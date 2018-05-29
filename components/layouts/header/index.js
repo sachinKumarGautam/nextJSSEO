@@ -6,14 +6,9 @@ import Button from '@material-ui/core/Button'
 import Toolbar from '@material-ui/core/Toolbar'
 import Typography from '@material-ui/core/Typography'
 import AutosuggestSearch from '../../AutosuggestSearch'
+import Subheader from './Subheader'
 
-const styles = {
-  root: {
-    flexGrow: 1
-  }
-}
-
-function SimpleAppBar (props) {
+function Header (props) {
   const { classes } = props
   return (
     <div className={classes.root}>
@@ -23,15 +18,22 @@ function SimpleAppBar (props) {
             Title
           </Typography>
           <AutosuggestSearch />
-          <Button color='inherit'>Login</Button>
+          <Button variant='raised' size='medium' color='primary' aria-label='add'>Login</Button>
         </Toolbar>
+        <Subheader />
       </AppBar>
     </div>
   )
 }
 
-SimpleAppBar.propTypes = {
+const styles = {
+  root: {
+    flexGrow: 1
+  }
+}
+
+Header.propTypes = {
   classes: PropTypes.object.isRequired
 }
 
-export default withStyles(styles)(SimpleAppBar)
+export default withStyles(styles)(Header)
