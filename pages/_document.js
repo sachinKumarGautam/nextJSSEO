@@ -22,11 +22,20 @@ class MyDocument extends Document {
             }
           />
           {/* PWA primary color */}
+<<<<<<< HEAD
           <meta name='theme-color' content={pageContext.theme.palette.primary.main} />
           <link
             rel='stylesheet'
             href='https://fonts.googleapis.com/css?family=Roboto:300,400,500'
           />
+=======
+          <meta name="theme-color" content={pageContext.theme.palette.primary.main} />
+          <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" />
+          {/* <link
+            rel="stylesheet"
+            href="https://fonts.googleapis.com/css?family=Roboto:300,400,500"
+          /> */}
+>>>>>>> 26f19a46c7a219bb24848eb1317d227b8faf4626
         </Head>
         <body>
           <Main />

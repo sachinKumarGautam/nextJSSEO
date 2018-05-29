@@ -10,9 +10,9 @@ import green from '@material-ui/core/colors/green';
 const theme = createMuiTheme({
   palette: {
     primary: {
-      light: purple[300],
-      main: purple[500],
-      dark: purple[700],
+      light: green[300],
+      main: green[500],
+      dark: green[700],
     },
     secondary: {
       light: green[300],
@@ -20,6 +20,11 @@ const theme = createMuiTheme({
       dark: green[700],
     },
   },
+  typography: {
+    // Use the system font instead of the default Roboto font.
+    fontFamily: ['Lato', 'sans-serif'],
+    fontSize: 16
+  }
 });
 
 function createPageContext() {
