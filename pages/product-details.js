@@ -1,10 +1,9 @@
 import React from 'react'
+import ProductDetailsWrapper from '../containers/productDetails'
 
 const ProductDetails = (props) => (
   <div>
-    <p>
-      Hello! product details page
-    </p>
+    <ProductDetailsWrapper />
   </div>
 )
 
