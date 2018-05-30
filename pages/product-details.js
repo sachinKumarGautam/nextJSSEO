@@ -1,10 +1,31 @@
 import React from 'react'
+
+import { withStyles } from '@material-ui/core/styles';
+import withRoot from '../src/withRoot';
+
+import Paper from '@material-ui/core/Paper';
+
 import ProductDetailsWrapper from '../containers/productDetails'
+
+const styles = theme => ({
+  root: {
+    paddingTop: 16,
+    paddingBottom: 16,
+    marginTop: theme.spacing.unit * 3,
+    paddingLeft: theme.spacing.unit * 7,
+    paddingRight: theme.spacing.unit * 7,
+  },
+  title: {
+    fontWeight: theme.typography.fontWeightBold
+  }
+})
 
 const ProductDetails = (props) => (
   <div>
-    <ProductDetailsWrapper />
+    <Paper className={props.classes.root}>
+      <ProductDetailsWrapper />
+    </Paper>
   </div>
 )
 
-export default ProductDetails
+export default withRoot(withStyles(styles)(ProductDetails));
