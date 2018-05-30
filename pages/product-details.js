@@ -14,15 +14,12 @@ const styles = theme => ({
     marginTop: theme.spacing.unit * 3,
     paddingLeft: theme.spacing.unit * 7,
     paddingRight: theme.spacing.unit * 7,
-  },
-  title: {
-    fontWeight: theme.typography.fontWeightBold
   }
 })
 
 const ProductDetails = (props) => (
   <div>
-    <Paper className={props.classes.root}>
+    <Paper className={props.classes.root} elevation={4}>
       <ProductDetailsWrapper />
     </Paper>
   </div>
