@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
 
 const styles = theme => {
@@ -16,8 +16,8 @@ const ProductName = (props) => (
     <Typography
       className={props.classes.title}
       gutterBottom
-      variant="title"
-      component="h1"
+      variant='title'
+      component='h1'
     >
       Glycomet 0.5 MG TAB 10S
     </Typography>

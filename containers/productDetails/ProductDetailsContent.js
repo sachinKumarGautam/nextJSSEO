@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-import Grid from '@material-ui/core/Grid';
+import Grid from '@material-ui/core/Grid'
 
 import ProductUseCases from './ProductUseCases'
 import RelatedArticles from '../../components/RelatedArticles'
@@ -10,14 +10,14 @@ import RelatedArticles from '../../components/RelatedArticles'
 */
 
 class ProductDetailsContent extends Component {
-  render() {
+  render () {
     return (
       <div>
         <Grid container spacing={24}>
-          <Grid item lg={9}>
+          <Grid item xs={9}>
             <ProductUseCases />
           </Grid>
-          <Grid item lg={3}>
+          <Grid item xs={3}>
             <RelatedArticles />
           </Grid>
         </Grid>

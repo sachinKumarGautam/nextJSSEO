@@ -22,7 +22,7 @@ const styles = theme => ({
   },
   title: {
     fontWeight: theme.typography.fontWeightBold
-  },
+  }
 })
 
 const ProductDetails = (props) => (
