@@ -57,6 +57,7 @@ function renderInput(inputProps) {
         },
         ...InputProps,
       }}
+      disableUnderline
       {...other}
     />
   );
