@@ -2,6 +2,9 @@ import React, { Component } from 'react'
 
 const RelatedArticles = (props) => (
   <div>
+    <h1>
+      Related Articles
+    </h1>
     <aside>
       <ul>
         <li>

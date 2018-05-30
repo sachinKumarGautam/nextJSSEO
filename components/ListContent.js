@@ -2,9 +2,9 @@ import React, { Component } from 'react'
 
 const ListContent = (props) => (
   <div>
-    <h3>
+    <h1>
       {props.title}
-    </h3>
+    </h1>
     <ul>
       <li>Glimepiride is used to Control high blood sugar which also helps prevent kidney damage.</li>
       <li>Glimepiride lowers blood sugar by causing the release of your body's natural insulin.</li>

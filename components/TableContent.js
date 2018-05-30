@@ -30,9 +30,9 @@ const data = [
 
 const TableContent = (props) => (
   <div>
-    <h3>
+    <h1>
       {props.title}
-    </h3>
+    </h1>
     <Table>
       <TableBody>
         {data.map(n => {
