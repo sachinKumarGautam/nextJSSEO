@@ -34,9 +34,6 @@ const ProductDetails = (props) => (
       </Paper>
     </div>
     <Footer />
-    {/* <p>
-      Hello! product details page
-    </p> */}
   </div>
 )
 
