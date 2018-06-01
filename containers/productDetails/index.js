@@ -7,14 +7,14 @@ import ProductDetailsContent from './ProductDetailsContent'
 Product Details content */
 
 class ProductDetailsWrapper extends Component {
-  render() {
+  render () {
     return (
       <div>
         <section>
-          <ProductDetails />      
+          <ProductDetails />
         </section>
         <section>
-          <ProductDetailsContent />       
+          <ProductDetailsContent />
         </section>
       </div>
     )

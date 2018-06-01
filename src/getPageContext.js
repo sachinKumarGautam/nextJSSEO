@@ -10,17 +10,25 @@ import green from '@material-ui/core/colors/green'
 const theme = createMuiTheme({
   palette: {
     primary: {
-      light: green[300],
-      main: green[500],
-      dark: green[700]
+      main: '#80c241'
     },
     secondary: {
-      light: green[300],
-      main: green[500],
-      dark: green[700]
+      main: '#fff'
     },
     customGrey: {
       lightGrey: '#9b9b9b'
+    }
+  },
+  overrides: {
+    MuiButton: {
+      label: {
+        color: '#fff',
+        textTransform: 'none'
+      }
+    },
+    MuiButtonBase: {
+      // The properties to apply
+      disableRipple: true // No more ripple, on the whole application 💣!
     }
   },
   typography: {

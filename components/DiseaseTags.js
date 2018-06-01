@@ -1,10 +1,10 @@
 import React from 'react'
 
- import Chip from '@material-ui/core/Chip';
+import Chip from '@material-ui/core/Chip'
 
 const DiseaseTags = (props) => (
   <div>
-    <Chip label="Basic Chip"/>
+    <Chip label='Basic Chip' />
   </div>
 )
 
