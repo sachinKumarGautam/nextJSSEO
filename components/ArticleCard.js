@@ -1,0 +1,55 @@
+import React from 'react'
+
+import { withStyles } from '@material-ui/core/styles'
+import Typography from '@material-ui/core/Typography'
+import Card from '@material-ui/core/Card'
+import CardActions from '@material-ui/core/CardActions'
+import CardContent from '@material-ui/core/CardContent'
+import CardMedia from '@material-ui/core/CardMedia'
+import Button from '@material-ui/core/Button'
+
+const styles = theme => {
+  return {
+    card: {
+      maxWidth: 252,
+      marginBottom: theme.spacing.unit * 4
+    },
+    media: {
+      height: 0,
+      paddingTop: '56.25%' // 16:9
+    },
+    cardTitle: {
+      ...theme.typography.subheading,
+      color: theme.palette.customGrey.grey600
+    },
+    cardContent: {
+      ...theme.typography.caption,
+      color: theme.palette.customGrey.grey500
+    }
+  }
+}
+
+const ArticleCard = (props) => (
+  <Card className={props.classes.card}>
+    <CardMedia
+      className={props.classes.media}
+      image='/static/images/avenger.jpg'
+      title='article'
+    />
+    <CardContent>
+      <Typography
+        gutterBottom
+        variant='subheading'
+        component='h2'
+        className={props.classes.cardTitle}
+      >
+        Myths & Facts About Diabetes
+      </Typography>
+      <Typography component='p' className={props.classes.cardContent}>
+        There does seem to be a genetic element to both type 2 diabetes and obesity...
+      </Typography>
+    </CardContent>
+  </Card>
+)
+
+export default withStyles(styles)(ArticleCard)

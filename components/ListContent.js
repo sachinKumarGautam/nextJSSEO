@@ -7,26 +7,49 @@ const styles = theme => {
   return {
     title: {
       color: theme.palette.customGrey.grey600,
-      fontWeight: theme.typography.fontWeightBold
+      fontWeight: theme.typography.fontWeightBold,
+      marginLeft: theme.spacing.unit * 2
+    },
+    titleWrapper: {
+      display: 'flex',
+      alignItems: 'baseline'
+    },
+    content: {
+      marginBottom: theme.spacing.unit * 2
+    },
+    contentBody: {
+      color: theme.palette.customGrey.grey500
     }
   }
 }
 
 const ListContent = (props) => (
   <div>
-    <Typography
-      gutterBottom
-      variant='title'
-      component='h1'
-      className={props.classes.title}
-    >
-      {props.title}
-    </Typography>
+    <div className={props.classes.titleWrapper}>
+      <img src={props.src} />
+      <Typography
+        gutterBottom
+        variant='title'
+        component='h1'
+        className={props.classes.title}
+      >
+        {props.title}
+      </Typography>
+    </div>
     <ul>
-      <li>Glimepiride is used to Control high blood sugar which also helps prevent kidney damage.</li>
-      <li>Glimepiride lowers blood sugar by causing the release of your body's natural insulin.</li>
-      <li>Metformin works by helping to restore your body's proper response to the insulin you naturally produce.</li>
-      <li>Metformin also decreases the amount of sugar that your liver makes and that your stomach/intestines absorb.</li>
+      {
+        props.content.map((item) => (
+          <li className={props.classes.content}>
+            <Typography
+              gutterBottom
+              variant='body1'
+              className={props.classes.contentBody}
+            >
+              {item}
+            </Typography>
+          </li>
+        ))
+      }
     </ul>
   </div>
 )
