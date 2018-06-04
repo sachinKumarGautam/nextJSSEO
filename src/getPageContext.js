@@ -3,7 +3,7 @@
 import { SheetsRegistry } from 'jss'
 import { createMuiTheme, createGenerateClassName } from '@material-ui/core/styles'
 // import purple from '@material-ui/core/colors/purple'
-import green from '@material-ui/core/colors/green'
+// import green from '@material-ui/core/colors/green'
 
 // A theme with custom primary and secondary color.
 // It's optional.
@@ -16,12 +16,16 @@ const theme = createMuiTheme({
       main: '#fff'
     },
     customGrey: {
+      grey100: '#dadada',
       grey200: '#9b9b9b',
       grey500: '#4a4a4a',
       grey600: '#3a3a3a'
     },
     customYellow: {
       yellow400: '#f5a623'
+    },
+    customGreen: {
+      green400: '#389e48'
     }
   },
   overrides: {
@@ -35,10 +39,6 @@ const theme = createMuiTheme({
         color: '#fff',
         textTransform: 'none'
       }
-    },
-    MuiButtonBase: {
-      // The properties to apply
-      disableRipple: true // No more ripple, on the whole application 💣!
     }
   },
   typography: {
@@ -49,6 +49,11 @@ const theme = createMuiTheme({
   },
   spacing: {
     percentageUnit: '12%'
+  },
+  breakpoints: {
+    values: {
+      lg: 1366
+    }
   }
 })
 

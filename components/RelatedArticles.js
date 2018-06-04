@@ -3,6 +3,8 @@ import React from 'react'
 import { withStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
 
+import ArticleCard from './ArticleCard'
+
 const styles = theme => {
   return {
     title: {
@@ -11,6 +13,11 @@ const styles = theme => {
     },
     imageTitle: {
       marginRight: theme.spacing.unit * 2
+    },
+    articleListWrapper: {
+      listStyle: 'none',
+      marginTop: theme.spacing.unit * 4,
+      paddingLeft: 0
     }
   }
 }
@@ -27,15 +34,15 @@ const RelatedArticles = (props) => (
       Related Articles
     </Typography>
     <aside>
-      <ul>
+      <ul className={props.classes.articleListWrapper}>
         <li>
-          article 1
+          <ArticleCard />
         </li>
         <li>
-          article 2
+          <ArticleCard />
         </li>
         <li>
-          article 3
+          <ArticleCard />
         </li>
       </ul>
     </aside>
