@@ -14,7 +14,7 @@ const styles = theme => ({
     marginBottom: theme.spacing.unit * 2.25
   },
   listItemText: {
-    color: theme.palette.customGrey.lightGrey
+    color: theme.palette.customGrey.grey200
     // marginLeft: theme.spacing.unit * 1.5
   }
 })

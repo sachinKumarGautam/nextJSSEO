@@ -17,22 +17,22 @@ class ProductUseCases extends Component {
     return (
       <div>
         <Grid container spacing={24}>
-          <Grid item lg={6}>
+          <Grid item xs={6}>
             <articles>
               <ListContent title={'Uses'} />
             </articles>
           </Grid>
-          <Grid item lg={6}>
+          <Grid item xs={6}>
             <articles>
               <ListContent title={'Side Effects'} />
             </articles>
           </Grid>
-          <Grid item lg={12}>
+          <Grid item xs={12}>
             <articles>
               <ListContent title={'How it Works'} />
             </articles>
           </Grid>
-          <Grid item lg={12}>
+          <Grid item xs={12}>
             <articles>
               <TableContent title={'Precautions'} />
             </articles>

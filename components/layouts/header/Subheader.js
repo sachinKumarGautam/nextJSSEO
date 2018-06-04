@@ -16,8 +16,7 @@ const styles = theme => ({
   },
   subHeaderText: {
     fontWeight: theme.typography.fontWeightBold,
-    // fontSize: theme.typography.body2.fontSize,
-    color: theme.palette.customGrey.lightGrey,
+    color: theme.palette.customGrey.grey200,
     paddingLeft: theme.spacing.unit * 2.25
   }
 })
