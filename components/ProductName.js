@@ -6,7 +6,8 @@ import Typography from '@material-ui/core/Typography'
 const styles = theme => {
   return {
     title: {
-      fontWeight: theme.typography.fontWeightBold
+      fontWeight: theme.typography.fontWeightBold,
+      color: theme.palette.customGrey.grey600
     }
   }
 }

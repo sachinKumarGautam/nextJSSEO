@@ -14,48 +14,59 @@ import Typography from '@material-ui/core/Typography'
   add to cart button
 */
 
-const styles = {
+const styles = theme => ({
   card: {
     minWidth: 275
   },
-  bullet: {
-    display: 'inline-block',
-    margin: '0 2px',
-    transform: 'scale(0.8)'
+  priceWrapper: {
+    display: 'flex',
+    alignItems: 'baseline'
   },
-  title: {
-    marginBottom: 16,
-    fontSize: 14
+  price: {
+    color: theme.palette.customGrey.grey600,
+    marginRight: theme.spacing.unit * 2
   },
-  pos: {
-    marginBottom: 12
+  estimatedPrice: {
+    color: theme.palette.customGrey.grey200
+  },
+  strokePrice: {
+    color: theme.palette.customGrey.grey200,
+    marginRight: theme.spacing.unit
+  },
+  discount: {
+    color: theme.palette.customYellow.yellow400
+  },
+  cardActions: {
+    marginBottom: theme.spacing.unit * 4
   }
-}
+})
 
 class ProductPriceDetails extends Component {
   render () {
     const { classes } = this.props
-    // const bull = <span className={classes.bullet}>•</span>
 
     return (
       <div>
         <Card className={classes.card}>
           <CardContent>
-            <Typography variant='title' component='h2'>
-              Rs. 38.00
-            </Typography>
-            <Typography className={classes.pos} color='textSecondary'>
-              *Estimated Price
-            </Typography>
-            <Typography className={classes.pos} color='textSecondary'>
-              Rs. 43.00, 5% discount on MRP
-            </Typography>
-            {/* <Typography component='p'>
-              well meaning and kindly.<br />
-              {'"a benevolent smile"'}
-            </Typography> */}
+            <div className={classes.priceWrapper}>
+              <Typography variant='headline' component='h2' className={classes.price}>
+                Rs. 38.00
+              </Typography>
+              <Typography className={classes.estimatedPrice} variant='caption'>
+                *Estimated Price
+              </Typography>
+            </div>
+            <div className={classes.priceWrapper}>
+              <Typography variant='body1'>
+                <s className={classes.strokePrice}>Rs. 43.00</s>
+              </Typography>
+              <Typography variant='body1' className={classes.discount}>
+                5% discount on MRP
+              </Typography>
+            </div>
           </CardContent>
-          <CardActions>
+          <CardActions className={classes.cardActions}>
             <Button variant='raised' size='small' color='primary'>Add To Cart</Button>
           </CardActions>
         </Card>

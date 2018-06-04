@@ -1,10 +1,27 @@
 import React from 'react'
 
+import { withStyles } from '@material-ui/core/styles'
+import Typography from '@material-ui/core/Typography'
+
+const styles = theme => {
+  return {
+    title: {
+      color: theme.palette.customGrey.grey600,
+      fontWeight: theme.typography.fontWeightBold
+    }
+  }
+}
+
 const ListContent = (props) => (
   <div>
-    <h1>
+    <Typography
+      gutterBottom
+      variant='title'
+      component='h1'
+      className={props.classes.title}
+    >
       {props.title}
-    </h1>
+    </Typography>
     <ul>
       <li>Glimepiride is used to Control high blood sugar which also helps prevent kidney damage.</li>
       <li>Glimepiride lowers blood sugar by causing the release of your body's natural insulin.</li>
@@ -14,4 +31,4 @@ const ListContent = (props) => (
   </div>
 )
 
-export default ListContent
+export default withStyles(styles)(ListContent)

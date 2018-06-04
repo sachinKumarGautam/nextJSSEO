@@ -5,6 +5,18 @@ import TableBody from '@material-ui/core/TableBody'
 import TableCell from '@material-ui/core/TableCell'
 import TableRow from '@material-ui/core/TableRow'
 
+import { withStyles } from '@material-ui/core/styles'
+import Typography from '@material-ui/core/Typography'
+
+const styles = theme => {
+  return {
+    title: {
+      color: theme.palette.customGrey.grey600,
+      fontWeight: theme.typography.fontWeightBold
+    }
+  }
+}
+
 const data = [
   {
     id: 1,
@@ -30,9 +42,14 @@ const data = [
 
 const TableContent = (props) => (
   <div>
-    <h1>
+    <Typography
+      gutterBottom
+      variant='title'
+      component='h1'
+      className={props.classes.title}
+    >
       {props.title}
-    </h1>
+    </Typography>
     <Table>
       <TableBody>
         {data.map(n => {
@@ -52,4 +69,4 @@ const TableContent = (props) => (
   </div>
 )
 
-export default TableContent
+export default withStyles(styles)(TableContent)

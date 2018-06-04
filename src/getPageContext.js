@@ -20,7 +20,12 @@ const theme = createMuiTheme({
       dark: green[700]
     },
     customGrey: {
-      lightGrey: '#9b9b9b'
+      grey200: '#9b9b9b',
+      grey500: '#4a4a4a',
+      grey600: '#3a3a3a'
+    },
+    customYellow: {
+      yellow400: '#f5a623'
     }
   },
   typography: {
@@ -28,6 +33,9 @@ const theme = createMuiTheme({
     fontFamily: ['Lato', 'sans-serif'],
     fontSize: 16,
     fontWeightBold: 600
+  },
+  spacing: {
+    percentageUnit: '12%'
   }
 })
 
