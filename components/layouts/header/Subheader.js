@@ -7,7 +7,8 @@ const styles = theme => ({
     display: 'flex',
     justifyContent: 'space-around',
     listStyle: 'none',
-    margin: theme.spacing.unit * 1.2
+    margin: theme.spacing.unit * 1.2,
+    marginTop: 0
   },
   subHeaderItem: {
     textDecoration: 'none',

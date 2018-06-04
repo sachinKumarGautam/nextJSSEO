@@ -7,6 +7,8 @@ import TextField from '@material-ui/core/TextField';
 import Paper from '@material-ui/core/Paper';
 import MenuItem from '@material-ui/core/MenuItem';
 import Chip from '@material-ui/core/Chip';
+import Button from '@material-ui/core/Button'
+import SearchIcon from '@material-ui/icons/Search'
 
 const suggestions = [
   { label: 'Afghanistan' },
@@ -49,17 +51,30 @@ function renderInput(inputProps) {
   const { InputProps, classes, ref, ...other } = inputProps;
 
   return (
-    <TextField
-      InputProps={{
-        inputRef: ref,
-        classes: {
-          root: classes.inputRoot,
-        },
-        ...InputProps,
+    <div className={classes.searchBar}>
+      <TextField
+        className={classes.inputRoot}
+        InputProps={{
+          disableUnderline: true,
+          inputRef: ref,
+          classes: {
+            root: classes.inputRoot,
+            // focused: classes.inputFocused
+          },
+          ...InputProps,
+        }}
+        disableUnderline
+        {...other}
+      />
+    <Button
+      variant="outlined" 
+      classes={{
+        root: classes.searchButton
       }}
-      disableUnderline
-      {...other}
-    />
+     >
+        <SearchIcon className={classes.iconColor}/>
+    </Button>
+    </div>
   );
 }
 
@@ -224,7 +239,27 @@ const styles = theme => ({
   },
   inputRoot: {
     flexWrap: 'wrap',
+    // borderRadius: `${theme.spacing.unit * 2}px 0px 0px ${theme.spacing.unit * 2}px`,
+    // paddingLeft: theme.spacing.unit * 2,
+    borderColor: theme.palette.customGrey.grey200,
+    // boxShadow: '0 1px 3px 0 rgba(0, 0, 0, 0.16)'
   },
+  inputFocused: {
+    border: '1px solid #80c241'
+  },
+  searchButton: {
+    // borderColor: theme.palette.customGrey.grey200,
+    width: '50px',
+    height: theme.spacing.unit * 4,
+    borderRadius: `0px ${theme.spacing.unit * 2}px ${theme.spacing.unit * 2}px 0px`,
+  },
+  searchBar: {
+    display: 'flex',
+    flexDirection: 'row'
+  },
+  iconColor: {
+    color: theme.palette.customGrey.grey500
+  }
 });
 
 function IntegrationDownshift(props) {
