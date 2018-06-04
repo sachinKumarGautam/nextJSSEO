@@ -6,6 +6,7 @@ import CardActions from '@material-ui/core/CardActions'
 import CardContent from '@material-ui/core/CardContent'
 import Button from '@material-ui/core/Button'
 import Typography from '@material-ui/core/Typography'
+import Paper from '@material-ui/core/Paper'
 
 /*
   Product price
@@ -38,28 +39,26 @@ class ProductPriceDetails extends Component {
     const bull = <span className={classes.bullet}>•</span>
 
     return (
-      <div>
-        <Card className={classes.card}>
-          <CardContent>
-            <Typography variant='title' component='h2'>
+      <Card elevation={'1'} className={classes.card}>
+        <CardContent>
+          <Typography variant='title' component='h2'>
               Rs. 38.00
-            </Typography>
-            <Typography className={classes.pos} color='textSecondary'>
+          </Typography>
+          <Typography className={classes.pos} color='textSecondary'>
               *Estimated Price
-            </Typography>
-            <Typography className={classes.pos} color='textSecondary'>
+          </Typography>
+          <Typography className={classes.pos} color='textSecondary'>
               Rs. 43.00, 5% discount on MRP
-            </Typography>
-            <Typography component='p'>
+          </Typography>
+          <Typography component='p'>
               well meaning and kindly.<br />
-              {'"a benevolent smile"'}
-            </Typography>
-          </CardContent>
-          <CardActions>
-            <Button variant='raised' size='small' color='primary'>Add To Cart</Button>
-          </CardActions>
-        </Card>
-      </div>
+            {'"a benevolent smile"'}
+          </Typography>
+        </CardContent>
+        <CardActions>
+          <Button variant='raised' size='small' color='primary'>Add To Cart</Button>
+        </CardActions>
+      </Card>
     )
   }
 }

@@ -14,7 +14,7 @@ const styles = theme => ({
     marginBottom: theme.spacing.unit * 2.25
   },
   listItemText: {
-    color: theme.palette.customGrey.lightGrey,
+    color: theme.palette.customGrey.lightGrey
     // marginLeft: theme.spacing.unit * 1.5
   }
 })
@@ -25,17 +25,17 @@ const CompanyInfo = ({classes}) => (
         Categories
     </Typography>
     <div className={classes.iconWithText}>
-      <Typography className={classes.listItemText} variant="subheading"  component='h2'>
+      <Typography className={classes.listItemText} variant='subheading' component='h2'>
           Diabetes
       </Typography>
     </div>
     <div className={classes.iconWithText}>
-      <Typography className={classes.listItemText} variant="subheading"  component='h2'>
+      <Typography className={classes.listItemText} variant='subheading' component='h2'>
           Blood pressure
       </Typography>
     </div>
     <div className={classes.iconWithText}>
-      <Typography className={classes.listItemText} variant='subheading'  component='h2'>
+      <Typography className={classes.listItemText} variant='subheading' component='h2'>
         Hypertension
       </Typography>
     </div>

@@ -1,17 +1,17 @@
 import React, { Component } from 'react'
 
-import Grid from '@material-ui/core/Grid';
+import Grid from '@material-ui/core/Grid'
 
 import ProductInfo from './ProductInfo'
 import ProductPriceDetails from './ProductPriceDetails'
 
-/* 
+/*
   Product basic info
   product price details
 */
 
 class ProductDetails extends Component {
-  render() {
+  render () {
     return (
       <div>
         <Grid container spacing={24}>

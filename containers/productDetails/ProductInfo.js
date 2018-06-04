@@ -8,7 +8,7 @@ import DiseaseTagsWrapper from './DiseaseTagsWrapper'
 import ProductOverview from '../../components/ProductOverview'
 import ProductInfoNav from '../../components/ProductInfoNav'
 
-/* 
+/*
   Product name
   product brand
   product pack size
@@ -19,7 +19,7 @@ import ProductInfoNav from '../../components/ProductInfoNav'
 */
 
 class ProductInfo extends Component {
-  render() {
+  render () {
     return (
       <div>
         <ProductName />

@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableRow from '@material-ui/core/TableRow';
+import Table from '@material-ui/core/Table'
+import TableBody from '@material-ui/core/TableBody'
+import TableCell from '@material-ui/core/TableCell'
+import TableRow from '@material-ui/core/TableRow'
 
 const data = [
   {
@@ -26,7 +26,7 @@ const data = [
     key: 'Miss Dose',
     value: 'Skip the missed dose and continue your regular dosing schedule. Do not take two doses at the same time.'
   }
-];
+]
 
 const TableContent = (props) => (
   <div>
@@ -38,14 +38,14 @@ const TableContent = (props) => (
         {data.map(n => {
           return (
             <TableRow key={n.id}>
-              <TableCell component="th" scope="row">
+              <TableCell component='th' scope='row'>
                 {n.key}
               </TableCell>
-              <TableCell component="th" scope="row">
+              <TableCell component='th' scope='row'>
                 {n.value}
               </TableCell>
             </TableRow>
-          );
+          )
         })}
       </TableBody>
     </Table>

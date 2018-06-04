@@ -4,10 +4,10 @@ import Typography from '@material-ui/core/Typography'
 
 const ProductMolecule = (props) => (
   <div>
-    <a href="#">
+    <a href='#'>
       Glimepiride (0.5mg)
     </a>
-    <a href="#">
+    <a href='#'>
       Metformin (1000mg)
     </a>
   </div>

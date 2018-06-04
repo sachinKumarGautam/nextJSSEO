@@ -18,11 +18,12 @@ const styles = theme => ({
     paddingRight: theme.spacing.unit * 7,
     maxWidth: theme.breakpoints.values.lg,
     minWidth: theme.breakpoints.values.md,
-    margin: '0 auto'
+    margin: '0 auto',
+    marginTop: '110px'
   },
   title: {
     fontWeight: theme.typography.fontWeightBold
-  },
+  }
 })
 
 const ProductDetails = (props) => (

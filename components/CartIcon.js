@@ -1,14 +1,12 @@
 import { withStyles } from '@material-ui/core/styles'
 import Icon from '@material-ui/core/Icon'
+import Badge from '@material-ui/core/Badge'
 import IconButton from '@material-ui/core/IconButton'
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart'
 
 const styles = theme => ({
   button: {
     margin: theme.spacing.unit
-  },
-  input: {
-    display: 'none'
   }
 })
 
@@ -17,7 +15,9 @@ function CartIcon (props) {
   return (
     <div>
       <IconButton color='primary' className={classes.button} aria-label='Add to shopping cart'>
-        <AddShoppingCartIcon />
+        <Badge className={classes.margin} badgeContent={4} color='primary'>
+          <AddShoppingCartIcon />
+        </Badge>
       </IconButton>
     </div>
   )

@@ -25,13 +25,13 @@ const CompanyInfo = ({classes}) => (
     </Typography>
     <div className={classes.iconWithText}>
       <img src={'/static/images/info-outline.svg'} />
-      <Typography className={classes.listItemText} variant="subheading"  component='h2'>
+      <Typography className={classes.listItemText} variant='subheading' component='h2'>
           About us
       </Typography>
     </div>
     <div className={classes.iconWithText}>
       <img src={'/static/images/info-outline.svg'} />
-      <Typography className={classes.listItemText} variant='subheading'  component='h2'>
+      <Typography className={classes.listItemText} variant='subheading' component='h2'>
         Career
       </Typography>
     </div>

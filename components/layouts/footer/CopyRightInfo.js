@@ -7,7 +7,7 @@ const styles = theme => ({
     paddingTop: 16,
     paddingBottom: 16,
     backgroundColor: '#4a4a4a',
-    borderTop: '0.8px solid #FFF',
+    borderTop: '0.8px solid #FFF'
   },
   iconWithText: {
     marginLeft: theme.spacing.unit * 4.75,

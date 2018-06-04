@@ -4,9 +4,9 @@ import DiseseTags from '../../components/DiseaseTags'
 
 const DiseaseTagsWrapper = (props) => (
   <div>
-      <p>
+    <p>
         Primary Uses: <DiseseTags />
-      </p>
+    </p>
   </div>
 )
 
