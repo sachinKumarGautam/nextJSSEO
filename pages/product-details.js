@@ -30,7 +30,7 @@ const ProductDetails = (props) => (
   <div>
     <Header />
     <div>
-      <Paper className={props.classes.root}>
+      <Paper className={props.classes.root} elevation={1}>
         <ProductDetailsWrapper />
       </Paper>
     </div>
