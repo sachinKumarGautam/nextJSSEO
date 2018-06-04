@@ -29,6 +29,11 @@ const theme = createMuiTheme({
     }
   },
   overrides: {
+    MuiPaper: {
+      elevation1: {
+        boxShadow: '0 0 6px 0 rgba(224, 224, 224, 0.72)'
+      }
+    },
     MuiButton: {
       label: {
         color: '#fff',

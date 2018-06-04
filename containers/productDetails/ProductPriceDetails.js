@@ -6,6 +6,7 @@ import CardActions from '@material-ui/core/CardActions'
 import CardContent from '@material-ui/core/CardContent'
 import Button from '@material-ui/core/Button'
 import Typography from '@material-ui/core/Typography'
+import Paper from '@material-ui/core/Paper'
 
 /*
   Product price
@@ -46,31 +47,29 @@ class ProductPriceDetails extends Component {
     const { classes } = this.props
 
     return (
-      <div>
-        <Card className={classes.card}>
-          <CardContent>
-            <div className={classes.priceWrapper}>
-              <Typography variant='headline' component='h2' className={classes.price}>
+      <Card elevation={'1'} className={classes.card}>
+        <CardContent>
+          <div className={classes.priceWrapper}>
+            <Typography variant='headline' component='h2' className={classes.price}>
                 Rs. 38.00
-              </Typography>
-              <Typography className={classes.estimatedPrice} variant='caption'>
+            </Typography>
+            <Typography className={classes.estimatedPrice} variant='caption'>
                 *Estimated Price
-              </Typography>
-            </div>
-            <div className={classes.priceWrapper}>
-              <Typography variant='body1'>
-                <s className={classes.strokePrice}>Rs. 43.00</s>
-              </Typography>
-              <Typography variant='body1' className={classes.discount}>
+            </Typography>
+          </div>
+          <div className={classes.priceWrapper}>
+            <Typography variant='body1'>
+              <s className={classes.strokePrice}>Rs. 43.00</s>
+            </Typography>
+            <Typography variant='body1' className={classes.discount}>
                 5% discount on MRP
-              </Typography>
-            </div>
-          </CardContent>
-          <CardActions className={classes.cardActions}>
-            <Button variant='raised' size='small' color='primary'>Add To Cart</Button>
-          </CardActions>
-        </Card>
-      </div>
+            </Typography>
+          </div>
+        </CardContent>
+        <CardActions className={classes.cardActions}>
+          <Button variant='raised' size='small' color='primary'>Add To Cart</Button>
+        </CardActions>
+      </Card>
     )
   }
 }

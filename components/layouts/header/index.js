@@ -1,7 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
-import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles'
 import Head from './Head'
 import AppBar from '@material-ui/core/AppBar'
 import Button from '@material-ui/core/Button'
@@ -15,12 +14,12 @@ function Header (props) {
   const { classes } = props
   return (
     <div className={classes.root}>
-      <AppBar className={classes.appBar} position='fixed' color='default'>
+      <AppBar elevation={'1'} className={classes.appBar} position='fixed' color='default'>
         <Head
           pageTitle={'Lifcare Product Details Page'}
         />
-        <Toolbar>
-          <img src='/static/images/logo.svg' />
+        <Toolbar className={classes.toolbar}>
+          <img src='/static/images/logo-green.svg' />
           <AutosuggestSearch />
           <CartIcon />
           <Button
@@ -34,8 +33,8 @@ function Header (props) {
             aria-label='login'
             className={classes.button}
           >Login / Register</Button>
-          <Subheader />
         </Toolbar>
+        <Subheader />
       </AppBar>
     </div>
   )
@@ -43,20 +42,22 @@ function Header (props) {
 
 const styles = theme => ({
   root: {
-    flexGrow: 1,
-    background: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)',
-    borderRadius: 3,
-    border: 0,
-    color: 'white',
-    height: 48,
-    // padding: '0 30px',
-    boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .30)'
+    flexGrow: 1
   },
   appBar: {
     backgroundColor: '#fff'
   },
+  toolbar: {
+    margin: `0 ${theme.spacing.unit * 3}px`
+  },
   button: {
-    borderRadius: '2em'
+    color: 'white',
+    // height: 33,
+    flexGrow: 0,
+    // width: 60,
+    borderRadius: theme.spacing.unit * 4,
+    background: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)',
+    boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .30)'
   }
 })
 
