@@ -3,19 +3,30 @@ import { withStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
 
 const styles = theme => ({
-  root: theme.mixins.gutters({
+  root: {
     paddingTop: 16,
     paddingBottom: 16,
-    marginTop: theme.spacing.unit * 3
-  })
+    backgroundColor: '#4a4a4a',
+    borderTop: '0.8px solid #FFF',
+  },
+  iconWithText: {
+    marginLeft: theme.spacing.unit * 4.75,
+    display: 'flex',
+    color: theme.palette.common.white,
+    flexDirection: 'row',
+    alignItems: 'center'
+  }
 })
 
 const SubFooter = ({classes}) => (
   <div>
     <Paper className={classes.root} elevation={4}>
-      <Typography variant='headline' component='h3'>
-          This is where copyright info will be
-      </Typography>
+      <div className={classes.iconWithText}>
+        <img src={'/static/images/splash.svg'} />
+        <Typography component='h3'>
+          © 2016 LifCARE. All Rights Reserved
+        </Typography>
+      </div>
     </Paper>
   </div>
 )
