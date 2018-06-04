@@ -39,10 +39,6 @@ const theme = createMuiTheme({
         color: '#fff',
         textTransform: 'none'
       }
-    },
-    MuiButtonBase: {
-      // The properties to apply
-      disableRipple: true // No more ripple, on the whole application 💣!
     }
   },
   typography: {
@@ -53,6 +49,11 @@ const theme = createMuiTheme({
   },
   spacing: {
     percentageUnit: '12%'
+  },
+  breakpoints: {
+    values: {
+      lg: 1366
+    }
   }
 })
 
