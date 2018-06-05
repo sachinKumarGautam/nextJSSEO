@@ -18,7 +18,7 @@ const styles = theme => ({
     maxWidth: theme.breakpoints.values.lg,
     minWidth: theme.breakpoints.values.md,
     margin: '0 auto',
-    marginTop: '93px'
+    marginTop: theme.spacing.unit * 12
   },
   title: {
     fontWeight: theme.typography.fontWeightBold
@@ -29,7 +29,7 @@ const ProductDetails = (props) => (
   <div>
     <Header />
     <div>
-      <Paper className={props.classes.root}>
+      <Paper className={props.classes.root} elevation={1}>
         <ProductDetailsWrapper />
       </Paper>
     </div>

@@ -47,7 +47,9 @@ const styles = theme => ({
     backgroundColor: '#fff'
   },
   toolbar: {
-    margin: `0 ${theme.spacing.unit * 3}px`
+    margin: `0 ${theme.spacing.unit * 3}px`,
+    marginBottom: 0,
+    height: theme.spacing.unit * 7.5
   },
   button: {
     color: 'white',

@@ -53,27 +53,26 @@ function renderInput(inputProps) {
   return (
     <div className={classes.searchBar}>
       <TextField
-        className={classes.inputRoot}
         InputProps={{
           disableUnderline: true,
           inputRef: ref,
           classes: {
-            root: classes.inputRoot,
-            // focused: classes.inputFocused
+            formControl: classes.inputFormControl,
+            focused: classes.inputFocused
           },
           ...InputProps,
         }}
         disableUnderline
         {...other}
       />
-    <Button
-      variant="outlined" 
-      classes={{
-        root: classes.searchButton
-      }}
-     >
-        <SearchIcon className={classes.iconColor}/>
-    </Button>
+        <Button
+          color="primary"
+          classes={{
+            root: classes.searchButton
+          }}
+        >
+          <SearchIcon className={classes.iconColor}/>
+      </Button>
     </div>
   );
 }
@@ -237,25 +236,30 @@ const styles = theme => ({
   chip: {
     margin: `${theme.spacing.unit / 2}px ${theme.spacing.unit / 4}px`,
   },
-  inputRoot: {
+  inputFormControl: {
     flexWrap: 'wrap',
-    // borderRadius: `${theme.spacing.unit * 2}px 0px 0px ${theme.spacing.unit * 2}px`,
-    // paddingLeft: theme.spacing.unit * 2,
+    width: theme.spacing.unit * 80,
+    paddingLeft: theme.spacing.unit * 2,
     borderColor: theme.palette.customGrey.grey200,
-    // boxShadow: '0 1px 3px 0 rgba(0, 0, 0, 0.16)'
+    border: '1px solid black',
+    borderRadius: theme.spacing.unit * 2,
+    boxShadow: "0 1px 3px 0 rgba(0, 0, 0, 0.16)",
   },
   inputFocused: {
     border: '1px solid #80c241'
   },
   searchButton: {
-    // borderColor: theme.palette.customGrey.grey200,
-    width: '50px',
+    borderColor: theme.palette.customGrey.grey200,
+    // width: '50px',
+    position: 'absolute',
+    right: 0,
     height: theme.spacing.unit * 4,
     borderRadius: `0px ${theme.spacing.unit * 2}px ${theme.spacing.unit * 2}px 0px`,
   },
   searchBar: {
     display: 'flex',
-    flexDirection: 'row'
+    flexDirection: 'row',
+    borderRadius: `0px ${theme.spacing.unit * 2}px ${theme.spacing.unit * 2}px 0px`,
   },
   iconColor: {
     color: theme.palette.customGrey.grey500

@@ -28,7 +28,7 @@ const styles = theme => {
 }
 
 const ArticleCard = (props) => (
-  <Card className={props.classes.card}>
+  <Card className={props.classes.card} elevation={1}>
     <CardMedia
       className={props.classes.media}
       image='/static/images/avenger.jpg'
