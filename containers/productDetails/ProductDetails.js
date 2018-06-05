@@ -14,7 +14,7 @@ import ProductPriceDetails from './ProductPriceDetails'
 const styles = theme => {
   return {
     productDetailsWrapper: {
-      borderBottom: '1px solid #9b9b9b',
+      borderBottom: `1px solid ${theme.palette.customGrey.grey100}`,
       paddingBottom: theme.spacing.unit * 3
     }
   }

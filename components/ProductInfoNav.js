@@ -27,6 +27,7 @@ const styles = theme => {
     linkLabel: {
       display: 'block',
       fontSize: '0.75rem',
+      fontFamily: theme.typography.fontFamily,
       marginTop: theme.spacing.unit
     }
   }
