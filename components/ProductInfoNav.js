@@ -27,7 +27,13 @@ const styles = theme => {
     linkLabel: {
       display: 'block',
       fontSize: '0.75rem',
-      marginTop: theme.spacing.unit
+      marginTop: theme.spacing.unit,
+      transition: '0.3s',
+      '&:hover': {
+        color: '#80c241',
+        transition: '0.3s',
+        transitionOrigin: 'center'
+      }
     }
   }
 }
