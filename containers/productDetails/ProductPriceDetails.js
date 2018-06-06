@@ -33,7 +33,6 @@ const styles = theme => ({
     paddingBottom: 0
   },
   cardActions: {
-    marginBottom: theme.spacing.unit * 4,
     display: 'flex',
     alignItems: 'baseline'
   }
@@ -74,18 +73,18 @@ class ProductPriceDetails extends Component {
               <ProductDiscount />
             </div>
             <DeliveryInfoWrapper />
+            <div className={classes.cardActions}>
+              <QuantityField />
+              <Button
+                variant='raised'
+                size='small'
+                color='primary'
+                onClick={this.handleClickOpen}
+              >
+                Add To Cart
+              </Button>
+            </div>
           </CardContent>
-          <CardActions className={classes.cardActions}>
-            <QuantityField />
-            <Button
-              variant='raised'
-              size='small'
-              color='primary'
-              onClick={this.handleClickOpen}
-            >
-              Add To Cart
-            </Button>
-          </CardActions>
         </Card>
         <PincodeDialog
           handleClose={this.handleClose}
