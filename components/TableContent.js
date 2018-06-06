@@ -38,6 +38,10 @@ const styles = theme => {
     },
     contentKeyCell: {
       borderRight: `0.5px solid ${theme.palette.customGrey.grey100}`
+    },
+    hover: {
+      color: theme.palette.primary.main,
+      transition: '0.2s'
     }
   }
 }
@@ -70,14 +74,14 @@ const data = [
 ]
 
 const TableContent = (props) => (
-  <div>
+  <div id={props.itemKey}>
     <div className={props.classes.titleWrapper}>
       <img src={props.src} />
       <Typography
         gutterBottom
         variant='title'
         component='h1'
-        className={props.classes.title}
+        className={props.hover.precautions ? `${props.classes.title} ${props.classes.hover}` : props.classes.title}
       >
         {props.title}
       </Typography>

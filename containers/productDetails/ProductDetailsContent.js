@@ -25,7 +25,9 @@ class ProductDetailsContent extends Component {
       <div>
         <Grid container spacing={24} className={this.props.classes.contentWrapper}>
           <Grid item xs={9}>
-            <ProductUseCases />
+            <ProductUseCases
+              hover={this.props.hover}
+            />
           </Grid>
           <Grid item xs={3}>
             <RelatedArticles />

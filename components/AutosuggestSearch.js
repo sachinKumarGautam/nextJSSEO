@@ -222,7 +222,7 @@ const styles = theme => ({
   },
   container: {
     flexGrow: 1,
-    width: '637px',
+    width: theme.spacing.unit * 80,
     margin: '0 auto',
     position: 'relative',
   },
