@@ -1,8 +1,8 @@
 import Head from 'next/head'
-export default (props) => (
+export default ({pageTitle}) => (
   <div>
     <Head>
-      <title>Page Title </title>
+      <title>{pageTitle}</title>
       {/* <meta name='viewport' content='initial-scale=1.0, width=device-width' key='viewport' /> */}
     </Head>
   </div>

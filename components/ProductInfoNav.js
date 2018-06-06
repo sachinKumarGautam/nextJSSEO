@@ -50,7 +50,6 @@ function scrollTo (id) {
     left: ele.offsetLeft,
     behavior: 'smooth'
   }
-  // window.scrollTo(ele.offsetLeft, ele.offsetTop - 130)
   window.scrollTo(option)
   return false
 }
