@@ -40,8 +40,10 @@ class ProductUseCases extends Component {
             <articles>
               <ListContent
                 title={'Uses'}
+                itemKey={'uses'}
                 src={'/static/images/uses.svg'}
                 content={usesContent}
+                hover={this.props.hover}
               />
             </articles>
           </Grid>
@@ -49,8 +51,10 @@ class ProductUseCases extends Component {
             <articles>
               <ListContent
                 title={'Side Effects'}
+                itemKey={'sideEffects'}
                 src={'/static/images/side-effects.svg'}
                 content={sideEffectsContent}
+                hover={this.props.hover}
               />
             </articles>
           </Grid>
@@ -58,14 +62,21 @@ class ProductUseCases extends Component {
             <articles>
               <ListContent
                 title={'How it Works'}
+                itemKey={'howItWorks'}
                 src={'/static/images/how-it-works.svg'}
                 content={howItWorksContent}
+                hover={this.props.hover}
               />
             </articles>
           </Grid>
           <Grid item xs={12}>
             <articles>
-              <TableContent title={'Precautions'} src={'/static/images/precautions.svg'} />
+              <TableContent 
+                itemKey={'precautions'} 
+                hover={this.props.hover}
+                title={'Precautions'} 
+                src={'/static/images/precautions.svg'} 
+              />
             </articles>
           </Grid>
         </Grid>

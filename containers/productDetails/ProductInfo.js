@@ -28,7 +28,10 @@ class ProductInfo extends Component {
         <ProductMolecule />
         <DiseaseTagsWrapper />
         <ProductOverview />
-        <ProductInfoNav />
+        <ProductInfoNav
+          toggleHover={this.props.toggleHover}
+          hover={this.props.hover}
+        />
       </div>
     )
   }

@@ -22,35 +22,63 @@ const styles = theme => {
     listLink: {
       display: 'flex',
       flexDirection: 'column',
-      alignItems: 'center'
+      alignItems: 'center',
+      textDecoration: 'none',
+      color: theme.palette.customGrey.grey600,
+      '&:hover': {
+        color: '#80c241'
+      }
     },
     linkLabel: {
       display: 'block',
       fontSize: '0.75rem',
+      fontFamily: theme.typography.fontFamily,
       marginTop: theme.spacing.unit,
-      transition: '0.3s',
-      '&:hover': {
-        color: '#80c241',
-        transition: '0.3s',
-        transitionOrigin: 'center'
-      }
+      transition: '0.2s',
+    },
+    hover: {
+      color: theme.palette.primary.main,
+      transition: '0.2s'
     }
   }
+}
+
+function scrollTo (id) {
+  var ele = document.getElementById(id)
+  const option = {
+    top: ele.offsetTop - 130,
+    left: ele.offsetLeft,
+    behavior: 'smooth'
+  }
+  // window.scrollTo(ele.offsetLeft, ele.offsetTop - 130)
+  window.scrollTo(option)
+  return false
 }
 
 const ProductBrand = (props) => (
   <div>
     <ui className={props.classes.listWrapper}>
       <li className={props.classes.list}>
-        <a className={props.classes.listLink}>
-          <img src={'/static/images/uses-nav.svg'} />
+        <a
+          className={props.hover.uses ? `${props.classes.listLink} ${props.classes.hover}` : props.classes.listLink}
+          // className={props.classes.listLink}
+          onMouseEnter={props.toggleHover.bind(this, 'uses')}
+          onMouseLeave={props.toggleHover.bind(this, 'uses')}
+          onClick={scrollTo.bind(this, 'uses')}
+        >
+          <img src={props.hover.uses ? '/static/images/uses-nav-green.svg' : '/static/images/uses-nav.svg'} />
           <span className={props.classes.linkLabel}>
             USES
           </span>
         </a>
       </li>
       <li className={props.classes.list}>
-        <a className={props.classes.listLink}>
+        <a
+          className={props.hover.sideEffects ? `${props.classes.listLink} ${props.classes.hover}` : props.classes.listLink}
+          onMouseEnter={props.toggleHover.bind(this, 'sideEffects')}
+          onMouseLeave={props.toggleHover.bind(this, 'sideEffects')}
+          onClick={scrollTo.bind(this, 'sideEffects')}
+        >
           <img src={'/static/images/side-effects-nav.svg'} />
           <span className={props.classes.linkLabel}>
             SIDE EFFECTS
@@ -58,7 +86,12 @@ const ProductBrand = (props) => (
         </a>
       </li>
       <li className={props.classes.list}>
-        <a className={props.classes.listLink}>
+        <a
+          className={props.hover.howItWorks ? `${props.classes.listLink} ${props.classes.hover}` : props.classes.listLink}
+          onMouseEnter={props.toggleHover.bind(this, 'howItWorks')}
+          onMouseLeave={props.toggleHover.bind(this, 'howItWorks')}
+          onClick={scrollTo.bind(this, 'howItWorks')}
+        >
           <img src={'/static/images/how-it-works-nav.svg'} />
           <span className={props.classes.linkLabel}>
             HOW IT WORKS
@@ -66,7 +99,12 @@ const ProductBrand = (props) => (
         </a>
       </li>
       <li className={props.classes.list}>
-        <a className={props.classes.listLink}>
+        <a
+          className={props.hover.precautions ? `${props.classes.listLink} ${props.classes.hover}` : props.classes.listLink}
+          onMouseEnter={props.toggleHover.bind(this, 'precautions')}
+          onMouseLeave={props.toggleHover.bind(this, 'precautions')}
+          onClick={scrollTo.bind(this, 'precautions')} 
+        >
           <img src={'/static/images/precautions-nav.svg'} />
           <span className={props.classes.linkLabel}>
             PRECAUTIONS

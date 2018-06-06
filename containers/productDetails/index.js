@@ -11,15 +11,35 @@ import ProductDetailsContent from './ProductDetailsContent'
 */
 
 class ProductDetailsWrapper extends Component {
+  constructor (props) {
+    super(props)
+    this.state = {
+      hover: {}
+    }
+  }
+
+  toggleHover (item) {
+    this.setState((prevState) => ({
+      hover: {
+        [item]: !prevState.hover[item]
+      }
+    })
+    )
+  }
   render () {
     return (
       <div>
         <BreadCrumbs />
         <section>
-          <ProductDetails />
+          <ProductDetails
+            toggleHover={this.toggleHover.bind(this)}
+            hover={this.state.hover}
+          />
         </section>
         <section>
-          <ProductDetailsContent />
+          <ProductDetailsContent
+            hover={this.state.hover}
+          />
         </section>
       </div>
     )

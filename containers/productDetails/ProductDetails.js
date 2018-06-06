@@ -14,7 +14,7 @@ import ProductPriceDetails from './ProductPriceDetails'
 const styles = theme => {
   return {
     productDetailsWrapper: {
-      borderBottom: '1px solid #9b9b9b',
+      borderBottom: `1px solid ${theme.palette.customGrey.grey100}`,
       paddingBottom: theme.spacing.unit * 3
     }
   }
@@ -26,7 +26,10 @@ class ProductDetails extends Component {
       <div>
         <Grid container spacing={24} className={this.props.classes.productDetailsWrapper}>
           <Grid item xs={8}>
-            <ProductInfo />
+            <ProductInfo
+              toggleHover={this.props.toggleHover}
+              hover={this.props.hover}
+            />
           </Grid>
           <Grid item xs={4}>
             <ProductPriceDetails />
