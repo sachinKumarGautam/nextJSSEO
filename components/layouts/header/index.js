@@ -48,17 +48,17 @@ function Header (props) {
 
 const styles = theme => ({
   root: {
-    flexGrow: 1,
+    flexGrow: 1
   },
   appBar: {
     backgroundColor: '#fff'
   },
   appBarInnerComp: {
     flexGrow: 1,
-    // margin: '0 auto',
-    // maxWidth: theme.breakpoints.values.lg,
-    // display: 'flex',
-    // width: '100%',
+    margin: '0 auto',
+    maxWidth: theme.breakpoints.values.lg,
+    display: 'flex',
+    width: '100%',
     flexDirection: 'column',
     paddingLeft: '56px',
     paddingRight: '36px'

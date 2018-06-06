@@ -16,7 +16,14 @@ const styles = theme => ({
     flexDirection: 'row',
     justifyContent: 'space-around',
     alignItems: 'stretch'
-    // marginTop: theme.spacing.unit * 3
+  },
+  footerInnerWrapper: {
+    maxWidth: '1366px',
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    alignItems: 'stretch',
+    width: '100%'
   }
 })
 
@@ -28,10 +35,12 @@ const SubFooter = ({classes}) => (
       component='div'
       square
     >
-      <CompanyInfo />
-      <ContactUs />
-      <Categories />
-      <OurApp />
+      <div className={classes.footerInnerWrapper}>
+        <CompanyInfo />
+        <ContactUs />
+        <Categories />
+        <OurApp />
+      </div>
     </Paper>
   </section>
 )

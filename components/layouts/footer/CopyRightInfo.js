@@ -7,9 +7,6 @@ const styles = theme => ({
     paddingTop: 16,
     paddingBottom: 16,
     backgroundColor: '#4a4a4a',
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
     borderTop: '0.4px solid #FFF',
     paddingLeft: theme.spacing.unit * 4.75,
     paddingRight: theme.spacing.unit * 7.5
@@ -26,16 +23,23 @@ const styles = theme => ({
   copyRightInfo: {
     color: theme.palette.common.white,
     paddingLeft: theme.spacing.unit * 2.25
+  },
+  footerInnerWrapper: {
+    maxWidth: theme.breakpoints.values.lg,
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    margin: '0 auto'
   }
 })
 
 const SubFooter = ({classes}) => (
-  <div>
-    <Paper className={classes.root} elevation={4}>
+  <Paper className={classes.root} elevation={4}>
+    <div className={classes.footerInnerWrapper}>
       <div className={classes.iconWithText}>
         <img src={'/static/images/splash.svg'} />
         <Typography className={classes.copyRightInfo} component='h3' variant={'body1'}>
-          © 2016 LifCARE. All Rights Reserved
+            © 2016 LifCARE. All Rights Reserved
         </Typography>
       </div>
       <div>
@@ -43,8 +47,8 @@ const SubFooter = ({classes}) => (
         <img className={classes.socialMediaIcon} src={'/static/images/facebook.svg'} />
         <img className={classes.socialMediaIcon} src={'/static/images/twitter.svg'} />
       </div>
-    </Paper>
-  </div>
+    </div>
+  </Paper>
 )
 
 export default withStyles(styles)(SubFooter)

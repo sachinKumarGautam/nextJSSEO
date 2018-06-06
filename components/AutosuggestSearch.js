@@ -222,9 +222,9 @@ const styles = theme => ({
   },
   container: {
     flexGrow: 1,
-    // width: '637px',
-    // margin: '0 auto',
-    // position: 'relative',
+    width: theme.spacing.unit * 80,
+    margin: '0 auto',
+    position: 'relative',
   },
   paper: {
     position: 'absolute',
@@ -238,7 +238,7 @@ const styles = theme => ({
   },
   inputFormControl: {
     flexWrap: 'wrap',
-    maxWidth: theme.spacing.unit * 80,
+    width: theme.spacing.unit * 80,
     paddingLeft: theme.spacing.unit * 2,
     borderColor: theme.palette.customGrey.grey200,
     border: '1px solid black',

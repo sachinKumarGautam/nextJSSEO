@@ -34,7 +34,7 @@ const styles = theme => {
       fontSize: '0.75rem',
       fontFamily: theme.typography.fontFamily,
       marginTop: theme.spacing.unit,
-      transition: '0.2s',
+      transition: '0.2s'
     },
     hover: {
       color: theme.palette.primary.main,
@@ -60,7 +60,6 @@ const ProductBrand = (props) => (
       <li className={props.classes.list}>
         <a
           className={props.hover.uses ? `${props.classes.listLink} ${props.classes.hover}` : props.classes.listLink}
-          // className={props.classes.listLink}
           onMouseEnter={props.toggleHover.bind(this, 'uses')}
           onMouseLeave={props.toggleHover.bind(this, 'uses')}
           onClick={scrollTo.bind(this, 'uses')}
@@ -78,7 +77,7 @@ const ProductBrand = (props) => (
           onMouseLeave={props.toggleHover.bind(this, 'sideEffects')}
           onClick={scrollTo.bind(this, 'sideEffects')}
         >
-          <img src={'/static/images/side-effects-nav.svg'} />
+          <img src={props.hover.sideEffects ? '/static/images/side-effects-nav-green.svg' : '/static/images/side-effects-nav.svg'} />
           <span className={props.classes.linkLabel}>
             SIDE EFFECTS
           </span>
@@ -91,7 +90,7 @@ const ProductBrand = (props) => (
           onMouseLeave={props.toggleHover.bind(this, 'howItWorks')}
           onClick={scrollTo.bind(this, 'howItWorks')}
         >
-          <img src={'/static/images/how-it-works-nav.svg'} />
+          <img src={props.hover.howItWorks ? '/static/images/how-it-works-nav-green.svg' : '/static/images/how-it-works-nav.svg'} />
           <span className={props.classes.linkLabel}>
             HOW IT WORKS
           </span>
@@ -102,9 +101,9 @@ const ProductBrand = (props) => (
           className={props.hover.precautions ? `${props.classes.listLink} ${props.classes.hover}` : props.classes.listLink}
           onMouseEnter={props.toggleHover.bind(this, 'precautions')}
           onMouseLeave={props.toggleHover.bind(this, 'precautions')}
-          onClick={scrollTo.bind(this, 'precautions')} 
+          onClick={scrollTo.bind(this, 'precautions')}
         >
-          <img src={'/static/images/precautions-nav.svg'} />
+          <img src={props.hover.precautions ? '/static/images/precautions-nav-green.svg' : '/static/images/precautions-nav.svg'} />
           <span className={props.classes.linkLabel}>
             PRECAUTIONS
           </span>
