@@ -25,10 +25,11 @@ const styles = theme => {
       alignItems: 'center'
     },
     linkLabel: {
+      ...theme.typography.body3,
       display: 'block',
-      fontSize: '0.75rem',
-      fontFamily: theme.typography.fontFamily,
-      marginTop: theme.spacing.unit
+      marginTop: theme.spacing.unit,
+      color: theme.palette.customGrey.grey600,
+      fontWeight: theme.typography.fontWeightBold
     }
   }
 }

@@ -45,7 +45,11 @@ const theme = createMuiTheme({
     // Use the system font instead of the default Roboto font.
     fontFamily: ['Lato', 'sans-serif'],
     fontSize: 16,
-    fontWeightBold: 600
+    fontWeightBold: 600,
+    body3: {
+      fontSize: '0.75rem',
+      fontFamily: ['Lato', 'sans-serif']
+    }
   },
   spacing: {
     percentageUnit: '12%'
