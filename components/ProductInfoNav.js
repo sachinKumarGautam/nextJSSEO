@@ -24,21 +24,17 @@ const styles = theme => {
       flexDirection: 'column',
       alignItems: 'center',
       textDecoration: 'none',
-      color: theme.palette.customGrey.grey600,
-      '&:hover': {
-        color: '#80c241'
-      }
+      color: theme.palette.customGrey.grey600
     },
     linkLabel: {
+      color: 'inherit',
       display: 'block',
       fontSize: '0.75rem',
       fontFamily: theme.typography.fontFamily,
-      marginTop: theme.spacing.unit,
-      transition: '0.2s'
+      marginTop: theme.spacing.unit
     },
     hover: {
-      color: theme.palette.primary.main,
-      transition: '0.2s'
+      color: theme.palette.primary.main
     }
   }
 }
