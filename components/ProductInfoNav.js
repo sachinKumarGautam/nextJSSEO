@@ -25,21 +25,15 @@ const styles = theme => {
       alignItems: 'center',
       textDecoration: 'none',
       color: theme.palette.customGrey.grey600,
-      '&:hover': {
-        color: '#80c241'
-      }
     },
     linkLabel: {
       ...theme.typography.body3,
       display: 'block',
       marginTop: theme.spacing.unit,
-      color: theme.palette.customGrey.grey600,
       fontWeight: theme.typography.fontWeightBold,
-      transition: '0.2s'
     },
     hover: {
       color: theme.palette.primary.main,
-      transition: '0.2s'
     }
   }
 }
