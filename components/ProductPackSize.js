@@ -19,7 +19,7 @@ const ProductPackSize = (props) => (
       component='h4'
       className={props.classes.packSize}
     >
-      Tablets / 10s
+      <i class='fas fa-pills' /> Tablets / 10s
     </Typography>
   </div>
 )

@@ -4,7 +4,6 @@ import { withStyles } from '@material-ui/core/styles'
 import Grid from '@material-ui/core/Grid'
 
 import ProductUseCases from '../../components/ProductUseCases'
-import RelatedArticles from '../../components/RelatedArticles'
 
 /*
   product use cases
@@ -19,23 +18,18 @@ const styles = theme => {
   }
 }
 
-class ProductDetailsContent extends Component {
+class MoleculeDetailsContent extends Component {
   render () {
     return (
       <div>
         <Grid container spacing={24} className={this.props.classes.contentWrapper}>
-          <Grid item xs={9}>
-            <ProductUseCases
-              hover={this.props.hover}
-            />
-          </Grid>
-          <Grid item xs={3}>
-            <RelatedArticles />
-          </Grid>
+          <ProductUseCases
+            hover={this.props.hover}
+          />
         </Grid>
       </div>
     )
   }
 }
 
-export default withStyles(styles)(ProductDetailsContent)
+export default withStyles(styles)(MoleculeDetailsContent)
