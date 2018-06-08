@@ -14,12 +14,10 @@ const styles = theme => {
       fontWeight: theme.typography.fontWeightBold
     },
     card: {
-      maxWidth: 252,
-      marginBottom: theme.spacing.unit * 8
+      maxWidth: 252
     },
     articleListWrapper: {
       listStyle: 'none',
-      marginTop: theme.spacing.unit * 4,
       paddingLeft: 0
     },
     viewAllLink: {
@@ -28,13 +26,17 @@ const styles = theme => {
       float: 'right',
       paddingRight: theme.spacing.unit * 5,
       color: theme.palette.primary.main,
-      fontWeight: theme.typography.fontWeightMedium
+      fontWeight: theme.typography.fontWeightMedium,
+      marginTop: theme.spacing.unit
+    },
+    relatedMedicinesWrapper: {
+      marginBottom: theme.spacing.unit * 8
     }
   }
 }
 
 const RelatedMedicines = (props) => (
-  <div>
+  <div className={props.classes.relatedMedicinesWrapper}>
     <Typography
       gutterBottom
       variant='title'
@@ -49,10 +51,16 @@ const RelatedMedicines = (props) => (
           <li>
             <RelatedMedicinesCard />
           </li>
+          <li>
+            <RelatedMedicinesCard />
+          </li>
+          <li>
+            <RelatedMedicinesCard />
+          </li>
         </ul>
       </CardContent>
     </Card>
-    {/* <a className={props.classes.viewAllLink}>view all</a> */}
+    <a className={props.classes.viewAllLink}>view all</a>
   </div>
 )
 

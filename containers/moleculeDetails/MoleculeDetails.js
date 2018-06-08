@@ -27,7 +27,7 @@ class MoleculeDetails extends Component {
   render () {
     return (
       <div className={this.props.classes.productDetailsWrapper}>
-        <ProductName />
+        <ProductName variant={'title'} />
         <DiseaseTagsWrapper />
         <ProductOverview />
         <ProductInfoNav

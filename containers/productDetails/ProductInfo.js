@@ -22,10 +22,10 @@ class ProductInfo extends Component {
   render () {
     return (
       <div>
-        <ProductName />
-        <ProductBrand />
-        <ProductPackSize />
-        <ProductMolecule />
+        <ProductName variant={'title'} />
+        <ProductBrand variant={'subheading'} />
+        <ProductPackSize variant={'subheading'} />
+        <ProductMolecule variant={'body1'} />
         <DiseaseTagsWrapper />
         <ProductOverview />
         <ProductInfoNav

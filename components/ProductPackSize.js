@@ -12,16 +12,14 @@ const styles = theme => {
 }
 
 const ProductPackSize = (props) => (
-  <div>
-    <Typography
-      gutterBottom
-      variant='subheading'
-      component='h4'
-      className={props.classes.packSize}
-    >
-      <i class='fas fa-pills' /> Tablets / 10s
-    </Typography>
-  </div>
+  <Typography
+    gutterBottom
+    variant={props.variant}
+    component='h4'
+    className={`${props.classes.packSize} ${props.customStyle}`}
+  >
+    {!props.withoutImage && <i class='fas fa-pills' />} Tablets / 10s
+  </Typography>
 )
 
 export default withStyles(styles)(ProductPackSize)

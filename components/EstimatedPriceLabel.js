@@ -10,7 +10,10 @@ const styles = theme => ({
 })
 
 const EstimatedPriceLabel = (props) => (
-  <Typography className={props.classes.estimatedPrice} variant='caption'>
+  <Typography
+    className={`${props.classes.estimatedPrice} ${props.customStyle}`}
+    variant='caption'
+  >
     *Estimated Price
   </Typography>
 )

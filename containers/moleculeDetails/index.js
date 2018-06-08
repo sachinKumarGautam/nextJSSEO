@@ -38,7 +38,7 @@ class MoleculeDetailsWrapper extends Component {
       <div>
         <BreadCrumbs />
         <Grid container spacing={24}>
-          <Grid item xs={9}>
+          <Grid item xs={8}>
             <section>
               <MoleculeDetails
                 toggleHover={this.toggleHover.bind(this)}
@@ -51,6 +51,7 @@ class MoleculeDetailsWrapper extends Component {
               />
             </section>
           </Grid>
+          <Grid item xs={1} />
           <Grid item xs={3}>
             <RelatedMedicines />
             <RelatedArticles />

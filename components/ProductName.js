@@ -17,7 +17,7 @@ const ProductName = (props) => (
     <Typography
       className={props.classes.title}
       gutterBottom
-      variant='title'
+      variant={props.variant}
       component='h1'
     >
       Glycomet 0.5 MG TAB 10S
