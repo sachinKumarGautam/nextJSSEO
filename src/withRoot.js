@@ -3,8 +3,6 @@ import PropTypes from 'prop-types';
 import { MuiThemeProvider } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import getPageContext from './getPageContext';
-import Button from '@material-ui/core/Button'
-
 
 function withRoot(Component) {
   class WithRoot extends React.Component {

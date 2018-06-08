@@ -7,7 +7,7 @@ import TextField from '@material-ui/core/TextField';
 import Paper from '@material-ui/core/Paper';
 import MenuItem from '@material-ui/core/MenuItem';
 import Chip from '@material-ui/core/Chip';
-import Button from '@material-ui/core/Button'
+import Button from './button'
 import SearchIcon from '@material-ui/icons/Search'
 
 const suggestions = [
@@ -70,9 +70,8 @@ function renderInput(inputProps) {
           classes={{
             root: classes.searchButton
           }}
-        >
-          <SearchIcon className={classes.iconColor}/>
-      </Button>
+          label={<SearchIcon className={classes.iconColor}/>}
+        />
     </div>
   );
 }
@@ -250,7 +249,6 @@ const styles = theme => ({
   },
   searchButton: {
     borderColor: theme.palette.customGrey.grey200,
-    // width: '50px',
     position: 'absolute',
     right: 0,
     height: theme.spacing.unit * 4,

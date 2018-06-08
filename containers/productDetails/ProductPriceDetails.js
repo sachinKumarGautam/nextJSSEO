@@ -4,8 +4,7 @@ import { withStyles } from '@material-ui/core/styles'
 import Card from '@material-ui/core/Card'
 // import CardActions from '@material-ui/core/CardActions'
 import CardContent from '@material-ui/core/CardContent'
-import Button from '@material-ui/core/Button'
-
+import Button from '../../components/button'
 import ProductPrice from '../../components/ProductPrice'
 import EstimatedPriceLabel from '../../components/EstimatedPriceLabel'
 import StrokePrice from '../../components/StrokePrice'
@@ -80,9 +79,8 @@ class ProductPriceDetails extends Component {
                 size='small'
                 color='primary'
                 onClick={this.handleClickOpen}
-              >
-                Add To Cart
-              </Button>
+                label={'Add To Cart'}
+              />
             </div>
           </CardContent>
         </Card>
