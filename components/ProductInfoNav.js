@@ -24,16 +24,17 @@ const styles = theme => {
       flexDirection: 'column',
       alignItems: 'center',
       textDecoration: 'none',
-      color: theme.palette.customGrey.grey600,
+      color: theme.palette.customGrey.grey600
     },
     linkLabel: {
       ...theme.typography.body3,
       display: 'block',
       marginTop: theme.spacing.unit,
       fontWeight: theme.typography.fontWeightBold,
+      fontFamily: theme.typography.fontFamily
     },
     hover: {
-      color: theme.palette.primary.main,
+      color: theme.palette.primary.main
     }
   }
 }

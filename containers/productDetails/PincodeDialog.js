@@ -1,7 +1,7 @@
 import React from 'react'
 
 import { withStyles } from '@material-ui/core/styles'
-import Button from '@material-ui/core/Button'
+import Button from '../../components/button'
 import TextField from '@material-ui/core/TextField'
 import Dialog from '@material-ui/core/Dialog'
 import DialogActions from '@material-ui/core/DialogActions'
@@ -38,12 +38,17 @@ const PincodeDialog = (props) => (
         />
       </DialogContent>
       <DialogActions>
-        <Button onClick={props.handleClose} color='primary' variant='raised'>
-          Cancel
-        </Button>
-        <Button onClick={props.handleClose} color='primary' variant='raised'>
-          Apply
-        </Button>
+        <Button 
+          onClick={props.handleClose} 
+          color='primary' 
+          variant='raised'
+          label={'Cancel'}
+        />
+        <Button 
+          onClick={props.handleClose} 
+          color='primary' 
+          label={'Apply'}
+          variant='raised' />
       </DialogActions>
     </Dialog>
   </div>

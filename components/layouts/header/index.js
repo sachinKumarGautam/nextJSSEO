@@ -3,47 +3,78 @@ import PropTypes from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
 // import Head from './Head'
 import AppBar from '@material-ui/core/AppBar'
-import Button from '@material-ui/core/Button'
+import Button from '../../button'
 import Toolbar from '@material-ui/core/Toolbar'
 import AutosuggestSearch from '../../AutosuggestSearch'
 import Subheader from './Subheader'
 import CartIcon from '../../CartIcon'
+import Login from '../../../containers/login'
+import getPageContext from '../../../src/getPageContext'
 
-function Header (props) {
-  const { classes } = props
-  return (
-    <div className={classes.root}>
-      <AppBar elevation={'1'} className={classes.appBar} position='fixed'>
-        {/* <Head
+class Header extends React.Component {
+  constructor (props, context) {
+    super(props, context)
+    this.pageContext = getPageContext()
+    this.openLoginModal = this.openLoginModal.bind(this)
+    this.closeLoginModal = this.closeLoginModal.bind(this)
+    this.state = {
+      openLoginDialog: false
+    }
+  }
+
+  openLoginModal () {
+    this.setState({
+      openLoginDialog: true
+    })
+  }
+
+  closeLoginModal () {
+    this.setState({
+      openLoginDialog: false
+    })
+  }
+
+  render () {
+    const { classes } = this.props
+    console.log(this.props.pageContext)
+    return (
+      <div className={classes.root}>
+        <AppBar elevation={'1'} className={classes.appBar} position='fixed'>
+          {/* <Head
           pageTitle={'Lifcare Product Details Page'}
         /> */}
-        <div className={classes.appBarInnerComp}>
-          <Toolbar
-            classes={{
-              root: classes.toolbar
-            }}
-            disableGutters
-          >
-            <img src='/static/images/logo-green.svg' />
-            <AutosuggestSearch />
-            <CartIcon />
-            <Button
+          <div className={classes.appBarInnerComp}>
+            <Toolbar
               classes={{
-                root: classes.root, // class name, e.g. `classes-nesting-root-x`
-                label: classes.label // class name, e.g. `classes-nesting-label-x`
+                root: classes.toolbar
               }}
-              variant='raised'
-              size='medium'
-              color='primary'
-              aria-label='login'
-              className={classes.button}
-            >Login / Register</Button>
-          </Toolbar>
-          <Subheader />
-        </div>
-      </AppBar>
-    </div>
-  )
+              disableGutters
+            >
+              <img src='/static/images/logo-green.svg' />
+              <AutosuggestSearch />
+              <CartIcon />
+              <Button
+                variant='raised'
+                size='medium'
+                color='primary'
+                aria-label='login'
+                onClick={this.openLoginModal}
+                className={classes.button}
+                label={'Login / Register'}
+              />
+              <Login
+                openLoginDialog={this.state.openLoginDialog}
+                openLoginModal={this.openLoginModal}
+                closeLoginModal={this.closeLoginModal}
+                {...this.props}
+              />
+            </Toolbar>
+            <Subheader />
+          </div>
+        </AppBar>
+      </div>
+    )
+  }
 }
 
 const styles = theme => ({
@@ -74,9 +105,7 @@ const styles = theme => ({
   button: {
     color: 'white',
     flexGrow: 0,
-    borderRadius: theme.spacing.unit * 4,
-    background: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)',
-    boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .30)'
+    borderRadius: theme.spacing.unit * 4
   }
 })
 
