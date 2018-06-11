@@ -14,8 +14,7 @@ const styles = theme => {
   return {
     relatedMedicinesCardWrapper: {
       paddingBottom: theme.spacing.unit * 2,
-      marginTop: theme.spacing.unit * 2,
-      borderBottom: `1px solid ${theme.palette.customGrey.grey100}`
+      marginTop: theme.spacing.unit * 2
     },
     customBrand: {
       ...theme.typography.body3,
@@ -48,7 +47,7 @@ const styles = theme => {
 }
 
 const RelatedMedicinesCard = (props) => (
-  <div className={props.classes.relatedMedicinesCardWrapper}>
+  <div>
     <ProductName variant={'body1'} />
     <div>
       <ProductBrand

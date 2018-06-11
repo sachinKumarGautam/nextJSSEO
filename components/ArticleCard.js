@@ -9,7 +9,6 @@ import CardMedia from '@material-ui/core/CardMedia'
 const styles = theme => {
   return {
     card: {
-      maxWidth: 252,
       marginBottom: theme.spacing.unit * 4
     },
     media: {

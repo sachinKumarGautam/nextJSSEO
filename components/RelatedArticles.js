@@ -7,6 +7,9 @@ import ArticleCard from './ArticleCard'
 
 const styles = theme => {
   return {
+    relatedArticlesWrapper: {
+      maxWidth: 252
+    },
     title: {
       color: theme.palette.customGrey.grey600,
       fontWeight: theme.typography.fontWeightBold
@@ -23,7 +26,6 @@ const styles = theme => {
       ...theme.typography.caption,
       display: 'block',
       float: 'right',
-      paddingRight: theme.spacing.unit * 5,
       color: theme.palette.primary.main,
       fontWeight: theme.typography.fontWeightMedium
     }
@@ -31,7 +33,7 @@ const styles = theme => {
 }
 
 const RelatedArticles = (props) => (
-  <div>
+  <div className={props.classes.relatedArticlesWrapper}>
     <Typography
       gutterBottom
       variant='title'
