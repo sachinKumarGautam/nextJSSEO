@@ -8,9 +8,6 @@ import CardMedia from '@material-ui/core/CardMedia'
 
 const styles = theme => {
   return {
-    card: {
-      marginBottom: theme.spacing.unit * 4
-    },
     media: {
       height: 0,
       paddingTop: '56.25%' // 16:9
@@ -27,7 +24,7 @@ const styles = theme => {
 }
 
 const ArticleCard = (props) => (
-  <Card className={props.classes.card} elevation={1}>
+  <Card elevation={1}>
     <CardMedia
       className={props.classes.media}
       image='/static/images/avenger.jpg'

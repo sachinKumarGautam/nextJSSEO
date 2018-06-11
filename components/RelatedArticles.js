@@ -28,6 +28,11 @@ const styles = theme => {
       float: 'right',
       color: theme.palette.primary.main,
       fontWeight: theme.typography.fontWeightMedium
+    },
+    listItem: {
+      '&:not(:last-child)': {
+        marginBottom: theme.spacing.unit * 4
+      }
     }
   }
 }
@@ -45,13 +50,13 @@ const RelatedArticles = (props) => (
     </Typography>
     <aside>
       <ul className={props.classes.articleListWrapper}>
-        <li>
+        <li className={props.classes.listItem}>
           <ArticleCard />
         </li>
-        <li>
+        <li className={props.classes.listItem}>
           <ArticleCard />
         </li>
-        <li>
+        <li className={props.classes.listItem}>
           <ArticleCard />
         </li>
       </ul>
