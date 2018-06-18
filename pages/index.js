@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Button from '@material-ui/core/Button';
+import Button from '../components/button';
 import Dialog from '@material-ui/core/Dialog';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import DialogContent from '@material-ui/core/DialogContent';
@@ -82,9 +82,7 @@ class Index extends React.Component {
               <DialogContentText>1-2-3-4-5</DialogContentText>
             </DialogContent>
             <DialogActions>
-              <Button color="primary" onClick={this.handleClose}>
-                OK
-              </Button>
+              <Button color="primary" onClick={this.handleClose} label={'OK'} />
             </DialogActions>
           </Dialog>
           <Typography variant="display1" gutterBottom>

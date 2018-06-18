@@ -7,7 +7,7 @@ import withRoot from '../src/withRoot'
 
 import Paper from '@material-ui/core/Paper'
 
-import ProductDetailsWrapper from '../containers/productDetails'
+import MoleculeDetailsWrapper from '../containers/moleculeDetails'
 
 const styles = theme => ({
   root: {
@@ -25,16 +25,16 @@ const styles = theme => ({
   }
 })
 
-const ProductDetails = (props) => (
+const MoleculeDetails = (props) => (
   <div>
     <Header />
     <div>
       <Paper className={props.classes.root} elevation={1}>
-        <ProductDetailsWrapper />
+        <MoleculeDetailsWrapper />
       </Paper>
     </div>
     <Footer />
   </div>
 )
 
-export default withRoot(withStyles(styles)(ProductDetails))
+export default withRoot(withStyles(styles)(MoleculeDetails))
