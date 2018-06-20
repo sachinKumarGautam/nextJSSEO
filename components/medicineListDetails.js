@@ -13,10 +13,6 @@ import EstimatedPriceLabel from './EstimatedPriceLabel'
 
 const styles = theme => {
   return {
-    relatedMedicinesCardWrapper: {
-      paddingBottom: theme.spacing.unit * 2,
-      marginTop: theme.spacing.unit * 2
-    },
     customBrand: {
       ...theme.typography.body3
     },
@@ -32,16 +28,6 @@ const styles = theme => {
     },
     customEstimatedLabel: {
       ...theme.typography.body3
-    },
-    divider: {
-      marginLeft: theme.spacing.unit,
-      marginRight: theme.spacing.unit
-    },
-    priceWrapper: {
-      textAlign: 'right'
-    },
-    estimatePriceWrapper: {
-      textAlign: 'center'
     },
     medicineListContentWrapper: {
       display: 'flex',
