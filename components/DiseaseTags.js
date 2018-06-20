@@ -7,14 +7,16 @@ const styles = theme => {
   return {
     tags: {
       ...theme.typography.subheading,
-      color: theme.palette.customGrey.grey600
+      color: theme.palette.customGrey.grey600,
+      marginRight: theme.spacing.unit
     }
   }
 }
 
 const DiseaseTags = (props) => (
   <div>
-    <Chip label='Basic Chip' className={props.classes.tags} />
+    <Chip label='Diabetes' className={props.classes.tags} />
+    <Chip label='Asthma' className={props.classes.tags} />
   </div>
 )
 

@@ -18,6 +18,14 @@ const styles = theme => {
       listStyle: 'none',
       marginTop: theme.spacing.unit * 4,
       paddingLeft: 0
+    },
+    viewAllLink: {
+      ...theme.typography.caption,
+      display: 'block',
+      float: 'right',
+      paddingRight: theme.spacing.unit * 5,
+      color: theme.palette.primary.main,
+      fontWeight: theme.typography.fontWeightMedium
     }
   }
 }
@@ -45,6 +53,7 @@ const RelatedArticles = (props) => (
           <ArticleCard />
         </li>
       </ul>
+      <a className={props.classes.viewAllLink}>view all</a>
     </aside>
   </div>
 )

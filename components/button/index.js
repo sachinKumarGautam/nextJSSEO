@@ -3,7 +3,6 @@ import { withStyles } from '@material-ui/core/styles'
 
 const styles = theme => ({
   button: {
-    color: 'white',
     flexGrow: 0,
     borderRadius: theme.spacing.unit * 4
   }
@@ -12,6 +11,8 @@ const styles = theme => ({
 const CommonButton = (buttonProps) => (
   <Button
     className={buttonProps.classes.button}
+    disableRipple
+    disabled={buttonProps.isLoading}
     {...buttonProps}
   >
     {buttonProps.label}

@@ -1,22 +1,27 @@
-import Login from './Login'
 
 import { withStyles } from '@material-ui/core/styles'
 import Dialog from '@material-ui/core/Dialog'
-import DialogActions from '@material-ui/core/DialogActions'
 import DialogContent from '@material-ui/core/DialogContent'
-import DialogContentText from '@material-ui/core/DialogContentText'
 import DialogTitle from '@material-ui/core/DialogTitle'
 import Fade from '@material-ui/core/Fade'
-import Typography from '@material-ui/core'
+import Login from './Login'
+import Register from './Register'
+import OTP from './OTP'
+
+/*
+    index.js
+      Login.js
+      Register.js
+ */
 
 const styles = theme => ({
   paper: {
     width: '100%',
     maxWidth: theme.spacing.unit * 59,
-    height: '272px',
     borderRadius: theme.spacing.unit / 2,
     backgroundColor: theme.palette.common.white,
-    border: 'solid 1px #979797'
+    border: 'solid 1px #979797',
+    minHeight: '176px'
   },
   dialogTitle: {
     ...theme.typography.title,
@@ -30,6 +35,49 @@ function Transition (props) {
 }
 
 class LoginWrapper extends React.Component {
+  constructor (props) {
+    super(props)
+
+    this.state = {
+      modalName: 'login'
+    }
+    this.toggleForm = this.toggleForm.bind(this)
+  }
+
+  toggleForm (name) {
+    this.setState({
+      modalName: name
+    })
+  }
+
+  componentDidMount () {
+    this.setState({
+      modalName: 'login'
+    })
+  }
+
+  getModal (name) {
+    switch (name) {
+      case 'login':
+        return <Login
+          toggleForm={this.toggleForm}
+          closeLoginModal={this.props.closeLoginModal}
+        />
+
+      case 'register':
+        return <Register
+          toggleForm={this.toggleForm}
+          closeLoginModal={this.props.closeLoginModal}
+        />
+
+      case 'otp':
+        return <OTP
+          toggleForm={this.toggleForm}
+          closeLoginModal={this.props.closeLoginModal}
+        />
+    }
+  }
+
   render () {
     const { classes } = this.props
     return (
@@ -45,30 +93,17 @@ class LoginWrapper extends React.Component {
           }}
         >
           <DialogTitle
-            // className={classes.dialogTitle}
-            id='alert-dialog-slide-title'
+            id='modal'
             disableTypography
             classes={{
               root: classes.dialogTitle
             }}
           >
-            {'Login'}
+            {this.state.modalName.toUpperCase()}
           </DialogTitle>
           <DialogContent>
-            {/* <DialogContentText id="alert-dialog-slide-description">
-              Let Google help apps determine location. This means sending anonymous location data to
-              Google, even when no apps are running.
-            </DialogContentText> */}
-            <Login {...this.props} />
+            {this.getModal(this.state.modalName)}
           </DialogContent>
-          {/* <DialogActions>
-            <Button
-              variant='contained'
-              onClick={this.props.closeLoginModal}
-              color='primary'
-              label={'Agree'}
-            />
-          </DialogActions> */}
         </Dialog>
       </div>
     )

@@ -2,7 +2,7 @@ import React from 'react'
 
 import { withStyles } from '@material-ui/core/styles'
 
-import DiseseTags from '../../components/DiseaseTags'
+import DiseseTags from './DiseaseTags'
 
 const styles = theme => {
   return {

@@ -38,15 +38,15 @@ const PincodeDialog = (props) => (
         />
       </DialogContent>
       <DialogActions>
-        <Button 
-          onClick={props.handleClose} 
-          color='primary' 
+        <Button
+          onClick={props.handleClose}
+          color='primary'
           variant='raised'
           label={'Cancel'}
         />
-        <Button 
-          onClick={props.handleClose} 
-          color='primary' 
+        <Button
+          onClick={props.handleClose}
+          color='primary'
           label={'Apply'}
           variant='raised' />
       </DialogActions>

@@ -12,16 +12,14 @@ const styles = theme => {
 }
 
 const ProductBrand = (props) => (
-  <div>
-    <Typography
-      gutterBottom
-      variant='subheading'
-      component='h3'
-      className={props.classes.brand}
-    >
-      <i class='far fa-building' /> Cipla Ltd
-    </Typography>
-  </div>
+  <Typography
+    gutterBottom
+    variant={props.variant}
+    component='h3'
+    className={`${props.classes.brand} ${props.customStyle}`}
+  >
+    {!props.withoutImage && <i class='far fa-building' />} Cipla Ltd
+  </Typography>
 )
 
 export default withStyles(styles)(ProductBrand)

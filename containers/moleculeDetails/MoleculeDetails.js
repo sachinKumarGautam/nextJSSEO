@@ -1,31 +1,33 @@
 import React, { Component } from 'react'
 
+import { withStyles } from '@material-ui/core/styles'
+
 import ProductName from '../../components/ProductName'
-import ProductBrand from '../../components/ProductBrand'
-import ProductPackSize from '../../components/ProductPackSize'
-import ProductMolecule from '../../components/ProductMolecule'
 import DiseaseTagsWrapper from '../../components/DiseaseTagsWrapper'
 import ProductOverview from '../../components/ProductOverview'
 import ProductInfoNav from '../../components/ProductInfoNav'
 
 /*
   Product name
-  product brand
-  product pack size
-  product molecule
   product related disease tags
   product overview
   product info nav
 */
 
-class ProductInfo extends Component {
+const styles = theme => {
+  return {
+    productDetailsWrapper: {
+      borderBottom: `1px solid ${theme.palette.customGrey.grey100}`,
+      paddingBottom: theme.spacing.unit * 3
+    }
+  }
+}
+
+class MoleculeDetails extends Component {
   render () {
     return (
-      <div>
+      <div className={this.props.classes.productDetailsWrapper}>
         <ProductName variant={'title'} />
-        <ProductBrand variant={'subheading'} />
-        <ProductPackSize variant={'subheading'} />
-        <ProductMolecule variant={'body1'} />
         <DiseaseTagsWrapper />
         <ProductOverview />
         <ProductInfoNav
@@ -37,4 +39,4 @@ class ProductInfo extends Component {
   }
 }
 
-export default ProductInfo
+export default withStyles(styles)(MoleculeDetails)

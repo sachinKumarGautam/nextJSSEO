@@ -61,14 +61,14 @@ class ProductPriceDetails extends Component {
 
     return (
       <div>
-        <Card elevation={'1'} className={classes.card}>
+        <Card elevation={1} className={classes.card}>
           <CardContent className={classes.cardContent}>
             <div className={classes.priceWrapper}>
-              <ProductPrice />
+              <ProductPrice variant={'headline'} />
               <EstimatedPriceLabel />
             </div>
             <div className={classes.priceWrapper}>
-              <StrokePrice />
+              <StrokePrice variant={'body1'} />
               <ProductDiscount />
             </div>
             <DeliveryInfoWrapper />

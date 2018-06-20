@@ -2,8 +2,8 @@ import React, { Component } from 'react'
 
 import Grid from '@material-ui/core/Grid'
 
-import ListContent from '../../components/ListContent'
-import TableContent from '../../components/TableContent'
+import ListContent from './ListContent'
+import TableContent from './TableContent'
 
 /*
   product uses

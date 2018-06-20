@@ -11,8 +11,10 @@ const styles = theme => ({
 })
 
 const ProductPrice = (props) => (
-  <Typography variant='body1'>
-    <s className={props.classes.strokePrice}>Rs. 43.00</s>
+  <Typography variant={props.variant} className={props.customStyle}>
+    <s className={`${props.classes.strokePrice} ${props.customStyle}`}>
+      Rs. 43.00
+    </s>
   </Typography>
 )
 
