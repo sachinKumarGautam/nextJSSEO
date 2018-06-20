@@ -21,12 +21,11 @@ const styles = theme => {
       ...theme.typography.body3
     },
     customPackSize: {
-      ...theme.typography.body3,
-      display: 'inline-block'
+      ...theme.typography.body3
     },
     customPrice: {
-      marginRight: theme.spacing.unit,
-      fontSize: theme.typography.fontSize
+      ...theme.typography.body1,
+      marginRight: theme.spacing.unit
     },
     customStrokePrice: {
       ...theme.typography.body3
