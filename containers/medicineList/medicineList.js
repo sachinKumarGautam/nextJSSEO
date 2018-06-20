@@ -11,8 +11,8 @@ import Button from '../../components/button'
 const styles = theme => {
   return {
     title: {
+      ...theme.typography.subheading,
       color: theme.palette.customGrey.grey600,
-      fontSize: theme.typography.fontSize + 2,
       paddingBottom: theme.spacing.unit * 4,
     },
     articleListWrapper: {
