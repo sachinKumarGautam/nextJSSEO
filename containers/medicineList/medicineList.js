@@ -5,8 +5,8 @@ import Typography from '@material-ui/core/Typography'
 import Card from '@material-ui/core/Card'
 import CardContent from '@material-ui/core/CardContent'
 
-import MedicineListContent from './medicineListContent'
 import Button from '../../components/button'
+import MedicineListDetails from '../../components/MedicineListDetails'
 
 const styles = theme => {
   return {
@@ -63,13 +63,13 @@ const MedicineList = (props) => (
       <CardContent>
         <ul className={props.classes.articleListWrapper}>
           <li className={props.classes.listItem}>
-            <MedicineListContent />
+            <MedicineListDetails />
           </li>
           <li className={props.classes.listItem}>
-            <MedicineListContent />
+            <MedicineListDetails />
           </li>
           <li className={props.classes.listItem}>
-            <MedicineListContent />
+            <MedicineListDetails />
           </li>
         </ul>
       </CardContent>

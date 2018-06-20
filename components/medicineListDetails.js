@@ -18,25 +18,21 @@ const styles = theme => {
       marginTop: theme.spacing.unit * 2
     },
     customBrand: {
-      ...theme.typography.body3,
-      display: 'inline-block'
+      ...theme.typography.body3
     },
     customPackSize: {
       ...theme.typography.body3,
       display: 'inline-block'
     },
     customPrice: {
-      display: 'inline-block',
       marginRight: theme.spacing.unit,
       fontSize: theme.typography.fontSize
     },
     customStrokePrice: {
-      ...theme.typography.body3,
-      display: 'inline-block'
+      ...theme.typography.body3
     },
     customEstimatedLabel: {
-      ...theme.typography.body3,
-      display: 'inline-block'
+      ...theme.typography.body3
     },
     divider: {
       marginLeft: theme.spacing.unit,
@@ -68,56 +64,42 @@ const styles = theme => {
 const MedicineListDetails = (props) => (
   <div className={props.classes.medicineListContentWrapper}>
     <div>
-      <div>
-        <ProductName variant={'body1'} />
-      </div>
-      <div>
-        <ProductBrand
-          variant={'caption'}
-          withoutImage
-          customStyle={props.classes.customBrand}
-        />
-      </div>
-      <div>
-        <ProductPackSize
-          variant={'caption'}
-          withoutImage
-          customStyle={props.classes.customPackSize}
-        />
-      </div>
+      <ProductName variant={'body1'} />
+      <ProductBrand
+        variant={'caption'}
+        withoutImage
+        customStyle={props.classes.customBrand}
+      />
+      <ProductPackSize
+        variant={'caption'}
+        withoutImage
+        customStyle={props.classes.customPackSize}
+      />
     </div>
     <div>
-      <div className={props.classes.priceWrapper}>
-        <ProductPrice
-          variant={'body1'}
-          customStyle={props.classes.customPrice}
-        />
-      </div>
-      <div className={props.classes.priceWrapper}>
-        <StrokePrice
-          variant={'caption'}
-          customStyle={props.classes.customStrokePrice}
-        />
-      </div>
-      <div className={props.classes.estimatePriceWrapper}>
-        <EstimatedPriceLabel
-          variant={'caption'}
-          customStyle={props.classes.customEstimatedLabel}
-        />
-      </div>
-      <div>
-        <Button
-          size='small'
-          variant='outlined'
-          color='primary'
-          classes={{
-            root: props.classes.buttonRoot,
-            label: props.classes.buttonLabel
-          }}
-          onClick={this.handleClickOpen}
-          label={'Add To Cart'}
-        />
-      </div>
+      <ProductPrice
+        variant={'body1'}
+        customStyle={props.classes.customPrice}
+      />
+      <StrokePrice
+        variant={'caption'}
+        customStyle={props.classes.customStrokePrice}
+      />
+      <EstimatedPriceLabel
+        variant={'caption'}
+        customStyle={props.classes.customEstimatedLabel}
+      />
+      <Button
+        size='small'
+        variant='outlined'
+        color='primary'
+        classes={{
+          root: props.classes.buttonRoot,
+          label: props.classes.buttonLabel
+        }}
+        onClick={this.handleClickOpen}
+        label={'Add To Cart'}
+      />
     </div>
   </div>
 )
