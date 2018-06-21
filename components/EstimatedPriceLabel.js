@@ -14,7 +14,7 @@ const EstimatedPriceLabel = (props) => (
     className={`${props.classes.estimatedPrice} ${props.customStyle}`}
     variant='caption'
   >
-    *Estimated Price
+    {props.estimatePriceText}
   </Typography>
 )
 
