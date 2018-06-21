@@ -36,9 +36,7 @@ const styles = theme => ({
 class LoginForm extends React.Component {
   constructor (props) {
     super(props)
-    this.state = { isSubmit: false }
   }
-
   render () {
     const {
       values,
@@ -88,6 +86,7 @@ class LoginForm extends React.Component {
           <Button
             type='submit'
             disabled={isSubmitting}
+            isLoading={isSubmitting}
             variant='raised'
             // onClick={toggleModal}
             color='primary'
@@ -103,15 +102,16 @@ export default withStyles(styles)(withFormik({
   mapPropsToValues: () => ({ mobile: '' }),
   validationSchema: Yup.object().shape({
     mobile: Yup.number()
-      // .min(10, 'Please enter valid phone number')
-      // .max(10, 'Please enter valid phone number')
-      .required('Mobile is required!')
+    // .min(10, 'Please enter valid phone number')
+    // .max(10, 'Please enter valid phone number')
+    // .required('Mobile is required!')
   }),
-  handleSubmit: (values, { props, setSubmitting }) => {
+  handleSubmit: (values, { props, changeLoadingState, setSubmitting }) => {
     setTimeout(() => {
       // alert(JSON.stringify(values, null, 2))
-      props.toggleForm('otp')
-      setSubmitting(false)
+      // props.toggleForm('otp')
+      // console.log(changeLoadingState)
+      setSubmitting(false)   
     }, 1000)
   },
   displayName: 'LoginForm' // helps with React DevTools
