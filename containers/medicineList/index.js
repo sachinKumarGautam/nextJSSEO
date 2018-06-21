@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 
 import BreadCrumbs from '../../components/BreadCrumbs'
-import MedicineList from './medicineList'
+import MedicineList from './MedicineList'
 /*
   bread crumbs
   label
