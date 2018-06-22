@@ -105,7 +105,7 @@ function getSuggestions (inputValue) {
   return suggestions.filter(suggestion => {
     const keep =
       (!inputValue || suggestion.label.toLowerCase().indexOf(inputValue.toLowerCase()) !== -1) &&
-      count < 5
+      count < 4
 
     if (keep) {
       count += 1
@@ -129,7 +129,9 @@ const styles = theme => ({
     position: 'absolute',
     zIndex: 1,
     left: 0,
-    right: 0
+    right: 0,
+    marginLeft: theme.spacing.unit * 2,
+    marginRight: theme.spacing.unit * 2
   },
   chip: {
     margin: `${theme.spacing.unit / 2}px ${theme.spacing.unit / 4}px`
