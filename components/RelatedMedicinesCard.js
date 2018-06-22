@@ -74,6 +74,7 @@ const RelatedMedicinesCard = (props) => (
       <EstimatedPriceLabel
         variant={'caption'}
         customStyle={props.classes.customEstimatedLabel}
+        estimatePriceText={'*Estimated Price'}
       />
     </div>
     <Button
