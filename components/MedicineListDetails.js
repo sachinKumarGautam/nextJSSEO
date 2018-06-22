@@ -20,13 +20,17 @@ const styles = theme => {
     },
     customPrice: {
       ...theme.typography.body1,
-      marginRight: theme.spacing.unit
+      marginRight: theme.spacing.unit,
+      display: 'inline-block',
+      marginLeft: theme.spacing.unit
     },
     customStrokePrice: {
-      ...theme.typography.body3
+      ...theme.typography.body3,
+      textAlign: 'right'
     },
     customEstimatedLabel: {
-      ...theme.typography.body3
+      ...theme.typography.body3,
+      display: 'inline-block'
     },
     medicineListContentWrapper: {
       display: 'flex',
@@ -61,6 +65,11 @@ const MedicineListDetails = (props) => (
       />
     </div>
     <div>
+      <EstimatedPriceLabel
+        variant={'caption'}
+        customStyle={props.classes.customEstimatedLabel}
+        estimatePriceText={'*Est. Price '}
+      />
       <ProductPrice
         variant={'body1'}
         customStyle={props.classes.customPrice}
@@ -68,10 +77,6 @@ const MedicineListDetails = (props) => (
       <StrokePrice
         variant={'caption'}
         customStyle={props.classes.customStrokePrice}
-      />
-      <EstimatedPriceLabel
-        variant={'caption'}
-        customStyle={props.classes.customEstimatedLabel}
       />
       <Button
         size='small'
@@ -81,6 +86,7 @@ const MedicineListDetails = (props) => (
           root: props.classes.buttonRoot,
           label: props.classes.buttonLabel
         }}
+        style={{float: 'right'}}
         onClick={this.handleClickOpen}
         label={'Add To Cart'}
       />

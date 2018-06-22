@@ -65,7 +65,9 @@ class ProductPriceDetails extends Component {
           <CardContent className={classes.cardContent}>
             <div className={classes.priceWrapper}>
               <ProductPrice variant={'headline'} />
-              <EstimatedPriceLabel />
+              <EstimatedPriceLabel
+                estimatePriceText={'*Estimated Price'}
+              />
             </div>
             <div className={classes.priceWrapper}>
               <StrokePrice variant={'body1'} />
