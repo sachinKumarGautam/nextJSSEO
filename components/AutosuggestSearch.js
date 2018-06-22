@@ -4,7 +4,7 @@ import Downshift from 'downshift'
 import { withStyles } from '@material-ui/core/styles'
 import TextField from '@material-ui/core/TextField'
 import Paper from '@material-ui/core/Paper'
-import MenuItem from '@material-ui/core/MenuItem'
+// import MenuItem from '@material-ui/core/MenuItem'
 import Button from './button'
 import SearchIcon from '@material-ui/icons/Search'
 import MedicineListDetails from './MedicineListDetails'
@@ -46,12 +46,6 @@ const suggestions = [
   { label: 'Brunei Darussalam' }
 ]
 
-const MedicineSuggestion = (props) => (
-  <div>
-    <p>Hello {props.label}</p>
-  </div>
-)
-
 function renderInput (inputProps) {
   const { InputProps, classes, ref, ...other } = inputProps
 
@@ -80,33 +74,30 @@ function renderInput (inputProps) {
   )
 }
 
-function renderSuggestion ({ suggestion, index, itemProps, highlightedIndex, selectedItem }) {
+function renderSuggestion ({
+  suggestion,
+  index,
+  itemProps,
+  highlightedIndex,
+  selectedItem,
+  searchItemStyle,
+  highlightedSearchItem,
+  selectedSearchItem
+}) {
   const isHighlighted = highlightedIndex === index
   const isSelected = (selectedItem || '').indexOf(suggestion.label) > -1
 
+  const listStyle = isHighlighted ? highlightedSearchItem : (isSelected ? selectedSearchItem : searchItemStyle)
+
   return (
-    <MenuItem
+    <li
       {...itemProps}
-      key={suggestion.label}
-      selected={isHighlighted}
-      component='div'
-      style={{
-        fontWeight: isSelected ? 500 : 400
-      }}
+      className={listStyle}
     >
-      {/* <MedicineSuggestion label={suggestion.label} /> */}
       <MedicineListDetails />
-    </MenuItem>
+    </li>
   )
 }
-
-// renderSuggestion.propTypes = {
-//   highlightedIndex: PropTypes.number,
-//   index: PropTypes.number,
-//   itemProps: PropTypes.object,
-//   selectedItem: PropTypes.string,
-//   suggestion: PropTypes.shape({ label: PropTypes.string }).isRequired
-// }
 
 function getSuggestions (inputValue) {
   let count = 0
@@ -137,7 +128,6 @@ const styles = theme => ({
   paper: {
     position: 'absolute',
     zIndex: 1,
-    marginTop: theme.spacing.unit,
     left: 0,
     right: 0
   },
@@ -170,6 +160,25 @@ const styles = theme => ({
   },
   iconColor: {
     color: theme.palette.customGrey.grey500
+  },
+  searchContentWrapper: {
+    listStyle: 'none',
+    paddingLeft: 0,
+    marginTop: 0,
+    marginBottom: 0
+  },
+  searchItem: {
+    '&:not(:last-child)': {
+      borderBottom: `1px solid ${theme.palette.customGrey.grey100}`
+    },
+    paddingTop: theme.spacing.unit * 2,
+    paddingBottom: theme.spacing.unit * 2
+  },
+  highlightedSearchItem: {
+    backgroundColor: theme.palette.customGrey.grey50
+  },
+  selectedSearchItem: {
+    fontWeight: theme.typography.fontWeightBold
   }
 })
 
@@ -178,8 +187,8 @@ function IntegrationDownshift (props) {
 
   return (
     <div className={classes.root}>
-      <Downshift>
-        {({ getInputProps, getItemProps, isOpen, inputValue, selectedItem, highlightedIndex }) => (
+      <Downshift isOpen>
+        {({ getInputProps, getItemProps, getMenuProps, isOpen, inputValue, selectedItem, highlightedIndex }) => (
           <div className={classes.container}>
             {renderInput({
               fullWidth: true,
@@ -191,15 +200,25 @@ function IntegrationDownshift (props) {
             })}
             {isOpen ? (
               <Paper className={classes.paper} square>
-                {getSuggestions(inputValue).map((suggestion, index) =>
-                  renderSuggestion({
-                    suggestion,
-                    index,
-                    itemProps: getItemProps({ item: suggestion.label }),
-                    highlightedIndex,
-                    selectedItem
-                  })
-                )}
+                <ul
+                  {...getMenuProps()}
+                  className={classes.searchContentWrapper}
+                >
+                  {getSuggestions(inputValue).map((suggestion, index) =>
+                    renderSuggestion({
+                      suggestion,
+                      index,
+                      itemProps: getItemProps({
+                        item: suggestion.label
+                      }),
+                      highlightedIndex,
+                      selectedItem,
+                      searchItemStyle: classes.searchItem,
+                      highlightedSearchItem: `${classes.searchItem} ${classes.highlightedSearchItem}`,
+                      selectedSearchItem: `${classes.searchItem} ${classes.selectedSearchItem}`
+                    })
+                  )}
+                </ul>
               </Paper>
             ) : null}
           </div>
