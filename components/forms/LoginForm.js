@@ -34,9 +34,6 @@ const styles = theme => ({
 })
 
 class LoginForm extends React.Component {
-  constructor (props) {
-    super(props)
-  }
   render () {
     const {
       values,
@@ -85,7 +82,7 @@ class LoginForm extends React.Component {
         <div className={classes.buttonWrapper}>
           <Button
             type='submit'
-            disabled={isSubmitting}
+            // disabled={isSubmitting}
             isLoading={isSubmitting}
             variant='raised'
             // onClick={toggleModal}
@@ -111,8 +108,8 @@ export default withStyles(styles)(withFormik({
       // alert(JSON.stringify(values, null, 2))
       // props.toggleForm('otp')
       // console.log(changeLoadingState)
-      setSubmitting(false)   
-    }, 1000)
+      setSubmitting(false)
+    }, 2000)
   },
   displayName: 'LoginForm' // helps with React DevTools
 })(LoginForm))
