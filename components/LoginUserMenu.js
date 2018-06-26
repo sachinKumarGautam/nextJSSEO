@@ -50,19 +50,19 @@ const styles = theme => {
     languageSubMenuStyle: {
       ...theme.typography.body2,
       paddingLeft: theme.spacing.unit * 7,
-      color: theme.palette.customGrey.grey250,
+      color: theme.palette.customGrey.grey300,
       marginTop: theme.spacing.unit * 5
     },
     secondSubMenuStyle: {
       ...theme.typography.body2,
       paddingLeft: theme.spacing.unit * 7,
-      color: theme.palette.customGrey.grey250,
+      color: theme.palette.customGrey.grey300,
       paddingTop: theme.spacing.unit * 0
     },
     privacySubMenuStyle: {
       ...theme.typography.body2,
       paddingLeft: theme.spacing.unit * 7,
-      color: theme.palette.customGrey.grey250,
+      color: theme.palette.customGrey.grey300,
       paddingTop: theme.spacing.unit * 0,
       marginBottom: theme.spacing.unit * 3
     }
