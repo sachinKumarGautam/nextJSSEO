@@ -69,7 +69,7 @@ const styles = theme => {
   }
 }
 
-class MenuLayout extends Component {
+class LoginUserMenu extends Component {
   state = {
     anchorEl: null,
   };
@@ -170,4 +170,4 @@ class MenuLayout extends Component {
   }
 }
 
-export default withStyles(styles)(MenuLayout);
+export default withStyles(styles)(LoginUserMenu);
