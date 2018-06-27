@@ -37,20 +37,32 @@ const styles = theme => ({
 })
 
 class MoleculeDetails extends React.Component {
-  // static async getInitialProps ({ store, isServer }) {
-  //   const resultAction = await store.dispatch(getMoleculeSummaryLoading())
-  //   console.log('result', resultAction)
+  static async getInitialProps ({ store, isServer }) {
+    const resultAction = await store.dispatch(getMoleculeSummaryLoading())
+    console.log('result', resultAction)
 
-  //   return { payload: resultAction }
-  // }
-  componentDidMount () {
-    this.props.actions.getMoleculeSummaryLoading(
-      this.props.moleculeDetailsState,
-      ''
-    )
+    return { payload: resultAction }
   }
+  // componentDidMount () {
+  //   this.props.actions.getMoleculeSummaryLoading(
+  //     this.props.moleculeDetailsState,
+  //     ''
+  //   )
+  // }
+
+  // static async getInitialProps ({ store, isServer }) {
+  //   const resultAction = await rootEpic(
+  //     of(getMoleculeSummaryLoading()),
+  //     store
+  //   ).toPromise() // we need to convert Observable to Promise
+  //   console.log('result', resultAction)
+  //   // store.dispatch(resultAction)
+
+  //   return {}
+  // }
 
   render () {
+    console.log('updated state', this.props.payload)
     return (
       <div>
         <Header />
@@ -64,12 +76,29 @@ class MoleculeDetails extends React.Component {
     )
   }
 }
+// const MoleculeDetails = (props) => (
+//   <div>
+//     <Header />
+//     <div>
+//       <Paper className={props.classes.root} elevation={1}>
+//         <MoleculeDetailsWrapper />
+//       </Paper>
+//     </div>
+//     <Footer />
+//   </div>
+// )
 
-// function mapStateToProps (state) {
-//   return {
-//     moleculeDetailsState: state.moleculeDetailsState
-//   }
+// MoleculeDetails.getInitialProps = ({ store, isServer }) => {
+//   store.dispatch(getMoleculeSummaryLoading())
+
+//   return { isServer }
 // }
+
+function mapStateToProps (state) {
+  return {
+    moleculeDetailsState: state.moleculeDetailsState
+  }
+}
 
 function mapDispatchToProps (dispatch) {
   return {
@@ -84,5 +113,6 @@ function mapDispatchToProps (dispatch) {
 
 export default withRedux(
   initStore,
+  mapStateToProps,
   mapDispatchToProps
 )(withRoot(withStyles(styles)(MoleculeDetails)))
