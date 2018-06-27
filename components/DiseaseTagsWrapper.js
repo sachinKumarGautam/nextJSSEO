@@ -24,7 +24,7 @@ const DiseaseTagsWrapper = (props) => (
     <p className={props.classes.label}>
       Primary Uses:
     </p>
-    <p><DiseseTags /></p>
+    <p><DiseseTags diseases={props.diseases} /></p>
   </div>
 )
 

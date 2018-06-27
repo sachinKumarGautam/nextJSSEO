@@ -88,33 +88,98 @@ const TableContent = (props) => (
     </div>
     <Table className={props.classes.tableWrapper}>
       <TableBody>
-        {data.map(item => {
-          return (
-            <TableRow key={item.id}>
-              <TableCell component='th' scope='row' className={props.classes.contentKeyCell}>
-                <div className={props.classes.contentKeyWrapper}>
-                  <img src={item.src} />
-                  <Typography
-                    gutterBottom
-                    variant='body1'
-                    className={props.classes.contentKey}
-                  >
-                    {item.key}
-                  </Typography>
-                </div>
-              </TableCell>
-              <TableCell component='th' scope='row'>
-                <Typography
-                  gutterBottom
-                  variant='body1'
-                  className={props.classes.contentBody}
-                >
-                  {item.value}
-                </Typography>
-              </TableCell>
-            </TableRow>
-          )
-        })}
+        <TableRow>
+          <TableCell component='th' scope='row' className={props.classes.contentKeyCell}>
+            <div className={props.classes.contentKeyWrapper}>
+              <img src={'/static/images/avoidPrecaution.svg'} />
+              <Typography
+                gutterBottom
+                variant='body1'
+                className={props.classes.contentKey}
+              >
+                {'Avoid'}
+              </Typography>
+            </div>
+          </TableCell>
+          <TableCell component='th' scope='row'>
+            <Typography
+              gutterBottom
+              variant='body1'
+              className={props.classes.contentBody}
+            >
+              {props.content['avoid']}
+            </Typography>
+          </TableCell>
+        </TableRow>
+        <TableRow>
+          <TableCell component='th' scope='row' className={props.classes.contentKeyCell}>
+            <div className={props.classes.contentKeyWrapper}>
+              <img src={'/static/images/foodPrecaution.svg'} />
+              <Typography
+                gutterBottom
+                variant='body1'
+                className={props.classes.contentKey}
+              >
+                {'Food'}
+              </Typography>
+            </div>
+          </TableCell>
+          <TableCell component='th' scope='row'>
+            <Typography
+              gutterBottom
+              variant='body1'
+              className={props.classes.contentBody}
+            >
+              {props.content['food']}
+            </Typography>
+          </TableCell>
+        </TableRow>
+        <TableRow>
+          <TableCell component='th' scope='row' className={props.classes.contentKeyCell}>
+            <div className={props.classes.contentKeyWrapper}>
+              <img src={'/static/images/storagePrecaution.svg'} />
+              <Typography
+                gutterBottom
+                variant='body1'
+                className={props.classes.contentKey}
+              >
+                {'Storage'}
+              </Typography>
+            </div>
+          </TableCell>
+          <TableCell component='th' scope='row'>
+            <Typography
+              gutterBottom
+              variant='body1'
+              className={props.classes.contentBody}
+            >
+              {props.content['storage']}
+            </Typography>
+          </TableCell>
+        </TableRow>
+        <TableRow>
+          <TableCell component='th' scope='row' className={props.classes.contentKeyCell}>
+            <div className={props.classes.contentKeyWrapper}>
+              <img src={'/static/images/missDosePrecaution.svg'} />
+              <Typography
+                gutterBottom
+                variant='body1'
+                className={props.classes.contentKey}
+              >
+                {'Miss Dose'}
+              </Typography>
+            </div>
+          </TableCell>
+          <TableCell component='th' scope='row'>
+            <Typography
+              gutterBottom
+              variant='body1'
+              className={props.classes.contentBody}
+            >
+              {props.content['miss_dose']}
+            </Typography>
+          </TableCell>
+        </TableRow>
       </TableBody>
     </Table>
   </div>

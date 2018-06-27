@@ -43,26 +43,15 @@ class MoleculeDetails extends React.Component {
 
     return { payload: resultAction }
   }
-  // componentDidMount () {
-  //   this.props.actions.getMoleculeSummaryLoading(
-  //     this.props.moleculeDetailsState,
-  //     ''
-  //   )
-  // }
 
-  // static async getInitialProps ({ store, isServer }) {
-  //   const resultAction = await rootEpic(
-  //     of(getMoleculeSummaryLoading()),
-  //     store
-  //   ).toPromise() // we need to convert Observable to Promise
-  //   console.log('result', resultAction)
-  //   // store.dispatch(resultAction)
-
-  //   return {}
-  // }
+  componentDidMount () {
+    this.props.actions.getMoleculeSummaryLoading(
+      this.props.moleculeDetailsState,
+      '' // pass salt id
+    )
+  }
 
   render () {
-    console.log('updated state', this.props.payload)
     return (
       <div>
         <Header />
@@ -76,23 +65,6 @@ class MoleculeDetails extends React.Component {
     )
   }
 }
-// const MoleculeDetails = (props) => (
-//   <div>
-//     <Header />
-//     <div>
-//       <Paper className={props.classes.root} elevation={1}>
-//         <MoleculeDetailsWrapper />
-//       </Paper>
-//     </div>
-//     <Footer />
-//   </div>
-// )
-
-// MoleculeDetails.getInitialProps = ({ store, isServer }) => {
-//   store.dispatch(getMoleculeSummaryLoading())
-
-//   return { isServer }
-// }
 
 function mapStateToProps (state) {
   return {
