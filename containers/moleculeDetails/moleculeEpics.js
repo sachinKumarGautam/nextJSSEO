@@ -34,42 +34,41 @@ import {
 //     })
 //   )
 
-export const getMoleculeSummary = (action$, store) =>
-  action$.pipe(
+// export const getMoleculeSummary = (action$, store) =>
+//   action$.pipe(
+//     ofType(GET_MOLECULE_SUMMARY_LOADING),
+//     mergeMap(data =>
+//       ajax({
+//         url: `http://sandbox.lifcare.in/v6/catalog/salts?salt-ids=5a61a295ae8bdc26685f2b09`
+//       }).pipe(
+//         map(response => {
+//           console.log(response)
+//           // return of(
+//           //   getMoleculeSummarySuccess(data.moleculeState, response))
+//           // )
+//         }),
+//         catchError(error => of(
+//           getMoleculeSummaryFailure(data.moleculeState, error)
+//         ))
+//       )
+//     )
+//   )
+
+export function getMoleculeSummary (action$, store) {
+  return action$.pipe(
     ofType(GET_MOLECULE_SUMMARY_LOADING),
-    mergeMap(data =>
-      ajax({
+    mergeMap(data => {
+      return ajax({
         url: `http://sandbox.lifcare.in/v6/catalog/salts?salt-ids=5a61a295ae8bdc26685f2b09`
       }).pipe(
-        map(response => {
-          console.log(response)
-          // return of(
-          //   getMoleculeSummarySuccess(data.moleculeState, response))
-          // )
+        map(result => {
+          console.log('API response', result)
+          return getMoleculeSummarySuccess(data.moleculeState, result.body.payload.content[0])
         }),
-        catchError(error => of(
-          getMoleculeSummaryFailure(data.moleculeState, error)
-        ))
+        catchError(error => {
+          return of(getMoleculeSummaryFailure(data.moleculeState, error))
+        })
       )
-    )
+    })
   )
-
-// export function getMoleculeSummary (action$, store) {
-//   return action$.ofType(GET_MOLECULE_SUMMARY_LOADING)
-//     .mergeMap(data => {
-//       return ajax({
-//         url: `http://sandbox.lifcare.in/v6/catalog/salts?salt-ids=5a61a295ae8bdc26685f2b09`
-//       })
-//         .map(response => {
-//           console.log('API response', response)
-//           return getMoleculeSummarySuccess(data.moleculeState, response)
-//         })
-//         .catch(error => {
-//           return of(getMoleculeSummaryFailure(data.moleculeState, error))
-//         })
-//       // return Observable.concat(
-//       //   Observable.of(validateFirebaseAuth()),
-
-//       // )
-//     })
-// }
+}

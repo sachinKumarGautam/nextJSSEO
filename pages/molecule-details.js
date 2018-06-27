@@ -37,27 +37,17 @@ const styles = theme => ({
 })
 
 class MoleculeDetails extends React.Component {
-  // static getInitialProps ({ store, isServer }) {
-  //   store.dispatch(getMoleculeSummaryLoading())
+  // static async getInitialProps ({ store, isServer }) {
+  //   const resultAction = await store.dispatch(getMoleculeSummaryLoading())
+  //   console.log('result', resultAction)
 
-  //   return { isServer }
+  //   return { payload: resultAction }
   // }
-  // componentDidMount () {
-  //   this.props.actions.getMoleculeSummaryLoading(
-  //     this.props.moleculeDetailsState,
-  //     ''
-  //   )
-  // }
-
-  static async getInitialProps ({ store, isServer }) {
-    const resultAction = await rootEpic(
-      of(getMoleculeSummaryLoading()),
-      store
-    ).toPromise() // we need to convert Observable to Promise
-    console.log('result', resultAction)
-    // store.dispatch(resultAction)
-
-    return { isServer }
+  componentDidMount () {
+    this.props.actions.getMoleculeSummaryLoading(
+      this.props.moleculeDetailsState,
+      ''
+    )
   }
 
   render () {
@@ -74,29 +64,12 @@ class MoleculeDetails extends React.Component {
     )
   }
 }
-// const MoleculeDetails = (props) => (
-//   <div>
-//     <Header />
-//     <div>
-//       <Paper className={props.classes.root} elevation={1}>
-//         <MoleculeDetailsWrapper />
-//       </Paper>
-//     </div>
-//     <Footer />
-//   </div>
-// )
 
-// MoleculeDetails.getInitialProps = ({ store, isServer }) => {
-//   store.dispatch(getMoleculeSummaryLoading())
-
-//   return { isServer }
+// function mapStateToProps (state) {
+//   return {
+//     moleculeDetailsState: state.moleculeDetailsState
+//   }
 // }
-
-function mapStateToProps (state) {
-  return {
-    moleculeDetailsState: state.moleculeDetailsState
-  }
-}
 
 function mapDispatchToProps (dispatch) {
   return {
@@ -111,6 +84,5 @@ function mapDispatchToProps (dispatch) {
 
 export default withRedux(
   initStore,
-  mapStateToProps,
   mapDispatchToProps
 )(withRoot(withStyles(styles)(MoleculeDetails)))
