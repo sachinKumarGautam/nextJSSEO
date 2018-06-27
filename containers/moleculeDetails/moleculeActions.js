@@ -1,5 +1,12 @@
+import {
+  GET_MOLECULE_SUMMARY_LOADING,
+  GET_MOLECULE_SUMMARY_SUCCESS,
+  GET_MOLECULE_SUMMARY_FAILURE
+} from './moleculeActionTypes'
+
 export function getMoleculeSummaryLoading (moleculeState, saltId) {
   return {
+    type: GET_MOLECULE_SUMMARY_LOADING,
     moleculeState,
     isLoading: true,
     isError: false,
@@ -10,6 +17,7 @@ export function getMoleculeSummaryLoading (moleculeState, saltId) {
 
 export function getMoleculeSummarySuccess (moleculeState, result) {
   return {
+    type: GET_MOLECULE_SUMMARY_SUCCESS,
     moleculeState,
     isLoading: false,
     id: result.id,
@@ -37,6 +45,7 @@ export function getMoleculeSummarySuccess (moleculeState, result) {
 
 export function getMoleculeSummaryFailure (moleculeState, error) {
   return {
+    type: GET_MOLECULE_SUMMARY_FAILURE,
     moleculeState,
     isLoading: false,
     isError: true,

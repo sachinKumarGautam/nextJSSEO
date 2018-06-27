@@ -53,3 +53,23 @@ export const getMoleculeSummary = (action$, store) =>
       )
     )
   )
+
+// export function getMoleculeSummary (action$, store) {
+//   return action$.ofType(GET_MOLECULE_SUMMARY_LOADING)
+//     .mergeMap(data => {
+//       return ajax({
+//         url: `http://sandbox.lifcare.in/v6/catalog/salts?salt-ids=5a61a295ae8bdc26685f2b09`
+//       })
+//         .map(response => {
+//           console.log('API response', response)
+//           return getMoleculeSummarySuccess(data.moleculeState, response)
+//         })
+//         .catch(error => {
+//           return of(getMoleculeSummaryFailure(data.moleculeState, error))
+//         })
+//       // return Observable.concat(
+//       //   Observable.of(validateFirebaseAuth()),
+
+//       // )
+//     })
+// }

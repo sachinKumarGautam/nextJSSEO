@@ -9,6 +9,8 @@ import Paper from '@material-ui/core/Paper'
 
 import ProductDetailsWrapper from '../containers/productDetails'
 
+// import fetch from 'isomorphic-fetch'
+
 const styles = theme => ({
   root: {
     paddingTop: 16,
@@ -30,11 +32,20 @@ const ProductDetails = (props) => (
     <Header />
     <div>
       <Paper className={props.classes.root} elevation={1}>
+        {/* <div>
+          Next stars: {props.stars}
+        </div> */}
         <ProductDetailsWrapper />
       </Paper>
     </div>
     <Footer />
   </div>
 )
+
+// ProductDetails.getInitialProps = async ({ req }) => {
+//   const res = await fetch('https://api.github.com/repos/zeit/next.js')
+//   const json = await res.json()
+//   return { stars: json.stargazers_count }
+// }
 
 export default withRoot(withStyles(styles)(ProductDetails))

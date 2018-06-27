@@ -4,15 +4,17 @@ import withRedux from 'next-redux-wrapper'
 import initStore from '../redux'
 import { bindActionCreators } from 'redux'
 
-import Header from '../components/layouts/header'
-import Footer from '../components/layouts/footer/Footer'
-
 import { withStyles } from '@material-ui/core/styles'
 import withRoot from '../src/withRoot'
 
+import Header from '../components/layouts/header'
+import Footer from '../components/layouts/footer/Footer'
+import MoleculeDetailsWrapper from '../containers/moleculeDetails'
+
 import Paper from '@material-ui/core/Paper'
 
-import MoleculeDetailsWrapper from '../containers/moleculeDetails'
+import { rootEpic } from '../redux/epics'
+import { of } from 'rxjs/observable/of'
 
 import {
   getMoleculeSummaryLoading
@@ -34,39 +36,61 @@ const styles = theme => ({
   }
 })
 
-const MoleculeDetails = (props) => (
-  <div>
-    <Header />
-    <div>
-      <Paper className={props.classes.root} elevation={1}>
-        <MoleculeDetailsWrapper />
-      </Paper>
-    </div>
-    <Footer />
-  </div>
-)
+class MoleculeDetails extends React.Component {
+  // static getInitialProps ({ store, isServer }) {
+  //   store.dispatch(getMoleculeSummaryLoading())
 
-// static async getInitialProps ({ store, isServer }) {
-//   const resultAction = await rootEpic(
-//     of(actions.fetchCharacter(isServer)),
-//     store
-//   ).toPromise() // we need to convert Observable to Promise
-//   store.dispatch(resultAction)
+  //   return { isServer }
+  // }
+  // componentDidMount () {
+  //   this.props.actions.getMoleculeSummaryLoading(
+  //     this.props.moleculeDetailsState,
+  //     ''
+  //   )
+  // }
+
+  static async getInitialProps ({ store, isServer }) {
+    const resultAction = await rootEpic(
+      of(getMoleculeSummaryLoading()),
+      store
+    ).toPromise() // we need to convert Observable to Promise
+    console.log('result', resultAction)
+    // store.dispatch(resultAction)
+
+    return { isServer }
+  }
+
+  render () {
+    return (
+      <div>
+        <Header />
+        <div>
+          <Paper className={this.props.classes.root} elevation={1}>
+            <MoleculeDetailsWrapper />
+          </Paper>
+        </div>
+        <Footer />
+      </div>
+    )
+  }
+}
+// const MoleculeDetails = (props) => (
+//   <div>
+//     <Header />
+//     <div>
+//       <Paper className={props.classes.root} elevation={1}>
+//         <MoleculeDetailsWrapper />
+//       </Paper>
+//     </div>
+//     <Footer />
+//   </div>
+// )
+
+// MoleculeDetails.getInitialProps = ({ store, isServer }) => {
+//   store.dispatch(getMoleculeSummaryLoading())
 
 //   return { isServer }
 // }
-
-MoleculeDetails.getInitialProps = async function () {
-  // const resultAction = await props.getMoleculeSummaryLoading()
-  // const res = await fetch('https://api.tvmaze.com/search/shows?q=batman')
-  // const data = await res.json()
-
-  // console.log(`Show data fetched. Count: ${data.length}`)
-
-  // return {
-  //   shows: data
-  // }
-}
 
 function mapStateToProps (state) {
   return {

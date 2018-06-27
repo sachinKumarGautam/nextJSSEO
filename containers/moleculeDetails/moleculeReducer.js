@@ -4,7 +4,7 @@ import {
   GET_MOLECULE_SUMMARY_LOADING,
   GET_MOLECULE_SUMMARY_SUCCESS,
   GET_MOLECULE_SUMMARY_FAILURE
-} from './moleculeActionTypes.js'
+} from './moleculeActionTypes'
 
 export default function (state = initialState, action) {
   switch (action.type) {
