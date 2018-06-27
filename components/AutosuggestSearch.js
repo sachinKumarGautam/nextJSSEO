@@ -189,7 +189,7 @@ function IntegrationDownshift (props) {
 
   return (
     <div className={classes.root}>
-      <Downshift isOpen>
+      <Downshift>
         {({ getInputProps, getItemProps, getMenuProps, isOpen, inputValue, selectedItem, highlightedIndex }) => (
           <div className={classes.container}>
             {renderInput({

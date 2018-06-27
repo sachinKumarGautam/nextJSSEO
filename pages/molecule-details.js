@@ -1,4 +1,9 @@
 import React from 'react'
+
+import withRedux from 'next-redux-wrapper'
+import initStore from '../redux'
+import { bindActionCreators } from 'redux'
+
 import Header from '../components/layouts/header'
 import Footer from '../components/layouts/footer/Footer'
 
@@ -8,6 +13,10 @@ import withRoot from '../src/withRoot'
 import Paper from '@material-ui/core/Paper'
 
 import MoleculeDetailsWrapper from '../containers/moleculeDetails'
+
+import {
+  getMoleculeSummaryLoading
+} from '../containers/moleculeDetails/moleculeActions'
 
 const styles = theme => ({
   root: {
@@ -37,4 +46,47 @@ const MoleculeDetails = (props) => (
   </div>
 )
 
-export default withRoot(withStyles(styles)(MoleculeDetails))
+// static async getInitialProps ({ store, isServer }) {
+//   const resultAction = await rootEpic(
+//     of(actions.fetchCharacter(isServer)),
+//     store
+//   ).toPromise() // we need to convert Observable to Promise
+//   store.dispatch(resultAction)
+
+//   return { isServer }
+// }
+
+MoleculeDetails.getInitialProps = async function () {
+  // const resultAction = await props.getMoleculeSummaryLoading()
+  // const res = await fetch('https://api.tvmaze.com/search/shows?q=batman')
+  // const data = await res.json()
+
+  // console.log(`Show data fetched. Count: ${data.length}`)
+
+  // return {
+  //   shows: data
+  // }
+}
+
+function mapStateToProps (state) {
+  return {
+    moleculeDetailsState: state.moleculeDetailsState
+  }
+}
+
+function mapDispatchToProps (dispatch) {
+  return {
+    actions: bindActionCreators(
+      {
+        getMoleculeSummaryLoading
+      },
+      dispatch
+    )
+  }
+}
+
+export default withRedux(
+  initStore,
+  mapStateToProps,
+  mapDispatchToProps
+)(withRoot(withStyles(styles)(MoleculeDetails)))
