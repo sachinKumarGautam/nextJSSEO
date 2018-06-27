@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
 
 import { withStyles } from '@material-ui/core/styles'
-import Popover from '@material-ui/core/Popover'
 import Typography from '@material-ui/core/Typography'
+
+import ReactTooltip from 'react-tooltip'
 
 const styles = theme => {
   return {
@@ -16,7 +17,16 @@ const styles = theme => {
     paper: {
       padding: theme.spacing.unit,
       width: theme.spacing.unit * 25,
-      backgroundColor: theme.palette.customGrey.grey50
+      backgroundColor: `${theme.palette.customGrey.grey50} !important`,
+      pointerEvents: 'auto !important',
+      '&:after': {
+        borderRightColor: `${theme.palette.customGrey.grey50} !important`
+      },
+      '&:hover': {
+        visibility: 'visible !important',
+        opacity: '1 !important'
+      },
+      borderRadius: '4px'
     },
     popoverContent: {
       ...theme.typography.body3
@@ -29,37 +39,28 @@ const styles = theme => {
   }
 }
 
+const PopoverContent = (props) => (
+  <div>
+    <Typography className={props.styles.popoverContent}>
+      Metformin is used in the treatment of  type2 diabetes. It decreases the amount of sugar…
+    </Typography>
+    <a className={props.styles.popoverLink} href='http://google.com'>Read more..</a>
+  </div>
+)
+
 class ProductMolecule extends Component {
-  constructor (props) {
-    super(props)
-    this.state = {
-      anchorEl: null,
-      popperOpen: false
-    }
-
-    this.handlePopoverOpen = this.handlePopoverOpen.bind(this)
-    this.handlePopoverClose = this.handlePopoverClose.bind(this)
-  }
-
-  handlePopoverOpen (event) {
-    this.setState({ anchorEl: event.target })
-  }
-
-  handlePopoverClose () {
-    this.setState({ anchorEl: null })
-  }
-
   render () {
     const {classes} = this.props
-    // const open = !!this.state.anchorEl
 
     return (
       <div>
         <a
           href='#'
           className={classes.moleculeTag}
-          onClick={this.handlePopoverOpen}
-          onMouseOver={this.handlePopoverOpen}
+          // onClick={this.handlePopoverOpen}
+          data-tip
+          data-for='moleculeItem'
+          // onMouseOver={this.handlePopoverOpen}
           // onMouseOut={this.handlePopoverClose}
         >
           Glimepiride (0.5mg)
@@ -67,34 +68,24 @@ class ProductMolecule extends Component {
         <a
           href='#'
           className={classes.moleculeTag}
-          onClick={this.handlePopoverOpen}
-          onMouseOver={this.handlePopoverOpen}
+          data-tip
+          data-for='moleculeItem'
+          // onClick={this.handlePopoverOpen}
+          // onMouseOver={this.handlePopoverOpen}
           // onMouseOut={this.handlePopoverClose}
         >
           Metformin (1000mg)
         </a>
-        <Popover
-          classes={{
-            paper: classes.paper
-          }}
-          open={Boolean(this.state.anchorEl)}
-          anchorEl={this.state.anchorEl}
-          anchorOrigin={{
-            vertical: 'center',
-            horizontal: 'right'
-          }}
-          transformOrigin={{
-            vertical: 'center',
-            horizontal: 'left'
-          }}
-          onClose={this.handlePopoverClose}
-          // disableRestoreFocus
+        <ReactTooltip
+          id='moleculeItem'
+          effect='solid'
+          place='right'
+          className={classes.paper}
+          // delayHide={1000}
+          delayShow={1000}
         >
-          <Typography className={classes.popoverContent}>
-            Metformin is used in the treatment of  type2 diabetes. It decreases the amount of sugar…
-          </Typography>
-          <a className={classes.popoverLink}>Read more..</a>
-        </Popover>
+          <PopoverContent styles={classes} />
+        </ReactTooltip>
       </div>
     )
   }

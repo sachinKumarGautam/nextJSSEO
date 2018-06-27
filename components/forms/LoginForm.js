@@ -18,13 +18,11 @@ const styles = theme => ({
   formControl: {
     margin: theme.spacing.unit,
     width: '100%'
-    // display: 'flex',
-    // flexDirection: 'row'
   },
   buttonWrapper: {
     marginTop: theme.spacing.unit * 3.5,
-    width: '180.5px',
-    height: '34px',
+    display: 'flex',
+    justifyContent: 'center',
     margin: '0 auto'
   },
   formHelperText: {

@@ -1,5 +1,8 @@
 import React, { Component } from 'react'
 
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+
 import Grid from '@material-ui/core/Grid'
 
 import BreadCrumbs from '../../components/BreadCrumbs'
@@ -34,6 +37,7 @@ class MoleculeDetailsWrapper extends Component {
   }
 
   render () {
+    console.log('inner state', this.props.moleculeDetailsState)
     return (
       <div>
         <BreadCrumbs />
@@ -62,4 +66,23 @@ class MoleculeDetailsWrapper extends Component {
   }
 }
 
-export default MoleculeDetailsWrapper
+function mapStateToProps (state) {
+  return {
+    moleculeDetailsState: state.moleculeDetailsState
+  }
+}
+
+function mapDispatchToProps (dispatch) {
+  return {
+    actions: bindActionCreators(
+      {
+      },
+      dispatch
+    )
+  }
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(MoleculeDetailsWrapper)

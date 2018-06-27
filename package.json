@@ -5,8 +5,8 @@
   "dependencies": {
     "@material-ui/core": "latest",
     "@material-ui/icons": "^1.1.0",
-    "downshift": "^2.0.0",
     "formik": "^0.11.11",
+    "downshift": "^2.0.6",
     "jss": "latest",
     "next": "latest",
     "next-redux-wrapper": "^1.0.0",
@@ -17,6 +17,7 @@
     "react-jss": "latest",
     "react-lazyload": "^2.3.0",
     "react-redux": "^5.0.1",
+    "react-tooltip": "^3.6.1",
     "redux": "^3.6.0",
     "redux-logger": "^3.0.6",
     "redux-observable": "^0.17.0",
