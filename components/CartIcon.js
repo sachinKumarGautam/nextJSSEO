@@ -8,6 +8,7 @@ import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart'
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import Divider from '@material-ui/core/Divider';
+import Typography from '@material-ui/core/Typography';
 
 import Button from './button'
 
@@ -114,19 +115,26 @@ class CartIcon extends Component {
           className={classes.menuStyle}
         >
           <MenuItem className={classes.summaryMenuWrapper}>
-            <span className={classes.summaryStyle}>
+            <Typography
+              variant="caption"
+              className={classes.summaryStyle}
+            >
               Order Summary
-            </span>
-            <span className={classes.itemStyle}>
+            </Typography>
+            <Typography
+              variant="caption"
+              className={classes.itemStyle}
+            >
               2 item(s)
-            </span>
+            </Typography>
           </MenuItem>
           <Divider/>
           {/* <MenuItem >
 
           </MenuItem> */}
           <div className={classes.medicineDetailWrapper}>
-            <span
+            <Typography
+              variant="caption"
               className={
                 this.state.quantity
                   ? classes.medicineNameStyle : classes.noItemTextStyle
@@ -136,13 +144,16 @@ class CartIcon extends Component {
                 this.state.quantity  ? 'Glycomet-GP 2 Tablet'
                 : 'There is no item in your cart yet'
               }
-            </span>
+            </Typography>
             {
               this.state.quantity ?
-              <span className={classes.priceStyle}>
+              <Typography
+                variant="caption"
+                className={classes.priceStyle}
+              >
                 Rs. 55.5
-              </span>
-              :<span></span>
+              </Typography>
+              : null
             }
           </div>
           <div className={classes.buttonStyle}>
