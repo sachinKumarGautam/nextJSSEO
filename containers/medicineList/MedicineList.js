@@ -13,7 +13,7 @@ const styles = theme => {
     title: {
       ...theme.typography.subheading,
       color: theme.palette.customGrey.grey600,
-      paddingBottom: theme.spacing.unit * 3,
+      paddingBottom: theme.spacing.unit * 3
     },
     articleListWrapper: {
       listStyle: 'none',

@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 
 import BreadCrumbs from '../../components/BreadCrumbs'
 import MedicineList from './MedicineList'
+
 /*
   bread crumbs
   label
@@ -14,7 +15,7 @@ class MedicineListWrapper extends Component {
       <div>
         <BreadCrumbs />
         <section >
-          <MedicineList/>
+          <MedicineList />
         </section>
       </div>
     )

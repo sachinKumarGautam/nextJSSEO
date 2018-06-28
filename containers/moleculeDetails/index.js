@@ -1,5 +1,8 @@
 import React, { Component } from 'react'
 
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+
 import Grid from '@material-ui/core/Grid'
 
 import BreadCrumbs from '../../components/BreadCrumbs'
@@ -43,17 +46,22 @@ class MoleculeDetailsWrapper extends Component {
               <MoleculeDetails
                 toggleHover={this.toggleHover.bind(this)}
                 hover={this.state.hover}
+                moleculeDetailsStatePayload={this.props.moleculeDetailsStatePayload}
               />
             </section>
             <section>
               <MoleculeDetailsContent
                 hover={this.state.hover}
+                moleculeDetailsStatePayload={this.props.moleculeDetailsStatePayload}
               />
             </section>
           </Grid>
           <Grid item xs={1} />
           <Grid item xs={3}>
-            <RelatedMedicines />
+            <RelatedMedicines
+              moleculeName={this.props.moleculeDetailsStatePayload.name}
+              medicineList={this.props.medicineListState.payload}
+            />
             <RelatedArticles />
           </Grid>
         </Grid>
@@ -62,4 +70,24 @@ class MoleculeDetailsWrapper extends Component {
   }
 }
 
-export default MoleculeDetailsWrapper
+function mapStateToProps (state) {
+  return {
+    moleculeDetailsStatePayload: state.moleculeDetailsState.payload,
+    medicineListState: state.medicineListState
+  }
+}
+
+function mapDispatchToProps (dispatch) {
+  return {
+    actions: bindActionCreators(
+      {
+      },
+      dispatch
+    )
+  }
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(MoleculeDetailsWrapper)

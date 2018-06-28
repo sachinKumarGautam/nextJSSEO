@@ -37,8 +37,7 @@ const ProductOverview = (props) => (
       component='h5'
       className={props.classes.overview}
     >
-      Glycomet-GP 0.5 Forte Tablet is used in the treatment of
-      type 2 diabetes.
+      {props.overview}
     </Typography>
   </div>
 )

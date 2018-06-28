@@ -15,8 +15,9 @@ const styles = theme => {
 
 const DiseaseTags = (props) => (
   <div>
-    <Chip label='Diabetes' className={props.classes.tags} />
-    <Chip label='Asthma' className={props.classes.tags} />
+    {props.diseases.map((disease, index) => (
+      <Chip label={disease} className={props.classes.tags} />
+    ))}
   </div>
 )
 

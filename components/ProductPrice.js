@@ -16,7 +16,7 @@ const ProductPrice = (props) => (
     component='h2'
     className={`${props.classes.price} ${props.customStyle}`}
   >
-    Rs. 38.00
+    Rs. {props.sellingPrice}
   </Typography>
 )
 

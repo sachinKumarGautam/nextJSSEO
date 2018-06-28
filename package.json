@@ -5,7 +5,7 @@
   "dependencies": {
     "@material-ui/core": "latest",
     "@material-ui/icons": "^1.1.0",
-    "downshift": "^1.31.15",
+    "downshift": "^2.0.6",
     "jss": "latest",
     "next": "latest",
     "next-redux-wrapper": "^1.0.0",
