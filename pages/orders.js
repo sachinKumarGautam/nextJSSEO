@@ -3,6 +3,7 @@ import Header from '../components/layouts/header'
 import Footer from '../components/layouts/footer/Footer'
 
 import { withStyles } from '@material-ui/core/styles'
+import withRoot from '../src/withRoot'
 
 import Paper from '@material-ui/core/Paper'
 
@@ -36,4 +37,4 @@ const Orders = (props) => (
   </div>
 )
 
-export default withStyles(styles)(Orders)
+export default withRoot(withStyles(styles)(Orders))

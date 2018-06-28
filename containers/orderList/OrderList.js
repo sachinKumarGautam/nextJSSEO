@@ -1,18 +1,30 @@
 import React, { Component } from 'react'
 
-/*
-  bread crumbs
-  order list
-*/
+import SideMenu from '../../components/SideMenu'
+import OrderListDetails from './OrderListDetails'
+
+import { withStyles } from '@material-ui/core/styles'
+
+const styles = theme => ({
+  orderListWrapperStyle: {
+    display: 'flex',
+    flexDirection: 'row'
+  }
+})
 
 class OrderList extends Component {
   render () {
     return (
-      <div>
-        hi
+      <div className={this.props.classes.orderListWrapperStyle}>
+        <section>
+          <SideMenu/>
+        </section>
+        <section>
+          <OrderListDetails/>
+        </section>
       </div>
     )
   }
 }
 
-export default OrderList
+export default withStyles(styles)(OrderList)
