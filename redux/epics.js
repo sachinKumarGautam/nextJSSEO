@@ -8,6 +8,10 @@ import {
   getMoleculeSummary
 } from '../containers/moleculeDetails/moleculeEpics'
 
+import {
+  getRelatedMedicines
+} from '../containers/medicineList/medicineListEpics'
+
 // import * as actions from './actions'
 // import * as types from './actionTypes'
 
@@ -52,5 +56,6 @@ import {
 //   )
 
 export const rootEpic = combineEpics(
-  getMoleculeSummary
+  getMoleculeSummary,
+  getRelatedMedicines
 )

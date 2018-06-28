@@ -12,6 +12,10 @@ import {
   getMoleculeSummaryFailure
 } from './moleculeActions'
 
+import {
+  getMoleculeSummary$
+} from '../../services/api'
+
 // export function getMoleculeSummary (action$) {
 //   action$.ofType(GET_MOLECULE_SUMMARY_LOADING)
 //     .switchMap()
@@ -58,11 +62,8 @@ export function getMoleculeSummary (action$, store) {
   return action$.pipe(
     ofType(GET_MOLECULE_SUMMARY_LOADING),
     mergeMap(data => {
-      return ajax({
-        url: `http://sandbox.lifcare.in/v6/catalog/salts?salt-ids=5a61a295ae8bdc26685f2b09`
-      }).pipe(
+      return ajax(getMoleculeSummary$(data.saltId)).pipe(
         map(result => {
-          console.log('API response', result)
           return getMoleculeSummarySuccess(data.moleculeState, result.body.payload.content[0])
         }),
         catchError(error => {

@@ -58,7 +58,10 @@ class MoleculeDetailsWrapper extends Component {
           </Grid>
           <Grid item xs={1} />
           <Grid item xs={3}>
-            <RelatedMedicines />
+            <RelatedMedicines
+              moleculeName={this.props.moleculeDetailsStatePayload.name}
+              medicineList={this.props.medicineListState.payload}
+            />
             <RelatedArticles />
           </Grid>
         </Grid>
@@ -69,7 +72,8 @@ class MoleculeDetailsWrapper extends Component {
 
 function mapStateToProps (state) {
   return {
-    moleculeDetailsStatePayload: state.moleculeDetailsState.payload
+    moleculeDetailsStatePayload: state.moleculeDetailsState.payload,
+    medicineListState: state.medicineListState
   }
 }
 

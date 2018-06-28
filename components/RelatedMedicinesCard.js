@@ -48,28 +48,33 @@ const styles = theme => {
 
 const RelatedMedicinesCard = (props) => (
   <div>
-    <ProductName variant={'body1'} />
+    <ProductName variant={'body1'} name={props.itemDetails.name} />
     <div>
       <ProductBrand
         variant={'caption'}
         withoutImage
         customStyle={props.classes.customBrand}
+        brand={props.itemDetails.brand_name}
       />
       <span className={props.classes.divider}>|</span>
       <ProductPackSize
         variant={'caption'}
         withoutImage
         customStyle={props.classes.customPackSize}
+        packType={props.itemDetails.pack_type}
+        packSize={props.itemDetails.pack_size.name}
       />
     </div>
     <div className={props.classes.priceWrapper}>
       <ProductPrice
         variant={'body1'}
         customStyle={props.classes.customPrice}
+        sellingPrice={props.itemDetails.selling_price}
       />
       <StrokePrice
         variant={'caption'}
         customStyle={props.classes.customStrokePrice}
+        mrp={props.itemDetails.mrp}
       />
       <EstimatedPriceLabel
         variant={'caption'}

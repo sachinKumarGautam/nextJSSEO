@@ -18,7 +18,7 @@ const ProductPackSize = (props) => (
     component='h4'
     className={`${props.classes.packSize} ${props.customStyle}`}
   >
-    {!props.withoutImage && <i class='fas fa-pills' />} Tablets / 10s
+    {!props.withoutImage && <i class='fas fa-pills' />} {props.packType} / {props.packSize}
   </Typography>
 )
 
