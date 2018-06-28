@@ -4,14 +4,16 @@ import {
   GET_RELATED_MEDICINES_FAILURE
 } from './medicineListActionTypes'
 
-export function getRelatedMedicinesLoading (medicineState, saltId) {
+export function getRelatedMedicinesLoading (medicineState, saltName, page, size) {
   return {
     type: GET_RELATED_MEDICINES_LOADING,
     medicineState,
     isLoading: true,
     isError: false,
     error: {},
-    saltId: saltId
+    saltName: saltName,
+    page: page,
+    size: size
   }
 }
 

@@ -1,5 +1,4 @@
-// import { store } from '../../../store'
-
+import ajax from 'universal-rx-request' // because standard AjaxObservable only works in browser
 const timeout = 60000
 
 // const defaultAuthHeader = process.env.REACT_APP_ACCESS_TOKEN
@@ -33,7 +32,7 @@ export default function makeAjaxRequest (params) {
 
   switch (params.method) {
     case 'GET':
-      return {
+      return ajax({
         url: params.url,
         method: 'get',
         timeout: timeout,
@@ -42,7 +41,7 @@ export default function makeAjaxRequest (params) {
             'Authorization': authHeader
           }
         }
-      }
+      })
 
     case 'POST':
       return {

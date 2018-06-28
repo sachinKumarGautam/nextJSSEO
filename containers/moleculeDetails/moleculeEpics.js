@@ -1,7 +1,7 @@
 import { of } from 'rxjs/observable/of'
 import { mergeMap, catchError, map } from 'rxjs/operators'
-import ajax from 'universal-rx-request' // because standard AjaxObservable only works in browser
 import { ofType } from 'redux-observable'
+import http from '../../services/api/ajaxWrapper'
 
 import {
   GET_MOLECULE_SUMMARY_LOADING
@@ -62,7 +62,7 @@ export function getMoleculeSummary (action$, store) {
   return action$.pipe(
     ofType(GET_MOLECULE_SUMMARY_LOADING),
     mergeMap(data => {
-      return ajax(getMoleculeSummary$(data.saltId)).pipe(
+      return http(getMoleculeSummary$(data.saltId)).pipe(
         map(result => {
           return getMoleculeSummarySuccess(data.moleculeState, result.body.payload.content[0])
         }),

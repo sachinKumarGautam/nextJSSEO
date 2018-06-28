@@ -55,7 +55,9 @@ class MoleculeDetails extends React.Component {
     )
     this.props.actions.getRelatedMedicinesLoading(
       this.props.medicineListState,
-      '' // pass salt name
+      'Multivitamin', // pass salt name
+      0, // page number
+      3 // page size
     )
   }
 
