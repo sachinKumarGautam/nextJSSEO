@@ -7,12 +7,12 @@ import withRoot from '../src/withRoot'
 
 import Paper from '@material-ui/core/Paper'
 
-import ProductDetailsWrapper from '../containers/productDetails'
+import MedicineListWrapper from '../containers/medicineList'
 
 const styles = theme => ({
   root: {
-    paddingTop: 16,
-    paddingBottom: 16,
+    paddingTop: theme.spacing.unit * 2,
+    paddingBottom: theme.spacing.unit * 2,
     paddingLeft: theme.spacing.unit * 7,
     paddingRight: theme.spacing.unit * 7,
     maxWidth: theme.breakpoints.values.lg,
@@ -25,16 +25,14 @@ const styles = theme => ({
   }
 })
 
-const ProductDetails = (props) => (
+const MedicineList = (props) => (
   <div>
     <Header />
-    <div>
-      <Paper className={props.classes.root} elevation={1}>
-        <ProductDetailsWrapper />
-      </Paper>
+    <div className={props.classes.root}>
+      <MedicineListWrapper />
     </div>
     <Footer />
   </div>
 )
 
-export default withRoot(withStyles(styles)(ProductDetails))
+export default withRoot(withStyles(styles)(MedicineList))
