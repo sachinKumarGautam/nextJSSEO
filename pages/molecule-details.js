@@ -25,6 +25,10 @@ import {
   getMoleculeSummaryLoading
 } from '../containers/moleculeDetails/moleculeActions'
 
+import {
+  getRelatedMedicinesLoading
+} from '../containers/medicineList/medicineListActions'
+
 const styles = theme => ({
   root: {
     paddingTop: 16,
@@ -42,17 +46,23 @@ const styles = theme => ({
 })
 
 class MoleculeDetails extends React.Component {
-  static async getInitialProps ({ store, isServer }) {
-    const resultAction = await store.dispatch(getMoleculeSummaryLoading())
-    console.log('result', resultAction)
+  // static async getInitialProps ({ store, isServer }) {
+  //   const resultAction = await store.dispatch(getMoleculeSummaryLoading())
+  //   console.log('result', resultAction)
 
-    return { payload: resultAction }
-  }
+  //   return { payload: resultAction }
+  // }
 
   componentDidMount () {
     this.props.actions.getMoleculeSummaryLoading(
       this.props.moleculeDetailsState,
-      '' // pass salt id
+      '5a61a295ae8bdc26685f2b09' // pass salt id
+    )
+    this.props.actions.getRelatedMedicinesLoading(
+      this.props.medicineListState,
+      'Multivitamin', // pass salt name
+      0, // page number
+      3 // page size
     )
   }
 
@@ -73,7 +83,8 @@ class MoleculeDetails extends React.Component {
 
 function mapStateToProps (state) {
   return {
-    moleculeDetailsState: state.moleculeDetailsState
+    moleculeDetailsState: state.moleculeDetailsState,
+    medicineListState: state.medicineListState
   }
 }
 
@@ -81,7 +92,8 @@ function mapDispatchToProps (dispatch) {
   return {
     actions: bindActionCreators(
       {
-        getMoleculeSummaryLoading
+        getMoleculeSummaryLoading,
+        getRelatedMedicinesLoading
       },
       dispatch
     )

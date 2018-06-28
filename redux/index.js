@@ -10,7 +10,7 @@ const composeEnhancers = (typeof window !== 'undefined' && window.__REDUX_DEVTOO
 export default function initStore (initialState) {
   const epicMiddleware = createEpicMiddleware(rootEpic)
   const logger = createLogger({ collapsed: true }) // log every action to see what's happening behind the scenes.
-  const reduxMiddleware = composeEnhancers(applyMiddleware(thunkMiddleware, epicMiddleware))
+  const reduxMiddleware = composeEnhancers(applyMiddleware(thunkMiddleware, epicMiddleware, logger))
 
   return createStore(reducer, initialState, reduxMiddleware)
 };

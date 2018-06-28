@@ -5,9 +5,9 @@ import { ofType } from 'redux-observable'
 
 import {SEND_OTP_LOADING, OTP_VERIFIED_LOADING} from './loginActionTypes'
 import {
-  sendOtpSuccess, 
-  sendOtpFailure, 
-  verifyOtpSuccess, 
+  sendOtpSuccess,
+  sendOtpFailure,
+  verifyOtpSuccess,
   verifyOtpFailure,
   toggleAuthentication
 } from './loginActions'

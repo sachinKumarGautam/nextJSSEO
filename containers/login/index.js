@@ -28,7 +28,7 @@ const styles = theme => ({
     borderRadius: theme.spacing.unit / 2,
     backgroundColor: theme.palette.common.white,
     border: 'solid 1px #979797',
-    minHeight: '176px'
+    minHeight: theme.spacing.unit * 22
   },
   dialogTitle: {
     ...theme.typography.title,

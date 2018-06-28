@@ -18,7 +18,7 @@ const ProductBrand = (props) => (
     component='h3'
     className={`${props.classes.brand} ${props.customStyle}`}
   >
-    {!props.withoutImage && <i class='far fa-building' />} Cipla Ltd
+    {!props.withoutImage && <i class='far fa-building' />} {props.brand}
   </Typography>
 )
 

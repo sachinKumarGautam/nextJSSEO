@@ -74,7 +74,6 @@ export default function (state = initialState, action) {
       }
 
     case TOGGLE_AUTHENTICATION:
-    console.log('sachin2', action)
       return {
         ...state,
         isAuthenticated: action.status

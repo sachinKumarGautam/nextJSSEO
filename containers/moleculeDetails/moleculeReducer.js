@@ -6,7 +6,7 @@ import {
   GET_MOLECULE_SUMMARY_FAILURE
 } from './moleculeActionTypes'
 
-export default function (state = initialState, action) {
+export default function moleculeReducer (state = initialState, action) {
   switch (action.type) {
     case GET_MOLECULE_SUMMARY_LOADING:
       return {

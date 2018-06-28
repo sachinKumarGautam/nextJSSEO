@@ -48,8 +48,6 @@ class SignIn extends React.Component {
   };
 
   componentDidUpdate(nextProps) {
-    console.log('Authentication check ',nextProps.loginState,  )
-    
     if(nextProps.loginState.isAuthenticated !== this.props.loginState.isAuthenticated){
        this.setState({
          checked: true
@@ -81,13 +79,13 @@ class SignIn extends React.Component {
           >
               Register
           </a>
-          <div className={classes.container2}>
+          {/* <div className={classes.container2}>
           <Zoom in={checked}>
             <Paper elevation={4} className={classes.paper}>
               Welcome sachin
             </Paper>
           </Zoom>
-          </div>
+          </div> */}
         </Typography>
       </div>
     )

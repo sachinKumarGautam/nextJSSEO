@@ -12,8 +12,8 @@ export default function (state = initialState, action) {
       return {
         ...state,
         isLoadingCustomerRegister: action.isLoading,
-        errorState: {
-          ...state.errorState,
+        errorStateCustomerRegister: {
+          ...state.errorStateCustomerRegister,
           isError: action.isError,
           error: action.error
         }
@@ -24,7 +24,15 @@ export default function (state = initialState, action) {
         ...state,
         isLoadingCustomerRegister: action.isLoading,
         payload: {
-          ...state.payload
+          ...state.payload,
+          id: action.id,
+          full_name: action.id,
+          default_patient_id: action.default_patient_id,
+          gender: action.gender,
+          membership_code: action.membership_code,
+          memebership_type: action.memebership_type,
+          referral_code: action.referral_code,
+          reference_code: action.reference_code
         }
       }
 
@@ -32,8 +40,8 @@ export default function (state = initialState, action) {
       return {
         ...state,
         isLoadingCustomerRegister: action.isLoading,
-        errorState: {
-          ...state.errorState,
+        errorStateCustomerRegister: {
+          ...state.errorStateCustomerRegister,
           isError: action.isError,
           error: action.error
         }
