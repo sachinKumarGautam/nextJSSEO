@@ -9,32 +9,73 @@ import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import Divider from '@material-ui/core/Divider';
 
+import Button from './button'
+
 const styles = theme => ({
   button: {
     margin: theme.spacing.unit
   },
+  menuPaperProps: {
+    width: theme.spacing.unit * 32
+  },
   menuStyle: {
     top: theme.spacing.unit * 5
   },
-  summaryWrapperStyle: {
+  summaryStyle: {
+    ...theme.typography.body3,
+    fontWeight: theme.typography.fontWeightBold,
+    color: theme.palette.customGreen.green300
+  },
+  itemStyle: {
+    ...theme.typography.body3,
+    fontWeight: theme.typography.fontWeightBold,
+    color: theme.palette.customGreen.green300
+  },
+  summaryMenuWrapper: {
+    justifyContent: 'space-between',
+    paddingTop: 0,
+    paddingBottom: theme.spacing.unit
+  },
+  medicineNameStyle: {
+    ...theme.typography.body3,
+    fontWeight: theme.typography.fontWeightBold,
+    color: theme.palette.customGrey.grey700
+  },
+  priceStyle: {
+    ...theme.typography.body4,
+    color: theme.palette.customGrey.grey700
+  },
+  medicineDetailWrapper: {
+    justifyContent: 'space-between',
+    display: 'flex',
     paddingTop: theme.spacing.unit,
     paddingBottom: theme.spacing.unit,
     paddingLeft: theme.spacing.unit * 2,
-    paddingRight: theme.spacing.unit,
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'space-between'
-  },
-  orderSummary: {
+    paddingRight: theme.spacing.unit * 2
+   },
+  noItemTextStyle: {
     ...theme.typography.body4,
-    fontWeight: theme.typography.fontWeightBold,
-    color: theme.palette.customGreen.green300
+    color: theme.palette.customGrey.grey200
+  },
+  buttonRoot: {
+    border: `1px solid ${theme.palette.primary.main}`
+  },
+  buttonLabel: {
+    ...theme.typography.body3,
+    color: theme.palette.primary.main,
+    fontWeight: theme.typography.fontWeightBold
+  },
+  buttonStyle: {
+    textAlign: 'center',
+    marginTop: theme.spacing.unit * 2,
+    marginBottom: theme.spacing.unit * 2
   }
 })
 
 class CartIcon extends Component {
   state = {
-    anchorEl: null
+    anchorEl: null,
+    quantity: 4
   }
 
   handleClick = event => {
@@ -49,40 +90,74 @@ class CartIcon extends Component {
     return (
       <div>
         <IconButton
-          aria-owns={this.state.anchorEl ? 'long-menu' : null}
+          aria-owns={this.state.anchorEl ? 'simple-menu' : null}
           aria-haspopup="true"
           onClick={this.handleClick}
           color='primary'
           className={classes.button}
           aria-label='Add to shopping cart'
         >
-          <Badge className={classes.margin} badgeContent={4} color='primary'>
+          <Badge className={classes.margin} badgeContent={this.state.quantity} color='primary'>
             <AddShoppingCartIcon />
           </Badge>
         </IconButton>
         <Menu
-          id="long-menu"
+          id="simple-menu"
           anchorEl={this.state.anchorEl}
           open={Boolean(this.state.anchorEl)}
           onClose={this.handleClose}
           PaperProps={{
             style: {
-              width: 280
+              width: 256
             }
           }}
           className={classes.menuStyle}
         >
-          <MenuItem>
-            <span className={classes.summaryWrapperStyle}>
-              <span className={classes.orderSummary}>
-                Order Summary
-              </span>
-              <span className={classes.orderSummary}>
-                1 item(s)
-              </span>
+          <MenuItem className={classes.summaryMenuWrapper}>
+            <span className={classes.summaryStyle}>
+              Order Summary
+            </span>
+            <span className={classes.itemStyle}>
+              2 item(s)
             </span>
           </MenuItem>
           <Divider/>
+          {/* <MenuItem >
+
+          </MenuItem> */}
+          <div className={classes.medicineDetailWrapper}>
+            <span
+              className={
+                this.state.quantity
+                  ? classes.medicineNameStyle : classes.noItemTextStyle
+              }
+            >
+              {
+                this.state.quantity  ? 'Glycomet-GP 2 Tablet'
+                : 'There is no item in your cart yet'
+              }
+            </span>
+            {
+              this.state.quantity ?
+              <span className={classes.priceStyle}>
+                Rs. 55.5
+              </span>
+              :<span></span>
+            }
+          </div>
+          <div className={classes.buttonStyle}>
+            <Button
+              size='small'
+              variant='outlined'
+              color='primary'
+              classes={{
+                root: classes.buttonRoot,
+                label: classes.buttonLabel
+              }}
+              onClick={this.handleClickOpen}
+              label={'PROCEED TO CART'}
+            />
+          </div>
         </Menu>
       </div>
     )
