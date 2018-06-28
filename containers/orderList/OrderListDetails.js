@@ -7,11 +7,29 @@ import Typography from '@material-ui/core/Typography'
 import { withStyles } from '@material-ui/core/styles'
 
 import OrderHeader from './OrderHeader'
+import OrderContent from './OrderContent'
+import OrderFooter from './OrderFooter'
+import Button from '../../components/button'
+
+const orderList= [
+  {
+    user_name: 'Jyoti Arora',
+    status: 'Payment Pending',
+    payment: 'failed',
+    order_status: 'cancel'
+  },
+  {
+    user_name: 'Ayushi Khetan',
+    status: 'Delivered',
+    payment: 'sucess',
+    order_status: 'return'
+  }
+]
 
 const styles = theme => ({
   card: {
-    minWidth: theme.spacing.unit * 86,
-    marginLeft: theme.spacing.unit * 5
+    minWidth: theme.spacing.unit * 92,
+    marginLeft: theme.spacing.unit * 6
   },
   cardContent: {
     paddingBottom: 0,
@@ -19,12 +37,31 @@ const styles = theme => ({
   },
   orderDetailWrapper: {
     border: `0.5px solid ${theme.palette.customGrey.grey250}`,
-    borderRadius: theme.spacing.unit / 2
+    borderRadius: theme.spacing.unit / 2,
+    marginBottom: theme.spacing.unit * 3,
+    marginLeft: theme.spacing.unit * 2,
+    marginRight: theme.spacing.unit * 2
   },
   title: {
     ...theme.typography.headline,
-    color: theme.palette.customGrey.grey500
-  }
+    color: theme.palette.customGrey.grey500,
+    marginLeft: theme.spacing.unit * 2,
+    marginBottom: theme.spacing.unit * 6
+  },
+  buttonRoot: {
+    backgroundColor: '#ffffff'
+  },
+  buttonLabel: {
+    ...theme.typography.body3,
+    color: theme.palette.customGrey.grey200
+  },
+  buttonWrapper: {
+    display: 'flex',
+    justifyContent: 'center'
+  },
+  button: {
+    marginBottom: theme.spacing.unit * 14
+  },
 })
 
 class OrderListDetails extends Component {
@@ -40,9 +77,33 @@ class OrderListDetails extends Component {
           >
             My Orders
           </Typography>
-          <div className={this.props.classes.orderDetailWrapper}>
-            <OrderHeader/>
-            <Divider/>
+          {
+            orderList.map((item) => {
+              return (
+                <div className={this.props.classes.orderDetailWrapper}>
+                  <OrderHeader/>
+                  <Divider/>
+                  <OrderContent
+                    orderList={item}
+                  />
+                  <Divider/>
+                  <OrderFooter/>
+                </div>
+              )
+            })
+          }
+          <div className={this.props.classes.buttonWrapper}>
+            <Button
+              size='medium'
+              variant='outlined'
+              className={this.props.classes.button}
+              classes={{
+                root: this.props.classes.buttonRoot,
+                label: this.props.classes.buttonLabel
+              }}
+              onClick={this.handleClickOpen}
+              label={'Show more'}
+            />
           </div>
         </CardContent>
       </Card>

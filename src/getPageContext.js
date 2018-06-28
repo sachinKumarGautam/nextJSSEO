@@ -22,7 +22,8 @@ const theme = createMuiTheme({
       grey250: '#979797',
       grey300: '#bbbbbb',
       grey500: '#4a4a4a',
-      grey600: '#3a3a3a'
+      grey600: '#3a3a3a',
+      grey700: '#393939'
     },
     customYellow: {
       yellow400: '#f5a623'
@@ -30,6 +31,9 @@ const theme = createMuiTheme({
     customGreen: {
       green300: '#78b437',
       green400: '#389e48'
+    },
+    customRed: {
+      red200: '#e83f6f'
     }
   },
   overrides: {
@@ -55,6 +59,10 @@ const theme = createMuiTheme({
     fontWeightBold: 600,
     body3: {
       fontSize: '0.75rem',
+      fontFamily: ['Lato', 'sans-serif']
+    },
+    body4: {
+      fontSize: '0.625rem',
       fontFamily: ['Lato', 'sans-serif']
     }
   },
