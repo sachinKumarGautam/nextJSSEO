@@ -81,7 +81,7 @@ class LoginForm extends React.Component {
           <Button
             type='submit'
             // disabled={isSubmitting}
-            isLoading={isSubmitting}
+            isloading={isSubmitting}
             variant='raised'
             // onClick={toggleModal}
             color='primary'
@@ -99,15 +99,10 @@ export default withStyles(styles)(withFormik({
     mobile: Yup.number()
     // .min(10, 'Please enter valid phone number')
     // .max(10, 'Please enter valid phone number')
-    // .required('Mobile is required!')
+      .required('Mobile is required!')
   }),
   handleSubmit: (values, { props, changeLoadingState, setSubmitting }) => {
-    setTimeout(() => {
-      // alert(JSON.stringify(values, null, 2))
-      // props.toggleForm('otp')
-      // console.log(changeLoadingState)
-      setSubmitting(false)
-    }, 2000)
+    props.onSubmit(props.loginState, setSubmitting, props.toggleForm, values)
   },
   displayName: 'LoginForm' // helps with React DevTools
 })(LoginForm))

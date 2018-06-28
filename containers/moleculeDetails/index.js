@@ -37,7 +37,6 @@ class MoleculeDetailsWrapper extends Component {
   }
 
   render () {
-    console.log('inner state', this.props.moleculeDetailsState)
     return (
       <div>
         <BreadCrumbs />
@@ -47,11 +46,13 @@ class MoleculeDetailsWrapper extends Component {
               <MoleculeDetails
                 toggleHover={this.toggleHover.bind(this)}
                 hover={this.state.hover}
+                moleculeDetailsStatePayload={this.props.moleculeDetailsStatePayload}
               />
             </section>
             <section>
               <MoleculeDetailsContent
                 hover={this.state.hover}
+                moleculeDetailsStatePayload={this.props.moleculeDetailsStatePayload}
               />
             </section>
           </Grid>
@@ -68,7 +69,7 @@ class MoleculeDetailsWrapper extends Component {
 
 function mapStateToProps (state) {
   return {
-    moleculeDetailsState: state.moleculeDetailsState
+    moleculeDetailsStatePayload: state.moleculeDetailsState.payload
   }
 }
 

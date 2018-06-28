@@ -33,21 +33,20 @@ const styles = theme => ({
 })
 
 const CommonButton = (buttonProps) => {
-  const { classes, isLoading, loaderSize } = buttonProps
+  const { classes, isloading, loaderSize } = buttonProps
   return (
     <div>
       <div
         className={classes.wrapper}
       >
         <Button
-          className={isLoading ? classes.buttonloader : classes.button}
+          className={isloading ? classes.buttonloader : classes.button}
           disableRipple
-          // disabled={buttonProps.isLoading}
           {...buttonProps}
         >
           {buttonProps.label}
         </Button>
-        {isLoading &&
+        {isloading &&
           <CircularProgress
             size={loaderSize || 22}
             className={classes.loader}

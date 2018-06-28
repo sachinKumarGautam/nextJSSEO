@@ -43,21 +43,21 @@ const RegisterForm = props => {
       <FormControl
         className={classes.formControl}
         aria-describedby='full-name'
-        error={errors.fullName && touched.fullName}
+        error={errors.full_name && touched.full_name}
       >
-        <InputLabel htmlFor='fullName'>Full Name</InputLabel>
+        <InputLabel htmlFor='full_name'>Full Name</InputLabel>
         <Input
-          id='fullName'
+          id='full_name'
           type='text'
           onChange={handleChange}
-          value={values.fullName}
+          value={values.full_name}
         />
         {
-          errors.fullName && touched.fullName &&
+          errors.full_name && touched.full_name &&
           <FormHelperText
-            id='fullName'
+            id='full_name'
           >
-            {errors.fullName}
+            {errors.full_name}
           </FormHelperText>
         }
       </FormControl>
@@ -72,15 +72,16 @@ const RegisterForm = props => {
           onChange={handleChange}
           inputProps={{
             name: 'gender',
-            id: 'gender'
+            id: 'gender',
+            placeholder: 'Gender'
           }}
         >
           <MenuItem value=''>
             <em>Gender</em>
           </MenuItem>
-          <MenuItem value={10}>Male</MenuItem>
-          <MenuItem value={20}>Female</MenuItem>
-          <MenuItem value={30}>Others</MenuItem>
+          <MenuItem value={'male'}>Male</MenuItem>
+          <MenuItem value={'femlae'}>Female</MenuItem>
+          <MenuItem value={'others'}>Others</MenuItem>
         </Select>
         {
           errors.gender && touched.gender &&
@@ -93,48 +94,48 @@ const RegisterForm = props => {
       </FormControl>
       <FormControl
         className={classes.formControl}
-        aria-describedby='membershipCode'
-        error={errors.membershipCode && touched.membershipCode}
+        aria-describedby='membership_code'
+        error={errors.membership_code && touched.membership_code}
       >
-        <InputLabel htmlFor='membershipCode'>Membership code</InputLabel>
+        <InputLabel htmlFor='membership_code'>Membership code</InputLabel>
         <Input
-          id='membershipCode'
+          id='membership_code'
           onChange={handleChange}
-          value={values.membershipCode}
+          value={values.membership_code}
         />
         {
-          errors.referralCode && touched.referralCode &&
+          errors.referral_code && touched.referral_code &&
           <FormHelperText
-            id='referralCode'
+            id='referral_code'
           >
-            {errors.referralCode}
+            {errors.referral_code}
           </FormHelperText>
         }
       </FormControl>
       <FormControl
         className={classes.formControl}
-        aria-describedby='referralCode'
-        error={errors.referralCode && touched.referralCode}
+        aria-describedby='referral_code'
+        error={errors.referral_code && touched.referral_code}
       >
         <InputLabel htmlFor='referral-code'>Referral code</InputLabel>
         <Input
-          id='referralCode'
+          id='referral_code'
           onChange={handleChange}
-          value={values.referralCode}
+          value={values.referral_code}
         />
         {
-          errors.referralCode && touched.referralCode &&
+          errors.referral_code && touched.referral_code &&
           <FormHelperText
-            id='referralCode'
+            id='referral_code'
           >
-            {errors.referralCode}
+            {errors.referral_code}
           </FormHelperText>
         }
       </FormControl>
       <div className={classes.buttonWrapper}>
         <Button
           type='submit'
-          disabled={isSubmitting}
+          isloading={isSubmitting}
           variant='raised'
           color='primary'
           label={'Register'}
@@ -145,24 +146,31 @@ const RegisterForm = props => {
 }
 
 export default withStyles(styles)(withFormik({
-  mapPropsToValues: () => (
-    {
-      fullName: '',
+  mapPropsToValues: (props) => {
+    console.log(props)
+    return {
+      full_name: '',
       gender: '',
-      membershipCode: '',
-      referralCode: ''
-    }),
+      mobile: props.loginState.payload.mobile || '',
+      membership_code: '',
+      referral_code: '',
+      age: '',
+      id: '',
+      membership_type: '',
+      reference_code: '',
+      referral_code: '',
+      email: '',
+      default_location: 'J-58, 3rd floor, lajpat Nagar 4'
+    }
+  },
   validationSchema: Yup.object().shape({
-    fullName: Yup.string().required('Please enter your full name'),
+    full_name: Yup.string().required('Please enter your full name'),
     gender: Yup.string().required('Gender is required'),
-    membershipCode: Yup.string(),
-    referralCode: Yup.string()
+    membership_code: Yup.string(),
+    referral_code: Yup.string()
   }),
   handleSubmit: (values, { props, setSubmitting }) => {
-    setTimeout(() => {
-      props.closeLoginModal()
-      setSubmitting(false)
-    }, 1000)
+    props.onSubmit(props.customerState, props.closeLoginModal, setSubmitting, values)
   },
   displayName: 'RegisterForm' // helps with React DevTools
 })(RegisterForm))

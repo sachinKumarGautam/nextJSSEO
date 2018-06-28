@@ -1,3 +1,8 @@
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+import compose from 'recompose/compose'
+import withRedux from 'next-redux-wrapper'
+import initStore from '../../redux'
 
 import { withStyles } from '@material-ui/core/styles'
 import Dialog from '@material-ui/core/Dialog'
@@ -7,6 +12,8 @@ import Fade from '@material-ui/core/Fade'
 import Login from './Login'
 import Register from './Register'
 import OTP from './OTP'
+import { sendOtpLoading, verifyOtpLoading} from './loginActions'
+import { customerRegisterLoading } from '../user/customer/customerActions'
 
 /*
     index.js
@@ -62,18 +69,25 @@ class LoginWrapper extends React.Component {
         return <Login
           toggleForm={this.toggleForm}
           closeLoginModal={this.props.closeLoginModal}
+          sendOtpLoading={this.props.actions.sendOtpLoading}
+          loginState={this.props.loginState}
         />
 
       case 'register':
         return <Register
           toggleForm={this.toggleForm}
           closeLoginModal={this.props.closeLoginModal}
+          loginState={this.props.loginState}
+          customerState={this.props.customerState}
+          customerRegisterLoading={this.props.actions.customerRegisterLoading}
         />
 
       case 'otp':
         return <OTP
           toggleForm={this.toggleForm}
           closeLoginModal={this.props.closeLoginModal}
+          loginState={this.props.loginState}
+          verifyOtpLoading={this.props.actions.verifyOtpLoading}
         />
     }
   }
@@ -110,4 +124,30 @@ class LoginWrapper extends React.Component {
   }
 }
 
-export default withStyles(styles)(LoginWrapper)
+function mapStateToProps (state) {
+  return {
+    loginState: state.loginState,
+    customerState: state.customerState
+  }
+}
+
+function mapDispatchToProps (dispatch) {
+  return {
+    actions: bindActionCreators(
+      {
+        sendOtpLoading,
+        verifyOtpLoading,
+        customerRegisterLoading
+      },
+      dispatch
+    )
+  }
+}
+
+// export default connect(mapStateToProps, mapDispatchToProps)(LoginWrapper)
+
+export default withRedux(
+  initStore,
+  mapStateToProps,
+  mapDispatchToProps
+)(withStyles(styles)(LoginWrapper))

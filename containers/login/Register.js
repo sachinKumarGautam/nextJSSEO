@@ -48,10 +48,16 @@ class Register extends React.Component {
   }
 
   render () {
-    const { classes } = this.props
+    const { classes, customerRegisterLoading, closeLoginModal, loginState } = this.props
     return (
       <div className={classes.container}>
-        <Form type={'registerForm'} closeLoginModal={this.props.closeLoginModal} />
+        <Form
+          type={'registerForm'}
+          closeLoginModal={closeLoginModal}
+          onSubmit={customerRegisterLoading}
+          loginState={loginState}
+          customerState={this.props.customerState}
+        />
         <Typography
           variant='caption'
           className={classes.accountInfo}

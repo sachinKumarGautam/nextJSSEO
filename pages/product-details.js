@@ -35,7 +35,7 @@ const ProductDetails = (props) => (
         {/* <div>
           Next stars: {props.stars}
         </div> */}
-        <ProductDetailsWrapper />
+        {/* <ProductDetailsWrapper /> */}
       </Paper>
     </div>
     <Footer />

@@ -20,7 +20,7 @@ const ProductName = (props) => (
       variant={props.variant}
       component='h1'
     >
-      Glycomet 0.5 MG TAB 10S
+      {props.name}
     </Typography>
   </div>
 )

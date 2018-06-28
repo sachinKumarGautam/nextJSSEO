@@ -552,14 +552,7 @@
     core-js "^2.5.3"
     regenerator-runtime "^0.11.1"
 
-"@babel/runtime@^7.0.0-beta.42":
-  version "7.0.0-beta.51"
-  resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.0.0-beta.51.tgz#48b8ed18307034c6620f643514650ca2ccc0165a"
-  dependencies:
-    core-js "^2.5.7"
-    regenerator-runtime "^0.11.1"
-
-"@babel/runtime@^7.0.0-beta.47":
+"@babel/runtime@^7.0.0-beta.42", "@babel/runtime@^7.0.0-beta.47":
   version "7.0.0-beta.51"
   resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.0.0-beta.51.tgz#48b8ed18307034c6620f643514650ca2ccc0165a"
   dependencies:
@@ -1370,11 +1363,7 @@ core-js@^1.0.0:
   version "1.2.7"
   resolved "https://registry.yarnpkg.com/core-js/-/core-js-1.2.7.tgz#652294c14651db28fa93bd2d5ff2983a4f08c636"
 
-<<<<<<< HEAD
-core-js@^2.4.0, core-js@^2.5.3, core-js@^2.5.6, core-js@^2.5.7:
-=======
 core-js@^2.4.0, core-js@^2.5.3, core-js@^2.5.7:
->>>>>>> a537a11cfb626f8e16619e32a68adfc0108842c9
   version "2.5.7"
   resolved "https://registry.yarnpkg.com/core-js/-/core-js-2.5.7.tgz#f972608ff0cead68b841a16a932d0b183791814e"
 
@@ -1679,11 +1668,6 @@ domutils@1.5.1:
     dom-serializer "0"
     domelementtype "1"
 
-<<<<<<< HEAD
-downshift@^2.0.0:
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/downshift/-/downshift-2.0.0.tgz#b5fb016d19100c43c2d504acb74c0afcba312a16"
-=======
 domutils@^1.5.1:
   version "1.7.0"
   resolved "https://registry.yarnpkg.com/domutils/-/domutils-1.7.0.tgz#56ea341e834e06e6748af7a1cb25da67ea9f8c2a"
@@ -1696,7 +1680,6 @@ downshift@^2.0.6:
   resolved "https://registry.yarnpkg.com/downshift/-/downshift-2.0.6.tgz#cfa505bfb1367bcfef3495307ca344cd2d54109d"
   dependencies:
     prop-types "^15.6.0"
->>>>>>> a537a11cfb626f8e16619e32a68adfc0108842c9
 
 duplexify@^3.4.2, duplexify@^3.6.0:
   version "3.6.0"
@@ -2139,19 +2122,7 @@ fast-levenshtein@^2.0.6, fast-levenshtein@~2.0.4:
   version "2.0.6"
   resolved "https://registry.yarnpkg.com/fast-levenshtein/-/fast-levenshtein-2.0.6.tgz#3d8a5c66883a16a30ca8643e851f19baa7797917"
 
-fbjs@^0.8.1, fbjs@^0.8.16:
-  version "0.8.17"
-  resolved "https://registry.yarnpkg.com/fbjs/-/fbjs-0.8.17.tgz#c4d598ead6949112653d6588b01a5cdcd9f90fdd"
-  dependencies:
-    core-js "^1.0.0"
-    isomorphic-fetch "^2.1.1"
-    loose-envify "^1.0.0"
-    object-assign "^4.1.0"
-    promise "^7.1.1"
-    setimmediate "^1.0.5"
-    ua-parser-js "^0.7.18"
-
-fbjs@^0.8.9:
+fbjs@^0.8.1, fbjs@^0.8.16, fbjs@^0.8.9:
   version "0.8.17"
   resolved "https://registry.yarnpkg.com/fbjs/-/fbjs-0.8.17.tgz#c4d598ead6949112653d6588b01a5cdcd9f90fdd"
   dependencies:
@@ -4248,7 +4219,7 @@ readdirp@^2.0.0:
     readable-stream "^2.0.2"
     set-immediate-shim "^1.0.1"
 
-"recompose@^0.26.0 || ^0.27.0":
+"recompose@^0.26.0 || ^0.27.0", recompose@^0.27.1:
   version "0.27.1"
   resolved "https://registry.yarnpkg.com/recompose/-/recompose-0.27.1.tgz#1a49e931f183634516633bbb4f4edbfd3f38a7ba"
   dependencies:
@@ -5043,11 +5014,7 @@ typedarray@^0.0.6:
   version "0.0.6"
   resolved "https://registry.yarnpkg.com/typedarray/-/typedarray-0.0.6.tgz#867ac74e3864187b1d3d47d996a78ec5c8830777"
 
-<<<<<<< HEAD
-ua-parser-js@^0.7.18, ua-parser-js@^0.7.9:
-=======
 ua-parser-js@^0.7.18:
->>>>>>> a537a11cfb626f8e16619e32a68adfc0108842c9
   version "0.7.18"
   resolved "https://registry.yarnpkg.com/ua-parser-js/-/ua-parser-js-0.7.18.tgz#a7bfd92f56edfb117083b69e31d2aa8882d4b1ed"
 

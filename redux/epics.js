@@ -8,6 +8,14 @@ import {
   getMoleculeSummary
 } from '../containers/moleculeDetails/moleculeEpics'
 
+import {
+  sendOTP, verifyOTP
+} from '../containers/login/loginEpics'
+
+import {
+  registerCustomer
+} from '../containers/user/customer/customerEpics'
+
 // import * as actions from './actions'
 // import * as types from './actionTypes'
 
@@ -52,5 +60,8 @@ import {
 //   )
 
 export const rootEpic = combineEpics(
-  getMoleculeSummary
+  getMoleculeSummary,
+  sendOTP,
+  verifyOTP,
+  registerCustomer
 )

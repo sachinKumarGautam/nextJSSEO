@@ -41,7 +41,7 @@ const PincodeDialog = (props) => (
         <Button
           onClick={props.handleClose}
           color='primary'
-          variant='raised'
+          variant='outlined'
           label={'Cancel'}
         />
         <Button

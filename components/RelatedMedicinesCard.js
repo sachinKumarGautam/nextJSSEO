@@ -43,7 +43,6 @@ const styles = theme => {
     },
     priceWrapper: {
       marginBottom: theme.spacing.unit
-<<<<<<< HEAD
     },
     buttonRoot: {
       border: '1px solid #80c241'
@@ -51,19 +50,11 @@ const styles = theme => {
     buttonLabel: {
       color: '#80c241'
     }
-
-=======
-    }
->>>>>>> a537a11cfb626f8e16619e32a68adfc0108842c9
   }
 }
 
 const RelatedMedicinesCard = (props) => (
-<<<<<<< HEAD
-  <div className={props.classes.relatedMedicinesCardWrapper}>
-=======
   <div>
->>>>>>> a537a11cfb626f8e16619e32a68adfc0108842c9
     <ProductName variant={'body1'} />
     <div>
       <ProductBrand
@@ -90,15 +81,11 @@ const RelatedMedicinesCard = (props) => (
       <EstimatedPriceLabel
         variant={'caption'}
         customStyle={props.classes.customEstimatedLabel}
-<<<<<<< HEAD
-=======
         estimatePriceText={'*Estimated Price'}
->>>>>>> a537a11cfb626f8e16619e32a68adfc0108842c9
       />
     </div>
     <Button
       size='small'
-<<<<<<< HEAD
       variant='outlined'
       color='primary'
       classes={{
@@ -108,14 +95,6 @@ const RelatedMedicinesCard = (props) => (
       onClick={this.handleClickOpen}
       label={'Add To Cart'}
     />
-=======
-      variant='raised'
-      color='primary'
-      onClick={this.handleClickOpen}
-    >
-      Add To Cart
-    </Button>
->>>>>>> a537a11cfb626f8e16619e32a68adfc0108842c9
   </div>
 )
 

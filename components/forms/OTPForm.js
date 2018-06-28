@@ -73,7 +73,7 @@ class OTPForm extends React.Component {
         <div className={classes.buttonWrapper}>
           <Button
             type='submit'
-            disabled={isSubmitting}
+            isloading={isSubmitting}
             variant='raised'
             color='primary'
             label={'Login'}
@@ -93,10 +93,7 @@ export default withStyles(styles)(withFormik({
       .required('Please enter OTP')
   }),
   handleSubmit: (values, { props, setSubmitting }) => {
-    setTimeout(() => {
-      props.closeLoginModal()
-      setSubmitting(false)
-    }, 1000)
+    props.onSubmit(props.loginState, setSubmitting, props.closeLoginModal, props.toggleForm, values)
   },
   displayName: 'OTPForm' // helps with React DevTools
 })(OTPForm))
