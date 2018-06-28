@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 
 import { withStyles } from '@material-ui/core/styles'
+import Typography from '@material-ui/core/Typography';
 
 const styles = theme => {
   return {
@@ -28,18 +29,62 @@ const styles = theme => {
 const OrderFooter = (props) => {
   return (
     <div className={props.classes.wrapperStyle}>
-      <span className={props.classes.labelStyle}>
-        Placed On <br/><span className={props.classes.valueStyle}>06 Apr 2018</span>
-      </span>
-      <span className={props.classes.labelStyle}>
-        Delivery Date <br/><span className={props.classes.valueStyle}>08 Apr 2018</span>
-      </span>
-      <span className={props.classes.labelStyle}>
-        Payment <br/><span className={props.classes.valueStyle}>Credit Card</span>
-      </span>
-      <span className={props.classes.labelStyle}>
-        Total Amount <br/><span className={props.classes.valueStyle}>Rs. 741.6</span>
-      </span>
+      <div>
+        <Typography
+          variant="caption"
+          className={props.classes.labelStyle}
+        >
+          Placed On
+        </Typography>
+        <Typography
+          variant="caption"
+          className={props.classes.valueStyle}
+        >
+          06 Apr 2018
+        </Typography>
+      </div>
+      <div>
+        <Typography
+          variant="caption"
+          className={props.classes.labelStyle}
+        >
+          Delivery Date
+        </Typography>
+        <Typography
+          variant="caption"
+          className={props.classes.valueStyle}
+        >
+          08 Apr 2018
+        </Typography>
+      </div>
+      <div>
+        <Typography
+          variant="caption"
+          className={props.classes.labelStyle}
+        >
+          Payment
+        </Typography>
+        <Typography
+          variant="caption"
+          className={props.classes.valueStyle}
+        >
+          Credit Card
+        </Typography>
+      </div>
+      <div>
+        <Typography
+          variant="caption"
+          className={props.classes.labelStyle}
+        >
+          Total Amount
+        </Typography>
+        <Typography
+          variant="caption"
+          className={props.classes.valueStyle}
+        >
+          Rs. 741.6
+        </Typography>
+      </div>
     </div>
   )
 }

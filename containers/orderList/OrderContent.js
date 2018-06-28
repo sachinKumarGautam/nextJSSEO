@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 
 import { withStyles } from '@material-ui/core/styles'
 import Person from '@material-ui/icons/Person'
+import Typography from '@material-ui/core/Typography';
 
 import Button from '../../components/button'
 
@@ -20,19 +21,16 @@ const styles = theme => {
       height: theme.spacing.unit * 2
     },
     userNameStyle: {
-      ...theme.typography.caption,
       color: theme.palette.customGrey.grey500,
       fontWeight: theme.typography.fontWeightBold,
       display: 'flex',
       flexDirection: 'row'
     },
     statusStyle: {
-      ...theme.typography.caption,
       color: theme.palette.customGreen.green300,
       paddingRight: theme.spacing.unit
     },
     pendingStyle: {
-      ...theme.typography.caption,
       color: theme.palette.customRed.red200,
       paddingRight: theme.spacing.unit
     },
@@ -48,11 +46,9 @@ const styles = theme => {
       flexDirection: 'row'
     },
     medicineNameStyle: {
-      ...theme.typography.caption,
       color: theme.palette.customGrey.grey500
     },
     quantityStyle: {
-      ...theme.typography.caption,
       color: theme.palette.customGrey.grey500,
       fontWeight: theme.typography.fontWeightBold
     },
@@ -79,7 +75,9 @@ const styles = theme => {
       paddingTop: theme.spacing.unit * 2,
       paddingLeft: theme.spacing.unit * 2,
       paddingRight: theme.spacing.unit* 3,
-      paddingBottom: theme.spacing.unit * 2
+      paddingBottom: theme.spacing.unit * 2,
+      display: 'flex',
+      justifyContent: 'space-between'
     },
     helpStyle: {
       ...theme.typography.body4,
@@ -90,8 +88,10 @@ const styles = theme => {
     cancelStyle: {
       ...theme.typography.body4,
       color: theme.palette.customGrey.grey500,
-      fontWeight: theme.typography.fontWeightBold,
-      float: 'right'
+      fontWeight: theme.typography.fontWeightBold
+    },
+    reviewHelpWrapper: {
+      display: 'flex'
     }
   }
 }
@@ -100,29 +100,52 @@ const OrderContent = (props) => {
   return (
     <div>
       <div className={props.classes.userDetailWrapper}>
-        <span className={props.classes.userNameStyle}>
-          <Person className={props.classes.userIconStyle}/>{props.orderList.user_name}
-        </span>
-        <span
-          className={
-            props.orderList.status === 'Payment Pending'
-            ? props.classes.pendingStyle :
-            props.classes.statusStyle
-          }
-        >
-          {props.orderList.status}
-        </span>
+        <div>
+          <Typography
+            variant="caption"
+            className={props.classes.userNameStyle}
+          >
+            <Person className={props.classes.userIconStyle}/>{props.orderList.user_name}
+          </Typography>
+        </div>
+        <div>
+          <Typography
+            variant="caption"
+            className={
+              props.orderList.status === 'Payment Pending'
+              ? props.classes.pendingStyle :
+              props.classes.statusStyle
+            }
+          >
+            {props.orderList.status}
+          </Typography>
+        </div>
       </div>
       <div className={props.classes.medicineDetailWrapper}>
         <img
           src='./../../static/images/avenger.jpg'
           className={props.classes.prescriptionStyle}
         />
-        <span className={props.classes.medicineNameStyle}>
-          Glycomet 0.5 MG <br/>
-          Zoryl MF 2MG <br/>
-          <span className={props.classes.quantityStyle}>+ 2 Items</span>
-        </span>
+        <div>
+          <Typography
+            variant="caption"
+            className={props.classes.medicineNameStyle}
+          >
+            Glycomet 0.5 MG
+          </Typography>
+          <Typography
+            variant="caption"
+            className={props.classes.medicineNameStyle}
+          >
+            Zoryl MF 2MG
+          </Typography>
+          <Typography
+            variant="caption"
+            className={props.classes.quantityStyle}
+          >
+            + 2 Items
+          </Typography>
+        </div>
       </div>
       {
         props.orderList.payment === 'failed' &&
@@ -150,14 +173,28 @@ const OrderContent = (props) => {
         </div>
       }
       <div className={props.classes.reviewWrapperStyle}>
-        <span className={props.classes.reviewStyle}>Write a review</span>
-        <span className={props.classes.helpStyle}>Need Help?</span>
-        <span className={props.classes.cancelStyle}><u>
-          {
-            props.orderList.order_status === 'cancel'
-            ? 'Cancel Order' : 'Return Order'
-          }
-        </u></span>
+        <div className={props.classes.reviewHelpWrapper}>
+          <Typography
+            variant="caption"
+            className={props.classes.reviewStyle}
+          >
+            Write a review
+          </Typography>
+          <Typography
+            variant="caption"
+            className={props.classes.helpStyle}
+          >
+            Need Help?
+          </Typography>
+        </div>
+        <div>
+          <a className={props.classes.cancelStyle}>
+            {
+              props.orderList.order_status === 'cancel'
+              ? 'Cancel Order' : 'Return Order'
+            }
+          </a>
+        </div>
       </div>
     </div>
   )

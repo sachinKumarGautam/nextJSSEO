@@ -28,7 +28,6 @@ const orderList= [
 
 const styles = theme => ({
   card: {
-    minWidth: theme.spacing.unit * 92,
     marginLeft: theme.spacing.unit * 6
   },
   cardContent: {
