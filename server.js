@@ -15,7 +15,8 @@ app.prepare()
 
     server.get('/molecule-details/:id', (req, res) => {
       const actualPage = '/molecule-details'
-      app.render(req, res, actualPage)
+      const queryParams = { title: req.params.id }
+      app.render(req, res, actualPage, queryParams)
     })
 
     server.listen(3000, (err) => {
