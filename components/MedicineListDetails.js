@@ -57,11 +57,14 @@ const MedicineListDetails = (props) => (
         variant={'caption'}
         withoutImage
         customStyle={props.classes.customBrand}
+        brand={props.itemDetails.brand_name}
       />
       <ProductPackSize
         variant={'caption'}
         withoutImage
         customStyle={props.classes.customPackSize}
+        packType={props.itemDetails.pack_type}
+        packSize={props.itemDetails.pack_size.name}
       />
     </div>
     <div>
@@ -73,10 +76,12 @@ const MedicineListDetails = (props) => (
       <ProductPrice
         variant={'body1'}
         customStyle={props.classes.customPrice}
+        sellingPrice={props.itemDetails.selling_price}
       />
       <StrokePrice
         variant={'caption'}
         customStyle={props.classes.customStrokePrice}
+        mrp={props.itemDetails.mrp}
       />
       <Button
         size='small'

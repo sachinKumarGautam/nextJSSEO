@@ -9,7 +9,7 @@ class OrderList extends Component {
   render () {
     return (
       <div>
-        <Grid container spacing={24} className={this.props.classes.productDetailsWrapper}>
+        <Grid container spacing={24}>
           <Grid item xs={2}>
             <SideMenu/>
           </Grid>
