@@ -17,6 +17,11 @@ import {
   getMedicineList$
 } from '../../services/api'
 
+/**
+ * Represents to the epic of get medicine list.
+ * @param {object} action$ - this is the ActionsObservable
+ * @param {object} store - to access the state from reducers
+ */
 export function getRelatedMedicines (action$, store) {
   return action$.pipe(
     ofType(GET_RELATED_MEDICINES_LOADING),

@@ -58,6 +58,11 @@ import {
 //     )
 //   )
 
+/**
+ * Represents to the epic of get molecule detail/summary
+ * @param {object} action$ - this is the ActionsObservable
+ * @param {object} store - to access the state from reducers
+ */
 export function getMoleculeSummary (action$, store) {
   return action$.pipe(
     ofType(GET_MOLECULE_SUMMARY_LOADING),
