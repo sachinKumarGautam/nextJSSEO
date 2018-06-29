@@ -8,6 +8,7 @@ import {
 
 export default function moleculeReducer (state = initialState, action) {
   switch (action.type) {
+    // update loading details of molecule summary API
     case GET_MOLECULE_SUMMARY_LOADING:
       return {
         ...state,
@@ -19,6 +20,7 @@ export default function moleculeReducer (state = initialState, action) {
         }
       }
 
+    // update success details of molecule summary API
     case GET_MOLECULE_SUMMARY_SUCCESS:
       return {
         ...state,
@@ -48,6 +50,7 @@ export default function moleculeReducer (state = initialState, action) {
         isLoading: action.isLoading
       }
 
+    // update failure details of molecule summary API
     case GET_MOLECULE_SUMMARY_FAILURE:
       return {
         ...state,
