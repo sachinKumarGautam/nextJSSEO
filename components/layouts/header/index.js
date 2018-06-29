@@ -10,6 +10,7 @@ import Subheader from './Subheader'
 import CartIcon from '../../CartIcon'
 import Login from '../../../containers/login'
 import getPageContext from '../../../src/getPageContext'
+import MenuWrapper from '../../../containers/menu'
 
 class Header extends React.Component {
   constructor (props, context) {
@@ -53,6 +54,7 @@ class Header extends React.Component {
               <img src='/static/images/logo-green.svg' />
               <AutosuggestSearch />
               <CartIcon />
+              <MenuWrapper/>
               <Button
                 variant='raised'
                 size='medium'
