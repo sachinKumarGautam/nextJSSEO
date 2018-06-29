@@ -58,6 +58,7 @@ class MedicineList extends React.Component {
     this.onClickOfShowMore=this.onClickOfShowMore.bind(this)
   }
 
+  //Represents to get medicine list when clicked on show more with page size and size per page.
   onClickOfShowMore () {
     this.props.getRelatedMedicinesLoading(
       this.props.medicineListState,

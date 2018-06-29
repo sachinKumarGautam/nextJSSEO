@@ -38,6 +38,7 @@ const styles = theme => ({
 
 class MedicineList extends React.Component {
   componentDidMount () {
+    //Represents to get medicine list with page size and size per page.
     this.props.actions.getRelatedMedicinesLoading(
       this.props.medicineListState,
       'Multivitamin', // pass salt name
