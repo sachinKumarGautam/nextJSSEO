@@ -4,6 +4,11 @@ import {
   GET_MOLECULE_SUMMARY_FAILURE
 } from './moleculeActionTypes'
 
+/**
+ * Represents to the loading state to get the molecule details according to the salt id.
+ * @param {object} moleculeState - The object maintained for payload, loading and error state.
+ * @param {string} saltId - The value of the salt id according to which list will occur
+ */
 export function getMoleculeSummaryLoading (moleculeState, saltId) {
   return {
     type: GET_MOLECULE_SUMMARY_LOADING,
@@ -14,6 +19,12 @@ export function getMoleculeSummaryLoading (moleculeState, saltId) {
     saltId: saltId
   }
 }
+
+/**
+ * Represents to the success state to get the molecule details.
+ * @param {object} moleculeState - The object maintained for payload, loading and error state.
+ * @param {string} saltId - The result obtained from the API response
+ */
 
 export function getMoleculeSummarySuccess (moleculeState, result) {
   return {
@@ -43,6 +54,11 @@ export function getMoleculeSummarySuccess (moleculeState, result) {
   }
 }
 
+/**
+ * Represents to the error state to get the molecule details.
+ * @param {object} moleculeState - The object maintained for payload, loading and error state.
+ * @param {object} error - The error details when API throws an error
+ */
 export function getMoleculeSummaryFailure (moleculeState, error) {
   return {
     type: GET_MOLECULE_SUMMARY_FAILURE,

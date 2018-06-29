@@ -8,6 +8,7 @@ import {
 
 export default function medicineListReducer (state = initialState, action) {
   switch (action.type) {
+    // update loading details of medicine list API
     case GET_RELATED_MEDICINES_LOADING:
       return {
         ...state,
@@ -19,6 +20,7 @@ export default function medicineListReducer (state = initialState, action) {
         }
       }
 
+    // update success details of medicine list API
     case GET_RELATED_MEDICINES_SUCCESS:
       return {
         ...state,
@@ -26,6 +28,7 @@ export default function medicineListReducer (state = initialState, action) {
         isLoading: action.isLoading
       }
 
+    // update failure details of medicine list API
     case GET_RELATED_MEDICINES_FAILURE:
       return {
         ...state,
