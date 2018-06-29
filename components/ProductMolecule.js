@@ -4,6 +4,7 @@ import { withStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
 
 import ReactTooltip from 'react-tooltip'
+import Link from 'next/link'
 
 const styles = theme => {
   return {
@@ -44,7 +45,9 @@ const PopoverContent = (props) => (
     <Typography className={props.styles.popoverContent}>
       Metformin is used in the treatment of  type2 diabetes. It decreases the amount of sugar…
     </Typography>
-    <a className={props.styles.popoverLink} href='http://google.com'>Read more..</a>
+    <Link as={`/molecule-details/Multivitamin`} href={'/molecule-details?id=5a61a295ae8bdc26685f2b09'}>
+      <a className={props.styles.popoverLink}>Read more..</a>
+    </Link>
   </div>
 )
 
@@ -81,7 +84,7 @@ class ProductMolecule extends Component {
           effect='solid'
           place='right'
           className={classes.paper}
-          // delayHide={1000}
+          delayHide={1000}
           delayShow={1000}
         >
           <PopoverContent styles={classes} />
