@@ -13,9 +13,6 @@ import MoleculeDetailsWrapper from '../containers/moleculeDetails'
 
 import Paper from '@material-ui/core/Paper'
 
-import { rootEpic } from '../redux/epics'
-import { of } from 'rxjs/observable/of'
-
 import {
   getMoleculeSummaryLoading
 } from '../containers/moleculeDetails/moleculeActions'
