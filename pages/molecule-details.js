@@ -1,6 +1,6 @@
 import React from 'react'
 import Header from '../components/layouts/header'
-import Footer from '../components/layouts/footer/Footer'
+import Footer from '../components/layouts/footer'
 
 import withRedux from 'next-redux-wrapper'
 import initStore from '../redux'
@@ -12,14 +12,6 @@ import withRoot from '../src/withRoot'
 import Paper from '@material-ui/core/Paper'
 
 import MoleculeDetailsWrapper from '../containers/moleculeDetails'
-import Header from '../components/layouts/header'
-import Footer from '../components/layouts/footer/Footer'
-import MoleculeDetailsWrapper from '../containers/moleculeDetails'
-
-import Paper from '@material-ui/core/Paper'
-
-import { rootEpic } from '../redux/epics'
-import { of } from 'rxjs/observable/of'
 
 import {
   getMoleculeSummaryLoading
@@ -69,14 +61,14 @@ class MoleculeDetails extends React.Component {
   render () {
     return (
       <div>
-    <Header />
-    <div>
-      <Paper className={props.classes.root} elevation={1}>
-        <MoleculeDetailsWrapper />
-      </Paper>
-    </div>
-    <Footer />
-  </div>
+        <Header />
+        <div>
+          <Paper className={this.props.classes.root} elevation={1}>
+            <MoleculeDetailsWrapper />
+          </Paper>
+        </div>
+        <Footer />
+      </div>
     )
   }
 }

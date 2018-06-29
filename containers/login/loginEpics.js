@@ -1,9 +1,11 @@
 import { of } from 'rxjs/observable/of'
-import { mergeMap, catchError, map } from 'rxjs/operators'
+import { from } from 'rxjs/observable/from'
+import { mergeMap, catchError, map, concat } from 'rxjs/operators'
 import ajax from 'universal-rx-request' // because standard AjaxObservable only works in browser
 import { ofType } from 'redux-observable'
 
 import {SEND_OTP_LOADING, OTP_VERIFIED_LOADING} from './loginActionTypes'
+
 import {
   sendOtpSuccess,
   sendOtpFailure,
@@ -70,7 +72,8 @@ export function verifyOTP (action$, store) {
             if (isNewUser) {
               data.toggleForm('register')
             } else {
-              toggleAuthentication(loginState, true)
+              // TODO: remove store.dispatch as it might be deprecated in future
+              store.dispatch(toggleAuthentication(loginState, true))
               data.closeLoginModal()
             }
           }, 250)

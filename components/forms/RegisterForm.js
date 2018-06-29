@@ -147,7 +147,6 @@ const RegisterForm = props => {
 
 export default withStyles(styles)(withFormik({
   mapPropsToValues: (props) => {
-    console.log(props)
     return {
       full_name: '',
       gender: '',

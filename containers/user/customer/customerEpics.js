@@ -28,7 +28,8 @@ export function registerCustomer (action$, store) {
           setTimeout(() => {
             data.closeLoginModal()
           }, 250)
-          toggleAuthentication(loginState, true)
+          // TODO: remove store.dispatch as it might be deprecated in future
+          store.dispatch(toggleAuthentication(loginState, true))
           return customerRegisterSuccess(customerState, result)
         }),
         catchError(error => {

@@ -1,7 +1,11 @@
-import Footer from './Footer'
+import Subfooter from './subfooter'
+import CopyRightInfo from './CopyRightInfo'
 
-const FooterWrapper = () => (
-  <Footer />
+const Footer = () => (
+  <footer>
+    <Subfooter />
+    <CopyRightInfo />
+  </footer>
 )
 
-export default FooterWrapper
+export default Footer
