@@ -49,45 +49,70 @@ const styles = theme => {
   }
 }
 
-const MedicineList = (props) => (
-  <div className={props.classes.medicineListWrapper}>
-    <Typography
-      gutterBottom
-      variant='title'
-      component='h1'
-      className={props.classes.title}
-    >
-      Available medicines for Glimepiride
-    </Typography>
-    <Card elevation={1}>
-      <CardContent>
-        <ul className={props.classes.articleListWrapper}>
-          <li className={props.classes.listItem}>
-            <MedicineListDetails />
-          </li>
-          <li className={props.classes.listItem}>
-            <MedicineListDetails />
-          </li>
-          <li className={props.classes.listItem}>
-            <MedicineListDetails />
-          </li>
-        </ul>
-      </CardContent>
-    </Card>
-    <div className={props.classes.buttonWrapper}>
-      <Button
-        size='medium'
-        variant='outlined'
-        className={props.classes.button}
-        classes={{
-          root: props.classes.buttonRoot,
-          label: props.classes.buttonLabel
-        }}
-        onClick={this.handleClickOpen}
-        label={'Show more'}
-      />
-    </div>
-  </div>
-)
+class MedicineList extends React.Component {
+  constructor (props) {
+    super(props)
+    this.state = {
+      page: 0
+    }
+    this.onClickOfShowMore=this.onClickOfShowMore.bind(this)
+  }
+
+  onClickOfShowMore () {
+    this.props.getRelatedMedicinesLoading(
+      this.props.medicineListState,
+      'Multivitamin', // pass salt name
+      (this.state.page + 1), // page number
+      3 // page size
+    )
+
+    this.setState({
+      page: this.state.page + 1
+    })
+  }
+
+  render () {
+    return (
+      <div className={this.props.classes.medicineListWrapper}>
+        <Typography
+          gutterBottom
+          variant='title'
+          component='h1'
+          className={this.props.classes.title}
+        >
+          Available medicines for Glimepiride
+        </Typography>
+        <Card elevation={1}>
+          <CardContent>
+            <ul className={this.props.classes.articleListWrapper}>
+              {
+                this.props.medicineListState.payload.map((itemDetails) => (
+                  <li className={this.props.classes.listItem}>
+                    <MedicineListDetails
+                      itemDetails={itemDetails}
+                    />
+                  </li>
+                ))
+              }
+            </ul>
+          </CardContent>
+        </Card>
+        <div className={this.props.classes.buttonWrapper}>
+          <Button
+            size='medium'
+            variant='outlined'
+            className={this.props.classes.button}
+            classes={{
+              root: this.props.classes.buttonRoot,
+              label: this.props.classes.buttonLabel
+            }}
+            onClick={this.onClickOfShowMore}
+            label={'Show more'}
+          />
+        </div>
+      </div>
+    )
+  }
+}
 
 export default withStyles(styles)(MedicineList)
