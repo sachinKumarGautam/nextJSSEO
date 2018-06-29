@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 
 import { withStyles } from '@material-ui/core/styles'
+import Typography from '@material-ui/core/Typography';
 import Location from '@material-ui/icons/LocationOn'
 import IconButton from '@material-ui/core/IconButton'
 
@@ -16,13 +17,14 @@ const styles = theme => {
       paddingBottom: theme.spacing.unit
     },
     orderNoStyle: {
-      ...theme.typography.caption,
       color: theme.palette.customGrey.grey500,
     },
     orderIdStyle: {
-      ...theme.typography.caption,
       color: theme.palette.customGreen.green300,
       marginLeft: theme.spacing.unit
+    },
+    orderWrapper: {
+      display: 'flex'
     },
     iconButtonStyle: {
       color: theme.palette.customGreen.green300,
@@ -42,13 +44,25 @@ const styles = theme => {
 const OrderHeader = (props) => {
   return (
     <div className={props.classes.wrapperStyle}>
-      <span className={props.classes.orderNoStyle}>
-        Order No.
-        <span className={props.classes.orderIdStyle}>100787317</span>
-      </span>
-      <span className={props.classes.trackWrapper}>
-        <Location className={props.classes.iconButtonStyle}/><u>Track Order</u>
-      </span>
+      <div className={props.classes.orderWrapper}>
+        <Typography
+          variant="caption"
+          className={props.classes.orderNoStyle}
+        >
+          Order No.
+        </Typography>
+        <Typography
+          variant="caption"
+          className={props.classes.orderIdStyle}
+        >
+          100787317
+        </Typography>
+      </div>
+      <div>
+        <a className={props.classes.trackWrapper}>
+          <Location className={props.classes.iconButtonStyle}/>Track Order
+        </a>
+      </div>
     </div>
   )
 }

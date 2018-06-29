@@ -25,6 +25,7 @@ class MoleculeDetailsContent extends Component {
         <Grid container spacing={24} className={this.props.classes.contentWrapper}>
           <ProductUseCases
             hover={this.props.hover}
+            summaryData={this.props.moleculeDetailsStatePayload}
           />
         </Grid>
       </div>

@@ -1,13 +1,28 @@
 import React from 'react'
-import Header from '../components/layouts/header'
-import Footer from '../components/layouts/footer/Footer'
+
+import withRedux from 'next-redux-wrapper'
+import initStore from '../redux'
+import { bindActionCreators } from 'redux'
 
 import { withStyles } from '@material-ui/core/styles'
 import withRoot from '../src/withRoot'
 
+import Header from '../components/layouts/header'
+import Footer from '../components/layouts/footer/Footer'
+import MoleculeDetailsWrapper from '../containers/moleculeDetails'
+
 import Paper from '@material-ui/core/Paper'
 
-import MoleculeDetailsWrapper from '../containers/moleculeDetails'
+import { rootEpic } from '../redux/epics'
+import { of } from 'rxjs/observable/of'
+
+import {
+  getMoleculeSummaryLoading
+} from '../containers/moleculeDetails/moleculeActions'
+
+import {
+  getRelatedMedicinesLoading
+} from '../containers/medicineList/medicineListActions'
 
 const styles = theme => ({
   root: {
@@ -25,16 +40,66 @@ const styles = theme => ({
   }
 })
 
-const MoleculeDetails = (props) => (
-  <div>
-    <Header />
-    <div>
-      <Paper className={props.classes.root} elevation={1}>
-        <MoleculeDetailsWrapper />
-      </Paper>
-    </div>
-    <Footer />
-  </div>
-)
+class MoleculeDetails extends React.Component {
+  // static async getInitialProps ({ store, isServer }) {
+  //   const resultAction = await store.dispatch(getMoleculeSummaryLoading())
+  //   console.log('result', resultAction)
 
-export default withRoot(withStyles(styles)(MoleculeDetails))
+  //   return { payload: resultAction }
+  // }
+
+  componentDidMount () {
+    //Represents to get molecule details.
+    this.props.actions.getMoleculeSummaryLoading(
+      this.props.moleculeDetailsState,
+      '5a61a295ae8bdc26685f2b09' // pass salt id
+    )
+
+    //Represents to get medicine list with page size and size per page.
+    this.props.actions.getRelatedMedicinesLoading(
+      this.props.medicineListState,
+      'Multivitamin', // pass salt name
+      0, // page number
+      3 // page size
+    )
+  }
+
+  render () {
+    return (
+      <div>
+        <Header />
+        <div>
+          <Paper className={this.props.classes.root} elevation={1}>
+            <MoleculeDetailsWrapper />
+          </Paper>
+        </div>
+        <Footer />
+      </div>
+    )
+  }
+}
+
+function mapStateToProps (state) {
+  return {
+    moleculeDetailsState: state.moleculeDetailsState,
+    medicineListState: state.medicineListState
+  }
+}
+
+function mapDispatchToProps (dispatch) {
+  return {
+    actions: bindActionCreators(
+      {
+        getMoleculeSummaryLoading,
+        getRelatedMedicinesLoading
+      },
+      dispatch
+    )
+  }
+}
+
+export default withRedux(
+  initStore,
+  mapStateToProps,
+  mapDispatchToProps
+)(withRoot(withStyles(styles)(MoleculeDetails)))

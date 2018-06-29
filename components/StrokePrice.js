@@ -13,7 +13,7 @@ const styles = theme => ({
 const ProductPrice = (props) => (
   <Typography variant={props.variant} className={props.customStyle}>
     <s className={`${props.classes.strokePrice} ${props.customStyle}`}>
-      Rs. 43.00
+      Rs. {props.mrp}
     </s>
   </Typography>
 )

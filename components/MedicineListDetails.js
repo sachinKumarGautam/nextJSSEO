@@ -1,7 +1,6 @@
 import React from 'react'
 
 import { withStyles } from '@material-ui/core/styles'
-import Grid from '@material-ui/core/Grid'
 
 import Button from './button'
 import ProductName from './ProductName'
@@ -58,11 +57,14 @@ const MedicineListDetails = (props) => (
         variant={'caption'}
         withoutImage
         customStyle={props.classes.customBrand}
+        brand={props.itemDetails.brand_name}
       />
       <ProductPackSize
         variant={'caption'}
         withoutImage
         customStyle={props.classes.customPackSize}
+        packType={props.itemDetails.pack_type}
+        packSize={props.itemDetails.pack_size.name}
       />
     </div>
     <div>
@@ -74,10 +76,12 @@ const MedicineListDetails = (props) => (
       <ProductPrice
         variant={'body1'}
         customStyle={props.classes.customPrice}
+        sellingPrice={props.itemDetails.selling_price}
       />
       <StrokePrice
         variant={'caption'}
         customStyle={props.classes.customStrokePrice}
+        mrp={props.itemDetails.mrp}
       />
       <Button
         size='small'

@@ -47,20 +47,16 @@ const RelatedMedicines = (props) => (
       component='h1'
       className={props.classes.title}
     >
-      Available medicines for Glimepiride
+      Available medicines for {props.moleculeName}
     </Typography>
     <Card elevation={1}>
       <CardContent>
         <ul className={props.classes.articleListWrapper}>
-          <li className={props.classes.listItem}>
-            <RelatedMedicinesCard />
-          </li>
-          <li className={props.classes.listItem}>
-            <RelatedMedicinesCard />
-          </li>
-          <li className={props.classes.listItem}>
-            <RelatedMedicinesCard />
-          </li>
+          {props.medicineList.map((item, index) => (
+            <li className={props.classes.listItem}>
+              <RelatedMedicinesCard itemDetails={item} />
+            </li>
+          ))}
         </ul>
       </CardContent>
     </Card>

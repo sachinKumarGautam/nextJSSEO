@@ -1,7 +1,15 @@
 import React, { Component } from 'react'
 
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+
 import BreadCrumbs from '../../components/BreadCrumbs'
 import MedicineList from './MedicineList'
+
+import {
+  getRelatedMedicinesLoading
+} from './medicineListActions'
+
 /*
   bread crumbs
   label
@@ -14,11 +22,36 @@ class MedicineListWrapper extends Component {
       <div>
         <BreadCrumbs />
         <section >
-          <MedicineList/>
+          <MedicineList
+            medicineListState={this.props.medicineListState}
+            getRelatedMedicinesLoading={this.props.actions.getRelatedMedicinesLoading}
+          />
         </section>
       </div>
     )
   }
 }
 
-export default MedicineListWrapper
+function mapDispatchToProps (dispatch) {
+  return {
+    actions: bindActionCreators(
+      {
+        getRelatedMedicinesLoading
+      },
+      dispatch
+    )
+  }
+}
+
+
+function mapStateToProps (state) {
+  return {
+    medicineListState: state.medicineListState
+  }
+}
+
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(MedicineListWrapper)

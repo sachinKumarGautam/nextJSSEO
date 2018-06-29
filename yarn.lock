@@ -1657,9 +1657,11 @@ domutils@^1.5.1:
     dom-serializer "0"
     domelementtype "1"
 
-downshift@^1.31.15:
-  version "1.31.16"
-  resolved "https://registry.yarnpkg.com/downshift/-/downshift-1.31.16.tgz#acd81631539502d4112d01bd573654419fd9f640"
+downshift@^2.0.6:
+  version "2.0.6"
+  resolved "https://registry.yarnpkg.com/downshift/-/downshift-2.0.6.tgz#cfa505bfb1367bcfef3495307ca344cd2d54109d"
+  dependencies:
+    prop-types "^15.6.0"
 
 duplexify@^3.4.2, duplexify@^3.6.0:
   version "3.6.0"

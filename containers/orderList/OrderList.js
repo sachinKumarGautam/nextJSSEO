@@ -3,28 +3,23 @@ import React, { Component } from 'react'
 import SideMenu from '../../components/SideMenu'
 import OrderListDetails from './OrderListDetails'
 
-import { withStyles } from '@material-ui/core/styles'
-
-const styles = theme => ({
-  orderListWrapperStyle: {
-    display: 'flex',
-    flexDirection: 'row'
-  }
-})
+import Grid from '@material-ui/core/Grid'
 
 class OrderList extends Component {
   render () {
     return (
-      <div className={this.props.classes.orderListWrapperStyle}>
-        <section>
-          <SideMenu/>
-        </section>
-        <section>
-          <OrderListDetails/>
-        </section>
+      <div>
+        <Grid container spacing={24}>
+          <Grid item xs={2}>
+            <SideMenu/>
+          </Grid>
+          <Grid item xs={10}>
+            <OrderListDetails/>
+          </Grid>
+        </Grid>
       </div>
     )
   }
 }
 
-export default withStyles(styles)(OrderList)
+export default OrderList
