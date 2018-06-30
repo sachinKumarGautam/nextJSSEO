@@ -4,10 +4,17 @@ import Footer from '../components/layouts/footer/Footer'
 
 import { withStyles } from '@material-ui/core/styles'
 import withRoot from '../src/withRoot'
+import withRedux from 'next-redux-wrapper'
+import initStore from '../redux'
+import { bindActionCreators } from 'redux'
 
 import Paper from '@material-ui/core/Paper'
 
 import CarePointWrapper from '../containers/carePoint'
+
+import {
+  getCarePointDetailsLoading
+} from '../containers/carePoint/carePointActions'
 
 const styles = theme => ({
   root: {
@@ -25,16 +32,50 @@ const styles = theme => ({
   }
 })
 
-const CarePoints = (props) => (
-  <div>
-    <Header />
-    <div>
-      <Paper className={props.classes.root} elevation={1}>
-        <CarePointWrapper />
-      </Paper>
-    </div>
-    <Footer />
-  </div>
-)
+class CarePoints extends React.Component {
+  componentDidMount () {
+    //Represents to get care point with customer Id.
+    this.props.actions.getCarePointDetailsLoading(
+      this.props.carePointState,
+      100036079,
+      'bonus'
+    )
+  }
 
-export default withRoot(withStyles(styles)(CarePoints))
+  render () {
+    return (
+      <div>
+        <Header />
+        <div>
+          <Paper className={this.props.classes.root} elevation={1}>
+            <CarePointWrapper />
+          </Paper>
+        </div>
+        <Footer />
+      </div>
+    )
+  }
+}
+
+function mapStateToProps (state) {
+  return {
+    carePointState: state.carePointState
+  }
+}
+
+function mapDispatchToProps (dispatch) {
+  return {
+    actions: bindActionCreators(
+      {
+        getCarePointDetailsLoading
+      },
+      dispatch
+    )
+  }
+}
+
+export default withRedux(
+  initStore,
+  mapStateToProps,
+  mapDispatchToProps
+)(withRoot(withStyles(styles)(CarePoints)))

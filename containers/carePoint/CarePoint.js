@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 
 import SideMenu from '../../components/SideMenu'
-// import OrderListDetails from './OrderListDetails'
+import CarePointsDetails from './CarePointsDetails'
 
 import Grid from '@material-ui/core/Grid'
 
@@ -14,7 +14,10 @@ class CarePoint extends Component {
             <aside><SideMenu/></aside>
           </Grid>
           <Grid item xs={10}>
-            {/* <OrderListDetails/> */}
+            <CarePointsDetails
+              carePointState={this.props.carePointState}
+              getCarePointDetailsLoading={this.props.getCarePointDetailsLoading}
+            />
           </Grid>
         </Grid>
       </div>

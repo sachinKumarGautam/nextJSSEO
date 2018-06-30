@@ -1,10 +1,18 @@
 import React, { Component } from 'react'
 
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+
 import BreadCrumbs from '../../components/BreadCrumbs'
-import CarePointDetails from './CarePointDetails'
+import CarePoint from './CarePoint'
+
+import {
+  getCarePointDetailsLoading
+} from './carePointActions'
+
 /*
   bread crumbs
-  order list
+  care point details
 */
 
 class CarePointWrapper extends Component {
@@ -13,11 +21,36 @@ class CarePointWrapper extends Component {
       <div>
         <BreadCrumbs />
         <section >
-          <CarePointDetails/>
+          <CarePoint
+            carePointState={this.props.carePointState}
+            getCarePointDetailsLoading={this.props.actions.getCarePointDetailsLoading}
+          />
         </section>
       </div>
     )
   }
 }
 
-export default CarePointWrapper
+function mapDispatchToProps (dispatch) {
+  return {
+    actions: bindActionCreators(
+      {
+        getCarePointDetailsLoading
+      },
+      dispatch
+    )
+  }
+}
+
+
+function mapStateToProps (state) {
+  return {
+    carePointState: state.carePointState
+  }
+}
+
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(CarePointWrapper)

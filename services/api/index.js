@@ -16,7 +16,18 @@ const getMedicineList$ = (saltName, page, size) => (
   })
 )
 
+const getCarePointsList$ = (customerId, cashType) => (
+  makeAjaxRequest({
+    method: 'GET',
+    url: fetchUrl('', 'wallet/' + customerId + '/transaction',
+      'QUERY_STRING',
+      {query_string: `&cash-type=${cashType}&size=100&page=0`}
+    )
+  })
+)
+
 export {
   getMoleculeSummary$,
-  getMedicineList$
+  getMedicineList$,
+  getCarePointsList$
 }
