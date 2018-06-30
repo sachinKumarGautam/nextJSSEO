@@ -31,13 +31,12 @@ const howItWorksContent = [
   `Glimepiride helps your pancreas to release insulin.`
 ]
 
-const data = 
-  {
-    avoid: 'Should be avoided in hypertensive patients and during pregnancy',
-    food: 'Avoid Alcohol',
-    storage: 'Store in a cool & dry place',
-    miss_dose: 'Skip the missed dose and continue your regular dosing schedule. Do not take two doses at the same time.'
-  }
+const data = {
+  avoid: 'Should be avoided in hypertensive patients and during pregnancy',
+  food: 'Avoid Alcohol',
+  storage: 'Store in a cool & dry place',
+  miss_dose: 'Skip the missed dose and continue your regular dosing schedule. Do not take two doses at the same time.'
+}
 
 class ProductUseCases extends Component {
   render () {

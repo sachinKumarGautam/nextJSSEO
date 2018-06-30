@@ -9,14 +9,14 @@ app.prepare()
   .then(() => {
     const server = express()
 
-    server.get('*', (req, res) => {
-      return handle(req, res)
-    })
-
     server.get('/molecule-details/:id', (req, res) => {
       const actualPage = '/molecule-details'
-      const queryParams = { title: req.params.id }
+      const queryParams = { id: req.params.id }
       app.render(req, res, actualPage, queryParams)
+    })
+
+    server.get('*', (req, res) => {
+      return handle(req, res)
     })
 
     server.listen(3000, (err) => {
