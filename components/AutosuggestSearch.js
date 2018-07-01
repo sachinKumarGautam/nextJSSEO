@@ -1,5 +1,4 @@
-import React from 'react'
-import PropTypes from 'prop-types'
+import Router from 'next/router'
 import Downshift from 'downshift'
 import { withStyles } from '@material-ui/core/styles'
 import TextField from '@material-ui/core/TextField'
@@ -137,24 +136,24 @@ const styles = theme => ({
   }
 })
 
-function debounce (fn, delay) {
-  var timer = null
-  return function () {
-    clearTimeout(timer)
-    timer = setTimeout(function () {
-      fn()
-    }, delay)
-  }
-}
-
 class SearchMedicine extends React.Component {
   constructor (props) {
     super(props)
     this.searchMedicineOnChange = this.searchMedicineOnChange.bind(this)
+    this.onSelectItem = this.onSelectItem.bind(this)
   }
 
   searchMedicineOnChange (event) {
     this.props.searchMedicineLoading(this.props.searchMedicineState, event.target.value)
+  }
+
+  onSelectItem (itemName) {
+    return (
+      Router.push({
+        pathname: '/molecule-details',
+        query: { name: itemName }
+      })
+    )
   }
 
   render () {
@@ -163,7 +162,7 @@ class SearchMedicine extends React.Component {
     return (
       <div className={classes.root}>
         <Downshift
-        // isOpen={searchMedicineResult}
+          onChange={this.onSelectItem}
           // onStateChange={({ inputValue }) => {
           //   return inputValue && this.setState({ inputValue })
           // }}
