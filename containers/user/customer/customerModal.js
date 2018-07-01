@@ -2,6 +2,7 @@ const initialState = {
   payload: {
     id: null,
     full_name: '',
+    mobile: '',
     default_patient_id: '',
     gender: '',
     membership_code: '',

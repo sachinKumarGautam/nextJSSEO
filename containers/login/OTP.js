@@ -30,12 +30,12 @@ const styles = theme => ({
 
 class OTP extends React.Component {
   render () {
-    const { classes, toggleForm, loginState, verifyOtpLoading } = this.props
+    const { classes, toggleForm, customerState, verifyOtpLoading } = this.props
     return (
       <div className={classes.container}>
         <Typography className={classes.otpHeading}> OTP has been sent on this number </Typography>
         <Typography className={classes.phoneNumber}>
-          {loginState.payload.mobile}
+          {customerState.payload.mobile}
           <span
             className={classes.changePhoneNumber}
             onClick={toggleForm.bind(this, 'login')}

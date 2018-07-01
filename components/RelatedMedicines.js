@@ -13,9 +13,6 @@ const styles = theme => {
       color: theme.palette.customGrey.grey600,
       fontWeight: theme.typography.fontWeightBold
     },
-    card: {
-      maxWidth: 252
-    },
     articleListWrapper: {
       listStyle: 'none',
       paddingLeft: 0

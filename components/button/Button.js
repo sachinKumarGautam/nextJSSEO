@@ -46,12 +46,10 @@ const CommonButton = (buttonProps) => {
         >
           {buttonProps.label}
         </Button>
-        {isloading &&
-          <CircularProgress
-            size={loaderSize || 22}
-            className={classes.loader}
-          />
-        }
+        {isloading && <CircularProgress
+          size={loaderSize || 22}
+          className={classes.loader}
+        />}
       </div>
     </div>
   )

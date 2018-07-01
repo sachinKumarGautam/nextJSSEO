@@ -3,6 +3,7 @@ import { from } from 'rxjs/observable/from'
 import { mergeMap, catchError, map, concat } from 'rxjs/operators'
 import ajax from 'universal-rx-request' // because standard AjaxObservable only works in browser
 import { ofType } from 'redux-observable'
+import http from '../../services/api/ajaxWrapper'
 
 import {SEND_OTP_LOADING, OTP_VERIFIED_LOADING} from './loginActionTypes'
 
@@ -13,6 +14,9 @@ import {
   verifyOtpFailure,
   toggleAuthentication
 } from './loginActions'
+
+import { updatePhoneNumber } from '../user/customer/customerActions'
+import { verifyOtp$ } from '../../services/api';
 
 export function sendOTP (action$, store) {
   return action$.pipe(
@@ -53,18 +57,11 @@ export function verifyOTP (action$, store) {
     ofType(OTP_VERIFIED_LOADING),
     mergeMap(data => {
       const loginState = store.getState().loginState
-      const mobile = loginState.payload.mobile
+      const customerState = store.getState().customerState
+      const mobile = loginState.payload.initalMobile
       const otp = data.values.otp
-      return ajax({
-        url: `http://hadron.lifcare.in/v1/oauth/token?grant_type=password&username=${mobile}&password=${otp}`,
-        method: 'post',
-        options: {
-          headers: {
-            'Authorization': 'Basic bXNpdGUtY29uc3VtZXItY2xpZW50OnNlY3JldA==',
-            'Content-Type': 'application/json'
-          }
-        }
-      }).pipe(
+
+      return http(verifyOtp$(mobile, otp)).pipe(
         map(result => {
           const isNewUser = loginState.isNewUser
           data.setSubmitting(false)
@@ -77,6 +74,7 @@ export function verifyOTP (action$, store) {
               data.closeLoginModal()
             }
           }, 250)
+          store.dispatch(updatePhoneNumber(customerState, data.values.mobile))
           return verifyOtpSuccess(loginState, result, isNewUser)
         }),
         catchError(error => {

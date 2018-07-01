@@ -27,7 +27,7 @@ const styles = theme => ({
     maxWidth: theme.spacing.unit * 59,
     borderRadius: theme.spacing.unit / 2,
     backgroundColor: theme.palette.common.white,
-    border: 'solid 1px #979797',
+    border: `solid 1px ${theme.palette.customGrey.grey250}`,
     minHeight: theme.spacing.unit * 22
   },
   dialogTitle: {
@@ -87,6 +87,7 @@ class LoginWrapper extends React.Component {
           toggleForm={this.toggleForm}
           closeLoginModal={this.props.closeLoginModal}
           loginState={this.props.loginState}
+          customerState={this.props.customerState}
           verifyOtpLoading={this.props.actions.verifyOtpLoading}
         />
     }

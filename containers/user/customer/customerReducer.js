@@ -3,7 +3,8 @@ import initialState from './customerModal'
 import {
   CUSTOMER_REGISTER_LOADING,
   CUSTOMER_REGISTER_SUCCESS,
-  CUSTOMER_REGISTER_FAILURE
+  CUSTOMER_REGISTER_FAILURE,
+  UPDATE_PHONE_NUMBER
 } from './customerActionTypes'
 
 export default function (state = initialState, action) {
@@ -46,6 +47,15 @@ export default function (state = initialState, action) {
           error: action.error
         }
       }
+    
+      case UPDATE_PHONE_NUMBER:
+        return {
+          ...state,
+          payload: {
+            ...state.payload,
+            mobile: action.mobile
+          }
+        }
 
     default:
       return state

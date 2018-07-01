@@ -1,8 +1,17 @@
 import {
   CUSTOMER_REGISTER_LOADING,
   CUSTOMER_REGISTER_SUCCESS,
-  CUSTOMER_REGISTER_FAILURE
+  CUSTOMER_REGISTER_FAILURE,
+  UPDATE_PHONE_NUMBER
 } from './customerActionTypes'
+
+export function updatePhoneNumber(customerState, mobile) {
+return {
+  type: UPDATE_PHONE_NUMBER,
+  customerState,
+  mobile
+}
+}
 
 export function customerRegisterLoading (
   customerState,
