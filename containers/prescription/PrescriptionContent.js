@@ -87,7 +87,7 @@ class PrescriptionContent extends Component {
             variant="caption"
             className={this.props.classes.uploadDateStyle}
           >
-            Uploaded on 4 Dec 2017
+            Uploaded on {this.props.prescription.created_at}
           </Typography>
         </div>
       </div>
