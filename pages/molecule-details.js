@@ -11,8 +11,11 @@ import withRoot from '../src/withRoot'
 
 import Paper from '@material-ui/core/Paper'
 
+<<<<<<< HEAD
 import MoleculeDetailsWrapper from '../containers/moleculeDetails'
 
+=======
+>>>>>>> 6edb14698271cd4b92e398986cf79162edec54cb
 import {
   getMoleculeSummaryLoading
 } from '../containers/moleculeDetails/moleculeActions'
