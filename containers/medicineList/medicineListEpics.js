@@ -17,13 +17,23 @@ import {
   getMedicineList$
 } from '../../services/api'
 
+/**
+ * Represents to the epic of get medicine list.
+ * @param {object} action$ - this is the ActionsObservable
+ * @param {object} store - to access the state from reducers
+ */
 export function getRelatedMedicines (action$, store) {
   return action$.pipe(
     ofType(GET_RELATED_MEDICINES_LOADING),
     mergeMap(data => {
       return http(getMedicineList$(data.saltName, data.page, data.size)).pipe(
         map(result => {
-          return getRelatedMedicinesSuccess(data.moleculeState, result.body.payload.content)
+          let modifiedResponse =
+            [...data.medicineState.payload, ...result.body.payload.content]
+          return getRelatedMedicinesSuccess(
+            data.moleculeState,
+            modifiedResponse
+          )
         }),
         catchError(error => {
           return of(getRelatedMedicinesFailure(data.moleculeState, error))
