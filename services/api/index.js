@@ -16,7 +16,15 @@ const getMedicineList$ = (saltName, page, size) => (
   })
 )
 
+const getPrescriptionList$ = (customerId) => (
+  makeAjaxRequest({
+    method: 'GET',
+    url: fetchUrl('account', 'customer/' + customerId + '/patient-prescriptions', 'GET_LIST')
+  })
+)
+
 export {
   getMoleculeSummary$,
-  getMedicineList$
+  getMedicineList$,
+  getPrescriptionList$
 }
