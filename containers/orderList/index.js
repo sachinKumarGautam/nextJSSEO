@@ -13,7 +13,7 @@ class OrderListWrapper extends Component {
       <div>
         <BreadCrumbs />
         <section >
-          <OrderList/>
+          <OrderList />
         </section>
       </div>
     )

@@ -20,13 +20,21 @@ const verifyOtp$ = (mobile, otp) => (
   makeAjaxRequest({
     method: 'post',
     url: fetchUrl('', 'oauth', `token?grant_type=password&username=${mobile}&password=${otp}`),
-    authHeader: 'Basic bXNpdGUtY29uc3VtZXItY2xpZW50OnNlY3JldA==',
+    authHeader: 'Basic bXNpdGUtY29uc3VtZXItY2xpZW50OnNlY3JldA=='
 
+  })
+)
+
+const searchMedicine$ = (inputValue, facilityCode) => (
+  makeAjaxRequest({
+    method: 'GET',
+    url: fetchUrl('catalog', 'medicine/search', 'QUERY_STRING', {query_string: `q=${inputValue}&facility-code=${100}`})
   })
 )
 
 export {
   getMoleculeSummary$,
   getMedicineList$,
-  verifyOtp$
+  verifyOtp$,
+  searchMedicine$
 }

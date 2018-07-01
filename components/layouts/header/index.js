@@ -1,6 +1,11 @@
 import React from 'react'
+
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+
 import PropTypes from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
+
 // import Head from './Head'
 import AppBar from '@material-ui/core/AppBar'
 import Button from '../../button'
@@ -11,6 +16,7 @@ import CartIcon from '../../CartIcon'
 import Login from '../../../containers/login'
 import getPageContext from '../../../src/getPageContext'
 import MenuWrapper from '../../../containers/menu'
+import { searchMedicineLoading } from '../../../containers/searchMedicine/searchMedicineAction'
 
 class Header extends React.Component {
   constructor (props, context) {
@@ -36,7 +42,11 @@ class Header extends React.Component {
   }
 
   render () {
-    const { classes } = this.props
+    const {
+      classes,
+      searchMedicineState,
+      actions
+    } = this.props
     return (
       <div className={classes.root}>
         <AppBar elevation={1} className={classes.appBar} position='fixed'>
@@ -51,9 +61,12 @@ class Header extends React.Component {
               disableGutters
             >
               <img src='/static/images/logo-green.svg' />
-              <AutosuggestSearch />
+              <AutosuggestSearch
+                searchMedicineState={searchMedicineState}
+                searchMedicineLoading={actions.searchMedicineLoading}
+              />
               <CartIcon />
-              <MenuWrapper/>
+              <MenuWrapper />
               <Button
                 variant='raised'
                 size='medium'
@@ -104,9 +117,8 @@ const styles = theme => ({
     justifyContent: 'space-between'
   },
   button: {
-    color: 'white',
-    flexGrow: 0,
-    borderRadius: theme.spacing.unit * 4
+    flexGrow: 0
+    // backgroundColor: theme.palette.primary.main
   }
 })
 
@@ -114,4 +126,24 @@ Header.propTypes = {
   classes: PropTypes.object.isRequired
 }
 
-export default withStyles(styles)(Header)
+function mapDispatchToProps (dispatch) {
+  return {
+    actions: bindActionCreators(
+      {
+        searchMedicineLoading
+      },
+      dispatch
+    )
+  }
+}
+
+function mapStateToProps (state) {
+  return {
+    searchMedicineState: state.searchMedicineState
+  }
+}
+
+export default withStyles(styles)(connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Header))

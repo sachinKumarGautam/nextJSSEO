@@ -8,20 +8,27 @@ const styles = theme => ({
   },
   button: {
     flexGrow: 1,
-    borderRadius: theme.spacing.unit * 4,
     paddingRight: 'auto',
     position: 'relative',
-    transition: 'padding-right .3s ease-out'
+    transition: 'padding-right .3s ease-out',
+    boxShadow: 'none'
   },
   buttonloader: {
     flexGrow: 1,
-    borderRadius: theme.spacing.unit * 4,
     paddingRight: theme.spacing.unit * 5,
     position: 'relative',
-    transition: 'padding-right .2s ease-in'
+    transition: 'padding-right .2s ease-in',
+    boxShadow: 'none'
   },
   wrapper: {
     position: 'relative'
+  },
+  loaderPrimary: {
+    color: theme.palette.primary.main,
+    position: 'absolute',
+    top: '50%',
+    marginTop: -(theme.spacing.unit * 1.5),
+    marginLeft: -(theme.spacing.unit * 4.25)
   },
   loader: {
     color: theme.palette.common.white,
@@ -33,7 +40,7 @@ const styles = theme => ({
 })
 
 const CommonButton = (buttonProps) => {
-  const { classes, isloading, loaderSize } = buttonProps
+  const { classes, isloading, loaderSize, loaderColor } = buttonProps
   return (
     <div>
       <div
@@ -41,14 +48,13 @@ const CommonButton = (buttonProps) => {
       >
         <Button
           className={isloading ? classes.buttonloader : classes.button}
-          disableRipple
           {...buttonProps}
         >
           {buttonProps.label}
         </Button>
         {isloading && <CircularProgress
           size={loaderSize || 22}
-          className={classes.loader}
+          className={loaderColor ? classes.loaderPrimary : classes.loader}
         />}
       </div>
     </div>

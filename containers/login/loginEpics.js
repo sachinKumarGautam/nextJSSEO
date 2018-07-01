@@ -16,7 +16,7 @@ import {
 } from './loginActions'
 
 import { updatePhoneNumber } from '../user/customer/customerActions'
-import { verifyOtp$ } from '../../services/api';
+import { verifyOtp$ } from '../../services/api'
 
 export function sendOTP (action$, store) {
   return action$.pipe(

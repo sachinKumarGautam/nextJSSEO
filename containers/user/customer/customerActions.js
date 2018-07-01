@@ -5,12 +5,12 @@ import {
   UPDATE_PHONE_NUMBER
 } from './customerActionTypes'
 
-export function updatePhoneNumber(customerState, mobile) {
-return {
-  type: UPDATE_PHONE_NUMBER,
-  customerState,
-  mobile
-}
+export function updatePhoneNumber (customerState, mobile) {
+  return {
+    type: UPDATE_PHONE_NUMBER,
+    customerState,
+    mobile
+  }
 }
 
 export function customerRegisterLoading (

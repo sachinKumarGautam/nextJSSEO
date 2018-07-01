@@ -6,7 +6,7 @@ class MenuWrapper extends Component {
   render () {
     return (
       <div>
-        <MenuLayout/>
+        <MenuLayout />
       </div>
     )
   }

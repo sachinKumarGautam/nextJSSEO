@@ -47,15 +47,15 @@ export default function (state = initialState, action) {
           error: action.error
         }
       }
-    
-      case UPDATE_PHONE_NUMBER:
-        return {
-          ...state,
-          payload: {
-            ...state.payload,
-            mobile: action.mobile
-          }
+
+    case UPDATE_PHONE_NUMBER:
+      return {
+        ...state,
+        payload: {
+          ...state.payload,
+          mobile: action.mobile
         }
+      }
 
     default:
       return state

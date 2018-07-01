@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 
 import { withStyles } from '@material-ui/core/styles'
 import Person from '@material-ui/icons/Person'
-import Typography from '@material-ui/core/Typography';
+import Typography from '@material-ui/core/Typography'
 
 import Button from '../../components/button'
 
@@ -64,7 +64,7 @@ const styles = theme => {
     },
     codButtonStyle: {
       ...theme.typography.caption,
-      marginLeft:  theme.spacing.unit * 2
+      marginLeft: theme.spacing.unit * 2
     },
     reviewStyle: {
       ...theme.typography.body4,
@@ -74,7 +74,7 @@ const styles = theme => {
     reviewWrapperStyle: {
       paddingTop: theme.spacing.unit * 2,
       paddingLeft: theme.spacing.unit * 2,
-      paddingRight: theme.spacing.unit* 3,
+      paddingRight: theme.spacing.unit * 3,
       paddingBottom: theme.spacing.unit * 2,
       display: 'flex',
       justifyContent: 'space-between'
@@ -102,19 +102,19 @@ const OrderContent = (props) => {
       <div className={props.classes.userDetailWrapper}>
         <div>
           <Typography
-            variant="caption"
+            variant='caption'
             className={props.classes.userNameStyle}
           >
-            <Person className={props.classes.userIconStyle}/>{props.orderList.user_name}
+            <Person className={props.classes.userIconStyle} />{props.orderList.user_name}
           </Typography>
         </div>
         <div>
           <Typography
-            variant="caption"
+            variant='caption'
             className={
               props.orderList.status === 'Payment Pending'
-              ? props.classes.pendingStyle :
-              props.classes.statusStyle
+                ? props.classes.pendingStyle
+                : props.classes.statusStyle
             }
           >
             {props.orderList.status}
@@ -128,19 +128,19 @@ const OrderContent = (props) => {
         />
         <div>
           <Typography
-            variant="caption"
+            variant='caption'
             className={props.classes.medicineNameStyle}
           >
             Glycomet 0.5 MG
           </Typography>
           <Typography
-            variant="caption"
+            variant='caption'
             className={props.classes.medicineNameStyle}
           >
             Zoryl MF 2MG
           </Typography>
           <Typography
-            variant="caption"
+            variant='caption'
             className={props.classes.quantityStyle}
           >
             + 2 Items
@@ -175,13 +175,13 @@ const OrderContent = (props) => {
       <div className={props.classes.reviewWrapperStyle}>
         <div className={props.classes.reviewHelpWrapper}>
           <Typography
-            variant="caption"
+            variant='caption'
             className={props.classes.reviewStyle}
           >
             Write a review
           </Typography>
           <Typography
-            variant="caption"
+            variant='caption'
             className={props.classes.helpStyle}
           >
             Need Help?
@@ -191,7 +191,7 @@ const OrderContent = (props) => {
           <a className={props.classes.cancelStyle}>
             {
               props.orderList.order_status === 'cancel'
-              ? 'Cancel Order' : 'Return Order'
+                ? 'Cancel Order' : 'Return Order'
             }
           </a>
         </div>

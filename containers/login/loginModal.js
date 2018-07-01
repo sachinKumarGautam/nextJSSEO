@@ -2,12 +2,12 @@ const initialState = {
   payload: {
     initalMobile: '',
     verification: {
-        access_token: '',
-        expires_in: 0,
-        refresh_token: '',
-        scope: '',
-        token_type: ''
-      },
+      access_token: '',
+      expires_in: 0,
+      refresh_token: '',
+      scope: '',
+      token_type: ''
+    }
   },
   isNewUser: false,
   isAuthenticated: false,
