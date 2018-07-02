@@ -28,8 +28,8 @@ const styles = theme => {
     },
     buttonStyle: {
       marginLeft: theme.spacing.unit * 7,
-      marginTop: theme.spacing.unit * 3,
-      marginBottom: theme.spacing.unit * 4
+      marginTop: theme.spacing.unit,
+      marginBottom: theme.spacing.unit * 2
     }
   }
 }

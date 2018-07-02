@@ -8,18 +8,20 @@ const styles = theme => {
   return {
     nameStyle: {
       ...theme.typography.subheading,
-      marginBottom: theme.spacing.unit * 4,
+      marginBottom: theme.spacing.unit * 2,
       color: theme.palette.customGrey.grey500
     },
     orderStyle: {
       ...theme.typography.caption,
       color: theme.palette.customGrey.grey500,
-      marginTop: theme.spacing.unit * 4
+      marginTop: theme.spacing.unit,
+      marginLeft: theme.spacing.unit * -2
     },
     menuStyle: {
       ...theme.typography.caption,
       color: theme.palette.customGrey.grey500,
-      paddingTop: theme.spacing.unit
+      paddingTop: theme.spacing.unit * 0,
+      marginLeft: theme.spacing.unit * -2
     },
   }
 }
