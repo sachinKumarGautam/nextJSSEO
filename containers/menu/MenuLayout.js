@@ -18,7 +18,7 @@ const styles = theme => {
       width: theme.spacing.unit * 45,
     },
     menuStyle: {
-      top: theme.spacing.unit * 5
+      top: theme.spacing.unit * 4
     },
     buttonRoot: {
       border: `1px solid ${theme.palette.primary.main}`
@@ -28,8 +28,8 @@ const styles = theme => {
     },
     buttonStyle: {
       marginLeft: theme.spacing.unit * 7,
-      marginTop: theme.spacing.unit,
-      marginBottom: theme.spacing.unit * 2
+      marginTop: theme.spacing.unit * 2,
+      marginBottom: theme.spacing.unit * 4
     }
   }
 }

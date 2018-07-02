@@ -10,20 +10,23 @@ const styles = theme => {
       ...theme.typography.caption,
       paddingLeft: theme.spacing.unit * 7,
       color: theme.palette.customGrey.grey300,
-      paddingTop: theme.spacing.unit * 2
+      paddingTop: theme.spacing.unit * 4,
+      paddingBottom: theme.spacing.unit / 2
     },
     secondSubMenuStyle: {
       ...theme.typography.caption,
       paddingLeft: theme.spacing.unit * 7,
       color: theme.palette.customGrey.grey300,
-      paddingTop: theme.spacing.unit * 0
+      paddingTop: theme.spacing.unit * 0,
+      paddingBottom: theme.spacing.unit / 2
     },
     privacySubMenuStyle: {
       ...theme.typography.caption,
       paddingLeft: theme.spacing.unit * 7,
       color: theme.palette.customGrey.grey300,
-      marginBottom: theme.spacing.unit * 0,
-      paddingTop: theme.spacing.unit * 0
+      marginBottom: theme.spacing.unit * 2,
+      paddingTop: theme.spacing.unit * 0,
+      paddingBottom: theme.spacing.unit / 2
     },
     listWrapper: {
       listStyle: 'none',

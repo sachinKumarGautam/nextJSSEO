@@ -12,13 +12,15 @@ const styles = theme => {
       ...theme.typography.caption,
       paddingLeft: theme.spacing.unit * 7,
       color: theme.palette.customGrey.grey500,
-      marginTop: theme.spacing.unit
+      marginTop: theme.spacing.unit * 0,
+      paddingBottom: theme.spacing.unit / 2
     },
     menuStyle: {
       ...theme.typography.caption,
       paddingLeft: theme.spacing.unit * 7,
       color: theme.palette.customGrey.grey500,
-      paddingTop: theme.spacing.unit * 0
+      paddingTop: theme.spacing.unit * 0,
+      paddingBottom: theme.spacing.unit / 2
     },
     listWrapper: {
       listStyle: 'none',
@@ -30,15 +32,14 @@ const styles = theme => {
 const MenuItems = (props) => {
   return (
     <div className={props.classes.listWrapper}>
-        <MenuItem
-          className={
-            props.isSideMenu ? props.customOrderStyle : props.classes.orderStyle
-          }
-          onClick={<Link as={`/orders`}/>}
-        >
-          Orders
-        </MenuItem>
-
+      <MenuItem
+        className={
+          props.isSideMenu ? props.customOrderStyle : props.classes.orderStyle
+        }
+        onClick={() => {window.location.pathname = '/orders'}}
+      >
+        Orders
+      </MenuItem>
       <MenuItem
         className={
           props.isSideMenu ? props.customMenuStyle : props.classes.menuStyle
@@ -57,8 +58,17 @@ const MenuItems = (props) => {
         className={
           props.isSideMenu ? props.customMenuStyle : props.classes.menuStyle
         }
+        onClick={() => {window.location.pathname = '/prescription'}}
       >
         Prescriptions
+      </MenuItem>
+      <MenuItem
+        className={
+          props.isSideMenu ? props.customMenuStyle : props.classes.menuStyle
+        }
+        onClick={() => {window.location.pathname = '/care-points'}}
+      >
+        Care Points / Care Points +
       </MenuItem>
       {
         !props.isSideMenu &&
