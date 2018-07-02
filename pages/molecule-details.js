@@ -44,20 +44,27 @@ class MoleculeDetails extends React.Component {
   //   return { payload: resultAction }
   // }
 
+  static getInitialProps (props) {
+    const { query } = props;
+    return query;
+  }
+
   componentDidMount () {
     // Represents to get molecule details.
-    this.props.actions.getMoleculeSummaryLoading(
-      this.props.moleculeDetailsState,
-      '5a61a295ae8bdc26685f2b09' // pass salt id
-    )
+    if (this.props.query && this.props.query.name) {
+      this.props.actions.getMoleculeSummaryLoading(
+        this.props.moleculeDetailsState,
+        this.props.query.name // pass salt id
+      )
+    }
 
     // Represents to get medicine list with page size and size per page.
-    this.props.actions.getRelatedMedicinesLoading(
-      this.props.medicineListState,
-      'Multivitamin', // pass salt name
-      0, // page number
-      3 // page size
-    )
+    // this.props.actions.getRelatedMedicinesLoading(
+    //   this.props.medicineListState,
+    //   'Multivitamin', // pass salt name
+    //   0, // page number
+    //   3 // page size
+    // )
   }
 
   render () {

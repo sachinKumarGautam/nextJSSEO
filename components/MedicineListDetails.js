@@ -44,7 +44,8 @@ const styles = theme => {
       border: `1px solid ${theme.palette.primary.main}`
     },
     buttonLabel: {
-      color: theme.palette.primary.main
+      color: theme.palette.primary.main,
+      fontSize: theme.typography.body3.fontSize
     }
   }
 }
@@ -57,7 +58,7 @@ const MedicineListDetails = (props) => (
         variant={'caption'}
         withoutImage
         customStyle={props.classes.customBrand}
-        brand={props.itemDetails.brand_name}
+        brand={props.itemDetails.brand_name || props.itemDetails.name}
       />
       <ProductPackSize
         variant={'caption'}

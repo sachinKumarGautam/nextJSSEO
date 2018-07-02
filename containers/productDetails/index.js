@@ -18,7 +18,7 @@ class ProductDetailsWrapper extends Component {
     }
   }
   componentDidMount() {
-    this.props.getProductDetailLoading(this.props.productDetailsState, 'I0008')
+    this.props.getProductDetailLoading(this.props.productDetailsState, 'I00008')
     
   }
   

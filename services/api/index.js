@@ -49,11 +49,22 @@ const getProductDetails$ = (sku) => (
 
 )
 
+const searchMedicine$ = (inputValue, facilityCode) => (
+  makeAjaxRequest({
+    method: 'GET',
+    url: fetchUrl('catalog', 'medicine/search', 'QUERY_STRING', {query_string: `q=${inputValue}&facility-code=${100}`})
+  })
+)
+
 export {
   getMoleculeSummary$,
   getMedicineList$,
   verifyOtp$,
+<<<<<<< HEAD
   sendOtp$,
   fetchUserInfo$,
   getProductDetails$
+=======
+  searchMedicine$
+>>>>>>> e1a3a977dfd631c42aa70cb5bb0795d11132c50b
 }

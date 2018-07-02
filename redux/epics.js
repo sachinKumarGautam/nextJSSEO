@@ -18,9 +18,14 @@ import {
 } from '../containers/medicineList/medicineListEpics'
 
 import {
+<<<<<<< HEAD
   getProductDetails
 } from '../containers/productDetails/productEpic'
 
+=======
+  searchMedicine
+} from '../containers/searchMedicine/searchMedicineEpic'
+>>>>>>> e1a3a977dfd631c42aa70cb5bb0795d11132c50b
 // import * as actions from './actions'
 // import * as types from './actionTypes'
 
@@ -70,6 +75,10 @@ export const rootEpic = combineEpics(
   verifyOTP,
   registerCustomer,
   getRelatedMedicines,
+<<<<<<< HEAD
   fetchUserInfo,
   getProductDetails
+=======
+  searchMedicine
+>>>>>>> e1a3a977dfd631c42aa70cb5bb0795d11132c50b
 )

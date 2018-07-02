@@ -33,14 +33,11 @@ const styles = theme => ({
 })
 
 class ProductDetails extends React.Component {
-  static async getInitialProps (props)  {
-    const { query } = props
-    //   const res = await fetch('https://api.github.com/repos/zeit/next.js')
-    //   const json = await res.json()
-    //   return { stars: json.stargazers_count }
-    return query
+    static getInitialProps (props) {
+      const { query } = props
+      return query
     }
-
+    
   componentDidMount () {
     console.log(this.props.query)
     // this.props.actions.getProductDetailLoading(this.props.productDetailsState, 'I0008')

@@ -15,12 +15,17 @@ import {
   toggleAuthentication
 } from './loginActions'
 
+<<<<<<< HEAD
 import {
   updatePhoneNumber,
   fetchUserInfoFailure,
   fetchUserInfoLoading
 } from '../user/customer/customerActions'
 import { sendOtp$, verifyOtp$ } from '../../services/api'
+=======
+import { updatePhoneNumber } from '../user/customer/customerActions'
+import { verifyOtp$ } from '../../services/api'
+>>>>>>> e1a3a977dfd631c42aa70cb5bb0795d11132c50b
 
 export function sendOTP (action$, store) {
   return action$.pipe(

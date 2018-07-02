@@ -1,5 +1,4 @@
-import React from 'react'
-import PropTypes from 'prop-types'
+import Router from 'next/router'
 import Downshift from 'downshift'
 import { withStyles } from '@material-ui/core/styles'
 import TextField from '@material-ui/core/TextField'
@@ -9,52 +8,14 @@ import Button from './button'
 import SearchIcon from '@material-ui/icons/Search'
 import MedicineListDetails from './MedicineListDetails'
 
-const suggestions = [
-  { label: 'Afghanistan' },
-  { label: 'Aland Islands' },
-  { label: 'Albania' },
-  { label: 'Algeria' },
-  { label: 'American Samoa' },
-  { label: 'Andorra' },
-  { label: 'Angola' },
-  { label: 'Anguilla' },
-  { label: 'Antarctica' },
-  { label: 'Antigua and Barbuda' },
-  { label: 'Argentina' },
-  { label: 'Armenia' },
-  { label: 'Aruba' },
-  { label: 'Australia' },
-  { label: 'Austria' },
-  { label: 'Azerbaijan' },
-  { label: 'Bahamas' },
-  { label: 'Bahrain' },
-  { label: 'Bangladesh' },
-  { label: 'Barbados' },
-  { label: 'Belarus' },
-  { label: 'Belgium' },
-  { label: 'Belize' },
-  { label: 'Benin' },
-  { label: 'Bermuda' },
-  { label: 'Bhutan' },
-  { label: 'Bolivia, Plurinational State of' },
-  { label: 'Bonaire, Sint Eustatius and Saba' },
-  { label: 'Bosnia and Herzegovina' },
-  { label: 'Botswana' },
-  { label: 'Bouvet Island' },
-  { label: 'Brazil' },
-  { label: 'British Indian Ocean Territory' },
-  { label: 'Brunei Darussalam' }
-]
-
 function renderInput (inputProps) {
-  const { InputProps, classes, ref, ...other } = inputProps
-
+  const { InputProps, classes, ref, onChange, ...other } = inputProps
   return (
     <div className={classes.searchBar}>
       <TextField
         InputProps={{
           disableUnderline: true,
-          inputRef: ref,
+          // inputRef: ref,
           classes: {
             formControl: classes.inputFormControl,
             focused: classes.inputFocused
@@ -88,31 +49,20 @@ function renderSuggestion ({
   const isSelected = (selectedItem || '').indexOf(suggestion.label) > -1
 
   const listStyle = isHighlighted ? highlightedSearchItem : (isSelected ? selectedSearchItem : searchItemStyle)
-
   return (
     <li
       {...itemProps}
       className={listStyle}
     >
-      <MedicineListDetails />
+      <MedicineListDetails
+        itemDetails={suggestion}
+      />
     </li>
   )
 }
 
-function getSuggestions (inputValue) {
-  let count = 0
-
-  return suggestions.filter(suggestion => {
-    const keep =
-      (!inputValue || suggestion.label.toLowerCase().indexOf(inputValue.toLowerCase()) !== -1) &&
-      count < 4
-
-    if (keep) {
-      count += 1
-    }
-
-    return keep
-  })
+function getSuggestions (searchMedicineResult) {
+  return searchMedicineResult
 }
 
 const styles = theme => ({
@@ -127,6 +77,8 @@ const styles = theme => ({
   },
   paper: {
     position: 'absolute',
+    maxHeight: theme.spacing.unit * 50,
+    overflow: 'scroll',
     zIndex: 1,
     left: 0,
     right: 0,
@@ -184,54 +136,78 @@ const styles = theme => ({
   }
 })
 
-function IntegrationDownshift (props) {
-  const { classes } = props
+class SearchMedicine extends React.Component {
+  constructor (props) {
+    super(props)
+    this.searchMedicineOnChange = this.searchMedicineOnChange.bind(this)
+    this.onSelectItem = this.onSelectItem.bind(this)
+  }
 
-  return (
-    <div className={classes.root}>
-      <Downshift>
-        {({ getInputProps, getItemProps, getMenuProps, isOpen, inputValue, selectedItem, highlightedIndex }) => (
-          <div className={classes.container}>
-            {renderInput({
-              fullWidth: true,
-              classes,
-              InputProps: getInputProps({
-                placeholder: 'Search a country (start with a)',
-                id: 'integration-downshift-simple'
-              })
-            })}
-            {isOpen ? (
-              <Paper className={classes.paper} square>
-                <ul
-                  {...getMenuProps()}
-                  className={classes.searchContentWrapper}
-                >
-                  {getSuggestions(inputValue).map((suggestion, index) =>
-                    renderSuggestion({
-                      suggestion,
-                      index,
-                      itemProps: getItemProps({
-                        item: suggestion.label
-                      }),
-                      highlightedIndex,
-                      selectedItem,
-                      searchItemStyle: classes.searchItem,
-                      highlightedSearchItem: `${classes.searchItem} ${classes.highlightedSearchItem}`,
-                      selectedSearchItem: `${classes.searchItem} ${classes.selectedSearchItem}`
-                    })
-                  )}
-                </ul>
-              </Paper>
-            ) : null}
-          </div>
-        )}
-      </Downshift>
-    </div>
-  )
+  searchMedicineOnChange (event) {
+    this.props.searchMedicineLoading(this.props.searchMedicineState, event.target.value)
+  }
+
+  onSelectItem (itemName) {
+    return (
+      Router.push({
+        pathname: '/molecule-details',
+        query: { name: itemName }
+      })
+    )
+  }
+
+  render () {
+    const { classes, searchMedicineState } = this.props
+    const searchMedicineResult = searchMedicineState.payload.searchMedicineResult
+    return (
+      <div className={classes.root}>
+        <Downshift
+          onChange={this.onSelectItem}
+          // onStateChange={({ inputValue }) => {
+          //   return inputValue && this.setState({ inputValue })
+          // }}
+        >
+          {({ getInputProps, getItemProps, getMenuProps, isOpen, inputValue, selectedItem, highlightedIndex }) => (
+            <div className={classes.container}>
+              {renderInput({
+                fullWidth: true,
+                classes,
+                InputProps: getInputProps({
+                  placeholder: 'Search medicine...',
+                  id: 'search-medicine',
+                  autofocus: 'true',
+                  onChange: this.searchMedicineOnChange
+                })
+              })}
+              {isOpen ? (
+                <Paper className={classes.paper} square>
+                  <ul
+                    {...getMenuProps()}
+                    className={classes.searchContentWrapper}
+                  >
+                    {getSuggestions(searchMedicineResult).map((suggestion, index) =>
+                      renderSuggestion({
+                        suggestion,
+                        index,
+                        itemProps: getItemProps({
+                          item: suggestion.name
+                        }),
+                        highlightedIndex,
+                        selectedItem,
+                        searchItemStyle: classes.searchItem,
+                        highlightedSearchItem: `${classes.searchItem} ${classes.highlightedSearchItem}`,
+                        selectedSearchItem: `${classes.searchItem} ${classes.selectedSearchItem}`
+                      })
+                    )}
+                  </ul>
+                </Paper>
+              ) : null}
+            </div>
+          )}
+        </Downshift>
+      </div>
+    )
+  }
 }
 
-IntegrationDownshift.propTypes = {
-  classes: PropTypes.object.isRequired
-}
-
-export default withStyles(styles)(IntegrationDownshift)
+export default withStyles(styles)(SearchMedicine)
