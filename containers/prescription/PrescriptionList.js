@@ -4,6 +4,7 @@ import Card from '@material-ui/core/Card'
 import CardContent from '@material-ui/core/CardContent'
 import Typography from '@material-ui/core/Typography'
 import { withStyles } from '@material-ui/core/styles'
+import Grid from '@material-ui/core/Grid'
 
 import PrescriptionContent from './PrescriptionContent'
 import Button from '../../components/button'
@@ -19,11 +20,6 @@ const styles = theme => ({
     ...theme.typography.headline,
     color: theme.palette.customGrey.grey500,
     marginLeft: theme.spacing.unit * 3
-  },
-  prescriptionContentWrapper: {
-    display: 'flex',
-    flexDirection: 'row',
-    flexWrap: 'wrap'
   },
   buttonRoot: {
     border: `1px solid ${theme.palette.primary.main}`
@@ -57,18 +53,22 @@ class PrescriptionList extends Component {
             >
               Prescriptions
             </Typography>
-            <div className={this.props.classes.prescriptionContentWrapper}>
+            <div>
               {
-                this.props.prescriptionState.payload.map((prescriptionDetails) => {
-                  return prescriptionDetails.prescription.map((prescription) => {
-                    return (
-                      <PrescriptionContent
-                        prescriptionDetails={prescriptionDetails}
-                        prescription={prescription}
-                      />
-                    )
-                  })
-                })
+                <Grid container spacing={24}>
+                  {this.props.prescriptionState.payload.map((prescriptionDetails) => {
+                    return prescriptionDetails.prescription.map((prescription) => {
+                      return (
+                        <Grid item xs={6}>
+                          <PrescriptionContent
+                            prescriptionDetails={prescriptionDetails}
+                            prescription={prescription}
+                          />
+                        </Grid>
+                      )
+                    })
+                  })}
+                </Grid>
               }
             </div>
             <Button
