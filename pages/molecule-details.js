@@ -1,7 +1,6 @@
 import React from 'react'
 
-import withRedux from 'next-redux-wrapper'
-import initStore from '../redux'
+import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
 import { withStyles } from '@material-ui/core/styles'
@@ -12,9 +11,6 @@ import Footer from '../components/layouts/footer/Footer'
 import MoleculeDetailsWrapper from '../containers/moleculeDetails'
 
 import Paper from '@material-ui/core/Paper'
-
-import { rootEpic } from '../redux/epics'
-import { of } from 'rxjs/observable/of'
 
 import {
   getMoleculeSummaryLoading
@@ -49,13 +45,13 @@ class MoleculeDetails extends React.Component {
   // }
 
   componentDidMount () {
-    //Represents to get molecule details.
+    // Represents to get molecule details.
     this.props.actions.getMoleculeSummaryLoading(
       this.props.moleculeDetailsState,
       '5a61a295ae8bdc26685f2b09' // pass salt id
     )
 
-    //Represents to get medicine list with page size and size per page.
+    // Represents to get medicine list with page size and size per page.
     this.props.actions.getRelatedMedicinesLoading(
       this.props.medicineListState,
       'Multivitamin', // pass salt name
@@ -98,8 +94,7 @@ function mapDispatchToProps (dispatch) {
   }
 }
 
-export default withRedux(
-  initStore,
+export default connect(
   mapStateToProps,
   mapDispatchToProps
 )(withRoot(withStyles(styles)(MoleculeDetails)))
