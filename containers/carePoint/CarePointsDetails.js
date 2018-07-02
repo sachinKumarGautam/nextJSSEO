@@ -9,7 +9,7 @@ import { withStyles } from '@material-ui/core/styles'
 import CarePointAmount from './CarePointAmount'
 import CarePointsDescription from './CarePointsDescription'
 import TransactionHistoryHeader from './TransactionHistoryHeader'
-import TransactionHistory from './TransactionHistory'
+import TransactionHistoryWrapper from './TransactionHistoryWrapper'
 
 const styles = theme => ({
   card: {
@@ -50,18 +50,9 @@ class CarePointsDetails extends Component {
               carePointState={this.props.carePointState}
               getCarePointDetailsLoading={this.props.getCarePointDetailsLoading}
             />
-            {
-              this.props.carePointState.payload.customer_wallet_transactions.content.map((carePointsDetails) => {
-                return (
-                  <div>
-                    <TransactionHistory
-                      carePointsDetails={carePointsDetails}
-                    />
-                    <Divider/>
-                  </div>
-                )
-              })
-            }
+            <TransactionHistoryWrapper
+              carePointState={this.props.carePointState}
+            />
           </div>
         </CardContent>
       </Card>

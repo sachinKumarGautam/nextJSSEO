@@ -3,16 +3,11 @@ import Header from '../components/layouts/header'
 import Footer from '../components/layouts/footer/Footer'
 
 import { withStyles } from '@material-ui/core/styles'
-import withRedux from 'next-redux-wrapper'
-import initStore from '../redux'
 import { bindActionCreators } from 'redux'
 
 import withRoot from '../src/withRoot'
 
-import { rootEpic } from '../redux/epics'
-import { of } from 'rxjs/observable/of'
-
-import Paper from '@material-ui/core/Paper'
+import { connect } from 'react-redux'
 
 import MedicineListWrapper from '../containers/medicineList'
 
@@ -38,7 +33,7 @@ const styles = theme => ({
 
 class MedicineList extends React.Component {
   componentDidMount () {
-    //Represents to get medicine list with page size and size per page.
+    // Represents to get medicine list with page size and size per page.
     this.props.actions.getRelatedMedicinesLoading(
       this.props.medicineListState,
       'Multivitamin', // pass salt name
@@ -77,8 +72,7 @@ function mapDispatchToProps (dispatch) {
   }
 }
 
-export default withRedux(
-  initStore,
+export default connect(
   mapStateToProps,
   mapDispatchToProps
 )(withRoot(withStyles(styles)(MedicineList)))

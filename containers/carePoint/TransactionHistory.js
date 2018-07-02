@@ -42,6 +42,9 @@ class TransactionHistory extends Component {
   render () {
     let transactionDate = formatDateWithMonth(this.props.carePointsDetails.transaction_date)
     let expiryDate = formatDateWithMonth(this.props.carePointsDetails.expiry_date)
+    let carePoint = this.props.carePointsDetails.cash_type === 'CASH'
+      ? this.props.carePointsDetails.money
+      : this.props.carePointsDetails.care_point
     return (
       <div className={this.props.classes.transactionDetailWrapper}>
         <div>
@@ -72,25 +75,18 @@ class TransactionHistory extends Component {
             gutterBottom
             variant='body2'
             className={
-              this.props.carePointsDetails.transaction_type === "credit"
+              this.props.carePointsDetails.transaction_type === 'credit'
               ? this.props.classes.earnedAmountStyle
               : this.props.classes.debitedAmountStyle
             }
           >
               {
-                this.props.carePointsDetails.transaction_type === "credit" ?
-                  '+' + (
-                    this.props.carePointsDetails.cash_type === 'CASH' ?
-                    this.props.carePointsDetails.money : this.props.carePointsDetails.care_point
-                  ) :
-                  '-' + (
-                    this.props.carePointsDetails.cash_type === 'CASH' ?
-                    this.props.carePointsDetails.money : this.props.carePointsDetails.care_point
-                  )
+                this.props.carePointsDetails.transaction_type === 'credit' ?
+                  `+${carePoint}` : `-${carePoint}`
               }
           </Typography>
           {
-            this.props.carePointsDetails.transaction_type === "credit" &&
+            this.props.carePointsDetails.transaction_type === 'credit' &&
             <Typography
               gutterBottom
               variant='caption'
@@ -99,7 +95,7 @@ class TransactionHistory extends Component {
               Valid till
             </Typography>
           }
-          { this.props.carePointsDetails.transaction_type === "credit" &&
+          { this.props.carePointsDetails.transaction_type === 'credit' &&
             <Typography
               gutterBottom
               variant='caption'
