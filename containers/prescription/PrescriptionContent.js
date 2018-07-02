@@ -4,6 +4,8 @@ import { withStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
 import Person from '@material-ui/icons/Person'
 
+import {formatDateWithMonth} from '../../utils/FormatDate'
+
 const styles = theme => ({
   imageStyle: {
     width: theme.spacing.unit * 17,
@@ -46,7 +48,7 @@ const styles = theme => ({
     flexDirection: 'row',
     border: `0.5px solid ${theme.palette.customGrey.grey250}`,
     borderRadius: theme.spacing.unit / 2,
-    marginRight: theme.spacing.unit * 3,
+    marginRight: theme.spacing.unit * 2,
     marginLeft: theme.spacing.unit,
     marginTop: theme.spacing.unit * 2
   },
@@ -57,6 +59,7 @@ const styles = theme => ({
 
 class PrescriptionContent extends Component {
   render () {
+    let uploadDate = formatDateWithMonth(this.props.prescription.created_at)
     return (
       <div className={this.props.classes.prescriptionWrapper}>
         <img
@@ -89,7 +92,7 @@ class PrescriptionContent extends Component {
             variant="caption"
             className={this.props.classes.uploadDateStyle}
           >
-            Uploaded on {this.props.prescription.created_at}
+            Uploaded on {uploadDate}
           </Typography>
         </div>
       </div>
