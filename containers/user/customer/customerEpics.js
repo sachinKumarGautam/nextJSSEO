@@ -2,9 +2,12 @@ import { of } from 'rxjs/observable/of'
 import { mergeMap, catchError, map } from 'rxjs/operators'
 import ajax from 'universal-rx-request' // because standard AjaxObservable only works in browser
 import { ofType } from 'redux-observable'
-import {CUSTOMER_REGISTER_LOADING} from './customerActionTypes'
+import {CUSTOMER_REGISTER_LOADING, FETCH_USER_INFO_LOADING} from './customerActionTypes'
 import { customerRegisterSuccess, customerRegisterFailure } from './customerActions'
 import { toggleAuthentication } from '../../login/loginActions'
+import {fetchCharacterSuccess} from '../../../redux/actions'
+import http from '../../../services/api/ajaxWrapper'
+import {fetchUserInfo$} from '../../../services/api/index'
 
 export function registerCustomer (action$, store) {
   return action$.pipe(
@@ -35,6 +38,25 @@ export function registerCustomer (action$, store) {
         catchError(error => {
           data.setSubmitting(false)
           return of(customerRegisterFailure(customerState, error))
+        })
+      )
+    })
+  )
+}
+
+export function fetchUserInfo (action$, store) {
+  return action$.pipe(
+    ofType(FETCH_USER_INFO_LOADING),
+    mergeMap(data => {
+      const customerState = store.getState().customerState
+      const mobile = customerState.payload.mobile
+      return http(fetchUserInfo$(mobile)).pipe(
+        map(result => {
+          return fetchCharacterSuccess(customerState, result)
+        }),
+        catchError(error => {
+          data.setSubmitting(false)
+          return of(fetchCharacterSuccess(customerState, error))
         })
       )
     })

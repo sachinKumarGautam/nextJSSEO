@@ -2,8 +2,7 @@ import React from 'react'
 import Header from '../components/layouts/header'
 import Footer from '../components/layouts/footer'
 
-import withRedux from 'next-redux-wrapper'
-import initStore from '../redux'
+import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
 import { withStyles } from '@material-ui/core/styles'
@@ -95,8 +94,7 @@ function mapDispatchToProps (dispatch) {
   }
 }
 
-export default withRedux(
-  initStore,
+export default connect(
   mapStateToProps,
   mapDispatchToProps
 )(withRoot(withStyles(styles)(MoleculeDetails)))

@@ -4,11 +4,46 @@ import {
   CUSTOMER_REGISTER_LOADING,
   CUSTOMER_REGISTER_SUCCESS,
   CUSTOMER_REGISTER_FAILURE,
-  UPDATE_PHONE_NUMBER
+  UPDATE_PHONE_NUMBER,
+  FETCH_USER_INFO_LOADING,
+  FETCH_USER_INFO_SUCCESS,
+  FETCH_USER_INFO_FAILURE
 } from './customerActionTypes'
 
 export default function (state = initialState, action) {
   switch (action.type) {
+    case FETCH_USER_INFO_LOADING:
+      return {
+        ...state,
+        isLoadingFetchCustomerDetails: action.isLoading,
+        errorStateFetchCustomerDetails: {
+          ...state.errorStateFetchCustomerDetails,
+          isError: action.isError,
+          error: action.error
+        }
+      }
+
+    case FETCH_USER_INFO_SUCCESS:
+      return {
+        ...state,
+        isLoadingFetchCustomerDetails: action.isLoading,
+        payload: {
+          ...state.payload
+
+        }
+      }
+
+    case FETCH_USER_INFO_FAILURE:
+      return {
+        ...state,
+        isLoadingFetchCustomerDetails: action.isLoading,
+        errorStateFetchCustomerDetails: {
+          ...state.errorStateFetchCustomerDetails,
+          isError: action.isError,
+          error: action.error
+        }
+      }
+
     case CUSTOMER_REGISTER_LOADING:
       return {
         ...state,
@@ -47,15 +82,15 @@ export default function (state = initialState, action) {
           error: action.error
         }
       }
-    
-      case UPDATE_PHONE_NUMBER:
-        return {
-          ...state,
-          payload: {
-            ...state.payload,
-            mobile: action.mobile
-          }
+
+    case UPDATE_PHONE_NUMBER:
+      return {
+        ...state,
+        payload: {
+          ...state.payload,
+          mobile: action.mobile
         }
+      }
 
     default:
       return state

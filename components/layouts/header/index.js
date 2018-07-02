@@ -53,7 +53,7 @@ class Header extends React.Component {
               <img src='/static/images/logo-green.svg' />
               <AutosuggestSearch />
               <CartIcon />
-              <MenuWrapper/>
+              <MenuWrapper />
               <Button
                 variant='raised'
                 size='medium'

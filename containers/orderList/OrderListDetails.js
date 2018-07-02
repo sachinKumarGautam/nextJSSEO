@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-import Divider from '@material-ui/core/Divider';
+import Divider from '@material-ui/core/Divider'
 import Card from '@material-ui/core/Card'
 import CardContent from '@material-ui/core/CardContent'
 import Typography from '@material-ui/core/Typography'
@@ -11,7 +11,7 @@ import OrderContent from './OrderContent'
 import OrderFooter from './OrderFooter'
 import Button from '../../components/button'
 
-const orderList= [
+const orderList = [
   {
     user_name: 'Jyoti Arora',
     status: 'Payment Pending',
@@ -31,7 +31,7 @@ const styles = theme => ({
     marginLeft: theme.spacing.unit * 6
   },
   cardContent: {
-    paddingBottom: 0,
+    paddingBottom: 0
 
   },
   orderDetailWrapper: {
@@ -60,7 +60,7 @@ const styles = theme => ({
   },
   button: {
     marginBottom: theme.spacing.unit * 14
-  },
+  }
 })
 
 class OrderListDetails extends Component {
@@ -80,13 +80,13 @@ class OrderListDetails extends Component {
             orderList.map((item) => {
               return (
                 <div className={this.props.classes.orderDetailWrapper}>
-                  <OrderHeader/>
-                  <Divider/>
+                  <OrderHeader />
+                  <Divider />
                   <OrderContent
                     orderList={item}
                   />
-                  <Divider/>
-                  <OrderFooter/>
+                  <Divider />
+                  <OrderFooter />
                 </div>
               )
             })

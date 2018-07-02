@@ -10,6 +10,11 @@ const initialState = {
     referral_code: '',
     reference_code: ''
   },
+  isLoadingFetchCustomerDetails: false,
+  errorStateFetchCustomerDetails: {
+    isError: false,
+    error: null
+  },
   isLoadingCustomerRegister: false,
   errorStateCustomerRegister: {
     isError: false,

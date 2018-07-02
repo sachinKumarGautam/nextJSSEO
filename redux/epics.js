@@ -9,7 +9,8 @@ import {
 } from '../containers/login/loginEpics'
 
 import {
-  registerCustomer
+  registerCustomer,
+  fetchUserInfo
 } from '../containers/user/customer/customerEpics'
 
 import {
@@ -64,5 +65,6 @@ export const rootEpic = combineEpics(
   sendOTP,
   verifyOTP,
   registerCustomer,
-  getRelatedMedicines
+  getRelatedMedicines,
+  fetchUserInfo
 )

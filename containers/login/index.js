@@ -1,8 +1,5 @@
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import compose from 'recompose/compose'
-import withRedux from 'next-redux-wrapper'
-import initStore from '../../redux'
 
 import { withStyles } from '@material-ui/core/styles'
 import Dialog from '@material-ui/core/Dialog'
@@ -147,8 +144,7 @@ function mapDispatchToProps (dispatch) {
 
 // export default connect(mapStateToProps, mapDispatchToProps)(LoginWrapper)
 
-export default withRedux(
-  initStore,
+export default connect(
   mapStateToProps,
   mapDispatchToProps
 )(withStyles(styles)(LoginWrapper))

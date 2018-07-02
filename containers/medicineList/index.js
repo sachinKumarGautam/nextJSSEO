@@ -43,13 +43,11 @@ function mapDispatchToProps (dispatch) {
   }
 }
 
-
 function mapStateToProps (state) {
   return {
     medicineListState: state.medicineListState
   }
 }
-
 
 export default connect(
   mapStateToProps,

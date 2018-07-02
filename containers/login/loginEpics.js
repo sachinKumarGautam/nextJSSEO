@@ -1,10 +1,12 @@
 import { of } from 'rxjs/observable/of'
-import { mergeMap, catchError, map } from 'rxjs/operators'
+import { mergeMap, catchError, map, merge } from 'rxjs/operators'
 import { ofType } from 'redux-observable'
 import http from '../../services/api/ajaxWrapper'
 
-import {SEND_OTP_LOADING, OTP_VERIFIED_LOADING} from './loginActionTypes'
-
+import { SEND_OTP_LOADING, OTP_VERIFIED_LOADING } from './loginActionTypes'
+// return concat(of(verifyOtpSuccess(loginState, result, isNewUser)),
+//           of(fetchUserInfoLoading(customerState, mobile)))
+//         })
 import {
   sendOtpSuccess,
   sendOtpFailure,
@@ -13,7 +15,11 @@ import {
   toggleAuthentication
 } from './loginActions'
 
-import { updatePhoneNumber } from '../user/customer/customerActions'
+import {
+  updatePhoneNumber,
+  fetchUserInfoFailure,
+  fetchUserInfoLoading
+} from '../user/customer/customerActions'
 import { sendOtp$, verifyOtp$ } from '../../services/api'
 
 export function sendOTP (action$, store) {
@@ -57,12 +63,21 @@ export function verifyOTP (action$, store) {
               data.toggleForm('register')
             } else {
               // TODO: remove store.dispatch as it might be deprecated in future
-              store.dispatch(toggleAuthentication(loginState, true))
-              data.closeLoginModal()
+              // store.dispatch(toggleAuthentication(loginState, true))
+              // store.dispatch(fetchUserInfoLoading(customerState, mobile))
+              // data.closeLoginModal()
             }
           }, 250)
-          store.dispatch(updatePhoneNumber(customerState, data.values.mobile))
-          return verifyOtpSuccess(loginState, result, isNewUser)
+          // store.dispatch(updatePhoneNumber(customerState, data.values.mobile))
+
+          return merge(of(verifyOtpSuccess(loginState, result, isNewUser)),
+          of(fetchUserInfoLoading(customerState, mobile))
+        )
+
+          // return concat(
+          //   verifyOtpSuccess(loginState, result, isNewUser),
+          //   fetchUserInfoLoading(customerState, mobile)
+          // )
         }),
         catchError(error => {
           data.setSubmitting(false)
