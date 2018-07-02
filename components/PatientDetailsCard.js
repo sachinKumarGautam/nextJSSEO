@@ -33,7 +33,7 @@ const styles = theme => {
       color: theme.palette.customGrey.grey500,
       fontWeight: theme.typography.fontWeightBold
     },
-    medicineNameStyle: {
+    genderStyle: {
       color: theme.palette.customGrey.grey500
     },
     mobileStyle: {
@@ -67,7 +67,7 @@ class PatientDetailsCard extends Component {
             <div>
               <Typography
                 variant="caption"
-                className={this.props.classes.medicineNameStyle}
+                className={this.props.classes.genderStyle}
               >
                 {this.props.patientDetail.gender} | {this.props.patientDetail.age}
               </Typography>

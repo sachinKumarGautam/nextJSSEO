@@ -26,11 +26,11 @@ const styles = theme => {
       color: theme.palette.customGreen.green300,
       fontWeight: theme.typography.fontWeightBold
     },
-    userNameStyle: {
+    addressTypeStyle: {
       color: theme.palette.customGrey.grey500,
       fontWeight: theme.typography.fontWeightBold
     },
-    medicineNameStyle: {
+    addressStyle: {
       color: theme.palette.customGrey.grey500
     },
   }
@@ -54,14 +54,14 @@ class AddressDetailsCard extends Component {
           <Grid item xs={10}>
             <Typography
               variant="caption"
-              className={this.props.classes.userNameStyle}
+              className={this.props.classes.addressTypeStyle}
             >
               {this.props.deliveryDetail.type}
             </Typography>
             <div>
               <Typography
                 variant="caption"
-                className={this.props.classes.medicineNameStyle}
+                className={this.props.classes.addressStyle}
               >
                 {this.props.deliveryDetail.street1}
               </Typography>

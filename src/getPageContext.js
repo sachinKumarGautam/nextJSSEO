@@ -64,15 +64,6 @@ const theme = createMuiTheme({
     body4: {
       fontSize: '0.625rem',
       fontFamily: ['Lato', 'sans-serif']
-    },
-    display0Bold: {
-      fontSize: "1.125rem",
-      fontWeight: 600,
-      fontFamily: ['Roboto', 'Helvetica', 'Arial', 'sans-serif']
-    },
-    display0: {
-      fontSize: "1.125rem",
-      fontFamily: ['Lato', 'sans-serif']
     }
   },
   spacing: {
