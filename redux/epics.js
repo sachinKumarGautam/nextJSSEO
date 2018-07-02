@@ -1,8 +1,4 @@
-import { interval } from 'rxjs/observable/interval'
-import { of } from 'rxjs/observable/of'
-import { takeUntil, mergeMap, catchError, map } from 'rxjs/operators'
-import { combineEpics, ofType } from 'redux-observable'
-import ajax from 'universal-rx-request' // because standard AjaxObservable only works in browser
+import { combineEpics } from 'redux-observable'
 
 import {
   getMoleculeSummary
