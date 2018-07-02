@@ -5,10 +5,10 @@ import Icon from '@material-ui/core/Icon'
 import Badge from '@material-ui/core/Badge'
 import IconButton from '@material-ui/core/IconButton'
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart'
-import Menu from '@material-ui/core/Menu';
-import MenuItem from '@material-ui/core/MenuItem';
 import Divider from '@material-ui/core/Divider';
 import Typography from '@material-ui/core/Typography';
+
+import ReactTooltip from 'react-tooltip'
 
 import Button from './button'
 
@@ -35,7 +35,8 @@ const styles = theme => ({
   summaryMenuWrapper: {
     justifyContent: 'space-between',
     paddingTop: 0,
-    paddingBottom: theme.spacing.unit
+    paddingBottom: theme.spacing.unit,
+    display: 'flex'
   },
   medicineNameStyle: {
     ...theme.typography.body3,
@@ -51,8 +52,7 @@ const styles = theme => ({
     display: 'flex',
     paddingTop: theme.spacing.unit,
     paddingBottom: theme.spacing.unit,
-    paddingLeft: theme.spacing.unit * 2,
-    paddingRight: theme.spacing.unit * 2
+    paddingRight: theme.spacing.unit / 2
    },
   noItemTextStyle: {
     ...theme.typography.body4,
@@ -70,51 +70,60 @@ const styles = theme => ({
     textAlign: 'center',
     marginTop: theme.spacing.unit * 2,
     marginBottom: theme.spacing.unit * 2
+  },
+  paper: {
+    padding: theme.spacing.unit,
+    width: theme.spacing.unit * 25,
+    backgroundColor: `${theme.palette.secondary.main} !important`,
+    pointerEvents: 'auto !important',
+    '&:after': {
+      borderBottomColor: `${theme.palette.secondary.main} !important`
+    },
+    '&:hover': {
+      visibility: 'visible !important',
+      opacity: '1 !important',
+    },
+    borderRadius: '4px',
+    boxShadow: '0 4px 4px 2px rgba(0, 0, 0, 0.14)'
+  },
+  moleculeTag: {
+    textDecoration: 'none'
   }
 })
 
 class CartIcon extends Component {
   state = {
-    anchorEl: null,
     quantity: 4
   }
 
-  handleClick = event => {
-    this.setState({ anchorEl: event.currentTarget })
-  }
-
-  handleClose = () => {
-    this.setState({ anchorEl: null })
-  }
   render () {
     const { classes } = this.props
     return (
       <div>
-        <IconButton
-          aria-owns={this.state.anchorEl ? 'simple-menu' : null}
-          aria-haspopup="true"
-          onClick={this.handleClick}
-          color='primary'
-          className={classes.button}
-          aria-label='Add to shopping cart'
+        <a
+          className={classes.moleculeTag}
+          data-tip
+          data-for='cartIcon'
         >
-          <Badge className={classes.margin} badgeContent={this.state.quantity} color='primary'>
-            <AddShoppingCartIcon />
-          </Badge>
-        </IconButton>
-        <Menu
-          id="simple-menu"
-          anchorEl={this.state.anchorEl}
-          open={Boolean(this.state.anchorEl)}
-          onClose={this.handleClose}
-          PaperProps={{
-            style: {
-              width: 256
-            }
-          }}
-          className={classes.menuStyle}
+          <IconButton
+            color='primary'
+            className={classes.button}
+            aria-label='Add to shopping cart'
+          >
+            <Badge className={classes.margin} badgeContent={this.state.quantity} color='primary'>
+              <AddShoppingCartIcon />
+            </Badge>
+          </IconButton>
+        </a>
+        <ReactTooltip
+          id='cartIcon'
+          effect='solid'
+          place='bottom'
+          className={classes.paper}
+          delayHide={1000}
+          delayShow={100}
         >
-          <MenuItem className={classes.summaryMenuWrapper}>
+          <div className={classes.summaryMenuWrapper}>
             <Typography
               variant="caption"
               className={classes.summaryStyle}
@@ -127,11 +136,8 @@ class CartIcon extends Component {
             >
               2 item(s)
             </Typography>
-          </MenuItem>
+          </div>
           <Divider/>
-          {/* <MenuItem >
-
-          </MenuItem> */}
           <div className={classes.medicineDetailWrapper}>
             <Typography
               variant="caption"
@@ -169,7 +175,7 @@ class CartIcon extends Component {
               label={'PROCEED TO CART'}
             />
           </div>
-        </Menu>
+        </ReactTooltip>
       </div>
     )
   }
