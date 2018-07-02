@@ -17,7 +17,8 @@ const styles = theme => ({
     fontWeight: theme.typography.fontWeightBold,
     marginLeft: theme.spacing.unit * 2,
     marginTop: theme.spacing.unit * 2,
-    paddingRight: theme.spacing.unit * 2
+    paddingRight: theme.spacing.unit * 2,
+    wordWrap: 'break-word'
   },
   userIconStyle: {
     color: theme.palette.customGrey.grey300,
@@ -31,7 +32,8 @@ const styles = theme => ({
     display: 'flex',
     flexDirection: 'row',
     marginTop: theme.spacing.unit,
-    paddingRight: theme.spacing.unit * 3
+    paddingRight: theme.spacing.unit * 3,
+    wordWrap: 'break-word'
   },
   doctorStyle: {
     color: theme.palette.customGrey.grey500,
@@ -55,9 +57,7 @@ const styles = theme => ({
   },
   detailWrapper: {
     marginRight: theme.spacing.unit * 2,
-    wordWrap: 'break-word',
-    whiteSpace: 'normal',
-    width: '60%'
+    overflow: 'hidden'
   }
 })
 
