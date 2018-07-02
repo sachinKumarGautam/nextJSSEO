@@ -71,8 +71,8 @@ export function verifyOTP (action$, store) {
           // store.dispatch(updatePhoneNumber(customerState, data.values.mobile))
 
           return merge(of(verifyOtpSuccess(loginState, result, isNewUser)),
-          of(fetchUserInfoLoading(customerState, mobile))
-        )
+            of(fetchUserInfoLoading(customerState, mobile))
+          )
 
           // return concat(
           //   verifyOtpSuccess(loginState, result, isNewUser),

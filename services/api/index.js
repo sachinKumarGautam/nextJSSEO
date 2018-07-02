@@ -41,10 +41,19 @@ const fetchUserInfo$ = (mobileNumber) => (
 
 )
 
+const getProductDetails$ = (sku) => (
+  makeAjaxRequest({
+    method: 'GET',
+    url: fetchUrl('catalog', `medicine/sku/${sku}/summary`, 'GET_LIST')
+  })
+
+)
+
 export {
   getMoleculeSummary$,
   getMedicineList$,
   verifyOtp$,
   sendOtp$,
-  fetchUserInfo$
+  fetchUserInfo$,
+  getProductDetails$
 }

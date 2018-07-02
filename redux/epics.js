@@ -17,6 +17,10 @@ import {
   getRelatedMedicines
 } from '../containers/medicineList/medicineListEpics'
 
+import {
+  getProductDetails
+} from '../containers/productDetails/productEpic'
+
 // import * as actions from './actions'
 // import * as types from './actionTypes'
 
@@ -66,5 +70,6 @@ export const rootEpic = combineEpics(
   verifyOTP,
   registerCustomer,
   getRelatedMedicines,
-  fetchUserInfo
+  fetchUserInfo,
+  getProductDetails
 )

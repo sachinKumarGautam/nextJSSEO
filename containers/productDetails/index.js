@@ -17,6 +17,11 @@ class ProductDetailsWrapper extends Component {
       hover: {}
     }
   }
+  componentDidMount() {
+    this.props.getProductDetailLoading(this.props.productDetailsState, 'I0008')
+    
+  }
+  
 
   toggleHover (item) {
     this.setState((prevState) => ({

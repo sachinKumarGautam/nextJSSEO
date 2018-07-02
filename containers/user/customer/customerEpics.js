@@ -1,6 +1,5 @@
 import { of } from 'rxjs/observable/of'
 import { mergeMap, catchError, map } from 'rxjs/operators'
-import ajax from 'universal-rx-request' // because standard AjaxObservable only works in browser
 import { ofType } from 'redux-observable'
 import {CUSTOMER_REGISTER_LOADING, FETCH_USER_INFO_LOADING} from './customerActionTypes'
 import { customerRegisterSuccess, customerRegisterFailure } from './customerActions'
