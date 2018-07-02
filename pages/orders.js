@@ -3,11 +3,22 @@ import Header from '../components/layouts/header'
 import Footer from '../components/layouts/footer/Footer'
 
 import { withStyles } from '@material-ui/core/styles'
+import withRedux from 'next-redux-wrapper'
+import initStore from '../redux'
+import { bindActionCreators } from 'redux'
+
 import withRoot from '../src/withRoot'
+
+import { rootEpic } from '../redux/epics'
+import { of } from 'rxjs/observable/of'
 
 import Paper from '@material-ui/core/Paper'
 
 import OrderListWrapper from '../containers/orderList'
+
+import {
+  getOrderListDetailsLoading
+} from '../containers/orderList/orderListActions'
 
 const styles = theme => ({
   root: {
@@ -25,16 +36,51 @@ const styles = theme => ({
   }
 })
 
-const Orders = (props) => (
-  <div>
-    <Header />
-    <div>
-      <Paper className={props.classes.root} elevation={1}>
-        <OrderListWrapper />
-      </Paper>
-    </div>
-    <Footer />
-  </div>
-)
+class Orders extends React.Component {
+  componentDidMount () {
+    //Represents to get order list details with page size and size per page.
+    this.props.actions.getOrderListDetailsLoading(
+      this.props.orderListState,
+      100059324, // pass customer Id
+      0, // page number
+      2 // page size
+    )
+  }
 
-export default withRoot(withStyles(styles)(Orders))
+  render () {
+    return (
+      <div>
+        <Header />
+        <div>
+          <Paper className={this.props.classes.root} elevation={1}>
+            <OrderListWrapper />
+          </Paper>
+        </div>
+        <Footer />
+      </div>
+    )
+  }
+}
+
+function mapStateToProps (state) {
+  return {
+    orderListState: state.orderListState
+  }
+}
+
+function mapDispatchToProps (dispatch) {
+  return {
+    actions: bindActionCreators(
+      {
+        getOrderListDetailsLoading
+      },
+      dispatch
+    )
+  }
+}
+
+export default withRedux(
+  initStore,
+  mapStateToProps,
+  mapDispatchToProps
+)(withRoot(withStyles(styles)(Orders)))

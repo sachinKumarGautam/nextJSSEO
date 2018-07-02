@@ -14,7 +14,10 @@ class OrderList extends Component {
             <SideMenu/>
           </Grid>
           <Grid item xs={10}>
-            <OrderListDetails/>
+            <OrderListDetails
+              orderListState={this.props.orderListState}
+              getOrderListDetailsLoading={this.props.getOrderListDetailsLoading}
+            />
           </Grid>
         </Grid>
       </div>
