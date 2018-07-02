@@ -21,27 +21,23 @@ const styles = theme => {
   }
 }
 
-class PatientDetailsWrapper extends Component {
-  render () {
-    return (
-      <div>
-        <BreadCrumbs />
-        <Grid container spacing={24}>
-          <Grid item xs={3}>
-            <section>
-              <SideMenu />
-            </section>
-          </Grid>
-          <Grid item xs={8} className={this.props.classes.mainStyle}>
-            <PatientDetailsList
-              patientDetailsState={this.props.patientDetailsState}
-              savePatientSelected={this.props.savePatientSelected}
-            />
-          </Grid>
-        </Grid>
-      </div>
-    )
-  }
-}
+const PatientDetailsWrapper = props => (
+  <div>
+    <BreadCrumbs />
+    <Grid container spacing={24}>
+      <Grid item xs={3}>
+        <section>
+          <SideMenu />
+        </section>
+      </Grid>
+      <Grid item xs={8} className={props.classes.mainStyle}>
+        <PatientDetailsList
+          patientDetailsState={props.patientDetailsState}
+          savePatientSelected={props.savePatientSelected}
+        />
+      </Grid>
+    </Grid>
+  </div>
+)
 
 export default  withStyles(styles)(PatientDetailsWrapper)

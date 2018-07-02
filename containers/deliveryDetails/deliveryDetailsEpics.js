@@ -22,7 +22,15 @@ export function getDeliveryDetailsList (action$, store) {
     mergeMap(data => {
       return http(getDeliveryDetailsList$(data.customerId)).pipe(
         map(result => {
-          return getDeliveryDetailsListSuccess(data.deliveryDetailsState, result.body.payload)
+          const payload = result.body.payload
+          const modifiedPayload = payload.map(address => {
+            return {
+              ...address,
+              type: address.type ? address.type : 'Others'
+            }
+          })
+
+          return getDeliveryDetailsListSuccess(data.deliveryDetailsState, modifiedPayload)
         }),
         catchError(error => {
           return of(getDeliveryDetailsListFailure(data.deliveryDetailsState, error))

@@ -21,27 +21,23 @@ const styles = theme => {
   }
 }
 
-class DeliveryDetailsWrapper extends Component {
-  render () {
-    return (
-      <div>
-        <BreadCrumbs />
-        <Grid container spacing={24}>
-          <Grid item xs={3}>
-            <section>
-              <SideMenu />
-            </section>
-          </Grid>
-          <Grid item xs={8} className={this.props.classes.mainStyle}>
-            <DeliveryDetailsList
-              deliveryDetailsState={this.props.deliveryDetailsState}
-              saveAddressSelected={this.props.saveAddressSelected}
-            />
-          </Grid>
-        </Grid>
-      </div>
-    )
-  }
-}
+const DeliveryDetailsWrapper = props => (
+  <div>
+    <BreadCrumbs />
+    <Grid container spacing={24}>
+      <Grid item xs={3}>
+        <section>
+          <SideMenu />
+        </section>
+      </Grid>
+      <Grid item xs={8} className={props.classes.mainStyle}>
+        <DeliveryDetailsList
+          deliveryDetailsState={props.deliveryDetailsState}
+          saveAddressSelected={props.saveAddressSelected}
+        />
+      </Grid>
+    </Grid>
+  </div>
+)
 
 export default  withStyles(styles)(DeliveryDetailsWrapper)

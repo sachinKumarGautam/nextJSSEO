@@ -31,78 +31,79 @@ const styles = theme => {
       fontWeight: theme.typography.fontWeightBold
     },
     addressStyle: {
-      color: theme.palette.customGrey.grey500
+      color: theme.palette.customGrey.grey500,
+      paddingTop: theme.spacing.unit * 1.25,
+      paddingBottom: theme.spacing.unit * 1.25
     },
+    addressDescriptionStyle: {
+      paddingLeft: theme.spacing.unit * 2.5
+    }
   }
 }
 
-class AddressDetailsCard extends Component {
-  render () {
-    return (
-      <div
-        className={
-          (this.props.addressIdSelected === this.props.deliveryDetail.id)
-          ? this.props.classes.addressWrapperSelectedStyle
-          : this.props.classes.addressWrapperStyle
-        }
-        onClick={this.props.saveAddressSelected.bind(this, this.props.deliveryDetail.id)}
-      >
-        <Grid container spacing={24}>
-          <Grid item xs={2}>
-            <img src="/static/images/home.svg" />
+const AddressDetailsCard = props => (
+  <div
+    className={
+      (props.addressIdSelected === props.deliveryDetail.id)
+      ? props.classes.addressWrapperSelectedStyle
+      : props.classes.addressWrapperStyle
+    }
+    onClick={props.saveAddressSelected.bind(this, props.deliveryDetail.id)}
+  >
+    <Grid container spacing={24}>
+      <Grid item xs={1}>
+        <img src="/static/images/home.svg" />
+      </Grid>
+      <Grid item xs={11} className={props.classes.addressDescriptionStyle}>
+        <Typography
+          variant="caption"
+          className={props.classes.addressTypeStyle}
+        >
+          {props.deliveryDetail.type}
+        </Typography>
+        <div>
+          <Typography
+            variant="caption"
+            className={props.classes.addressStyle}
+          >
+            {props.deliveryDetail.street1}
+          </Typography>
+        </div>
+        <div>
+          <Typography
+            variant="caption"
+            className={props.classes.medicineNameStyle}
+          >
+            {props.deliveryDetail.street2}
+          </Typography>
+        </div>
+        <div>
+          <Grid container spacing={24}>
+            <Grid item xs={3}>
+              <div>
+                <Typography
+                  variant="caption"
+                  className={props.classes.buttonLabel}
+                >
+                  EDIT
+                </Typography>
+              </div>
+            </Grid>
+            <Grid item xs={3}>
+              <div>
+                <Typography
+                  variant="caption"
+                  className={props.classes.buttonLabel}
+                >
+                  DELETE
+                </Typography>
+              </div>
+            </Grid>
           </Grid>
-          <Grid item xs={10}>
-            <Typography
-              variant="caption"
-              className={this.props.classes.addressTypeStyle}
-            >
-              {this.props.deliveryDetail.type}
-            </Typography>
-            <div>
-              <Typography
-                variant="caption"
-                className={this.props.classes.addressStyle}
-              >
-                {this.props.deliveryDetail.street1}
-              </Typography>
-            </div>
-            <div>
-              <Typography
-                variant="caption"
-                className={this.props.classes.medicineNameStyle}
-              >
-                {this.props.deliveryDetail.street2}
-              </Typography>
-            </div>
-            <div>
-              <Grid container spacing={24}>
-                <Grid item xs={3}>
-                  <div>
-                    <Typography
-                      variant="caption"
-                      className={this.props.classes.buttonLabel}
-                    >
-                      EDIT
-                    </Typography>
-                  </div>
-                </Grid>
-                <Grid item xs={3}>
-                  <div>
-                    <Typography
-                      variant="caption"
-                      className={this.props.classes.buttonLabel}
-                    >
-                      DELETE
-                    </Typography>
-                  </div>
-                </Grid>
-              </Grid>
-            </div>
-          </Grid>
-        </Grid>
-      </div>
-    )
-  }
-}
+        </div>
+      </Grid>
+    </Grid>
+  </div>
+)
 
 export default withStyles(styles)(AddressDetailsCard)

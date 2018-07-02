@@ -42,73 +42,69 @@ const styles = theme => {
   }
 }
 
-class PatientDetailsCard extends Component {
-  render () {
-    return (
-      <div
-        className={
-          (this.props.patientIdSelected === this.props.patientDetail.id)
-          ? this.props.classes.patientWrapperSelectedStyle
-          : this.props.classes.patientWrapperStyle
-        }
-        onClick={this.props.savePatientSelected.bind(this, this.props.patientDetail.id)}
-      >
-        <Grid container spacing={24}>
-          <Grid item xs={3}>
-            <img src="/static/images/profile.svg" />
+const PatientDetailsCard = props => (
+  <div
+    className={
+      (props.patientIdSelected === props.patientDetail.id)
+      ? props.classes.patientWrapperSelectedStyle
+      : props.classes.patientWrapperStyle
+    }
+    onClick={props.savePatientSelected.bind(this, props.patientDetail.id)}
+  >
+    <Grid container spacing={24}>
+      <Grid item xs={3}>
+        <img src="/static/images/profile.svg" />
+      </Grid>
+      <Grid item xs={9}>
+        <Typography
+          variant="caption"
+          className={props.classes.userNameStyle}
+        >
+          {props.patientDetail.full_name}
+        </Typography>
+        <div>
+          <Typography
+            variant="caption"
+            className={props.classes.genderStyle}
+          >
+            {props.patientDetail.gender} | {props.patientDetail.age}
+          </Typography>
+        </div>
+        <div>
+          <Typography
+            variant="caption"
+            className={props.classes.mobileStyle}
+          >
+            {props.patientDetail.mobile}
+          </Typography>
+        </div>
+        <div>
+          <Grid container spacing={24}>
+            <Grid item xs={3}>
+              <div>
+                <Typography
+                  variant="caption"
+                  className={props.classes.buttonLabel}
+                >
+                  EDIT
+                </Typography>
+              </div>
+            </Grid>
+            <Grid item xs={3}>
+              <div>
+                <Typography
+                  variant="caption"
+                  className={props.classes.buttonLabel}
+                >
+                  DELETE
+                </Typography>
+              </div>
+            </Grid>
           </Grid>
-          <Grid item xs={9}>
-            <Typography
-              variant="caption"
-              className={this.props.classes.userNameStyle}
-            >
-              {this.props.patientDetail.full_name}
-            </Typography>
-            <div>
-              <Typography
-                variant="caption"
-                className={this.props.classes.genderStyle}
-              >
-                {this.props.patientDetail.gender} | {this.props.patientDetail.age}
-              </Typography>
-            </div>
-            <div>
-              <Typography
-                variant="caption"
-                className={this.props.classes.mobileStyle}
-              >
-                {this.props.patientDetail.mobile}
-              </Typography>
-            </div>
-            <div>
-              <Grid container spacing={24}>
-                <Grid item xs={3}>
-                  <div>
-                    <Typography
-                      variant="caption"
-                      className={this.props.classes.buttonLabel}
-                    >
-                      EDIT
-                    </Typography>
-                  </div>
-                </Grid>
-                <Grid item xs={3}>
-                  <div>
-                    <Typography
-                      variant="caption"
-                      className={this.props.classes.buttonLabel}
-                    >
-                      DELETE
-                    </Typography>
-                  </div>
-                </Grid>
-              </Grid>
-            </div>
-          </Grid>
-        </Grid>
-      </div>
-    )
-  }
-}
+        </div>
+      </Grid>
+    </Grid>
+  </div>
+)
 
 export default withStyles(styles)(PatientDetailsCard)
