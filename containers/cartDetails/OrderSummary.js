@@ -17,6 +17,9 @@ const styles = theme => ({
   heading: {
     fontSize: theme.typography.pxToRem(15),
     flexShrink: 0,
+    fontSize: theme.spacing.unit * 2.75,
+    fontWeight: theme.typography.fontWeightBold,
+    color: theme.palette.customGrey.grey500
   },
   secondaryHeading: {
     fontSize: theme.typography.pxToRem(15),
@@ -41,12 +44,12 @@ class OrderSummary extends React.Component {
 
     return (
       <div className={classes.root}>
-        <ExpansionPanel 
+        <ExpansionPanel
           expanded={expanded === 'panel1'}
           onChange={this.handleChange('panel1')}
           className={classes.expansionPanel}
         >
-          <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
+          <ExpansionPanelSummary expandIcon={<div />}>
             <Typography className={classes.heading}>Logged in</Typography>
           </ExpansionPanelSummary>
           <ExpansionPanelDetails>
@@ -61,7 +64,7 @@ class OrderSummary extends React.Component {
           onChange={this.handleChange('panel2')}
           className={classes.expansionPanel}
         >
-          <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
+          <ExpansionPanelSummary expandIcon={<div />}>
             <Typography className={classes.heading}>Attached Prescriptions</Typography>
           </ExpansionPanelSummary>
           <ExpansionPanelDetails>
@@ -76,7 +79,7 @@ class OrderSummary extends React.Component {
           onChange={this.handleChange('panel3')}
           className={classes.expansionPanel}
         >
-          <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
+          <ExpansionPanelSummary expandIcon={<div />}>
             <Typography className={classes.heading}>Customer Details</Typography>
           </ExpansionPanelSummary>
           <ExpansionPanelDetails>
@@ -91,7 +94,7 @@ class OrderSummary extends React.Component {
           onChange={this.handleChange('panel4')}
           className={classes.expansionPanel}
         >
-          <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
+          <ExpansionPanelSummary expandIcon={<div />}>
             <Typography className={classes.heading}>Delivery Details</Typography>
           </ExpansionPanelSummary>
           <ExpansionPanelDetails>
@@ -106,7 +109,7 @@ class OrderSummary extends React.Component {
           onChange={this.handleChange('panel5')}
           className={classes.expansionPanel}
         >
-          <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
+          <ExpansionPanelSummary expandIcon={<div />}>
             <Typography className={classes.heading}>Payment</Typography>
           </ExpansionPanelSummary>
           <ExpansionPanelDetails>

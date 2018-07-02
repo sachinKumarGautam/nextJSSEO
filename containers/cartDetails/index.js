@@ -19,12 +19,12 @@ class CartDetailsWrapper extends Component {
       <div>
         <BreadCrumbs />
         <Grid container spacing={24}>
-          <Grid item xs={6}>
+          <Grid item xs={8}>
             <section>
               <OrderSummary />
             </section>
           </Grid>
-          <Grid item xs={6}>
+          <Grid item xs={4}>
             <section>
               <CartDetails />
             </section>
