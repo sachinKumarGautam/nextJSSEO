@@ -3,6 +3,8 @@ import React, { Component } from 'react'
 import { withStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
 
+import {formatDateWithMonth} from '../../utils/FormatDate'
+
 const styles = theme => ({
   earnedStyle: {
     color: theme.palette.customGrey.grey500
@@ -11,11 +13,19 @@ const styles = theme => ({
     color: theme.palette.customGrey.grey200
   },
   earnedAmountStyle: {
-    color: theme.palette.customGreen.green300
+    color: theme.palette.customGreen.green300,
+    marginRight: theme.spacing.unit * 2,
+    textAlign: 'right'
   },
   debitedAmountStyle: {
     color: theme.palette.customRed.red200,
-    marginRight: theme.spacing.unit * 9
+    marginRight: theme.spacing.unit * 2,
+    textAlign: 'right'
+  },
+  validStyle: {
+    color: theme.palette.customGrey.grey200,
+    marginRight: theme.spacing.unit * 2,
+    textAlign: 'right'
   },
   transactionDetailWrapper: {
     display: 'flex',
@@ -28,76 +38,80 @@ const styles = theme => ({
   }
 })
 
-const TransactionHistory = (props) => {
-  return (
-    <div className={props.classes.transactionDetailWrapper}>
-      <div>
-        <Typography
-          gutterBottom
-          variant='body2'
-          className={props.classes.earnedStyle}
-        >
-          {props.carePointsDetails.display_transaction_type}
-        </Typography>
-        <Typography
-          gutterBottom
-          variant='caption'
-          className={props.classes.detailStyle}
-        >
-          {props.carePointsDetails.display_comment}
-        </Typography>
-        <Typography
-          gutterBottom
-          variant='caption'
-          className={props.classes.detailStyle}
-        >
-          {props.carePointsDetails.transaction_date}
-        </Typography>
-      </div>
-      <div>
-        <Typography
-          gutterBottom
-          variant='body2'
-          className={
-            props.carePointsDetails.transaction_type === "credit"
-            ? props.classes.earnedAmountStyle
-            : props.classes.debitedAmountStyle
-          }
-        >
-            {
-              props.carePointsDetails.transaction_type === "credit" ?
-                '+' + (
-                  props.carePointsDetails.cash_type === 'CASH' ?
-                  props.carePointsDetails.money : props.carePointsDetails.care_point
-                ) :
-                '-' + (
-                  props.carePointsDetails.cash_type === 'CASH' ?
-                  props.carePointsDetails.money : props.carePointsDetails.care_point
-                )
+class TransactionHistory extends Component {
+  render () {
+    let transactionDate = formatDateWithMonth(this.props.carePointsDetails.transaction_date)
+    let expiryDate = formatDateWithMonth(this.props.carePointsDetails.expiry_date)
+    return (
+      <div className={this.props.classes.transactionDetailWrapper}>
+        <div>
+          <Typography
+            gutterBottom
+            variant='body2'
+            className={this.props.classes.earnedStyle}
+          >
+            {this.props.carePointsDetails.display_transaction_type}
+          </Typography>
+          <Typography
+            gutterBottom
+            variant='caption'
+            className={this.props.classes.detailStyle}
+          >
+            {this.props.carePointsDetails.display_comment}
+          </Typography>
+          <Typography
+            gutterBottom
+            variant='caption'
+            className={this.props.classes.detailStyle}
+          >
+            {transactionDate}
+          </Typography>
+        </div>
+        <div>
+          <Typography
+            gutterBottom
+            variant='body2'
+            className={
+              this.props.carePointsDetails.transaction_type === "credit"
+              ? this.props.classes.earnedAmountStyle
+              : this.props.classes.debitedAmountStyle
             }
-        </Typography>
-        {
-          props.carePointsDetails.transaction_type === "credit" &&
-          <Typography
-            gutterBottom
-            variant='caption'
-            className={props.classes.detailStyle}
           >
-            Valid till
+              {
+                this.props.carePointsDetails.transaction_type === "credit" ?
+                  '+' + (
+                    this.props.carePointsDetails.cash_type === 'CASH' ?
+                    this.props.carePointsDetails.money : this.props.carePointsDetails.care_point
+                  ) :
+                  '-' + (
+                    this.props.carePointsDetails.cash_type === 'CASH' ?
+                    this.props.carePointsDetails.money : this.props.carePointsDetails.care_point
+                  )
+              }
           </Typography>
-        }
-        { props.carePointsDetails.transaction_type === "credit" &&
-          <Typography
-            gutterBottom
-            variant='caption'
-            className={props.classes.detailStyle}
-          >
-            {props.carePointsDetails.expiry_date}
-          </Typography>
-        }
+          {
+            this.props.carePointsDetails.transaction_type === "credit" &&
+            <Typography
+              gutterBottom
+              variant='caption'
+              className={this.props.classes.validStyle}
+            >
+              Valid till
+            </Typography>
+          }
+          { this.props.carePointsDetails.transaction_type === "credit" &&
+            <Typography
+              gutterBottom
+              variant='caption'
+              className={this.props.classes.validStyle}
+            >
+              {expiryDate}
+            </Typography>
+          }
+        </div>
       </div>
-    </div>
-  )
+    )
+  }
 }
 
 export default withStyles(styles)(TransactionHistory)
