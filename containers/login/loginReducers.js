@@ -28,9 +28,9 @@ export default function (state = initialState, action) {
         ...state,
         isLoadingSendOtp: action.isLoading,
         isNewUser: action.isNewUser,
-        ...state.payload,
         payload: {
-          initalMobile: action.mobile
+          ...state.payload,
+          initialMobile: action.mobile
         }
       }
 

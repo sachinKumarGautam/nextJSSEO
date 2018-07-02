@@ -44,9 +44,9 @@ export default function makeAjaxRequest (params) {
       })
 
     case 'POST':
-      return {
+      return ajax({
         url: params.url,
-        method: 'POST',
+        method: 'post',
         timeout: timeout,
         options: {
           headers: {
@@ -55,12 +55,12 @@ export default function makeAjaxRequest (params) {
           }
         },
         data: params.body
-      }
+      })
 
     case 'PUT':
-      return {
+      return ajax({
         url: params.url,
-        method: 'PUT',
+        method: 'put',
         timeout: timeout,
         options: {
           headers: {
@@ -69,12 +69,12 @@ export default function makeAjaxRequest (params) {
           }
         },
         data: params.body
-      }
+      })
 
     case 'METHOD_UPLOAD_FILE':
-      return {
+      return ajax({
         url: params.url,
-        method: 'PUT',
+        method: 'put',
         timeout: timeout,
         options: {
           headers: {
@@ -82,12 +82,12 @@ export default function makeAjaxRequest (params) {
           }
         },
         data: params.body
-      }
+      })
 
     case 'DELETE':
-      return {
+      return ajax({
         url: params.url,
-        method: 'DELETE',
+        method: 'delete',
         timeout: timeout,
         body: params.body,
         options: {
@@ -95,12 +95,12 @@ export default function makeAjaxRequest (params) {
             'Authorization': authHeader
           }
         }
-      }
+      })
 
     case 'PATCH':
-      return {
+      return ajax({
         url: params.url,
-        method: 'PATCH',
+        method: 'patch',
         timeout: timeout,
         body: params.body,
         options: {
@@ -109,7 +109,7 @@ export default function makeAjaxRequest (params) {
             'Content-Type': contentType
           }
         }
-      }
+      })
 
     default:
       return false

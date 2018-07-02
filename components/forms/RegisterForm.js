@@ -63,6 +63,27 @@ const RegisterForm = props => {
       </FormControl>
       <FormControl
         className={classes.formControl}
+        aria-describedby='mobile'
+        error={errors.mobile && touched.mobile}
+      >
+        <InputLabel htmlFor='mobile'>Phone number</InputLabel>
+        <Input
+          id='mobile'
+          type='text'
+          onChange={handleChange}
+          value={values.mobile}
+        />
+        {
+          errors.mobile && touched.mobile &&
+          <FormHelperText
+            id='mobile'
+          >
+            {errors.mobile}
+          </FormHelperText>
+        }
+      </FormControl>
+      <FormControl
+        className={classes.formControl}
         aria-describedby='gender'
         error={errors.gender && touched.gender}
       >
@@ -150,20 +171,20 @@ export default withStyles(styles)(withFormik({
     return {
       full_name: '',
       gender: '',
-      mobile: props.loginState.payload.mobile || '',
+      mobile: props.loginState.payload.initialMobile,
       membership_code: '',
       referral_code: '',
       age: '',
       id: '',
       membership_type: '',
       reference_code: '',
-      referral_code: '',
       email: '',
       default_location: 'J-58, 3rd floor, lajpat Nagar 4'
     }
   },
   validationSchema: Yup.object().shape({
     full_name: Yup.string().required('Please enter your full name'),
+    mobile: Yup.number().required('Please enter OTP'),
     gender: Yup.string().required('Gender is required'),
     membership_code: Yup.string(),
     referral_code: Yup.string()
