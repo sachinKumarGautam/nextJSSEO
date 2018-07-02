@@ -38,7 +38,7 @@ class CarePoints extends React.Component {
     this.props.actions.getCarePointDetailsLoading(
       this.props.carePointState,
       100036079,
-      'bonus'
+      'all'
     )
   }
 
