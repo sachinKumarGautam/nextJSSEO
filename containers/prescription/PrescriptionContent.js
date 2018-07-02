@@ -25,6 +25,7 @@ const styles = theme => ({
     marginLeft: theme.spacing.unit,
   },
   userNameStyle: {
+    ...theme.typography.body3,
     color: theme.palette.customGrey.grey500,
     fontWeight: theme.typography.fontWeightBold,
     display: 'flex',
@@ -72,7 +73,7 @@ class PrescriptionContent extends Component {
         <div className={this.props.classes.detailWrapper}>
           <Typography
             gutterBottom
-            variant='subheading'
+            variant='body2'
             component='h1'
             className={this.props.classes.prescriptionName}
           >
