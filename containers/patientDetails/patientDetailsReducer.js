@@ -3,7 +3,8 @@ import initialState from './patientDetailsModal'
 import {
   GET_PATIENT_DETAILS_LIST_LOADING,
   GET_PATIENT_DETAILS_LIST_SUCCESS,
-  GET_PATIENT_DETAILS_LIST_FAILURE
+  GET_PATIENT_DETAILS_LIST_FAILURE,
+  SAVE_PATIENT_SELECTED
 } from './patientDetailsActionTypes'
 
 export default function patientDetailsReducer (state = initialState, action) {
@@ -35,6 +36,12 @@ export default function patientDetailsReducer (state = initialState, action) {
           isError: action.isError,
           error: action.error
         }
+      }
+
+    case SAVE_PATIENT_SELECTED:
+      return {
+        ...state,
+        patientIdSelected: action.patientIdSelected
       }
 
     default:

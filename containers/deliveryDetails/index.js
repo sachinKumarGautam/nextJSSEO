@@ -5,7 +5,7 @@ import { withStyles } from '@material-ui/core/styles'
 
 import BreadCrumbs from '../../components/BreadCrumbs'
 import SideMenu from '../../components/SideMenu'
-import Main from './Main'
+import DeliveryDetailsList from './DeliveryDetailsList'
 
 /*
   bread crumbs
@@ -33,8 +33,9 @@ class DeliveryDetailsWrapper extends Component {
             </section>
           </Grid>
           <Grid item xs={8} className={this.props.classes.mainStyle}>
-            <Main
+            <DeliveryDetailsList
               deliveryDetailsState={this.props.deliveryDetailsState}
+              saveAddressSelected={this.props.saveAddressSelected}
             />
           </Grid>
         </Grid>

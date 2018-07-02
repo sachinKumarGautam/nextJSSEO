@@ -17,7 +17,8 @@ import { rootEpic } from '../redux/epics'
 import { of } from 'rxjs/observable/of'
 
 import {
-  getDeliveryDetailsListLoading
+  getDeliveryDetailsListLoading,
+  saveAddressSelected
 } from '../containers/deliveryDetails/deliveryDetailsActions'
 
 const styles = theme => ({
@@ -52,6 +53,7 @@ class DeliveryDetails extends React.Component {
           <Paper className={this.props.classes.root} elevation={1}>
             <DeliveryDetailsWrapper
               deliveryDetailsState={this.props.deliveryDetailsState}
+              saveAddressSelected={this.props.actions.saveAddressSelected}
             />
           </Paper>
         </div>
@@ -71,7 +73,8 @@ function mapDispatchToProps (dispatch) {
   return {
     actions: bindActionCreators(
       {
-        getDeliveryDetailsListLoading
+        getDeliveryDetailsListLoading,
+        saveAddressSelected
       },
       dispatch
     )

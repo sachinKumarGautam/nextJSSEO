@@ -1,7 +1,8 @@
 import {
   GET_DELIVERY_DETAILS_LIST_LOADING,
   GET_DELIVERY_DETAILS_LIST_SUCCESS,
-  GET_DELIVERY_DETAILS_LIST_FAILURE
+  GET_DELIVERY_DETAILS_LIST_FAILURE,
+  SAVE_ADDRESS_SELECTED
 } from './deliveryDetailsActionTypes'
 
 export function getDeliveryDetailsListLoading (deliveryDetailsState, customerId) {
@@ -31,5 +32,13 @@ export function getDeliveryDetailsListFailure (deliveryDetailsState, error) {
     isLoading: false,
     isError: true,
     error: error
+  }
+}
+
+export function saveAddressSelected (deliveryDetailsState, addressIdSelected) {
+  return {
+    type: SAVE_ADDRESS_SELECTED,
+    deliveryDetailsState,
+    addressIdSelected: addressIdSelected
   }
 }

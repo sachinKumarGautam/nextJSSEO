@@ -3,7 +3,8 @@ import initialState from './deliveryDetailsModal'
 import {
   GET_DELIVERY_DETAILS_LIST_LOADING,
   GET_DELIVERY_DETAILS_LIST_SUCCESS,
-  GET_DELIVERY_DETAILS_LIST_FAILURE
+  GET_DELIVERY_DETAILS_LIST_FAILURE,
+  SAVE_ADDRESS_SELECTED
 } from './deliveryDetailsActionTypes'
 
 export default function deliveryDetailsReducer (state = initialState, action) {
@@ -35,6 +36,12 @@ export default function deliveryDetailsReducer (state = initialState, action) {
           isError: action.isError,
           error: action.error
         }
+      }
+
+    case SAVE_ADDRESS_SELECTED:
+      return {
+        ...state,
+        addressIdSelected: action.addressIdSelected
       }
 
     default:

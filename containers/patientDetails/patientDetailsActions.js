@@ -1,7 +1,8 @@
 import {
   GET_PATIENT_DETAILS_LIST_LOADING,
   GET_PATIENT_DETAILS_LIST_SUCCESS,
-  GET_PATIENT_DETAILS_LIST_FAILURE
+  GET_PATIENT_DETAILS_LIST_FAILURE,
+  SAVE_PATIENT_SELECTED
 } from './patientDetailsActionTypes'
 
 export function getPatientDetailsListLoading (patientDetailsState, customerId) {
@@ -31,5 +32,13 @@ export function getPatientDetailsListFailure (patientDetailsState, error) {
     isLoading: false,
     isError: true,
     error: error
+  }
+}
+
+export function savePatientSelected (patientDetailsState, patientIdSelected) {
+  return {
+    type: SAVE_PATIENT_SELECTED,
+    patientDetailsState,
+    patientIdSelected: patientIdSelected
   }
 }

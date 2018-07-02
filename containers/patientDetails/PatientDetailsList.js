@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 
 import Grid from '@material-ui/core/Grid'
+import Typography from '@material-ui/core/Typography'
 
 import { withStyles } from '@material-ui/core/styles'
 
@@ -26,15 +27,47 @@ const styles = theme => {
       justifyContent: 'flex-end',
       marginTop: theme.spacing.unit * 3.75,
       marginRight: theme.spacing.unit * 3.75
+    },
+    title: {
+      ...theme.typography.headline,
+      color: theme.palette.customGrey.grey500,
+      marginLeft: theme.spacing.unit * 2,
+      marginBottom: theme.spacing.unit * 6
     }
   }
 }
 
-class Main extends Component {
+class PatientDetailsList extends Component {
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      patientIdSelected: 0
+    }
+  }
+
+  savePatientSelected(patientIdSelected) {
+    this.setState({
+      patientIdSelected: patientIdSelected
+    })
+
+    this.props.savePatientSelected(
+      this.props.patientDetailsState,
+      patientIdSelected
+    )
+  }
+
   render () {
     return (
       <div>
-        <p className={this.props.classes.nameStyle}>Patients</p>
+        <Typography
+          gutterBottom
+          variant='title'
+          component='h1'
+          className={this.props.classes.title}
+        >
+          Patients
+        </Typography>
         <Grid container spacing={24}>
           {
             this.props.patientDetailsState.payload.map(patientDetail => {
@@ -42,6 +75,8 @@ class Main extends Component {
                 <Grid item xs={6}>
                   <PatientDetailsCard
                     patientDetail={patientDetail}
+                    savePatientSelected={this.savePatientSelected.bind(this)}
+                    patientIdSelected={this.state.patientIdSelected}
                   />
                 </Grid>
               )
@@ -66,4 +101,4 @@ class Main extends Component {
   }
 }
 
-export default withStyles(styles)(Main)
+export default withStyles(styles)(PatientDetailsList)

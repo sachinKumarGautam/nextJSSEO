@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 
 import Grid from '@material-ui/core/Grid'
+import Typography from '@material-ui/core/Typography'
 
 import { withStyles } from '@material-ui/core/styles'
 
@@ -26,15 +27,47 @@ const styles = theme => {
       justifyContent: 'flex-end',
       marginTop: theme.spacing.unit * 3.75,
       marginRight: theme.spacing.unit * 3.75
+    },
+    title: {
+      ...theme.typography.headline,
+      color: theme.palette.customGrey.grey500,
+      marginLeft: theme.spacing.unit * 2,
+      marginBottom: theme.spacing.unit * 6
     }
   }
 }
 
 class Main extends Component {
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      addressIdSelected: 0
+    }
+  }
+
+  saveAddressSelected(addressIdSelected) {
+    this.setState({
+      addressIdSelected: addressIdSelected
+    })
+
+    this.props.saveAddressSelected(
+      this.props.deliveryDetailsState,
+      addressIdSelected
+    )
+  }
+
   render () {
     return (
       <div>
-        <p className={this.props.classes.nameStyle}>Addresses</p>
+        <Typography
+          gutterBottom
+          variant='title'
+          component='h1'
+          className={this.props.classes.title}
+        >
+          Addresses
+        </Typography>
         <Grid container spacing={24}>
           {
             this.props.deliveryDetailsState.payload.map(deliveryDetail => {
@@ -42,6 +75,8 @@ class Main extends Component {
                 <Grid item xs={6}>
                   <AddressDetailsCard
                     deliveryDetail={deliveryDetail}
+                    saveAddressSelected={this.saveAddressSelected.bind(this)}
+                    addressIdSelected={this.state.addressIdSelected}
                   />
                 </Grid>
               )

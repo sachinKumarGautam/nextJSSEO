@@ -5,7 +5,7 @@ import { withStyles } from '@material-ui/core/styles'
 
 import BreadCrumbs from '../../components/BreadCrumbs'
 import SideMenu from '../../components/SideMenu'
-import Main from './Main'
+import PatientDetailsList from './PatientDetailsList'
 
 /*
   bread crumbs
@@ -33,8 +33,9 @@ class PatientDetailsWrapper extends Component {
             </section>
           </Grid>
           <Grid item xs={8} className={this.props.classes.mainStyle}>
-            <Main
+            <PatientDetailsList
               patientDetailsState={this.props.patientDetailsState}
+              savePatientSelected={this.props.savePatientSelected}
             />
           </Grid>
         </Grid>
