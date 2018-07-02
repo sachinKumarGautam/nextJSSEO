@@ -23,8 +23,30 @@ const getOrderList$ = (customerId, page, size) => (
   })
 )
 
+const getPrescriptionList$ = (customerId) => (
+  makeAjaxRequest({
+    method: 'GET',
+    url: fetchUrl('account', 'customer/' + customerId + '/patient-prescriptions', 'GET_LIST')
+  })
+)
+
+const getCarePointsList$ = (customerId, cashType) => (
+  makeAjaxRequest({
+    method: 'GET',
+    url: fetchUrl('', 'wallet/' + customerId + '/transaction',
+      'QUERY_STRING',
+      {query_string:
+        cashType === 'all' ?
+          `size=100&page=0` : `cash-type=${cashType}&size=100&page=0`
+      }
+    )
+  })
+)
+
 export {
   getMoleculeSummary$,
   getMedicineList$,
-  getOrderList$
+  getOrderList$,
+  getPrescriptionList$,
+  getCarePointsList$
 }

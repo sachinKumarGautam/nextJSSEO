@@ -12,6 +12,14 @@ import {
   getOrderListDetails
 } from '../containers/orderList/orderListEpics'
 
+import {
+  getPrescriptionList
+} from '../containers/prescription/prescriptionEpics'
+
+import {
+  carePointsList
+} from '../containers/carePoint/carePointEpics'
+
 // import * as actions from './actions'
 // import * as types from './actionTypes'
 
@@ -58,5 +66,7 @@ import {
 export const rootEpic = combineEpics(
   getMoleculeSummary,
   getRelatedMedicines,
-  getOrderListDetails
+  getOrderListDetails,
+  getPrescriptionList,
+  carePointsList
 )
