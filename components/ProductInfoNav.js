@@ -24,17 +24,25 @@ const styles = theme => {
       flexDirection: 'column',
       alignItems: 'center',
       textDecoration: 'none',
-      color: theme.palette.customGrey.grey600
+      color: theme.palette.customGrey.grey600,
+      '&:hover': {
+        transitionDelay: '2s'
+      }
     },
     linkLabel: {
       ...theme.typography.body3,
       display: 'block',
       marginTop: theme.spacing.unit,
       fontWeight: theme.typography.fontWeightBold,
-      fontFamily: theme.typography.fontFamily
+      fontFamily: theme.typography.fontFamily,
+      transition: '2s',
+      '&:hover': {
+        transitionDelay: '2s'
+      }
     },
     hover: {
-      color: theme.palette.primary.main
+      color: theme.palette.primary.main,
+      transitionDelay: '2s'
     }
   }
 }

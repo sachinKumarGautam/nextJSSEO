@@ -37,10 +37,9 @@ class Header extends React.Component {
 
   render () {
     const { classes } = this.props
-    console.log(this.props.pageContext)
     return (
       <div className={classes.root}>
-        <AppBar elevation={'1'} className={classes.appBar} position='fixed'>
+        <AppBar elevation={1} className={classes.appBar} position='fixed'>
           {/* <Head
           pageTitle={'Lifcare Product Details Page'}
         /> */}
@@ -54,7 +53,7 @@ class Header extends React.Component {
               <img src='/static/images/logo-green.svg' />
               <AutosuggestSearch />
               <CartIcon />
-              <MenuWrapper/>
+              <MenuWrapper />
               <Button
                 variant='raised'
                 size='medium'
@@ -64,12 +63,12 @@ class Header extends React.Component {
                 className={classes.button}
                 label={'Login / Register'}
               />
-              <Login
+              {this.state.openLoginDialog && <Login
                 openLoginDialog={this.state.openLoginDialog}
                 openLoginModal={this.openLoginModal}
                 closeLoginModal={this.closeLoginModal}
                 {...this.props}
-              />
+              />}
             </Toolbar>
             <Subheader />
           </div>

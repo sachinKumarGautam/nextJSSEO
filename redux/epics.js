@@ -5,6 +5,15 @@ import {
 } from '../containers/moleculeDetails/moleculeEpics'
 
 import {
+  sendOTP, verifyOTP
+} from '../containers/login/loginEpics'
+
+import {
+  registerCustomer,
+  fetchUserInfo
+} from '../containers/user/customer/customerEpics'
+
+import {
   getRelatedMedicines
 } from '../containers/medicineList/medicineListEpics'
 
@@ -58,5 +67,9 @@ import {
 export const rootEpic = combineEpics(
   getMoleculeSummary,
   getRelatedMedicines,
-  carePointsList
+  carePointsList,
+  sendOTP,
+  verifyOTP,
+  registerCustomer,
+  fetchUserInfo
 )
