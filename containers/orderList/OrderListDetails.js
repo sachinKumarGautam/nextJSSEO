@@ -11,21 +11,6 @@ import OrderContent from './OrderContent'
 import OrderFooter from './OrderFooter'
 import Button from '../../components/button'
 
-const orderList= [
-  {
-    user_name: 'Jyoti Arora',
-    status: 'Payment Pending',
-    payment: 'failed',
-    order_status: 'cancel'
-  },
-  {
-    user_name: 'Ayushi Khetan',
-    status: 'Delivered',
-    payment: 'sucess',
-    order_status: 'return'
-  }
-]
-
 const styles = theme => ({
   card: {
     marginLeft: theme.spacing.unit * 6
@@ -77,16 +62,20 @@ class OrderListDetails extends Component {
             My Orders
           </Typography>
           {
-            orderList.map((item) => {
+            this.props.orderListState.payload.map((orderDetails) => {
               return (
                 <div className={this.props.classes.orderDetailWrapper}>
-                  <OrderHeader/>
-                  <Divider/>
-                  <OrderContent
-                    orderList={item}
+                  <OrderHeader
+                    orderDetails={orderDetails}
                   />
                   <Divider/>
-                  <OrderFooter/>
+                  <OrderContent
+                    orderDetails={orderDetails}
+                  />
+                  <Divider/>
+                  <OrderFooter
+                    orderDetails={orderDetails}
+                  />
                 </div>
               )
             })

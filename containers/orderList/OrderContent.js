@@ -6,6 +6,8 @@ import Typography from '@material-ui/core/Typography';
 
 import Button from '../../components/button'
 
+import {getOrderStatusProgressDetails} from './OrderStatus'
+
 const styles = theme => {
   return {
     userDetailWrapper: {
@@ -96,108 +98,119 @@ const styles = theme => {
   }
 }
 
-const OrderContent = (props) => {
-  return (
-    <div>
-      <div className={props.classes.userDetailWrapper}>
-        <div>
-          <Typography
-            variant="caption"
-            className={props.classes.userNameStyle}
-          >
-            <Person className={props.classes.userIconStyle}/>{props.orderList.user_name}
-          </Typography>
+class OrderContent extends Component {
+  render () {
+    let state = this.props.orderDetails.state
+    let status = this.props.orderDetails.status
+    let orderStatus = getOrderStatusProgressDetails(state, status)
+    let viewStatus = orderStatus.viewStatus
+    return (
+      <div>
+        <div className={this.props.classes.userDetailWrapper}>
+          <div>
+            <Typography
+              variant="caption"
+              className={this.props.classes.userNameStyle}
+            >
+              <Person className={this.props.classes.userIconStyle}/>
+              {
+                this.props.orderDetails.shipping_address.first_name +
+                this.props.orderDetails.shipping_address.last_name
+              }
+            </Typography>
+          </div>
+          <div>
+            <Typography
+              variant="caption"
+              className={
+                // props.orderList.status === 'Payment Pending'
+                // ? props.classes.pendingStyle :
+                this.props.classes.statusStyle
+              }
+            >
+              {viewStatus}
+            </Typography>
+          </div>
         </div>
-        <div>
-          <Typography
-            variant="caption"
-            className={
-              props.orderList.status === 'Payment Pending'
-              ? props.classes.pendingStyle :
-              props.classes.statusStyle
-            }
-          >
-            {props.orderList.status}
-          </Typography>
-        </div>
-      </div>
-      <div className={props.classes.medicineDetailWrapper}>
-        <img
-          src='./../../static/images/avenger.jpg'
-          className={props.classes.prescriptionStyle}
-        />
-        <div>
-          <Typography
-            variant="caption"
-            className={props.classes.medicineNameStyle}
-          >
-            Glycomet 0.5 MG
-          </Typography>
-          <Typography
-            variant="caption"
-            className={props.classes.medicineNameStyle}
-          >
-            Zoryl MF 2MG
-          </Typography>
-          <Typography
-            variant="caption"
-            className={props.classes.quantityStyle}
-          >
-            + 2 Items
-          </Typography>
-        </div>
-      </div>
-      {
-        props.orderList.payment === 'failed' &&
-        <div className={props.classes.buttonWrapperStyle}>
-          <Button
-            size='small'
-            variant='outlined'
-            color='primary'
-            classes={{
-              root: props.classes.buttonRoot,
-              label: props.classes.buttonLabel
-            }}
-            className={props.classes.codButtonStyle}
-            onClick={this.handleClickOpen}
-            label={'Retry Payment'}
+        <div className={this.props.classes.medicineDetailWrapper}>
+          <img
+            src='./../../static/images/avenger.jpg'
+            className={this.props.classes.prescriptionStyle}
           />
-          <Button
-            size='small'
-            variant='raised'
-            color='primary'
-            onClick={this.handleClickOpen}
-            className={props.classes.codButtonStyle}
-            label={'Convert to COD'}
-          />
+          <div>
+            <Typography
+              variant="caption"
+              className={this.props.classes.medicineNameStyle}
+            >
+              Glycomet 0.5 MG
+            </Typography>
+            <Typography
+              variant="caption"
+              className={this.props.classes.medicineNameStyle}
+            >
+              Zoryl MF 2MG
+            </Typography>
+            <Typography
+              variant="caption"
+              className={this.props.classes.quantityStyle}
+            >
+              + 2 Items
+            </Typography>
+          </div>
         </div>
-      }
-      <div className={props.classes.reviewWrapperStyle}>
-        <div className={props.classes.reviewHelpWrapper}>
-          <Typography
-            variant="caption"
-            className={props.classes.reviewStyle}
-          >
-            Write a review
-          </Typography>
-          <Typography
-            variant="caption"
-            className={props.classes.helpStyle}
-          >
-            Need Help?
-          </Typography>
-        </div>
-        <div>
-          <a className={props.classes.cancelStyle}>
-            {
-              props.orderList.order_status === 'cancel'
-              ? 'Cancel Order' : 'Return Order'
-            }
-          </a>
+        {/* {
+          props.orderList.payment === 'failed' &&
+          <div className={this.props.classes.buttonWrapperStyle}>
+            <Button
+              size='small'
+              variant='outlined'
+              color='primary'
+              classes={{
+                root: this.props.classes.buttonRoot,
+                label: this.props.classes.buttonLabel
+              }}
+              className={this.props.classes.codButtonStyle}
+              onClick={this.handleClickOpen}
+              label={'Retry Payment'}
+            />
+            <Button
+              size='small'
+              variant='raised'
+              color='primary'
+              onClick={this.handleClickOpen}
+              className={this.props.classes.codButtonStyle}
+              label={'Convert to COD'}
+            />
+          </div>
+        } */}
+        <div className={this.props.classes.reviewWrapperStyle}>
+          <div className={this.props.classes.reviewHelpWrapper}>
+            <Typography
+              variant="caption"
+              className={this.props.classes.reviewStyle}
+            >
+              Write a review
+            </Typography>
+            <Typography
+              variant="caption"
+              className={this.props.classes.helpStyle}
+            >
+              Need Help?
+            </Typography>
+          </div>
+          <div>
+            <a className={this.props.classes.cancelStyle}>
+              {
+                // this.props.orderList.order_status === 'cancel'
+                // ? 'Cancel Order' : 'Return Order'
+              }
+              Cancel Order
+            </a>
+          </div>
         </div>
       </div>
-    </div>
-  )
+    )
+  }
 }
 
 export default withStyles(styles)(OrderContent)
