@@ -9,16 +9,18 @@ import withRoot from '../src/withRoot'
 
 import { connect } from 'react-redux'
 
-import MedicineListWrapper from '../containers/medicineList'
+import Paper from '@material-ui/core/Paper'
+
+import CarePointWrapper from '../containers/carePoint'
 
 import {
-  getRelatedMedicinesLoading
-} from '../containers/medicineList/medicineListActions'
+  getCarePointDetailsLoading
+} from '../containers/carePoint/carePointActions'
 
 const styles = theme => ({
   root: {
-    paddingTop: theme.spacing.unit * 2,
-    paddingBottom: theme.spacing.unit * 2,
+    paddingTop: 16,
+    paddingBottom: 16,
     paddingLeft: theme.spacing.unit * 7,
     paddingRight: theme.spacing.unit * 7,
     maxWidth: theme.breakpoints.values.lg,
@@ -31,14 +33,13 @@ const styles = theme => ({
   }
 })
 
-class MedicineList extends React.Component {
+class CarePoints extends React.Component {
   componentDidMount () {
-    // Represents to get medicine list with page size and size per page.
-    this.props.actions.getRelatedMedicinesLoading(
-      this.props.medicineListState,
-      'Multivitamin', // pass salt name
-      0, // page number
-      3 // page size
+    //Represents to get care point with customer Id.
+    this.props.actions.getCarePointDetailsLoading(
+      this.props.carePointState,
+      100036079,
+      'all'
     )
   }
 
@@ -46,8 +47,10 @@ class MedicineList extends React.Component {
     return (
       <div>
         <Header />
-        <div className={this.props.classes.root}>
-          <MedicineListWrapper />
+        <div>
+          <Paper className={this.props.classes.root} elevation={1}>
+            <CarePointWrapper />
+          </Paper>
         </div>
         <Footer />
       </div>
@@ -57,7 +60,7 @@ class MedicineList extends React.Component {
 
 function mapStateToProps (state) {
   return {
-    medicineListState: state.medicineListState
+    carePointState: state.carePointState
   }
 }
 
@@ -65,7 +68,7 @@ function mapDispatchToProps (dispatch) {
   return {
     actions: bindActionCreators(
       {
-        getRelatedMedicinesLoading
+        getCarePointDetailsLoading
       },
       dispatch
     )
@@ -75,4 +78,4 @@ function mapDispatchToProps (dispatch) {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(withRoot(withStyles(styles)(MedicineList)))
+)(withRoot(withStyles(styles)(CarePoints)))

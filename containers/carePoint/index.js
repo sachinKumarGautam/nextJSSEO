@@ -4,27 +4,26 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
 import BreadCrumbs from '../../components/BreadCrumbs'
-import MedicineList from './MedicineList'
+import CarePoint from './CarePoint'
 
 import {
-  getRelatedMedicinesLoading
-} from './medicineListActions'
+  getCarePointDetailsLoading
+} from './carePointActions'
 
 /*
   bread crumbs
-  label
-  medicine list
+  care point details
 */
 
-class MedicineListWrapper extends Component {
+class CarePointWrapper extends Component {
   render () {
     return (
       <div>
         <BreadCrumbs />
         <section >
-          <MedicineList
-            medicineListState={this.props.medicineListState}
-            getRelatedMedicinesLoading={this.props.actions.getRelatedMedicinesLoading}
+          <CarePoint
+            carePointState={this.props.carePointState}
+            getCarePointDetailsLoading={this.props.actions.getCarePointDetailsLoading}
           />
         </section>
       </div>
@@ -36,20 +35,22 @@ function mapDispatchToProps (dispatch) {
   return {
     actions: bindActionCreators(
       {
-        getRelatedMedicinesLoading
+        getCarePointDetailsLoading
       },
       dispatch
     )
   }
 }
 
+
 function mapStateToProps (state) {
   return {
-    medicineListState: state.medicineListState
+    carePointState: state.carePointState
   }
 }
+
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(MedicineListWrapper)
+)(CarePointWrapper)

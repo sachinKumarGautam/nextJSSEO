@@ -46,33 +46,6 @@ const styles = theme => {
   }
 }
 
-const data = [
-  {
-    id: 1,
-    key: 'Avoid',
-    value: 'Should be avoided in hypertensive patients and during pregnancy',
-    src: '/static/images/avoidPrecaution.svg'
-  },
-  {
-    id: 2,
-    key: 'Food',
-    value: 'Avoid Alcohol',
-    src: '/static/images/foodPrecaution.svg'
-  },
-  {
-    id: 3,
-    key: 'Storage',
-    value: 'Store in a cool & dry place',
-    src: '/static/images/storagePrecaution.svg'
-  },
-  {
-    id: 4,
-    key: 'Miss Dose',
-    value: 'Skip the missed dose and continue your regular dosing schedule. Do not take two doses at the same time.',
-    src: '/static/images/missDosePrecaution.svg'
-  }
-]
-
 const TableContent = (props) => (
   <div id={props.itemKey}>
     <div className={props.classes.titleWrapper}>

@@ -7,6 +7,8 @@ import CardContent from '@material-ui/core/CardContent'
 
 import RelatedMedicinesCard from './RelatedMedicinesCard'
 
+import Link from 'next/link'
+
 const styles = theme => {
   return {
     title: {
@@ -60,7 +62,9 @@ const RelatedMedicines = (props) => (
         </ul>
       </CardContent>
     </Card>
-    <a className={props.classes.viewAllLink}>view all</a>
+    <Link as={`/medicine-list`} href={`/medicine-list?name=Multivitamin`}>
+      <a className={props.classes.viewAllLink}>view all</a>
+    </Link>
   </div>
 )
 

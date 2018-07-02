@@ -1,8 +1,4 @@
-import { interval } from 'rxjs/observable/interval'
-import { of } from 'rxjs/observable/of'
-import { takeUntil, mergeMap, catchError, map } from 'rxjs/operators'
-import { combineEpics, ofType } from 'redux-observable'
-import ajax from 'universal-rx-request' // because standard AjaxObservable only works in browser
+import { combineEpics } from 'redux-observable'
 
 import {
   getMoleculeSummary
@@ -11,6 +7,10 @@ import {
 import {
   getRelatedMedicines
 } from '../containers/medicineList/medicineListEpics'
+
+import {
+  carePointsList
+} from '../containers/carePoint/carePointEpics'
 
 // import * as actions from './actions'
 // import * as types from './actionTypes'
@@ -57,5 +57,6 @@ import {
 
 export const rootEpic = combineEpics(
   getMoleculeSummary,
-  getRelatedMedicines
+  getRelatedMedicines,
+  carePointsList
 )
