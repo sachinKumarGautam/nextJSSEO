@@ -1,9 +1,13 @@
-import React from 'react'
+import React, { Component } from 'react'
+
 import Header from '../components/layouts/header'
 import Footer from '../components/layouts/footer/Footer'
 
 import { withStyles } from '@material-ui/core/styles'
 import withRoot from '../src/withRoot'
+
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
 
 import Paper from '@material-ui/core/Paper'
 
@@ -27,25 +31,44 @@ const styles = theme => ({
   }
 })
 
-const ProductDetails = (props) => (
-  <div>
-    <Header />
-    <div>
-      <Paper className={props.classes.root} elevation={1}>
-        {/* <div>
-          Next stars: {props.stars}
-        </div> */}
-        <ProductDetailsWrapper />
-      </Paper>
-    </div>
-    <Footer />
-  </div>
-)
+class ProductDetails extends Component {
+  componentDidMount () {
+    // get anonymous cart
+  }
 
-// ProductDetails.getInitialProps = async ({ req }) => {
-//   const res = await fetch('https://api.github.com/repos/zeit/next.js')
-//   const json = await res.json()
-//   return { stars: json.stargazers_count }
-// }
+  render () {
+    return (
+      <div>
+        <Header />
+        <div>
+          <Paper className={this.props.classes.root} elevation={1}>
+            <ProductDetailsWrapper />
+          </Paper>
+        </div>
+        <Footer />
+      </div>
+    )
+  }
+}
 
-export default withRoot(withStyles(styles)(ProductDetails))
+function mapStateToProps (state) {
+  return {
+    cartDetailsState: state.cartDetailsState
+  }
+}
+
+function mapDispatchToProps (dispatch) {
+  return {
+    actions: bindActionCreators(
+      {
+
+      },
+      dispatch
+    )
+  }
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withRoot(withStyles(styles)(ProductDetails)))
