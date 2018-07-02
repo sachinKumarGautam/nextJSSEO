@@ -3,10 +3,11 @@ import Header from '../components/layouts/header'
 import Footer from '../components/layouts/footer/Footer'
 
 import { withStyles } from '@material-ui/core/styles'
-import withRoot from '../src/withRoot'
-import withRedux from 'next-redux-wrapper'
-import initStore from '../redux'
 import { bindActionCreators } from 'redux'
+
+import withRoot from '../src/withRoot'
+
+import { connect } from 'react-redux'
 
 import Paper from '@material-ui/core/Paper'
 
@@ -74,8 +75,7 @@ function mapDispatchToProps (dispatch) {
   }
 }
 
-export default withRedux(
-  initStore,
+export default connect(
   mapStateToProps,
   mapDispatchToProps
 )(withRoot(withStyles(styles)(CarePoints)))
