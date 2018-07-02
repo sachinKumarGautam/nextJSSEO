@@ -49,11 +49,14 @@ const styles = theme => ({
     border: `0.5px solid ${theme.palette.customGrey.grey250}`,
     borderRadius: theme.spacing.unit / 2,
     marginRight: theme.spacing.unit * 2,
-    marginLeft: theme.spacing.unit,
+    marginLeft: theme.spacing.unit * 2,
     marginTop: theme.spacing.unit * 2
   },
   detailWrapper: {
     marginRight: theme.spacing.unit * 2,
+    wordWrap: 'break-word',
+    whiteSpace: 'normal',
+    width: '60%'
   }
 })
 
