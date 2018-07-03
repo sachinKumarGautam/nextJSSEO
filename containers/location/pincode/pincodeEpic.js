@@ -1,10 +1,10 @@
 import { of } from 'rxjs/observable/of'
 import { mergeMap, catchError, map } from 'rxjs/operators'
 import { ofType } from 'redux-observable'
-import http from '../../services/api/ajaxWrapper'
 import {CHECK_PINCODE_LOADING} from './pincodeActionTypes'
 import {checkPincodeSuccess, checkPincodeFailure} from './pincodeAction'
-import {checkPincode$} from '../../../services/api/index'
+import {checkPincode$} from '../../../services/api'
+import http from '../../../services/api/ajaxWrapper'
 
 /**
  * Represents to the epic of get medicine list.
@@ -17,6 +17,10 @@ export function checkPincode (action$, store) {
     mergeMap(data => {
       return http(checkPincode$(data.pincode)).pipe(
         map(result => {
+          setTimeout(() => {
+            data.handleClose()
+          }, 350)
+          data.setSubmitting(false)
           return checkPincodeSuccess(data.checkPincodeState, result)
         }),
         catchError(error => {

@@ -25,6 +25,9 @@ import {
   getAnonymousCartIdEpic
 } from '../containers/cartDetails/cartEpics'
 
+import {
+  checkPincode
+} from '../containers/location/pincode/pincodeEpic'
 // import * as actions from './actions'
 // import * as types from './actionTypes'
 
@@ -77,5 +80,6 @@ export const rootEpic = combineEpics(
   fetchUserInfo,
   getRelatedMedicines,
   carePointsList,
-  getAnonymousCartIdEpic
+  getAnonymousCartIdEpic,
+  checkPincode
 )

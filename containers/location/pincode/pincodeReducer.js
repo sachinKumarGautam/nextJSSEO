@@ -24,7 +24,7 @@ export default function checkPincodeReducer (state = initialState, action) {
     case CHECK_PINCODE_SUCCESS:
       return {
         ...state,
-        payload: action.payload,
+        // payload: action.payload,
         isLoading: action.isLoading
       }
 

@@ -19,6 +19,8 @@ import {
   getAnonymousCartIdLoading
 } from '../containers/cartDetails/cartActions'
 
+import {checkPincodeLoading} from '../containers/location/pincode/pincodeAction'
+
 const styles = theme => ({
   root: {
     paddingTop: 16,
@@ -52,7 +54,10 @@ class ProductDetails extends Component {
         <Header />
         <div>
           <Paper className={this.props.classes.root} elevation={1}>
-            <ProductDetailsWrapper />
+            <ProductDetailsWrapper
+              checkPincodeState={this.props.checkPincodeState}
+              checkPincodeLoading={this.props.actions.checkPincodeLoading}
+            />
           </Paper>
         </div>
         <Footer />
@@ -64,6 +69,7 @@ class ProductDetails extends Component {
 function mapStateToProps (state) {
   return {
     cartState: state.cartState,
+    checkPincodeState: state.checkPincodeState,
     cartDetailsState: state.cartDetailsState
   }
 }
@@ -72,7 +78,8 @@ function mapDispatchToProps (dispatch) {
   return {
     actions: bindActionCreators(
       {
-        getAnonymousCartIdLoading
+        getAnonymousCartIdLoading,
+        checkPincodeLoading
       },
       dispatch
     )

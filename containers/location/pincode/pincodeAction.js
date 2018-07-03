@@ -4,29 +4,36 @@ import {
   CHECK_PINCODE_FAILURE
 } from './pincodeActionTypes'
 
-export function checkPincodeLoading (locationState, pincode) {
+export function checkPincodeLoading (
+  checkPincodeState, 
+  handleClose, 
+  setSubmitting, 
+  values
+) {
   return {
     type: CHECK_PINCODE_LOADING,
-    locationState,
-    pincode,
+    checkPincodeState,
+    handleClose, 
+    setSubmitting, 
+    pincode: values.pincode,
     isLoading: true,
     isError: false,
     error: {}
   }
 }
 
-export function checkPincodeSuccess (locationState, result) {
+export function checkPincodeSuccess (checkPincodeState, result) {
   return {
     type: CHECK_PINCODE_SUCCESS,
-    locationState,
+    checkPincodeState,
     isLoading: false
   }
 }
 
-export function checkPincodeFailure (locationState, error) {
+export function checkPincodeFailure (checkPincodeState, error) {
   return {
     type: CHECK_PINCODE_FAILURE,
-    locationState,
+    checkPincodeState,
     isLoading: false,
     isError: true,
     error: error

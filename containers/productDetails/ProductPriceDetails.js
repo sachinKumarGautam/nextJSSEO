@@ -82,6 +82,10 @@ class ProductPriceDetails extends Component {
                 color='primary'
                 onClick={this.handleClickOpen}
                 label={'Add To Cart'}
+                handleClose={this.handleClose}
+                open={this.state.open}
+                checkPincodeState={this.props.checkPincodeState}
+                checkPincodeLoading={this.props.checkPincodeLoading}
               />
             </div>
           </CardContent>
