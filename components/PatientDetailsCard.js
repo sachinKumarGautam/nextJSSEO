@@ -18,7 +18,7 @@ const styles = theme => {
     patientWrapperSelectedStyle: {
       border: `1px solid ${theme.palette.customGrey.grey250}`,
       width: theme.spacing.unit * 42.5,
-      backgroundColor: 'rgb(243, 253, 232)',
+      backgroundColor: theme.palette.customGreen.green200,
       padding: theme.spacing.unit * 2.5,
       borderRadius: theme.spacing.unit * 0.5
     },

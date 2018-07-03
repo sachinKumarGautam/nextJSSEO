@@ -17,7 +17,7 @@ const styles = theme => {
     },
     addressWrapperSelectedStyle: {
       border: `1px solid ${theme.palette.customGrey.grey250}`,
-      backgroundColor: 'rgb(243, 253, 232)',
+      backgroundColor: theme.palette.customGreen.green200,
       width: theme.spacing.unit * 42.5,
       padding: theme.spacing.unit * 2.5,
       borderRadius: theme.spacing.unit * 0.5
@@ -61,46 +61,40 @@ const AddressDetailsCard = props => (
         >
           {props.deliveryDetail.type}
         </Typography>
-        <div>
-          <Typography
-            variant="caption"
-            className={props.classes.addressStyle}
-          >
-            {props.deliveryDetail.street1}
-          </Typography>
-        </div>
-        <div>
-          <Typography
-            variant="caption"
-            className={props.classes.medicineNameStyle}
-          >
-            {props.deliveryDetail.street2}
-          </Typography>
-        </div>
-        <div>
-          <Grid container spacing={24}>
-            <Grid item xs={3}>
-              <div>
-                <Typography
-                  variant="caption"
-                  className={props.classes.buttonLabel}
-                >
-                  EDIT
-                </Typography>
-              </div>
-            </Grid>
-            <Grid item xs={3}>
-              <div>
-                <Typography
-                  variant="caption"
-                  className={props.classes.buttonLabel}
-                >
-                  DELETE
-                </Typography>
-              </div>
-            </Grid>
+        <Typography
+          variant="caption"
+          className={props.classes.addressStyle}
+        >
+          {props.deliveryDetail.street1}
+        </Typography>
+        <Typography
+          variant="caption"
+          className={props.classes.medicineNameStyle}
+        >
+          {props.deliveryDetail.street2}
+        </Typography>
+        <Grid container spacing={24}>
+          <Grid item xs={3}>
+            <div>
+              <Typography
+                variant="caption"
+                className={props.classes.buttonLabel}
+              >
+                EDIT
+              </Typography>
+            </div>
           </Grid>
-        </div>
+          <Grid item xs={3}>
+            <div>
+              <Typography
+                variant="caption"
+                className={props.classes.buttonLabel}
+              >
+                DELETE
+              </Typography>
+            </div>
+          </Grid>
+        </Grid>
       </Grid>
     </Grid>
   </div>

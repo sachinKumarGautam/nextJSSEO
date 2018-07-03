@@ -14,7 +14,8 @@ import DeliveryDetailsList from './DeliveryDetailsList'
 const styles = theme => {
   return {
     mainStyle: {
-      boxShadow: '0 0 6px 0 rgba(224, 224, 224, 0.72)',
+      boxShadow: `0 0 6px 0 ${theme.palette.customGrey.grey800}`,
+      opacity: 0.72,
       marginBottom: theme.spacing.unit * 2.5,
       height: theme.spacing.unit * 62.5,
     }
@@ -26,9 +27,9 @@ const DeliveryDetailsWrapper = props => (
     <BreadCrumbs />
     <Grid container spacing={24}>
       <Grid item xs={3}>
-        <section>
+        <aside>
           <SideMenu />
-        </section>
+        </aside>
       </Grid>
       <Grid item xs={8} className={props.classes.mainStyle}>
         <DeliveryDetailsList

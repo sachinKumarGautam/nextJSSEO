@@ -29,6 +29,7 @@ export function getDeliveryDetailsList (action$, store) {
         map(result => {
           const payload = result.body.payload
           const modifiedPayload = payload.map(address => {
+            // TODO developer: need to change in future - Others
             return {
               ...address,
               type: address.type ? address.type : 'Others'

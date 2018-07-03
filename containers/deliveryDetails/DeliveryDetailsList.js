@@ -6,7 +6,7 @@ import Typography from '@material-ui/core/Typography'
 import { withStyles } from '@material-ui/core/styles'
 
 import Button from '../../components/button'
-import AddressDetailsCard from '../../components/AddressDetailsCard'
+import AddressDetailsCardWrapper from './AddressDetailsCardWrapper'
 
 const styles = theme => {
   return {
@@ -68,21 +68,10 @@ class Main extends Component {
         >
           Addresses
         </Typography>
-        <Grid container spacing={24}>
-          {
-            this.props.deliveryDetailsState.payload.map(deliveryDetail => {
-              return (
-                <Grid item xs={6}>
-                  <AddressDetailsCard
-                    deliveryDetail={deliveryDetail}
-                    saveAddressSelected={this.saveAddressSelected.bind(this)}
-                    addressIdSelected={this.state.addressIdSelected}
-                  />
-                </Grid>
-              )
-            })
-          }
-        </Grid>
+        <AddressDetailsCardWrapper
+          payload={this.props.deliveryDetailsState.payload}
+          saveAddressSelected={this.saveAddressSelected.bind(this)}
+        />
         <div className={this.props.classes.buttonWrapper}>
           <Button
             size='small'
