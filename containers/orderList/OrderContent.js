@@ -99,7 +99,6 @@ const styles = theme => {
   }
 }
 
-<<<<<<< HEAD
 class OrderContent extends Component {
   render () {
     let state = this.props.orderDetails.state
@@ -133,108 +132,32 @@ class OrderContent extends Component {
               {viewStatus}
             </Typography>
           </div>
-=======
-const OrderContent = (props) => {
-  return (
-    <div>
-      <div className={props.classes.userDetailWrapper}>
-        <div>
-          <Typography
-            variant='caption'
-            className={props.classes.userNameStyle}
-          >
-            <Person className={props.classes.userIconStyle} />{props.orderList.user_name}
-          </Typography>
         </div>
-        <div>
-          <Typography
-            variant='caption'
-            className={
-              props.orderList.status === 'Payment Pending'
-                ? props.classes.pendingStyle
-                : props.classes.statusStyle
-            }
-          >
-            {props.orderList.status}
-          </Typography>
-        </div>
-      </div>
-      <div className={props.classes.medicineDetailWrapper}>
-        <img
-          src='./../../static/images/avenger.jpg'
-          className={props.classes.prescriptionStyle}
-        />
-        <div>
-          <Typography
-            variant='caption'
-            className={props.classes.medicineNameStyle}
-          >
-            Glycomet 0.5 MG
-          </Typography>
-          <Typography
-            variant='caption'
-            className={props.classes.medicineNameStyle}
-          >
-            Zoryl MF 2MG
-          </Typography>
-          <Typography
-            variant='caption'
-            className={props.classes.quantityStyle}
-          >
-            + 2 Items
-          </Typography>
->>>>>>> 06b63f99b00a52cd71af51cea6b7954f0b45e5c7
-        </div>
-        <div className={this.props.classes.medicineDetailWrapper}>
-          <img
-            src={image}
-            className={this.props.classes.prescriptionStyle}
-          />
-<<<<<<< HEAD
-          <div>
-            {
-              this.props.orderDetails.items.map((itemDetail, index) => (
-                index < 3 && 
-                <Typography
-                  variant="caption"
-                  className={this.props.classes.medicineNameStyle}
-                >
-                  {itemDetail.name}
-                </Typography>
-              ))
-=======
-        </div>
-      }
-      <div className={props.classes.reviewWrapperStyle}>
-        <div className={props.classes.reviewHelpWrapper}>
-          <Typography
-            variant='caption'
-            className={props.classes.reviewStyle}
-          >
-            Write a review
-          </Typography>
-          <Typography
-            variant='caption'
-            className={props.classes.helpStyle}
-          >
-            Need Help?
-          </Typography>
-        </div>
-        <div>
-          <a className={props.classes.cancelStyle}>
-            {
-              props.orderList.order_status === 'cancel'
-                ? 'Cancel Order' : 'Return Order'
->>>>>>> 06b63f99b00a52cd71af51cea6b7954f0b45e5c7
-            }
-            <Typography
-              variant="caption"
-              className={this.props.classes.quantityStyle}
-            >
-              {(itemsLeft > 0) && `+${itemsLeft} Items`}
-            </Typography>
+          <div className={this.props.classes.medicineDetailWrapper}>
+            <img
+              src={image}
+              className={this.props.classes.prescriptionStyle}
+            />
+            <div>
+              {
+                this.props.orderDetails.items.map((itemDetail, index) => (
+                  index < 3 &&
+                  <Typography
+                    variant="caption"
+                    className={this.props.classes.medicineNameStyle}
+                  >
+                    {itemDetail.name}
+                  </Typography>
+                ))
+              }
+              <Typography
+                variant="caption"
+                className={this.props.classes.quantityStyle}
+              >
+                {(itemsLeft > 0) && `+${itemsLeft} Items`}
+              </Typography>
+            </div>
           </div>
-        </div>
         {/* {
           props.orderList.payment === 'failed' &&
           <div className={this.props.classes.buttonWrapperStyle}>

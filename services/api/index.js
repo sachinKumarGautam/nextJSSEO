@@ -16,7 +16,6 @@ const getMedicineList$ = (saltName, page, size) => (
   })
 )
 
-<<<<<<< HEAD
 const getOrderList$ = (customerId, page, size) => (
   makeAjaxRequest({
     method: 'GET',
@@ -28,7 +27,9 @@ const getPrescriptionList$ = (customerId) => (
   makeAjaxRequest({
     method: 'GET',
     url: fetchUrl('account', 'customer/' + customerId + '/patient-prescriptions', 'GET_LIST')
-=======
+  })
+)
+
 const verifyOtp$ = (mobile, otp) => (
   makeAjaxRequest({
     method: 'POST',
@@ -51,7 +52,6 @@ const fetchUserInfo$ = (mobileNumber) => (
     method: 'GET',
     url: fetchUrl('account', 'customer/mobile/' + mobileNumber, 'GET_LIST')
   })
-
 )
 
 const registerCustomer$ = (data) => (
@@ -59,7 +59,6 @@ const registerCustomer$ = (data) => (
     method: 'POST',
     url: fetchUrl('account', 'customer', 'GET_LIST'),
     body: data
->>>>>>> 06b63f99b00a52cd71af51cea6b7954f0b45e5c7
   })
 )
 
@@ -79,14 +78,11 @@ const getCarePointsList$ = (customerId, cashType) => (
 export {
   getMoleculeSummary$,
   getMedicineList$,
-<<<<<<< HEAD
   getOrderList$,
   getPrescriptionList$,
-=======
   verifyOtp$,
   sendOtp$,
   fetchUserInfo$,
   registerCustomer$,
->>>>>>> 06b63f99b00a52cd71af51cea6b7954f0b45e5c7
   getCarePointsList$
 }
