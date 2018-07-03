@@ -38,7 +38,7 @@ class Orders extends React.Component {
     //Represents to get order list details with page size and size per page.
     this.props.actions.getOrderListDetailsLoading(
       this.props.orderListState,
-      100059324, // pass customer Id
+      100183363, // pass customer Id
       0, // page number
       2 // page size
     )

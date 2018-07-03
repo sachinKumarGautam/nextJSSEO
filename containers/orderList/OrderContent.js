@@ -45,7 +45,8 @@ const styles = theme => {
       paddingTop: theme.spacing.unit * 3,
       paddingLeft: theme.spacing.unit * 3,
       display: 'flex',
-      flexDirection: 'row'
+      flexDirection: 'row',
+      paddingBottom: theme.spacing.unit * 3
     },
     medicineNameStyle: {
       color: theme.palette.customGrey.grey500
@@ -104,6 +105,9 @@ class OrderContent extends Component {
     let status = this.props.orderDetails.status
     let orderStatus = getOrderStatusProgressDetails(state, status)
     let viewStatus = orderStatus.viewStatus
+    let itemsLeft = this.props.orderDetails.items.length - 3
+    let image = this.props.orderDetails.prescriptions.length &&
+      this.props.orderDetails.prescriptions[0].location
     return (
       <div>
         <div className={this.props.classes.userDetailWrapper}>
@@ -131,27 +135,26 @@ class OrderContent extends Component {
         </div>
         <div className={this.props.classes.medicineDetailWrapper}>
           <img
-            src='./../../static/images/avenger.jpg'
+            src={image}
             className={this.props.classes.prescriptionStyle}
           />
           <div>
-            <Typography
-              variant="caption"
-              className={this.props.classes.medicineNameStyle}
-            >
-              Glycomet 0.5 MG
-            </Typography>
-            <Typography
-              variant="caption"
-              className={this.props.classes.medicineNameStyle}
-            >
-              Zoryl MF 2MG
-            </Typography>
+            {
+              this.props.orderDetails.items.map((itemDetail, index) => (
+                index < 3 && 
+                <Typography
+                  variant="caption"
+                  className={this.props.classes.medicineNameStyle}
+                >
+                  {itemDetail.name}
+                </Typography>
+              ))
+            }
             <Typography
               variant="caption"
               className={this.props.classes.quantityStyle}
             >
-              + 2 Items
+              {(itemsLeft > 0) && `+${itemsLeft} Items`}
             </Typography>
           </div>
         </div>
@@ -179,7 +182,7 @@ class OrderContent extends Component {
               label={'Convert to COD'}
             />
           </div>
-        } */}
+        }
         <div className={this.props.classes.reviewWrapperStyle}>
           <div className={this.props.classes.reviewHelpWrapper}>
             <Typography
@@ -204,7 +207,7 @@ class OrderContent extends Component {
               Cancel Order
             </a>
           </div>
-        </div>
+        </div> */}
       </div>
     )
   }

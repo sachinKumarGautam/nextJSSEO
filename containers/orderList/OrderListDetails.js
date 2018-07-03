@@ -49,6 +49,26 @@ const styles = theme => ({
 })
 
 class OrderListDetails extends Component {
+  constructor(props) {
+    super(props)
+    this.state ={
+      page: 0
+    }
+  }
+
+  onClickOfShowMore() {
+    this.props.getOrderListDetailsLoading(
+      this.props.orderListState,
+      100183363, // pass customer Id
+      this.state.page + 1, // page number
+      2 // page size
+    )
+
+    this.setState({
+      page: this.state.page + 1
+    })
+  }
+
   render () {
     return (
       <Card elevation={'1'} className={this.props.classes.card}>
@@ -89,7 +109,7 @@ class OrderListDetails extends Component {
                 root: this.props.classes.buttonRoot,
                 label: this.props.classes.buttonLabel
               }}
-              onClick={this.handleClickOpen}
+              onClick={this.onClickOfShowMore.bind(this)}
               label={'Show more'}
             />
           </div>
