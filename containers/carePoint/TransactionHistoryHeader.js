@@ -2,17 +2,17 @@ import React, { Component } from 'react'
 
 import Typography from '@material-ui/core/Typography'
 import { withStyles } from '@material-ui/core/styles'
-import Radio from '@material-ui/core/Radio';
+import Radio from '@material-ui/core/Radio'
 import RadioGroup from '@material-ui/core/RadioGroup'
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import RadioButtonUncheckedIcon from '@material-ui/icons/RadioButtonUnchecked';
-import RadioButtonCheckedIcon from '@material-ui/icons/RadioButtonChecked';
+import FormControlLabel from '@material-ui/core/FormControlLabel'
+import RadioButtonUncheckedIcon from '@material-ui/icons/RadioButtonUnchecked'
+import RadioButtonCheckedIcon from '@material-ui/icons/RadioButtonChecked'
 
 const styles = theme => ({
   transactionHeaderWrapper: {
     display: 'flex',
     flexDirection: 'row',
-    borderBottom: `1px solid ${theme.palette.customGrey.grey300}`,
+    borderBottom: `1px solid ${theme.palette.customGrey.grey300}`
   },
   transactionTitle: {
     color: theme.palette.customGrey.grey500,
@@ -42,13 +42,13 @@ const styles = theme => ({
 })
 
 class TransactionHistoryHeader extends Component {
-  constructor(props){
+  constructor (props) {
     super(props)
-    this.state={
+    this.state = {
       radioValue: 'all'
     }
   }
-  onClickOfRadio(event, value) {
+  onClickOfRadio (event, value) {
     this.props.getCarePointDetailsLoading(
       this.props.carePointState,
       100036079,
@@ -78,45 +78,45 @@ class TransactionHistoryHeader extends Component {
             onChange={this.onClickOfRadio.bind(this)}
           >
             <FormControlLabel
-              value="bonus"
+              value='bonus'
               control={
                 <Radio
-                  color="primary"
+                  color='primary'
                   className={this.props.classes.radioSize}
                   icon={<RadioButtonUncheckedIcon className={this.props.classes.size} />}
                   checkedIcon={<RadioButtonCheckedIcon className={this.props.classes.size} />}
                 />
               }
-              label="CARE POINTS"
+              label='CARE POINTS'
               classes={{
                 label: this.props.classes.radioButtonStyle
               }}
             />
             <FormControlLabel
-              value="cash"
+              value='cash'
               control={
                 <Radio
-                  color="primary"
+                  color='primary'
                   className={this.props.classes.radioSize}
                   icon={<RadioButtonUncheckedIcon className={this.props.classes.size} />}
                   checkedIcon={<RadioButtonCheckedIcon className={this.props.classes.size} />}
                 />}
-              label="CARE POINTS +"
+              label='CARE POINTS +'
               classes={{
                 label: this.props.classes.radioButtonStyle
               }}
             />
             <FormControlLabel
-              value="all"
+              value='all'
               control={
                 <Radio
-                  color="primary"
+                  color='primary'
                   className={this.props.classes.radioSize}
                   icon={<RadioButtonUncheckedIcon className={this.props.classes.size} />}
                   checkedIcon={<RadioButtonCheckedIcon className={this.props.classes.size} />}
                 />
               }
-              label="ALL"
+              label='ALL'
               classes={{
                 label: this.props.classes.radioButtonStyle
               }}

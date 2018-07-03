@@ -26,6 +26,9 @@ const styles = theme => ({
     color: theme.palette.primary.main
   }
 })
+
+// IGNORE React.Component linter warning in js standard style
+
 class Subheader extends React.Component {
   constructor (props) {
     super(props)

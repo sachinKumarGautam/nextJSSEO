@@ -1,6 +1,5 @@
 import Paper from '@material-ui/core/Paper'
 import { withStyles } from '@material-ui/core/styles'
-import Typography from '@material-ui/core/Typography'
 import CompanyInfo from './CompanyInfo'
 import ContactUs from './ContantUs'
 import Categories from './Categories'

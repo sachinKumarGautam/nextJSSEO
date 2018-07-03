@@ -5,7 +5,7 @@ const styles = theme => ({
   iconWithText: {
     display: 'flex',
     flexDirection: 'row',
-    alignItems: 'flex-start',
+    alignItems: 'center',
     marginBottom: theme.spacing.unit * 2.25
   },
   listHeaderText: {
