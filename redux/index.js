@@ -27,7 +27,7 @@ export default function initStore (initialState, {isServer, req, debug, storeKey
 
     const persistConfig = {
       key: 'nextjs',
-      blacklist: ['medicineListState'],
+      blacklist: ['medicineListState', 'prescriptionState'],
       storage
     }
 

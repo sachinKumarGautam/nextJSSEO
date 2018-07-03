@@ -18,6 +18,10 @@ import {
 } from '../containers/medicineList/medicineListEpics'
 
 import {
+  getPrescriptionList
+} from '../containers/prescription/prescriptionEpics'
+
+import {
   carePointsList
 } from '../containers/carePoint/carePointEpics'
 
@@ -72,5 +76,6 @@ export const rootEpic = combineEpics(
   getRelatedMedicines,
   fetchUserInfo,
   getRelatedMedicines,
+  getPrescriptionList,
   carePointsList
 )
