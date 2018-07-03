@@ -48,6 +48,10 @@ const appReducer = combineReducers({
 
 const reducer = (state, action) => {
   // TODO: reset all state
+  if (action.type === 'RESET_APPLICATION_STATE') {
+    state = undefined
+  }
+
   return appReducer(state, action)
 }
 
