@@ -81,6 +81,15 @@ const getCartDetails$ = cartUid => (
   })
 )
 
+const checkPincode$ = (pincode) => (
+
+  makeAjaxRequest({
+    method: 'GET',
+    url: fetchUrl('shipping', 'place/pincode/' + pincode, 'GET_LIST')
+  })
+
+)
+
 export {
   getMoleculeSummary$,
   getMedicineList$,
@@ -90,5 +99,6 @@ export {
   verifyOtp$,
   sendOtp$,
   fetchUserInfo$,
-  registerCustomer$
+  registerCustomer$,
+  checkPincode$
 }

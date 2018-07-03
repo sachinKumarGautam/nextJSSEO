@@ -11,7 +11,7 @@ import StrokePrice from '../../components/StrokePrice'
 import ProductDiscount from '../../components/ProductDiscount'
 import DeliveryInfoWrapper from '../../components/DeliveryInfoWrapper'
 import QuantityField from '../../components/QuantityField'
-import PincodeDialog from './PincodeDialog'
+import AddToCartButton from '../cartDetails/addToCartWrapper'
 
 /*
   Product price
@@ -76,7 +76,7 @@ class ProductPriceDetails extends Component {
             <DeliveryInfoWrapper />
             <div className={classes.cardActions}>
               <QuantityField />
-              <Button
+              <AddToCartButton
                 variant='raised'
                 size='small'
                 color='primary'
@@ -86,10 +86,6 @@ class ProductPriceDetails extends Component {
             </div>
           </CardContent>
         </Card>
-        <PincodeDialog
-          handleClose={this.handleClose}
-          open={this.state.open}
-        />
       </div>
     )
   }

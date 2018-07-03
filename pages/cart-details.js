@@ -33,7 +33,7 @@ const styles = theme => ({
 })
 
 class CartDetails extends React.Component {
-  componentDidMount() {
+  componentDidMount () {
     const cartUid = this.props.cartState.payload.uid
 
     this.props.actions.getCartDetailsLoading(
@@ -42,7 +42,7 @@ class CartDetails extends React.Component {
     )
   }
 
-  componentWillReceiveProps(nextProps) {
+  componentWillReceiveProps (nextProps) {
     if (nextProps.cartState.payload.uid !== this.props.cartState.payload.uid) {
       const cartUid = nextProps.cartState.payload.uid
 
@@ -53,7 +53,7 @@ class CartDetails extends React.Component {
     }
   }
 
-  render() {
+  render () {
     return (
       <div>
         <Header />

@@ -15,7 +15,7 @@ import ProductDetailsWrapper from '../containers/productDetails'
 
 // import fetch from 'isomorphic-fetch'
 
-import  {
+import {
   getAnonymousCartIdLoading
 } from '../containers/cartDetails/cartActions'
 

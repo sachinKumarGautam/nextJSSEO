@@ -1,7 +1,7 @@
 import React from 'react'
 
 import { withStyles } from '@material-ui/core/styles'
-import Button from '../../components/button'
+import Button from '../../../components/button'
 import TextField from '@material-ui/core/TextField'
 import Dialog from '@material-ui/core/Dialog'
 import DialogActions from '@material-ui/core/DialogActions'

@@ -20,7 +20,6 @@ import {
   getCartDetails$
 } from '../../services/api'
 
-
 export function getAnonymousCartIdEpic (action$, store) {
   return action$.pipe(
     ofType(GET_ANONYMOUS_CART_ID_LOADING),
@@ -43,7 +42,6 @@ export function getCartDetailsEpic (action$, store) {
     mergeMap(data => {
       return http(getCartDetails$(data.cartUid)).pipe(
         map(result => {
-          debugger
           return getAnonymousCartIdSuccess(data.cartState, result.body.payload.content[0])
         }),
         catchError(error => {

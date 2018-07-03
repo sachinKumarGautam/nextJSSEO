@@ -1,14 +1,14 @@
 import React, { Component } from 'react'
 
-import { withStyles } from '@material-ui/core/styles';
-import Typography from '@material-ui/core/Typography';
+import { withStyles } from '@material-ui/core/styles'
+import Typography from '@material-ui/core/Typography'
 
 const styles = theme => ({
   avatarWrapper: {
     borderBottom: '1px solid #eee',
     padding: theme.spacing.unit * 2.5
   }
-});
+})
 
 class Avatar extends Component {
   render () {

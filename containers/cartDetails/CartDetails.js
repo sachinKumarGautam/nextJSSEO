@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 
-import { withStyles } from '@material-ui/core/styles';
-import Typography from '@material-ui/core/Typography';
+import { withStyles } from '@material-ui/core/styles'
+import Typography from '@material-ui/core/Typography'
 
 import Avatar from './Avatar'
 import MedicineList from './MedicineList'
@@ -35,7 +35,7 @@ const styles = theme => ({
     marginLeft: theme.spacing.unit * 2.5,
     fontWeight: theme.typography.fontWeightBold
   }
-});
+})
 
 class CartDetails extends Component {
   render () {
