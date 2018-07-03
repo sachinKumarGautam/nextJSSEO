@@ -6,7 +6,15 @@ import Typography from '@material-ui/core/Typography';
 
 const styles = theme => ({
   carePointsWrapper: {
-    padding: theme.spacing.unit * 1.25
+    padding: theme.spacing.unit * 2,
+    paddingBottom: 0
+  },
+  carePointsText: {
+    fontSize: theme.spacing.unit * 2,
+    fontWeight: theme.typography.fontWeightBold
+  },
+  carePoints: {
+    fontSize: theme.spacing.unit * 2
   }
 });
 
@@ -16,12 +24,12 @@ class CarePoints extends Component {
       <div className={this.props.classes.carePointsWrapper}>
         <Grid container spacing={24}>
           <Grid item xs={4}>
-            <Typography>
+            <Typography className={this.props.classes.carePointsText}>
               Care Points :
             </Typography>
           </Grid>
           <Grid item xs={2}>
-            <Typography>
+            <Typography className={this.props.classes.carePoints}>
               0
             </Typography>
           </Grid>
