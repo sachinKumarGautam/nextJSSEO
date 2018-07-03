@@ -7,7 +7,7 @@ import Typography from '@material-ui/core/Typography';
 const styles = theme => ({
   priceDetailsWrapper: {
     padding: theme.spacing.unit * 2.5,
-    borderBottom: '1px solid #eee'
+    borderBottom: `1px solid ${theme.palette.customGrey.grey800}`
   },
   itemTotal: {
     fontSize: theme.spacing.unit * 1.75,

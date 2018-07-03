@@ -9,7 +9,7 @@ const styles = theme => ({
     textAlign: 'center'
   },
   borderStyle: {
-    border: '1px dotted #979797',
+    border: `1px dotted ${theme.palette.customGrey.grey250}`,
     padding: theme.spacing.unit * 1.25,
     borderRadius: theme.spacing.unit * 0.25,
   },

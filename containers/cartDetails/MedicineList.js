@@ -12,7 +12,7 @@ import ProductPackSize from '../../components/ProductPackSize'
 const styles = theme => ({
   medicineListWrapper: {
     padding: theme.spacing.unit * 2.5,
-    borderBottom: '1px solid #eee'
+    borderBottom: `1px solid ${theme.palette.customGrey.grey800}`
   },
   cartAmountWrapper: {
     marginTop: theme.spacing.unit * 1.25
