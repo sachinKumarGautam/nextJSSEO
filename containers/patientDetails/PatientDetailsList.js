@@ -8,6 +8,8 @@ import { withStyles } from '@material-ui/core/styles'
 import Button from '../../components/button'
 import PatientDetailsCard from '../../components/PatientDetailsCard'
 
+import PatientDetailForm from './PatientDetailForm'
+
 const styles = theme => {
   return {
     nameStyle: {
@@ -40,9 +42,9 @@ const styles = theme => {
 class PatientDetailsList extends Component {
   constructor(props) {
     super(props)
-
     this.state = {
-      patientIdSelected: 0
+      patientIdSelected: 0,
+      openPatientFormDialog: false
     }
   }
 
@@ -55,6 +57,18 @@ class PatientDetailsList extends Component {
       this.props.patientDetailsState,
       patientIdSelected
     )
+  }
+
+  openPatientFormModal () {
+    this.setState({
+      openPatientFormDialog: true
+    })
+  }
+
+  closePatientFormModal () {
+    this.setState({
+      openPatientFormDialog: false
+    })
   }
 
   render () {
@@ -94,7 +108,16 @@ class PatientDetailsList extends Component {
             }}
             style={{float: 'right'}}
             label={'ADD NEW PATIENT'}
+            onClick={this.openPatientFormModal.bind(this)}
           />
+          {
+            this.state.openPatientFormDialog &&
+            <PatientDetailForm
+              closePatientFormModal = {this.closePatientFormModal.bind(this)}
+              openPatientFormDialog = {this.state.openPatientFormDialog}
+              patientFormState = {this.props.patientDetailsState}
+            />
+          }
         </div>
       </div>
     )

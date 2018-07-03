@@ -15,13 +15,20 @@ import { withStyles } from '@material-ui/core/styles'
 const styles = theme => ({
   formControl: {
     margin: theme.spacing.unit,
-    width: '100%'
+    width: '100%',
+    paddingLeft: theme.spacing.unit * 5,
+    paddingRight: theme.spacing.unit * 6
+  },
+  labelStyle: {
+    ...theme.typography.subheading,
+    color: theme.palette.customGrey.grey200,
+    paddingLeft: theme.spacing.unit * 7,
+    paddingRight: theme.spacing.unit * 5
   },
   buttonWrapper: {
-    marginTop: theme.spacing.unit * 3.5,
-    width: theme.spacing.unit * 22,
-    height: theme.spacing.unit * 4.25,
-    margin: '0 auto'
+    marginTop: theme.spacing.unit * 3,
+    textAlign: 'center',
+    marginBottom: theme.spacing.unit * 2
   },
   formHelperText: {
     textAlign: 'center'
@@ -45,7 +52,12 @@ const PatientForm = props => {
         aria-describedby='full-name'
         error={errors.full_name && touched.full_name}
       >
-        <InputLabel htmlFor='full_name'>Full Name</InputLabel>
+        <InputLabel
+          className={classes.labelStyle}
+          htmlFor='full_name'
+        >
+          Full Name
+        </InputLabel>
         <Input
           id='full_name'
           type='text'
@@ -66,7 +78,12 @@ const PatientForm = props => {
         aria-describedby='gender'
         error={errors.gender && touched.gender}
       >
-        <InputLabel htmlFor='gender'>Gender</InputLabel>
+        <InputLabel
+          className={classes.labelStyle}
+          htmlFor='gender'
+        >
+          Gender
+        </InputLabel>
         <Select
           value={values.gender}
           onChange={handleChange}
@@ -97,7 +114,12 @@ const PatientForm = props => {
         aria-describedby='age'
         error={errors.age && touched.age}
       >
-        <InputLabel htmlFor='age'>Age</InputLabel>
+        <InputLabel
+          className={classes.labelStyle}
+          htmlFor='age'
+        >
+          Age
+        </InputLabel>
         <Input
           id='age'
           type='text'
@@ -118,7 +140,12 @@ const PatientForm = props => {
         aria-describedby='mobile'
         error={errors.mobile && touched.mobile}
       >
-        <InputLabel htmlFor='mobile'>Contact No.</InputLabel>
+        <InputLabel
+          className={classes.labelStyle}
+          htmlFor='mobile'
+        >
+          Contact No.
+        </InputLabel>
         <Input
           id='mobile'
           type='text'
@@ -158,11 +185,11 @@ export default withStyles(styles)(withFormik({
   },
   validationSchema: Yup.object().shape({
     full_name: Yup.string().required('Please enter your full name'),
-    mobile: Yup.number().required('Please enter contact no.'),
+    mobile: Yup.number().required('Please enter contact detail'),
     gender: Yup.string().required('Gender is required')
   }),
   handleSubmit: (values, { props, setSubmitting }) => {
-    props.onSubmit(props.customerState, props.closeLoginModal, setSubmitting, values)
+    props.onSubmit(props.patientFormState, props.closeLoginModal, setSubmitting, values)
   },
   displayName: 'PatientForm' // helps with React DevTools
 })(PatientForm))
