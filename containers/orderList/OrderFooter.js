@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 
 import { withStyles } from '@material-ui/core/styles'
-import Typography from '@material-ui/core/Typography';
+import Typography from '@material-ui/core/Typography'
 
 import {formatDateWithMonth} from '../../utils/FormatDate'
 
@@ -33,13 +33,13 @@ const OrderFooter = (props) => {
     <div className={props.classes.wrapperStyle}>
       <div>
         <Typography
-          variant="caption"
+          variant='caption'
           className={props.classes.labelStyle}
         >
           Placed On
         </Typography>
         <Typography
-          variant="caption"
+          variant='caption'
           className={props.classes.valueStyle}
         >
           {formatDateWithMonth(props.orderDetails.created_at)}
@@ -47,13 +47,13 @@ const OrderFooter = (props) => {
       </div>
       <div>
         <Typography
-          variant="caption"
+          variant='caption'
           className={props.classes.labelStyle}
         >
           Delivery Date
         </Typography>
         <Typography
-          variant="caption"
+          variant='caption'
           className={props.classes.valueStyle}
         >
           {formatDateWithMonth(props.orderDetails.delivery_date)}
@@ -61,13 +61,13 @@ const OrderFooter = (props) => {
       </div>
       <div>
         <Typography
-          variant="caption"
+          variant='caption'
           className={props.classes.labelStyle}
         >
           Payment
         </Typography>
         <Typography
-          variant="caption"
+          variant='caption'
           className={props.classes.valueStyle}
         >
           {props.orderDetails.payment_method}
@@ -75,13 +75,13 @@ const OrderFooter = (props) => {
       </div>
       <div>
         <Typography
-          variant="caption"
+          variant='caption'
           className={props.classes.labelStyle}
         >
           Total Amount
         </Typography>
         <Typography
-          variant="caption"
+          variant='caption'
           className={props.classes.valueStyle}
         >
           {props.orderDetails.total_payable_amount}

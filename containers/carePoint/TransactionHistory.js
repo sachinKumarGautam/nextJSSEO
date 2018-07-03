@@ -76,14 +76,14 @@ class TransactionHistory extends Component {
             variant='body2'
             className={
               this.props.carePointsDetails.transaction_type === 'credit'
-              ? this.props.classes.earnedAmountStyle
-              : this.props.classes.debitedAmountStyle
+                ? this.props.classes.earnedAmountStyle
+                : this.props.classes.debitedAmountStyle
             }
           >
-              {
-                this.props.carePointsDetails.transaction_type === 'credit' ?
-                  `+${carePoint}` : `-${carePoint}`
-              }
+            {
+              this.props.carePointsDetails.transaction_type === 'credit'
+                ? `+${carePoint}` : `-${carePoint}`
+            }
           </Typography>
           {
             this.props.carePointsDetails.transaction_type === 'credit' &&

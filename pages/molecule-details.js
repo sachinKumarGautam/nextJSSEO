@@ -1,4 +1,6 @@
 import React from 'react'
+import Header from '../components/layouts/header'
+import Footer from '../components/layouts/footer'
 
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
@@ -6,11 +8,9 @@ import { bindActionCreators } from 'redux'
 import { withStyles } from '@material-ui/core/styles'
 import withRoot from '../src/withRoot'
 
-import Header from '../components/layouts/header'
-import Footer from '../components/layouts/footer/Footer'
-import MoleculeDetailsWrapper from '../containers/moleculeDetails'
-
 import Paper from '@material-ui/core/Paper'
+
+import MoleculeDetailsWrapper from '../containers/moleculeDetails'
 
 import {
   getMoleculeSummaryLoading

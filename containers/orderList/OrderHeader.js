@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 
 import { withStyles } from '@material-ui/core/styles'
-import Typography from '@material-ui/core/Typography';
+import Typography from '@material-ui/core/Typography'
 import Location from '@material-ui/icons/LocationOn'
 import IconButton from '@material-ui/core/IconButton'
 
@@ -17,7 +17,7 @@ const styles = theme => {
       paddingBottom: theme.spacing.unit
     },
     orderNoStyle: {
-      color: theme.palette.customGrey.grey500,
+      color: theme.palette.customGrey.grey500
     },
     orderIdStyle: {
       color: theme.palette.customGreen.green300,
@@ -46,13 +46,13 @@ const OrderHeader = (props) => {
     <div className={props.classes.wrapperStyle}>
       <div className={props.classes.orderWrapper}>
         <Typography
-          variant="caption"
+          variant='caption'
           className={props.classes.orderNoStyle}
         >
           Order No.
         </Typography>
         <Typography
-          variant="caption"
+          variant='caption'
           className={props.classes.orderIdStyle}
         >
           {props.orderDetails.id}
@@ -60,7 +60,7 @@ const OrderHeader = (props) => {
       </div>
       <div>
         <a className={props.classes.trackWrapper}>
-          <Location className={props.classes.iconButtonStyle}/>Track Order
+          <Location className={props.classes.iconButtonStyle} />Track Order
         </a>
       </div>
     </div>

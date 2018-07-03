@@ -16,6 +16,7 @@ const getMedicineList$ = (saltName, page, size) => (
   })
 )
 
+<<<<<<< HEAD
 const getOrderList$ = (customerId, page, size) => (
   makeAjaxRequest({
     method: 'GET',
@@ -27,6 +28,38 @@ const getPrescriptionList$ = (customerId) => (
   makeAjaxRequest({
     method: 'GET',
     url: fetchUrl('account', 'customer/' + customerId + '/patient-prescriptions', 'GET_LIST')
+=======
+const verifyOtp$ = (mobile, otp) => (
+  makeAjaxRequest({
+    method: 'POST',
+    url: fetchUrl('', 'oauth/token', 'LOGIN', {username: mobile, password: otp}),
+    authHeader: 'Basic bXNpdGUtY29uc3VtZXItY2xpZW50OnNlY3JldA=='
+  })
+)
+
+const sendOtp$ = (data) => (
+  makeAjaxRequest({
+    method: 'POST',
+    url: fetchUrl('auth', 'otp', 'CREATE'),
+    contentType: 'application/x-www-form-urlencoded',
+    body: {mobile: data.mobile}
+  })
+)
+
+const fetchUserInfo$ = (mobileNumber) => (
+  makeAjaxRequest({
+    method: 'GET',
+    url: fetchUrl('account', 'customer/mobile/' + mobileNumber, 'GET_LIST')
+  })
+
+)
+
+const registerCustomer$ = (data) => (
+  makeAjaxRequest({
+    method: 'POST',
+    url: fetchUrl('account', 'customer', 'GET_LIST'),
+    body: data
+>>>>>>> 06b63f99b00a52cd71af51cea6b7954f0b45e5c7
   })
 )
 
@@ -36,8 +69,8 @@ const getCarePointsList$ = (customerId, cashType) => (
     url: fetchUrl('', 'wallet/' + customerId + '/transaction',
       'QUERY_STRING',
       {query_string:
-        cashType === 'all' ?
-          `size=100&page=0` : `cash-type=${cashType}&size=100&page=0`
+        cashType === 'all'
+          ? `size=100&page=0` : `cash-type=${cashType}&size=100&page=0`
       }
     )
   })
@@ -46,7 +79,14 @@ const getCarePointsList$ = (customerId, cashType) => (
 export {
   getMoleculeSummary$,
   getMedicineList$,
+<<<<<<< HEAD
   getOrderList$,
   getPrescriptionList$,
+=======
+  verifyOtp$,
+  sendOtp$,
+  fetchUserInfo$,
+  registerCustomer$,
+>>>>>>> 06b63f99b00a52cd71af51cea6b7954f0b45e5c7
   getCarePointsList$
 }

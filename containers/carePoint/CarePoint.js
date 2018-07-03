@@ -11,7 +11,7 @@ class CarePoint extends Component {
       <div>
         <Grid container spacing={24}>
           <Grid item xs={2}>
-            <aside><SideMenu/></aside>
+            <aside><SideMenu /></aside>
           </Grid>
           <Grid item xs={10}>
             <CarePointsDetails

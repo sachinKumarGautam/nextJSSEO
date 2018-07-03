@@ -20,10 +20,14 @@ class OrderListWrapper extends Component {
       <div>
         <BreadCrumbs />
         <section >
+<<<<<<< HEAD
           <OrderList
             orderListState={this.props.orderListState}
             getOrderListDetailsLoading={this.props.actions.getOrderListDetailsLoading}
           />
+=======
+          <OrderList />
+>>>>>>> 06b63f99b00a52cd71af51cea6b7954f0b45e5c7
         </section>
       </div>
     )

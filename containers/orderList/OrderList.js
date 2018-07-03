@@ -11,13 +11,17 @@ class OrderList extends Component {
       <div>
         <Grid container spacing={24}>
           <Grid item xs={2}>
-            <aside><SideMenu/></aside>
+            <aside><SideMenu /></aside>
           </Grid>
           <Grid item xs={10}>
+<<<<<<< HEAD
             <OrderListDetails
               orderListState={this.props.orderListState}
               getOrderListDetailsLoading={this.props.getOrderListDetailsLoading}
             />
+=======
+            <OrderListDetails />
+>>>>>>> 06b63f99b00a52cd71af51cea6b7954f0b45e5c7
           </Grid>
         </Grid>
       </div>

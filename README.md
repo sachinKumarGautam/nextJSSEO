@@ -33,5 +33,7 @@ npm run dev
 * https://material.io/develop/web/components/theme/
 * https://github.com/mui-org/material-ui/tree/master/examples/nextjs
 
+# Website checklist
+http://humaan.com/checklist/
 
 

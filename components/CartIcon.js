@@ -1,5 +1,4 @@
 import { withStyles } from '@material-ui/core/styles'
-import Icon from '@material-ui/core/Icon'
 import Badge from '@material-ui/core/Badge'
 import IconButton from '@material-ui/core/IconButton'
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart'
