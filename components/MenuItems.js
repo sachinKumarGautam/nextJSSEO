@@ -2,19 +2,33 @@ import React, { Component } from 'react'
 
 import { withStyles } from '@material-ui/core/styles'
 
+import MenuItem from '@material-ui/core/MenuItem';
+
+import Router from 'next/router'
+import {
+  ORDER,
+  PRESCRIPTION,
+  CARE_POINTS,
+  ADDRESS_LIST,
+  PATIENT_LIST
+} from '../routes/RouteConstant'
+
 const styles = theme => {
   return {
     orderStyle: {
       ...theme.typography.caption,
       paddingLeft: theme.spacing.unit * 7,
       color: theme.palette.customGrey.grey500,
-      marginTop: theme.spacing.unit * 3
+      marginTop: theme.spacing.unit * 2,
+      paddingBottom: theme.spacing.unit / 2,
+      paddingTop: 0
     },
     menuStyle: {
       ...theme.typography.caption,
       paddingLeft: theme.spacing.unit * 7,
       color: theme.palette.customGrey.grey500,
-      paddingTop: theme.spacing.unit
+      paddingTop: theme.spacing.unit * 0,
+      paddingBottom: theme.spacing.unit / 2
     },
     listWrapper: {
       listStyle: 'none',
@@ -23,75 +37,71 @@ const styles = theme => {
   }
 }
 
-const MenuItems = (props) => {
-  return (
-    <div>
-      <ul className={props.classes.listWrapper}>
-        <li
-          className={
-            props.isSideMenu ? props.customOrderStyle : props.classes.orderStyle
-          }
+class MenuItems extends Component {
+  render () {
+    let orderStyle=
+      this.props.isSideMenu ? this.props.customOrderStyle : this.props.classes.orderStyle
+
+    let menuStyle =
+      this.props.isSideMenu ? this.props.customMenuStyle : this.props.classes.menuStyle
+
+    return (
+      <div className={this.props.classes.listWrapper}>
+        <MenuItem
+          className={orderStyle}
+          onClick={() => {Router.push({ pathname: ORDER})}}
         >
           Orders
-        </li>
-        <li
-          className={
-            props.isSideMenu ? props.customMenuStyle : props.classes.menuStyle
-          }
+        </MenuItem>
+        <MenuItem
+          className={menuStyle}
+          onClick={() => {Router.push({ pathname: PATIENT_LIST})}}
         >
           Patients
-        </li>
-        <li
-          className={
-            props.isSideMenu ? props.customMenuStyle : props.classes.menuStyle
-          }
+        </MenuItem>
+        <MenuItem
+          className={menuStyle}
+          onClick={() => {Router.push({ pathname: ADDRESS_LIST})}}
         >
           Addresses
-        </li>
-        <li
-          className={
-            props.isSideMenu ? props.customMenuStyle : props.classes.menuStyle
-          }
+        </MenuItem>
+        <MenuItem
+          className={menuStyle}
+          onClick={() => {Router.push({ pathname: PRESCRIPTION})}}
         >
           Prescriptions
-        </li>
-        <li
-          className={
-            props.isSideMenu ? props.customMenuStyle : props.classes.menuStyle
-          }
+        </MenuItem>
+        <MenuItem
+          className={menuStyle}
+          onClick={() => {Router.push({ pathname: CARE_POINTS})}}
         >
           Care Points / Care Points +
-        </li>
+        </MenuItem>
         {
-          !props.isSideMenu &&
-          <li
-            className={
-              props.isSideMenu ? props.customMenuStyle : props.classes.menuStyle
-            }
+          !this.props.isSideMenu &&
+          <MenuItem
+            className={menuStyle}
           >
             Content
-          </li>
-        }{
-          !props.isSideMenu &&
-          <li
-            className={
-              props.isSideMenu ? props.customMenuStyle : props.classes.menuStyle
-            }
+          </MenuItem>
+        }
+        {
+          !this.props.isSideMenu &&
+          <MenuItem
+            className={menuStyle}
           >
             Bookmarks
-          </li>
+          </MenuItem>
         }
-        <li
-          className={
-            props.isSideMenu ? props.customMenuStyle : props.classes.menuStyle
-          }
-          onClick={props.logout}
+        <MenuItem
+          className={menuStyle}
+          onClick={this.props.logout}
         >
           Log out
-        </li>
-      </ul>
-    </div>
-  )
+        </MenuItem>
+      </div>
+    )
+  }
 }
 
 export default withStyles(styles)(MenuItems)
