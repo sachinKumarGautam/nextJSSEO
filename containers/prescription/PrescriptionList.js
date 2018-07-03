@@ -6,7 +6,7 @@ import Typography from '@material-ui/core/Typography'
 import { withStyles } from '@material-ui/core/styles'
 import Grid from '@material-ui/core/Grid'
 
-import PrescriptionContent from './PrescriptionContent'
+import PrescriptionContentWrapper from './PrescriptionContentWrapper'
 import Button from '../../components/button'
 
 const styles = theme => ({
@@ -53,24 +53,9 @@ class PrescriptionList extends Component {
             >
               Prescriptions
             </Typography>
-            <div>
-              {
-                <Grid container spacing={24}>
-                  {this.props.prescriptionState.payload.map((prescriptionDetails) => {
-                    return prescriptionDetails.prescription.map((prescription) => {
-                      return (
-                        <Grid item xs={6}>
-                          <PrescriptionContent
-                            prescriptionDetails={prescriptionDetails}
-                            prescription={prescription}
-                          />
-                        </Grid>
-                      )
-                    })
-                  })}
-                </Grid>
-              }
-            </div>
+            <PrescriptionContentWrapper
+              prescriptionState={this.props.prescriptionState}
+            />
             <Button
               size='medium'
               variant='outlined'

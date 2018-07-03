@@ -17,7 +17,8 @@ const styles = theme => ({
     fontWeight: theme.typography.fontWeightBold,
     marginLeft: theme.spacing.unit * 2,
     marginTop: theme.spacing.unit * 2,
-    paddingRight: theme.spacing.unit * 2
+    paddingRight: theme.spacing.unit * 2,
+    wordWrap: 'break-word'
   },
   userIconStyle: {
     color: theme.palette.customGrey.grey300,
@@ -25,12 +26,14 @@ const styles = theme => ({
     marginLeft: theme.spacing.unit,
   },
   userNameStyle: {
+    ...theme.typography.body3,
     color: theme.palette.customGrey.grey500,
     fontWeight: theme.typography.fontWeightBold,
     display: 'flex',
     flexDirection: 'row',
     marginTop: theme.spacing.unit,
-    paddingRight: theme.spacing.unit * 3
+    paddingRight: theme.spacing.unit * 3,
+    wordWrap: 'break-word'
   },
   doctorStyle: {
     color: theme.palette.customGrey.grey500,
@@ -54,9 +57,7 @@ const styles = theme => ({
   },
   detailWrapper: {
     marginRight: theme.spacing.unit * 2,
-    wordWrap: 'break-word',
-    whiteSpace: 'normal',
-    width: '60%'
+    overflow: 'hidden'
   }
 })
 
@@ -72,7 +73,7 @@ class PrescriptionContent extends Component {
         <div className={this.props.classes.detailWrapper}>
           <Typography
             gutterBottom
-            variant='subheading'
+            variant='body2'
             component='h1'
             className={this.props.classes.prescriptionName}
           >
