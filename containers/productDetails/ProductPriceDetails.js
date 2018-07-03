@@ -61,7 +61,7 @@ class ProductPriceDetails extends Component {
 
     return (
       <div>
-        <Card elevation={'1'} className={classes.card}>
+        <Card elevation={1} className={classes.card}>
           <CardContent className={classes.cardContent}>
             <div className={classes.priceWrapper}>
               <ProductPrice variant={'headline'} />

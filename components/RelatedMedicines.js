@@ -23,6 +23,7 @@ const styles = theme => {
       ...theme.typography.caption,
       display: 'block',
       float: 'right',
+      paddingRight: theme.spacing.unit * 5,
       color: theme.palette.primary.main,
       fontWeight: theme.typography.fontWeightMedium,
       marginTop: theme.spacing.unit

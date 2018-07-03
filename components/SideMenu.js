@@ -22,7 +22,7 @@ const styles = theme => {
       color: theme.palette.customGrey.grey500,
       paddingTop: theme.spacing.unit * 0,
       marginLeft: theme.spacing.unit * -2
-    },
+    }
   }
 }
 
@@ -33,7 +33,7 @@ const SideMenu = (props) => {
       <MenuItems
         customOrderStyle={props.classes.orderStyle}
         customMenuStyle={props.classes.menuStyle}
-        isSideMenu={true}
+        isSideMenu
       />
     </div>
   )
