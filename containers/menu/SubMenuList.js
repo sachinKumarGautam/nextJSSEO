@@ -10,7 +10,7 @@ const styles = theme => {
       ...theme.typography.caption,
       paddingLeft: theme.spacing.unit * 7,
       color: theme.palette.customGrey.grey300,
-      paddingTop: theme.spacing.unit * 0,
+      paddingTop: 0,
       paddingBottom: theme.spacing.unit / 2,
       marginTop: theme.spacing.unit * 4
     },
@@ -18,7 +18,7 @@ const styles = theme => {
       ...theme.typography.caption,
       paddingLeft: theme.spacing.unit * 7,
       color: theme.palette.customGrey.grey300,
-      paddingTop: theme.spacing.unit * 0,
+      paddingTop: 0,
       paddingBottom: theme.spacing.unit / 2
     },
     privacySubMenuStyle: {
@@ -26,7 +26,7 @@ const styles = theme => {
       paddingLeft: theme.spacing.unit * 7,
       color: theme.palette.customGrey.grey300,
       marginBottom: theme.spacing.unit * 2,
-      paddingTop: theme.spacing.unit * 0,
+      paddingTop: 0,
       paddingBottom: theme.spacing.unit / 2
     },
     listWrapper: {
