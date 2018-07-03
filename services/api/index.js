@@ -22,15 +22,28 @@ const getCarePointsList$ = (customerId, cashType) => (
     url: fetchUrl('', 'wallet/' + customerId + '/transaction',
       'QUERY_STRING',
       {query_string:
-        cashType === 'all' ?
-          `size=100&page=0` : `cash-type=${cashType}&size=100&page=0`
+        cashType === 'all'
+          ? `size=100&page=0` : `cash-type=${cashType}&size=100&page=0`
       }
     )
+  })
+)
+
+const getAnonymousCartId$ = (source, facilityCode, sourceType = '') => (
+  makeAjaxRequest({
+    method: 'POST',
+    url: fetchUrl('cart', '', 'CREATE'),
+    body: {
+      source: source,
+      facility_code: facilityCode,
+      source_type: sourceType
+    }
   })
 )
 
 export {
   getMoleculeSummary$,
   getMedicineList$,
-  getCarePointsList$
+  getCarePointsList$,
+  getAnonymousCartId$
 }
