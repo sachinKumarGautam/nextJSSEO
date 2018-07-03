@@ -6,7 +6,7 @@ import Typography from '@material-ui/core/Typography'
 
 import Button from '../../components/button'
 
-import {getOrderStatusProgressDetails} from './OrderStatus'
+import {getOrderStatusProgressDetails} from '../../utils/orderStatus/OrderStatus'
 
 const styles = theme => {
   return {
@@ -20,7 +20,8 @@ const styles = theme => {
     },
     userIconStyle: {
       color: theme.palette.customGrey.grey300,
-      height: theme.spacing.unit * 2
+      height: theme.spacing.unit * 2,
+      marginTop: theme.spacing.unit / 8
     },
     userNameStyle: {
       color: theme.palette.customGrey.grey500,
