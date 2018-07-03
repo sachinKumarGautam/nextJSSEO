@@ -18,8 +18,8 @@ const styles = theme => ({
   },
   buttonWrapper: {
     marginTop: theme.spacing.unit * 3.5,
-    width: '180.5px',
-    height: '34px',
+    width: theme.spacing.unit * 22.5,
+    height: theme.spacing.unit * 4.25,
     margin: '0 auto'
   },
   formHelperText: {
