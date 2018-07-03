@@ -95,6 +95,7 @@ class MenuItems extends Component {
         }
         <MenuItem
           className={menuStyle}
+          onClick={this.props.logout}
         >
           Log out
         </MenuItem>

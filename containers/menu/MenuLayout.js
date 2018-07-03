@@ -12,6 +12,8 @@ import MenuItems from '../../components/MenuItems'
 import Button from '../../components/button'
 import SubMenuList from './SubMenuList'
 
+import { logoutWithReload } from '../../utils/removePersistState'
+
 const styles = theme => {
   return {
     menuPaperProps: {
@@ -47,6 +49,10 @@ class MenuLayout extends Component {
     this.setState({ anchorEl: null })
   }
 
+  logout = () => {
+    logoutWithReload()
+  }
+
   render () {
     return (
       <div>
@@ -72,7 +78,7 @@ class MenuLayout extends Component {
         >
           <MenuItem>{<UserDetail/>}</MenuItem>
           <Divider/>
-          <MenuItems/>
+          <MenuItems logout={this.logout.bind(this)} />
           <Button
             size='small'
             variant='outlined'
