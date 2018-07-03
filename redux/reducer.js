@@ -8,6 +8,7 @@ import moleculeDetailsReducer from '../containers/moleculeDetails/moleculeReduce
 import medicineListReducer from '../containers/medicineList/medicineLIstReducer'
 import deliveryDetailsReducer from '../containers/deliveryDetails/deliveryDetailsReducer'
 import patientDetailsReducer from '../containers/patientDetails/patientDetailsReducer'
+import carePointReducer from '../containers/carePoint/carePointReducer'
 
 const isengard = (store, action) => {
   return (
@@ -25,7 +26,8 @@ const appReducer = combineReducers({
   moleculeDetailsState: moleculeDetailsReducer,
   medicineListState: medicineListReducer,
   deliveryDetailsState: deliveryDetailsReducer,
-  patientDetailsState: patientDetailsReducer
+  patientDetailsState: patientDetailsReducer,
+  carePointState: carePointReducer
 })
 
 // export const persistConfig = {
