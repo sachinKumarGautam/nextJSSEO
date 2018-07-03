@@ -16,6 +16,11 @@ import {
   getDeliveryDetailsList$
 } from '../../services/api'
 
+/**
+ * Represents to the epic of get delivery details
+ * @param {object} action$ - this is the ActionsObservable
+ * @param {object} store - to access the state from reducers
+ */
 export function getDeliveryDetailsList (action$, store) {
   return action$.pipe(
     ofType(GET_DELIVERY_DETAILS_LIST_LOADING),

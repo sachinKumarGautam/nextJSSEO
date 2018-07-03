@@ -9,6 +9,7 @@ import {
 
 export default function patientDetailsReducer (state = initialState, action) {
   switch (action.type) {
+    // update loading details of patient details API
     case GET_PATIENT_DETAILS_LIST_LOADING:
       return {
         ...state,
@@ -20,6 +21,7 @@ export default function patientDetailsReducer (state = initialState, action) {
         }
       }
 
+    // update loading details of patient details API
     case GET_PATIENT_DETAILS_LIST_SUCCESS:
       return {
         ...state,
@@ -27,6 +29,7 @@ export default function patientDetailsReducer (state = initialState, action) {
         isLoading: action.isLoading
       }
 
+    // update loading details of patient details API
     case GET_PATIENT_DETAILS_LIST_FAILURE:
       return {
         ...state,
@@ -38,6 +41,7 @@ export default function patientDetailsReducer (state = initialState, action) {
         }
       }
 
+    // update selected patientId
     case SAVE_PATIENT_SELECTED:
       return {
         ...state,

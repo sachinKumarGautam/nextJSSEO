@@ -30,6 +30,13 @@ const getPatientDetailsList$ = customerId => (
   })
 )
 
+const getPrescriptionList$ = (customerId) => (
+  makeAjaxRequest({
+    method: 'GET',
+    url: fetchUrl('account', 'customer/' + customerId + '/patient-prescriptions', 'GET_LIST')
+  })
+)
+
 const verifyOtp$ = (mobile, otp) => (
   makeAjaxRequest({
     method: 'POST',
@@ -52,7 +59,6 @@ const fetchUserInfo$ = (mobileNumber) => (
     method: 'GET',
     url: fetchUrl('account', 'customer/mobile/' + mobileNumber, 'GET_LIST')
   })
-
 )
 
 const registerCustomer$ = (data) => (
@@ -81,6 +87,7 @@ export {
   getMedicineList$,
   getDeliveryDetailsList$,
   getPatientDetailsList$,
+  getPrescriptionList$,
   verifyOtp$,
   sendOtp$,
   fetchUserInfo$,

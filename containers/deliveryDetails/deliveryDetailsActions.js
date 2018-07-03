@@ -5,6 +5,11 @@ import {
   SAVE_ADDRESS_SELECTED
 } from './deliveryDetailsActionTypes'
 
+/**
+ * Represents to the loading state to get the delivery details according to the customer id.
+ * @param {object} deliveryDetailsState - The object maintained for payload, loading and error state.
+ * @param {number} customerId - The value of the customer id according to which list will occur
+ */
 export function getDeliveryDetailsListLoading (deliveryDetailsState, customerId) {
   return {
     type: GET_DELIVERY_DETAILS_LIST_LOADING,
@@ -16,6 +21,11 @@ export function getDeliveryDetailsListLoading (deliveryDetailsState, customerId)
   }
 }
 
+/**
+ * Represents to the success state to get the delivery details.
+ * @param {object} deliveryDetailsState - The object maintained for payload, loading and error state.
+ * @param {array} result - The result obtained from the API response
+ */
 export function getDeliveryDetailsListSuccess (deliveryDetailsState, result) {
   return {
     type: GET_DELIVERY_DETAILS_LIST_SUCCESS,
@@ -25,6 +35,11 @@ export function getDeliveryDetailsListSuccess (deliveryDetailsState, result) {
   }
 }
 
+/**
+ * Represents to the error state to get the delivery details.
+ * @param {object} deliveryDetailsState - The object maintained for payload, loading and error state.
+ * @param {object} error - The error details when API throws an error
+ */
 export function getDeliveryDetailsListFailure (deliveryDetailsState, error) {
   return {
     type: GET_DELIVERY_DETAILS_LIST_FAILURE,
@@ -35,6 +50,11 @@ export function getDeliveryDetailsListFailure (deliveryDetailsState, error) {
   }
 }
 
+/**
+ * Represents to the save selected addressId
+ * @param {object} patientDetailsState - The object maintained for payload, loading and error state.
+ * @param {number} patientIdSelected - The value of the selected addressId
+ */
 export function saveAddressSelected (deliveryDetailsState, addressIdSelected) {
   return {
     type: SAVE_ADDRESS_SELECTED,

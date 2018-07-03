@@ -7,7 +7,7 @@ import { withStyles } from '@material-ui/core/styles'
 import withRoot from '../src/withRoot'
 
 import Header from '../components/layouts/header'
-import Footer from '../components/layouts/footer/Footer'
+import Footer from '../components/layouts/footer'
 import DeliveryDetailsWrapper from '../containers/deliveryDetails'
 
 import Paper from '@material-ui/core/Paper'
@@ -38,9 +38,10 @@ const styles = theme => ({
 
 class DeliveryDetails extends React.Component {
   componentDidMount () {
+    // Represents to get delivery details.
     this.props.actions.getDeliveryDetailsListLoading(
       this.props.deliveryDetailsState,
-      '100113091'
+      '100113091' // pass customer id
     )
   }
 
