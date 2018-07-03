@@ -120,7 +120,7 @@ class CartIcon extends Component {
           effect='solid'
           place='bottom'
           className={classes.paper}
-          delayHide={1000}
+          delayHide={500}
           delayShow={100}
         >
           <div className={classes.summaryMenuWrapper}>
