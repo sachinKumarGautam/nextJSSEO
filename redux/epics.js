@@ -12,6 +12,10 @@ import {
   carePointsList
 } from '../containers/carePoint/carePointEpics'
 
+import {
+  getAnonymousCartIdEpic
+} from '../containers/cartDetails/cartEpics'
+
 // import * as actions from './actions'
 // import * as types from './actionTypes'
 
@@ -58,5 +62,6 @@ import {
 export const rootEpic = combineEpics(
   getMoleculeSummary,
   getRelatedMedicines,
-  carePointsList
+  carePointsList,
+  getAnonymousCartIdEpic
 )

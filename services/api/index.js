@@ -41,9 +41,17 @@ const getAnonymousCartId$ = (source, facilityCode, sourceType = '') => (
   })
 )
 
+const getCartDetails$ = cartUid => (
+  makeAjaxRequest({
+    method: 'GET',
+    url: fetchUrl('cart', cartUid, 'GET_LIST')
+  })
+)
+
 export {
   getMoleculeSummary$,
   getMedicineList$,
   getCarePointsList$,
-  getAnonymousCartId$
+  getAnonymousCartId$,
+  getCartDetails$
 }

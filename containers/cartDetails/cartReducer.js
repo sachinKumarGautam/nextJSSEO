@@ -1,14 +1,10 @@
 import initialState from './cartModal'
 
-import {
-  GET_ANONYMOUS_CART_ID_LOADING,
-  GET_ANONYMOUS_CART_ID_SUCCESS,
-  GET_ANONYMOUS_CART_ID_FAILURE
-} from './cartActionTypes'
+import * as cartActionTypes from './cartActionTypes'
 
 export default function cartReducer (state = initialState, action) {
   switch (action.type) {
-    case GET_ANONYMOUS_CART_ID_LOADING:
+    case cartActionTypes.GET_ANONYMOUS_CART_ID_LOADING:
       return {
         ...state,
         isLoading: action.isLoading,
@@ -19,7 +15,7 @@ export default function cartReducer (state = initialState, action) {
         }
       }
 
-    case GET_ANONYMOUS_CART_ID_SUCCESS:
+    case cartActionTypes.GET_ANONYMOUS_CART_ID_SUCCESS:
       return {
         ...state,
         isLoading: action.isLoading,
@@ -42,12 +38,58 @@ export default function cartReducer (state = initialState, action) {
         }
       }
 
-    case GET_ANONYMOUS_CART_ID_FAILURE:
+    case cartActionTypes.GET_ANONYMOUS_CART_ID_FAILURE:
       return {
         ...state,
         isLoading: action.isLoading,
         errorState: {
           ...state.errorState,
+          isError: action.isError,
+          error: action.error
+        }
+      }
+
+    case cartActionTypes.GET_CART_DETAILS_LOADING:
+      return {
+        ...state,
+        isLoading: action.isLoading,
+        errorState: {
+          ...state.cartDetails.errorState,
+          isError: action.isError
+        }
+      }
+
+    case cartActionTypes.GET_CART_DETAILS_SUCCESS:
+      return {
+        ...state,
+        isLoading: action.isLoading,
+        payload: {
+          ...state.cartDetails.payload,
+          id: action.id,
+          uid: action.uid,
+          customer_id: action.customer_id,
+          customer_first_name: action.customer_first_name,
+          customer_last_name: action.customer_last_name,
+          facility_code: action.facility_code,
+          status: action.status,
+          source: action.source,
+          cart_items: {
+            ...state.cartDetails.payload.cart_items,
+            payload: action.cart_items
+          },
+          cart_prescriptions: action.cart_prescriptions,
+          source_type: action.source_type,
+          delivery_option: action.delivery_option,
+          service_type: action.service_type
+        }
+      }
+
+    case cartActionTypes.GET_CART_DETAILS_FAILURE:
+      return {
+        ...state,
+        isLoading: action.isLoading,
+        errorState: {
+          ...state.cartDetails.errorState,
           isError: action.isError,
           error: action.error
         }
