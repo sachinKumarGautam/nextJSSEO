@@ -20,7 +20,7 @@ const styles = theme => {
     menuStyle: {
       ...theme.typography.caption,
       color: theme.palette.customGrey.grey500,
-      paddingTop: theme.spacing.unit * 0,
+      paddingTop: theme.spacing.unit,
       marginLeft: theme.spacing.unit * -2
     }
   }

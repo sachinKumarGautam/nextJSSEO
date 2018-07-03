@@ -10,8 +10,9 @@ const styles = theme => {
       ...theme.typography.caption,
       paddingLeft: theme.spacing.unit * 7,
       color: theme.palette.customGrey.grey300,
-      paddingTop: theme.spacing.unit * 4,
-      paddingBottom: theme.spacing.unit / 2
+      paddingTop: theme.spacing.unit * 0,
+      paddingBottom: theme.spacing.unit / 2,
+      marginTop: theme.spacing.unit * 4
     },
     secondSubMenuStyle: {
       ...theme.typography.caption,
