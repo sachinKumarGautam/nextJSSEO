@@ -8,7 +8,6 @@ import {
   FETCH_USER_INFO_FAILURE
 } from './customerActionTypes'
 
-<<<<<<< HEAD
 export function fetchUserInfoLoading (customerState, phoneNumber) {
   return {
     type: FETCH_USER_INFO_LOADING,
@@ -50,8 +49,6 @@ export function fetchUserInfoFailure (customerState, error) {
   }
 }
 
-=======
->>>>>>> e1a3a977dfd631c42aa70cb5bb0795d11132c50b
 export function updatePhoneNumber (customerState, mobile) {
   return {
     type: UPDATE_PHONE_NUMBER,

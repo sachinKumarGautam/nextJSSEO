@@ -16,6 +16,19 @@ const getMedicineList$ = (saltName, page, size) => (
   })
 )
 
+const getCarePointsList$ = (customerId, cashType) => (
+  makeAjaxRequest({
+    method: 'GET',
+    url: fetchUrl('', 'wallet/' + customerId + '/transaction',
+      'QUERY_STRING',
+      {query_string:
+        cashType === 'all'
+          ? `size=100&page=0` : `cash-type=${cashType}&size=100&page=0`
+      }
+    )
+  })
+)
+
 const verifyOtp$ = (mobile, otp) => (
   makeAjaxRequest({
     method: 'POST',
@@ -44,6 +57,14 @@ const fetchUserInfo$ = (mobileNumber) => (
 const getProductDetails$ = (sku) => (
   makeAjaxRequest({
     method: 'GET',
+    url: fetchUrl('catalog', `medicine/sku/${sku}`, 'GET_LIST')
+  })
+
+)
+
+const getProductDetailsSummary$ = (sku) => (
+  makeAjaxRequest({
+    method: 'GET',
     url: fetchUrl('catalog', `medicine/sku/${sku}/summary`, 'GET_LIST')
   })
 
@@ -59,12 +80,11 @@ const searchMedicine$ = (inputValue, facilityCode) => (
 export {
   getMoleculeSummary$,
   getMedicineList$,
+  getCarePointsList$,
   verifyOtp$,
-<<<<<<< HEAD
   sendOtp$,
   fetchUserInfo$,
-  getProductDetails$
-=======
-  searchMedicine$
->>>>>>> e1a3a977dfd631c42aa70cb5bb0795d11132c50b
+  getProductDetails$,
+  searchMedicine$,
+  getProductDetailsSummary$
 }

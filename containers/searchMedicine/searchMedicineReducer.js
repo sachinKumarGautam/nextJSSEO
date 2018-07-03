@@ -1,5 +1,10 @@
 import initialState from './searchMedicineModal'
-import {SEARCH_MEDICINE_LOADING, SEARCH_MEDICINE_SUCCESS, SEARCH_MEDICINE_FAILURE} from './searchMedicineActionTypes'
+import {
+  SEARCH_MEDICINE_LOADING, 
+  SEARCH_MEDICINE_SUCCESS, 
+  SEARCH_MEDICINE_FAILURE,
+  UPDATE_INPROGRESS_MEDICINE_STATE
+} from './searchMedicineActionTypes'
 
 export default function searchMedicineReducer (state = initialState, action) {
   switch (action.type) {
@@ -35,6 +40,18 @@ export default function searchMedicineReducer (state = initialState, action) {
           ...state.errorState,
           isError: action.isError,
           error: action.error
+        }
+      }
+
+      case UPDATE_INPROGRESS_MEDICINE_STATE:
+      return {
+        ...state,
+        payload: {
+          ...state.payload,
+          inProgressMedicineDetails: {
+            ...state.payload.inProgressMedicineDetails,
+            
+          }
         }
       }
 

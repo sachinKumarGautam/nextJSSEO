@@ -44,11 +44,6 @@ class MoleculeDetails extends React.Component {
   //   return { payload: resultAction }
   // }
 
-  static getInitialProps (props) {
-    const { query } = props;
-    return query;
-  }
-
   componentDidMount () {
     // Represents to get molecule details.
     if (this.props.query && this.props.query.name) {
@@ -82,10 +77,11 @@ class MoleculeDetails extends React.Component {
   }
 }
 
-function mapStateToProps (state) {
+function mapStateToProps (state, ownProps) {
   return {
     moleculeDetailsState: state.moleculeDetailsState,
-    medicineListState: state.medicineListState
+    medicineListState: state.medicineListState,
+    location: ownProps.location
   }
 }
 

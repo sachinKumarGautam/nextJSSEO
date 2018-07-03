@@ -3,6 +3,8 @@ import React, { Component } from 'react'
 import BreadCrumbs from '../../components/BreadCrumbs'
 import ProductDetails from './ProductDetails'
 import ProductDetailsContent from './ProductDetailsContent'
+import Router from 'next/router'
+
 
 /*
   bread crumbs
@@ -17,11 +19,12 @@ class ProductDetailsWrapper extends Component {
       hover: {}
     }
   }
-  componentDidMount() {
-    this.props.getProductDetailLoading(this.props.productDetailsState, 'I00008')
-    
+  componentDidMount () {
+    const { pathname, query } = Router
+    if(query.sku){
+      this.props.getProductDetailLoading(this.props.productDetailsState, query.sku)
+    }
   }
-  
 
   toggleHover (item) {
     this.setState((prevState) => ({

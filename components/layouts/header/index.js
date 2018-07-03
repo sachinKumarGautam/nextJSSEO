@@ -10,13 +10,13 @@ import { withStyles } from '@material-ui/core/styles'
 import AppBar from '@material-ui/core/AppBar'
 import Button from '../../button'
 import Toolbar from '@material-ui/core/Toolbar'
-import AutosuggestSearch from '../../AutosuggestSearch'
+import SearchMedicine from '../../../containers/searchMedicine'
 import Subheader from './Subheader'
 import CartIcon from '../../CartIcon'
 import Login from '../../../containers/login'
 import getPageContext from '../../../src/getPageContext'
 import MenuWrapper from '../../../containers/menu'
-import { searchMedicineLoading } from '../../../containers/searchMedicine/searchMedicineAction'
+import { searchMedicineLoading, updateInProgressMedicineState } from '../../../containers/searchMedicine/searchMedicineAction'
 
 class Header extends React.Component {
   constructor (props, context) {
@@ -61,9 +61,10 @@ class Header extends React.Component {
               disableGutters
             >
               <img src='/static/images/logo-green.svg' />
-              <AutosuggestSearch
+              <SearchMedicine
                 searchMedicineState={searchMedicineState}
                 searchMedicineLoading={actions.searchMedicineLoading}
+                updateInProgressMedicineState={actions.updateInProgressMedicineState}
               />
               <CartIcon />
               <MenuWrapper />
@@ -130,7 +131,8 @@ function mapDispatchToProps (dispatch) {
   return {
     actions: bindActionCreators(
       {
-        searchMedicineLoading
+        searchMedicineLoading,
+        updateInProgressMedicineState
       },
       dispatch
     )

@@ -1,5 +1,5 @@
 import { of } from 'rxjs/observable/of'
-import { mergeMap, catchError, map, merge } from 'rxjs/operators'
+import { mergeMap, catchError, map, concat, flatMap } from 'rxjs/operators'
 import { ofType } from 'redux-observable'
 import http from '../../services/api/ajaxWrapper'
 
@@ -15,17 +15,11 @@ import {
   toggleAuthentication
 } from './loginActions'
 
-<<<<<<< HEAD
 import {
   updatePhoneNumber,
-  fetchUserInfoFailure,
   fetchUserInfoLoading
 } from '../user/customer/customerActions'
 import { sendOtp$, verifyOtp$ } from '../../services/api'
-=======
-import { updatePhoneNumber } from '../user/customer/customerActions'
-import { verifyOtp$ } from '../../services/api'
->>>>>>> e1a3a977dfd631c42aa70cb5bb0795d11132c50b
 
 export function sendOTP (action$, store) {
   return action$.pipe(
@@ -60,29 +54,24 @@ export function verifyOTP (action$, store) {
       const otp = data.values.otp
 
       return http(verifyOtp$(mobile, otp)).pipe(
-        map(result => {
+        flatMap(result => {
           const isNewUser = loginState.isNewUser
           data.setSubmitting(false)
           setTimeout(() => {
             if (isNewUser) {
               data.toggleForm('register')
+              return of(verifyOtpSuccess(loginState, result, isNewUser),
+                updatePhoneNumber(customerState, data.values.mobile)
+              )
             } else {
-              // TODO: remove store.dispatch as it might be deprecated in future
-              // store.dispatch(toggleAuthentication(loginState, true))
-              // store.dispatch(fetchUserInfoLoading(customerState, mobile))
-              // data.closeLoginModal()
+              data.closeLoginModal()
+              return of(toggleAuthentication(loginState, true),
+                fetchUserInfoLoading(customerState, mobile),
+                verifyOtpSuccess(loginState, result, isNewUser),
+                updatePhoneNumber(customerState, data.values.mobile)
+              )
             }
           }, 250)
-          // store.dispatch(updatePhoneNumber(customerState, data.values.mobile))
-
-          return merge(of(verifyOtpSuccess(loginState, result, isNewUser)),
-            of(fetchUserInfoLoading(customerState, mobile))
-          )
-
-          // return concat(
-          //   verifyOtpSuccess(loginState, result, isNewUser),
-          //   fetchUserInfoLoading(customerState, mobile)
-          // )
         }),
         catchError(error => {
           data.setSubmitting(false)

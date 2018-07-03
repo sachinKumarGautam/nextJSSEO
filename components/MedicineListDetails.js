@@ -51,7 +51,10 @@ const styles = theme => {
 }
 
 const MedicineListDetails = (props) => (
-  <div className={props.classes.medicineListContentWrapper}>
+  <div 
+    className={props.classes.medicineListContentWrapper}
+    onClick={props.onSelectItem.bind(this, props.itemDetails)}
+    >
     <div>
       <ProductName variant={'body1'} />
       <ProductBrand
