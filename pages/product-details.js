@@ -1,4 +1,5 @@
-import React from 'react'
+import React, { Component } from 'react'
+
 import Header from '../components/layouts/header'
 import Footer from '../components/layouts/footer'
 
@@ -33,24 +34,26 @@ const styles = theme => ({
 })
 
 class ProductDetails extends React.Component {
-  static async getInitialProps (props)  {
-    const { query } = props
-    //   const res = await fetch('https://api.github.com/repos/zeit/next.js')
-    //   const json = await res.json()
-    //   return { stars: json.stargazers_count }
+  // static getInitialProps (props) {
+  //   const { query } = props
+  //   console.log(props)
+  //   return query
+  // }
+
+  static getInitialProps ({query}) {
     return query
-    }
+  }
+
 
   componentDidMount () {
-    console.log(this.props.query)
     // this.props.actions.getProductDetailLoading(this.props.productDetailsState, 'I0008')
   }
 
-  render() {
+  render () {
     const {
       classes,
       actions
-    } = this.props;
+    } = this.props
 
     return (
       <div>
@@ -58,13 +61,13 @@ class ProductDetails extends React.Component {
         <div>
           <Paper className={classes.root} elevation={1}>
             <ProductDetailsWrapper
-            getProductDetailLoading={actions.getProductDetailLoading}
-             />
+              getProductDetailLoading={actions.getProductDetailLoading}
+            />
           </Paper>
         </div>
         <Footer />
       </div>
-    );
+    )
   }
 }
 
@@ -76,7 +79,8 @@ class ProductDetails extends React.Component {
 
 function mapStateToProps (state) {
   return {
-    productDetailsState: state.productDetailsState
+    productDetailsState: state.productDetailsState,
+    cartDetailsState: state.cartDetailsState
   }
 }
 

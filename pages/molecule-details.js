@@ -46,11 +46,10 @@ class MoleculeDetails extends React.Component {
 
   componentDidMount () {
     // Represents to get molecule details.
-    this.props.actions.getMoleculeSummaryLoading(
-      this.props.moleculeDetailsState,
-      '5a61a295ae8bdc26685f2b09' // pass salt id
-    )
-
+      this.props.actions.getMoleculeSummaryLoading(
+        this.props.moleculeDetailsState,
+        '5a61a295ae8bdc26685f2b09' // pass salt id
+      )
     // Represents to get medicine list with page size and size per page.
     this.props.actions.getRelatedMedicinesLoading(
       this.props.medicineListState,
@@ -75,10 +74,11 @@ class MoleculeDetails extends React.Component {
   }
 }
 
-function mapStateToProps (state) {
+function mapStateToProps (state, ownProps) {
   return {
     moleculeDetailsState: state.moleculeDetailsState,
-    medicineListState: state.medicineListState
+    medicineListState: state.medicineListState,
+    location: ownProps.location
   }
 }
 

@@ -9,6 +9,7 @@ import loginReducer from '../containers/login/loginReducers'
 import customerReducer from '../containers/user/customer/customerReducer'
 import medicineListReducer from '../containers/medicineList/medicineLIstReducer'
 import productDetailsReducer from '../containers/productDetails/productDetailsReducer'
+import searchMedicineReducer from '../containers/searchMedicine/searchMedicineReducer'
 import carePointReducer from '../containers/carePoint/carePointReducer'
 
 const isengard = (store, action) => {
@@ -29,7 +30,8 @@ const appReducer = combineReducers({
   customerState: customerReducer,
   medicineListState: medicineListReducer,
   productDetailsState: productDetailsReducer,
-  carePointState: carePointReducer
+  carePointState: carePointReducer,
+  searchMedicineState: searchMedicineReducer
 })
 
 // export const persistConfig = {

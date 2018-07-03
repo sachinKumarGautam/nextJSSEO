@@ -1,22 +1,22 @@
 import React from 'react'
-import PropTypes from 'prop-types'
-import { withStyles } from '@material-ui/core/styles'
 
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
-import withRoot from '../../../src/withRoot'
+import PropTypes from 'prop-types'
+import { withStyles } from '@material-ui/core/styles'
 
 // import Head from './Head'
 import AppBar from '@material-ui/core/AppBar'
 import Button from '../../button'
 import Toolbar from '@material-ui/core/Toolbar'
-import AutosuggestSearch from '../../AutosuggestSearch'
+import SearchMedicine from '../../../containers/searchMedicine'
 import Subheader from './Subheader'
 import CartIcon from '../../CartIcon'
 import Login from '../../../containers/login'
 import getPageContext from '../../../src/getPageContext'
 import MenuWrapper from '../../../containers/menu'
+import { searchMedicineLoading, updateInProgressMedicineState } from '../../../containers/searchMedicine/searchMedicineAction'
 
 class Header extends React.Component {
   constructor (props, context) {
@@ -42,7 +42,14 @@ class Header extends React.Component {
   }
 
   render () {
-    const { classes, loginState, customerState } = this.props
+    const {
+      classes,
+      searchMedicineState,
+      actions,
+      loginState,
+      customerState
+    } = this.props
+
     return (
       <div className={classes.root}>
         <AppBar elevation={1} className={classes.appBar} position='fixed'>
@@ -57,7 +64,11 @@ class Header extends React.Component {
               disableGutters
             >
               <img src='/static/images/logo-green.svg' />
-              <AutosuggestSearch />
+              <SearchMedicine
+                searchMedicineState={searchMedicineState}
+                searchMedicineLoading={actions.searchMedicineLoading}
+                updateInProgressMedicineState={actions.updateInProgressMedicineState}
+              />
               <CartIcon />
               {loginState.isAuthenticated && <MenuWrapper />}
               { !loginState.isAuthenticated &&
@@ -112,9 +123,8 @@ const styles = theme => ({
     justifyContent: 'space-between'
   },
   button: {
-    color: 'white',
-    flexGrow: 0,
-    borderRadius: theme.spacing.unit * 4
+    flexGrow: 0
+    // backgroundColor: theme.palette.primary.main
   }
 })
 
@@ -125,7 +135,8 @@ Header.propTypes = {
 function mapStateToProps (state) {
   return {
     loginState: state.loginState,
-    customerState: state.customerState
+    customerState: state.customerState,
+    searchMedicineState: state.searchMedicineState
   }
 }
 
@@ -133,13 +144,15 @@ function mapDispatchToProps (dispatch) {
   return {
     actions: bindActionCreators(
       {
+        searchMedicineLoading,
+        updateInProgressMedicineState
       },
       dispatch
     )
   }
 }
 
-export default connect(
+export default withStyles(styles)(connect(
   mapStateToProps,
   mapDispatchToProps
-)(withRoot(withStyles(styles)(Header)))
+)(Header))

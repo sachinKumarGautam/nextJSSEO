@@ -44,20 +44,24 @@ const styles = theme => {
       border: `1px solid ${theme.palette.primary.main}`
     },
     buttonLabel: {
-      color: theme.palette.primary.main
+      color: theme.palette.primary.main,
+      fontSize: theme.typography.body3.fontSize
     }
   }
 }
 
 const MedicineListDetails = (props) => (
-  <div className={props.classes.medicineListContentWrapper}>
+  <div 
+    className={props.classes.medicineListContentWrapper}
+    onClick={props.onSelectItem.bind(this, props.itemDetails)}
+    >
     <div>
       <ProductName variant={'body1'} />
       <ProductBrand
         variant={'caption'}
         withoutImage
         customStyle={props.classes.customBrand}
-        brand={props.itemDetails.brand_name}
+        brand={props.itemDetails.brand_name || props.itemDetails.name}
       />
       <ProductPackSize
         variant={'caption'}

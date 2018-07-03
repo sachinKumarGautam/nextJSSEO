@@ -22,6 +22,10 @@ import {
 } from '../containers/productDetails/productEpic'
 
 import {
+  searchMedicine
+} from '../containers/searchMedicine/searchMedicineEpic'
+
+import {
   carePointsList
 } from '../containers/carePoint/carePointEpics'
 
@@ -70,6 +74,8 @@ import {
 
 export const rootEpic = combineEpics(
   getMoleculeSummary,
+  getRelatedMedicines,
+  carePointsList,
   sendOTP,
   verifyOTP,
   registerCustomer,
@@ -77,5 +83,8 @@ export const rootEpic = combineEpics(
   fetchUserInfo,
   getProductDetails,
   getRelatedMedicines,
-  carePointsList
+  carePointsList,
+  searchMedicine,
+  fetchUserInfo,
+  // getProductDetailSummary
 )

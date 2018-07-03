@@ -16,6 +16,19 @@ const getMedicineList$ = (saltName, page, size) => (
   })
 )
 
+const getCarePointsList$ = (customerId, cashType) => (
+  makeAjaxRequest({
+    method: 'GET',
+    url: fetchUrl('', 'wallet/' + customerId + '/transaction',
+      'QUERY_STRING',
+      {query_string:
+        cashType === 'all'
+          ? `size=100&page=0` : `cash-type=${cashType}&size=100&page=0`
+      }
+    )
+  })
+)
+
 const verifyOtp$ = (mobile, otp) => (
   makeAjaxRequest({
     method: 'POST',
@@ -44,6 +57,14 @@ const fetchUserInfo$ = (mobileNumber) => (
 const getProductDetails$ = (sku) => (
   makeAjaxRequest({
     method: 'GET',
+    url: fetchUrl('catalog', `medicine/sku/${sku}`, 'GET_LIST')
+  })
+
+)
+
+const getProductDetailsSummary$ = (sku) => (
+  makeAjaxRequest({
+    method: 'GET',
     url: fetchUrl('catalog', `medicine/sku/${sku}/summary`, 'GET_LIST')
   })
 )
@@ -56,16 +77,10 @@ const registerCustomer$ = (data) => (
   })
 )
 
-const getCarePointsList$ = (customerId, cashType) => (
+const searchMedicine$ = (inputValue, facilityCode) => (
   makeAjaxRequest({
     method: 'GET',
-    url: fetchUrl('', 'wallet/' + customerId + '/transaction',
-      'QUERY_STRING',
-      {query_string:
-        cashType === 'all'
-          ? `size=100&page=0` : `cash-type=${cashType}&size=100&page=0`
-      }
-    )
+    url: fetchUrl('catalog', 'medicine/search', 'QUERY_STRING', {query_string: `q=${inputValue}&facility-code=${100}`})
   })
 )
 
@@ -77,5 +92,7 @@ export {
   fetchUserInfo$,
   getProductDetails$,
   registerCustomer$,
-  getCarePointsList$
+  getCarePointsList$,
+  searchMedicine$,
+  getProductDetailsSummary$
 }
