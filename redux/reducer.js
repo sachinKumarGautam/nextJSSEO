@@ -8,6 +8,7 @@ import moleculeDetailsReducer from '../containers/moleculeDetails/moleculeReduce
 import loginReducer from '../containers/login/loginReducers'
 import customerReducer from '../containers/user/customer/customerReducer'
 import medicineListReducer from '../containers/medicineList/medicineLIstReducer'
+import orderListReducers from '../containers/orderList/orderListReducers'
 import prescriptionReducers from '../containers/prescription/prescriptionReducers'
 import carePointReducer from '../containers/carePoint/carePointReducer'
 
@@ -28,6 +29,7 @@ const appReducer = combineReducers({
   loginState: loginReducer,
   customerState: customerReducer,
   medicineListState: medicineListReducer,
+  orderListState: orderListReducers,
   prescriptionState: prescriptionReducers,
   carePointState: carePointReducer
 })
