@@ -41,10 +41,19 @@ const fetchUserInfo$ = (mobileNumber) => (
 
 )
 
+const registerCustomer$ = (data) => (
+  makeAjaxRequest({
+    method: 'POST',
+    url: fetchUrl('account', 'customer', 'GET_LIST'),
+    body: data,
+  })
+)
+
 export {
   getMoleculeSummary$,
   getMedicineList$,
   verifyOtp$,
   sendOtp$,
-  fetchUserInfo$
+  fetchUserInfo$,
+  registerCustomer$
 }

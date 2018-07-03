@@ -84,7 +84,6 @@ class LoginWrapper extends React.Component {
           toggleForm={this.toggleForm}
           closeLoginModal={this.props.closeLoginModal}
           loginState={this.props.loginState}
-          customerState={this.props.customerState}
           verifyOtpLoading={this.props.actions.verifyOtpLoading}
         />
     }

@@ -1,5 +1,5 @@
 import { of } from 'rxjs/observable/of'
-import { mergeMap, catchError, map, merge } from 'rxjs/operators'
+import { mergeMap, catchError, map, merge,  flatMap } from 'rxjs/operators'
 import { ofType } from 'redux-observable'
 import http from '../../services/api/ajaxWrapper'
 
@@ -17,7 +17,6 @@ import {
 
 import {
   updatePhoneNumber,
-  fetchUserInfoFailure,
   fetchUserInfoLoading
 } from '../user/customer/customerActions'
 import { sendOtp$, verifyOtp$ } from '../../services/api'
@@ -55,29 +54,33 @@ export function verifyOTP (action$, store) {
       const otp = data.values.otp
 
       return http(verifyOtp$(mobile, otp)).pipe(
-        map(result => {
+        flatMap(result => {
           const isNewUser = loginState.isNewUser
+        let successObservable
+          
           data.setSubmitting(false)
           setTimeout(() => {
             if (isNewUser) {
               data.toggleForm('register')
             } else {
-              // TODO: remove store.dispatch as it might be deprecated in future
-              // store.dispatch(toggleAuthentication(loginState, true))
-              // store.dispatch(fetchUserInfoLoading(customerState, mobile))
-              // data.closeLoginModal()
+              data.closeLoginModal()
             }
           }, 250)
-          // store.dispatch(updatePhoneNumber(customerState, data.values.mobile))
 
-          return merge(of(verifyOtpSuccess(loginState, result, isNewUser)),
-          of(fetchUserInfoLoading(customerState, mobile))
-        )
+          if (isNewUser) {
+            successObservable = of(
+              verifyOtpSuccess(loginState, result, isNewUser)
+            )
+          }
+          else {
+            successObservable = of(toggleAuthentication(loginState, true),
+            fetchUserInfoLoading(customerState, mobile),
+            verifyOtpSuccess(loginState, result, isNewUser),
+            updatePhoneNumber(customerState, mobile)
+          )
+          }
 
-          // return concat(
-          //   verifyOtpSuccess(loginState, result, isNewUser),
-          //   fetchUserInfoLoading(customerState, mobile)
-          // )
+          return successObservable
         }),
         catchError(error => {
           data.setSubmitting(false)

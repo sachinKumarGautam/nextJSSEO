@@ -1,6 +1,12 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
+
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+
+import withRoot from '../../../src/withRoot'
+
 // import Head from './Head'
 import AppBar from '@material-ui/core/AppBar'
 import Button from '../../button'
@@ -36,7 +42,7 @@ class Header extends React.Component {
   }
 
   render () {
-    const { classes } = this.props
+    const { classes, loginState, customerState } = this.props
     return (
       <div className={classes.root}>
         <AppBar elevation={1} className={classes.appBar} position='fixed'>
@@ -53,8 +59,9 @@ class Header extends React.Component {
               <img src='/static/images/logo-green.svg' />
               <AutosuggestSearch />
               <CartIcon />
-              <MenuWrapper />
-              <Button
+              {loginState.isAuthenticated && <MenuWrapper />}
+              { !loginState.isAuthenticated &&
+                <Button
                 variant='raised'
                 size='medium'
                 color='primary'
@@ -62,12 +69,13 @@ class Header extends React.Component {
                 onClick={this.openLoginModal}
                 className={classes.button}
                 label={'Login / Register'}
-              />
+              />}
               {this.state.openLoginDialog && <Login
                 openLoginDialog={this.state.openLoginDialog}
                 openLoginModal={this.openLoginModal}
                 closeLoginModal={this.closeLoginModal}
-                {...this.props}
+                loginState={loginState}
+                customerState={customerState}
               />}
             </Toolbar>
             <Subheader />
@@ -114,4 +122,24 @@ Header.propTypes = {
   classes: PropTypes.object.isRequired
 }
 
-export default withStyles(styles)(Header)
+function mapStateToProps (state) {
+  return {
+    loginState: state.loginState,
+    customerState: state.customerState
+  }
+}
+
+function mapDispatchToProps (dispatch) {
+  return {
+    actions: bindActionCreators(
+      {
+      },
+      dispatch
+    )
+  }
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withRoot(withStyles(styles)(Header)))

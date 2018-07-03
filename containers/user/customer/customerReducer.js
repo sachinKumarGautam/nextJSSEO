@@ -28,8 +28,17 @@ export default function (state = initialState, action) {
         ...state,
         isLoadingFetchCustomerDetails: action.isLoading,
         payload: {
-          ...state.payload
-
+          ...state.payload,
+          id: action.id,
+          full_name: action.full_name,
+          gender: action.gender,
+          age: action.age,
+          referral_code: action.referral_code,
+          default_location: action.default_location,
+          reference_code: action.reference_code,
+          membership_code: action.membership_code,
+          mobile: action.mobile,
+          email: action.email
         }
       }
 
