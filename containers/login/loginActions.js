@@ -54,7 +54,6 @@ export function verifyOtpLoading (loginState, setSubmitting, closeLoginModal, to
 }
 
 export function verifyOtpSuccess (loginState, result) {
-  console.log(result)
   return {
     type: OTP_VERIFIED_SUCCESS,
     loginState,

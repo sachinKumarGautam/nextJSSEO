@@ -46,7 +46,27 @@ const getProductDetails$ = (sku) => (
     method: 'GET',
     url: fetchUrl('catalog', `medicine/sku/${sku}/summary`, 'GET_LIST')
   })
+)
 
+const registerCustomer$ = (data) => (
+  makeAjaxRequest({
+    method: 'POST',
+    url: fetchUrl('account', 'customer', 'GET_LIST'),
+    body: data
+  })
+)
+
+const getCarePointsList$ = (customerId, cashType) => (
+  makeAjaxRequest({
+    method: 'GET',
+    url: fetchUrl('', 'wallet/' + customerId + '/transaction',
+      'QUERY_STRING',
+      {query_string:
+        cashType === 'all'
+          ? `size=100&page=0` : `cash-type=${cashType}&size=100&page=0`
+      }
+    )
+  })
 )
 
 export {
@@ -55,5 +75,7 @@ export {
   verifyOtp$,
   sendOtp$,
   fetchUserInfo$,
-  getProductDetails$
+  getProductDetails$,
+  registerCustomer$,
+  getCarePointsList$
 }

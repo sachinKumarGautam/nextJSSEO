@@ -1,7 +1,6 @@
 import { Observable } from 'rxjs/Observable'
 
 let http = (propGenerator) => {
-  console.log(propGenerator)
   return propGenerator
     .catch(data => {
       if (data.status === 401) {

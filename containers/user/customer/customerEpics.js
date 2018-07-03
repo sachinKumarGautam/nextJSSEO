@@ -1,12 +1,17 @@
 import { of } from 'rxjs/observable/of'
-import { mergeMap, catchError, map } from 'rxjs/operators'
+import { mergeMap, catchError, map, flatMap } from 'rxjs/operators'
 import { ofType } from 'redux-observable'
 import {CUSTOMER_REGISTER_LOADING, FETCH_USER_INFO_LOADING} from './customerActionTypes'
-import { customerRegisterSuccess, customerRegisterFailure } from './customerActions'
+import {
+  customerRegisterSuccess,
+  customerRegisterFailure,
+  fetchUserInfoSuccess,
+  fetchUserInfoFailure
+} from './customerActions'
 import { toggleAuthentication } from '../../login/loginActions'
-import {fetchCharacterSuccess} from '../../../redux/actions'
+
 import http from '../../../services/api/ajaxWrapper'
-import {fetchUserInfo$} from '../../../services/api/index'
+import {fetchUserInfo$, registerCustomer$} from '../../../services/api/index'
 
 export function registerCustomer (action$, store) {
   return action$.pipe(
@@ -14,25 +19,15 @@ export function registerCustomer (action$, store) {
     mergeMap(data => {
       const customerState = store.getState().customerState
       const loginState = store.getState().loginState
-      return ajax({
-        url: `http://hadron.lifcare.in/v5/account/customer`,
-        method: 'post',
-        data: data.values,
-        options: {
-          headers: {
-            'Authorization': 'Bearer 076cfb92-f233-446e-9ed6-30c0b7b93831',
-            'Content-Type': 'application/json'
-          }
-        }
-      }).pipe(
-        map(result => {
+      return http(registerCustomer$(data.values)).pipe(
+        flatMap(result => {
           data.setSubmitting(false)
           setTimeout(() => {
             data.closeLoginModal()
           }, 250)
           // TODO: remove store.dispatch as it might be deprecated in future
-          store.dispatch(toggleAuthentication(loginState, true))
-          return customerRegisterSuccess(customerState, result)
+          return of(toggleAuthentication(loginState, true),
+            customerRegisterSuccess(customerState, result))
         }),
         catchError(error => {
           data.setSubmitting(false)
@@ -48,14 +43,12 @@ export function fetchUserInfo (action$, store) {
     ofType(FETCH_USER_INFO_LOADING),
     mergeMap(data => {
       const customerState = store.getState().customerState
-      const mobile = customerState.payload.mobile
-      return http(fetchUserInfo$(mobile)).pipe(
+      return http(fetchUserInfo$(data.phoneNumber)).pipe(
         map(result => {
-          return fetchCharacterSuccess(customerState, result)
+          return fetchUserInfoSuccess(customerState, result)
         }),
         catchError(error => {
-          data.setSubmitting(false)
-          return of(fetchCharacterSuccess(customerState, error))
+          return of(fetchUserInfoFailure(customerState, error))
         })
       )
     })

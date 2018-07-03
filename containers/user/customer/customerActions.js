@@ -11,6 +11,7 @@ import {
 export function fetchUserInfoLoading (customerState, phoneNumber) {
   return {
     type: FETCH_USER_INFO_LOADING,
+    phoneNumber,
     customerState,
     isLoading: true,
     isError: false,
@@ -22,20 +23,18 @@ export function fetchUserInfoSuccess (customerState, result) {
   return {
     type: FETCH_USER_INFO_SUCCESS,
     customerState,
-    isLoading: false
-    // id: data.response.payload.id,
-    // first_name: data.response.payload.first_name,
-    // full_name: data.response.payload.full_name,
-    // gender: data.response.payload.gender,
-    // age: data.response.payload.age,
-    // referral_code: data.response.payload.referral_code,
-    // default_location: data.response.payload.default_location,
-    // reference_code: data.response.payload.reference_code,
-    // membership_code: data.response.payload.membership_code,
-    // mobile: data.response.payload.mobile,
-    // email: data.response.payload.email,
-    // isUserAlreadyExists: isUserAlreadyExists,
-    // isLoading: false
+    result,
+    isLoading: false,
+    id: result.body.payload.id,
+    full_name: result.body.payload.full_name,
+    gender: result.body.payload.gender,
+    age: result.body.payload.age,
+    referral_code: result.body.payload.referral_code,
+    default_location: result.body.payload.default_location,
+    reference_code: result.body.payload.reference_code,
+    membership_code: result.body.payload.membership_code,
+    mobile: result.body.payload.mobile,
+    email: result.body.payload.email
   }
 }
 
