@@ -35,7 +35,7 @@ const styles = theme => ({
 
 class CarePoints extends React.Component {
   componentDidMount () {
-    //Represents to get care point with customer Id.
+    // Represents to get care point with customer Id.
     this.props.actions.getCarePointDetailsLoading(
       this.props.carePointState,
       100036079,
