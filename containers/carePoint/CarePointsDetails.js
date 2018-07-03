@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-import Divider from '@material-ui/core/Divider';
+import Divider from '@material-ui/core/Divider'
 import Card from '@material-ui/core/Card'
 import CardContent from '@material-ui/core/CardContent'
 import Typography from '@material-ui/core/Typography'
@@ -16,7 +16,7 @@ const styles = theme => ({
     marginLeft: theme.spacing.unit * 6
   },
   cardContent: {
-    paddingBottom: 0,
+    paddingBottom: 0
   },
   title: {
     ...theme.typography.headline,
@@ -44,8 +44,8 @@ class CarePointsDetails extends Component {
             <CarePointAmount
               carePointAmountDetails={this.props.carePointState.payload.customer_wallet}
             />
-            <Divider/>
-            <CarePointsDescription/>
+            <Divider />
+            <CarePointsDescription />
             <TransactionHistoryHeader
               carePointState={this.props.carePointState}
               getCarePointDetailsLoading={this.props.getCarePointDetailsLoading}

@@ -5,6 +5,8 @@ import { combineReducers } from 'redux'
 // import { migrations } from './persistMigration'
 
 import moleculeDetailsReducer from '../containers/moleculeDetails/moleculeReducer'
+import loginReducer from '../containers/login/loginReducers'
+import customerReducer from '../containers/user/customer/customerReducer'
 import medicineListReducer from '../containers/medicineList/medicineLIstReducer'
 import prescriptionReducers from '../containers/prescription/prescriptionReducers'
 import carePointReducer from '../containers/carePoint/carePointReducer'
@@ -23,6 +25,8 @@ const isengard = (store, action) => {
 const appReducer = combineReducers({
   isengard,
   moleculeDetailsState: moleculeDetailsReducer,
+  loginState: loginReducer,
+  customerState: customerReducer,
   medicineListState: medicineListReducer,
   prescriptionState: prescriptionReducers,
   carePointState: carePointReducer

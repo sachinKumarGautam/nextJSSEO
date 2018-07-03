@@ -42,13 +42,11 @@ function mapDispatchToProps (dispatch) {
   }
 }
 
-
 function mapStateToProps (state) {
   return {
     carePointState: state.carePointState
   }
 }
-
 
 export default connect(
   mapStateToProps,

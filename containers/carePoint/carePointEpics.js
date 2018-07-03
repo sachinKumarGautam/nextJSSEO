@@ -4,7 +4,6 @@ import ajax from 'universal-rx-request' // because standard AjaxObservable only 
 import { ofType } from 'redux-observable'
 import http from '../../services/api/ajaxWrapper'
 
-
 import {
   GET_CARE_POINT_DETAILS_LOADING
 } from './carePointActionTypes'
