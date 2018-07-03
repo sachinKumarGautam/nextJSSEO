@@ -54,7 +54,7 @@ export default function cartReducer (state = initialState, action) {
         ...state,
         isLoading: action.isLoading,
         errorState: {
-          ...state.cartDetails.errorState,
+          ...state.errorState,
           isError: action.isError
         }
       }
@@ -64,7 +64,7 @@ export default function cartReducer (state = initialState, action) {
         ...state,
         isLoading: action.isLoading,
         payload: {
-          ...state.cartDetails.payload,
+          ...state.payload,
           id: action.id,
           uid: action.uid,
           customer_id: action.customer_id,
@@ -89,7 +89,7 @@ export default function cartReducer (state = initialState, action) {
         ...state,
         isLoading: action.isLoading,
         errorState: {
-          ...state.cartDetails.errorState,
+          ...state.errorState,
           isError: action.isError,
           error: action.error
         }

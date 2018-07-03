@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 
 import { withStyles } from '@material-ui/core/styles'
-import Typography from '@material-ui/core/Typography';
+import Typography from '@material-ui/core/Typography'
 
 const styles = theme => {
   return {
@@ -31,13 +31,13 @@ const OrderFooter = (props) => {
     <div className={props.classes.wrapperStyle}>
       <div>
         <Typography
-          variant="caption"
+          variant='caption'
           className={props.classes.labelStyle}
         >
           Placed On
         </Typography>
         <Typography
-          variant="caption"
+          variant='caption'
           className={props.classes.valueStyle}
         >
           06 Apr 2018
@@ -45,13 +45,13 @@ const OrderFooter = (props) => {
       </div>
       <div>
         <Typography
-          variant="caption"
+          variant='caption'
           className={props.classes.labelStyle}
         >
           Delivery Date
         </Typography>
         <Typography
-          variant="caption"
+          variant='caption'
           className={props.classes.valueStyle}
         >
           08 Apr 2018
@@ -59,13 +59,13 @@ const OrderFooter = (props) => {
       </div>
       <div>
         <Typography
-          variant="caption"
+          variant='caption'
           className={props.classes.labelStyle}
         >
           Payment
         </Typography>
         <Typography
-          variant="caption"
+          variant='caption'
           className={props.classes.valueStyle}
         >
           Credit Card
@@ -73,13 +73,13 @@ const OrderFooter = (props) => {
       </div>
       <div>
         <Typography
-          variant="caption"
+          variant='caption'
           className={props.classes.labelStyle}
         >
           Total Amount
         </Typography>
         <Typography
-          variant="caption"
+          variant='caption'
           className={props.classes.valueStyle}
         >
           Rs. 741.6

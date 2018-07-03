@@ -8,20 +8,20 @@ const styles = theme => ({
     ...theme.typography.body3,
     color: theme.palette.customGrey.grey500,
     textAlign: 'center',
-    marginBottom: theme.spacing.unit * 3,
+    marginBottom: theme.spacing.unit * 3
   },
   valueStyle: {
     color: theme.palette.customGrey.grey500,
     fontWeight: theme.typography.fontWeightBold,
     textAlign: 'center',
-    marginBottom: theme.spacing.unit * 5,
+    marginBottom: theme.spacing.unit * 5
   },
   amountWrapperStyle: {
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-between',
     marginLeft: theme.spacing.unit * 9,
-    marginRight: theme.spacing.unit * 8,
+    marginRight: theme.spacing.unit * 8
   }
 })
 

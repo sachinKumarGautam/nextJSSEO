@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 
 import Header from '../components/layouts/header'
-import Footer from '../components/layouts/footer/Footer'
+import Footer from '../components/layouts/footer'
 
 import { withStyles } from '@material-ui/core/styles'
 import withRoot from '../src/withRoot'
@@ -14,6 +14,10 @@ import Paper from '@material-ui/core/Paper'
 import ProductDetailsWrapper from '../containers/productDetails'
 
 // import fetch from 'isomorphic-fetch'
+
+import  {
+  getAnonymousCartIdLoading
+} from '../containers/cartDetails/cartActions'
 
 const styles = theme => ({
   root: {
@@ -34,6 +38,12 @@ const styles = theme => ({
 class ProductDetails extends Component {
   componentDidMount () {
     // get anonymous cart
+    this.props.actions.getAnonymousCartIdLoading(
+      this.props.cartState,
+      'MWEB',
+      100,
+      ''
+    )
   }
 
   render () {
@@ -53,6 +63,7 @@ class ProductDetails extends Component {
 
 function mapStateToProps (state) {
   return {
+    cartState: state.cartState,
     cartDetailsState: state.cartDetailsState
   }
 }
@@ -61,7 +72,7 @@ function mapDispatchToProps (dispatch) {
   return {
     actions: bindActionCreators(
       {
-
+        getAnonymousCartIdLoading
       },
       dispatch
     )

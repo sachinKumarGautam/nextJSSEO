@@ -1,6 +1,6 @@
 import React from 'react'
 import Header from '../components/layouts/header'
-import Footer from '../components/layouts/footer/Footer'
+import Footer from '../components/layouts/footer'
 
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
@@ -13,7 +13,7 @@ import Paper from '@material-ui/core/Paper'
 import CartDetailsWrapper from '../containers/cartDetails'
 
 import {
-  getAnonymousCartIdLoading
+  getCartDetailsLoading
 } from '../containers/cartDetails/cartActions'
 
 const styles = theme => ({
@@ -34,17 +34,23 @@ const styles = theme => ({
 
 class CartDetails extends React.Component {
   componentDidMount() {
-    this.props.actions.getAnonymousCartIdLoading(
-      this.props.cartState,
-      'MWEB',
-      100,
-      ''
-    )
+    const cartUid = this.props.cartState.payload.uid
 
     this.props.actions.getCartDetailsLoading(
       this.props.cartState,
-      this.props.Props.cartState.payload.uid
+      this.props.cartState.payload.uid
     )
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.cartState.payload.uid !== this.props.cartState.payload.uid) {
+      const cartUid = nextProps.cartState.payload.uid
+
+      this.props.actions.getCartDetailsLoading(
+        nextProps.cartState,
+        nextProps.cartState.payload.uid
+      )
+    }
   }
 
   render() {
@@ -72,7 +78,7 @@ function mapDispatchToProps (dispatch) {
   return {
     actions: bindActionCreators(
       {
-        getAnonymousCartIdLoading
+        getCartDetailsLoading
       },
       dispatch
     )

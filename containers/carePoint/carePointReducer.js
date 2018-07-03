@@ -24,7 +24,7 @@ export default function carePointReducer (state = initialState, action) {
     case GET_CARE_POINT_DETAILS_SUCCESS:
       return {
         ...state,
-        payload:{
+        payload: {
           ...state.payload,
           customer_wallet: {
             ...state.payload.customer_wallet,
@@ -33,7 +33,7 @@ export default function carePointReducer (state = initialState, action) {
             refundable_cash: action.payload.customer_wallet.refundable_cash,
             customer_id: action.payload.customer_wallet.customer_id
           },
-          customer_wallet_transactions: action.payload.customer_wallet_transactions,
+          customer_wallet_transactions: action.payload.customer_wallet_transactions
         },
         isLoading: action.isLoading
       }

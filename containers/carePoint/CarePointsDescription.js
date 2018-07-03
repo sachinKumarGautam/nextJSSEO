@@ -8,7 +8,7 @@ const styles = theme => ({
     color: theme.palette.customGrey.grey500,
     marginBottom: theme.spacing.unit * 2
   },
-  valueStyle:{
+  valueStyle: {
     color: theme.palette.customGrey.grey500,
     paddingRight: theme.spacing.unit * 5
   },

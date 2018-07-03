@@ -8,13 +8,14 @@ import ProductPackSize from './ProductPackSize'
 import ProductPrice from './ProductPrice'
 import StrokePrice from './StrokePrice'
 import EstimatedPriceLabel from './EstimatedPriceLabel'
-import Button from '@material-ui/core/Button'
+import Button from '../components/button'
 
 const styles = theme => {
   return {
     relatedMedicinesCardWrapper: {
       paddingBottom: theme.spacing.unit * 2,
-      marginTop: theme.spacing.unit * 2
+      marginTop: theme.spacing.unit * 2,
+      borderBottom: `1px solid ${theme.palette.customGrey.grey100}`
     },
     customBrand: {
       ...theme.typography.body3,
@@ -42,6 +43,12 @@ const styles = theme => {
     },
     priceWrapper: {
       marginBottom: theme.spacing.unit
+    },
+    buttonRoot: {
+      border: '1px solid #80c241'
+    },
+    buttonLabel: {
+      color: '#80c241'
     }
   }
 }
@@ -84,12 +91,15 @@ const RelatedMedicinesCard = (props) => (
     </div>
     <Button
       size='small'
-      variant='raised'
+      variant='outlined'
       color='primary'
+      classes={{
+        root: props.classes.buttonRoot,
+        label: props.classes.buttonLabel
+      }}
       onClick={this.handleClickOpen}
-    >
-      Add To Cart
-    </Button>
+      label={'Add To Cart'}
+    />
   </div>
 )
 

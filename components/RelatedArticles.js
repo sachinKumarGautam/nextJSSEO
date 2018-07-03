@@ -27,6 +27,7 @@ const styles = theme => {
       display: 'block',
       float: 'right',
       color: theme.palette.primary.main,
+      paddingRight: theme.spacing.unit * 5,
       fontWeight: theme.typography.fontWeightMedium
     },
     listItem: {

@@ -21,16 +21,16 @@ export function getAnonymousCartIdSuccess (cartState, result) {
   return {
     type: cartActionTypes.GET_ANONYMOUS_CART_ID_SUCCESS,
     cartState,
-    id: result.response.payload.id,
-    uid: result.response.payload.uid,
+    id: result.id,
+    uid: result.uid,
     patient_id: 0,
     cart_prescriptions: [],
     cart_items: [],
     isLoading: false,
     is_doctor_callback: false,
     is_cart_transfered: false,
-    source_type: result.response.payload.source_type,
-    facility_code: result.response.payload.facility_code
+    source_type: result.source_type,
+    facility_code: result.facility_code
   }
 }
 

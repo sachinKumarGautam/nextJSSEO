@@ -27,8 +27,7 @@ export function getAnonymousCartIdEpic (action$, store) {
     mergeMap(data => {
       return http(getAnonymousCartId$(data.source, data.facility_code, data.source_type)).pipe(
         map(result => {
-          debugger
-          return getAnonymousCartIdSuccess(data.cartState, result.body.payload.content[0])
+          return getAnonymousCartIdSuccess(data.cartState, result.body.payload)
         }),
         catchError(error => {
           return of(getAnonymousCartIdFailure(data.cartState, error))
