@@ -3,6 +3,8 @@ import React, { Component } from 'react'
 import { withStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
 
+import {formatDateWithMonth} from '../../utils/FormatDate'
+
 const styles = theme => {
   return {
     wrapperStyle: {
@@ -40,7 +42,7 @@ const OrderFooter = (props) => {
           variant='caption'
           className={props.classes.valueStyle}
         >
-          06 Apr 2018
+          {formatDateWithMonth(props.orderDetails.created_at)}
         </Typography>
       </div>
       <div>
@@ -54,7 +56,7 @@ const OrderFooter = (props) => {
           variant='caption'
           className={props.classes.valueStyle}
         >
-          08 Apr 2018
+          {formatDateWithMonth(props.orderDetails.delivery_date)}
         </Typography>
       </div>
       <div>
@@ -68,7 +70,7 @@ const OrderFooter = (props) => {
           variant='caption'
           className={props.classes.valueStyle}
         >
-          Credit Card
+          {props.orderDetails.payment_method}
         </Typography>
       </div>
       <div>
@@ -82,7 +84,7 @@ const OrderFooter = (props) => {
           variant='caption'
           className={props.classes.valueStyle}
         >
-          Rs. 741.6
+          {props.orderDetails.total_payable_amount}
         </Typography>
       </div>
     </div>
