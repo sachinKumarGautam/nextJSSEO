@@ -55,7 +55,7 @@ const OrderHeader = (props) => {
           variant='caption'
           className={props.classes.orderIdStyle}
         >
-          100787317
+          {props.orderDetails.id}
         </Typography>
       </div>
       <div>
