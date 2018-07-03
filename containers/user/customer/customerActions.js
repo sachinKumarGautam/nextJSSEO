@@ -34,7 +34,7 @@ export function fetchUserInfoSuccess (customerState, result) {
     reference_code: result.body.payload.reference_code,
     membership_code: result.body.payload.membership_code,
     mobile: result.body.payload.mobile,
-    email: result.body.payload.email,
+    email: result.body.payload.email
   }
 }
 

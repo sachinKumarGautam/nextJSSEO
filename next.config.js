@@ -3,7 +3,7 @@
 //       cfg.plugins = cfg.plugins.filter(plugin => {
 //         return plugin.constructor.name !== 'UglifyJsPlugin';
 //       });
-  
+
 //       return plugin
 //     }
 //   }

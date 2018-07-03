@@ -1,5 +1,5 @@
 import { of } from 'rxjs/observable/of'
-import { mergeMap, catchError, map, merge,  flatMap } from 'rxjs/operators'
+import { mergeMap, catchError, map, merge, flatMap } from 'rxjs/operators'
 import { ofType } from 'redux-observable'
 import http from '../../services/api/ajaxWrapper'
 
@@ -56,8 +56,8 @@ export function verifyOTP (action$, store) {
       return http(verifyOtp$(mobile, otp)).pipe(
         flatMap(result => {
           const isNewUser = loginState.isNewUser
-        let successObservable
-          
+          let successObservable
+
           data.setSubmitting(false)
           setTimeout(() => {
             if (isNewUser) {
@@ -71,13 +71,12 @@ export function verifyOTP (action$, store) {
             successObservable = of(
               verifyOtpSuccess(loginState, result, isNewUser)
             )
-          }
-          else {
+          } else {
             successObservable = of(toggleAuthentication(loginState, true),
-            fetchUserInfoLoading(customerState, mobile),
-            verifyOtpSuccess(loginState, result, isNewUser),
-            updatePhoneNumber(customerState, mobile)
-          )
+              fetchUserInfoLoading(customerState, mobile),
+              verifyOtpSuccess(loginState, result, isNewUser),
+              updatePhoneNumber(customerState, mobile)
+            )
           }
 
           return successObservable

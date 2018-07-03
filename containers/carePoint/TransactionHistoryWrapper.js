@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-import Divider from '@material-ui/core/Divider';
+import Divider from '@material-ui/core/Divider'
 
 import TransactionHistory from './TransactionHistory'
 
@@ -15,7 +15,7 @@ class TransactionHistoryWrapper extends Component {
                 <TransactionHistory
                   carePointsDetails={carePointsDetails}
                 />
-                <Divider/>
+                <Divider />
               </div>
             )
           })

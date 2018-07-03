@@ -62,14 +62,14 @@ class Header extends React.Component {
               {loginState.isAuthenticated && <MenuWrapper />}
               { !loginState.isAuthenticated &&
                 <Button
-                variant='raised'
-                size='medium'
-                color='primary'
-                aria-label='login'
-                onClick={this.openLoginModal}
-                className={classes.button}
-                label={'Login / Register'}
-              />}
+                  variant='raised'
+                  size='medium'
+                  color='primary'
+                  aria-label='login'
+                  onClick={this.openLoginModal}
+                  className={classes.button}
+                  label={'Login / Register'}
+                />}
               {this.state.openLoginDialog && <Login
                 openLoginDialog={this.state.openLoginDialog}
                 openLoginModal={this.openLoginModal}

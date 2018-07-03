@@ -56,7 +56,7 @@ const getCarePointsList$ = (customerId, cashType) => (
       'QUERY_STRING',
       {query_string:
         cashType === 'all'
-        ? `size=100&page=0` : `cash-type=${cashType}&size=100&page=0`
+          ? `size=100&page=0` : `cash-type=${cashType}&size=100&page=0`
       }
     )
   })

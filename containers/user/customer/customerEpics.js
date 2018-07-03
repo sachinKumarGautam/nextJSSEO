@@ -3,10 +3,10 @@ import { mergeMap, catchError, map, flatMap } from 'rxjs/operators'
 import ajax from 'universal-rx-request' // because standard AjaxObservable only works in browser
 import { ofType } from 'redux-observable'
 import {CUSTOMER_REGISTER_LOADING, FETCH_USER_INFO_LOADING} from './customerActionTypes'
-import { 
-  customerRegisterSuccess, 
-  customerRegisterFailure, 
-  fetchUserInfoSuccess, 
+import {
+  customerRegisterSuccess,
+  customerRegisterFailure,
+  fetchUserInfoSuccess,
   fetchUserInfoFailure
 } from './customerActions'
 import { toggleAuthentication } from '../../login/loginActions'
@@ -27,8 +27,8 @@ export function registerCustomer (action$, store) {
             data.closeLoginModal()
           }, 250)
           // TODO: remove store.dispatch as it might be deprecated in future
-          return of(toggleAuthentication(loginState, true), 
-          customerRegisterSuccess(customerState, result))
+          return of(toggleAuthentication(loginState, true),
+            customerRegisterSuccess(customerState, result))
         }),
         catchError(error => {
           data.setSubmitting(false)
