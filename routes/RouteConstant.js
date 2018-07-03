@@ -1,6 +1,6 @@
-export const ORDER = '/orders'
+export const ORDER = '/order-list'
 
-export const PRESCRIPTION = '/prescription'
+export const PRESCRIPTION = '/prescription-list'
 
 export const CARE_POINTS = '/care-points'
 
