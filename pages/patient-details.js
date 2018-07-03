@@ -1,7 +1,6 @@
 import React from 'react'
 
-import withRedux from 'next-redux-wrapper'
-import initStore from '../redux'
+import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
 import { withStyles } from '@material-ui/core/styles'
@@ -81,8 +80,7 @@ function mapDispatchToProps (dispatch) {
   }
 }
 
-export default withRedux(
-  initStore,
+export default connect(
   mapStateToProps,
   mapDispatchToProps
 )(withRoot(withStyles(styles)(PatientDetails)))
