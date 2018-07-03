@@ -8,6 +8,7 @@ import moleculeDetailsReducer from '../containers/moleculeDetails/moleculeReduce
 import loginReducer from '../containers/login/loginReducers'
 import customerReducer from '../containers/user/customer/customerReducer'
 import medicineListReducer from '../containers/medicineList/medicineLIstReducer'
+import prescriptionReducers from '../containers/prescription/prescriptionReducers'
 import carePointReducer from '../containers/carePoint/carePointReducer'
 import cartReducer from '../containers/cartDetails/cartReducer'
 import checkPincodeReducer from '../containers/location/pincode/pincodeReducer'
@@ -31,7 +32,8 @@ const appReducer = combineReducers({
   medicineListState: medicineListReducer,
   carePointState: carePointReducer,
   cartState: cartReducer,
-  checkPincodeState: checkPincodeReducer
+  checkPincodeState: checkPincodeReducer,
+  prescriptionState: prescriptionReducers,
 })
 
 // export const persistConfig = {
@@ -48,6 +50,10 @@ const appReducer = combineReducers({
 
 const reducer = (state, action) => {
   // TODO: reset all state
+  if (action.type === 'RESET_APPLICATION_STATE') {
+    state = undefined
+  }
+
   return appReducer(state, action)
 }
 

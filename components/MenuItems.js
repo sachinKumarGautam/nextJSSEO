@@ -85,6 +85,7 @@ const MenuItems = (props) => {
           className={
             props.isSideMenu ? props.customMenuStyle : props.classes.menuStyle
           }
+          onClick={props.logout}
         >
           Log out
         </li>

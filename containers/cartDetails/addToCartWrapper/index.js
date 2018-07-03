@@ -14,7 +14,7 @@ class AddToCartWrapper extends React.Component {
 
   buttonOnClick () {
     if (this.props.checkPincodeState.payload.city) {
-      this.props.onClick.bind(this)
+      this.props.onClick()
     } else {
       this.setState({
         open: true
@@ -29,10 +29,6 @@ class AddToCartWrapper extends React.Component {
   }
 
   render () {
-    const {
-      open
-    } = this.props
-
     return (
       <React.Fragment>
         <Button

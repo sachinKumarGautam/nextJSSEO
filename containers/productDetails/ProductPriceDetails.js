@@ -40,21 +40,12 @@ const styles = theme => ({
 class ProductPriceDetails extends Component {
   constructor (props) {
     super(props)
-    this.state = {
-      open: false
-    }
-
-    this.handleClickOpen = this.handleClickOpen.bind(this)
-    this.handleClose = this.handleClose.bind(this)
   }
 
-  handleClickOpen () {
-    this.setState({ open: true })
-  };
-
-  handleClose () {
-    this.setState({ open: false })
-  };
+  addToCart() {
+    //dummy func 
+    console.log('sachin is awesome')
+  }
 
   render () {
     const { classes } = this.props
@@ -80,10 +71,8 @@ class ProductPriceDetails extends Component {
                 variant='raised'
                 size='small'
                 color='primary'
-                onClick={this.handleClickOpen}
+                onClick={this.addToCart.bind(this)}
                 label={'Add To Cart'}
-                handleClose={this.handleClose}
-                open={this.state.open}
                 checkPincodeState={this.props.checkPincodeState}
                 checkPincodeLoading={this.props.checkPincodeLoading}
               />

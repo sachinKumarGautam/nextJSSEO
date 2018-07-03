@@ -45,7 +45,6 @@ const PincodeDialog = (props) => {
     classes
     // toggleForm
   } = props
-  console.log('dkdkjkj')
   return (
     <div>
       <Dialog
@@ -99,6 +98,7 @@ const PincodeDialog = (props) => {
           />
           <Button
             onClick={props.handleSubmit}
+            isloading={isSubmitting}
             color='primary'
             label={'Apply'}
             variant='raised' 

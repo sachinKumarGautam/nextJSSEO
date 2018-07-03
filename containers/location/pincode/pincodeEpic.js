@@ -15,16 +15,18 @@ export function checkPincode (action$, store) {
   return action$.pipe(
     ofType(CHECK_PINCODE_LOADING),
     mergeMap(data => {
+      const checkPincodeState = store.getState().checkPincodeState
       return http(checkPincode$(data.pincode)).pipe(
         map(result => {
+          console.log(result)
           setTimeout(() => {
             data.handleClose()
           }, 350)
           data.setSubmitting(false)
-          return checkPincodeSuccess(data.checkPincodeState, result)
+          return checkPincodeSuccess(checkPincodeState, result)
         }),
         catchError(error => {
-          return of(checkPincodeFailure(data.checkPincodeState, error))
+          return of(checkPincodeFailure(checkPincodeState, error))
         })
       )
     })

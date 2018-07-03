@@ -23,10 +23,23 @@ export function checkPincodeLoading (
 }
 
 export function checkPincodeSuccess (checkPincodeState, result) {
+  const updatedResult = result.body.payload
   return {
     type: CHECK_PINCODE_SUCCESS,
     checkPincodeState,
-    isLoading: false
+    isLoading: false,
+    id: updatedResult.id,
+    pincode: updatedResult.pincode,
+    city: updatedResult.city,
+    state: updatedResult.state,
+    country: updatedResult.country,
+    delivery_day: updatedResult.delivery_day,
+    free_shipping_min_order: updatedResult.free_shipping_min_order,
+    shipping_fee: updatedResult.shipping_fee,
+    is_active: updatedResult.is_active,
+    is_lc_assured_available: updatedResult.is_lc_assured_available,
+    is_urgent_dl_available: updatedResult.is_lc_assured_available,
+    urgent_delivery_charge: updatedResult.urgent_delivery_charge
   }
 }
 
