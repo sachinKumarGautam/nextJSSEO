@@ -90,3 +90,41 @@ export function getCartDetailsFailure (cartState, error) {
     error: error
   }
 }
+
+export function decrementCartItemLoading (
+  cartState,
+  medicineSelected
+) {
+  return {
+    type: cartActionTypes.DECREMENT_CART_ITEM_LOADING,
+    cartState: cartState,
+    medicineSelected: medicineSelected
+  }
+}
+
+export function incrementCartItemLoading (
+  cartState,
+  medicineSelected
+) {
+  return {
+    type: cartActionTypes.INCREMENT_CART_ITEM_LOADING,
+    cartState: cartState,
+    medicineSelected: medicineSelected
+  }
+}
+
+export function putCartItemSuccess (cartState, cartItems) {
+  return {
+    type: cartActionTypes.PUT_CART_ITEM_SUCCESS,
+    cartState,
+    cartItems: cartItems
+  }
+}
+
+export function putCartItemFailure (cartState, cartItems) {
+  return {
+    type: cartActionTypes.PUT_CART_ITEM_FAILURE,
+    cartState,
+    cartItems: cartItems
+  }
+}

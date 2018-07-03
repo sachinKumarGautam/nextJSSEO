@@ -13,7 +13,8 @@ import Paper from '@material-ui/core/Paper'
 import CartDetailsWrapper from '../containers/cartDetails'
 
 import {
-  getCartDetailsLoading
+  getCartDetailsLoading,
+  incrementCartItemLoading
 } from '../containers/cartDetails/cartActions'
 
 const styles = theme => ({
@@ -34,21 +35,27 @@ const styles = theme => ({
 
 class CartDetails extends React.Component {
   componentDidMount() {
-    const cartUid = this.props.cartState.payload.uid
-
+    const cartUid = '19820b57-3166-44e3-8023-d1831d9757ec'
+    const medicineSelected = ''
+    
     this.props.actions.getCartDetailsLoading(
       this.props.cartState,
-      this.props.cartState.payload.uid
+      cartUid
+    )
+
+    this.props.actions.incrementCartItemLoading(
+      this.props.cartState,
+      medicineSelected
     )
   }
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.cartState.payload.uid !== this.props.cartState.payload.uid) {
-      const cartUid = nextProps.cartState.payload.uid
+      const cartUid = '19820b57-3166-44e3-8023-d1831d9757ec'
 
       this.props.actions.getCartDetailsLoading(
         nextProps.cartState,
-        nextProps.cartState.payload.uid
+        cartUid
       )
     }
   }
@@ -78,7 +85,8 @@ function mapDispatchToProps (dispatch) {
   return {
     actions: bindActionCreators(
       {
-        getCartDetailsLoading
+        getCartDetailsLoading,
+        incrementCartItemLoading
       },
       dispatch
     )

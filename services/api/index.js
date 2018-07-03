@@ -81,6 +81,14 @@ const getCartDetails$ = cartUid => (
   })
 )
 
+const putCartItem$ = (cartUid, cartItem) => (
+  makeAjaxRequest({
+    method: 'PUT',
+    url: fetchUrl('cart', cartUid + '/item', 'GET_LIST'),
+    body: cartItem
+  })
+)
+
 export {
   getMoleculeSummary$,
   getMedicineList$,
@@ -90,5 +98,6 @@ export {
   verifyOtp$,
   sendOtp$,
   fetchUserInfo$,
-  registerCustomer$
+  registerCustomer$,
+  putCartItem$
 }

@@ -22,7 +22,12 @@ import {
 } from '../containers/carePoint/carePointEpics'
 
 import {
-  getAnonymousCartIdEpic
+  getAnonymousCartIdEpic,
+  getCartDetailsEpic,
+  decrementCartItemLoadingEpic,
+  decrementCartItemEpic,
+  incrementCartItemLoadingEpic,
+  incrementCartItemEpic
 } from '../containers/cartDetails/cartEpics'
 
 // import * as actions from './actions'
@@ -77,5 +82,10 @@ export const rootEpic = combineEpics(
   fetchUserInfo,
   getRelatedMedicines,
   carePointsList,
-  getAnonymousCartIdEpic
+  getAnonymousCartIdEpic,
+  getCartDetailsEpic,
+  decrementCartItemLoadingEpic,
+  decrementCartItemEpic,
+  incrementCartItemLoadingEpic,
+  incrementCartItemEpic
 )

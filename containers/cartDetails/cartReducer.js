@@ -95,6 +95,36 @@ export default function cartReducer (state = initialState, action) {
         }
       }
 
+    case cartActionTypes.INCREMENT_CART_ITEM_LOADING:
+      return state
+
+    case cartActionTypes.DECREMENT_CART_ITEM_LOADING:
+      return state
+
+    case cartActionTypes.PUT_CART_ITEM_SUCCESS:
+      return {
+        ...state,
+        payload: {
+          ...state.payload,
+          cart_items: {
+            ...state.payload.cart_items,
+            payload: action.cartItems
+          }
+        }
+      }
+
+    case cartActionTypes.PUT_CART_ITEM_FAILURE:
+      return {
+        ...state,
+        payload: {
+          ...state.payload,
+          cart_items: {
+            ...state.payload.cart_items,
+            payload: action.cartItems
+          }
+        }
+      }
+
     default:
       return state
   }
