@@ -113,10 +113,7 @@ class OrderContent extends Component {
               className={this.props.classes.userNameStyle}
             >
               <Person className={this.props.classes.userIconStyle}/>
-              {
-                this.props.orderDetails.shipping_address.first_name +
-                this.props.orderDetails.shipping_address.last_name
-              }
+              {this.props.orderDetails.customer_full_name}
             </Typography>
           </div>
           <div>

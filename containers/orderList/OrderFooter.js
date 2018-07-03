@@ -56,7 +56,7 @@ const OrderFooter = (props) => {
           variant="caption"
           className={props.classes.valueStyle}
         >
-          {formatDateWithMonth(props.orderDetails.promised_delivery_date)}
+          {formatDateWithMonth(props.orderDetails.delivery_date)}
         </Typography>
       </div>
       <div>

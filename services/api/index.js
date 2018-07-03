@@ -19,7 +19,7 @@ const getMedicineList$ = (saltName, page, size) => (
 const getOrderList$ = (customerId, page, size) => (
   makeAjaxRequest({
     method: 'GET',
-    url: fetchUrl('order', `customer/${customerId}/orders?size=${size}&page=${page}`, 'CREATE')
+    url: fetchUrl('order', `customer/${customerId}/order-summary?size=${size}&page=${page}`, 'CREATE')
   })
 )
 
