@@ -139,6 +139,13 @@ const saveDeliveryAddressToCart$ = (cartId, shippingAddressId) => (
   })
 )
 
+const cartTransfer$ = cartUid => (
+  makeAjaxRequest({
+    method: 'PATCH',
+    url: fetchUrl('cart', cartUid + '/transfer', 'CREATE')
+  })
+)
+
 export {
   getMoleculeSummary$,
   getMedicineList$,
@@ -156,5 +163,6 @@ export {
   putCartItem$,
   deleteCartItem$,
   savePatientToCart$,
-  saveDeliveryAddressToCart$
+  saveDeliveryAddressToCart$,
+  cartTransfer$
 }

@@ -46,7 +46,8 @@ import {
   incrementCartItemEpic,
   deleteCartItemLoadingEpic,
   deleteCartItemEpic,
-  savePatientToCartEpic
+  savePatientToCartEpic,
+  cartTransferEpic
 } from '../containers/cartDetails/cartEpics'
 
 // import * as actions from './actions'
@@ -114,5 +115,6 @@ export const rootEpic = combineEpics(
   savePatientToCartEpic,
   getOrderListDetails,
   getPrescriptionList,
-  carePointsList
+  carePointsList,
+  cartTransferEpic
 )

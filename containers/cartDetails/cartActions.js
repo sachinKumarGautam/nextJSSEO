@@ -156,6 +156,18 @@ export function savePatientToCartLoading (
   }
 }
 
+export function cartTransferLoading (
+  cartState
+) {
+  return {
+    type: cartActionTypes.CART_TRANSFER_LOADING,
+    cartState: cartState,
+    isLoading: true,
+    isError: false,
+    error: {}
+  }
+}
+
 export function savePatientToCartSuccess (cartState, response) {
   return {
     type: cartActionTypes.SAVE_PATIENT_TO_CART_SUCCESS,
@@ -202,6 +214,38 @@ export function saveDeliveryAddressToCartFailure (cartState, error) {
   return {
     type: cartActionTypes.SAVE_DELIVERY_ADDRESS_TO_CART_FAILURE,
     cartState,
+    isLoading: false,
+    isError: true,
+    error: error
+  }
+}
+
+export function cartTransferSuccess (cartState, result, cartItems, cartPrescriptions) {
+  let payload = result.body.payload
+  return {
+    type: cartActionTypes.CART_TRANSFER_SUCCESS,
+    cartState: cartState,
+    cart_items: cartItems,
+    isLoading: false,
+    id: payload.id,
+    uid: payload.uid,
+    customer_id: payload.customer_id,
+    customer_first_name: payload.customer_first_name,
+    customer_last_name: payload.customer_last_name,
+    facility_code: payload.facility_code,
+    status: payload.status,
+    source: payload.source,
+    cart_prescriptions: cartPrescriptions,
+    doctor_callback: payload.doctor_callback,
+    is_cart_transfered: true,
+    source_type: payload.source_type
+  }
+}
+
+export function cartTransferFailure (cartState, error) {
+  return {
+    type: cartActionTypes.CART_TRANSFER_FAILURE,
+    cartState: cartState,
     isLoading: false,
     isError: true,
     error: error

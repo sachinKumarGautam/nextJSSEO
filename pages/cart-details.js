@@ -35,30 +35,27 @@ const styles = theme => ({
 
 class CartDetails extends React.Component {
   componentDidMount() {
-    const cartUid = '19820b57-3166-44e3-8023-d1831d9757ec'
     const medicineSelected = ''
-    
+
     this.props.actions.getCartDetailsLoading(
       this.props.cartState,
-      cartUid
+      this.props.cartState.payload.uid
     )
 
-    this.props.actions.incrementCartItemLoading(
-      this.props.cartState,
-      medicineSelected
-    )
+    // this.props.actions.incrementCartItemLoading(
+    //   this.props.cartState,
+    //   medicineSelected
+    // )
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.cartState.payload.uid !== this.props.cartState.payload.uid) {
-      const cartUid = '19820b57-3166-44e3-8023-d1831d9757ec'
-
-      this.props.actions.getCartDetailsLoading(
-        nextProps.cartState,
-        cartUid
-      )
-    }
-  }
+  // componentWillReceiveProps(nextProps) {
+  //   if (nextProps.cartState.payload.uid !== this.props.cartState.payload.uid) {
+  //     this.props.actions.getCartDetailsLoading(
+  //       nextProps.cartState,
+  //       nextprops.cartState.payload.uid
+  //     )
+  //   }
+  // }
 
   render() {
     return (
