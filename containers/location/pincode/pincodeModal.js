@@ -4,7 +4,6 @@ const initialState = {
     state: '',
     id: '',
     pincode: '',
-    city: '',
     state: '',
     country: '',
     delivery_day: '',

@@ -34,13 +34,11 @@ const styles = theme => ({
 })
 
 function getPincodeErrorMsg (pincodeFormError, inValidPincodeError, pincodeLoading) {
-  if(pincodeLoading) {
+  if (pincodeLoading) {
     return 'Checking pincode...'
-  }
-  else if(pincodeFormError) {
+  } else if (pincodeFormError) {
     return pincodeFormError
-  }
-  else if(!pincodeFormError && inValidPincodeError){
+  } else if (!pincodeFormError && inValidPincodeError) {
     return inValidPincodeError
   }
 }
@@ -64,7 +62,7 @@ const PincodeDialog = (props) => {
   const pincodeFormError = errors.pincode && touched.pincode ? errors.pincode : ''
 
   const inValidPincodeError = touched.pincode && pincodeError === 'NotFoundException'
-  ? `Sorry! We don't service in your area. Please change pincode ` : ''
+    ? `Sorry! We don't service in your area. Please change pincode ` : ''
 
   return (
     <div>

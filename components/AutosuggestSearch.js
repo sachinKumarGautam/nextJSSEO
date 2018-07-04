@@ -1,5 +1,4 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import Downshift from 'downshift'
 import { withStyles } from '@material-ui/core/styles'
 import TextField from '@material-ui/core/TextField'
@@ -82,7 +81,9 @@ function renderSuggestion ({
   selectedItem,
   searchItemStyle,
   highlightedSearchItem,
-  selectedSearchItem
+  selectedSearchItem,
+  checkPincodeLoading,
+  checkPincodeState
 }) {
   const isHighlighted = highlightedIndex === index
   const isSelected = (selectedItem || '').indexOf(suggestion.label) > -1
@@ -94,7 +95,10 @@ function renderSuggestion ({
       {...itemProps}
       className={listStyle}
     >
-      <MedicineListDetails />
+      <MedicineListDetails
+        checkPincodeLoading={checkPincodeLoading}
+        checkPincodeState={checkPincodeState}
+      />
     </li>
   )
 }
@@ -184,54 +188,62 @@ const styles = theme => ({
   }
 })
 
-function IntegrationDownshift (props) {
-  const { classes } = props
+class IntegrationDownshift extends React.Component {
+  constructor (props) {
+    super(props)
+  }
 
-  return (
-    <div className={classes.root}>
-      <Downshift>
-        {({ getInputProps, getItemProps, getMenuProps, isOpen, inputValue, selectedItem, highlightedIndex }) => (
-          <div className={classes.container}>
-            {renderInput({
-              fullWidth: true,
-              classes,
-              InputProps: getInputProps({
-                placeholder: 'Search a country (start with a)',
-                id: 'integration-downshift-simple'
-              })
-            })}
-            {isOpen ? (
-              <Paper className={classes.paper} square>
-                <ul
-                  {...getMenuProps()}
-                  className={classes.searchContentWrapper}
-                >
-                  {getSuggestions(inputValue).map((suggestion, index) =>
-                    renderSuggestion({
-                      suggestion,
-                      index,
-                      itemProps: getItemProps({
-                        item: suggestion.label
-                      }),
-                      highlightedIndex,
-                      selectedItem,
-                      searchItemStyle: classes.searchItem,
-                      highlightedSearchItem: `${classes.searchItem} ${classes.highlightedSearchItem}`,
-                      selectedSearchItem: `${classes.searchItem} ${classes.selectedSearchItem}`
-                    })
-                  )}
-                </ul>
-              </Paper>
-            ) : null}
-          </div>
-        )}
-      </Downshift>
-    </div>
-  )
-}
+  render () {
+    const {
+      classes,
+      checkPincodeLoading,
+      checkPincodeState
+    } = this.props
 
-IntegrationDownshift.propTypes = {
-  classes: PropTypes.object.isRequired
+    return (
+      <div className={classes.root}>
+        <Downshift>
+          {({ getInputProps, getItemProps, getMenuProps, isOpen, inputValue, selectedItem, highlightedIndex }) => (
+            <div className={classes.container}>
+              {renderInput({
+                fullWidth: true,
+                classes,
+                InputProps: getInputProps({
+                  placeholder: 'Search a country (start with a)',
+                  id: 'integration-downshift-simple'
+                })
+              })}
+              {isOpen ? (
+                <Paper className={classes.paper} square>
+                  <ul
+                    {...getMenuProps()}
+                    className={classes.searchContentWrapper}
+                  >
+                    {getSuggestions(inputValue).map((suggestion, index) =>
+                      renderSuggestion({
+                        suggestion,
+                        index,
+                        itemProps: getItemProps({
+                          item: suggestion.label
+                        }),
+                        checkPincodeLoading,
+                        checkPincodeState,
+                        highlightedIndex,
+                        selectedItem,
+                        searchItemStyle: classes.searchItem,
+                        highlightedSearchItem: `${classes.searchItem} ${classes.highlightedSearchItem}`,
+                        selectedSearchItem: `${classes.searchItem} ${classes.selectedSearchItem}`
+                      })
+                    )}
+                  </ul>
+                </Paper>
+              ) : null}
+            </div>
+          )}
+        </Downshift>
+      </div>
+    )
+  }
 }
 
 export default withStyles(styles)(IntegrationDownshift)

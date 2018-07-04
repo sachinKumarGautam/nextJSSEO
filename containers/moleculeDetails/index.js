@@ -61,6 +61,8 @@ class MoleculeDetailsWrapper extends Component {
             <RelatedMedicines
               moleculeName={this.props.moleculeDetailsStatePayload.name}
               medicineList={this.props.medicineListState.payload}
+              checkPincodeLoading={this.props.checkPincodeLoading}
+              checkPincodeState={this.props.checkPincodeState}
             />
             <RelatedArticles />
           </Grid>

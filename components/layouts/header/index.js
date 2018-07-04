@@ -1,5 +1,4 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
 
 import { connect } from 'react-redux'
@@ -17,6 +16,39 @@ import CartIcon from '../../CartIcon'
 import Login from '../../../containers/login'
 import getPageContext from '../../../src/getPageContext'
 import MenuWrapper from '../../../containers/menu'
+import { checkPincodeLoading } from '../../../containers/location/pincode/pincodeAction'
+
+const styles = theme => ({
+  root: {
+    flexGrow: 1
+  },
+  appBar: {
+    backgroundColor: '#fff'
+  },
+  appBarInnerComp: {
+    flexGrow: 1,
+    margin: '0 auto',
+    maxWidth: theme.breakpoints.values.lg,
+    display: 'flex',
+    width: '100%',
+    flexDirection: 'column',
+    paddingLeft: '56px',
+    paddingRight: '36px'
+  },
+  toolbar: {
+    // margin: `0 ${theme.spacing.unit * 3}px`,
+    marginBottom: 0,
+    height: theme.spacing.unit * 7.5,
+    display: 'flex',
+    // width: '100%',
+    justifyContent: 'space-between'
+  },
+  button: {
+    color: 'white',
+    flexGrow: 0,
+    borderRadius: theme.spacing.unit * 4
+  }
+})
 
 class Header extends React.Component {
   constructor (props, context) {
@@ -57,7 +89,10 @@ class Header extends React.Component {
               disableGutters
             >
               <img src='/static/images/logo-green.svg' />
-              <AutosuggestSearch />
+              <AutosuggestSearch
+                checkPincodeLoading={this.props.actions.checkPincodeLoading}
+                checkPincodeState={this.props.checkPincodeState}
+              />
               <CartIcon />
               {loginState.isAuthenticated && <MenuWrapper />}
               { !loginState.isAuthenticated &&
@@ -86,46 +121,11 @@ class Header extends React.Component {
   }
 }
 
-const styles = theme => ({
-  root: {
-    flexGrow: 1
-  },
-  appBar: {
-    backgroundColor: '#fff'
-  },
-  appBarInnerComp: {
-    flexGrow: 1,
-    margin: '0 auto',
-    maxWidth: theme.breakpoints.values.lg,
-    display: 'flex',
-    width: '100%',
-    flexDirection: 'column',
-    paddingLeft: '56px',
-    paddingRight: '36px'
-  },
-  toolbar: {
-    // margin: `0 ${theme.spacing.unit * 3}px`,
-    marginBottom: 0,
-    height: theme.spacing.unit * 7.5,
-    display: 'flex',
-    // width: '100%',
-    justifyContent: 'space-between'
-  },
-  button: {
-    color: 'white',
-    flexGrow: 0,
-    borderRadius: theme.spacing.unit * 4
-  }
-})
-
-Header.propTypes = {
-  classes: PropTypes.object.isRequired
-}
-
 function mapStateToProps (state) {
   return {
     loginState: state.loginState,
-    customerState: state.customerState
+    customerState: state.customerState,
+    checkPincodeState: state.checkPincodeState
   }
 }
 
@@ -133,6 +133,7 @@ function mapDispatchToProps (dispatch) {
   return {
     actions: bindActionCreators(
       {
+        checkPincodeLoading
       },
       dispatch
     )
