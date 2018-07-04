@@ -1,5 +1,5 @@
 import { of } from 'rxjs/observable/of'
-import { mergeMap, catchError, map } from 'rxjs/operators'
+import { mergeMap, catchError, map, switchMap } from 'rxjs/operators'
 import { ofType } from 'redux-observable'
 import http from '../../services/api/ajaxWrapper'
 
@@ -8,7 +8,8 @@ import {
   GET_CART_DETAILS_LOADING,
   DECREMENT_CART_ITEM_LOADING,
   INCREMENT_CART_ITEM_LOADING,
-  DELETE_CART_ITEM_LOADING
+  DELETE_CART_ITEM_LOADING,
+  CART_TRANSFER_LOADING
 } from './cartActionTypes'
 
 import {
@@ -17,16 +18,18 @@ import {
   getCartDetailsSuccess,
   getCartDetailsFailure,
   putCartItemSuccess,
-  putCartItemFailure
+  putCartItemFailure,
+  cartTransferSuccess,
+  cartTransferFailure
 } from './cartActions'
 
 import {
   getAnonymousCartId$,
   getCartDetails$,
   putCartItem$,
-  deleteCartItem$
+  deleteCartItem$,
+  cartTransfer$
 } from '../../services/api'
-
 
 export function getAnonymousCartIdEpic (action$, store) {
   return action$.pipe(
@@ -228,6 +231,43 @@ export function deleteCartItemEpic (action$, store) {
             data.medicineSelected,
             error
           )
+        })
+      )
+    })
+  )
+}
+
+export function cartTransferEpic (action$, store) {
+  return action$.pipe(
+    ofType(CART_TRANSFER_LOADING),
+    switchMap(data => {
+      return http(cartTransfer$(data.cartState.payload.uid)).pipe(
+        map(result => {
+          let cartItems = result.body.payload.cart_items
+          let cartPrescriptions = result.body.payload.cart_prescriptions
+
+          cartItems.forEach((cartMedicine, index) => {
+            cartItems[index] = {
+              ...cartItems[index],
+              isCartMedicine: true
+            }
+          })
+
+          let updatedCartPrescriptions = cartPrescriptions.map((prescription, index) => {
+            return {
+              ...prescription,
+              url: prescription.location
+            }
+          })
+          return cartTransferSuccess(
+            data.cartState,
+            result,
+            cartItems,
+            updatedCartPrescriptions
+          )
+        }),
+        catchError(error => {
+          return of(cartTransferFailure(data.cartState, error))
         })
       )
     })
