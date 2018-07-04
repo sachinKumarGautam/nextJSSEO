@@ -23,7 +23,7 @@ export function getMoleculeSummaryLoading (moleculeState, saltId) {
 /**
  * Represents to the success state to get the molecule details.
  * @param {object} moleculeState - The object maintained for payload, loading and error state.
- * @param {string} saltId - The result obtained from the API response
+ * @param {array} result - The result obtained from the API response
  */
 
 export function getMoleculeSummarySuccess (moleculeState, result) {
