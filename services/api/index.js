@@ -101,6 +101,13 @@ const getAnonymousCartId$ = (source, facilityCode, sourceType = '') => (
   })
 )
 
+const cartTransfer$ = cartUid => (
+  makeAjaxRequest({
+    method: 'PATCH',
+    url: fetchUrl('cart', cartUid + '/transfer', 'CREATE')
+  })
+)
+
 export {
   getMoleculeSummary$,
   getMedicineList$,
@@ -113,5 +120,6 @@ export {
   verifyOtp$,
   sendOtp$,
   fetchUserInfo$,
-  registerCustomer$
+  registerCustomer$,
+  cartTransfer$
 }
