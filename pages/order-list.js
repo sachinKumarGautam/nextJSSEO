@@ -40,7 +40,7 @@ class Orders extends React.Component {
       this.props.orderListState,
       this.props.customerState.payload.id, // pass customer Id
       0, // page number
-      2 // page size
+      10 // page size
     )
   }
 

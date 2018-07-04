@@ -60,7 +60,7 @@ class OrderListDetails extends Component {
       this.props.orderListState,
       this.props.customerState.payload.id, // pass customer Id
       this.state.page + 1, // page number
-      2 // page size
+      10 // page size
     )
 
     this.setState({
