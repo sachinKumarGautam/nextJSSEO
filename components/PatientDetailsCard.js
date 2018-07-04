@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 
 import Grid from '@material-ui/core/Grid'
 import Typography from '@material-ui/core/Typography'
-import Button from '@material-ui/core/Button'
+import Button from './button'
 
 import { withStyles } from '@material-ui/core/styles'
 
@@ -11,16 +11,18 @@ const styles = theme => {
   return {
     patientWrapperStyle: {
       border: `1px solid ${theme.palette.customGrey.grey250}`,
-      width: theme.spacing.unit * 42.5,
       padding: theme.spacing.unit * 2.5,
-      borderRadius: theme.spacing.unit * 0.5
+      borderRadius: theme.spacing.unit * 0.5,
+      marginLeft: theme.spacing.unit * 4,
+      marginRight: theme.spacing.unit * 4
     },
     patientWrapperSelectedStyle: {
       border: `1px solid ${theme.palette.customGrey.grey250}`,
-      width: theme.spacing.unit * 42.5,
       backgroundColor: theme.palette.customGreen.green200,
       padding: theme.spacing.unit * 2.5,
-      borderRadius: theme.spacing.unit * 0.5
+      borderRadius: theme.spacing.unit * 0.5,
+      marginLeft: theme.spacing.unit * 4,
+      marginRight: theme.spacing.unit * 4
     },
     buttonRoot: {
       border: `1px solid ${theme.palette.primary.main}`
@@ -45,7 +47,12 @@ const styles = theme => {
     button: {
       backgroundColor: theme.palette.common.white,
       boxShadow: 'none'
-    }
+    },
+    buttonLabel: {
+      ...theme.typography.body2,
+      color: theme.palette.customGreen.green300,
+      fontWeight: theme.typography.fontWeightBold
+    },
   }
 }
 
@@ -92,14 +99,12 @@ const PatientDetailsCard = props => (
                 variant="contained"
                 size="small"
                 className={props.classes.button}
-              >
-                <Typography
-                  variant="caption"
-                  className={props.classes.buttonLabel}
-                >
-                  EDIT
-                </Typography>
-              </Button>
+                classes={{
+                  label: props.classes.buttonLabel
+                }}
+                onClick={this.handleClickOpen}
+                label={'EDIT'}
+              />
             </Grid>
             {
               // <Grid item xs={3}>

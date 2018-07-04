@@ -41,7 +41,7 @@ class DeliveryDetails extends React.Component {
     // Represents to get delivery details.
     this.props.actions.getDeliveryDetailsListLoading(
       this.props.deliveryDetailsState,
-      '100113091' // pass customer id
+      this.props.customerState.payload.id // pass customer id
     )
   }
 
@@ -65,7 +65,8 @@ class DeliveryDetails extends React.Component {
 
 function mapStateToProps (state) {
   return {
-    deliveryDetailsState: state.deliveryDetailsState
+    deliveryDetailsState: state.deliveryDetailsState,
+    customerState: state.customerState
   }
 }
 

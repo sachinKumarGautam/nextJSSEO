@@ -38,7 +38,7 @@ class MedicineList extends React.Component {
       this.props.medicineListState,
       'Multivitamin', // pass salt name
       0, // page number
-      3 // page size
+      10 // page size
     )
   }
 

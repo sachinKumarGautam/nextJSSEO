@@ -38,7 +38,7 @@ class Prescription extends React.Component{
     //Represents to get prescription list.
     this.props.actions.getPrescriptionListLoading(
       this.props.prescriptionState,
-      100036079
+      this.props.customerState.payload.id
     )
   }
 
@@ -60,7 +60,8 @@ class Prescription extends React.Component{
 
 function mapStateToProps (state) {
   return {
-    prescriptionState: state.prescriptionState
+    prescriptionState: state.prescriptionState,
+    customerState: state.customerState
   }
 }
 
