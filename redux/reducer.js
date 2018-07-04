@@ -8,11 +8,13 @@ import moleculeDetailsReducer from '../containers/moleculeDetails/moleculeReduce
 import loginReducer from '../containers/login/loginReducers'
 import customerReducer from '../containers/user/customer/customerReducer'
 import medicineListReducer from '../containers/medicineList/medicineLIstReducer'
+import deliveryDetailsReducer from '../containers/deliveryDetails/deliveryDetailsReducer'
+import patientDetailsReducer from '../containers/patientDetails/patientDetailsReducer'
 import orderListReducers from '../containers/orderList/orderListReducers'
-import prescriptionReducers from '../containers/prescription/prescriptionReducers'
 import carePointReducer from '../containers/carePoint/carePointReducer'
 import cartReducer from '../containers/cartDetails/cartReducer'
 import checkPincodeReducer from '../containers/location/pincode/pincodeReducer'
+import prescriptionReducers from '../containers/prescription/prescriptionReducers'
 
 const isengard = (store, action) => {
   return (
@@ -34,8 +36,10 @@ const appReducer = combineReducers({
   carePointState: carePointReducer,
   cartState: cartReducer,
   checkPincodeState: checkPincodeReducer,
-  orderListState: orderListReducers,
-  prescriptionState: prescriptionReducers
+  deliveryDetailsState: deliveryDetailsReducer,
+  patientDetailsState: patientDetailsReducer,
+  prescriptionState: prescriptionReducers,
+  orderListState: orderListReducers
 })
 
 // export const persistConfig = {
