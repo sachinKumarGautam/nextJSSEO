@@ -9,13 +9,13 @@ import withRoot from '../src/withRoot'
 
 import { connect } from 'react-redux'
 
+import {
+  getPrescriptionListLoading
+} from '../containers/prescription/prescriptionActions'
+
 import Paper from '@material-ui/core/Paper'
 
-import CarePointWrapper from '../containers/carePoint'
-
-import {
-  getCarePointDetailsLoading
-} from '../containers/carePoint/carePointActions'
+import PrescriptionDetailsWrapper from '../containers/prescription'
 
 const styles = theme => ({
   root: {
@@ -33,13 +33,12 @@ const styles = theme => ({
   }
 })
 
-class CarePoints extends React.Component {
+class Prescription extends React.Component{
   componentDidMount () {
-    // Represents to get care point with customer Id.
-    this.props.actions.getCarePointDetailsLoading(
-      this.props.carePointState,
-      100036079,
-      'all'
+    //Represents to get prescription list.
+    this.props.actions.getPrescriptionListLoading(
+      this.props.prescriptionState,
+      100036079
     )
   }
 
@@ -49,7 +48,7 @@ class CarePoints extends React.Component {
         <Header />
         <div>
           <Paper className={this.props.classes.root} elevation={1}>
-            <CarePointWrapper />
+            <PrescriptionDetailsWrapper />
           </Paper>
         </div>
         <Footer />
@@ -58,9 +57,10 @@ class CarePoints extends React.Component {
   }
 }
 
+
 function mapStateToProps (state) {
   return {
-    carePointState: state.carePointState
+    prescriptionState: state.prescriptionState
   }
 }
 
@@ -68,7 +68,7 @@ function mapDispatchToProps (dispatch) {
   return {
     actions: bindActionCreators(
       {
-        getCarePointDetailsLoading
+        getPrescriptionListLoading
       },
       dispatch
     )
@@ -78,4 +78,4 @@ function mapDispatchToProps (dispatch) {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(withRoot(withStyles(styles)(CarePoints)))
+)(withRoot(withStyles(styles)(Prescription)))

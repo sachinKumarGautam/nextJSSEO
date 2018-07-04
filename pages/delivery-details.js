@@ -1,21 +1,24 @@
 import React from 'react'
-import Header from '../components/layouts/header'
-import Footer from '../components/layouts/footer'
-
-import { withStyles } from '@material-ui/core/styles'
-import { bindActionCreators } from 'redux'
-
-import withRoot from '../src/withRoot'
 
 import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+
+import { withStyles } from '@material-ui/core/styles'
+import withRoot from '../src/withRoot'
+
+import Header from '../components/layouts/header'
+import Footer from '../components/layouts/footer'
+import DeliveryDetailsWrapper from '../containers/deliveryDetails'
 
 import Paper from '@material-ui/core/Paper'
 
-import CarePointWrapper from '../containers/carePoint'
+import { rootEpic } from '../redux/epics'
+import { of } from 'rxjs/observable/of'
 
 import {
-  getCarePointDetailsLoading
-} from '../containers/carePoint/carePointActions'
+  getDeliveryDetailsListLoading,
+  saveAddressSelected
+} from '../containers/deliveryDetails/deliveryDetailsActions'
 
 const styles = theme => ({
   root: {
@@ -33,13 +36,12 @@ const styles = theme => ({
   }
 })
 
-class CarePoints extends React.Component {
+class DeliveryDetails extends React.Component {
   componentDidMount () {
-    // Represents to get care point with customer Id.
-    this.props.actions.getCarePointDetailsLoading(
-      this.props.carePointState,
-      100036079,
-      'all'
+    // Represents to get delivery details.
+    this.props.actions.getDeliveryDetailsListLoading(
+      this.props.deliveryDetailsState,
+      '100113091' // pass customer id
     )
   }
 
@@ -49,7 +51,10 @@ class CarePoints extends React.Component {
         <Header />
         <div>
           <Paper className={this.props.classes.root} elevation={1}>
-            <CarePointWrapper />
+            <DeliveryDetailsWrapper
+              deliveryDetailsState={this.props.deliveryDetailsState}
+              saveAddressSelected={this.props.actions.saveAddressSelected}
+            />
           </Paper>
         </div>
         <Footer />
@@ -60,7 +65,7 @@ class CarePoints extends React.Component {
 
 function mapStateToProps (state) {
   return {
-    carePointState: state.carePointState
+    deliveryDetailsState: state.deliveryDetailsState
   }
 }
 
@@ -68,7 +73,8 @@ function mapDispatchToProps (dispatch) {
   return {
     actions: bindActionCreators(
       {
-        getCarePointDetailsLoading
+        getDeliveryDetailsListLoading,
+        saveAddressSelected
       },
       dispatch
     )
@@ -78,4 +84,4 @@ function mapDispatchToProps (dispatch) {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(withRoot(withStyles(styles)(CarePoints)))
+)(withRoot(withStyles(styles)(DeliveryDetails)))
