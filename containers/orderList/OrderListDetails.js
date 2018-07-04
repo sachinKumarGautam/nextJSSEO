@@ -11,28 +11,12 @@ import OrderContent from './OrderContent'
 import OrderFooter from './OrderFooter'
 import Button from '../../components/button'
 
-const orderList = [
-  {
-    user_name: 'Jyoti Arora',
-    status: 'Payment Pending',
-    payment: 'failed',
-    order_status: 'cancel'
-  },
-  {
-    user_name: 'Ayushi Khetan',
-    status: 'Delivered',
-    payment: 'sucess',
-    order_status: 'return'
-  }
-]
-
 const styles = theme => ({
   card: {
     marginLeft: theme.spacing.unit * 6
   },
   cardContent: {
     paddingBottom: 0
-
   },
   orderDetailWrapper: {
     border: `0.5px solid ${theme.palette.customGrey.grey250}`,
@@ -64,6 +48,26 @@ const styles = theme => ({
 })
 
 class OrderListDetails extends Component {
+  constructor(props) {
+    super(props)
+    this.state ={
+      page: 0
+    }
+  }
+
+  onClickOfShowMore() {
+    this.props.getOrderListDetailsLoading(
+      this.props.orderListState,
+      this.props.customerState.payload.id, // pass customer Id
+      this.state.page + 1, // page number
+      2 // page size
+    )
+
+    this.setState({
+      page: this.state.page + 1
+    })
+  }
+
   render () {
     return (
       <Card elevation={'1'} className={this.props.classes.card}>
@@ -77,16 +81,20 @@ class OrderListDetails extends Component {
             My Orders
           </Typography>
           {
-            orderList.map((item) => {
+            this.props.orderListState.payload.map((orderDetails) => {
               return (
                 <div className={this.props.classes.orderDetailWrapper}>
-                  <OrderHeader />
-                  <Divider />
-                  <OrderContent
-                    orderList={item}
+                  <OrderHeader
+                    orderDetails={orderDetails}
                   />
-                  <Divider />
-                  <OrderFooter />
+                  <Divider/>
+                  <OrderContent
+                    orderDetails={orderDetails}
+                  />
+                  <Divider/>
+                  <OrderFooter
+                    orderDetails={orderDetails}
+                  />
                 </div>
               )
             })
@@ -100,7 +108,7 @@ class OrderListDetails extends Component {
                 root: this.props.classes.buttonRoot,
                 label: this.props.classes.buttonLabel
               }}
-              onClick={this.handleClickOpen}
+              onClick={this.onClickOfShowMore.bind(this)}
               label={'Show more'}
             />
           </div>

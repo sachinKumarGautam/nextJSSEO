@@ -7,6 +7,9 @@ import { rootEpic } from './epics'
 
 const composeEnhancers = (typeof window !== 'undefined' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) || compose
 
+export let config = null
+export let store = null
+
 function makeConfiguredStore (rootReducer, initialState) {
   const epicMiddleware = createEpicMiddleware(rootEpic)
   const logger = createLogger({ collapsed: true }) // log every action to see what's happening behind the scenes.
@@ -19,20 +22,29 @@ export default function initStore (initialState, {isServer, req, debug, storeKey
   if (isServer) {
     // initialState = initialState || {fromServer: 'foo'}
 
-    return makeConfiguredStore(reducer, initialState)
+    store = makeConfiguredStore(reducer, initialState)
+    return store
   } else {
     // we need it only on client side
     const {persistStore, persistReducer} = require('redux-persist')
     const storage = require('redux-persist/es/storage').default
 
     const persistConfig = {
-      key: 'nextjs',
-      blacklist: ['medicineListState', 'prescriptionState'],
+      key: 'lifcareSite1.0.0',
+      blacklist: [
+        'medicineListState',
+        'orderListState',
+        'prescriptionState',
+        'deliveryDetailsState',
+        'patientDetailsState'
+      ],
       storage
     }
 
+    config = persistConfig
+
     const persistedReducer = persistReducer(persistConfig, reducer)
-    const store = makeConfiguredStore(persistedReducer, initialState)
+    store = makeConfiguredStore(persistedReducer, initialState)
 
     store.__persistor = persistStore(store) // Nasty hack
 

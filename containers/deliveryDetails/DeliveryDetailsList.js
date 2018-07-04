@@ -2,14 +2,22 @@ import React, { Component } from 'react'
 
 import Grid from '@material-ui/core/Grid'
 import Typography from '@material-ui/core/Typography'
+import Card from '@material-ui/core/Card'
+import CardContent from '@material-ui/core/CardContent'
 
 import { withStyles } from '@material-ui/core/styles'
 
 import Button from '../../components/button'
-import AddressDetailsCard from '../../components/AddressDetailsCard'
+import AddressDetailsCardWrapper from './AddressDetailsCardWrapper'
 
 const styles = theme => {
   return {
+    card: {
+      marginLeft: theme.spacing.unit * 6
+    },
+    cardContent: {
+      paddingBottom: 0
+    },
     nameStyle: {
       ...theme.typography.subheading,
       marginBottom: theme.spacing.unit * 4,
@@ -20,13 +28,17 @@ const styles = theme => {
       border: `1px solid ${theme.palette.primary.main}`
     },
     buttonLabel: {
-      color: theme.palette.primary.main
+      ...theme.typography.body3,
+      color: theme.palette.primary.main,
+      fontWeight: theme.typography.fontWeightBold,
+      paddingLeft: theme.spacing.unit * 4,
+      paddingRight: theme.spacing.unit * 4
     },
     buttonWrapper: {
-      display: 'flex',
-      justifyContent: 'flex-end',
+      textAlign: 'right',
       marginTop: theme.spacing.unit * 3.75,
-      marginRight: theme.spacing.unit * 3.75
+      marginRight: theme.spacing.unit * 3.75,
+      marginBottom: theme.spacing.unit * 20
     },
     title: {
       ...theme.typography.headline,
@@ -59,44 +71,36 @@ class Main extends Component {
 
   render () {
     return (
-      <div>
-        <Typography
-          gutterBottom
-          variant='title'
-          component='h1'
-          className={this.props.classes.title}
-        >
-          Addresses
-        </Typography>
-        <Grid container spacing={24}>
-          {
-            this.props.deliveryDetailsState.payload.map(deliveryDetail => {
-              return (
-                <Grid item xs={6}>
-                  <AddressDetailsCard
-                    deliveryDetail={deliveryDetail}
-                    saveAddressSelected={this.saveAddressSelected.bind(this)}
-                    addressIdSelected={this.state.addressIdSelected}
-                  />
-                </Grid>
-              )
-            })
-          }
-        </Grid>
-        <div className={this.props.classes.buttonWrapper}>
-          <Button
-            size='small'
-            variant='outlined'
-            color='primary'
-            classes={{
-              root: this.props.classes.buttonRoot,
-              label: this.props.classes.buttonLabel
-            }}
-            style={{float: 'right'}}
-            label={'ADD NEW ADDRESS'}
+      <Card elevation={'1'} className={this.props.classes.card}>
+        <CardContent className={this.props.classes.cardContent}>
+          <Typography
+            gutterBottom
+            variant='title'
+            component='h1'
+            className={this.props.classes.title}
+          >
+            Addresses
+          </Typography>
+          <AddressDetailsCardWrapper
+            payload={this.props.deliveryDetailsState.payload}
+            saveAddressSelected={this.saveAddressSelected.bind(this)}
+            addressIdSelected={this.state.addressIdSelected}
           />
-        </div>
-      </div>
+          <div className={this.props.classes.buttonWrapper}>
+            <Button
+              size='small'
+              variant='outlined'
+              color='primary'
+              classes={{
+                root: this.props.classes.buttonRoot,
+                label: this.props.classes.buttonLabel
+              }}
+              style={{float: 'right'}}
+              label={'ADD NEW ADDRESS'}
+            />
+          </div>
+        </CardContent>
+      </Card>
     )
   }
 }

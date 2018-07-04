@@ -41,7 +41,7 @@ class PatientDetails extends React.Component {
     // Represents to get patient details.
     this.props.actions.getPatientDetailsListLoading(
       this.props.patientDetailsState,
-      '100113091' // pass customer id
+      this.props.customerState.payload.id // pass customer id
     )
   }
 
@@ -65,7 +65,8 @@ class PatientDetails extends React.Component {
 
 function mapStateToProps (state) {
   return {
-    patientDetailsState: state.patientDetailsState
+    patientDetailsState: state.patientDetailsState,
+    customerState: state.customerState
   }
 }
 

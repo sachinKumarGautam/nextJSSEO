@@ -2,25 +2,27 @@ import React, { Component } from 'react'
 
 import Grid from '@material-ui/core/Grid'
 import Typography from '@material-ui/core/Typography'
+import Button from './button'
 
 import { withStyles } from '@material-ui/core/styles'
 
-import Button from './button'
 
 const styles = theme => {
   return {
     patientWrapperStyle: {
       border: `1px solid ${theme.palette.customGrey.grey250}`,
-      width: theme.spacing.unit * 42.5,
       padding: theme.spacing.unit * 2.5,
-      borderRadius: theme.spacing.unit * 0.5
+      borderRadius: theme.spacing.unit * 0.5,
+      marginLeft: theme.spacing.unit * 4,
+      marginRight: theme.spacing.unit * 4
     },
     patientWrapperSelectedStyle: {
       border: `1px solid ${theme.palette.customGrey.grey250}`,
-      width: theme.spacing.unit * 42.5,
-      backgroundColor: 'rgb(243, 253, 232)',
+      backgroundColor: theme.palette.customGreen.green200,
       padding: theme.spacing.unit * 2.5,
-      borderRadius: theme.spacing.unit * 0.5
+      borderRadius: theme.spacing.unit * 0.5,
+      marginLeft: theme.spacing.unit * 4,
+      marginRight: theme.spacing.unit * 4
     },
     buttonRoot: {
       border: `1px solid ${theme.palette.primary.main}`
@@ -31,14 +33,26 @@ const styles = theme => {
     },
     userNameStyle: {
       color: theme.palette.customGrey.grey500,
-      fontWeight: theme.typography.fontWeightBold
+      fontWeight: theme.typography.fontWeightBold,
+      marginLeft: theme.spacing.unit * 1.875
     },
     genderStyle: {
-      color: theme.palette.customGrey.grey500
+      color: theme.palette.customGrey.grey500,
+      marginLeft: theme.spacing.unit * 1.875
     },
     mobileStyle: {
-      color: theme.palette.customGrey.grey500
-    }
+      color: theme.palette.customGrey.grey500,
+      marginLeft: theme.spacing.unit * 1.875
+    },
+    button: {
+      backgroundColor: theme.palette.common.white,
+      boxShadow: 'none'
+    },
+    buttonLabel: {
+      ...theme.typography.body2,
+      color: theme.palette.customGreen.green300,
+      fontWeight: theme.typography.fontWeightBold
+    },
   }
 }
 
@@ -80,26 +94,34 @@ const PatientDetailsCard = props => (
         </div>
         <div>
           <Grid container spacing={24}>
-            <Grid item xs={3}>
-              <div>
-                <Typography
-                  variant="caption"
-                  className={props.classes.buttonLabel}
-                >
-                  EDIT
-                </Typography>
-              </div>
+            <Grid item xs={4}>
+              <Button
+                variant="contained"
+                size="small"
+                className={props.classes.button}
+                classes={{
+                  label: props.classes.buttonLabel
+                }}
+                onClick={this.handleClickOpen}
+                label={'EDIT'}
+              />
             </Grid>
-            <Grid item xs={3}>
-              <div>
-                <Typography
-                  variant="caption"
-                  className={props.classes.buttonLabel}
-                >
-                  DELETE
-                </Typography>
-              </div>
-            </Grid>
+            {
+              // <Grid item xs={3}>
+              //   <Button
+              //     variant="contained"
+              //     size="small"
+              //     className={props.classes.button}
+              //   >
+              //     <Typography
+              //       variant="caption"
+              //       className={props.classes.buttonLabel}
+              //     >
+              //       DELETE
+              //     </Typography>
+              //   </Button>
+              // </Grid>
+            }
           </Grid>
         </div>
       </Grid>
