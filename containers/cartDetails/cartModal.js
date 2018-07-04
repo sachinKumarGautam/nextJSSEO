@@ -6,9 +6,23 @@ const initialState = {
     customer_first_name: '',
     customer_last_name: '',
     facility_code: 0,
-    patient_id: 0,
+    patient_id: {
+      payload: 0,
+      isLoading: false,
+      errorState: {
+        isError: false,
+        error: {}
+      }
+    },
     patient_full_name: '',
-    shipping_address_id: 0,
+    shipping_address_id: {
+      payload: 0,
+      isLoading: false,
+      errorState: {
+        isError: false,
+        error: {}
+      }
+    },
     shipping_address: {},
     type: '',
     comment: '',

@@ -139,3 +139,71 @@ export function putCartItemFailure (cartState, cartItems) {
     cartItems: cartItems
   }
 }
+
+export function savePatientToCartLoading (
+  cartState,
+  patientId,
+  cartId
+) {
+  return {
+    type: cartActionTypes.SAVE_PATIENT_TO_CART_LOADING,
+    cartState,
+    patientId: patientId,
+    cartId: cartId,
+    isLoading: true,
+    isError: false,
+    error: {}
+  }
+}
+
+export function savePatientToCartSuccess (cartState, response) {
+  return {
+    type: cartActionTypes.SAVE_PATIENT_TO_CART_SUCCESS,
+    cartState,
+    response,
+    isLoading: false
+  }
+}
+
+export function savePatientToCartFailure (cartState, error) {
+  return {
+    type: cartActionTypes.SAVE_PATIENT_TO_CART_FAILURE,
+    cartState,
+    isLoading: false,
+    isError: true,
+    error: error
+  }
+}
+
+export function saveDeliveryAddressToCartLoading (
+  cartState,
+  shippingAddressId
+) {
+  return {
+    type: cartActionTypes.SAVE_DELIVERY_ADDRESS_TO_CART_LOADING,
+    cartState,
+    shippingAddressId: shippingAddressId,
+    isLoading: true,
+    isError: false,
+    error: {}
+  }
+}
+
+export function saveDeliveryAddressToCartSuccess (cartState, shipping_address_id) {
+  return {
+    type: cartActionTypes.SAVE_DELIVERY_ADDRESS_TO_CART_SUCCESS,
+    cartState,
+    shipping_address_id: shipping_address_id,
+    isLoading: false
+  }
+}
+
+export function saveDeliveryAddressToCartFailure (cartState, error) {
+  return {
+    type: cartActionTypes.SAVE_DELIVERY_ADDRESS_TO_CART_FAILURE,
+    cartState,
+    isLoading: false,
+    isError: true,
+    error: error
+  }
+}

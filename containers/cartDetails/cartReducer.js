@@ -128,6 +128,100 @@ export default function cartReducer (state = initialState, action) {
         }
       }
 
+    case cartActionTypes.SAVE_PATIENT_TO_CART_LOADING:
+      return {
+        ...state,
+        payload: {
+          ...state.payload,
+          patient_id: {
+            ...state.payload.patient_id,
+            isLoading: action.isLoading,
+            errorState: {
+              ...state.payload.patient_id.errorState,
+              isError: action.isError,
+              error: action.error
+            }
+          }
+        }
+      }
+
+    case cartActionTypes.SAVE_PATIENT_TO_CART_SUCCESS:
+      return {
+        ...state,
+        payload: {
+          ...state.payload,
+          patient_id: {
+            ...state.payload.patient_id,
+            isLoading: action.isLoading,
+            payload: action.patient_id
+          }
+        }
+      }
+
+    case cartActionTypes.SAVE_PATIENT_TO_CART_FAILURE:
+      return {
+        ...state,
+        payload: {
+          ...state.payload,
+          patient_id: {
+            ...state.payload.patient_id,
+            isLoading: action.isLoading,
+            errorState: {
+              ...state.payload.patient_id.errorState,
+              isError: action.isError,
+              error: action.error
+            }
+          }
+        }
+      }
+
+    case cartActionTypes.SAVE_DELIVERY_ADDRESS_TO_CART_LOADING:
+      return {
+        ...state,
+        payload: {
+          ...state.payload,
+          patient_id: {
+            ...state.payload.patient_id,
+            isLoading: action.isLoading,
+            errorState: {
+              ...state.payload.patient_id.errorState,
+              isError: action.isError,
+              error: action.error
+            }
+          }
+        }
+      }
+
+    case cartActionTypes.SAVE_DELIVERY_ADDRESS_TO_CART_SUCCESS:
+      return {
+        ...state,
+        payload: {
+          ...state.payload,
+          shipping_address_id: {
+            ...state.payload.shipping_address_id,
+            isLoading: action.isLoading,
+            payload: action.shipping_address_id
+          }
+        }
+      }
+
+    case cartActionTypes.SAVE_DELIVERY_ADDRESS_TO_CART_FAILURE:
+      return {
+        ...state,
+        payload: {
+          ...state.payload,
+          shipping_address_id: {
+            ...state.payload.shipping_address_id,
+            isLoading: action.isLoading,
+            errorState: {
+              ...state.payload.shipping_address_id.errorState,
+              isError: action.isError,
+              error: action.error
+            }
+          }
+        }
+      }
+
     default:
       return state
   }

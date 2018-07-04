@@ -8,7 +8,9 @@ import {
   GET_CART_DETAILS_LOADING,
   DECREMENT_CART_ITEM_LOADING,
   INCREMENT_CART_ITEM_LOADING,
-  DELETE_CART_ITEM_LOADING
+  DELETE_CART_ITEM_LOADING,
+  SAVE_PATIENT_TO_CART_LOADING,
+  SAVE_DELIVERY_ADDRESS_TO_CART_LOADING
 } from './cartActionTypes'
 
 import {
@@ -17,14 +19,20 @@ import {
   getCartDetailsSuccess,
   getCartDetailsFailure,
   putCartItemSuccess,
-  putCartItemFailure
+  putCartItemFailure,
+  savePatientToCartSuccess,
+  savePatientToCartFailure,
+  saveDeliveryAddressToCartSuccess,
+  saveDeliveryAddressToCartFailure
 } from './cartActions'
 
 import {
   getAnonymousCartId$,
   getCartDetails$,
   putCartItem$,
-  deleteCartItem$
+  deleteCartItem$,
+  savePatientToCart$,
+  saveDeliveryAddressToCart$
 } from '../../services/api'
 
 
@@ -50,10 +58,10 @@ export function getCartDetailsEpic (action$, store) {
     mergeMap(data => {
       return http(getCartDetails$(data.cartUid)).pipe(
         map(result => {
-          return getAnonymousCartIdSuccess(data.cartState, result.body.payload)
+          return getCartDetailsSuccess(data.cartState, result.body.payload)
         }),
         catchError(error => {
-          return of(getAnonymousCartIdFailure(data.cartState, error))
+          return of(getCartDetailsFailure(data.cartState, error))
         })
       )
     })
@@ -228,6 +236,49 @@ export function deleteCartItemEpic (action$, store) {
             data.medicineSelected,
             error
           )
+        })
+      )
+    })
+  )
+}
+
+export function savePatientToCartEpic (action$, store) {
+  return action$.pipe(
+    ofType(SAVE_PATIENT_TO_CART_LOADING),
+    mergeMap(data => {
+      return http(savePatientToCart$(data.cartId, { patient_id: data.patientId })).pipe(
+        map(result => {
+          debugger
+          return savePatientToCartSuccess(data.cartState, result.body.payload.patients)
+        }),
+        catchError(error => {
+          return of(savePatientToCartFailure(data.cartState, error))
+        })
+      )
+    })
+  )
+}
+
+export function saveDeliveryAddressToCartEpic (action$, store) {
+  return action$.pipe(
+    ofType(SAVE_DELIVERY_ADDRESS_TO_CART_LOADING),
+    mergeMap(data => {
+      const shippingAddressId = {
+        shipping_address_id: data.shippingId
+      }
+
+      return http(
+        saveDeliveryAddressToCart$(
+            data.cartState.cartDetails.payload.uid,
+            shippingAddressId
+          )
+        ).pipe(
+        map(result => {
+          debugger
+          return saveDeliveryAddressToCartSuccess(data.cartState, result.body.payload.patients)
+        }),
+        catchError(error => {
+          return of(saveDeliveryAddressToCartFailure(data.cartState, error))
         })
       )
     })
