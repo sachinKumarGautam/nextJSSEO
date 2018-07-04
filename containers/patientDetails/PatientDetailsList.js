@@ -34,14 +34,18 @@ const styles = theme => {
     buttonWrapper: {
       display: 'flex',
       justifyContent: 'flex-end',
-      marginTop: theme.spacing.unit * 3.75,
-      marginRight: theme.spacing.unit * 3.75
+      marginRight: theme.spacing.unit * 2
     },
     title: {
       ...theme.typography.headline,
       color: theme.palette.customGrey.grey500,
       marginLeft: theme.spacing.unit * 2,
       marginBottom: theme.spacing.unit * 6
+    },
+    titleWrapper: {
+      display: 'flex',
+      flexDirection: 'row',
+      justifyContent: 'space-between'
     }
   }
 }
@@ -82,41 +86,45 @@ class PatientDetailsList extends Component {
     return (
       <Card elevation={'1'} className={this.props.classes.card}>
         <CardContent className={this.props.classes.cardContent}>
-          <Typography
-            gutterBottom
-            variant='title'
-            component='h1'
-            className={this.props.classes.title}
-          >
-            Patients
-          </Typography>
+          <div className={this.props.classes.titleWrapper}>
+            <Typography
+              gutterBottom
+              variant='title'
+              component='h1'
+              className={this.props.classes.title}
+            >
+              Patients
+            </Typography>
+            <div className={this.props.classes.buttonWrapper}>
+              <Button
+                size='small'
+                variant='outlined'
+                color='primary'
+                classes={{
+                  root: this.props.classes.buttonRoot,
+                  label: this.props.classes.buttonLabel
+                }}
+                style={{float: 'right'}}
+                label={'ADD NEW PATIENT'}
+                onClick={this.openPatientFormModal.bind(this)}
+              />
+              {
+                this.state.openPatientFormDialog &&
+                <PatientDetailForm
+                  closePatientFormModal = {this.closePatientFormModal.bind(this)}
+                  openPatientFormDialog = {this.state.openPatientFormDialog}
+                  patientFormState = {this.props.patientDetailsState}
+                  onSubmit = {this.props.submitPatientDetailsLoading}
+                  customerId = {this.props.customerState.payload.id}
+                />
+              }
+            </div>
+          </div>
           <PatientDetailsCardWrapper
             payload={this.props.patientDetailsState.payload}
             savePatientSelected={this.savePatientSelected.bind(this)}
             patientIdSelected={this.state.patientIdSelected}
           />
-          <div className={this.props.classes.buttonWrapper}>
-            <Button
-              size='small'
-              variant='outlined'
-              color='primary'
-              classes={{
-                root: this.props.classes.buttonRoot,
-                label: this.props.classes.buttonLabel
-              }}
-              style={{float: 'right'}}
-              label={'ADD NEW PATIENT'}
-              onClick={this.openPatientFormModal.bind(this)}
-            />
-            {
-              this.state.openPatientFormDialog &&
-              <PatientDetailForm
-                closePatientFormModal = {this.closePatientFormModal.bind(this)}
-                openPatientFormDialog = {this.state.openPatientFormDialog}
-                patientFormState = {this.props.patientDetailsState}
-              />
-            }
-          </div>
         </CardContent>
       </Card>
     )

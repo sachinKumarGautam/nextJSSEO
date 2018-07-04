@@ -57,7 +57,8 @@ class PatientDetailForm extends React.Component {
           <DialogContent>
             <Form
               type={'patientForm'}
-              // onSubmit={this.props.sendOtpLoading}
+              onSubmit = {this.props.submitPatientDetailsLoading}
+              customerId = {this.props.customerState.payload.id}
               patientFormState={this.props.patientFormState}
               closeModal={this.props.closePatientFormModal}
             />

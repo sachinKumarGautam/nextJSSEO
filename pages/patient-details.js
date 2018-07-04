@@ -17,7 +17,8 @@ import { of } from 'rxjs/observable/of'
 
 import {
   getPatientDetailsListLoading,
-  savePatientSelected
+  savePatientSelected,
+  submitPatientDetailsLoading
 } from '../containers/patientDetails/patientDetailsActions'
 
 const styles = theme => ({
@@ -54,6 +55,8 @@ class PatientDetails extends React.Component {
             <PatientDetailsWrapper
               patientDetailsState={this.props.patientDetailsState}
               savePatientSelected={this.props.actions.savePatientSelected}
+              submitPatientDetailsLoading={this.props.actions.submitPatientDetailsLoading}
+              customerState={this.props.customerState}
             />
           </Paper>
         </div>
@@ -75,7 +78,8 @@ function mapDispatchToProps (dispatch) {
     actions: bindActionCreators(
       {
         getPatientDetailsListLoading,
-        savePatientSelected
+        savePatientSelected,
+        submitPatientDetailsLoading
       },
       dispatch
     )

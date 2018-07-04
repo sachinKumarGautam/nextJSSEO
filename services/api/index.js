@@ -89,6 +89,14 @@ const getCarePointsList$ = (customerId, cashType) => (
   })
 )
 
+const submitPatientDetails$ = (customerId, patientDetails) => (
+  makeAjaxRequest({
+    method: 'POST',
+    url: fetchUrl('account', 'customer/' + customerId + '/patient', 'CREATE'),
+    body: patientDetails
+  })
+)
+
 export {
   getMoleculeSummary$,
   getMedicineList$,
@@ -100,5 +108,6 @@ export {
   sendOtp$,
   fetchUserInfo$,
   registerCustomer$,
-  getCarePointsList$
+  getCarePointsList$,
+  submitPatientDetails$
 }
