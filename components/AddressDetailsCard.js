@@ -10,7 +10,6 @@ const styles = theme => {
   return {
     addressWrapperStyle: {
       border: `1px solid ${theme.palette.customGrey.grey250}`,
-      // width: theme.spacing.unit * 42.5,
       padding: theme.spacing.unit * 2.5,
       borderRadius: theme.spacing.unit * 0.5,
       marginLeft: theme.spacing.unit * 3,
@@ -19,7 +18,6 @@ const styles = theme => {
     addressWrapperSelectedStyle: {
       border: `1px solid ${theme.palette.customGrey.grey250}`,
       backgroundColor: theme.palette.customGreen.green200,
-      // width: theme.spacing.unit * 42.5,
       padding: theme.spacing.unit * 2.5,
       borderRadius: theme.spacing.unit * 0.5,
       marginLeft: theme.spacing.unit * 3,
@@ -31,14 +29,15 @@ const styles = theme => {
     },
     addressTypeStyle: {
       color: theme.palette.customGrey.grey500,
-      fontWeight: theme.typography.fontWeightBold,
+      fontWeight: theme.typography.fontWeightBold
+    },
+    addressTypeWrapper: {
       display: 'flex',
       flexDirection: 'row',
-      marginBottom: theme.spacing.unit
+      alignItems: 'baseline'
     },
     addressTypeImage: {
-      marginRight: theme.spacing.unit * 2.5,
-      marginTop: theme.spacing.unit * -0.75
+      marginRight: theme.spacing.unit * 2.5
     },
     addressStyle: {
       color: theme.palette.customGrey.grey500,
@@ -70,13 +69,15 @@ const AddressDetailsCard = props => (
     }
     onClick={props.saveAddressSelected.bind(this, props.deliveryDetail.id)}
   >
-    <Typography
-      variant="caption"
-      className={props.classes.addressTypeStyle}
-    >
+    <div className={props.classes.addressTypeWrapper}>
       <img src="/static/images/home.svg" className={props.classes.addressTypeImage}/>
-      {props.deliveryDetail.type}
-    </Typography>
+      <Typography
+        variant="caption"
+        className={props.classes.addressTypeStyle}
+      >
+        {props.deliveryDetail.type}
+      </Typography>
+    </div>
     <Typography
       variant="caption"
       className={props.classes.addressStyle}
