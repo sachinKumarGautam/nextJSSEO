@@ -11,11 +11,11 @@ import { connect } from 'react-redux'
 
 import Paper from '@material-ui/core/Paper'
 
-import CarePointWrapper from '../containers/carePoint'
+import OrderListWrapper from '../containers/orderList'
 
 import {
-  getCarePointDetailsLoading
-} from '../containers/carePoint/carePointActions'
+  getOrderListDetailsLoading
+} from '../containers/orderList/orderListActions'
 
 const styles = theme => ({
   root: {
@@ -33,13 +33,14 @@ const styles = theme => ({
   }
 })
 
-class CarePoints extends React.Component {
+class Orders extends React.Component {
   componentDidMount () {
-    // Represents to get care point with customer Id.
-    this.props.actions.getCarePointDetailsLoading(
-      this.props.carePointState,
-      100036079,
-      'all'
+    //Represents to get order list details with page size and size per page.
+    this.props.actions.getOrderListDetailsLoading(
+      this.props.orderListState,
+      100183363, // pass customer Id
+      0, // page number
+      2 // page size
     )
   }
 
@@ -49,7 +50,7 @@ class CarePoints extends React.Component {
         <Header />
         <div>
           <Paper className={this.props.classes.root} elevation={1}>
-            <CarePointWrapper />
+            <OrderListWrapper />
           </Paper>
         </div>
         <Footer />
@@ -60,7 +61,7 @@ class CarePoints extends React.Component {
 
 function mapStateToProps (state) {
   return {
-    carePointState: state.carePointState
+    orderListState: state.orderListState
   }
 }
 
@@ -68,7 +69,7 @@ function mapDispatchToProps (dispatch) {
   return {
     actions: bindActionCreators(
       {
-        getCarePointDetailsLoading
+        getOrderListDetailsLoading
       },
       dispatch
     )
@@ -78,4 +79,4 @@ function mapDispatchToProps (dispatch) {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(withRoot(withStyles(styles)(CarePoints)))
+)(withRoot(withStyles(styles)(Orders)))

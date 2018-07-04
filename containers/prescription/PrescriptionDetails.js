@@ -1,22 +1,21 @@
 import React, { Component } from 'react'
 
 import SideMenu from '../../components/SideMenu'
-import OrderListDetails from './OrderListDetails'
+import PrescriptionList from './PrescriptionList'
 
 import Grid from '@material-ui/core/Grid'
 
-class OrderList extends Component {
+class PrescriptionDetails extends Component {
   render () {
     return (
       <div>
         <Grid container spacing={24}>
           <Grid item xs={2}>
-            <aside><SideMenu /></aside>
+            <SideMenu/>
           </Grid>
           <Grid item xs={10}>
-            <OrderListDetails
-              orderListState={this.props.orderListState}
-              getOrderListDetailsLoading={this.props.getOrderListDetailsLoading}
+            <PrescriptionList
+              prescriptionState={this.props.prescriptionState}
             />
           </Grid>
         </Grid>
@@ -25,4 +24,4 @@ class OrderList extends Component {
   }
 }
 
-export default OrderList
+export default PrescriptionDetails

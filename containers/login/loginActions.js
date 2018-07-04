@@ -81,3 +81,9 @@ export function toggleAuthentication (loginState, status) {
     status: status
   }
 }
+
+export function logout () {
+  return {
+    type: 'RESET_APPLICATION_STATE'
+  }
+}

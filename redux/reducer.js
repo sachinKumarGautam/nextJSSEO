@@ -8,8 +8,12 @@ import moleculeDetailsReducer from '../containers/moleculeDetails/moleculeReduce
 import loginReducer from '../containers/login/loginReducers'
 import customerReducer from '../containers/user/customer/customerReducer'
 import medicineListReducer from '../containers/medicineList/medicineLIstReducer'
+import deliveryDetailsReducer from '../containers/deliveryDetails/deliveryDetailsReducer'
+import patientDetailsReducer from '../containers/patientDetails/patientDetailsReducer'
+import orderListReducers from '../containers/orderList/orderListReducers'
 import carePointReducer from '../containers/carePoint/carePointReducer'
 import cartReducer from '../containers/cartDetails/cartReducer'
+import prescriptionReducers from '../containers/prescription/prescriptionReducers'
 
 const isengard = (store, action) => {
   return (
@@ -29,7 +33,12 @@ const appReducer = combineReducers({
   customerState: customerReducer,
   medicineListState: medicineListReducer,
   carePointState: carePointReducer,
-  cartState: cartReducer
+  cartState: cartReducer,
+  deliveryDetailsState: deliveryDetailsReducer,
+  patientDetailsState: patientDetailsReducer,
+  carePointState: carePointReducer,
+  prescriptionState: prescriptionReducers,
+  orderListState: orderListReducers
 })
 
 // export const persistConfig = {
@@ -46,6 +55,10 @@ const appReducer = combineReducers({
 
 const reducer = (state, action) => {
   // TODO: reset all state
+  if (action.type === 'RESET_APPLICATION_STATE') {
+    state = undefined
+  }
+
   return appReducer(state, action)
 }
 

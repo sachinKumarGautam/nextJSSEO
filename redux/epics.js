@@ -18,6 +18,22 @@ import {
 } from '../containers/medicineList/medicineListEpics'
 
 import {
+  getDeliveryDetailsList
+} from '../containers/deliveryDetails/deliveryDetailsEpics'
+
+import {
+  getPatientDetailsList
+} from '../containers/patientDetails/patientDetailsEpics'
+
+import {
+  getOrderListDetails
+} from '../containers/orderList/orderListEpics'
+
+import {
+  getPrescriptionList
+} from '../containers/prescription/prescriptionEpics'
+
+import {
   carePointsList
 } from '../containers/carePoint/carePointEpics'
 
@@ -91,5 +107,10 @@ export const rootEpic = combineEpics(
   incrementCartItemLoadingEpic,
   incrementCartItemEpic,
   deleteCartItemLoadingEpic,
-  deleteCartItemEpic
+  deleteCartItemEpic,
+  getDeliveryDetailsList,
+  getPatientDetailsList,
+  getOrderListDetails,
+  getPrescriptionList,
+  carePointsList
 )
