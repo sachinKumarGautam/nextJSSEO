@@ -113,6 +113,17 @@ export function incrementCartItemLoading (
   }
 }
 
+export function deleteCartItemLoading (
+  cartState,
+  medicineSelected
+) {
+  return {
+    type: cartActionTypes.DELETE_CART_ITEM_LOADING,
+    cartState: cartState,
+    medicineSelected: medicineSelected
+  }
+}
+
 export function putCartItemSuccess (cartState, cartItems) {
   return {
     type: cartActionTypes.PUT_CART_ITEM_SUCCESS,

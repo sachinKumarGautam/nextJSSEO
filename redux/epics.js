@@ -27,7 +27,9 @@ import {
   decrementCartItemLoadingEpic,
   decrementCartItemEpic,
   incrementCartItemLoadingEpic,
-  incrementCartItemEpic
+  incrementCartItemEpic,
+  deleteCartItemLoadingEpic,
+  deleteCartItemEpic
 } from '../containers/cartDetails/cartEpics'
 
 // import * as actions from './actions'
@@ -87,5 +89,7 @@ export const rootEpic = combineEpics(
   decrementCartItemLoadingEpic,
   decrementCartItemEpic,
   incrementCartItemLoadingEpic,
-  incrementCartItemEpic
+  incrementCartItemEpic,
+  deleteCartItemLoadingEpic,
+  deleteCartItemEpic
 )

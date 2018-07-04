@@ -7,7 +7,8 @@ import {
   GET_ANONYMOUS_CART_ID_LOADING,
   GET_CART_DETAILS_LOADING,
   DECREMENT_CART_ITEM_LOADING,
-  INCREMENT_CART_ITEM_LOADING
+  INCREMENT_CART_ITEM_LOADING,
+  DELETE_CART_ITEM_LOADING
 } from './cartActionTypes'
 
 import {
@@ -21,7 +22,9 @@ import {
 
 import {
   getAnonymousCartId$,
-  getCartDetails$
+  getCartDetails$,
+  putCartItem$,
+  deleteCartItem$
 } from '../../services/api'
 
 
@@ -129,12 +132,12 @@ export function decrementCartItemEpic (action$, store) {
   return action$.pipe(
     ofType(DECREMENT_CART_ITEM_LOADING),
     mergeMap(data => {
-      let cartUid = cartState.cartDetails.payload.uid
+      let cartUid = data.cartState.cartDetails.payload.uid
 
       let medicineDecremented = {
-        name: medicineSelected.name,
-        sku: medicineSelected.sku,
-        quantity: medicineSelected.quantity - 1
+        name: data.medicineSelected.name,
+        sku: data.medicineSelected.sku,
+        quantity: data.medicineSelected.quantity - 1
       }
 
       return http(putCartItem$(cartUid, medicineDecremented)).pipe(
@@ -170,15 +173,51 @@ export function incrementCartItemEpic (action$, store) {
   return action$.pipe(
     ofType(INCREMENT_CART_ITEM_LOADING),
     mergeMap(data => {
-      let cartUid = cartState.cartDetails.payload.uid
+      let cartUid = data.cartState.cartDetails.payload.uid
 
       let medicineDecremented = {
-        name: medicineSelected.name,
-        sku: medicineSelected.sku,
-        quantity: medicineSelected.quantity + 1
+        name: data.medicineSelected.name,
+        sku: data.medicineSelected.sku,
+        quantity: data.medicineSelected.quantity + 1
       }
 
       return http(putCartItem$(cartUid, medicineDecremented)).pipe(
+        map(result => {
+          debugger
+          return putCartItemSuccess(data.cartState, result.body.payload)
+        }),
+        catchError(error => {
+          return cartApiErrorHandling(
+            data.cartState,
+            data.medicineSelected,
+            error
+          )
+        })
+      )
+    })
+  )
+}
+
+export function deleteCartItemLoadingEpic (action$, store) {
+  return action$.pipe(
+    ofType(DELETE_CART_ITEM_LOADING),
+    mergeMap(data => {
+      return cartApiLoadingHandling(
+          data.cartState,
+          data.medicineSelected
+        )
+    })
+  )
+}
+
+export function deleteCartItemEpic (action$, store) {
+  return action$.pipe(
+    ofType(DELETE_CART_ITEM_LOADING),
+    mergeMap(data => {
+      let cartUid = data.cartState.cartDetails.payload.uid
+      let cartItemSku = data.medicineSelected.sku
+
+      return http(deleteCartItem$(cartUid, cartItemSku)).pipe(
         map(result => {
           debugger
           return putCartItemSuccess(data.cartState, result.body.payload)

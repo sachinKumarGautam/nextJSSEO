@@ -89,6 +89,29 @@ const putCartItem$ = (cartUid, cartItem) => (
   })
 )
 
+const deleteCartItem$ = (cartUid, cartItemSku) => (
+  makeAjaxRequest({
+    method: 'DELETE',
+    url: fetchUrl('cart', cartUid + '/item/sku/' + cartItemSku, 'GET_LIST')
+  })
+)
+
+const savePatientToCart$ = (cartId, patientId) => (
+  makeAjaxRequest({
+    method: 'PATCH',
+    body: patientId,
+    url: fetchUrl('cart', cartId + '/assign/patient', 'GET_LIST')
+  })
+)
+
+const saveDeliveryAddressToCart$ = (cartId, shippingAddressId) => (
+  makeAjaxRequest({
+    method: 'PATCH',
+    body: shippingAddressId,
+    url: fetchUrl('cart', cartId + '/shipping-address', 'GET_LIST')
+  })
+)
+
 export {
   getMoleculeSummary$,
   getMedicineList$,
@@ -99,5 +122,8 @@ export {
   sendOtp$,
   fetchUserInfo$,
   registerCustomer$,
-  putCartItem$
+  putCartItem$,
+  deleteCartItem$,
+  savePatientToCart$,
+  saveDeliveryAddressToCart$
 }

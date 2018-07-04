@@ -101,6 +101,9 @@ export default function cartReducer (state = initialState, action) {
     case cartActionTypes.DECREMENT_CART_ITEM_LOADING:
       return state
 
+    case cartActionTypes.DELETE_CART_ITEM_LOADING:
+      return state
+
     case cartActionTypes.PUT_CART_ITEM_SUCCESS:
       return {
         ...state,
