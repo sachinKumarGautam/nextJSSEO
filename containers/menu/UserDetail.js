@@ -17,7 +17,7 @@ const styles = theme => {
 const UserDetail = (props) => {
   return (
     <div className={props.classes.nameMenuStyle}>
-      Hi Shankar
+      Hi {props.customerState.payload.full_name}
     </div>
   )
 }

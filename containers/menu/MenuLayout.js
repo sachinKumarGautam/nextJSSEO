@@ -76,7 +76,11 @@ class MenuLayout extends Component {
           }}
           className={this.props.classes.menuStyle}
         >
-          <MenuItem>{<UserDetail/>}</MenuItem>
+          <MenuItem>{
+            <UserDetail
+              customerState={this.props.customerState}
+            />
+          }</MenuItem>
           <Divider/>
           <MenuItems logout={this.logout.bind(this)} />
           <Button
