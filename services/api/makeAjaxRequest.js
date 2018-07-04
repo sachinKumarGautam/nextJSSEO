@@ -1,3 +1,4 @@
+import { store } from '../../redux'
 import ajax from 'universal-rx-request' // because standard AjaxObservable only works in browser
 const timeout = 60000
 
@@ -9,9 +10,7 @@ export default function makeAjaxRequest (params) {
     authHeader // handle custome authorization token
 
   // get access_token from login state
-  // let accessToken = store.getState().loginState.loginDetails.verification.payload.access_token
-  let accessToken
-
+  let accessToken = store.getState().loginState.payload.verification.access_token
   // function to set content type of ajax request
   if (!params.contentType) {
     contentType = 'application/json'
