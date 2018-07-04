@@ -7,14 +7,27 @@ import Typography from '@material-ui/core/Typography';
 const styles = theme => ({
   priceDetailsWrapper: {
     padding: theme.spacing.unit * 2.5,
-    borderBottom: '1px solid #eee'
+    borderBottom: `1px solid ${theme.palette.customGrey.grey800}`
   },
   itemTotal: {
-    fontSize: theme.spacing.unit * 1.75
+    fontSize: theme.spacing.unit * 1.75,
+    paddingTop: theme.spacing.unit * 1.25
+  },
+  itemTotalAmount: {
+    fontSize: theme.spacing.unit * 1.75,
+    paddingTop: theme.spacing.unit * 1.25,
+    textAlign: 'right'
   },
   discount: {
     fontSize: theme.spacing.unit * 1.75,
-    color: theme.palette.customGreen.green300
+    color: theme.palette.customGreen.green300,
+    paddingTop: theme.spacing.unit * 1.25
+  },
+  discountAmount: {
+    fontSize: theme.spacing.unit * 1.75,
+    color: theme.palette.customGreen.green300,
+    paddingTop: theme.spacing.unit * 1.25,
+    textAlign: 'right'
   }
 });
 
@@ -47,25 +60,25 @@ class PriceDetails extends Component {
             </Typography>
           </Grid>
           <Grid item xs={4}>
-            <Typography className={this.props.classes.itemTotal}>
+            <Typography className={this.props.classes.itemTotalAmount}>
               Rs. 870.00
             </Typography>
-            <Typography className={this.props.classes.discount}>
+            <Typography className={this.props.classes.discountAmount}>
               - Rs. 70.00
             </Typography>
-            <Typography className={this.props.classes.discount}>
+            <Typography className={this.props.classes.discountAmount}>
               - Rs. 0.00
             </Typography>
-            <Typography className={this.props.classes.discount}>
+            <Typography className={this.props.classes.discountAmount}>
               - Rs. 0.00
             </Typography>
-            <Typography className={this.props.classes.itemTotal}>
+            <Typography className={this.props.classes.itemTotalAmount}>
               Rs. 800.00
             </Typography>
-            <Typography className={this.props.classes.itemTotal}>
+            <Typography className={this.props.classes.itemTotalAmount}>
               Rs. 0.00
             </Typography>
-            <Typography className={this.props.classes.itemTotal}>
+            <Typography className={this.props.classes.itemTotalAmount}>
               Rs. 800.00
             </Typography>
           </Grid>

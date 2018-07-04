@@ -37,6 +37,17 @@ import {
   carePointsList
 } from '../containers/carePoint/carePointEpics'
 
+import {
+  getAnonymousCartIdEpic,
+  getCartDetailsEpic,
+  decrementCartItemLoadingEpic,
+  decrementCartItemEpic,
+  incrementCartItemLoadingEpic,
+  incrementCartItemEpic,
+  deleteCartItemLoadingEpic,
+  deleteCartItemEpic
+} from '../containers/cartDetails/cartEpics'
+
 // import * as actions from './actions'
 // import * as types from './actionTypes'
 
@@ -88,6 +99,15 @@ export const rootEpic = combineEpics(
   getRelatedMedicines,
   fetchUserInfo,
   getRelatedMedicines,
+  carePointsList,
+  getAnonymousCartIdEpic,
+  getCartDetailsEpic,
+  decrementCartItemLoadingEpic,
+  decrementCartItemEpic,
+  incrementCartItemLoadingEpic,
+  incrementCartItemEpic,
+  deleteCartItemLoadingEpic,
+  deleteCartItemEpic,
   getDeliveryDetailsList,
   getPatientDetailsList,
   getOrderListDetails,

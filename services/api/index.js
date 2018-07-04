@@ -101,10 +101,41 @@ const getAnonymousCartId$ = (source, facilityCode, sourceType = '') => (
   })
 )
 
-const cartTransfer$ = cartUid => (
+const getCartDetails$ = cartUid => (
+  makeAjaxRequest({
+    method: 'GET',
+    url: fetchUrl('cart', cartUid, 'GET_LIST')
+  })
+)
+
+const putCartItem$ = (cartUid, cartItem) => (
+  makeAjaxRequest({
+    method: 'PUT',
+    url: fetchUrl('cart', cartUid + '/item', 'GET_LIST'),
+    body: cartItem
+  })
+)
+
+const deleteCartItem$ = (cartUid, cartItemSku) => (
+  makeAjaxRequest({
+    method: 'DELETE',
+    url: fetchUrl('cart', cartUid + '/item/sku/' + cartItemSku, 'GET_LIST')
+  })
+)
+
+const savePatientToCart$ = (cartId, patientId) => (
   makeAjaxRequest({
     method: 'PATCH',
-    url: fetchUrl('cart', cartUid + '/transfer', 'CREATE')
+    body: patientId,
+    url: fetchUrl('cart', cartId + '/assign/patient', 'GET_LIST')
+  })
+)
+
+const saveDeliveryAddressToCart$ = (cartId, shippingAddressId) => (
+  makeAjaxRequest({
+    method: 'PATCH',
+    body: shippingAddressId,
+    url: fetchUrl('cart', cartId + '/shipping-address', 'GET_LIST')
   })
 )
 
@@ -113,6 +144,7 @@ export {
   getMedicineList$,
   getCarePointsList$,
   getAnonymousCartId$,
+  getCartDetails$,
   getDeliveryDetailsList$,
   getPatientDetailsList$,
   getOrderList$,
@@ -121,5 +153,8 @@ export {
   sendOtp$,
   fetchUserInfo$,
   registerCustomer$,
-  cartTransfer$
+  putCartItem$,
+  deleteCartItem$,
+  savePatientToCart$,
+  saveDeliveryAddressToCart$
 }

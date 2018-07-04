@@ -5,10 +5,14 @@ import { withStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 
+import ProductName from '../../components/ProductName'
+import ProductBrand from '../../components/ProductBrand'
+import ProductPackSize from '../../components/ProductPackSize'
+
 const styles = theme => ({
   medicineListWrapper: {
     padding: theme.spacing.unit * 2.5,
-    borderBottom: '1px solid #eee'
+    borderBottom: `1px solid ${theme.palette.customGrey.grey800}`
   },
   cartAmountWrapper: {
     marginTop: theme.spacing.unit * 1.25
@@ -35,15 +39,21 @@ class MedicineList extends Component {
         <div className={this.props.classes.medicineListWrapper}>
           <Grid container spacing={24}>
             <Grid item xs={7}>
-              <Typography className={this.props.classes.medicineNameWrapper}>
-                Glycomet 0.5 MG TAB 10S
-              </Typography>
-              <Typography className={this.props.classes.companyNameWrapper}>
-                Cipla Ltd
-              </Typography>
-              <Typography className={this.props.classes.companyNameWrapper}>
-                Tablet | 10.0
-              </Typography>
+              <ProductName
+                customStyle={this.props.classes.medicineNameWrapper}
+                name={'Glycomet 0.5 MG TAB 10S'}
+              />
+              <ProductBrand
+                customStyle={this.props.classes.companyNameWrapper}
+                brand={'Cipla Ltd'}
+                withoutImage={true}
+              />
+              <ProductPackSize
+                customStyle={this.props.classes.companyNameWrapper}
+                packType={'Tablet'}
+                packSize={'10.0'}
+                withoutImage={true}
+              />
             </Grid>
             <Grid item xs={5}>
               <div className={this.props.classes.amountWrapper}>
@@ -76,15 +86,21 @@ class MedicineList extends Component {
         <div className={this.props.classes.medicineListWrapper}>
           <Grid container spacing={24}>
             <Grid item xs={7}>
-              <Typography className={this.props.classes.medicineNameWrapper}>
-                Glycomet 0.5 MG TAB 10S
-              </Typography>
-              <Typography className={this.props.classes.companyNameWrapper}>
-                Cipla Ltd
-              </Typography>
-              <Typography className={this.props.classes.companyNameWrapper}>
-                Tablet | 10.0
-              </Typography>
+              <ProductName
+                customStyle={this.props.classes.medicineNameWrapper}
+                name={'Glycomet 0.5 MG TAB 10S'}
+              />
+              <ProductBrand
+                customStyle={this.props.classes.companyNameWrapper}
+                brand={'Cipla Ltd'}
+                withoutImage={true}
+              />
+              <ProductPackSize
+                customStyle={this.props.classes.companyNameWrapper}
+                packType={'Tablet'}
+                packSize={'10.0'}
+                withoutImage={true}
+              />
             </Grid>
             <Grid item xs={5}>
               <div className={this.props.classes.amountWrapper}>
@@ -117,15 +133,21 @@ class MedicineList extends Component {
         <div className={this.props.classes.medicineListWrapper}>
           <Grid container spacing={24}>
             <Grid item xs={7}>
-              <Typography className={this.props.classes.medicineNameWrapper}>
-                Glycomet 0.5 MG TAB 10S
-              </Typography>
-              <Typography className={this.props.classes.companyNameWrapper}>
-                Cipla Ltd
-              </Typography>
-              <Typography className={this.props.classes.companyNameWrapper}>
-                Tablet | 10.0
-              </Typography>
+              <ProductName
+                customStyle={this.props.classes.medicineNameWrapper}
+                name={'Glycomet 0.5 MG TAB 10S'}
+              />
+              <ProductBrand
+                customStyle={this.props.classes.companyNameWrapper}
+                brand={'Cipla Ltd'}
+                withoutImage={true}
+              />
+              <ProductPackSize
+                customStyle={this.props.classes.companyNameWrapper}
+                packType={'Tablet'}
+                packSize={'10.0'}
+                withoutImage={true}
+              />
             </Grid>
             <Grid item xs={5}>
               <div className={this.props.classes.amountWrapper}>

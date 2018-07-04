@@ -1,17 +1,10 @@
 import initialState from './cartModal'
 
-import {
-  GET_ANONYMOUS_CART_ID_LOADING,
-  GET_ANONYMOUS_CART_ID_SUCCESS,
-  GET_ANONYMOUS_CART_ID_FAILURE,
-  CART_TRANSFER_LOADING,
-  CART_TRANSFER_SUCCESS,
-  CART_TRANSFER_FAILURE
-} from './cartActionTypes'
+import * as cartActionTypes from './cartActionTypes'
 
 export default function cartReducer (state = initialState, action) {
   switch (action.type) {
-    case GET_ANONYMOUS_CART_ID_LOADING:
+    case cartActionTypes.GET_ANONYMOUS_CART_ID_LOADING:
       return {
         ...state,
         isLoading: action.isLoading,
@@ -22,7 +15,7 @@ export default function cartReducer (state = initialState, action) {
         }
       }
 
-    case GET_ANONYMOUS_CART_ID_SUCCESS:
+    case cartActionTypes.GET_ANONYMOUS_CART_ID_SUCCESS:
       return {
         ...state,
         isLoading: action.isLoading,
@@ -45,7 +38,7 @@ export default function cartReducer (state = initialState, action) {
         }
       }
 
-    case GET_ANONYMOUS_CART_ID_FAILURE:
+    case cartActionTypes.GET_ANONYMOUS_CART_ID_FAILURE:
       return {
         ...state,
         isLoading: action.isLoading,
@@ -56,18 +49,17 @@ export default function cartReducer (state = initialState, action) {
         }
       }
 
-    case CART_TRANSFER_LOADING:
+    case cartActionTypes.GET_CART_DETAILS_LOADING:
       return {
         ...state,
         isLoading: action.isLoading,
         errorState: {
           ...state.errorState,
-          isError: action.isError,
-          error: action.error
+          isError: action.isError
         }
       }
 
-    case CART_TRANSFER_SUCCESS:
+    case cartActionTypes.GET_CART_DETAILS_SUCCESS:
       return {
         ...state,
         isLoading: action.isLoading,
@@ -82,20 +74,17 @@ export default function cartReducer (state = initialState, action) {
           status: action.status,
           source: action.source,
           cart_items: {
-            ...state.payload.cart_items,
+            ...state.cartDetails.payload.cart_items,
             payload: action.cart_items
           },
           cart_prescriptions: action.cart_prescriptions,
-          is_cart_transfered: action.is_cart_transfered,
           source_type: action.source_type,
-          is_doctor_callback: {
-            ...state.payload.is_doctor_callback,
-            payload: action.doctor_callback
-          }
+          delivery_option: action.delivery_option,
+          service_type: action.service_type
         }
       }
 
-    case CART_TRANSFER_FAILURE:
+    case cartActionTypes.GET_CART_DETAILS_FAILURE:
       return {
         ...state,
         isLoading: action.isLoading,
@@ -103,6 +92,39 @@ export default function cartReducer (state = initialState, action) {
           ...state.errorState,
           isError: action.isError,
           error: action.error
+        }
+      }
+
+    case cartActionTypes.INCREMENT_CART_ITEM_LOADING:
+      return state
+
+    case cartActionTypes.DECREMENT_CART_ITEM_LOADING:
+      return state
+
+    case cartActionTypes.DELETE_CART_ITEM_LOADING:
+      return state
+
+    case cartActionTypes.PUT_CART_ITEM_SUCCESS:
+      return {
+        ...state,
+        payload: {
+          ...state.payload,
+          cart_items: {
+            ...state.payload.cart_items,
+            payload: action.cartItems
+          }
+        }
+      }
+
+    case cartActionTypes.PUT_CART_ITEM_FAILURE:
+      return {
+        ...state,
+        payload: {
+          ...state.payload,
+          cart_items: {
+            ...state.payload.cart_items,
+            payload: action.cartItems
+          }
         }
       }
 

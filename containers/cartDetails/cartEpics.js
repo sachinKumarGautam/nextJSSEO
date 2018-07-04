@@ -1,191 +1,235 @@
+import { of } from 'rxjs/observable/of'
+import { mergeMap, catchError, map } from 'rxjs/operators'
+import { ofType } from 'redux-observable'
+import http from '../../services/api/ajaxWrapper'
+
 import {
   GET_ANONYMOUS_CART_ID_LOADING,
-  CART_TRANSFER_LOADING
+  GET_CART_DETAILS_LOADING,
+  DECREMENT_CART_ITEM_LOADING,
+  INCREMENT_CART_ITEM_LOADING,
+  DELETE_CART_ITEM_LOADING
 } from './cartActionTypes'
 
 import {
-  cartTransfer$
+  getAnonymousCartIdSuccess,
+  getAnonymousCartIdFailure,
+  getCartDetailsSuccess,
+  getCartDetailsFailure,
+  putCartItemSuccess,
+  putCartItemFailure
+} from './cartActions'
+
+import {
+  getAnonymousCartId$,
+  getCartDetails$,
+  putCartItem$,
+  deleteCartItem$
 } from '../../services/api'
 
-// export function getAnonymousCartIdEpic (actions$) {
-//   return (
-//     actions$
-//       .ofType(GET_ANONYMOUS_CART_ID_LOADING)
-//       .switchMap((data) => {
-//         return Observable.defer(() => {
-//           return Observable.ajax(getAnonymousCartId$(data.source, data.facility_code, data.source_type))
-//         })
-//           .flatMap(getCartResponse => {
-//             if (data.source_type === 'REFILL') {
-//               return Observable.concat(
-//                 Observable.of(
-//                   getAnonymousCartIdSuccess(
-//                     data.cartState,
-//                     getCartResponse
-//                   )
-//                 ),
-//                 Observable.of(
-//                   savePatientToCart(
-//                     data.cartState,
-//                     data.patientId,
-//                     data.navigationState,
-//                     getCartResponse.response.payload.uid
-//                   )
-//                 )
-//               )
-//             } else {
-//               return Observable.concat(
-//                 Observable.of(
-//                   getAnonymousCartIdSuccess(
-//                     data.cartState,
-//                     getCartResponse
-//                   )
-//                 )
-//               )
-//             }
-//           })
-//           .catch((error, source) => {
-//             const errorObservable = Observable.of(
-//               getAnonymousCartIdFailure(
-//                 data.cartState,
-//                 error.xhr.response
-//               )
-//             )
 
-//             return checkTokenAuthentication(
-//               actions$,
-//               error,
-//               source,
-//               data.type,
-//               errorObservable
-//             )
-//           })
-//       })
-//   )
-// }
-
-export function cartTransferEpic (action$) {
-  return (
-    action$
-      .ofType(CART_TRANSFER_LOADING)
-      .switchMap((data) => {
-        return Observable.defer(() => {
-          return Observable.ajax(cartTransfer$(data.cartUid))
+export function getAnonymousCartIdEpic (action$, store) {
+  return action$.pipe(
+    ofType(GET_ANONYMOUS_CART_ID_LOADING),
+    mergeMap(data => {
+      return http(getAnonymousCartId$(data.source, data.facility_code, data.source_type)).pipe(
+        map(result => {
+          return getAnonymousCartIdSuccess(data.cartState, result.body.payload)
+        }),
+        catchError(error => {
+          return of(getAnonymousCartIdFailure(data.cartState, error))
         })
-          .flatMap(cartResponse => {
-            let cartItems = cartResponse.response.payload.cart_items
-            let cartPrescriptions = cartResponse.response.payload.cart_prescriptions
+      )
+    })
+  )
+}
 
-            cartItems.forEach((cartMedicine, index) => {
-              cartItems[index] = {
-                ...cartItems[index],
-                isCartMedicine: true
-              }
-            })
+export function getCartDetailsEpic (action$, store) {
+  return action$.pipe(
+    ofType(GET_CART_DETAILS_LOADING),
+    mergeMap(data => {
+      return http(getCartDetails$(data.cartUid)).pipe(
+        map(result => {
+          return getAnonymousCartIdSuccess(data.cartState, result.body.payload)
+        }),
+        catchError(error => {
+          return of(getAnonymousCartIdFailure(data.cartState, error))
+        })
+      )
+    })
+  )
+}
 
-            let updatedCartPrescriptions = cartPrescriptions.map((prescription, index) => {
-              return {
-                ...prescription,
-                url: prescription.location
-              }
-            })
+function cartApiLoadingHandling (
+  cartState,
+  medicineSelected
+) {
+  let cartItems = cartState.payload.cart_items.payload
 
-            if (data.isExistingUser) {
-              return Observable.concat(
-                Observable.of(toggleNavigationFlag(data.navigationState)),
-                Observable.of(
-                  cartTransferSuccess(
-                    data.cartState,
-                    cartResponse,
-                    cartItems,
-                    updatedCartPrescriptions
-                  )
-                )
-              )
-            } else if (data.isPatientRegistration) {
-              return Observable.concat(
-                Observable.of(
-                  cartTransferSuccess(
-                    data.cartState,
-                    cartResponse,
-                    cartItems,
-                    updatedCartPrescriptions
-                  )
-                ),
-                Observable.of(
-                  submitPatientDetailLoading(
-                    data.patientFormState,
-                    data.customerId,
-                    data.cartState,
-                    data.navigationState,
-                    data.isExistingUser
-                  )
-                )
-              )
-            } else {
-              return Observable.concat(
-                Observable.of(
-                  cartTransferSuccess(
-                    data.cartState,
-                    cartResponse,
-                    cartItems,
-                    updatedCartPrescriptions
-                  )
-                ),
-                Observable.of(
-                  savePatientToCart(
-                    data.cartState,
-                    data.patientId,
-                    data.navigationState,
-                    cartResponse.response.payload.uid
-                  )
-                )
-              )
-            }
-          })
-          .catch((error, source) => {
-            let errorObservable
-            if (data.isExistingUser) {
-              errorObservable = Observable.concat(
-                Observable.of(resetLoginState()),
-                Observable.of(
-                  cartTransferFailure(
-                    data.cartState,
-                    error
-                  )
-                ),
-                Observable.of(
-                  cartErrorHandling(
-                    data.cartState,
-                    error
-                  )
-                )
-              )
-            } else {
-              errorObservable = Observable.concat(
-                Observable.of(
-                  cartTransferFailure(
-                    data.cartState,
-                    error
-                  )
-                ),
-                Observable.of(
-                  cartErrorHandling(
-                    data.cartState,
-                    error
-                  )
-                )
-              )
-            }
+  cartItems.forEach((cartMedicine, index) => {
+    if (cartMedicine.id === medicineSelected.id) {
+      cartItems[index] = {
+        ...cartMedicine,
+        isLoading: true,
+        errorState: {
+          ...cartMedicine.errorState,
+          isError: false
+        }
+      }
 
-            return checkTokenAuthentication(
-              action$,
-              error,
-              source,
-              data.type,
-              errorObservable
-            )
-          })
-      })
+      return false
+    }
+  })
+
+  return putCartItemSuccess(
+    cartState,
+    cartItems
+  )
+}
+
+function cartApiErrorHandling (
+  cartState,
+  medicineSelected,
+  error
+) {
+  let cartItems = cartState.payload.cart_items.payload
+
+  cartItems.forEach((cartMedicine, index) => {
+    if (cartMedicine.id === medicineSelected.id) {
+      cartItems[index] = {
+        ...cartMedicine,
+        isLoading: true,
+        errorState: {
+          ...cartMedicine.errorState,
+          isError: true,
+          error: error
+        }
+      }
+
+      return false
+    }
+  })
+
+  return putCartItemSuccess(
+    cartState,
+    cartItems
+  )
+}
+
+export function decrementCartItemLoadingEpic (action$, store) {
+  return action$.pipe(
+    ofType(DECREMENT_CART_ITEM_LOADING),
+    mergeMap(data => {
+      return cartApiLoadingHandling(
+          data.cartState,
+          data.medicineSelected
+        )
+    })
+  )
+}
+
+export function decrementCartItemEpic (action$, store) {
+  return action$.pipe(
+    ofType(DECREMENT_CART_ITEM_LOADING),
+    mergeMap(data => {
+      let cartUid = data.cartState.cartDetails.payload.uid
+
+      let medicineDecremented = {
+        name: data.medicineSelected.name,
+        sku: data.medicineSelected.sku,
+        quantity: data.medicineSelected.quantity - 1
+      }
+
+      return http(putCartItem$(cartUid, medicineDecremented)).pipe(
+        map(result => {
+          debugger
+          return putCartItemSuccess(data.cartState, result.body.payload)
+        }),
+        catchError(error => {
+          return cartApiErrorHandling(
+            data.cartState,
+            data.medicineSelected,
+            error
+          )
+        })
+      )
+    })
+  )
+}
+
+export function incrementCartItemLoadingEpic (action$, store) {
+  return action$.pipe(
+    ofType(INCREMENT_CART_ITEM_LOADING),
+    mergeMap(data => {
+      return cartApiLoadingHandling(
+          data.cartState,
+          data.medicineSelected
+        )
+    })
+  )
+}
+
+export function incrementCartItemEpic (action$, store) {
+  return action$.pipe(
+    ofType(INCREMENT_CART_ITEM_LOADING),
+    mergeMap(data => {
+      let cartUid = data.cartState.cartDetails.payload.uid
+
+      let medicineDecremented = {
+        name: data.medicineSelected.name,
+        sku: data.medicineSelected.sku,
+        quantity: data.medicineSelected.quantity + 1
+      }
+
+      return http(putCartItem$(cartUid, medicineDecremented)).pipe(
+        map(result => {
+          debugger
+          return putCartItemSuccess(data.cartState, result.body.payload)
+        }),
+        catchError(error => {
+          return cartApiErrorHandling(
+            data.cartState,
+            data.medicineSelected,
+            error
+          )
+        })
+      )
+    })
+  )
+}
+
+export function deleteCartItemLoadingEpic (action$, store) {
+  return action$.pipe(
+    ofType(DELETE_CART_ITEM_LOADING),
+    mergeMap(data => {
+      return cartApiLoadingHandling(
+          data.cartState,
+          data.medicineSelected
+        )
+    })
+  )
+}
+
+export function deleteCartItemEpic (action$, store) {
+  return action$.pipe(
+    ofType(DELETE_CART_ITEM_LOADING),
+    mergeMap(data => {
+      let cartUid = data.cartState.cartDetails.payload.uid
+      let cartItemSku = data.medicineSelected.sku
+
+      return http(deleteCartItem$(cartUid, cartItemSku)).pipe(
+        map(result => {
+          debugger
+          return putCartItemSuccess(data.cartState, result.body.payload)
+        }),
+        catchError(error => {
+          return cartApiErrorHandling(
+            data.cartState,
+            data.medicineSelected,
+            error
+          )
+        })
+      )
+    })
   )
 }

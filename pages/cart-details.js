@@ -2,12 +2,20 @@ import React from 'react'
 import Header from '../components/layouts/header'
 import Footer from '../components/layouts/footer'
 
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+
 import { withStyles } from '@material-ui/core/styles'
 import withRoot from '../src/withRoot'
 
 import Paper from '@material-ui/core/Paper'
 
 import CartDetailsWrapper from '../containers/cartDetails'
+
+import {
+  getCartDetailsLoading,
+  incrementCartItemLoading
+} from '../containers/cartDetails/cartActions'
 
 const styles = theme => ({
   root: {
@@ -25,16 +33,67 @@ const styles = theme => ({
   }
 })
 
-const CartDetails = (props) => (
-  <div>
-    <Header />
-    <div>
-      <Paper className={props.classes.root} elevation={1}>
-        <CartDetailsWrapper />
-      </Paper>
-    </div>
-    <Footer />
-  </div>
-)
+class CartDetails extends React.Component {
+  componentDidMount() {
+    const cartUid = '19820b57-3166-44e3-8023-d1831d9757ec'
+    const medicineSelected = ''
+    
+    this.props.actions.getCartDetailsLoading(
+      this.props.cartState,
+      cartUid
+    )
 
-export default withRoot(withStyles(styles)(CartDetails))
+    this.props.actions.incrementCartItemLoading(
+      this.props.cartState,
+      medicineSelected
+    )
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.cartState.payload.uid !== this.props.cartState.payload.uid) {
+      const cartUid = '19820b57-3166-44e3-8023-d1831d9757ec'
+
+      this.props.actions.getCartDetailsLoading(
+        nextProps.cartState,
+        cartUid
+      )
+    }
+  }
+
+  render() {
+    return (
+      <div>
+        <Header />
+        <div>
+          <Paper className={this.props.classes.root} elevation={1}>
+            <CartDetailsWrapper />
+          </Paper>
+        </div>
+        <Footer />
+      </div>
+    )
+  }
+}
+
+function mapStateToProps (state) {
+  return {
+    cartState: state.cartState
+  }
+}
+
+function mapDispatchToProps (dispatch) {
+  return {
+    actions: bindActionCreators(
+      {
+        getCartDetailsLoading,
+        incrementCartItemLoading
+      },
+      dispatch
+    )
+  }
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withRoot(withStyles(styles)(CartDetails)))

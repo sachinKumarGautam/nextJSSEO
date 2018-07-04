@@ -1,20 +1,13 @@
-import {
-  GET_ANONYMOUS_CART_ID_LOADING,
-  GET_ANONYMOUS_CART_ID_SUCCESS,
-  GET_ANONYMOUS_CART_ID_FAILURE,
-  CART_TRANSFER_LOADING,
-  CART_TRANSFER_SUCCESS,
-  CART_TRANSFER_FAILURE
-} from './cartActionTypes'
+import * as cartActionTypes from './cartActionTypes'
 
-export function getAnonymousCartId (
+export function getAnonymousCartIdLoading (
   cartState,
   source,
   facilityCode,
   sourceType = ''
 ) {
   return {
-    type: GET_ANONYMOUS_CART_ID_LOADING,
+    type: cartActionTypes.GET_ANONYMOUS_CART_ID_LOADING,
     cartState: cartState,
     isLoading: true,
     isError: false,
@@ -24,51 +17,52 @@ export function getAnonymousCartId (
   }
 }
 
-export function getAnonymousCartIdSuccess (cartDetails, result) {
+export function getAnonymousCartIdSuccess (cartState, result) {
   return {
-    type: GET_ANONYMOUS_CART_ID_SUCCESS,
-    cartDetails,
-    id: result.response.payload.id,
-    uid: result.response.payload.uid,
+    type: cartActionTypes.GET_ANONYMOUS_CART_ID_SUCCESS,
+    cartState,
+    id: result.id,
+    uid: result.uid,
     patient_id: 0,
     cart_prescriptions: [],
     cart_items: [],
     isLoading: false,
     is_doctor_callback: false,
     is_cart_transfered: false,
-    source_type: result.response.payload.source_type,
-    facility_code: result.response.payload.facility_code
+    source_type: result.source_type,
+    facility_code: result.facility_code
   }
 }
 
-export function getAnonymousCartIdFailure (cartDetails, error) {
+export function getAnonymousCartIdFailure (cartState, error) {
   return {
-    type: GET_ANONYMOUS_CART_ID_FAILURE,
-    cartDetails,
+    type: cartActionTypes.GET_ANONYMOUS_CART_ID_FAILURE,
+    cartState,
     isLoading: false,
     isError: true,
     error: error
   }
 }
 
-export function cartTransferLoading (
-  cartState,
-  customerId,
-  patientFormState
-) {
+export function getCartDetailsLoading (cartState, cartUid) {
   return {
-    type: CART_TRANSFER_LOADING,
+    type: cartActionTypes.GET_CART_DETAILS_LOADING,
     cartState: cartState,
+    cartUid: cartUid,
     isLoading: true,
-    isError: false,
-    error: {}
+    isError: false
   }
 }
 
-export function cartTransferSuccess (cartState, result, cartItems, cartPrescriptions) {
-  let payload = result.response.payload
+export function getCartDetailsSuccess (
+  cartState,
+  result,
+  cartItems,
+  cartPrescriptions
+) {
+  const payload = result.response.payload
   return {
-    type: CART_TRANSFER_SUCCESS,
+    type: cartActionTypes.GET_CART_DETAILS_SUCCESS,
     cartState: cartState,
     cart_items: cartItems,
     isLoading: false,
@@ -81,18 +75,67 @@ export function cartTransferSuccess (cartState, result, cartItems, cartPrescript
     status: payload.status,
     source: payload.source,
     cart_prescriptions: cartPrescriptions,
-    doctor_callback: payload.doctor_callback,
-    is_cart_transfered: true,
-    source_type: payload.source_type
+    source_type: payload.source_type,
+    delivery_option: payload.delivery_option,
+    service_type: payload.service_type
   }
 }
 
-export function cartTransferFailure (cartState, error) {
+export function getCartDetailsFailure (cartState, error) {
   return {
-    type: CART_TRANSFER_FAILURE,
+    type: cartActionTypes.GET_CART_DETAILS_FAILURE,
     cartState: cartState,
     isLoading: false,
     isError: true,
     error: error
+  }
+}
+
+export function decrementCartItemLoading (
+  cartState,
+  medicineSelected
+) {
+  return {
+    type: cartActionTypes.DECREMENT_CART_ITEM_LOADING,
+    cartState: cartState,
+    medicineSelected: medicineSelected
+  }
+}
+
+export function incrementCartItemLoading (
+  cartState,
+  medicineSelected
+) {
+  return {
+    type: cartActionTypes.INCREMENT_CART_ITEM_LOADING,
+    cartState: cartState,
+    medicineSelected: medicineSelected
+  }
+}
+
+export function deleteCartItemLoading (
+  cartState,
+  medicineSelected
+) {
+  return {
+    type: cartActionTypes.DELETE_CART_ITEM_LOADING,
+    cartState: cartState,
+    medicineSelected: medicineSelected
+  }
+}
+
+export function putCartItemSuccess (cartState, cartItems) {
+  return {
+    type: cartActionTypes.PUT_CART_ITEM_SUCCESS,
+    cartState,
+    cartItems: cartItems
+  }
+}
+
+export function putCartItemFailure (cartState, cartItems) {
+  return {
+    type: cartActionTypes.PUT_CART_ITEM_FAILURE,
+    cartState,
+    cartItems: cartItems
   }
 }

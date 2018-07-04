@@ -7,6 +7,8 @@ import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
+import Button from '../../components/button'
+
 const styles = theme => ({
   root: {
     width: '100%',
@@ -25,6 +27,13 @@ const styles = theme => ({
     fontSize: theme.typography.pxToRem(15),
     color: theme.palette.text.secondary,
   },
+  buttonRoot: {
+    border: `1px solid ${theme.palette.primary.main}`,
+    backgroundColor: theme.palette.primary.main
+  },
+  buttonLabel: {
+    color: theme.palette.common.white
+  }
 });
 
 class OrderSummary extends React.Component {
@@ -53,10 +62,25 @@ class OrderSummary extends React.Component {
             <Typography className={classes.heading}>Logged in</Typography>
           </ExpansionPanelSummary>
           <ExpansionPanelDetails>
-            <Typography>
-              Nulla facilisi. Phasellus sollicitudin nulla et quam mattis feugiat. Aliquam eget
-              maximus est, id dignissim quam.
-            </Typography>
+            <div>
+              <Typography>
+                Nulla facilisi. Phasellus sollicitudin nulla et quam mattis feugiat. Aliquam eget
+                maximus est, id dignissim quam.
+              </Typography>
+            </div>
+            <div>
+              <Button
+                size='small'
+                variant='outlined'
+                color='primary'
+                classes={{
+                  root: this.props.classes.buttonRoot,
+                  label: this.props.classes.buttonLabel
+                }}
+                style={{float: 'right'}}
+                label={'NEXT'}
+              />
+            </div>
           </ExpansionPanelDetails>
         </ExpansionPanel>
         <ExpansionPanel
@@ -72,6 +96,17 @@ class OrderSummary extends React.Component {
               Donec placerat, lectus sed mattis semper, neque lectus feugiat lectus, varius pulvinar
               diam eros in elit. Pellentesque convallis laoreet laoreet.
             </Typography>
+            <Button
+              size='small'
+              variant='outlined'
+              color='primary'
+              classes={{
+                root: this.props.classes.buttonRoot,
+                label: this.props.classes.buttonLabel
+              }}
+              style={{float: 'right'}}
+              label={'NEXT'}
+            />
           </ExpansionPanelDetails>
         </ExpansionPanel>
         <ExpansionPanel
@@ -87,6 +122,17 @@ class OrderSummary extends React.Component {
               Nunc vitae orci ultricies, auctor nunc in, volutpat nisl. Integer sit amet egestas
               eros, vitae egestas augue. Duis vel est augue.
             </Typography>
+            <Button
+              size='small'
+              variant='outlined'
+              color='primary'
+              classes={{
+                root: this.props.classes.buttonRoot,
+                label: this.props.classes.buttonLabel
+              }}
+              style={{float: 'right'}}
+              label={'NEXT'}
+            />
           </ExpansionPanelDetails>
         </ExpansionPanel>
         <ExpansionPanel
@@ -102,6 +148,17 @@ class OrderSummary extends React.Component {
               Nunc vitae orci ultricies, auctor nunc in, volutpat nisl. Integer sit amet egestas
               eros, vitae egestas augue. Duis vel est augue.
             </Typography>
+            <Button
+              size='small'
+              variant='outlined'
+              color='primary'
+              classes={{
+                root: this.props.classes.buttonRoot,
+                label: this.props.classes.buttonLabel
+              }}
+              style={{float: 'right'}}
+              label={'NEXT'}
+            />
           </ExpansionPanelDetails>
         </ExpansionPanel>
         <ExpansionPanel
@@ -117,6 +174,17 @@ class OrderSummary extends React.Component {
               Nunc vitae orci ultricies, auctor nunc in, volutpat nisl. Integer sit amet egestas
               eros, vitae egestas augue. Duis vel est augue.
             </Typography>
+            <Button
+              size='small'
+              variant='outlined'
+              color='primary'
+              classes={{
+                root: this.props.classes.buttonRoot,
+                label: this.props.classes.buttonLabel
+              }}
+              style={{float: 'right'}}
+              label={'NEXT'}
+            />
           </ExpansionPanelDetails>
         </ExpansionPanel>
       </div>

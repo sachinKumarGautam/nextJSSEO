@@ -5,7 +5,7 @@ import Typography from '@material-ui/core/Typography';
 
 const styles = theme => ({
   avatarWrapper: {
-    borderBottom: '1px solid #eee',
+    borderBottom: `1px solid ${theme.palette.customGrey.grey800}`,
     padding: theme.spacing.unit * 2.5
   }
 });
