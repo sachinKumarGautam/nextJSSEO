@@ -31,7 +31,7 @@ export default function initStore (initialState, {isServer, req, debug, storeKey
 
     const persistConfig = {
       key: 'lifcareSite1.0.0',
-      blacklist: ['medicineListState', 'prescriptionState'],
+      blacklist: ['medicineListState', 'orderListState', 'prescriptionState'],
       storage
     }
 

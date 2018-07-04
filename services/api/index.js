@@ -16,6 +16,13 @@ const getMedicineList$ = (saltName, page, size) => (
   })
 )
 
+const getOrderList$ = (customerId, page, size) => (
+  makeAjaxRequest({
+    method: 'GET',
+    url: fetchUrl('order', `customer/${customerId}/order-summary?size=${size}&page=${page}`, 'CREATE')
+  })
+)
+
 const getPrescriptionList$ = (customerId) => (
   makeAjaxRequest({
     method: 'GET',
@@ -102,6 +109,7 @@ export {
   getCarePointsList$,
   getAnonymousCartId$,
   getCartDetails$,
+  getOrderList$,
   getPrescriptionList$,
   verifyOtp$,
   sendOtp$,

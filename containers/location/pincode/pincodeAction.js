@@ -5,16 +5,16 @@ import {
 } from './pincodeActionTypes'
 
 export function checkPincodeLoading (
-  checkPincodeState, 
-  handleClose, 
-  setSubmitting, 
+  checkPincodeState,
+  handleClose,
+  setSubmitting,
   values
 ) {
   return {
     type: CHECK_PINCODE_LOADING,
     checkPincodeState,
-    handleClose, 
-    setSubmitting, 
+    handleClose,
+    setSubmitting,
     pincode: values.pincode,
     isLoading: true,
     isError: false,

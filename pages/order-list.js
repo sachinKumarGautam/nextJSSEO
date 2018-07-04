@@ -9,13 +9,13 @@ import withRoot from '../src/withRoot'
 
 import { connect } from 'react-redux'
 
-import {
-  getPrescriptionListLoading
-} from '../containers/prescription/prescriptionActions'
-
 import Paper from '@material-ui/core/Paper'
 
-import PrescriptionDetailsWrapper from '../containers/prescription'
+import OrderListWrapper from '../containers/orderList'
+
+import {
+  getOrderListDetailsLoading
+} from '../containers/orderList/orderListActions'
 
 const styles = theme => ({
   root: {
@@ -33,12 +33,14 @@ const styles = theme => ({
   }
 })
 
-class Prescription extends React.Component{
+class Orders extends React.Component {
   componentDidMount () {
-    //Represents to get prescription list.
-    this.props.actions.getPrescriptionListLoading(
-      this.props.prescriptionState,
-      100036079
+    // Represents to get order list details with page size and size per page.
+    this.props.actions.getOrderListDetailsLoading(
+      this.props.orderListState,
+      100183363, // pass customer Id
+      0, // page number
+      2 // page size
     )
   }
 
@@ -48,7 +50,7 @@ class Prescription extends React.Component{
         <Header />
         <div>
           <Paper className={this.props.classes.root} elevation={1}>
-            <PrescriptionDetailsWrapper />
+            <OrderListWrapper />
           </Paper>
         </div>
         <Footer />
@@ -57,10 +59,9 @@ class Prescription extends React.Component{
   }
 }
 
-
 function mapStateToProps (state) {
   return {
-    prescriptionState: state.prescriptionState
+    orderListState: state.orderListState
   }
 }
 
@@ -68,7 +69,7 @@ function mapDispatchToProps (dispatch) {
   return {
     actions: bindActionCreators(
       {
-        getPrescriptionListLoading
+        getOrderListDetailsLoading
       },
       dispatch
     )
@@ -78,4 +79,4 @@ function mapDispatchToProps (dispatch) {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(withRoot(withStyles(styles)(Prescription)))
+)(withRoot(withStyles(styles)(Orders)))

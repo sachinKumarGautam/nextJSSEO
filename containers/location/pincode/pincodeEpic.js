@@ -18,7 +18,6 @@ export function checkPincode (action$, store) {
       const checkPincodeState = store.getState().checkPincodeState
       return http(checkPincode$(data.pincode)).pipe(
         map(result => {
-          console.log(result)
           setTimeout(() => {
             data.handleClose()
           }, 350)
@@ -26,7 +25,8 @@ export function checkPincode (action$, store) {
           return checkPincodeSuccess(checkPincodeState, result)
         }),
         catchError(error => {
-          return of(checkPincodeFailure(checkPincodeState, error))
+          data.setSubmitting(false)
+          return of(checkPincodeFailure(checkPincodeState, error.response.body.error.code))
         })
       )
     })

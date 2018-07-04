@@ -1,31 +1,19 @@
 
 import Button from '../../../components/button'
-import PincodeDialog from './PincodeDialog'
+import PincodeDialog from '../../../containers/location/pincode/PincodeDialog'
 
 class AddToCartWrapper extends React.Component {
   constructor (props) {
     super(props)
-    this.handleClose = this.handleClose.bind(this)
-    this.buttonOnClick = this.buttonOnClick.bind(this)
-    this.state = {
-      open: false
-    }
+    this.addToCartHandler = this.addToCartHandler.bind(this)
   }
 
-  buttonOnClick () {
+  addToCartHandler () {
     if (this.props.checkPincodeState.payload.city) {
       this.props.onClick()
     } else {
-      this.setState({
-        open: true
-      })
+      this.props.handleOpenPincodeDialog()
     }
-  }
-
-  handleClose () {
-    this.setState({
-      open: false
-    })
   }
 
   render () {
@@ -35,13 +23,14 @@ class AddToCartWrapper extends React.Component {
           variant='raised'
           size='small'
           color='primary'
-          onClick={this.buttonOnClick}
+          onClick={this.addToCartHandler}
           label={'Add To Cart'}
         />
         <PincodeDialog
-          open={this.state.open}
+          open={this.props.open}
           onSubmit={this.props.checkPincodeLoading}
-          handleClose={this.handleClose}
+          handleClose={this.props.handleClose}
+          checkPincodeState={this.props.checkPincodeState}
         />
       </React.Fragment>
     )

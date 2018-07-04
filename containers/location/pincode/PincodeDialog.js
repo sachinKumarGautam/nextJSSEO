@@ -33,6 +33,18 @@ const styles = theme => ({
   }
 })
 
+function getPincodeErrorMsg (pincodeFormError, inValidPincodeError, pincodeLoading) {
+  if(pincodeLoading) {
+    return 'Checking pincode...'
+  }
+  else if(pincodeFormError) {
+    return pincodeFormError
+  }
+  else if(!pincodeFormError && inValidPincodeError){
+    return inValidPincodeError
+  }
+}
+
 const PincodeDialog = (props) => {
   const {
     values,
@@ -42,9 +54,18 @@ const PincodeDialog = (props) => {
     handleChange,
     handleBlur,
     handleSubmit,
-    classes
+    classes,
+    checkPincodeState
     // toggleForm
   } = props
+  const pincodeLoading = checkPincodeState.isLoading
+  const pincodeError = checkPincodeState.errorState.error
+
+  const pincodeFormError = errors.pincode && touched.pincode ? errors.pincode : ''
+
+  const inValidPincodeError = touched.pincode && pincodeError === 'NotFoundException'
+  ? `Sorry! We don't service in your area. Please change pincode ` : ''
+
   return (
     <div>
       <Dialog
@@ -63,7 +84,7 @@ const PincodeDialog = (props) => {
             <FormControl
               className={classes.formControl}
               aria-describedby='pincode'
-              error={errors.pincode && touched.pincode}
+              error={pincodeFormError || inValidPincodeError}
             >
               <Input
                 autoFocus
@@ -78,14 +99,11 @@ const PincodeDialog = (props) => {
                 onBlur={handleBlur}
                 placeholder={'Enter you pincode'}
               />
-              {
-                errors.pincode && touched.pincode &&
-                <FormHelperText
-                  id='pincode'
-                >
-                  {errors.pincode}
-                </FormHelperText>
-              }
+              <FormHelperText
+                id='pincode'
+              >
+                {getPincodeErrorMsg(pincodeFormError, inValidPincodeError, pincodeLoading)}
+              </FormHelperText>
             </FormControl>
           </form>
         </DialogContent>
@@ -101,7 +119,7 @@ const PincodeDialog = (props) => {
             isloading={isSubmitting}
             color='primary'
             label={'Apply'}
-            variant='raised' 
+            variant='raised'
           />
         </DialogActions>
       </Dialog>
@@ -110,7 +128,7 @@ const PincodeDialog = (props) => {
 }
 
 export default withStyles(styles)(withFormik({
-  mapPropsToValues: (props) => ({ pincode: '' }),
+  mapPropsToValues: (props) => ({ pincode: props.checkPincodeState.payload.pincode }),
   validationSchema: Yup.object().shape({
     pincode: Yup.number().required('Pincode is required!')
   }),

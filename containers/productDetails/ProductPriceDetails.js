@@ -40,11 +40,26 @@ const styles = theme => ({
 class ProductPriceDetails extends Component {
   constructor (props) {
     super(props)
+    this.handleOpenPincodeDialog = this.handleOpenPincodeDialog.bind(this)
+    this.handleClosePincodeDialog = this.handleClosePincodeDialog.bind(this)
+    this.state = {
+      pincodeDialogOpen: false
+    }
   }
 
-  addToCart() {
-    //dummy func 
-    console.log('sachin is awesome')
+  addToCart () {
+  }
+
+  handleOpenPincodeDialog () {
+    this.setState({
+      pincodeDialogOpen: true
+    })
+  }
+
+  handleClosePincodeDialog () {
+    this.setState({
+      pincodeDialogOpen: false
+    })
   }
 
   render () {
@@ -64,15 +79,20 @@ class ProductPriceDetails extends Component {
               <StrokePrice variant={'body1'} />
               <ProductDiscount />
             </div>
-            <DeliveryInfoWrapper />
+            {
+              this.props.checkPincodeState.payload.city &&
+              <DeliveryInfoWrapper
+                checkPincodeState={this.props.checkPincodeState}
+                openPincodeDialog={this.handleOpenPincodeDialog}
+              />
+            }
             <div className={classes.cardActions}>
               <QuantityField />
               <AddToCartButton
-                variant='raised'
-                size='small'
-                color='primary'
+                open={this.state.pincodeDialogOpen}
+                handleOpenPincodeDialog={this.handleOpenPincodeDialog}
+                handleClose={this.handleClosePincodeDialog}
                 onClick={this.addToCart.bind(this)}
-                label={'Add To Cart'}
                 checkPincodeState={this.props.checkPincodeState}
                 checkPincodeLoading={this.props.checkPincodeLoading}
               />

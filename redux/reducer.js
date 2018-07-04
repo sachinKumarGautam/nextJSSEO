@@ -8,6 +8,7 @@ import moleculeDetailsReducer from '../containers/moleculeDetails/moleculeReduce
 import loginReducer from '../containers/login/loginReducers'
 import customerReducer from '../containers/user/customer/customerReducer'
 import medicineListReducer from '../containers/medicineList/medicineLIstReducer'
+import orderListReducers from '../containers/orderList/orderListReducers'
 import prescriptionReducers from '../containers/prescription/prescriptionReducers'
 import carePointReducer from '../containers/carePoint/carePointReducer'
 import cartReducer from '../containers/cartDetails/cartReducer'
@@ -33,7 +34,8 @@ const appReducer = combineReducers({
   carePointState: carePointReducer,
   cartState: cartReducer,
   checkPincodeState: checkPincodeReducer,
-  prescriptionState: prescriptionReducers,
+  orderListState: orderListReducers,
+  prescriptionState: prescriptionReducers
 })
 
 // export const persistConfig = {

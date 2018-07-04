@@ -23,7 +23,7 @@ const styles = theme => ({
   userIconStyle: {
     color: theme.palette.customGrey.grey300,
     height: theme.spacing.unit * 2,
-    marginLeft: theme.spacing.unit,
+    marginLeft: theme.spacing.unit
   },
   userNameStyle: {
     ...theme.typography.body3,
@@ -80,20 +80,20 @@ class PrescriptionContent extends Component {
             {this.props.prescription.file_name}
           </Typography>
           <Typography
-            variant="caption"
+            variant='caption'
             className={this.props.classes.userNameStyle}
           >
-            <Person className={this.props.classes.userIconStyle}/>
+            <Person className={this.props.classes.userIconStyle} />
             {this.props.prescriptionDetails.patient_full_name}
           </Typography>
           <Typography
-            variant="body2"
+            variant='body2'
             className={this.props.classes.doctorStyle}
           >
             {this.props.prescription.doctor_name}
           </Typography>
           <Typography
-            variant="caption"
+            variant='caption'
             className={this.props.classes.uploadDateStyle}
           >
             Uploaded on {uploadDate}
