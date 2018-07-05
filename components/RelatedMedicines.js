@@ -57,7 +57,11 @@ const RelatedMedicines = (props) => (
         <ul className={props.classes.articleListWrapper}>
           {props.medicineList.map((item, index) => (
             <li className={props.classes.listItem}>
-              <RelatedMedicinesCard itemDetails={item} />
+              <RelatedMedicinesCard
+                checkPincodeLoading={props.checkPincodeLoading}
+                checkPincodeState={props.checkPincodeState}
+                itemDetails={item}
+              />
             </li>
           ))}
         </ul>

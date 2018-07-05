@@ -16,6 +16,19 @@ const getMedicineList$ = (saltName, page, size) => (
   })
 )
 
+const getCarePointsList$ = (customerId, cashType) => (
+  makeAjaxRequest({
+    method: 'GET',
+    url: fetchUrl('', 'wallet/' + customerId + '/transaction',
+      'QUERY_STRING',
+      {query_string:
+        cashType === 'all'
+          ? `size=100&page=0` : `cash-type=${cashType}&size=100&page=0`
+      }
+    )
+  })
+)
+
 const getDeliveryDetailsList$ = customerId => (
   makeAjaxRequest({
     method: 'GET',
@@ -68,6 +81,14 @@ const fetchUserInfo$ = (mobileNumber) => (
   })
 )
 
+const getProductDetails$ = (productName, location) => (
+  makeAjaxRequest({
+    method: 'GET',
+    url: fetchUrl('catalog', `medicine/slug/3a-fer-cap-210047?location=${101}`, 'GET_LIST')
+  })
+
+)
+
 const registerCustomer$ = (data) => (
   makeAjaxRequest({
     method: 'POST',
@@ -76,16 +97,10 @@ const registerCustomer$ = (data) => (
   })
 )
 
-const getCarePointsList$ = (customerId, cashType) => (
+const searchMedicine$ = (inputValue, facilityCode) => (
   makeAjaxRequest({
     method: 'GET',
-    url: fetchUrl('', 'wallet/' + customerId + '/transaction',
-      'QUERY_STRING',
-      {query_string:
-        cashType === 'all'
-          ? `size=20&page=0` : `cash-type=${cashType}&size=100&page=0`
-      }
-    )
+    url: fetchUrl('catalog', 'medicine/search', 'QUERY_STRING', {query_string: `q=${inputValue}&facility-code=${100}`})
   })
 )
 
@@ -171,6 +186,13 @@ const submitOrder$ = (cartState, body) => (
   })
 )
 
+const checkPincode$ = (pincode) => (
+  makeAjaxRequest({
+    method: 'GET',
+    url: fetchUrl('shipping', 'place/pincode/' + pincode, 'GET_LIST')
+  })
+)
+
 export {
   getMoleculeSummary$,
   getMedicineList$,
@@ -192,5 +214,9 @@ export {
   cartTransfer$,
   uploadPrescriptionEpic$,
   deletePrescriptionEpic$,
-  submitOrder$
+  submitOrder$,
+  getProductDetails$,
+  searchMedicine$,
+  getProductDetailsSummary$,
+  checkPincode$
 }

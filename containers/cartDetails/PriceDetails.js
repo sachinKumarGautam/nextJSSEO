@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 
 import Grid from '@material-ui/core/Grid'
-import { withStyles } from '@material-ui/core/styles';
-import Typography from '@material-ui/core/Typography';
+import { withStyles } from '@material-ui/core/styles'
+import Typography from '@material-ui/core/Typography'
 
 const styles = theme => ({
   priceDetailsWrapper: {
@@ -29,7 +29,7 @@ const styles = theme => ({
     paddingTop: theme.spacing.unit * 1.25,
     textAlign: 'right'
   }
-});
+})
 
 class PriceDetails extends Component {
   render () {

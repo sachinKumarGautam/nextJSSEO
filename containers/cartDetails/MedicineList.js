@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 
 import Grid from '@material-ui/core/Grid'
-import { withStyles } from '@material-ui/core/styles';
-import Typography from '@material-ui/core/Typography';
-import IconButton from '@material-ui/core/IconButton';
+import { withStyles } from '@material-ui/core/styles'
+import Typography from '@material-ui/core/Typography'
+import IconButton from '@material-ui/core/IconButton'
 
 import ProductName from '../../components/ProductName'
 import ProductBrand from '../../components/ProductBrand'
@@ -30,7 +30,7 @@ const styles = theme => ({
   amountWrapper: {
     textAlign: 'center'
   }
-});
+})
 
 class MedicineList extends Component {
   render () {

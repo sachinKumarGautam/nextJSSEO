@@ -47,7 +47,11 @@ const theme = createMuiTheme({
     },
     MuiButton: {
       root: {
+        boxShadow: 'none',
         borderRadius: 32
+      },
+      raisedPrimary: {
+        boxShadow: 'none'
       },
       label: {
         color: '#fff',

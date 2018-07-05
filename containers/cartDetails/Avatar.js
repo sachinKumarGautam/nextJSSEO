@@ -12,7 +12,7 @@ const styles = theme => ({
   userName: {
     marginTop: theme.spacing.unit * 0.75
   }
-});
+})
 
 class Avatar extends Component {
   render () {

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 
-import { withStyles } from '@material-ui/core/styles';
-import Typography from '@material-ui/core/Typography';
+import { withStyles } from '@material-ui/core/styles'
+import Typography from '@material-ui/core/Typography'
 
 const styles = theme => ({
   couponWrapper: {
@@ -11,12 +11,12 @@ const styles = theme => ({
   borderStyle: {
     border: `1px dotted ${theme.palette.customGrey.grey250}`,
     padding: theme.spacing.unit * 1.25,
-    borderRadius: theme.spacing.unit * 0.25,
+    borderRadius: theme.spacing.unit * 0.25
   },
   couponText: {
     fontSize: theme.spacing.unit * 2.25
   }
-});
+})
 
 class Coupon extends Component {
   render () {

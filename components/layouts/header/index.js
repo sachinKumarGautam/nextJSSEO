@@ -1,26 +1,61 @@
 import React from 'react'
-import PropTypes from 'prop-types'
-import { withStyles } from '@material-ui/core/styles'
 
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
-import withRoot from '../../../src/withRoot'
+import PropTypes from 'prop-types'
+import { withStyles } from '@material-ui/core/styles'
 
 // import Head from './Head'
 import AppBar from '@material-ui/core/AppBar'
 import Button from '../../button'
 import Toolbar from '@material-ui/core/Toolbar'
-import AutosuggestSearch from '../../AutosuggestSearch'
+import SearchMedicine from '../../../containers/searchMedicine'
 import Subheader from './Subheader'
 import CartIcon from '../../CartIcon'
 import Login from '../../../containers/login'
 import getPageContext from '../../../src/getPageContext'
 import MenuWrapper from '../../../containers/menu'
+import { searchMedicineLoading, updateInProgressMedicineState } from '../../../containers/searchMedicine/searchMedicineAction'
+import { checkPincodeLoading } from '../../../containers/location/pincode/pincodeAction'
 
 import {
-  updateIsCartOpenLoginFlag
+  getAnonymousCartIdLoading,
+  updateIsCartOpenLoginFlag,
+  incrementCartItemLoading
 } from '../../../containers/cartDetails/cartActions'
+
+const styles = theme => ({
+  root: {
+    flexGrow: 1
+  },
+  appBar: {
+    backgroundColor: '#fff'
+  },
+  appBarInnerComp: {
+    flexGrow: 1,
+    margin: '0 auto',
+    maxWidth: theme.breakpoints.values.lg,
+    display: 'flex',
+    width: '100%',
+    flexDirection: 'column',
+    paddingLeft: '56px',
+    paddingRight: '36px'
+  },
+  toolbar: {
+    // margin: `0 ${theme.spacing.unit * 3}px`,
+    marginBottom: 0,
+    height: theme.spacing.unit * 7.5,
+    display: 'flex',
+    // width: '100%',
+    justifyContent: 'space-between'
+  },
+  button: {
+    color: 'white',
+    flexGrow: 0,
+    borderRadius: theme.spacing.unit * 4
+  }
+})
 
 class Header extends React.Component {
   constructor (props, context) {
@@ -30,6 +65,17 @@ class Header extends React.Component {
     this.closeLoginModal = this.closeLoginModal.bind(this)
     this.state = {
       openLoginDialog: false
+    }
+  }
+
+  componentDidMount() {
+    if(!this.props.loginState.isAuthenticated && !this.props.cartState.payload.uid) {
+      this.props.actions.getAnonymousCartIdLoading(
+        this.props.cartState,
+        'MWEB',
+        100,
+        ''
+      )
     }
   }
 
@@ -53,7 +99,15 @@ class Header extends React.Component {
   }
 
   render () {
-    const { classes, loginState, customerState } = this.props
+    const {
+      classes,
+      searchMedicineState,
+      actions,
+      loginState,
+      customerState,
+      checkPincodeState
+    } = this.props
+
     return (
       <div className={classes.root}>
         <AppBar elevation={1} className={classes.appBar} position='fixed'>
@@ -68,7 +122,15 @@ class Header extends React.Component {
               disableGutters
             >
               <img src='/static/images/logo-green.svg' />
-              <AutosuggestSearch />
+              <SearchMedicine
+                searchMedicineState={searchMedicineState}
+                cartState={this.props.cartState}
+                incrementCartItemLoading={this.props.actions.incrementCartItemLoading}
+                checkPincodeState={checkPincodeState}
+                checkPincodeLoading={this.props.actions.checkPincodeLoading}
+                searchMedicineLoading={actions.searchMedicineLoading}
+                updateInProgressMedicineState={actions.updateInProgressMedicineState}
+              />
               <CartIcon
                 cartState={this.props.cartState}
               />
@@ -108,47 +170,13 @@ class Header extends React.Component {
   }
 }
 
-const styles = theme => ({
-  root: {
-    flexGrow: 1
-  },
-  appBar: {
-    backgroundColor: '#fff'
-  },
-  appBarInnerComp: {
-    flexGrow: 1,
-    margin: '0 auto',
-    maxWidth: theme.breakpoints.values.lg,
-    display: 'flex',
-    width: '100%',
-    flexDirection: 'column',
-    paddingLeft: '56px',
-    paddingRight: '36px'
-  },
-  toolbar: {
-    // margin: `0 ${theme.spacing.unit * 3}px`,
-    marginBottom: 0,
-    height: theme.spacing.unit * 7.5,
-    display: 'flex',
-    // width: '100%',
-    justifyContent: 'space-between'
-  },
-  button: {
-    color: 'white',
-    flexGrow: 0,
-    borderRadius: theme.spacing.unit * 4
-  }
-})
-
-Header.propTypes = {
-  classes: PropTypes.object.isRequired
-}
-
 function mapStateToProps (state) {
   return {
     loginState: state.loginState,
     customerState: state.customerState,
-    cartState: state.cartState
+    cartState: state.cartState,
+    checkPincodeState: state.checkPincodeState,
+    searchMedicineState: state.searchMedicineState
   }
 }
 
@@ -156,14 +184,19 @@ function mapDispatchToProps (dispatch) {
   return {
     actions: bindActionCreators(
       {
-        updateIsCartOpenLoginFlag
+        updateIsCartOpenLoginFlag,
+        searchMedicineLoading,
+        checkPincodeLoading,
+        updateInProgressMedicineState,
+        getAnonymousCartIdLoading,
+        incrementCartItemLoading
       },
       dispatch
     )
   }
 }
 
-export default connect(
+export default withStyles(styles)(connect(
   mapStateToProps,
   mapDispatchToProps
-)(withRoot(withStyles(styles)(Header)))
+)(Header))

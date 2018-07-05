@@ -50,7 +50,7 @@ const styles = theme => {
 }
 
 class Main extends Component {
-  constructor(props) {
+  constructor (props) {
     super(props)
 
     this.state = {
@@ -58,7 +58,7 @@ class Main extends Component {
     }
   }
 
-  saveAddressSelected(addressIdSelected) {
+  saveAddressSelected (addressIdSelected) {
     this.setState({
       addressIdSelected: addressIdSelected
     })
