@@ -9,8 +9,9 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
 import { withStyles } from '@material-ui/core/styles'
-import withRoot from '../../src/withRoot'
 
+import withRoot from '../../src/withRoot'
+import {getPatientDetailsListLoading} from '../patientDetails/patientDetailsActions'
 
 /*
   bread crumbs
@@ -24,18 +25,12 @@ class ProductDetailsWrapper extends Component {
     this.state = {
       hover: {}
     }
-    
+  }
+
   componentDidMount () {
     const { pathname, query } = Router
     if (query.id) {
-      this.props.getProductDetailLoading(this.props.productDetailsState, query.id , query.location)
-    }
-  }
-  componentDidMount () {
-    const { pathname, query } = Router
-    console.log(Router, pathname, query)
-    if (query.sku) {
-      this.props.getProductDetailLoading(this.props.productDetailsState, query.sku)
+      this.props.getProductDetailLoading(this.props.productDetailsState, query.id, query.location)
     }
   }
 
@@ -43,33 +38,37 @@ class ProductDetailsWrapper extends Component {
     this.setState((prevState) => ({
       hover: {
         [item]: !prevState.hover[item]
-        }
-      })
+      }
+    })
     )
   }
+
   render () {
     const { pathname, query } = Router
     console.log(query)
     return (
-       <div>
-        { query.id 
-          ?
-          <React.Fragment>
+      <div>
+        { 
+          query.id
+          ? <div>
             <BreadCrumbs />
-              <section>
-                <ProductDetails
-                  toggleHover={this.toggleHover.bind(this)}
-                  hover={this.state.hover}
-                  checkPincodeState={this.props.checkPincodeState}
-                  checkPincodeLoading={this.props.checkPincodeLoading}
-                />
-              </section>
-              <section>
-                <ProductDetailsContent
-                  hover={this.state.hover}
-                />
-              </section>
-          </React.Fragment>
+            <section>
+              <ProductDetails
+                toggleHover={this.toggleHover.bind(this)}
+                hover={this.state.hover}
+                checkPincodeState={this.props.checkPincodeState}
+                productDetailsState={this.props.productDetailsState}
+                checkPincodeLoading={this.props.checkPincodeLoading}
+              />
+            </section>
+            <section>
+              <ProductDetailsContent
+                hover={this.state.hover}
+                productDetailsState={this.props.productDetailsState}
+                
+              />
+            </section>
+          </div>
           : null
         }
       </div>
@@ -79,8 +78,8 @@ class ProductDetailsWrapper extends Component {
 
 function mapStateToProps (state) {
   return {
-    patientDetailsState: state.patientDetailsState,
-    customerState: state.customerState
+    checkPincodeState: state.checkPincodeState,
+    productDetailsState: state.productDetailsState
   }
 }
 
@@ -88,8 +87,6 @@ function mapDispatchToProps (dispatch) {
   return {
     actions: bindActionCreators(
       {
-        getPatientDetailsListLoading,
-        savePatientSelected
       },
       dispatch
     )
@@ -99,4 +96,4 @@ function mapDispatchToProps (dispatch) {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(withStyles(styles)(ProductDetailsWrapper))
+)(ProductDetailsWrapper)

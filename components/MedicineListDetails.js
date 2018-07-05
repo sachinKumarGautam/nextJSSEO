@@ -87,61 +87,61 @@ class MedicineListDetails extends React.Component {
         // prefetch
         href={`/product-details?id=${props.itemDetails.slug}`}
         as={`/product-details/${props.itemDetails.slug}`}
-    >
-      <div className={props.classes.medicineListContentWrapper}>
-        <div>
-          <ProductName variant={'body1'} />
-          <ProductBrand
-            variant={'caption'}
-            withoutImage
-            customStyle={props.classes.customBrand}
-            brand={props.itemDetails.brand_name || props.itemDetails.name}
-          />
-          <ProductPackSize
-            variant={'caption'}
-            withoutImage
-            customStyle={props.classes.customPackSize}
-            packType={props.itemDetails.pack_type}
-            packSize={props.itemDetails.pack_size.name}
-          />
+      >
+        <div className={props.classes.medicineListContentWrapper}>
+          <div>
+            <ProductName variant={'body1'} />
+            <ProductBrand
+              variant={'caption'}
+              withoutImage
+              customStyle={props.classes.customBrand}
+              brand={props.itemDetails.brand_name || props.itemDetails.name}
+            />
+            <ProductPackSize
+              variant={'caption'}
+              withoutImage
+              customStyle={props.classes.customPackSize}
+              packType={props.itemDetails.pack_type}
+              packSize={props.itemDetails.pack_size.name}
+            />
+          </div>
+          <div>
+            <EstimatedPriceLabel
+              variant={'caption'}
+              customStyle={props.classes.customEstimatedLabel}
+              estimatePriceText={'*Est. Price '}
+            />
+            <ProductPrice
+              variant={'body1'}
+              customStyle={props.classes.customPrice}
+              sellingPrice={props.itemDetails.selling_price}
+            />
+            <StrokePrice
+              variant={'caption'}
+              customStyle={props.classes.customStrokePrice}
+              mrp={props.itemDetails.mrp}
+            />
+            <AddToCartWrapper
+              variant='outlined'
+              classes={{
+                root: props.classes.buttonRoot,
+                label: props.classes.buttonLabel
+              }}
+              style={{float: 'right'}}
+              onClick={this.handleClickOpen}
+              label={'Add To Cart'}
+              open={this.state.pincodeDialogOpen}
+              handleOpenPincodeDialog={this.handleOpenPincodeDialog}
+              handleClose={this.handleClosePincodeDialog}
+              onClick={this.addToCart.bind(this)}
+              checkPincodeState={props.checkPincodeState}
+              checkPincodeLoading={props.checkPincodeLoading}
+            />
+          </div>
         </div>
-        <div>
-          <EstimatedPriceLabel
-            variant={'caption'}
-            customStyle={props.classes.customEstimatedLabel}
-            estimatePriceText={'*Est. Price '}
-          />
-          <ProductPrice
-            variant={'body1'}
-            customStyle={props.classes.customPrice}
-            sellingPrice={props.itemDetails.selling_price}
-          />
-          <StrokePrice
-            variant={'caption'}
-            customStyle={props.classes.customStrokePrice}
-            mrp={props.itemDetails.mrp}
-          />
-          <AddToCartWrapper
-            variant='outlined'
-            classes={{
-              root: props.classes.buttonRoot,
-              label: props.classes.buttonLabel
-            }}
-            style={{float: 'right'}}
-            onClick={this.handleClickOpen}
-            label={'Add To Cart'}
-            open={this.state.pincodeDialogOpen}
-            handleOpenPincodeDialog={this.handleOpenPincodeDialog}
-            handleClose={this.handleClosePincodeDialog}
-            onClick={this.addToCart.bind(this)}
-            checkPincodeState={props.checkPincodeState}
-            checkPincodeLoading={props.checkPincodeLoading}
-          />
-        </div>
-      </div>
-    </Link>
-  )
-}
+      </Link>
+    )
+  }
 }
 
 export default withStyles(styles)(MedicineListDetails)

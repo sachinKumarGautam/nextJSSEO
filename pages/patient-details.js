@@ -12,7 +12,6 @@ import PatientDetailsWrapper from '../containers/patientDetails'
 
 import Paper from '@material-ui/core/Paper'
 
-
 import {
   getPatientDetailsListLoading,
   savePatientSelected

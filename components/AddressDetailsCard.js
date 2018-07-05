@@ -42,7 +42,7 @@ const styles = theme => {
     addressStyle: {
       color: theme.palette.customGrey.grey500,
       paddingBottom: theme.spacing.unit,
-      marginLeft: theme.spacing.unit * 5,
+      marginLeft: theme.spacing.unit * 5
     },
     addressDescriptionStyle: {
       paddingLeft: theme.spacing.unit * 2.5
@@ -56,7 +56,7 @@ const styles = theme => {
       ...theme.typography.body2,
       color: theme.palette.customGreen.green300,
       fontWeight: theme.typography.fontWeightBold
-    },
+    }
   }
 }
 
@@ -64,35 +64,35 @@ const AddressDetailsCard = props => (
   <div
     className={
       (props.addressIdSelected === props.deliveryDetail.id)
-      ? props.classes.addressWrapperSelectedStyle
-      : props.classes.addressWrapperStyle
+        ? props.classes.addressWrapperSelectedStyle
+        : props.classes.addressWrapperStyle
     }
     onClick={props.saveAddressSelected.bind(this, props.deliveryDetail.id)}
   >
     <div className={props.classes.addressTypeWrapper}>
-      <img src="/static/images/home.svg" className={props.classes.addressTypeImage}/>
+      <img src='/static/images/home.svg' className={props.classes.addressTypeImage} />
       <Typography
-        variant="caption"
+        variant='caption'
         className={props.classes.addressTypeStyle}
       >
         {props.deliveryDetail.type}
       </Typography>
     </div>
     <Typography
-      variant="caption"
+      variant='caption'
       className={props.classes.addressStyle}
     >
       {props.deliveryDetail.street1}
     </Typography>
     <Typography
-      variant="caption"
+      variant='caption'
       className={props.classes.addressStyle}
     >
       {props.deliveryDetail.street2}
     </Typography>
     <Button
-      variant="contained"
-      size="small"
+      variant='contained'
+      size='small'
       className={props.classes.button}
       classes={{
         label: props.classes.buttonLabel

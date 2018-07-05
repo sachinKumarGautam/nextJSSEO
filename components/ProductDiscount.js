@@ -11,7 +11,7 @@ const styles = theme => ({
 
 const ProductDiscount = (props) => (
   <Typography variant='body1' className={props.classes.discount}>
-    5% discount on MRP
+    {props.discount}% discount on MRP
   </Typography>
 )
 

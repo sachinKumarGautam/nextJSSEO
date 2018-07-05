@@ -29,12 +29,14 @@ class ProductDetails extends Component {
             <ProductInfo
               toggleHover={this.props.toggleHover}
               hover={this.props.hover}
+              productDetailsState={this.props.productDetailsState}
             />
           </Grid>
           <Grid item xs={4}>
             <ProductPriceDetails
               checkPincodeState={this.props.checkPincodeState}
               checkPincodeLoading={this.props.checkPincodeLoading}
+              productDetailsState={this.props.productDetailsState}
             />
           </Grid>
         </Grid>

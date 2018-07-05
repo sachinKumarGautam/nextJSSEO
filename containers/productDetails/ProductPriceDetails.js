@@ -70,14 +70,22 @@ class ProductPriceDetails extends Component {
         <Card elevation={1} className={classes.card}>
           <CardContent className={classes.cardContent}>
             <div className={classes.priceWrapper}>
-              <ProductPrice variant={'headline'} />
+              <ProductPrice
+                variant={'headline'}
+                sellingPrice={this.props.productDetailsState.payload.selling_price}
+                />
               <EstimatedPriceLabel
                 estimatePriceText={'*Estimated Price'}
               />
             </div>
             <div className={classes.priceWrapper}>
-              <StrokePrice variant={'body1'} />
-              <ProductDiscount />
+              <StrokePrice
+               variant={'body1'}
+               mrp={this.props.productDetailsState.payload.selling_price}
+                />
+              <ProductDiscount
+                discount={this.props.productDetailsState.payload.discount}
+               />
             </div>
             {
               this.props.checkPincodeState.payload.city &&

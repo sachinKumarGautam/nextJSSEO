@@ -147,7 +147,7 @@ function mapDispatchToProps (dispatch) {
     actions: bindActionCreators(
       {
         searchMedicineLoading,
-        checkPincodeLoading,        
+        checkPincodeLoading,
         updateInProgressMedicineState
       },
       dispatch

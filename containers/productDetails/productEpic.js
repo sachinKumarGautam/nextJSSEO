@@ -1,5 +1,5 @@
 import { of } from 'rxjs/observable/of'
-import { mergeMap, catchError, flatMap } from 'rxjs/operators'
+import { mergeMap, catchError, map, flatMap } from 'rxjs/operators'
 import { ofType } from 'redux-observable'
 
 import {GET_PRODUCT_DETAILS_LOADING} from './productDetailsActionTypes'
@@ -20,9 +20,10 @@ export function getProductDetails (action$, store) {
 
       return http(getProductDetails$(data.productName)).pipe(
         flatMap(result => {
-          return getProductDetailSuccess(productDetailsState, result, data.values)
+          return of(getProductDetailSuccess(productDetailsState, result, data.values))
         }),
         catchError(error => {
+          console.log(error)
           return of(getProductDetailFailure(productDetailsState, error))
         })
       )
