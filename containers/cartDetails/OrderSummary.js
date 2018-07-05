@@ -21,7 +21,8 @@ const styles = theme => ({
     flexShrink: 0,
     fontSize: theme.spacing.unit * 2.75,
     fontWeight: theme.typography.fontWeightBold,
-    color: theme.palette.customGrey.grey500
+    color: theme.palette.customGrey.grey500,
+    marginLeft: theme.spacing.unit * 1.25
   },
   secondaryHeading: {
     fontSize: theme.typography.pxToRem(15),
@@ -115,7 +116,7 @@ class OrderSummary extends React.Component {
           className={classes.expansionPanel}
         >
           <ExpansionPanelSummary expandIcon={<div />}>
-            <Typography className={classes.heading}>Customer Details</Typography>
+            <Typography className={classes.heading}>Patient Details</Typography>
           </ExpansionPanelSummary>
           <ExpansionPanelDetails>
             <Typography>

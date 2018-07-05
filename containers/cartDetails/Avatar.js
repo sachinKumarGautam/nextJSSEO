@@ -8,6 +8,9 @@ const styles = theme => ({
   avatarWrapper: {
     borderBottom: `1px solid ${theme.palette.customGrey.grey800}`,
     padding: theme.spacing.unit * 2.5
+  },
+  userName: {
+    marginTop: theme.spacing.unit * 0.75
   }
 });
 
@@ -15,10 +18,16 @@ class Avatar extends Component {
   render () {
     return (
       <div className={this.props.classes.avatarWrapper}>
-        <img src='/static/images/profileCart.svg' />
-        <Typography>
-          Jyoti Arora
-        </Typography>
+        <Grid container spacing={24}>
+          <Grid item xs={2}>
+            <img src='/static/images/profileCart.svg' />
+          </Grid>
+          <Grid item xs={4}>
+            <Typography className={this.props.classes.userName}>
+              Jyoti Arora
+            </Typography>
+          </Grid>
+        </Grid>
       </div>
     )
   }
