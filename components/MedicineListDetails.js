@@ -80,13 +80,13 @@ class MedicineListDetails extends React.Component {
       props
     } = this
 
-    const city = this.props.checkPincodeSatte.payload.city
+    const city = this.props.checkPincodeState.payload.city
 
     return (
       <Link
-      prefetch
-      href={`/product-details?id=${props.itemDetails.slug}&location=${city}`}
-      as={`/product-details/${props.itemDetails.slug}`}
+        // prefetch
+        href={`/product-details?id=${props.itemDetails.slug}`}
+        as={`/product-details/${props.itemDetails.slug}`}
     >
       <div className={props.classes.medicineListContentWrapper}>
         <div>

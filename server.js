@@ -15,9 +15,9 @@ app.prepare()
       app.render(req, res, actualPage, queryParams)
     })
 
-    server.get('/product-details/:id/:location', (req, res) => {
+    server.get('/product-details/:id', (req, res) => {
       const actualPage = '/product-details'
-      const queryParams = { id: req.params.id, location: req.params.location }
+      const queryParams = { id: req.params.id }
       app.render(req, res, actualPage, queryParams)
     })
 

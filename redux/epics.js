@@ -106,18 +106,14 @@ export const rootEpic = combineEpics(
   fetchUserInfo,
   getProductDetails,
   getRelatedMedicines,
-<<<<<<< HEAD
   carePointsList,
   searchMedicine,
-  fetchUserInfo
+  fetchUserInfo,
   // getProductDetailSummary
-=======
   getDeliveryDetailsList,
   getPatientDetailsList,
   getOrderListDetails,
   getPrescriptionList,
   getAnonymousCartIdEpic,
-  checkPincode,
-  carePointsList
->>>>>>> b23190f42af869ee236b54c8c3ef78d8586fc8a5
+  checkPincode
 )

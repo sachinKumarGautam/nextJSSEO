@@ -17,12 +17,11 @@ class ProductDetailsWrapper extends Component {
     this.state = {
       hover: {}
     }
-  }
+    
   componentDidMount () {
     const { pathname, query } = Router
-    console.log(Router, pathname, query)
-    if (query.sku) {
-      this.props.getProductDetailLoading(this.props.productDetailsState, query.sku)
+    if (query.id) {
+      this.props.getProductDetailLoading(this.props.productDetailsState, query.id , query.location)
     }
   }
 
@@ -30,30 +29,59 @@ class ProductDetailsWrapper extends Component {
     this.setState((prevState) => ({
       hover: {
         [item]: !prevState.hover[item]
-      }
-    })
+        }
+      })
     )
   }
   render () {
+    const { pathname, query } = Router
+    console.log(query)
     return (
-      <div>
-        <BreadCrumbs />
-        <section>
-          <ProductDetails
-            toggleHover={this.toggleHover.bind(this)}
-            hover={this.state.hover}
-            checkPincodeState={this.props.checkPincodeState}
-            checkPincodeLoading={this.props.checkPincodeLoading}
-          />
-        </section>
-        <section>
-          <ProductDetailsContent
-            hover={this.state.hover}
-          />
-        </section>
+       <div>
+        { query.id 
+          ?
+          <React.Fragment>
+            <BreadCrumbs />
+              <section>
+                <ProductDetails
+                  toggleHover={this.toggleHover.bind(this)}
+                  hover={this.state.hover}
+                  checkPincodeState={this.props.checkPincodeState}
+                  checkPincodeLoading={this.props.checkPincodeLoading}
+                />
+              </section>
+              <section>
+                <ProductDetailsContent
+                  hover={this.state.hover}
+                />
+              </section>
+          </React.Fragment>
+          : null
+        }
       </div>
     )
   }
 }
 
-export default ProductDetailsWrapper
+function mapStateToProps (state) {
+  return {
+    patientDetailsState: state.patientDetailsState
+  }
+}
+
+function mapDispatchToProps (dispatch) {
+  return {
+    actions: bindActionCreators(
+      {
+        getPatientDetailsListLoading,
+        savePatientSelected
+      },
+      dispatch
+    )
+  }
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withRoot(withStyles(styles)(ProductDetailsWrapper)))

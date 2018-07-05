@@ -81,19 +81,12 @@ const fetchUserInfo$ = (mobileNumber) => (
   })
 )
 
-const getProductDetails$ = (sku) => (
+const getProductDetails$ = (productName, location) => (
   makeAjaxRequest({
     method: 'GET',
-    url: fetchUrl('catalog', `medicine/sku/${sku}`, 'GET_LIST')
+    url: fetchUrl('catalog', `medicine/slug/3a-fer-cap-210047?location=${101}`, 'GET_LIST')
   })
 
-)
-
-const getProductDetailsSummary$ = (sku) => (
-  makeAjaxRequest({
-    method: 'GET',
-    url: fetchUrl('catalog', `medicine/sku/${sku}/summary`, 'GET_LIST')
-  })
 )
 
 const registerCustomer$ = (data) => (
