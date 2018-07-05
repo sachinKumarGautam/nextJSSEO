@@ -23,6 +23,7 @@ class OrderListWrapper extends Component {
           <OrderList
             orderListState={this.props.orderListState}
             getOrderListDetailsLoading={this.props.actions.getOrderListDetailsLoading}
+            customerState={this.props.customerState}
           />
         </section>
       </div>
@@ -43,7 +44,8 @@ function mapDispatchToProps (dispatch) {
 
 function mapStateToProps (state) {
   return {
-    orderListState: state.orderListState
+    orderListState: state.orderListState,
+    customerState: state.customerState
   }
 }
 

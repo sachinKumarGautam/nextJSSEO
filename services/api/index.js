@@ -120,6 +120,13 @@ const getCartDetails$ = cartUid => (
   makeAjaxRequest({
     method: 'GET',
     url: fetchUrl('cart', cartUid, 'GET_LIST')
+    url: fetchUrl('', 'wallet/' + customerId + '/transaction',
+      'QUERY_STRING',
+      {query_string:
+        cashType === 'all'
+          ? `size=20&page=0` : `cash-type=${cashType}&size=100&page=0`
+      }
+    )
   })
 )
 

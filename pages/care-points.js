@@ -38,7 +38,7 @@ class CarePoints extends React.Component {
     // Represents to get care point with customer Id.
     this.props.actions.getCarePointDetailsLoading(
       this.props.carePointState,
-      100036079,
+      this.props.customerState.payload.id,
       'all'
     )
   }
@@ -60,7 +60,8 @@ class CarePoints extends React.Component {
 
 function mapStateToProps (state) {
   return {
-    carePointState: state.carePointState
+    carePointState: state.carePointState,
+    customerState: state.customerState
   }
 }
 

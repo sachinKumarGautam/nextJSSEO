@@ -47,7 +47,7 @@ const RelatedArticles = (props) => (
       className={props.classes.title}
     >
       <img src={'/static/images/related-articles.svg'} className={props.classes.imageTitle} />
-      Related Articles
+      Articles
     </Typography>
     <aside>
       <ul className={props.classes.articleListWrapper}>

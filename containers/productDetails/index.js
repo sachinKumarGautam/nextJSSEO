@@ -5,6 +5,13 @@ import ProductDetails from './ProductDetails'
 import ProductDetailsContent from './ProductDetailsContent'
 import Router from 'next/router'
 
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+
+import { withStyles } from '@material-ui/core/styles'
+import withRoot from '../../src/withRoot'
+
+
 /*
   bread crumbs
   Product Details
@@ -22,6 +29,13 @@ class ProductDetailsWrapper extends Component {
     const { pathname, query } = Router
     if (query.id) {
       this.props.getProductDetailLoading(this.props.productDetailsState, query.id , query.location)
+    }
+  }
+  componentDidMount () {
+    const { pathname, query } = Router
+    console.log(Router, pathname, query)
+    if (query.sku) {
+      this.props.getProductDetailLoading(this.props.productDetailsState, query.sku)
     }
   }
 
@@ -65,7 +79,8 @@ class ProductDetailsWrapper extends Component {
 
 function mapStateToProps (state) {
   return {
-    patientDetailsState: state.patientDetailsState
+    patientDetailsState: state.patientDetailsState,
+    customerState: state.customerState
   }
 }
 
@@ -84,4 +99,4 @@ function mapDispatchToProps (dispatch) {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(withRoot(withStyles(styles)(ProductDetailsWrapper)))
+)(withStyles(styles)(ProductDetailsWrapper))

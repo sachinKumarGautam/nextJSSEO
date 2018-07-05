@@ -7,7 +7,8 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
 import { withStyles } from '@material-ui/core/styles'
-import withRoot from '../src/withRoot'
+
+import { withRoot } from '../src/withRoot'
 
 import Paper from '@material-ui/core/Paper'
 
