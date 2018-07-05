@@ -62,6 +62,12 @@ class PatientDetailsList extends Component {
       this.props.patientDetailsState,
       patientIdSelected
     )
+
+    this.props.savePatientToCartLoading(
+      this.props.patientDetailsState,
+      patientIdSelected,
+      '680a75c5-7965-4f9d-ab2f-14cb0ce16c2c'
+    )
   }
 
   render () {

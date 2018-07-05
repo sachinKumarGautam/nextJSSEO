@@ -67,7 +67,7 @@ const AddressDetailsCard = props => (
       ? props.classes.addressWrapperSelectedStyle
       : props.classes.addressWrapperStyle
     }
-    onClick={props.saveAddressSelected.bind(this, props.deliveryDetail.id)}
+    //onClick={props.saveAddressSelected.bind(this, props.deliveryDetail.id)}
   >
     <div className={props.classes.addressTypeWrapper}>
       <img src="/static/images/home.svg" className={props.classes.addressTypeImage}/>

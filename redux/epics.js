@@ -37,6 +37,23 @@ import {
   carePointsList
 } from '../containers/carePoint/carePointEpics'
 
+import {
+  getAnonymousCartIdEpic,
+  getCartDetailsEpic,
+  // decrementCartItemLoadingEpic,
+  decrementCartItemEpic,
+  // incrementCartItemLoadingEpic,
+  incrementCartItemEpic,
+  // deleteCartItemLoadingEpic,
+  deleteCartItemEpic,
+  savePatientToCartEpic,
+  cartTransferEpic,
+  saveDeliveryAddressToCartEpic,
+  uploadPrescriptionEpic,
+  deletePrescriptionEpic,
+  submitOrderEpic
+} from '../containers/cartDetails/cartEpics'
+
 // import * as actions from './actions'
 // import * as types from './actionTypes'
 
@@ -88,9 +105,24 @@ export const rootEpic = combineEpics(
   getRelatedMedicines,
   fetchUserInfo,
   getRelatedMedicines,
+  carePointsList,
+  getAnonymousCartIdEpic,
+  getCartDetailsEpic,
+  // decrementCartItemLoadingEpic,
+  decrementCartItemEpic,
+  // incrementCartItemLoadingEpic,
+  incrementCartItemEpic,
+  // deleteCartItemLoadingEpic,
+  deleteCartItemEpic,
   getDeliveryDetailsList,
   getPatientDetailsList,
+  savePatientToCartEpic,
+  saveDeliveryAddressToCartEpic,
   getOrderListDetails,
   getPrescriptionList,
-  carePointsList
+  carePointsList,
+  cartTransferEpic,
+  uploadPrescriptionEpic,
+  deletePrescriptionEpic,
+  submitOrderEpic
 )

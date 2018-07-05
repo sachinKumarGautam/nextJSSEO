@@ -18,6 +18,10 @@ import {
   savePatientSelected
 } from '../containers/patientDetails/patientDetailsActions'
 
+import {
+  savePatientToCartLoading
+} from '../containers/cartDetails/cartActions'
+
 const styles = theme => ({
   root: {
     paddingTop: 16,
@@ -52,6 +56,7 @@ class PatientDetails extends React.Component {
             <PatientDetailsWrapper
               patientDetailsState={this.props.patientDetailsState}
               savePatientSelected={this.props.actions.savePatientSelected}
+              savePatientToCartLoading={this.props.actions.savePatientToCartLoading}
             />
           </Paper>
         </div>
@@ -73,7 +78,8 @@ function mapDispatchToProps (dispatch) {
     actions: bindActionCreators(
       {
         getPatientDetailsListLoading,
-        savePatientSelected
+        savePatientSelected,
+        savePatientToCartLoading
       },
       dispatch
     )

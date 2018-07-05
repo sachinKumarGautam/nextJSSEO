@@ -89,9 +89,94 @@ const getCarePointsList$ = (customerId, cashType) => (
   })
 )
 
+const getAnonymousCartId$ = (source, facilityCode, sourceType = '') => (
+  makeAjaxRequest({
+    method: 'POST',
+    url: fetchUrl('cart', '', 'CREATE'),
+    body: {
+      source: source,
+      facility_code: facilityCode,
+      source_type: sourceType
+    }
+  })
+)
+
+const getCartDetails$ = cartUid => (
+  makeAjaxRequest({
+    method: 'GET',
+    url: fetchUrl('cart', cartUid, 'GET_LIST')
+  })
+)
+
+const putCartItem$ = (cartUid, cartItem) => (
+  makeAjaxRequest({
+    method: 'PUT',
+    url: fetchUrl('cart', cartUid + '/item', 'GET_LIST'),
+    body: cartItem
+  })
+)
+
+const deleteCartItem$ = (cartUid, cartItemSku) => (
+  makeAjaxRequest({
+    method: 'DELETE',
+    url: fetchUrl('cart', cartUid + '/item/sku/' + cartItemSku, 'GET_LIST')
+  })
+)
+
+const savePatientToCart$ = (cartId, patientId) => (
+  makeAjaxRequest({
+    method: 'PATCH',
+    url: fetchUrl('cart', cartId + '/assign/patient', 'GET_LIST'),
+    body: {
+      patient_id: patientId
+    }
+  })
+)
+
+const saveDeliveryAddressToCart$ = (cartId, shippingAddressId) => (
+  makeAjaxRequest({
+    method: 'PATCH',
+    body: shippingAddressId,
+    url: fetchUrl('cart', cartId + '/shipping-address', 'GET_LIST')
+  })
+)
+
+const cartTransfer$ = cartUid => (
+  makeAjaxRequest({
+    method: 'PATCH',
+    url: fetchUrl('cart', cartUid + '/transfer', 'CREATE')
+  })
+)
+
+const uploadPrescriptionEpic$ = (cartId, formData) => (
+  makeAjaxRequest({
+    method: 'METHOD_UPLOAD_FILE',
+    url: fetchUrl('cart', cartId + '/prescription', 'CREATE'),
+    body: formData
+  })
+)
+
+const deletePrescriptionEpic$ = (cartId, prescriptionId) => (
+  makeAjaxRequest({
+    method: 'DELETE',
+    url: fetchUrl('cart', cartId + '/prescription/' + prescriptionId, 'GET_LIST')
+  })
+)
+
+const submitOrder$ = (cartState, body) => (
+  makeAjaxRequest({
+    method: 'POST',
+    url: fetchUrl('order', 'cart', 'CREATE'),
+    body: body
+  })
+)
+
 export {
   getMoleculeSummary$,
   getMedicineList$,
+  getCarePointsList$,
+  getAnonymousCartId$,
+  getCartDetails$,
   getDeliveryDetailsList$,
   getPatientDetailsList$,
   getOrderList$,
@@ -100,5 +185,12 @@ export {
   sendOtp$,
   fetchUserInfo$,
   registerCustomer$,
-  getCarePointsList$
+  putCartItem$,
+  deleteCartItem$,
+  savePatientToCart$,
+  saveDeliveryAddressToCart$,
+  cartTransfer$,
+  uploadPrescriptionEpic$,
+  deletePrescriptionEpic$,
+  submitOrder$
 }
