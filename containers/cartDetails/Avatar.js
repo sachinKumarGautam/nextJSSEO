@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 
+import Grid from '@material-ui/core/Grid'
 import { withStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 
@@ -14,6 +15,7 @@ class Avatar extends Component {
   render () {
     return (
       <div className={this.props.classes.avatarWrapper}>
+        <img src='/static/images/profileCart.svg' />
         <Typography>
           Jyoti Arora
         </Typography>

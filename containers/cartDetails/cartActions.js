@@ -60,24 +60,23 @@ export function getCartDetailsSuccess (
   cartItems,
   cartPrescriptions
 ) {
-  const payload = result.response.payload
   return {
     type: cartActionTypes.GET_CART_DETAILS_SUCCESS,
     cartState: cartState,
-    cart_items: cartItems,
     isLoading: false,
-    id: payload.id,
-    uid: payload.uid,
-    customer_id: payload.customer_id,
-    customer_first_name: payload.customer_first_name,
-    customer_last_name: payload.customer_last_name,
-    facility_code: payload.facility_code,
-    status: payload.status,
-    source: payload.source,
-    cart_prescriptions: cartPrescriptions,
-    source_type: payload.source_type,
-    delivery_option: payload.delivery_option,
-    service_type: payload.service_type
+    id: result.id,
+    uid: result.uid,
+    customer_id: result.customer_id,
+    customer_first_name: result.customer_first_name,
+    customer_last_name: result.customer_last_name,
+    facility_code: result.facility_code,
+    status: result.status,
+    source: result.source,
+    cart_items: result.cart_items,
+    cart_prescriptions: result.cart_prescriptions,
+    source_type: result.source_type,
+    delivery_option: result.delivery_option,
+    service_type: result.service_type
   }
 }
 

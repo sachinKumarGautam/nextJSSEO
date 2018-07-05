@@ -14,7 +14,9 @@ import CartDetailsWrapper from '../containers/cartDetails'
 
 import {
   getCartDetailsLoading,
-  incrementCartItemLoading
+  incrementCartItemLoading,
+  decrementCartItemLoading,
+  deleteCartItemLoading
 } from '../containers/cartDetails/cartActions'
 
 const styles = theme => ({
@@ -35,36 +37,23 @@ const styles = theme => ({
 
 class CartDetails extends React.Component {
   componentDidMount() {
-    const medicineSelected = ''
-
     this.props.actions.getCartDetailsLoading(
       this.props.cartState,
-      this.props.cartState.payload.uid
+      '680a75c5-7965-4f9d-ab2f-14cb0ce16c2c'
     )
-
-    // this.props.actions.incrementCartItemLoading(
-    //   this.props.cartState,
-    //   medicineSelected
-    // )
   }
-
-  // componentWillReceiveProps(nextProps) {
-  //   if (nextProps.cartState.payload.uid !== this.props.cartState.payload.uid) {
-  //     this.props.actions.getCartDetailsLoading(
-  //       nextProps.cartState,
-  //       nextprops.cartState.payload.uid
-  //     )
-  //   }
-  // }
 
   render() {
     return (
       <div>
         <Header />
-        <div>
-          <Paper className={this.props.classes.root} elevation={1}>
-            <CartDetailsWrapper />
-          </Paper>
+        <div className={this.props.classes.root}>
+          <CartDetailsWrapper
+            cartState={this.props.cartState}
+            incrementCartItemLoading={this.props.actions.incrementCartItemLoading}
+            decrementCartItemLoading={this.props.actions.decrementCartItemLoading}
+            deleteCartItemLoading={this.props.actions.deleteCartItemLoading}
+          />
         </div>
         <Footer />
       </div>
@@ -83,7 +72,9 @@ function mapDispatchToProps (dispatch) {
     actions: bindActionCreators(
       {
         getCartDetailsLoading,
-        incrementCartItemLoading
+        incrementCartItemLoading,
+        decrementCartItemLoading,
+        deleteCartItemLoading
       },
       dispatch
     )

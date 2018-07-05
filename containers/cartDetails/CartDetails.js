@@ -25,6 +25,9 @@ const styles = theme => ({
   cartWrapper: {
     boxshadow: '0 1px 3px 0 rgba(63, 63, 68, 0.15), 0 0 0 1px rgba(63, 63, 68, 0.05)'
   },
+  cartDetailsWrapper: {
+    backgroundColor: theme.palette.common.white
+  },
   myCartWrapper: {
     height: theme.spacing.unit * 5.565,
     backgroundColor: theme.palette.customGreen.green300
@@ -38,9 +41,21 @@ const styles = theme => ({
 });
 
 class CartDetails extends Component {
+  decrementCartItem(cartItem) {
+    if(cartItem.quantity === 1) {
+      this.props.deleteCartItemLoading(this.props.cartState, cartItem)
+    } else {
+      this.props.decrementCartItemLoading(this.props.cartState, cartItem)
+    }
+  }
+
+  incrementCartItem(cartItem) {
+    this.props.incrementCartItemLoading(this.props.cartState, cartItem)
+  }
+
   render () {
     return (
-      <div>
+      <div className={this.props.classes.cartDetailsWrapper}>
         <div className={this.props.classes.myCartWrapper}>
           <Typography className={this.props.classes.myCartText}>
             MY CART
@@ -48,7 +63,11 @@ class CartDetails extends Component {
         </div>
         <div className={this.props.classes.cartWrapper}>
           <Avatar />
-          <MedicineList />
+          <MedicineList
+            cartState={this.props.cartState}
+            decrementCartItem={this.decrementCartItem.bind(this)}
+            incrementCartItem={this.incrementCartItem.bind(this)}
+          />
           <Coupon />
           <CarePoints />
           <CarePointsPlus />

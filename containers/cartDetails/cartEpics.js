@@ -131,10 +131,10 @@ export function decrementCartItemLoadingEpic (action$, store) {
   return action$.pipe(
     ofType(DECREMENT_CART_ITEM_LOADING),
     mergeMap(data => {
-      return cartApiLoadingHandling(
+      return of(cartApiLoadingHandling(
           data.cartState,
           data.medicineSelected
-        )
+        ))
     })
   )
 }
@@ -143,7 +143,7 @@ export function decrementCartItemEpic (action$, store) {
   return action$.pipe(
     ofType(DECREMENT_CART_ITEM_LOADING),
     mergeMap(data => {
-      let cartUid = data.cartState.cartDetails.payload.uid
+      let cartUid = data.cartState.payload.uid
 
       let medicineDecremented = {
         name: data.medicineSelected.name,
@@ -153,8 +153,7 @@ export function decrementCartItemEpic (action$, store) {
 
       return http(putCartItem$(cartUid, medicineDecremented)).pipe(
         map(result => {
-          debugger
-          return putCartItemSuccess(data.cartState, result.body.payload)
+          return putCartItemSuccess(data.cartState, result.body.payload.cart_items)
         }),
         catchError(error => {
           return cartApiErrorHandling(
@@ -172,10 +171,10 @@ export function incrementCartItemLoadingEpic (action$, store) {
   return action$.pipe(
     ofType(INCREMENT_CART_ITEM_LOADING),
     mergeMap(data => {
-      return cartApiLoadingHandling(
+      return of(cartApiLoadingHandling(
           data.cartState,
           data.medicineSelected
-        )
+        ))
     })
   )
 }
@@ -184,18 +183,16 @@ export function incrementCartItemEpic (action$, store) {
   return action$.pipe(
     ofType(INCREMENT_CART_ITEM_LOADING),
     mergeMap(data => {
-      let cartUid = data.cartState.cartDetails.payload.uid
-
-      let medicineDecremented = {
+      const cartUid = data.cartState.payload.uid
+      const medicineIncremented = {
         name: data.medicineSelected.name,
         sku: data.medicineSelected.sku,
         quantity: data.medicineSelected.quantity + 1
       }
 
-      return http(putCartItem$(cartUid, medicineDecremented)).pipe(
+      return http(putCartItem$(cartUid, medicineIncremented)).pipe(
         map(result => {
-          debugger
-          return putCartItemSuccess(data.cartState, result.body.payload)
+          return putCartItemSuccess(data.cartState, result.body.payload.cart_items)
         }),
         catchError(error => {
           return cartApiErrorHandling(
@@ -213,10 +210,10 @@ export function deleteCartItemLoadingEpic (action$, store) {
   return action$.pipe(
     ofType(DELETE_CART_ITEM_LOADING),
     mergeMap(data => {
-      return cartApiLoadingHandling(
+      return of(cartApiLoadingHandling(
           data.cartState,
           data.medicineSelected
-        )
+        ))
     })
   )
 }
@@ -225,13 +222,12 @@ export function deleteCartItemEpic (action$, store) {
   return action$.pipe(
     ofType(DELETE_CART_ITEM_LOADING),
     mergeMap(data => {
-      let cartUid = data.cartState.cartDetails.payload.uid
+      let cartUid = data.cartState.payload.uid
       let cartItemSku = data.medicineSelected.sku
 
       return http(deleteCartItem$(cartUid, cartItemSku)).pipe(
         map(result => {
-          debugger
-          return putCartItemSuccess(data.cartState, result.body.payload)
+          return putCartItemSuccess(data.cartState, result.body.payload.cart_items)
         }),
         catchError(error => {
           return cartApiErrorHandling(
@@ -249,7 +245,7 @@ export function savePatientToCartEpic (action$, store) {
   return action$.pipe(
     ofType(SAVE_PATIENT_TO_CART_LOADING),
     mergeMap(data => {
-      return http(savePatientToCart$(data.cartId, { patient_id: data.patientId })).pipe(
+      return http(savePatientToCart$(data.cartId, data.patientId)).pipe(
         map(result => {
           debugger
           return savePatientToCartSuccess(data.cartState, result.body.payload.patients)

@@ -126,8 +126,10 @@ const deleteCartItem$ = (cartUid, cartItemSku) => (
 const savePatientToCart$ = (cartId, patientId) => (
   makeAjaxRequest({
     method: 'PATCH',
-    body: patientId,
-    url: fetchUrl('cart', cartId + '/assign/patient', 'GET_LIST')
+    url: fetchUrl('cart', cartId + '/assign/patient', 'GET_LIST'),
+    body: {
+      patient_id: patientId
+    }
   })
 )
 

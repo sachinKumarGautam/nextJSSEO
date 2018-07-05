@@ -59,28 +59,27 @@ class OrderSummary extends React.Component {
           className={classes.expansionPanel}
         >
           <ExpansionPanelSummary expandIcon={<div />}>
-            <Typography className={classes.heading}>Logged in</Typography>
+            <img src='/static/images/loggedIn.svg' />
+            <Typography className={classes.heading}>
+              Logged in
+            </Typography>
           </ExpansionPanelSummary>
           <ExpansionPanelDetails>
-            <div>
-              <Typography>
-                Nulla facilisi. Phasellus sollicitudin nulla et quam mattis feugiat. Aliquam eget
-                maximus est, id dignissim quam.
-              </Typography>
-            </div>
-            <div>
-              <Button
-                size='small'
-                variant='outlined'
-                color='primary'
-                classes={{
-                  root: this.props.classes.buttonRoot,
-                  label: this.props.classes.buttonLabel
-                }}
-                style={{float: 'right'}}
-                label={'NEXT'}
-              />
-            </div>
+            <Typography>
+              Nulla facilisi. Phasellus sollicitudin nulla et quam mattis feugiat. Aliquam eget
+              maximus est, id dignissim quam.
+            </Typography>
+            <Button
+              size='small'
+              variant='outlined'
+              color='primary'
+              classes={{
+                root: this.props.classes.buttonRoot,
+                label: this.props.classes.buttonLabel
+              }}
+              style={{float: 'right'}}
+              label={'NEXT'}
+            />
           </ExpansionPanelDetails>
         </ExpansionPanel>
         <ExpansionPanel
@@ -89,6 +88,7 @@ class OrderSummary extends React.Component {
           className={classes.expansionPanel}
         >
           <ExpansionPanelSummary expandIcon={<div />}>
+            <img src='/static/images/attachedPrescriptions.svg' />
             <Typography className={classes.heading}>Attached Prescriptions</Typography>
           </ExpansionPanelSummary>
           <ExpansionPanelDetails>
