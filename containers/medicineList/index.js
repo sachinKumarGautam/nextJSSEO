@@ -25,6 +25,7 @@ class MedicineListWrapper extends Component {
           <MedicineList
             medicineListState={this.props.medicineListState}
             getRelatedMedicinesLoading={this.props.actions.getRelatedMedicinesLoading}
+            checkPincodeState={this.props.checkPincodeState}
           />
         </section>
       </div>
@@ -45,7 +46,8 @@ function mapDispatchToProps (dispatch) {
 
 function mapStateToProps (state) {
   return {
-    medicineListState: state.medicineListState
+    medicineListState: state.medicineListState,
+    checkPincodeState: state.checkPincodeState
   }
 }
 

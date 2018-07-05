@@ -45,7 +45,8 @@ function renderSuggestion ({
   searchItemStyle,
   highlightedSearchItem,
   selectedSearchItem,
-  onSelectItem
+  onSelectItem,
+  checkPincodeState
 }) {
   const isHighlighted = highlightedIndex === index
   const isSelected = (selectedItem || '').indexOf(suggestion.label) > -1
@@ -58,7 +59,7 @@ function renderSuggestion ({
     >
       <MedicineListDetails
         itemDetails={suggestion}
-        onSelectItem={onSelectItem}
+        checkPincodeState={checkPincodeState}
       />
     </li>
   )
@@ -151,17 +152,17 @@ class SearchMedicine extends React.Component {
   }
 
   onSelectItem (itemDetails, props) {
+    console.log(itemDetails)
     this.props.updateInProgressMedicineState(this.props.searchMedicineState, itemDetails)
     return (
       Router.push({
-        pathname: PRODUCT_DETAILS,
-        query: { name: itemDetails.name }
+        pathname: `${PRODUCT_DETAILS}/${itemDetails.slug}`
       })
     )
   }
 
   render () {
-    const { classes, searchMedicineState } = this.props
+    const { classes, searchMedicineState, checkPincodeState } = this.props
     const searchMedicineResult = searchMedicineState.payload.searchMedicineResult
     return (
       <div className={classes.root}>
@@ -179,7 +180,7 @@ class SearchMedicine extends React.Component {
                 InputProps: getInputProps({
                   placeholder: 'Search medicine...',
                   id: 'search-medicine',
-                  autofocus: 'true',
+                  autofocus: true,
                   onChange: this.searchMedicineOnChange
                 })
               })}
@@ -198,6 +199,7 @@ class SearchMedicine extends React.Component {
                         }),
                         highlightedIndex,
                         selectedItem,
+                        checkPincodeState,
                         onSelectItem: this.onSelectItem,
                         searchItemStyle: classes.searchItem,
                         highlightedSearchItem: `${classes.searchItem} ${classes.highlightedSearchItem}`,

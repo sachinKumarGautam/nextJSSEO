@@ -6,7 +6,7 @@ import {GET_PRODUCT_DETAILS_LOADING, GET_PRODUCT_DETAILS_SUMMARY_LOADING} from '
 
 import http from '../../services/api/ajaxWrapper'
 import {
-  getProductDetailSuccess, 
+  getProductDetailSuccess,
   getProductDetailFailure
 } from './productDetailsActions'
 

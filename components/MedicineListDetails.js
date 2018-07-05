@@ -1,5 +1,5 @@
 import React from 'react'
-
+import Link from 'next/link'
 import { withStyles } from '@material-ui/core/styles'
 
 import Button from './button'
@@ -50,57 +50,65 @@ const styles = theme => {
   }
 }
 
-const MedicineListDetails = (props) => (
-  <div 
-    className={props.classes.medicineListContentWrapper}
-    onClick={props.onSelectItem.bind(this, props.itemDetails)}
+const MedicineListDetails = (props) => {
+  const city = props.checkPincodeState.payload.city
+  return (
+    <Link
+      prefetch
+      href={`/product-details?id=${props.itemDetails.slug}&location=${city}`}
+      as={`/product-details/${props.itemDetails.slug}`}
     >
-    <div>
-      <ProductName variant={'body1'} />
-      <ProductBrand
-        variant={'caption'}
-        withoutImage
-        customStyle={props.classes.customBrand}
-        brand={props.itemDetails.brand_name || props.itemDetails.name}
-      />
-      <ProductPackSize
-        variant={'caption'}
-        withoutImage
-        customStyle={props.classes.customPackSize}
-        packType={props.itemDetails.pack_type}
-        packSize={props.itemDetails.pack_size.name}
-      />
-    </div>
-    <div>
-      <EstimatedPriceLabel
-        variant={'caption'}
-        customStyle={props.classes.customEstimatedLabel}
-        estimatePriceText={'*Est. Price '}
-      />
-      <ProductPrice
-        variant={'body1'}
-        customStyle={props.classes.customPrice}
-        sellingPrice={props.itemDetails.selling_price}
-      />
-      <StrokePrice
-        variant={'caption'}
-        customStyle={props.classes.customStrokePrice}
-        mrp={props.itemDetails.mrp}
-      />
-      <Button
-        size='small'
-        variant='outlined'
-        color='primary'
-        classes={{
-          root: props.classes.buttonRoot,
-          label: props.classes.buttonLabel
-        }}
-        style={{float: 'right'}}
-        onClick={this.handleClickOpen}
-        label={'Add To Cart'}
-      />
-    </div>
-  </div>
-)
+      <div
+        className={props.classes.medicineListContentWrapper}
+      >
+        <div>
+          <ProductName variant={'body1'} />
+          <ProductBrand
+            variant={'caption'}
+            withoutImage
+            customStyle={props.classes.customBrand}
+            brand={props.itemDetails.brand_name || props.itemDetails.name}
+          />
+          <ProductPackSize
+            variant={'caption'}
+            withoutImage
+            customStyle={props.classes.customPackSize}
+            packType={props.itemDetails.pack_type}
+            packSize={props.itemDetails.pack_size.name}
+          />
+        </div>
+        <div>
+          <EstimatedPriceLabel
+            variant={'caption'}
+            customStyle={props.classes.customEstimatedLabel}
+            estimatePriceText={'*Est. Price '}
+          />
+          <ProductPrice
+            variant={'body1'}
+            customStyle={props.classes.customPrice}
+            sellingPrice={props.itemDetails.selling_price}
+          />
+          <StrokePrice
+            variant={'caption'}
+            customStyle={props.classes.customStrokePrice}
+            mrp={props.itemDetails.mrp}
+          />
+          <Button
+            size='small'
+            variant='outlined'
+            color='primary'
+            classes={{
+              root: props.classes.buttonRoot,
+              label: props.classes.buttonLabel
+            }}
+            style={{float: 'right'}}
+            onClick={this.handleClickOpen}
+            label={'Add To Cart'}
+          />
+        </div>
+      </div>
+    </Link>
+  )
+}
 
 export default withStyles(styles)(MedicineListDetails)

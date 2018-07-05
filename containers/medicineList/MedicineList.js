@@ -90,6 +90,7 @@ class MedicineList extends React.Component {
                   <li className={classes.listItem}>
                     <MedicineListDetails
                       itemDetails={itemDetails}
+                      checkPincodeState={this.props.checkPincodeState}
                     />
                   </li>
                 ))

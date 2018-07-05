@@ -1,7 +1,7 @@
 import initialState from './searchMedicineModal'
 import {
-  SEARCH_MEDICINE_LOADING, 
-  SEARCH_MEDICINE_SUCCESS, 
+  SEARCH_MEDICINE_LOADING,
+  SEARCH_MEDICINE_SUCCESS,
   SEARCH_MEDICINE_FAILURE,
   UPDATE_INPROGRESS_MEDICINE_STATE
 } from './searchMedicineActionTypes'
@@ -43,14 +43,14 @@ export default function searchMedicineReducer (state = initialState, action) {
         }
       }
 
-      case UPDATE_INPROGRESS_MEDICINE_STATE:
+    case UPDATE_INPROGRESS_MEDICINE_STATE:
       return {
         ...state,
         payload: {
           ...state.payload,
           inProgressMedicineDetails: {
-            ...state.payload.inProgressMedicineDetails,
-            
+            ...state.payload.inProgressMedicineDetails
+
           }
         }
       }

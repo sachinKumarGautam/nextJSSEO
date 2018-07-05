@@ -44,7 +44,6 @@ class ProductDetails extends React.Component {
     return query
   }
 
-
   componentDidMount () {
     // this.props.actions.getProductDetailLoading(this.props.productDetailsState, 'I0008')
   }

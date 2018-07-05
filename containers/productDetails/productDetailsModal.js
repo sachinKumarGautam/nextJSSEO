@@ -1,8 +1,8 @@
 const initialState = {
   payload: {
     productDetails: {
-      payload:{}
-    },
+      payload: {}
+    }
     // productDetailsSummary: {
     //   payload: {}
     // }

@@ -5,7 +5,6 @@ import ProductDetails from './ProductDetails'
 import ProductDetailsContent from './ProductDetailsContent'
 import Router from 'next/router'
 
-
 /*
   bread crumbs
   Product Details
@@ -21,7 +20,8 @@ class ProductDetailsWrapper extends Component {
   }
   componentDidMount () {
     const { pathname, query } = Router
-    if(query.sku){
+    console.log(Router, pathname, query)
+    if (query.sku) {
       this.props.getProductDetailLoading(this.props.productDetailsState, query.sku)
     }
   }

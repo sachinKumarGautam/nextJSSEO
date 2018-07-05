@@ -2,7 +2,7 @@ const initialState = {
   payload: {
     searchMedicineResult: [],
     inProgressMedicineDetails: {
-      
+
     }
   },
   isLoading: false,

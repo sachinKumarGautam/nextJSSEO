@@ -47,7 +47,8 @@ class Header extends React.Component {
       searchMedicineState,
       actions,
       loginState,
-      customerState
+      customerState,
+      checkPincodeState
     } = this.props
 
     return (
@@ -66,6 +67,7 @@ class Header extends React.Component {
               <img src='/static/images/logo-green.svg' />
               <SearchMedicine
                 searchMedicineState={searchMedicineState}
+                checkPincodeState={checkPincodeState}
                 searchMedicineLoading={actions.searchMedicineLoading}
                 updateInProgressMedicineState={actions.updateInProgressMedicineState}
               />
@@ -136,6 +138,7 @@ function mapStateToProps (state) {
   return {
     loginState: state.loginState,
     customerState: state.customerState,
+    checkPincodeState: state.checkPincodeState,
     searchMedicineState: state.searchMedicineState
   }
 }

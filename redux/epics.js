@@ -85,6 +85,6 @@ export const rootEpic = combineEpics(
   getRelatedMedicines,
   carePointsList,
   searchMedicine,
-  fetchUserInfo,
+  fetchUserInfo
   // getProductDetailSummary
 )
