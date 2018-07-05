@@ -12,8 +12,6 @@ import PatientDetailsWrapper from '../containers/patientDetails'
 
 import Paper from '@material-ui/core/Paper'
 
-import { rootEpic } from '../redux/epics'
-import { of } from 'rxjs/observable/of'
 
 import {
   getPatientDetailsListLoading,
