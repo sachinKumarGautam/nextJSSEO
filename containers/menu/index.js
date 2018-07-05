@@ -18,7 +18,6 @@ class MenuWrapper extends Component {
   }
 }
 
-
 function mapStateToProps (state) {
   return {
     customerState: state.customerState

@@ -51,7 +51,7 @@ const styles = theme => {
 }
 
 class PatientDetailsList extends Component {
-  constructor(props) {
+  constructor (props) {
     super(props)
     this.state = {
       patientIdSelected: 0,
@@ -59,7 +59,7 @@ class PatientDetailsList extends Component {
     }
   }
 
-  savePatientSelected(patientIdSelected) {
+  savePatientSelected (patientIdSelected) {
     this.setState({
       patientIdSelected: patientIdSelected
     })
@@ -67,6 +67,12 @@ class PatientDetailsList extends Component {
     this.props.savePatientSelected(
       this.props.patientDetailsState,
       patientIdSelected
+    )
+
+    this.props.savePatientToCartLoading(
+      this.props.patientDetailsState,
+      patientIdSelected,
+      '680a75c5-7965-4f9d-ab2f-14cb0ce16c2c'
     )
   }
 

@@ -14,7 +14,7 @@ const styles = theme => ({
     marginLeft: theme.spacing.unit * 6
   },
   cardContent: {
-    paddingBottom: 0,
+    paddingBottom: 0
   },
   title: {
     ...theme.typography.headline,

@@ -109,7 +109,11 @@ class CartIcon extends Component {
             className={classes.button}
             aria-label='Add to shopping cart'
           >
-            <Badge className={classes.margin} badgeContent={this.state.quantity} color='primary'>
+            <Badge
+              className={classes.margin}
+              badgeContent={this.props.cartState.payload.cart_items.payload.length}
+              color='primary'
+            >
               <AddShoppingCartIcon />
             </Badge>
           </IconButton>

@@ -114,16 +114,16 @@ class OrderContent extends Component {
         <div className={this.props.classes.userDetailWrapper}>
           <div>
             <Typography
-              variant="caption"
+              variant='caption'
               className={this.props.classes.userNameStyle}
             >
-              <Person className={this.props.classes.userIconStyle}/>
+              <Person className={this.props.classes.userIconStyle} />
               {this.props.orderDetails.customer_full_name}
             </Typography>
           </div>
           <div>
             <Typography
-              variant="caption"
+              variant='caption'
               className={
                 // props.orderList.status === 'Payment Pending'
                 // ? props.classes.pendingStyle :
@@ -134,31 +134,31 @@ class OrderContent extends Component {
             </Typography>
           </div>
         </div>
-          <div className={this.props.classes.medicineDetailWrapper}>
-            <img
-              src={image}
-              className={this.props.classes.prescriptionStyle}
-            />
-            <div>
-              {
-                this.props.orderDetails.items.map((itemDetail, index) => (
-                  index < 3 &&
+        <div className={this.props.classes.medicineDetailWrapper}>
+          <img
+            src={image}
+            className={this.props.classes.prescriptionStyle}
+          />
+          <div>
+            {
+              this.props.orderDetails.items.map((itemDetail, index) => (
+                index < 3 &&
                   <Typography
-                    variant="caption"
+                    variant='caption'
                     className={this.props.classes.medicineNameStyle}
                   >
                     {itemDetail.name}
                   </Typography>
-                ))
-              }
-              <Typography
-                variant="caption"
-                className={this.props.classes.quantityStyle}
-              >
-                {(itemsLeft > 0) && `+${itemsLeft} Items`}
-              </Typography>
-            </div>
+              ))
+            }
+            <Typography
+              variant='caption'
+              className={this.props.classes.quantityStyle}
+            >
+              {(itemsLeft > 0) && `+${itemsLeft} Items`}
+            </Typography>
           </div>
+        </div>
         {/* {
           props.orderList.payment === 'failed' &&
           <div className={this.props.classes.buttonWrapperStyle}>

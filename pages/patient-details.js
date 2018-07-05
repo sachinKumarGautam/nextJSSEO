@@ -12,12 +12,15 @@ import PatientDetailsWrapper from '../containers/patientDetails'
 
 import Paper from '@material-ui/core/Paper'
 
-
 import {
   getPatientDetailsListLoading,
   savePatientSelected,
   submitPatientDetailsLoading
 } from '../containers/patientDetails/patientDetailsActions'
+
+import {
+  savePatientToCartLoading
+} from '../containers/cartDetails/cartActions'
 
 const styles = theme => ({
   root: {
@@ -55,6 +58,7 @@ class PatientDetails extends React.Component {
               savePatientSelected={this.props.actions.savePatientSelected}
               submitPatientDetailsLoading={this.props.actions.submitPatientDetailsLoading}
               customerState={this.props.customerState}
+              savePatientToCartLoading={this.props.actions.savePatientToCartLoading}
             />
           </Paper>
         </div>
@@ -77,7 +81,8 @@ function mapDispatchToProps (dispatch) {
       {
         getPatientDetailsListLoading,
         savePatientSelected,
-        submitPatientDetailsLoading
+        submitPatientDetailsLoading,
+        savePatientToCartLoading
       },
       dispatch
     )

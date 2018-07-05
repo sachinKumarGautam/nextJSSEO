@@ -25,6 +25,7 @@ const PatientDetailsWrapper = props => (
           savePatientSelected={props.savePatientSelected}
           submitPatientDetailsLoading={props.submitPatientDetailsLoading}
           customerState={props.customerState}
+          savePatientToCartLoading={props.savePatientToCartLoading}
         />
       </Grid>
     </Grid>

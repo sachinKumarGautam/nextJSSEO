@@ -48,14 +48,14 @@ const styles = theme => ({
 })
 
 class OrderListDetails extends Component {
-  constructor(props) {
+  constructor (props) {
     super(props)
-    this.state ={
+    this.state = {
       page: 0
     }
   }
 
-  onClickOfShowMore() {
+  onClickOfShowMore () {
     this.props.getOrderListDetailsLoading(
       this.props.orderListState,
       this.props.customerState.payload.id, // pass customer Id
@@ -87,11 +87,11 @@ class OrderListDetails extends Component {
                   <OrderHeader
                     orderDetails={orderDetails}
                   />
-                  <Divider/>
+                  <Divider />
                   <OrderContent
                     orderDetails={orderDetails}
                   />
-                  <Divider/>
+                  <Divider />
                   <OrderFooter
                     orderDetails={orderDetails}
                   />

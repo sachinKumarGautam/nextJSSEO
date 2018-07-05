@@ -24,7 +24,8 @@ const theme = createMuiTheme({
       grey500: '#4a4a4a',
       grey600: '#3a3a3a',
       grey700: '#393939',
-      grey800: '#E0E0E0'
+      grey800: '#dfe3e8',
+      grey900: '#E0E0E0'
     },
     customYellow: {
       yellow400: '#f5a623'
@@ -46,7 +47,11 @@ const theme = createMuiTheme({
     },
     MuiButton: {
       root: {
+        boxShadow: 'none',
         borderRadius: 32
+      },
+      raisedPrimary: {
+        boxShadow: 'none'
       },
       label: {
         color: '#fff',
