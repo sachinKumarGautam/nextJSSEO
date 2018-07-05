@@ -7,11 +7,11 @@ const FormWrapper = (props) => {
   const {
     closeLoginModal,
     toggleForm,
+    closeModal,
     onSubmit,
     loginState,
     customerState,
     patientFormState,
-    customerId
   } = props
   switch (props.type) {
     case 'loginForm':
@@ -41,10 +41,11 @@ const FormWrapper = (props) => {
 
     case 'patientForm':
       return <PatientForm
-        closeLoginModal={closeLoginModal}
+        closeModal={closeModal}
         onSubmit={onSubmit}
         patientFormState={patientFormState}
-        customerId = {customerId}
+        customerId={props.customerState.payload.id}
+        mobile={props.customerState.payload.mobile}
       />
 
     default :

@@ -3,9 +3,9 @@ import {
   GET_PATIENT_DETAILS_LIST_SUCCESS,
   GET_PATIENT_DETAILS_LIST_FAILURE,
   SAVE_PATIENT_SELECTED,
-  ADD_NEW_PATIENT_LOADING,
-  ADD_NEW_PATIENT_SUCCESS,
-  ADD_NEW_PATIENT_FAILURE
+  SUBMIT_PATIENT_LOADING ,
+  SUBMIT_PATIENT_SUCCESS,
+  SUBMIT_PATIENT_FAILURE
 } from './patientDetailsActionTypes'
 
 /**
@@ -13,14 +13,17 @@ import {
  * @param {object} patientDetailsState - The object maintained for payload, loading and error state.
  * @param {number} customerId - The value of the customer id according to which list will occur
  */
-export function getPatientDetailsListLoading (patientDetailsState, customerId) {
+export function getPatientDetailsListLoading (
+  patientDetailsState, 
+  customerId, 
+) {
   return {
     type: GET_PATIENT_DETAILS_LIST_LOADING,
     patientDetailsState,
+    customerId, 
     isLoading: true,
     isError: false,
     error: {},
-    customerId: customerId
   }
 }
 
@@ -78,17 +81,17 @@ export function submitPatientDetailsLoading (
   patientDetailsState,
   customerId,
   setSubmitting,
-  closeLoginModal,
+  closeModal,
   values
 ) {
   return {
-    type: ADD_NEW_PATIENT_LOADING,
+    type: SUBMIT_PATIENT_LOADING,
     patientDetailsState,
     isLoading: true,
     isError: false,
     error: {},
     customerId: customerId,
-    closeLoginModal,
+    closeModal,
     values: values,
     setSubmitting
   }
@@ -101,7 +104,7 @@ export function submitPatientDetailsLoading (
  */
 export function submitPatientDetailsSuccess (patientDetailsState, result) {
   return {
-    type: ADD_NEW_PATIENT_SUCCESS,
+    type: SUBMIT_PATIENT_SUCCESS,
     patientDetailsState,
     isLoading: false,
     patientDetailsList: result
@@ -115,7 +118,7 @@ export function submitPatientDetailsSuccess (patientDetailsState, result) {
  */
 export function submitPatientDetailsFailure (patientDetailsState, error) {
   return {
-    type: ADD_NEW_PATIENT_FAILURE,
+    type: SUBMIT_PATIENT_FAILURE,
     patientDetailsState,
     isLoading: false,
     isError: true,

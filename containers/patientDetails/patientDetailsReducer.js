@@ -5,9 +5,9 @@ import {
   GET_PATIENT_DETAILS_LIST_SUCCESS,
   GET_PATIENT_DETAILS_LIST_FAILURE,
   SAVE_PATIENT_SELECTED,
-  ADD_NEW_PATIENT_LOADING,
-  ADD_NEW_PATIENT_SUCCESS,
-  ADD_NEW_PATIENT_FAILURE
+  SUBMIT_PATIENT_LOADING,
+  SUBMIT_PATIENT_SUCCESS,
+  SUBMIT_PATIENT_FAILURE
 } from './patientDetailsActionTypes'
 
 export default function patientDetailsReducer (state = initialState, action) {
@@ -52,7 +52,7 @@ export default function patientDetailsReducer (state = initialState, action) {
       }
 
     // update loading details of add new patient API
-    case ADD_NEW_PATIENT_LOADING:
+    case SUBMIT_PATIENT_LOADING:
       return {
         ...state,
         addNewPatient: {
@@ -67,7 +67,7 @@ export default function patientDetailsReducer (state = initialState, action) {
       }
 
     // update loading details of add new patient API
-    case ADD_NEW_PATIENT_SUCCESS:
+    case SUBMIT_PATIENT_SUCCESS:
       return {
         ...state,
         addNewPatient: {
@@ -78,7 +78,7 @@ export default function patientDetailsReducer (state = initialState, action) {
       }
 
     // update loading details of add new patient API
-    case ADD_NEW_PATIENT_FAILURE:
+    case SUBMIT_PATIENT_FAILURE:
       return {
         ...state,
         addNewPatient: {

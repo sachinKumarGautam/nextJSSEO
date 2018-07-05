@@ -30,6 +30,17 @@ const getPatientDetailsList$ = customerId => (
   })
 )
 
+const submitPatientDetails$ = (customerId, patientDetails) => (
+
+  makeAjaxRequest({
+    method: 'POST',
+    url: fetchUrl('account', 'customer/' + customerId + '/patient', 'CREATE'),
+    body: patientDetails
+  })
+
+)
+
+
 const getOrderList$ = (customerId, page, size) => (
   makeAjaxRequest({
     method: 'GET',
@@ -89,14 +100,6 @@ const getCarePointsList$ = (customerId, cashType) => (
   })
 )
 
-const submitPatientDetails$ = (customerId, patientDetails) => (
-  makeAjaxRequest({
-    method: 'POST',
-    url: fetchUrl('account', 'customer/' + customerId + '/patient', 'CREATE'),
-    body: patientDetails
-  })
-)
-
 export {
   getMoleculeSummary$,
   getMedicineList$,
@@ -109,5 +112,5 @@ export {
   fetchUserInfo$,
   registerCustomer$,
   getCarePointsList$,
-  submitPatientDetails$
+  submitPatientDetails$,
 }

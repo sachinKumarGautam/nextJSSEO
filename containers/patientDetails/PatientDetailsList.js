@@ -6,10 +6,10 @@ import { withStyles } from '@material-ui/core/styles'
 import Card from '@material-ui/core/Card'
 import CardContent from '@material-ui/core/CardContent'
 
-import Button from '../../components/button'
 import PatientDetailsCardWrapper from './PatientDetailsCardWrapper'
 
 import PatientDetailForm from './PatientDetailForm'
+import AddPatientButton from './addPatientButton';
 
 const styles = theme => {
   return {
@@ -96,28 +96,19 @@ class PatientDetailsList extends Component {
               Patients
             </Typography>
             <div className={this.props.classes.buttonWrapper}>
-              <Button
-                size='small'
-                variant='outlined'
-                color='primary'
-                classes={{
-                  root: this.props.classes.buttonRoot,
-                  label: this.props.classes.buttonLabel
-                }}
-                style={{float: 'right'}}
-                label={'ADD NEW PATIENT'}
+              <AddPatientButton
+                buttonRoot={this.props.classes.buttonRoot}
+                buttonLabel={this.props.classes.buttonLabel}
                 onClick={this.openPatientFormModal.bind(this)}
               />
-              {
-                this.state.openPatientFormDialog &&
-                <PatientDetailForm
-                  closePatientFormModal = {this.closePatientFormModal.bind(this)}
-                  openPatientFormDialog = {this.state.openPatientFormDialog}
-                  patientFormState = {this.props.patientDetailsState}
-                  onSubmit = {this.props.submitPatientDetailsLoading}
-                  customerId = {this.props.customerState.payload.id}
-                />
-              }
+              <PatientDetailForm
+                closePatientFormModal={this.closePatientFormModal.bind(this)}
+                openPatientFormDialog={this.state.openPatientFormDialog}
+                patientFormState={this.props.patientDetailsState}
+                customerState={this.props.customerState}
+                submitPatientDetailsLoading={this.props.submitPatientDetailsLoading}
+                isEdit={'false'}
+              />
             </div>
           </div>
           <PatientDetailsCardWrapper

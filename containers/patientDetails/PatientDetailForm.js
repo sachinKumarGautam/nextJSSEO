@@ -33,6 +33,7 @@ function Transition (props) {
 class PatientDetailForm extends React.Component {
   render () {
     const { classes } = this.props
+    console.log(this.props.openPatientFormDialog)
     return (
       <div>
         <Dialog
@@ -57,8 +58,8 @@ class PatientDetailForm extends React.Component {
           <DialogContent>
             <Form
               type={'patientForm'}
-              onSubmit = {this.props.submitPatientDetailsLoading}
-              customerId = {this.props.customerState.payload.id}
+              onSubmit={this.props.submitPatientDetailsLoading}
+              customerState={this.props.customerState}
               patientFormState={this.props.patientFormState}
               closeModal={this.props.closePatientFormModal}
             />
