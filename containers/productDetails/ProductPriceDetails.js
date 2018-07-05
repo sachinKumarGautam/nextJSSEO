@@ -11,7 +11,7 @@ import StrokePrice from '../../components/StrokePrice'
 import ProductDiscount from '../../components/ProductDiscount'
 import DeliveryInfoWrapper from '../../components/DeliveryInfoWrapper'
 import QuantityField from '../../components/QuantityField'
-import PincodeDialog from './PincodeDialog'
+import AddToCartButton from '../cartDetails/addToCartWrapper'
 
 /*
   Product price
@@ -40,21 +40,27 @@ const styles = theme => ({
 class ProductPriceDetails extends Component {
   constructor (props) {
     super(props)
+    this.handleOpenPincodeDialog = this.handleOpenPincodeDialog.bind(this)
+    this.handleClosePincodeDialog = this.handleClosePincodeDialog.bind(this)
     this.state = {
-      open: false
+      pincodeDialogOpen: false
     }
-
-    this.handleClickOpen = this.handleClickOpen.bind(this)
-    this.handleClose = this.handleClose.bind(this)
   }
 
-  handleClickOpen () {
-    this.setState({ open: true })
-  };
+  addToCart () {
+  }
 
-  handleClose () {
-    this.setState({ open: false })
-  };
+  handleOpenPincodeDialog () {
+    this.setState({
+      pincodeDialogOpen: true
+    })
+  }
+
+  handleClosePincodeDialog () {
+    this.setState({
+      pincodeDialogOpen: false
+    })
+  }
 
   render () {
     const { classes } = this.props
@@ -73,23 +79,26 @@ class ProductPriceDetails extends Component {
               <StrokePrice variant={'body1'} />
               <ProductDiscount />
             </div>
-            <DeliveryInfoWrapper />
+            {
+              this.props.checkPincodeState.payload.city &&
+              <DeliveryInfoWrapper
+                checkPincodeState={this.props.checkPincodeState}
+                openPincodeDialog={this.handleOpenPincodeDialog}
+              />
+            }
             <div className={classes.cardActions}>
               <QuantityField />
-              <Button
-                variant='raised'
-                size='small'
-                color='primary'
-                onClick={this.handleClickOpen}
-                label={'Add To Cart'}
+              <AddToCartButton
+                open={this.state.pincodeDialogOpen}
+                handleOpenPincodeDialog={this.handleOpenPincodeDialog}
+                handleClose={this.handleClosePincodeDialog}
+                onClick={this.addToCart.bind(this)}
+                checkPincodeState={this.props.checkPincodeState}
+                checkPincodeLoading={this.props.checkPincodeLoading}
               />
             </div>
           </CardContent>
         </Card>
-        <PincodeDialog
-          handleClose={this.handleClose}
-          open={this.state.open}
-        />
       </div>
     )
   }

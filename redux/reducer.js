@@ -10,7 +10,13 @@ import customerReducer from '../containers/user/customer/customerReducer'
 import medicineListReducer from '../containers/medicineList/medicineLIstReducer'
 import productDetailsReducer from '../containers/productDetails/productDetailsReducer'
 import searchMedicineReducer from '../containers/searchMedicine/searchMedicineReducer'
+import deliveryDetailsReducer from '../containers/deliveryDetails/deliveryDetailsReducer'
+import patientDetailsReducer from '../containers/patientDetails/patientDetailsReducer'
+import orderListReducers from '../containers/orderList/orderListReducers'
 import carePointReducer from '../containers/carePoint/carePointReducer'
+import cartReducer from '../containers/cartDetails/cartReducer'
+import checkPincodeReducer from '../containers/location/pincode/pincodeReducer'
+import prescriptionReducers from '../containers/prescription/prescriptionReducers'
 
 const isengard = (store, action) => {
   return (
@@ -31,7 +37,13 @@ const appReducer = combineReducers({
   medicineListState: medicineListReducer,
   productDetailsState: productDetailsReducer,
   carePointState: carePointReducer,
-  searchMedicineState: searchMedicineReducer
+  searchMedicineState: searchMedicineReducer,
+  cartState: cartReducer,
+  checkPincodeState: checkPincodeReducer,
+  deliveryDetailsState: deliveryDetailsReducer,
+  patientDetailsState: patientDetailsReducer,
+  prescriptionState: prescriptionReducers,
+  orderListState: orderListReducers
 })
 
 // export const persistConfig = {
@@ -48,6 +60,10 @@ const appReducer = combineReducers({
 
 const reducer = (state, action) => {
   // TODO: reset all state
+  if (action.type === 'RESET_APPLICATION_STATE') {
+    state = undefined
+  }
+
   return appReducer(state, action)
 }
 

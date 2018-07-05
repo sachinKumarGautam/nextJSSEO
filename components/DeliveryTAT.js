@@ -22,7 +22,7 @@ const DeliveryTAT = (props) => (
   <div className={props.classes.deliveryTATWrapper}>
     <img src={'/static/images/delivery-tat.svg'} />
     <Typography variant='caption' className={props.classes.deliveryTATLabel}>
-      Delivered within 1-2 days
+      Delivered within {props.delivery_day} day
     </Typography>
   </div>
 )

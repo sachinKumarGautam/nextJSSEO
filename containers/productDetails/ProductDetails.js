@@ -32,7 +32,10 @@ class ProductDetails extends Component {
             />
           </Grid>
           <Grid item xs={4}>
-            <ProductPriceDetails />
+            <ProductPriceDetails
+              checkPincodeState={this.props.checkPincodeState}
+              checkPincodeLoading={this.props.checkPincodeLoading}
+            />
           </Grid>
         </Grid>
       </div>

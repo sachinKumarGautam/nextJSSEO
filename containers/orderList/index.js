@@ -1,7 +1,14 @@
 import React, { Component } from 'react'
 
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+
 import BreadCrumbs from '../../components/BreadCrumbs'
 import OrderList from './OrderList'
+
+import {
+  getOrderListDetailsLoading
+} from './orderListActions'
 /*
   bread crumbs
   order list
@@ -13,11 +20,34 @@ class OrderListWrapper extends Component {
       <div>
         <BreadCrumbs />
         <section >
-          <OrderList />
+          <OrderList
+            orderListState={this.props.orderListState}
+            getOrderListDetailsLoading={this.props.actions.getOrderListDetailsLoading}
+          />
         </section>
       </div>
     )
   }
 }
 
-export default OrderListWrapper
+function mapDispatchToProps (dispatch) {
+  return {
+    actions: bindActionCreators(
+      {
+        getOrderListDetailsLoading
+      },
+      dispatch
+    )
+  }
+}
+
+function mapStateToProps (state) {
+  return {
+    orderListState: state.orderListState
+  }
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(OrderListWrapper)

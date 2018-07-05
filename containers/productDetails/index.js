@@ -42,6 +42,8 @@ class ProductDetailsWrapper extends Component {
           <ProductDetails
             toggleHover={this.toggleHover.bind(this)}
             hover={this.state.hover}
+            checkPincodeState={this.props.checkPincodeState}
+            checkPincodeLoading={this.props.checkPincodeLoading}
           />
         </section>
         <section>

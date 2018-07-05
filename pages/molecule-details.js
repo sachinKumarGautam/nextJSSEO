@@ -20,6 +20,8 @@ import {
   getRelatedMedicinesLoading
 } from '../containers/medicineList/medicineListActions'
 
+import { checkPincodeLoading } from '../containers/location/pincode/pincodeAction'
+
 const styles = theme => ({
   root: {
     paddingTop: 16,
@@ -65,7 +67,10 @@ class MoleculeDetails extends React.Component {
         <Header />
         <div>
           <Paper className={this.props.classes.root} elevation={1}>
-            <MoleculeDetailsWrapper />
+            <MoleculeDetailsWrapper
+              checkPincodeLoading={this.props.actions.checkPincodeLoading}
+              checkPincodeState={this.props.checkPincodeState}
+            />
           </Paper>
         </div>
         <Footer />
@@ -74,11 +79,11 @@ class MoleculeDetails extends React.Component {
   }
 }
 
-function mapStateToProps (state, ownProps) {
+function mapStateToProps (state) {
   return {
     moleculeDetailsState: state.moleculeDetailsState,
     medicineListState: state.medicineListState,
-    location: ownProps.location
+    checkPincodeState: state.checkPincodeState
   }
 }
 
@@ -87,7 +92,8 @@ function mapDispatchToProps (dispatch) {
     actions: bindActionCreators(
       {
         getMoleculeSummaryLoading,
-        getRelatedMedicinesLoading
+        getRelatedMedicinesLoading,
+        checkPincodeLoading
       },
       dispatch
     )

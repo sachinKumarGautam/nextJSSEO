@@ -2,13 +2,13 @@ import React from 'react'
 import Link from 'next/link'
 import { withStyles } from '@material-ui/core/styles'
 
-import Button from './button'
 import ProductName from './ProductName'
 import ProductBrand from './ProductBrand'
 import ProductPackSize from './ProductPackSize'
 import ProductPrice from './ProductPrice'
 import StrokePrice from './StrokePrice'
 import EstimatedPriceLabel from './EstimatedPriceLabel'
+import AddToCartWrapper from '../containers/cartDetails/addToCartWrapper/index'
 
 const styles = theme => {
   return {
@@ -50,17 +50,45 @@ const styles = theme => {
   }
 }
 
-const MedicineListDetails = (props) => {
-  const city = props.checkPincodeState.payload.city
-  return (
-    <Link
+class MedicineListDetails extends React.Component {
+  constructor (props) {
+    super(props)
+    this.handleOpenPincodeDialog = this.handleOpenPincodeDialog.bind(this)
+    this.handleClosePincodeDialog = this.handleClosePincodeDialog.bind(this)
+    this.state = {
+      pincodeDialogOpen: false
+    }
+  }
+
+  addToCart () {
+  }
+
+  handleOpenPincodeDialog () {
+    this.setState({
+      pincodeDialogOpen: true
+    })
+  }
+
+  handleClosePincodeDialog () {
+    this.setState({
+      pincodeDialogOpen: false
+    })
+  }
+
+  render () {
+    const {
+      props
+    } = this
+
+    const city = this.props.checkPincodeSatte.payload.city
+
+    return (
+      <Link
       prefetch
       href={`/product-details?id=${props.itemDetails.slug}&location=${city}`}
       as={`/product-details/${props.itemDetails.slug}`}
     >
-      <div
-        className={props.classes.medicineListContentWrapper}
-      >
+      <div className={props.classes.medicineListContentWrapper}>
         <div>
           <ProductName variant={'body1'} />
           <ProductBrand
@@ -93,10 +121,8 @@ const MedicineListDetails = (props) => {
             customStyle={props.classes.customStrokePrice}
             mrp={props.itemDetails.mrp}
           />
-          <Button
-            size='small'
+          <AddToCartWrapper
             variant='outlined'
-            color='primary'
             classes={{
               root: props.classes.buttonRoot,
               label: props.classes.buttonLabel
@@ -104,11 +130,18 @@ const MedicineListDetails = (props) => {
             style={{float: 'right'}}
             onClick={this.handleClickOpen}
             label={'Add To Cart'}
+            open={this.state.pincodeDialogOpen}
+            handleOpenPincodeDialog={this.handleOpenPincodeDialog}
+            handleClose={this.handleClosePincodeDialog}
+            onClick={this.addToCart.bind(this)}
+            checkPincodeState={props.checkPincodeState}
+            checkPincodeLoading={props.checkPincodeLoading}
           />
         </div>
       </div>
     </Link>
   )
+}
 }
 
 export default withStyles(styles)(MedicineListDetails)

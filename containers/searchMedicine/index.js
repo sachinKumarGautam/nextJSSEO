@@ -162,7 +162,7 @@ class SearchMedicine extends React.Component {
   }
 
   render () {
-    const { classes, searchMedicineState, checkPincodeState } = this.props
+    const { classes, searchMedicineState, checkPincodeLoading, checkPincodeState } = this.props
     const searchMedicineResult = searchMedicineState.payload.searchMedicineResult
     return (
       <div className={classes.root}>
@@ -199,6 +199,7 @@ class SearchMedicine extends React.Component {
                         }),
                         highlightedIndex,
                         selectedItem,
+                        checkPincodeLoading,
                         checkPincodeState,
                         onSelectItem: this.onSelectItem,
                         searchItemStyle: classes.searchItem,

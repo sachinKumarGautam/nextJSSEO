@@ -26,9 +26,32 @@ import {
 } from '../containers/searchMedicine/searchMedicineEpic'
 
 import {
+  getDeliveryDetailsList
+} from '../containers/deliveryDetails/deliveryDetailsEpics'
+
+import {
+  getPatientDetailsList
+} from '../containers/patientDetails/patientDetailsEpics'
+
+import {
+  getOrderListDetails
+} from '../containers/orderList/orderListEpics'
+
+import {
+  getPrescriptionList
+} from '../containers/prescription/prescriptionEpics'
+
+import {
   carePointsList
 } from '../containers/carePoint/carePointEpics'
 
+import {
+  getAnonymousCartIdEpic
+} from '../containers/cartDetails/cartEpics'
+
+import {
+  checkPincode
+} from '../containers/location/pincode/pincodeEpic'
 // import * as actions from './actions'
 // import * as types from './actionTypes'
 
@@ -83,8 +106,18 @@ export const rootEpic = combineEpics(
   fetchUserInfo,
   getProductDetails,
   getRelatedMedicines,
+<<<<<<< HEAD
   carePointsList,
   searchMedicine,
   fetchUserInfo
   // getProductDetailSummary
+=======
+  getDeliveryDetailsList,
+  getPatientDetailsList,
+  getOrderListDetails,
+  getPrescriptionList,
+  getAnonymousCartIdEpic,
+  checkPincode,
+  carePointsList
+>>>>>>> b23190f42af869ee236b54c8c3ef78d8586fc8a5
 )

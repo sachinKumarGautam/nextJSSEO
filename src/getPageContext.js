@@ -23,12 +23,14 @@ const theme = createMuiTheme({
       grey300: '#bbbbbb',
       grey500: '#4a4a4a',
       grey600: '#3a3a3a',
-      grey700: '#393939'
+      grey700: '#393939',
+      grey800: '#E0E0E0'
     },
     customYellow: {
       yellow400: '#f5a623'
     },
     customGreen: {
+      green200: '#F3FDE8',
       green300: '#78b437',
       green400: '#389e48'
     },

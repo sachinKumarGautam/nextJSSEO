@@ -17,6 +17,12 @@ import { getProductDetailLoading } from '../containers/productDetails/productDet
 
 // import fetch from 'isomorphic-fetch'
 
+import {
+  getAnonymousCartIdLoading
+} from '../containers/cartDetails/cartActions'
+
+import {checkPincodeLoading} from '../containers/location/pincode/pincodeAction'
+
 const styles = theme => ({
   root: {
     paddingTop: 16,
@@ -46,12 +52,20 @@ class ProductDetails extends React.Component {
 
   componentDidMount () {
     // this.props.actions.getProductDetailLoading(this.props.productDetailsState, 'I0008')
+    // get anonymous cart
+    this.props.actions.getAnonymousCartIdLoading(
+      this.props.cartState,
+      'MWEB',
+      100,
+      ''
+    )
   }
 
   render () {
     const {
       classes,
-      actions
+      actions,
+      checkPincodeState
     } = this.props
 
     return (
@@ -60,7 +74,9 @@ class ProductDetails extends React.Component {
         <div>
           <Paper className={classes.root} elevation={1}>
             <ProductDetailsWrapper
+              checkPincodeState={checkPincodeState}
               getProductDetailLoading={actions.getProductDetailLoading}
+              checkPincodeLoading={actions.checkPincodeLoading}
             />
           </Paper>
         </div>
@@ -79,6 +95,8 @@ class ProductDetails extends React.Component {
 function mapStateToProps (state) {
   return {
     productDetailsState: state.productDetailsState,
+    cartState: state.cartState,
+    checkPincodeState: state.checkPincodeState,
     cartDetailsState: state.cartDetailsState
   }
 }
@@ -87,7 +105,9 @@ function mapDispatchToProps (dispatch) {
   return {
     actions: bindActionCreators(
       {
-        getProductDetailLoading
+        getProductDetailLoading,
+        getAnonymousCartIdLoading,
+        checkPincodeLoading
       },
       dispatch
     )

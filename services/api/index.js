@@ -29,6 +29,34 @@ const getCarePointsList$ = (customerId, cashType) => (
   })
 )
 
+const getDeliveryDetailsList$ = customerId => (
+  makeAjaxRequest({
+    method: 'GET',
+    url: fetchUrl('account', 'customer/' + customerId + '/shipping-addresses', 'GET_LIST')
+  })
+)
+
+const getPatientDetailsList$ = customerId => (
+  makeAjaxRequest({
+    method: 'GET',
+    url: fetchUrl('account', 'customer/' + customerId, 'CREATE')
+  })
+)
+
+const getOrderList$ = (customerId, page, size) => (
+  makeAjaxRequest({
+    method: 'GET',
+    url: fetchUrl('order', `customer/${customerId}/order-summary?size=${size}&page=${page}`, 'CREATE')
+  })
+)
+
+const getPrescriptionList$ = (customerId) => (
+  makeAjaxRequest({
+    method: 'GET',
+    url: fetchUrl('account', 'customer/' + customerId + '/patient-prescriptions', 'GET_LIST')
+  })
+)
+
 const verifyOtp$ = (mobile, otp) => (
   makeAjaxRequest({
     method: 'POST',
@@ -51,7 +79,6 @@ const fetchUserInfo$ = (mobileNumber) => (
     method: 'GET',
     url: fetchUrl('account', 'customer/mobile/' + mobileNumber, 'GET_LIST')
   })
-
 )
 
 const getProductDetails$ = (sku) => (
@@ -84,15 +111,50 @@ const searchMedicine$ = (inputValue, facilityCode) => (
   })
 )
 
+const getAnonymousCartId$ = (source, facilityCode, sourceType = '') => (
+  makeAjaxRequest({
+    method: 'POST',
+    url: fetchUrl('cart', '', 'CREATE'),
+    body: {
+      source: source,
+      facility_code: facilityCode,
+      source_type: sourceType
+    }
+  })
+)
+
+const getCartDetails$ = cartUid => (
+  makeAjaxRequest({
+    method: 'GET',
+    url: fetchUrl('cart', cartUid, 'GET_LIST')
+  })
+)
+
+const checkPincode$ = (pincode) => (
+
+  makeAjaxRequest({
+    method: 'GET',
+    url: fetchUrl('shipping', 'place/pincode/' + pincode, 'GET_LIST')
+  })
+
+)
+
 export {
   getMoleculeSummary$,
   getMedicineList$,
+  getCarePointsList$,
+  getAnonymousCartId$,
+  getCartDetails$,
+  getDeliveryDetailsList$,
+  getPatientDetailsList$,
+  getOrderList$,
+  getPrescriptionList$,
   verifyOtp$,
   sendOtp$,
   fetchUserInfo$,
   getProductDetails$,
   registerCustomer$,
-  getCarePointsList$,
   searchMedicine$,
-  getProductDetailsSummary$
+  getProductDetailsSummary$,
+  checkPincode$
 }

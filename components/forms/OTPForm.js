@@ -26,6 +26,10 @@ const styles = theme => ({
   },
   inputCenter: {
     textAlign: 'center'
+  },
+  otpInput: {
+    textAlign: 'center',
+    letterSpacing: '4px'
   }
 })
 
@@ -58,6 +62,14 @@ class OTPForm extends React.Component {
             id='otp'
             type='number'
             value={values.otp}
+            classes={{
+              input: classes.otpInput
+            }}
+            // inputProps={{
+            //   classes: {
+            //     root: classes.otpInput,
+            //   },
+            // }}
             onChange={handleChange}
             placeholder={'Enter your 4 digit OTP'}
           />

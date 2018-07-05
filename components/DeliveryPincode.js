@@ -27,8 +27,8 @@ const styles = theme => {
 const DeliveryPincode = (props) => (
   <div className={props.classes.deliveryPincodeWrapper}>
     <span className={props.classes.deliveryLabel}>Delivery </span>
-    <span className={props.classes.deliveryPincode}>to pincode 110056</span>
-    <a href='' className={props.classes.deliveryChangeLabel}>Change</a>
+    <span className={props.classes.deliveryPincode}>to pincode {props.pincode}</span>
+    <a onClick={props.openPincodeDialog.bind(this)} className={props.classes.deliveryChangeLabel}>Change</a>
   </div>
 )
 

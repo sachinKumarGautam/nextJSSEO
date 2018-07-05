@@ -17,6 +17,39 @@ import Login from '../../../containers/login'
 import getPageContext from '../../../src/getPageContext'
 import MenuWrapper from '../../../containers/menu'
 import { searchMedicineLoading, updateInProgressMedicineState } from '../../../containers/searchMedicine/searchMedicineAction'
+import { checkPincodeLoading } from '../../../containers/location/pincode/pincodeAction'
+
+const styles = theme => ({
+  root: {
+    flexGrow: 1
+  },
+  appBar: {
+    backgroundColor: '#fff'
+  },
+  appBarInnerComp: {
+    flexGrow: 1,
+    margin: '0 auto',
+    maxWidth: theme.breakpoints.values.lg,
+    display: 'flex',
+    width: '100%',
+    flexDirection: 'column',
+    paddingLeft: '56px',
+    paddingRight: '36px'
+  },
+  toolbar: {
+    // margin: `0 ${theme.spacing.unit * 3}px`,
+    marginBottom: 0,
+    height: theme.spacing.unit * 7.5,
+    display: 'flex',
+    // width: '100%',
+    justifyContent: 'space-between'
+  },
+  button: {
+    color: 'white',
+    flexGrow: 0,
+    borderRadius: theme.spacing.unit * 4
+  }
+})
 
 class Header extends React.Component {
   constructor (props, context) {
@@ -68,6 +101,7 @@ class Header extends React.Component {
               <SearchMedicine
                 searchMedicineState={searchMedicineState}
                 checkPincodeState={checkPincodeState}
+                checkPincodeLoading={this.props.actions.checkPincodeLoading}
                 searchMedicineLoading={actions.searchMedicineLoading}
                 updateInProgressMedicineState={actions.updateInProgressMedicineState}
               />
@@ -99,41 +133,6 @@ class Header extends React.Component {
   }
 }
 
-const styles = theme => ({
-  root: {
-    flexGrow: 1
-  },
-  appBar: {
-    backgroundColor: '#fff'
-  },
-  appBarInnerComp: {
-    flexGrow: 1,
-    margin: '0 auto',
-    maxWidth: theme.breakpoints.values.lg,
-    display: 'flex',
-    width: '100%',
-    flexDirection: 'column',
-    paddingLeft: '56px',
-    paddingRight: '36px'
-  },
-  toolbar: {
-    // margin: `0 ${theme.spacing.unit * 3}px`,
-    marginBottom: 0,
-    height: theme.spacing.unit * 7.5,
-    display: 'flex',
-    // width: '100%',
-    justifyContent: 'space-between'
-  },
-  button: {
-    flexGrow: 0
-    // backgroundColor: theme.palette.primary.main
-  }
-})
-
-Header.propTypes = {
-  classes: PropTypes.object.isRequired
-}
-
 function mapStateToProps (state) {
   return {
     loginState: state.loginState,
@@ -148,6 +147,7 @@ function mapDispatchToProps (dispatch) {
     actions: bindActionCreators(
       {
         searchMedicineLoading,
+        checkPincodeLoading,        
         updateInProgressMedicineState
       },
       dispatch
