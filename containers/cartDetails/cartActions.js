@@ -67,8 +67,14 @@ export function getCartDetailsSuccess (
     id: result.id,
     uid: result.uid,
     customer_id: result.customer_id,
-    customer_first_name: result.customer_first_name,
-    customer_last_name: result.customer_last_name,
+    customer_full_name: result.customer_full_name,
+    patient_full_name: result.patient_full_name,
+    discount: result.discount,
+    redeemed_care_points: result.redeemed_care_points,
+    redeemable_care_points: result.redeemable_care_points,
+    total_mrp: result.total_mrp,
+    total_sale_price: result.total_sale_price,
+    total_tax_amount: result.total_tax_amount,
     facility_code: result.facility_code,
     status: result.status,
     source: result.source,
@@ -123,11 +129,17 @@ export function deleteCartItemLoading (
   }
 }
 
-export function putCartItemSuccess (cartState, cartItems) {
+export function putCartItemSuccess (cartState, result) {
   return {
     type: cartActionTypes.PUT_CART_ITEM_SUCCESS,
     cartState,
-    cartItems: cartItems
+    cart_items: result.cart_items,
+    discount: result.discount,
+    redeemed_care_points: result.redeemed_care_points,
+    redeemable_care_points: result.redeemable_care_points,
+    total_mrp: result.total_mrp,
+    total_sale_price: result.total_sale_price,
+    total_tax_amount: result.total_tax_amount
   }
 }
 
@@ -245,6 +257,114 @@ export function cartTransferFailure (cartState, error) {
   return {
     type: cartActionTypes.CART_TRANSFER_FAILURE,
     cartState: cartState,
+    isLoading: false,
+    isError: true,
+    error: error
+  }
+}
+
+export function updateIsCartOpenLoginFlag (cartState, isCartOpenLoginDialog) {
+  return {
+    type: cartActionTypes.UPDATE_IS_CART_OPEN_LOGIN_FLAG,
+    cartState: cartState,
+    isCartOpenLoginDialog: isCartOpenLoginDialog
+  }
+}
+
+export function uploadPrescriptionLoading (cartState, file) {
+  return {
+    type: cartActionTypes.UPLOAD_PRESCRIPTION_LOADING,
+    cartState: cartState,
+    uploadedFiles: file
+  }
+}
+
+export function uploadPrescriptionSuccess (
+  cartState,
+  uploadedFiles,
+  cartPrescriptions
+) {
+  return {
+    type: cartActionTypes.UPLOAD_PRESCRIPTION_SUCCESS,
+    cartState,
+    isLoading: false,
+    cart_prescriptions: cartPrescriptions,
+    uploadedFiles: uploadedFiles
+  }
+}
+
+export function uploadPrescriptionFailure (cartState, error) {
+  return {
+    type: cartActionTypes.UPLOAD_PRESCRIPTION_FAILURE,
+    cartState,
+    isLoading: false,
+    isError: true,
+    error: error
+  }
+}
+
+export function deletePrescriptionLoading (cartState, files, index) {
+  return {
+    type: cartActionTypes.DELETE_PRESCRIPTION_LOADING,
+    cartState: cartState,
+    isLoading: true,
+    isError: false,
+    error: {},
+    uploadedFiles: files,
+    deletedFileIndex: index
+  }
+}
+
+export function deletePrescriptionSuccess (
+  cartState,
+  uploadedFiles,
+  cartPrescriptions
+) {
+  return {
+    type: cartActionTypes.DELETE_PRESCRIPTION_SUCCESS,
+    cartState,
+    isLoading: false,
+    cart_prescriptions: cartPrescriptions,
+    uploadedFiles: uploadedFiles
+  }
+}
+
+export function deletePrescriptionFailure (cartState, error) {
+  return {
+    type: cartActionTypes.DELETE_PRESCRIPTION_FAILURE,
+    cartState,
+    isLoading: false,
+    isError: true,
+    error: error
+  }
+}
+
+export function submitOrderLoading (cartState) {
+  return {
+    type: cartActionTypes.SUBMIT_ORDER_LOADING,
+    cartState,
+    isLoading: true,
+    isError: false
+  }
+}
+
+export function submitOrderSuccess (cartState, result) {
+  return {
+    type: cartActionTypes.SUBMIT_ORDER_SUCCESS,
+    cartState,
+    order_number: result.order.id,
+    delivery_option: result.order.delivery_option,
+    service_type: result.order.service_type,
+    doctor_callback: result.order.doctor_callback,
+    order_prescriptions: result.order.order_prescriptions,
+    isLoading: false
+  }
+}
+
+export function submitOrderFailure (cartState, error) {
+  return {
+    type: cartActionTypes.SUBMIT_ORDER_FAILURE,
+    cartState,
     isLoading: false,
     isError: true,
     error: error

@@ -62,17 +62,25 @@ class CartDetails extends Component {
           </Typography>
         </div>
         <div className={this.props.classes.cartWrapper}>
-          <Avatar />
+          <Avatar
+            cartState={this.props.cartState}
+          />
           <MedicineList
             cartState={this.props.cartState}
             decrementCartItem={this.decrementCartItem.bind(this)}
             incrementCartItem={this.incrementCartItem.bind(this)}
           />
           <Coupon />
-          <CarePoints />
-          <CarePointsPlus />
-          <PriceDetails />
-          <TotalAmount />
+          {
+            // <CarePoints />
+            // <CarePointsPlus />
+          }
+          <PriceDetails
+            cartState={this.props.cartState}
+          />
+          <TotalAmount
+            cartState={this.props.cartState}
+          />
         </div>
       </div>
     )

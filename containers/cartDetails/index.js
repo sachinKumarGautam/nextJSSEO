@@ -21,7 +21,19 @@ class CartDetailsWrapper extends Component {
         <Grid container spacing={24}>
           <Grid item xs={8}>
             <section>
-              <OrderSummary />
+              <OrderSummary
+                loginState={this.props.loginState}
+                cartState={this.props.cartState}
+                customerState={this.props.customerState}
+                patientDetailsState={this.props.patientDetailsState}
+                deliveryDetailsState={this.props.deliveryDetailsState}
+                savePatientToCartLoading={this.props.savePatientToCartLoading}
+                saveDeliveryAddressToCartLoading={this.props.saveDeliveryAddressToCartLoading}
+                updateIsCartOpenLoginFlag={this.props.updateIsCartOpenLoginFlag}
+                uploadPrescriptionLoading={this.props.uploadPrescriptionLoading}
+                deletePrescriptionLoading={this.props.deletePrescriptionLoading}
+                submitOrderLoading={this.props.submitOrderLoading}
+              />
             </section>
           </Grid>
           <Grid item xs={4}>

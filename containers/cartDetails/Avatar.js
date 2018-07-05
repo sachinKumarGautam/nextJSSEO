@@ -22,9 +22,9 @@ class Avatar extends Component {
           <Grid item xs={2}>
             <img src='/static/images/profileCart.svg' />
           </Grid>
-          <Grid item xs={4}>
+          <Grid item xs={8}>
             <Typography className={this.props.classes.userName}>
-              Jyoti Arora
+              {this.props.cartState.payload.patient_full_name}
             </Typography>
           </Grid>
         </Grid>

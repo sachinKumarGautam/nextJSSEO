@@ -1,13 +1,18 @@
 import React from 'react';
 
+import Grid from '@material-ui/core/Grid'
 import { withStyles } from '@material-ui/core/styles';
 import ExpansionPanel from '@material-ui/core/ExpansionPanel';
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
+import ExpansionPanelActions from '@material-ui/core/ExpansionPanelActions';
 import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
 import Button from '../../components/button'
+import PatientDetailsCard from '../../components/PatientDetailsCard'
+import AddressDetailsCard from '../../components/AddressDetailsCard'
+import ImagePicker from './ImagePicker'
 
 const styles = theme => ({
   root: {
@@ -34,6 +39,11 @@ const styles = theme => ({
   },
   buttonLabel: {
     color: theme.palette.common.white
+  },
+  patientDetailsWrapper: {
+    border: '1px solid #eee',
+    padding: theme.spacing.unit * 2.5,
+    marginLeft: theme.spacing.unit * 1.25
   }
 });
 
@@ -47,6 +57,61 @@ class OrderSummary extends React.Component {
       expanded: expanded ? panel : false,
     });
   };
+
+  handleNextChange = (panel, expanded) => {
+    this.setState({
+      expanded: expanded ? panel : false,
+    });
+  };
+
+  savePatientToCart(patientId) {
+    this.props.savePatientToCartLoading(
+      this.props.cartState,
+      patientId,
+      '680a75c5-7965-4f9d-ab2f-14cb0ce16c2c'
+    )
+  }
+
+  saveDeliveryAddressToCart(addressId) {
+    this.props.saveDeliveryAddressToCartLoading(
+      this.props.cartState,
+      addressId
+    )
+  }
+
+  openLoginModal() {
+    const isCartOpenLoginDialog = true
+
+    this.props.updateIsCartOpenLoginFlag(
+      this.props.cartState,
+      isCartOpenLoginDialog
+    )
+  }
+
+  onImageSelection(event) {
+    this.props.uploadPrescriptionLoading(
+      this.props.cartState,
+      event.target.files[0]
+    )
+  }
+
+  onDeleteButton(index) {
+    this.props.deletePrescriptionLoading(
+      this.props.cartState,
+      [],
+      index
+    )
+  }
+
+  onViewImage() {
+
+  }
+
+  placeOrder() {
+    this.props.submitOrderLoading(
+      this.props.cartState
+    )
+  }
 
   render() {
     const { classes } = this.props;
@@ -62,25 +127,47 @@ class OrderSummary extends React.Component {
           <ExpansionPanelSummary expandIcon={<div />}>
             <img src='/static/images/loggedIn.svg' />
             <Typography className={classes.heading}>
-              Logged in
+              {
+                !this.props.loginState.isAuthenticated
+                ? (
+                  'Logged in'
+                ) : (
+                  this.props.customerState.payload.full_name
+                )
+              }
             </Typography>
           </ExpansionPanelSummary>
           <ExpansionPanelDetails>
-            <Typography>
-              Nulla facilisi. Phasellus sollicitudin nulla et quam mattis feugiat. Aliquam eget
-              maximus est, id dignissim quam.
-            </Typography>
-            <Button
-              size='small'
-              variant='outlined'
-              color='primary'
-              classes={{
-                root: this.props.classes.buttonRoot,
-                label: this.props.classes.buttonLabel
-              }}
-              style={{float: 'right'}}
-              label={'NEXT'}
-            />
+            {
+              !this.props.loginState.isAuthenticated &&
+              <Grid container spacing={24}>
+                <Grid item xs={2}>
+                  <Button
+                    size='small'
+                    variant='outlined'
+                    color='primary'
+                    classes={{
+                      root: this.props.classes.buttonRoot,
+                      label: this.props.classes.buttonLabel
+                    }}
+                    label={'Login'}
+                    onClick={this.openLoginModal.bind(this)}
+                  />
+                </Grid>
+                <Grid item xs={2}>
+                  <Button
+                    size='small'
+                    variant='outlined'
+                    color='primary'
+                    classes={{
+                      root: this.props.classes.buttonRoot,
+                      label: this.props.classes.buttonLabel
+                    }}
+                    label={'Register'}
+                  />
+                </Grid>
+              </Grid>
+            }
           </ExpansionPanelDetails>
         </ExpansionPanel>
         <ExpansionPanel
@@ -94,9 +181,17 @@ class OrderSummary extends React.Component {
           </ExpansionPanelSummary>
           <ExpansionPanelDetails>
             <Typography>
-              Donec placerat, lectus sed mattis semper, neque lectus feugiat lectus, varius pulvinar
-              diam eros in elit. Pellentesque convallis laoreet laoreet.
+              *Upload your prescription. If you do not have a ready prescription,
+              you may opt for a tele-consultation with our doctor and create a prescription.
+              <ImagePicker
+                onImageSelection={this.onImageSelection.bind(this)}
+                files={this.props.cartState.payload.cart_prescriptions}
+                onDeleteButton={this.onDeleteButton.bind(this)}
+                onViewImage={this.onViewImage}
+              />
             </Typography>
+          </ExpansionPanelDetails>
+          <ExpansionPanelActions>
             <Button
               size='small'
               variant='outlined'
@@ -105,10 +200,10 @@ class OrderSummary extends React.Component {
                 root: this.props.classes.buttonRoot,
                 label: this.props.classes.buttonLabel
               }}
-              style={{float: 'right'}}
               label={'NEXT'}
+              onClick={this.handleNextChange.bind(this, 'panel3', true)}
             />
-          </ExpansionPanelDetails>
+          </ExpansionPanelActions>
         </ExpansionPanel>
         <ExpansionPanel
           expanded={expanded === 'panel3'}
@@ -119,21 +214,32 @@ class OrderSummary extends React.Component {
             <Typography className={classes.heading}>Patient Details</Typography>
           </ExpansionPanelSummary>
           <ExpansionPanelDetails>
-            <Typography>
-              Nunc vitae orci ultricies, auctor nunc in, volutpat nisl. Integer sit amet egestas
-              eros, vitae egestas augue. Duis vel est augue.
-            </Typography>
-            <Button
-              size='small'
-              variant='outlined'
-              color='primary'
-              classes={{
-                root: this.props.classes.buttonRoot,
-                label: this.props.classes.buttonLabel
-              }}
-              style={{float: 'right'}}
-              label={'NEXT'}
-            />
+            <Grid container spacing={24}>
+              {
+                this.props.patientDetailsState.payload.map(patientDetail => {
+                  return (
+                    <Grid item xs={6}>
+                      <PatientDetailsCard
+                        patientDetail={patientDetail}
+                      />
+                    </Grid>
+                  )
+                })
+              }
+            </Grid>
+            <ExpansionPanelActions>
+              <Button
+                size='small'
+                variant='outlined'
+                color='primary'
+                classes={{
+                  root: this.props.classes.buttonRoot,
+                  label: this.props.classes.buttonLabel
+                }}
+                label={'NEXT'}
+                onClick={this.handleNextChange.bind(this, 'panel4', true)}
+              />
+            </ExpansionPanelActions>
           </ExpansionPanelDetails>
         </ExpansionPanel>
         <ExpansionPanel
@@ -145,21 +251,32 @@ class OrderSummary extends React.Component {
             <Typography className={classes.heading}>Delivery Details</Typography>
           </ExpansionPanelSummary>
           <ExpansionPanelDetails>
-            <Typography>
-              Nunc vitae orci ultricies, auctor nunc in, volutpat nisl. Integer sit amet egestas
-              eros, vitae egestas augue. Duis vel est augue.
-            </Typography>
-            <Button
-              size='small'
-              variant='outlined'
-              color='primary'
-              classes={{
-                root: this.props.classes.buttonRoot,
-                label: this.props.classes.buttonLabel
-              }}
-              style={{float: 'right'}}
-              label={'NEXT'}
-            />
+            <Grid container spacing={24}>
+              {
+                this.props.deliveryDetailsState.payload.map(deliveryDetail => {
+                  return (
+                    <Grid item xs={6}>
+                      <AddressDetailsCard
+                        deliveryDetail={deliveryDetail}
+                      />
+                    </Grid>
+                  )
+                })
+              }
+            </Grid>
+            <ExpansionPanelActions>
+              <Button
+                size='small'
+                variant='outlined'
+                color='primary'
+                classes={{
+                  root: this.props.classes.buttonRoot,
+                  label: this.props.classes.buttonLabel
+                }}
+                label={'NEXT'}
+                onClick={this.handleNextChange.bind(this, 'panel5', true)}
+              />
+            </ExpansionPanelActions>
           </ExpansionPanelDetails>
         </ExpansionPanel>
         <ExpansionPanel
@@ -172,9 +289,10 @@ class OrderSummary extends React.Component {
           </ExpansionPanelSummary>
           <ExpansionPanelDetails>
             <Typography>
-              Nunc vitae orci ultricies, auctor nunc in, volutpat nisl. Integer sit amet egestas
-              eros, vitae egestas augue. Duis vel est augue.
+              CASH ON DELIVERY
             </Typography>
+          </ExpansionPanelDetails>
+          <ExpansionPanelActions>
             <Button
               size='small'
               variant='outlined'
@@ -183,10 +301,10 @@ class OrderSummary extends React.Component {
                 root: this.props.classes.buttonRoot,
                 label: this.props.classes.buttonLabel
               }}
-              style={{float: 'right'}}
-              label={'NEXT'}
+              label={'Place Order'}
+              onClick={this.placeOrder.bind(this)}
             />
-          </ExpansionPanelDetails>
+          </ExpansionPanelActions>
         </ExpansionPanel>
       </div>
     );

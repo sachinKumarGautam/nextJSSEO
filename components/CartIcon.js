@@ -14,7 +14,11 @@ function CartIcon (props) {
   return (
     <div>
       <IconButton color='primary' className={classes.button} aria-label='Add to shopping cart'>
-        <Badge className={classes.margin} badgeContent={4} color='primary'>
+        <Badge
+          className={classes.margin}
+          badgeContent={props.cartState.payload.cart_items.payload.length}
+          color='primary'
+        >
           <AddShoppingCartIcon />
         </Badge>
       </IconButton>

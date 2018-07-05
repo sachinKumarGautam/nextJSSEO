@@ -18,6 +18,10 @@ import Login from '../../../containers/login'
 import getPageContext from '../../../src/getPageContext'
 import MenuWrapper from '../../../containers/menu'
 
+import {
+  updateIsCartOpenLoginFlag
+} from '../../../containers/cartDetails/cartActions'
+
 class Header extends React.Component {
   constructor (props, context) {
     super(props, context)
@@ -36,9 +40,16 @@ class Header extends React.Component {
   }
 
   closeLoginModal () {
+    const isCartOpenLoginDialog = false
+
     this.setState({
       openLoginDialog: false
     })
+
+    this.props.actions.updateIsCartOpenLoginFlag(
+      this.props.cartState,
+      isCartOpenLoginDialog
+    )
   }
 
   render () {
@@ -58,7 +69,9 @@ class Header extends React.Component {
             >
               <img src='/static/images/logo-green.svg' />
               <AutosuggestSearch />
-              <CartIcon />
+              <CartIcon
+                cartState={this.props.cartState}
+              />
               {loginState.isAuthenticated && <MenuWrapper />}
               { !loginState.isAuthenticated &&
                 <Button
@@ -70,13 +83,22 @@ class Header extends React.Component {
                   className={classes.button}
                   label={'Login / Register'}
                 />}
-              {this.state.openLoginDialog && <Login
-                openLoginDialog={this.state.openLoginDialog}
-                openLoginModal={this.openLoginModal}
-                closeLoginModal={this.closeLoginModal}
-                loginState={loginState}
-                customerState={customerState}
-              />}
+              {
+                (
+                  this.state.openLoginDialog ||
+                  this.props.cartState.isCartOpenLoginDialog
+                ) &&
+                <Login
+                  openLoginDialog={
+                    this.state.openLoginDialog ||
+                    this.props.cartState.isCartOpenLoginDialog
+                  }
+                  openLoginModal={this.openLoginModal}
+                  closeLoginModal={this.closeLoginModal}
+                  loginState={loginState}
+                  customerState={customerState}
+                />
+              }
             </Toolbar>
             <Subheader />
           </div>
@@ -125,7 +147,8 @@ Header.propTypes = {
 function mapStateToProps (state) {
   return {
     loginState: state.loginState,
-    customerState: state.customerState
+    customerState: state.customerState,
+    cartState: state.cartState
   }
 }
 
@@ -133,6 +156,7 @@ function mapDispatchToProps (dispatch) {
   return {
     actions: bindActionCreators(
       {
+        updateIsCartOpenLoginFlag
       },
       dispatch
     )

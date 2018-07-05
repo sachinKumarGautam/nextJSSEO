@@ -68,8 +68,14 @@ export default function cartReducer (state = initialState, action) {
           id: action.id,
           uid: action.uid,
           customer_id: action.customer_id,
-          customer_first_name: action.customer_first_name,
-          customer_last_name: action.customer_last_name,
+          customer_full_name: action.customer_full_name,
+          patient_full_name: action.patient_full_name,
+          discount: action.discount,
+          redeemed_care_points: action.redeemed_care_points,
+          redeemable_care_points: action.redeemable_care_points,
+          total_mrp: action.total_mrp,
+          total_sale_price: action.total_sale_price,
+          total_tax_amount: action.total_tax_amount,
           facility_code: action.facility_code,
           status: action.status,
           source: action.source,
@@ -111,8 +117,14 @@ export default function cartReducer (state = initialState, action) {
           ...state.payload,
           cart_items: {
             ...state.payload.cart_items,
-            payload: action.cartItems
-          }
+            payload: action.cart_items
+          },
+          discount: action.discount,
+          redeemed_care_points: action.redeemed_care_points,
+          redeemable_care_points: action.redeemable_care_points,
+          total_mrp: action.total_mrp,
+          total_sale_price: action.total_sale_price,
+          total_tax_amount: action.total_tax_amount
         }
       }
 
@@ -180,11 +192,11 @@ export default function cartReducer (state = initialState, action) {
         ...state,
         payload: {
           ...state.payload,
-          patient_id: {
-            ...state.payload.patient_id,
+          shipping_address_id: {
+            ...state.payload.shipping_address_id,
             isLoading: action.isLoading,
             errorState: {
-              ...state.payload.patient_id.errorState,
+              ...state.payload.shipping_address_id.errorState,
               isError: action.isError,
               error: action.error
             }
@@ -269,6 +281,126 @@ export default function cartReducer (state = initialState, action) {
           ...state.errorState,
           isError: action.isError,
           error: action.error
+        }
+      }
+
+    case cartActionTypes.UPDATE_IS_CART_OPEN_LOGIN_FLAG:
+      return {
+        ...state,
+        isCartOpenLoginDialog: action.isCartOpenLoginDialog
+      }
+
+    case cartActionTypes.UPLOAD_PRESCRIPTION_LOADING:
+      return state
+
+    case cartActionTypes.UPLOAD_PRESCRIPTION_SUCCESS:
+      return {
+        ...state,
+        prescriptionDetails: {
+          ...state.prescriptionDetails,
+          isLoading: action.isLoading,
+          cartPrescriptionList: action.uploadedFiles
+        },
+        payload: {
+          ...state.payload,
+          cart_prescriptions: action.cart_prescriptions
+        }
+      }
+
+    case cartActionTypes.UPLOAD_PRESCRIPTION_FAILURE:
+      return {
+        ...state,
+        prescriptionDetails: {
+          ...state.prescriptionDetails,
+          isLoading: action.isLoading,
+          errorState: {
+            ...state.prescriptionDetails.errorState,
+            isError: action.isError,
+            error: action.error
+          }
+        }
+      }
+
+    case cartActionTypes.DELETE_PRESCRIPTION_LOADING:
+      return {
+        ...state,
+        prescriptionDetails: {
+          ...state.prescriptionDetails,
+          isLoading: action.isLoading,
+          errorState: {
+            ...state.prescriptionDetails.errorState,
+            isError: action.isError,
+            error: action.error
+          }
+        }
+      }
+
+    case cartActionTypes.DELETE_PRESCRIPTION_SUCCESS:
+      return {
+        ...state,
+        prescriptionDetails: {
+          ...state.prescriptionDetails,
+          isLoading: action.isLoading,
+          cartPrescriptionList: action.uploadedFiles
+        },
+        payload: {
+          ...state.payload,
+          cart_prescriptions: action.cart_prescriptions
+        }
+      }
+
+    case cartActionTypes.DELETE_PRESCRIPTION_FAILURE:
+      return {
+        ...state,
+        prescriptionDetails: {
+          ...state.prescriptionDetails,
+          isLoading: action.isLoading,
+          errorState: {
+            ...state.prescriptionDetails.errorState,
+            isError: action.isError,
+            error: action.error
+          }
+        }
+      }
+
+    case cartActionTypes.SUBMIT_ORDER_LOADING:
+      return {
+        ...state,
+        orderResponse: {
+          ...state.orderResponse,
+          isLoading: action.isLoading,
+          errorState: {
+            ...state.orderResponse.errorState,
+            isError: action.isError
+          }
+        }
+      }
+
+    case cartActionTypes.SUBMIT_ORDER_SUCCESS:
+      return {
+        ...state,
+        orderResponse: {
+          ...state.orderResponse,
+          order_number: action.order_number,
+          isLoading: action.isLoading,
+          service_type: action.service_type,
+          delivery_option: action.delivery_option,
+          doctor_callback: action.doctor_callback,
+          order_prescriptions: action.order_prescriptions
+        }
+      }
+
+    case cartActionTypes.SUBMIT_ORDER_FAILURE:
+      return {
+        ...state,
+        orderResponse: {
+          ...state.orderResponse,
+          isLoading: action.isLoading,
+          errorState: {
+            ...state.orderResponse.errorState,
+            isError: action.isError,
+            error: action.error
+          }
         }
       }
 

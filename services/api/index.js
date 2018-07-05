@@ -148,6 +148,29 @@ const cartTransfer$ = cartUid => (
   })
 )
 
+const uploadPrescriptionEpic$ = (cartId, formData) => (
+  makeAjaxRequest({
+    method: 'METHOD_UPLOAD_FILE',
+    url: fetchUrl('cart', cartId + '/prescription', 'CREATE'),
+    body: formData
+  })
+)
+
+const deletePrescriptionEpic$ = (cartId, prescriptionId) => (
+  makeAjaxRequest({
+    method: 'DELETE',
+    url: fetchUrl('cart', cartId + '/prescription/' + prescriptionId, 'GET_LIST')
+  })
+)
+
+const submitOrder$ = (cartState, body) => (
+  makeAjaxRequest({
+    method: 'POST',
+    url: fetchUrl('order', 'cart', 'CREATE'),
+    body: body
+  })
+)
+
 export {
   getMoleculeSummary$,
   getMedicineList$,
@@ -166,5 +189,8 @@ export {
   deleteCartItem$,
   savePatientToCart$,
   saveDeliveryAddressToCart$,
-  cartTransfer$
+  cartTransfer$,
+  uploadPrescriptionEpic$,
+  deletePrescriptionEpic$,
+  submitOrder$
 }

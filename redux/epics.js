@@ -40,14 +40,18 @@ import {
 import {
   getAnonymousCartIdEpic,
   getCartDetailsEpic,
-  decrementCartItemLoadingEpic,
+  // decrementCartItemLoadingEpic,
   decrementCartItemEpic,
-  incrementCartItemLoadingEpic,
+  // incrementCartItemLoadingEpic,
   incrementCartItemEpic,
-  deleteCartItemLoadingEpic,
+  // deleteCartItemLoadingEpic,
   deleteCartItemEpic,
   savePatientToCartEpic,
-  cartTransferEpic
+  cartTransferEpic,
+  saveDeliveryAddressToCartEpic,
+  uploadPrescriptionEpic,
+  deletePrescriptionEpic,
+  submitOrderEpic
 } from '../containers/cartDetails/cartEpics'
 
 // import * as actions from './actions'
@@ -104,17 +108,21 @@ export const rootEpic = combineEpics(
   carePointsList,
   getAnonymousCartIdEpic,
   getCartDetailsEpic,
-  decrementCartItemLoadingEpic,
+  // decrementCartItemLoadingEpic,
   decrementCartItemEpic,
-  incrementCartItemLoadingEpic,
+  // incrementCartItemLoadingEpic,
   incrementCartItemEpic,
-  deleteCartItemLoadingEpic,
+  // deleteCartItemLoadingEpic,
   deleteCartItemEpic,
   getDeliveryDetailsList,
   getPatientDetailsList,
   savePatientToCartEpic,
+  saveDeliveryAddressToCartEpic,
   getOrderListDetails,
   getPrescriptionList,
   carePointsList,
-  cartTransferEpic
+  cartTransferEpic,
+  uploadPrescriptionEpic,
+  deletePrescriptionEpic,
+  submitOrderEpic
 )

@@ -55,10 +55,34 @@ const initialState = {
     delivery_option: '',
     service_type: ''
   },
+  isCartOpenLoginDialog: false,
   isLoading: false,
   errorState: {
     isError: false,
     error: {}
+  },
+  prescriptionDetails: {
+    prescriptionType: '',
+    cartPrescriptionList: [],
+    isLoading: false,
+    errorState: {
+      isError: false,
+      error: {}
+    },
+    isViewImageVisible: false,
+    visibleImageUrl: ''
+  },
+  orderResponse: {
+    order_number: null,
+    delivery_option: '',
+    service_type: '',
+    order_prescriptions: [],
+    doctor_callback: false,
+    isLoading: false,
+    errorState: {
+      isError: false,
+      error: {}
+    }
   }
 }
 

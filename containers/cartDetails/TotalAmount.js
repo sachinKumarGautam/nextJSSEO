@@ -30,7 +30,7 @@ class Avatar extends Component {
           </Grid>
           <Grid item xs={4}>
             <Typography className={this.props.classes.totalAmount}>
-              Rs. 800
+              Rs. {this.props.cartState.payload.total_sale_price}
             </Typography>
           </Grid>
         </Grid>

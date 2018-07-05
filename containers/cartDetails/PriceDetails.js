@@ -49,38 +49,42 @@ class PriceDetails extends Component {
             <Typography className={this.props.classes.discount}>
               Care Points Plus
             </Typography>
-            <Typography className={this.props.classes.itemTotal}>
-              Amount Payable
-            </Typography>
-            <Typography className={this.props.classes.itemTotal}>
-              Amount Paid
-            </Typography>
-            <Typography className={this.props.classes.itemTotal}>
-              Remaining Amount Payable
-            </Typography>
+            {
+              // <Typography className={this.props.classes.itemTotal}>
+              //   Amount Payable
+              // </Typography>
+              // <Typography className={this.props.classes.itemTotal}>
+              //   Amount Paid
+              // </Typography>
+              // <Typography className={this.props.classes.itemTotal}>
+              //   Remaining Amount Payable
+              // </Typography>
+            }
           </Grid>
           <Grid item xs={4}>
             <Typography className={this.props.classes.itemTotalAmount}>
-              Rs. 870.00
+              Rs. {this.props.cartState.payload.total_mrp}
             </Typography>
             <Typography className={this.props.classes.discountAmount}>
-              - Rs. 70.00
+              - Rs. {this.props.cartState.payload.discount}
             </Typography>
             <Typography className={this.props.classes.discountAmount}>
-              - Rs. 0.00
+              - Rs. {this.props.cartState.payload.redeemed_care_points}
             </Typography>
             <Typography className={this.props.classes.discountAmount}>
-              - Rs. 0.00
+              - Rs. {this.props.cartState.payload.redeemable_care_points}
             </Typography>
-            <Typography className={this.props.classes.itemTotalAmount}>
-              Rs. 800.00
-            </Typography>
-            <Typography className={this.props.classes.itemTotalAmount}>
-              Rs. 0.00
-            </Typography>
-            <Typography className={this.props.classes.itemTotalAmount}>
-              Rs. 800.00
-            </Typography>
+            {
+              // <Typography className={this.props.classes.itemTotalAmount}>
+              //   Rs. 800.00
+              // </Typography>
+              // <Typography className={this.props.classes.itemTotalAmount}>
+              //   Rs. 0.00
+              // </Typography>
+              // <Typography className={this.props.classes.itemTotalAmount}>
+              //   Rs. 800.00
+              // </Typography>
+            }
           </Grid>
         </Grid>
       </div>

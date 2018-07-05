@@ -100,7 +100,7 @@ export default function makeAjaxRequest (params) {
     case 'PATCH':
       return ajax({
         url: params.url,
-        method: 'patch',
+        method: 'update',
         timeout: timeout,
         body: params.body,
         options: {

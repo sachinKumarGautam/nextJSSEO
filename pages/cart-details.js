@@ -13,11 +13,25 @@ import Paper from '@material-ui/core/Paper'
 import CartDetailsWrapper from '../containers/cartDetails'
 
 import {
+  updateIsCartOpenLoginFlag,
   getCartDetailsLoading,
   incrementCartItemLoading,
   decrementCartItemLoading,
-  deleteCartItemLoading
+  deleteCartItemLoading,
+  savePatientToCartLoading,
+  saveDeliveryAddressToCartLoading,
+  uploadPrescriptionLoading,
+  deletePrescriptionLoading,
+  submitOrderLoading
 } from '../containers/cartDetails/cartActions'
+
+import {
+  getDeliveryDetailsListLoading
+} from '../containers/deliveryDetails/deliveryDetailsActions'
+
+import {
+  getPatientDetailsListLoading
+} from '../containers/patientDetails/patientDetailsActions'
 
 const styles = theme => ({
   root: {
@@ -41,6 +55,16 @@ class CartDetails extends React.Component {
       this.props.cartState,
       '680a75c5-7965-4f9d-ab2f-14cb0ce16c2c'
     )
+
+    this.props.actions.getPatientDetailsListLoading(
+      this.props.patientDetailsState,
+      this.props.customerState.payload.id // pass customer id
+    )
+
+    this.props.actions.getDeliveryDetailsListLoading(
+      this.props.deliveryDetailsState,
+      this.props.customerState.payload.id // pass customer id
+    )
   }
 
   render() {
@@ -49,10 +73,20 @@ class CartDetails extends React.Component {
         <Header />
         <div className={this.props.classes.root}>
           <CartDetailsWrapper
+            loginState={this.props.loginState}
             cartState={this.props.cartState}
+            customerState={this.props.customerState}
+            patientDetailsState={this.props.patientDetailsState}
+            deliveryDetailsState={this.props.deliveryDetailsState}
+            savePatientToCartLoading={this.props.actions.savePatientToCartLoading}
+            saveDeliveryAddressToCartLoading={this.props.actions.saveDeliveryAddressToCartLoading}
             incrementCartItemLoading={this.props.actions.incrementCartItemLoading}
             decrementCartItemLoading={this.props.actions.decrementCartItemLoading}
             deleteCartItemLoading={this.props.actions.deleteCartItemLoading}
+            updateIsCartOpenLoginFlag={this.props.actions.updateIsCartOpenLoginFlag}
+            uploadPrescriptionLoading={this.props.actions.uploadPrescriptionLoading}
+            deletePrescriptionLoading={this.props.actions.deletePrescriptionLoading}
+            submitOrderLoading={this.props.actions.submitOrderLoading}
           />
         </div>
         <Footer />
@@ -63,7 +97,11 @@ class CartDetails extends React.Component {
 
 function mapStateToProps (state) {
   return {
-    cartState: state.cartState
+    loginState: state.loginState,
+    cartState: state.cartState,
+    customerState: state.customerState,
+    patientDetailsState: state.patientDetailsState,
+    deliveryDetailsState: state.deliveryDetailsState
   }
 }
 
@@ -71,10 +109,18 @@ function mapDispatchToProps (dispatch) {
   return {
     actions: bindActionCreators(
       {
+        updateIsCartOpenLoginFlag,
         getCartDetailsLoading,
         incrementCartItemLoading,
         decrementCartItemLoading,
-        deleteCartItemLoading
+        deleteCartItemLoading,
+        getDeliveryDetailsListLoading,
+        getPatientDetailsListLoading,
+        savePatientToCartLoading,
+        saveDeliveryAddressToCartLoading,
+        uploadPrescriptionLoading,
+        deletePrescriptionLoading,
+        submitOrderLoading
       },
       dispatch
     )
