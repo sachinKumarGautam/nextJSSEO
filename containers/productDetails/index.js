@@ -9,8 +9,6 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
 import { withStyles } from '@material-ui/core/styles'
-import withRoot from '../../src/withRoot'
-
 
 /*
   bread crumbs
@@ -72,8 +70,6 @@ function mapDispatchToProps (dispatch) {
   return {
     actions: bindActionCreators(
       {
-        getPatientDetailsListLoading,
-        savePatientSelected
       },
       dispatch
     )
@@ -83,4 +79,4 @@ function mapDispatchToProps (dispatch) {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(withStyles(styles)(ProductDetailsWrapper))
+)(ProductDetailsWrapper)
