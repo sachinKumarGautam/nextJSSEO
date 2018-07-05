@@ -23,6 +23,8 @@ const PatientDetailsWrapper = props => (
         <PatientDetailsList
           patientDetailsState={props.patientDetailsState}
           savePatientSelected={props.savePatientSelected}
+          submitPatientDetailsLoading={props.submitPatientDetailsLoading}
+          customerState={props.customerState}
         />
       </Grid>
     </Grid>

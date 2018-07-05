@@ -4,7 +4,10 @@ import {
   GET_PATIENT_DETAILS_LIST_LOADING,
   GET_PATIENT_DETAILS_LIST_SUCCESS,
   GET_PATIENT_DETAILS_LIST_FAILURE,
-  SAVE_PATIENT_SELECTED
+  SAVE_PATIENT_SELECTED,
+  ADD_NEW_PATIENT_LOADING,
+  ADD_NEW_PATIENT_SUCCESS,
+  ADD_NEW_PATIENT_FAILURE
 } from './patientDetailsActionTypes'
 
 export default function patientDetailsReducer (state = initialState, action) {
@@ -46,6 +49,47 @@ export default function patientDetailsReducer (state = initialState, action) {
       return {
         ...state,
         patientIdSelected: action.patientIdSelected
+      }
+
+    // update loading details of add new patient API
+    case ADD_NEW_PATIENT_LOADING:
+      return {
+        ...state,
+        addNewPatient: {
+          ...state.addNewPatient,
+          isLoading: action.isLoading,
+          errorState: {
+            ...state.addNewPatient.errorState,
+            isError: action.isError,
+            error: action.error
+          }
+        }
+      }
+
+    // update loading details of add new patient API
+    case ADD_NEW_PATIENT_SUCCESS:
+      return {
+        ...state,
+        addNewPatient: {
+          ...state.addNewPatient,
+          payload: action.patientDetailsList,
+          isLoading: action.isLoading
+        }
+      }
+
+    // update loading details of add new patient API
+    case ADD_NEW_PATIENT_FAILURE:
+      return {
+        ...state,
+        addNewPatient: {
+          ...state.addNewPatient,
+          isLoading: action.isLoading,
+          errorState: {
+            ...state.errorState,
+            isError: action.isError,
+            error: action.error
+          }
+        }
       }
 
     default:
