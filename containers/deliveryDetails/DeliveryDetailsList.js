@@ -8,7 +8,7 @@ import CardContent from '@material-ui/core/CardContent'
 import { withStyles } from '@material-ui/core/styles'
 
 import Button from '../../components/button'
-import DeliveryDetailForm from './DeliveryDetailForm'
+import DeliveryDetailForm from './DeliveryDetailsForm'
 import AddressDetailsCardWrapper from './AddressDetailsCardWrapper'
 
 const styles = theme => {
