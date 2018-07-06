@@ -62,9 +62,14 @@ class CartDetails extends Component {
           </Typography>
         </div>
         <div className={this.props.classes.cartWrapper}>
-          <Avatar
-            cartState={this.props.cartState}
-          />
+          {
+            this.props.cartState.payload.patient_id.payload
+            ? (
+              <Avatar
+                cartState={this.props.cartState}
+              />
+            ) : null
+          }
           <MedicineList
             cartState={this.props.cartState}
             decrementCartItem={this.decrementCartItem.bind(this)}

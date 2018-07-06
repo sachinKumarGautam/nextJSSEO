@@ -23,7 +23,10 @@ export default function cartReducer (state = initialState, action) {
           ...state.payload,
           id: action.id,
           uid: action.uid,
-          patient_id: action.patient_id,
+          patient_id: {
+            ...state.payload.patient_id,
+            payload: action.patient_id
+          },
           cart_items: {
             ...state.payload.cart_items,
             payload: action.cart_items
