@@ -23,7 +23,9 @@ import {
   uploadPrescriptionLoading,
   deletePrescriptionLoading,
   submitOrderLoading,
-  updateIsCartOpenRegisterModalFlag
+  updateIsCartOpenRegisterModalFlag,
+  resetCartState,
+  getAnonymousCartIdLoading
 } from '../containers/cartDetails/cartActions'
 
 import {
@@ -105,6 +107,8 @@ class CartDetails extends React.Component {
             deletePrescriptionLoading={this.props.actions.deletePrescriptionLoading}
             submitOrderLoading={this.props.actions.submitOrderLoading}
             updateIsCartOpenRegisterModalFlag={this.props.actions.updateIsCartOpenRegisterModalFlag}
+            resetCartState={this.props.actions.resetCartState}
+            getAnonymousCartIdLoading={this.props.actions.getAnonymousCartIdLoading}
           />
         </div>
         <Footer />
@@ -139,7 +143,9 @@ function mapDispatchToProps (dispatch) {
         uploadPrescriptionLoading,
         deletePrescriptionLoading,
         submitOrderLoading,
-        updateIsCartOpenRegisterModalFlag
+        updateIsCartOpenRegisterModalFlag,
+        resetCartState,
+        getAnonymousCartIdLoading
       },
       dispatch
     )

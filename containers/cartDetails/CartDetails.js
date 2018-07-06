@@ -11,6 +11,12 @@ import CarePointsPlus from './CarePointsPlus'
 import PriceDetails from './PriceDetails'
 import TotalAmount from './TotalAmount'
 
+import Router from 'next/router'
+
+import {
+  THANK_YOU
+} from '../../routes/RouteConstant'
+
 /*
   avatar
   medicine list
@@ -51,6 +57,24 @@ class CartDetails extends Component {
 
   incrementCartItem (cartItem) {
     this.props.incrementCartItemLoading(this.props.cartState, cartItem)
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if(
+      nextProps.cartState.orderResponse.order_number !==
+      this.props.cartState.orderResponse.order_number
+    ) {
+      Router.push({ pathname: THANK_YOU})
+
+      this.props.resetCartState()
+
+      this.props.getAnonymousCartIdLoading(
+        this.props.cartState,
+        'MWEB',
+        100,
+        ''
+      )
+    }
   }
 
   render () {

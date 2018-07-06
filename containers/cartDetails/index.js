@@ -44,6 +44,8 @@ class CartDetailsWrapper extends Component {
                 incrementCartItemLoading={this.props.incrementCartItemLoading}
                 decrementCartItemLoading={this.props.decrementCartItemLoading}
                 deleteCartItemLoading={this.props.deleteCartItemLoading}
+                resetCartState={this.props.resetCartState}
+                getAnonymousCartIdLoading={this.props.getAnonymousCartIdLoading}
               />
             </section>
           </Grid>

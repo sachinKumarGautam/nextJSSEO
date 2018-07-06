@@ -413,6 +413,9 @@ export default function cartReducer (state = initialState, action) {
         }
       }
 
+    case cartActionTypes.RESET_CART_STATE:
+      return initialState
+
     default:
       return state
   }

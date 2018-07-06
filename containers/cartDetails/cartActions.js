@@ -378,3 +378,9 @@ export function submitOrderFailure (cartState, error) {
     error: error
   }
 }
+
+export function resetCartState() {
+  return {
+    type: cartActionTypes.RESET_CART_STATE
+  }
+}
