@@ -2,7 +2,7 @@ import LoginForm from './LoginForm'
 import RegisterForm from './RegisterForm'
 import OTPForm from './OTPForm'
 import PatientForm from './PatientForm'
-import DeliveryDetailsForm from '../../containers/deliveryDetails/DeliveryDetailsForm'
+import DeliveryForm from './DeliveryForm'
 
 const FormWrapper = (props) => {
   const {
@@ -12,7 +12,8 @@ const FormWrapper = (props) => {
     onSubmit,
     loginState,
     customerState,
-    patientFormState
+    patientFormState,
+    deliveryFormState
   } = props
   switch (props.type) {
     case 'loginForm':
@@ -53,7 +54,7 @@ const FormWrapper = (props) => {
       return <DeliveryForm
         closeModal={closeModal}
         onSubmit={onSubmit}
-        deliveryFormState={patientFdeliveryFormState}
+        deliveryFormState={deliveryFormState}
         customerId={props.customerState.payload.id}
         mobile={props.customerState.payload.mobile}
       />
