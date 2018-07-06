@@ -187,7 +187,7 @@ class OrderSummary extends React.Component {
       <div className={classes.root}>
         <ExpansionPanel
           expanded={expanded === 'panel1'}
-          onChange={this.handleNextChange.bind(this, 'panel1')}
+          //onChange={this.handleNextChange.bind(this, 'panel1')}
           className={classes.expansionPanel}
         >
           <ExpansionPanelSummary expandIcon={<div />}>
@@ -279,25 +279,27 @@ class OrderSummary extends React.Component {
         >
           <ExpansionPanelSummary expandIcon={<div />}>
             <Typography className={classes.heading}>Patient Details</Typography>
-            {
-              this.state.expanded === 'panel3' &&
-              <AddPatientButton
-                buttonRoot={this.props.classes.buttonRoot}
-                buttonLabel={this.props.classes.buttonLabel}
-                onClick={this.openPatientFormModal.bind(this)}
-              />
-            }
-            <PatientDetailForm
-              closePatientFormModal={this.closePatientFormModal.bind(this)}
-              openPatientFormDialog={this.state.openPatientFormDialog}
-              patientFormState={this.props.patientDetailsState}
-              customerState={this.props.customerState}
-              submitPatientDetailsLoading={this.props.submitPatientDetailsLoading}
-              isEdit={'false'}
-            />
           </ExpansionPanelSummary>
           <ExpansionPanelDetails>
             <Grid container spacing={24}>
+              <Grid item xs={12}>
+                {
+                  this.state.expanded === 'panel3' &&
+                  <AddPatientButton
+                    buttonRoot={this.props.classes.buttonRoot}
+                    buttonLabel={this.props.classes.buttonLabel}
+                    onClick={this.openPatientFormModal.bind(this)}
+                  />
+                }
+                <PatientDetailForm
+                  closePatientFormModal={this.closePatientFormModal.bind(this)}
+                  openPatientFormDialog={this.state.openPatientFormDialog}
+                  patientFormState={this.props.patientDetailsState}
+                  customerState={this.props.customerState}
+                  submitPatientDetailsLoading={this.props.submitPatientDetailsLoading}
+                  isEdit={'false'}
+                />
+              </Grid>
               {
                 this.props.patientDetailsState.payload.map(patientDetail => {
                   return (
@@ -334,25 +336,27 @@ class OrderSummary extends React.Component {
         >
           <ExpansionPanelSummary expandIcon={<div />}>
             <Typography className={classes.heading}>Delivery Details</Typography>
-            {
-              this.state.expanded === 'panel4' &&
-              <AddDeliveryAddressButton
-                buttonRoot={this.props.classes.buttonRoot}
-                buttonLabel={this.props.classes.buttonLabel}
-                onClick={this.openDeliveryFormModal.bind(this)}
-              />
-            }
-            <DeliveryDetailForm
-              onSubmit={this.props.submitDeliveryDetailsLoading}
-              openDeliveryFormDialog={this.state.openDeliveryFormDialog}
-              customerState={this.props.customerState}
-              deliveryDetailsState={this.props.deliveryDetailsState}
-              deliveryFormState={this.props.deliveryDetailsState.deliveryFormState}
-              closeDeliveryFormModal={this.closeDeliveryFormModal.bind(this)}
-            />
           </ExpansionPanelSummary>
           <ExpansionPanelDetails>
             <Grid container spacing={24}>
+              <Grid item xs={12}>
+                {
+                  this.state.expanded === 'panel4' &&
+                  <AddDeliveryAddressButton
+                    buttonRoot={this.props.classes.buttonRoot}
+                    buttonLabel={this.props.classes.buttonLabel}
+                    onClick={this.openDeliveryFormModal.bind(this)}
+                  />
+                }
+                <DeliveryDetailForm
+                  onSubmit={this.props.submitDeliveryDetailsLoading}
+                  openDeliveryFormDialog={this.state.openDeliveryFormDialog}
+                  customerState={this.props.customerState}
+                  deliveryDetailsState={this.props.deliveryDetailsState}
+                  deliveryFormState={this.props.deliveryDetailsState.deliveryFormState}
+                  closeDeliveryFormModal={this.closeDeliveryFormModal.bind(this)}
+                />
+              </Grid>
               {
                 this.props.deliveryDetailsState.payload.map(deliveryDetail => {
                   return (

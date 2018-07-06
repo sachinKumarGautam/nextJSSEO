@@ -99,7 +99,9 @@ class CartDetails extends Component {
             decrementCartItem={this.decrementCartItem.bind(this)}
             incrementCartItem={this.incrementCartItem.bind(this)}
           />
-          <Coupon />
+          {
+            // <Coupon />
+          }
           {
             // <CarePoints />
             // <CarePointsPlus />

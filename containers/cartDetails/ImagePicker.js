@@ -50,7 +50,7 @@ const styles = theme => ({
     zIndex: -1
   },
   pickerListLabel: {
-    width: '75px',
+    width: '100px',
     textAlign: 'center',
     background: '#fff',
     padding: '15px',
@@ -59,7 +59,8 @@ const styles = theme => ({
     fontWeight: '300',
     flexShrink: 0,
     marginRight: '5px',
-    border: '1px solid #80c241'
+    border: '1px solid #80c241',
+    marginTop: 10
   },
   pickerListLabelPlus: {
     fontSize: '35px',
