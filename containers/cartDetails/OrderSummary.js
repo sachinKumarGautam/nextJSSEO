@@ -17,6 +17,9 @@ import ImagePicker from './ImagePicker'
 import AddPatientButton from '../patientDetails/AddPatientButton'
 import PatientDetailForm from '../patientDetails/PatientDetailForm'
 
+import AddDeliveryAddressButton from '../deliveryDetails/AddDeliveryAddressButton'
+import DeliveryDetailForm from '../deliveryDetails/DeliveryDetailsForm'
+
 const styles = theme => ({
   root: {
     width: '100%',
@@ -55,7 +58,8 @@ class OrderSummary extends React.Component {
     expanded: 'panel1',
     patientIdSelected: 0,
     addressIdSelected: 0,
-    openPatientFormDialog: false
+    openPatientFormDialog: false,
+    openDeliveryFormDialog: false
   };
 
   handleChange = panel => (event, expanded) => {
@@ -160,6 +164,18 @@ class OrderSummary extends React.Component {
   closePatientFormModal() {
     this.setState({
       openPatientFormDialog: false
+    })
+  }
+
+  openDeliveryFormModal() {
+    this.setState({
+      openDeliveryFormDialog: true
+    })
+  }
+
+  closeDeliveryFormModal() {
+    this.setState({
+      openDeliveryFormDialog: false
     })
   }
 
@@ -318,6 +334,22 @@ class OrderSummary extends React.Component {
         >
           <ExpansionPanelSummary expandIcon={<div />}>
             <Typography className={classes.heading}>Delivery Details</Typography>
+            {
+              this.state.expanded === 'panel4' &&
+              <AddDeliveryAddressButton
+                buttonRoot={this.props.classes.buttonRoot}
+                buttonLabel={this.props.classes.buttonLabel}
+                onClick={this.openDeliveryFormModal.bind(this)}
+              />
+            }
+            <DeliveryDetailForm
+              onSubmit={this.props.submitDeliveryDetailsLoading}
+              openDeliveryFormDialog={this.state.openDeliveryFormDialog}
+              customerState={this.props.customerState}
+              deliveryDetailsState={this.props.deliveryDetailsState}
+              deliveryFormState={this.props.deliveryDetailsState.deliveryFormState}
+              closeDeliveryFormModal={this.closeDeliveryFormModal.bind(this)}
+            />
           </ExpansionPanelSummary>
           <ExpansionPanelDetails>
             <Grid container spacing={24}>

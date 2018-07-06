@@ -29,7 +29,8 @@ import {
 } from '../containers/cartDetails/cartActions'
 
 import {
-  getDeliveryDetailsListLoading
+  getDeliveryDetailsListLoading,
+  submitDeliveryDetailsLoading
 } from '../containers/deliveryDetails/deliveryDetailsActions'
 
 import {
@@ -111,6 +112,7 @@ class CartDetails extends React.Component {
             resetCartState={this.props.actions.resetCartState}
             getAnonymousCartIdLoading={this.props.actions.getAnonymousCartIdLoading}
             submitPatientDetailsLoading={this.props.actions.submitPatientDetailsLoading}
+            submitDeliveryDetailsLoading={this.props.actions.submitDeliveryDetailsLoading}
           />
         </div>
         <Footer />
@@ -148,7 +150,8 @@ function mapDispatchToProps (dispatch) {
         updateIsCartOpenRegisterModalFlag,
         resetCartState,
         getAnonymousCartIdLoading,
-        submitPatientDetailsLoading
+        submitPatientDetailsLoading,
+        submitDeliveryDetailsLoading
       },
       dispatch
     )

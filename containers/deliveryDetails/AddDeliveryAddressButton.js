@@ -10,7 +10,7 @@ const AddDeliveryAddressButton = (props) => (
       label: props.buttonLabel
     }}
     style={{float: 'right'}}
-    label={'ADD NEW DELIVERY ADDRESS'}
+    label={'ADD NEW ADDRESS'}
     onClick={props.onClick.bind(this)}
   />
 )
