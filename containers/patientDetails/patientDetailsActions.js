@@ -3,7 +3,7 @@ import {
   GET_PATIENT_DETAILS_LIST_SUCCESS,
   GET_PATIENT_DETAILS_LIST_FAILURE,
   SAVE_PATIENT_SELECTED,
-  SUBMIT_PATIENT_LOADING ,
+  SUBMIT_PATIENT_LOADING,
   SUBMIT_PATIENT_SUCCESS,
   SUBMIT_PATIENT_FAILURE
 } from './patientDetailsActionTypes'
@@ -14,16 +14,16 @@ import {
  * @param {number} customerId - The value of the customer id according to which list will occur
  */
 export function getPatientDetailsListLoading (
-  patientDetailsState, 
-  customerId, 
+  patientDetailsState,
+  customerId
 ) {
   return {
     type: GET_PATIENT_DETAILS_LIST_LOADING,
     patientDetailsState,
-    customerId, 
+    customerId,
     isLoading: true,
     isError: false,
-    error: {},
+    error: {}
   }
 }
 

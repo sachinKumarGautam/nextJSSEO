@@ -49,7 +49,9 @@ const styles = theme => ({
 
 class OrderSummary extends React.Component {
   state = {
-    expanded: null,
+    expanded: 'panel1',
+    patientIdSelected: 0,
+    addressIdSelected: 0
   };
 
   handleChange = panel => (event, expanded) => {
@@ -88,6 +90,15 @@ class OrderSummary extends React.Component {
     )
   }
 
+  openRegisterModal() {
+    const isCartOpenRegisterDialog = true
+
+    this.props.updateIsCartOpenRegisterModalFlag(
+      this.props.cartState,
+      isCartOpenRegisterDialog
+    )
+  }
+
   onImageSelection(event) {
     this.props.uploadPrescriptionLoading(
       this.props.cartState,
@@ -113,6 +124,18 @@ class OrderSummary extends React.Component {
     )
   }
 
+  saveAddressSelected() {
+    this.setState({
+      addressIdSelected: addressIdSelected
+    })
+  }
+
+  savePatientSelected() {
+    this.setState({
+      patientIdSelected: patientIdSelected
+    })
+  }
+
   render() {
     const { classes } = this.props;
     const { expanded } = this.state;
@@ -121,7 +144,7 @@ class OrderSummary extends React.Component {
       <div className={classes.root}>
         <ExpansionPanel
           expanded={expanded === 'panel1'}
-          onChange={this.handleChange('panel1')}
+          onChange={this.handleNextChange.bind(this, 'panel1')}
           className={classes.expansionPanel}
         >
           <ExpansionPanelSummary expandIcon={<div />}>
@@ -130,7 +153,7 @@ class OrderSummary extends React.Component {
               {
                 !this.props.loginState.isAuthenticated
                 ? (
-                  'Logged in'
+                  'Log in'
                 ) : (
                   this.props.customerState.payload.full_name
                 )
@@ -164,6 +187,7 @@ class OrderSummary extends React.Component {
                       label: this.props.classes.buttonLabel
                     }}
                     label={'Register'}
+                    onClick={this.openRegisterModal.bind(this)}
                   />
                 </Grid>
               </Grid>
@@ -207,7 +231,7 @@ class OrderSummary extends React.Component {
         </ExpansionPanel>
         <ExpansionPanel
           expanded={expanded === 'panel3'}
-          onChange={this.handleChange('panel3')}
+          //onChange={this.handleChange('panel3')}
           className={classes.expansionPanel}
         >
           <ExpansionPanelSummary expandIcon={<div />}>
@@ -221,6 +245,8 @@ class OrderSummary extends React.Component {
                     <Grid item xs={6}>
                       <PatientDetailsCard
                         patientDetail={patientDetail}
+                        savePatientSelected={this.savePatientSelected.bind(this)}
+                        patientIdSelected={this.state.patientIdSelected}
                       />
                     </Grid>
                   )
@@ -244,7 +270,7 @@ class OrderSummary extends React.Component {
         </ExpansionPanel>
         <ExpansionPanel
           expanded={expanded === 'panel4'}
-          onChange={this.handleChange('panel4')}
+          //onChange={this.handleChange('panel4')}
           className={classes.expansionPanel}
         >
           <ExpansionPanelSummary expandIcon={<div />}>
@@ -258,6 +284,8 @@ class OrderSummary extends React.Component {
                     <Grid item xs={6}>
                       <AddressDetailsCard
                         deliveryDetail={deliveryDetail}
+                        saveAddressSelected={this.saveAddressSelected.bind(this)}
+                        addressIdSelected={this.state.addressIdSelected}
                       />
                     </Grid>
                   )
@@ -281,7 +309,7 @@ class OrderSummary extends React.Component {
         </ExpansionPanel>
         <ExpansionPanel
           expanded={expanded === 'panel5'}
-          onChange={this.handleChange('panel5')}
+          //onChange={this.handleChange('panel5')}
           className={classes.expansionPanel}
         >
           <ExpansionPanelSummary expandIcon={<div />}>

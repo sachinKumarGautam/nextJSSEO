@@ -22,7 +22,8 @@ import { checkPincodeLoading } from '../../../containers/location/pincode/pincod
 import {
   getAnonymousCartIdLoading,
   updateIsCartOpenLoginFlag,
-  incrementCartItemLoading
+  incrementCartItemLoading,
+  updateIsCartOpenRegisterModalFlag
 } from '../../../containers/cartDetails/cartActions'
 
 const styles = theme => ({
@@ -68,8 +69,8 @@ class Header extends React.Component {
     }
   }
 
-  componentDidMount() {
-    if(!this.props.loginState.isAuthenticated && !this.props.cartState.payload.uid) {
+  componentDidMount () {
+    if (!this.props.loginState.isAuthenticated && !this.props.cartState.payload.uid) {
       this.props.actions.getAnonymousCartIdLoading(
         this.props.cartState,
         'MWEB',
@@ -87,6 +88,7 @@ class Header extends React.Component {
 
   closeLoginModal () {
     const isCartOpenLoginDialog = false
+    const isCartOpenRegisterDialog = false
 
     this.setState({
       openLoginDialog: false
@@ -95,6 +97,11 @@ class Header extends React.Component {
     this.props.actions.updateIsCartOpenLoginFlag(
       this.props.cartState,
       isCartOpenLoginDialog
+    )
+
+    this.props.actions.updateIsCartOpenRegisterModalFlag(
+      this.props.cartState,
+      isCartOpenRegisterDialog
     )
   }
 
@@ -148,14 +155,17 @@ class Header extends React.Component {
               {
                 (
                   this.state.openLoginDialog ||
-                  this.props.cartState.isCartOpenLoginDialog
+                  this.props.cartState.isCartOpenLoginDialog ||
+                  this.props.cartState.isCartOpenRegisterDialog
                 ) &&
                 <Login
                   openLoginDialog={
                     this.state.openLoginDialog ||
-                    this.props.cartState.isCartOpenLoginDialog
+                    this.props.cartState.isCartOpenLoginDialog ||
+                    this.props.cartState.isCartOpenRegisterDialog
                   }
                   openLoginModal={this.openLoginModal}
+                  isCartOpenRegisterDialog={this.props.cartState.isCartOpenRegisterDialog}
                   closeLoginModal={this.closeLoginModal}
                   loginState={loginState}
                   customerState={customerState}
@@ -189,7 +199,8 @@ function mapDispatchToProps (dispatch) {
         checkPincodeLoading,
         updateInProgressMedicineState,
         getAnonymousCartIdLoading,
-        incrementCartItemLoading
+        incrementCartItemLoading,
+        updateIsCartOpenRegisterModalFlag
       },
       dispatch
     )

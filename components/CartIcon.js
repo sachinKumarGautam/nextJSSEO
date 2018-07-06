@@ -11,6 +11,12 @@ import ReactTooltip from 'react-tooltip'
 
 import Button from './button'
 
+import Router from 'next/router'
+
+import {
+  CART_DETAILS
+} from '../routes/RouteConstant'
+
 const styles = theme => ({
   button: {
     margin: theme.spacing.unit
@@ -97,6 +103,8 @@ class CartIcon extends Component {
 
   render () {
     const { classes } = this.props
+    const cartItems = this.props.cartState.payload.cart_items.payload
+
     return (
       <div>
         <a
@@ -111,7 +119,7 @@ class CartIcon extends Component {
           >
             <Badge
               className={classes.margin}
-              badgeContent={this.props.cartState.payload.cart_items.payload.length}
+              badgeContent={cartItems.length}
               color='primary'
             >
               <AddShoppingCartIcon />
@@ -137,7 +145,7 @@ class CartIcon extends Component {
               variant="caption"
               className={classes.itemStyle}
             >
-              2 item(s)
+              {cartItems.length} item(s)
             </Typography>
           </div>
           <Divider/>
@@ -150,7 +158,8 @@ class CartIcon extends Component {
               }
             >
               {
-                this.state.quantity  ? 'Glycomet-GP 2 Tablet'
+                cartItems.length
+                ? cartItems[cartItems.length - 1].name
                 : 'There is no item in your cart yet'
               }
             </Typography>
@@ -160,7 +169,7 @@ class CartIcon extends Component {
                 variant="caption"
                 className={classes.priceStyle}
               >
-                Rs. 55.5
+                Rs. {cartItems.length && cartItems[cartItems.length - 1].mrp}
               </Typography>
               : null
             }
@@ -174,7 +183,7 @@ class CartIcon extends Component {
                 root: classes.buttonRoot,
                 label: classes.buttonLabel
               }}
-              onClick={this.handleClickOpen}
+              onClick={() => { Router.push({ pathname: CART_DETAILS}) }}
               label={'PROCEED TO CART'}
             />
           </div>

@@ -22,6 +22,7 @@ const QuantityField = (props) => (
     select
     defaultValue={'1'}
     label='Qty:'
+    onChange={props.onChangeQuantity.bind(this)}
     className={props.classes.textField}
     // value={this.state.currency}
     // onChange={this.handleChange('currency')}

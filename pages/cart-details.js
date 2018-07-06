@@ -22,7 +22,8 @@ import {
   saveDeliveryAddressToCartLoading,
   uploadPrescriptionLoading,
   deletePrescriptionLoading,
-  submitOrderLoading
+  submitOrderLoading,
+  updateIsCartOpenRegisterModalFlag
 } from '../containers/cartDetails/cartActions'
 
 import {
@@ -55,7 +56,7 @@ class CartDetails extends React.Component {
 
     this.props.actions.getCartDetailsLoading(
       this.props.cartState,
-      '680a75c5-7965-4f9d-ab2f-14cb0ce16c2c'
+      cartUid
     )
 
     this.props.actions.getPatientDetailsListLoading(
@@ -67,6 +68,20 @@ class CartDetails extends React.Component {
       this.props.deliveryDetailsState,
       this.props.customerState.payload.id // pass customer id
     )
+  }
+
+  componentWillReceiveProps (nextProps) {
+    if (nextProps.customerState.payload.id !== this.props.customerState.payload.id) {
+      this.props.actions.getPatientDetailsListLoading(
+        this.props.patientDetailsState,
+        nextProps.customerState.payload.id // pass customer id
+      )
+
+      this.props.actions.getDeliveryDetailsListLoading(
+        this.props.deliveryDetailsState,
+        nextProps.customerState.payload.id // pass customer id
+      )
+    }
   }
 
   render () {
@@ -89,6 +104,7 @@ class CartDetails extends React.Component {
             uploadPrescriptionLoading={this.props.actions.uploadPrescriptionLoading}
             deletePrescriptionLoading={this.props.actions.deletePrescriptionLoading}
             submitOrderLoading={this.props.actions.submitOrderLoading}
+            updateIsCartOpenRegisterModalFlag={this.props.actions.updateIsCartOpenRegisterModalFlag}
           />
         </div>
         <Footer />
@@ -122,7 +138,8 @@ function mapDispatchToProps (dispatch) {
         saveDeliveryAddressToCartLoading,
         uploadPrescriptionLoading,
         deletePrescriptionLoading,
-        submitOrderLoading
+        submitOrderLoading,
+        updateIsCartOpenRegisterModalFlag
       },
       dispatch
     )

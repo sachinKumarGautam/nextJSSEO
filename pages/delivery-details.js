@@ -17,7 +17,8 @@ import { of } from 'rxjs/observable/of'
 
 import {
   getDeliveryDetailsListLoading,
-  saveAddressSelected
+  saveAddressSelected,
+  submitDeliveryDetailsLoading
 } from '../containers/deliveryDetails/deliveryDetailsActions'
 
 const styles = theme => ({
@@ -54,6 +55,8 @@ class DeliveryDetails extends React.Component {
             <DeliveryDetailsWrapper
               deliveryDetailsState={this.props.deliveryDetailsState}
               saveAddressSelected={this.props.actions.saveAddressSelected}
+              submitDeliveryDetailsLoading={this.props.actions.submitDeliveryDetailsLoading}
+              customerState={this.props.customerState}
             />
           </Paper>
         </div>
@@ -75,7 +78,8 @@ function mapDispatchToProps (dispatch) {
     actions: bindActionCreators(
       {
         getDeliveryDetailsListLoading,
-        saveAddressSelected
+        saveAddressSelected,
+        submitDeliveryDetailsLoading
       },
       dispatch
     )

@@ -33,6 +33,7 @@ class CartDetailsWrapper extends Component {
                 uploadPrescriptionLoading={this.props.uploadPrescriptionLoading}
                 deletePrescriptionLoading={this.props.deletePrescriptionLoading}
                 submitOrderLoading={this.props.submitOrderLoading}
+                updateIsCartOpenRegisterModalFlag={this.props.updateIsCartOpenRegisterModalFlag}
               />
             </section>
           </Grid>

@@ -1,0 +1,72 @@
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+
+import { withStyles } from '@material-ui/core/styles'
+import Dialog from '@material-ui/core/Dialog'
+import DialogContent from '@material-ui/core/DialogContent'
+import DialogTitle from '@material-ui/core/DialogTitle'
+import Fade from '@material-ui/core/Fade'
+
+import Form from '../../components/forms/index'
+
+const styles = theme => ({
+  paper: {
+    width: '100%',
+    maxWidth: theme.spacing.unit * 59,
+    borderRadius: theme.spacing.unit / 2,
+    backgroundColor: theme.palette.common.white,
+    border: `solid 1px ${theme.palette.customGrey.grey250}`,
+    minHeight: theme.spacing.unit * 22
+  },
+  dialogTitle: {
+    ...theme.typography.subheading,
+    textAlign: 'center',
+    color: theme.palette.primary.main,
+    fontWeight: theme.typography.fontWeightBold
+  }
+})
+
+function Transition (props) {
+  return <Fade {...props} />
+}
+
+class DeliveryDetailForm extends React.Component {
+  render () {
+    const { classes } = this.props
+    return (
+      <div>
+        <Dialog
+          open={this.props.openDeliveryFormDialog}
+          TransitionComponent={Transition}
+          keepMounted
+          onClose={this.props.closeDeliveryFormModal}
+          aria-labelledby='delivery-detail-form'
+          classes={{
+            paper: classes.paper
+          }}
+        >
+          <DialogTitle
+            id='modal'
+            disableTypography
+            classes={{
+              root: classes.dialogTitle
+            }}
+          >
+            {'ADD NEW ADDRESS'}
+          </DialogTitle>
+          <DialogContent>
+            <Form
+              type={'deliveryForm'}
+              onSubmit={this.props.onSubmit}
+              customerState={this.props.customerState}
+              deliveryFormState={this.props.deliveryFormState}
+              closeModal={this.props.closeModal}
+            />
+          </DialogContent>
+        </Dialog>
+      </div>
+    )
+  }
+}
+
+export default (withStyles(styles)(DeliveryDetailForm))

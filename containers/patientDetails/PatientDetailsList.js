@@ -9,7 +9,7 @@ import CardContent from '@material-ui/core/CardContent'
 import PatientDetailsCardWrapper from './PatientDetailsCardWrapper'
 
 import PatientDetailForm from './PatientDetailForm'
-import AddPatientButton from './addPatientButton';
+import AddPatientButton from './addPatientButton'
 
 const styles = theme => {
   return {

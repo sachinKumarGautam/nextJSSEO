@@ -55,17 +55,14 @@ class MedicineListDetails extends React.Component {
     super(props)
     this.handleOpenPincodeDialog = this.handleOpenPincodeDialog.bind(this)
     this.handleClosePincodeDialog = this.handleClosePincodeDialog.bind(this)
+    this.addToCart = this.addToCart.bind(this)
     this.state = {
       pincodeDialogOpen: false
     }
   }
 
   addToCart (event) {
-    debugger
-    event.stopPropagation()
-    console.log('sachi sachin')
     this.props.incrementCartItemLoading(this.props.cartState, this.props.itemDetails)
-
   }
 
   handleOpenPincodeDialog () {
@@ -82,12 +79,10 @@ class MedicineListDetails extends React.Component {
 
   render () {
     const {
-      props,
-
+      props
     } = this
 
     const city = this.props.checkPincodeState.payload.city
-
     return (
       <Link
         // prefetch
@@ -96,20 +91,25 @@ class MedicineListDetails extends React.Component {
       >
         <div className={props.classes.medicineListContentWrapper}>
           <div>
-            <ProductName variant={'body1'} />
+            <ProductName
+              name={props.itemDetails.name}
+              variant={'body1'}
+            />
             <ProductBrand
               variant={'caption'}
               withoutImage
               customStyle={props.classes.customBrand}
-              brand={props.itemDetails.brand_name || props.itemDetails.name}
+              brand={props.itemDetails.brand_name}
             />
-            <ProductPackSize
-              variant={'caption'}
-              withoutImage
-              customStyle={props.classes.customPackSize}
-              packType={props.itemDetails.pack_type}
-              packSize={props.itemDetails.pack_size.name}
-            />
+            { props.itemDetails.pack_size && props.itemDetails.pack_size.name &&
+              <ProductPackSize
+                variant={'caption'}
+                withoutImage
+                customStyle={props.classes.customPackSize}
+                packType={props.itemDetails.pack_type}
+                packSize={props.itemDetails.pack_size ? props.itemDetails.pack_size.name : ''}
+              />
+            }
           </div>
           <div>
             <EstimatedPriceLabel
@@ -138,7 +138,7 @@ class MedicineListDetails extends React.Component {
               open={this.state.pincodeDialogOpen}
               handleOpenPincodeDialog={this.handleOpenPincodeDialog}
               handleClose={this.handleClosePincodeDialog}
-              onClick={this.addToCart.bind(this)}
+              addToCart={this.addToCart}
               checkPincodeState={props.checkPincodeState}
               checkPincodeLoading={props.checkPincodeLoading}
             />

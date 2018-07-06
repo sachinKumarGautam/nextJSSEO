@@ -271,6 +271,14 @@ export function updateIsCartOpenLoginFlag (cartState, isCartOpenLoginDialog) {
   }
 }
 
+export function updateIsCartOpenRegisterModalFlag (cartState, isCartOpenRegisterDialog) {
+  return {
+    type: cartActionTypes.UPDATE_IS_CART_OPEN_REGISTER_MODAL_FLAG,
+    cartState: cartState,
+    isCartOpenRegisterDialog: isCartOpenRegisterDialog
+  }
+}
+
 export function uploadPrescriptionLoading (cartState, file) {
   return {
     type: cartActionTypes.UPLOAD_PRESCRIPTION_LOADING,

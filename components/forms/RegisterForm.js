@@ -121,6 +121,7 @@ const RegisterForm = props => {
         <InputLabel htmlFor='membership_code'>Membership code</InputLabel>
         <Input
           id='membership_code'
+          disabled
           onChange={handleChange}
           value={values.membership_code}
         />
@@ -143,6 +144,7 @@ const RegisterForm = props => {
           id='referral_code'
           onChange={handleChange}
           value={values.referral_code}
+          disabled
         />
         {
           errors.referral_code && touched.referral_code &&

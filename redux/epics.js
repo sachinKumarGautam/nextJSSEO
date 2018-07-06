@@ -26,7 +26,8 @@ import {
 } from '../containers/searchMedicine/searchMedicineEpic'
 
 import {
-  getDeliveryDetailsList
+  getDeliveryDetailsList,
+  submitDeliveryDetails
 } from '../containers/deliveryDetails/deliveryDetailsEpics'
 
 import {
@@ -144,5 +145,6 @@ export const rootEpic = combineEpics(
   deletePrescriptionEpic,
   submitOrderEpic,
   getAnonymousCartIdEpic,
-  checkPincode
+  checkPincode,
+  submitDeliveryDetails
 )

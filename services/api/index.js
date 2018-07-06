@@ -53,7 +53,6 @@ const submitPatientDetails$ = (customerId, patientDetails) => (
 
 )
 
-
 const getOrderList$ = (customerId, page, size) => (
   makeAjaxRequest({
     method: 'GET',
@@ -95,7 +94,7 @@ const fetchUserInfo$ = (mobileNumber) => (
 const getProductDetails$ = (productName, location) => (
   makeAjaxRequest({
     method: 'GET',
-    url: fetchUrl('catalog', `medicine/slug/3a-fer-cap-210047?location=${101}`, 'GET_LIST')
+    url: fetchUrl('catalog', `medicine/slug/${productName}?location=${101}`, 'GET_LIST')
   })
 
 )
@@ -204,6 +203,16 @@ const checkPincode$ = (pincode) => (
   })
 )
 
+const submitDeliveryDetails$ = (customerId, deliveryAddressData) => (
+
+  makeAjaxRequest({
+    method: 'POST',
+    url: fetchUrl('account', 'customer/' + customerId + '/shipping-address', 'GET_LIST'),
+    body: deliveryAddressData
+  })
+
+)
+
 export {
   getMoleculeSummary$,
   getMedicineList$,
@@ -229,5 +238,6 @@ export {
   submitOrder$,
   getProductDetails$,
   searchMedicine$,
-  checkPincode$
+  checkPincode$,
+  submitDeliveryDetails$
 }

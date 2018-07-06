@@ -290,6 +290,12 @@ export default function cartReducer (state = initialState, action) {
         isCartOpenLoginDialog: action.isCartOpenLoginDialog
       }
 
+    case cartActionTypes.UPDATE_IS_CART_OPEN_REGISTER_MODAL_FLAG:
+      return {
+        ...state,
+        isCartOpenRegisterDialog: action.isCartOpenRegisterDialog
+      }
+
     case cartActionTypes.UPLOAD_PRESCRIPTION_LOADING:
       return state
 

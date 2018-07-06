@@ -12,7 +12,7 @@ import {
   getPatientDetailsListSuccess,
   getPatientDetailsListFailure,
   submitPatientDetailsSuccess,
-  submitPatientDetailsFailure, 
+  submitPatientDetailsFailure,
   getPatientDetailsListLoading
 } from './patientDetailsActions'
 
@@ -29,7 +29,6 @@ export function getPatientDetailsList (action$, store) {
   return action$.pipe(
     ofType(GET_PATIENT_DETAILS_LIST_LOADING),
     mergeMap(data => {
-      
       return http(getPatientDetailsList$(data.customerId)).pipe(
         flatMap(result => {
           return of(getPatientDetailsListSuccess(data.patientDetailsState, result.body.payload.patients))
@@ -53,7 +52,7 @@ export function submitPatient (action$, store) {
           data.setSubmitting(false)
           data.closeModal()
           return of(submitPatientDetailsSuccess(data.patientDetailsState, result),
-          getPatientDetailsListLoading(patientDetailsState, customerId))
+            getPatientDetailsListLoading(patientDetailsState, customerId))
         }),
         catchError(error => {
           data.setSubmitting(false)
