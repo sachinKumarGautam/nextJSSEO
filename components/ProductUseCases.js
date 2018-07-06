@@ -55,14 +55,15 @@ class ProductUseCases extends Component {
           </Grid>
           <Grid item xs={12}>
             <articles>
-              <TableContent
-                itemKey={'precautions'}
-                hover={this.props.hover}
-                title={'Precautions'}
-                src={this.props.hover.precautions ? '/static/images/precautions-green.svg' : '/static/images/precautions.svg'}
-                // content={this.props.summaryData.precautions}
-                content={this.props.productDetailsState.payload['precautions']}
-              />
+              {this.props.productDetailsState.payload['precautions'] &&
+                <TableContent
+                  itemKey={'precautions'}
+                  hover={this.props.hover}
+                  title={'Precautions'}
+                  src={this.props.hover.precautions ? '/static/images/precautions-green.svg' : '/static/images/precautions.svg'}
+                  // content={this.props.summaryData.precautions}
+                  content={this.props.productDetailsState.payload['precautions']}
+                />}
             </articles>
           </Grid>
         </Grid>

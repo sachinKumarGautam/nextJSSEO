@@ -174,7 +174,7 @@ class SearchMedicine extends React.Component {
       checkPincodeState,
       cartState,
       incrementCartItemLoading
-     } = this.props
+    } = this.props
     const searchMedicineResult = searchMedicineState.payload.searchMedicineResult
     return (
       <div className={classes.root}>
@@ -218,7 +218,7 @@ class SearchMedicine extends React.Component {
                         checkPincodeLoading,
                         checkPincodeState,
                         cartState,
-                        incrementCartItemLoading,
+                        incrementCartItemLoading
                       })
                     )}
                   </ul>

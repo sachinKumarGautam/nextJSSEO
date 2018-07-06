@@ -37,6 +37,9 @@ class ProductDetails extends Component {
               checkPincodeState={this.props.checkPincodeState}
               checkPincodeLoading={this.props.checkPincodeLoading}
               productDetailsState={this.props.productDetailsState}
+              incrementCartItemLoading={this.props.incrementCartItemLoading}
+              cartState={this.props.cartState}
+              onChangeQuantity={this.props.onChangeQuantity}
             />
           </Grid>
         </Grid>

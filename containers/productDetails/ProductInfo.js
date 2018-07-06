@@ -23,24 +23,25 @@ class ProductInfo extends Component {
     return (
       <div>
         <ProductName
-         variant={'title'}
-         name={this.props.productDetailsState.payload.name}
-          />
+          variant={'title'}
+          name={this.props.productDetailsState.payload.name}
+        />
         <ProductBrand
-         variant={'subheading'}
-         brand={this.props.productDetailsState.payload.brand}
-          />
+          variant={'subheading'}
+          brand={this.props.productDetailsState.payload.brand}
+        />
         <ProductPackSize
-         variant={'subheading'}
-         packType={this.props.productDetailsState.payload.pack_type}
-         packSize={this.props.productDetailsState.payload.pack_size.name}
-          />
+          variant={'subheading'}
+          packType={this.props.productDetailsState.payload.pack_type}
+          packSize={this.props.productDetailsState.payload.pack_size
+            ? this.props.productDetailsState.payload.pack_size.name : ''}
+        />
         <ProductMolecule
-         variant={'body1'}
-         salts={this.props.productDetailsState.payload.salts}
-          />
-        <DiseaseTagsWrapper 
-        diseases={this.props.productDetailsState.payload.diseases}
+          variant={'body1'}
+          salts={this.props.productDetailsState.payload.salts}
+        />
+        <DiseaseTagsWrapper
+          diseases={this.props.productDetailsState.payload.diseases}
         />
         {/* <ProductOverview /> */}
         <ProductInfoNav

@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core/styles'
 
 const styles = theme => ({
   imagePickerWrapper: {
@@ -74,7 +74,7 @@ const styles = theme => ({
     position: 'relative',
     display: 'inline-block'
   }
-});
+})
 
 const ImagePicker = (props) => (
   <div className={props.classes.imagePickerWrapper}>
@@ -106,7 +106,7 @@ const ImagePicker = (props) => (
         props.files.map((image, index) => (
           <div
             className={props.classes.deleteButtonWrapper}
-            //onClick={props.onViewImage.bind(this, image.url)}
+            // onClick={props.onViewImage.bind(this, image.url)}
             key={image.id}
           >
             <div
@@ -127,4 +127,4 @@ const ImagePicker = (props) => (
   </div>
 )
 
-export default withStyles(styles)(ImagePicker);
+export default withStyles(styles)(ImagePicker)

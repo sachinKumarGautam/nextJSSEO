@@ -14,7 +14,8 @@ import Paper from '@material-ui/core/Paper'
 
 import {
   getPatientDetailsListLoading,
-  savePatientSelected
+  savePatientSelected,
+  submitPatientDetailsLoading
 } from '../containers/patientDetails/patientDetailsActions'
 
 import {
@@ -55,6 +56,8 @@ class PatientDetails extends React.Component {
             <PatientDetailsWrapper
               patientDetailsState={this.props.patientDetailsState}
               savePatientSelected={this.props.actions.savePatientSelected}
+              submitPatientDetailsLoading={this.props.actions.submitPatientDetailsLoading}
+              customerState={this.props.customerState}
               savePatientToCartLoading={this.props.actions.savePatientToCartLoading}
             />
           </Paper>
@@ -78,6 +81,7 @@ function mapDispatchToProps (dispatch) {
       {
         getPatientDetailsListLoading,
         savePatientSelected,
+        submitPatientDetailsLoading,
         savePatientToCartLoading
       },
       dispatch

@@ -8,6 +8,7 @@ import CardContent from '@material-ui/core/CardContent'
 import { withStyles } from '@material-ui/core/styles'
 
 import Button from '../../components/button'
+import DeliveryDetailForm from './DeliveryDetailForm'
 import AddressDetailsCardWrapper from './AddressDetailsCardWrapper'
 
 const styles = theme => {
@@ -54,8 +55,11 @@ class Main extends Component {
     super(props)
 
     this.state = {
-      addressIdSelected: 0
+      addressIdSelected: 0,
+      openDeliveryFormDialog: false
     }
+    this.openDeliveryFormModal = this.openDeliveryFormModal.bind(this)
+    this.closeDeliveryFormModal = this.closeDeliveryFormModal.bind(this)
   }
 
   saveAddressSelected (addressIdSelected) {
@@ -67,6 +71,18 @@ class Main extends Component {
       this.props.deliveryDetailsState,
       addressIdSelected
     )
+  }
+
+  openDeliveryFormModal () {
+    this.setState({
+      openDeliveryFormDialog: true
+    })
+  }
+
+  closeDeliveryFormModal () {
+    this.setState({
+      openDeliveryFormDialog: false
+    })
   }
 
   render () {
@@ -95,10 +111,17 @@ class Main extends Component {
                 root: this.props.classes.buttonRoot,
                 label: this.props.classes.buttonLabel
               }}
+              onClick={this.openDeliveryFormModal}
               style={{float: 'right'}}
               label={'ADD NEW ADDRESS'}
             />
           </div>
+          <DeliveryDetailForm
+            onSubmit={this.props.submitDeliveryDetailsLoading}
+            customerState={this.props.customerState}
+            deliveryFormState={this.props.deliveryDetailsState.deliveryFormState}
+            closeModal={this.closeDeliveryFormModal}
+          />
         </CardContent>
       </Card>
     )

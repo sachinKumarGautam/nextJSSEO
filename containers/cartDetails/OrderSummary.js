@@ -49,7 +49,7 @@ const styles = theme => ({
 
 class OrderSummary extends React.Component {
   state = {
-    expanded: null,
+    expanded: 'panel1',
     patientIdSelected: 0,
     addressIdSelected: 0
   };
@@ -90,6 +90,15 @@ class OrderSummary extends React.Component {
     )
   }
 
+  openRegisterModal() {
+    const isCartOpenRegisterDialog = true
+
+    this.props.updateIsCartOpenRegisterModalFlag(
+      this.props.cartState,
+      isCartOpenRegisterDialog
+    )
+  }
+
   onImageSelection(event) {
     this.props.uploadPrescriptionLoading(
       this.props.cartState,
@@ -115,16 +124,27 @@ class OrderSummary extends React.Component {
     )
   }
 
-  saveAddressSelected() {
+  saveAddressSelected(addressIdSelected) {
     this.setState({
       addressIdSelected: addressIdSelected
     })
+
+    this.props.saveDeliveryAddressToCartLoading(
+      this.props.cartState,
+      addressIdSelected
+    )
   }
 
-  savePatientSelected() {
+  savePatientSelected(patientIdSelected) {
     this.setState({
       patientIdSelected: patientIdSelected
     })
+
+    this.props.savePatientToCartLoading(
+      this.props.cartState,
+      patientIdSelected,
+      this.props.cartState.payload.uid
+    )
   }
 
   render() {
@@ -135,7 +155,7 @@ class OrderSummary extends React.Component {
       <div className={classes.root}>
         <ExpansionPanel
           expanded={expanded === 'panel1'}
-          //onChange={this.handleChange('panel1')}
+          onChange={this.handleNextChange.bind(this, 'panel1')}
           className={classes.expansionPanel}
         >
           <ExpansionPanelSummary expandIcon={<div />}>
@@ -144,7 +164,7 @@ class OrderSummary extends React.Component {
               {
                 !this.props.loginState.isAuthenticated
                 ? (
-                  'Logged in'
+                  'Log in'
                 ) : (
                   this.props.customerState.payload.full_name
                 )
@@ -178,6 +198,7 @@ class OrderSummary extends React.Component {
                       label: this.props.classes.buttonLabel
                     }}
                     label={'Register'}
+                    onClick={this.openRegisterModal.bind(this)}
                   />
                 </Grid>
               </Grid>

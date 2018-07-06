@@ -79,7 +79,7 @@ export function customerRegisterSuccess (customerState, result) {
     type: CUSTOMER_REGISTER_SUCCESS,
     customerState,
     id: result.body.payload.id,
-    full_name: result.body.payload.id,
+    full_name: result.body.payload.full_name,
     default_patient_id: result.body.payload.default_patient_id,
     gender: result.body.payload.gender,
     membership_code: result.body.payload.membership_code,

@@ -10,15 +10,16 @@ import { withStyles } from '@material-ui/core/styles'
 import withRoot from '../src/withRoot'
 
 import Paper from '@material-ui/core/Paper'
+import Router from 'next/router'
+
 
 import ProductDetailsWrapper from '../containers/productDetails'
 
-import { getProductDetailLoading } from '../containers/productDetails/productDetailsActions'
-
-// import fetch from 'isomorphic-fetch'
+import { getProductDetailLoading , onChangeQuantity} from '../containers/productDetails/productDetailsActions'
 
 import {
-  getAnonymousCartIdLoading
+  getAnonymousCartIdLoading,
+  incrementCartItemLoading
 } from '../containers/cartDetails/cartActions'
 
 import {checkPincodeLoading} from '../containers/location/pincode/pincodeAction'
@@ -40,26 +41,37 @@ const styles = theme => ({
 })
 
 class ProductDetails extends React.Component {
+  state = {
+    id: ''
+  }
   static getInitialProps ({query}) {
     return query
   }
 
   componentDidMount () {
-    // this.props.actions.getProductDetailLoading(this.props.productDetailsState, 'I0008')
-    // get anonymous cart
-    // this.props.actions.getAnonymousCartIdLoading(
-    //   this.props.cartState,
-    //   'MWEB',
-    //   100,
-    //   ''
-    // )
+    const { pathname, query } = Router
+    if (Router.query.id) {
+      this.props.actions.getProductDetailLoading(this.props.productDetailsState, query.id, query.location)
+    }
+    this.setState({
+      id: Router.query.id
+    })
   }
+
+  componentWillReceiveProps(nextProps) {
+    const { pathname, query } = Router
+    if (this.props.id !== Router.query.id) {
+      this.props.actions.getProductDetailLoading(this.props.productDetailsState, Router.query.id, query.location)
+    }
+  }
+
 
   render () {
     const {
       classes,
       actions,
-      checkPincodeState
+      checkPincodeState,
+      cartState
     } = this.props
 
     return (
@@ -71,6 +83,9 @@ class ProductDetails extends React.Component {
               checkPincodeState={checkPincodeState}
               getProductDetailLoading={actions.getProductDetailLoading}
               checkPincodeLoading={actions.checkPincodeLoading}
+              incrementCartItemLoading={actions.incrementCartItemLoading}
+              cartState={cartState}
+              onChangeQuantity={actions.onChangeQuantity}
             />
           </Paper>
         </div>
@@ -101,7 +116,9 @@ function mapDispatchToProps (dispatch) {
       {
         getProductDetailLoading,
         getAnonymousCartIdLoading,
-        checkPincodeLoading
+        checkPincodeLoading,
+        incrementCartItemLoading,
+        onChangeQuantity
       },
       dispatch
     )

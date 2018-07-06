@@ -49,13 +49,13 @@ class MedicineList extends Component {
                     <ProductBrand
                       customStyle={this.props.classes.companyNameWrapper}
                       brand={cartItem.brand}
-                      withoutImage={true}
+                      withoutImage
                     />
                     <ProductPackSize
                       customStyle={this.props.classes.companyNameWrapper}
                       packType={cartItem.type}
                       packSize={cartItem.per_pack_qty}
-                      withoutImage={true}
+                      withoutImage
                     />
                   </Grid>
                   <Grid item xs={5}>

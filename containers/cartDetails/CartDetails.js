@@ -41,15 +41,15 @@ const styles = theme => ({
 })
 
 class CartDetails extends Component {
-  decrementCartItem(cartItem) {
-    if(cartItem.quantity === 1) {
+  decrementCartItem (cartItem) {
+    if (cartItem.quantity === 1) {
       this.props.deleteCartItemLoading(this.props.cartState, cartItem)
     } else {
       this.props.decrementCartItemLoading(this.props.cartState, cartItem)
     }
   }
 
-  incrementCartItem(cartItem) {
+  incrementCartItem (cartItem) {
     this.props.incrementCartItemLoading(this.props.cartState, cartItem)
   }
 

@@ -40,7 +40,7 @@ const styles = theme => {
     },
     horizontalItem: {
       display: 'flex',
-      flexDirection: 'row',
+      flexDirection: 'row'
 
     }
   }
@@ -64,7 +64,7 @@ class ProductMolecule extends Component {
     return (
       <div className={classes.horizontalItem}>
         {
-          this.props.salts.length && this.props.salts.map((item) => (
+          this.props.salts && this.props.salts.length && this.props.salts.map((item) => (
             <div>
               <a
                 href='#'
@@ -77,7 +77,7 @@ class ProductMolecule extends Component {
               >
                 {item.name}
               </a>
-            {/* <ReactTooltip
+              {/* <ReactTooltip
               id='moleculeItem'
               effect='solid'
               place='right'

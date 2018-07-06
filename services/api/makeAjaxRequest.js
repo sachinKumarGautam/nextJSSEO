@@ -89,26 +89,26 @@ export default function makeAjaxRequest (params) {
         url: params.url,
         method: 'delete',
         timeout: timeout,
-        body: params.body,
         options: {
           headers: {
             'Authorization': authHeader
           }
-        }
+        },
+        data: params.body
       })
 
     case 'PATCH':
       return ajax({
         url: params.url,
-        method: 'update',
+        method: 'patch',
         timeout: timeout,
-        body: params.body,
         options: {
           headers: {
             'Authorization': authHeader,
             'Content-Type': contentType
           }
-        }
+        },
+        data: params.body
       })
 
     default:

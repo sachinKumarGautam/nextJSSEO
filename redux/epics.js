@@ -26,11 +26,13 @@ import {
 } from '../containers/searchMedicine/searchMedicineEpic'
 
 import {
-  getDeliveryDetailsList
+  getDeliveryDetailsList,
+  submitDeliveryDetails
 } from '../containers/deliveryDetails/deliveryDetailsEpics'
 
 import {
-  getPatientDetailsList
+  getPatientDetailsList,
+  submitPatient
 } from '../containers/patientDetails/patientDetailsEpics'
 
 import {
@@ -137,10 +139,12 @@ export const rootEpic = combineEpics(
   getOrderListDetails,
   getPrescriptionList,
   carePointsList,
+  submitPatient,
   cartTransferEpic,
   uploadPrescriptionEpic,
   deletePrescriptionEpic,
   submitOrderEpic,
   getAnonymousCartIdEpic,
-  checkPincode
+  checkPincode,
+  submitDeliveryDetails
 )

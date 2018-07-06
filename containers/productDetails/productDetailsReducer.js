@@ -3,7 +3,8 @@ import initialState from './productDetailsModal'
 import {
   GET_PRODUCT_DETAILS_LOADING,
   GET_PRODUCT_DETAILS_FAILURE,
-  GET_PRODUCT_DETAILS_SUCCESS
+  GET_PRODUCT_DETAILS_SUCCESS,
+  ON_CHANGE_QUANITY
   // GET_PRODUCT_DETAILS_SUMMARY_LOADING,
   // GET_PRODUCT_DETAILS_SUMMARY_SUCCESS,
   // GET_PRODUCT_DETAILS_SUMMARY_FAILURE
@@ -75,6 +76,15 @@ export default function (state = initialState, action) {
           ...state.errorStateGetProductDetails,
           isError: action.isError,
           error: action.error
+        }
+      }
+
+    case ON_CHANGE_QUANITY:
+      return {
+        ...state,
+        payload: {
+          ...state.payload,
+          quantity: action.quantity
         }
       }
 
