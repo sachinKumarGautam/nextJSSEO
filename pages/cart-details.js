@@ -33,7 +33,8 @@ import {
 } from '../containers/deliveryDetails/deliveryDetailsActions'
 
 import {
-  getPatientDetailsListLoading
+  getPatientDetailsListLoading,
+  submitPatientDetailsLoading
 } from '../containers/patientDetails/patientDetailsActions'
 
 const styles = theme => ({
@@ -109,6 +110,7 @@ class CartDetails extends React.Component {
             updateIsCartOpenRegisterModalFlag={this.props.actions.updateIsCartOpenRegisterModalFlag}
             resetCartState={this.props.actions.resetCartState}
             getAnonymousCartIdLoading={this.props.actions.getAnonymousCartIdLoading}
+            submitPatientDetailsLoading={this.props.actions.submitPatientDetailsLoading}
           />
         </div>
         <Footer />
@@ -145,7 +147,8 @@ function mapDispatchToProps (dispatch) {
         submitOrderLoading,
         updateIsCartOpenRegisterModalFlag,
         resetCartState,
-        getAnonymousCartIdLoading
+        getAnonymousCartIdLoading,
+        submitPatientDetailsLoading
       },
       dispatch
     )

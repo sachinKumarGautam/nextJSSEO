@@ -14,6 +14,9 @@ import PatientDetailsCard from '../../components/PatientDetailsCard'
 import AddressDetailsCard from '../../components/AddressDetailsCard'
 import ImagePicker from './ImagePicker'
 
+import AddPatientButton from '../patientDetails/AddPatientButton'
+import PatientDetailForm from '../patientDetails/PatientDetailForm'
+
 const styles = theme => ({
   root: {
     width: '100%',
@@ -51,7 +54,8 @@ class OrderSummary extends React.Component {
   state = {
     expanded: 'panel1',
     patientIdSelected: 0,
-    addressIdSelected: 0
+    addressIdSelected: 0,
+    openPatientFormDialog: false
   };
 
   handleChange = panel => (event, expanded) => {
@@ -145,6 +149,18 @@ class OrderSummary extends React.Component {
       patientIdSelected,
       this.props.cartState.payload.uid
     )
+  }
+
+  openPatientFormModal() {
+    this.setState({
+      openPatientFormDialog: true
+    })
+  }
+
+  closePatientFormModal() {
+    this.setState({
+      openPatientFormDialog: false
+    })
   }
 
   render() {
@@ -247,6 +263,22 @@ class OrderSummary extends React.Component {
         >
           <ExpansionPanelSummary expandIcon={<div />}>
             <Typography className={classes.heading}>Patient Details</Typography>
+            {
+              this.state.expanded === 'panel3' &&
+              <AddPatientButton
+                buttonRoot={this.props.classes.buttonRoot}
+                buttonLabel={this.props.classes.buttonLabel}
+                onClick={this.openPatientFormModal.bind(this)}
+              />
+            }
+            <PatientDetailForm
+              closePatientFormModal={this.closePatientFormModal.bind(this)}
+              openPatientFormDialog={this.state.openPatientFormDialog}
+              patientFormState={this.props.patientDetailsState}
+              customerState={this.props.customerState}
+              submitPatientDetailsLoading={this.props.submitPatientDetailsLoading}
+              isEdit={'false'}
+            />
           </ExpansionPanelSummary>
           <ExpansionPanelDetails>
             <Grid container spacing={24}>
