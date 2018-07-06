@@ -384,3 +384,11 @@ export function resetCartState() {
     type: cartActionTypes.RESET_CART_STATE
   }
 }
+
+export function goToCartSnackbar (cartState, showAddToCartSnackBar) {
+    return {
+      type: cartActionTypes.GO_TO_CART_SNACKBAR,
+      cartState,
+      showAddToCartSnackBar
+    }
+}

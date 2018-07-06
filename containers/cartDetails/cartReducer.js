@@ -416,6 +416,15 @@ export default function cartReducer (state = initialState, action) {
     case cartActionTypes.RESET_CART_STATE:
       return initialState
 
+    case cartActionTypes.GO_TO_CART_SNACKBAR:
+      return {
+        ...state,
+        payload: {
+          ...state.payload,
+          showAddToCartSnackBar: action.showAddToCartSnackBar
+        }
+      }
+
     default:
       return state
   }

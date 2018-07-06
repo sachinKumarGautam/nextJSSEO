@@ -19,11 +19,14 @@ import MenuWrapper from '../../../containers/menu'
 import { searchMedicineLoading, updateInProgressMedicineState } from '../../../containers/searchMedicine/searchMedicineAction'
 import { checkPincodeLoading } from '../../../containers/location/pincode/pincodeAction'
 
+import GoToCartSnackbar from '../../../containers/cartDetails/GoToCartSnackbar'
+
 import {
   getAnonymousCartIdLoading,
   updateIsCartOpenLoginFlag,
   incrementCartItemLoading,
-  updateIsCartOpenRegisterModalFlag
+  updateIsCartOpenRegisterModalFlag, 
+  goToCartSnackbar
 } from '../../../containers/cartDetails/cartActions'
 
 const styles = theme => ({
@@ -173,6 +176,10 @@ class Header extends React.Component {
               }
             </Toolbar>
             <Subheader />
+            <GoToCartSnackbar
+              goToCartSnackbar={this.props.actions.goToCartSnackbar}
+              cartState={this.props.cartState}
+             />
           </div>
         </AppBar>
       </div>
@@ -200,7 +207,8 @@ function mapDispatchToProps (dispatch) {
         updateInProgressMedicineState,
         getAnonymousCartIdLoading,
         incrementCartItemLoading,
-        updateIsCartOpenRegisterModalFlag
+        updateIsCartOpenRegisterModalFlag,
+        goToCartSnackbar
       },
       dispatch
     )

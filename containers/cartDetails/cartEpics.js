@@ -1,5 +1,5 @@
 import { of } from 'rxjs/observable/of'
-import { mergeMap, catchError, map, switchMap } from 'rxjs/operators'
+import { mergeMap, catchError, map, switchMap, flatMap } from 'rxjs/operators'
 import { ofType } from 'redux-observable'
 import http from '../../services/api/ajaxWrapper'
 
@@ -35,7 +35,8 @@ import {
   deletePrescriptionSuccess,
   deletePrescriptionFailure,
   submitOrderSuccess,
-  submitOrderFailure
+  submitOrderFailure, 
+  goToCartSnackbar
 } from './cartActions'
 
 import {
@@ -201,10 +202,15 @@ export function incrementCartItemEpic (action$, store) {
         sku: data.medicineSelected.sku,
         quantity: data.medicineSelected.quantity + 1
       }
-
       return http(putCartItem$(cartUid, medicineIncremented)).pipe(
-        map(result => {
-          return putCartItemSuccess(data.cartState, result.body.payload)
+        flatMap(result => {
+          if (medicineIncremented.quantity === 1) {
+           return of(goToCartSnackbar(data.cartState, true),
+            putCartItemSuccess(data.cartState, result.body.payload))
+          }
+          else {
+            return putCartItemSuccess(data.cartState, result.body.payload)
+          }
         }),
         catchError(error => {
           return cartApiErrorHandling(

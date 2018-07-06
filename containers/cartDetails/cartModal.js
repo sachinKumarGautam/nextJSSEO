@@ -56,6 +56,7 @@ const initialState = {
     service_type: ''
   },
   isCartOpenLoginDialog: false,
+  showAddToCartSnackBar: false,
   isCartOpenRegisterDialog: false,
   isLoading: false,
   errorState: {

@@ -1,6 +1,7 @@
 import React from 'react'
 import Header from '../components/layouts/header'
 import Footer from '../components/layouts/footer'
+import CircularProgress from '@material-ui/core/CircularProgress'
 
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
@@ -25,7 +26,8 @@ import {
   submitOrderLoading,
   updateIsCartOpenRegisterModalFlag,
   resetCartState,
-  getAnonymousCartIdLoading
+  getAnonymousCartIdLoading,
+  goToCartSnackbar
 } from '../containers/cartDetails/cartActions'
 
 import {
@@ -49,6 +51,31 @@ const styles = theme => ({
   },
   title: {
     fontWeight: theme.typography.fontWeightBold
+  },
+  loaderStyle: {
+    position: 'fixed',
+    height: '100%',
+    width: '100%',
+    justifyContent: 'center',
+    alignItems: 'center',
+    left: 0,
+    top: 0,
+    zIndex: '9999'
+  },
+  spinnerStyle: {
+    position: 'fixed',
+    height: '100%',
+    backgroundColor: '#fff',
+    flexDirection: 'column',
+    width: '100%',
+    justifyContent: 'center',
+    alignItems: 'center',
+    left: 0,
+    top: 0,
+    zIndex: '1'
+  },
+  progress: {
+    margin: theme.spacing.unit * 2
   }
 })
 
@@ -111,6 +138,14 @@ class CartDetails extends React.Component {
             getAnonymousCartIdLoading={this.props.actions.getAnonymousCartIdLoading}
           />
         </div>
+        {this.props.cartState.orderResponse.isLoading &&
+          <div>
+            <div className={this.props.classes.loaderStyle} />
+            <div className={this.props.classes.spinnerStyle}>
+              <CircularProgress className={this.props.classes.progress} />
+            </div>
+          </div>
+        }
         <Footer />
       </div>
     )
@@ -145,7 +180,8 @@ function mapDispatchToProps (dispatch) {
         submitOrderLoading,
         updateIsCartOpenRegisterModalFlag,
         resetCartState,
-        getAnonymousCartIdLoading
+        getAnonymousCartIdLoading,
+        goToCartSnackbar
       },
       dispatch
     )
