@@ -31,11 +31,13 @@ import {
 } from '../containers/cartDetails/cartActions'
 
 import {
-  getDeliveryDetailsListLoading
+  getDeliveryDetailsListLoading,
+  submitDeliveryDetailsLoading
 } from '../containers/deliveryDetails/deliveryDetailsActions'
 
 import {
-  getPatientDetailsListLoading
+  getPatientDetailsListLoading,
+  submitPatientDetailsLoading
 } from '../containers/patientDetails/patientDetailsActions'
 
 const styles = theme => ({
@@ -136,6 +138,8 @@ class CartDetails extends React.Component {
             updateIsCartOpenRegisterModalFlag={this.props.actions.updateIsCartOpenRegisterModalFlag}
             resetCartState={this.props.actions.resetCartState}
             getAnonymousCartIdLoading={this.props.actions.getAnonymousCartIdLoading}
+            submitPatientDetailsLoading={this.props.actions.submitPatientDetailsLoading}
+            submitDeliveryDetailsLoading={this.props.actions.submitDeliveryDetailsLoading}
           />
         </div>
         {this.props.cartState.orderResponse.isLoading &&
@@ -181,7 +185,9 @@ function mapDispatchToProps (dispatch) {
         updateIsCartOpenRegisterModalFlag,
         resetCartState,
         getAnonymousCartIdLoading,
-        goToCartSnackbar
+        goToCartSnackbar,
+        submitPatientDetailsLoading,
+        submitDeliveryDetailsLoading
       },
       dispatch
     )

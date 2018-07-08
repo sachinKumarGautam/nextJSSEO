@@ -66,6 +66,7 @@ export function getCartDetailsSuccess (
     isLoading: false,
     id: result.id,
     uid: result.uid,
+    patient_id: result.patient_id,
     customer_id: result.customer_id,
     customer_full_name: result.customer_full_name,
     patient_full_name: result.patient_full_name,

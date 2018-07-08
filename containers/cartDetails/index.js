@@ -34,6 +34,8 @@ class CartDetailsWrapper extends Component {
                 deletePrescriptionLoading={this.props.deletePrescriptionLoading}
                 submitOrderLoading={this.props.submitOrderLoading}
                 updateIsCartOpenRegisterModalFlag={this.props.updateIsCartOpenRegisterModalFlag}
+                submitPatientDetailsLoading={this.props.submitPatientDetailsLoading}
+                submitDeliveryDetailsLoading={this.props.submitDeliveryDetailsLoading}
               />
             </section>
           </Grid>

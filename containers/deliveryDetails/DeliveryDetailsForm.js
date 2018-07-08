@@ -59,6 +59,7 @@ class DeliveryDetailForm extends React.Component {
               type={'deliveryForm'}
               onSubmit={this.props.onSubmit}
               customerState={this.props.customerState}
+              deliveryDetailsState={this.props.deliveryDetailsState}
               deliveryFormState={this.props.deliveryFormState}
               closeModal={this.props.closeModal}
             />

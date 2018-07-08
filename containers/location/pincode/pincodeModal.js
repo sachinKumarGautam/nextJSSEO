@@ -1,7 +1,7 @@
 const initialState = {
   payload: {
-    city: 'Delhi', // default state
-    state: 'Delhi', // default state
+    city: '',
+    state: '',
     id: 101,
     pincode: '',
     country: '',

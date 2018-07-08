@@ -8,10 +8,14 @@ const styles = theme => ({
   },
   button: {
     flexGrow: 1,
-    paddingRight: 'auto',
     position: 'relative',
     transition: 'padding-right .3s ease-out',
-    boxShadow: 'none'
+    boxShadow: 'none',
+    paddingRight: '10px',
+    paddingLeft: '10px',
+    paddingTop: '5px',
+    paddingBottom: '5px'
+
   },
   buttonloader: {
     flexGrow: 1,
@@ -40,7 +44,7 @@ const styles = theme => ({
 })
 
 const CommonButton = (buttonProps) => {
-  const { classes, isloading, loaderSize, loaderColor } = buttonProps
+  const { classes, isloading, loaderSize, loaderColor, label } = buttonProps
   return (
     <div>
       <div
@@ -48,9 +52,12 @@ const CommonButton = (buttonProps) => {
       >
         <Button
           className={isloading ? classes.buttonloader : classes.button}
-          {...buttonProps}
+          classes={{
+            label: classes.label
+          }}
+          // {...buttonProps}
         >
-          {buttonProps.label}
+          {label}
         </Button>
         {isloading && <CircularProgress
           size={loaderSize || 22}

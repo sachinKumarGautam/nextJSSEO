@@ -84,7 +84,7 @@ class DeliveryForm extends React.Component {
             className={classes.labelStyle}
             htmlFor='mobile'
           >
-            Full Name
+            Phone No.
           </InputLabel>
           <Input
             id='mobile'
@@ -136,7 +136,7 @@ class DeliveryForm extends React.Component {
             className={classes.labelStyle}
             htmlFor='locality'
           >
-            Pincode
+            Locality
           </InputLabel>
           <Input
             id='locality'
@@ -165,7 +165,7 @@ class DeliveryForm extends React.Component {
             City
           </InputLabel>
           <Input
-            id='locality'
+            id='city'
             type='text'
             onChange={handleChange}
             value={values.city}
@@ -240,7 +240,7 @@ export default withStyles(styles)(withFormik({
     state: Yup.string().required('State is required')
   }),
   handleSubmit: (values, { props, setSubmitting }) => {
-    props.onSubmit(props.deliveryFormState, props.customerId, setSubmitting, props.closeModal, values)
+    props.onSubmit(props.deliveryDetailsState, props.deliveryFormState, props.customerId, setSubmitting, props.closeModal, values)
   },
   displayName: 'DeliveryForm' // helps with React DevTools
 })(DeliveryForm))

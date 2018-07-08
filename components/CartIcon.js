@@ -11,7 +11,7 @@ import ReactTooltip from 'react-tooltip'
 
 import Button from './button'
 
-import Router from 'next/router'
+import Link from 'next/link'
 
 import {
   CART_DETAILS
@@ -175,17 +175,18 @@ class CartIcon extends Component {
             }
           </div>
           <div className={classes.buttonStyle}>
-            <Button
-              size='small'
-              variant='outlined'
-              color='primary'
-              classes={{
-                root: classes.buttonRoot,
-                label: classes.buttonLabel
-              }}
-              onClick={() => { Router.push({ pathname: CART_DETAILS}) }}
-              label={'PROCEED TO CART'}
-            />
+            <Link prefetch href={CART_DETAILS}>
+              <Button
+                size='small'
+                variant='outlined'
+                color='primary'
+                classes={{
+                  root: classes.buttonRoot,
+                  label: classes.buttonLabel
+                }}
+                label={'PROCEED TO CART'}
+              />
+            </Link>
           </div>
         </ReactTooltip>
       </div>

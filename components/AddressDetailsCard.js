@@ -23,10 +23,6 @@ const styles = theme => {
       marginLeft: theme.spacing.unit * 3,
       marginRight: theme.spacing.unit * 3
     },
-    buttonLabel: {
-      color: theme.palette.customGreen.green300,
-      fontWeight: theme.typography.fontWeightBold
-    },
     addressTypeStyle: {
       color: theme.palette.customGrey.grey500,
       fontWeight: theme.typography.fontWeightBold

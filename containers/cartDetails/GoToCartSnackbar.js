@@ -41,7 +41,7 @@ class GoToCartSnackbar extends React.Component {
             vertical: 'bottom',
             horizontal: 'center',
           }}
-          autoHideDuration={6000}
+          autoHideDuration={10000}
           open={this.props.cartState.payload.showAddToCartSnackBar}
           onClose={this.handleClose}
           ContentProps={{
@@ -58,7 +58,7 @@ class GoToCartSnackbar extends React.Component {
               <AddShoppingCartIcon />
             </IconButton>
           ]}
-          message={<span id="message-id">1 item added in the cart</span>}
+          message={<span id="message-id">1 item added in the cart. Proceed to checkout</span>}
         />
         </Link>
         

@@ -67,6 +67,7 @@ export function saveAddressSelected (deliveryDetailsState, addressIdSelected) {
 }
 
 export function submitDeliveryDetailsLoading (
+  deliveryDetailsState,
   deliveryDetails,
   customerId,
   setSubmitting,

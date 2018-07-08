@@ -39,7 +39,7 @@ const SubFooter = ({classes}) => (
       <div className={classes.iconWithText}>
         <img src={'/static/images/splash.svg'} />
         <Typography className={classes.copyRightInfo} component='h3' variant={'body1'}>
-            © 2016 LifCARE. All Rights Reserved
+            © 2018 LifCARE. All Rights Reserved
         </Typography>
       </div>
       <div>
