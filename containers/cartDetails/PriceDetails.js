@@ -44,7 +44,7 @@ class PriceDetails extends Component {
               Discount
             </Typography>
             <Typography className={this.props.classes.discount}>
-              Redeemed Care Points
+              Care Points
             </Typography>
             <Typography className={this.props.classes.discount}>
               Care Points Plus
