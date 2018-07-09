@@ -21,6 +21,7 @@ const PatientDetailsWrapper = props => (
       </Grid>
       <Grid item xs={10}>
         <PatientDetailsList
+          cartState={props.cartState}
           patientDetailsState={props.patientDetailsState}
           savePatientSelected={props.savePatientSelected}
           submitPatientDetailsLoading={props.submitPatientDetailsLoading}

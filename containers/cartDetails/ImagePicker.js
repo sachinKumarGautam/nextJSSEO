@@ -21,7 +21,7 @@ const styles = theme => ({
   pickerImage: {
     width: theme.spacing.unit * 12.5,
     height: theme.spacing.unit * 12.5,
-    background: '#eee',
+    background: theme.palette.grey['200'],
     display: 'inline-block',
     marginRight: theme.spacing.unit * 0.625,
     flexShrink: 0
@@ -32,7 +32,7 @@ const styles = theme => ({
     color: theme.palette.common.white,
     width: theme.spacing.unit * 3.125,
     height: theme.spacing.unit * 3.125,
-    background: '#333',
+    background: theme.palette.common.black,
     borderRadius: '50%',
     textAlign: 'center'
   },

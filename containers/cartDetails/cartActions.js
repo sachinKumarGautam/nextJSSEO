@@ -180,11 +180,11 @@ export function cartTransferLoading (
   }
 }
 
-export function savePatientToCartSuccess (cartState, response) {
+export function savePatientToCartSuccess (cartState, result) {
   return {
     type: cartActionTypes.SAVE_PATIENT_TO_CART_SUCCESS,
     cartState,
-    response,
+    patient_id: result.patient_id,
     isLoading: false
   }
 }

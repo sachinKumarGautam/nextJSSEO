@@ -47,7 +47,7 @@ const styles = theme => ({
     color: theme.palette.common.white
   },
   patientDetailsWrapper: {
-    border: '1px solid #eee',
+    border: `1px solid ${theme.palette.grey['200']}`,
     padding: theme.spacing.unit * 2.5,
     marginLeft: theme.spacing.unit * 1.25
   }
@@ -56,8 +56,6 @@ const styles = theme => ({
 class OrderSummary extends React.Component {
   state = {
     expanded: 'panel1',
-    patientIdSelected: 0,
-    addressIdSelected: 0,
     openPatientFormDialog: false,
     openDeliveryFormDialog: false
   };
@@ -78,7 +76,7 @@ class OrderSummary extends React.Component {
     this.props.savePatientToCartLoading(
       this.props.cartState,
       patientId,
-      '680a75c5-7965-4f9d-ab2f-14cb0ce16c2c'
+      this.props.cartState.payload.uid
     )
   }
 
@@ -122,9 +120,9 @@ class OrderSummary extends React.Component {
     )
   }
 
-  onViewImage() {
-
-  }
+  // onViewImage() {
+  //
+  // }
 
   placeOrder() {
     this.props.submitOrderLoading(
@@ -133,10 +131,6 @@ class OrderSummary extends React.Component {
   }
 
   saveAddressSelected(addressIdSelected) {
-    this.setState({
-      addressIdSelected: addressIdSelected
-    })
-
     this.props.saveDeliveryAddressToCartLoading(
       this.props.cartState,
       addressIdSelected
@@ -144,10 +138,6 @@ class OrderSummary extends React.Component {
   }
 
   savePatientSelected(patientIdSelected) {
-    this.setState({
-      patientIdSelected: patientIdSelected
-    })
-
     this.props.savePatientToCartLoading(
       this.props.cartState,
       patientIdSelected,
@@ -254,7 +244,7 @@ class OrderSummary extends React.Component {
                 onImageSelection={this.onImageSelection.bind(this)}
                 files={this.props.cartState.payload.cart_prescriptions}
                 onDeleteButton={this.onDeleteButton.bind(this)}
-                onViewImage={this.onViewImage}
+                //onViewImage={this.onViewImage}
               />
             </Typography>
           </ExpansionPanelDetails>
@@ -307,7 +297,7 @@ class OrderSummary extends React.Component {
                       <PatientDetailsCard
                         patientDetail={patientDetail}
                         savePatientSelected={this.savePatientSelected.bind(this)}
-                        patientIdSelected={this.state.patientIdSelected}
+                        patientIdSelected={this.props.cartState.payload.patient_id.payload}
                       />
                     </Grid>
                   )
@@ -364,7 +354,7 @@ class OrderSummary extends React.Component {
                       <AddressDetailsCard
                         deliveryDetail={deliveryDetail}
                         saveAddressSelected={this.saveAddressSelected.bind(this)}
-                        addressIdSelected={this.state.addressIdSelected}
+                        addressIdSelected={this.props.cartState.payload.shipping_address_id.payload}
                       />
                     </Grid>
                   )

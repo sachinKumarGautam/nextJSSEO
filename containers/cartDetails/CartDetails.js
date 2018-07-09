@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 
+import Card from '@material-ui/core/Card'
+import CardContent from '@material-ui/core/CardContent'
 import { withStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
 
@@ -26,8 +28,11 @@ import {
 */
 
 const styles = theme => ({
-  cartWrapper: {
-    boxshadow: '0 1px 3px 0 rgba(63, 63, 68, 0.15), 0 0 0 1px rgba(63, 63, 68, 0.05)'
+  card: {
+    marginLeft: theme.spacing.unit * 6
+  },
+  cardContent: {
+    padding: 0
   },
   cartDetailsWrapper: {
     backgroundColor: theme.palette.common.white
@@ -77,37 +82,39 @@ class CartDetails extends Component {
 
   render () {
     return (
-      <div className={this.props.classes.cartDetailsWrapper}>
-        <div className={this.props.classes.myCartWrapper}>
-          <Typography className={this.props.classes.myCartText}>
-            MY CART
-          </Typography>
-        </div>
-        <div className={this.props.classes.cartWrapper}>
-          {
-            this.props.cartState.payload.patient_id.payload
-            ? (
-              <Avatar
-                cartState={this.props.cartState}
-              />
-            ) : null
-          }
-          <MedicineList
-            cartState={this.props.cartState}
-            decrementCartItem={this.decrementCartItem.bind(this)}
-            incrementCartItem={this.incrementCartItem.bind(this)}
-          />
-          {
-            // <Coupon />
-          }
-          <PriceDetails
-            cartState={this.props.cartState}
-          />
-          <TotalAmount
-            cartState={this.props.cartState}
-          />
-        </div>
-      </div>
+      <Card elevation={'1'} className={this.props.classes.card}>
+        <CardContent className={this.props.classes.cardContent}>
+          <div className={this.props.classes.myCartWrapper}>
+            <Typography className={this.props.classes.myCartText}>
+              MY CART
+            </Typography>
+          </div>
+          <div className={this.props.classes.cartWrapper}>
+            {
+              this.props.cartState.payload.patient_id.payload
+              ? (
+                <Avatar
+                  cartState={this.props.cartState}
+                />
+              ) : null
+            }
+            <MedicineList
+              cartState={this.props.cartState}
+              decrementCartItem={this.decrementCartItem.bind(this)}
+              incrementCartItem={this.incrementCartItem.bind(this)}
+            />
+            {
+              // <Coupon />
+            }
+            <PriceDetails
+              cartState={this.props.cartState}
+            />
+            <TotalAmount
+              cartState={this.props.cartState}
+            />
+          </div>
+        </CardContent>
+      </Card>
     )
   }
 }
