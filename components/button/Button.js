@@ -1,6 +1,8 @@
 import Button from '@material-ui/core/Button'
 import { withStyles } from '@material-ui/core/styles'
+import classNames from 'classnames'
 import CircularProgress from '@material-ui/core/CircularProgress'
+import {SignalCellularNull} from '@material-ui/icons'
 
 const styles = theme => ({
   root: {
@@ -44,18 +46,44 @@ const styles = theme => ({
 })
 
 const CommonButton = (buttonProps) => {
-  const { classes, isloading, loaderSize, loaderColor, label } = buttonProps
+  const {
+    classes,
+    isloading,
+    loaderSize,
+    loaderColor,
+    label,
+    href,
+    mini,
+    variant,
+    disabled,
+    fullWidth,
+    color,
+    type,
+    onClick,
+    className
+  } = buttonProps
   return (
     <div>
       <div
         className={classes.wrapper}
       >
         <Button
-          className={isloading ? classes.buttonloader : classes.button}
+          className={isloading 
+            ? classNames(className, classes.buttonloader) 
+            : classNames(className, classes.button) 
+          }
+          type={type || SignalCellularNull}
+          color={color}
+          href={href || null}
+          mini={mini || null}
+          disabled={disabled || null}
+          fullWidth={fullWidth || null}
+          variant={variant || null}
           classes={{
-            label: classes.label
+            root: classes.root || {},
+            label: classes.label || {}
           }}
-          // {...buttonProps}
+          onClick={onClick}
         >
           {label}
         </Button>

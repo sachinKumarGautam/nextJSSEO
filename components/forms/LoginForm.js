@@ -80,10 +80,8 @@ class LoginForm extends React.Component {
         <div className={classes.buttonWrapper}>
           <Button
             type='submit'
-            // disabled={isSubmitting}
             isloading={isSubmitting}
             variant='raised'
-            // onClick={toggleModal}
             color='primary'
             label={'Login with OTP'}
           />

@@ -30,6 +30,12 @@ const styles = theme => ({
   formHelperText: {
     textAlign: 'center',
     marginTop: theme.spacing.unit
+  },
+  buttonLabel: {
+    color: theme.palette.common.black
+  },
+  cancelButton: {
+    marginRight: theme.spacing.unit
   }
 })
 
@@ -106,18 +112,23 @@ const PincodeDialog = (props) => {
           </form>
         </DialogContent>
         <DialogActions>
-          <Button
-            onClick={props.handleClose}
-            color='primary'
-            variant='outlined'
-            label={'Cancel'}
-          />
+          <div className={classes.cancelButton}>
+            <Button
+              onClick={props.handleClose}
+              label={'Cancel'}
+              color='primary'
+              classes={{
+                label: classes.buttonLabel
+              }}
+            />
+          </div>
           <Button
             onClick={props.handleSubmit}
             isloading={isSubmitting}
             color='primary'
             label={'Apply'}
             variant='raised'
+            autoFocus
           />
         </DialogActions>
       </Dialog>

@@ -9,71 +9,6 @@ import SearchIcon from '@material-ui/icons/Search'
 import MedicineListDetails from '../../components/MedicineListDetails'
 import {PRODUCT_DETAILS} from '../../Route'
 
-function renderInput (inputProps) {
-  const { InputProps, classes, ref, onChange, ...other } = inputProps
-  return (
-    <div className={classes.searchBar}>
-      <TextField
-        InputProps={{
-          disableUnderline: true,
-          // inputRef: ref,
-          classes: {
-            formControl: classes.inputFormControl,
-            focused: classes.inputFocused
-          },
-          ...InputProps
-        }}
-        {...other}
-      />
-      <Button
-        color='primary'
-        classes={{
-          root: classes.searchButton
-        }}
-        label={<SearchIcon className={classes.iconColor} />}
-      />
-    </div>
-  )
-}
-
-function renderSuggestion ({
-  suggestion,
-  index,
-  itemProps,
-  highlightedIndex,
-  selectedItem,
-  searchItemStyle,
-  highlightedSearchItem,
-  selectedSearchItem,
-  onSelectItem,
-  checkPincodeLoading,
-  checkPincodeState,
-  cartState,
-  incrementCartItemLoading
-}) {
-  const isHighlighted = highlightedIndex === index
-  const isSelected = (selectedItem || '').indexOf(suggestion.label) > -1
-
-  const listStyle = isHighlighted ? highlightedSearchItem : (isSelected ? selectedSearchItem : searchItemStyle)
-  return (
-    <li
-      {...itemProps}
-      className={listStyle}
-    >
-      <MedicineListDetails
-        itemDetails={suggestion}
-        incrementCartItemLoading={incrementCartItemLoading}
-        cartState={cartState}
-        checkPincodeState={checkPincodeState}
-      />
-    </li>
-  )
-}
-
-function getSuggestions (searchMedicineResult) {
-  return searchMedicineResult
-}
-
 const styles = theme => ({
   root: {
     flexGrow: 1
@@ -145,6 +80,71 @@ const styles = theme => ({
   }
 })
 
+function renderInput (inputProps) {
+  const { InputProps, classes, ref, onChange, ...other } = inputProps
+  return (
+    <div className={classes.searchBar}>
+      <TextField
+        InputProps={{
+          disableUnderline: true,
+          // inputRef: ref,
+          classes: {
+            formControl: classes.inputFormControl,
+            focused: classes.inputFocused
+          },
+          ...InputProps
+        }}
+        {...other}
+      />
+      <Button
+        color='primary'
+        classes={{
+          root: classes.searchButton
+        }}
+        label={<SearchIcon className={classes.iconColor} />}
+      />
+    </div>
+  )
+}
+
+function renderSuggestion ({
+  suggestion,
+  index,
+  itemProps,
+  highlightedIndex,
+  selectedItem,
+  searchItemStyle,
+  highlightedSearchItem,
+  selectedSearchItem,
+  onSelectItem,
+  checkPincodeLoading,
+  checkPincodeState,
+  cartState,
+  incrementCartItemLoading
+}) {
+  const isHighlighted = highlightedIndex === index
+  const isSelected = (selectedItem || '').indexOf(suggestion.label) > -1
+
+  const listStyle = isHighlighted ? highlightedSearchItem : (isSelected ? selectedSearchItem : searchItemStyle)
+  return (
+    <li
+      {...itemProps}
+      className={listStyle}
+    >
+      <MedicineListDetails
+        itemDetails={suggestion}
+        incrementCartItemLoading={incrementCartItemLoading}
+        cartState={cartState}
+        checkPincodeState={checkPincodeState}
+      />
+    </li>
+  )
+}
+
+function getSuggestions (searchMedicineResult) {
+  return searchMedicineResult
+}
+
 class SearchMedicine extends React.Component {
   constructor (props) {
     super(props)
@@ -179,7 +179,6 @@ class SearchMedicine extends React.Component {
     return (
       <div className={classes.root}>
         <Downshift
-          // onSelect={(item) => console.log('tatti', item) }
           // onStateChange={({ inputValue }) => {
           //   return inputValue && this.setState({ inputValue })
           // }}

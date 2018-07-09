@@ -73,20 +73,25 @@ class ProductDetails extends React.Component {
       checkPincodeState,
       cartState
     } = this.props
+    const { query } = Router
 
     return (
       <div>
         <Header />
         <div>
           <Paper className={classes.root} elevation={1}>
-            <ProductDetailsWrapper
+            {
+              query.id && query.id !== 'undefined' ? 
+              <ProductDetailsWrapper
               checkPincodeState={checkPincodeState}
               getProductDetailLoading={actions.getProductDetailLoading}
               checkPincodeLoading={actions.checkPincodeLoading}
               incrementCartItemLoading={actions.incrementCartItemLoading}
               cartState={cartState}
               onChangeQuantity={actions.onChangeQuantity}
-            />
+              />
+              : "Page not found"
+            }
           </Paper>
         </div>
         <Footer />

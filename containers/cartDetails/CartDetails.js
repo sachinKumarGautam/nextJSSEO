@@ -59,8 +59,8 @@ class CartDetails extends Component {
     this.props.incrementCartItemLoading(this.props.cartState, cartItem)
   }
 
-  componentWillReceiveProps(nextProps) {
-    if(
+  componentWillReceiveProps (nextProps) {
+    if (
       nextProps.cartState.orderResponse.order_number !==
       this.props.cartState.orderResponse.order_number
     ) {

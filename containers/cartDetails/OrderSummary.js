@@ -41,15 +41,19 @@ const styles = theme => ({
   },
   buttonRoot: {
     border: `1px solid ${theme.palette.primary.main}`,
-    backgroundColor: theme.palette.primary.main
+    // backgroundColor: theme.palette.primary.main
   },
   buttonLabel: {
-    color: theme.palette.common.white
+    color: theme.palette.primary.main
   },
   patientDetailsWrapper: {
     border: '1px solid #eee',
     padding: theme.spacing.unit * 2.5,
     marginLeft: theme.spacing.unit * 1.25
+  },
+  loginWrapperClass: {
+    display: 'flex',
+    flexDirection: 'column'
   }
 });
 
@@ -206,21 +210,21 @@ class OrderSummary extends React.Component {
           <ExpansionPanelDetails>
             {
               !this.props.loginState.isAuthenticated &&
+              <div className={this.props.classes.loginWrapperClass}>
+              <Typography variant={'caption'} gutterBottom>
+                  To place an order now, login to your existing account or register
+              </Typography>
               <Grid container spacing={24}>
-                <Grid item xs={2}>
+                <Grid item xs={4}>
                   <Button
                     size='small'
-                    variant='outlined'
+                    variant='raised'
                     color='primary'
-                    classes={{
-                      root: this.props.classes.buttonRoot,
-                      label: this.props.classes.buttonLabel
-                    }}
                     label={'Login'}
                     onClick={this.openLoginModal.bind(this)}
                   />
                 </Grid>
-                <Grid item xs={2}>
+                <Grid item xs={4}>
                   <Button
                     size='small'
                     variant='outlined'
@@ -234,6 +238,7 @@ class OrderSummary extends React.Component {
                   />
                 </Grid>
               </Grid>
+              </div>
             }
           </ExpansionPanelDetails>
         </ExpansionPanel>

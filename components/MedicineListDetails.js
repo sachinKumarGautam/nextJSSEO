@@ -46,6 +46,10 @@ const styles = theme => {
     buttonLabel: {
       color: theme.palette.primary.main,
       fontSize: theme.typography.body3.fontSize
+    },
+    buttonWrapperStyle: {
+      marginTop: theme.spacing.unit,
+      float: 'right'
     }
   }
 }
@@ -85,7 +89,7 @@ class MedicineListDetails extends React.Component {
     const city = this.props.checkPincodeState.payload.city
     return (
       <Link
-        // prefetch
+        prefetch
         href={`/product-details?id=${props.itemDetails.slug}`}
         as={`/product-details/${props.itemDetails.slug}`}
       >
@@ -127,13 +131,14 @@ class MedicineListDetails extends React.Component {
               customStyle={props.classes.customStrokePrice}
               mrp={props.itemDetails.mrp}
             />
+            <div className={props.classes.buttonWrapperStyle}>
             <AddToCartWrapper
               variant='outlined'
               classes={{
                 root: props.classes.buttonRoot,
                 label: props.classes.buttonLabel
               }}
-              style={{float: 'right'}}
+              // style={{float: 'right'}}
               label={'Add To Cart'}
               open={this.state.pincodeDialogOpen}
               handleOpenPincodeDialog={this.handleOpenPincodeDialog}
@@ -142,6 +147,7 @@ class MedicineListDetails extends React.Component {
               checkPincodeState={props.checkPincodeState}
               checkPincodeLoading={props.checkPincodeLoading}
             />
+            </div>
           </div>
         </div>
       </Link>

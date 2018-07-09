@@ -35,12 +35,10 @@ class ProductDetailsWrapper extends Component {
   }
 
   render () {
-    const { pathname, query } = Router
+    const { query } = Router
     return (
       <div>
-        {
-          query.id
-            ? <div>
+        <div>
               <BreadCrumbs />
               <section>
                 <ProductDetails
@@ -58,12 +56,9 @@ class ProductDetailsWrapper extends Component {
                 <ProductDetailsContent
                   hover={this.state.hover}
                   productDetailsState={this.props.productDetailsState}
-
                 />
               </section>
             </div>
-            : null
-        }
       </div>
     )
   }
