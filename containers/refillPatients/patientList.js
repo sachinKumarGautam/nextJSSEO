@@ -24,28 +24,21 @@ const styles = theme => ({
 
 class PatientList extends Component {
   render () {
-    const { classes } = this.props
+    const { classes, patientDetailsState } = this.props
     return (
       <div>
         <MenuList>
-          <MenuItem className={classes.menuItem}>
-            <ListItemIcon className={classes.icon}>
-              <SendIcon />
-            </ListItemIcon>
-            <ListItemText classes={{ primary: classes.primary }} inset primary='Jyoti Arora' />
-          </MenuItem>
-          <MenuItem className={classes.menuItem}>
-            <ListItemIcon className={classes.icon}>
-              <DraftsIcon />
-            </ListItemIcon>
-            <ListItemText classes={{ primary: classes.primary }} inset primary='Shankar K.' />
-          </MenuItem>
-          <MenuItem className={classes.menuItem}>
-            <ListItemIcon className={classes.icon}>
-              <InboxIcon />
-            </ListItemIcon>
-            <ListItemText classes={{ primary: classes.primary }} inset primary='Amit Kumar' />
-          </MenuItem>
+          {patientDetailsState.payload.map((patient, index) => (
+            <MenuItem className={classes.menuItem}>
+              <ListItemIcon className={classes.icon}>
+                <SendIcon />
+              </ListItemIcon>
+              <ListItemText
+                classes={{ primary: classes.primary }}
+                inset primary={patient.full_name}
+              />
+            </MenuItem>
+          ))}
         </MenuList>
       </div>
     )

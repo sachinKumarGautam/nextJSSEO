@@ -1,13 +1,20 @@
-import React from 'react'
+import React, { Component } from 'react'
+
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+
 import Header from '../components/layouts/header'
 import Footer from '../components/layouts/footer'
 
 import { withStyles } from '@material-ui/core/styles'
 import withRoot from '../src/withRoot'
-
 import Paper from '@material-ui/core/Paper'
 
 import RefillPatientsWrapper from '../containers/refillPatients'
+
+import {
+  getPatientDetailsListLoading
+} from '../containers/patientDetails/patientDetailsActions'
 
 const styles = theme => ({
   root: {
@@ -25,16 +32,48 @@ const styles = theme => ({
   }
 })
 
-const RefillPatient = (props) => (
-  <div>
-    <Header />
-    <div>
-      <Paper className={props.classes.root} elevation={1}>
-        <RefillPatientsWrapper />
-      </Paper>
-    </div>
-    <Footer />
-  </div>
-)
+class RefillPatient extends Component {
+  componentDidMount () {
+    this.props.actions.getPatientDetailsListLoading(
+      this.props.patientDetailsState,
+      this.props.customerState.payload.id // pass customer id
+    )
+  }
 
-export default withRoot(withStyles(styles)(RefillPatient))
+  render () {
+    return (
+      <div>
+        <Header />
+        <div>
+          <Paper className={this.props.classes.root} elevation={1}>
+            <RefillPatientsWrapper />
+          </Paper>
+        </div>
+        <Footer />
+      </div>
+    )
+  }
+}
+
+function mapStateToProps (state) {
+  return {
+    patientDetailsState: state.patientDetailsState,
+    customerState: state.customerState
+  }
+}
+
+function mapDispatchToProps (dispatch) {
+  return {
+    actions: bindActionCreators(
+      {
+        getPatientDetailsListLoading
+      },
+      dispatch
+    )
+  }
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withRoot(withStyles(styles)(RefillPatient)))

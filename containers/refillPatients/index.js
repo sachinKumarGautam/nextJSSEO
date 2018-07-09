@@ -23,7 +23,9 @@ class RefillPatientsWrapper extends Component {
         <Grid container spacing={24}>
           <Grid item xs={3}>
             <aside>
-              <PatientList />
+              <PatientList
+                patientDetailsState={this.props.patientDetailsState}
+              />
             </aside>
           </Grid>
           <Grid item xs={9}>
@@ -41,7 +43,8 @@ class RefillPatientsWrapper extends Component {
 
 function mapStateToProps (state) {
   return {
-    medicineListState: state.medicineListState
+    medicineListState: state.medicineListState,
+    patientDetailsState: state.patientDetailsState
   }
 }
 
