@@ -9,6 +9,14 @@ import FormHelperText from '@material-ui/core/FormHelperText'
 import FormControl from '@material-ui/core/FormControl'
 import Button from '../../components/button'
 import { withStyles } from '@material-ui/core/styles'
+import {
+  FULL_NAME_REQUIRED,
+  MOBILE_REQUIRED,
+  STATE_REQUIRED,
+  LOCALITY_REQUIRED,
+  CITY_REQUIRED,
+  PINCODE_REQUIRED,
+} from '../../containers/messages/ValidationMsg'
 
 // Helper styles for demo
 
@@ -232,12 +240,12 @@ export default withStyles(styles)(withFormik({
     }
   },
   validationSchema: Yup.object().shape({
-    full_name: Yup.string().required('Please enter your full name'),
-    mobile: Yup.number().required('Please enter contact detail'),
-    pincode: Yup.string().required('Pincode is required'),
-    locality: Yup.string().required('Locality is required'),
-    city: Yup.string().required('City is required'),
-    state: Yup.string().required('State is required')
+    full_name: Yup.string().required(FULL_NAME_REQUIRED),
+    mobile: Yup.number().required(MOBILE_REQUIRED),
+    pincode: Yup.string().required(PINCODE_REQUIRED),
+    locality: Yup.string().required(LOCALITY_REQUIRED),
+    city: Yup.string().required(CITY_REQUIRED),
+    state: Yup.string().required(STATE_REQUIRED)
   }),
   handleSubmit: (values, { props, setSubmitting }) => {
     props.onSubmit(props.deliveryDetailsState, props.deliveryFormState, props.customerId, setSubmitting, props.closeModal, values)

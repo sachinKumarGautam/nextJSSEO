@@ -17,7 +17,7 @@ export function searchMedicine (action$, store) {
     debounceTime(1000),
     mergeMap(data => {
       const searchMedicineState = store.getState().searchMedicineState
-      return http(searchMedicine$(data.value)).pipe(
+      return http(searchMedicine$(data.value, data.facilityId)).pipe(
         map(result => {
           return searchMedicineSuccess(searchMedicineState, result)
         }),

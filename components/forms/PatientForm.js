@@ -10,6 +10,12 @@ import FormControl from '@material-ui/core/FormControl'
 import Button from '../../components/button'
 import { withStyles } from '@material-ui/core/styles'
 
+import {
+  FULL_NAME_REQUIRED,
+  MOBILE_REQUIRED,
+  GENDER_REQUIRED
+} from '../../containers/messages/ValidationMsg'
+
 // Helper styles for demo
 
 const styles = theme => ({
@@ -187,9 +193,9 @@ export default withStyles(styles)(withFormik({
     }
   },
   validationSchema: Yup.object().shape({
-    full_name: Yup.string().required('Please enter your full name'),
-    mobile: Yup.number().required('Please enter contact detail'),
-    gender: Yup.string().required('Gender is required')
+    full_name: Yup.string().required(FULL_NAME_REQUIRED),
+    mobile: Yup.number().required(MOBILE_REQUIRED),
+    gender: Yup.string().required(GENDER_REQUIRED)
   }),
   handleSubmit: (values, { props, setSubmitting }) => {
     props.onSubmit(props.patientFormState, props.customerId, setSubmitting, props.closeModal, values)

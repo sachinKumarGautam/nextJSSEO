@@ -23,7 +23,7 @@ const getCarePointsList$ = (customerId, cashType) => (
       'QUERY_STRING',
       {query_string:
         cashType === 'all'
-          ? `size=100&page=0` : `cash-type=${cashType}&size=100&page=0`
+          ? `size=10&page=0` : `cash-type=${cashType}&size=100&page=0`
       }
     )
   })
@@ -94,7 +94,7 @@ const fetchUserInfo$ = (mobileNumber) => (
 const getProductDetails$ = (productName, location) => (
   makeAjaxRequest({
     method: 'GET',
-    url: fetchUrl('catalog', `medicine/slug/${productName}?location=${101}`, 'GET_LIST')
+    url: fetchUrl('catalog', `medicine/slug/${productName}?location=${location}`, 'GET_LIST')
   })
 
 )
@@ -110,7 +110,7 @@ const registerCustomer$ = (data) => (
 const searchMedicine$ = (inputValue, facilityCode) => (
   makeAjaxRequest({
     method: 'GET',
-    url: fetchUrl('catalog', 'medicine/search', 'QUERY_STRING', {query_string: `q=${inputValue}&facility-code=${100}`})
+    url: fetchUrl('catalog', 'medicine/search', 'QUERY_STRING', {query_string: `q=${inputValue}&facility-code=${facilityCode}`})
   })
 )
 

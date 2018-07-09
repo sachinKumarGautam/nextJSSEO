@@ -13,9 +13,11 @@ import DialogActions from '@material-ui/core/DialogActions'
 import DialogContent from '@material-ui/core/DialogContent'
 import DialogContentText from '@material-ui/core/DialogContentText'
 
+import { PINCODE_INVALID, CHECKING_PINCODE, PINCODE_REQUIRED } from '../../messages/ValidationMsg'
+
 const styles = theme => ({
   paper: {
-    minWidth: 500
+    minWidth: theme.spacing.unit * 62.5
   },
   formControl: {
     margin: theme.spacing.unit,
@@ -41,7 +43,7 @@ const styles = theme => ({
 
 function getPincodeErrorMsg (pincodeFormError, inValidPincodeError, pincodeLoading) {
   if (pincodeLoading) {
-    return 'Checking pincode...'
+    return CHECKING_PINCODE
   } else if (pincodeFormError) {
     return pincodeFormError
   } else if (!pincodeFormError && inValidPincodeError) {
@@ -68,7 +70,7 @@ const PincodeDialog = (props) => {
   const pincodeFormError = errors.pincode && touched.pincode ? errors.pincode : ''
 
   const inValidPincodeError = touched.pincode && pincodeError === 'NotFoundException'
-    ? `Sorry! We don't service in your area. Please change pincode ` : ''
+    ? PINCODE_INVALID : ''
 
   return (
     <div>
@@ -139,7 +141,7 @@ const PincodeDialog = (props) => {
 export default withStyles(styles)(withFormik({
   mapPropsToValues: (props) => ({ pincode: props.checkPincodeState.payload.pincode }),
   validationSchema: Yup.object().shape({
-    pincode: Yup.number().required('Pincode is required!')
+    pincode: Yup.number().required(PINCODE_REQUIRED)
   }),
   handleSubmit: (values, { props, setSubmitting }) => {
     props.onSubmit(props.checkPincodeState, props.handleClose, setSubmitting, values)
