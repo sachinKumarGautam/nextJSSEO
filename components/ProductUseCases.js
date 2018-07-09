@@ -23,8 +23,7 @@ class ProductUseCases extends Component {
                 title={'Uses'}
                 itemKey={'uses'}
                 src={this.props.hover.uses ? '/static/images/uses-green.svg' : '/static/images/uses.svg'}
-                // content={this.props.summaryData.uses}
-                content={this.props.productDetailsState.payload.uses}
+                content={this.props.summaryData.uses}
                 hover={this.props.hover}
               />
             </articles>
@@ -35,8 +34,7 @@ class ProductUseCases extends Component {
                 title={'Side Effects'}
                 itemKey={'sideEffects'}
                 src={this.props.hover.sideEffects ? '/static/images/side-effects-green.svg' : '/static/images/side-effects.svg'}
-                // content={this.props.summaryData.side_effects}
-                content={this.props.productDetailsState.payload['side_effects']}
+                content={this.props.summaryData.side_effects}
                 hover={this.props.hover}
               />
             </articles>
@@ -47,22 +45,20 @@ class ProductUseCases extends Component {
                 title={'How it Works'}
                 itemKey={'howItWorks'}
                 src={this.props.hover.howItWorks ? '/static/images/how-it-works-green.svg' : '/static/images/how-it-works.svg'}
-                // content={this.props.summaryData.how_it_works}
-                content={this.props.productDetailsState.payload['how_it_works']}
+                content={this.props.summaryData.how_it_works}
                 hover={this.props.hover}
               />
             </articles>
           </Grid>
           <Grid item xs={12}>
             <articles>
-              {this.props.productDetailsState.payload['precautions'] &&
+              {this.props.summaryData.payload['precautions'] &&
                 <TableContent
                   itemKey={'precautions'}
                   hover={this.props.hover}
                   title={'Precautions'}
                   src={this.props.hover.precautions ? '/static/images/precautions-green.svg' : '/static/images/precautions.svg'}
-                  // content={this.props.summaryData.precautions}
-                  content={this.props.productDetailsState.payload['precautions']}
+                  content={this.props.summaryData.precautions}
                 />}
             </articles>
           </Grid>

@@ -9,6 +9,7 @@ import ProductPrice from './ProductPrice'
 import StrokePrice from './StrokePrice'
 import EstimatedPriceLabel from './EstimatedPriceLabel'
 import AddToCartWrapper from '../containers/cartDetails/addToCartWrapper/index'
+import {PRODUCT_DETAILS} from '../routes/RouteConstant'
 
 const styles = theme => {
   return {
@@ -90,8 +91,8 @@ class MedicineListDetails extends React.Component {
     return (
       <Link
         prefetch
-        href={`/product-details?id=${props.itemDetails.slug}`}
-        as={`/product-details/${props.itemDetails.slug}`}
+        href={`${PRODUCT_DETAILS}?id=${props.itemDetails.slug}`}
+        as={`${PRODUCT_DETAILS}/${props.itemDetails.slug}`}
       >
         <div className={props.classes.medicineListContentWrapper}>
           <div>

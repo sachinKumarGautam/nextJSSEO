@@ -76,14 +76,14 @@ const TableContent = (props) => (
           </TableCell>
           <TableCell component='th' scope='row'>
             {
-              props.content['avoid'] && props.content['avoid'] && props.content['avoid'].map((item) => {
+              props.content['avoid'] && props.content['avoid'].map((item) => {
                 return (
                   <Typography
                     gutterBottom
                     variant='body1'
                     className={props.classes.contentBody}
                   >
-                    {item}{' '}
+                    {`${item }`}
                   </Typography>
                 )
               })
@@ -110,7 +110,7 @@ const TableContent = (props) => (
               variant='body1'
               className={props.classes.contentBody}
             >
-              {props.content['food']}{' '}
+              {`${props.content['food']} `}
             </Typography>
           </TableCell>
         </TableRow>
@@ -133,7 +133,7 @@ const TableContent = (props) => (
               variant='body1'
               className={props.classes.contentBody}
             >
-              {props.content['storage']}{' '}
+              {`${props.content['storage']} `}
             </Typography>
           </TableCell>
         </TableRow>
@@ -156,7 +156,7 @@ const TableContent = (props) => (
               variant='body1'
               className={props.classes.contentBody}
             >
-              {props.content['miss_dose']}{' '}
+              {`${props.content['miss_dose']} `}
             </Typography>
           </TableCell>
         </TableRow>
