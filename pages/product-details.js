@@ -3,6 +3,7 @@ import Header from '../components/layouts/header'
 import Footer from '../components/layouts/footer'
 
 import { withStyles } from '@material-ui/core/styles'
+
 import withRoot from '../src/withRoot'
 
 import Paper from '@material-ui/core/Paper'
@@ -48,4 +49,4 @@ const ProductDetails = (props) => (
 //   return { stars: json.stargazers_count }
 // }
 
-export default withRoot(withStyles(styles)(ProductDetails))
+export default withRoot((withStyles(styles)(ProductDetails)))

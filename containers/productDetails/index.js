@@ -3,6 +3,12 @@ import React, { Component } from 'react'
 import BreadCrumbs from '../../components/BreadCrumbs'
 import ProductDetails from './ProductDetails'
 import ProductDetailsContent from './ProductDetailsContent'
+import Router from 'next/router'
+
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+
+import { withStyles } from '@material-ui/core/styles'
 
 /*
   bread crumbs
@@ -15,6 +21,13 @@ class ProductDetailsWrapper extends Component {
     super(props)
     this.state = {
       hover: {}
+    }
+  }
+  componentDidMount () {
+    const { pathname, query } = Router
+    console.log(Router, pathname, query)
+    if (query.sku) {
+      this.props.getProductDetailLoading(this.props.productDetailsState, query.sku)
     }
   }
 
@@ -46,4 +59,24 @@ class ProductDetailsWrapper extends Component {
   }
 }
 
-export default ProductDetailsWrapper
+function mapStateToProps (state) {
+  return {
+    patientDetailsState: state.patientDetailsState,
+    customerState: state.customerState
+  }
+}
+
+function mapDispatchToProps (dispatch) {
+  return {
+    actions: bindActionCreators(
+      {
+      },
+      dispatch
+    )
+  }
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ProductDetailsWrapper)

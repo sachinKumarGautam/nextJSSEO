@@ -2,14 +2,21 @@ import React, { Component } from 'react'
 
 import Grid from '@material-ui/core/Grid'
 import Typography from '@material-ui/core/Typography'
-
 import { withStyles } from '@material-ui/core/styles'
+import Card from '@material-ui/core/Card'
+import CardContent from '@material-ui/core/CardContent'
 
 import Button from '../../components/button'
 import PatientDetailsCardWrapper from './PatientDetailsCardWrapper'
 
 const styles = theme => {
   return {
+    card: {
+      marginLeft: theme.spacing.unit * 6
+    },
+    cardContent: {
+      paddingBottom: 0
+    },
     nameStyle: {
       ...theme.typography.subheading,
       marginBottom: theme.spacing.unit * 4,
@@ -59,33 +66,36 @@ class PatientDetailsList extends Component {
 
   render () {
     return (
-      <div>
-        <Typography
-          gutterBottom
-          variant='title'
-          component='h1'
-          className={this.props.classes.title}
-        >
-          Patients
-        </Typography>
-        <PatientDetailsCardWrapper
-          payload={this.props.patientDetailsState.payload}
-          savePatientSelected={this.savePatientSelected.bind(this)}
-        />
-        <div className={this.props.classes.buttonWrapper}>
-          <Button
-            size='small'
-            variant='outlined'
-            color='primary'
-            classes={{
-              root: this.props.classes.buttonRoot,
-              label: this.props.classes.buttonLabel
-            }}
-            style={{float: 'right'}}
-            label={'ADD NEW PATIENT'}
+      <Card elevation={'1'} className={this.props.classes.card}>
+        <CardContent className={this.props.classes.cardContent}>
+          <Typography
+            gutterBottom
+            variant='title'
+            component='h1'
+            className={this.props.classes.title}
+          >
+            Patients
+          </Typography>
+          <PatientDetailsCardWrapper
+            payload={this.props.patientDetailsState.payload}
+            savePatientSelected={this.savePatientSelected.bind(this)}
+            patientIdSelected={this.state.patientIdSelected}
           />
-        </div>
-      </div>
+          <div className={this.props.classes.buttonWrapper}>
+            <Button
+              size='small'
+              variant='outlined'
+              color='primary'
+              classes={{
+                root: this.props.classes.buttonRoot,
+                label: this.props.classes.buttonLabel
+              }}
+              style={{float: 'right'}}
+              label={'ADD NEW PATIENT'}
+            />
+          </div>
+        </CardContent>
+      </Card>
     )
   }
 }

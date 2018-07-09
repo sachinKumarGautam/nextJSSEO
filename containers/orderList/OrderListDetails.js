@@ -17,7 +17,6 @@ const styles = theme => ({
   },
   cardContent: {
     paddingBottom: 0
-
   },
   orderDetailWrapper: {
     border: `0.5px solid ${theme.palette.customGrey.grey250}`,
@@ -59,9 +58,9 @@ class OrderListDetails extends Component {
   onClickOfShowMore() {
     this.props.getOrderListDetailsLoading(
       this.props.orderListState,
-      100183363, // pass customer Id
+      this.props.customerState.payload.id, // pass customer Id
       this.state.page + 1, // page number
-      2 // page size
+      10 // page size
     )
 
     this.setState({
