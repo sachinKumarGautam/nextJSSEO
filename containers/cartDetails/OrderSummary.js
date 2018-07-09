@@ -10,12 +10,11 @@ import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
 import Button from '../../components/button'
-import PatientDetailsCard from '../../components/PatientDetailsCard'
-import AddressDetailsCard from '../../components/AddressDetailsCard'
-import ImagePicker from './ImagePicker'
 
-import AddPatientButton from '../patientDetails/AddPatientButton'
-import PatientDetailForm from '../patientDetails/PatientDetailForm'
+import ImagePicker from './ImagePicker'
+import LoginDetails from './LoginDetails'
+import PatientDetails from './PatientDetails'
+import AddressDetails from './AddressDetails'
 
 import AddDeliveryAddressButton from '../deliveryDetails/AddDeliveryAddressButton'
 import DeliveryDetailForm from '../deliveryDetails/DeliveryDetailsForm'
@@ -194,37 +193,13 @@ class OrderSummary extends React.Component {
             </Typography>
           </ExpansionPanelSummary>
           <ExpansionPanelDetails>
-            {
-              !this.props.loginState.isAuthenticated &&
-              <Grid container spacing={24}>
-                <Grid item xs={2}>
-                  <Button
-                    size='small'
-                    variant='outlined'
-                    color='primary'
-                    classes={{
-                      root: this.props.classes.buttonRoot,
-                      label: this.props.classes.buttonLabel
-                    }}
-                    label={'Login'}
-                    onClick={this.openLoginModal.bind(this)}
-                  />
-                </Grid>
-                <Grid item xs={2}>
-                  <Button
-                    size='small'
-                    variant='outlined'
-                    color='primary'
-                    classes={{
-                      root: this.props.classes.buttonRoot,
-                      label: this.props.classes.buttonLabel
-                    }}
-                    label={'Register'}
-                    onClick={this.openRegisterModal.bind(this)}
-                  />
-                </Grid>
-              </Grid>
-            }
+            <LoginDetails
+              loginState={this.props.loginState}
+              buttonRoot={this.props.classes.buttonRoot}
+              buttonLabel={this.props.classes.buttonLabel}
+              openLoginModal={this.openLoginModal.bind(this)}
+              openRegisterModal={this.openRegisterModal.bind(this)}
+            />
           </ExpansionPanelDetails>
         </ExpansionPanel>
         <ExpansionPanel
@@ -271,53 +246,33 @@ class OrderSummary extends React.Component {
             <Typography className={classes.heading}>Patient Details</Typography>
           </ExpansionPanelSummary>
           <ExpansionPanelDetails>
-            <Grid container spacing={24}>
-              <Grid item xs={12}>
-                {
-                  this.state.expanded === 'panel3' &&
-                  <AddPatientButton
-                    buttonRoot={this.props.classes.buttonRoot}
-                    buttonLabel={this.props.classes.buttonLabel}
-                    onClick={this.openPatientFormModal.bind(this)}
-                  />
-                }
-                <PatientDetailForm
-                  closePatientFormModal={this.closePatientFormModal.bind(this)}
-                  openPatientFormDialog={this.state.openPatientFormDialog}
-                  patientFormState={this.props.patientDetailsState}
-                  customerState={this.props.customerState}
-                  submitPatientDetailsLoading={this.props.submitPatientDetailsLoading}
-                  isEdit={'false'}
-                />
-              </Grid>
-              {
-                this.props.patientDetailsState.payload.map(patientDetail => {
-                  return (
-                    <Grid item xs={6}>
-                      <PatientDetailsCard
-                        patientDetail={patientDetail}
-                        savePatientSelected={this.savePatientSelected.bind(this)}
-                        patientIdSelected={this.props.cartState.payload.patient_id.payload}
-                      />
-                    </Grid>
-                  )
-                })
-              }
-            </Grid>
-            <ExpansionPanelActions>
-              <Button
-                size='small'
-                variant='outlined'
-                color='primary'
-                classes={{
-                  root: this.props.classes.buttonRoot,
-                  label: this.props.classes.buttonLabel
-                }}
-                label={'NEXT'}
-                onClick={this.handleNextChange.bind(this, 'panel4', true)}
-              />
-            </ExpansionPanelActions>
+            <PatientDetails
+              expanded={this.state.expanded}
+              buttonRoot={this.props.classes.buttonRoot}
+              buttonLabel={this.props.classes.buttonLabel}
+              openPatientFormModal={this.openPatientFormModal.bind(this)}
+              submitPatientDetailsLoading={this.props.submitPatientDetailsLoading}
+              openPatientFormDialog={this.state.openPatientFormDialog}
+              customerState={this.props.customerState}
+              patientDetailsState={this.props.patientDetailsState}
+              closePatientFormModal={this.closePatientFormModal.bind(this)}
+              savePatientSelected={this.savePatientSelected.bind(this)}
+              patientIdSelected={this.props.cartState.payload.patient_id.payload}
+            />
           </ExpansionPanelDetails>
+          <ExpansionPanelActions>
+            <Button
+              size='small'
+              variant='outlined'
+              color='primary'
+              classes={{
+                root: this.props.classes.buttonRoot,
+                label: this.props.classes.buttonLabel
+              }}
+              label={'NEXT'}
+              onClick={this.handleNextChange.bind(this, 'panel4', true)}
+            />
+          </ExpansionPanelActions>
         </ExpansionPanel>
         <ExpansionPanel
           expanded={expanded === 'panel4'}
@@ -328,53 +283,34 @@ class OrderSummary extends React.Component {
             <Typography className={classes.heading}>Delivery Details</Typography>
           </ExpansionPanelSummary>
           <ExpansionPanelDetails>
-            <Grid container spacing={24}>
-              <Grid item xs={12}>
-                {
-                  this.state.expanded === 'panel4' &&
-                  <AddDeliveryAddressButton
-                    buttonRoot={this.props.classes.buttonRoot}
-                    buttonLabel={this.props.classes.buttonLabel}
-                    onClick={this.openDeliveryFormModal.bind(this)}
-                  />
-                }
-                <DeliveryDetailForm
-                  onSubmit={this.props.submitDeliveryDetailsLoading}
-                  openDeliveryFormDialog={this.state.openDeliveryFormDialog}
-                  customerState={this.props.customerState}
-                  deliveryDetailsState={this.props.deliveryDetailsState}
-                  deliveryFormState={this.props.deliveryDetailsState.deliveryFormState}
-                  closeDeliveryFormModal={this.closeDeliveryFormModal.bind(this)}
-                />
-              </Grid>
-              {
-                this.props.deliveryDetailsState.payload.map(deliveryDetail => {
-                  return (
-                    <Grid item xs={6}>
-                      <AddressDetailsCard
-                        deliveryDetail={deliveryDetail}
-                        saveAddressSelected={this.saveAddressSelected.bind(this)}
-                        addressIdSelected={this.props.cartState.payload.shipping_address_id.payload}
-                      />
-                    </Grid>
-                  )
-                })
-              }
-            </Grid>
-            <ExpansionPanelActions>
-              <Button
-                size='small'
-                variant='outlined'
-                color='primary'
-                classes={{
-                  root: this.props.classes.buttonRoot,
-                  label: this.props.classes.buttonLabel
-                }}
-                label={'NEXT'}
-                onClick={this.handleNextChange.bind(this, 'panel5', true)}
-              />
-            </ExpansionPanelActions>
+            <AddressDetails
+              expanded={this.state.expanded}
+              buttonRoot={this.props.classes.buttonRoot}
+              buttonLabel={this.props.classes.buttonLabel}
+              openDeliveryFormModal={this.openDeliveryFormModal.bind(this)}
+              submitDeliveryDetailsLoading={this.props.submitDeliveryDetailsLoading}
+              openDeliveryFormDialog={this.state.openDeliveryFormDialog}
+              customerState={this.props.customerState}
+              deliveryFormState={this.props.deliveryDetailsState.deliveryFormState}
+              deliveryDetailsState={this.props.deliveryDetailsState}
+              closeDeliveryFormModal={this.closeDeliveryFormModal.bind(this)}
+              saveAddressSelected={this.saveAddressSelected.bind(this)}
+              addressIdSelected={this.props.cartState.payload.patient_id.payload}
+            />
           </ExpansionPanelDetails>
+          <ExpansionPanelActions>
+            <Button
+              size='small'
+              variant='outlined'
+              color='primary'
+              classes={{
+                root: this.props.classes.buttonRoot,
+                label: this.props.classes.buttonLabel
+              }}
+              label={'NEXT'}
+              onClick={this.handleNextChange.bind(this, 'panel5', true)}
+            />
+          </ExpansionPanelActions>
         </ExpansionPanel>
         <ExpansionPanel
           expanded={expanded === 'panel5'}
