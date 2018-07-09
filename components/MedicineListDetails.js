@@ -10,8 +10,13 @@ import ProductPrice from './ProductPrice'
 import StrokePrice from './StrokePrice'
 import EstimatedPriceLabel from './EstimatedPriceLabel'
 
+import RefillDueDays from './RefillDueDays'
+
 const styles = theme => {
   return {
+    customName: {
+      display: 'inline-block'
+    },
     customBrand: {
       ...theme.typography.body3
     },
@@ -52,7 +57,12 @@ const styles = theme => {
 const MedicineListDetails = (props) => (
   <div className={props.classes.medicineListContentWrapper}>
     <div>
-      <ProductName variant={'body1'} />
+      <ProductName
+        variant={'body1'}
+        name={props.itemDetails.name}
+        customStyle={props.classes.customName}
+      />
+      {props.isRefillMedicines && <RefillDueDays />}
       <ProductBrand
         variant={'caption'}
         withoutImage

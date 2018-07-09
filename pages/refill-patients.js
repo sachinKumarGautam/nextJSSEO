@@ -7,6 +7,8 @@ import withRoot from '../src/withRoot'
 
 import Paper from '@material-ui/core/Paper'
 
+import RefillPatientsWrapper from '../containers/refillPatients'
+
 const styles = theme => ({
   root: {
     paddingTop: 16,
@@ -28,9 +30,7 @@ const RefillPatient = (props) => (
     <Header />
     <div>
       <Paper className={props.classes.root} elevation={1}>
-        <div>
-          refill patient list
-        </div>
+        <RefillPatientsWrapper />
       </Paper>
     </div>
     <Footer />
