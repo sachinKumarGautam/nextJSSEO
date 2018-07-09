@@ -18,7 +18,7 @@ const styles = theme => ({
   }
 })
 
-class Avatar extends Component {
+class TotalAmount extends Component {
   render () {
     return (
       <div className={this.props.classes.totalAmountWrapper}>
@@ -39,4 +39,4 @@ class Avatar extends Component {
   }
 }
 
-export default withStyles(styles)(Avatar)
+export default withStyles(styles)(TotalAmount)

@@ -10,9 +10,6 @@ import RefillDetails from './RefillDetails'
 import Button from '../../components/button'
 
 const styles = theme => ({
-  card: {
-    marginLeft: theme.spacing.unit * 5
-  },
   cardContent: {
     paddingBottom: 0
   },
@@ -49,7 +46,6 @@ const styles = theme => ({
   },
   buttonWrapper: {
     marginLeft: theme.spacing.unit * 5.25,
-    marginRight: theme.spacing.unit * 11.75,
     display: 'flex',
     flexDirection: 'row',
     marginBottom: theme.spacing.unit * 5.37,
@@ -58,7 +54,7 @@ const styles = theme => ({
 
 const OrderConfirmationDetails = (props) => {
   return (
-    <Card elevation={'1'} className={props.classes.card}>
+    <Card elevation={'1'}>
       <CardContent className={props.classes.cardContent}>
         <ThankyouDetails/>
         <Divider/>

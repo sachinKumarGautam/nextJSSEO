@@ -13,8 +13,8 @@ const styles = theme => ({
   root: {
     paddingTop: 16,
     paddingBottom: 16,
-    paddingLeft: theme.spacing.unit * 7,
-    paddingRight: theme.spacing.unit * 7,
+    paddingLeft: theme.spacing.unit * 5,
+    paddingRight: theme.spacing.unit * 3.5,
     maxWidth: theme.breakpoints.values.lg,
     minWidth: theme.breakpoints.values.md,
     margin: '0 auto',

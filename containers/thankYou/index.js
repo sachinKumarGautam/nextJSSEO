@@ -13,7 +13,9 @@ class ThankyouWrapper extends Component {
       <div>
         <BreadCrumbs />
         <section>
-          <OrderConfirmation/>
+          <OrderConfirmation
+            cartState={this.props.cartState}
+          />
         </section>
       </div>
     )
@@ -32,6 +34,7 @@ function mapDispatchToProps (dispatch) {
 
 function mapStateToProps (state) {
   return {
+    cartState: state.cartState
   }
 }
 

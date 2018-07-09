@@ -3,16 +3,18 @@ import React, { Component } from 'react'
 import Grid from '@material-ui/core/Grid'
 
 import OrderConfirmationDetails from './OrderConfirmationDetails'
-// import CartDetails from './CartDetails'
+import MyCartDetails from './MyCartDetails'
 
 const OrderConfirmation = (props) => {
   return (
-    <Grid container spacing={24}>
-      <Grid item xs={8}>
+    <Grid container>
+      <Grid item xs={7}>
         <OrderConfirmationDetails/>
       </Grid>
-      <Grid item xs={4}>
-        {/* <CartDetails/> */}
+      <Grid item xs={5}>
+        <MyCartDetails
+          cartState={props.cartState}
+        />
       </Grid>
     </Grid>
   )
