@@ -8,6 +8,8 @@ export const ADDRESS_LIST = '/delivery-details'
 
 export const PATIENT_LIST = '/patient-details'
 
+export const PRODUCT_DETAILS = '/product-details'
+
 export const CART_DETAILS = '/cart-details'
 
 export const THANK_YOU = '/thank-you'

@@ -1,6 +1,5 @@
 const initialState = {
   payload: {
-    payload: {
       variant_status: '',
       sku: '',
       quantity: 1,
@@ -38,7 +37,6 @@ const initialState = {
       lc_assured_available: false,
       is_cold_storage: false,
       packaging_type: null
-    }
   },
   isLoadingGetProductDetails: false,
   errorStateGetProductDetails: {

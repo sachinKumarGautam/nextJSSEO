@@ -27,7 +27,7 @@ class ProductDetailsContent extends Component {
           <Grid item xs={9}>
             <ProductUseCases
               hover={this.props.hover}
-              productDetailsState={this.props.productDetailsState}
+              summaryData={this.props.productDetailsState.payload}
             />
           </Grid>
           <Grid item xs={3}>

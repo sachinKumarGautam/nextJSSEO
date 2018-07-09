@@ -81,7 +81,7 @@ const CommonButton = (buttonProps) => {
           variant={variant || null}
           classes={{
             root: classes.root || {},
-            label: classes.label || {}
+            label: classes.label
           }}
           onClick={onClick}
         >
