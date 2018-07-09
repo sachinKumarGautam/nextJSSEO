@@ -39,57 +39,57 @@ class MedicineList extends Component {
         {
           this.props.cartState.payload.cart_items.payload.map(cartItem => {
             return (
-              <div className={this.props.classes.medicineListWrapper}>
-                <Grid container spacing={24}>
-                  <Grid item xs={7}>
-                    <ProductName
-                      customStyle={this.props.classes.medicineNameWrapper}
-                      name={cartItem.name}
-                    />
-                    <ProductBrand
-                      customStyle={this.props.classes.companyNameWrapper}
-                      brand={cartItem.brand}
-                      withoutImage
-                    />
-                    <ProductPackSize
-                      customStyle={this.props.classes.companyNameWrapper}
-                      packType={cartItem.type}
-                      packSize={cartItem.per_pack_qty}
-                      withoutImage
-                    />
-                  </Grid>
-                  <Grid item xs={5}>
-                    <div className={this.props.classes.amountWrapper}>
-                      <Typography className={this.props.classes.amount}>
-                        Rs. {cartItem.mrp}
+              <Grid
+                container
+                spacing={24}
+                className={this.props.classes.medicineListWrapper}
+              >
+                <Grid item xs={7}>
+                  <ProductName
+                    customStyle={this.props.classes.medicineNameWrapper}
+                    name={cartItem.name}
+                  />
+                  <ProductBrand
+                    customStyle={this.props.classes.companyNameWrapper}
+                    brand={cartItem.brand}
+                    withoutImage
+                  />
+                  <ProductPackSize
+                    customStyle={this.props.classes.companyNameWrapper}
+                    packType={cartItem.type}
+                    packSize={cartItem.per_pack_qty}
+                    withoutImage
+                  />
+                </Grid>
+                <Grid item xs={5}>
+                  <div className={this.props.classes.amountWrapper}>
+                    <Typography className={this.props.classes.amount}>
+                      Rs. {cartItem.mrp}
+                    </Typography>
+                  </div>
+                  <Grid container spacing={24}>
+                    <Grid item xs={5}>
+                      <IconButton
+                        onClick={this.props.decrementCartItem.bind(this, cartItem)}
+                      >
+                        <img src='/static/images/minusDisable.svg' />
+                      </IconButton>
+                    </Grid>
+                    <Grid item xs={2} className={this.props.classes.cartAmountWrapper}>
+                      <Typography>
+                        {cartItem.quantity}
                       </Typography>
-                    </div>
-                    <div>
-                      <Grid container spacing={24}>
-                        <Grid item xs={5}>
-                          <IconButton
-                            onClick={this.props.decrementCartItem.bind(this, cartItem)}
-                          >
-                            <img src='/static/images/minusDisable.svg' />
-                          </IconButton>
-                        </Grid>
-                        <Grid item xs={2} className={this.props.classes.cartAmountWrapper}>
-                          <Typography>
-                            {cartItem.quantity}
-                          </Typography>
-                        </Grid>
-                        <Grid item xs={4}>
-                          <IconButton
-                            onClick={this.props.incrementCartItem.bind(this, cartItem)}
-                          >
-                            <img src='/static/images/plus.svg' />
-                          </IconButton>
-                        </Grid>
-                      </Grid>
-                    </div>
+                    </Grid>
+                    <Grid item xs={4}>
+                      <IconButton
+                        onClick={this.props.incrementCartItem.bind(this, cartItem)}
+                      >
+                        <img src='/static/images/plus.svg' />
+                      </IconButton>
+                    </Grid>
                   </Grid>
                 </Grid>
-              </div>
+              </Grid>
             )
           })
         }

@@ -126,6 +126,7 @@ class CartDetails extends React.Component {
             customerState={this.props.customerState}
             patientDetailsState={this.props.patientDetailsState}
             deliveryDetailsState={this.props.deliveryDetailsState}
+            checkPincodeState={this.props.checkPincodeState}
             savePatientToCartLoading={this.props.actions.savePatientToCartLoading}
             saveDeliveryAddressToCartLoading={this.props.actions.saveDeliveryAddressToCartLoading}
             incrementCartItemLoading={this.props.actions.incrementCartItemLoading}
@@ -162,7 +163,8 @@ function mapStateToProps (state) {
     cartState: state.cartState,
     customerState: state.customerState,
     patientDetailsState: state.patientDetailsState,
-    deliveryDetailsState: state.deliveryDetailsState
+    deliveryDetailsState: state.deliveryDetailsState,
+    checkPincodeState: state.checkPincodeState
   }
 }
 
