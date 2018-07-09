@@ -6,7 +6,7 @@ import withRoot from '../src/withRoot'
 import Header from '../components/layouts/header'
 import Footer from '../components/layouts/footer'
 
-import ThankYou from '../containers/thankYou'
+import ThankyouWrapper from '../containers/thankYou'
 import Paper from '@material-ui/core/Paper'
 
 const styles = theme => ({
@@ -25,16 +25,18 @@ const styles = theme => ({
   }
 })
 
-class ThankYouWrapper extends React.Component {
+class OrderConfirmationWrapper extends React.Component {
   render () {
     return (
       <div>
         <Header />
-        <ThankYou />
+        <div className={this.props.classes.root}>
+          <ThankyouWrapper />
+        </div>
         <Footer />
       </div>
     )
   }
 }
 
-export default withRoot(ThankYouWrapper)
+export default withRoot(withStyles(styles)(OrderConfirmationWrapper))
