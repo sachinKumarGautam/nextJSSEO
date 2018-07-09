@@ -1,12 +1,13 @@
 import React from 'react'
 
 import { withStyles } from '@material-ui/core/styles'
+import IconButton from '@material-ui/core/IconButton'
 
 const styles = theme => ({
   imagePickerWrapper: {
     width: '100%',
-    height: '100px',
-    background: '#fff',
+    height: theme.spacing.unit * 12.5,
+    background: theme.palette.common.white,
     display: 'flex',
     flexDirection: 'row',
     flex: 12
@@ -17,28 +18,22 @@ const styles = theme => ({
     overflowY: 'hidden',
     whiteSpace: 'no-wrap'
   },
-  pickerButton: {
-    width: '100px',
-    height: '100px',
-    background: 'yellow'
-  },
   pickerImage: {
-    width: '100px',
-    height: '100px',
+    width: theme.spacing.unit * 12.5,
+    height: theme.spacing.unit * 12.5,
     background: '#eee',
     display: 'inline-block',
-    marginRight: '5px',
+    marginRight: theme.spacing.unit * 0.625,
     flexShrink: 0
   },
   deleteButton: {
     position: 'absolute',
-    right: '6px',
-    color: '#fff',
-    width: '25px',
-    height: '25px',
+    right: theme.spacing.unit * 0.75,
+    color: theme.palette.common.white,
+    width: theme.spacing.unit * 3.125,
+    height: theme.spacing.unit * 3.125,
     background: '#333',
     borderRadius: '50%',
-    lineHeight: '23px',
     textAlign: 'center'
   },
   pickerListInput: {
@@ -50,26 +45,22 @@ const styles = theme => ({
     zIndex: -1
   },
   pickerListLabel: {
-    width: '100px',
+    width: theme.spacing.unit * 12.5,
     textAlign: 'center',
-    background: '#fff',
-    padding: '15px',
-    color: '#80c241',
-    borderRadius: '2px',
+    background: theme.palette.common.white,
+    padding: theme.spacing.unit * 1.875,
+    color: theme.palette.customGrey.grey200,
+    borderRadius: theme.spacing.unit * 0.25,
     fontWeight: '300',
     flexShrink: 0,
-    marginRight: '5px',
-    border: '1px solid #80c241',
+    marginRight: theme.spacing.unit * 0.625,
+    border: `1px dashed ${theme.palette.customGrey.grey200}`,
     marginTop: 10
   },
   pickerListLabelPlus: {
-    fontSize: '35px',
+    fontSize: theme.spacing.unit * 4.375,
     display: 'block',
-    marginBottom: '5px'
-  },
-  pickerListLabelAddImage: {
-    fontSize: '12px',
-    display: 'block'
+    marginBottom: theme.spacing.unit * 0.625
   },
   deleteButtonWrapper: {
     position: 'relative',
@@ -90,18 +81,14 @@ const ImagePicker = (props) => (
       <label
         className={props.classes.pickerListLabel}
         for='file'>
-        <label
-          className={props.classes.pickerListLabelPlus}
-          for='file'
-        >
-          +
-        </label>
-        <label
-          className={props.classes.pickerListLabelAddImage}
-          for='file'
-        >
-          Add Image
-        </label>
+        <IconButton>
+          <label
+            className={props.classes.pickerListLabelPlus}
+            for='file'
+          >
+            +
+          </label>
+        </IconButton>
       </label>
       {
         props.files.map((image, index) => (
