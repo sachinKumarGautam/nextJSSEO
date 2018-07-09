@@ -265,7 +265,7 @@ export function savePatientToCartEpic (action$, store) {
     mergeMap(data => {
       return http(savePatientToCart$(data.cartId, data.patientId)).pipe(
         map(result => {
-          return savePatientToCartSuccess(data.cartState, result.body.payload.patients)
+          return savePatientToCartSuccess(data.cartState, result.body.payload)
         }),
         catchError(error => {
           return of(savePatientToCartFailure(data.cartState, error))
@@ -290,7 +290,7 @@ export function saveDeliveryAddressToCartEpic (action$, store) {
         )
       ).pipe(
         map(result => {
-          return saveDeliveryAddressToCartSuccess(data.cartState, result.body.payload.patients)
+          return saveDeliveryAddressToCartSuccess(data.cartState, result.body.payload.shipping_address_id)
         }),
         catchError(error => {
           return of(saveDeliveryAddressToCartFailure(data.cartState, error))
