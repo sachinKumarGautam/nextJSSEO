@@ -51,11 +51,11 @@ const styles = theme => ({
     padding: theme.spacing.unit * 1.875,
     color: theme.palette.customGrey.grey200,
     borderRadius: theme.spacing.unit * 0.25,
-    fontWeight: '300',
+    fontWeight: theme.typography.fontWeightLight,
     flexShrink: 0,
     marginRight: theme.spacing.unit * 0.625,
     border: `1px dashed ${theme.palette.customGrey.grey200}`,
-    marginTop: 10
+    marginTop: theme.spacing.unit * 1.25
   },
   pickerListLabelPlus: {
     fontSize: theme.spacing.unit * 4.375,

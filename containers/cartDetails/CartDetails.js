@@ -6,8 +6,6 @@ import Typography from '@material-ui/core/Typography'
 import Avatar from './Avatar'
 import MedicineList from './MedicineList'
 import Coupon from './Coupon'
-import CarePoints from './CarePoints'
-import CarePointsPlus from './CarePointsPlus'
 import PriceDetails from './PriceDetails'
 import TotalAmount from './TotalAmount'
 
@@ -59,10 +57,10 @@ class CartDetails extends Component {
     this.props.incrementCartItemLoading(this.props.cartState, cartItem)
   }
 
-  componentWillReceiveProps(nextProps) {
+  componentDidUpdate(prevProps) {
     if(
-      nextProps.cartState.orderResponse.order_number !==
-      this.props.cartState.orderResponse.order_number
+      this.props.cartState.orderResponse.order_number !==
+      prevProps.cartState.orderResponse.order_number
     ) {
       Router.push({ pathname: THANK_YOU})
 
@@ -70,8 +68,8 @@ class CartDetails extends Component {
 
       this.props.getAnonymousCartIdLoading(
         this.props.cartState,
-        'MWEB',
-        100,
+        this.props.checkPincodeState.payload.source,
+        this.props.checkPincodeState.payload.id,
         ''
       )
     }
@@ -101,10 +99,6 @@ class CartDetails extends Component {
           />
           {
             // <Coupon />
-          }
-          {
-            // <CarePoints />
-            // <CarePointsPlus />
           }
           <PriceDetails
             cartState={this.props.cartState}

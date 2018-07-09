@@ -17,6 +17,10 @@ import {
   CART_DETAILS
 } from '../routes/RouteConstant'
 
+import  {
+  NO_CART_ITEM
+} from '../containers/messages/cartMessages'
+
 const styles = theme => ({
   button: {
     margin: theme.spacing.unit
@@ -160,7 +164,7 @@ class CartIcon extends Component {
               {
                 cartItems.length
                 ? cartItems[cartItems.length - 1].name
-                : 'There is no item in your cart yet'
+                : NO_CART_ITEM
               }
             </Typography>
             {
