@@ -223,6 +223,14 @@ const submitRefillDate$ = (orderId, refillDay) => (
   })
 )
 
+const getPatientPastMedicineList$ = (patientId, facilityCode) => (
+  makeAjaxRequest({
+    method: 'GET',
+    url: fetchUrl('account', 'patient/' + patientId + '/past-medicines',
+      'QUERY_STRING', {query_string: `facility-code=${facilityCode}`})
+  })
+)
+
 export {
   getMoleculeSummary$,
   getMedicineList$,
@@ -250,5 +258,6 @@ export {
   searchMedicine$,
   checkPincode$,
   submitDeliveryDetails$,
-  submitRefillDate$
+  submitRefillDate$,
+  getPatientPastMedicineList$
 }
