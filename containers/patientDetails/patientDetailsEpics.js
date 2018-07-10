@@ -49,7 +49,7 @@ export function getPatientDetailsList (action$, store) {
               )
             )
           } else {
-            return getPatientDetailsListSuccess(data.patientDetailsState, result.body.payload.patients)
+            return of(getPatientDetailsListSuccess(data.patientDetailsState, result.body.payload.patients))
           }
         }),
         catchError(error => {
