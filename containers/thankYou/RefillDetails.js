@@ -76,16 +76,15 @@ class RefillDetails extends Component {
   onClickOfRefillDay(refillDay) {
     this.props.submitRefillDateLoading(
       this.props.thankYouState,
-      // this.props.cartState.orderResponse.order_number,
-      100681913,
+      this.props.cartState.orderResponse.order_number,
       refillDay.value
     )
   }
 
-  componentWillUpdate(nextProps, nextState) {
+  componentDidUpdate(prevProps) {
     if(
       this.props.thankYouState.payload.repeat_day !==
-      nextProps.thankYouState.payload.repeat_day
+      prevProps.thankYouState.payload.repeat_day
     ){
       this.setState({
         open: true

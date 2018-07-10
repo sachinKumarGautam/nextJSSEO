@@ -4,6 +4,7 @@ import { withStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
 
 import {formatDate} from '../../utils/FormatDate'
+import {DESCRIPTION} from '../messages/thankyouMessages'
 
 const styles = theme => ({
   imageStyle: {
@@ -56,7 +57,7 @@ const ThankyouDetails = (props) => {
     <div>
       <div className={props.classes.orderWrapper}>
         <img
-          src= '../../static/images/bg-chk.svg'
+          src= 'static/images/bg-chk.svg'
           alt='check'
           className={props.classes.imageStyle}
         />
@@ -102,7 +103,7 @@ const ThankyouDetails = (props) => {
         variant='body2'
         className={props.classes.description}
       >
-        Your order is under process and is promised is promised for same day Express delivery*. We will call you shortly to confirm medicines and quantities
+        {DESCRIPTION}
       </Typography>
     </div>
   )
