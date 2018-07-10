@@ -7,6 +7,7 @@ import ReactTooltip from 'react-tooltip'
 
 import Link from 'next/link'
 
+import { MOLECULE_DETAILS } from '../routes/RouteConstant'
 const styles = theme => {
   return {
     moleculeTag: {
@@ -14,7 +15,10 @@ const styles = theme => {
       textDecoration: 'none',
       borderBottom: '1px dashed',
       marginRight: theme.spacing.unit * 2,
-      color: theme.palette.customGrey.grey600
+      color: theme.palette.customGrey.grey600,
+      '&:hover': {
+        color: theme.palette.primary.main,
+      },
     },
     paper: {
       padding: theme.spacing.unit,
@@ -51,7 +55,10 @@ const PopoverContent = (props) => (
     <Typography className={props.styles.popoverContent}>
       Metformin is used in the treatment of  type2 diabetes. It decreases the amount of sugar…
     </Typography>
-    <Link as={`/molecule-details/Multivitamin`} href={`/molecule-details?id=5a61a295ae8bdc26685f2b09`}>
+    <Link 
+      as={`${MOLECULE_DETAILS}/${props.item.name}`} 
+      href={`${MOLECULE_DETAILS}?id=${props.item.id}&name=${props.item.name}`}
+    >
       <a className={props.styles.popoverLink}>Read more..</a>
     </Link>
   </div>
@@ -77,16 +84,16 @@ class ProductMolecule extends Component {
               >
                 {item.name}
               </a>
-              {/* <ReactTooltip
-              id='moleculeItem'
-              effect='solid'
-              place='right'
-              className={classes.paper}
-              delayHide={1000}
-              delayShow={1000}
+              <ReactTooltip
+                id='moleculeItem'
+                effect='solid'
+                place='right'
+                className={classes.paper}
+                delayHide={1000}
+                delayShow={1000}
             >
-              <PopoverContent styles={classes} />
-            </ReactTooltip> */}
+              <PopoverContent item={item} styles={classes} />
+            </ReactTooltip>
             </div>
           )
           )
