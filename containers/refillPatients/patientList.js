@@ -25,7 +25,8 @@ class PatientList extends Component {
       this.props.pastMedicineState,
       patientId
     )
-    this.props.setPatientDetails(
+    this.props.updateSelectedPatientDetails(
+      this.props.pastMedicineState,
       patientId,
       patientName
     )

@@ -10,7 +10,8 @@ import PatientList from './patientList'
 import RefillMedicineList from './refillMedicineList'
 
 import {
-  getRefillPastMedicinesLoading
+  getRefillPastMedicinesLoading,
+  updateSelectedPatientDetails
 } from './refillActions'
 
 /*
@@ -20,33 +21,6 @@ import {
 */
 
 class RefillPatientsWrapper extends Component {
-  constructor (props) {
-    super(props)
-
-    this.state = {
-      patientId: 0,
-      patientFullName: ''
-    }
-
-    this.setPatientDetails = this.setPatientDetails.bind(this)
-  }
-
-  componentDidUpdate (prevProps) {
-    if (prevProps.patientDetailsState.payload.length !== this.props.patientDetailsState.payload.length) {
-      this.setPatientDetails(
-        this.props.patientDetailsState.payload[0].id,
-        this.props.patientDetailsState.payload[0].full_name
-      )
-    }
-  }
-
-  setPatientDetails (id, name) {
-    this.setState({
-      id: id,
-      patientFullName: name
-    })
-  }
-
   render () {
     return (
       <div>
@@ -58,7 +32,7 @@ class RefillPatientsWrapper extends Component {
                 patientDetailsState={this.props.patientDetailsState}
                 getRefillPastMedicinesLoading={this.props.actions.getRefillPastMedicinesLoading}
                 pastMedicineState={this.props.pastMedicineState}
-                setPatientDetails={this.setPatientDetails}
+                updateSelectedPatientDetails={this.props.actions.updateSelectedPatientDetails}
               />
             </aside>
           </Grid>
@@ -67,7 +41,6 @@ class RefillPatientsWrapper extends Component {
               <RefillMedicineList
                 pastMedicineState={this.props.pastMedicineState}
                 checkPincodeState={this.props.checkPincodeState}
-                patientName={this.state.patientFullName}
               />
             </section>
           </Grid>
@@ -89,7 +62,8 @@ function mapDispatchToProps (dispatch) {
   return {
     actions: bindActionCreators(
       {
-        getRefillPastMedicinesLoading
+        getRefillPastMedicinesLoading,
+        updateSelectedPatientDetails
       },
       dispatch
     )

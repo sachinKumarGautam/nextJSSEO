@@ -1,5 +1,7 @@
 const initialState = {
   payload: [],
+  selectedPatientId: 0,
+  selectedPatientName: '',
   isLoading: false,
   errorState: {
     error: {},

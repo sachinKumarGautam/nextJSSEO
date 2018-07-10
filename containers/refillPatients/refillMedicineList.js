@@ -41,7 +41,7 @@ class RefillMedicineList extends Component {
               component='h1'
               className={this.props.classes.treatmentHeading}
             >
-              Treatments of {this.props.patientName}
+              Treatments of {this.props.pastMedicineState.selectedPatientName}
             </Typography>
             <ul className={this.props.classes.medicineListWrapper}>
               {

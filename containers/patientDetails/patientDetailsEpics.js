@@ -17,7 +17,8 @@ import {
 } from './patientDetailsActions'
 
 import {
-  getRefillPastMedicinesLoading
+  getRefillPastMedicinesLoading,
+  updateSelectedPatientDetails
 } from '../refillPatients/refillActions'
 
 import {
@@ -40,7 +41,12 @@ export function getPatientDetailsList (action$, store) {
           if (data.isRefillPatients) {
             return of(
               getPatientDetailsListSuccess(data.patientDetailsState, result.body.payload.patients),
-              getRefillPastMedicinesLoading(pastMedicineState, result.body.payload.patients[0].id)
+              getRefillPastMedicinesLoading(pastMedicineState, result.body.payload.patients[0].id),
+              updateSelectedPatientDetails(
+                pastMedicineState,
+                result.body.payload.patients[0].id,
+                result.body.payload.patients[0].full_name
+              )
             )
           } else {
             return getPatientDetailsListSuccess(data.patientDetailsState, result.body.payload.patients)

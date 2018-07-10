@@ -3,7 +3,8 @@ import initialState from './refillModal'
 import {
   GET_PAST_MEDICINES_LOADING,
   GET_PAST_MEDICINES_SUCCESS,
-  GET_PAST_MEDICINES_FAILURE
+  GET_PAST_MEDICINES_FAILURE,
+  UPDATE_REFILL_PATIENT_DETAILS
 } from './refillActionTypes'
 
 export default function refillReducer (state = initialState, action) {
@@ -35,6 +36,13 @@ export default function refillReducer (state = initialState, action) {
           isError: action.isError,
           error: action.error
         }
+      }
+
+    case UPDATE_REFILL_PATIENT_DETAILS:
+      return {
+        ...state,
+        selectedPatientId: action.patientId,
+        selectedPatientName: action.patientName
       }
 
     default:

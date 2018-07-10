@@ -1,7 +1,8 @@
 import {
   GET_PAST_MEDICINES_LOADING,
   GET_PAST_MEDICINES_SUCCESS,
-  GET_PAST_MEDICINES_FAILURE
+  GET_PAST_MEDICINES_FAILURE,
+  UPDATE_REFILL_PATIENT_DETAILS
 } from './refillActionTypes'
 
 export function getRefillPastMedicinesLoading (pastMedicineState, patientId) {
@@ -31,5 +32,18 @@ export function getRefillPastMedicinesFailure (pastMedicineState, error) {
     isLoading: false,
     isError: true,
     error: error
+  }
+}
+
+export function updateSelectedPatientDetails (
+  pastMedicineState,
+  patientId,
+  patientName
+) {
+  return {
+    type: UPDATE_REFILL_PATIENT_DETAILS,
+    pastMedicineState,
+    patientId: patientId,
+    patientName: patientName
   }
 }
