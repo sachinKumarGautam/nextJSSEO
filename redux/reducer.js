@@ -17,6 +17,7 @@ import carePointReducer from '../containers/carePoint/carePointReducer'
 import cartReducer from '../containers/cartDetails/cartReducer'
 import checkPincodeReducer from '../containers/location/pincode/pincodeReducer'
 import prescriptionReducers from '../containers/prescription/prescriptionReducers'
+import thankYouReducer from '../containers/thankYou/thankYouReducer'
 
 const isengard = (store, action) => {
   return (
@@ -44,7 +45,8 @@ const appReducer = combineReducers({
   deliveryDetailsState: deliveryDetailsReducer,
   patientDetailsState: patientDetailsReducer,
   prescriptionState: prescriptionReducers,
-  orderListState: orderListReducers
+  orderListState: orderListReducers,
+  thankYouState: thankYouReducer
 })
 
 // export const persistConfig = {

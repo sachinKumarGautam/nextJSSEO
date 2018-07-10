@@ -4,8 +4,10 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
 import BreadCrumbs from '../../components/BreadCrumbs'
-
 import OrderConfirmation from './OrderConfirmation'
+import {
+  submitRefillDateLoading
+} from './thankYouActions'
 
 class ThankyouWrapper extends Component {
   render () {
@@ -14,6 +16,8 @@ class ThankyouWrapper extends Component {
         <BreadCrumbs />
         <section>
           <OrderConfirmation
+            submitRefillDateLoading={this.props.actions.submitRefillDateLoading}
+            thankYouState={this.props.thankYouState}
             cartState={this.props.cartState}
           />
         </section>
@@ -26,6 +30,7 @@ function mapDispatchToProps (dispatch) {
   return {
     actions: bindActionCreators(
       {
+        submitRefillDateLoading
       },
       dispatch
     )
@@ -34,7 +39,8 @@ function mapDispatchToProps (dispatch) {
 
 function mapStateToProps (state) {
   return {
-    cartState: state.cartState
+    cartState: state.cartState,
+    thankYouState: state.thankYouState
   }
 }
 

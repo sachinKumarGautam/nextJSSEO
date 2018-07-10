@@ -11,10 +11,12 @@ const styles = theme => ({
   totalAmount: {
     fontSize: theme.spacing.unit * 2.25,
     fontWeight: theme.typography.fontWeightBold,
-    textAlign: 'right'
+    textAlign: 'right',
+    paddingRight: theme.spacing.unit * 4.125
   },
   totalAmountText: {
-    fontSize: theme.spacing.unit * 2.25
+    fontSize: theme.spacing.unit * 2.25,
+    paddingLeft: theme.spacing.unit * 4.125
   }
 })
 

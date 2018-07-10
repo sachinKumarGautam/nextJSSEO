@@ -9,7 +9,11 @@ const OrderConfirmation = (props) => {
   return (
     <Grid container>
       <Grid item xs={7}>
-        <OrderConfirmationDetails/>
+        <OrderConfirmationDetails
+          cartState={props.cartState}
+          submitRefillDateLoading={props.submitRefillDateLoading}
+          thankYouState={props.thankYouState}
+        />
       </Grid>
       <Grid item xs={5}>
         <MyCartDetails

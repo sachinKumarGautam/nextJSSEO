@@ -213,6 +213,16 @@ const submitDeliveryDetails$ = (customerId, deliveryAddressData) => (
 
 )
 
+const submitRefillDate$ = (orderId, refillDay) => (
+  makeAjaxRequest({
+    method: 'PUT',
+    url: fetchUrl('order', orderId + '/repeat-in-days', 'GET_LIST'),
+    body: {
+      repeat_day: refillDay
+    }
+  })
+)
+
 export {
   getMoleculeSummary$,
   getMedicineList$,
@@ -239,5 +249,6 @@ export {
   getProductDetails$,
   searchMedicine$,
   checkPincode$,
-  submitDeliveryDetails$
+  submitDeliveryDetails$,
+  submitRefillDate$
 }

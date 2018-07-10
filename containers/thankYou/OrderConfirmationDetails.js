@@ -10,6 +10,9 @@ import RefillDetails from './RefillDetails'
 import Button from '../../components/button'
 
 const styles = theme => ({
+  card: {
+    marginBottom: theme.spacing.unit * 30
+  },
   cardContent: {
     paddingBottom: 0
   },
@@ -54,11 +57,17 @@ const styles = theme => ({
 
 const OrderConfirmationDetails = (props) => {
   return (
-    <Card elevation={'1'}>
+    <Card elevation={'1'} className={props.classes.card}>
       <CardContent className={props.classes.cardContent}>
-        <ThankyouDetails/>
+        <ThankyouDetails
+          cartState={props.cartState}
+        />
         <Divider/>
-        <RefillDetails/>
+        <RefillDetails
+          submitRefillDateLoading={props.submitRefillDateLoading}
+          thankYouState={props.thankYouState}
+          cartState={props.cartState}
+        />
         <div className={props.classes.buttonWrapper}>
           <Button
             size='small'
