@@ -44,7 +44,6 @@ import {
 
 class CartDetailsWrapper extends Component {
   componentDidMount () {
-    console.log('componentDidMount');
     const cartUid = this.props.cartState.payload.uid
     
     this.props.actions.getCartDetailsLoading(

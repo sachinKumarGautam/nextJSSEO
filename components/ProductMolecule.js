@@ -55,7 +55,7 @@ const PopoverContent = (props) => (
     <Typography className={props.styles.popoverContent}>
       Metformin is used in the treatment of  type2 diabetes. It decreases the amount of sugar…
     </Typography>
-    <Link 
+    <Link
       as={`${MOLECULE_DETAILS}/${props.item.name}`} 
       href={`${MOLECULE_DETAILS}?id=${props.item.id}&name=${props.item.name}`}
     >
@@ -91,9 +91,9 @@ class ProductMolecule extends Component {
                 className={classes.paper}
                 delayHide={1000}
                 delayShow={1000}
-            >
-              <PopoverContent item={item} styles={classes} />
-            </ReactTooltip>
+              >
+                <PopoverContent item={item} styles={classes} />
+              </ReactTooltip>
             </div>
           )
           )
