@@ -299,7 +299,7 @@ class OrderSummary extends React.Component {
               deliveryDetailsState={this.props.deliveryDetailsState}
               closeDeliveryFormModal={this.closeDeliveryFormModal.bind(this)}
               saveAddressSelected={this.saveAddressSelected.bind(this)}
-              addressIdSelected={this.props.cartState.payload.patient_id.payload}
+              addressIdSelected={this.props.cartState.payload.shipping_address_id.payload}
             />
           </ExpansionPanelDetails>
           <ExpansionPanelActions>
