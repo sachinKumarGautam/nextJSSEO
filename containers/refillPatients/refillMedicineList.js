@@ -41,15 +41,16 @@ class RefillMedicineList extends Component {
               component='h1'
               className={this.props.classes.treatmentHeading}
             >
-              Treatments of Jyoti Arora
+              Treatments of {this.props.patientName}
             </Typography>
             <ul className={this.props.classes.medicineListWrapper}>
               {
-                this.props.medicineListState.payload.map((itemDetails) => (
+                this.props.pastMedicineState.payload.map((itemDetails) => (
                   <li className={this.props.classes.listItem}>
                     <MedicineListDetails
                       itemDetails={itemDetails}
                       isRefillMedicines
+                      checkPincodeState={this.props.checkPincodeState}
                     />
                   </li>
                 ))

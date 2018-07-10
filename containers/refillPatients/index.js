@@ -9,6 +9,10 @@ import BreadCrumbs from '../../components/BreadCrumbs'
 import PatientList from './patientList'
 import RefillMedicineList from './refillMedicineList'
 
+import {
+  getRefillPastMedicinesLoading
+} from './refillActions'
+
 /*
   bread crumbs
   side menu of patient list
@@ -16,6 +20,33 @@ import RefillMedicineList from './refillMedicineList'
 */
 
 class RefillPatientsWrapper extends Component {
+  constructor (props) {
+    super(props)
+
+    this.state = {
+      patientId: 0,
+      patientFullName: ''
+    }
+
+    this.setPatientDetails = this.setPatientDetails.bind(this)
+  }
+
+  componentDidUpdate (prevProps) {
+    if (prevProps.patientDetailsState.payload.length !== this.props.patientDetailsState.payload.length) {
+      this.setPatientDetails(
+        this.props.patientDetailsState.payload[0].id,
+        this.props.patientDetailsState.payload[0].full_name
+      )
+    }
+  }
+
+  setPatientDetails (id, name) {
+    this.setState({
+      id: id,
+      patientFullName: name
+    })
+  }
+
   render () {
     return (
       <div>
@@ -25,13 +56,18 @@ class RefillPatientsWrapper extends Component {
             <aside>
               <PatientList
                 patientDetailsState={this.props.patientDetailsState}
+                getRefillPastMedicinesLoading={this.props.actions.getRefillPastMedicinesLoading}
+                pastMedicineState={this.props.pastMedicineState}
+                setPatientDetails={this.setPatientDetails}
               />
             </aside>
           </Grid>
           <Grid item xs={9}>
             <section>
               <RefillMedicineList
-                medicineListState={this.props.medicineListState}
+                pastMedicineState={this.props.pastMedicineState}
+                checkPincodeState={this.props.checkPincodeState}
+                patientName={this.state.patientFullName}
               />
             </section>
           </Grid>
@@ -43,8 +79,9 @@ class RefillPatientsWrapper extends Component {
 
 function mapStateToProps (state) {
   return {
-    medicineListState: state.medicineListState,
-    patientDetailsState: state.patientDetailsState
+    pastMedicineState: state.pastMedicineState,
+    patientDetailsState: state.patientDetailsState,
+    checkPincodeState: state.checkPincodeState
   }
 }
 
@@ -52,6 +89,7 @@ function mapDispatchToProps (dispatch) {
   return {
     actions: bindActionCreators(
       {
+        getRefillPastMedicinesLoading
       },
       dispatch
     )

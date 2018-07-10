@@ -5,9 +5,6 @@ import MenuItem from '@material-ui/core/MenuItem'
 import { withStyles } from '@material-ui/core/styles'
 import ListItemIcon from '@material-ui/core/ListItemIcon'
 import ListItemText from '@material-ui/core/ListItemText'
-import InboxIcon from '@material-ui/icons/MoveToInbox'
-import DraftsIcon from '@material-ui/icons/Drafts'
-import SendIcon from '@material-ui/icons/Send'
 
 const styles = theme => ({
   menuItem: {
@@ -23,15 +20,29 @@ const styles = theme => ({
 })
 
 class PatientList extends Component {
+  getPastMedicines (patientId, patientName) {
+    this.props.getRefillPastMedicinesLoading(
+      this.props.pastMedicineState,
+      patientId
+    )
+    this.props.setPatientDetails(
+      patientId,
+      patientName
+    )
+  }
+
   render () {
     const { classes, patientDetailsState } = this.props
     return (
       <div>
         <MenuList>
           {patientDetailsState.payload.map((patient, index) => (
-            <MenuItem className={classes.menuItem}>
+            <MenuItem
+              className={classes.menuItem}
+              onClick={this.getPastMedicines.bind(this, patient.id, patient.full_name)}
+            >
               <ListItemIcon className={classes.icon}>
-                <SendIcon />
+                <img src='/static/images/loggedIn.svg' />
               </ListItemIcon>
               <ListItemText
                 classes={{ primary: classes.primary }}

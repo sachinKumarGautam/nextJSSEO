@@ -1,6 +1,8 @@
 import { withStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
 
+import Link from 'next/link'
+
 const styles = theme => ({
   horizontalSubheader: {
     display: 'flex',
@@ -69,20 +71,21 @@ class Subheader extends React.Component {
           </a>
         </li>
         <li>
-          <a
-            onMouseEnter={this.toggleHover.bind(this, 'repeatPastMedicine')}
-            onMouseLeave={this.toggleHover.bind(this, 'repeatPastMedicine')}
-            href='#'
-            className={classes.subHeaderItem}
-          >
-            <img src='/static/images/repeat-button.svg' />
-            <Typography
-              variant={'body2'}
-              className={this.state.hover.repeatPastMedicine ? `${classes.subHeaderText} ${classes.hover}` : classes.subHeaderText}
-              component='h1'>
-              Refill Past Medicines
-            </Typography>
-          </a>
+          <Link href={`/refill-patients`}>
+            <a
+              onMouseEnter={this.toggleHover.bind(this, 'repeatPastMedicine')}
+              onMouseLeave={this.toggleHover.bind(this, 'repeatPastMedicine')}
+              className={classes.subHeaderItem}
+            >
+              <img src='/static/images/repeat-button.svg' />
+              <Typography
+                variant={'body2'}
+                className={this.state.hover.repeatPastMedicine ? `${classes.subHeaderText} ${classes.hover}` : classes.subHeaderText}
+                component='h1'>
+                Refill Past Medicines
+              </Typography>
+            </a>
+          </Link>
         </li>
         <li>
           <a

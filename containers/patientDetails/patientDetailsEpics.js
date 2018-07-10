@@ -17,6 +17,10 @@ import {
 } from './patientDetailsActions'
 
 import {
+  getRefillPastMedicinesLoading
+} from '../refillPatients/refillActions'
+
+import {
   getPatientDetailsList$, submitPatientDetails$
 } from '../../services/api'
 
@@ -29,11 +33,14 @@ export function getPatientDetailsList (action$, store) {
   return action$.pipe(
     ofType(GET_PATIENT_DETAILS_LIST_LOADING),
     mergeMap(data => {
+      const pastMedicineState = store.getState().pastMedicineState
+
       return http(getPatientDetailsList$(data.customerId)).pipe(
         flatMap(result => {
           if (data.isRefillPatients) {
             return of(
-              getPatientDetailsListSuccess(data.patientDetailsState, result.body.payload.patients)
+              getPatientDetailsListSuccess(data.patientDetailsState, result.body.payload.patients),
+              getRefillPastMedicinesLoading(pastMedicineState, result.body.payload.patients[0].id)
             )
           } else {
             return getPatientDetailsListSuccess(data.patientDetailsState, result.body.payload.patients)

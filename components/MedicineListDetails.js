@@ -113,15 +113,16 @@ class MedicineListDetails extends React.Component {
               customStyle={props.classes.customBrand}
               brand={props.itemDetails.brand_name}
             />
-            { props.itemDetails.pack_size && props.itemDetails.pack_size.name &&
-              <ProductPackSize
-                variant={'caption'}
-                withoutImage
-                customStyle={props.classes.customPackSize}
-                packType={props.itemDetails.pack_type}
-                packSize={props.itemDetails.pack_size ? props.itemDetails.pack_size.name : ''}
-              />
-            }
+            <ProductPackSize
+              variant={'caption'}
+              withoutImage
+              customStyle={props.classes.customPackSize}
+              packType={props.itemDetails.pack_type}
+              packSize={
+                (props.itemDetails.pack_size && props.itemDetails.pack_size.name)
+                  ? props.itemDetails.pack_size.name : props.itemDetails.pack_size
+              }
+            />
           </div>
           <div>
             <EstimatedPriceLabel
