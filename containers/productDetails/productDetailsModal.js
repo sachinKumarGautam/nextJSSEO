@@ -2,7 +2,7 @@ const initialState = {
   payload: {
       variant_status: '',
       sku: '',
-      quantity: 1,
+      quantity: 0,
       variant_id: '',
       name: '',
       classification_code: '',

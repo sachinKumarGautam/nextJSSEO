@@ -200,7 +200,7 @@ export function incrementCartItemEpic (action$, store) {
       const medicineIncremented = {
         name: data.medicineSelected.name,
         sku: data.medicineSelected.sku,
-        quantity: data.medicineSelected.quantity + 1
+        quantity: parseInt(data.medicineSelected.quantity) + 1
       }
       return http(putCartItem$(cartUid, medicineIncremented)).pipe(
         flatMap(result => {
