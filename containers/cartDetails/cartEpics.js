@@ -35,7 +35,7 @@ import {
   deletePrescriptionSuccess,
   deletePrescriptionFailure,
   submitOrderSuccess,
-  submitOrderFailure, 
+  submitOrderFailure,
   goToCartSnackbar
 } from './cartActions'
 
@@ -209,15 +209,15 @@ export function incrementCartItemEpic (action$, store) {
             putCartItemSuccess(data.cartState, result.body.payload))
           }
           else {
-            return putCartItemSuccess(data.cartState, result.body.payload)
+            return of(putCartItemSuccess(data.cartState, result.body.payload))
           }
         }),
         catchError(error => {
-          return cartApiErrorHandling(
+          return of(cartApiErrorHandling(
             data.cartState,
             data.medicineSelected,
             error
-          )
+          ))
         })
       )
     })
