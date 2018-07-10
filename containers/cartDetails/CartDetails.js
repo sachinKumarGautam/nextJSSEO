@@ -4,6 +4,7 @@ import Card from '@material-ui/core/Card'
 import CardContent from '@material-ui/core/CardContent'
 import { withStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
+import Divider from '@material-ui/core/Divider'
 
 import Avatar from './Avatar'
 import MedicineList from './MedicineList'
@@ -29,7 +30,7 @@ import {
 
 const styles = theme => ({
   card: {
-    marginLeft: theme.spacing.unit * 6
+    marginLeft: theme.spacing.unit * 3.125
   },
   cardContent: {
     padding: 0
@@ -93,9 +94,12 @@ class CartDetails extends Component {
             {
               this.props.cartState.payload.patient_id.payload
               ? (
-                <Avatar
-                  cartState={this.props.cartState}
-                />
+                <div>
+                  <Avatar
+                    cartState={this.props.cartState}
+                  />
+                  <Divider/>
+                </div>
               ) : null
             }
             <MedicineList
@@ -103,9 +107,7 @@ class CartDetails extends Component {
               decrementCartItem={this.decrementCartItem.bind(this)}
               incrementCartItem={this.incrementCartItem.bind(this)}
             />
-            {
-              // <Coupon />
-            }
+            <Coupon />
             <PriceDetails
               cartState={this.props.cartState}
             />

@@ -81,8 +81,8 @@ class CartDetailsWrapper extends Component {
     return (
       <div>
         <BreadCrumbs />
-        <Grid container spacing={24}>
-          <Grid item xs={8}>
+        <Grid container>
+          <Grid item xs={7}>
             <section>
               <OrderSummary
                 loginState={this.props.loginState}
@@ -102,7 +102,7 @@ class CartDetailsWrapper extends Component {
               />
             </section>
           </Grid>
-          <Grid item xs={4}>
+          <Grid item xs={5}>
             <section>
               <CartDetails
                 cartState={this.props.cartState}
