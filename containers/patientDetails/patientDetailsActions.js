@@ -15,7 +15,8 @@ import {
  */
 export function getPatientDetailsListLoading (
   patientDetailsState,
-  customerId
+  customerId,
+  isRefillPatients
 ) {
   return {
     type: GET_PATIENT_DETAILS_LIST_LOADING,
@@ -23,7 +24,8 @@ export function getPatientDetailsListLoading (
     customerId,
     isLoading: true,
     isError: false,
-    error: {}
+    error: {},
+    isRefillPatients: isRefillPatients
   }
 }
 

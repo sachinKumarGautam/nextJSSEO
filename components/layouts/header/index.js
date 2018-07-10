@@ -3,7 +3,6 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
-import PropTypes from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
 
 // import Head from './Head'
@@ -175,11 +174,13 @@ class Header extends React.Component {
                 />
               }
             </Toolbar>
-            <Subheader />
+            <Subheader
+              isAuthenticated={this.props.loginState.isAuthenticated}
+            />
             <GoToCartSnackbar
               goToCartSnackbar={this.props.actions.goToCartSnackbar}
               cartState={this.props.cartState}
-             />
+            />
           </div>
         </AppBar>
       </div>

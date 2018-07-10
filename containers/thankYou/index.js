@@ -1,30 +1,50 @@
-import Paper from '@material-ui/core/Paper'
-import { withStyles } from '@material-ui/core/styles'
-import Typography from '@material-ui/core/Typography'
+import React, { Component } from 'react'
 
-const styles = theme => ({
-  root: {
-    paddingTop: theme.spacing.unit * 12,
-    paddingBottom: theme.spacing.unit * 12,
-    paddingLeft: theme.spacing.unit * 7,
-    paddingRight: theme.spacing.unit * 7,
-    maxWidth: theme.breakpoints.values.lg,
-    minWidth: theme.breakpoints.values.md,
-    margin: '0 auto',
-    textAlign: 'center',
-    marginTop: theme.spacing.unit * 12
-  },
-  title: {
-    fontWeight: theme.typography.fontWeightBold
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+
+import BreadCrumbs from '../../components/BreadCrumbs'
+import OrderConfirmation from './OrderConfirmation'
+import {
+  submitRefillDateLoading
+} from './thankYouActions'
+
+class ThankyouWrapper extends Component {
+  render () {
+    return (
+      <div>
+        <BreadCrumbs />
+        <section>
+          <OrderConfirmation
+            submitRefillDateLoading={this.props.actions.submitRefillDateLoading}
+            thankYouState={this.props.thankYouState}
+            cartState={this.props.cartState}
+          />
+        </section>
+      </div>
+    )
   }
-})
+}
 
-const ThankYou = (props) => (
-  <div>
-    <Paper className={props.classes.root} elevation={1}>
-        <Typography variant="display2" gutterBottom>Thank You for placing order </Typography>
-    </Paper>
-  </div>
-)
+function mapDispatchToProps (dispatch) {
+  return {
+    actions: bindActionCreators(
+      {
+        submitRefillDateLoading
+      },
+      dispatch
+    )
+  }
+}
 
-export default withStyles(styles)(ThankYou)
+function mapStateToProps (state) {
+  return {
+    cartState: state.cartState,
+    thankYouState: state.thankYouState
+  }
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ThankyouWrapper)

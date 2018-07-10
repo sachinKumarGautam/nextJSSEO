@@ -36,7 +36,8 @@ export default function initStore (initialState, {isServer, req, debug, storeKey
         'orderListState',
         'prescriptionState',
         'deliveryDetailsState',
-        'patientDetailsState'
+        'patientDetailsState',
+        'thankYouState'
       ],
       storage
     }

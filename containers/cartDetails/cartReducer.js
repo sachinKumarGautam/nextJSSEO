@@ -399,7 +399,8 @@ export default function cartReducer (state = initialState, action) {
           service_type: action.service_type,
           delivery_option: action.delivery_option,
           doctor_callback: action.doctor_callback,
-          order_prescriptions: action.order_prescriptions
+          order_prescriptions: action.order_prescriptions,
+          promised_delivery_date: action.promised_delivery_date
         }
       }
 
