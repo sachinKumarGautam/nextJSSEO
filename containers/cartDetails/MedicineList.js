@@ -42,7 +42,6 @@ const styles = theme => ({
   },
   plusIcon: {
     marginRight: theme.spacing.unit * 3.75,
-    marginLeft: theme.spacing.unit
   },
   buttonWrapper: {
     display: 'flex',
@@ -50,7 +49,6 @@ const styles = theme => ({
     marginLeft: theme.spacing.unit * 2
   },
   minusButton: {
-    marginRight: theme.spacing.unit
   }
 })
 

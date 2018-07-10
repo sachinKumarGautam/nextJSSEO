@@ -30,7 +30,7 @@ import {
 
 const styles = theme => ({
   card: {
-    marginLeft: theme.spacing.unit * 3.125
+    marginLeft: theme.spacing.unit * 3.125,
   },
   cardContent: {
     padding: 0
@@ -47,6 +47,11 @@ const styles = theme => ({
     paddingTop: theme.spacing.unit * 1.25,
     marginLeft: theme.spacing.unit * 2.5,
     fontWeight: theme.typography.fontWeightBold
+  },
+  cartWrapper: {
+    '&:last-child': {
+      paddingBottom: 0
+    }
   }
 })
 
@@ -84,13 +89,18 @@ class CartDetails extends Component {
   render () {
     return (
       <Card elevation={'1'} className={this.props.classes.card}>
-        <CardContent className={this.props.classes.cardContent}>
+        <CardContent
+          className={this.props.classes.cardContent}
+          classes={{
+            root: this.props.classes.cartWrapper
+          }}
+        >
           <div className={this.props.classes.myCartWrapper}>
             <Typography className={this.props.classes.myCartText}>
               MY CART
             </Typography>
           </div>
-          <div className={this.props.classes.cartWrapper}>
+          <div>
             {
               this.props.cartState.payload.patient_id.payload
               ? (
@@ -107,7 +117,7 @@ class CartDetails extends Component {
               decrementCartItem={this.decrementCartItem.bind(this)}
               incrementCartItem={this.incrementCartItem.bind(this)}
             />
-            <Coupon />
+            {/* <Coupon /> */}
             <PriceDetails
               cartState={this.props.cartState}
             />
