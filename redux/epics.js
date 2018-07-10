@@ -69,6 +69,12 @@ import {
 } from '../containers/location/pincode/pincodeEpic'
 
 import {
+  submitRefillDate
+} from '../containers/thankYou/thankYouEpics'
+// import * as actions from './actions'
+// import * as types from './actionTypes'
+
+import {
   getPatientPastMedicineList
 } from '../containers/refillPatients/refillEpics'
 
@@ -109,5 +115,6 @@ export const rootEpic = combineEpics(
   getAnonymousCartIdEpic,
   checkPincode,
   submitDeliveryDetails,
+  submitRefillDate,
   getPatientPastMedicineList
 )

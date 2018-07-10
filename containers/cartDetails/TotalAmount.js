@@ -11,14 +11,16 @@ const styles = theme => ({
   totalAmount: {
     fontSize: theme.spacing.unit * 2.25,
     fontWeight: theme.typography.fontWeightBold,
-    textAlign: 'right'
+    textAlign: 'right',
+    paddingRight: theme.spacing.unit * 4.125
   },
   totalAmountText: {
-    fontSize: theme.spacing.unit * 2.25
+    fontSize: theme.spacing.unit * 2.25,
+    paddingLeft: theme.spacing.unit * 4.125
   }
 })
 
-class Avatar extends Component {
+class TotalAmount extends Component {
   render () {
     return (
       <Grid
@@ -41,4 +43,4 @@ class Avatar extends Component {
   }
 }
 
-export default withStyles(styles)(Avatar)
+export default withStyles(styles)(TotalAmount)

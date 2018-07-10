@@ -366,6 +366,7 @@ export function submitOrderSuccess (cartState, result) {
     service_type: result.order.service_type,
     doctor_callback: result.order.doctor_callback,
     order_prescriptions: result.order.order_prescriptions,
+    promised_delivery_date: result.order.promised_delivery_date,
     isLoading: false
   }
 }

@@ -11,23 +11,27 @@ const styles = theme => ({
   },
   itemTotal: {
     fontSize: theme.spacing.unit * 1.75,
-    paddingTop: theme.spacing.unit * 1.25
+    paddingTop: theme.spacing.unit * 1.25,
+    paddingLeft: theme.spacing.unit * 4
   },
   itemTotalAmount: {
     fontSize: theme.spacing.unit * 1.75,
     paddingTop: theme.spacing.unit * 1.25,
-    textAlign: 'right'
+    textAlign: 'right',
+    paddingRight: theme.spacing.unit * 4
   },
   discount: {
     fontSize: theme.spacing.unit * 1.75,
     color: theme.palette.customGreen.green300,
-    paddingTop: theme.spacing.unit * 1.25
+    paddingTop: theme.spacing.unit * 1.25,
+    paddingLeft: theme.spacing.unit * 4
   },
   discountAmount: {
     fontSize: theme.spacing.unit * 1.75,
     color: theme.palette.customGreen.green300,
     paddingTop: theme.spacing.unit * 1.25,
-    textAlign: 'right'
+    textAlign: 'right',
+    paddingRight: theme.spacing.unit * 4
   }
 })
 
