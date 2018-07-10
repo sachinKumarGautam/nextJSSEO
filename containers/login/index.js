@@ -55,10 +55,24 @@ class LoginWrapper extends React.Component {
   }
 
   componentDidMount () {
-    this.setState({
-      modalName: 'login'
-    })
+    if (this.props.isCartOpenRegisterDialog) {
+      this.setState({
+        modalName: 'register'
+      })
+    } else {
+      this.setState({
+        modalName: 'login'
+      })
+    }
   }
+
+  // componentWillReceiveProps(nextProps) {
+  //   if(nextProps.isCartOpenRegisterDialog && nextProps.modalName !== this.state.modalName ){
+  //     this.setState({
+  //       modalName: 'register'
+  //     })
+  //   }
+  // }
 
   getModal (name) {
     switch (name) {

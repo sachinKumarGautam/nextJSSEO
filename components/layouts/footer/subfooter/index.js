@@ -27,7 +27,6 @@ const styles = theme => ({
 })
 
 const SubFooter = ({classes}) => (
-  <section>
     <Paper
       className={classes.root}
       elevation={1}
@@ -41,7 +40,6 @@ const SubFooter = ({classes}) => (
         <OurApp />
       </div>
     </Paper>
-  </section>
 )
 
 export default withStyles(styles)(SubFooter)

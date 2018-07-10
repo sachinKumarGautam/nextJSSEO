@@ -44,7 +44,7 @@ const ListContent = (props) => {
       </div>
       <ul>
         {
-          props.content.map((item) => (
+          props.content && props.content.map((item) => (
             <li className={props.classes.content}>
               <Typography
                 gutterBottom

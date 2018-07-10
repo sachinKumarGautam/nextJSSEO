@@ -23,11 +23,11 @@ const styles = theme => {
 const BreadCrumbs = (props) => (
   <nav>
     <div className={props.classes.navWrapper}>
-      <a href='#' className={props.classes.breadCrumb}>First</a>
+      {/* <a href='#' className={props.classes.breadCrumb}>First</a>
       <span className={props.classes.breadCrumbArrow}>></span>
       <a href='#' className={props.classes.breadCrumb}>Second</a>
       <span className={props.classes.breadCrumbArrow}>></span>
-      <a href='#' className={props.classes.breadCrumb}>Third</a>
+      <a href='#' className={props.classes.breadCrumb}>Third</a> */}
     </div>
   </nav>
 )

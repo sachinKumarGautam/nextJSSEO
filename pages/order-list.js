@@ -35,7 +35,7 @@ const styles = theme => ({
 
 class Orders extends React.Component {
   componentDidMount () {
-    //Represents to get order list details with page size and size per page.
+    // Represents to get order list details with page size and size per page.
     this.props.actions.getOrderListDetailsLoading(
       this.props.orderListState,
       this.props.customerState.payload.id, // pass customer Id

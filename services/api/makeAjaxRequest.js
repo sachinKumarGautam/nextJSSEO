@@ -11,6 +11,7 @@ export default function makeAjaxRequest (params) {
 
   // get access_token from login state
   let accessToken = store.getState().loginState.payload.verification.access_token
+
   // function to set content type of ajax request
   if (!params.contentType) {
     contentType = 'application/json'
@@ -88,12 +89,12 @@ export default function makeAjaxRequest (params) {
         url: params.url,
         method: 'delete',
         timeout: timeout,
-        body: params.body,
         options: {
           headers: {
             'Authorization': authHeader
           }
-        }
+        },
+        data: params.body
       })
 
     case 'PATCH':
@@ -101,13 +102,13 @@ export default function makeAjaxRequest (params) {
         url: params.url,
         method: 'patch',
         timeout: timeout,
-        body: params.body,
         options: {
           headers: {
             'Authorization': authHeader,
             'Content-Type': contentType
           }
-        }
+        },
+        data: params.body
       })
 
     default:

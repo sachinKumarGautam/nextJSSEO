@@ -18,11 +18,21 @@ import {
 } from '../containers/medicineList/medicineListEpics'
 
 import {
-  getDeliveryDetailsList
+  getProductDetails
+} from '../containers/productDetails/productEpic'
+
+import {
+  searchMedicine
+} from '../containers/searchMedicine/searchMedicineEpic'
+
+import {
+  getDeliveryDetailsList,
+  submitDeliveryDetails
 } from '../containers/deliveryDetails/deliveryDetailsEpics'
 
 import {
-  getPatientDetailsList
+  getPatientDetailsList,
+  submitPatient
 } from '../containers/patientDetails/patientDetailsEpics'
 
 import {
@@ -37,6 +47,26 @@ import {
   carePointsList
 } from '../containers/carePoint/carePointEpics'
 
+import {
+  getAnonymousCartIdEpic,
+  getCartDetailsEpic,
+  // decrementCartItemLoadingEpic,
+  decrementCartItemEpic,
+  // incrementCartItemLoadingEpic,
+  incrementCartItemEpic,
+  // deleteCartItemLoadingEpic,
+  deleteCartItemEpic,
+  savePatientToCartEpic,
+  cartTransferEpic,
+  saveDeliveryAddressToCartEpic,
+  uploadPrescriptionEpic,
+  deletePrescriptionEpic,
+  submitOrderEpic
+} from '../containers/cartDetails/cartEpics'
+
+import {
+  checkPincode
+} from '../containers/location/pincode/pincodeEpic'
 // import * as actions from './actions'
 // import * as types from './actionTypes'
 
@@ -82,15 +112,39 @@ import {
 
 export const rootEpic = combineEpics(
   getMoleculeSummary,
+  getRelatedMedicines,
+  carePointsList,
   sendOTP,
   verifyOTP,
   registerCustomer,
   getRelatedMedicines,
   fetchUserInfo,
+  getProductDetails,
   getRelatedMedicines,
+  carePointsList,
+  getAnonymousCartIdEpic,
+  getCartDetailsEpic,
+  // decrementCartItemLoadingEpic,
+  decrementCartItemEpic,
+  // incrementCartItemLoadingEpic,
+  incrementCartItemEpic,
+  // deleteCartItemLoadingEpic,
+  deleteCartItemEpic,
+  searchMedicine,
+  fetchUserInfo,
   getDeliveryDetailsList,
   getPatientDetailsList,
+  savePatientToCartEpic,
+  saveDeliveryAddressToCartEpic,
   getOrderListDetails,
   getPrescriptionList,
-  carePointsList
+  carePointsList,
+  submitPatient,
+  cartTransferEpic,
+  uploadPrescriptionEpic,
+  deletePrescriptionEpic,
+  submitOrderEpic,
+  getAnonymousCartIdEpic,
+  checkPincode,
+  submitDeliveryDetails
 )

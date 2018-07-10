@@ -69,7 +69,7 @@ export default function (state = initialState, action) {
             scope: action.scope
           }
         }
-        
+
       }
 
     case OTP_VERIFIED_FAILURE:

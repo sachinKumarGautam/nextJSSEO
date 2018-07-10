@@ -19,6 +19,11 @@ import {
   updatePhoneNumber,
   fetchUserInfoLoading
 } from '../user/customer/customerActions'
+
+import {
+  cartTransferLoading
+} from '../cartDetails/cartActions'
+
 import { sendOtp$, verifyOtp$ } from '../../services/api'
 
 export function sendOTP (action$, store) {
@@ -50,6 +55,7 @@ export function verifyOTP (action$, store) {
     mergeMap(data => {
       const loginState = store.getState().loginState
       const customerState = store.getState().customerState
+      const cartState = store.getState().cartState
       const mobile = loginState.payload.initialMobile
       const otp = data.values.otp
 
@@ -75,7 +81,8 @@ export function verifyOTP (action$, store) {
             successObservable = of(toggleAuthentication(loginState, true),
               fetchUserInfoLoading(customerState, mobile),
               verifyOtpSuccess(loginState, result, isNewUser),
-              updatePhoneNumber(customerState, mobile)
+              updatePhoneNumber(customerState, mobile),
+              cartTransferLoading(cartState)
             )
           }
 

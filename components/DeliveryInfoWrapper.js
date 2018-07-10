@@ -14,10 +14,19 @@ import AssuredServiceInfo from './AssuredServiceInfo'
 
 const DeliveryInfoWrapper = (props) => (
   <div>
-    <DeliveryPincode />
-    <DeliveryTAT />
-    <ExpressDeliveryInfo />
-    <AssuredServiceInfo />
+    <DeliveryPincode
+      pincode={props.checkPincodeState.payload.pincode}
+      openPincodeDialog={props.openPincodeDialog}
+    />
+    <DeliveryTAT
+      delivery_day={props.checkPincodeState.payload.delivery_day}
+    />
+    {props.checkPincodeState.payload.is_urgent_dl_available &&
+      <ExpressDeliveryInfo
+      />}
+    {props.checkPincodeState.payload.is_lc_assured_available &&
+      <AssuredServiceInfo
+      />}
   </div>
 )
 

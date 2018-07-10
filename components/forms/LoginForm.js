@@ -12,6 +12,10 @@ import InputAdornment from '@material-ui/core/InputAdornment'
 import AccountCircle from '@material-ui/icons/StayPrimaryPortrait'
 import { withStyles } from '@material-ui/core/styles'
 
+import {
+  MOBILE_REQUIRED,
+} from '../../containers/messages/ValidationMsg'
+
 // Helper styles for demo
 
 const styles = theme => ({
@@ -80,10 +84,8 @@ class LoginForm extends React.Component {
         <div className={classes.buttonWrapper}>
           <Button
             type='submit'
-            // disabled={isSubmitting}
             isloading={isSubmitting}
             variant='raised'
-            // onClick={toggleModal}
             color='primary'
             label={'Login with OTP'}
           />
@@ -99,7 +101,7 @@ export default withStyles(styles)(withFormik({
     mobile: Yup.number()
     // .min(10, 'Please enter valid phone number')
     // .max(10, 'Please enter valid phone number')
-      .required('Mobile is required!')
+      .required(MOBILE_REQUIRED)
   }),
   handleSubmit: (values, { props, changeLoadingState, setSubmitting }) => {
     props.onSubmit(props.loginState, setSubmitting, props.toggleForm, values)
