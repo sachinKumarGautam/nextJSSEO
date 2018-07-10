@@ -3,6 +3,8 @@ import Typography from '@material-ui/core/Typography'
 
 import Link from 'next/link'
 
+import { REFILL_PATIENTS } from '../../../routes/RouteConstant'
+
 const styles = theme => ({
   horizontalSubheader: {
     display: 'flex',
@@ -26,6 +28,10 @@ const styles = theme => ({
   },
   hover: {
     color: theme.palette.primary.main
+  },
+  linkDisabled: {
+    pointerEvents: 'none', // This makes it not clickable
+    opacity: 0.6 // This grays it out to look disabled
   }
 })
 
@@ -50,7 +56,7 @@ class Subheader extends React.Component {
   }
 
   render () {
-    const {classes} = this.props
+    const {classes, isAuthenticated} = this.props
 
     return (
       <ul className={classes.horizontalSubheader}>
@@ -70,8 +76,8 @@ class Subheader extends React.Component {
             </Typography>
           </a>
         </li>
-        <li>
-          <Link href={`/refill-patients`}>
+        <li className={isAuthenticated ? '' : classes.linkDisabled}>
+          <Link href={REFILL_PATIENTS}>
             <a
               onMouseEnter={this.toggleHover.bind(this, 'repeatPastMedicine')}
               onMouseLeave={this.toggleHover.bind(this, 'repeatPastMedicine')}

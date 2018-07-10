@@ -174,7 +174,9 @@ class Header extends React.Component {
                 />
               }
             </Toolbar>
-            <Subheader />
+            <Subheader
+              isAuthenticated={this.props.loginState.isAuthenticated}
+            />
             <GoToCartSnackbar
               goToCartSnackbar={this.props.actions.goToCartSnackbar}
               cartState={this.props.cartState}

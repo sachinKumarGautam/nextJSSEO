@@ -106,7 +106,7 @@ class MedicineListDetails extends React.Component {
               name={props.itemDetails.name}
               customStyle={props.classes.customName}
             />
-            {props.isRefillMedicines && <RefillDueDays />}
+            {/* {props.isRefillMedicines && <RefillDueDays />} */}
             <ProductBrand
               variant={'caption'}
               withoutImage

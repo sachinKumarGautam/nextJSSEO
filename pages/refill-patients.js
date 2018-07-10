@@ -18,8 +18,8 @@ import {
 
 const styles = theme => ({
   root: {
-    paddingTop: 16,
-    paddingBottom: 16,
+    paddingTop: theme.spacing.unit * 2,
+    paddingBottom: theme.spacing.unit * 2,
     paddingLeft: theme.spacing.unit * 7,
     paddingRight: theme.spacing.unit * 7,
     maxWidth: theme.breakpoints.values.lg,
