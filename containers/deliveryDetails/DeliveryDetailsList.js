@@ -8,6 +8,8 @@ import CardContent from '@material-ui/core/CardContent'
 import { withStyles } from '@material-ui/core/styles'
 
 import Button from '../../components/button'
+import AddDeliveryAddressButton from './AddDeliveryAddressButton'
+import DeliveryDetailForm from './DeliveryDetailsForm'
 import AddressDetailsCardWrapper from './AddressDetailsCardWrapper'
 
 const styles = theme => {
@@ -37,28 +39,35 @@ const styles = theme => {
     buttonWrapper: {
       textAlign: 'right',
       marginTop: theme.spacing.unit * 3.75,
-      marginRight: theme.spacing.unit * 3.75,
-      marginBottom: theme.spacing.unit * 20
+      marginRight: theme.spacing.unit * 3.75
     },
     title: {
       ...theme.typography.headline,
       color: theme.palette.customGrey.grey500,
       marginLeft: theme.spacing.unit * 2,
       marginBottom: theme.spacing.unit * 6
+    },
+    titleWrapper: {
+      display: 'flex',
+      flexDirection: 'row',
+      justifyContent: 'space-between'
     }
   }
 }
 
 class Main extends Component {
-  constructor(props) {
+  constructor (props) {
     super(props)
 
     this.state = {
-      addressIdSelected: 0
+      addressIdSelected: 0,
+      openDeliveryFormDialog: false
     }
+    this.openDeliveryFormModal = this.openDeliveryFormModal.bind(this)
+    this.closeDeliveryFormModal = this.closeDeliveryFormModal.bind(this)
   }
 
-  saveAddressSelected(addressIdSelected) {
+  saveAddressSelected (addressIdSelected) {
     this.setState({
       addressIdSelected: addressIdSelected
     })
@@ -69,36 +78,52 @@ class Main extends Component {
     )
   }
 
+  openDeliveryFormModal () {
+    this.setState({
+      openDeliveryFormDialog: true
+    })
+  }
+
+  closeDeliveryFormModal () {
+    this.setState({
+      openDeliveryFormDialog: false
+    })
+  }
+
   render () {
     return (
       <Card elevation={'1'} className={this.props.classes.card}>
         <CardContent className={this.props.classes.cardContent}>
-          <Typography
-            gutterBottom
-            variant='title'
-            component='h1'
-            className={this.props.classes.title}
-          >
-            Addresses
-          </Typography>
+          <div className={this.props.classes.titleWrapper}>
+            <Typography
+              gutterBottom
+              variant='title'
+              component='h1'
+              className={this.props.classes.title}
+            >
+              Address
+            </Typography>
+            <div className={this.props.classes.buttonWrapper}>
+              <AddDeliveryAddressButton
+                buttonRoot={this.props.classes.buttonRoot}
+                buttonLabel={this.props.classes.buttonLabel}
+                onClick={this.openDeliveryFormModal.bind(this)}
+              />
+              <DeliveryDetailForm
+                onSubmit={this.props.submitDeliveryDetailsLoading}
+                openDeliveryFormDialog={this.state.openDeliveryFormDialog}
+                customerState={this.props.customerState}
+                deliveryDetailsState={this.props.deliveryDetailsState}
+                deliveryFormState={this.props.deliveryDetailsState.deliveryFormState}
+                closeModal={this.closeDeliveryFormModal}
+              />
+            </div>
+          </div>
           <AddressDetailsCardWrapper
             payload={this.props.deliveryDetailsState.payload}
             saveAddressSelected={this.saveAddressSelected.bind(this)}
             addressIdSelected={this.state.addressIdSelected}
           />
-          <div className={this.props.classes.buttonWrapper}>
-            <Button
-              size='small'
-              variant='outlined'
-              color='primary'
-              classes={{
-                root: this.props.classes.buttonRoot,
-                label: this.props.classes.buttonLabel
-              }}
-              style={{float: 'right'}}
-              label={'ADD NEW ADDRESS'}
-            />
-          </div>
         </CardContent>
       </Card>
     )

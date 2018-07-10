@@ -23,6 +23,8 @@ const DeliveryDetailsWrapper = props => (
         <DeliveryDetailsList
           deliveryDetailsState={props.deliveryDetailsState}
           saveAddressSelected={props.saveAddressSelected}
+          submitDeliveryDetailsLoading={props.submitDeliveryDetailsLoading}
+          customerState={props.customerState}
         />
       </Grid>
     </Grid>

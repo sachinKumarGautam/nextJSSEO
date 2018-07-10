@@ -11,7 +11,7 @@ import StrokePrice from '../../components/StrokePrice'
 import ProductDiscount from '../../components/ProductDiscount'
 import DeliveryInfoWrapper from '../../components/DeliveryInfoWrapper'
 import QuantityField from '../../components/QuantityField'
-import PincodeDialog from './PincodeDialog'
+import AddToCartButton from '../cartDetails/addToCartWrapper'
 
 /*
   Product price
@@ -40,21 +40,35 @@ const styles = theme => ({
 class ProductPriceDetails extends Component {
   constructor (props) {
     super(props)
+    this.handleOpenPincodeDialog = this.handleOpenPincodeDialog.bind(this)
+    this.handleClosePincodeDialog = this.handleClosePincodeDialog.bind(this)
+    this.onChangeQuantity = this.onChangeQuantity.bind(this)
+    this.addToCart = this.addToCart.bind(this)
     this.state = {
-      open: false
+      pincodeDialogOpen: false
     }
-
-    this.handleClickOpen = this.handleClickOpen.bind(this)
-    this.handleClose = this.handleClose.bind(this)
   }
 
-  handleClickOpen () {
-    this.setState({ open: true })
-  };
+  addToCart () {
+    this.props.incrementCartItemLoading(this.props.cartState, this.props.productDetailsState.payload)
+  }
 
-  handleClose () {
-    this.setState({ open: false })
-  };
+  handleOpenPincodeDialog () {
+    this.setState({
+      pincodeDialogOpen: true
+    })
+  }
+
+  onChangeQuantity (event) {
+    // sub 1 from select quantity coz medicine is incremented by 1 already in api (epic)
+    this.props.onChangeQuantity(this.props.productDetailsState, event.target.value - 1)
+  }
+
+  handleClosePincodeDialog () {
+    this.setState({
+      pincodeDialogOpen: false
+    })
+  }
 
   render () {
     const { classes } = this.props
@@ -64,32 +78,46 @@ class ProductPriceDetails extends Component {
         <Card elevation={1} className={classes.card}>
           <CardContent className={classes.cardContent}>
             <div className={classes.priceWrapper}>
-              <ProductPrice variant={'headline'} />
+              <ProductPrice
+                variant={'headline'}
+                sellingPrice={this.props.productDetailsState.payload.selling_price}
+              />
               <EstimatedPriceLabel
                 estimatePriceText={'*Estimated Price'}
               />
             </div>
             <div className={classes.priceWrapper}>
-              <StrokePrice variant={'body1'} />
-              <ProductDiscount />
+              <StrokePrice
+                variant={'body1'}
+                mrp={this.props.productDetailsState.payload.selling_price}
+              />
+              <ProductDiscount
+                discount={this.props.productDetailsState.payload.discount}
+              />
             </div>
-            <DeliveryInfoWrapper />
+            {
+              this.props.checkPincodeState.payload.city &&
+              <DeliveryInfoWrapper
+                checkPincodeState={this.props.checkPincodeState}
+                openPincodeDialog={this.handleOpenPincodeDialog}
+              />
+            }
             <div className={classes.cardActions}>
-              <QuantityField />
-              <Button
-                variant='raised'
-                size='small'
-                color='primary'
-                onClick={this.handleClickOpen}
-                label={'Add To Cart'}
+              <QuantityField
+                onChangeQuantity={this.onChangeQuantity}
+              />
+              <AddToCartButton
+                open={this.state.pincodeDialogOpen}
+                handleOpenPincodeDialog={this.handleOpenPincodeDialog}
+                handleClose={this.handleClosePincodeDialog}
+                addToCart={this.addToCart}
+                checkPincodeState={this.props.checkPincodeState}
+                checkPincodeLoading={this.props.checkPincodeLoading}
+                onChangeQuantity={this.onChangeQuantity}
               />
             </div>
           </CardContent>
         </Card>
-        <PincodeDialog
-          handleClose={this.handleClose}
-          open={this.state.open}
-        />
       </div>
     )
   }

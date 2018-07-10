@@ -31,7 +31,6 @@ class OrderListWrapper extends Component {
   }
 }
 
-
 function mapDispatchToProps (dispatch) {
   return {
     actions: bindActionCreators(

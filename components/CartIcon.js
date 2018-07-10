@@ -11,6 +11,16 @@ import ReactTooltip from 'react-tooltip'
 
 import Button from './button'
 
+import Link from 'next/link'
+
+import {
+  CART_DETAILS
+} from '../routes/RouteConstant'
+
+import  {
+  NO_CART_ITEM
+} from '../containers/messages/cartMessages'
+
 const styles = theme => ({
   button: {
     margin: theme.spacing.unit
@@ -97,6 +107,8 @@ class CartIcon extends Component {
 
   render () {
     const { classes } = this.props
+    const cartItems = this.props.cartState.payload.cart_items.payload
+
     return (
       <div>
         <a
@@ -109,7 +121,11 @@ class CartIcon extends Component {
             className={classes.button}
             aria-label='Add to shopping cart'
           >
-            <Badge className={classes.margin} badgeContent={this.state.quantity} color='primary'>
+            <Badge
+              className={classes.margin}
+              badgeContent={cartItems.length}
+              color='primary'
+            >
               <AddShoppingCartIcon />
             </Badge>
           </IconButton>
@@ -133,7 +149,7 @@ class CartIcon extends Component {
               variant="caption"
               className={classes.itemStyle}
             >
-              2 item(s)
+              {cartItems.length} item(s)
             </Typography>
           </div>
           <Divider/>
@@ -146,8 +162,9 @@ class CartIcon extends Component {
               }
             >
               {
-                this.state.quantity  ? 'Glycomet-GP 2 Tablet'
-                : 'There is no item in your cart yet'
+                cartItems.length
+                ? cartItems[cartItems.length - 1].name
+                : NO_CART_ITEM
               }
             </Typography>
             {
@@ -156,23 +173,24 @@ class CartIcon extends Component {
                 variant="caption"
                 className={classes.priceStyle}
               >
-                Rs. 55.5
+                Rs. {cartItems.length && cartItems[cartItems.length - 1].mrp}
               </Typography>
               : null
             }
           </div>
           <div className={classes.buttonStyle}>
-            <Button
-              size='small'
-              variant='outlined'
-              color='primary'
-              classes={{
-                root: classes.buttonRoot,
-                label: classes.buttonLabel
-              }}
-              onClick={this.handleClickOpen}
-              label={'PROCEED TO CART'}
-            />
+            <Link prefetch href={CART_DETAILS}>
+              <Button
+                size='small'
+                variant='outlined'
+                color='primary'
+                classes={{
+                  root: classes.buttonRoot,
+                  label: classes.buttonLabel
+                }}
+                label={'PROCEED TO CART'}
+              />
+            </Link>
           </div>
         </ReactTooltip>
       </div>

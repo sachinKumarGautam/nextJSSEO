@@ -29,10 +29,18 @@ class ProductDetails extends Component {
             <ProductInfo
               toggleHover={this.props.toggleHover}
               hover={this.props.hover}
+              productDetailsState={this.props.productDetailsState}
             />
           </Grid>
           <Grid item xs={4}>
-            <ProductPriceDetails />
+            <ProductPriceDetails
+              checkPincodeState={this.props.checkPincodeState}
+              checkPincodeLoading={this.props.checkPincodeLoading}
+              productDetailsState={this.props.productDetailsState}
+              incrementCartItemLoading={this.props.incrementCartItemLoading}
+              cartState={this.props.cartState}
+              onChangeQuantity={this.props.onChangeQuantity}
+            />
           </Grid>
         </Grid>
       </div>

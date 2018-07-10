@@ -33,9 +33,9 @@ const styles = theme => ({
   }
 })
 
-class Prescription extends React.Component{
+class Prescription extends React.Component {
   componentDidMount () {
-    //Represents to get prescription list.
+    // Represents to get prescription list.
     this.props.actions.getPrescriptionListLoading(
       this.props.prescriptionState,
       this.props.customerState.payload.id
@@ -56,7 +56,6 @@ class Prescription extends React.Component{
     )
   }
 }
-
 
 function mapStateToProps (state) {
   return {

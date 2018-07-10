@@ -9,6 +9,7 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
 import { withStyles } from '@material-ui/core/styles'
+import withRoot from '../../src/withRoot'
 
 /*
   bread crumbs
@@ -23,13 +24,6 @@ class ProductDetailsWrapper extends Component {
       hover: {}
     }
   }
-  componentDidMount () {
-    const { pathname, query } = Router
-    console.log(Router, pathname, query)
-    if (query.sku) {
-      this.props.getProductDetailLoading(this.props.productDetailsState, query.sku)
-    }
-  }
 
   toggleHover (item) {
     this.setState((prevState) => ({
@@ -39,21 +33,32 @@ class ProductDetailsWrapper extends Component {
     })
     )
   }
+
   render () {
+    const { query } = Router
     return (
       <div>
-        <BreadCrumbs />
-        <section>
-          <ProductDetails
-            toggleHover={this.toggleHover.bind(this)}
-            hover={this.state.hover}
-          />
-        </section>
-        <section>
-          <ProductDetailsContent
-            hover={this.state.hover}
-          />
-        </section>
+        <div>
+              <BreadCrumbs />
+              <section>
+                <ProductDetails
+                  toggleHover={this.toggleHover.bind(this)}
+                  hover={this.state.hover}
+                  checkPincodeState={this.props.checkPincodeState}
+                  productDetailsState={this.props.productDetailsState}
+                  checkPincodeLoading={this.props.checkPincodeLoading}
+                  incrementCartItemLoading={this.props.incrementCartItemLoading}
+                  cartState={this.props.cartState}
+                  onChangeQuantity={this.props.onChangeQuantity}
+                />
+              </section>
+              <section>
+                <ProductDetailsContent
+                  hover={this.state.hover}
+                  productDetailsState={this.props.productDetailsState}
+                />
+              </section>
+            </div>
       </div>
     )
   }
@@ -61,8 +66,8 @@ class ProductDetailsWrapper extends Component {
 
 function mapStateToProps (state) {
   return {
-    patientDetailsState: state.patientDetailsState,
-    customerState: state.customerState
+    checkPincodeState: state.checkPincodeState,
+    productDetailsState: state.productDetailsState
   }
 }
 

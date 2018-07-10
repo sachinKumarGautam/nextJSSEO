@@ -71,7 +71,7 @@ export default function (state = initialState, action) {
         payload: {
           ...state.payload,
           id: action.id,
-          full_name: action.id,
+          full_name: action.full_name,
           default_patient_id: action.default_patient_id,
           gender: action.gender,
           membership_code: action.membership_code,

@@ -15,7 +15,7 @@ const styles = theme => {
 const ProductName = (props) => (
   <div>
     <Typography
-      className={props.classes.title}
+      className={`${props.classes.title} ${props.customStyle}`}
       gutterBottom
       variant={props.variant}
       component='h1'

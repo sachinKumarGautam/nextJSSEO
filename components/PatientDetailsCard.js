@@ -6,7 +6,6 @@ import Button from './button'
 
 import { withStyles } from '@material-ui/core/styles'
 
-
 const styles = theme => {
   return {
     patientWrapperStyle: {
@@ -52,7 +51,7 @@ const styles = theme => {
       ...theme.typography.body2,
       color: theme.palette.customGreen.green300,
       fontWeight: theme.typography.fontWeightBold
-    },
+    }
   }
 }
 
@@ -60,25 +59,25 @@ const PatientDetailsCard = props => (
   <div
     className={
       (props.patientIdSelected === props.patientDetail.id)
-      ? props.classes.patientWrapperSelectedStyle
-      : props.classes.patientWrapperStyle
+        ? props.classes.patientWrapperSelectedStyle
+        : props.classes.patientWrapperStyle
     }
     onClick={props.savePatientSelected.bind(this, props.patientDetail.id)}
   >
     <Grid container spacing={24}>
       <Grid item xs={3}>
-        <img src="/static/images/profile.svg" />
+        <img src='/static/images/profile.svg' />
       </Grid>
       <Grid item xs={9}>
         <Typography
-          variant="caption"
+          variant='caption'
           className={props.classes.userNameStyle}
         >
           {props.patientDetail.full_name}
         </Typography>
         <div>
           <Typography
-            variant="caption"
+            variant='caption'
             className={props.classes.genderStyle}
           >
             {props.patientDetail.gender} | {props.patientDetail.age}
@@ -86,7 +85,7 @@ const PatientDetailsCard = props => (
         </div>
         <div>
           <Typography
-            variant="caption"
+            variant='caption'
             className={props.classes.mobileStyle}
           >
             {props.patientDetail.mobile}
@@ -96,8 +95,8 @@ const PatientDetailsCard = props => (
           <Grid container spacing={24}>
             <Grid item xs={4}>
               <Button
-                variant="contained"
-                size="small"
+                variant='contained'
+                size='small'
                 className={props.classes.button}
                 classes={{
                   label: props.classes.buttonLabel

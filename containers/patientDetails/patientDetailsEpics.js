@@ -1,19 +1,23 @@
 import { of } from 'rxjs/observable/of'
-import { mergeMap, catchError, map } from 'rxjs/operators'
+import { mergeMap, catchError, flatMap, map } from 'rxjs/operators'
 import { ofType } from 'redux-observable'
 import http from '../../services/api/ajaxWrapper'
 
 import {
-  GET_PATIENT_DETAILS_LIST_LOADING
+  GET_PATIENT_DETAILS_LIST_LOADING,
+  SUBMIT_PATIENT_LOADING
 } from './patientDetailsActionTypes'
 
 import {
   getPatientDetailsListSuccess,
-  getPatientDetailsListFailure
+  getPatientDetailsListFailure,
+  submitPatientDetailsSuccess,
+  submitPatientDetailsFailure,
+  getPatientDetailsListLoading
 } from './patientDetailsActions'
 
 import {
-  getPatientDetailsList$
+  getPatientDetailsList$, submitPatientDetails$
 } from '../../services/api'
 
 /**
@@ -26,11 +30,33 @@ export function getPatientDetailsList (action$, store) {
     ofType(GET_PATIENT_DETAILS_LIST_LOADING),
     mergeMap(data => {
       return http(getPatientDetailsList$(data.customerId)).pipe(
-        map(result => {
-          return getPatientDetailsListSuccess(data.patientDetailsState, result.body.payload.patients)
+        flatMap(result => {
+          return of(getPatientDetailsListSuccess(data.patientDetailsState, result.body.payload.patients))
         }),
         catchError(error => {
           return of(getPatientDetailsListFailure(data.patientDetailsState, error))
+        })
+      )
+    })
+  )
+}
+
+export function submitPatient (action$, store) {
+  return action$.pipe(
+    ofType(SUBMIT_PATIENT_LOADING),
+    mergeMap(data => {
+      const patientDetailsState = store.getState().store
+      const customerId = store.getState().customerState.payload.id
+      return http(submitPatientDetails$(data.customerId, data.values)).pipe(
+        flatMap(result => {
+          data.setSubmitting(false)
+          data.closeModal()
+          return of(submitPatientDetailsSuccess(data.patientDetailsState, result),
+            getPatientDetailsListLoading(patientDetailsState, customerId))
+        }),
+        catchError(error => {
+          data.setSubmitting(false)
+          return of(submitPatientDetailsFailure(data.patientDetailsState, error))
         })
       )
     })
