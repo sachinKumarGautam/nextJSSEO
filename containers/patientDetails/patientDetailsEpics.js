@@ -1,9 +1,5 @@
 import { of } from 'rxjs/observable/of'
-<<<<<<< HEAD
 import { mergeMap, catchError, flatMap } from 'rxjs/operators'
-=======
-import { mergeMap, catchError, flatMap, map } from 'rxjs/operators'
->>>>>>> 921925e533e12f65112ebed84a3b3a89d27cda5d
 import { ofType } from 'redux-observable'
 import http from '../../services/api/ajaxWrapper'
 
