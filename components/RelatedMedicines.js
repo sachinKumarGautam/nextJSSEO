@@ -61,6 +61,8 @@ const RelatedMedicines = (props) => (
                 checkPincodeLoading={props.checkPincodeLoading}
                 checkPincodeState={props.checkPincodeState}
                 itemDetails={item}
+                incrementCartItemLoading={props.incrementCartItemLoading}
+                cartState={props.cartState}
               />
             </li>
           ))}
