@@ -36,7 +36,8 @@ class RefillPatient extends Component {
   componentDidMount () {
     this.props.actions.getPatientDetailsListLoading(
       this.props.patientDetailsState,
-      this.props.customerState.payload.id // pass customer id
+      this.props.customerState.payload.id, // pass customer id,
+      {isRefillPatients: true}
     )
   }
 

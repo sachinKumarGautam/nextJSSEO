@@ -10,14 +10,19 @@ import {
  * @param {object} patientDetailsState - The object maintained for payload, loading and error state.
  * @param {number} customerId - The value of the customer id according to which list will occur
  */
-export function getPatientDetailsListLoading (patientDetailsState, customerId) {
+export function getPatientDetailsListLoading (
+  patientDetailsState,
+  customerId,
+  isRefillPatients
+) {
   return {
     type: GET_PATIENT_DETAILS_LIST_LOADING,
     patientDetailsState,
     isLoading: true,
     isError: false,
     error: {},
-    customerId: customerId
+    customerId: customerId,
+    isRefillPatients: isRefillPatients
   }
 }
 
