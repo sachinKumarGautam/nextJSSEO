@@ -89,6 +89,7 @@ const initialState = {
   },
   couponDetail: {
     couponCode: '',
+    isCouponApplied: false,
     payload: {},
     isLoading: false,
     errorState: {

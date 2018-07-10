@@ -436,9 +436,10 @@ export default function cartReducer (state = initialState, action) {
         couponDetail: {
           ...state.couponDetail,
           isLoading: action.isLoading,
+          isCouponApplied: action.isCouponApplied,
           errorState: {
             ...state.couponDetail.errorState,
-            isError: action.isError,
+            isError: action.isError
           }
         }
       }
@@ -450,6 +451,8 @@ export default function cartReducer (state = initialState, action) {
           ...state.couponDetail,
           payload: action.payload,
           isLoading: action.isLoading,
+          isCouponApplied: action.isCouponApplied,
+          couponCode: action.payload.coupon_code
         }
       }
 
@@ -459,6 +462,11 @@ export default function cartReducer (state = initialState, action) {
         couponDetail: {
           ...state.couponDetail,
           isLoading: action.isLoading,
+          isCouponApplied: action.isCouponApplied,
+          payload: {
+            ...state.couponDetail.payload,
+            coupon_code: ''
+          },
           errorState: {
             ...state.couponDetail.errorState,
             isError: action.isError,

@@ -23,7 +23,9 @@ import {
   submitOrderLoading,
   updateIsCartOpenRegisterModalFlag,
   resetCartState,
-  getAnonymousCartIdLoading
+  getAnonymousCartIdLoading,
+  applyCouponCodeLoading,
+  updateCouponCode
 } from './cartActions'
 
 import {
@@ -111,6 +113,8 @@ class CartDetailsWrapper extends Component {
                 deleteCartItemLoading={this.props.actions.deleteCartItemLoading}
                 resetCartState={this.props.actions.resetCartState}
                 getAnonymousCartIdLoading={this.props.actions.getAnonymousCartIdLoading}
+                applyCouponCodeLoading={this.props.actions.applyCouponCodeLoading}
+                updateCouponCode={this.props.actions.updateCouponCode}
               />
             </section>
           </Grid>
@@ -151,7 +155,9 @@ function mapDispatchToProps (dispatch) {
         resetCartState,
         getAnonymousCartIdLoading,
         submitPatientDetailsLoading,
-        submitDeliveryDetailsLoading
+        submitDeliveryDetailsLoading,
+        applyCouponCodeLoading,
+        updateCouponCode
       },
       dispatch
     )

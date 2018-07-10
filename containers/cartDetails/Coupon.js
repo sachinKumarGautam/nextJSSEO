@@ -10,6 +10,7 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 
 import Button from '../../components/button'
+import {COUPON_MESSAGE} from '../messages/couponMessage'
 
 const styles = theme => ({
   buttonStyle: {
@@ -49,6 +50,39 @@ const styles = theme => ({
   },
   contentRoot: {
     ...theme.typography.caption
+  },
+  couponDetailWrapper: {
+    marginTop: theme.spacing.unit * 2.25,
+    marginBottom: theme.spacing.unit * 3,
+    marginLeft: theme.spacing.unit,
+    marginRight: theme.spacing.unit * 2,
+    border: `1px dashed ${theme.palette.customGrey.grey200}`,
+    textAlign: 'left',
+    justifyContent: 'space-between',
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center'
+  },
+  couponCodeStyle: {
+    ...theme.typography.body2,
+    color: theme.palette.customGrey.grey500,
+    fontWeight: theme.typography.fontWeightBold,
+    paddingLeft: theme.spacing.unit * 2,
+    paddingTop: theme.spacing.unit
+  },
+  couponDescriptionStyle: {
+    ...theme.typography.caption,
+    color: theme.palette.customGrey.grey300,
+    paddingLeft: theme.spacing.unit * 2,
+    paddingBottom: theme.spacing.unit
+  },
+  editButton: {
+    textAlign: 'center'
+  },
+  editButtonLabel: {
+    ...theme.typography.caption,
+    fontWeight: theme.typography.fontWeightBold,
+    color: theme.palette.customGrey.grey500
   }
 })
 
@@ -64,29 +98,96 @@ class Coupon extends Component {
     this.setState({
       open: true
     })
+
+    this.props.updateCouponCode (
+      this.props.cartState,
+      this.props.cartState.couponDetail.payload.coupon_code
+    )
+  }
+
+  onClickOfApply() {
+    this.props.applyCouponCodeLoading(
+      this.props.cartState,
+      this.props.cartState.payload.uid,
+      this.props.cartState.couponDetail.couponCode
+    )
   }
 
   handleClose() {
     this.setState({
       open: false
     })
+
+    if(!this.props.cartState.couponDetail.isCouponApplied) {
+      this.props.updateCouponCode (
+        this.props.cartState,
+        ''
+      )
+    }
+  }
+
+  onChange(event) {
+    this.props.updateCouponCode (
+      this.props.cartState,
+      event.target.value
+    )
+  }
+
+  componentDidUpdate(prevProps) {
+    if((this.props.cartState.couponDetail.isCouponApplied !==
+    prevProps.cartState.couponDetail.isCouponApplied) &&
+    this.props.cartState.couponDetail.isCouponApplied) {
+      this.setState({
+        open: false
+      })
+    }
   }
 
   render () {
     return (
       <div className={this.props.classes.couponWrapper}>
-        <Button
-          size='small'
-          variant='outlined'
-          color='primary'
-          classes={{
-            root: this.props.classes.buttonRoot,
-            label: this.props.classes.buttonLabel
-          }}
-          className={this.props.classes.buttonStyle}
-          onClick={this.onClickOfCoupon.bind(this)}
-          label={'Have a coupon code?'}
-        />
+        {
+          !this.props.cartState.couponDetail.isCouponApplied ?
+          <Button
+            size='small'
+            variant='outlined'
+            color='primary'
+            classes={{
+              root: this.props.classes.buttonRoot,
+              label: this.props.classes.buttonLabel
+            }}
+            className={this.props.classes.buttonStyle}
+            onClick={this.onClickOfCoupon.bind(this)}
+            label={'Have a coupon code?'}
+          /> :
+          <div className={this.props.classes.couponDetailWrapper}>
+            <div>
+              <Typography
+                variant='caption'
+                className={this.props.classes.couponCodeStyle}
+              >
+                {this.props.cartState.couponDetail.payload.coupon_code}
+              </Typography>
+              <Typography
+                variant='caption'
+                className={this.props.classes.couponDescriptionStyle}
+              >
+                {this.props.cartState.couponDetail.payload.short_coupon_description}
+              </Typography>
+            </div>
+            <Button
+              size='small'
+              color='primary'
+              className={this.props.classes.editButton}
+              onClick={this.onClickOfCoupon.bind(this)}
+              classes={{
+                root: this.props.classes.couponButtonRoot,
+                label: this.props.classes.editButtonLabel
+              }}
+              label={'EDIT'}
+            />
+          </div>
+        }
         <Dialog
           open={this.state.open}
           onClose={this.handleClose.bind(this)}
@@ -102,15 +203,15 @@ class Coupon extends Component {
               margin="dense"
               id="name"
               fullWidth
-              // value={''}
-              // onChange={this.handleChange('name')}
+              value={this.props.cartState.couponDetail.couponCode}
+              onChange={this.onChange.bind(this)}
             />
             <DialogContentText
               classes={{
                 root: this.props.classes.contentRoot
               }}
             >
-              Best coupon available is always auto-applied to the order unless specified otherwise
+              {COUPON_MESSAGE}
             </DialogContentText>
           </DialogContent>
           <DialogActions>
@@ -127,7 +228,7 @@ class Coupon extends Component {
             <Button
               size='small'
               color='primary'
-              onClick={this.handleClose.bind(this)}
+              onClick={this.onClickOfApply.bind(this)}
               classes={{
                 root: this.props.classes.couponButtonRoot,
                 label: this.props.classes.couponCancelButtonLabel

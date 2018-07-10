@@ -14,7 +14,8 @@ import {
   CART_TRANSFER_LOADING,
   UPLOAD_PRESCRIPTION_LOADING,
   DELETE_PRESCRIPTION_LOADING,
-  SUBMIT_ORDER_LOADING
+  SUBMIT_ORDER_LOADING,
+  SUBMIT_COUPON_CODE_LOADING
 } from './cartActionTypes'
 
 import {
@@ -36,7 +37,9 @@ import {
   deletePrescriptionFailure,
   submitOrderSuccess,
   submitOrderFailure,
-  goToCartSnackbar
+  goToCartSnackbar,
+  applyCouponCodeSuccess,
+  applyCouponCodeFailure
 } from './cartActions'
 
 import {
@@ -49,7 +52,8 @@ import {
   cartTransfer$,
   uploadPrescriptionEpic$,
   deletePrescriptionEpic$,
-  submitOrder$
+  submitOrder$,
+  applyCouponForCart$
 } from '../../services/api'
 
 export function getAnonymousCartIdEpic (action$, store) {
@@ -424,6 +428,25 @@ export function submitOrderEpic (action$, store) {
         }),
         catchError(error => {
           return of(submitOrderFailure(data.cartState, error))
+        })
+      )
+    })
+  )
+}
+
+export function applyCouponCode (action$, store) {
+  return action$.pipe(
+    ofType(SUBMIT_COUPON_CODE_LOADING),
+    mergeMap(data => {
+      return http(applyCouponForCart$(data.cartId, data.couponCode)).pipe(
+        map(result => {
+          return applyCouponCodeSuccess(
+            data.moleculeState,
+            result.body.payload
+          )
+        }),
+        catchError(error => {
+          return of(applyCouponCodeFailure(data.moleculeState, error))
         })
       )
     })

@@ -117,7 +117,11 @@ class CartDetails extends Component {
               decrementCartItem={this.decrementCartItem.bind(this)}
               incrementCartItem={this.incrementCartItem.bind(this)}
             />
-            {/* <Coupon /> */}
+            <Coupon
+              applyCouponCodeLoading={this.props.applyCouponCodeLoading}
+              updateCouponCode={this.props.updateCouponCode}
+              cartState={this.props.cartState}
+            />
             <PriceDetails
               cartState={this.props.cartState}
             />

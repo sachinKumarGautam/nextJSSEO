@@ -61,7 +61,8 @@ import {
   saveDeliveryAddressToCartEpic,
   uploadPrescriptionEpic,
   deletePrescriptionEpic,
-  submitOrderEpic
+  submitOrderEpic,
+  applyCouponCode
 } from '../containers/cartDetails/cartEpics'
 
 import {
@@ -77,6 +78,7 @@ import {
 import {
   getPatientPastMedicineList
 } from '../containers/refillPatients/refillEpics'
+
 
 export const rootEpic = combineEpics(
   getMoleculeSummary,
@@ -116,5 +118,6 @@ export const rootEpic = combineEpics(
   checkPincode,
   submitDeliveryDetails,
   submitRefillDate,
-  getPatientPastMedicineList
+  getPatientPastMedicineList,
+  applyCouponCode
 )
