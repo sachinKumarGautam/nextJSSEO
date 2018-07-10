@@ -13,11 +13,7 @@ const styles = theme => ({
     position: 'relative',
     transition: 'padding-right .3s ease-out',
     boxShadow: 'none',
-    paddingRight: '10px',
-    paddingLeft: '10px',
-    paddingTop: '5px',
-    paddingBottom: '5px'
-
+    padding: `${theme.spacing.unit / 1.6}px ${theme.spacing.unit * 1.25}px`
   },
   buttonloader: {
     flexGrow: 1,

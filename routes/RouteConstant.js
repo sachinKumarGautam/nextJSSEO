@@ -10,6 +10,8 @@ export const PATIENT_LIST = '/patient-details'
 
 export const PRODUCT_DETAILS = '/product-details'
 
+export const MOLECULE_DETAILS = '/molecule-details'
+
 export const CART_DETAILS = '/cart-details'
 
 export const THANK_YOU = '/thank-you'
