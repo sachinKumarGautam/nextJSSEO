@@ -60,7 +60,8 @@ class ProductPriceDetails extends Component {
   }
 
   onChangeQuantity (event) {
-    this.props.onChangeQuantity(this.props.productDetailsState, event.target.value)
+    // sub 1 from select quantity coz medicine is incremented by 1 already in api (epic)
+    this.props.onChangeQuantity(this.props.productDetailsState, event.target.value - 1)
   }
 
   handleClosePincodeDialog () {
