@@ -6,6 +6,8 @@ import Link from 'next/link'
 import { CART_DETAILS } from '../../routes/RouteConstant';
 import IconButton from '@material-ui/core/IconButton';
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart'
+import { ITEM_ADDED_TO_CART } from '../../containers/messages/cartMessages'
+import { SNACK_BAR_DURATION } from '../../components/constants/Constants';
 
 
 const styles = theme => ({
@@ -41,7 +43,7 @@ class GoToCartSnackbar extends React.Component {
             vertical: 'bottom',
             horizontal: 'center',
           }}
-          autoHideDuration={10000}
+          autoHideDuration={SNACK_BAR_DURATION}
           open={this.props.cartState.payload.showAddToCartSnackBar}
           onClose={this.handleClose}
           ContentProps={{
@@ -58,7 +60,7 @@ class GoToCartSnackbar extends React.Component {
               <AddShoppingCartIcon />
             </IconButton>
           ]}
-          message={<span id="message-id">1 item added in the cart. Proceed to checkout</span>}
+          message={<span>{ITEM_ADDED_TO_CART}</span>}
         />
         </Link>
         

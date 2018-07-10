@@ -58,9 +58,9 @@ class ProductDetails extends React.Component {
     })
   }
 
-  componentWillReceiveProps(nextProps) {
+  componentDidUpdate(prevProps) {
     const { pathname, query } = Router
-    if (this.props.id !== Router.query.id) {
+    if (prevProps.id !== Router.query.id) {
       this.props.actions.getProductDetailLoading(this.props.productDetailsState, Router.query.id, query.location)
     }
   }

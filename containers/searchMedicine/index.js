@@ -37,12 +37,12 @@ const styles = theme => ({
     width: theme.spacing.unit * 80,
     paddingLeft: theme.spacing.unit * 2,
     borderColor: theme.palette.customGrey.grey200,
-    border: '1px solid black',
+    border: `1px solid ${theme.palette.common.black}`,
     borderRadius: theme.spacing.unit * 2,
     boxShadow: '0 1px 3px 0 rgba(0, 0, 0, 0.16)'
   },
   inputFocused: {
-    border: '1px solid #80c241'
+    border: `1px solid ${theme.palette.primary.main}`
   },
   searchButton: {
     borderColor: theme.palette.customGrey.grey200,
@@ -153,17 +153,15 @@ class SearchMedicine extends React.Component {
   }
 
   searchMedicineOnChange (event) {
-    this.props.searchMedicineLoading(this.props.searchMedicineState, event.target.value)
+    this.props.searchMedicineLoading(
+      this.props.searchMedicineState, 
+      this.props.checkPincodeState.payload.id, 
+      event.target.value
+    )
   }
 
   onSelectItem (itemDetails, props) {
-    console.log(itemDetails)
     this.props.updateInProgressMedicineState(this.props.searchMedicineState, itemDetails)
-    return (
-      Router.push({
-        pathname: `${PRODUCT_DETAILS}/${itemDetails.slug}`
-      })
-    )
   }
 
   render () {

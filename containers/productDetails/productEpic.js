@@ -18,7 +18,7 @@ export function getProductDetails (action$, store) {
     mergeMap(data => {
       const productDetailsState = store.getState().productDetailsState
 
-      return http(getProductDetails$(data.productName)).pipe(
+      return http(getProductDetails$(data.productName, data.location)).pipe(
         flatMap(result => {
           return of(getProductDetailSuccess(productDetailsState, result, data.values))
         }),

@@ -34,7 +34,7 @@ const styles = theme => ({
     flexGrow: 1
   },
   appBar: {
-    backgroundColor: '#fff'
+    backgroundColor: theme.palette.common.white
   },
   appBarInnerComp: {
     flexGrow: 1,
@@ -43,8 +43,8 @@ const styles = theme => ({
     display: 'flex',
     width: '100%',
     flexDirection: 'column',
-    paddingLeft: '56px',
-    paddingRight: '36px'
+    paddingLeft: theme.spacing.unit * 7,
+    paddingRight: theme.spacing.unit * 4.5
   },
   toolbar: {
     // margin: `0 ${theme.spacing.unit * 3}px`,
@@ -76,8 +76,8 @@ class Header extends React.Component {
     if (!this.props.loginState.isAuthenticated && !this.props.cartState.payload.uid) {
       this.props.actions.getAnonymousCartIdLoading(
         this.props.cartState,
-        'MWEB',
-        100,
+        this.props.checkPincodeState.payload.source,
+        this.props.checkPincodeState.payload.id,
         ''
       )
     }

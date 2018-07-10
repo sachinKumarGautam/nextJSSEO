@@ -54,25 +54,20 @@ class PatientDetailsList extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      patientIdSelected: 0,
       openPatientFormDialog: false
     }
   }
 
   savePatientSelected (patientIdSelected) {
-    this.setState({
-      patientIdSelected: patientIdSelected
-    })
-
     this.props.savePatientSelected(
       this.props.patientDetailsState,
       patientIdSelected
     )
 
     this.props.savePatientToCartLoading(
-      this.props.patientDetailsState,
+      this.props.cartState,
       patientIdSelected,
-      '680a75c5-7965-4f9d-ab2f-14cb0ce16c2c'
+      this.props.cartState.payload.uid
     )
   }
 
@@ -120,7 +115,7 @@ class PatientDetailsList extends Component {
           <PatientDetailsCardWrapper
             payload={this.props.patientDetailsState.payload}
             savePatientSelected={this.savePatientSelected.bind(this)}
-            patientIdSelected={this.state.patientIdSelected}
+            patientIdSelected={this.props.cartState.payload.patient_id.payload}
           />
         </CardContent>
       </Card>

@@ -52,7 +52,7 @@ class ProductUseCases extends Component {
           </Grid>
           <Grid item xs={12}>
             <articles>
-              {this.props.summaryData.payload['precautions'] &&
+              {this.props.summaryData.precautions &&
                 <TableContent
                   itemKey={'precautions'}
                   hover={this.props.hover}

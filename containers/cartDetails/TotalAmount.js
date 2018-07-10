@@ -23,20 +23,22 @@ const styles = theme => ({
 class TotalAmount extends Component {
   render () {
     return (
-      <div className={this.props.classes.totalAmountWrapper}>
-        <Grid container spacing={24}>
-          <Grid item xs={8}>
-            <Typography className={this.props.classes.totalAmountText}>
-              TOTAL AMOUNT
-            </Typography>
-          </Grid>
-          <Grid item xs={4}>
-            <Typography className={this.props.classes.totalAmount}>
-              Rs. {this.props.cartState.payload.total_sale_price}
-            </Typography>
-          </Grid>
+      <Grid
+        container
+        spacing={24}
+        className={this.props.classes.totalAmountWrapper}
+      >
+        <Grid item xs={8}>
+          <Typography className={this.props.classes.totalAmountText}>
+            TOTAL AMOUNT
+          </Typography>
         </Grid>
-      </div>
+        <Grid item xs={4}>
+          <Typography className={this.props.classes.totalAmount}>
+            Rs. {this.props.cartState.payload.total_sale_price}
+          </Typography>
+        </Grid>
+      </Grid>
     )
   }
 }

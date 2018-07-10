@@ -58,6 +58,7 @@ class PatientDetails extends React.Component {
               savePatientSelected={this.props.actions.savePatientSelected}
               submitPatientDetailsLoading={this.props.actions.submitPatientDetailsLoading}
               customerState={this.props.customerState}
+              cartState={this.props.cartState}
               savePatientToCartLoading={this.props.actions.savePatientToCartLoading}
             />
           </Paper>
@@ -70,6 +71,7 @@ class PatientDetails extends React.Component {
 
 function mapStateToProps (state) {
   return {
+    cartState: state.cartState,
     patientDetailsState: state.patientDetailsState,
     customerState: state.customerState
   }

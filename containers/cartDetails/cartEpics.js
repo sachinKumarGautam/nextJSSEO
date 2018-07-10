@@ -35,7 +35,7 @@ import {
   deletePrescriptionSuccess,
   deletePrescriptionFailure,
   submitOrderSuccess,
-  submitOrderFailure, 
+  submitOrderFailure,
   goToCartSnackbar
 } from './cartActions'
 
@@ -200,7 +200,7 @@ export function incrementCartItemEpic (action$, store) {
       const medicineIncremented = {
         name: data.medicineSelected.name,
         sku: data.medicineSelected.sku,
-        quantity: data.medicineSelected.quantity + 1
+        quantity: parseInt(data.medicineSelected.quantity) + 1
       }
       return http(putCartItem$(cartUid, medicineIncremented)).pipe(
         flatMap(result => {
@@ -209,15 +209,15 @@ export function incrementCartItemEpic (action$, store) {
             putCartItemSuccess(data.cartState, result.body.payload))
           }
           else {
-            return putCartItemSuccess(data.cartState, result.body.payload)
+            return of(putCartItemSuccess(data.cartState, result.body.payload))
           }
         }),
         catchError(error => {
-          return cartApiErrorHandling(
+          return of(cartApiErrorHandling(
             data.cartState,
             data.medicineSelected,
             error
-          )
+          ))
         })
       )
     })
@@ -265,7 +265,7 @@ export function savePatientToCartEpic (action$, store) {
     mergeMap(data => {
       return http(savePatientToCart$(data.cartId, data.patientId)).pipe(
         map(result => {
-          return savePatientToCartSuccess(data.cartState, result.body.payload.patients)
+          return savePatientToCartSuccess(data.cartState, result.body.payload)
         }),
         catchError(error => {
           return of(savePatientToCartFailure(data.cartState, error))
@@ -290,7 +290,7 @@ export function saveDeliveryAddressToCartEpic (action$, store) {
         )
       ).pipe(
         map(result => {
-          return saveDeliveryAddressToCartSuccess(data.cartState, result.body.payload.patients)
+          return saveDeliveryAddressToCartSuccess(data.cartState, result.body.payload.shipping_address_id)
         }),
         catchError(error => {
           return of(saveDeliveryAddressToCartFailure(data.cartState, error))

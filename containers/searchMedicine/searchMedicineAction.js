@@ -10,10 +10,11 @@ import {
  * @param {object} searchMedicineState - The object maintained for payload, loading and error state.
  */
 
-export function searchMedicineLoading (searchMedicineState, value) {
+export function searchMedicineLoading (searchMedicineState, facilityId, value) {
   return {
     type: SEARCH_MEDICINE_LOADING,
     searchMedicineState,
+    facilityId,
     value,
     isLoading: true,
     isError: false,
