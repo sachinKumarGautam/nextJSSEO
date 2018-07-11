@@ -12,7 +12,11 @@ import ProductPackSize from '../../components/ProductPackSize'
 
 const styles = theme => ({
   cartAmountWrapper: {
-    marginTop: theme.spacing.unit * 1.25
+    marginTop: theme.spacing.unit * 1.25,
+    marginLeft: theme.spacing.unit * 1.25
+  },
+  cartAmount: {
+    marginLeft: theme.spacing.unit * 1.25
   },
   medicineNameWrapper: {
     ...theme.typography.body2,

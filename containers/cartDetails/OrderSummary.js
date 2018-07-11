@@ -3,6 +3,7 @@ import React from 'react';
 import Grid from '@material-ui/core/Grid'
 import { withStyles } from '@material-ui/core/styles';
 import ExpansionPanel from '@material-ui/core/ExpansionPanel';
+import Radio from '@material-ui/core/Radio';
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 import ExpansionPanelActions from '@material-ui/core/ExpansionPanelActions';
 import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
@@ -16,8 +17,8 @@ import LoginDetails from './LoginDetails'
 import PatientDetails from './PatientDetails'
 import AddressDetails from './AddressDetails'
 
+import AddPatientButton from '../patientDetails/AddPatientButton'
 import AddDeliveryAddressButton from '../deliveryDetails/AddDeliveryAddressButton'
-import DeliveryDetailForm from '../deliveryDetails/DeliveryDetailsForm'
 
 const styles = theme => ({
   root: {
@@ -32,7 +33,8 @@ const styles = theme => ({
     fontSize: theme.spacing.unit * 2.75,
     fontWeight: theme.typography.fontWeightBold,
     color: theme.palette.customGrey.grey500,
-    marginLeft: theme.spacing.unit * 1.25
+    marginLeft: theme.spacing.unit * 2.5,
+    letterSpacing: theme.spacing.unit * 0.275
   },
   secondaryHeading: {
     fontSize: theme.typography.pxToRem(15),
@@ -40,9 +42,24 @@ const styles = theme => ({
   },
   buttonRoot: {
     border: `1px solid ${theme.palette.primary.main}`,
-    // backgroundColor: theme.palette.primary.main
   },
   buttonLabel: {
+    color: theme.palette.primary.main
+  },
+  loginButtonRoot: {
+    width: '100%'
+  },
+  nextButtonRoot: {
+    marginTop: theme.spacing.unit *  2.5,
+    width: theme.spacing.unit *  18.5,
+    float: 'right',
+    marginRight: theme.spacing.unit *  2.5
+  },
+  registerButtonRoot: {
+    border: `1px solid ${theme.palette.primary.main}`,
+    width: '100%'
+  },
+  registerButtonLabel: {
     color: theme.palette.primary.main
   },
   patientDetailsWrapper: {
@@ -53,15 +70,51 @@ const styles = theme => ({
   loginWrapperClass: {
     display: 'flex',
     flexDirection: 'column'
-  }
+  },
+  patientWrapper: {
+    justifyContent: 'space-between',
+    display: 'flex',
+    flexDirection: 'row',
+    width: '94%'
+  },
+  patientContentWrapper: {
+    display: 'flex',
+    flexDirection: 'row'
+  },
+  loginDescription: {
+    marginLeft: theme.spacing.unit * 6.25,
+    fontSize: theme.spacing.unit * 1.75,
+    color: theme.palette.customGrey.grey500
+  },
+  loginDetailsWrapper: {
+    marginTop: theme.spacing.unit * 2.5
+  },
+  paymentDescription: {
+    marginTop: theme.spacing.unit * 1.25
+  },
+  radioButton: {
+    color: theme.palette.customGrey.grey500,
+    '&$checked': {
+      color: theme.palette.customGreen.green300,
+    }
+  },
+  checked: {}
 });
 
 class OrderSummary extends React.Component {
   state = {
-    expanded: 'panel1',
+    expanded: !this.props.loginState.isAuthenticated ? 'panel1' : 'panel2',
     openPatientFormDialog: false,
     openDeliveryFormDialog: false
   };
+
+  componentDidUpdate(prevProps) {
+    if(this.props.loginState.isAuthenticated !== prevProps.loginState.isAuthenticated) {
+      this.setState({
+        expanded: 'panel2'
+      })
+    }
+  }
 
   handleChange = panel => (event, expanded) => {
     this.setState({
@@ -180,7 +233,11 @@ class OrderSummary extends React.Component {
       <div className={classes.root}>
         <ExpansionPanel
           expanded={expanded === 'panel1'}
-          //onChange={this.handleNextChange.bind(this, 'panel1')}
+          onChange={
+            !this.props.loginState.isAuthenticated
+            ? this.handleChange('panel1')
+            : null
+          }
           className={classes.expansionPanel}
         >
           <ExpansionPanelSummary expandIcon={<div />}>
@@ -189,7 +246,7 @@ class OrderSummary extends React.Component {
               {
                 !this.props.loginState.isAuthenticated
                 ? (
-                  'Log in'
+                  'Login/Register'
                 ) : (
                   this.props.customerState.payload.full_name
                 )
@@ -197,13 +254,19 @@ class OrderSummary extends React.Component {
             </Typography>
           </ExpansionPanelSummary>
           <ExpansionPanelDetails>
-            <LoginDetails
-              loginState={this.props.loginState}
-              buttonRoot={this.props.classes.buttonRoot}
-              buttonLabel={this.props.classes.buttonLabel}
-              openLoginModal={this.openLoginModal.bind(this)}
-              openRegisterModal={this.openRegisterModal.bind(this)}
-            />
+            <Typography className={this.props.classes.loginDescription}>
+              To place an order now, login to your existing account or register
+              <div className={this.props.classes.loginDetailsWrapper}>
+                <LoginDetails
+                  loginState={this.props.loginState}
+                  loginButtonRoot={this.props.classes.loginButtonRoot}
+                  registerButtonRoot={this.props.classes.registerButtonRoot}
+                  registerButtonLabel={this.props.classes.registerButtonLabel}
+                  openLoginModal={this.openLoginModal.bind(this)}
+                  openRegisterModal={this.openRegisterModal.bind(this)}
+                />
+              </div>
+            </Typography>
           </ExpansionPanelDetails>
         </ExpansionPanel>
         <ExpansionPanel
@@ -213,10 +276,10 @@ class OrderSummary extends React.Component {
         >
           <ExpansionPanelSummary expandIcon={<div />}>
             <img src='/static/images/attachedPrescriptions.svg' />
-            <Typography className={classes.heading}>Attached Prescriptions</Typography>
+            <Typography className={classes.heading}>Upload Prescriptions</Typography>
           </ExpansionPanelSummary>
           <ExpansionPanelDetails>
-            <Typography>
+            <Typography className={this.props.classes.loginDescription}>
               *Upload your prescription. If you do not have a ready prescription,
               you may opt for a tele-consultation with our doctor and create a prescription.
               <ImagePicker
@@ -225,123 +288,178 @@ class OrderSummary extends React.Component {
                 onDeleteButton={this.onDeleteButton.bind(this)}
                 //onViewImage={this.onViewImage}
               />
+              <Button
+                size='small'
+                color='primary'
+                variant='raised'
+                classes={{
+                  root: this.props.classes.nextButtonRoot
+                }}
+                label={'NEXT'}
+                onClick={
+                  this.props.loginState.isAuthenticated
+                  ? this.handleNextChange.bind(this, 'panel3', true)
+                  : null
+                }
+              />
             </Typography>
           </ExpansionPanelDetails>
-          <ExpansionPanelActions>
-            <Button
-              size='small'
-              variant='outlined'
-              color='primary'
-              classes={{
-                root: this.props.classes.buttonRoot,
-                label: this.props.classes.buttonLabel
-              }}
-              label={'NEXT'}
-              onClick={this.handleNextChange.bind(this, 'panel3', true)}
-            />
-          </ExpansionPanelActions>
         </ExpansionPanel>
         <ExpansionPanel
           expanded={expanded === 'panel3'}
-          //onChange={this.handleChange('panel3')}
+          onChange={
+            this.props.loginState.isAuthenticated
+            ? this.handleChange('panel3')
+            : null
+          }
           className={classes.expansionPanel}
         >
-          <ExpansionPanelSummary expandIcon={<div />}>
-            <Typography className={classes.heading}>Patient Details</Typography>
-          </ExpansionPanelSummary>
-          <ExpansionPanelDetails>
-            <PatientDetails
-              expanded={this.state.expanded}
-              buttonRoot={this.props.classes.buttonRoot}
-              buttonLabel={this.props.classes.buttonLabel}
-              openPatientFormModal={this.openPatientFormModal.bind(this)}
-              submitPatientDetailsLoading={this.props.submitPatientDetailsLoading}
-              openPatientFormDialog={this.state.openPatientFormDialog}
-              customerState={this.props.customerState}
-              patientDetailsState={this.props.patientDetailsState}
-              closePatientFormModal={this.closePatientFormModal.bind(this)}
-              savePatientSelected={this.savePatientSelected.bind(this)}
-              patientIdSelected={this.props.cartState.payload.patient_id.payload}
-            />
-          </ExpansionPanelDetails>
-          <ExpansionPanelActions>
-            <Button
-              size='small'
-              variant='outlined'
-              color='primary'
-              classes={{
-                root: this.props.classes.buttonRoot,
-                label: this.props.classes.buttonLabel
-              }}
-              label={'NEXT'}
-              onClick={this.handleNextChange.bind(this, 'panel4', true)}
-            />
-          </ExpansionPanelActions>
-        </ExpansionPanel>
-        <ExpansionPanel
-          expanded={expanded === 'panel4'}
-          //onChange={this.handleChange('panel4')}
-          className={classes.expansionPanel}
-        >
-          <ExpansionPanelSummary expandIcon={<div />}>
-            <Typography className={classes.heading}>Delivery Details</Typography>
-          </ExpansionPanelSummary>
-          <ExpansionPanelDetails>
-            <AddressDetails
-              expanded={this.state.expanded}
-              buttonRoot={this.props.classes.buttonRoot}
-              buttonLabel={this.props.classes.buttonLabel}
-              openDeliveryFormModal={this.openDeliveryFormModal.bind(this)}
-              submitDeliveryDetailsLoading={this.props.submitDeliveryDetailsLoading}
-              openDeliveryFormDialog={this.state.openDeliveryFormDialog}
-              customerState={this.props.customerState}
-              deliveryFormState={this.props.deliveryDetailsState.deliveryFormState}
-              deliveryDetailsState={this.props.deliveryDetailsState}
-              closeDeliveryFormModal={this.closeDeliveryFormModal.bind(this)}
-              saveAddressSelected={this.saveAddressSelected.bind(this)}
-              addressIdSelected={this.props.cartState.payload.shipping_address_id.payload}
-            />
-          </ExpansionPanelDetails>
-          <ExpansionPanelActions>
-            <Button
-              size='small'
-              variant='outlined'
-              color='primary'
-              classes={{
-                root: this.props.classes.buttonRoot,
-                label: this.props.classes.buttonLabel
-              }}
-              label={'NEXT'}
-              onClick={this.handleNextChange.bind(this, 'panel5', true)}
-            />
-          </ExpansionPanelActions>
-        </ExpansionPanel>
-        <ExpansionPanel
-          expanded={expanded === 'panel5'}
-          //onChange={this.handleChange('panel5')}
-          className={classes.expansionPanel}
-        >
-          <ExpansionPanelSummary expandIcon={<div />}>
-            <Typography className={classes.heading}>Payment</Typography>
+          <ExpansionPanelSummary
+            expandIcon={<div />}
+            classes={{
+              content: this.props.classes.patientContentWrapper
+            }}
+          >
+            <img src='/static/images/loggedIn.svg' />
+            <div className={this.props.classes.patientWrapper}>
+              <Typography className={classes.heading}>Patient Details</Typography>
+              {
+                this.state.expanded === 'panel3' &&
+                <AddPatientButton
+                  buttonRoot={this.props.classes.buttonRoot}
+                  buttonLabel={this.props.classes.buttonLabel}
+                  onClick={this.openPatientFormModal.bind(this)}
+                />
+              }
+            </div>
           </ExpansionPanelSummary>
           <ExpansionPanelDetails>
             <Typography>
-              CASH ON DELIVERY
+              <PatientDetails
+                isCartPage={true}
+                expanded={this.state.expanded}
+                buttonRoot={this.props.classes.buttonRoot}
+                buttonLabel={this.props.classes.buttonLabel}
+                openPatientFormModal={this.openPatientFormModal.bind(this)}
+                submitPatientDetailsLoading={this.props.submitPatientDetailsLoading}
+                openPatientFormDialog={this.state.openPatientFormDialog}
+                customerState={this.props.customerState}
+                patientDetailsState={this.props.patientDetailsState}
+                closePatientFormModal={this.closePatientFormModal.bind(this)}
+                savePatientSelected={this.savePatientSelected.bind(this)}
+                patientIdSelected={this.props.cartState.payload.patient_id.payload}
+              />
+              <Button
+                size='small'
+                color='primary'
+                variant='raised'
+                classes={{
+                  root: this.props.classes.nextButtonRoot
+                }}
+                label={'NEXT'}
+                onClick={
+                  this.props.loginState.isAuthenticated
+                  ? this.handleNextChange.bind(this, 'panel4', true)
+                  : null
+                }
+              />
             </Typography>
           </ExpansionPanelDetails>
-          <ExpansionPanelActions>
-            <Button
-              size='small'
-              variant='outlined'
-              color='primary'
+        </ExpansionPanel>
+        <ExpansionPanel
+          expanded={expanded === 'panel4'}
+          onChange={
+            this.props.loginState.isAuthenticated
+            ? this.handleChange('panel4')
+            : null
+          }
+          className={classes.expansionPanel}
+        >
+          <ExpansionPanelSummary
+            expandIcon={<div />}
+            classes={{
+              content: this.props.classes.patientContentWrapper
+            }}
+          >
+            <img src='/static/images/attachedPrescriptions.svg' />
+            <div className={this.props.classes.patientWrapper}>
+              <Typography className={classes.heading}>Delivery Details</Typography>
+              {
+                this.state.expanded === 'panel4' &&
+                <AddDeliveryAddressButton
+                  buttonRoot={this.props.classes.buttonRoot}
+                  buttonLabel={this.props.classes.buttonLabel}
+                  onClick={this.openDeliveryFormModal.bind(this)}
+                />
+              }
+            </div>
+          </ExpansionPanelSummary>
+          <ExpansionPanelDetails>
+            <Typography>
+              <AddressDetails
+                isCartPage={true}
+                expanded={this.state.expanded}
+                buttonRoot={this.props.classes.buttonRoot}
+                buttonLabel={this.props.classes.buttonLabel}
+                openDeliveryFormModal={this.openDeliveryFormModal.bind(this)}
+                submitDeliveryDetailsLoading={this.props.submitDeliveryDetailsLoading}
+                openDeliveryFormDialog={this.state.openDeliveryFormDialog}
+                customerState={this.props.customerState}
+                deliveryFormState={this.props.deliveryDetailsState.deliveryFormState}
+                deliveryDetailsState={this.props.deliveryDetailsState}
+                closeDeliveryFormModal={this.closeDeliveryFormModal.bind(this)}
+                saveAddressSelected={this.saveAddressSelected.bind(this)}
+                addressIdSelected={this.props.cartState.payload.shipping_address_id.payload}
+              />
+              <Button
+                size='small'
+                color='primary'
+                variant='raised'
+                classes={{
+                  root: this.props.classes.nextButtonRoot
+                }}
+                label={'NEXT'}
+                onClick={this.handleNextChange.bind(this, 'panel5', true)}
+              />
+            </Typography>
+          </ExpansionPanelDetails>
+        </ExpansionPanel>
+        <ExpansionPanel
+          expanded={expanded === 'panel5'}
+          onChange={
+            this.props.loginState.isAuthenticated
+            ? this.handleChange('panel5')
+            : null
+          }
+          className={classes.expansionPanel}
+        >
+          <ExpansionPanelSummary expandIcon={<div />}>
+            <img src='/static/images/attachedPrescriptions.svg' />
+            <Typography className={classes.heading}>Payment</Typography>
+          </ExpansionPanelSummary>
+          <ExpansionPanelDetails>
+            <Radio
+              checked={true}
+              name="radio-button-demo"
               classes={{
-                root: this.props.classes.buttonRoot,
-                label: this.props.classes.buttonLabel
+                root: this.props.classes.radioButton,
+                checked: this.props.classes.checked,
               }}
-              label={'Place Order'}
-              onClick={this.placeOrder.bind(this)}
             />
-          </ExpansionPanelActions>
+            <Typography className={this.props.classes.paymentDescription}>
+              CASH ON DELIVERY
+              <Button
+                size='small'
+                color='primary'
+                variant='raised'
+                classes={{
+                  root: this.props.classes.nextButtonRoot
+                }}
+                label={'Place Order'}
+                onClick={this.placeOrder.bind(this)}
+              />
+            </Typography>
+          </ExpansionPanelDetails>
         </ExpansionPanel>
       </div>
     );

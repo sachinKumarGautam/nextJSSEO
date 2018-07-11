@@ -9,7 +9,20 @@ import {
   submitRefillDateLoading
 } from './thankYouActions'
 
+import {
+  getAnonymousCartIdLoading
+} from '../cartDetails/cartActions'
+
 class ThankyouWrapper extends Component {
+  componentDidMount() {
+    this.props.actions.getAnonymousCartIdLoading(
+      this.props.cartState,
+      this.props.checkPincodeState.payload.source,
+      this.props.checkPincodeState.payload.id,
+      ''
+    )
+  }
+
   render () {
     return (
       <div>
@@ -30,7 +43,8 @@ function mapDispatchToProps (dispatch) {
   return {
     actions: bindActionCreators(
       {
-        submitRefillDateLoading
+        submitRefillDateLoading,
+        getAnonymousCartIdLoading
       },
       dispatch
     )
@@ -40,7 +54,8 @@ function mapDispatchToProps (dispatch) {
 function mapStateToProps (state) {
   return {
     cartState: state.cartState,
-    thankYouState: state.thankYouState
+    thankYouState: state.thankYouState,
+    checkPincodeState: state.checkPincodeState
   }
 }
 

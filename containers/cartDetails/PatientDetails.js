@@ -9,14 +9,6 @@ import PatientDetailsCard from '../../components/PatientDetailsCard'
 const PatientDetails = props => (
   <Grid container spacing={24}>
     <Grid item xs={12}>
-      {
-        props.expanded === 'panel3' &&
-        <AddPatientButton
-          buttonRoot={props.buttonRoot}
-          buttonLabel={props.buttonLabel}
-          onClick={props.openPatientFormModal}
-        />
-      }
       <PatientDetailForm
         closePatientFormModal={props.closePatientFormModal}
         openPatientFormDialog={props.openPatientFormDialog}
@@ -34,6 +26,7 @@ const PatientDetails = props => (
               patientDetail={patientDetail}
               savePatientSelected={props.savePatientSelected}
               patientIdSelected={props.patientIdSelected}
+              isCartPage={props.isCartPage}
             />
           </Grid>
         )

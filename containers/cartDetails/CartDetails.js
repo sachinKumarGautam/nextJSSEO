@@ -48,6 +48,10 @@ const styles = theme => ({
     marginLeft: theme.spacing.unit * 2.5,
     fontWeight: theme.typography.fontWeightBold
   },
+  scrollWrapper: {
+    maxHeight: theme.spacing.unit * 50,
+    overflowY: 'scroll'
+  },
   cartWrapper: {
     '&:last-child': {
       paddingBottom: 0
@@ -70,19 +74,12 @@ class CartDetails extends Component {
 
   componentDidUpdate (prevProps) {
     if (
-      this.props.cartState.orderResponse.order_number !==
-      prevProps.cartState.orderResponse.order_number
+      this.props.cartState.orderResponse.payload.order_number !==
+      prevProps.cartState.orderResponse.payload.order_number
     ) {
       Router.push({ pathname: THANK_YOU})
 
       this.props.resetCartState()
-
-      this.props.getAnonymousCartIdLoading(
-        this.props.cartState,
-        this.props.checkPincodeState.payload.source,
-        this.props.checkPincodeState.payload.id,
-        ''
-      )
     }
   }
 
@@ -100,7 +97,7 @@ class CartDetails extends Component {
               MY CART
             </Typography>
           </div>
-          <div>
+          <div className={this.props.classes.scrollWrapper}>
             {
               this.props.cartState.payload.patient_id.payload
               ? (
@@ -127,10 +124,10 @@ class CartDetails extends Component {
             <PriceDetails
               cartState={this.props.cartState}
             />
-            <TotalAmount
-              cartState={this.props.cartState}
-            />
           </div>
+          <TotalAmount
+            cartState={this.props.cartState}
+          />
         </CardContent>
       </Card>
     )
