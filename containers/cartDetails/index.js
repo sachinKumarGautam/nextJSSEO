@@ -22,8 +22,7 @@ import {
   deletePrescriptionLoading,
   submitOrderLoading,
   updateIsCartOpenRegisterModalFlag,
-  resetCartState,
-  getAnonymousCartIdLoading
+  resetCartState
 } from './cartActions'
 
 import {
@@ -45,7 +44,7 @@ import {
 class CartDetailsWrapper extends Component {
   componentDidMount () {
     const cartUid = this.props.cartState.payload.uid
-    
+
     this.props.actions.getCartDetailsLoading(
       this.props.cartState,
       cartUid
@@ -70,7 +69,7 @@ class CartDetailsWrapper extends Component {
         this.props.customerState.payload.id !==
         prevProps.customerState.payload.id
       ) && (
-        !this.props.cartState.orderResponse.order_number
+        !this.props.cartState.orderResponse.payload.order_number
       )
     ) {
       this.props.actions.getPatientDetailsListLoading(
@@ -118,7 +117,6 @@ class CartDetailsWrapper extends Component {
                 decrementCartItemLoading={this.props.actions.decrementCartItemLoading}
                 deleteCartItemLoading={this.props.actions.deleteCartItemLoading}
                 resetCartState={this.props.actions.resetCartState}
-                getAnonymousCartIdLoading={this.props.actions.getAnonymousCartIdLoading}
               />
             </section>
           </Grid>
@@ -157,7 +155,6 @@ function mapDispatchToProps (dispatch) {
         submitOrderLoading,
         updateIsCartOpenRegisterModalFlag,
         resetCartState,
-        getAnonymousCartIdLoading,
         submitPatientDetailsLoading,
         submitDeliveryDetailsLoading
       },

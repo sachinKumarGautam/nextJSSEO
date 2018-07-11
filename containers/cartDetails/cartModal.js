@@ -75,12 +75,27 @@ const initialState = {
     visibleImageUrl: ''
   },
   orderResponse: {
-    order_number: null,
-    delivery_option: '',
-    service_type: '',
-    order_prescriptions: [],
-    doctor_callback: false,
-    promised_delivery_date: '',
+    payload: {
+      order_number: null,
+      delivery_option: '',
+      service_type: '',
+      order_prescriptions: [],
+      doctor_callback: false,
+      promised_delivery_date: '',
+      patient_id: 0,
+      customer_id: 0,
+      customer_full_name: '',
+      patient_full_name: '',
+      discount: 0,
+      redeemed_care_points: 0,
+      redeemable_care_points: 0,
+      total_mrp: 0,
+      total_sale_price: 0,
+      total_tax_amount: 0,
+      facility_code: 0,
+      status: '',
+      source: ''
+    },
     isLoading: false,
     errorState: {
       isError: false,

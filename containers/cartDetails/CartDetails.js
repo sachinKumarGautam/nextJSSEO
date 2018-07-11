@@ -68,19 +68,12 @@ class CartDetails extends Component {
 
   componentDidUpdate (prevProps) {
     if (
-      this.props.cartState.orderResponse.order_number !==
-      prevProps.cartState.orderResponse.order_number
+      this.props.cartState.orderResponse.payload.order_number !==
+      prevProps.cartState.orderResponse.payload.order_number
     ) {
       Router.push({ pathname: THANK_YOU})
 
       this.props.resetCartState()
-
-      this.props.getAnonymousCartIdLoading(
-        this.props.cartState,
-        this.props.checkPincodeState.payload.source,
-        this.props.checkPincodeState.payload.id,
-        ''
-      )
     }
   }
 
