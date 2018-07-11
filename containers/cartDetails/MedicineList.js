@@ -15,7 +15,11 @@ const styles = theme => ({
     borderBottom: `1px solid ${theme.palette.customGrey.grey800}`
   },
   cartAmountWrapper: {
-    marginTop: theme.spacing.unit * 1.25
+    marginTop: theme.spacing.unit * 1.25,
+    marginLeft: theme.spacing.unit * 1.25
+  },
+  cartAmount: {
+    marginLeft: theme.spacing.unit * 1.25 
   },
   medicineNameWrapper: {
     fontSize: theme.spacing.unit * 1.75,
@@ -44,7 +48,7 @@ class MedicineList extends Component {
                 spacing={24}
                 className={this.props.classes.medicineListWrapper}
               >
-                <Grid item xs={7}>
+                <Grid item xs={6}>
                   <ProductName
                     customStyle={this.props.classes.medicineNameWrapper}
                     name={cartItem.name}
@@ -61,14 +65,14 @@ class MedicineList extends Component {
                     withoutImage
                   />
                 </Grid>
-                <Grid item xs={5}>
+                <Grid item xs={6}>
                   <div className={this.props.classes.amountWrapper}>
                     <Typography className={this.props.classes.amount}>
                       Rs. {cartItem.mrp}
                     </Typography>
                   </div>
                   <Grid container spacing={24}>
-                    <Grid item xs={5}>
+                    <Grid item xs={3}>
                       <IconButton
                         onClick={this.props.decrementCartItem.bind(this, cartItem)}
                       >
@@ -76,11 +80,11 @@ class MedicineList extends Component {
                       </IconButton>
                     </Grid>
                     <Grid item xs={2} className={this.props.classes.cartAmountWrapper}>
-                      <Typography>
+                      <Typography className={this.props.classes.cartAmount}>
                         {cartItem.quantity}
                       </Typography>
                     </Grid>
-                    <Grid item xs={4}>
+                    <Grid item xs={3}>
                       <IconButton
                         onClick={this.props.incrementCartItem.bind(this, cartItem)}
                       >

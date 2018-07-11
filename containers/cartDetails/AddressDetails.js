@@ -9,14 +9,6 @@ import AddressDetailsCard from '../../components/AddressDetailsCard'
 const AddressDetails = props => (
   <Grid container spacing={24}>
     <Grid item xs={12}>
-      {
-        props.expanded === 'panel4' &&
-        <AddDeliveryAddressButton
-          buttonRoot={props.buttonRoot}
-          buttonLabel={props.buttonLabel}
-          onClick={props.openDeliveryFormModal}
-        />
-      }
       <DeliveryDetailForm
         onSubmit={props.submitDeliveryDetailsLoading}
         openDeliveryFormDialog={props.openDeliveryFormDialog}
@@ -34,6 +26,7 @@ const AddressDetails = props => (
               deliveryDetail={deliveryDetail}
               saveAddressSelected={props.saveAddressSelected}
               addressIdSelected={props.addressIdSelected}
+              isCartPage={props.isCartPage}
             />
           </Grid>
         )

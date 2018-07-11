@@ -46,6 +46,10 @@ const styles = theme => ({
     paddingTop: theme.spacing.unit * 1.25,
     marginLeft: theme.spacing.unit * 2.5,
     fontWeight: theme.typography.fontWeightBold
+  },
+  scrollWrapper: {
+    maxHeight: 400,
+    overflowY: 'scroll'
   }
 })
 
@@ -90,25 +94,27 @@ class CartDetails extends Component {
             </Typography>
           </div>
           <div className={this.props.classes.cartWrapper}>
-            {
-              this.props.cartState.payload.patient_id.payload
-              ? (
-                <Avatar
-                  cartState={this.props.cartState}
-                />
-              ) : null
-            }
-            <MedicineList
-              cartState={this.props.cartState}
-              decrementCartItem={this.decrementCartItem.bind(this)}
-              incrementCartItem={this.incrementCartItem.bind(this)}
-            />
-            {
-              // <Coupon />
-            }
-            <PriceDetails
-              cartState={this.props.cartState}
-            />
+            <div className={this.props.classes.scrollWrapper}>
+              {
+                this.props.cartState.payload.patient_id.payload
+                ? (
+                  <Avatar
+                    cartState={this.props.cartState}
+                  />
+                ) : null
+              }
+              <MedicineList
+                cartState={this.props.cartState}
+                decrementCartItem={this.decrementCartItem.bind(this)}
+                incrementCartItem={this.incrementCartItem.bind(this)}
+              />
+              {
+                // <Coupon />
+              }
+              <PriceDetails
+                cartState={this.props.cartState}
+              />
+            </div>
             <TotalAmount
               cartState={this.props.cartState}
             />

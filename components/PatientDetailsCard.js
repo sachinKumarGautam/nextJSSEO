@@ -94,16 +94,32 @@ const PatientDetailsCard = props => (
         <div>
           <Grid container spacing={24}>
             <Grid item xs={4}>
-              <Button
-                variant='contained'
-                size='small'
-                className={props.classes.button}
-                classes={{
-                  label: props.classes.buttonLabel
-                }}
-                onClick={this.handleClickOpen}
-                label={'EDIT'}
-              />
+              {
+                props.isCartPage
+                ? (
+                  <Button
+                    variant='contained'
+                    size='small'
+                    className={props.classes.button}
+                    classes={{
+                      label: props.classes.buttonLabel
+                    }}
+                    onClick={this.handleClickOpen}
+                    label={'SELECT'}
+                  />
+                ) : (
+                  <Button
+                    variant='contained'
+                    size='small'
+                    className={props.classes.button}
+                    classes={{
+                      label: props.classes.buttonLabel
+                    }}
+                    onClick={this.handleClickOpen}
+                    label={'EDIT'}
+                  />
+                )
+              }
             </Grid>
             {
               // <Grid item xs={3}>

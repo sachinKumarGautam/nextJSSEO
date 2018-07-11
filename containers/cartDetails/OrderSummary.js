@@ -16,8 +16,8 @@ import LoginDetails from './LoginDetails'
 import PatientDetails from './PatientDetails'
 import AddressDetails from './AddressDetails'
 
+import AddPatientButton from '../patientDetails/AddPatientButton'
 import AddDeliveryAddressButton from '../deliveryDetails/AddDeliveryAddressButton'
-import DeliveryDetailForm from '../deliveryDetails/DeliveryDetailsForm'
 
 const styles = theme => ({
   root: {
@@ -32,7 +32,7 @@ const styles = theme => ({
     fontSize: theme.spacing.unit * 2.75,
     fontWeight: theme.typography.fontWeightBold,
     color: theme.palette.customGrey.grey500,
-    marginLeft: theme.spacing.unit * 1.25
+    marginLeft: theme.spacing.unit * 2.5
   },
   secondaryHeading: {
     fontSize: theme.typography.pxToRem(15),
@@ -53,12 +53,21 @@ const styles = theme => ({
   loginWrapperClass: {
     display: 'flex',
     flexDirection: 'column'
+  },
+  patientWrapper: {
+    justifyContent: 'space-between'
+  },
+  loginDescription: {
+    marginLeft: theme.spacing.unit * 6.25
+  },
+  loginDetailsWrapper: {
+    marginTop: 20
   }
 });
 
 class OrderSummary extends React.Component {
   state = {
-    expanded: 'panel1',
+    expanded: !this.props.loginState.isAuthenticated ? 'panel1' : null,
     openPatientFormDialog: false,
     openDeliveryFormDialog: false
   };
@@ -197,13 +206,18 @@ class OrderSummary extends React.Component {
             </Typography>
           </ExpansionPanelSummary>
           <ExpansionPanelDetails>
-            <LoginDetails
-              loginState={this.props.loginState}
-              buttonRoot={this.props.classes.buttonRoot}
-              buttonLabel={this.props.classes.buttonLabel}
-              openLoginModal={this.openLoginModal.bind(this)}
-              openRegisterModal={this.openRegisterModal.bind(this)}
-            />
+            <Typography className={this.props.classes.loginDescription}>
+              To place an order now, login to your existing account or register
+              <div className={this.props.classes.loginDetailsWrapper}>
+                <LoginDetails
+                  loginState={this.props.loginState}
+                  buttonRoot={this.props.classes.buttonRoot}
+                  buttonLabel={this.props.classes.buttonLabel}
+                  openLoginModal={this.openLoginModal.bind(this)}
+                  openRegisterModal={this.openRegisterModal.bind(this)}
+                />
+              </div>
+            </Typography>
           </ExpansionPanelDetails>
         </ExpansionPanel>
         <ExpansionPanel
@@ -246,11 +260,25 @@ class OrderSummary extends React.Component {
           //onChange={this.handleChange('panel3')}
           className={classes.expansionPanel}
         >
-          <ExpansionPanelSummary expandIcon={<div />}>
+          <ExpansionPanelSummary
+            expandIcon={<div />}
+            classes={{
+              content: this.props.classes.patientWrapper
+            }}
+          >
             <Typography className={classes.heading}>Patient Details</Typography>
+            {
+              this.state.expanded === 'panel3' &&
+              <AddPatientButton
+                buttonRoot={this.props.classes.buttonRoot}
+                buttonLabel={this.props.classes.buttonLabel}
+                onClick={this.openPatientFormModal.bind(this)}
+              />
+            }
           </ExpansionPanelSummary>
           <ExpansionPanelDetails>
             <PatientDetails
+              isCartPage={true}
               expanded={this.state.expanded}
               buttonRoot={this.props.classes.buttonRoot}
               buttonLabel={this.props.classes.buttonLabel}
@@ -283,11 +311,25 @@ class OrderSummary extends React.Component {
           //onChange={this.handleChange('panel4')}
           className={classes.expansionPanel}
         >
-          <ExpansionPanelSummary expandIcon={<div />}>
+          <ExpansionPanelSummary
+            expandIcon={<div />}
+            classes={{
+              content: this.props.classes.patientWrapper
+            }}
+          >
             <Typography className={classes.heading}>Delivery Details</Typography>
+            {
+              this.state.expanded === 'panel4' &&
+              <AddDeliveryAddressButton
+                buttonRoot={this.props.classes.buttonRoot}
+                buttonLabel={this.props.classes.buttonLabel}
+                onClick={this.openDeliveryFormModal.bind(this)}
+              />
+            }
           </ExpansionPanelSummary>
           <ExpansionPanelDetails>
             <AddressDetails
+              isCartPage={true}
               expanded={this.state.expanded}
               buttonRoot={this.props.classes.buttonRoot}
               buttonLabel={this.props.classes.buttonLabel}

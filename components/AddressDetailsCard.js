@@ -86,16 +86,32 @@ const AddressDetailsCard = props => (
     >
       {props.deliveryDetail.street2}
     </Typography>
-    <Button
-      variant='contained'
-      size='small'
-      className={props.classes.button}
-      classes={{
-        label: props.classes.buttonLabel
-      }}
-      onClick={this.handleClickOpen}
-      label={'EDIT'}
-    />
+    {
+      props.isCartPage
+      ? (
+        <Button
+          variant='contained'
+          size='small'
+          className={props.classes.button}
+          classes={{
+            label: props.classes.buttonLabel
+          }}
+          onClick={this.handleClickOpen}
+          label={'SELECT'}
+        />
+      ) : (
+        <Button
+          variant='contained'
+          size='small'
+          className={props.classes.button}
+          classes={{
+            label: props.classes.buttonLabel
+          }}
+          onClick={this.handleClickOpen}
+          label={'EDIT'}
+        />
+      )
+    }
   </div>
 )
 
