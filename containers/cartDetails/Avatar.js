@@ -25,7 +25,7 @@ class Avatar extends Component {
           <Grid item xs={2}>
             <img
               src='/static/images/profileCart.svg'
-              className= {this.props.classes.userIconStyle}
+              className={this.props.classes.userIconStyle}
             />
           </Grid>
           <Grid item xs={8}>

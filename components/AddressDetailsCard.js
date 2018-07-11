@@ -48,6 +48,10 @@ const styles = theme => {
       boxShadow: 'none',
       marginLeft: theme.spacing.unit * 3.25
     },
+    selectButton: {
+      boxShadow: 'none',
+      marginLeft: theme.spacing.unit * 3.75
+    },
     buttonLabel: {
       ...theme.typography.body2,
       color: theme.palette.customGreen.green300,
@@ -86,16 +90,30 @@ const AddressDetailsCard = props => (
     >
       {props.deliveryDetail.street2}
     </Typography>
-    <Button
-      variant='contained'
-      size='small'
-      className={props.classes.button}
-      classes={{
-        label: props.classes.buttonLabel
-      }}
-      onClick={this.handleClickOpen}
-      label={'EDIT'}
-    />
+    {
+      props.isCartPage
+      ? (
+        <Button
+          variant='raised'
+          size='small'
+          color='primary'
+          className={props.classes.selectButton}
+          onClick={this.handleClickOpen}
+          label={'SELECT'}
+        />
+      ) : (
+        <Button
+          variant='contained'
+          size='small'
+          className={props.classes.button}
+          classes={{
+            label: props.classes.buttonLabel
+          }}
+          onClick={this.handleClickOpen}
+          label={'EDIT'}
+        />
+      )
+    }
   </div>
 )
 

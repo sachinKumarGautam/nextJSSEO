@@ -11,10 +11,9 @@ import withRoot from '../src/withRoot'
 import { connect } from 'react-redux'
 
 import MedicineListWrapper from '../containers/medicineList'
-
-import {
-  getRelatedMedicinesLoading
-} from '../containers/medicineList/medicineListActions'
+import {searchMedicineLoading} from '../containers/searchMedicine/searchMedicineAction'
+import {getRelatedMedicinesLoading} from '../containers/medicineList/medicineListActions'
+import {incrementCartItemLoading} from '../containers/cartDetails/cartActions'
 
 const styles = theme => ({
   root: {
@@ -35,8 +34,8 @@ const styles = theme => ({
 class MedicineList extends React.Component {
   componentDidMount () {
     const {query} = Router
-
     // Represents to get medicine list with page size and size per page.
+
     if (query.name) {
       this.props.actions.getRelatedMedicinesLoading(
         this.props.medicineListState,
@@ -45,15 +44,34 @@ class MedicineList extends React.Component {
         10 // page size
       )
     }
+
+    if (query.productName) {
+      this.props.actions.searchMedicineLoading(
+        this.props.searchMedicineState,
+        this.props.checkPincodeState.payload.id,
+        query.productName
+      )
+    }
   }
 
   render () {
+    const {query} = Router
+
     return (
       <div>
         <Header />
         <div className={this.props.classes.root}>
           <MedicineListWrapper
+            cartState={this.props.cartState}
+            checkPincodeState={this.props.checkPincodeState}
             moleculeName={Router.query.name}
+            incrementCartItemLoading={this.props.actions.incrementCartItemLoading}
+            searchMedicineLoading={this.props.actions.searchMedicineLoading}
+            getRelatedMedicinesLoading={this.props.actions.getRelatedMedicinesLoading}
+            medicineState={
+              query.productName
+                ? this.props.searchMedicineState.payload.searchMedicineResult
+                : this.props.medicineListState.payload}
           />
         </div>
         <Footer />
@@ -64,7 +82,10 @@ class MedicineList extends React.Component {
 
 function mapStateToProps (state) {
   return {
-    medicineListState: state.medicineListState
+    medicineListState: state.medicineListState,
+    searchMedicineState: state.searchMedicineState,
+    checkPincodeState: state.checkPincodeState,
+    cartState: state.cartState
   }
 }
 
@@ -72,7 +93,9 @@ function mapDispatchToProps (dispatch) {
   return {
     actions: bindActionCreators(
       {
-        getRelatedMedicinesLoading
+        getRelatedMedicinesLoading,
+        searchMedicineLoading,
+        incrementCartItemLoading
       },
       dispatch
     )

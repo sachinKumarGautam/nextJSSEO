@@ -9,29 +9,28 @@ const LoginDetails = props => (
     {
       !props.loginState.isAuthenticated &&
       <Grid container spacing={24}>
-        <Grid item xs={6}>
+        <Grid item xs={4}>
           <Button
             size='small'
-            variant='outlined'
             color='primary'
+            variant='raised'
             classes={{
-              root: props.buttonRoot,
-              label: props.buttonLabel
+              root: props.loginButtonRoot
             }}
-            label={'Login'}
+            label={'LOGIN'}
             onClick={props.openLoginModal}
           />
         </Grid>
-        <Grid item xs={2}>
+        <Grid item xs={4}>
           <Button
             size='small'
             variant='outlined'
             color='primary'
             classes={{
-              root: props.buttonRoot,
-              label: props.buttonLabel
+              root: props.registerButtonRoot,
+              label: props.registerButtonLabel
             }}
-            label={'Register'}
+            label={'REGISTER'}
             onClick={props.openRegisterModal}
           />
         </Grid>

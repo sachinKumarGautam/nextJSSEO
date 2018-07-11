@@ -76,7 +76,7 @@ class RefillDetails extends Component {
   onClickOfRefillDay (refillDay) {
     this.props.submitRefillDateLoading(
       this.props.thankYouState,
-      this.props.cartState.orderResponse.order_number,
+      this.props.cartState.orderResponse.payload.order_number,
       refillDay.value
     )
   }

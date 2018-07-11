@@ -79,7 +79,7 @@ const ThankyouDetails = (props) => {
           variant='subheading'
           className={props.classes.orderNumber}
         >
-          : {props.cartState.orderResponse.order_number}
+          : {props.cartState.orderResponse.payload.order_number}
         </Typography>
       </div>
       <div className={props.classes.orderWrapper}>
@@ -94,8 +94,8 @@ const ThankyouDetails = (props) => {
           className={props.classes.deliveryDateValue}
         >
           : {
-            props.cartState.orderResponse.promised_delivery_date
-              ? formatDate(props.cartState.orderResponse.promised_delivery_date) : ''
+            props.cartState.orderResponse.payload.promised_delivery_date
+              ? formatDate(props.cartState.orderResponse.payload.promised_delivery_date) : ''
           }
         </Typography>
       </div>

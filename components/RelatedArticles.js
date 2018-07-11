@@ -5,7 +5,7 @@ import Typography from '@material-ui/core/Typography'
 
 import ArticleCard from './ArticleCard'
 
-const relatedArticle =[
+const relatedArticle = [
   {
     image: '../../static/images/womanHair.jpg',
     label: 'Does loosing hair makes you lose your mind?',

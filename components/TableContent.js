@@ -7,6 +7,8 @@ import TableRow from '@material-ui/core/TableRow'
 
 import { withStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
+import { CURRENTLY_WORKING_SECTION } from '../containers/messages/commonMsg'
+
 // import {disablePageOverlayStyle} from '../../jiva/src/client/styles/baseStyle'
 
 const styles = theme => {
@@ -63,7 +65,7 @@ const TableContent = (props) => (
         {props.title}
       </Typography>
     </div>
-    { !props.content &&
+    { props.content &&
 
     <Table className={props.classes.tableWrapper}>
       <TableBody>
@@ -221,7 +223,7 @@ const TableContent = (props) => (
     {
       !props.content &&
       <Typography className={props.classes.currentlyWorking} variant={'body2'} component='div'>
-            We are currently working on this section
+        {CURRENTLY_WORKING_SECTION}
       </Typography>
     }
   </div>

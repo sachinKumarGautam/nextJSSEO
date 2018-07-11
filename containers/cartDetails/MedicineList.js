@@ -12,7 +12,11 @@ import ProductPackSize from '../../components/ProductPackSize'
 
 const styles = theme => ({
   cartAmountWrapper: {
-    marginTop: theme.spacing.unit * 1.25
+    marginTop: theme.spacing.unit * 1.25,
+    marginLeft: theme.spacing.unit * 1.25
+  },
+  cartAmount: {
+    marginLeft: theme.spacing.unit * 1.25
   },
   medicineNameWrapper: {
     ...theme.typography.body2,
@@ -24,9 +28,9 @@ const styles = theme => ({
   companyNameWrapper: {
     ...theme.typography.caption,
     marginLeft: theme.spacing.unit * 3.875,
-    marginBottom: theme.spacing.unit /4
+    marginBottom: theme.spacing.unit / 4
   },
-  packType:{
+  packType: {
     ...theme.typography.caption,
     marginLeft: theme.spacing.unit * 3.875,
     marginBottom: theme.spacing.unit * 3.125
@@ -105,7 +109,7 @@ class MedicineList extends Component {
                     </div>
                   </Grid>
                 </Grid>
-                <Divider/>
+                <Divider />
               </div>
             )
           })

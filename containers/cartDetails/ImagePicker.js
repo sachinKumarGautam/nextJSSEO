@@ -20,15 +20,16 @@ const styles = theme => ({
   },
   pickerImage: {
     width: theme.spacing.unit * 12.5,
-    height: theme.spacing.unit * 12.5,
+    height: theme.spacing.unit * 11.25,
     background: theme.palette.grey['200'],
     display: 'inline-block',
     marginRight: theme.spacing.unit * 0.625,
-    flexShrink: 0
+    flexShrink: 0,
+    marginTop: theme.spacing.unit * 1.25
   },
   deleteButton: {
     position: 'absolute',
-    right: theme.spacing.unit * 0.75,
+    right: 0,
     color: theme.palette.common.white,
     width: theme.spacing.unit * 3.125,
     height: theme.spacing.unit * 3.125,

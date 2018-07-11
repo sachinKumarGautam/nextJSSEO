@@ -47,6 +47,11 @@ const styles = theme => {
       backgroundColor: theme.palette.common.white,
       boxShadow: 'none'
     },
+    selectButton: {
+      boxShadow: 'none',
+      marginLeft: theme.spacing.unit * 1.25,
+      marginTop: theme.spacing.unit * 1.25
+    },
     buttonLabel: {
       ...theme.typography.body2,
       color: theme.palette.customGreen.green300,
@@ -94,16 +99,30 @@ const PatientDetailsCard = props => (
         <div>
           <Grid container spacing={24}>
             <Grid item xs={4}>
-              <Button
-                variant='contained'
-                size='small'
-                className={props.classes.button}
-                classes={{
-                  label: props.classes.buttonLabel
-                }}
-                onClick={this.handleClickOpen}
-                label={'EDIT'}
-              />
+              {
+                props.isCartPage
+                ? (
+                  <Button
+                    variant='raised'
+                    size='small'
+                    color='primary'
+                    className={props.classes.selectButton}
+                    onClick={this.handleClickOpen}
+                    label={'SELECT'}
+                  />
+                ) : (
+                  <Button
+                    variant='contained'
+                    size='small'
+                    className={props.classes.button}
+                    classes={{
+                      label: props.classes.buttonLabel
+                    }}
+                    onClick={this.handleClickOpen}
+                    label={'EDIT'}
+                  />
+                )
+              }
             </Grid>
             {
               // <Grid item xs={3}>
