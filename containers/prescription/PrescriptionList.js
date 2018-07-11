@@ -32,10 +32,14 @@ const styles = theme => ({
     paddingRight: theme.spacing.unit * 5
   },
   button: {
-    marginTop: theme.spacing.unit * 4,
-    marginBottom: theme.spacing.unit * 21,
+    marginTop: theme.spacing.unit,
     marginRight: theme.spacing.unit * 3,
     float: 'right'
+  },
+  buttonWrapper: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between'
   }
 })
 
@@ -45,27 +49,29 @@ class PrescriptionList extends Component {
       <div>
         <Card elevation={'1'} className={this.props.classes.card}>
           <CardContent className={this.props.classes.cardContent}>
-            <Typography
-              gutterBottom
-              variant='headline'
-              component='h1'
-              className={this.props.classes.title}
-            >
-              Prescriptions
-            </Typography>
+            <div className={this.props.classes.buttonWrapper}>
+              <Typography
+                gutterBottom
+                variant='headline'
+                component='h1'
+                className={this.props.classes.title}
+              >
+                Prescriptions
+              </Typography>
+              <Button
+                size='medium'
+                variant='outlined'
+                className={this.props.classes.button}
+                classes={{
+                  root: this.props.classes.buttonRoot,
+                  label: this.props.classes.buttonLabel
+                }}
+                onClick={this.handleClickOpen}
+                label={'UPLOAD PRESCRIPTION'}
+              />
+            </div>
             <PrescriptionContentWrapper
               prescriptionState={this.props.prescriptionState}
-            />
-            <Button
-              size='medium'
-              variant='outlined'
-              className={this.props.classes.button}
-              classes={{
-                root: this.props.classes.buttonRoot,
-                label: this.props.classes.buttonLabel
-              }}
-              onClick={this.handleClickOpen}
-              label={'UPLOAD PRESCRIPTION'}
             />
           </CardContent>
         </Card>
