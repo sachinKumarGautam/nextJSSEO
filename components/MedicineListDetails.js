@@ -11,8 +11,13 @@ import EstimatedPriceLabel from './EstimatedPriceLabel'
 import AddToCartWrapper from '../containers/cartDetails/addToCartWrapper/index'
 import {PRODUCT_DETAILS} from '../routes/RouteConstant'
 
+import RefillDueDays from './RefillDueDays'
+
 const styles = theme => {
   return {
+    customName: {
+      display: 'inline-block'
+    },
     customBrand: {
       ...theme.typography.body3
     },
@@ -97,24 +102,27 @@ class MedicineListDetails extends React.Component {
         <div className={props.classes.medicineListContentWrapper}>
           <div>
             <ProductName
-              name={props.itemDetails.name}
               variant={'body1'}
+              name={props.itemDetails.name}
+              customStyle={props.classes.customName}
             />
+            {/* {props.isRefillMedicines && <RefillDueDays />} */}
             <ProductBrand
               variant={'caption'}
               withoutImage
               customStyle={props.classes.customBrand}
               brand={props.itemDetails.brand_name}
             />
-            { props.itemDetails.pack_size && props.itemDetails.pack_size.name &&
-              <ProductPackSize
-                variant={'caption'}
-                withoutImage
-                customStyle={props.classes.customPackSize}
-                packType={props.itemDetails.pack_type}
-                packSize={props.itemDetails.pack_size ? props.itemDetails.pack_size.name : ''}
-              />
-            }
+            <ProductPackSize
+              variant={'caption'}
+              withoutImage
+              customStyle={props.classes.customPackSize}
+              packType={props.itemDetails.pack_type}
+              packSize={
+                (props.itemDetails.pack_size && props.itemDetails.pack_size.name)
+                  ? props.itemDetails.pack_size.name : props.itemDetails.pack_size
+              }
+            />
           </div>
           <div>
             <EstimatedPriceLabel
@@ -133,21 +141,21 @@ class MedicineListDetails extends React.Component {
               mrp={props.itemDetails.mrp}
             />
             <div className={props.classes.buttonWrapperStyle}>
-            <AddToCartWrapper
-              variant='outlined'
-              classes={{
-                root: props.classes.buttonRoot,
-                label: props.classes.buttonLabel
-              }}
-              // style={{float: 'right'}}
-              label={'Add To Cart'}
-              open={this.state.pincodeDialogOpen}
-              handleOpenPincodeDialog={this.handleOpenPincodeDialog}
-              handleClose={this.handleClosePincodeDialog}
-              addToCart={this.addToCart}
-              checkPincodeState={props.checkPincodeState}
-              checkPincodeLoading={props.checkPincodeLoading}
-            />
+              <AddToCartWrapper
+                variant='outlined'
+                classes={{
+                  root: props.classes.buttonRoot,
+                  label: props.classes.buttonLabel
+                }}
+                // style={{float: 'right'}}
+                label={'Add To Cart'}
+                open={this.state.pincodeDialogOpen}
+                handleOpenPincodeDialog={this.handleOpenPincodeDialog}
+                handleClose={this.handleClosePincodeDialog}
+                addToCart={this.addToCart}
+                checkPincodeState={props.checkPincodeState}
+                checkPincodeLoading={props.checkPincodeLoading}
+              />
             </div>
           </div>
         </div>

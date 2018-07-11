@@ -1,5 +1,5 @@
 import { of } from 'rxjs/observable/of'
-import { mergeMap, catchError, flatMap, map } from 'rxjs/operators'
+import { mergeMap, catchError, flatMap } from 'rxjs/operators'
 import { ofType } from 'redux-observable'
 import http from '../../services/api/ajaxWrapper'
 
@@ -17,6 +17,11 @@ import {
 } from './patientDetailsActions'
 
 import {
+  getRefillPastMedicinesLoading,
+  updateSelectedPatientDetails
+} from '../refillPatients/refillActions'
+
+import {
   getPatientDetailsList$, submitPatientDetails$
 } from '../../services/api'
 
@@ -29,9 +34,23 @@ export function getPatientDetailsList (action$, store) {
   return action$.pipe(
     ofType(GET_PATIENT_DETAILS_LIST_LOADING),
     mergeMap(data => {
+      const pastMedicineState = store.getState().pastMedicineState
+
       return http(getPatientDetailsList$(data.customerId)).pipe(
         flatMap(result => {
-          return of(getPatientDetailsListSuccess(data.patientDetailsState, result.body.payload.patients))
+          if (data.isRefillPatients) {
+            return of(
+              getPatientDetailsListSuccess(data.patientDetailsState, result.body.payload.patients),
+              getRefillPastMedicinesLoading(pastMedicineState, result.body.payload.patients[0].id),
+              updateSelectedPatientDetails(
+                pastMedicineState,
+                result.body.payload.patients[0].id,
+                result.body.payload.patients[0].full_name
+              )
+            )
+          } else {
+            return of(getPatientDetailsListSuccess(data.patientDetailsState, result.body.payload.patients))
+          }
         }),
         catchError(error => {
           return of(getPatientDetailsListFailure(data.patientDetailsState, error))

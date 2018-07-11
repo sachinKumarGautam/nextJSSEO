@@ -6,15 +6,15 @@ import withRoot from '../src/withRoot'
 import Header from '../components/layouts/header'
 import Footer from '../components/layouts/footer'
 
-import ThankYou from '../containers/thankYou'
+import ThankyouWrapper from '../containers/thankYou'
 import Paper from '@material-ui/core/Paper'
 
 const styles = theme => ({
   root: {
     paddingTop: theme.spacing.unit * 2,
     paddingBottom: theme.spacing.unit * 2,
-    paddingLeft: theme.spacing.unit * 7,
-    paddingRight: theme.spacing.unit * 7,
+    paddingLeft: theme.spacing.unit * 5,
+    paddingRight: theme.spacing.unit * 3.5,
     maxWidth: theme.breakpoints.values.lg,
     minWidth: theme.breakpoints.values.md,
     margin: '0 auto',
@@ -25,16 +25,18 @@ const styles = theme => ({
   }
 })
 
-class ThankYouWrapper extends React.Component {
+class OrderConfirmationWrapper extends React.Component {
   render () {
     return (
       <div>
         <Header />
-        <ThankYou />
+        <div className={this.props.classes.root}>
+          <ThankyouWrapper />
+        </div>
         <Footer />
       </div>
     )
   }
 }
 
-export default withRoot(ThankYouWrapper)
+export default withRoot(withStyles(styles)(OrderConfirmationWrapper))

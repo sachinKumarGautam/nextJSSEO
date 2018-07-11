@@ -213,6 +213,24 @@ const submitDeliveryDetails$ = (customerId, deliveryAddressData) => (
 
 )
 
+const submitRefillDate$ = (orderId, refillDay) => (
+  makeAjaxRequest({
+    method: 'PUT',
+    url: fetchUrl('order', orderId + '/repeat-in-days', 'GET_LIST'),
+    body: {
+      repeat_day: refillDay
+    }
+  })
+)
+
+const getPatientPastMedicineList$ = (patientId, facilityCode) => (
+  makeAjaxRequest({
+    method: 'GET',
+    url: fetchUrl('account', 'patient/' + patientId + '/past-medicines',
+      'QUERY_STRING', {query_string: `facility-code=${facilityCode}`})
+  })
+)
+
 export {
   getMoleculeSummary$,
   getMedicineList$,
@@ -239,5 +257,7 @@ export {
   getProductDetails$,
   searchMedicine$,
   checkPincode$,
-  submitDeliveryDetails$
+  submitDeliveryDetails$,
+  submitRefillDate$,
+  getPatientPastMedicineList$
 }

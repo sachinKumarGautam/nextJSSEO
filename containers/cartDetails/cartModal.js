@@ -80,6 +80,7 @@ const initialState = {
     service_type: '',
     order_prescriptions: [],
     doctor_callback: false,
+    promised_delivery_date: '',
     isLoading: false,
     errorState: {
       isError: false,
