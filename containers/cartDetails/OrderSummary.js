@@ -51,7 +51,7 @@ const styles = theme => ({
   },
   nextButtonRoot: {
     marginTop: theme.spacing.unit *  2.5,
-    width: '148px',
+    width: theme.spacing.unit *  18.5,
     float: 'right',
     marginRight: theme.spacing.unit *  2.5
   },

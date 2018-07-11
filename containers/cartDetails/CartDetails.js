@@ -48,7 +48,7 @@ const styles = theme => ({
     fontWeight: theme.typography.fontWeightBold
   },
   scrollWrapper: {
-    maxHeight: 400,
+    maxHeight: theme.spacing.unit * 50,
     overflowY: 'scroll'
   }
 })
