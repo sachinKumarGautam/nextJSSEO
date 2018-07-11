@@ -78,6 +78,10 @@ import {
   getPatientPastMedicineList
 } from '../containers/refillPatients/refillEpics'
 
+import {
+  getBackGroungImages
+} from '../containers/homePage/homePageEpics'
+
 export const rootEpic = combineEpics(
   getMoleculeSummary,
   getRelatedMedicines,
@@ -116,5 +120,6 @@ export const rootEpic = combineEpics(
   checkPincode,
   submitDeliveryDetails,
   submitRefillDate,
-  getPatientPastMedicineList
+  getPatientPastMedicineList,
+  getBackGroungImages
 )

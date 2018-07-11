@@ -9,7 +9,9 @@ class HomePageWrapper extends Component {
   render () {
     return (
       <div>
-        <HomePageDetails/>
+        <HomePageDetails
+          homePageState={this.props.homePageState}
+        />
       </div>
     )
   }
@@ -27,6 +29,7 @@ function mapDispatchToProps (dispatch) {
 
 function mapStateToProps (state) {
   return {
+    homePageState: state.homePageState
   }
 }
 

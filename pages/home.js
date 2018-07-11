@@ -12,6 +12,10 @@ import Paper from '@material-ui/core/Paper'
 
 import HomePageWrapper from '../containers/homePage'
 
+import {
+  getBackGroundImagesLoading
+} from '../containers/homePage/homePageActions'
+
 const styles = theme => ({
   root: {
     paddingTop: theme.spacing.unit * 2,
@@ -29,6 +33,13 @@ const styles = theme => ({
 })
 
 class HomePage extends React.Component {
+  componentDidMount() {
+    this.props.actions.getBackGroundImagesLoading(
+      this.props.homePageState,
+      'background'
+    )
+  }
+
   render () {
     return (
       <div>
@@ -46,6 +57,7 @@ class HomePage extends React.Component {
 
 function mapStateToProps (state) {
   return {
+    homePageState: state.homePageState
   }
 }
 
@@ -53,6 +65,7 @@ function mapDispatchToProps (dispatch) {
   return {
     actions: bindActionCreators(
       {
+        getBackGroundImagesLoading
       },
       dispatch
     )

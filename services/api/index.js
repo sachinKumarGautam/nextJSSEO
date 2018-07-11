@@ -231,6 +231,13 @@ const getPatientPastMedicineList$ = (patientId, facilityCode) => (
   })
 )
 
+const getSliderImages$ = tagName => (
+  makeAjaxRequest({
+    method: 'GET',
+    url: fetchUrl('account', 'offer/tag/' + tagName, 'GET_LIST')
+  })
+)
+
 export {
   getMoleculeSummary$,
   getMedicineList$,
@@ -259,5 +266,6 @@ export {
   checkPincode$,
   submitDeliveryDetails$,
   submitRefillDate$,
-  getPatientPastMedicineList$
+  getPatientPastMedicineList$,
+  getSliderImages$
 }

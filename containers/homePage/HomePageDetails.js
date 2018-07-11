@@ -1,22 +1,47 @@
 import React, {Component} from 'react'
 
-import Card from '@material-ui/core/Card'
-import CardContent from '@material-ui/core/CardContent'
+import Slider from "react-slick";
 import { withStyles } from '@material-ui/core/styles'
 
 const styles = theme => {
   return {
+    container: {
+        margin: '0 auto',
+        padding: '35px 0px',
+        color: '#333',
+        background: '##80c241',
+    }
   }
 }
 
-const HomePageWrapper = (props) => {
-  return (
-    <Card elevation={1}>
-      <CardContent>
-        hi
-      </CardContent>
-    </Card>
-  )
+class HomePageWrapper extends Component {
+  render () {
+    let settings= {
+      dots: false,
+      arrows: false,
+      infinite: true,
+      speed: 300,
+      slidesToShow: 1,
+      slidesToScroll: 1,
+      autoplay: true,
+      autoplaySpeed: 2000
+    }
+    return (
+      <div className={this.props.classes.container}>
+        <Slider {...settings}>
+          {
+            this.props.homePageState.backGroundImage.payload.map((item) => {
+              return (
+                <div>
+                  {item.image}
+                </div>
+              )
+            })
+          }
+        </Slider>
+      </div>
+    )
+  }
 }
 
 export default withStyles(styles)(HomePageWrapper)
