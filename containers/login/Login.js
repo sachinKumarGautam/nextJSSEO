@@ -2,8 +2,8 @@ import React from 'react'
 import { withStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
 import Form from '../../components/forms/index'
-import Zoom from '@material-ui/core/Zoom';
-import Paper from '@material-ui/core/Paper';
+import Zoom from '@material-ui/core/Zoom'
+import Paper from '@material-ui/core/Paper'
 
 const styles = theme => ({
   container: {
@@ -35,29 +35,16 @@ const styles = theme => ({
     textDecoration: 'none'
   },
   container2: {
-    display: 'flex',
+    display: 'flex'
   },
   paper: {
-    margin: theme.spacing.unit,
-  },
+    margin: theme.spacing.unit
+  }
 })
 
 class SignIn extends React.Component {
-  state = {
-    checked: false,
-  };
-
-  componentDidUpdate(nextProps) {
-    if(nextProps.loginState.isAuthenticated !== this.props.loginState.isAuthenticated){
-       this.setState({
-         checked: true
-       })
-    }
-  }
-
   render () {
     const { classes } = this.props
-    const { checked } = this.state;
     return (
       <div className={classes.container}>
         <Form
@@ -79,13 +66,6 @@ class SignIn extends React.Component {
           >
               Register
           </a>
-          {/* <div className={classes.container2}>
-          <Zoom in={checked}>
-            <Paper elevation={4} className={classes.paper}>
-              Welcome sachin
-            </Paper>
-          </Zoom>
-          </div> */}
         </Typography>
       </div>
     )

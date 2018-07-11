@@ -8,11 +8,18 @@ import moleculeDetailsReducer from '../containers/moleculeDetails/moleculeReduce
 import loginReducer from '../containers/login/loginReducers'
 import customerReducer from '../containers/user/customer/customerReducer'
 import medicineListReducer from '../containers/medicineList/medicineLIstReducer'
+import productDetailsReducer from '../containers/productDetails/productDetailsReducer'
+import searchMedicineReducer from '../containers/searchMedicine/searchMedicineReducer'
 import deliveryDetailsReducer from '../containers/deliveryDetails/deliveryDetailsReducer'
 import patientDetailsReducer from '../containers/patientDetails/patientDetailsReducer'
 import orderListReducers from '../containers/orderList/orderListReducers'
 import carePointReducer from '../containers/carePoint/carePointReducer'
+import cartReducer from '../containers/cartDetails/cartReducer'
+import checkPincodeReducer from '../containers/location/pincode/pincodeReducer'
 import prescriptionReducers from '../containers/prescription/prescriptionReducers'
+import thankYouReducer from '../containers/thankYou/thankYouReducer'
+import refillReducer from '../containers/refillPatients/refillReducer'
+import homePageReducers from '../containers/homePage/homePageReducers'
 
 const isengard = (store, action) => {
   return (
@@ -31,12 +38,18 @@ const appReducer = combineReducers({
   loginState: loginReducer,
   customerState: customerReducer,
   medicineListState: medicineListReducer,
+  carePointState: carePointReducer,
+  cartState: cartReducer,
+  productDetailsState: productDetailsReducer,
+  searchMedicineState: searchMedicineReducer,
+  checkPincodeState: checkPincodeReducer,
   deliveryDetailsState: deliveryDetailsReducer,
   patientDetailsState: patientDetailsReducer,
-  carePointState: carePointReducer,
   prescriptionState: prescriptionReducers,
-  orderListState: orderListReducers
-
+  orderListState: orderListReducers,
+  thankYouState: thankYouReducer,
+  pastMedicineState: refillReducer,
+  homePageState: homePageReducers
 })
 
 // export const persistConfig = {

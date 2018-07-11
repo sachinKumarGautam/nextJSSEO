@@ -12,13 +12,15 @@ import PatientDetailsWrapper from '../containers/patientDetails'
 
 import Paper from '@material-ui/core/Paper'
 
-import { rootEpic } from '../redux/epics'
-import { of } from 'rxjs/observable/of'
-
 import {
   getPatientDetailsListLoading,
-  savePatientSelected
+  savePatientSelected,
+  submitPatientDetailsLoading
 } from '../containers/patientDetails/patientDetailsActions'
+
+import {
+  savePatientToCartLoading
+} from '../containers/cartDetails/cartActions'
 
 const styles = theme => ({
   root: {
@@ -41,7 +43,7 @@ class PatientDetails extends React.Component {
     // Represents to get patient details.
     this.props.actions.getPatientDetailsListLoading(
       this.props.patientDetailsState,
-      '100113091' // pass customer id
+      this.props.customerState.payload.id // pass customer id
     )
   }
 
@@ -54,6 +56,10 @@ class PatientDetails extends React.Component {
             <PatientDetailsWrapper
               patientDetailsState={this.props.patientDetailsState}
               savePatientSelected={this.props.actions.savePatientSelected}
+              submitPatientDetailsLoading={this.props.actions.submitPatientDetailsLoading}
+              customerState={this.props.customerState}
+              cartState={this.props.cartState}
+              savePatientToCartLoading={this.props.actions.savePatientToCartLoading}
             />
           </Paper>
         </div>
@@ -65,7 +71,9 @@ class PatientDetails extends React.Component {
 
 function mapStateToProps (state) {
   return {
-    patientDetailsState: state.patientDetailsState
+    cartState: state.cartState,
+    patientDetailsState: state.patientDetailsState,
+    customerState: state.customerState
   }
 }
 
@@ -74,7 +82,9 @@ function mapDispatchToProps (dispatch) {
     actions: bindActionCreators(
       {
         getPatientDetailsListLoading,
-        savePatientSelected
+        savePatientSelected,
+        submitPatientDetailsLoading,
+        savePatientToCartLoading
       },
       dispatch
     )

@@ -7,6 +7,7 @@ import ReactTooltip from 'react-tooltip'
 
 import Link from 'next/link'
 
+import { MOLECULE_DETAILS } from '../routes/RouteConstant'
 const styles = theme => {
   return {
     moleculeTag: {
@@ -14,7 +15,10 @@ const styles = theme => {
       textDecoration: 'none',
       borderBottom: '1px dashed',
       marginRight: theme.spacing.unit * 2,
-      color: theme.palette.customGrey.grey600
+      color: theme.palette.customGrey.grey600,
+      '&:hover': {
+        color: theme.palette.primary.main
+      }
     },
     paper: {
       padding: theme.spacing.unit,
@@ -37,6 +41,11 @@ const styles = theme => {
       ...theme.typography.body3,
       color: theme.palette.primary.main,
       textDecoration: 'none'
+    },
+    horizontalItem: {
+      display: 'flex',
+      flexDirection: 'row'
+
     }
   }
 }
@@ -46,7 +55,10 @@ const PopoverContent = (props) => (
     <Typography className={props.styles.popoverContent}>
       Metformin is used in the treatment of  type2 diabetes. It decreases the amount of sugar…
     </Typography>
-    <Link as={`/molecule-details/Multivitamin`} href={`/molecule-details?id=5a61a295ae8bdc26685f2b09`}>
+    <Link
+      as={`${MOLECULE_DETAILS}/${props.item.id}/${props.item.name}`}
+      href={`${MOLECULE_DETAILS}?id=${props.item.id}&name=${props.item.name}`}
+    >
       <a className={props.styles.popoverLink}>Read more..</a>
     </Link>
   </div>
@@ -57,39 +69,35 @@ class ProductMolecule extends Component {
     const {classes} = this.props
 
     return (
-      <div>
-        <a
-          href='#'
-          className={classes.moleculeTag}
-          // onClick={this.handlePopoverOpen}
-          data-tip
-          data-for='moleculeItem'
-          // onMouseOver={this.handlePopoverOpen}
-          // onMouseOut={this.handlePopoverClose}
-        >
-          Glimepiride (0.5mg)
-        </a>
-        <a
-          href='#'
-          className={classes.moleculeTag}
-          data-tip
-          data-for='moleculeItem'
-          // onClick={this.handlePopoverOpen}
-          // onMouseOver={this.handlePopoverOpen}
-          // onMouseOut={this.handlePopoverClose}
-        >
-          Metformin (1000mg)
-        </a>
-        <ReactTooltip
-          id='moleculeItem'
-          effect='solid'
-          place='right'
-          className={classes.paper}
-          delayHide={1000}
-          delayShow={1000}
-        >
-          <PopoverContent styles={classes} />
-        </ReactTooltip>
+      <div className={classes.horizontalItem}>
+        {
+          this.props.salts && this.props.salts.length && this.props.salts.map((item) => (
+            <div>
+              <a
+                href='#'
+                className={classes.moleculeTag}
+                // onClick={this.handlePopoverOpen}
+                data-tip
+                data-for='moleculeItem'
+                // onMouseOver={this.handlePopoverOpen}
+                // onMouseOut={this.handlePopoverClose}
+              >
+                {item.name}
+              </a>
+              <ReactTooltip
+                id='moleculeItem'
+                effect='solid'
+                place='right'
+                className={classes.paper}
+                delayHide={1000}
+                delayShow={1000}
+              >
+                <PopoverContent item={item} styles={classes} />
+              </ReactTooltip>
+            </div>
+          )
+          )
+        }
       </div>
     )
   }

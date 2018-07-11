@@ -7,6 +7,8 @@ import TableRow from '@material-ui/core/TableRow'
 
 import { withStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
+import { CURRENTLY_WORKING_SECTION } from '../containers/messages/commonMsg'
+
 // import {disablePageOverlayStyle} from '../../jiva/src/client/styles/baseStyle'
 
 const styles = theme => {
@@ -42,11 +44,15 @@ const styles = theme => {
     hover: {
       color: theme.palette.primary.main,
       transition: '0.2s'
+    },
+    currentlyWorking: {
+      padding: theme.spacing.unit * 2
     }
   }
 }
 
 const TableContent = (props) => (
+
   <div id={props.itemKey}>
     <div className={props.classes.titleWrapper}>
       <img src={props.src} />
@@ -59,6 +65,8 @@ const TableContent = (props) => (
         {props.title}
       </Typography>
     </div>
+    { props.content &&
+
     <Table className={props.classes.tableWrapper}>
       <TableBody>
         <TableRow>
@@ -75,13 +83,27 @@ const TableContent = (props) => (
             </div>
           </TableCell>
           <TableCell component='th' scope='row'>
-            <Typography
-              gutterBottom
-              variant='body1'
-              className={props.classes.contentBody}
-            >
-              {props.content['avoid']}
-            </Typography>
+            { typeof props.content['avoid'] === 'object'
+              ? props.content['avoid'] && props.content['avoid'].map((item) => {
+                return (
+                  <Typography
+                    gutterBottom
+                    variant='body1'
+                    className={props.classes.contentBody}
+                  >
+                    {`${item}`}
+                  </Typography>
+                )
+              })
+
+              : <Typography
+                gutterBottom
+                variant='body1'
+                className={props.classes.contentBody}
+              >
+                {props.content.avoid}
+              </Typography>
+            }
           </TableCell>
         </TableRow>
         <TableRow>
@@ -98,13 +120,27 @@ const TableContent = (props) => (
             </div>
           </TableCell>
           <TableCell component='th' scope='row'>
-            <Typography
-              gutterBottom
-              variant='body1'
-              className={props.classes.contentBody}
-            >
-              {props.content['food']}
-            </Typography>
+            { typeof props.content['food'] === 'object'
+              ? props.content['food'] && props.content['food'].map((item) => {
+                return (
+                  <Typography
+                    gutterBottom
+                    variant='body1'
+                    className={props.classes.contentBody}
+                  >
+                    {`${item}`}
+                  </Typography>
+                )
+              })
+
+              : <Typography
+                gutterBottom
+                variant='body1'
+                className={props.classes.contentBody}
+              >
+                {props.content.food}
+              </Typography>
+            }
           </TableCell>
         </TableRow>
         <TableRow>
@@ -121,13 +157,27 @@ const TableContent = (props) => (
             </div>
           </TableCell>
           <TableCell component='th' scope='row'>
-            <Typography
-              gutterBottom
-              variant='body1'
-              className={props.classes.contentBody}
-            >
-              {props.content['storage']}
-            </Typography>
+            { typeof props.content['storage'] === 'object'
+              ? props.content['storage'] && props.content['storage'].map((item) => {
+                return (
+                  <Typography
+                    gutterBottom
+                    variant='body1'
+                    className={props.classes.contentBody}
+                  >
+                    {`${item}`}
+                  </Typography>
+                )
+              })
+
+              : <Typography
+                gutterBottom
+                variant='body1'
+                className={props.classes.contentBody}
+              >
+                {props.content.storage}
+              </Typography>
+            }
           </TableCell>
         </TableRow>
         <TableRow>
@@ -144,17 +194,38 @@ const TableContent = (props) => (
             </div>
           </TableCell>
           <TableCell component='th' scope='row'>
-            <Typography
-              gutterBottom
-              variant='body1'
-              className={props.classes.contentBody}
-            >
-              {props.content['miss_dose']}
-            </Typography>
+            { typeof props.content['miss_dose'] === 'object'
+              ? props.content['miss_dose'] && props.content['miss_dose'].map((item) => {
+                return (
+                  <Typography
+                    gutterBottom
+                    variant='body1'
+                    className={props.classes.contentBody}
+                  >
+                    {`${item}`}
+                  </Typography>
+                )
+              })
+
+              : <Typography
+                gutterBottom
+                variant='body1'
+                className={props.classes.contentBody}
+              >
+                {props.content.miss_dose}
+              </Typography>
+            }
           </TableCell>
         </TableRow>
       </TableBody>
     </Table>
+    }
+    {
+      !props.content &&
+      <Typography className={props.classes.currentlyWorking} variant={'body2'} component='div'>
+        {CURRENTLY_WORKING_SECTION}
+      </Typography>
+    }
   </div>
 )
 

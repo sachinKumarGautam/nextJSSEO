@@ -2,25 +2,26 @@ import React, { Component } from 'react'
 
 import Grid from '@material-ui/core/Grid'
 import Typography from '@material-ui/core/Typography'
-import Button from '@material-ui/core/Button'
+import Button from './button'
 
 import { withStyles } from '@material-ui/core/styles'
-
 
 const styles = theme => {
   return {
     patientWrapperStyle: {
       border: `1px solid ${theme.palette.customGrey.grey250}`,
-      width: theme.spacing.unit * 42.5,
       padding: theme.spacing.unit * 2.5,
-      borderRadius: theme.spacing.unit * 0.5
+      borderRadius: theme.spacing.unit * 0.5,
+      marginLeft: theme.spacing.unit * 4,
+      marginRight: theme.spacing.unit * 4
     },
     patientWrapperSelectedStyle: {
       border: `1px solid ${theme.palette.customGrey.grey250}`,
-      width: theme.spacing.unit * 42.5,
       backgroundColor: theme.palette.customGreen.green200,
       padding: theme.spacing.unit * 2.5,
-      borderRadius: theme.spacing.unit * 0.5
+      borderRadius: theme.spacing.unit * 0.5,
+      marginLeft: theme.spacing.unit * 4,
+      marginRight: theme.spacing.unit * 4
     },
     buttonRoot: {
       border: `1px solid ${theme.palette.primary.main}`
@@ -45,6 +46,16 @@ const styles = theme => {
     button: {
       backgroundColor: theme.palette.common.white,
       boxShadow: 'none'
+    },
+    selectButton: {
+      boxShadow: 'none',
+      marginLeft: theme.spacing.unit * 1.25,
+      marginTop: theme.spacing.unit * 1.25
+    },
+    buttonLabel: {
+      ...theme.typography.body2,
+      color: theme.palette.customGreen.green300,
+      fontWeight: theme.typography.fontWeightBold
     }
   }
 }
@@ -53,25 +64,25 @@ const PatientDetailsCard = props => (
   <div
     className={
       (props.patientIdSelected === props.patientDetail.id)
-      ? props.classes.patientWrapperSelectedStyle
-      : props.classes.patientWrapperStyle
+        ? props.classes.patientWrapperSelectedStyle
+        : props.classes.patientWrapperStyle
     }
     onClick={props.savePatientSelected.bind(this, props.patientDetail.id)}
   >
     <Grid container spacing={24}>
       <Grid item xs={3}>
-        <img src="/static/images/profile.svg" />
+        <img src='/static/images/profile.svg' />
       </Grid>
       <Grid item xs={9}>
         <Typography
-          variant="caption"
+          variant='caption'
           className={props.classes.userNameStyle}
         >
           {props.patientDetail.full_name}
         </Typography>
         <div>
           <Typography
-            variant="caption"
+            variant='caption'
             className={props.classes.genderStyle}
           >
             {props.patientDetail.gender} | {props.patientDetail.age}
@@ -79,7 +90,7 @@ const PatientDetailsCard = props => (
         </div>
         <div>
           <Typography
-            variant="caption"
+            variant='caption'
             className={props.classes.mobileStyle}
           >
             {props.patientDetail.mobile}
@@ -88,18 +99,30 @@ const PatientDetailsCard = props => (
         <div>
           <Grid container spacing={24}>
             <Grid item xs={4}>
-              <Button
-                variant="contained"
-                size="small"
-                className={props.classes.button}
-              >
-                <Typography
-                  variant="caption"
-                  className={props.classes.buttonLabel}
-                >
-                  EDIT
-                </Typography>
-              </Button>
+              {
+                props.isCartPage
+                ? (
+                  <Button
+                    variant='raised'
+                    size='small'
+                    color='primary'
+                    className={props.classes.selectButton}
+                    onClick={this.handleClickOpen}
+                    label={'SELECT'}
+                  />
+                ) : (
+                  <Button
+                    variant='contained'
+                    size='small'
+                    className={props.classes.button}
+                    classes={{
+                      label: props.classes.buttonLabel
+                    }}
+                    onClick={this.handleClickOpen}
+                    label={'EDIT'}
+                  />
+                )
+              }
             </Grid>
             {
               // <Grid item xs={3}>

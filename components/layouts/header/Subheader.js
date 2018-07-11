@@ -1,6 +1,10 @@
 import { withStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
 
+import Link from 'next/link'
+
+import { REFILL_PATIENTS } from '../../../routes/RouteConstant'
+
 const styles = theme => ({
   horizontalSubheader: {
     display: 'flex',
@@ -24,6 +28,10 @@ const styles = theme => ({
   },
   hover: {
     color: theme.palette.primary.main
+  },
+  linkDisabled: {
+    pointerEvents: 'none', // This makes it not clickable
+    opacity: 0.6 // This grays it out to look disabled
   }
 })
 
@@ -48,7 +56,7 @@ class Subheader extends React.Component {
   }
 
   render () {
-    const {classes} = this.props
+    const {classes, isAuthenticated} = this.props
 
     return (
       <ul className={classes.horizontalSubheader}>
@@ -68,21 +76,22 @@ class Subheader extends React.Component {
             </Typography>
           </a>
         </li>
-        <li>
-          <a
-            onMouseEnter={this.toggleHover.bind(this, 'repeatPastMedicine')}
-            onMouseLeave={this.toggleHover.bind(this, 'repeatPastMedicine')}
-            href='#'
-            className={classes.subHeaderItem}
-          >
-            <img src='/static/images/repeat-button.svg' />
-            <Typography
-              variant={'body2'}
-              className={this.state.hover.repeatPastMedicine ? `${classes.subHeaderText} ${classes.hover}` : classes.subHeaderText}
-              component='h1'>
-              Refill Past Medicines
-            </Typography>
-          </a>
+        <li className={isAuthenticated ? '' : classes.linkDisabled}>
+          <Link href={REFILL_PATIENTS}>
+            <a
+              onMouseEnter={this.toggleHover.bind(this, 'repeatPastMedicine')}
+              onMouseLeave={this.toggleHover.bind(this, 'repeatPastMedicine')}
+              className={classes.subHeaderItem}
+            >
+              <img src='/static/images/repeat-button.svg' />
+              <Typography
+                variant={'body2'}
+                className={this.state.hover.repeatPastMedicine ? `${classes.subHeaderText} ${classes.hover}` : classes.subHeaderText}
+                component='h1'>
+                Refill Past Medicines
+              </Typography>
+            </a>
+          </Link>
         </li>
         <li>
           <a
@@ -104,7 +113,8 @@ class Subheader extends React.Component {
           <a
             onMouseEnter={this.toggleHover.bind(this, 'healthContent')}
             onMouseLeave={this.toggleHover.bind(this, 'healthContent')}
-            href='#'
+            href='https://blog.lifcare.in/'
+            target='_blank'
             className={classes.subHeaderItem}
           >
             <img src='/static/images/blog.svg' />

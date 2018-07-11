@@ -10,6 +10,7 @@ import MoleculeDetails from './MoleculeDetails'
 import MoleculeDetailsContent from './MoleculeDetailsContent'
 import RelatedMedicines from '../../components/RelatedMedicines'
 import RelatedArticles from '../../components/RelatedArticles'
+import { incrementCartItemLoading } from '../../containers/cartDetails/cartActions'
 
 /*
   bread crumbs
@@ -61,6 +62,10 @@ class MoleculeDetailsWrapper extends Component {
             <RelatedMedicines
               moleculeName={this.props.moleculeDetailsStatePayload.name}
               medicineList={this.props.medicineListState.payload}
+              checkPincodeLoading={this.props.checkPincodeLoading}
+              checkPincodeState={this.props.checkPincodeState}
+              incrementCartItemLoading={this.props.actions.incrementCartItemLoading}
+              cartState={this.props.cartState}
             />
             <RelatedArticles />
           </Grid>
@@ -73,7 +78,8 @@ class MoleculeDetailsWrapper extends Component {
 function mapStateToProps (state) {
   return {
     moleculeDetailsStatePayload: state.moleculeDetailsState.payload,
-    medicineListState: state.medicineListState
+    medicineListState: state.medicineListState,
+    cartState: state.cartState
   }
 }
 
@@ -81,6 +87,7 @@ function mapDispatchToProps (dispatch) {
   return {
     actions: bindActionCreators(
       {
+        incrementCartItemLoading
       },
       dispatch
     )

@@ -2,7 +2,6 @@ import React from 'react'
 
 import { withStyles } from '@material-ui/core/styles'
 import TextField from '@material-ui/core/TextField'
-import MenuItem from '@material-ui/core/MenuItem'
 
 const styles = theme => ({
   textField: {
@@ -15,43 +14,29 @@ const styles = theme => ({
   }
 })
 
-const currencies = [
-  {
-    value: 'USD',
-    label: '$'
-  },
-  {
-    value: 'EUR',
-    label: '€'
-  },
-  {
-    value: 'BTC',
-    label: '฿'
-  },
-  {
-    value: 'JPY',
-    label: '¥'
-  }
-]
+const quantity = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 
 const QuantityField = (props) => (
   <TextField
     id='quantity'
     select
+    defaultValue={'1'}
     label='Qty:'
+    onChange={props.onChangeQuantity.bind(this)}
     className={props.classes.textField}
     // value={this.state.currency}
     // onChange={this.handleChange('currency')}
     SelectProps={{
+      native: true,
       MenuProps: {
         className: props.classes.menu
       }
     }}
   >
-    {currencies.map(option => (
-      <MenuItem key={option.value} value={option.value}>
-        {option.label}
-      </MenuItem>
+    {quantity.map(item => (
+      <option key={item} value={item}>
+        {item}
+      </option>
     ))}
   </TextField>
 )

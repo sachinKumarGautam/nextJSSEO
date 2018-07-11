@@ -1,12 +1,13 @@
 import React from 'react'
-import Header from '../components/layouts/header'
-import Footer from '../components/layouts/footer'
 
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
+import Router from 'next/router'
 
 import { withStyles } from '@material-ui/core/styles'
 import withRoot from '../src/withRoot'
+import Header from '../components/layouts/header'
+import Footer from '../components/layouts/footer'
 
 import Paper from '@material-ui/core/Paper'
 
@@ -19,6 +20,8 @@ import {
 import {
   getRelatedMedicinesLoading
 } from '../containers/medicineList/medicineListActions'
+
+import { checkPincodeLoading } from '../containers/location/pincode/pincodeAction'
 
 const styles = theme => ({
   root: {
@@ -42,22 +45,30 @@ class MoleculeDetails extends React.Component {
   //   console.log('result', resultAction)
 
   //   return { payload: resultAction }
+
   // }
+
+  static getInitialProps ({query}) {
+    return query
+  }
 
   componentDidMount () {
     // Represents to get molecule details.
-    this.props.actions.getMoleculeSummaryLoading(
-      this.props.moleculeDetailsState,
-      '5a61a295ae8bdc26685f2b09' // pass salt id
-    )
+    const {query} = Router
 
-    // Represents to get medicine list with page size and size per page.
-    this.props.actions.getRelatedMedicinesLoading(
-      this.props.medicineListState,
-      'Multivitamin', // pass salt name
-      0, // page number
-      3 // page size
-    )
+    if (Router.query.id) {
+      this.props.actions.getMoleculeSummaryLoading(
+        this.props.moleculeDetailsState,
+        query.id// pass salt id // 5a61a295ae8bdc26685f2b09 // query.id
+      )
+      // Represents to get medicine list with page size and size per page.
+      this.props.actions.getRelatedMedicinesLoading(
+        this.props.medicineListState,
+        query.name, // pass salt name //query.name
+        0, // page number
+        3 // page size
+      )
+    }
   }
 
   render () {
@@ -66,7 +77,10 @@ class MoleculeDetails extends React.Component {
         <Header />
         <div>
           <Paper className={this.props.classes.root} elevation={1}>
-            <MoleculeDetailsWrapper />
+            <MoleculeDetailsWrapper
+              checkPincodeLoading={this.props.actions.checkPincodeLoading}
+              checkPincodeState={this.props.checkPincodeState}
+            />
           </Paper>
         </div>
         <Footer />
@@ -78,7 +92,8 @@ class MoleculeDetails extends React.Component {
 function mapStateToProps (state) {
   return {
     moleculeDetailsState: state.moleculeDetailsState,
-    medicineListState: state.medicineListState
+    medicineListState: state.medicineListState,
+    checkPincodeState: state.checkPincodeState
   }
 }
 
@@ -87,7 +102,8 @@ function mapDispatchToProps (dispatch) {
     actions: bindActionCreators(
       {
         getMoleculeSummaryLoading,
-        getRelatedMedicinesLoading
+        getRelatedMedicinesLoading,
+        checkPincodeLoading
       },
       dispatch
     )

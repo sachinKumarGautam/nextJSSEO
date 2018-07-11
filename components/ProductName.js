@@ -13,16 +13,14 @@ const styles = theme => {
 }
 
 const ProductName = (props) => (
-  <div>
-    <Typography
-      className={props.classes.title}
-      gutterBottom
-      variant={props.variant}
-      component='h1'
-    >
-      {props.name}
-    </Typography>
-  </div>
+  <Typography
+    className={`${props.classes.title} ${props.customStyle}`}
+    gutterBottom
+    variant={props.variant}
+    component='h1'
+  >
+    {props.name}
+  </Typography>
 )
 
 export default withStyles(styles)(ProductName)

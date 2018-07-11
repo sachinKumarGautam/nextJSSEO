@@ -17,7 +17,6 @@ const styles = theme => ({
   },
   cardContent: {
     paddingBottom: 0
-
   },
   orderDetailWrapper: {
     border: `0.5px solid ${theme.palette.customGrey.grey250}`,
@@ -49,19 +48,19 @@ const styles = theme => ({
 })
 
 class OrderListDetails extends Component {
-  constructor(props) {
+  constructor (props) {
     super(props)
-    this.state ={
+    this.state = {
       page: 0
     }
   }
 
-  onClickOfShowMore() {
+  onClickOfShowMore () {
     this.props.getOrderListDetailsLoading(
       this.props.orderListState,
-      100183363, // pass customer Id
+      this.props.customerState.payload.id, // pass customer Id
       this.state.page + 1, // page number
-      2 // page size
+      10 // page size
     )
 
     this.setState({
@@ -88,11 +87,11 @@ class OrderListDetails extends Component {
                   <OrderHeader
                     orderDetails={orderDetails}
                   />
-                  <Divider/>
+                  <Divider />
                   <OrderContent
                     orderDetails={orderDetails}
                   />
-                  <Divider/>
+                  <Divider />
                   <OrderFooter
                     orderDetails={orderDetails}
                   />

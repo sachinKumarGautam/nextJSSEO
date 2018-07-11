@@ -27,21 +27,19 @@ const styles = theme => ({
 })
 
 const SubFooter = ({classes}) => (
-  <section>
-    <Paper
-      className={classes.root}
-      elevation={1}
-      component='div'
-      square
-    >
-      <div className={classes.footerInnerWrapper}>
-        <CompanyInfo />
-        <ContactUs />
-        <Categories />
-        <OurApp />
-      </div>
-    </Paper>
-  </section>
+  <Paper
+    className={classes.root}
+    elevation={1}
+    component='div'
+    square
+  >
+    <div className={classes.footerInnerWrapper}>
+      <CompanyInfo />
+      <ContactUs />
+      <Categories />
+      <OurApp />
+    </div>
+  </Paper>
 )
 
 export default withStyles(styles)(SubFooter)

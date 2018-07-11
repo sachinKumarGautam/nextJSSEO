@@ -30,6 +30,10 @@ const styles = theme => ({
     flexDirection: 'row',
     justifyContent: 'space-between',
     margin: '0 auto'
+  },
+  linkStyle: {
+    textDecoration: 'none',
+    color: 'inherit'
   }
 })
 
@@ -39,13 +43,31 @@ const SubFooter = ({classes}) => (
       <div className={classes.iconWithText}>
         <img src={'/static/images/splash.svg'} />
         <Typography className={classes.copyRightInfo} component='h3' variant={'body1'}>
-            © 2016 LifCARE. All Rights Reserved
+            © 2018 LifCARE. All Rights Reserved
         </Typography>
       </div>
       <div>
-        <img className={classes.socialMediaIcon} src={'/static/images/instagram.svg'} />
-        <img className={classes.socialMediaIcon} src={'/static/images/facebook.svg'} />
-        <img className={classes.socialMediaIcon} src={'/static/images/twitter.svg'} />
+        <a
+          href='https://www.instagram.com/lifcare_pharmacy'
+          target='blank'
+          className={classes.linkStyle}
+        >
+          <img className={classes.socialMediaIcon} src={'/static/images/instagram.svg'} />
+        </a>
+        <a
+          className={classes.linkStyle}
+          target='blank'
+          href='https://www.facebook.com/LifCare/'
+        >
+          <img className={classes.socialMediaIcon} src={'/static/images/facebook.svg'} />
+        </a>
+        <a
+          className={classes.linkStyle}
+          target='blank'
+          href='https://twitter.com/lifcare'
+        >
+          <img className={classes.socialMediaIcon} src={'/static/images/twitter.svg'} />
+        </a>
       </div>
     </div>
   </Paper>

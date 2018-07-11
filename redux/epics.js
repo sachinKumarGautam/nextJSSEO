@@ -18,11 +18,21 @@ import {
 } from '../containers/medicineList/medicineListEpics'
 
 import {
-  getDeliveryDetailsList
+  getProductDetails
+} from '../containers/productDetails/productEpic'
+
+import {
+  searchMedicine
+} from '../containers/searchMedicine/searchMedicineEpic'
+
+import {
+  getDeliveryDetailsList,
+  submitDeliveryDetails
 } from '../containers/deliveryDetails/deliveryDetailsEpics'
 
 import {
-  getPatientDetailsList
+  getPatientDetailsList,
+  submitPatient
 } from '../containers/patientDetails/patientDetailsEpics'
 
 import {
@@ -37,60 +47,81 @@ import {
   carePointsList
 } from '../containers/carePoint/carePointEpics'
 
+import {
+  getAnonymousCartIdEpic,
+  getCartDetailsEpic,
+  // decrementCartItemLoadingEpic,
+  decrementCartItemEpic,
+  // incrementCartItemLoadingEpic,
+  incrementCartItemEpic,
+  // deleteCartItemLoadingEpic,
+  deleteCartItemEpic,
+  savePatientToCartEpic,
+  cartTransferEpic,
+  saveDeliveryAddressToCartEpic,
+  uploadPrescriptionEpic,
+  deletePrescriptionEpic,
+  submitOrderEpic,
+  applyCouponCode
+} from '../containers/cartDetails/cartEpics'
+
+import {
+  checkPincode
+} from '../containers/location/pincode/pincodeEpic'
+
+import {
+  submitRefillDate
+} from '../containers/thankYou/thankYouEpics'
 // import * as actions from './actions'
 // import * as types from './actionTypes'
 
-// export const fetchUserEpic = (action$, store) =>
-//   action$.pipe(
-//     ofType(types.START_FETCHING_CHARACTERS),
-//     mergeMap(action => {
-//       return interval(3000).pipe(
-//         mergeMap(x =>
-//           actions.fetchCharacter({
-//             isServer: store.getState().isServer
-//           })
-//         ),
-//         takeUntil(action$.ofType(types.STOP_FETCHING_CHARACTERS))
-//       )
-//     })
-//   )
+import {
+  getPatientPastMedicineList
+} from '../containers/refillPatients/refillEpics'
 
-// export const fetchCharacterEpic = (action$, store) =>
-//   action$.pipe(
-//     ofType(types.FETCH_CHARACTER),
-//     mergeMap(action =>
-//       ajax({
-//         url: `https://swapi.co/api/people/${store.getState().nextCharacterId}`
-//       }).pipe(
-//         map(response =>
-//           actions.fetchCharacterSuccess(
-//             response.body,
-//             store.getState().isServer
-//           )
-//         ),
-//         catchError(error =>
-//           of(
-//             actions.fetchCharacterFailure(
-//               error.response.body,
-//               store.getState().isServer
-//             )
-//           )
-//         )
-//       )
-//     )
-//   )
+import {
+  getBackGroungImages
+} from '../containers/homePage/homePageEpics'
 
 export const rootEpic = combineEpics(
   getMoleculeSummary,
+  getRelatedMedicines,
+  carePointsList,
   sendOTP,
   verifyOTP,
   registerCustomer,
   getRelatedMedicines,
   fetchUserInfo,
+  getProductDetails,
   getRelatedMedicines,
+  carePointsList,
+  getAnonymousCartIdEpic,
+  getCartDetailsEpic,
+  // decrementCartItemLoadingEpic,
+  decrementCartItemEpic,
+  // incrementCartItemLoadingEpic,
+  incrementCartItemEpic,
+  // deleteCartItemLoadingEpic,
+  deleteCartItemEpic,
+  searchMedicine,
+  fetchUserInfo,
   getDeliveryDetailsList,
   getPatientDetailsList,
+  savePatientToCartEpic,
+  saveDeliveryAddressToCartEpic,
   getOrderListDetails,
   getPrescriptionList,
-  carePointsList
+  carePointsList,
+  submitPatient,
+  cartTransferEpic,
+  uploadPrescriptionEpic,
+  deletePrescriptionEpic,
+  submitOrderEpic,
+  getAnonymousCartIdEpic,
+  checkPincode,
+  submitDeliveryDetails,
+  submitRefillDate,
+  getPatientPastMedicineList,
+  getBackGroungImages,
+  applyCouponCode
 )

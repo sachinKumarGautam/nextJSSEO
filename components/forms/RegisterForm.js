@@ -10,6 +10,13 @@ import FormControl from '@material-ui/core/FormControl'
 import Button from '../../components/button'
 import { withStyles } from '@material-ui/core/styles'
 
+import {
+  FULL_NAME_REQUIRED,
+  MOBILE_REQUIRED,
+  GENDER_REQUIRED,
+  PINCODE_REQUIRED
+} from '../../containers/messages/ValidationMsg'
+
 // Helper styles for demo
 
 const styles = theme => ({
@@ -19,8 +26,8 @@ const styles = theme => ({
   },
   buttonWrapper: {
     marginTop: theme.spacing.unit * 3.5,
-    width: theme.spacing.unit * 22,
-    height: theme.spacing.unit * 4.25,
+    display: 'flex',
+    justifyContent: 'center',
     margin: '0 auto'
   },
   formHelperText: {
@@ -121,6 +128,7 @@ const RegisterForm = props => {
         <InputLabel htmlFor='membership_code'>Membership code</InputLabel>
         <Input
           id='membership_code'
+          disabled
           onChange={handleChange}
           value={values.membership_code}
         />
@@ -143,6 +151,7 @@ const RegisterForm = props => {
           id='referral_code'
           onChange={handleChange}
           value={values.referral_code}
+          disabled
         />
         {
           errors.referral_code && touched.referral_code &&
@@ -183,9 +192,9 @@ export default withStyles(styles)(withFormik({
     }
   },
   validationSchema: Yup.object().shape({
-    full_name: Yup.string().required('Please enter your full name'),
-    mobile: Yup.number().required('Please enter OTP'),
-    gender: Yup.string().required('Gender is required'),
+    full_name: Yup.string().required(FULL_NAME_REQUIRED),
+    mobile: Yup.number().required(MOBILE_REQUIRED),
+    gender: Yup.string().required(GENDER_REQUIRED),
     membership_code: Yup.string(),
     referral_code: Yup.string()
   }),

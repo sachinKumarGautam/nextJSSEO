@@ -22,12 +22,28 @@ class ProductInfo extends Component {
   render () {
     return (
       <div>
-        <ProductName variant={'title'} />
-        <ProductBrand variant={'subheading'} />
-        <ProductPackSize variant={'subheading'} />
-        <ProductMolecule variant={'body1'} />
-        <DiseaseTagsWrapper />
-        <ProductOverview />
+        <ProductName
+          variant={'title'}
+          name={this.props.productDetailsState.payload.name}
+        />
+        <ProductBrand
+          variant={'subheading'}
+          brand={this.props.productDetailsState.payload.brand}
+        />
+        <ProductPackSize
+          variant={'subheading'}
+          packType={this.props.productDetailsState.payload.pack_type}
+          packSize={this.props.productDetailsState.payload.pack_size
+            ? this.props.productDetailsState.payload.pack_size.name : ''}
+        />
+        <ProductMolecule
+          variant={'body1'}
+          salts={this.props.productDetailsState.payload.salts}
+        />
+        <DiseaseTagsWrapper
+          diseases={this.props.productDetailsState.payload.diseases}
+        />
+        {/* <ProductOverview /> */}
         <ProductInfoNav
           toggleHover={this.props.toggleHover}
           hover={this.props.hover}

@@ -9,6 +9,11 @@ import { withStyles } from '@material-ui/core/styles'
 
 // Helper styles for demo
 
+import {
+  OTP_REQUIRED
+} from '../../containers/messages/ValidationMsg'
+import {OTP_PLACEHOLDER} from '../../containers/messages/PlaceholderMsg'
+
 const styles = theme => ({
   formControl: {
     margin: theme.spacing.unit,
@@ -26,6 +31,10 @@ const styles = theme => ({
   },
   inputCenter: {
     textAlign: 'center'
+  },
+  otpInput: {
+    textAlign: 'center',
+    letterSpacing: theme.spacing.unit / 2
   }
 })
 
@@ -58,8 +67,16 @@ class OTPForm extends React.Component {
             id='otp'
             type='number'
             value={values.otp}
+            classes={{
+              input: classes.otpInput
+            }}
+            // inputProps={{
+            //   classes: {
+            //     root: classes.otpInput,
+            //   },
+            // }}
             onChange={handleChange}
-            placeholder={'Enter your 4 digit OTP'}
+            placeholder={OTP_PLACEHOLDER}
           />
           {
             errors.otp && touched.otp &&
@@ -90,7 +107,7 @@ export default withStyles(styles)(withFormik({
     otp: Yup.number()
       // .min(10, 'Please enter valid phone number')
       // .max(10, 'Please enter valid phone number')
-      .required('Please enter OTP')
+      .required(OTP_REQUIRED)
   }),
   handleSubmit: (values, { props, setSubmitting }) => {
     props.onSubmit(props.loginState, setSubmitting, props.closeLoginModal, props.toggleForm, values)

@@ -60,9 +60,16 @@ export default function (state = initialState, action) {
       return {
         ...state,
         isLoadingVerifyOtp: action.isLoading,
-        access_token: action.access_token,
-        refresh_token: action.refresh_token,
-        scope: action.scope
+        payload: {
+          ...state.payload,
+          verification: {
+            ...state.payload.verification,
+            access_token: action.access_token,
+            refresh_token: action.refresh_token,
+            scope: action.scope
+          }
+        }
+
       }
 
     case OTP_VERIFIED_FAILURE:

@@ -2,7 +2,10 @@ import {
   GET_DELIVERY_DETAILS_LIST_LOADING,
   GET_DELIVERY_DETAILS_LIST_SUCCESS,
   GET_DELIVERY_DETAILS_LIST_FAILURE,
-  SAVE_ADDRESS_SELECTED
+  SAVE_ADDRESS_SELECTED,
+  SUBMIT_DELIVERY_DETAILS_LOADING,
+  SUBMIT_DELIVERY_DETAILS_SUCCESS,
+  SUBMIT_DELIVERY_DETAILS_FAILURE
 } from './deliveryDetailsActionTypes'
 
 /**
@@ -60,5 +63,45 @@ export function saveAddressSelected (deliveryDetailsState, addressIdSelected) {
     type: SAVE_ADDRESS_SELECTED,
     deliveryDetailsState,
     addressIdSelected: addressIdSelected
+  }
+}
+
+export function submitDeliveryDetailsLoading (
+  deliveryDetailsState,
+  deliveryDetails,
+  customerId,
+  setSubmitting,
+  closeModal,
+  values
+) {
+  return {
+    type: SUBMIT_DELIVERY_DETAILS_LOADING,
+    deliveryDetailsState,
+    deliveryDetails,
+    customerId,
+    setSubmitting,
+    closeModal,
+    values,
+    isLoading: true,
+    error: null,
+    isError: false
+  }
+}
+
+export function submitDeliveryDetailsSuccess (deliveryDetailsState, result) {
+  return {
+    type: SUBMIT_DELIVERY_DETAILS_SUCCESS,
+    deliveryDetailsState,
+    isLoading: true
+  }
+}
+
+export function submitDeliveryDetailsFailure (deliveryDetailsState, error) {
+  return {
+    type: SUBMIT_DELIVERY_DETAILS_FAILURE,
+    deliveryDetailsState,
+    isLoading: false,
+    error: error,
+    isError: true
   }
 }

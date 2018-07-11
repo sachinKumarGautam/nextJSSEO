@@ -4,6 +4,7 @@ import { withStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
 import Card from '@material-ui/core/Card'
 import CardContent from '@material-ui/core/CardContent'
+import withRoot from '../../src/withRoot'
 
 import Button from '../../components/button'
 import MedicineListDetails from '../../components/MedicineListDetails'
@@ -33,18 +34,16 @@ const styles = theme => {
       paddingBottom: theme.spacing.unit * 2,
       marginTop: theme.spacing.unit * 2
     },
-    button: {
-      marginTop: theme.spacing.unit * 4
-    },
     buttonRoot: {
-      backgroundColor: '#ffffff'
+      // backgroundColor: '#ffffff',
     },
     buttonLabel: {
       color: theme.palette.customGrey.grey200
     },
     buttonWrapper: {
       display: 'flex',
-      justifyContent: 'center'
+      justifyContent: 'center',
+      marginTop: theme.spacing.unit * 4
     }
   }
 }
@@ -64,7 +63,7 @@ class MedicineList extends React.Component {
       this.props.medicineListState,
       'Multivitamin', // pass salt name
       (this.state.page + 1), // page number
-      3 // page size
+      10 // page size
     )
 
     this.setState({
@@ -73,24 +72,36 @@ class MedicineList extends React.Component {
   }
 
   render () {
+    const {
+      medicineListState,
+      incrementCartItemLoading,
+      cartState,
+      classes,
+      checkPincodeState,
+      checkPincodeLoading
+    } = this.props
     return (
-      <div className={this.props.classes.medicineListWrapper}>
+      <div className={classes.medicineListWrapper}>
         <Typography
           gutterBottom
           variant='title'
           component='h1'
-          className={this.props.classes.title}
+          className={classes.title}
         >
-          Available medicines for Glimepiride
+          Available medicines for {this.props.moleculeName}
         </Typography>
         <Card elevation={1}>
           <CardContent>
-            <ul className={this.props.classes.articleListWrapper}>
+            <ul className={classes.articleListWrapper}>
               {
-                this.props.medicineListState.payload.map((itemDetails) => (
-                  <li className={this.props.classes.listItem}>
+                medicineListState.map((itemDetails) => (
+                  <li className={classes.listItem}>
                     <MedicineListDetails
                       itemDetails={itemDetails}
+                      checkPincodeState={checkPincodeState}
+                      checkPincodeLoading={checkPincodeLoading}
+                      incrementCartItemLoading={incrementCartItemLoading}
+                      cartState={cartState}
                     />
                   </li>
                 ))
@@ -98,22 +109,25 @@ class MedicineList extends React.Component {
             </ul>
           </CardContent>
         </Card>
-        <div className={this.props.classes.buttonWrapper}>
-          <Button
-            size='medium'
-            variant='outlined'
-            className={this.props.classes.button}
-            classes={{
-              root: this.props.classes.buttonRoot,
-              label: this.props.classes.buttonLabel
-            }}
-            onClick={this.onClickOfShowMore}
-            label={'Show more'}
-          />
-        </div>
+        { medicineListState && !this.props.query.productName &&
+          <div className={classes.buttonWrapper}>
+            <Button
+              size='medium'
+              variant='outlined'
+              disabled={medicineListState.isLoading}
+              loaderColor={'primary'}
+              isloading={medicineListState.isLoading}
+              classes={{
+                root: classes.buttonRoot,
+                label: classes.buttonLabel
+              }}
+              onClick={this.onClickOfShowMore}
+              label={'Show more'}
+            />
+          </div>}
       </div>
     )
   }
 }
 
-export default withStyles(styles)(MedicineList)
+export default withRoot(withStyles(styles)(MedicineList))

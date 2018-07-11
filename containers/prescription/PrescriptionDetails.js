@@ -11,7 +11,7 @@ class PrescriptionDetails extends Component {
       <div>
         <Grid container spacing={24}>
           <Grid item xs={2}>
-            <SideMenu/>
+            <SideMenu />
           </Grid>
           <Grid item xs={10}>
             <PrescriptionList

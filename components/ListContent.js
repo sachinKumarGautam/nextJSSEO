@@ -2,6 +2,7 @@ import React from 'react'
 
 import { withStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
+import { CURRENTLY_WORKING_SECTION } from '../containers/messages/commonMsg'
 
 const styles = theme => {
   return {
@@ -24,6 +25,9 @@ const styles = theme => {
     hover: {
       color: theme.palette.primary.main,
       transition: '0.2s'
+    },
+    currentlyWorking: {
+      padding: theme.spacing.unit * 2
     }
   }
 }
@@ -44,7 +48,7 @@ const ListContent = (props) => {
       </div>
       <ul>
         {
-          props.content.map((item) => (
+          props.content && props.content.map((item) => (
             <li className={props.classes.content}>
               <Typography
                 gutterBottom
@@ -55,6 +59,12 @@ const ListContent = (props) => {
               </Typography>
             </li>
           ))
+        }
+        {
+          !props.content &&
+          <Typography className={props.classes.currentlyWorking} variant={'body2'} component='div'>
+            {CURRENTLY_WORKING_SECTION}
+          </Typography>
         }
       </ul>
     </div>

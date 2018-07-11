@@ -2,6 +2,11 @@ import React, { Component } from 'react'
 
 import { withStyles } from '@material-ui/core/styles'
 
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+
+import withRoot from '../src/withRoot'
+
 import MenuItems from './MenuItems'
 import { logoutWithReload } from '../utils/removePersistState'
 
@@ -36,7 +41,9 @@ class SideMenu extends Component {
   render () {
     return (
       <div>
-        <p className={this.props.classes.nameStyle}>Shankar Krishnamurthy</p>
+        <p className={this.props.classes.nameStyle}>
+          {this.props.customerState.payload.full_name}
+        </p>
         <MenuItems
           customOrderStyle={this.props.classes.orderStyle}
           customMenuStyle={this.props.classes.menuStyle}
@@ -48,4 +55,23 @@ class SideMenu extends Component {
   }
 }
 
-export default withStyles(styles)(SideMenu)
+function mapStateToProps (state) {
+  return {
+    customerState: state.customerState
+  }
+}
+
+function mapDispatchToProps (dispatch) {
+  return {
+    actions: bindActionCreators(
+      {
+      },
+      dispatch
+    )
+  }
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withRoot(withStyles(styles)(SideMenu)))

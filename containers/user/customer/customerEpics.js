@@ -1,6 +1,5 @@
 import { of } from 'rxjs/observable/of'
 import { mergeMap, catchError, map, flatMap } from 'rxjs/operators'
-import ajax from 'universal-rx-request' // because standard AjaxObservable only works in browser
 import { ofType } from 'redux-observable'
 import {CUSTOMER_REGISTER_LOADING, FETCH_USER_INFO_LOADING} from './customerActionTypes'
 import {
@@ -13,6 +12,7 @@ import { toggleAuthentication } from '../../login/loginActions'
 
 import http from '../../../services/api/ajaxWrapper'
 import {fetchUserInfo$, registerCustomer$} from '../../../services/api/index'
+import {cartTransferLoading} from '../../cartDetails/cartActions'
 
 export function registerCustomer (action$, store) {
   return action$.pipe(
@@ -20,6 +20,8 @@ export function registerCustomer (action$, store) {
     mergeMap(data => {
       const customerState = store.getState().customerState
       const loginState = store.getState().loginState
+      const cartState = store.getState().cartState
+
       return http(registerCustomer$(data.values)).pipe(
         flatMap(result => {
           data.setSubmitting(false)
@@ -28,7 +30,8 @@ export function registerCustomer (action$, store) {
           }, 250)
           // TODO: remove store.dispatch as it might be deprecated in future
           return of(toggleAuthentication(loginState, true),
-            customerRegisterSuccess(customerState, result))
+            customerRegisterSuccess(customerState, result),
+            cartTransferLoading(cartState))
         }),
         catchError(error => {
           data.setSubmitting(false)
