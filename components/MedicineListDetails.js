@@ -96,37 +96,37 @@ class MedicineListDetails extends React.Component {
     return (
       
         <div className={props.classes.medicineListContentWrapper}>
-          <div>
-            <Link
-              prefetch
-              href={`${PRODUCT_DETAILS}?id=${props.itemDetails.slug}&location=${city}`}
-              as={`${PRODUCT_DETAILS}/${props.itemDetails.slug}/${city}`}
-            >
+          <Link
+            prefetch
+            href={`${PRODUCT_DETAILS}?id=${props.itemDetails.slug}&location=${city}`}
+            as={`${PRODUCT_DETAILS}/${props.itemDetails.slug}/${city}`}
+          >
+            <div>
               <ProductName
                 variant={'body1'}
                 name={props.itemDetails.name}
                 customStyle={props.classes.customName}
               />
-            </Link>
-            
-            {/* {props.isRefillMedicines && <RefillDueDays />} */}
-            <ProductBrand
-              variant={'caption'}
-              withoutImage
-              customStyle={props.classes.customBrand}
-              brand={props.itemDetails.brand_name}
-            />
-            <ProductPackSize
-              variant={'caption'}
-              withoutImage
-              customStyle={props.classes.customPackSize}
-              packType={props.itemDetails.pack_type}
-              packSize={
-                (props.itemDetails.pack_size && props.itemDetails.pack_size.name)
-                  ? props.itemDetails.pack_size.name : props.itemDetails.pack_size
-              }
-            />
-          </div>
+              
+              {/* {props.isRefillMedicines && <RefillDueDays />} */}
+              <ProductBrand
+                variant={'caption'}
+                withoutImage
+                customStyle={props.classes.customBrand}
+                brand={props.itemDetails.brand_name}
+              />
+              <ProductPackSize
+                variant={'caption'}
+                withoutImage
+                customStyle={props.classes.customPackSize}
+                packType={props.itemDetails.pack_type}
+                packSize={
+                  (props.itemDetails.pack_size && props.itemDetails.pack_size.name)
+                    ? props.itemDetails.pack_size.name : props.itemDetails.pack_size
+                }
+              />
+            </div>
+          </Link>          
           <div>
             <EstimatedPriceLabel
               variant={'caption'}
