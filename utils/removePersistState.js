@@ -4,7 +4,7 @@ import { config, store } from '../redux'
 import {logout} from '../containers/login/loginActions'
 
 import {
-  PRODUCT_DETAILS
+  HOME_PAGE
 } from '../routes/RouteConstant'
 
 export const logoutWithReload = (path) => {
@@ -13,6 +13,6 @@ export const logoutWithReload = (path) => {
     resolve(store.dispatch(logout()))
   })
   promiseToLogout.then(() => {
-    window.location.href = PRODUCT_DETAILS
+    window.location.href = HOME_PAGE
   })
 }

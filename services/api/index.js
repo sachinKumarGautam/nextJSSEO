@@ -231,6 +231,13 @@ const getPatientPastMedicineList$ = (patientId, facilityCode) => (
   })
 )
 
+const getSliderImages$ = tagName => (
+  makeAjaxRequest({
+    method: 'GET',
+    url: fetchUrl('account', 'offer/tag/' + tagName, 'GET_LIST')
+  })
+)
+
 const applyCouponForCart$ = (cartUid, couponCode) => (
   makeAjaxRequest({
     method: 'PATCH',
@@ -267,5 +274,6 @@ export {
   submitDeliveryDetails$,
   submitRefillDate$,
   getPatientPastMedicineList$,
+  getSliderImages$,
   applyCouponForCart$
 }
