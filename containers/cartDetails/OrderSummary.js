@@ -28,13 +28,11 @@ const styles = theme => ({
     marginBottom: theme.spacing.unit * 2
   },
   heading: {
-    fontSize: theme.typography.pxToRem(15),
-    flexShrink: 0,
-    fontSize: theme.spacing.unit * 2.75,
-    fontWeight: theme.typography.fontWeightBold,
+    ...theme.typography.title,
+    fontSize: theme.typography.pxToRem(19),
     color: theme.palette.customGrey.grey500,
     marginLeft: theme.spacing.unit * 2.5,
-    letterSpacing: theme.spacing.unit * 0.275
+    marginTop: theme.spacing.unit / 2
   },
   secondaryHeading: {
     fontSize: theme.typography.pxToRem(15),
@@ -90,7 +88,8 @@ const styles = theme => ({
     marginTop: theme.spacing.unit * 2.5
   },
   paymentDescription: {
-    marginTop: theme.spacing.unit * 1.25
+    marginTop: theme.spacing.unit * 1.25,
+    width: '100%'
   },
   radioButton: {
     color: theme.palette.customGrey.grey500,
@@ -98,7 +97,19 @@ const styles = theme => ({
       color: theme.palette.customGreen.green300,
     }
   },
-  checked: {}
+  imageIcon:{
+    width: theme.spacing.unit * 3.5
+  },
+  nameChecked: {
+    width: theme.spacing.unit * 7,
+    marginTop: theme.spacing.unit / 4,
+    marginLeft: theme.spacing.unit * 4.375
+  },
+  otherSummaryCheck: {
+    width: theme.spacing.unit * 3.5,
+    marginTop: theme.spacing.unit / 4,
+    marginLeft: theme.spacing.unit * 4.375
+  }
 });
 
 class OrderSummary extends React.Component {
@@ -241,8 +252,10 @@ class OrderSummary extends React.Component {
           className={classes.expansionPanel}
         >
           <ExpansionPanelSummary expandIcon={<div />}>
-            <img src='/static/images/loggedIn.svg' />
-            <Typography className={classes.heading}>
+            <img src='/static/images/loggedIn.svg' className={classes.imageIcon}/>
+            <Typography
+              className={classes.heading}
+            >
               {
                 !this.props.loginState.isAuthenticated
                 ? (
@@ -252,6 +265,13 @@ class OrderSummary extends React.Component {
                 )
               }
             </Typography>
+            {/* {this.props.loginState.isAuthenticated &&
+              <img
+                src='static/images/bg-chk.svg'
+                alt='check'
+                className={classes.nameChecked}
+              />
+            } */}
           </ExpansionPanelSummary>
           <ExpansionPanelDetails>
             <Typography className={this.props.classes.loginDescription}>
@@ -275,7 +295,7 @@ class OrderSummary extends React.Component {
           className={classes.expansionPanel}
         >
           <ExpansionPanelSummary expandIcon={<div />}>
-            <img src='/static/images/attachedPrescriptions.svg' />
+            <img src='/static/images/attachedPrescriptions.svg'  className={classes.imageIcon}/>
             <Typography className={classes.heading}>Upload Prescriptions</Typography>
           </ExpansionPanelSummary>
           <ExpansionPanelDetails>
@@ -320,9 +340,19 @@ class OrderSummary extends React.Component {
               content: this.props.classes.patientContentWrapper
             }}
           >
-            <img src='/static/images/loggedIn.svg' />
+            <img src='/static/images/loggedIn.svg' className={classes.imageIcon}/>
             <div className={this.props.classes.patientWrapper}>
-              <Typography className={classes.heading}>Patient Details</Typography>
+              <Typography className={classes.heading}>
+                Patient Details
+                {/* {
+                  this.state.expanded === 'panel4' &&
+                  <img
+                    src='static/images/bg-chk.svg'
+                    alt='check'
+                    className={classes.otherSummaryCheck}
+                  />
+                } */}
+              </Typography>
               {
                 this.state.expanded === 'panel3' &&
                 <AddPatientButton
@@ -381,7 +411,7 @@ class OrderSummary extends React.Component {
               content: this.props.classes.patientContentWrapper
             }}
           >
-            <img src='/static/images/attachedPrescriptions.svg' />
+            <img src='/static/images/attachedPrescriptions.svg'  className={classes.imageIcon}/>
             <div className={this.props.classes.patientWrapper}>
               <Typography className={classes.heading}>Delivery Details</Typography>
               {
@@ -434,19 +464,19 @@ class OrderSummary extends React.Component {
           className={classes.expansionPanel}
         >
           <ExpansionPanelSummary expandIcon={<div />}>
-            <img src='/static/images/attachedPrescriptions.svg' />
+            <img src='/static/images/attachedPrescriptions.svg'  className={classes.imageIcon}/>
             <Typography className={classes.heading}>Payment</Typography>
           </ExpansionPanelSummary>
           <ExpansionPanelDetails>
-            <Radio
-              checked={true}
-              name="radio-button-demo"
-              classes={{
-                root: this.props.classes.radioButton,
-                checked: this.props.classes.checked,
-              }}
-            />
             <Typography className={this.props.classes.paymentDescription}>
+              <Radio
+                checked={true}
+                name="radio-button-demo"
+                classes={{
+                  root: this.props.classes.radioButton,
+                  checked: this.props.classes.checked,
+                }}
+              />
               CASH ON DELIVERY
               <Button
                 size='small'

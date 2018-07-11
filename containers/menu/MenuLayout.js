@@ -32,6 +32,9 @@ const styles = theme => {
       marginLeft: theme.spacing.unit * 7,
       marginTop: theme.spacing.unit * 2,
       marginBottom: theme.spacing.unit * 4
+    },
+    iconSize: {
+      fontSize: theme.spacing.unit * 3.75
     }
   }
 }
@@ -62,7 +65,11 @@ class MenuLayout extends Component {
           aria-haspopup="true"
           onClick={this.handleClick}
         >
-          <AccountCircle />
+          <AccountCircle
+            classes={{
+              root: this.props.classes.iconSize
+            }}
+          />
         </IconButton>
         <Menu
           id="long-menu"
