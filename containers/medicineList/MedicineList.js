@@ -77,7 +77,8 @@ class MedicineList extends React.Component {
       incrementCartItemLoading,
       cartState,
       classes,
-      checkPincodeState
+      checkPincodeState,
+      checkPincodeLoading
     } = this.props
     return (
       <div className={classes.medicineListWrapper}>
@@ -98,6 +99,7 @@ class MedicineList extends React.Component {
                     <MedicineListDetails
                       itemDetails={itemDetails}
                       checkPincodeState={checkPincodeState}
+                      checkPincodeLoading={checkPincodeLoading}
                       incrementCartItemLoading={incrementCartItemLoading}
                       cartState={cartState}
                     />

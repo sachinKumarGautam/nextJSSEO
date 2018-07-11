@@ -94,18 +94,21 @@ class MedicineListDetails extends React.Component {
 
     const city = this.props.checkPincodeState.payload.city
     return (
-      <Link
-        prefetch
-        href={`${PRODUCT_DETAILS}?id=${props.itemDetails.slug}&location=${city}`}
-        as={`${PRODUCT_DETAILS}/${props.itemDetails.slug}/${city}`}
-      >
+      
         <div className={props.classes.medicineListContentWrapper}>
           <div>
-            <ProductName
-              variant={'body1'}
-              name={props.itemDetails.name}
-              customStyle={props.classes.customName}
-            />
+            <Link
+              prefetch
+              href={`${PRODUCT_DETAILS}?id=${props.itemDetails.slug}&location=${city}`}
+              as={`${PRODUCT_DETAILS}/${props.itemDetails.slug}/${city}`}
+            >
+              <ProductName
+                variant={'body1'}
+                name={props.itemDetails.name}
+                customStyle={props.classes.customName}
+              />
+            </Link>
+            
             {/* {props.isRefillMedicines && <RefillDueDays />} */}
             <ProductBrand
               variant={'caption'}
@@ -159,7 +162,6 @@ class MedicineListDetails extends React.Component {
             </div>
           </div>
         </div>
-      </Link>
     )
   }
 }

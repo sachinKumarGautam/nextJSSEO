@@ -26,6 +26,7 @@ class MedicineListWrapper extends Component {
             moleculeName={this.props.moleculeName}
             incrementCartItemLoading={this.props.incrementCartItemLoading}
             cartState={this.props.cartState}
+            checkPincodeLoading={this.props.checkPincodeLoading}
           />
         </section>
       </div>

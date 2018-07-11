@@ -14,6 +14,7 @@ import {
   updateSelectedPatientDetails
 } from './refillActions'
 import {incrementCartItemLoading} from '../cartDetails/cartActions'
+import {checkPincodeLoading} from '../location/pincode/pincodeAction'
 
 /*
   bread crumbs
@@ -44,6 +45,7 @@ class RefillPatientsWrapper extends Component {
                 checkPincodeState={this.props.checkPincodeState}
                 cartState={this.props.cartState}
                 incrementCartItemLoading={this.props.actions.incrementCartItemLoading}
+                checkPincodeLoading={this.props.actions.checkPincodeLoading}
               />
             </section>
           </Grid>
@@ -68,7 +70,8 @@ function mapDispatchToProps (dispatch) {
       {
         getRefillPastMedicinesLoading,
         updateSelectedPatientDetails,
-        incrementCartItemLoading
+        incrementCartItemLoading,
+        checkPincodeLoading
       },
       dispatch
     )

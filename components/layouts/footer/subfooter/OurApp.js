@@ -6,7 +6,16 @@ const styles = theme => ({
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'flex-start',
+    
     marginBottom: theme.spacing.unit * 2.25
+  },
+  img: {
+    width: theme.spacing.unit * 12.75,
+    height: theme.spacing.unit * 5,
+  },
+  img2: {
+    width: theme.spacing.unit * 12.75,
+    height: theme.spacing.unit * 4,
   },
   listHeaderText: {
     color: theme.palette.common.white,
@@ -24,10 +33,10 @@ const OurApp = ({classes}) => (
         Our App
     </Typography>
     <div className={classes.iconWithText}>
-      <img src={'/static/images/asset-1.svg'} />
+      <img className={classes.img} src={'/static/images/asset-1.svg'} />
     </div>
     <div className={classes.iconWithText}>
-      <img src={'/static/images/asset-1.svg'} />
+      <img className={classes.img2} src={'/static/images/appStore.png'} />
     </div>
   </div>
 )
