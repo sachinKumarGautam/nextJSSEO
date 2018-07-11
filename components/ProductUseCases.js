@@ -59,7 +59,8 @@ class ProductUseCases extends Component {
                   title={'Precautions'}
                   src={this.props.hover.precautions ? '/static/images/precautions-green.svg' : '/static/images/precautions.svg'}
                   content={this.props.summaryData.precautions}
-                />}
+                />
+              }
             </articles>
           </Grid>
         </Grid>

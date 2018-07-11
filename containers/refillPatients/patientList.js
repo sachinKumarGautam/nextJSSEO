@@ -9,9 +9,10 @@ import ListItemText from '@material-ui/core/ListItemText'
 const styles = theme => ({
   menuItem: {
     '&:focus': {
-      backgroundColor: theme.palette.primary.main,
+      // backgroundColor: theme.palette.primary.main,
       '& $primary, & $icon': {
-        color: theme.palette.common.white
+        color: theme.palette.primary.main,
+        fontWeight: theme.typography.fontWeightBold
       }
     }
   },
@@ -47,7 +48,8 @@ class PatientList extends Component {
               </ListItemIcon>
               <ListItemText
                 classes={{ primary: classes.primary }}
-                inset primary={patient.full_name}
+                inset
+                primary={patient.full_name}
               />
             </MenuItem>
           ))}

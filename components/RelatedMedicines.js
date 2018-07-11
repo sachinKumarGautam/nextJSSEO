@@ -7,6 +7,8 @@ import CardContent from '@material-ui/core/CardContent'
 
 import RelatedMedicinesCard from './RelatedMedicinesCard'
 
+import { MEDICINE_LIST } from '../routes/RouteConstant'
+
 import Link from 'next/link'
 
 const styles = theme => {
@@ -61,13 +63,18 @@ const RelatedMedicines = (props) => (
                 checkPincodeLoading={props.checkPincodeLoading}
                 checkPincodeState={props.checkPincodeState}
                 itemDetails={item}
+                incrementCartItemLoading={props.incrementCartItemLoading}
+                cartState={props.cartState}
               />
             </li>
           ))}
         </ul>
       </CardContent>
     </Card>
-    <Link as={`/medicine-list`} href={`/medicine-list?name=Multivitamin`}>
+    <Link
+      as={`${MEDICINE_LIST}/${props.moleculeName}`}
+      href={`${MEDICINE_LIST}?name=${props.moleculeName}`}
+    >
       <a className={props.classes.viewAllLink}>view all</a>
     </Link>
   </div>

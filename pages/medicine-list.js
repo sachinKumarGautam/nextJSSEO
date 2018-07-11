@@ -4,6 +4,7 @@ import Footer from '../components/layouts/footer'
 
 import { withStyles } from '@material-ui/core/styles'
 import { bindActionCreators } from 'redux'
+import Router from 'next/router'
 
 import withRoot from '../src/withRoot'
 
@@ -33,13 +34,17 @@ const styles = theme => ({
 
 class MedicineList extends React.Component {
   componentDidMount () {
+    const {query} = Router
+
     // Represents to get medicine list with page size and size per page.
-    this.props.actions.getRelatedMedicinesLoading(
-      this.props.medicineListState,
-      'Multivitamin', // pass salt name
-      0, // page number
-      10 // page size
-    )
+    if (query.name) {
+      this.props.actions.getRelatedMedicinesLoading(
+        this.props.medicineListState,
+        query.name, // pass salt name
+        0, // page number
+        10 // page size
+      )
+    }
   }
 
   render () {
@@ -47,7 +52,9 @@ class MedicineList extends React.Component {
       <div>
         <Header />
         <div className={this.props.classes.root}>
-          <MedicineListWrapper />
+          <MedicineListWrapper
+            moleculeName={Router.query.name}
+          />
         </div>
         <Footer />
       </div>

@@ -4,7 +4,7 @@ import { withStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
 import Card from '@material-ui/core/Card'
 import CardContent from '@material-ui/core/CardContent'
-import { withRoot } from '../../src/withRoot'
+import withRoot from '../../src/withRoot'
 
 import Button from '../../components/button'
 import MedicineListDetails from '../../components/MedicineListDetails'
@@ -72,7 +72,13 @@ class MedicineList extends React.Component {
   }
 
   render () {
-    const {medicineListState, classes} = this.props
+    const {
+      medicineListState,
+      incrementCartItemLoading,
+      cartState,
+      classes,
+      checkPincodeState
+    } = this.props
     return (
       <div className={classes.medicineListWrapper}>
         <Typography
@@ -81,7 +87,7 @@ class MedicineList extends React.Component {
           component='h1'
           className={classes.title}
         >
-          Available medicines for Glimepiride
+          Available medicines for {this.props.moleculeName}
         </Typography>
         <Card elevation={1}>
           <CardContent>
@@ -91,7 +97,9 @@ class MedicineList extends React.Component {
                   <li className={classes.listItem}>
                     <MedicineListDetails
                       itemDetails={itemDetails}
-                      checkPincodeState={this.props.checkPincodeState}
+                      checkPincodeState={checkPincodeState}
+                      incrementCartItemLoading={incrementCartItemLoading}
+                      cartState={cartState}
                     />
                   </li>
                 ))
