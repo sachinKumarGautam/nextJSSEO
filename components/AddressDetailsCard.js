@@ -48,6 +48,10 @@ const styles = theme => {
       boxShadow: 'none',
       marginLeft: theme.spacing.unit * 3.25
     },
+    selectButton: {
+      boxShadow: 'none',
+      marginLeft: theme.spacing.unit * 3.75
+    },
     buttonLabel: {
       ...theme.typography.body2,
       color: theme.palette.customGreen.green300,
@@ -90,12 +94,10 @@ const AddressDetailsCard = props => (
       props.isCartPage
       ? (
         <Button
-          variant='contained'
+          variant='raised'
           size='small'
-          className={props.classes.button}
-          classes={{
-            label: props.classes.buttonLabel
-          }}
+          color='primary'
+          className={props.classes.selectButton}
           onClick={this.handleClickOpen}
           label={'SELECT'}
         />

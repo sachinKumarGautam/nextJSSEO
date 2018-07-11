@@ -47,6 +47,11 @@ const styles = theme => {
       backgroundColor: theme.palette.common.white,
       boxShadow: 'none'
     },
+    selectButton: {
+      boxShadow: 'none',
+      marginLeft: theme.spacing.unit * 1.25,
+      marginTop: theme.spacing.unit * 1.25
+    },
     buttonLabel: {
       ...theme.typography.body2,
       color: theme.palette.customGreen.green300,
@@ -98,12 +103,10 @@ const PatientDetailsCard = props => (
                 props.isCartPage
                 ? (
                   <Button
-                    variant='contained'
+                    variant='raised'
                     size='small'
-                    className={props.classes.button}
-                    classes={{
-                      label: props.classes.buttonLabel
-                    }}
+                    color='primary'
+                    className={props.classes.selectButton}
                     onClick={this.handleClickOpen}
                     label={'SELECT'}
                   />
