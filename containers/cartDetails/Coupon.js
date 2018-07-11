@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
 
 import { withStyles } from '@material-ui/core/styles'
-import TextField from '@material-ui/core/TextField';
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogTitle from '@material-ui/core/DialogTitle';
+import TextField from '@material-ui/core/TextField'
+import Dialog from '@material-ui/core/Dialog'
+import DialogActions from '@material-ui/core/DialogActions'
+import DialogContent from '@material-ui/core/DialogContent'
+import DialogContentText from '@material-ui/core/DialogContentText'
+import DialogTitle from '@material-ui/core/DialogTitle'
 
 import EditCoupon from './EditCoupon'
 import Button from '../../components/button'
@@ -14,8 +14,8 @@ import {COUPON_MESSAGE} from '../messages/couponMessage'
 
 const styles = theme => ({
   buttonStyle: {
-   ...theme.typography.title,
-   fontSize: theme.typography.pxToRem(18)
+    ...theme.typography.title,
+    fontSize: theme.typography.pxToRem(18)
   },
   buttonRoot: {
     border: `1px dashed ${theme.palette.customGrey.grey200}`,
@@ -41,7 +41,7 @@ const styles = theme => ({
     borderRadius: 0
   },
   couponApplyButtonLabel: {
-    color: theme.palette.customGrey.grey500,
+    color: theme.palette.customGrey.grey500
   },
   couponCancelButtonLabel: {
     color: theme.palette.customGreen.green300
@@ -88,9 +88,9 @@ const styles = theme => ({
 })
 
 class Coupon extends Component {
-  constructor(props) {
+  constructor (props) {
     super(props)
-    this.state={
+    this.state = {
       open: false
     }
   }
@@ -100,13 +100,13 @@ class Coupon extends Component {
       open: true
     })
 
-    this.props.updateCouponCode (
+    this.props.updateCouponCode(
       this.props.cartState,
       this.props.cartState.couponDetail.payload.coupon_code
     )
   }
 
-  onClickOfApply() {
+  onClickOfApply () {
     this.props.applyCouponCodeLoading(
       this.props.cartState,
       this.props.cartState.payload.uid,
@@ -114,28 +114,28 @@ class Coupon extends Component {
     )
   }
 
-  handleClose() {
+  handleClose () {
     this.setState({
       open: false
     })
 
-    if(!this.props.cartState.couponDetail.isCouponApplied) {
-      this.props.updateCouponCode (
+    if (!this.props.cartState.couponDetail.isCouponApplied) {
+      this.props.updateCouponCode(
         this.props.cartState,
         ''
       )
     }
   }
 
-  onChange(event) {
-    this.props.updateCouponCode (
+  onChange (event) {
+    this.props.updateCouponCode(
       this.props.cartState,
       event.target.value
     )
   }
 
-  componentDidUpdate(prevProps) {
-    if((this.props.cartState.couponDetail.isCouponApplied !==
+  componentDidUpdate (prevProps) {
+    if ((this.props.cartState.couponDetail.isCouponApplied !==
     prevProps.cartState.couponDetail.isCouponApplied) &&
     this.props.cartState.couponDetail.isCouponApplied) {
       this.setState({
@@ -148,38 +148,38 @@ class Coupon extends Component {
     return (
       <div className={this.props.classes.couponWrapper}>
         {
-          !this.props.cartState.couponDetail.isCouponApplied ?
-          <Button
-            size='small'
-            variant='outlined'
-            color='primary'
-            classes={{
-              root: this.props.classes.buttonRoot,
-              label: this.props.classes.buttonLabel
-            }}
-            className={this.props.classes.buttonStyle}
-            onClick={this.onClickOfCoupon.bind(this)}
-            label={'Have a coupon code?'}
-          /> :
-          <EditCoupon
-            cartState={this.props.cartState}
-            onClickOfCoupon={this.onClickOfCoupon.bind(this)}
-          />
+          !this.props.cartState.couponDetail.isCouponApplied
+            ? <Button
+              size='small'
+              variant='outlined'
+              color='primary'
+              classes={{
+                root: this.props.classes.buttonRoot,
+                label: this.props.classes.buttonLabel
+              }}
+              className={this.props.classes.buttonStyle}
+              onClick={this.onClickOfCoupon.bind(this)}
+              label={'Have a coupon code?'}
+            />
+            : <EditCoupon
+              cartState={this.props.cartState}
+              onClickOfCoupon={this.onClickOfCoupon.bind(this)}
+            />
         }
         <Dialog
           open={this.state.open}
           onClose={this.handleClose.bind(this)}
-          aria-labelledby="form-dialog-title"
+          aria-labelledby='form-dialog-title'
           classes={{
             paper: this.props.classes.paper
           }}
         >
-          <DialogTitle id="form-dialog-title">Enter Coupon Code</DialogTitle>
+          <DialogTitle id='form-dialog-title'>Enter Coupon Code</DialogTitle>
           <DialogContent>
             <TextField
               autoFocus
-              margin="dense"
-              id="name"
+              margin='dense'
+              id='name'
               fullWidth
               value={this.props.cartState.couponDetail.couponCode}
               onChange={this.onChange.bind(this)}

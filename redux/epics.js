@@ -79,7 +79,6 @@ import {
   getPatientPastMedicineList
 } from '../containers/refillPatients/refillEpics'
 
-
 export const rootEpic = combineEpics(
   getMoleculeSummary,
   getRelatedMedicines,

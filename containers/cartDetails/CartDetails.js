@@ -30,7 +30,7 @@ import {
 
 const styles = theme => ({
   card: {
-    marginLeft: theme.spacing.unit * 3.125,
+    marginLeft: theme.spacing.unit * 3.125
   },
   cardContent: {
     padding: 0
@@ -100,14 +100,14 @@ class CartDetails extends Component {
           <div className={this.props.classes.scrollWrapper}>
             {
               this.props.cartState.payload.patient_id.payload
-              ? (
-                <div>
-                  <Avatar
-                    cartState={this.props.cartState}
-                  />
-                  <Divider/>
-                </div>
-              ) : null
+                ? (
+                  <div>
+                    <Avatar
+                      cartState={this.props.cartState}
+                    />
+                    <Divider />
+                  </div>
+                ) : null
             }
             <MedicineList
               cartState={this.props.cartState}
@@ -115,11 +115,11 @@ class CartDetails extends Component {
               incrementCartItem={this.incrementCartItem.bind(this)}
             />
             { this.props.cartState.payload.patient_id.payload &&
-                <Coupon
-                  applyCouponCodeLoading={this.props.applyCouponCodeLoading}
-                  updateCouponCode={this.props.updateCouponCode}
-                  cartState={this.props.cartState}
-                />
+            <Coupon
+              applyCouponCodeLoading={this.props.applyCouponCodeLoading}
+              updateCouponCode={this.props.updateCouponCode}
+              cartState={this.props.cartState}
+            />
             }
             <PriceDetails
               cartState={this.props.cartState}

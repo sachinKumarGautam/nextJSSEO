@@ -2,6 +2,7 @@ import React from 'react'
 
 import { withStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
+import { CURRENTLY_WORKING_SECTION } from '../containers/messages/commonMsg'
 
 const styles = theme => {
   return {
@@ -62,7 +63,7 @@ const ListContent = (props) => {
         {
           !props.content &&
           <Typography className={props.classes.currentlyWorking} variant={'body2'} component='div'>
-                We are currently working on this section
+            {CURRENTLY_WORKING_SECTION}
           </Typography>
         }
       </ul>

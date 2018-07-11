@@ -93,7 +93,7 @@ class MedicineList extends React.Component {
           <CardContent>
             <ul className={classes.articleListWrapper}>
               {
-                medicineListState.payload.map((itemDetails) => (
+                medicineListState.map((itemDetails) => (
                   <li className={classes.listItem}>
                     <MedicineListDetails
                       itemDetails={itemDetails}
@@ -107,7 +107,7 @@ class MedicineList extends React.Component {
             </ul>
           </CardContent>
         </Card>
-        { medicineListState.payload &&
+        { medicineListState &&
           <div className={classes.buttonWrapper}>
             <Button
               size='medium'
