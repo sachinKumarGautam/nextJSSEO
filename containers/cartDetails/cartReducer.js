@@ -478,6 +478,11 @@ export default function cartReducer (state = initialState, action) {
           isLoading: action.isLoading,
           isCouponApplied: action.isCouponApplied,
           couponCode: action.payload.coupon_code
+        },
+        payload: {
+          ...state.payload,
+          coupon_discount: action.payload.coupon_discount,
+          coupon_code: action.payload.coupon_code
         }
       }
 
