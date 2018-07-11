@@ -43,7 +43,8 @@ const styles = theme => ({
   buttonWrapper: {
     display: 'flex',
     flexDirection: 'row',
-    marginLeft: theme.spacing.unit * 2.25
+    marginRight: theme.spacing.unit * 3,
+    justifyContent: 'flex-end'
   }
 })
 
