@@ -58,12 +58,14 @@ class RelatedMedicinesCard extends React.Component {
     super(props)
     this.handleOpenPincodeDialog = this.handleOpenPincodeDialog.bind(this)
     this.handleClosePincodeDialog = this.handleClosePincodeDialog.bind(this)
+    this.addToCart = this.addToCart.bind(this)
     this.state = {
       pincodeDialogOpen: false
     }
   }
 
-  addToCart () {
+  addToCart (event) {
+    this.props.incrementCartItemLoading(this.props.cartState, this.props.itemDetails)
   }
 
   handleOpenPincodeDialog () {
@@ -123,7 +125,7 @@ class RelatedMedicinesCard extends React.Component {
           open={this.state.pincodeDialogOpen}
           handleOpenPincodeDialog={this.handleOpenPincodeDialog}
           handleClose={this.handleClosePincodeDialog}
-          onClick={this.addToCart.bind(this)}
+          addToCart={this.addToCart}
           variant='outlined'
           classes={{
             root: props.classes.buttonRoot,

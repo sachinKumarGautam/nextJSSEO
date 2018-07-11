@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 
 import Grid from '@material-ui/core/Grid'
 
@@ -35,4 +35,4 @@ const PatientDetails = props => (
   </Grid>
 )
 
-export default PatientDetails;
+export default PatientDetails

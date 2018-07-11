@@ -27,7 +27,7 @@ const styles = theme => ({
   titleStyle: {
     backgroundColor: theme.palette.customGreen.green300
   },
-  cardStyle:{
+  cardStyle: {
     '&:last-child': {
       paddingBottom: 0
     }

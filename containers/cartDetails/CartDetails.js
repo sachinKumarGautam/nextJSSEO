@@ -67,7 +67,7 @@ class CartDetails extends Component {
   }
 
   componentDidUpdate (prevProps) {
-    if(
+    if (
       this.props.cartState.orderResponse.order_number !==
       prevProps.cartState.orderResponse.order_number
     ) {

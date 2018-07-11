@@ -24,6 +24,9 @@ const styles = theme => {
     hover: {
       color: theme.palette.primary.main,
       transition: '0.2s'
+    },
+    currentlyWorking: {
+      padding: theme.spacing.unit * 2
     }
   }
 }
@@ -55,6 +58,12 @@ const ListContent = (props) => {
               </Typography>
             </li>
           ))
+        }
+        {
+          !props.content &&
+          <Typography className={props.classes.currentlyWorking} variant={'body2'} component='div'>
+                We are currently working on this section
+          </Typography>
         }
       </ul>
     </div>

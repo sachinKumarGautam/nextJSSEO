@@ -9,6 +9,7 @@ import MedicineList from './MedicineList'
 import {
   getRelatedMedicinesLoading
 } from './medicineListActions'
+import {incrementCartItemLoading} from '../cartDetails/cartActions'
 
 /*
   bread crumbs
@@ -26,6 +27,9 @@ class MedicineListWrapper extends Component {
             medicineListState={this.props.medicineListState}
             getRelatedMedicinesLoading={this.props.actions.getRelatedMedicinesLoading}
             checkPincodeState={this.props.checkPincodeState}
+            moleculeName={this.props.moleculeName}
+            incrementCartItemLoading={this.props.actions.incrementCartItemLoading}
+            cartState={this.props.cartState}
           />
         </section>
       </div>
@@ -37,7 +41,8 @@ function mapDispatchToProps (dispatch) {
   return {
     actions: bindActionCreators(
       {
-        getRelatedMedicinesLoading
+        getRelatedMedicinesLoading,
+        incrementCartItemLoading
       },
       dispatch
     )
@@ -47,7 +52,8 @@ function mapDispatchToProps (dispatch) {
 function mapStateToProps (state) {
   return {
     medicineListState: state.medicineListState,
-    checkPincodeState: state.checkPincodeState
+    checkPincodeState: state.checkPincodeState,
+    cartState: state.cartState
   }
 }
 
