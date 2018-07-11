@@ -26,6 +26,7 @@ class MedicineListWrapper extends Component {
             medicineListState={this.props.medicineListState}
             getRelatedMedicinesLoading={this.props.actions.getRelatedMedicinesLoading}
             checkPincodeState={this.props.checkPincodeState}
+            moleculeName={this.props.moleculeName}
           />
         </section>
       </div>

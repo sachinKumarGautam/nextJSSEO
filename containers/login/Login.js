@@ -43,21 +43,9 @@ const styles = theme => ({
 })
 
 class SignIn extends React.Component {
-  state = {
-    checked: false,
-  };
-
-  componentDidUpdate(nextProps) {
-    if(nextProps.loginState.isAuthenticated !== this.props.loginState.isAuthenticated){
-       this.setState({
-         checked: true
-       })
-    }
-  }
 
   render () {
     const { classes } = this.props
-    const { checked } = this.state;
     return (
       <div className={classes.container}>
         <Form
@@ -79,13 +67,6 @@ class SignIn extends React.Component {
           >
               Register
           </a>
-          {/* <div className={classes.container2}>
-          <Zoom in={checked}>
-            <Paper elevation={4} className={classes.paper}>
-              Welcome sachin
-            </Paper>
-          </Zoom>
-          </div> */}
         </Typography>
       </div>
     )
