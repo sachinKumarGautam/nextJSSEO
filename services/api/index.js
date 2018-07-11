@@ -238,6 +238,13 @@ const getSliderImages$ = tagName => (
   })
 )
 
+const applyCouponForCart$ = (cartUid, couponCode) => (
+  makeAjaxRequest({
+    method: 'PATCH',
+    url: fetchUrl('cart', cartUid + '/coupon/' + couponCode, 'CREATE')
+  })
+)
+
 export {
   getMoleculeSummary$,
   getMedicineList$,
@@ -267,5 +274,6 @@ export {
   submitDeliveryDetails$,
   submitRefillDate$,
   getPatientPastMedicineList$,
-  getSliderImages$
+  getSliderImages$,
+  applyCouponForCart$
 }

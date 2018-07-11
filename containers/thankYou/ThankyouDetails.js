@@ -57,7 +57,7 @@ const ThankyouDetails = (props) => {
     <div>
       <div className={props.classes.orderWrapper}>
         <img
-          src= 'static/images/bg-chk.svg'
+          src='static/images/bg-chk.svg'
           alt='check'
           className={props.classes.imageStyle}
         />
@@ -94,8 +94,8 @@ const ThankyouDetails = (props) => {
           className={props.classes.deliveryDateValue}
         >
           : {
-            props.cartState.orderResponse.promised_delivery_date ?
-            formatDate(props.cartState.orderResponse.promised_delivery_date) : ''
+            props.cartState.orderResponse.promised_delivery_date
+              ? formatDate(props.cartState.orderResponse.promised_delivery_date) : ''
           }
         </Typography>
       </div>

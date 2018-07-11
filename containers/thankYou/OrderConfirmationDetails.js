@@ -55,7 +55,7 @@ const styles = theme => ({
     marginLeft: theme.spacing.unit * 5.25,
     display: 'flex',
     flexDirection: 'row',
-    marginBottom: theme.spacing.unit * 5.37,
+    marginBottom: theme.spacing.unit * 5.37
   }
 })
 
@@ -66,7 +66,7 @@ const OrderConfirmationDetails = (props) => {
         <ThankyouDetails
           cartState={props.cartState}
         />
-        <Divider/>
+        <Divider />
         <RefillDetails
           submitRefillDateLoading={props.submitRefillDateLoading}
           thankYouState={props.thankYouState}

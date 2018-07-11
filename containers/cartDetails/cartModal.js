@@ -86,6 +86,16 @@ const initialState = {
       isError: false,
       error: {}
     }
+  },
+  couponDetail: {
+    couponCode: '',
+    isCouponApplied: false,
+    payload: {},
+    isLoading: false,
+    errorState: {
+      isError: false,
+      error: {}
+    }
   }
 }
 

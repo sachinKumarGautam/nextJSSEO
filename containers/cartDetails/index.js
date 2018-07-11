@@ -23,7 +23,9 @@ import {
   submitOrderLoading,
   updateIsCartOpenRegisterModalFlag,
   resetCartState,
-  getAnonymousCartIdLoading
+  getAnonymousCartIdLoading,
+  applyCouponCodeLoading,
+  updateCouponCode
 } from './cartActions'
 
 import {
@@ -44,7 +46,6 @@ import {
 
 class CartDetailsWrapper extends Component {
   componentDidMount () {
-    console.log('componentDidMount')
     const cartUid = this.props.cartState.payload.uid
 
     this.props.actions.getCartDetailsLoading(
@@ -52,15 +53,17 @@ class CartDetailsWrapper extends Component {
       cartUid
     )
 
-    this.props.actions.getPatientDetailsListLoading(
-      this.props.patientDetailsState,
-      this.props.customerState.payload.id // pass customer id
-    )
+    if (this.props.loginState.isAuthenticated) {
+      this.props.actions.getPatientDetailsListLoading(
+        this.props.patientDetailsState,
+        this.props.customerState.payload.id // pass customer id
+      )
 
-    this.props.actions.getDeliveryDetailsListLoading(
-      this.props.deliveryDetailsState,
-      this.props.customerState.payload.id // pass customer id
-    )
+      this.props.actions.getDeliveryDetailsListLoading(
+        this.props.deliveryDetailsState,
+        this.props.customerState.payload.id // pass customer id
+      )
+    }
   }
 
   componentDidUpdate (prevProps) {
@@ -81,8 +84,8 @@ class CartDetailsWrapper extends Component {
     return (
       <div>
         <BreadCrumbs />
-        <Grid container spacing={24}>
-          <Grid item xs={8}>
+        <Grid container>
+          <Grid item xs={7}>
             <section>
               <OrderSummary
                 loginState={this.props.loginState}
@@ -102,7 +105,7 @@ class CartDetailsWrapper extends Component {
               />
             </section>
           </Grid>
-          <Grid item xs={4}>
+          <Grid item xs={5}>
             <section>
               <CartDetails
                 cartState={this.props.cartState}
@@ -111,6 +114,8 @@ class CartDetailsWrapper extends Component {
                 deleteCartItemLoading={this.props.actions.deleteCartItemLoading}
                 resetCartState={this.props.actions.resetCartState}
                 getAnonymousCartIdLoading={this.props.actions.getAnonymousCartIdLoading}
+                applyCouponCodeLoading={this.props.actions.applyCouponCodeLoading}
+                updateCouponCode={this.props.actions.updateCouponCode}
               />
             </section>
           </Grid>
@@ -151,7 +156,9 @@ function mapDispatchToProps (dispatch) {
         resetCartState,
         getAnonymousCartIdLoading,
         submitPatientDetailsLoading,
-        submitDeliveryDetailsLoading
+        submitDeliveryDetailsLoading,
+        applyCouponCodeLoading,
+        updateCouponCode
       },
       dispatch
     )

@@ -430,6 +430,60 @@ export default function cartReducer (state = initialState, action) {
         }
       }
 
+    case cartActionTypes.SUBMIT_COUPON_CODE_LOADING:
+      return {
+        ...state,
+        couponDetail: {
+          ...state.couponDetail,
+          isLoading: action.isLoading,
+          isCouponApplied: action.isCouponApplied,
+          errorState: {
+            ...state.couponDetail.errorState,
+            isError: action.isError
+          }
+        }
+      }
+
+    case cartActionTypes.SUBMIT_COUPON_CODE_SUCCESS:
+      return {
+        ...state,
+        couponDetail: {
+          ...state.couponDetail,
+          payload: action.payload,
+          isLoading: action.isLoading,
+          isCouponApplied: action.isCouponApplied,
+          couponCode: action.payload.coupon_code
+        }
+      }
+
+    case cartActionTypes.SUBMIT_COUPON_CODE_FAILURE:
+      return {
+        ...state,
+        couponDetail: {
+          ...state.couponDetail,
+          isLoading: action.isLoading,
+          isCouponApplied: action.isCouponApplied,
+          payload: {
+            ...state.couponDetail.payload,
+            coupon_code: ''
+          },
+          errorState: {
+            ...state.couponDetail.errorState,
+            isError: action.isError,
+            error: action.error
+          }
+        }
+      }
+
+    case cartActionTypes.UPDATE_COUPON_CODE_VALUE:
+      return {
+        ...state,
+        couponDetail: {
+          ...state.couponDetail,
+          couponCode: action.value
+        }
+      }
+
     default:
       return state
   }

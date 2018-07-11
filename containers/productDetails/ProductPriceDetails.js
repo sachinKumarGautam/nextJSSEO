@@ -96,7 +96,7 @@ class ProductPriceDetails extends Component {
               />
             </div>
             {
-              this.props.checkPincodeState.payload.city &&
+              this.props.checkPincodeState.payload.pincode &&
               <DeliveryInfoWrapper
                 checkPincodeState={this.props.checkPincodeState}
                 openPincodeDialog={this.handleOpenPincodeDialog}
@@ -113,7 +113,6 @@ class ProductPriceDetails extends Component {
                 addToCart={this.addToCart}
                 checkPincodeState={this.props.checkPincodeState}
                 checkPincodeLoading={this.props.checkPincodeLoading}
-                onChangeQuantity={this.onChangeQuantity}
               />
             </div>
           </CardContent>
