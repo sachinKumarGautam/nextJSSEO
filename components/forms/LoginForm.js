@@ -13,7 +13,7 @@ import AccountCircle from '@material-ui/icons/StayPrimaryPortrait'
 import { withStyles } from '@material-ui/core/styles'
 
 import {
-  MOBILE_REQUIRED,
+  MOBILE_REQUIRED
 } from '../../containers/messages/ValidationMsg'
 
 // Helper styles for demo

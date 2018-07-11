@@ -63,7 +63,7 @@ class CartDetails extends Component {
   }
 
   componentDidUpdate (prevProps) {
-    if(
+    if (
       this.props.cartState.orderResponse.order_number !==
       prevProps.cartState.orderResponse.order_number
     ) {
@@ -92,11 +92,11 @@ class CartDetails extends Component {
           <div className={this.props.classes.cartWrapper}>
             {
               this.props.cartState.payload.patient_id.payload
-              ? (
-                <Avatar
-                  cartState={this.props.cartState}
-                />
-              ) : null
+                ? (
+                  <Avatar
+                    cartState={this.props.cartState}
+                  />
+                ) : null
             }
             <MedicineList
               cartState={this.props.cartState}

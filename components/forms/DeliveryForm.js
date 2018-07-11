@@ -15,7 +15,7 @@ import {
   STATE_REQUIRED,
   LOCALITY_REQUIRED,
   CITY_REQUIRED,
-  PINCODE_REQUIRED,
+  PINCODE_REQUIRED
 } from '../../containers/messages/ValidationMsg'
 
 // Helper styles for demo

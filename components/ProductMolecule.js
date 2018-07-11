@@ -17,8 +17,8 @@ const styles = theme => {
       marginRight: theme.spacing.unit * 2,
       color: theme.palette.customGrey.grey600,
       '&:hover': {
-        color: theme.palette.primary.main,
-      },
+        color: theme.palette.primary.main
+      }
     },
     paper: {
       padding: theme.spacing.unit,

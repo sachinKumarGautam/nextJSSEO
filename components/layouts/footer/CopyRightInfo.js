@@ -54,14 +54,14 @@ const SubFooter = ({classes}) => (
         >
           <img className={classes.socialMediaIcon} src={'/static/images/instagram.svg'} />
         </a>
-        <a 
+        <a
           className={classes.linkStyle}
           target='blank'
           href='https://www.facebook.com/LifCare/'
         >
           <img className={classes.socialMediaIcon} src={'/static/images/facebook.svg'} />
         </a>
-        <a 
+        <a
           className={classes.linkStyle}
           target='blank'
           href='https://twitter.com/lifcare'
