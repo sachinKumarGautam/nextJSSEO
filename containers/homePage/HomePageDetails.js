@@ -3,13 +3,15 @@ import React, {Component} from 'react'
 import Slider from "react-slick";
 import { withStyles } from '@material-ui/core/styles'
 
+import '../../pages/index.css'
+
 const styles = theme => {
   return {
     container: {
-        margin: '0 auto',
-        padding: '35px 0px',
-        color: '#333',
-        background: '##80c241',
+      margin: '0 auto',
+      padding: '35px 0px',
+      color: '#333',
+      background: '##80c241',
     }
   }
 }
