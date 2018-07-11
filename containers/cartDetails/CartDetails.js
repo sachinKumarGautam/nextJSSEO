@@ -4,6 +4,7 @@ import Card from '@material-ui/core/Card'
 import CardContent from '@material-ui/core/CardContent'
 import { withStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
+import Divider from '@material-ui/core/Divider'
 
 import Avatar from './Avatar'
 import MedicineList from './MedicineList'
@@ -29,7 +30,7 @@ import {
 
 const styles = theme => ({
   card: {
-    marginLeft: theme.spacing.unit * 6
+    marginLeft: theme.spacing.unit * 3.125,
   },
   cardContent: {
     padding: 0
@@ -50,6 +51,11 @@ const styles = theme => ({
   scrollWrapper: {
     maxHeight: theme.spacing.unit * 50,
     overflowY: 'scroll'
+  },
+  cartWrapper: {
+    '&:last-child': {
+      paddingBottom: 0
+    }
   }
 })
 
@@ -80,38 +86,48 @@ class CartDetails extends Component {
   render () {
     return (
       <Card elevation={'1'} className={this.props.classes.card}>
-        <CardContent className={this.props.classes.cardContent}>
+        <CardContent
+          className={this.props.classes.cardContent}
+          classes={{
+            root: this.props.classes.cartWrapper
+          }}
+        >
           <div className={this.props.classes.myCartWrapper}>
             <Typography className={this.props.classes.myCartText}>
               MY CART
             </Typography>
           </div>
-          <div className={this.props.classes.cartWrapper}>
-            <div className={this.props.classes.scrollWrapper}>
-              {
-                this.props.cartState.payload.patient_id.payload
-                ? (
+          <div className={this.props.classes.scrollWrapper}>
+            {
+              this.props.cartState.payload.patient_id.payload
+              ? (
+                <div>
                   <Avatar
                     cartState={this.props.cartState}
                   />
-                ) : null
-              }
-              <MedicineList
-                cartState={this.props.cartState}
-                decrementCartItem={this.decrementCartItem.bind(this)}
-                incrementCartItem={this.incrementCartItem.bind(this)}
-              />
-              {
-                // <Coupon />
-              }
-              <PriceDetails
-                cartState={this.props.cartState}
-              />
-            </div>
-            <TotalAmount
+                  <Divider/>
+                </div>
+              ) : null
+            }
+            <MedicineList
+              cartState={this.props.cartState}
+              decrementCartItem={this.decrementCartItem.bind(this)}
+              incrementCartItem={this.incrementCartItem.bind(this)}
+            />
+            { this.props.cartState.payload.patient_id.payload &&
+                <Coupon
+                  applyCouponCodeLoading={this.props.applyCouponCodeLoading}
+                  updateCouponCode={this.props.updateCouponCode}
+                  cartState={this.props.cartState}
+                />
+            }
+            <PriceDetails
               cartState={this.props.cartState}
             />
           </div>
+          <TotalAmount
+            cartState={this.props.cartState}
+          />
         </CardContent>
       </Card>
     )
