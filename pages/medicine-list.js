@@ -16,6 +16,8 @@ import {
   getRelatedMedicinesLoading
 } from '../containers/medicineList/medicineListActions'
 
+import { searchMedicineLoading } from '../containers/searchMedicine/searchMedicineAction'
+
 const styles = theme => ({
   root: {
     paddingTop: theme.spacing.unit * 2,
@@ -35,14 +37,22 @@ const styles = theme => ({
 class MedicineList extends React.Component {
   componentDidMount () {
     const {query} = Router
-
     // Represents to get medicine list with page size and size per page.
+
     if (query.name) {
       this.props.actions.getRelatedMedicinesLoading(
         this.props.medicineListState,
         query.name, // pass salt name
         0, // page number
         10 // page size
+      )
+    }
+
+    if (query.productName) {
+      this.props.actions.searchMedicineLoading(
+        this.props.searchMedicineState,
+        this.props.checkPincodeState.payload.id,
+        query.productName
       )
     }
   }
@@ -64,7 +74,9 @@ class MedicineList extends React.Component {
 
 function mapStateToProps (state) {
   return {
-    medicineListState: state.medicineListState
+    medicineListState: state.medicineListState,
+    searchMedicineState: state.searchMedicineState,
+    checkPincodeState: state.checkPincodeState
   }
 }
 
@@ -72,7 +84,8 @@ function mapDispatchToProps (dispatch) {
   return {
     actions: bindActionCreators(
       {
-        getRelatedMedicinesLoading
+        getRelatedMedicinesLoading,
+        searchMedicineLoading
       },
       dispatch
     )

@@ -7,7 +7,8 @@ import Paper from '@material-ui/core/Paper'
 import Button from '../../components/button'
 import SearchIcon from '@material-ui/icons/Search'
 import MedicineListDetails from '../../components/MedicineListDetails'
-// import { PRODUCT_DETAILS } from '../../routes/RouteConstant'
+
+import { MEDICINE_LIST_PRODUCT } from '../../routes/RouteConstant'
 
 const styles = theme => ({
   root: {
@@ -101,6 +102,7 @@ function renderInput (inputProps) {
         classes={{
           root: classes.searchButton
         }}
+        onClick={inputProps.onSearchClick.bind(this, InputProps.inputValue)}
         label={<SearchIcon className={classes.iconColor} />}
       />
     </div>
@@ -150,18 +152,25 @@ class SearchMedicine extends React.Component {
     super(props)
     this.searchMedicineOnChange = this.searchMedicineOnChange.bind(this)
     this.onSelectItem = this.onSelectItem.bind(this)
+    this.onSearchMedicine = this.onSearchMedicine.bind(this)
   }
 
   searchMedicineOnChange (event) {
     this.props.searchMedicineLoading(
-      this.props.searchMedicineState, 
-      this.props.checkPincodeState.payload.id, 
+      this.props.searchMedicineState,
+      this.props.checkPincodeState.payload.id,
       event.target.value
     )
   }
 
   onSelectItem (itemDetails, props) {
     this.props.updateInProgressMedicineState(this.props.searchMedicineState, itemDetails)
+  }
+
+  onSearchMedicine (medicineName) {
+    const href = `${MEDICINE_LIST_PRODUCT}?productName=${medicineName}`
+    const as = `${MEDICINE_LIST_PRODUCT}/${medicineName}`
+    Router.push(href, as)
   }
 
   render () {
@@ -190,8 +199,10 @@ class SearchMedicine extends React.Component {
                   placeholder: 'Search medicine...',
                   id: 'search-medicine',
                   autofocus: true,
-                  onChange: this.searchMedicineOnChange
-                })
+                  onChange: this.searchMedicineOnChange,
+                  inputValue
+                }),
+                onSearchClick: this.onSearchMedicine
               })}
               {isOpen ? (
                 <Paper className={classes.paper} square>
