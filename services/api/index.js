@@ -231,6 +231,13 @@ const getPatientPastMedicineList$ = (patientId, facilityCode) => (
   })
 )
 
+const applyCouponForCart$ = (cartUid, couponCode) => (
+  makeAjaxRequest({
+    method: 'PATCH',
+    url: fetchUrl('cart', cartUid + '/coupon/' + couponCode, 'CREATE')
+  })
+)
+
 export {
   getMoleculeSummary$,
   getMedicineList$,
@@ -259,5 +266,6 @@ export {
   checkPincode$,
   submitDeliveryDetails$,
   submitRefillDate$,
-  getPatientPastMedicineList$
+  getPatientPastMedicineList$,
+  applyCouponForCart$
 }

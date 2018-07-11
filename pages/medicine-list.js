@@ -15,7 +15,6 @@ import {searchMedicineLoading} from '../containers/searchMedicine/searchMedicine
 import {getRelatedMedicinesLoading} from '../containers/medicineList/medicineListActions'
 import {incrementCartItemLoading} from '../containers/cartDetails/cartActions'
 
-
 const styles = theme => ({
   root: {
     paddingTop: theme.spacing.unit * 2,
@@ -70,9 +69,9 @@ class MedicineList extends React.Component {
             searchMedicineLoading={this.props.actions.searchMedicineLoading}
             getRelatedMedicinesLoading={this.props.actions.getRelatedMedicinesLoading}
             medicineState={
-              query.productName 
-              ? this.props.searchMedicineState.payload.searchMedicineResult
-              : this.props.medicineListState.payload}
+              query.productName
+                ? this.props.searchMedicineState.payload.searchMedicineResult
+                : this.props.medicineListState.payload}
           />
         </div>
         <Footer />

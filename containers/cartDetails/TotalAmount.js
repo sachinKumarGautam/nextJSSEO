@@ -16,7 +16,7 @@ const styles = theme => ({
   },
   totalAmountText: {
     fontSize: theme.spacing.unit * 2.25,
-    paddingLeft: theme.spacing.unit * 4.125
+    paddingLeft: theme.spacing.unit * 2
   }
 })
 

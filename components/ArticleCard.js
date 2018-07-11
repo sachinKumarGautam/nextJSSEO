@@ -27,7 +27,7 @@ const ArticleCard = (props) => (
   <Card elevation={1}>
     <CardMedia
       className={props.classes.media}
-      image='/static/images/avenger.jpg'
+      image={props.articleDetail.image}
       title='article'
     />
     <CardContent>
@@ -37,10 +37,10 @@ const ArticleCard = (props) => (
         component='h2'
         className={props.classes.cardTitle}
       >
-        Myths & Facts About Diabetes
+        {props.articleDetail.label}
       </Typography>
       <Typography component='p' className={props.classes.cardContent}>
-        There does seem to be a genetic element to both type 2 diabetes and obesity...
+        {props.articleDetail.description}
       </Typography>
     </CardContent>
   </Card>
