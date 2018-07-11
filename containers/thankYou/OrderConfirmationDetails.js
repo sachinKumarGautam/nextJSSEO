@@ -9,6 +9,10 @@ import ThankyouDetails from './ThankyouDetails'
 import RefillDetails from './RefillDetails'
 import Button from '../../components/button'
 
+import Router from 'next/router'
+
+import {HOME_PAGE} from '../../routes/RouteConstant'
+
 const styles = theme => ({
   card: {
     marginBottom: theme.spacing.unit * 30
@@ -90,7 +94,7 @@ const OrderConfirmationDetails = (props) => {
               label: props.classes.buttonHomeLabel
             }}
             className={props.classes.buttonHomeStyle}
-            // onClick={this.handleClickOpen}
+            onClick={() => { Router.push({ pathname: HOME_PAGE}) }}
             label={'HOME'}
           />
         </div>

@@ -1,10 +1,13 @@
-const withCss = require('@zeit/next-css')
+// module.exports = {
+//     webpack: function (cfg) {
+//       cfg.plugins = cfg.plugins.filter(plugin => {
+//         return plugin.constructor.name !== 'UglifyJsPlugin';
+//       });
 
-// fix: prevents error when .css files are required by node
-if (typeof require !== 'undefined') {
-  require.extensions['.css'] = (file) => {}
-}
+//       return plugin
+//     }
+//   }
 
-const withImages = require('next-images')
-module.exports = withImages()
-module.exports = withCss()
+//   module.exports.optimization = {
+//     minimize: false
+//   };
