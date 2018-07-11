@@ -38,17 +38,12 @@ const styles = theme => ({
     marginTop: theme.spacing.unit * 2.875
   },
   amountWrapper: {
-    textAlign: 'center'
-  },
-  plusIcon: {
-    marginRight: theme.spacing.unit * 3.75,
+    textAlign: 'right'
   },
   buttonWrapper: {
     display: 'flex',
     flexDirection: 'row',
-    marginLeft: theme.spacing.unit * 2
-  },
-  minusButton: {
+    marginLeft: theme.spacing.unit * 2.25
   }
 })
 
@@ -63,7 +58,7 @@ class MedicineList extends Component {
                 <Grid
                   container
                 >
-                  <Grid item xs={7}>
+                  <Grid item xs={8}>
                     <ProductName
                       customStyle={this.props.classes.medicineNameWrapper}
                       name={cartItem.name}
@@ -80,7 +75,7 @@ class MedicineList extends Component {
                       withoutImage
                     />
                   </Grid>
-                  <Grid item xs={5}>
+                  <Grid item xs={4}>
                     <div className={this.props.classes.amountWrapper}>
                       <Typography className={this.props.classes.amount}>
                         Rs. {cartItem.mrp}
@@ -89,7 +84,6 @@ class MedicineList extends Component {
                     <div className={this.props.classes.buttonWrapper}>
                       <IconButton
                         onClick={this.props.decrementCartItem.bind(this, cartItem)}
-                        className={this.props.classes.minusButton}
                       >
                         <img
                           src='/static/images/minusDisable.svg'
@@ -102,7 +96,6 @@ class MedicineList extends Component {
                       </Typography>
                       <IconButton
                         onClick={this.props.incrementCartItem.bind(this, cartItem)}
-                        className={this.props.classes.plusIcon}
                       >
                         <img
                           src='/static/images/plus.svg'

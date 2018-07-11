@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 
 import { withStyles } from '@material-ui/core/styles'
-import Typography from '@material-ui/core/Typography'
 import TextField from '@material-ui/core/TextField';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
@@ -9,6 +8,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 
+import EditCoupon from './EditCoupon'
 import Button from '../../components/button'
 import {COUPON_MESSAGE} from '../messages/couponMessage'
 
@@ -23,8 +23,9 @@ const styles = theme => ({
   },
   buttonLabel: {
     color: theme.palette.customGrey.grey700,
-    paddingLeft: theme.spacing.unit * 3,
-    paddingRight: theme.spacing.unit * 8,
+    paddingLeft: theme.spacing.unit * 2,
+    paddingRight: theme.spacing.unit * 2,
+    textAlign: 'center',
     paddingTop: theme.spacing.unit * 2.125,
     paddingBottom: theme.spacing.unit * 2
   },
@@ -160,33 +161,10 @@ class Coupon extends Component {
             onClick={this.onClickOfCoupon.bind(this)}
             label={'Have a coupon code?'}
           /> :
-          <div className={this.props.classes.couponDetailWrapper}>
-            <div>
-              <Typography
-                variant='caption'
-                className={this.props.classes.couponCodeStyle}
-              >
-                {this.props.cartState.couponDetail.payload.coupon_code}
-              </Typography>
-              <Typography
-                variant='caption'
-                className={this.props.classes.couponDescriptionStyle}
-              >
-                {this.props.cartState.couponDetail.payload.short_coupon_description}
-              </Typography>
-            </div>
-            <Button
-              size='small'
-              color='primary'
-              className={this.props.classes.editButton}
-              onClick={this.onClickOfCoupon.bind(this)}
-              classes={{
-                root: this.props.classes.couponButtonRoot,
-                label: this.props.classes.editButtonLabel
-              }}
-              label={'EDIT'}
-            />
-          </div>
+          <EditCoupon
+            cartState={this.props.cartState}
+            onClickOfCoupon={this.onClickOfCoupon.bind(this)}
+          />
         }
         <Dialog
           open={this.state.open}
