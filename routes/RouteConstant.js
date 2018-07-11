@@ -17,3 +17,5 @@ export const CART_DETAILS = '/cart-details'
 export const THANK_YOU = '/order-confirmation'
 
 export const REFILL_PATIENTS = '/refill-patients'
+
+export const MEDICINE_LIST = '/medicine-list'

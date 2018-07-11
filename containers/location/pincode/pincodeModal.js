@@ -1,6 +1,6 @@
 const initialState = {
   payload: {
-    city: '', 
+    city: 'Delhi',
     state: '',
     id: 100,
     source: 'MWEB',

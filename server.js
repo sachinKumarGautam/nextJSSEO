@@ -21,6 +21,12 @@ app.prepare()
       app.render(req, res, actualPage, queryParams)
     })
 
+    server.get('/medicine-list/:name', (req, res) => {
+      const actualPage = '/medicine-list'
+      const queryParams = { name: req.params.name }
+      app.render(req, res, actualPage, queryParams)
+    })
+
     server.get('*', (req, res) => {
       return handle(req, res)
     })

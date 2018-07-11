@@ -51,7 +51,11 @@ class ProductDetails extends React.Component {
   componentDidMount () {
     const { pathname, query } = Router
     if (Router.query.id) {
-      this.props.actions.getProductDetailLoading(this.props.productDetailsState, query.id, query.location)
+      this.props.actions.getProductDetailLoading(
+        this.props.productDetailsState,
+        query.id,
+        query.location
+      )
     }
     this.setState({
       id: Router.query.id
@@ -61,7 +65,11 @@ class ProductDetails extends React.Component {
   componentDidUpdate(prevProps) {
     const { pathname, query } = Router
     if (prevProps.id !== Router.query.id) {
-      this.props.actions.getProductDetailLoading(this.props.productDetailsState, Router.query.id, query.location)
+      this.props.actions.getProductDetailLoading(
+        this.props.productDetailsState,
+        query.id,
+        query.location
+      )
     }
   }
 

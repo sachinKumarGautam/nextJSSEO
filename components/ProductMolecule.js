@@ -56,7 +56,7 @@ const PopoverContent = (props) => (
       Metformin is used in the treatment of  type2 diabetes. It decreases the amount of sugar…
     </Typography>
     <Link
-      as={`${MOLECULE_DETAILS}/${props.item.name}`} 
+      as={`${MOLECULE_DETAILS}/${props.item.id}/${props.item.name}`}
       href={`${MOLECULE_DETAILS}?id=${props.item.id}&name=${props.item.name}`}
     >
       <a className={props.styles.popoverLink}>Read more..</a>

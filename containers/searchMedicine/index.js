@@ -7,7 +7,7 @@ import Paper from '@material-ui/core/Paper'
 import Button from '../../components/button'
 import SearchIcon from '@material-ui/icons/Search'
 import MedicineListDetails from '../../components/MedicineListDetails'
-import { PRODUCT_DETAILS } from '../../routes/RouteConstant'
+// import { PRODUCT_DETAILS } from '../../routes/RouteConstant'
 
 const styles = theme => ({
   root: {
