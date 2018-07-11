@@ -102,7 +102,7 @@ function renderInput (inputProps) {
         classes={{
           root: classes.searchButton
         }}
-        onClick={inputProps.onSearchClick.bind(this, InputProps.inputValue)}
+        onClick={InputProps.inputValue ? inputProps.onSearchClick.bind(this, InputProps.inputValue) : null}
         label={<SearchIcon className={classes.iconColor} />}
       />
     </div>

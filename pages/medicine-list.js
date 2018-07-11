@@ -11,12 +11,10 @@ import withRoot from '../src/withRoot'
 import { connect } from 'react-redux'
 
 import MedicineListWrapper from '../containers/medicineList'
+import {searchMedicineLoading} from '../containers/searchMedicine/searchMedicineAction'
+import {getRelatedMedicinesLoading} from '../containers/medicineList/medicineListActions'
+import {incrementCartItemLoading} from '../containers/cartDetails/cartActions'
 
-import {
-  getRelatedMedicinesLoading
-} from '../containers/medicineList/medicineListActions'
-
-import { searchMedicineLoading } from '../containers/searchMedicine/searchMedicineAction'
 
 const styles = theme => ({
   root: {
@@ -58,12 +56,23 @@ class MedicineList extends React.Component {
   }
 
   render () {
+    const {query} = Router
+
     return (
       <div>
         <Header />
         <div className={this.props.classes.root}>
           <MedicineListWrapper
+            cartState={this.props.cartState}
+            checkPincodeState={this.props.checkPincodeState}
             moleculeName={Router.query.name}
+            incrementCartItemLoading={this.props.actions.incrementCartItemLoading}
+            searchMedicineLoading={this.props.actions.searchMedicineLoading}
+            getRelatedMedicinesLoading={this.props.actions.getRelatedMedicinesLoading}
+            medicineState={
+              query.productName 
+              ? this.props.searchMedicineState.payload.searchMedicineResult
+              : this.props.medicineListState.payload}
           />
         </div>
         <Footer />
@@ -76,7 +85,8 @@ function mapStateToProps (state) {
   return {
     medicineListState: state.medicineListState,
     searchMedicineState: state.searchMedicineState,
-    checkPincodeState: state.checkPincodeState
+    checkPincodeState: state.checkPincodeState,
+    cartState: state.cartState
   }
 }
 
@@ -85,7 +95,8 @@ function mapDispatchToProps (dispatch) {
     actions: bindActionCreators(
       {
         getRelatedMedicinesLoading,
-        searchMedicineLoading
+        searchMedicineLoading,
+        incrementCartItemLoading
       },
       dispatch
     )
