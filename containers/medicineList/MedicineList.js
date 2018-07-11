@@ -107,7 +107,7 @@ class MedicineList extends React.Component {
             </ul>
           </CardContent>
         </Card>
-        { medicineListState &&
+        { medicineListState && !this.props.query.productName &&
           <div className={classes.buttonWrapper}>
             <Button
               size='medium'

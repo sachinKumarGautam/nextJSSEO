@@ -20,6 +20,7 @@ class MedicineListWrapper extends Component {
         <section >
           <MedicineList
             medicineListState={this.props.medicineState}
+            query={this.props.query}
             getRelatedMedicinesLoading={this.props.getRelatedMedicinesLoading}
             checkPincodeState={this.props.checkPincodeState}
             moleculeName={this.props.moleculeName}

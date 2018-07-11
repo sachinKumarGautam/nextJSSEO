@@ -67,6 +67,7 @@ class MedicineList extends React.Component {
             moleculeName={Router.query.name}
             incrementCartItemLoading={this.props.actions.incrementCartItemLoading}
             searchMedicineLoading={this.props.actions.searchMedicineLoading}
+            query={query}
             getRelatedMedicinesLoading={this.props.actions.getRelatedMedicinesLoading}
             medicineState={
               query.productName
