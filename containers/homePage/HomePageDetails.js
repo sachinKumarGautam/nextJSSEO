@@ -3,7 +3,7 @@ import React, {Component} from 'react'
 import Slider from "react-slick";
 import { withStyles } from '@material-ui/core/styles'
 
-import '../../pages/index.css'
+// import '../../pages/index.css'
 
 const styles = theme => {
   return {
@@ -35,7 +35,7 @@ class HomePageWrapper extends Component {
             this.props.homePageState.backGroundImage.payload.map((item) => {
               return (
                 <div>
-                  {item.image}
+                  <img src={item.image}/>
                 </div>
               )
             })
