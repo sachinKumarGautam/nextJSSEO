@@ -54,6 +54,12 @@ class PriceDetails extends Component {
               Care Points Plus
             </Typography>
             {
+              this.props.cartState.payload.coupon_code &&
+              <Typography className={this.props.classes.discount}>
+                Coupon Discount
+              </Typography>
+            }
+            {
               // <Typography className={this.props.classes.itemTotal}>
               //   Amount Payable
               // </Typography>
@@ -78,6 +84,12 @@ class PriceDetails extends Component {
             <Typography className={this.props.classes.discountAmount}>
               - Rs. {this.props.cartState.payload.redeemable_care_points}
             </Typography>
+            {
+              this.props.cartState.payload.coupon_code &&
+              <Typography className={this.props.classes.discountAmount}>
+                - Rs. {this.props.cartState.payload.coupon_discount}
+              </Typography>
+            }
             {
               // <Typography className={this.props.classes.itemTotalAmount}>
               //   Rs. 800.00

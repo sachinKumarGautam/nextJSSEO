@@ -28,6 +28,12 @@ import {
   goToCartSnackbar
 } from '../../../containers/cartDetails/cartActions'
 
+import {
+  HOME_PAGE
+} from '../../../routes/RouteConstant'
+
+import Router from 'next/router'
+
 const styles = theme => ({
   root: {
     flexGrow: 1
@@ -130,7 +136,10 @@ class Header extends React.Component {
               }}
               disableGutters
             >
-              <img src='/static/images/logo-green.svg' />
+              <img
+                src='/static/images/logo-green.svg'
+                onClick={() => { Router.push({ pathname: HOME_PAGE}) }}
+              />
               <SearchMedicine
                 searchMedicineState={searchMedicineState}
                 cartState={this.props.cartState}
