@@ -5,22 +5,28 @@ import { withStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
 
 const styles = theme => ({
-  avatarWrapper: {
-    borderBottom: `1px solid ${theme.palette.customGrey.grey800}`,
-    padding: theme.spacing.unit * 2.5
+  userIconStyle: {
+    marginLeft: theme.spacing.unit * 3.625,
+    marginTop: theme.spacing.unit * 2.5,
+    marginBottom: theme.spacing.unit * 1.625
   },
   userName: {
-    marginTop: theme.spacing.unit * 0.75
+    marginLeft: theme.spacing.unit * 2,
+    marginTop: theme.spacing.unit * 3.25,
+    marginBottom: theme.spacing.unit * 2.75
   }
 })
 
 class Avatar extends Component {
   render () {
     return (
-      <div className={this.props.classes.avatarWrapper}>
+      <div>
         <Grid container spacing={24}>
           <Grid item xs={2}>
-            <img src='/static/images/profileCart.svg' />
+            <img
+              src='/static/images/profileCart.svg'
+              className= {this.props.classes.userIconStyle}
+            />
           </Grid>
           <Grid item xs={8}>
             <Typography className={this.props.classes.userName}>

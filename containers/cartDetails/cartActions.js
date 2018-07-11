@@ -394,3 +394,44 @@ export function goToCartSnackbar (cartState, showAddToCartSnackBar) {
     showAddToCartSnackBar
   }
 }
+
+export function applyCouponCodeLoading (cartState, cartId, couponCode) {
+  return {
+    type: cartActionTypes.SUBMIT_COUPON_CODE_LOADING,
+    cartState,
+    isLoading: true,
+    isError: false,
+    cartId,
+    couponCode,
+    isCouponApplied: false
+  }
+}
+
+export function applyCouponCodeSuccess (cartState, result) {
+  return {
+    type: cartActionTypes.SUBMIT_COUPON_CODE_SUCCESS,
+    cartState,
+    payload: result,
+    isLoading: false,
+    isCouponApplied: true
+  }
+}
+
+export function applyCouponCodeFailure (cartState, error) {
+  return {
+    type: cartActionTypes.SUBMIT_COUPON_CODE_FAILURE,
+    cartState,
+    isLoading: false,
+    isError: true,
+    error: error,
+    isCouponApplied: false
+  }
+}
+
+export function updateCouponCode (cartState, value) {
+  return {
+    type: cartActionTypes.UPDATE_COUPON_CODE_VALUE,
+    cartState,
+    value
+  }
+}
