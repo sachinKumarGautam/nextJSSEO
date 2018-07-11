@@ -44,27 +44,35 @@ import {
 
 class CartDetailsWrapper extends Component {
   componentDidMount () {
-    console.log('componentDidMount')
     const cartUid = this.props.cartState.payload.uid
-
+    
     this.props.actions.getCartDetailsLoading(
       this.props.cartState,
       cartUid
     )
 
-    this.props.actions.getPatientDetailsListLoading(
-      this.props.patientDetailsState,
-      this.props.customerState.payload.id // pass customer id
-    )
+    if(this.props.customerState.payload.id) {
+      this.props.actions.getPatientDetailsListLoading(
+        this.props.patientDetailsState,
+        this.props.customerState.payload.id // pass customer id
+      )
 
-    this.props.actions.getDeliveryDetailsListLoading(
-      this.props.deliveryDetailsState,
-      this.props.customerState.payload.id // pass customer id
-    )
+      this.props.actions.getDeliveryDetailsListLoading(
+        this.props.deliveryDetailsState,
+        this.props.customerState.payload.id // pass customer id
+      )
+    }
   }
 
   componentDidUpdate (prevProps) {
-    if (this.props.customerState.payload.id !== prevProps.customerState.payload.id) {
+    if (
+      (
+        this.props.customerState.payload.id !==
+        prevProps.customerState.payload.id
+      ) && (
+        !this.props.cartState.orderResponse.order_number
+      )
+    ) {
       this.props.actions.getPatientDetailsListLoading(
         this.props.patientDetailsState,
         this.props.customerState.payload.id // pass customer id
