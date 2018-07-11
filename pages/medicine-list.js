@@ -14,6 +14,7 @@ import MedicineListWrapper from '../containers/medicineList'
 import {searchMedicineLoading} from '../containers/searchMedicine/searchMedicineAction'
 import {getRelatedMedicinesLoading} from '../containers/medicineList/medicineListActions'
 import {incrementCartItemLoading} from '../containers/cartDetails/cartActions'
+import { checkPincodeLoading } from '../containers/location/pincode/pincodeAction'
 
 const styles = theme => ({
   root: {
@@ -67,6 +68,8 @@ class MedicineList extends React.Component {
             moleculeName={Router.query.name}
             incrementCartItemLoading={this.props.actions.incrementCartItemLoading}
             searchMedicineLoading={this.props.actions.searchMedicineLoading}
+            query={query}
+            checkPincodeLoading={this.props.actions.checkPincodeLoading}
             getRelatedMedicinesLoading={this.props.actions.getRelatedMedicinesLoading}
             medicineState={
               query.productName
@@ -95,7 +98,8 @@ function mapDispatchToProps (dispatch) {
       {
         getRelatedMedicinesLoading,
         searchMedicineLoading,
-        incrementCartItemLoading
+        incrementCartItemLoading,
+        checkPincodeLoading
       },
       dispatch
     )

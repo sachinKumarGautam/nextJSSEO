@@ -100,7 +100,6 @@ export function submitDeliveryDetailsFailure (deliveryDetailsState, error) {
   return {
     type: SUBMIT_DELIVERY_DETAILS_FAILURE,
     deliveryDetailsState,
-    deliveryDetails,
     isLoading: false,
     error: error,
     isError: true
