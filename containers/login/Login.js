@@ -2,8 +2,8 @@ import React from 'react'
 import { withStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
 import Form from '../../components/forms/index'
-import Zoom from '@material-ui/core/Zoom';
-import Paper from '@material-ui/core/Paper';
+import Zoom from '@material-ui/core/Zoom'
+import Paper from '@material-ui/core/Paper'
 
 const styles = theme => ({
   container: {
@@ -35,15 +35,14 @@ const styles = theme => ({
     textDecoration: 'none'
   },
   container2: {
-    display: 'flex',
+    display: 'flex'
   },
   paper: {
-    margin: theme.spacing.unit,
-  },
+    margin: theme.spacing.unit
+  }
 })
 
 class SignIn extends React.Component {
-
   render () {
     const { classes } = this.props
     return (

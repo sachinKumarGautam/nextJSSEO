@@ -45,7 +45,7 @@ class MoleculeDetails extends React.Component {
   //   console.log('result', resultAction)
 
   //   return { payload: resultAction }
-  
+
   // }
 
   static getInitialProps ({query}) {

@@ -10,7 +10,7 @@ class AddToCartWrapper extends React.Component {
 
   addToCartHandler (event) {
     event.stopPropagation()
-    if (this.props.checkPincodeState.payload.city) {
+    if (this.props.checkPincodeState.payload.pincode) {
       this.props.addToCart()
     } else {
       this.props.handleOpenPincodeDialog()

@@ -2,9 +2,9 @@ import React, { Component } from 'react'
 
 import { withStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
-import Snackbar from '@material-ui/core/Snackbar';
-import IconButton from '@material-ui/core/IconButton';
-import CloseIcon from '@material-ui/icons/Close';
+import Snackbar from '@material-ui/core/Snackbar'
+import IconButton from '@material-ui/core/IconButton'
+import CloseIcon from '@material-ui/icons/Close'
 
 import Button from '../../components/button'
 import {formatDate} from '../../utils/FormatDate'
@@ -20,7 +20,7 @@ const styles = theme => ({
   description: {
     marginLeft: theme.spacing.unit * 5,
     marginBottom: theme.spacing.unit * 3.5,
-    color: theme.palette.customGrey.grey500,
+    color: theme.palette.customGrey.grey500
   },
   buttonRoot: {
     border: `1px dashed ${theme.palette.customGrey.grey200}`
@@ -42,7 +42,7 @@ const styles = theme => ({
   },
   close: {
     width: theme.spacing.unit * 4,
-    height: theme.spacing.unit * 4,
+    height: theme.spacing.unit * 4
   }
 })
 
@@ -66,14 +66,14 @@ const refillDays = [
 ]
 
 class RefillDetails extends Component {
-  constructor(props){
+  constructor (props) {
     super(props)
-    this.state={
+    this.state = {
       open: false
     }
   }
 
-  onClickOfRefillDay(refillDay) {
+  onClickOfRefillDay (refillDay) {
     this.props.submitRefillDateLoading(
       this.props.thankYouState,
       this.props.cartState.orderResponse.order_number,
@@ -81,18 +81,18 @@ class RefillDetails extends Component {
     )
   }
 
-  componentDidUpdate(prevProps) {
-    if(
+  componentDidUpdate (prevProps) {
+    if (
       this.props.thankYouState.payload.repeat_day !==
       prevProps.thankYouState.payload.repeat_day
-    ){
+    ) {
       this.setState({
         open: true
       })
     }
   }
 
-  handleClose() {
+  handleClose () {
     this.setState({
       open: false
     })
@@ -139,27 +139,27 @@ class RefillDetails extends Component {
         <Snackbar
           anchorOrigin={{
             vertical: 'bottom',
-            horizontal: 'center',
+            horizontal: 'center'
           }}
           open={this.state.open}
           autoHideDuration={10000}
           onClose={this.handleClose.bind(this)}
           ContentProps={{
-            'aria-describedby': 'refillDate-id',
+            'aria-describedby': 'refillDate-id'
           }}
           message={
-            <span id="message-id">
+            <span id='message-id'>
               We will confirm your refill request on {refillDate} before we process your next order.
             </span>
           }
           action={[
             <IconButton
-               key="close"
-               aria-label="Close"
-               color="inherit"
-               className={this.props.classes.close}
-               onClick={this.handleClose.bind(this)}
-             >
+              key='close'
+              aria-label='Close'
+              color='inherit'
+              className={this.props.classes.close}
+              onClick={this.handleClose.bind(this)}
+            >
               <CloseIcon />
             </IconButton>
           ]}

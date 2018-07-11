@@ -64,9 +64,9 @@ const CommonButton = (buttonProps) => {
         className={classes.wrapper}
       >
         <Button
-          className={isloading 
-            ? classNames(className, classes.buttonloader) 
-            : classNames(className, classes.button) 
+          className={isloading
+            ? classNames(className, classes.buttonloader)
+            : classNames(className, classes.button)
           }
           type={type || SignalCellularNull}
           color={color}

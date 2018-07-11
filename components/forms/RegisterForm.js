@@ -14,7 +14,7 @@ import {
   FULL_NAME_REQUIRED,
   MOBILE_REQUIRED,
   GENDER_REQUIRED,
-  PINCODE_REQUIRED,
+  PINCODE_REQUIRED
 } from '../../containers/messages/ValidationMsg'
 
 // Helper styles for demo

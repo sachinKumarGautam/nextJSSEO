@@ -154,8 +154,8 @@ class SearchMedicine extends React.Component {
 
   searchMedicineOnChange (event) {
     this.props.searchMedicineLoading(
-      this.props.searchMedicineState, 
-      this.props.checkPincodeState.payload.id, 
+      this.props.searchMedicineState,
+      this.props.checkPincodeState.payload.id,
       event.target.value
     )
   }

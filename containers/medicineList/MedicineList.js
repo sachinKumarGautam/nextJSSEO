@@ -72,7 +72,13 @@ class MedicineList extends React.Component {
   }
 
   render () {
-    const {medicineListState, classes} = this.props
+    const {
+      medicineListState,
+      incrementCartItemLoading,
+      cartState,
+      classes,
+      checkPincodeState
+    } = this.props
     return (
       <div className={classes.medicineListWrapper}>
         <Typography
@@ -91,7 +97,9 @@ class MedicineList extends React.Component {
                   <li className={classes.listItem}>
                     <MedicineListDetails
                       itemDetails={itemDetails}
-                      checkPincodeState={this.props.checkPincodeState}
+                      checkPincodeState={checkPincodeState}
+                      incrementCartItemLoading={incrementCartItemLoading}
+                      cartState={cartState}
                     />
                   </li>
                 ))

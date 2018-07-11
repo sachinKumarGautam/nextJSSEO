@@ -24,7 +24,7 @@ import {
   getAnonymousCartIdLoading,
   updateIsCartOpenLoginFlag,
   incrementCartItemLoading,
-  updateIsCartOpenRegisterModalFlag, 
+  updateIsCartOpenRegisterModalFlag,
   goToCartSnackbar
 } from '../../../containers/cartDetails/cartActions'
 
