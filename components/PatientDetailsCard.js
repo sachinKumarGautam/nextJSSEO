@@ -11,17 +11,13 @@ const styles = theme => {
     patientWrapperStyle: {
       border: `1px solid ${theme.palette.customGrey.grey250}`,
       padding: theme.spacing.unit * 2.5,
-      borderRadius: theme.spacing.unit * 0.5,
-      marginLeft: theme.spacing.unit * 4,
-      marginRight: theme.spacing.unit * 4
+      borderRadius: theme.spacing.unit * 0.5
     },
     patientWrapperSelectedStyle: {
       border: `1px solid ${theme.palette.customGrey.grey250}`,
       backgroundColor: theme.palette.customGreen.green200,
       padding: theme.spacing.unit * 2.5,
-      borderRadius: theme.spacing.unit * 0.5,
-      marginLeft: theme.spacing.unit * 4,
-      marginRight: theme.spacing.unit * 4
+      borderRadius: theme.spacing.unit * 0.5
     },
     buttonRoot: {
       border: `1px solid ${theme.palette.primary.main}`
