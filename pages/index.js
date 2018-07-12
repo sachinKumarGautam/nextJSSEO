@@ -34,6 +34,7 @@ const styles = theme => ({
 
 class HomePage extends React.Component {
   componentDidMount () {
+console.log('hello j')
     this.props.actions.getBackGroundImagesLoading(
       this.props.homePageState,
       'background'
