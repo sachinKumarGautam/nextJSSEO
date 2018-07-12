@@ -4,7 +4,6 @@ import Card from '@material-ui/core/Card'
 import CardContent from '@material-ui/core/CardContent'
 import Typography from '@material-ui/core/Typography'
 import { withStyles } from '@material-ui/core/styles'
-import Grid from '@material-ui/core/Grid'
 
 import PrescriptionContentWrapper from './PrescriptionContentWrapper'
 import Button from '../../components/button'

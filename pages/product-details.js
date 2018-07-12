@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 
 import Header from '../components/layouts/header'
 import Footer from '../components/layouts/footer'
@@ -14,7 +14,7 @@ import Router from 'next/router'
 
 import ProductDetailsWrapper from '../containers/productDetails'
 
-import { getProductDetailLoading, onChangeQuantity} from '../containers/productDetails/productDetailsActions'
+import { getProductDetailLoading, onChangeQuantity } from '../containers/productDetails/productDetailsActions'
 
 import {
   getAnonymousCartIdLoading,
@@ -52,7 +52,7 @@ class ProductDetails extends React.Component {
   }
 
   componentDidMount () {
-    const { pathname, query } = Router
+    const { query } = Router
     if (Router.query.id) {
       this.props.actions.getProductDetailLoading(
         this.props.productDetailsState,
@@ -66,7 +66,7 @@ class ProductDetails extends React.Component {
   }
 
   componentDidUpdate (prevProps) {
-    const { pathname, query } = Router
+    const { query } = Router
     if (prevProps.id !== Router.query.id) {
       this.props.actions.getProductDetailLoading(
         this.props.productDetailsState,
