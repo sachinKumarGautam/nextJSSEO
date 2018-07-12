@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 import { withStyles } from '@material-ui/core/styles'
 import Badge from '@material-ui/core/Badge'
 import IconButton from '@material-ui/core/IconButton'
-import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart'
+import ShoppingCartIcon from '@material-ui/icons/ShoppingCart'
 import Divider from '@material-ui/core/Divider';
 import Typography from '@material-ui/core/Typography';
 
@@ -97,6 +97,16 @@ const styles = theme => ({
   },
   moleculeTag: {
     textDecoration: 'none'
+  },
+  badge: {
+    width: theme.spacing.unit * 2,
+    height: theme.spacing.unit * 2,
+    top:  theme.spacing.unit * -0.75,
+    right: 0,
+    left: theme.spacing.unit * 2
+  },
+  iconStyle: {
+    fontSize: theme.spacing.unit * 3.25
   }
 })
 
@@ -117,16 +127,17 @@ class CartIcon extends Component {
           data-for='cartIcon'
         >
           <IconButton
-            color='primary'
             className={classes.button}
             aria-label='Add to shopping cart'
           >
             <Badge
-              className={classes.margin}
               badgeContent={cartItems.length}
               color='primary'
+              classes={{
+                badge: classes.badge
+              }}
             >
-              <AddShoppingCartIcon />
+              <ShoppingCartIcon classes={{root: classes.iconStyle}}/>
             </Badge>
           </IconButton>
         </a>
