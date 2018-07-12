@@ -89,7 +89,6 @@ const styles = theme => ({
     flex: 12,
     flexDirection: 'column'
   },
-  checked: {},
   imageIcon: {
     width: theme.spacing.unit * 3.5
   },

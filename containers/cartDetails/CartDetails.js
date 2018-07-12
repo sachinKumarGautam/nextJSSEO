@@ -78,7 +78,7 @@ class CartDetails extends Component {
       this.props.cartState.orderResponse.payload.order_number !==
       prevProps.cartState.orderResponse.payload.order_number
     ) {
-      Router.push({ pathname: THANK_YOU})
+      Router.push({ pathname: THANK_YOU })
 
       this.props.resetCartState()
     }

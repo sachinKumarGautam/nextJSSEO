@@ -23,7 +23,6 @@ import {
   submitOrderLoading,
   updateIsCartOpenRegisterModalFlag,
   resetCartState,
-  getAnonymousCartIdLoading,
   applyCouponCodeLoading,
   updateCouponCode,
   optForDoctorCallbackLoading

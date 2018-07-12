@@ -1,3 +1,4 @@
+import React from 'react'
 import { withFormik } from 'formik'
 import * as Yup from 'yup'
 
@@ -50,8 +51,7 @@ class PatientForm extends React.Component {
       isSubmitting,
       handleChange,
       handleSubmit,
-      classes,
-      onSubmit
+      classes
     } = this.props
     return (
       <form onSubmit={handleSubmit}>

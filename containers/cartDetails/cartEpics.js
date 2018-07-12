@@ -25,7 +25,6 @@ import {
   getCartDetailsSuccess,
   getCartDetailsFailure,
   putCartItemSuccess,
-  putCartItemFailure,
   savePatientToCartSuccess,
   savePatientToCartFailure,
   saveDeliveryAddressToCartSuccess,
@@ -92,32 +91,32 @@ export function getCartDetailsEpic (action$, store) {
   )
 }
 
-function cartApiLoadingHandling (
-  cartState,
-  medicineSelected
-) {
-  let cartItems = cartState.payload.cart_items.payload
-
-  cartItems.forEach((cartMedicine, index) => {
-    if (cartMedicine.id === medicineSelected.id) {
-      cartItems[index] = {
-        ...cartMedicine,
-        isLoading: true,
-        errorState: {
-          ...cartMedicine.errorState,
-          isError: false
-        }
-      }
-
-      return false
-    }
-  })
-
-  return putCartItemSuccess(
-    cartState,
-    cartState.payload
-  )
-}
+// function cartApiLoadingHandling (
+//   cartState,
+//   medicineSelected
+// ) {
+//   let cartItems = cartState.payload.cart_items.payload
+//
+//   cartItems.forEach((cartMedicine, index) => {
+//     if (cartMedicine.id === medicineSelected.id) {
+//       cartItems[index] = {
+//         ...cartMedicine,
+//         isLoading: true,
+//         errorState: {
+//           ...cartMedicine.errorState,
+//           isError: false
+//         }
+//       }
+//
+//       return false
+//     }
+//   })
+//
+//   return putCartItemSuccess(
+//     cartState,
+//     cartState.payload
+//   )
+// }
 
 function cartApiErrorHandling (
   cartState,

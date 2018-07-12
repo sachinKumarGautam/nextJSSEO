@@ -64,9 +64,9 @@ class PatientDetailsExpansionPanel extends React.Component {
               </Typography>
               {
                 this.props.patientIdSelected
-                ? (
-                  <img src='/static/images/checkedIcon.svg' className={this.props.checkedIcon}/>
-                ) : null                
+                  ? (
+                    <img src='/static/images/checkedIcon.svg' className={this.props.checkedIcon} />
+                  ) : null
               }
             </div>
             {

@@ -59,7 +59,6 @@ const PincodeDialog = (props) => {
     isSubmitting,
     handleChange,
     handleBlur,
-    handleSubmit,
     classes,
     checkPincodeState
     // toggleForm

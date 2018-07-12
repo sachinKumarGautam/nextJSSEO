@@ -12,9 +12,6 @@ import DeliveryDetailsWrapper from '../containers/deliveryDetails'
 
 import Paper from '@material-ui/core/Paper'
 
-import { rootEpic } from '../redux/epics'
-import { of } from 'rxjs/observable/of'
-
 import {
   getDeliveryDetailsListLoading,
   saveAddressSelected,

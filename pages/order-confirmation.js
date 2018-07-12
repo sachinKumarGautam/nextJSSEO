@@ -7,7 +7,6 @@ import Header from '../components/layouts/header'
 import Footer from '../components/layouts/footer'
 
 import ThankyouWrapper from '../containers/thankYou'
-import Paper from '@material-ui/core/Paper'
 
 const styles = theme => ({
   root: {

@@ -143,7 +143,7 @@ class Header extends React.Component {
               <img
                 className={classes.lifcareLogoStyle}
                 src='/static/images/logo-green.svg'
-                onClick={() => { Router.push({ pathname: HOME_PAGE}) }}
+                onClick={() => { Router.push({ pathname: HOME_PAGE }) }}
               />
               <SearchMedicine
                 searchMedicineState={searchMedicineState}

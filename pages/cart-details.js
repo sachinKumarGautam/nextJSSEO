@@ -1,12 +1,9 @@
 import React from 'react'
 import Header from '../components/layouts/header'
 import Footer from '../components/layouts/footer'
-import CircularProgress from '@material-ui/core/CircularProgress'
 
 import { withStyles } from '@material-ui/core/styles'
 import withRoot from '../src/withRoot'
-
-import Paper from '@material-ui/core/Paper'
 
 import CartDetailsWrapper from '../containers/cartDetails'
 
