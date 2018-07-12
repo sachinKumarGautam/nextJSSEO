@@ -43,7 +43,9 @@ class ProductInfo extends Component {
         <DiseaseTagsWrapper
           diseases={this.props.productDetailsState.payload.diseases}
         />
-        {/* <ProductOverview /> */}
+        <ProductOverview
+          overview={this.props.productDetailsState.payload.description}
+        />
         <ProductInfoNav
           toggleHover={this.props.toggleHover}
           hover={this.props.hover}
