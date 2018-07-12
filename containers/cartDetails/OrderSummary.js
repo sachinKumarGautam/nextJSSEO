@@ -17,8 +17,9 @@ const styles = theme => ({
   },
   heading: {
     ...theme.typography.title,
-    fontSize: theme.typography.pxToRem(19),
+    fontSize: theme.spacing.unit * 2.75,
     color: theme.palette.customGrey.grey500,
+    fontWeight: theme.typography.fontWeightBold,
     marginLeft: theme.spacing.unit * 2.5,
     marginTop: theme.spacing.unit / 2
   },
@@ -92,6 +93,12 @@ const styles = theme => ({
   imageIcon: {
     width: theme.spacing.unit * 3.5
   },
+  checkedIconWrapper: {
+    display: 'flex'
+  },
+  checkedIcon: {
+    marginLeft: theme.spacing.unit * 3.5
+  },
   checkboxWrapper: {
     display: 'flex',
     flexDirection: 'row',
@@ -154,6 +161,7 @@ class OrderSummary extends React.Component {
           registerButtonLabel={this.props.classes.registerButtonLabel}
           updateIsCartOpenLoginFlag={this.props.updateIsCartOpenLoginFlag}
           updateIsCartOpenRegisterModalFlag={this.props.updateIsCartOpenRegisterModalFlag}
+          checkedIcon={this.props.classes.checkedIcon}
         />
         <PrescriptionsExpansionPanel
           expanded={this.state.expanded}
@@ -170,6 +178,7 @@ class OrderSummary extends React.Component {
           deletePrescriptionLoading={this.props.deletePrescriptionLoading}
           files={this.props.cartState.payload.cart_prescriptions}
           handleNextChange={this.handleNextChange.bind(this, 'panel3', true)}
+          checkedIcon={this.props.classes.checkedIcon}
           checkboxWrapper={this.props.classes.checkboxWrapper}
           checkbox={this.props.classes.checkbox}
           teleconsultText={this.props.classes.teleconsultText}
@@ -197,6 +206,8 @@ class OrderSummary extends React.Component {
           patientDetailsWrapper={this.props.classes.patientDetailsWrapper}
           nextButtonRoot={this.props.classes.nextButtonRoot}
           handleNextChange={this.handleNextChange.bind(this, 'panel4', true)}
+          checkedIconWrapper={this.props.classes.checkedIconWrapper}
+          checkedIcon={this.props.classes.checkedIcon}
         />
         <AddressDetailsExpansionPanel
           expanded={this.state.expanded}
@@ -221,6 +232,8 @@ class OrderSummary extends React.Component {
           patientDetailsWrapper={this.props.classes.patientDetailsWrapper}
           nextButtonRoot={this.props.classes.nextButtonRoot}
           handleNextChange={this.handleNextChange.bind(this, 'panel5', true)}
+          checkedIconWrapper={this.props.classes.checkedIconWrapper}
+          checkedIcon={this.props.classes.checkedIcon}
         />
         <PaymentExpansionPanel
           expanded={this.state.expanded}

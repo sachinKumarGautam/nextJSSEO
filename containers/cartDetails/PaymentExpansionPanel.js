@@ -70,6 +70,10 @@ class PaymentExpansionPanel extends React.Component {
             }}
             label={'Place Order'}
             onClick={this.placeOrder.bind(this)}
+            disabled={
+              !this.props.cartState.payload.patient_id.payload ||
+              !this.props.cartState.payload.shipping_address_id.payload
+            }
           />
         </ExpansionPanelDetails>
       </ExpansionPanel>
