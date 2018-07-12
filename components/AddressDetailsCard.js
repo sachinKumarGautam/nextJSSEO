@@ -11,17 +11,13 @@ const styles = theme => {
     addressWrapperStyle: {
       border: `1px solid ${theme.palette.customGrey.grey250}`,
       padding: theme.spacing.unit * 2.5,
-      borderRadius: theme.spacing.unit * 0.5,
-      marginLeft: theme.spacing.unit * 3,
-      marginRight: theme.spacing.unit * 3
+      borderRadius: theme.spacing.unit * 0.5
     },
     addressWrapperSelectedStyle: {
       border: `1px solid ${theme.palette.customGrey.grey250}`,
       backgroundColor: theme.palette.customGreen.green200,
       padding: theme.spacing.unit * 2.5,
-      borderRadius: theme.spacing.unit * 0.5,
-      marginLeft: theme.spacing.unit * 3,
-      marginRight: theme.spacing.unit * 3
+      borderRadius: theme.spacing.unit * 0.5
     },
     addressTypeStyle: {
       color: theme.palette.customGrey.grey500,
@@ -92,27 +88,27 @@ const AddressDetailsCard = props => (
     </Typography>
     {
       props.isCartPage
-      ? (
-        <Button
-          variant='raised'
-          size='small'
-          color='primary'
-          className={props.classes.selectButton}
-          onClick={this.handleClickOpen}
-          label={'SELECT'}
-        />
-      ) : (
-        <Button
-          variant='contained'
-          size='small'
-          className={props.classes.button}
-          classes={{
-            label: props.classes.buttonLabel
-          }}
-          onClick={this.handleClickOpen}
-          label={'EDIT'}
-        />
-      )
+        ? (
+          <Button
+            variant='raised'
+            size='small'
+            color='primary'
+            className={props.classes.selectButton}
+            onClick={this.handleClickOpen}
+            label={'SELECT'}
+          />
+        ) : (
+          <Button
+            variant='contained'
+            size='small'
+            className={props.classes.button}
+            classes={{
+              label: props.classes.buttonLabel
+            }}
+            onClick={this.handleClickOpen}
+            label={'EDIT'}
+          />
+        )
     }
   </div>
 )

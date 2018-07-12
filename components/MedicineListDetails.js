@@ -94,74 +94,74 @@ class MedicineListDetails extends React.Component {
 
     const city = this.props.checkPincodeState.payload.city
     return (
-      
-        <div className={props.classes.medicineListContentWrapper}>
-          <Link
-            prefetch
-            href={`${PRODUCT_DETAILS}?id=${props.itemDetails.slug}&location=${city}`}
-            as={`${PRODUCT_DETAILS}/${props.itemDetails.slug}/${city}`}
-          >
-            <div>
-              <ProductName
-                variant={'body1'}
-                name={props.itemDetails.name}
-                customStyle={props.classes.customName}
-              />
-              
-              {/* {props.isRefillMedicines && <RefillDueDays />} */}
-              <ProductBrand
-                variant={'caption'}
-                withoutImage
-                customStyle={props.classes.customBrand}
-                brand={props.itemDetails.brand_name}
-              />
-              <ProductPackSize
-                variant={'caption'}
-                withoutImage
-                customStyle={props.classes.customPackSize}
-                packType={props.itemDetails.pack_type}
-                packSize={
-                  (props.itemDetails.pack_size && props.itemDetails.pack_size.name)
-                    ? props.itemDetails.pack_size.name : props.itemDetails.pack_size
-                }
-              />
-            </div>
-          </Link>          
+
+      <div className={props.classes.medicineListContentWrapper}>
+        <Link
+          prefetch
+          href={`${PRODUCT_DETAILS}?id=${props.itemDetails.slug}&location=${city}`}
+          as={`${PRODUCT_DETAILS}/${props.itemDetails.slug}/${city}`}
+        >
           <div>
-            <EstimatedPriceLabel
-              variant={'caption'}
-              customStyle={props.classes.customEstimatedLabel}
-              estimatePriceText={'*Est. Price '}
-            />
-            <ProductPrice
+            <ProductName
               variant={'body1'}
-              customStyle={props.classes.customPrice}
-              sellingPrice={props.itemDetails.selling_price}
+              name={props.itemDetails.name}
+              customStyle={props.classes.customName}
             />
-            <StrokePrice
+
+            {/* {props.isRefillMedicines && <RefillDueDays />} */}
+            <ProductBrand
               variant={'caption'}
-              customStyle={props.classes.customStrokePrice}
-              mrp={props.itemDetails.mrp}
+              withoutImage
+              customStyle={props.classes.customBrand}
+              brand={props.itemDetails.brand_name}
             />
-            <div className={props.classes.buttonWrapperStyle}>
-              <AddToCartWrapper
-                variant='outlined'
-                classes={{
-                  root: props.classes.buttonRoot,
-                  label: props.classes.buttonLabel
-                }}
-                // style={{float: 'right'}}
-                label={'Add To Cart'}
-                open={this.state.pincodeDialogOpen}
-                handleOpenPincodeDialog={this.handleOpenPincodeDialog}
-                handleClose={this.handleClosePincodeDialog}
-                addToCart={this.addToCart}
-                checkPincodeState={props.checkPincodeState}
-                checkPincodeLoading={props.checkPincodeLoading}
-              />
-            </div>
+            <ProductPackSize
+              variant={'caption'}
+              withoutImage
+              customStyle={props.classes.customPackSize}
+              packType={props.itemDetails.pack_type}
+              packSize={
+                (props.itemDetails.pack_size && props.itemDetails.pack_size.name)
+                  ? props.itemDetails.pack_size.name : props.itemDetails.pack_size
+              }
+            />
+          </div>
+        </Link>
+        <div>
+          <EstimatedPriceLabel
+            variant={'caption'}
+            customStyle={props.classes.customEstimatedLabel}
+            estimatePriceText={'*Est. Price '}
+          />
+          <ProductPrice
+            variant={'body1'}
+            customStyle={props.classes.customPrice}
+            sellingPrice={props.itemDetails.selling_price}
+          />
+          <StrokePrice
+            variant={'caption'}
+            customStyle={props.classes.customStrokePrice}
+            mrp={props.itemDetails.mrp}
+          />
+          <div className={props.classes.buttonWrapperStyle}>
+            <AddToCartWrapper
+              variant='outlined'
+              classes={{
+                root: props.classes.buttonRoot,
+                label: props.classes.buttonLabel
+              }}
+              // style={{float: 'right'}}
+              label={'Add To Cart'}
+              open={this.state.pincodeDialogOpen}
+              handleOpenPincodeDialog={this.handleOpenPincodeDialog}
+              handleClose={this.handleClosePincodeDialog}
+              addToCart={this.addToCart}
+              checkPincodeState={props.checkPincodeState}
+              checkPincodeLoading={props.checkPincodeLoading}
+            />
           </div>
         </div>
+      </div>
     )
   }
 }

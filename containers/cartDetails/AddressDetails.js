@@ -7,7 +7,7 @@ import DeliveryDetailForm from '../deliveryDetails/DeliveryDetailsForm'
 import AddressDetailsCard from '../../components/AddressDetailsCard'
 
 const AddressDetails = props => (
-  <Grid container spacing={24}>
+  <Grid container spacing={24} className={props.addressDetailsWrapper}>
     <Grid item xs={12}>
       <DeliveryDetailForm
         onSubmit={props.submitDeliveryDetailsLoading}

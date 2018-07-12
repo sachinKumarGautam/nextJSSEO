@@ -14,7 +14,7 @@ import {
 } from '../cartDetails/cartActions'
 
 class ThankyouWrapper extends Component {
-  componentDidMount() {
+  componentDidMount () {
     this.props.actions.getAnonymousCartIdLoading(
       this.props.cartState,
       this.props.checkPincodeState.payload.source,
