@@ -11,7 +11,7 @@ import EstimatedPriceLabel from './EstimatedPriceLabel'
 import AddToCartWrapper from '../containers/cartDetails/addToCartWrapper/index'
 import {PRODUCT_DETAILS} from '../routes/RouteConstant'
 
-import RefillDueDays from './RefillDueDays'
+// import RefillDueDays from './RefillDueDays'
 
 const styles = theme => {
   return {

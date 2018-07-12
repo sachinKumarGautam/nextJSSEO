@@ -33,7 +33,7 @@ class PrescriptionsExpansionPanel extends React.Component {
         className={this.props.expansionPanel}
       >
         <ExpansionPanelSummary expandIcon={<div />}>
-          <img src='/static/images/attachedPrescriptions.svg' />
+          <img src='/static/images/attachedPrescriptions.svg' className={this.props.imageIcon}/>
           <Typography
             component='h1'
             className={this.props.heading}

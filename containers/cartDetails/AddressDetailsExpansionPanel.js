@@ -52,7 +52,7 @@ class AddressDetailsExpansionPanel extends React.Component {
             content: this.props.patientContentWrapper
           }}
         >
-          <img src='/static/images/attachedPrescriptions.svg' />
+          <img src='/static/images/attachedPrescriptions.svg' className={this.props.imageIcon}/>
           <div className={this.props.patientWrapper}>
             <Typography
               component='h1'

@@ -36,7 +36,8 @@ const initialState = {
     urgent_dl_available: false,
     lc_assured_available: false,
     is_cold_storage: false,
-    packaging_type: null
+    packaging_type: null,
+    description: ''
   },
   isLoadingGetProductDetails: false,
   errorStateGetProductDetails: {

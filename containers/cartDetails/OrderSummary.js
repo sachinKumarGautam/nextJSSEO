@@ -16,13 +16,11 @@ const styles = theme => ({
     marginBottom: theme.spacing.unit * 2
   },
   heading: {
-    fontSize: theme.typography.pxToRem(15),
-    flexShrink: 0,
-    fontSize: theme.spacing.unit * 2.75,
-    fontWeight: theme.typography.fontWeightBold,
+    ...theme.typography.title,
+    fontSize: theme.typography.pxToRem(19),
     color: theme.palette.customGrey.grey500,
     marginLeft: theme.spacing.unit * 2.5,
-    letterSpacing: theme.spacing.unit * 0.275
+    marginTop: theme.spacing.unit / 2
   },
   secondaryHeading: {
     fontSize: theme.typography.pxToRem(15),
@@ -89,7 +87,10 @@ const styles = theme => ({
     flex: 12,
     flexDirection: 'column'
   },
-  checked: {}
+  checked: {},
+  imageIcon:{
+    width: theme.spacing.unit * 3.5
+  }
 });
 
 class OrderSummary extends React.Component {
@@ -126,6 +127,7 @@ class OrderSummary extends React.Component {
           cartState={this.props.cartState}
           customerState={this.props.customerState}
           handleChange={this.handleChange('panel1')}
+          imageIcon={this.props.classes.imageIcon}
           expansionPanel={this.props.classes.expansionPanel}
           heading={this.props.classes.heading}
           thankYouWrapper={this.props.classes.thankYouWrapper}
@@ -142,6 +144,7 @@ class OrderSummary extends React.Component {
           loginState={this.props.loginState}
           cartState={this.props.cartState}
           handleChange={this.handleChange('panel2')}
+          imageIcon={this.props.classes.imageIcon}
           expansionPanel={this.props.classes.expansionPanel}
           heading={this.props.classes.heading}
           thankYouWrapper={this.props.classes.thankYouWrapper}
@@ -157,6 +160,7 @@ class OrderSummary extends React.Component {
           loginState={this.props.loginState}
           cartState={this.props.cartState}
           handleChange={this.handleChange('panel3')}
+          imageIcon={this.props.classes.imageIcon}
           expansionPanel={this.props.classes.expansionPanel}
           heading={this.props.classes.heading}
           patientWrapper={this.props.classes.patientWrapper}
@@ -179,6 +183,7 @@ class OrderSummary extends React.Component {
           loginState={this.props.loginState}
           cartState={this.props.cartState}
           handleChange={this.handleChange('panel4')}
+          imageIcon={this.props.classes.imageIcon}
           expansionPanel={this.props.classes.expansionPanel}
           heading={this.props.classes.heading}
           patientWrapper={this.props.classes.patientWrapper}
@@ -202,6 +207,7 @@ class OrderSummary extends React.Component {
           loginState={this.props.loginState}
           cartState={this.props.cartState}
           handleChange={this.handleChange('panel5')}
+          imageIcon={this.props.classes.imageIcon}
           expansionPanel={this.props.classes.expansionPanel}
           heading={this.props.classes.heading}
           thankYouWrapper={this.props.classes.thankYouWrapper}

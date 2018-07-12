@@ -53,7 +53,7 @@ class PatientDetailsExpansionPanel extends React.Component {
             content: this.props.patientContentWrapper
           }}
         >
-          <img src='/static/images/loggedIn.svg' />
+          <img src='/static/images/loggedIn.svg' className={this.props.imageIcon}/>
           <div className={this.props.patientWrapper}>
             <Typography
               component='h1'

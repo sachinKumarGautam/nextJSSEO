@@ -63,6 +63,10 @@ const styles = theme => ({
     color: 'white',
     flexGrow: 0,
     borderRadius: theme.spacing.unit * 4
+  },
+  lifcareLogoStyle: {
+    width: theme.spacing.unit * 12,
+    cursor: 'pointer'
   }
 })
 
@@ -137,6 +141,7 @@ class Header extends React.Component {
               disableGutters
             >
               <img
+                className={classes.lifcareLogoStyle}
                 src='/static/images/logo-green.svg'
                 onClick={() => { Router.push({ pathname: HOME_PAGE}) }}
               />

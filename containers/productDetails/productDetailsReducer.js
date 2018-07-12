@@ -64,7 +64,8 @@ export default function (state = initialState, action) {
           urgent_dl_available: action.urgent_dl_available,
           lc_assured_available: action.lc_assured_available,
           is_cold_storage: action.is_cold_storage,
-          packaging_type: action.packaging_type
+          packaging_type: action.packaging_type,
+          description: action.description
         }
       }
 

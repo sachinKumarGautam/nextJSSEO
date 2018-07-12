@@ -38,7 +38,7 @@ class LoginExpansionPanel extends React.Component {
         className={this.props.expansionPanel}
       >
         <ExpansionPanelSummary expandIcon={<div />}>
-          <img src='/static/images/loggedIn.svg' />
+          <img src='/static/images/loggedIn.svg' className={this.props.imageIcon}/>
           <Typography component='h1' className={this.props.heading}>
             {
               !this.props.loginState.isAuthenticated

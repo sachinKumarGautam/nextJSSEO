@@ -59,6 +59,7 @@ export function getProductDetailSuccess (productDetailsState, result) {
     lc_assured_available: result.lc_assured_available,
     is_cold_storage: result.is_cold_storage,
     packaging_type: result.packaging_type,
+    description: result.description,
     isLoading: false
   }
 }
