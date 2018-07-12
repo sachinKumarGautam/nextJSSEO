@@ -15,7 +15,7 @@ const AddressDetails = props => (
         customerState={props.customerState}
         deliveryDetailsState={props.deliveryDetailsState}
         deliveryFormState={props.deliveryFormState}
-        closeDeliveryFormModal={props.closeDeliveryFormModal}
+        closeModal={props.closeDeliveryFormModal}
       />
     </Grid>
     {
