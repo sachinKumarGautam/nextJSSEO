@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 
-import Slider from "react-slick";
+import Slider from 'react-slick'
 import { withStyles } from '@material-ui/core/styles'
 
 const styles = theme => {
@@ -13,7 +13,7 @@ const styles = theme => {
 
 class HomePageWrapper extends Component {
   render () {
-    let settings= {
+    let settings = {
       dots: false,
       arrows: false,
       infinite: true,
@@ -29,7 +29,7 @@ class HomePageWrapper extends Component {
           this.props.homePageState.backGroundImage.payload.map((item) => {
             return (
               <div>
-                <img src={item.image} className={this.props.classes.imageStyle}/>
+                <img src={item.image} className={this.props.classes.imageStyle} />
               </div>
             )
           })

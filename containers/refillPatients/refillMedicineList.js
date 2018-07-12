@@ -31,11 +31,11 @@ const styles = theme => {
 
 class RefillMedicineList extends Component {
   render () {
-    const { 
-      incrementCartItemLoading, 
+    const {
+      incrementCartItemLoading,
       cartState,
       checkPincodeLoading
-     } = this.props
+    } = this.props
     return (
       <div>
         <Card elevation={'1'}>

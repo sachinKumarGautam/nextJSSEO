@@ -49,31 +49,31 @@ class MenuItems extends Component {
       <div className={this.props.classes.listWrapper}>
         <MenuItem
           className={orderStyle}
-          onClick={() => { Router.push({ pathname: ORDER}) }}
+          onClick={() => { Router.push({ pathname: ORDER }) }}
         >
           Orders
         </MenuItem>
         <MenuItem
           className={menuStyle}
-          onClick={() => { Router.push({ pathname: PATIENT_LIST}) }}
+          onClick={() => { Router.push({ pathname: PATIENT_LIST }) }}
         >
           Patients
         </MenuItem>
         <MenuItem
           className={menuStyle}
-          onClick={() => { Router.push({ pathname: ADDRESS_LIST}) }}
+          onClick={() => { Router.push({ pathname: ADDRESS_LIST }) }}
         >
           Addresses
         </MenuItem>
         <MenuItem
           className={menuStyle}
-          onClick={() => { Router.push({ pathname: PRESCRIPTION}) }}
+          onClick={() => { Router.push({ pathname: PRESCRIPTION }) }}
         >
           Prescriptions
         </MenuItem>
         <MenuItem
           className={menuStyle}
-          onClick={() => { Router.push({ pathname: CARE_POINTS}) }}
+          onClick={() => { Router.push({ pathname: CARE_POINTS }) }}
         >
           Care Points / Care Points +
         </MenuItem>
