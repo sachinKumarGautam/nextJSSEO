@@ -99,16 +99,6 @@ const styles = theme => ({
   },
   imageIcon:{
     width: theme.spacing.unit * 3.5
-  },
-  nameChecked: {
-    width: theme.spacing.unit * 7,
-    marginTop: theme.spacing.unit / 4,
-    marginLeft: theme.spacing.unit * 4.375
-  },
-  otherSummaryCheck: {
-    width: theme.spacing.unit * 3.5,
-    marginTop: theme.spacing.unit / 4,
-    marginLeft: theme.spacing.unit * 4.375
   }
 });
 
@@ -265,13 +255,6 @@ class OrderSummary extends React.Component {
                 )
               }
             </Typography>
-            {/* {this.props.loginState.isAuthenticated &&
-              <img
-                src='static/images/bg-chk.svg'
-                alt='check'
-                className={classes.nameChecked}
-              />
-            } */}
           </ExpansionPanelSummary>
           <ExpansionPanelDetails>
             <Typography className={this.props.classes.loginDescription}>
@@ -344,14 +327,6 @@ class OrderSummary extends React.Component {
             <div className={this.props.classes.patientWrapper}>
               <Typography className={classes.heading}>
                 Patient Details
-                {/* {
-                  this.state.expanded === 'panel4' &&
-                  <img
-                    src='static/images/bg-chk.svg'
-                    alt='check'
-                    className={classes.otherSummaryCheck}
-                  />
-                } */}
               </Typography>
               {
                 this.state.expanded === 'panel3' &&

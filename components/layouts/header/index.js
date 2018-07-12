@@ -65,7 +65,8 @@ const styles = theme => ({
     borderRadius: theme.spacing.unit * 4
   },
   lifcareLogoStyle: {
-    width: theme.spacing.unit * 12
+    width: theme.spacing.unit * 12,
+    cursor: 'pointer'
   }
 })
 

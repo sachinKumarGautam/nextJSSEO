@@ -56,6 +56,9 @@ const styles = theme => {
       color: theme.palette.primary.main,
       marginLeft: theme.spacing.unit * 2,
       marginTop: theme.spacing.unit * 1.25
+    },
+    selectButtonRoot: {
+      cursor: 'pointer'
     }
   }
 }
@@ -105,6 +108,9 @@ const PatientDetailsCard = props => (
                   <Typography
                     variant='caption'
                     className={props.classes.selectButtonLabel}
+                    classes= {{
+                      root: props.classes.selectButtonRoot
+                    }}
                   >
                     SELECT
                   </Typography>
