@@ -9,6 +9,10 @@ import Button from '../../components/button'
 
 import ImagePicker from './ImagePicker'
 
+import {
+  PRESCRIPTION_DESCRIPTION
+} from '../messages/cartMessages'
+
 class PrescriptionsExpansionPanel extends React.Component {
   onImageSelection (event) {
     this.props.uploadPrescriptionLoading(
@@ -47,8 +51,7 @@ class PrescriptionsExpansionPanel extends React.Component {
           }}
         >
           <Typography component='h2' className={this.props.loginDescription}>
-            *Upload your prescription. If you do not have a ready prescription,
-            you may opt for a tele-consultation with our doctor and create a prescription.
+            {PRESCRIPTION_DESCRIPTION}
           </Typography>
           <ImagePicker
             onImageSelection={this.onImageSelection.bind(this)}

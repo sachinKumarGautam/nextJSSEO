@@ -7,6 +7,10 @@ import Typography from '@material-ui/core/Typography'
 
 import LoginDetails from './LoginDetails'
 
+import {
+  LOGIN_DESCRIPTION
+} from '../messages/cartMessages'
+
 class LoginExpansionPanel extends React.Component {
   openLoginModal () {
     const isCartOpenLoginDialog = true
@@ -56,7 +60,7 @@ class LoginExpansionPanel extends React.Component {
           }}
         >
           <Typography component='h2' className={this.props.loginDescription}>
-            To place an order now, login to your existing account or register
+            {LOGIN_DESCRIPTION}
           </Typography>
           <div className={this.props.loginDetailsWrapper}>
             <LoginDetails
