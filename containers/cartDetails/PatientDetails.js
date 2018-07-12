@@ -7,7 +7,7 @@ import PatientDetailForm from '../patientDetails/PatientDetailForm'
 import PatientDetailsCard from '../../components/PatientDetailsCard'
 
 const PatientDetails = props => (
-  <Grid container spacing={24}>
+  <Grid container spacing={24} className={props.patientDetailsWrapper}>
     <Grid item xs={12}>
       <PatientDetailForm
         closePatientFormModal={props.closePatientFormModal}
