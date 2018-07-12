@@ -23,8 +23,8 @@ import {
 
 const styles = theme => ({
   root: {
-    paddingTop: 16,
-    paddingBottom: 16,
+    paddingTop: theme.spacing.unit * 3,
+    paddingBottom: theme.spacing.unit * 3,
     paddingLeft: theme.spacing.unit * 7,
     paddingRight: theme.spacing.unit * 7,
     maxWidth: theme.breakpoints.values.lg,
@@ -34,6 +34,10 @@ const styles = theme => ({
   },
   title: {
     fontWeight: theme.typography.fontWeightBold
+  },
+  wrapperStyle: {
+    paddingBottom: theme.spacing.unit * 3,
+    minHeight: theme.spacing.unit * 100
   }
 })
 
@@ -50,7 +54,7 @@ class DeliveryDetails extends React.Component {
     return (
       <div>
         <Header />
-        <div>
+        <div className={this.props.classes.wrapperStyle}>
           <Paper className={this.props.classes.root} elevation={1}>
             <DeliveryDetailsWrapper
               deliveryDetailsState={this.props.deliveryDetailsState}
