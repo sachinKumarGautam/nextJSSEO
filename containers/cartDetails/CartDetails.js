@@ -50,7 +50,8 @@ const styles = theme => ({
   },
   scrollWrapper: {
     maxHeight: theme.spacing.unit * 50,
-    overflowY: 'scroll'
+    overflowY: 'scroll',
+    overflowX: 'none'
   },
   cartWrapper: {
     '&:last-child': {

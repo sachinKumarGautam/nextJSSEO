@@ -54,12 +54,20 @@ class AddressDetailsExpansionPanel extends React.Component {
         >
           <img src='/static/images/attachedPrescriptions.svg' className={this.props.imageIcon} />
           <div className={this.props.patientWrapper}>
-            <Typography
-              component='h1'
-              className={this.props.heading}
-            >
-              Delivery Details
-            </Typography>
+            <div className={this.props.checkedIconWrapper}>
+              <Typography
+                component='h1'
+                className={this.props.heading}
+              >
+                Delivery Details
+              </Typography>
+              {
+                this.props.addressIdSelected
+                ? (
+                  <img src='/static/images/checkedIcon.svg' className={this.props.checkedIcon}/>
+                ) : null
+              }
+            </div>
             {
               this.props.expanded === 'panel4' &&
               <AddDeliveryAddressButton
