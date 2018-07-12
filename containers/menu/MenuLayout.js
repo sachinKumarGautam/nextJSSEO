@@ -34,7 +34,7 @@ const styles = theme => {
       marginBottom: theme.spacing.unit * 4
     },
     iconSize: {
-      fontSize: theme.spacing.unit * 3.75
+      fontSize: theme.spacing.unit * 3.5
     }
   }
 }

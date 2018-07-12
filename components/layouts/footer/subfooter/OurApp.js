@@ -6,7 +6,7 @@ const styles = theme => ({
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'flex-start',
-    
+
     marginBottom: theme.spacing.unit * 2.25
   },
   img: {
@@ -18,8 +18,10 @@ const styles = theme => ({
     height: theme.spacing.unit * 4,
   },
   listHeaderText: {
+    ...theme.typography.body1,
     color: theme.palette.common.white,
-    marginBottom: theme.spacing.unit * 2.25
+    marginBottom: theme.spacing.unit * 2.5,
+    fontWeight: theme.typography.fontWeightBold
   },
   listItemText: {
     color: theme.palette.customGrey.grey200,

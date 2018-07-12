@@ -97,6 +97,13 @@ const styles = theme => ({
   },
   moleculeTag: {
     textDecoration: 'none'
+  },
+  badge: {
+    width: theme.spacing.unit * 2,
+    height: theme.spacing.unit * 2,
+    top:  theme.spacing.unit * -0.75,
+    right: 0,
+    left: theme.spacing.unit * 2
   }
 })
 
@@ -122,9 +129,11 @@ class CartIcon extends Component {
             aria-label='Add to shopping cart'
           >
             <Badge
-              className={classes.margin}
               badgeContent={cartItems.length}
               color='primary'
+              classes={{
+                badge: classes.badge
+              }}
             >
               <AddShoppingCartIcon />
             </Badge>

@@ -9,12 +9,15 @@ const styles = theme => ({
     marginBottom: theme.spacing.unit * 2.25
   },
   listHeaderText: {
+    ...theme.typography.body1,
     color: theme.palette.common.white,
-    marginBottom: theme.spacing.unit * 2.25
+    marginBottom: theme.spacing.unit * 2.5,
+    fontWeight: theme.typography.fontWeightBold
   },
   listItemText: {
+    ...theme.typography.body1,
     color: theme.palette.primary.main,
-    marginLeft: theme.spacing.unit * 1.5,
+    marginLeft: theme.spacing.unit * 2.375,
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'flex-start'
