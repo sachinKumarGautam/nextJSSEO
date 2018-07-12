@@ -59,7 +59,10 @@ class PrescriptionsExpansionPanel extends React.Component {
 
           </Typography>
           {
-            this.props.files.length
+            (
+              this.props.files.length ||
+              this.props.cartState.payload.is_doctor_callback.payload
+            )
             ? (
               <img src='/static/images/checkedIcon.svg' className={this.props.checkedIcon}/>
             ) : null
