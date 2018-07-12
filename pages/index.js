@@ -39,6 +39,7 @@ console.log('hello j')
       this.props.homePageState,
       'background'
     )
+console.log('hello moto')
   }
 
   render () {

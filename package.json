@@ -38,6 +38,8 @@
     "standard": "^11.0.0"
   },
   "scripts": {
+    "precommit": "npm test",
+    "prepush": "npm test",
     "dev": "node server.js",
     "build": "next build",
     "start": "NODE_ENV=production node server.js"
