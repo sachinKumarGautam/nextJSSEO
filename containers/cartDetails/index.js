@@ -53,7 +53,7 @@ class CartDetailsWrapper extends Component {
       cartUid
     )
 
-    if(this.props.customerState.payload.id) {
+    if (this.props.customerState.payload.id) {
       this.props.actions.getPatientDetailsListLoading(
         this.props.patientDetailsState,
         this.props.customerState.payload.id // pass customer id

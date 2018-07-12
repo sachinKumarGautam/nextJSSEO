@@ -30,12 +30,12 @@ export function getRelatedMedicines (action$, store) {
           let modifiedResponse =
             [...data.medicineState.payload, ...result.body.payload.content]
           return getRelatedMedicinesSuccess(
-            data.moleculeState,
+            data.medicineState,
             modifiedResponse
           )
         }),
         catchError(error => {
-          return of(getRelatedMedicinesFailure(data.moleculeState, error))
+          return of(getRelatedMedicinesFailure(data.medicineState, error))
         })
       )
     })
