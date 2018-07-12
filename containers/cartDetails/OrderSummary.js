@@ -17,7 +17,7 @@ const styles = theme => ({
   },
   heading: {
     ...theme.typography.title,
-    fontSize: theme.typography.pxToRem(19),
+    fontSize: theme.spacing.unit * 2.75,
     color: theme.palette.customGrey.grey500,
     fontWeight: theme.typography.fontWeightBold,
     marginLeft: theme.spacing.unit * 2.5,
