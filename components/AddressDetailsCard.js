@@ -53,6 +53,9 @@ const styles = theme => {
       paddingLeft: theme.spacing.unit * 5,
       marginTop: theme.spacing.unit * 1.25
     },
+    selectButtonRoot: {
+      cursor: 'pointer'
+    },
     buttonLabel: {
       ...theme.typography.body2,
       color: theme.palette.customGreen.green300,
@@ -97,6 +100,9 @@ const AddressDetailsCard = props => (
         <Typography
           variant='caption'
           className={props.classes.selectButtonLabel}
+          classes={{
+            root: props.classes.selectButtonRoot
+          }}
         >
           SELECT
         </Typography>
