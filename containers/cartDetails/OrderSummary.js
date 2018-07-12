@@ -1,6 +1,6 @@
-import React from 'react';
+import React from 'react'
 
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core/styles'
 
 import LoginExpansionPanel from './LoginExpansionPanel'
 import PrescriptionsExpansionPanel from './PrescriptionsExpansionPanel'
@@ -10,7 +10,7 @@ import PaymentExpansionPanel from './PaymentExpansionPanel'
 
 const styles = theme => ({
   root: {
-    width: '100%',
+    width: '100%'
   },
   expansionPanel: {
     marginBottom: theme.spacing.unit * 2
@@ -24,10 +24,10 @@ const styles = theme => ({
   },
   secondaryHeading: {
     fontSize: theme.typography.pxToRem(15),
-    color: theme.palette.text.secondary,
+    color: theme.palette.text.secondary
   },
   buttonRoot: {
-    border: `1px solid ${theme.palette.primary.main}`,
+    border: `1px solid ${theme.palette.primary.main}`
   },
   buttonLabel: {
     color: theme.palette.primary.main
@@ -36,10 +36,10 @@ const styles = theme => ({
     width: '100%'
   },
   nextButtonRoot: {
-    marginTop: theme.spacing.unit *  2.5,
-    width: theme.spacing.unit *  18.5,
+    marginTop: theme.spacing.unit * 2.5,
+    width: theme.spacing.unit * 18.5,
     float: 'right',
-    marginRight: theme.spacing.unit *  2.5
+    marginRight: theme.spacing.unit * 2.5
   },
   registerButtonRoot: {
     border: `1px solid ${theme.palette.primary.main}`,
@@ -72,7 +72,7 @@ const styles = theme => ({
   },
   loginDetailsWrapper: {
     marginTop: theme.spacing.unit * 2.5,
-    marginLeft:  theme.spacing.unit * 6.25
+    marginLeft: theme.spacing.unit * 6.25
   },
   paymentDescription: {
     marginTop: theme.spacing.unit * 1.25
@@ -80,7 +80,7 @@ const styles = theme => ({
   radioButton: {
     color: theme.palette.customGrey.grey500,
     '&$checked': {
-      color: theme.palette.customGreen.green300,
+      color: theme.palette.customGreen.green300
     }
   },
   checked: {},
@@ -89,7 +89,7 @@ const styles = theme => ({
     flexDirection: 'column'
   },
   checked: {},
-  imageIcon:{
+  imageIcon: {
     width: theme.spacing.unit * 3.5
   },
   checkboxWrapper: {
@@ -101,21 +101,21 @@ const styles = theme => ({
     display: 'flex',
     flexDirection: 'row',
     marginTop: theme.spacing.unit * 2,
-    marginLeft:  theme.spacing.unit * 4.5
+    marginLeft: theme.spacing.unit * 4.5
   },
   teleconsultText: {
     ...theme.typography.body2,
     marginTop: theme.spacing.unit * 1.25
   }
-});
+})
 
 class OrderSummary extends React.Component {
   state = {
     expanded: !this.props.loginState.isAuthenticated ? 'panel1' : 'panel2'
   };
 
-  componentDidUpdate(prevProps) {
-    if(this.props.loginState.isAuthenticated !== prevProps.loginState.isAuthenticated) {
+  componentDidUpdate (prevProps) {
+    if (this.props.loginState.isAuthenticated !== prevProps.loginState.isAuthenticated) {
       this.setState({
         expanded: 'panel2'
       })
@@ -124,17 +124,17 @@ class OrderSummary extends React.Component {
 
   handleChange = panel => (event, expanded) => {
     this.setState({
-      expanded: expanded ? panel : false,
-    });
+      expanded: expanded ? panel : false
+    })
   };
 
   handleNextChange = (panel, expanded) => {
     this.setState({
-      expanded: expanded ? panel : false,
-    });
+      expanded: expanded ? panel : false
+    })
   };
 
-  render() {
+  render () {
     return (
       <div className={this.props.classes.root}>
         <LoginExpansionPanel
@@ -238,8 +238,8 @@ class OrderSummary extends React.Component {
           submitOrderLoading={this.props.submitOrderLoading}
         />
       </div>
-    );
+    )
   }
 }
 
-export default withStyles(styles)(OrderSummary);
+export default withStyles(styles)(OrderSummary)

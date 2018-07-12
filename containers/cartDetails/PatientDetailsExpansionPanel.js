@@ -1,9 +1,9 @@
-import React from 'react';
+import React from 'react'
 
-import ExpansionPanel from '@material-ui/core/ExpansionPanel';
-import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
-import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
-import Typography from '@material-ui/core/Typography';
+import ExpansionPanel from '@material-ui/core/ExpansionPanel'
+import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails'
+import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary'
+import Typography from '@material-ui/core/Typography'
 
 import Button from '../../components/button'
 
@@ -16,19 +16,19 @@ class PatientDetailsExpansionPanel extends React.Component {
     openPatientFormDialog: false
   }
 
-  openPatientFormModal() {
+  openPatientFormModal () {
     this.setState({
       openPatientFormDialog: true
     })
   }
 
-  closePatientFormModal() {
+  closePatientFormModal () {
     this.setState({
       openPatientFormDialog: false
     })
   }
 
-  savePatientSelected(patientIdSelected) {
+  savePatientSelected (patientIdSelected) {
     this.props.savePatientToCartLoading(
       this.props.cartState,
       patientIdSelected,
@@ -36,14 +36,14 @@ class PatientDetailsExpansionPanel extends React.Component {
     )
   }
 
-  render() {
+  render () {
     return (
       <ExpansionPanel
         expanded={this.props.expanded === 'panel3'}
         onChange={
           this.props.loginState.isAuthenticated
-          ? this.props.handleChange
-          : null
+            ? this.props.handleChange
+            : null
         }
         className={this.props.expansionPanel}
       >
@@ -53,7 +53,7 @@ class PatientDetailsExpansionPanel extends React.Component {
             content: this.props.patientContentWrapper
           }}
         >
-          <img src='/static/images/loggedIn.svg' className={this.props.imageIcon}/>
+          <img src='/static/images/loggedIn.svg' className={this.props.imageIcon} />
           <div className={this.props.patientWrapper}>
             <Typography
               component='h1'
@@ -77,7 +77,7 @@ class PatientDetailsExpansionPanel extends React.Component {
           }}
         >
           <PatientDetails
-            isCartPage={true}
+            isCartPage
             expanded={this.props.expanded}
             buttonRoot={this.props.buttonRoot}
             buttonLabel={this.props.buttonLabel}
@@ -101,14 +101,14 @@ class PatientDetailsExpansionPanel extends React.Component {
             label={'NEXT'}
             onClick={
               this.props.loginState.isAuthenticated
-              ? this.props.handleNextChange
-              : null
+                ? this.props.handleNextChange
+                : null
             }
           />
         </ExpansionPanelDetails>
       </ExpansionPanel>
-    );
+    )
   }
 }
 
-export default PatientDetailsExpansionPanel;
+export default PatientDetailsExpansionPanel

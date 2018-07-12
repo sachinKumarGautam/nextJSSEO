@@ -4,7 +4,7 @@ import ExpansionPanel from '@material-ui/core/ExpansionPanel'
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails'
 import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary'
 import Typography from '@material-ui/core/Typography'
-import Checkbox from '@material-ui/core/Checkbox';
+import Checkbox from '@material-ui/core/Checkbox'
 
 import Button from '../../components/button'
 
@@ -46,7 +46,7 @@ class PrescriptionsExpansionPanel extends React.Component {
         className={this.props.expansionPanel}
       >
         <ExpansionPanelSummary expandIcon={<div />}>
-          <img src='/static/images/attachedPrescriptions.svg' className={this.props.imageIcon}/>
+          <img src='/static/images/attachedPrescriptions.svg' className={this.props.imageIcon} />
           <Typography
             component='h1'
             className={this.props.heading}
@@ -73,7 +73,7 @@ class PrescriptionsExpansionPanel extends React.Component {
               <Checkbox
                 checked={this.props.cartState.payload.is_doctor_callback.payload}
                 onChange={this.onClickOfDoctorCallBack.bind(this)}
-                color="primary"
+                color='primary'
                 disabled={
                   this.props.cartState.payload.cart_prescriptions.length > 0
                 }
