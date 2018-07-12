@@ -101,7 +101,8 @@ class Subheader extends React.Component {
           <a
             onMouseEnter={this.toggleHover.bind(this, 'diseases')}
             onMouseLeave={this.toggleHover.bind(this, 'diseases')}
-            href='#'
+            href='https://blog.lifcare.in/'
+            target='_blank'
             className={classes.subHeaderItem}
           >
             <img src='/static/images/repeat-button.svg' />
