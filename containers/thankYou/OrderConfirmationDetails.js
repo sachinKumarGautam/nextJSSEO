@@ -91,7 +91,7 @@ const OrderConfirmationDetails = (props) => {
               label: props.classes.buttonHomeLabel
             }}
             className={props.classes.buttonHomeStyle}
-            onClick={ () => { Router.push({ pathname: HOME_PAGE }) }}
+            onClick={() => { Router.push({ pathname: HOME_PAGE }) }}
             label={'HOME'}
           />
         </div>
