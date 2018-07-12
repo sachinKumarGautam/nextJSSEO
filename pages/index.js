@@ -33,7 +33,7 @@ const styles = theme => ({
 })
 
 class HomePage extends React.Component {
-  componentDidMount() {
+  componentDidMount () {
     this.props.actions.getBackGroundImagesLoading(
       this.props.homePageState,
       'background'
@@ -46,7 +46,7 @@ class HomePage extends React.Component {
         <Header />
         <div>
           <Paper className={this.props.classes.root} elevation={1}>
-            <HomePageWrapper/>
+            <HomePageWrapper />
           </Paper>
         </div>
         <Footer />

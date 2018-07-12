@@ -1,8 +1,5 @@
 import React, { Component } from 'react'
 
-import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
-
 import BreadCrumbs from '../../components/BreadCrumbs'
 import MedicineList from './MedicineList'
 

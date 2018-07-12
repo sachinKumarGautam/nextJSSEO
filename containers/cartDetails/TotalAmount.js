@@ -25,7 +25,6 @@ class TotalAmount extends Component {
     return (
       <Grid
         container
-        spacing={24}
         className={this.props.classes.totalAmountWrapper}
       >
         <Grid item xs={8}>

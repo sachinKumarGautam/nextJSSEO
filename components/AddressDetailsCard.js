@@ -1,6 +1,5 @@
-import React, { Component } from 'react'
+import React from 'react'
 
-import Grid from '@material-ui/core/Grid'
 import Typography from '@material-ui/core/Typography'
 import Button from './button'
 
@@ -11,17 +10,13 @@ const styles = theme => {
     addressWrapperStyle: {
       border: `1px solid ${theme.palette.customGrey.grey250}`,
       padding: theme.spacing.unit * 2.5,
-      borderRadius: theme.spacing.unit * 0.5,
-      marginLeft: theme.spacing.unit * 3,
-      marginRight: theme.spacing.unit * 3
+      borderRadius: theme.spacing.unit * 0.5
     },
     addressWrapperSelectedStyle: {
       border: `1px solid ${theme.palette.customGrey.grey250}`,
       backgroundColor: theme.palette.customGreen.green200,
       padding: theme.spacing.unit * 2.5,
-      borderRadius: theme.spacing.unit * 0.5,
-      marginLeft: theme.spacing.unit * 3,
-      marginRight: theme.spacing.unit * 3
+      borderRadius: theme.spacing.unit * 0.5
     },
     addressTypeStyle: {
       color: theme.palette.customGrey.grey500,
@@ -48,9 +43,13 @@ const styles = theme => {
       boxShadow: 'none',
       marginLeft: theme.spacing.unit * 3.25
     },
-    selectButton: {
-      boxShadow: 'none',
-      marginLeft: theme.spacing.unit * 3.75
+    selectButtonLabel: {
+      color: theme.palette.primary.main,
+      paddingLeft: theme.spacing.unit * 5,
+      marginTop: theme.spacing.unit * 1.25
+    },
+    selectButtonRoot: {
+      cursor: 'pointer'
     },
     buttonLabel: {
       ...theme.typography.body2,
@@ -92,27 +91,28 @@ const AddressDetailsCard = props => (
     </Typography>
     {
       props.isCartPage
-      ? (
-        <Button
-          variant='raised'
-          size='small'
-          color='primary'
-          className={props.classes.selectButton}
-          onClick={this.handleClickOpen}
-          label={'SELECT'}
-        />
-      ) : (
-        <Button
-          variant='contained'
-          size='small'
-          className={props.classes.button}
-          classes={{
-            label: props.classes.buttonLabel
-          }}
-          onClick={this.handleClickOpen}
-          label={'EDIT'}
-        />
-      )
+        ? (
+          <Typography
+            variant='caption'
+            className={props.classes.selectButtonLabel}
+            classes={{
+              root: props.classes.selectButtonRoot
+            }}
+          >
+          SELECT
+          </Typography>
+        ) : (
+          <Button
+            variant='contained'
+            size='small'
+            className={props.classes.button}
+            classes={{
+              label: props.classes.buttonLabel
+            }}
+            onClick={this.handleClickOpen}
+            label={'EDIT'}
+          />
+        )
     }
   </div>
 )
