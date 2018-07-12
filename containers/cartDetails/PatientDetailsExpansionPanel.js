@@ -55,12 +55,20 @@ class PatientDetailsExpansionPanel extends React.Component {
         >
           <img src='/static/images/loggedIn.svg' className={this.props.imageIcon}/>
           <div className={this.props.patientWrapper}>
-            <Typography
-              component='h1'
-              className={this.props.heading}
-            >
-              Patient Details
-            </Typography>
+            <div className={this.props.checkedIconWrapper}>
+              <Typography
+                component='h1'
+                className={this.props.heading}
+              >
+                Patient Details
+              </Typography>
+              {
+                this.props.patientIdSelected
+                ? (
+                  <img src='/static/images/checkedIcon.svg' className={this.props.checkedIcon}/>
+                ) : null                
+              }
+            </div>
             {
               this.props.expanded === 'panel3' &&
               <AddPatientButton

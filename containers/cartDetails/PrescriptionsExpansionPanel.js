@@ -42,8 +42,19 @@ class PrescriptionsExpansionPanel extends React.Component {
             component='h1'
             className={this.props.heading}
           >
-            Upload Prescriptions
+            {
+              this.props.files.length
+              ? 'Attached Prescriptions'
+              : 'Upload Prescriptions'
+            }
+
           </Typography>
+          {
+            this.props.files.length
+            ? (
+              <img src='/static/images/checkedIcon.svg' className={this.props.checkedIcon}/>
+            ) : null
+          }
         </ExpansionPanelSummary>
         <ExpansionPanelDetails
           classes={{
