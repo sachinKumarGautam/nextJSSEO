@@ -514,6 +514,52 @@ export default function cartReducer (state = initialState, action) {
         }
       }
 
+    case cartActionTypes.OPT_DOCTOR_CALLBACK_LOADING:
+      return {
+        ...state,
+        payload: {
+          ...state.payload,
+          is_doctor_callback: {
+            ...state.payload.is_doctor_callback,
+            isLoading: action.isLoading,
+            errorState: {
+              ...state.payload.is_doctor_callback.errorState,
+              isError: action.isError
+            }
+          }
+        }
+      }
+
+    case cartActionTypes.OPT_DOCTOR_CALLBACK_SUCCESS:
+      return {
+        ...state,
+        payload: {
+          ...state.payload,
+          is_doctor_callback: {
+            ...state.payload.is_doctor_callback,
+            payload: action.payload,
+            isLoading: action.isLoading
+          }
+        }
+      }
+
+    case cartActionTypes.OPT_DOCTOR_CALLBACK_FAILURE:
+      return {
+        ...state,
+        payload: {
+          ...state.payload,
+          is_doctor_callback: {
+            ...state.payload.is_doctor_callback,
+            isLoading: action.isLoading,
+            errorState: {
+              ...state.payload.is_doctor_callback.errorState,
+              isError: action.isError,
+              error: {}
+            }
+          }
+        }
+      }
+
     default:
       return state
   }

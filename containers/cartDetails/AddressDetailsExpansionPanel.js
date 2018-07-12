@@ -1,9 +1,9 @@
-import React from 'react';
+import React from 'react'
 
-import ExpansionPanel from '@material-ui/core/ExpansionPanel';
-import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
-import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
-import Typography from '@material-ui/core/Typography';
+import ExpansionPanel from '@material-ui/core/ExpansionPanel'
+import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails'
+import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary'
+import Typography from '@material-ui/core/Typography'
 
 import Button from '../../components/button'
 
@@ -16,33 +16,33 @@ class AddressDetailsExpansionPanel extends React.Component {
     openDeliveryFormDialog: false
   }
 
-  openDeliveryFormModal() {
+  openDeliveryFormModal () {
     this.setState({
       openDeliveryFormDialog: true
     })
   }
 
-  closeDeliveryFormModal() {
+  closeDeliveryFormModal () {
     this.setState({
       openDeliveryFormDialog: false
     })
   }
 
-  saveAddressSelected(addressIdSelected) {
+  saveAddressSelected (addressIdSelected) {
     this.props.saveDeliveryAddressToCartLoading(
       this.props.cartState,
       addressIdSelected
     )
   }
 
-  render() {
+  render () {
     return (
       <ExpansionPanel
         expanded={this.props.expanded === 'panel4'}
         onChange={
           this.props.loginState.isAuthenticated
-          ? this.props.handleChange
-          : null
+            ? this.props.handleChange
+            : null
         }
         className={this.props.expansionPanel}
       >
@@ -52,7 +52,7 @@ class AddressDetailsExpansionPanel extends React.Component {
             content: this.props.patientContentWrapper
           }}
         >
-          <img src='/static/images/attachedPrescriptions.svg' className={this.props.imageIcon}/>
+          <img src='/static/images/attachedPrescriptions.svg' className={this.props.imageIcon} />
           <div className={this.props.patientWrapper}>
             <div className={this.props.checkedIconWrapper}>
               <Typography
@@ -84,7 +84,7 @@ class AddressDetailsExpansionPanel extends React.Component {
           }}
         >
           <AddressDetails
-            isCartPage={true}
+            isCartPage
             expanded={this.props.expanded}
             buttonRoot={this.props.buttonRoot}
             buttonLabel={this.props.buttonLabel}
@@ -111,8 +111,8 @@ class AddressDetailsExpansionPanel extends React.Component {
           />
         </ExpansionPanelDetails>
       </ExpansionPanel>
-    );
+    )
   }
 }
 
-export default AddressDetailsExpansionPanel;
+export default AddressDetailsExpansionPanel

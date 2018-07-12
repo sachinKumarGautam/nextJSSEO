@@ -33,7 +33,6 @@ const styles = theme => {
 }
 
 class SideMenu extends Component {
-
   logout = () => {
     logoutWithReload()
   }

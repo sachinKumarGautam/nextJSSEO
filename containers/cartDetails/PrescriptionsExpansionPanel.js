@@ -4,6 +4,7 @@ import ExpansionPanel from '@material-ui/core/ExpansionPanel'
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails'
 import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary'
 import Typography from '@material-ui/core/Typography'
+import Checkbox from '@material-ui/core/Checkbox'
 
 import Button from '../../components/button'
 
@@ -29,6 +30,14 @@ class PrescriptionsExpansionPanel extends React.Component {
     )
   }
 
+  onClickOfDoctorCallBack () {
+    this.props.optForDoctorCallbackLoading(
+      this.props.cartState,
+      this.props.cartState.payload.uid,
+      !this.props.cartState.payload.is_doctor_callback.payload
+    )
+  }
+
   render () {
     return (
       <ExpansionPanel
@@ -37,7 +46,7 @@ class PrescriptionsExpansionPanel extends React.Component {
         className={this.props.expansionPanel}
       >
         <ExpansionPanelSummary expandIcon={<div />}>
-          <img src='/static/images/attachedPrescriptions.svg' className={this.props.imageIcon}/>
+          <img src='/static/images/attachedPrescriptions.svg' className={this.props.imageIcon} />
           <Typography
             component='h1'
             className={this.props.heading}
@@ -70,20 +79,38 @@ class PrescriptionsExpansionPanel extends React.Component {
             onDeleteButton={this.onDeleteButton.bind(this)}
             // onViewImage={this.onViewImage}
           />
-          <Button
-            size='small'
-            color='primary'
-            variant='raised'
-            classes={{
-              root: this.props.nextButtonRoot
-            }}
-            label={'NEXT'}
-            onClick={
-              this.props.loginState.isAuthenticated
-                ? this.props.handleNextChange
-                : null
-            }
-          />
+          <div className={this.props.checkboxWrapper}>
+            <div className={this.props.checkbox}>
+              <Checkbox
+                checked={this.props.cartState.payload.is_doctor_callback.payload}
+                onChange={this.onClickOfDoctorCallBack.bind(this)}
+                color='primary'
+                disabled={
+                  this.props.cartState.payload.cart_prescriptions.length > 0
+                }
+              />
+              <Typography
+                variant='caption'
+                className={this.props.teleconsultText}
+              >
+                Opt in for Free Doctor Consultation
+              </Typography>
+            </div>
+            <Button
+              size='small'
+              color='primary'
+              variant='raised'
+              classes={{
+                root: this.props.nextButtonRoot
+              }}
+              label={'NEXT'}
+              onClick={
+                this.props.loginState.isAuthenticated
+                  ? this.props.handleNextChange
+                  : null
+              }
+            />
+          </div>
         </ExpansionPanelDetails>
       </ExpansionPanel>
     )

@@ -15,7 +15,8 @@ import {
   UPLOAD_PRESCRIPTION_LOADING,
   DELETE_PRESCRIPTION_LOADING,
   SUBMIT_ORDER_LOADING,
-  SUBMIT_COUPON_CODE_LOADING
+  SUBMIT_COUPON_CODE_LOADING,
+  OPT_DOCTOR_CALLBACK_LOADING
 } from './cartActionTypes'
 
 import {
@@ -39,7 +40,9 @@ import {
   submitOrderFailure,
   goToCartSnackbar,
   applyCouponCodeSuccess,
-  applyCouponCodeFailure
+  applyCouponCodeFailure,
+  optForDoctorCallbackSuccess,
+  optForDoctorCallbackFailure
 } from './cartActions'
 
 import {
@@ -53,7 +56,8 @@ import {
   uploadPrescriptionEpic$,
   deletePrescriptionEpic$,
   submitOrder$,
-  applyCouponForCart$
+  applyCouponForCart$,
+  teleConsultation$
 } from '../../services/api'
 
 export function getAnonymousCartIdEpic (action$, store) {
@@ -440,12 +444,31 @@ export function applyCouponCode (action$, store) {
       return http(applyCouponForCart$(data.cartId, data.couponCode)).pipe(
         map(result => {
           return applyCouponCodeSuccess(
-            data.moleculeState,
+            data.cartState,
             result.body.payload
           )
         }),
         catchError(error => {
-          return of(applyCouponCodeFailure(data.moleculeState, error))
+          return of(applyCouponCodeFailure(data.cartState, error))
+        })
+      )
+    })
+  )
+}
+
+export function optDoctorCallback (action$, store) {
+  return action$.pipe(
+    ofType(OPT_DOCTOR_CALLBACK_LOADING),
+    mergeMap(data => {
+      return http(teleConsultation$(data.cartUId, data.doctorCallback)).pipe(
+        map(result => {
+          return optForDoctorCallbackSuccess(
+            data.cartState,
+            result.body.payload.doctor_callback
+          )
+        }),
+        catchError(error => {
+          return of(optForDoctorCallbackFailure(data.cartState, error))
         })
       )
     })
