@@ -103,7 +103,9 @@ const styles = theme => ({
     height: theme.spacing.unit * 2,
     top:  theme.spacing.unit * -0.75,
     right: 0,
-    left: theme.spacing.unit * 2
+    left: theme.spacing.unit * 2,
+    color: theme.palette.common.white,
+    fontSize: theme.spacing.unit * 1.625
   },
   iconStyle: {
     fontSize: theme.spacing.unit * 3.25

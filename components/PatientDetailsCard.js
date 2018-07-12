@@ -104,38 +104,23 @@ const PatientDetailsCard = props => (
                         root: props.classes.selectButtonRoot
                       }}
                     >
-                    SELECT
+                      SELECT
                     </Typography>
                   ) : (
-                    <Button
-                      variant='contained'
-                      size='small'
-                      className={props.classes.button}
-                      classes={{
-                        label: props.classes.buttonLabel
-                      }}
-                      onClick={this.handleClickOpen}
-                      label={'EDIT'}
-                    />
+                    <div onClick={this.handleClickOpen}>
+                      <Typography
+                        variant='caption'
+                        className={props.classes.selectButtonLabel}
+                        classes={{
+                          root: props.classes.selectButtonRoot
+                        }}
+                      >
+                        EDIT
+                      </Typography>
+                    </div>
                   )
               }
             </Grid>
-            {
-              // <Grid item xs={3}>
-              //   <Button
-              //     variant="contained"
-              //     size="small"
-              //     className={props.classes.button}
-              //   >
-              //     <Typography
-              //       variant="caption"
-              //       className={props.classes.buttonLabel}
-              //     >
-              //       DELETE
-              //     </Typography>
-              //   </Button>
-              // </Grid>
-            }
           </Grid>
         </div>
       </Grid>

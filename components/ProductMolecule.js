@@ -44,8 +44,8 @@ const styles = theme => {
     },
     horizontalItem: {
       display: 'flex',
-      flexDirection: 'row'
-
+      flexDirection: 'row',
+      flexWrap: 'wrap'
     }
   }
 }
