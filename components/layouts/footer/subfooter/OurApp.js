@@ -11,11 +11,11 @@ const styles = theme => ({
   },
   img: {
     width: theme.spacing.unit * 12.75,
-    height: theme.spacing.unit * 5,
+    height: theme.spacing.unit * 5
   },
   img2: {
     width: theme.spacing.unit * 12.75,
-    height: theme.spacing.unit * 4,
+    height: theme.spacing.unit * 4
   },
   listHeaderText: {
     ...theme.typography.body1,

@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 
 import Grid from '@material-ui/core/Grid'
 import Typography from '@material-ui/core/Typography'
@@ -25,10 +25,6 @@ const styles = theme => {
     },
     buttonRoot: {
       border: `1px solid ${theme.palette.primary.main}`
-    },
-    buttonLabel: {
-      color: theme.palette.customGreen.green300,
-      fontWeight: theme.typography.fontWeightBold
     },
     userNameStyle: {
       color: theme.palette.customGrey.grey500,
@@ -104,28 +100,28 @@ const PatientDetailsCard = props => (
             <Grid item xs={4}>
               {
                 props.isCartPage
-                ? (
-                  <Typography
-                    variant='caption'
-                    className={props.classes.selectButtonLabel}
-                    classes= {{
-                      root: props.classes.selectButtonRoot
-                    }}
-                  >
+                  ? (
+                    <Typography
+                      variant='caption'
+                      className={props.classes.selectButtonLabel}
+                      classes={{
+                        root: props.classes.selectButtonRoot
+                      }}
+                    >
                     SELECT
-                  </Typography>
-                ) : (
-                  <Button
-                    variant='contained'
-                    size='small'
-                    className={props.classes.button}
-                    classes={{
-                      label: props.classes.buttonLabel
-                    }}
-                    onClick={this.handleClickOpen}
-                    label={'EDIT'}
-                  />
-                )
+                    </Typography>
+                  ) : (
+                    <Button
+                      variant='contained'
+                      size='small'
+                      className={props.classes.button}
+                      classes={{
+                        label: props.classes.buttonLabel
+                      }}
+                      onClick={this.handleClickOpen}
+                      label={'EDIT'}
+                    />
+                  )
               }
             </Grid>
             {
