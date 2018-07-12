@@ -18,8 +18,8 @@ import {
 
 const styles = theme => ({
   root: {
-    paddingTop: theme.spacing.unit * 2,
-    paddingBottom: theme.spacing.unit * 2,
+    paddingTop: theme.spacing.unit * 3,
+    paddingBottom: theme.spacing.unit * 3,
     paddingLeft: theme.spacing.unit * 7,
     paddingRight: theme.spacing.unit * 7,
     maxWidth: theme.breakpoints.values.lg,
@@ -29,6 +29,10 @@ const styles = theme => ({
   },
   title: {
     fontWeight: theme.typography.fontWeightBold
+  },
+  wrapperStyle: {
+    paddingBottom: theme.spacing.unit * 3,
+    minHeight: theme.spacing.unit * 100
   }
 })
 
@@ -45,7 +49,7 @@ class RefillPatient extends Component {
     return (
       <div>
         <Header />
-        <div>
+        <div className={this.props.classes.wrapperStyle}>
           <Paper className={this.props.classes.root} elevation={1}>
             <RefillPatientsWrapper />
           </Paper>
