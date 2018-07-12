@@ -28,13 +28,11 @@ const styles = theme => ({
     marginBottom: theme.spacing.unit * 2
   },
   heading: {
-    fontSize: theme.typography.pxToRem(15),
-    flexShrink: 0,
-    fontSize: theme.spacing.unit * 2.75,
-    fontWeight: theme.typography.fontWeightBold,
+    ...theme.typography.title,
+    fontSize: theme.typography.pxToRem(19),
     color: theme.palette.customGrey.grey500,
     marginLeft: theme.spacing.unit * 2.5,
-    letterSpacing: theme.spacing.unit * 0.275
+    marginTop: theme.spacing.unit / 2
   },
   secondaryHeading: {
     fontSize: theme.typography.pxToRem(15),
@@ -98,7 +96,9 @@ const styles = theme => ({
       color: theme.palette.customGreen.green300,
     }
   },
-  checked: {}
+  imageIcon:{
+    width: theme.spacing.unit * 3.5
+  }
 });
 
 class OrderSummary extends React.Component {
@@ -241,8 +241,10 @@ class OrderSummary extends React.Component {
           className={classes.expansionPanel}
         >
           <ExpansionPanelSummary expandIcon={<div />}>
-            <img src='/static/images/loggedIn.svg' />
-            <Typography className={classes.heading}>
+            <img src='/static/images/loggedIn.svg' className={classes.imageIcon}/>
+            <Typography
+              className={classes.heading}
+            >
               {
                 !this.props.loginState.isAuthenticated
                 ? (
@@ -275,7 +277,7 @@ class OrderSummary extends React.Component {
           className={classes.expansionPanel}
         >
           <ExpansionPanelSummary expandIcon={<div />}>
-            <img src='/static/images/attachedPrescriptions.svg' />
+            <img src='/static/images/attachedPrescriptions.svg'  className={classes.imageIcon}/>
             <Typography className={classes.heading}>Upload Prescriptions</Typography>
           </ExpansionPanelSummary>
           <ExpansionPanelDetails>
@@ -320,9 +322,11 @@ class OrderSummary extends React.Component {
               content: this.props.classes.patientContentWrapper
             }}
           >
-            <img src='/static/images/loggedIn.svg' />
+            <img src='/static/images/loggedIn.svg' className={classes.imageIcon}/>
             <div className={this.props.classes.patientWrapper}>
-              <Typography className={classes.heading}>Patient Details</Typography>
+              <Typography className={classes.heading}>
+                Patient Details
+              </Typography>
               {
                 this.state.expanded === 'panel3' &&
                 <AddPatientButton
@@ -381,7 +385,7 @@ class OrderSummary extends React.Component {
               content: this.props.classes.patientContentWrapper
             }}
           >
-            <img src='/static/images/attachedPrescriptions.svg' />
+            <img src='/static/images/attachedPrescriptions.svg'  className={classes.imageIcon}/>
             <div className={this.props.classes.patientWrapper}>
               <Typography className={classes.heading}>Delivery Details</Typography>
               {
@@ -434,7 +438,7 @@ class OrderSummary extends React.Component {
           className={classes.expansionPanel}
         >
           <ExpansionPanelSummary expandIcon={<div />}>
-            <img src='/static/images/attachedPrescriptions.svg' />
+            <img src='/static/images/attachedPrescriptions.svg'  className={classes.imageIcon}/>
             <Typography className={classes.heading}>Payment</Typography>
           </ExpansionPanelSummary>
           <ExpansionPanelDetails>
