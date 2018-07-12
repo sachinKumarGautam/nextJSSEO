@@ -88,8 +88,7 @@ const styles = theme => ({
     marginTop: theme.spacing.unit * 2.5
   },
   paymentDescription: {
-    marginTop: theme.spacing.unit * 1.25,
-    width: '100%'
+    marginTop: theme.spacing.unit * 1.25
   },
   radioButton: {
     color: theme.palette.customGrey.grey500,
@@ -443,15 +442,15 @@ class OrderSummary extends React.Component {
             <Typography className={classes.heading}>Payment</Typography>
           </ExpansionPanelSummary>
           <ExpansionPanelDetails>
+            <Radio
+              checked={true}
+              name="radio-button-demo"
+              classes={{
+                root: this.props.classes.radioButton,
+                checked: this.props.classes.checked,
+              }}
+            />
             <Typography className={this.props.classes.paymentDescription}>
-              <Radio
-                checked={true}
-                name="radio-button-demo"
-                classes={{
-                  root: this.props.classes.radioButton,
-                  checked: this.props.classes.checked,
-                }}
-              />
               CASH ON DELIVERY
               <Button
                 size='small'
