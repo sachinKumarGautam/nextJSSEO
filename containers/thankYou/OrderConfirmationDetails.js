@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 
 import Divider from '@material-ui/core/Divider'
 import Card from '@material-ui/core/Card'
@@ -91,7 +91,7 @@ const OrderConfirmationDetails = (props) => {
               label: props.classes.buttonHomeLabel
             }}
             className={props.classes.buttonHomeStyle}
-            onClick={() => { Router.push({ pathname: HOME_PAGE}) }}
+            onClick={ () => { Router.push({ pathname: HOME_PAGE }) }}
             label={'HOME'}
           />
         </div>

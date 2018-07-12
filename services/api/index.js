@@ -245,6 +245,16 @@ const applyCouponForCart$ = (cartUid, couponCode) => (
   })
 )
 
+const teleConsultation$ = (cartUid, isDoctorCallback) => (
+  makeAjaxRequest({
+    method: 'PATCH',
+    url: fetchUrl('cart', cartUid + '/doctor-callback', 'CREATE'),
+    body: {
+      doctor_callback: isDoctorCallback
+    }
+  })
+)
+
 export {
   getMoleculeSummary$,
   getMedicineList$,
@@ -275,5 +285,6 @@ export {
   submitRefillDate$,
   getPatientPastMedicineList$,
   getSliderImages$,
-  applyCouponForCart$
+  applyCouponForCart$,
+  teleConsultation$
 }
