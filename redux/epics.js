@@ -62,7 +62,8 @@ import {
   uploadPrescriptionEpic,
   deletePrescriptionEpic,
   submitOrderEpic,
-  applyCouponCode
+  applyCouponCode,
+  optDoctorCallback
 } from '../containers/cartDetails/cartEpics'
 
 import {
@@ -123,5 +124,6 @@ export const rootEpic = combineEpics(
   submitRefillDate,
   getPatientPastMedicineList,
   getBackGroungImages,
-  applyCouponCode
+  applyCouponCode,
+  optDoctorCallback
 )

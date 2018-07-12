@@ -9,6 +9,7 @@ import ExpansionPanelActions from '@material-ui/core/ExpansionPanelActions';
 import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import Checkbox from '@material-ui/core/Checkbox';
 
 import Button from '../../components/button'
 
@@ -98,7 +99,21 @@ const styles = theme => ({
       color: theme.palette.customGreen.green300,
     }
   },
-  checked: {}
+  checked: {},
+  checkboxWrapper: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between'
+  },
+  checkbox: {
+    display: 'flex',
+    flexDirection: 'row',
+    marginTop: theme.spacing.unit * 2
+  },
+  teleconsultText: {
+    ...theme.typography.body2,
+    marginTop: theme.spacing.unit * 1.25
+  }
 });
 
 class OrderSummary extends React.Component {
@@ -225,6 +240,14 @@ class OrderSummary extends React.Component {
     })
   }
 
+  onClickOfDoctorCallBack () {
+    this.props.optForDoctorCallbackLoading(
+      this.props.cartState,
+      this.props.cartState.payload.uid,
+      !this.props.cartState.payload.is_doctor_callback.payload
+    )
+  }
+
   render() {
     const { classes } = this.props;
     const { expanded } = this.state;
@@ -288,20 +311,38 @@ class OrderSummary extends React.Component {
                 onDeleteButton={this.onDeleteButton.bind(this)}
                 //onViewImage={this.onViewImage}
               />
-              <Button
-                size='small'
-                color='primary'
-                variant='raised'
-                classes={{
-                  root: this.props.classes.nextButtonRoot
-                }}
-                label={'NEXT'}
-                onClick={
-                  this.props.loginState.isAuthenticated
-                  ? this.handleNextChange.bind(this, 'panel3', true)
-                  : null
-                }
-              />
+              <div className={this.props.classes.checkboxWrapper}>
+                <div className={this.props.classes.checkbox}>
+                  <Checkbox
+                    checked={this.props.cartState.payload.is_doctor_callback.payload}
+                    onChange={this.onClickOfDoctorCallBack.bind(this)}
+                    color="primary"
+                    disabled={
+                      this.props.cartState.prescriptionDetails.cartPrescriptionList.length > 0
+                    }
+                  />
+                  <Typography
+                    variant='caption'
+                    className={this.props.classes.teleconsultText}
+                  >
+                    Opt in for Free Doctor Consultation
+                  </Typography>
+                </div>
+                <Button
+                  size='small'
+                  color='primary'
+                  variant='raised'
+                  classes={{
+                    root: this.props.classes.nextButtonRoot
+                  }}
+                  label={'NEXT'}
+                  onClick={
+                    this.props.loginState.isAuthenticated
+                    ? this.handleNextChange.bind(this, 'panel3', true)
+                    : null
+                  }
+                />
+              </div>
             </Typography>
           </ExpansionPanelDetails>
         </ExpansionPanel>
