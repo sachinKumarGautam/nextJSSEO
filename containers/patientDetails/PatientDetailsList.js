@@ -46,6 +46,9 @@ const styles = theme => {
       display: 'flex',
       flexDirection: 'row',
       justifyContent: 'space-between'
+    },
+    patientDetailsCardWrapper: {
+      padding: theme.spacing.unit * 1.25
     }
   }
 }
@@ -116,6 +119,7 @@ class PatientDetailsList extends Component {
             payload={this.props.patientDetailsState.payload}
             savePatientSelected={this.savePatientSelected.bind(this)}
             patientIdSelected={this.props.cartState.payload.patient_id.payload}
+            patientDetailsCardWrapper={this.props.classes.patientDetailsCardWrapper}
           />
         </CardContent>
       </Card>

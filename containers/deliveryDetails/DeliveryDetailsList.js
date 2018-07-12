@@ -51,6 +51,9 @@ const styles = theme => {
       display: 'flex',
       flexDirection: 'row',
       justifyContent: 'space-between'
+    },
+    addressDetailsCardWrapper: {
+      padding: theme.spacing.unit * 1.25
     }
   }
 }
@@ -123,6 +126,7 @@ class Main extends Component {
             payload={this.props.deliveryDetailsState.payload}
             saveAddressSelected={this.saveAddressSelected.bind(this)}
             addressIdSelected={this.state.addressIdSelected}
+            addressDetailsCardWrapper={this.props.classes.addressDetailsCardWrapper}
           />
         </CardContent>
       </Card>

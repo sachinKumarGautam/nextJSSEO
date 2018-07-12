@@ -5,7 +5,7 @@ import Grid from '@material-ui/core/Grid'
 import AddressDetailsCard from '../../components/AddressDetailsCard'
 
 const AddressDetailsCardWrapper = props => (
-  <Grid container spacing={24}>
+  <Grid container spacing={24} className={props.addressDetailsCardWrapper}>
     {
       props.payload.map(deliveryDetail => {
         return (
