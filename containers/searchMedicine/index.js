@@ -137,6 +137,7 @@ function renderSuggestion ({
         itemDetails={suggestion}
         incrementCartItemLoading={incrementCartItemLoading}
         cartState={cartState}
+        checkPincodeLoading={checkPincodeLoading}
         checkPincodeState={checkPincodeState}
       />
     </li>
@@ -150,7 +151,11 @@ function getSuggestions (searchMedicineResult) {
 class SearchMedicine extends React.Component {
   constructor (props) {
     super(props)
+    this.state = {
+      isOpen: false
+    }
     this.searchMedicineOnChange = this.searchMedicineOnChange.bind(this)
+    this.stateChangeHandler = this.stateChangeHandler.bind(this)
     this.onSelectItem = this.onSelectItem.bind(this)
     this.onSearchMedicine = this.onSearchMedicine.bind(this)
   }
@@ -173,6 +178,44 @@ class SearchMedicine extends React.Component {
     Router.push(href, as)
   }
 
+  stateChangeHandler = changes => {
+    let {
+      isOpen = this.state.isOpen,
+      type,
+    } = changes
+
+    console.log(Downshift.stateChangeTypes);
+    // isOpen =
+    //   type === (Downshift.stateChangeTypes.blurInput 
+    //   || Downshift.stateChangeTypes.itemMouseEnter 
+    //   || Downshift.stateChangeTypes.changeInput
+    // ) || isOpen ? true : false
+
+      console.log('type: ',type, 'changes.isOpen: ', changes.isOpen, this.state.isOpen)
+
+      if(type !== Downshift.stateChangeTypes.mouseUp){
+        this.setState({
+          isOpen: isOpen || this.state.isOpen,
+        })
+      }
+
+      if(type === Downshift.stateChangeTypes.itemMouseEnter){
+        this.setState({
+          isOpen: true
+        })
+      }
+
+
+  }
+
+  onOuterClick = () => (
+    // {console.log('sachin')}
+    this.setState({
+      isOpen: false
+    })
+  )
+
+
   render () {
     const {
       classes,
@@ -182,10 +225,14 @@ class SearchMedicine extends React.Component {
       cartState,
       incrementCartItemLoading
     } = this.props
+    const isOpen = this.state.isOpen
     const searchMedicineResult = searchMedicineState.payload.searchMedicineResult
     return (
       <div className={classes.root}>
         <Downshift
+          {...this.state}        
+          onStateChange={this.stateChangeHandler}
+          // onOuterClick={this.onOuterClick}
           // onStateChange={({ inputValue }) => {
           //   return inputValue && this.setState({ inputValue })
           // }}

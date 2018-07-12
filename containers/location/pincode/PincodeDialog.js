@@ -51,91 +51,116 @@ function getPincodeErrorMsg (pincodeFormError, inValidPincodeError, pincodeLoadi
   }
 }
 
-const PincodeDialog = (props) => {
-  const {
-    values,
-    touched,
-    errors,
-    isSubmitting,
-    handleChange,
-    handleBlur,
-    handleSubmit,
-    classes,
-    checkPincodeState
-    // toggleForm
-  } = props
-  const pincodeLoading = checkPincodeState.isLoading
-  const pincodeError = checkPincodeState.errorState.error
+function onClick(event) {
+ console.log('event', event)
+}
 
-  const pincodeFormError = errors.pincode && touched.pincode ? errors.pincode : ''
+class PincodeDialog extends React.Component {
+  constructor(props) {
+    super(props);
+      this.onClick = this.onClick.bind(this)
+  }
 
-  const inValidPincodeError = touched.pincode && pincodeError === 'NotFoundException'
-    ? PINCODE_INVALID : ''
+  onClick(event) {
+    console.log('event1', event)
+    event.stopPropagation() 
+    event.preventDefault()
+    return 0
+   }
+   
 
-  return (
-    <div>
-      <Dialog
-        open={props.open}
-        onClose={props.handleClose}
-        aria-labelledby='form-dialog-title'
-        classes={{
-          paper: props.classes.paper
-        }}
-      >
-        <DialogContent>
-          <DialogContentText>
-              Enter Delivery Pincode
-          </DialogContentText>
-          <form onSubmit={props.handleSubmit}>
-            <FormControl
-              className={classes.formControl}
-              aria-describedby='pincode'
-              error={pincodeFormError || inValidPincodeError}
-            >
-              <Input
-                autoFocus
-                margin='dense'
-                label='Pincode'
-                fullWidth
-                autoComplete='off'
-                id='pincode'
-                type='number'
-                value={values.pincode}
-                onChange={handleChange}
-                onBlur={handleBlur}
-                placeholder={'Enter you pincode'}
-              />
-              <FormHelperText
-                id='pincode'
+  render () {
+    const {
+      props,
+    } = this;
+
+    const {
+      values,
+      touched,
+      errors,
+      isSubmitting,
+      handleChange,
+      handleBlur,
+      handleSubmit,
+      classes,
+      checkPincodeState
+      // toggleForm
+    } = props
+    const pincodeLoading = checkPincodeState.isLoading
+    const pincodeError = checkPincodeState.errorState.error
+
+    const pincodeFormError = errors.pincode && touched.pincode ? errors.pincode : ''
+
+    const inValidPincodeError = touched.pincode && pincodeError === 'NotFoundException'
+      ? PINCODE_INVALID : ''
+
+    return (
+      <div onClick={this.onClick}>
+        <Dialog
+          // disableBackdropClick
+          onClick={this.onClick}
+          open={props.open}
+          onClose={props.handleClose}
+          aria-labelledby='form-dialog-title'
+          classes={{
+            paper: props.classes.paper
+          }}
+        >
+          <DialogContent>
+            <DialogContentText>
+                Enter Delivery Pincode
+            </DialogContentText>
+            <form onSubmit={props.handleSubmit}>
+              <FormControl
+                className={classes.formControl}
+                aria-describedby='pincode'
+                error={pincodeFormError || inValidPincodeError}
               >
-                {getPincodeErrorMsg(pincodeFormError, inValidPincodeError, pincodeLoading)}
-              </FormHelperText>
-            </FormControl>
-          </form>
-        </DialogContent>
-        <DialogActions>
-          <div className={classes.cancelButton}>
+                <Input
+                  autoFocus
+                  margin='dense'
+                  label='Pincode'
+                  fullWidth
+                  autoComplete='off'
+                  id='pincode'
+                  type='number'
+                  value={values.pincode}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  placeholder={'Enter you pincode'}
+                />
+                <FormHelperText
+                  id='pincode'
+                >
+                  {getPincodeErrorMsg(pincodeFormError, inValidPincodeError, pincodeLoading)}
+                </FormHelperText>
+              </FormControl>
+            </form>
+          </DialogContent>
+          <DialogActions>
+            <div className={classes.cancelButton}>
+              <Button
+                onClick={props.handleClose}
+                label={'Cancel'}
+                color='primary'
+                classes={{
+                  label: classes.buttonLabel
+                }}
+              />
+            </div>
             <Button
-              onClick={props.handleClose}
-              label={'Cancel'}
+              onClick={props.handleSubmit}
+              isloading={isSubmitting}
               color='primary'
-              classes={{
-                label: classes.buttonLabel
-              }}
+              label={'Apply'}
+              variant='raised'
+              autoFocus
             />
-          </div>
-          <Button
-            onClick={props.handleSubmit}
-            isloading={isSubmitting}
-            color='primary'
-            label={'Apply'}
-            variant='raised'
-            autoFocus
-          />
-        </DialogActions>
-      </Dialog>
-    </div>
-  )
+          </DialogActions>
+        </Dialog>
+      </div>
+    )
+  }
 }
 
 export default withStyles(styles)(withFormik({
