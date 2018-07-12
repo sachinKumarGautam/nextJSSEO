@@ -12,10 +12,9 @@ import withRoot from '../src/withRoot'
 import Paper from '@material-ui/core/Paper'
 import Router from 'next/router'
 
-
 import ProductDetailsWrapper from '../containers/productDetails'
 
-import { getProductDetailLoading , onChangeQuantity} from '../containers/productDetails/productDetailsActions'
+import { getProductDetailLoading, onChangeQuantity} from '../containers/productDetails/productDetailsActions'
 
 import {
   getAnonymousCartIdLoading,
@@ -62,7 +61,7 @@ class ProductDetails extends React.Component {
     })
   }
 
-  componentDidUpdate(prevProps) {
+  componentDidUpdate (prevProps) {
     const { pathname, query } = Router
     if (prevProps.id !== Router.query.id) {
       this.props.actions.getProductDetailLoading(
@@ -72,7 +71,6 @@ class ProductDetails extends React.Component {
       )
     }
   }
-
 
   render () {
     const {
@@ -89,16 +87,16 @@ class ProductDetails extends React.Component {
         <div>
           <Paper className={classes.root} elevation={1}>
             {
-              query.id && query.id !== 'undefined' ? 
-              <ProductDetailsWrapper
-              checkPincodeState={checkPincodeState}
-              getProductDetailLoading={actions.getProductDetailLoading}
-              checkPincodeLoading={actions.checkPincodeLoading}
-              incrementCartItemLoading={actions.incrementCartItemLoading}
-              cartState={cartState}
-              onChangeQuantity={actions.onChangeQuantity}
-              />
-              : "Page not found"
+              query.id && query.id !== 'undefined'
+                ? <ProductDetailsWrapper
+                  checkPincodeState={checkPincodeState}
+                  getProductDetailLoading={actions.getProductDetailLoading}
+                  checkPincodeLoading={actions.checkPincodeLoading}
+                  incrementCartItemLoading={actions.incrementCartItemLoading}
+                  cartState={cartState}
+                  onChangeQuantity={actions.onChangeQuantity}
+                />
+                : 'Page not found'
             }
           </Paper>
         </div>
