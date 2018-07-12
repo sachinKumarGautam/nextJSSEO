@@ -53,8 +53,8 @@ class PrescriptionsExpansionPanel extends React.Component {
           >
             {
               this.props.files.length
-              ? 'Attached Prescriptions'
-              : 'Upload Prescriptions'
+                ? 'Attached Prescriptions'
+                : 'Upload Prescriptions'
             }
 
           </Typography>
@@ -63,9 +63,9 @@ class PrescriptionsExpansionPanel extends React.Component {
               this.props.files.length ||
               this.props.cartState.payload.is_doctor_callback.payload
             )
-            ? (
-              <img src='/static/images/checkedIcon.svg' className={this.props.checkedIcon}/>
-            ) : null
+              ? (
+                <img src='/static/images/checkedIcon.svg' className={this.props.checkedIcon} />
+              ) : null
           }
         </ExpansionPanelSummary>
         <ExpansionPanelDetails

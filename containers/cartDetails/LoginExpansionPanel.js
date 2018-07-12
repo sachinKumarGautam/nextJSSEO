@@ -55,9 +55,9 @@ class LoginExpansionPanel extends React.Component {
           </Typography>
           {
             this.props.loginState.isAuthenticated
-            ? (
-              <img src='/static/images/checkedIcon.svg' className={this.props.checkedIcon}/>
-            ) : null
+              ? (
+                <img src='/static/images/checkedIcon.svg' className={this.props.checkedIcon} />
+              ) : null
           }
         </ExpansionPanelSummary>
         <ExpansionPanelDetails

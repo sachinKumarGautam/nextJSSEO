@@ -99,19 +99,20 @@ const AddressDetailsCard = props => (
               root: props.classes.selectButtonRoot
             }}
           >
-          SELECT
+            SELECT
           </Typography>
         ) : (
-          <Button
-            variant='contained'
-            size='small'
-            className={props.classes.button}
-            classes={{
-              label: props.classes.buttonLabel
-            }}
-            onClick={this.handleClickOpen}
-            label={'EDIT'}
-          />
+          <div onClick={this.handleClickOpen}>
+            <Typography
+              variant='caption'
+              className={props.classes.selectButtonLabel}
+              classes={{
+                root: props.classes.selectButtonRoot
+              }}
+            >
+              EDIT
+            </Typography>
+          </div>
         )
     }
   </div>

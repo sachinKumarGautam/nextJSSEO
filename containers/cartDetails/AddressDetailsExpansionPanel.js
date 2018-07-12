@@ -63,9 +63,9 @@ class AddressDetailsExpansionPanel extends React.Component {
               </Typography>
               {
                 this.props.addressIdSelected
-                ? (
-                  <img src='/static/images/checkedIcon.svg' className={this.props.checkedIcon}/>
-                ) : null
+                  ? (
+                    <img src='/static/images/checkedIcon.svg' className={this.props.checkedIcon} />
+                  ) : null
               }
             </div>
             {

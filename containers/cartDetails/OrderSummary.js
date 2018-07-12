@@ -97,7 +97,8 @@ const styles = theme => ({
     display: 'flex'
   },
   checkedIcon: {
-    marginLeft: theme.spacing.unit * 3.5
+    marginLeft: theme.spacing.unit * 4.5,
+    marginTop: theme.spacing.unit / 2
   },
   checkboxWrapper: {
     display: 'flex',

@@ -18,14 +18,15 @@ import { checkPincodeLoading } from '../containers/location/pincode/pincodeActio
 
 const styles = theme => ({
   root: {
-    paddingTop: theme.spacing.unit * 2,
-    paddingBottom: theme.spacing.unit * 2,
+    paddingTop: theme.spacing.unit * 3,
+    paddingBottom: theme.spacing.unit * 3,
     paddingLeft: theme.spacing.unit * 7,
     paddingRight: theme.spacing.unit * 7,
     maxWidth: theme.breakpoints.values.lg,
     minWidth: theme.breakpoints.values.md,
     margin: '0 auto',
-    marginTop: theme.spacing.unit * 12
+    marginTop: theme.spacing.unit * 12,
+    minHeight: theme.spacing.unit * 100
   },
   title: {
     fontWeight: theme.typography.fontWeightBold
