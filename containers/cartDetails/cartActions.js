@@ -451,3 +451,33 @@ export function updateCouponCode (cartState, value) {
     value
   }
 }
+
+export function optForDoctorCallbackLoading (cartState, cartUId, doctorCallback) {
+  return {
+    type: cartActionTypes.OPT_DOCTOR_CALLBACK_LOADING,
+    cartState,
+    isLoading: true,
+    isError: false,
+    cartUId,
+    doctorCallback
+  }
+}
+
+export function optForDoctorCallbackSuccess (cartState, result) {
+  return {
+    type: cartActionTypes.OPT_DOCTOR_CALLBACK_SUCCESS,
+    cartState,
+    payload: result,
+    isLoading: false
+  }
+}
+
+export function optForDoctorCallbackFailure (cartState, error) {
+  return {
+    type: cartActionTypes.OPT_DOCTOR_CALLBACK_FAILURE,
+    cartState,
+    isLoading: false,
+    isError: true,
+    error: error
+  }
+}
