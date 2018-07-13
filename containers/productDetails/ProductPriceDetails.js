@@ -22,7 +22,7 @@ import AddToCartButton from '../cartDetails/addToCartWrapper'
 
 const styles = theme => ({
   card: {
-    minWidth: 275
+    minWidth: theme.spacing.unit * 34.37
   },
   priceWrapper: {
     display: 'flex',
@@ -33,7 +33,8 @@ const styles = theme => ({
   },
   cardActions: {
     display: 'flex',
-    alignItems: 'baseline'
+    alignItems: 'baseline',
+    marginTop: theme.spacing.unit * 2
   }
 })
 

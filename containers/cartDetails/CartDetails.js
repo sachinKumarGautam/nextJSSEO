@@ -50,7 +50,8 @@ const styles = theme => ({
   },
   scrollWrapper: {
     maxHeight: theme.spacing.unit * 50,
-    overflowY: 'scroll'
+    overflowY: 'scroll',
+    overflowX: 'hidden'
   },
   cartWrapper: {
     '&:last-child': {
@@ -114,12 +115,15 @@ class CartDetails extends Component {
               decrementCartItem={this.decrementCartItem.bind(this)}
               incrementCartItem={this.incrementCartItem.bind(this)}
             />
-            { this.props.cartState.payload.patient_id.payload &&
-            <Coupon
-              applyCouponCodeLoading={this.props.applyCouponCodeLoading}
-              updateCouponCode={this.props.updateCouponCode}
-              cartState={this.props.cartState}
-            />
+            {
+              this.props.cartState.payload.patient_id.payload
+                ? (
+                  <Coupon
+                    applyCouponCodeLoading={this.props.applyCouponCodeLoading}
+                    updateCouponCode={this.props.updateCouponCode}
+                    cartState={this.props.cartState}
+                  />
+                ) : null
             }
             <PriceDetails
               cartState={this.props.cartState}

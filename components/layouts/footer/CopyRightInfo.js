@@ -4,12 +4,13 @@ import Typography from '@material-ui/core/Typography'
 
 const styles = theme => ({
   root: {
-    paddingTop: 16,
-    paddingBottom: 16,
-    backgroundColor: '#4a4a4a',
-    borderTop: '0.4px solid #FFF',
+    paddingTop: theme.spacing.unit * 2,
+    paddingBottom: theme.spacing.unit * 1.5,
+    backgroundColor: theme.palette.customGrey.grey500,
     paddingLeft: theme.spacing.unit * 4.75,
-    paddingRight: theme.spacing.unit * 7.5
+    paddingRight: theme.spacing.unit * 7.5,
+    borderRadius: 0,
+    borderTop: `solid 0.8px ${theme.palette.customGrey.grey250}`
   },
   iconWithText: {
     display: 'flex',
@@ -18,11 +19,14 @@ const styles = theme => ({
     alignItems: 'center'
   },
   socialMediaIcon: {
-    paddingLeft: theme.spacing.unit * 5.3
+    marginLeft: theme.spacing.unit * 5.88,
+    width: theme.spacing.unit * 2.5,
+    height: theme.spacing.unit * 2.5
   },
   copyRightInfo: {
+    ...theme.typography.caption,
     color: theme.palette.common.white,
-    paddingLeft: theme.spacing.unit * 2.25
+    paddingLeft: theme.spacing.unit * 2.125
   },
   footerInnerWrapper: {
     maxWidth: theme.breakpoints.values.lg,

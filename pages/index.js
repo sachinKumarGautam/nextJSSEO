@@ -29,11 +29,16 @@ const styles = theme => ({
   },
   title: {
     fontWeight: theme.typography.fontWeightBold
+  },
+  wrapperStyle: {
+    paddingTop: theme.spacing.unit * 3,
+    paddingBottom: theme.spacing.unit * 3,
+    minHeight: theme.spacing.unit * 100
   }
 })
 
 class HomePage extends React.Component {
-  componentDidMount() {
+  componentDidMount () {
     this.props.actions.getBackGroundImagesLoading(
       this.props.homePageState,
       'background'
@@ -46,7 +51,7 @@ class HomePage extends React.Component {
         <Header />
         <div>
           <Paper className={this.props.classes.root} elevation={1}>
-            <HomePageWrapper/>
+            <HomePageWrapper />
           </Paper>
         </div>
         <Footer />

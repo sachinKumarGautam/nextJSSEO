@@ -56,7 +56,8 @@ const styles = theme => ({
     flexShrink: 0,
     marginRight: theme.spacing.unit * 0.625,
     border: `1px dashed ${theme.palette.customGrey.grey200}`,
-    marginTop: theme.spacing.unit * 1.25
+    marginTop: theme.spacing.unit * 1.25,
+    marginLeft: theme.spacing.unit * 6.25
   },
   pickerListLabelPlus: {
     fontSize: theme.spacing.unit * 4.375,

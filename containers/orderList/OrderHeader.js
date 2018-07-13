@@ -1,9 +1,8 @@
-import React, { Component } from 'react'
+import React from 'react'
 
 import { withStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
 import Location from '@material-ui/icons/LocationOn'
-import IconButton from '@material-ui/core/IconButton'
 
 const styles = theme => {
   return {

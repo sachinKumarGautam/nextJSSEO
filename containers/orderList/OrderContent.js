@@ -4,8 +4,6 @@ import { withStyles } from '@material-ui/core/styles'
 import Person from '@material-ui/icons/Person'
 import Typography from '@material-ui/core/Typography'
 
-import Button from '../../components/button'
-
 import {getOrderStatusProgressDetails} from '../../utils/orderStatus/OrderStatus'
 
 const styles = theme => {

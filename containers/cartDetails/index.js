@@ -25,7 +25,8 @@ import {
   resetCartState,
   getAnonymousCartIdLoading,
   applyCouponCodeLoading,
-  updateCouponCode
+  updateCouponCode,
+  optForDoctorCallbackLoading
 } from './cartActions'
 
 import {
@@ -53,7 +54,7 @@ class CartDetailsWrapper extends Component {
       cartUid
     )
 
-    if(this.props.customerState.payload.id) {
+    if (this.props.customerState.payload.id) {
       this.props.actions.getPatientDetailsListLoading(
         this.props.patientDetailsState,
         this.props.customerState.payload.id // pass customer id
@@ -109,6 +110,7 @@ class CartDetailsWrapper extends Component {
                 updateIsCartOpenRegisterModalFlag={this.props.actions.updateIsCartOpenRegisterModalFlag}
                 submitPatientDetailsLoading={this.props.actions.submitPatientDetailsLoading}
                 submitDeliveryDetailsLoading={this.props.actions.submitDeliveryDetailsLoading}
+                optForDoctorCallbackLoading={this.props.actions.optForDoctorCallbackLoading}
               />
             </section>
           </Grid>
@@ -163,7 +165,8 @@ function mapDispatchToProps (dispatch) {
         submitPatientDetailsLoading,
         submitDeliveryDetailsLoading,
         applyCouponCodeLoading,
-        updateCouponCode
+        updateCouponCode,
+        optForDoctorCallbackLoading
       },
       dispatch
     )

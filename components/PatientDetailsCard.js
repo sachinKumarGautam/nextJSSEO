@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 
 import Grid from '@material-ui/core/Grid'
 import Typography from '@material-ui/core/Typography'
@@ -11,24 +11,16 @@ const styles = theme => {
     patientWrapperStyle: {
       border: `1px solid ${theme.palette.customGrey.grey250}`,
       padding: theme.spacing.unit * 2.5,
-      borderRadius: theme.spacing.unit * 0.5,
-      marginLeft: theme.spacing.unit * 4,
-      marginRight: theme.spacing.unit * 4
+      borderRadius: theme.spacing.unit * 0.5
     },
     patientWrapperSelectedStyle: {
       border: `1px solid ${theme.palette.customGrey.grey250}`,
       backgroundColor: theme.palette.customGreen.green200,
       padding: theme.spacing.unit * 2.5,
-      borderRadius: theme.spacing.unit * 0.5,
-      marginLeft: theme.spacing.unit * 4,
-      marginRight: theme.spacing.unit * 4
+      borderRadius: theme.spacing.unit * 0.5
     },
     buttonRoot: {
       border: `1px solid ${theme.palette.primary.main}`
-    },
-    buttonLabel: {
-      color: theme.palette.customGreen.green300,
-      fontWeight: theme.typography.fontWeightBold
     },
     userNameStyle: {
       color: theme.palette.customGrey.grey500,
@@ -47,15 +39,18 @@ const styles = theme => {
       backgroundColor: theme.palette.common.white,
       boxShadow: 'none'
     },
-    selectButton: {
-      boxShadow: 'none',
-      marginLeft: theme.spacing.unit * 1.25,
-      marginTop: theme.spacing.unit * 1.25
-    },
     buttonLabel: {
       ...theme.typography.body2,
       color: theme.palette.customGreen.green300,
       fontWeight: theme.typography.fontWeightBold
+    },
+    selectButtonLabel: {
+      color: theme.palette.primary.main,
+      marginLeft: theme.spacing.unit * 2,
+      marginTop: theme.spacing.unit * 1.25
+    },
+    selectButtonRoot: {
+      cursor: 'pointer'
     }
   }
 }
@@ -101,45 +96,31 @@ const PatientDetailsCard = props => (
             <Grid item xs={4}>
               {
                 props.isCartPage
-                ? (
-                  <Button
-                    variant='raised'
-                    size='small'
-                    color='primary'
-                    className={props.classes.selectButton}
-                    onClick={this.handleClickOpen}
-                    label={'SELECT'}
-                  />
-                ) : (
-                  <Button
-                    variant='contained'
-                    size='small'
-                    className={props.classes.button}
-                    classes={{
-                      label: props.classes.buttonLabel
-                    }}
-                    onClick={this.handleClickOpen}
-                    label={'EDIT'}
-                  />
-                )
+                  ? (
+                    <Typography
+                      variant='caption'
+                      className={props.classes.selectButtonLabel}
+                      classes={{
+                        root: props.classes.selectButtonRoot
+                      }}
+                    >
+                      SELECT
+                    </Typography>
+                  ) : (
+                    <div onClick={this.handleClickOpen}>
+                      <Typography
+                        variant='caption'
+                        className={props.classes.selectButtonLabel}
+                        classes={{
+                          root: props.classes.selectButtonRoot
+                        }}
+                      >
+                        EDIT
+                      </Typography>
+                    </div>
+                  )
               }
             </Grid>
-            {
-              // <Grid item xs={3}>
-              //   <Button
-              //     variant="contained"
-              //     size="small"
-              //     className={props.classes.button}
-              //   >
-              //     <Typography
-              //       variant="caption"
-              //       className={props.classes.buttonLabel}
-              //     >
-              //       DELETE
-              //     </Typography>
-              //   </Button>
-              // </Grid>
-            }
           </Grid>
         </div>
       </Grid>

@@ -7,21 +7,16 @@ import OurApp from './OurApp'
 
 const styles = theme => ({
   root: {
-    paddingTop: theme.spacing.unit * 7,
-    paddingLeft: theme.spacing.unit * 7,
-    paddingRight: theme.spacing.unit * 7,
-    backgroundColor: '#4a4a4a',
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    alignItems: 'stretch'
+    paddingTop: theme.spacing.unit * 5.37,
+    paddingLeft: theme.spacing.unit * 9.75,
+    paddingRight: theme.spacing.unit * 18.875,
+    paddingBottom: theme.spacing.unit * 4.25,
+    backgroundColor: theme.palette.customGrey.grey500
   },
   footerInnerWrapper: {
-    maxWidth: '1366px',
     display: 'flex',
     flexDirection: 'row',
-    justifyContent: 'space-around',
-    alignItems: 'stretch',
+    justifyContent: 'space-between',
     width: '100%'
   }
 })

@@ -3,9 +3,9 @@ import React, { Component } from 'react'
 import { withStyles } from '@material-ui/core/styles'
 import Badge from '@material-ui/core/Badge'
 import IconButton from '@material-ui/core/IconButton'
-import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart'
-import Divider from '@material-ui/core/Divider';
-import Typography from '@material-ui/core/Typography';
+import ShoppingCartIcon from '@material-ui/icons/ShoppingCart'
+import Divider from '@material-ui/core/Divider'
+import Typography from '@material-ui/core/Typography'
 
 import ReactTooltip from 'react-tooltip'
 
@@ -17,7 +17,7 @@ import {
   CART_DETAILS
 } from '../routes/RouteConstant'
 
-import  {
+import {
   NO_CART_ITEM
 } from '../containers/messages/cartMessages'
 
@@ -62,7 +62,7 @@ const styles = theme => ({
     paddingTop: theme.spacing.unit,
     paddingBottom: theme.spacing.unit,
     paddingRight: theme.spacing.unit / 2
-   },
+  },
   noItemTextStyle: {
     ...theme.typography.body4,
     color: theme.palette.customGrey.grey200
@@ -90,13 +90,25 @@ const styles = theme => ({
     },
     '&:hover': {
       visibility: 'visible !important',
-      opacity: '1 !important',
+      opacity: '1 !important'
     },
     borderRadius: '4px',
     boxShadow: '0 4px 4px 2px rgba(0, 0, 0, 0.14)'
   },
   moleculeTag: {
     textDecoration: 'none'
+  },
+  badge: {
+    width: theme.spacing.unit * 2,
+    height: theme.spacing.unit * 2,
+    top: theme.spacing.unit * -0.75,
+    right: 0,
+    left: theme.spacing.unit * 2,
+    color: theme.palette.common.white,
+    fontSize: theme.spacing.unit * 1.625
+  },
+  iconStyle: {
+    fontSize: theme.spacing.unit * 3.25
   }
 })
 
@@ -117,16 +129,17 @@ class CartIcon extends Component {
           data-for='cartIcon'
         >
           <IconButton
-            color='primary'
             className={classes.button}
             aria-label='Add to shopping cart'
           >
             <Badge
-              className={classes.margin}
               badgeContent={cartItems.length}
               color='primary'
+              classes={{
+                badge: classes.badge
+              }}
             >
-              <AddShoppingCartIcon />
+              <ShoppingCartIcon classes={{root: classes.iconStyle}} />
             </Badge>
           </IconButton>
         </a>
@@ -140,22 +153,22 @@ class CartIcon extends Component {
         >
           <div className={classes.summaryMenuWrapper}>
             <Typography
-              variant="caption"
+              variant='caption'
               className={classes.summaryStyle}
             >
               Order Summary
             </Typography>
             <Typography
-              variant="caption"
+              variant='caption'
               className={classes.itemStyle}
             >
               {cartItems.length} item(s)
             </Typography>
           </div>
-          <Divider/>
+          <Divider />
           <div className={classes.medicineDetailWrapper}>
             <Typography
-              variant="caption"
+              variant='caption'
               className={
                 this.state.quantity
                   ? classes.medicineNameStyle : classes.noItemTextStyle
@@ -163,19 +176,19 @@ class CartIcon extends Component {
             >
               {
                 cartItems.length
-                ? cartItems[cartItems.length - 1].name
-                : NO_CART_ITEM
+                  ? cartItems[cartItems.length - 1].name
+                  : NO_CART_ITEM
               }
             </Typography>
             {
-              this.state.quantity ?
-              <Typography
-                variant="caption"
-                className={classes.priceStyle}
-              >
-                Rs. {cartItems.length && cartItems[cartItems.length - 1].mrp}
-              </Typography>
-              : null
+              this.state.quantity
+                ? <Typography
+                  variant='caption'
+                  className={classes.priceStyle}
+                >
+                    Rs. {cartItems.length && cartItems[cartItems.length - 1].mrp}
+                </Typography>
+                : null
             }
           </div>
           <div className={classes.buttonStyle}>

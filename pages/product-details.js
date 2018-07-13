@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 
 import Header from '../components/layouts/header'
 import Footer from '../components/layouts/footer'
@@ -12,10 +12,9 @@ import withRoot from '../src/withRoot'
 import Paper from '@material-ui/core/Paper'
 import Router from 'next/router'
 
-
 import ProductDetailsWrapper from '../containers/productDetails'
 
-import { getProductDetailLoading , onChangeQuantity} from '../containers/productDetails/productDetailsActions'
+import { getProductDetailLoading, onChangeQuantity } from '../containers/productDetails/productDetailsActions'
 
 import {
   getAnonymousCartIdLoading,
@@ -26,8 +25,8 @@ import {checkPincodeLoading} from '../containers/location/pincode/pincodeAction'
 
 const styles = theme => ({
   root: {
-    paddingTop: 16,
-    paddingBottom: 16,
+    paddingTop: theme.spacing.unit * 3,
+    paddingBottom: theme.spacing.unit * 3,
     paddingLeft: theme.spacing.unit * 7,
     paddingRight: theme.spacing.unit * 7,
     maxWidth: theme.breakpoints.values.lg,
@@ -37,6 +36,10 @@ const styles = theme => ({
   },
   title: {
     fontWeight: theme.typography.fontWeightBold
+  },
+  wrapperStyle: {
+    paddingBottom: theme.spacing.unit * 3,
+    minHeight: theme.spacing.unit * 100
   }
 })
 
@@ -49,7 +52,7 @@ class ProductDetails extends React.Component {
   }
 
   componentDidMount () {
-    const { pathname, query } = Router
+    const { query } = Router
     if (Router.query.id) {
       this.props.actions.getProductDetailLoading(
         this.props.productDetailsState,
@@ -62,8 +65,8 @@ class ProductDetails extends React.Component {
     })
   }
 
-  componentDidUpdate(prevProps) {
-    const { pathname, query } = Router
+  componentDidUpdate (prevProps) {
+    const { query } = Router
     if (prevProps.id !== Router.query.id) {
       this.props.actions.getProductDetailLoading(
         this.props.productDetailsState,
@@ -72,7 +75,6 @@ class ProductDetails extends React.Component {
       )
     }
   }
-
 
   render () {
     const {
@@ -86,19 +88,19 @@ class ProductDetails extends React.Component {
     return (
       <div>
         <Header />
-        <div>
+        <div className={this.props.classes.wrapperStyle}>
           <Paper className={classes.root} elevation={1}>
             {
-              query.id && query.id !== 'undefined' ? 
-              <ProductDetailsWrapper
-              checkPincodeState={checkPincodeState}
-              getProductDetailLoading={actions.getProductDetailLoading}
-              checkPincodeLoading={actions.checkPincodeLoading}
-              incrementCartItemLoading={actions.incrementCartItemLoading}
-              cartState={cartState}
-              onChangeQuantity={actions.onChangeQuantity}
-              />
-              : "Page not found"
+              query.id && query.id !== 'undefined'
+                ? <ProductDetailsWrapper
+                  checkPincodeState={checkPincodeState}
+                  getProductDetailLoading={actions.getProductDetailLoading}
+                  checkPincodeLoading={actions.checkPincodeLoading}
+                  incrementCartItemLoading={actions.incrementCartItemLoading}
+                  cartState={cartState}
+                  onChangeQuantity={actions.onChangeQuantity}
+                />
+                : 'Page not found'
             }
           </Paper>
         </div>

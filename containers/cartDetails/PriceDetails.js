@@ -39,7 +39,7 @@ class PriceDetails extends Component {
   render () {
     return (
       <div className={this.props.classes.priceDetailsWrapper}>
-        <Grid container spacing={24}>
+        <Grid container>
           <Grid item xs={8}>
             <Typography className={this.props.classes.itemTotal}>
               ITEM TOTAL

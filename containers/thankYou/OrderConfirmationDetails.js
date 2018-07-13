@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 
 import Divider from '@material-ui/core/Divider'
 import Card from '@material-ui/core/Card'
@@ -14,9 +14,6 @@ import Router from 'next/router'
 import {HOME_PAGE} from '../../routes/RouteConstant'
 
 const styles = theme => ({
-  card: {
-    marginBottom: theme.spacing.unit * 30
-  },
   cardContent: {
     paddingBottom: 0
   },
@@ -61,7 +58,7 @@ const styles = theme => ({
 
 const OrderConfirmationDetails = (props) => {
   return (
-    <Card elevation={'1'} className={props.classes.card}>
+    <Card elevation={'1'}>
       <CardContent className={props.classes.cardContent}>
         <ThankyouDetails
           cartState={props.cartState}
@@ -94,7 +91,7 @@ const OrderConfirmationDetails = (props) => {
               label: props.classes.buttonHomeLabel
             }}
             className={props.classes.buttonHomeStyle}
-            onClick={() => { Router.push({ pathname: HOME_PAGE}) }}
+            onClick={() => { Router.push({ pathname: HOME_PAGE }) }}
             label={'HOME'}
           />
         </div>
