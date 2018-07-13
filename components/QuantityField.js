@@ -15,7 +15,8 @@ const styles = theme => ({
   },
   wrapper: {
     display: 'flex',
-    flexDirection: 'row'
+    flexDirection: 'row',
+    marginLeft: theme.spacing.unit * 1.5
   },
   quantityTextFix: {
     marginTop: theme.spacing.unit

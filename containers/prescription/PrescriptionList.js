@@ -6,7 +6,7 @@ import Typography from '@material-ui/core/Typography'
 import { withStyles } from '@material-ui/core/styles'
 
 import PrescriptionContentWrapper from './PrescriptionContentWrapper'
-import Button from '../../components/button'
+// import Button from '../../components/button'
 
 const styles = theme => ({
   card: {
@@ -57,7 +57,7 @@ class PrescriptionList extends Component {
               >
                 Prescriptions
               </Typography>
-              <Button
+              {/* <Button
                 size='medium'
                 variant='outlined'
                 className={this.props.classes.button}
@@ -67,7 +67,7 @@ class PrescriptionList extends Component {
                 }}
                 onClick={this.handleClickOpen}
                 label={'UPLOAD PRESCRIPTION'}
-              />
+              /> */}
             </div>
             <PrescriptionContentWrapper
               prescriptionState={this.props.prescriptionState}

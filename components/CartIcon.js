@@ -71,9 +71,11 @@ const styles = theme => ({
     border: `1px solid ${theme.palette.primary.main}`
   },
   buttonLabel: {
-    ...theme.typography.body3,
+    ...theme.typography.caption,
     color: theme.palette.primary.main,
-    fontWeight: theme.typography.fontWeightBold
+    fontWeight: theme.typography.fontWeightBold,
+    paddingLeft: theme.spacing.unit * 4,
+    paddingRight: theme.spacing.unit * 4
   },
   buttonStyle: {
     textAlign: 'center',
@@ -181,12 +183,12 @@ class CartIcon extends Component {
               }
             </Typography>
             {
-              this.state.quantity
+              cartItems.length
                 ? <Typography
                   variant='caption'
                   className={classes.priceStyle}
                 >
-                    Rs. {cartItems.length && cartItems[cartItems.length - 1].mrp}
+                    &#8377; {cartItems.length && cartItems[cartItems.length - 1].mrp}
                 </Typography>
                 : null
             }
@@ -201,7 +203,7 @@ class CartIcon extends Component {
                   root: classes.buttonRoot,
                   label: classes.buttonLabel
                 }}
-                label={'PROCEED TO CART'}
+                label={'Proceed to Cart'}
               />
             </Link>
           </div>

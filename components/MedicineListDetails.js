@@ -16,7 +16,10 @@ import {PRODUCT_DETAILS} from '../routes/RouteConstant'
 const styles = theme => {
   return {
     customName: {
-      display: 'inline-block'
+      ...theme.typography.body2,
+      display: 'inline-block',
+      marginBottom: theme.spacing.unit / 4,
+      fontWeight: theme.typography.fontWeightBold
     },
     customBrand: {
       ...theme.typography.body3
@@ -26,8 +29,9 @@ const styles = theme => {
     },
     customPrice: {
       ...theme.typography.body1,
-      marginRight: theme.spacing.unit,
+      marginRight: theme.spacing.unit * 1.25,
       display: 'inline-block',
+      marginBottom: theme.spacing.unit / 4,
       marginLeft: theme.spacing.unit
     },
     customStrokePrice: {

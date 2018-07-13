@@ -13,14 +13,21 @@ const styles = theme => {
     expressDeliveryWrapper: {
       display: 'flex',
       alignItems: 'center',
-      marginTop: theme.spacing.unit
+      marginTop: theme.spacing.unit * 1.375,
+      marginLeft: theme.spacing.unit * 1.25
+    },
+    imageStyle: {
+      width: theme.spacing.unit * 2.25
     }
   }
 }
 
 const ExpressDeliveryInfo = (props) => (
   <div className={props.classes.expressDeliveryWrapper}>
-    <img src={'/static/images/express-delivery-icon.svg'} />
+    <img
+      src={'/static/images/express-delivery-icon.svg'}
+      clasName={props.classes.imageStyle}
+    />
     <Typography component='caption' className={props.classes.label}>
       Express Delivery Available
     </Typography>
