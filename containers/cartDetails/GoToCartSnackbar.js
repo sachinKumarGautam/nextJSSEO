@@ -1,5 +1,4 @@
 import React from 'react'
-import Button from '@material-ui/core/Button'
 import Snackbar from '@material-ui/core/Snackbar'
 import { withStyles } from '@material-ui/core/styles'
 import Link from 'next/link'
@@ -32,7 +31,6 @@ class GoToCartSnackbar extends React.Component {
   };
 
   render () {
-    const { vertical, horizontal, open } = this.state
     const { classes } = this.props
     return (
       <div>

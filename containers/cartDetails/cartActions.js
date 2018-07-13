@@ -214,11 +214,11 @@ export function saveDeliveryAddressToCartLoading (
   }
 }
 
-export function saveDeliveryAddressToCartSuccess (cartState, shipping_address_id) {
+export function saveDeliveryAddressToCartSuccess (cartState, shippingAddressId) {
   return {
     type: cartActionTypes.SAVE_DELIVERY_ADDRESS_TO_CART_SUCCESS,
     cartState,
-    shipping_address_id: shipping_address_id,
+    shipping_address_id: shippingAddressId,
     isLoading: false
   }
 }

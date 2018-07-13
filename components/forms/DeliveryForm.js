@@ -1,10 +1,9 @@
+import React from 'react'
 import { withFormik } from 'formik'
 import * as Yup from 'yup'
 
 import Input from '@material-ui/core/Input'
-import Select from '@material-ui/core/Select'
 import InputLabel from '@material-ui/core/InputLabel'
-import MenuItem from '@material-ui/core/MenuItem'
 import FormHelperText from '@material-ui/core/FormHelperText'
 import FormControl from '@material-ui/core/FormControl'
 import Button from '../../components/button'
@@ -52,8 +51,7 @@ class DeliveryForm extends React.Component {
       isSubmitting,
       handleChange,
       handleSubmit,
-      classes,
-      onSubmit
+      classes
     } = this.props
     return (
       <form onSubmit={handleSubmit}>
