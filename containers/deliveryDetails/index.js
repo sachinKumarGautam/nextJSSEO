@@ -22,11 +22,9 @@ const DeliveryDetailsWrapper = props => (
       <Grid item xs={10}>
         <DeliveryDetailsList
           deliveryDetailsState={props.deliveryDetailsState}
-          saveAddressSelected={props.saveAddressSelected}
           submitDeliveryDetailsLoading={props.submitDeliveryDetailsLoading}
           customerState={props.customerState}
           cartState={props.cartState}
-          saveDeliveryAddressToCartLoading={props.saveDeliveryAddressToCartLoading}
         />
       </Grid>
     </Grid>

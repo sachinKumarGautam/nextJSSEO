@@ -61,7 +61,12 @@ const PatientDetailsCard = props => (
         ? props.classes.patientWrapperSelectedStyle
         : props.classes.patientWrapperStyle
     }
-    onClick={props.savePatientSelected.bind(this, props.patientDetail)}
+    onClick={
+      props.savePatientSelected
+        ? props.savePatientSelected.bind(this, props.patientDetail)
+        : null
+    }
+
   >
     <Grid container spacing={24}>
       <Grid item xs={3}>

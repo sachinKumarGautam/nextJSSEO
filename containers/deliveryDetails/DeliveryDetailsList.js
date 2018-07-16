@@ -66,18 +66,6 @@ class Main extends Component {
     this.closeDeliveryFormModal = this.closeDeliveryFormModal.bind(this)
   }
 
-  saveAddressSelected (addressIdSelected) {
-    this.props.saveAddressSelected(
-      this.props.deliveryDetailsState,
-      addressIdSelected
-    )
-
-    this.props.saveDeliveryAddressToCartLoading(
-      this.props.cartState,
-      addressIdSelected
-    )
-  }
-
   openDeliveryFormModal () {
     this.setState({
       openDeliveryFormDialog: true
@@ -121,8 +109,6 @@ class Main extends Component {
           </div>
           <AddressDetailsCardWrapper
             payload={this.props.deliveryDetailsState.payload}
-            saveAddressSelected={this.saveAddressSelected.bind(this)}
-            addressIdSelected={this.props.cartState.payload.shipping_address_details.payload.shipping_address_id}
             addressDetailsCardWrapper={this.props.classes.addressDetailsCardWrapper}
           />
         </CardContent>
