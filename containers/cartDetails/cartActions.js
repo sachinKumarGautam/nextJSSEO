@@ -185,6 +185,7 @@ export function savePatientToCartSuccess (cartState, result) {
     type: cartActionTypes.SAVE_PATIENT_TO_CART_SUCCESS,
     cartState,
     patient_id: result.patient_id,
+    patient_full_name: result.patient_full_name,
     isLoading: false
   }
 }
@@ -213,11 +214,11 @@ export function saveDeliveryAddressToCartLoading (
   }
 }
 
-export function saveDeliveryAddressToCartSuccess (cartState, shipping_address_id) {
+export function saveDeliveryAddressToCartSuccess (cartState, shippingAddressId) {
   return {
     type: cartActionTypes.SAVE_DELIVERY_ADDRESS_TO_CART_SUCCESS,
     cartState,
-    shipping_address_id: shipping_address_id,
+    shipping_address_id: shippingAddressId,
     isLoading: false
   }
 }
@@ -242,6 +243,8 @@ export function cartTransferSuccess (cartState, result, cartItems, cartPrescript
     id: payload.id,
     uid: payload.uid,
     customer_id: payload.customer_id,
+    patient_id: payload.patient_id,
+    patient_full_name: payload.patient_full_name,
     customer_first_name: payload.customer_first_name,
     customer_last_name: payload.customer_last_name,
     facility_code: payload.facility_code,
@@ -367,6 +370,19 @@ export function submitOrderSuccess (cartState, result) {
     doctor_callback: result.order.doctor_callback,
     order_prescriptions: result.order.order_prescriptions,
     promised_delivery_date: result.order.promised_delivery_date,
+    patient_id: result.order.patient_id,
+    customer_id: result.order.customer_id,
+    customer_full_name: result.order.customer_full_name,
+    patient_full_name: result.order.patient_full_name,
+    discount: result.order.discount,
+    redeemed_care_points: result.order.redeemed_care_points,
+    redeemable_care_points: result.order.redeemable_care_points,
+    total_mrp: result.order.total_mrp,
+    total_sale_price: result.order.total_sale_price,
+    total_tax_amount: result.order.total_tax_amount,
+    facility_code: result.order.facility_code,
+    status: result.order.status,
+    source: result.order.source,
     isLoading: false
   }
 }
@@ -433,5 +449,35 @@ export function updateCouponCode (cartState, value) {
     type: cartActionTypes.UPDATE_COUPON_CODE_VALUE,
     cartState,
     value
+  }
+}
+
+export function optForDoctorCallbackLoading (cartState, cartUId, doctorCallback) {
+  return {
+    type: cartActionTypes.OPT_DOCTOR_CALLBACK_LOADING,
+    cartState,
+    isLoading: true,
+    isError: false,
+    cartUId,
+    doctorCallback
+  }
+}
+
+export function optForDoctorCallbackSuccess (cartState, result) {
+  return {
+    type: cartActionTypes.OPT_DOCTOR_CALLBACK_SUCCESS,
+    cartState,
+    payload: result,
+    isLoading: false
+  }
+}
+
+export function optForDoctorCallbackFailure (cartState, error) {
+  return {
+    type: cartActionTypes.OPT_DOCTOR_CALLBACK_FAILURE,
+    cartState,
+    isLoading: false,
+    isError: true,
+    error: error
   }
 }

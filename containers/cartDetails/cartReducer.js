@@ -173,7 +173,8 @@ export default function cartReducer (state = initialState, action) {
             ...state.payload.patient_id,
             isLoading: action.isLoading,
             payload: action.patient_id
-          }
+          },
+          patient_full_name: action.patient_full_name
         }
       }
 
@@ -261,6 +262,11 @@ export default function cartReducer (state = initialState, action) {
           id: action.id,
           uid: action.uid,
           customer_id: action.customer_id,
+          patient_id: {
+            ...state.payload.patient_id,
+            payload: action.patient_id
+          },
+          patient_full_name: action.patient_full_name,
           customer_first_name: action.customer_first_name,
           customer_last_name: action.customer_last_name,
           facility_code: action.facility_code,
@@ -394,13 +400,29 @@ export default function cartReducer (state = initialState, action) {
         ...state,
         orderResponse: {
           ...state.orderResponse,
-          order_number: action.order_number,
-          isLoading: action.isLoading,
-          service_type: action.service_type,
-          delivery_option: action.delivery_option,
-          doctor_callback: action.doctor_callback,
-          order_prescriptions: action.order_prescriptions,
-          promised_delivery_date: action.promised_delivery_date
+          payload: {
+            ...state.orderResponse.payload,
+            order_number: action.order_number,
+            isLoading: action.isLoading,
+            service_type: action.service_type,
+            delivery_option: action.delivery_option,
+            doctor_callback: action.doctor_callback,
+            order_prescriptions: action.order_prescriptions,
+            promised_delivery_date: action.promised_delivery_date,
+            patient_id: action.patient_id,
+            customer_id: action.customer_id,
+            customer_full_name: action.customer_full_name,
+            patient_full_name: action.patient_full_name,
+            discount: action.discount,
+            redeemed_care_points: action.redeemed_care_points,
+            redeemable_care_points: action.redeemable_care_points,
+            total_mrp: action.total_mrp,
+            total_sale_price: action.total_sale_price,
+            total_tax_amount: action.total_tax_amount,
+            facility_code: action.facility_code,
+            status: action.status,
+            source: action.source
+          }
         }
       }
 
@@ -419,7 +441,10 @@ export default function cartReducer (state = initialState, action) {
       }
 
     case cartActionTypes.RESET_CART_STATE:
-      return initialState
+      return {
+        ...state,
+        payload: initialState.payload
+      }
 
     case cartActionTypes.GO_TO_CART_SNACKBAR:
       return {
@@ -453,6 +478,11 @@ export default function cartReducer (state = initialState, action) {
           isLoading: action.isLoading,
           isCouponApplied: action.isCouponApplied,
           couponCode: action.payload.coupon_code
+        },
+        payload: {
+          ...state.payload,
+          coupon_discount: action.payload.coupon_discount,
+          coupon_code: action.payload.coupon_code
         }
       }
 
@@ -481,6 +511,52 @@ export default function cartReducer (state = initialState, action) {
         couponDetail: {
           ...state.couponDetail,
           couponCode: action.value
+        }
+      }
+
+    case cartActionTypes.OPT_DOCTOR_CALLBACK_LOADING:
+      return {
+        ...state,
+        payload: {
+          ...state.payload,
+          is_doctor_callback: {
+            ...state.payload.is_doctor_callback,
+            isLoading: action.isLoading,
+            errorState: {
+              ...state.payload.is_doctor_callback.errorState,
+              isError: action.isError
+            }
+          }
+        }
+      }
+
+    case cartActionTypes.OPT_DOCTOR_CALLBACK_SUCCESS:
+      return {
+        ...state,
+        payload: {
+          ...state.payload,
+          is_doctor_callback: {
+            ...state.payload.is_doctor_callback,
+            payload: action.payload,
+            isLoading: action.isLoading
+          }
+        }
+      }
+
+    case cartActionTypes.OPT_DOCTOR_CALLBACK_FAILURE:
+      return {
+        ...state,
+        payload: {
+          ...state.payload,
+          is_doctor_callback: {
+            ...state.payload.is_doctor_callback,
+            isLoading: action.isLoading,
+            errorState: {
+              ...state.payload.is_doctor_callback.errorState,
+              isError: action.isError,
+              error: {}
+            }
+          }
         }
       }
 

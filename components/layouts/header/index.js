@@ -28,6 +28,12 @@ import {
   goToCartSnackbar
 } from '../../../containers/cartDetails/cartActions'
 
+import {
+  HOME_PAGE
+} from '../../../routes/RouteConstant'
+
+import Router from 'next/router'
+
 const styles = theme => ({
   root: {
     flexGrow: 1
@@ -57,6 +63,10 @@ const styles = theme => ({
     color: 'white',
     flexGrow: 0,
     borderRadius: theme.spacing.unit * 4
+  },
+  lifcareLogoStyle: {
+    width: theme.spacing.unit * 12,
+    cursor: 'pointer'
   }
 })
 
@@ -130,7 +140,11 @@ class Header extends React.Component {
               }}
               disableGutters
             >
-              <img src='/static/images/logo-green.svg' />
+              <img
+                className={classes.lifcareLogoStyle}
+                src='/static/images/logo-green.svg'
+                onClick={() => { Router.push({ pathname: HOME_PAGE }) }}
+              />
               <SearchMedicine
                 searchMedicineState={searchMedicineState}
                 cartState={this.props.cartState}

@@ -44,8 +44,8 @@ const styles = theme => {
     },
     horizontalItem: {
       display: 'flex',
-      flexDirection: 'row'
-
+      flexDirection: 'row',
+      flexWrap: 'wrap'
     }
   }
 }
@@ -53,7 +53,7 @@ const styles = theme => {
 const PopoverContent = (props) => (
   <div>
     <Typography className={props.styles.popoverContent}>
-      Metformin is used in the treatment of  type2 diabetes. It decreases the amount of sugar…
+      {props.item.description ? props.item.description : ''}
     </Typography>
     <Link
       as={`${MOLECULE_DETAILS}/${props.item.id}/${props.item.name}`}

@@ -23,9 +23,9 @@ import {
   submitOrderLoading,
   updateIsCartOpenRegisterModalFlag,
   resetCartState,
-  getAnonymousCartIdLoading,
   applyCouponCodeLoading,
-  updateCouponCode
+  updateCouponCode,
+  optForDoctorCallbackLoading
 } from './cartActions'
 
 import {
@@ -53,7 +53,7 @@ class CartDetailsWrapper extends Component {
       cartUid
     )
 
-    if (this.props.loginState.isAuthenticated) {
+    if (this.props.customerState.payload.id) {
       this.props.actions.getPatientDetailsListLoading(
         this.props.patientDetailsState,
         this.props.customerState.payload.id // pass customer id
@@ -67,7 +67,14 @@ class CartDetailsWrapper extends Component {
   }
 
   componentDidUpdate (prevProps) {
-    if (this.props.customerState.payload.id !== prevProps.customerState.payload.id) {
+    if (
+      (
+        this.props.customerState.payload.id !==
+        prevProps.customerState.payload.id
+      ) && (
+        !this.props.cartState.orderResponse.payload.order_number
+      )
+    ) {
       this.props.actions.getPatientDetailsListLoading(
         this.props.patientDetailsState,
         this.props.customerState.payload.id // pass customer id
@@ -102,6 +109,7 @@ class CartDetailsWrapper extends Component {
                 updateIsCartOpenRegisterModalFlag={this.props.actions.updateIsCartOpenRegisterModalFlag}
                 submitPatientDetailsLoading={this.props.actions.submitPatientDetailsLoading}
                 submitDeliveryDetailsLoading={this.props.actions.submitDeliveryDetailsLoading}
+                optForDoctorCallbackLoading={this.props.actions.optForDoctorCallbackLoading}
               />
             </section>
           </Grid>
@@ -113,7 +121,6 @@ class CartDetailsWrapper extends Component {
                 decrementCartItemLoading={this.props.actions.decrementCartItemLoading}
                 deleteCartItemLoading={this.props.actions.deleteCartItemLoading}
                 resetCartState={this.props.actions.resetCartState}
-                getAnonymousCartIdLoading={this.props.actions.getAnonymousCartIdLoading}
                 applyCouponCodeLoading={this.props.actions.applyCouponCodeLoading}
                 updateCouponCode={this.props.actions.updateCouponCode}
               />
@@ -154,11 +161,11 @@ function mapDispatchToProps (dispatch) {
         submitOrderLoading,
         updateIsCartOpenRegisterModalFlag,
         resetCartState,
-        getAnonymousCartIdLoading,
         submitPatientDetailsLoading,
         submitDeliveryDetailsLoading,
         applyCouponCodeLoading,
-        updateCouponCode
+        updateCouponCode,
+        optForDoctorCallbackLoading
       },
       dispatch
     )

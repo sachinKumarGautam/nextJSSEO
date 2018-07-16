@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 
 import Card from '@material-ui/core/Card'
 import CardContent from '@material-ui/core/CardContent'
@@ -52,10 +52,10 @@ const MyCartDetails = (props) => {
           </Typography>
         </div>
         <PriceDetails
-          cartState={props.cartState}
+          cartState={props.cartState.orderResponse}
         />
         <TotalAmount
-          cartState={props.cartState}
+          cartState={props.cartState.orderResponse}
         />
       </CardContent>
     </Card>

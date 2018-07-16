@@ -13,8 +13,7 @@ import { withStyles } from '@material-ui/core/styles'
 import {
   FULL_NAME_REQUIRED,
   MOBILE_REQUIRED,
-  GENDER_REQUIRED,
-  PINCODE_REQUIRED
+  GENDER_REQUIRED
 } from '../../containers/messages/ValidationMsg'
 
 // Helper styles for demo
@@ -195,8 +194,8 @@ export default withStyles(styles)(withFormik({
     full_name: Yup.string().required(FULL_NAME_REQUIRED),
     mobile: Yup.number().required(MOBILE_REQUIRED),
     gender: Yup.string().required(GENDER_REQUIRED),
-    membership_code: Yup.string().required(),
-    referral_code: Yup.string().required()
+    membership_code: Yup.string(),
+    referral_code: Yup.string()
   }),
   handleSubmit: (values, { props, setSubmitting }) => {
     props.onSubmit(props.customerState, props.closeLoginModal, setSubmitting, values)

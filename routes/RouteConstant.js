@@ -18,6 +18,8 @@ export const THANK_YOU = '/order-confirmation'
 
 export const REFILL_PATIENTS = '/refill-patients'
 
+export const HOME_PAGE = '/'
+
 export const MEDICINE_LIST_PRODUCT = '/medicine-list/product'
 
 export const MEDICINE_LIST_MOLECULE = '/medicine-list/molecule'

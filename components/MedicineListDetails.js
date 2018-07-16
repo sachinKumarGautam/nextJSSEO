@@ -11,7 +11,7 @@ import EstimatedPriceLabel from './EstimatedPriceLabel'
 import AddToCartWrapper from '../containers/cartDetails/addToCartWrapper/index'
 import {PRODUCT_DETAILS} from '../routes/RouteConstant'
 
-import RefillDueDays from './RefillDueDays'
+// import RefillDueDays from './RefillDueDays'
 
 const styles = theme => {
   return {
@@ -94,21 +94,20 @@ class MedicineListDetails extends React.Component {
 
     const city = this.props.checkPincodeState.payload.city
     return (
-      
-        <div className={props.classes.medicineListContentWrapper}>
+
+      <div className={props.classes.medicineListContentWrapper}>
+        <Link
+          prefetch
+          href={`${PRODUCT_DETAILS}?id=${props.itemDetails.slug}&location=${city}`}
+          as={`${PRODUCT_DETAILS}/${props.itemDetails.slug}/${city}`}
+        >
           <div>
-            <Link
-              prefetch
-              href={`${PRODUCT_DETAILS}?id=${props.itemDetails.slug}&location=${city}`}
-              as={`${PRODUCT_DETAILS}/${props.itemDetails.slug}/${city}`}
-            >
-              <ProductName
-                variant={'body1'}
-                name={props.itemDetails.name}
-                customStyle={props.classes.customName}
-              />
-            </Link>
-            
+            <ProductName
+              variant={'body1'}
+              name={props.itemDetails.name}
+              customStyle={props.classes.customName}
+            />
+
             {/* {props.isRefillMedicines && <RefillDueDays />} */}
             <ProductBrand
               variant={'caption'}
@@ -127,41 +126,42 @@ class MedicineListDetails extends React.Component {
               }
             />
           </div>
-          <div>
-            <EstimatedPriceLabel
-              variant={'caption'}
-              customStyle={props.classes.customEstimatedLabel}
-              estimatePriceText={'*Est. Price '}
+        </Link>
+        <div>
+          <EstimatedPriceLabel
+            variant={'caption'}
+            customStyle={props.classes.customEstimatedLabel}
+            estimatePriceText={'*Est. Price '}
+          />
+          <ProductPrice
+            variant={'body1'}
+            customStyle={props.classes.customPrice}
+            sellingPrice={props.itemDetails.selling_price}
+          />
+          <StrokePrice
+            variant={'caption'}
+            customStyle={props.classes.customStrokePrice}
+            mrp={props.itemDetails.mrp}
+          />
+          <div className={props.classes.buttonWrapperStyle}>
+            <AddToCartWrapper
+              variant='outlined'
+              classes={{
+                root: props.classes.buttonRoot,
+                label: props.classes.buttonLabel
+              }}
+              // style={{float: 'right'}}
+              label={'Add To Cart'}
+              open={this.state.pincodeDialogOpen}
+              handleOpenPincodeDialog={this.handleOpenPincodeDialog}
+              handleClose={this.handleClosePincodeDialog}
+              addToCart={this.addToCart}
+              checkPincodeState={props.checkPincodeState}
+              checkPincodeLoading={props.checkPincodeLoading}
             />
-            <ProductPrice
-              variant={'body1'}
-              customStyle={props.classes.customPrice}
-              sellingPrice={props.itemDetails.selling_price}
-            />
-            <StrokePrice
-              variant={'caption'}
-              customStyle={props.classes.customStrokePrice}
-              mrp={props.itemDetails.mrp}
-            />
-            <div className={props.classes.buttonWrapperStyle}>
-              <AddToCartWrapper
-                variant='outlined'
-                classes={{
-                  root: props.classes.buttonRoot,
-                  label: props.classes.buttonLabel
-                }}
-                // style={{float: 'right'}}
-                label={'Add To Cart'}
-                open={this.state.pincodeDialogOpen}
-                handleOpenPincodeDialog={this.handleOpenPincodeDialog}
-                handleClose={this.handleClosePincodeDialog}
-                addToCart={this.addToCart}
-                checkPincodeState={props.checkPincodeState}
-                checkPincodeLoading={props.checkPincodeLoading}
-              />
-            </div>
           </div>
         </div>
+      </div>
     )
   }
 }

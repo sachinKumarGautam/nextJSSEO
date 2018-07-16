@@ -25,8 +25,8 @@ import { checkPincodeLoading } from '../containers/location/pincode/pincodeActio
 
 const styles = theme => ({
   root: {
-    paddingTop: 16,
-    paddingBottom: 16,
+    paddingTop: theme.spacing.unit * 3,
+    paddingBottom: theme.spacing.unit * 3,
     paddingLeft: theme.spacing.unit * 7,
     paddingRight: theme.spacing.unit * 7,
     maxWidth: theme.breakpoints.values.lg,
@@ -36,6 +36,10 @@ const styles = theme => ({
   },
   title: {
     fontWeight: theme.typography.fontWeightBold
+  },
+  wrapperStyle: {
+    paddingBottom: theme.spacing.unit * 3,
+    minHeight: theme.spacing.unit * 100
   }
 })
 
@@ -61,6 +65,9 @@ class MoleculeDetails extends React.Component {
         this.props.moleculeDetailsState,
         query.id// pass salt id // 5a61a295ae8bdc26685f2b09 // query.id
       )
+    }
+
+    if (query.name) {
       // Represents to get medicine list with page size and size per page.
       this.props.actions.getRelatedMedicinesLoading(
         this.props.medicineListState,
@@ -75,7 +82,7 @@ class MoleculeDetails extends React.Component {
     return (
       <div>
         <Header />
-        <div>
+        <div className={this.props.classes.wrapperStyle}>
           <Paper className={this.props.classes.root} elevation={1}>
             <MoleculeDetailsWrapper
               checkPincodeLoading={this.props.actions.checkPincodeLoading}

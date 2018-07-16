@@ -1,13 +1,11 @@
 import React, { Component } from 'react'
 
-import Grid from '@material-ui/core/Grid'
 import Typography from '@material-ui/core/Typography'
 import Card from '@material-ui/core/Card'
 import CardContent from '@material-ui/core/CardContent'
 
 import { withStyles } from '@material-ui/core/styles'
 
-import Button from '../../components/button'
 import AddDeliveryAddressButton from './AddDeliveryAddressButton'
 import DeliveryDetailForm from './DeliveryDetailsForm'
 import AddressDetailsCardWrapper from './AddressDetailsCardWrapper'
@@ -38,19 +36,22 @@ const styles = theme => {
     },
     buttonWrapper: {
       textAlign: 'right',
-      marginTop: theme.spacing.unit * 3.75,
+      marginTop: theme.spacing.unit,
       marginRight: theme.spacing.unit * 3.75
     },
     title: {
       ...theme.typography.headline,
       color: theme.palette.customGrey.grey500,
       marginLeft: theme.spacing.unit * 2,
-      marginBottom: theme.spacing.unit * 6
+      marginBottom: theme.spacing.unit * 4
     },
     titleWrapper: {
       display: 'flex',
       flexDirection: 'row',
       justifyContent: 'space-between'
+    },
+    addressDetailsCardWrapper: {
+      padding: theme.spacing.unit * 1.25
     }
   }
 }
@@ -123,6 +124,7 @@ class Main extends Component {
             payload={this.props.deliveryDetailsState.payload}
             saveAddressSelected={this.saveAddressSelected.bind(this)}
             addressIdSelected={this.state.addressIdSelected}
+            addressDetailsCardWrapper={this.props.classes.addressDetailsCardWrapper}
           />
         </CardContent>
       </Card>

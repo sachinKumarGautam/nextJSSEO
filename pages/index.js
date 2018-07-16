@@ -1,116 +1,83 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import Button from '../components/button';
-import Dialog from '@material-ui/core/Dialog';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogActions from '@material-ui/core/DialogActions';
-import Typography from '@material-ui/core/Typography';
-import { withStyles } from '@material-ui/core/styles';
-import withRoot from '../src/withRoot';
+import React from 'react'
+import Header from '../components/layouts/header'
+import Footer from '../components/layouts/footer'
 
-import Link from 'next/link'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
 
-import withRedux from 'next-redux-wrapper'
-import initStore from '../redux'
-import CharacterInfo from '../components/CharacterInfo'
-import { rootEpic } from '../redux/epics'
-import * as actions from '../redux/actions'
-import { of } from 'rxjs/observable/of'
+import { withStyles } from '@material-ui/core/styles'
+import withRoot from '../src/withRoot'
+
+import Paper from '@material-ui/core/Paper'
+
+import HomePageWrapper from '../containers/homePage'
+
+import {
+  getBackGroundImagesLoading
+} from '../containers/homePage/homePageActions'
 
 const styles = theme => ({
   root: {
-    textAlign: 'center',
-    paddingTop: theme.spacing.unit * 20,
+    paddingTop: theme.spacing.unit * 2,
+    paddingBottom: theme.spacing.unit * 2,
+    paddingLeft: theme.spacing.unit * 7,
+    paddingRight: theme.spacing.unit * 7,
+    maxWidth: theme.breakpoints.values.lg,
+    minWidth: theme.breakpoints.values.md,
+    margin: '0 auto',
+    marginTop: theme.spacing.unit * 12
   },
-});
-
-class Index extends React.Component {
-  static async getInitialProps ({ store, isServer }) {
-    const resultAction = await rootEpic(
-      of(actions.fetchCharacter(isServer)),
-      store
-    ).toPromise() // we need to convert Observable to Promise
-    store.dispatch(resultAction)
-
-    return { isServer }
+  title: {
+    fontWeight: theme.typography.fontWeightBold
+  },
+  wrapperStyle: {
+    paddingTop: theme.spacing.unit * 3,
+    paddingBottom: theme.spacing.unit * 3,
+    minHeight: theme.spacing.unit * 100
   }
+})
 
-  state = {
-    open: false,
-  };
-
-  handleClose = () => {
-    this.setState({
-      open: false,
-    });
-  };
-
-  handleClick = () => {
-    this.setState({
-      open: true,
-    });
-  };
-
+class HomePage extends React.Component {
   componentDidMount () {
-    this.props.startFetchingCharacters()
+    this.props.actions.getBackGroundImagesLoading(
+      this.props.homePageState,
+      'background'
+    )
   }
 
-  componentWillUnmount () {
-    this.props.stopFetchingCharacters()
-  }
-
-  render() {
-    const { classes } = this.props;
-    const { open } = this.state;
-
+  render () {
     return (
       <div>
+        <Header />
         <div>
-          <h1>Index Page</h1>
-          <CharacterInfo />
-          <br />
-          <nav>
-            <Link href='/other'><a>Navigate to "/other"</a></Link>
-          </nav>
+          <Paper className={this.props.classes.root} elevation={1}>
+            <HomePageWrapper />
+          </Paper>
         </div>
-        <div className={classes.root}>
-          <Dialog open={open} onClose={this.handleClose}>
-            <DialogTitle>Super Secret Password</DialogTitle>
-            <DialogContent>
-              <DialogContentText>1-2-3-4-5</DialogContentText>
-            </DialogContent>
-            <DialogActions>
-              <Button color="primary" onClick={this.handleClose} label={'OK'} />
-            </DialogActions>
-          </Dialog>
-          <Typography variant="display1" gutterBottom>
-            Material-UI
-          </Typography>
-          <Typography variant="subheading" gutterBottom>
-            example project
-          </Typography>
-          <Button variant="raised" color="primary" onClick={this.handleClick}>
-            Super Secret Password
-          </Button>
-        </div>
+        <Footer />
       </div>
-    );
+    )
   }
 }
 
-Index.propTypes = {
-  classes: PropTypes.object.isRequired,
-};
-
-// export default withRoot(withStyles(styles)(Index));
-
-export default withRedux(
-  initStore,
-  null,
-  {
-    startFetchingCharacters: actions.startFetchingCharacters,
-    stopFetchingCharacters: actions.stopFetchingCharacters
+function mapStateToProps (state) {
+  return {
+    homePageState: state.homePageState
   }
-)(withRoot(withStyles(styles)(Index)))
+}
+
+function mapDispatchToProps (dispatch) {
+  return {
+    actions: bindActionCreators(
+      {
+        getBackGroundImagesLoading
+      },
+      dispatch
+    )
+  }
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withRoot(withStyles(styles)(HomePage)))

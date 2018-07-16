@@ -4,7 +4,6 @@ import { withStyles } from '@material-ui/core/styles'
 import Card from '@material-ui/core/Card'
 // import CardActions from '@material-ui/core/CardActions'
 import CardContent from '@material-ui/core/CardContent'
-import Button from '../../components/button'
 import ProductPrice from '../../components/ProductPrice'
 import EstimatedPriceLabel from '../../components/EstimatedPriceLabel'
 import StrokePrice from '../../components/StrokePrice'
@@ -22,7 +21,7 @@ import AddToCartButton from '../cartDetails/addToCartWrapper'
 
 const styles = theme => ({
   card: {
-    minWidth: 275
+    minWidth: theme.spacing.unit * 34.37
   },
   priceWrapper: {
     display: 'flex',
@@ -33,7 +32,8 @@ const styles = theme => ({
   },
   cardActions: {
     display: 'flex',
-    alignItems: 'baseline'
+    alignItems: 'baseline',
+    marginTop: theme.spacing.unit * 2
   }
 })
 

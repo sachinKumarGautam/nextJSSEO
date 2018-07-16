@@ -6,20 +6,22 @@ const styles = theme => ({
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'flex-start',
-    
+
     marginBottom: theme.spacing.unit * 2.25
   },
   img: {
     width: theme.spacing.unit * 12.75,
-    height: theme.spacing.unit * 5,
+    height: theme.spacing.unit * 5
   },
   img2: {
     width: theme.spacing.unit * 12.75,
-    height: theme.spacing.unit * 4,
+    height: theme.spacing.unit * 4
   },
   listHeaderText: {
+    ...theme.typography.body1,
     color: theme.palette.common.white,
-    marginBottom: theme.spacing.unit * 2.25
+    marginBottom: theme.spacing.unit * 2.5,
+    fontWeight: theme.typography.fontWeightBold
   },
   listItemText: {
     color: theme.palette.customGrey.grey200,

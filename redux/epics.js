@@ -62,7 +62,8 @@ import {
   uploadPrescriptionEpic,
   deletePrescriptionEpic,
   submitOrderEpic,
-  applyCouponCode
+  applyCouponCode,
+  optDoctorCallback
 } from '../containers/cartDetails/cartEpics'
 
 import {
@@ -79,18 +80,18 @@ import {
   getPatientPastMedicineList
 } from '../containers/refillPatients/refillEpics'
 
+import {
+  getBackGroungImages
+} from '../containers/homePage/homePageEpics'
+
 export const rootEpic = combineEpics(
   getMoleculeSummary,
   getRelatedMedicines,
-  carePointsList,
   sendOTP,
   verifyOTP,
   registerCustomer,
-  getRelatedMedicines,
   fetchUserInfo,
   getProductDetails,
-  getRelatedMedicines,
-  carePointsList,
   getAnonymousCartIdEpic,
   getCartDetailsEpic,
   // decrementCartItemLoadingEpic,
@@ -113,10 +114,11 @@ export const rootEpic = combineEpics(
   uploadPrescriptionEpic,
   deletePrescriptionEpic,
   submitOrderEpic,
-  getAnonymousCartIdEpic,
   checkPincode,
   submitDeliveryDetails,
   submitRefillDate,
   getPatientPastMedicineList,
-  applyCouponCode
+  getBackGroungImages,
+  applyCouponCode,
+  optDoctorCallback
 )

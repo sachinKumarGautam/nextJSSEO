@@ -231,10 +231,27 @@ const getPatientPastMedicineList$ = (patientId, facilityCode) => (
   })
 )
 
+const getSliderImages$ = tagName => (
+  makeAjaxRequest({
+    method: 'GET',
+    url: fetchUrl('account', 'offer/tag/' + tagName, 'GET_LIST')
+  })
+)
+
 const applyCouponForCart$ = (cartUid, couponCode) => (
   makeAjaxRequest({
     method: 'PATCH',
     url: fetchUrl('cart', cartUid + '/coupon/' + couponCode, 'CREATE')
+  })
+)
+
+const teleConsultation$ = (cartUid, isDoctorCallback) => (
+  makeAjaxRequest({
+    method: 'PATCH',
+    url: fetchUrl('cart', cartUid + '/doctor-callback', 'CREATE'),
+    body: {
+      doctor_callback: isDoctorCallback
+    }
   })
 )
 
@@ -267,5 +284,7 @@ export {
   submitDeliveryDetails$,
   submitRefillDate$,
   getPatientPastMedicineList$,
-  applyCouponForCart$
+  getSliderImages$,
+  applyCouponForCart$,
+  teleConsultation$
 }

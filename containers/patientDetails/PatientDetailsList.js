@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 
-import Grid from '@material-ui/core/Grid'
 import Typography from '@material-ui/core/Typography'
 import { withStyles } from '@material-ui/core/styles'
 import Card from '@material-ui/core/Card'
@@ -46,6 +45,9 @@ const styles = theme => {
       display: 'flex',
       flexDirection: 'row',
       justifyContent: 'space-between'
+    },
+    patientDetailsCardWrapper: {
+      padding: theme.spacing.unit * 1.25
     }
   }
 }
@@ -116,6 +118,7 @@ class PatientDetailsList extends Component {
             payload={this.props.patientDetailsState.payload}
             savePatientSelected={this.savePatientSelected.bind(this)}
             patientIdSelected={this.props.cartState.payload.patient_id.payload}
+            patientDetailsCardWrapper={this.props.classes.patientDetailsCardWrapper}
           />
         </CardContent>
       </Card>

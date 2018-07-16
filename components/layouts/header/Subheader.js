@@ -1,9 +1,10 @@
+import React from 'react'
 import { withStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
 
 import Link from 'next/link'
 
-import { REFILL_PATIENTS } from '../../../routes/RouteConstant'
+import { REFILL_PATIENTS, HOME_PAGE } from '../../../routes/RouteConstant'
 
 const styles = theme => ({
   horizontalSubheader: {
@@ -61,20 +62,24 @@ class Subheader extends React.Component {
     return (
       <ul className={classes.horizontalSubheader}>
         <li>
-          <a
-            onMouseEnter={this.toggleHover.bind(this, 'orderMedicine')}
-            onMouseLeave={this.toggleHover.bind(this, 'orderMedicine')}
-            href='#'
-            className={classes.subHeaderItem}
-          >
-            <img src='/static/images/order-med.svg' />
-            <Typography
-              variant={'body2'}
-              className={this.state.hover.orderMedicine ? `${classes.subHeaderText} ${classes.hover}` : classes.subHeaderText}
-              component='h1'>
-                Order Medicine
-            </Typography>
-          </a>
+          <Link href={HOME_PAGE}>
+            <a
+              onMouseEnter={this.toggleHover.bind(this, 'orderMedicine')}
+              onMouseLeave={this.toggleHover.bind(this, 'orderMedicine')}
+              href='#'
+              className={classes.subHeaderItem}
+            >
+              <img
+                src='/static/images/order-med.svg'
+              />
+              <Typography
+                variant={'body2'}
+                className={this.state.hover.orderMedicine ? `${classes.subHeaderText} ${classes.hover}` : classes.subHeaderText}
+                component='h1'>
+                  Order Medicine
+              </Typography>
+            </a>
+          </Link>
         </li>
         <li className={isAuthenticated ? '' : classes.linkDisabled}>
           <Link href={REFILL_PATIENTS}>
@@ -97,7 +102,8 @@ class Subheader extends React.Component {
           <a
             onMouseEnter={this.toggleHover.bind(this, 'diseases')}
             onMouseLeave={this.toggleHover.bind(this, 'diseases')}
-            href='#'
+            href='https://blog.lifcare.in/'
+            target='_blank'
             className={classes.subHeaderItem}
           >
             <img src='/static/images/repeat-button.svg' />
@@ -113,7 +119,8 @@ class Subheader extends React.Component {
           <a
             onMouseEnter={this.toggleHover.bind(this, 'healthContent')}
             onMouseLeave={this.toggleHover.bind(this, 'healthContent')}
-            href='#'
+            href='https://blog.lifcare.in/'
+            target='_blank'
             className={classes.subHeaderItem}
           >
             <img src='/static/images/blog.svg' />

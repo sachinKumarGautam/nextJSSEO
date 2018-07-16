@@ -1,3 +1,4 @@
+import React from 'react'
 import Router from 'next/router'
 import Downshift from 'downshift'
 import { withStyles } from '@material-ui/core/styles'
@@ -191,19 +192,19 @@ class SearchMedicine extends React.Component {
     //   || Downshift.stateChangeTypes.changeInput
     // ) || isOpen ? true : false
 
-      console.log('type: ',type, 'changes.isOpen: ', changes.isOpen, this.state.isOpen)
+      // console.log('type: ',type, 'changes.isOpen: ', changes.isOpen, this.state.isOpen)
 
-      if(type !== Downshift.stateChangeTypes.mouseUp){
-        this.setState({
-          isOpen: isOpen || this.state.isOpen,
-        })
-      }
+      // if(type !== Downshift.stateChangeTypes.mouseUp){
+      //   this.setState({
+      //     isOpen: isOpen || this.state.isOpen,
+      //   })
+      // }
 
-      if(type === Downshift.stateChangeTypes.itemMouseEnter){
-        this.setState({
-          isOpen: true
-        })
-      }
+      // if(type === Downshift.stateChangeTypes.itemMouseEnter){
+      //   this.setState({
+      //     isOpen: true
+      //   })
+      // }
 
 
   }
@@ -230,12 +231,8 @@ class SearchMedicine extends React.Component {
     return (
       <div className={classes.root}>
         <Downshift
-          {...this.state}        
-          onStateChange={this.stateChangeHandler}
+          // onStateChange={this.stateChangeHandler}
           // onOuterClick={this.onOuterClick}
-          // onStateChange={({ inputValue }) => {
-          //   return inputValue && this.setState({ inputValue })
-          // }}
         >
           {({ getInputProps, getItemProps, getMenuProps, isOpen, inputValue, selectedItem, highlightedIndex }) => (
             <div className={classes.container}>

@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
 
-import IconButton from '@material-ui/core/IconButton';
-import Menu from '@material-ui/core/Menu';
-import MenuItem from '@material-ui/core/MenuItem';
-import AccountCircle from '@material-ui/icons/AccountCircle';
-import Divider from '@material-ui/core/Divider';
+import IconButton from '@material-ui/core/IconButton'
+import Menu from '@material-ui/core/Menu'
+import MenuItem from '@material-ui/core/MenuItem'
+import AccountCircle from '@material-ui/icons/AccountCircle'
+import Divider from '@material-ui/core/Divider'
 import { withStyles } from '@material-ui/core/styles'
 
 import UserDetail from './UserDetail'
@@ -17,7 +17,7 @@ import { logoutWithReload } from '../../utils/removePersistState'
 const styles = theme => {
   return {
     menuPaperProps: {
-      width: theme.spacing.unit * 45,
+      width: theme.spacing.unit * 45
     },
     menuStyle: {
       top: theme.spacing.unit * 4
@@ -32,6 +32,9 @@ const styles = theme => {
       marginLeft: theme.spacing.unit * 7,
       marginTop: theme.spacing.unit * 2,
       marginBottom: theme.spacing.unit * 4
+    },
+    iconSize: {
+      fontSize: theme.spacing.unit * 3.5
     }
   }
 }
@@ -57,15 +60,19 @@ class MenuLayout extends Component {
     return (
       <div>
         <IconButton
-          aria-label="More"
+          aria-label='More'
           aria-owns={this.state.anchorEl ? 'long-menu' : null}
-          aria-haspopup="true"
+          aria-haspopup='true'
           onClick={this.handleClick}
         >
-          <AccountCircle />
+          <AccountCircle
+            classes={{
+              root: this.props.classes.iconSize
+            }}
+          />
         </IconButton>
         <Menu
-          id="long-menu"
+          id='long-menu'
           anchorEl={this.state.anchorEl}
           open={Boolean(this.state.anchorEl)}
           onClose={this.handleClose}
@@ -81,7 +88,7 @@ class MenuLayout extends Component {
               customerState={this.props.customerState}
             />
           }</MenuItem>
-          <Divider/>
+          <Divider />
           <MenuItems logout={this.logout.bind(this)} />
           <Button
             size='small'
@@ -95,8 +102,8 @@ class MenuLayout extends Component {
             onClick={this.handleClickOpen}
             label={'Chat now'}
           />
-          <Divider/>
-          <SubMenuList/>
+          <Divider />
+          <SubMenuList />
         </Menu>
       </div>
     )

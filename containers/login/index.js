@@ -1,3 +1,4 @@
+import React from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
@@ -9,7 +10,7 @@ import Fade from '@material-ui/core/Fade'
 import Login from './Login'
 import Register from './Register'
 import OTP from './OTP'
-import { sendOtpLoading, verifyOtpLoading} from './loginActions'
+import { sendOtpLoading, verifyOtpLoading } from './loginActions'
 import { customerRegisterLoading } from '../user/customer/customerActions'
 
 /*
