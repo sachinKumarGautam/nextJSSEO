@@ -166,6 +166,12 @@ class OrderSummary extends React.Component {
     })
   };
 
+  handleClose() {
+    this.setState({
+      isShowSnackbar: false
+    })
+  }
+
   render () {
     return (
       <div className={this.props.classes.root}>
@@ -284,6 +290,7 @@ class OrderSummary extends React.Component {
           }}
           autoHideDuration={SNACK_BAR_DURATION}
           open={this.state.isShowSnackbar}
+          onClose={this.handleClose.bind(this)}
           ContentProps={{
             'aria-describedby': 'cart-items'
           }}
