@@ -26,7 +26,7 @@ const ExpressDeliveryInfo = (props) => (
   <div className={props.classes.expressDeliveryWrapper}>
     <img
       src={'/static/images/express-delivery-icon.svg'}
-      clasName={props.classes.imageStyle}
+      className={props.classes.imageStyle}
     />
     <Typography component='caption' className={props.classes.label}>
       Express Delivery Available
