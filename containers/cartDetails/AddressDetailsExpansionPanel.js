@@ -8,6 +8,7 @@ import Typography from '@material-ui/core/Typography'
 import Button from '../../components/button'
 
 import AddressDetails from './AddressDetails'
+import SelectedAddressDetails from './SelectedAddressDetails'
 
 import AddDeliveryAddressButton from '../deliveryDetails/AddDeliveryAddressButton'
 
@@ -60,30 +61,11 @@ class AddressDetailsExpansionPanel extends React.Component {
                 this.props.expanded !== 'panel4' &&
                 this.props.cartState.payload.shipping_address_details.payload.shipping_address_id
                   ? (
-                    <div>
-                      <Typography
-                        component='h1'
-                        className={this.props.heading}
-                      >
-                        {
-                          this.props.cartState.payload.shipping_address_details.payload.shipping_address.type
-                            ? this.props.cartState.payload.shipping_address_details.payload.shipping_address.type
-                            : 'Others'
-                        }
-                      </Typography>
-                      <Typography
-                        component='h1'
-                        className={this.props.patientDetails}
-                      >
-                        {this.props.cartState.payload.shipping_address_details.payload.shipping_address.street1}
-                      </Typography>
-                      <Typography
-                        component='h1'
-                        className={this.props.patientDetails}
-                      >
-                        {this.props.cartState.payload.shipping_address_details.payload.shipping_address.street2}
-                      </Typography>
-                    </div>
+                    <SelectedAddressDetails
+                      heading={this.props.heading}
+                      patientDetails={this.props.patientDetails}
+                      shipping_address={this.props.cartState.payload.shipping_address_details.payload.shipping_address}
+                    />
                   ) : (
                     <Typography
                       component='h1'

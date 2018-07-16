@@ -13,10 +13,9 @@ const styles = theme => {
       borderRadius: theme.spacing.unit * 0.5
     },
     patientWrapperSelectedStyle: {
-      border: `1px solid ${theme.palette.primary.main}`,
+      border: `2px solid ${theme.palette.primary.main}`,
       padding: theme.spacing.unit * 2.5,
-      borderRadius: theme.spacing.unit * 0.5,
-      boxShadow: '0px 3px 7px 5px #eee'
+      borderRadius: theme.spacing.unit * 0.5
     },
     buttonRoot: {
       border: `1px solid ${theme.palette.primary.main}`

@@ -8,6 +8,7 @@ import Typography from '@material-ui/core/Typography'
 import Button from '../../components/button'
 
 import PatientDetails from './PatientDetails'
+import SelectedPatientDetails from './SelectedPatientDetails'
 
 import AddPatientButton from '../patientDetails/AddPatientButton'
 
@@ -63,27 +64,11 @@ class PatientDetailsExpansionPanel extends React.Component {
                 this.props.expanded !== 'panel3' &&
                 this.props.cartState.payload.patient_details.payload.patient_id
                   ? (
-                    <div>
-                      <Typography
-                        component='h1'
-                        className={this.props.heading}
-                      >
-                        {this.props.cartState.payload.patient_details.payload.patient_full_name}
-                      </Typography>
-                      <Typography
-                        component='h1'
-                        className={this.props.patientDetails}
-                      >
-                        {this.props.cartState.payload.patient_details.payload.gender} |
-                        {this.props.cartState.payload.patient_details.payload.age}
-                      </Typography>
-                      <Typography
-                        component='h1'
-                        className={this.props.patientDetails}
-                      >
-                        {this.props.cartState.payload.patient_details.payload.mobile}
-                      </Typography>
-                    </div>
+                    <SelectedPatientDetails
+                      heading={this.props.heading}
+                      patientDetails={this.props.patientDetails}
+                      patient={this.props.cartState.payload.patient_details.payload}
+                    />
                   ) : (
                     <Typography
                       component='h1'
