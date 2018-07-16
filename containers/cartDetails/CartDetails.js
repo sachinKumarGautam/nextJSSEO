@@ -18,6 +18,10 @@ import {
   THANK_YOU
 } from '../../routes/RouteConstant'
 
+import {
+  NO_MEDICINES
+} from '../messages/cartMessages'
+
 /*
   avatar
   medicine list
@@ -126,7 +130,7 @@ class CartDetails extends Component {
                 ) : (
                   <div>
                     <Typography className={this.props.classes.medicineListWrapper}>
-                    No medicines added in cart
+                      {NO_MEDICINES}
                     </Typography>
                     <Divider />
                   </div>
