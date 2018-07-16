@@ -23,7 +23,7 @@ const styles = theme => {
     },
     treatmentHeading: {
       marginLeft: theme.spacing.unit * 3,
-      marginBottom: theme.spacing.unit * 7,
+      marginBottom: theme.spacing.unit * 6.5,
       fontWeight: theme.typography.fontWeightBold
     }
   }

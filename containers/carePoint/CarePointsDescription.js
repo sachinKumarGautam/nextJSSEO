@@ -3,6 +3,11 @@ import React from 'react'
 import Typography from '@material-ui/core/Typography'
 import { withStyles } from '@material-ui/core/styles'
 
+import {
+  CARE_POINT_DESCRIPTION,
+  CARE_POINT_PLUS_DESCRIPTION
+} from '../messages/commonMsg'
+
 const styles = theme => ({
   labelStyle: {
     color: theme.palette.customGrey.grey500,
@@ -44,7 +49,7 @@ const CarePointsDescription = (props) => {
           variant='caption'
           className={props.classes.valueStyle}
         >
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          {CARE_POINT_DESCRIPTION}
         </Typography>
       </div>
       <div className={props.classes.carePointPlusWrapper}>
@@ -58,7 +63,7 @@ const CarePointsDescription = (props) => {
           variant='caption'
           className={props.classes.valueStyle}
         >
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          {CARE_POINT_PLUS_DESCRIPTION}
         </Typography>
       </div>
     </div>

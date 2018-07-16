@@ -3,15 +3,42 @@ import Snackbar from '@material-ui/core/Snackbar'
 import { withStyles } from '@material-ui/core/styles'
 import Link from 'next/link'
 import { CART_DETAILS } from '../../routes/RouteConstant'
-import IconButton from '@material-ui/core/IconButton'
-import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart'
+// import IconButton from '@material-ui/core/IconButton'
+// import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart'
 import { ITEM_ADDED_TO_CART } from '../../containers/messages/cartMessages'
 import { SNACK_BAR_DURATION } from '../../components/constants/Constants'
+import Button from '../../components/button'
+import Typography from '@material-ui/core/Typography'
 
 const styles = theme => ({
-  close: {
-    width: theme.spacing.unit * 4,
-    height: theme.spacing.unit * 4
+  // close: {
+  //   width: theme.spacing.unit * 4,
+  //   height: theme.spacing.unit * 4
+  // }
+  couponButtonRoot: {
+    border: 'none',
+    backgroundColor: theme.palette.customGrey.grey200,
+    '&:hover': {
+      color: theme.palette.primary.main,
+      backgroundColor: theme.palette.customGrey.grey200
+    }
+  },
+  editButton: {
+    textAlign: 'center'
+  },
+  editButtonLabel: {
+    ...theme.typography.caption,
+    fontWeight: theme.typography.fontWeightBold,
+    color: theme.palette.secondary.main
+  },
+  buttonWrappr: {
+    display: 'flex',
+    flexDirection: 'row'
+  },
+  text: {
+    marginTop: theme.spacing.unit,
+    marginRight: theme.spacing.unit * 2,
+    color: theme.palette.secondary.main
   }
 })
 
@@ -46,18 +73,37 @@ class GoToCartSnackbar extends React.Component {
             ContentProps={{
               'aria-describedby': 'cart-items'
             }}
-            action={[
-              <IconButton
-                key='goToCart'
-                aria-label='Close'
-                color='inherit'
-                className={classes.close}
-                onClick={this.handleClose}
-              >
-                <AddShoppingCartIcon />
-              </IconButton>
-            ]}
-            message={<span>{ITEM_ADDED_TO_CART}</span>}
+            // action={[
+            //   <IconButton
+            //     key='goToCart'
+            //     aria-label='Close'
+            //     color='inherit'
+            //     className={classes.close}
+            //     onClick={this.handleClose}
+            //   >
+            //     <AddShoppingCartIcon />
+            //   </IconButton>
+            // ]}
+            message={
+              <div className={classes.buttonWrappr}>
+                <Typography
+                  variant='caption'
+                  className={classes.text}
+                >
+                  {ITEM_ADDED_TO_CART}
+                </Typography>
+                <Button
+                  size='small'
+                  className={classes.editButton}
+                  classes={{
+                    root: classes.couponButtonRoot,
+                    label: classes.editButtonLabel
+                  }}
+                  label={'Go To Cart'}
+                  onClick={this.handleClose}
+                />
+              </div>
+            }
           />
         </Link>
 

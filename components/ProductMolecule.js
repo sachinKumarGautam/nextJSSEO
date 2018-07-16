@@ -11,13 +11,14 @@ import { MOLECULE_DETAILS } from '../routes/RouteConstant'
 const styles = theme => {
   return {
     moleculeTag: {
-      ...theme.typography.subheading,
+      ...theme.typography.body2,
       textDecoration: 'none',
-      borderBottom: '1px dashed',
-      marginRight: theme.spacing.unit * 2,
+      borderBottom: `1px dashed ${theme.palette.customGrey.grey200}`,
+      marginRight: theme.spacing.unit * 3.375,
       color: theme.palette.customGrey.grey600,
       '&:hover': {
-        color: theme.palette.primary.main
+        color: theme.palette.primary.main,
+        borderBottom: `1px dashed ${theme.palette.primary.main}`
       }
     },
     paper: {
@@ -35,7 +36,9 @@ const styles = theme => {
       borderRadius: '4px'
     },
     popoverContent: {
-      ...theme.typography.body3
+      fontSize: theme.typography.pxToRem(10),
+      color: theme.palette.customGrey.grey500,
+      marginBottom: theme.spacing.unit
     },
     popoverLink: {
       ...theme.typography.body3,

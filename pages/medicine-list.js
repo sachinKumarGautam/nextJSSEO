@@ -38,7 +38,7 @@ class MedicineList extends React.Component {
     const {query} = Router
     // Represents to get medicine list with page size and size per page.
 
-    if (query.name) {
+    if (query.name && !this.props.medicineListState.payload.length) {
       this.props.actions.getRelatedMedicinesLoading(
         this.props.medicineListState,
         query.name, // pass salt name

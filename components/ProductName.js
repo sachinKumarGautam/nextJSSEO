@@ -6,8 +6,11 @@ import Typography from '@material-ui/core/Typography'
 const styles = theme => {
   return {
     title: {
+      ...theme.typography.title,
       fontWeight: theme.typography.fontWeightBold,
-      color: theme.palette.customGrey.grey600
+      color: theme.palette.customGrey.grey600,
+      marginBottom: theme.spacing.unit * 1.5,
+      marginRight: theme.spacing.unit * 7
     }
   }
 }
