@@ -5,7 +5,10 @@ import {
   SAVE_ADDRESS_SELECTED,
   SUBMIT_DELIVERY_DETAILS_LOADING,
   SUBMIT_DELIVERY_DETAILS_SUCCESS,
-  SUBMIT_DELIVERY_DETAILS_FAILURE
+  SUBMIT_DELIVERY_DETAILS_FAILURE,
+  CHECK_PINCODE_DETAIL_LOADING,
+  CHECK_PINCODE_DETAIL_SUCCESS,
+  CHECK_PINCODE_DETAIL_FAILURE
 } from './deliveryDetailsActionTypes'
 
 /**
@@ -99,6 +102,36 @@ export function submitDeliveryDetailsSuccess (deliveryDetailsState, result) {
 export function submitDeliveryDetailsFailure (deliveryDetailsState, error) {
   return {
     type: SUBMIT_DELIVERY_DETAILS_FAILURE,
+    deliveryDetailsState,
+    isLoading: false,
+    error: error,
+    isError: true
+  }
+}
+
+export function checkPincodeDetailLoading (deliveryDetailsState, pincode) {
+  return {
+    type: CHECK_PINCODE_DETAIL_LOADING,
+    deliveryDetailsState,
+    pincode,
+    isLoading: true,
+    error: null,
+    isError: false
+  }
+}
+
+export function checkPincodeDetailSuccess (deliveryDetailsState, result) {
+  return {
+    type: CHECK_PINCODE_DETAIL_SUCCESS,
+    deliveryDetailsState,
+    payload: result,
+    isLoading: true
+  }
+}
+
+export function checkPincodeDetailFailure (deliveryDetailsState, error) {
+  return {
+    type: CHECK_PINCODE_DETAIL_FAILURE,
     deliveryDetailsState,
     isLoading: false,
     error: error,

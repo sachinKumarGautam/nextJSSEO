@@ -6,6 +6,14 @@ const initialState = {
   errorState: {
     isError: false,
     error: {}
+  },
+  pincodeCheck: {
+    payload: {},
+    isLoading: false,
+    errorState: {
+      isError: false,
+      error: {}
+    }
   }
 }
 

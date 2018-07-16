@@ -27,7 +27,8 @@ import {
 
 import {
   getDeliveryDetailsList,
-  submitDeliveryDetails
+  submitDeliveryDetails,
+  checkPincodeServicability
 } from '../containers/deliveryDetails/deliveryDetailsEpics'
 
 import {
@@ -120,5 +121,6 @@ export const rootEpic = combineEpics(
   getPatientPastMedicineList,
   getBackGroungImages,
   applyCouponCode,
-  optDoctorCallback
+  optDoctorCallback,
+  checkPincodeServicability
 )

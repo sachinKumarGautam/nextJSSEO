@@ -4,7 +4,9 @@ import { ofType } from 'redux-observable'
 import http from '../../services/api/ajaxWrapper'
 
 import {
-  GET_DELIVERY_DETAILS_LIST_LOADING, SUBMIT_DELIVERY_DETAILS_LOADING
+  GET_DELIVERY_DETAILS_LIST_LOADING,
+  SUBMIT_DELIVERY_DETAILS_LOADING,
+  CHECK_PINCODE_DETAIL_LOADING
 } from './deliveryDetailsActionTypes'
 
 import {
@@ -12,12 +14,15 @@ import {
   getDeliveryDetailsListFailure,
   submitDeliveryDetailsSuccess,
   submitDeliveryDetailsFailure,
-  getDeliveryDetailsListLoading
+  getDeliveryDetailsListLoading,
+  checkPincodeDetailSuccess,
+  checkPincodeDetailFailure
 } from './deliveryDetailsActions'
 
 import {
   getDeliveryDetailsList$,
-  submitDeliveryDetails$
+  submitDeliveryDetails$,
+  getCityStateUsingPincode$
 } from '../../services/api'
 
 /**
@@ -65,6 +70,30 @@ export function submitDeliveryDetails (action$, store) {
         catchError(error => {
           data.setSubmitting(false)
           return of(submitDeliveryDetailsFailure(deliveryDetailsState, error))
+        })
+      )
+    })
+  )
+}
+
+/**
+ * Represents to the check the Pincode.
+ * @param {object} action$ - this is the ActionsObservable
+ * @param {object} store - to access the state from reducers
+ */
+export function checkPincodeServicability (action$, store) {
+  return action$.pipe(
+    ofType(CHECK_PINCODE_DETAIL_LOADING),
+    mergeMap(data => {
+      return http(getCityStateUsingPincode$(data.saltName, data.page, data.size)).pipe(
+        map(result => {
+          return checkPincodeDetailSuccess(
+            data.deliveryDetailsState,
+            result.body.payload
+          )
+        }),
+        catchError(error => {
+          return of(checkPincodeDetailFailure(data.deliveryDetailsState, error))
         })
       )
     })

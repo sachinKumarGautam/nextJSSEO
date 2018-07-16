@@ -117,6 +117,7 @@ class Main extends Component {
                 deliveryDetailsState={this.props.deliveryDetailsState}
                 deliveryFormState={this.props.deliveryDetailsState.deliveryFormState}
                 closeModal={this.closeDeliveryFormModal}
+                checkPincodeDetailLoading={this.props.checkPincodeDetailLoading}
               />
             </div>
           </div>

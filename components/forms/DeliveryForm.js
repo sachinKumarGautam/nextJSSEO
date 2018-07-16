@@ -14,7 +14,8 @@ import {
   STATE_REQUIRED,
   LOCALITY_REQUIRED,
   CITY_REQUIRED,
-  PINCODE_REQUIRED
+  PINCODE_REQUIRED,
+  STREET1_REQUIRED
 } from '../../containers/messages/ValidationMsg'
 
 // Helper styles for demo
@@ -161,8 +162,52 @@ class DeliveryForm extends React.Component {
         </FormControl>
         <FormControl
           className={classes.formControl}
+          aria-describedby='street1'
+          error={errors.street1 && touched.street1}
+        >
+          <InputLabel
+            className={classes.labelStyle}
+            htmlFor='street1'
+          >
+            Flat/House/Office No.
+          </InputLabel>
+          <Input
+            id='street1'
+            type='text'
+            onChange={handleChange}
+            value={values.street1}
+          />
+          {
+            errors.street1 && touched.street1 &&
+            <FormHelperText
+              id='street1'
+            >
+              {errors.street1}
+            </FormHelperText>
+          }
+        </FormControl>
+        <FormControl
+          className={classes.formControl}
+          aria-describedby='street2'
+        >
+          <InputLabel
+            className={classes.labelStyle}
+            htmlFor='street2'
+          >
+            Street/Society(Optional)
+          </InputLabel>
+          <Input
+            id='street2'
+            type='text'
+            onChange={handleChange}
+            value={values.street2}
+          />
+        </FormControl>
+        <FormControl
+          className={classes.formControl}
           aria-describedby='city'
           error={errors.city && touched.city}
+          disabled='true'
         >
           <InputLabel
             className={classes.labelStyle}
@@ -189,6 +234,7 @@ class DeliveryForm extends React.Component {
           className={classes.formControl}
           aria-describedby='state'
           error={errors.state && touched.state}
+          disabled='true'
         >
           <InputLabel
             className={classes.labelStyle}
@@ -233,10 +279,10 @@ export default withStyles(styles)(withFormik({
       mobile: '',
       pincode: '',
       locality: '',
-      street1: 'deafult street1',
-      street2: 'deafult street2',
-      city: '',
-      state: ''
+      street1: '',
+      street2: '',
+      city: 'DELHI',
+      state: 'DELHI'
     }
   },
   validationSchema: Yup.object().shape({
@@ -244,6 +290,7 @@ export default withStyles(styles)(withFormik({
     mobile: Yup.number().required(MOBILE_REQUIRED),
     pincode: Yup.string().required(PINCODE_REQUIRED),
     locality: Yup.string().required(LOCALITY_REQUIRED),
+    street1: Yup.string().required(STREET1_REQUIRED),
     city: Yup.string().required(CITY_REQUIRED),
     state: Yup.string().required(STATE_REQUIRED)
   }),

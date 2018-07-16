@@ -15,7 +15,8 @@ import Paper from '@material-ui/core/Paper'
 import {
   getDeliveryDetailsListLoading,
   saveAddressSelected,
-  submitDeliveryDetailsLoading
+  submitDeliveryDetailsLoading,
+  checkPincodeDetailLoading
 } from '../containers/deliveryDetails/deliveryDetailsActions'
 
 const styles = theme => ({
@@ -58,6 +59,7 @@ class DeliveryDetails extends React.Component {
               saveAddressSelected={this.props.actions.saveAddressSelected}
               submitDeliveryDetailsLoading={this.props.actions.submitDeliveryDetailsLoading}
               customerState={this.props.customerState}
+              checkPincodeDetailLoading={this.props.actions.checkPincodeDetailLoading}
             />
           </Paper>
         </div>
@@ -80,7 +82,8 @@ function mapDispatchToProps (dispatch) {
       {
         getDeliveryDetailsListLoading,
         saveAddressSelected,
-        submitDeliveryDetailsLoading
+        submitDeliveryDetailsLoading,
+        checkPincodeDetailLoading
       },
       dispatch
     )
