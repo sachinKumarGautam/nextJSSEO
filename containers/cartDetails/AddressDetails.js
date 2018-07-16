@@ -2,7 +2,6 @@ import React from 'react'
 
 import Grid from '@material-ui/core/Grid'
 
-import AddDeliveryAddressButton from '../deliveryDetails/AddDeliveryAddressButton'
 import DeliveryDetailForm from '../deliveryDetails/DeliveryDetailsForm'
 import AddressDetailsCard from '../../components/AddressDetailsCard'
 

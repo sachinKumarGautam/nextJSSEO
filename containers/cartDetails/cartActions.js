@@ -227,6 +227,15 @@ export function saveDeliveryAddressToCartSuccess (cartState, result) {
   }
 }
 
+export function saveDeliveryAddressToCartSuccess (cartState, shippingAddressId) {
+  return {
+    type: cartActionTypes.SAVE_DELIVERY_ADDRESS_TO_CART_SUCCESS,
+    cartState,
+    shipping_address_id: shippingAddressId,
+    isLoading: false
+  }
+}
+
 export function saveDeliveryAddressToCartFailure (cartState, error) {
   return {
     type: cartActionTypes.SAVE_DELIVERY_ADDRESS_TO_CART_FAILURE,
