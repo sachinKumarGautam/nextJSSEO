@@ -166,7 +166,7 @@ class OrderSummary extends React.Component {
     })
   };
 
-  handleClose() {
+  handleClose () {
     this.setState({
       isShowSnackbar: false
     })
