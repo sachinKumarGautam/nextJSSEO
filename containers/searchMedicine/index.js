@@ -182,31 +182,29 @@ class SearchMedicine extends React.Component {
   stateChangeHandler = changes => {
     let {
       isOpen = this.state.isOpen,
-      type,
+      type
     } = changes
 
-    console.log(Downshift.stateChangeTypes);
+    console.log(Downshift.stateChangeTypes)
     // isOpen =
-    //   type === (Downshift.stateChangeTypes.blurInput 
-    //   || Downshift.stateChangeTypes.itemMouseEnter 
+    //   type === (Downshift.stateChangeTypes.blurInput
+    //   || Downshift.stateChangeTypes.itemMouseEnter
     //   || Downshift.stateChangeTypes.changeInput
     // ) || isOpen ? true : false
 
-      // console.log('type: ',type, 'changes.isOpen: ', changes.isOpen, this.state.isOpen)
+    // console.log('type: ',type, 'changes.isOpen: ', changes.isOpen, this.state.isOpen)
 
-      // if(type !== Downshift.stateChangeTypes.mouseUp){
-      //   this.setState({
-      //     isOpen: isOpen || this.state.isOpen,
-      //   })
-      // }
+    // if(type !== Downshift.stateChangeTypes.mouseUp){
+    //   this.setState({
+    //     isOpen: isOpen || this.state.isOpen,
+    //   })
+    // }
 
-      // if(type === Downshift.stateChangeTypes.itemMouseEnter){
-      //   this.setState({
-      //     isOpen: true
-      //   })
-      // }
-
-
+    // if(type === Downshift.stateChangeTypes.itemMouseEnter){
+    //   this.setState({
+    //     isOpen: true
+    //   })
+    // }
   }
 
   onOuterClick = () => (
@@ -215,7 +213,6 @@ class SearchMedicine extends React.Component {
       isOpen: false
     })
   )
-
 
   render () {
     const {

@@ -51,28 +51,23 @@ function getPincodeErrorMsg (pincodeFormError, inValidPincodeError, pincodeLoadi
   }
 }
 
-function onClick(event) {
- console.log('event', event)
-}
-
 class PincodeDialog extends React.Component {
-  constructor(props) {
-    super(props);
-      this.onClick = this.onClick.bind(this)
+  constructor (props) {
+    super(props)
+    this.onClick = this.onClick.bind(this)
   }
 
-  onClick(event) {
+  onClick (event) {
     console.log('event1', event)
-    event.stopPropagation() 
+    event.stopPropagation()
     event.preventDefault()
     return 0
-   }
-   
+  }
 
   render () {
     const {
-      props,
-    } = this;
+      props
+    } = this
 
     const {
       values,
@@ -98,7 +93,6 @@ class PincodeDialog extends React.Component {
       <div onClick={this.onClick}>
         <Dialog
           // disableBackdropClick
-          onClick={this.onClick}
           open={props.open}
           onClose={props.handleClose}
           aria-labelledby='form-dialog-title'

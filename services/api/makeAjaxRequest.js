@@ -11,7 +11,7 @@ export default function makeAjaxRequest (params) {
 
   // get access_token from login state
   let accessToken = store.getState().loginState.payload.verification.access_token
-  
+
   // function to set content type of ajax request
   if (!params.contentType) {
     contentType = 'application/json'
