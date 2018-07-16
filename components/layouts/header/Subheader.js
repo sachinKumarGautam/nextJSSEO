@@ -3,6 +3,7 @@ import { withStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
 
 import Link from 'next/link'
+import Router from 'next/router'
 
 import { REFILL_PATIENTS, HOME_PAGE } from '../../../routes/RouteConstant'
 
@@ -29,11 +30,11 @@ const styles = theme => ({
   },
   hover: {
     color: theme.palette.primary.main
-  },
-  linkDisabled: {
-    pointerEvents: 'none', // This makes it not clickable
-    opacity: 0.6 // This grays it out to look disabled
   }
+  // linkDisabled: {
+  //   pointerEvents: 'none', // This makes it not clickable
+  //   opacity: 0.6 // This grays it out to look disabled
+  // }
 })
 
 // IGNORE React.Component linter warning in js standard style
@@ -45,6 +46,7 @@ class Subheader extends React.Component {
       hover: {}
     }
     this.toggleHover = this.toggleHover.bind(this)
+    this.redirectToRefill = this.redirectToRefill.bind(this)
   }
 
   toggleHover (item) {
@@ -56,8 +58,16 @@ class Subheader extends React.Component {
     )
   }
 
+  redirectToRefill () {
+    if (this.props.isAuthenticated) {
+      Router.push(REFILL_PATIENTS)
+    } else {
+      this.props.openLoginModal.call(this)
+    }
+  }
+
   render () {
-    const {classes, isAuthenticated} = this.props
+    const {classes} = this.props
 
     return (
       <ul className={classes.horizontalSubheader}>
@@ -81,22 +91,21 @@ class Subheader extends React.Component {
             </a>
           </Link>
         </li>
-        <li className={isAuthenticated ? '' : classes.linkDisabled}>
-          <Link href={REFILL_PATIENTS}>
-            <a
-              onMouseEnter={this.toggleHover.bind(this, 'repeatPastMedicine')}
-              onMouseLeave={this.toggleHover.bind(this, 'repeatPastMedicine')}
-              className={classes.subHeaderItem}
-            >
-              <img src='/static/images/repeat-button.svg' />
-              <Typography
-                variant={'body2'}
-                className={this.state.hover.repeatPastMedicine ? `${classes.subHeaderText} ${classes.hover}` : classes.subHeaderText}
-                component='h1'>
-                Refill Past Medicines
-              </Typography>
-            </a>
-          </Link>
+        <li>
+          <a
+            onClick={this.redirectToRefill}
+            onMouseEnter={this.toggleHover.bind(this, 'repeatPastMedicine')}
+            onMouseLeave={this.toggleHover.bind(this, 'repeatPastMedicine')}
+            className={classes.subHeaderItem}
+          >
+            <img src='/static/images/repeat-button.svg' />
+            <Typography
+              variant={'body2'}
+              className={this.state.hover.repeatPastMedicine ? `${classes.subHeaderText} ${classes.hover}` : classes.subHeaderText}
+              component='h1'>
+              Refill Past Medicines
+            </Typography>
+          </a>
         </li>
         <li>
           <a

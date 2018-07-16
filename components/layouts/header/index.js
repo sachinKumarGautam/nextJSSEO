@@ -190,6 +190,7 @@ class Header extends React.Component {
             </Toolbar>
             <Subheader
               isAuthenticated={this.props.loginState.isAuthenticated}
+              openLoginModal={this.openLoginModal}
             />
             <GoToCartSnackbar
               goToCartSnackbar={this.props.actions.goToCartSnackbar}
