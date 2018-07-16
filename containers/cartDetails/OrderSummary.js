@@ -1,12 +1,16 @@
 import React from 'react'
 
 import { withStyles } from '@material-ui/core/styles'
+import Snackbar from '@material-ui/core/Snackbar'
 
 import LoginExpansionPanel from './LoginExpansionPanel'
 import PrescriptionsExpansionPanel from './PrescriptionsExpansionPanel'
 import PatientDetailsExpansionPanel from './PatientDetailsExpansionPanel'
 import AddressDetailsExpansionPanel from './AddressDetailsExpansionPanel'
 import PaymentExpansionPanel from './PaymentExpansionPanel'
+
+import { ITEM_ADDED_TO_CART } from '../../containers/messages/cartMessages'
+import { SNACK_BAR_DURATION } from '../../components/constants/Constants'
 
 const styles = theme => ({
   root: {
@@ -21,7 +25,8 @@ const styles = theme => ({
     color: theme.palette.customGrey.grey500,
     fontWeight: theme.typography.fontWeightBold,
     marginLeft: theme.spacing.unit * 2.5,
-    marginTop: theme.spacing.unit / 2
+    marginTop: theme.spacing.unit / 2,
+    letterSpacing: theme.spacing.unit * 0.275
   },
   secondaryHeading: {
     fontSize: theme.typography.pxToRem(15),
@@ -64,7 +69,8 @@ const styles = theme => ({
   },
   patientContentWrapper: {
     display: 'flex',
-    flexDirection: 'row'
+    flexDirection: 'row',
+    alignItems: 'flex-start'
   },
   loginDescription: {
     marginLeft: theme.spacing.unit * 6.25,
@@ -91,14 +97,16 @@ const styles = theme => ({
   },
   checked: {},
   imageIcon: {
-    width: theme.spacing.unit * 3.5
+    width: theme.spacing.unit * 3.5,
+    marginTop: theme.spacing.unit * 0.625
   },
   checkedIconWrapper: {
-    display: 'flex'
+    display: 'flex',
+    alignItems: 'flex-start'
   },
   checkedIcon: {
     marginLeft: theme.spacing.unit * 4.5,
-    marginTop: theme.spacing.unit / 2
+    marginTop: theme.spacing.unit * 0.625
   },
   checkboxWrapper: {
     display: 'flex',
@@ -114,11 +122,17 @@ const styles = theme => ({
   teleconsultText: {
     ...theme.typography.body2,
     marginTop: theme.spacing.unit * 1.25
+  },
+  patientDetails: {
+    fontSize: theme.spacing.unit * 2,
+    marginLeft: theme.spacing.unit * 2.5,
+    color: theme.palette.customGrey.grey500
   }
 })
 
 class OrderSummary extends React.Component {
   state = {
+    isShowSnackbar: false,
     expanded: !this.props.loginState.isAuthenticated ? 'panel1' : 'panel2'
   };
 
@@ -137,6 +151,17 @@ class OrderSummary extends React.Component {
   };
 
   handleNextChange = (panel, expanded) => {
+    if(
+      !this.props.cartState.payload.cart_items.payload.length &&
+      !this.props.cartState.payload.is_doctor_callback.payload
+    ) {
+      this.setState({
+        isShowSnackbar: true
+      })
+
+      return false
+    }
+
     this.setState({
       expanded: expanded ? panel : false
     })
@@ -203,12 +228,13 @@ class OrderSummary extends React.Component {
           savePatientToCartLoading={this.props.savePatientToCartLoading}
           customerState={this.props.customerState}
           patientDetailsState={this.props.patientDetailsState}
-          patientIdSelected={this.props.cartState.payload.patient_id.payload}
+          patientIdSelected={this.props.cartState.payload.patient_details.payload.patient_id}
           patientDetailsWrapper={this.props.classes.patientDetailsWrapper}
           nextButtonRoot={this.props.classes.nextButtonRoot}
           handleNextChange={this.handleNextChange.bind(this, 'panel4', true)}
           checkedIconWrapper={this.props.classes.checkedIconWrapper}
           checkedIcon={this.props.classes.checkedIcon}
+          patientDetails={this.props.classes.patientDetails}
         />
         <AddressDetailsExpansionPanel
           expanded={this.state.expanded}
@@ -229,12 +255,13 @@ class OrderSummary extends React.Component {
           customerState={this.props.customerState}
           deliveryFormState={this.props.deliveryDetailsState.deliveryFormState}
           deliveryDetailsState={this.props.deliveryDetailsState}
-          addressIdSelected={this.props.cartState.payload.shipping_address_id.payload}
+          addressIdSelected={this.props.cartState.payload.shipping_address_details.payload.shipping_address_id}
           patientDetailsWrapper={this.props.classes.patientDetailsWrapper}
           nextButtonRoot={this.props.classes.nextButtonRoot}
           handleNextChange={this.handleNextChange.bind(this, 'panel5', true)}
           checkedIconWrapper={this.props.classes.checkedIconWrapper}
           checkedIcon={this.props.classes.checkedIcon}
+          patientDetails={this.props.classes.patientDetails}
         />
         <PaymentExpansionPanel
           expanded={this.state.expanded}
@@ -250,6 +277,18 @@ class OrderSummary extends React.Component {
           paymentDescription={this.props.classes.paymentDescription}
           nextButtonRoot={this.props.classes.nextButtonRoot}
           submitOrderLoading={this.props.submitOrderLoading}
+        />
+        <Snackbar
+          anchorOrigin={{
+            vertical: 'bottom',
+            horizontal: 'center'
+          }}
+          autoHideDuration={SNACK_BAR_DURATION}
+          open={this.state.isShowSnackbar}
+          ContentProps={{
+            'aria-describedby': 'cart-items'
+          }}
+          message={<span>Please add medicines or opt for tele-consultation</span>}
         />
       </div>
     )

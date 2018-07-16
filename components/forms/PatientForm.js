@@ -198,7 +198,14 @@ export default withStyles(styles)(withFormik({
     gender: Yup.string().required(GENDER_REQUIRED)
   }),
   handleSubmit: (values, { props, setSubmitting }) => {
-    props.onSubmit(props.patientFormState, props.customerId, setSubmitting, props.closeModal, values)
+    props.onSubmit(
+      props.patientFormState,
+      props.customerId,
+      setSubmitting,
+      props.closeModal,
+      values,
+      props.isCartPage
+    )
   },
   displayName: 'PatientForm' // helps with React DevTools
 })(PatientForm))

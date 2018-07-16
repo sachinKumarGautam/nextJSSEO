@@ -10,6 +10,7 @@ const AddressDetails = props => (
   <Grid container spacing={24} className={props.addressDetailsWrapper}>
     <Grid item xs={12}>
       <DeliveryDetailForm
+        isCartPage={props.isCartPage}
         onSubmit={props.submitDeliveryDetailsLoading}
         openDeliveryFormDialog={props.openDeliveryFormDialog}
         customerState={props.customerState}

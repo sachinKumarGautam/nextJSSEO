@@ -40,7 +40,8 @@ class AddressDetailsExpansionPanel extends React.Component {
       <ExpansionPanel
         expanded={this.props.expanded === 'panel4'}
         onChange={
-          this.props.loginState.isAuthenticated
+          this.props.loginState.isAuthenticated &&
+          this.props.cartState.payload.patient_details.payload.patient_id
             ? this.props.handleChange
             : null
         }
@@ -55,12 +56,43 @@ class AddressDetailsExpansionPanel extends React.Component {
           <img src='/static/images/attachedPrescriptions.svg' className={this.props.imageIcon} />
           <div className={this.props.patientWrapper}>
             <div className={this.props.checkedIconWrapper}>
-              <Typography
-                component='h1'
-                className={this.props.heading}
-              >
-                Delivery Details
-              </Typography>
+              {
+                this.props.expanded !== 'panel4' &&
+                this.props.cartState.payload.shipping_address_details.payload.shipping_address_id
+                ? (
+                  <div>
+                    <Typography
+                      component='h1'
+                      className={this.props.heading}
+                    >
+                      {
+                        this.props.cartState.payload.shipping_address_details.payload.shipping_address.type
+                        ? this.props.cartState.payload.shipping_address_details.payload.shipping_address.type
+                        : 'Others'
+                      }
+                    </Typography>
+                    <Typography
+                      component='h1'
+                      className={this.props.patientDetails}
+                    >
+                      {this.props.cartState.payload.shipping_address_details.payload.shipping_address.street1}
+                    </Typography>
+                    <Typography
+                      component='h1'
+                      className={this.props.patientDetails}
+                    >
+                      {this.props.cartState.payload.shipping_address_details.payload.shipping_address.street2}
+                    </Typography>
+                  </div>
+                ) : (
+                  <Typography
+                    component='h1'
+                    className={this.props.heading}
+                  >
+                    Delivery Details
+                  </Typography>
+                )
+              }
               {
                 this.props.addressIdSelected
                   ? (

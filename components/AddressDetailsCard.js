@@ -13,10 +13,10 @@ const styles = theme => {
       borderRadius: theme.spacing.unit * 0.5
     },
     addressWrapperSelectedStyle: {
-      border: `1px solid ${theme.palette.customGrey.grey250}`,
-      backgroundColor: theme.palette.customGreen.green200,
+      border: `1px solid ${theme.palette.primary.main}`,
       padding: theme.spacing.unit * 2.5,
-      borderRadius: theme.spacing.unit * 0.5
+      borderRadius: theme.spacing.unit * 0.5,
+      boxShadow: '0px 3px 7px 5px #eee'
     },
     addressTypeStyle: {
       color: theme.palette.customGrey.grey500,

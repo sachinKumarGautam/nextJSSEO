@@ -3,9 +3,10 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
-import BreadCrumbs from '../../components/BreadCrumbs'
-
+import { withStyles } from '@material-ui/core/styles'
 import Grid from '@material-ui/core/Grid'
+
+import BreadCrumbs from '../../components/BreadCrumbs'
 
 import OrderSummary from './OrderSummary'
 import CartDetails from './CartDetails'
@@ -44,6 +45,13 @@ import {
   order summary
   cart details
 */
+
+const styles = theme => ({
+  stickyWrapper: {
+    position: 'sticky',
+    top: 111
+  }
+})
 
 class CartDetailsWrapper extends Component {
   componentDidMount () {
@@ -115,7 +123,7 @@ class CartDetailsWrapper extends Component {
             </section>
           </Grid>
           <Grid item xs={5}>
-            <section>
+            <section className={this.props.classes.stickyWrapper}>
               <CartDetails
                 cartState={this.props.cartState}
                 incrementCartItemLoading={this.props.actions.incrementCartItemLoading}
@@ -176,4 +184,4 @@ function mapDispatchToProps (dispatch) {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(CartDetailsWrapper)
+)(withStyles(styles)(CartDetailsWrapper))

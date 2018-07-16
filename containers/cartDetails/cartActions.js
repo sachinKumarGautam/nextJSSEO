@@ -68,6 +68,8 @@ export function getCartDetailsSuccess (
     uid: result.uid,
     patient_id: result.patient_id,
     customer_id: result.customer_id,
+    shipping_address_id: result.shipping_address_id,
+    shipping_address: result.shipping_address,
     customer_full_name: result.customer_full_name,
     patient_full_name: result.patient_full_name,
     discount: result.discount,
@@ -154,13 +156,13 @@ export function putCartItemFailure (cartState, cartItems) {
 
 export function savePatientToCartLoading (
   cartState,
-  patientId,
+  patient,
   cartId
 ) {
   return {
     type: cartActionTypes.SAVE_PATIENT_TO_CART_LOADING,
     cartState,
-    patientId: patientId,
+    patient: patient,
     cartId: cartId,
     isLoading: true,
     isError: false,
@@ -180,11 +182,12 @@ export function cartTransferLoading (
   }
 }
 
-export function savePatientToCartSuccess (cartState, result) {
+export function savePatientToCartSuccess (cartState, patient, result) {
   return {
     type: cartActionTypes.SAVE_PATIENT_TO_CART_SUCCESS,
     cartState,
     patient_id: result.patient_id,
+    patient: patient,
     patient_full_name: result.patient_full_name,
     isLoading: false
   }
@@ -214,11 +217,12 @@ export function saveDeliveryAddressToCartLoading (
   }
 }
 
-export function saveDeliveryAddressToCartSuccess (cartState, shipping_address_id) {
+export function saveDeliveryAddressToCartSuccess (cartState, result) {
   return {
     type: cartActionTypes.SAVE_DELIVERY_ADDRESS_TO_CART_SUCCESS,
     cartState,
-    shipping_address_id: shipping_address_id,
+    shipping_address_id: result.shipping_address_id,
+    shipping_address: result.shipping_address,
     isLoading: false
   }
 }

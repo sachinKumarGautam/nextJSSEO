@@ -28,10 +28,10 @@ class PatientDetailsExpansionPanel extends React.Component {
     })
   }
 
-  savePatientSelected (patientIdSelected) {
+  savePatientSelected (patientSelected) {
     this.props.savePatientToCartLoading(
       this.props.cartState,
-      patientIdSelected,
+      patientSelected,
       this.props.cartState.payload.uid
     )
   }
@@ -41,9 +41,12 @@ class PatientDetailsExpansionPanel extends React.Component {
       <ExpansionPanel
         expanded={this.props.expanded === 'panel3'}
         onChange={
-          this.props.loginState.isAuthenticated
-            ? this.props.handleChange
-            : null
+          this.props.loginState.isAuthenticated &&
+          (
+            this.props.cartState.payload.cart_items.payload.length ||
+            this.props.cartState.payload.cart_prescriptions.length ||
+            this.props.cartState.payload.is_doctor_callback.payload
+          ) ? this.props.handleChange : null
         }
         className={this.props.expansionPanel}
       >
@@ -56,12 +59,40 @@ class PatientDetailsExpansionPanel extends React.Component {
           <img src='/static/images/loggedIn.svg' className={this.props.imageIcon} />
           <div className={this.props.patientWrapper}>
             <div className={this.props.checkedIconWrapper}>
-              <Typography
-                component='h1'
-                className={this.props.heading}
-              >
-                Patient Details
-              </Typography>
+              {
+                this.props.expanded !== 'panel3' &&
+                this.props.cartState.payload.patient_details.payload.patient_id
+                ? (
+                  <div>
+                    <Typography
+                      component='h1'
+                      className={this.props.heading}
+                    >
+                      {this.props.cartState.payload.patient_details.payload.patient_full_name}
+                    </Typography>
+                    <Typography
+                      component='h1'
+                      className={this.props.patientDetails}
+                    >
+                      {this.props.cartState.payload.patient_details.payload.gender} |
+                      {this.props.cartState.payload.patient_details.payload.age}
+                    </Typography>
+                    <Typography
+                      component='h1'
+                      className={this.props.patientDetails}
+                    >
+                      {this.props.cartState.payload.patient_details.payload.mobile}
+                    </Typography>
+                  </div>
+                ) : (
+                  <Typography
+                    component='h1'
+                    className={this.props.heading}
+                  >
+                    Patient Details
+                  </Typography>
+                )
+              }
               {
                 this.props.patientIdSelected
                   ? (

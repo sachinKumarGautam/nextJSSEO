@@ -57,6 +57,11 @@ const styles = theme => ({
     '&:last-child': {
       paddingBottom: 0
     }
+  },
+  medicineListWrapper: {
+    paddingTop: theme.spacing.unit * 4.375,
+    paddingBottom: theme.spacing.unit * 4.375,
+    textAlign: 'center'
   }
 })
 
@@ -100,7 +105,7 @@ class CartDetails extends Component {
           </div>
           <div className={this.props.classes.scrollWrapper}>
             {
-              this.props.cartState.payload.patient_id.payload
+              this.props.cartState.payload.patient_details.payload.patient_id
                 ? (
                   <div>
                     <Avatar
@@ -110,13 +115,25 @@ class CartDetails extends Component {
                   </div>
                 ) : null
             }
-            <MedicineList
-              cartState={this.props.cartState}
-              decrementCartItem={this.decrementCartItem.bind(this)}
-              incrementCartItem={this.incrementCartItem.bind(this)}
-            />
             {
-              this.props.cartState.payload.patient_id.payload
+              this.props.cartState.payload.cart_items.payload.length
+              ? (
+                <MedicineList
+                  cartState={this.props.cartState}
+                  decrementCartItem={this.decrementCartItem.bind(this)}
+                  incrementCartItem={this.incrementCartItem.bind(this)}
+                />
+              ) : (
+                <div>
+                  <Typography className={this.props.classes.medicineListWrapper}>
+                    No medicines added in cart
+                  </Typography>
+                  <Divider />
+                </div>
+              )
+            }
+            {
+              this.props.cartState.payload.patient_details.payload.patient_id
                 ? (
                   <Coupon
                     applyCouponCodeLoading={this.props.applyCouponCodeLoading}

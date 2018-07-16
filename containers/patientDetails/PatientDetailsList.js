@@ -118,7 +118,7 @@ class PatientDetailsList extends Component {
           <PatientDetailsCardWrapper
             payload={this.props.patientDetailsState.payload}
             savePatientSelected={this.savePatientSelected.bind(this)}
-            patientIdSelected={this.props.cartState.payload.patient_id.payload}
+            patientIdSelected={this.props.cartState.payload.patient_details.payload.patient_id}
             patientDetailsCardWrapper={this.props.classes.patientDetailsCardWrapper}
           />
         </CardContent>

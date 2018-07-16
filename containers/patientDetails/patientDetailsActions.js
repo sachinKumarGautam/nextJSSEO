@@ -84,7 +84,8 @@ export function submitPatientDetailsLoading (
   customerId,
   setSubmitting,
   closeModal,
-  values
+  values,
+  isCartPage = false
 ) {
   return {
     type: SUBMIT_PATIENT_LOADING,
@@ -95,7 +96,8 @@ export function submitPatientDetailsLoading (
     customerId: customerId,
     closeModal,
     values: values,
-    setSubmitting
+    setSubmitting,
+    isCartPage: isCartPage
   }
 }
 

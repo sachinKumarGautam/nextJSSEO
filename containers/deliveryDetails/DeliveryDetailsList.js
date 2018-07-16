@@ -59,9 +59,7 @@ const styles = theme => {
 class Main extends Component {
   constructor (props) {
     super(props)
-
     this.state = {
-      addressIdSelected: 0,
       openDeliveryFormDialog: false
     }
     this.openDeliveryFormModal = this.openDeliveryFormModal.bind(this)
@@ -69,12 +67,13 @@ class Main extends Component {
   }
 
   saveAddressSelected (addressIdSelected) {
-    this.setState({
-      addressIdSelected: addressIdSelected
-    })
-
     this.props.saveAddressSelected(
       this.props.deliveryDetailsState,
+      addressIdSelected
+    )
+
+    this.props.saveDeliveryAddressToCartLoading(
+      this.props.cartState,
       addressIdSelected
     )
   }
@@ -123,7 +122,7 @@ class Main extends Component {
           <AddressDetailsCardWrapper
             payload={this.props.deliveryDetailsState.payload}
             saveAddressSelected={this.saveAddressSelected.bind(this)}
-            addressIdSelected={this.state.addressIdSelected}
+            addressIdSelected={this.props.cartState.payload.shipping_address_details.payload.shipping_address_id}
             addressDetailsCardWrapper={this.props.classes.addressDetailsCardWrapper}
           />
         </CardContent>

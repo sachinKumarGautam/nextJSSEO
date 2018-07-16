@@ -250,7 +250,15 @@ export default withStyles(styles)(withFormik({
     state: Yup.string().required(STATE_REQUIRED)
   }),
   handleSubmit: (values, { props, setSubmitting }) => {
-    props.onSubmit(props.deliveryDetailsState, props.deliveryFormState, props.customerId, setSubmitting, props.closeModal, values)
+    props.onSubmit(
+      props.deliveryDetailsState,
+      props.deliveryFormState,
+      props.customerId,
+      setSubmitting,
+      props.closeModal,
+      values,
+      props.isCartPage
+    )
   },
   displayName: 'DeliveryForm' // helps with React DevTools
 })(DeliveryForm))
