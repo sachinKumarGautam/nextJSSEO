@@ -48,7 +48,7 @@ import {
 const styles = theme => ({
   stickyWrapper: {
     position: 'sticky',
-    top: 111
+    top: theme.spacing.unit * 13.875
   }
 })
 
