@@ -9,6 +9,7 @@ const PatientDetails = props => (
   <Grid container spacing={24} className={props.patientDetailsWrapper}>
     <Grid item xs={12}>
       <PatientDetailForm
+        isCartPage={props.isCartPage}
         closePatientFormModal={props.closePatientFormModal}
         openPatientFormDialog={props.openPatientFormDialog}
         patientFormState={props.patientDetailsState}

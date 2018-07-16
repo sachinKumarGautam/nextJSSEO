@@ -18,10 +18,6 @@ import {
   submitPatientDetailsLoading
 } from '../containers/patientDetails/patientDetailsActions'
 
-import {
-  savePatientToCartLoading
-} from '../containers/cartDetails/cartActions'
-
 const styles = theme => ({
   root: {
     paddingTop: theme.spacing.unit * 3,
@@ -63,7 +59,6 @@ class PatientDetails extends React.Component {
               submitPatientDetailsLoading={this.props.actions.submitPatientDetailsLoading}
               customerState={this.props.customerState}
               cartState={this.props.cartState}
-              savePatientToCartLoading={this.props.actions.savePatientToCartLoading}
             />
           </Paper>
         </div>
@@ -87,8 +82,7 @@ function mapDispatchToProps (dispatch) {
       {
         getPatientDetailsListLoading,
         savePatientSelected,
-        submitPatientDetailsLoading,
-        savePatientToCartLoading
+        submitPatientDetailsLoading
       },
       dispatch
     )

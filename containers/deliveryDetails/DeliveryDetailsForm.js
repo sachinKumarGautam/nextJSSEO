@@ -54,6 +54,7 @@ class DeliveryDetailForm extends React.Component {
           </DialogTitle>
           <DialogContent>
             <Form
+              isCartPage={this.props.isCartPage}
               type={'deliveryForm'}
               onSubmit={this.props.onSubmit}
               customerState={this.props.customerState}

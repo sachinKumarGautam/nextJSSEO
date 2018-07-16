@@ -23,9 +23,12 @@ export default function cartReducer (state = initialState, action) {
           ...state.payload,
           id: action.id,
           uid: action.uid,
-          patient_id: {
-            ...state.payload.patient_id,
-            payload: action.patient_id
+          patient_details: {
+            ...state.payload.patient_details,
+            payload: {
+              ...state.payload.patient_details.payload,
+              patient_id: action.patient_id
+            }
           },
           cart_items: {
             ...state.payload.cart_items,
@@ -70,13 +73,24 @@ export default function cartReducer (state = initialState, action) {
           ...state.payload,
           id: action.id,
           uid: action.uid,
-          patient_id: {
-            ...state.payload.patient_id,
-            payload: action.patient_id
+          patient_details: {
+            ...state.payload.patient_details,
+            payload: {
+              ...state.payload.patient_details.payload,
+              patient_id: action.patient_id,
+              patient_full_name: action.patient_full_name
+            }
+          },
+          shipping_address_details: {
+            ...state.payload.shipping_address_details,
+            payload: {
+              ...state.payload.shipping_address_details.payload,
+              shipping_address_id: action.shipping_address_id,
+              shipping_address: action.shipping_address
+            }
           },
           customer_id: action.customer_id,
           customer_full_name: action.customer_full_name,
-          patient_full_name: action.patient_full_name,
           discount: action.discount,
           redeemed_care_points: action.redeemed_care_points,
           redeemable_care_points: action.redeemable_care_points,
@@ -152,11 +166,11 @@ export default function cartReducer (state = initialState, action) {
         ...state,
         payload: {
           ...state.payload,
-          patient_id: {
-            ...state.payload.patient_id,
+          patient_details: {
+            ...state.payload.patient_details,
             isLoading: action.isLoading,
             errorState: {
-              ...state.payload.patient_id.errorState,
+              ...state.payload.patient_details.errorState,
               isError: action.isError,
               error: action.error
             }
@@ -169,12 +183,18 @@ export default function cartReducer (state = initialState, action) {
         ...state,
         payload: {
           ...state.payload,
-          patient_id: {
-            ...state.payload.patient_id,
+          patient_details: {
+            ...state.payload.patient_details,
             isLoading: action.isLoading,
-            payload: action.patient_id
-          },
-          patient_full_name: action.patient_full_name
+            payload: {
+              ...state.payload.patient_details.payload,
+              patient_id: action.patient_id,
+              patient_full_name: action.patient_full_name,
+              age: action.patient.age,
+              gender: action.patient.gender,
+              mobile: action.patient.mobile
+            }
+          }
         }
       }
 
@@ -183,11 +203,11 @@ export default function cartReducer (state = initialState, action) {
         ...state,
         payload: {
           ...state.payload,
-          patient_id: {
-            ...state.payload.patient_id,
+          patient_details: {
+            ...state.payload.patient_details,
             isLoading: action.isLoading,
             errorState: {
-              ...state.payload.patient_id.errorState,
+              ...state.payload.patient_details.errorState,
               isError: action.isError,
               error: action.error
             }
@@ -200,11 +220,11 @@ export default function cartReducer (state = initialState, action) {
         ...state,
         payload: {
           ...state.payload,
-          shipping_address_id: {
-            ...state.payload.shipping_address_id,
+          shipping_address_details: {
+            ...state.payload.shipping_address_details,
             isLoading: action.isLoading,
             errorState: {
-              ...state.payload.shipping_address_id.errorState,
+              ...state.payload.shipping_address_details.errorState,
               isError: action.isError,
               error: action.error
             }
@@ -217,10 +237,14 @@ export default function cartReducer (state = initialState, action) {
         ...state,
         payload: {
           ...state.payload,
-          shipping_address_id: {
-            ...state.payload.shipping_address_id,
+          shipping_address_details: {
+            ...state.payload.shipping_address_details,
             isLoading: action.isLoading,
-            payload: action.shipping_address_id
+            payload: {
+              ...state.payload.shipping_address_details.payload,
+              shipping_address_id: action.shipping_address_id,
+              shipping_address: action.shipping_address
+            }
           }
         }
       }
@@ -230,11 +254,11 @@ export default function cartReducer (state = initialState, action) {
         ...state,
         payload: {
           ...state.payload,
-          shipping_address_id: {
-            ...state.payload.shipping_address_id,
+          shipping_address_details: {
+            ...state.payload.shipping_address_details,
             isLoading: action.isLoading,
             errorState: {
-              ...state.payload.shipping_address_id.errorState,
+              ...state.payload.shipping_address_details.errorState,
               isError: action.isError,
               error: action.error
             }
@@ -262,11 +286,14 @@ export default function cartReducer (state = initialState, action) {
           id: action.id,
           uid: action.uid,
           customer_id: action.customer_id,
-          patient_id: {
-            ...state.payload.patient_id,
-            payload: action.patient_id
+          patient_details: {
+            ...state.payload.patient_details,
+            payload: {
+              ...state.payload.patient_details.payload,
+              patient_id: action.patient_id,
+              patient_full_name: action.patient_full_name
+            }
           },
-          patient_full_name: action.patient_full_name,
           customer_first_name: action.customer_first_name,
           customer_last_name: action.customer_last_name,
           facility_code: action.facility_code,

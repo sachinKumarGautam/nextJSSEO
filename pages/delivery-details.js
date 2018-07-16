@@ -58,6 +58,7 @@ class DeliveryDetails extends React.Component {
               saveAddressSelected={this.props.actions.saveAddressSelected}
               submitDeliveryDetailsLoading={this.props.actions.submitDeliveryDetailsLoading}
               customerState={this.props.customerState}
+              cartState={this.props.cartState}
             />
           </Paper>
         </div>
@@ -69,6 +70,7 @@ class DeliveryDetails extends React.Component {
 
 function mapStateToProps (state) {
   return {
+    cartState: state.cartState,
     deliveryDetailsState: state.deliveryDetailsState,
     customerState: state.customerState
   }

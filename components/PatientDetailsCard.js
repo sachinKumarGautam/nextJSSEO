@@ -13,8 +13,7 @@ const styles = theme => {
       borderRadius: theme.spacing.unit * 0.5
     },
     patientWrapperSelectedStyle: {
-      border: `1px solid ${theme.palette.customGrey.grey250}`,
-      backgroundColor: theme.palette.customGreen.green200,
+      border: `2px solid ${theme.palette.primary.main}`,
       padding: theme.spacing.unit * 2.5,
       borderRadius: theme.spacing.unit * 0.5
     },
@@ -61,7 +60,12 @@ const PatientDetailsCard = props => (
         ? props.classes.patientWrapperSelectedStyle
         : props.classes.patientWrapperStyle
     }
-    onClick={props.savePatientSelected.bind(this, props.patientDetail.id)}
+    onClick={
+      props.savePatientSelected
+        ? props.savePatientSelected.bind(this, props.patientDetail)
+        : null
+    }
+
   >
     <Grid container spacing={24}>
       <Grid item xs={3}>

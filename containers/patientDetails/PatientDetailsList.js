@@ -60,19 +60,6 @@ class PatientDetailsList extends Component {
     }
   }
 
-  savePatientSelected (patientIdSelected) {
-    this.props.savePatientSelected(
-      this.props.patientDetailsState,
-      patientIdSelected
-    )
-
-    this.props.savePatientToCartLoading(
-      this.props.cartState,
-      patientIdSelected,
-      this.props.cartState.payload.uid
-    )
-  }
-
   openPatientFormModal () {
     this.setState({
       openPatientFormDialog: true
@@ -116,8 +103,6 @@ class PatientDetailsList extends Component {
           </div>
           <PatientDetailsCardWrapper
             payload={this.props.patientDetailsState.payload}
-            savePatientSelected={this.savePatientSelected.bind(this)}
-            patientIdSelected={this.props.cartState.payload.patient_id.payload}
             patientDetailsCardWrapper={this.props.classes.patientDetailsCardWrapper}
           />
         </CardContent>
