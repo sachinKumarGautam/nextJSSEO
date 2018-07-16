@@ -117,20 +117,20 @@ class CartDetails extends Component {
             }
             {
               this.props.cartState.payload.cart_items.payload.length
-              ? (
-                <MedicineList
-                  cartState={this.props.cartState}
-                  decrementCartItem={this.decrementCartItem.bind(this)}
-                  incrementCartItem={this.incrementCartItem.bind(this)}
-                />
-              ) : (
-                <div>
-                  <Typography className={this.props.classes.medicineListWrapper}>
+                ? (
+                  <MedicineList
+                    cartState={this.props.cartState}
+                    decrementCartItem={this.decrementCartItem.bind(this)}
+                    incrementCartItem={this.incrementCartItem.bind(this)}
+                  />
+                ) : (
+                  <div>
+                    <Typography className={this.props.classes.medicineListWrapper}>
                     No medicines added in cart
-                  </Typography>
-                  <Divider />
-                </div>
-              )
+                    </Typography>
+                    <Divider />
+                  </div>
+                )
             }
             {
               this.props.cartState.payload.patient_details.payload.patient_id

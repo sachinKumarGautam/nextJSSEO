@@ -77,7 +77,7 @@ export function submitPatient (action$, store) {
           data.setSubmitting(false)
           data.closeModal()
 
-          if(data.isCartPage) {
+          if (data.isCartPage) {
             return of(
               submitPatientDetailsSuccess(data.patientDetailsState, result),
               savePatientToCartLoading(cartState, result.body.payload, cartState.payload.uid),

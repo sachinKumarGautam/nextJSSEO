@@ -9,7 +9,7 @@ import PatientDetailsExpansionPanel from './PatientDetailsExpansionPanel'
 import AddressDetailsExpansionPanel from './AddressDetailsExpansionPanel'
 import PaymentExpansionPanel from './PaymentExpansionPanel'
 
-import { ITEM_ADDED_TO_CART } from '../../containers/messages/cartMessages'
+import { ATLEAST_ONE_ITEM } from '../../containers/messages/cartMessages'
 import { SNACK_BAR_DURATION } from '../../components/constants/Constants'
 
 const styles = theme => ({
@@ -150,7 +150,7 @@ class OrderSummary extends React.Component {
   };
 
   handleNextChange = (panel, expanded) => {
-    if(
+    if (
       !this.props.cartState.payload.cart_items.payload.length &&
       !this.props.cartState.payload.is_doctor_callback.payload
     ) {
@@ -287,7 +287,7 @@ class OrderSummary extends React.Component {
           ContentProps={{
             'aria-describedby': 'cart-items'
           }}
-          message={<span>Please add medicines or opt for tele-consultation</span>}
+          message={<span>{ATLEAST_ONE_ITEM}</span>}
         />
       </div>
     )

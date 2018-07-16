@@ -59,39 +59,39 @@ class AddressDetailsExpansionPanel extends React.Component {
               {
                 this.props.expanded !== 'panel4' &&
                 this.props.cartState.payload.shipping_address_details.payload.shipping_address_id
-                ? (
-                  <div>
+                  ? (
+                    <div>
+                      <Typography
+                        component='h1'
+                        className={this.props.heading}
+                      >
+                        {
+                          this.props.cartState.payload.shipping_address_details.payload.shipping_address.type
+                            ? this.props.cartState.payload.shipping_address_details.payload.shipping_address.type
+                            : 'Others'
+                        }
+                      </Typography>
+                      <Typography
+                        component='h1'
+                        className={this.props.patientDetails}
+                      >
+                        {this.props.cartState.payload.shipping_address_details.payload.shipping_address.street1}
+                      </Typography>
+                      <Typography
+                        component='h1'
+                        className={this.props.patientDetails}
+                      >
+                        {this.props.cartState.payload.shipping_address_details.payload.shipping_address.street2}
+                      </Typography>
+                    </div>
+                  ) : (
                     <Typography
                       component='h1'
                       className={this.props.heading}
                     >
-                      {
-                        this.props.cartState.payload.shipping_address_details.payload.shipping_address.type
-                        ? this.props.cartState.payload.shipping_address_details.payload.shipping_address.type
-                        : 'Others'
-                      }
-                    </Typography>
-                    <Typography
-                      component='h1'
-                      className={this.props.patientDetails}
-                    >
-                      {this.props.cartState.payload.shipping_address_details.payload.shipping_address.street1}
-                    </Typography>
-                    <Typography
-                      component='h1'
-                      className={this.props.patientDetails}
-                    >
-                      {this.props.cartState.payload.shipping_address_details.payload.shipping_address.street2}
-                    </Typography>
-                  </div>
-                ) : (
-                  <Typography
-                    component='h1'
-                    className={this.props.heading}
-                  >
                     Delivery Details
-                  </Typography>
-                )
+                    </Typography>
+                  )
               }
               {
                 this.props.addressIdSelected

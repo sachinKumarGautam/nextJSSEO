@@ -66,7 +66,7 @@ export function submitDeliveryDetails (action$, store) {
           data.setSubmitting(false)
           data.closeModal()
 
-          if(data.isCartPage) {
+          if (data.isCartPage) {
             return of(
               submitDeliveryDetailsSuccess(deliveryDetailsState, result),
               saveDeliveryAddressToCartLoading(cartState, result.body.payload.id),
