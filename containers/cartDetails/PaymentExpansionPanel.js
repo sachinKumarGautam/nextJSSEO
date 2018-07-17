@@ -29,7 +29,7 @@ class PaymentExpansionPanel extends React.Component {
         className={this.props.expansionPanel}
       >
         <ExpansionPanelSummary expandIcon={<div />}>
-          <img src='/static/images/attachedPrescriptions.svg' className={this.props.imageIcon} />
+          <img src='/static/images/group-6.svg' className={this.props.imageIcon} />
           <Typography
             component='h1'
             className={this.props.heading}

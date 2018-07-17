@@ -21,11 +21,14 @@ const styles = theme => ({
     flexDirection: 'row',
     '&:hover': {
       color: theme.palette.primary.main
+    },
+    '&active, &link': {
+      color: theme.palette.primary.main
     }
   },
   subHeaderText: {
     fontWeight: theme.typography.fontWeightBold,
-    color: theme.palette.customGrey.grey200,
+    color: theme.palette.customGrey.grey500,
     paddingLeft: theme.spacing.unit * 2.25
   },
   hover: {
