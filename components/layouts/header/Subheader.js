@@ -21,11 +21,14 @@ const styles = theme => ({
     flexDirection: 'row',
     '&:hover': {
       color: theme.palette.primary.main
+    },
+    '&active, &link': {
+      color: theme.palette.primary.main
     }
   },
   subHeaderText: {
     fontWeight: theme.typography.fontWeightBold,
-    color: theme.palette.customGrey.grey200,
+    color: theme.palette.customGrey.grey500,
     paddingLeft: theme.spacing.unit * 2.25
   },
   hover: {
@@ -79,9 +82,9 @@ class Subheader extends React.Component {
               href='#'
               className={classes.subHeaderItem}
             >
-              <img
+              {/* <img
                 src='/static/images/order-med.svg'
-              />
+              /> */}
               <Typography
                 variant={'body2'}
                 className={this.state.hover.orderMedicine ? `${classes.subHeaderText} ${classes.hover}` : classes.subHeaderText}
@@ -98,7 +101,7 @@ class Subheader extends React.Component {
             onMouseLeave={this.toggleHover.bind(this, 'repeatPastMedicine')}
             className={classes.subHeaderItem}
           >
-            <img src='/static/images/repeat-button.svg' />
+            {/* <img src='/static/images/repeat-button.svg' /> */}
             <Typography
               variant={'body2'}
               className={this.state.hover.repeatPastMedicine ? `${classes.subHeaderText} ${classes.hover}` : classes.subHeaderText}
@@ -115,7 +118,7 @@ class Subheader extends React.Component {
             target='_blank'
             className={classes.subHeaderItem}
           >
-            <img src='/static/images/repeat-button.svg' />
+            {/* <img src='/static/images/repeat-button.svg' /> */}
             <Typography
               variant={'body2'}
               className={this.state.hover.diseases ? `${classes.subHeaderText} ${classes.hover}` : classes.subHeaderText}
@@ -132,7 +135,7 @@ class Subheader extends React.Component {
             target='_blank'
             className={classes.subHeaderItem}
           >
-            <img src='/static/images/blog.svg' />
+            {/* <img src='/static/images/blog.svg' /> */}
             <Typography
               variant={'body2'}
               className={this.state.hover.healthContent ? `${classes.subHeaderText} ${classes.hover}` : classes.subHeaderText}

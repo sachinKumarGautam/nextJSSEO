@@ -14,7 +14,7 @@ const styles = theme => {
       display: 'flex',
       alignItems: 'center',
       marginTop: theme.spacing.unit,
-      marginLeft: theme.spacing.unit * 1.5
+      marginLeft: theme.spacing.unit * 1.25
     }
   }
 }
