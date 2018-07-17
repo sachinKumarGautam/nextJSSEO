@@ -79,9 +79,9 @@ class Subheader extends React.Component {
               href='#'
               className={classes.subHeaderItem}
             >
-              <img
+              {/* <img
                 src='/static/images/order-med.svg'
-              />
+              /> */}
               <Typography
                 variant={'body2'}
                 className={this.state.hover.orderMedicine ? `${classes.subHeaderText} ${classes.hover}` : classes.subHeaderText}
@@ -98,7 +98,7 @@ class Subheader extends React.Component {
             onMouseLeave={this.toggleHover.bind(this, 'repeatPastMedicine')}
             className={classes.subHeaderItem}
           >
-            <img src='/static/images/repeat-button.svg' />
+            {/* <img src='/static/images/repeat-button.svg' /> */}
             <Typography
               variant={'body2'}
               className={this.state.hover.repeatPastMedicine ? `${classes.subHeaderText} ${classes.hover}` : classes.subHeaderText}
@@ -115,7 +115,7 @@ class Subheader extends React.Component {
             target='_blank'
             className={classes.subHeaderItem}
           >
-            <img src='/static/images/repeat-button.svg' />
+            {/* <img src='/static/images/repeat-button.svg' /> */}
             <Typography
               variant={'body2'}
               className={this.state.hover.diseases ? `${classes.subHeaderText} ${classes.hover}` : classes.subHeaderText}
@@ -132,7 +132,7 @@ class Subheader extends React.Component {
             target='_blank'
             className={classes.subHeaderItem}
           >
-            <img src='/static/images/blog.svg' />
+            {/* <img src='/static/images/blog.svg' /> */}
             <Typography
               variant={'body2'}
               className={this.state.hover.healthContent ? `${classes.subHeaderText} ${classes.hover}` : classes.subHeaderText}
