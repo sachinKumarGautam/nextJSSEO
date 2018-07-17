@@ -54,7 +54,7 @@ class AddressDetailsExpansionPanel extends React.Component {
             content: this.props.patientContentWrapper
           }}
         >
-          <img src='/static/images/group-4.svg' className={this.props.imageIcon} />
+          <img src='/static/images/delivery.svg' className={this.props.imageIcon} />
           <div className={this.props.patientWrapper}>
             <div className={this.props.checkedIconWrapper}>
               {
