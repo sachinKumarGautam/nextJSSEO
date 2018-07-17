@@ -90,7 +90,9 @@ class ProductDetails extends React.Component {
     const { query } = Router
     return (
       <div>
-        <Header />
+        <Header
+          addToCartHandler={this.props.addToCartHandler}
+        />
         <div className={this.props.classes.wrapperStyle}>
           <Paper className={classes.root} elevation={1}>
             {

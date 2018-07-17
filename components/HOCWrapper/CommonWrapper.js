@@ -7,6 +7,8 @@ import { incrementCartItemLoading } from '../../containers/cartDetails/cartActio
 import { openPincodeDialog, checkPincodeLoading } from '../../containers/location/pincode/pincodeAction'
 import {FormatColorReset} from '@material-ui/icons'
 
+import withRoot from '../../src/withRoot'
+
 export function commonWrapperHOC (Page) {
   class CommomWrapper extends React.Component {
     static getInitialProps (ctx) {
@@ -21,7 +23,7 @@ export function commonWrapperHOC (Page) {
       }
     }
 
-    addToCartHandler (inProgressCartItem, event) {
+    addToCartHandler (inProgressCartItem) {
       console.log('inProgressCartItem', inProgressCartItem)
       if (this.props.checkPincodeState.payload.pincode) {
         console.log('I was here')
@@ -30,7 +32,6 @@ export function commonWrapperHOC (Page) {
         this.setState({
           inProgressCartItem: inProgressCartItem
         }, () => this.saveInProgressCartItem(this.state.inProgressCartItem))
-
         this.props.actions.openPincodeDialog(this.props.checkPincodeState, true)
       }
     }
@@ -92,7 +93,7 @@ export function commonWrapperHOC (Page) {
   return connect(
     mapStateToProps,
     mapDispatchToProps
-  )(CommomWrapper)
+  )(withRoot(CommomWrapper))
 }
 
 // export default (mapStateToProps, mapDispatchToProps) => (Page) => {

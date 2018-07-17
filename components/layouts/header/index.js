@@ -152,6 +152,7 @@ class Header extends React.Component {
                 checkPincodeState={checkPincodeState}
                 checkPincodeLoading={this.props.actions.checkPincodeLoading}
                 searchMedicineLoading={actions.searchMedicineLoading}
+                addToCartHandler={this.props.addToCartHandler}
               />
               <CartIcon
                 cartState={this.props.cartState}

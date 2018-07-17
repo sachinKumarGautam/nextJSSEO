@@ -11,6 +11,8 @@ import MedicineListDetails from '../../components/MedicineListDetails'
 
 import { MEDICINE_LIST_PRODUCT } from '../../routes/RouteConstant'
 
+// import { commonWrapperHOC } from '../../components/HOCWrapper/CommonWrapper'
+
 const styles = theme => ({
   root: {
     flexGrow: 1
@@ -123,7 +125,8 @@ function renderSuggestion ({
   checkPincodeLoading,
   checkPincodeState,
   cartState,
-  incrementCartItemLoading
+  incrementCartItemLoading,
+  addToCartHandler
 }) {
   const isHighlighted = highlightedIndex === index
   const isSelected = (selectedItem || '').indexOf(suggestion.label) > -1
@@ -141,6 +144,7 @@ function renderSuggestion ({
         cartState={cartState}
         checkPincodeLoading={checkPincodeLoading}
         checkPincodeState={checkPincodeState}
+        addToCartHandler={addToCartHandler}
       />
     </li>
   )
@@ -208,7 +212,8 @@ class SearchMedicine extends React.Component {
       checkPincodeLoading,
       checkPincodeState,
       cartState,
-      incrementCartItemLoading
+      incrementCartItemLoading,
+      addToCartHandler
     } = this.props
     const isOpen = this.state.isOpen
     const searchMedicineResult = searchMedicineState.payload.searchMedicineResult
@@ -256,7 +261,8 @@ class SearchMedicine extends React.Component {
                         checkPincodeLoading,
                         checkPincodeState,
                         cartState,
-                        incrementCartItemLoading
+                        incrementCartItemLoading,
+                        addToCartHandler
                       })
                     )}
                   </ul>
