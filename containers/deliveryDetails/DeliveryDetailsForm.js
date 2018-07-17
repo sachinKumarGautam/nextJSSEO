@@ -61,6 +61,7 @@ class DeliveryDetailForm extends React.Component {
               deliveryFormState={this.props.deliveryFormState}
               closeModal={this.props.closeModal}
               checkPincodeDetailLoading={this.props.checkPincodeDetailLoading}
+              updateAddressFormValue={this.props.updateAddressFormValue}
             />
           </DialogContent>
         </Dialog>

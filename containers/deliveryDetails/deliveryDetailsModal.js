@@ -14,6 +14,16 @@ const initialState = {
       isError: false,
       error: {}
     }
+  },
+  addressForm: {
+    full_name: '',
+    mobile: '',
+    pincode: '',
+    locality: '',
+    street1: '',
+    street2: '',
+    city: '',
+    state: ''
   }
 }
 

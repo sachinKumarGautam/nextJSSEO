@@ -16,7 +16,8 @@ import {
   submitDeliveryDetailsFailure,
   getDeliveryDetailsListLoading,
   checkPincodeDetailSuccess,
-  checkPincodeDetailFailure
+  checkPincodeDetailFailure,
+  updateAddressFormValue
 } from './deliveryDetailsActions'
 
 import {
@@ -85,12 +86,10 @@ export function checkPincodeServicability (action$, store) {
   return action$.pipe(
     ofType(CHECK_PINCODE_DETAIL_LOADING),
     mergeMap(data => {
-      return http(getCityStateUsingPincode$(data.saltName, data.page, data.size)).pipe(
-        map(result => {
-          return checkPincodeDetailSuccess(
-            data.deliveryDetailsState,
-            result.body.payload
-          )
+      return http(getCityStateUsingPincode$(data.pincode)).pipe(
+        flatMap(result => {
+          return of(checkPincodeDetailSuccess(data.deliveryDetailsState, result.body.payload),
+            updateAddressFormValue(data.deliveryDetailsState, result.body.payload.state, result.body.payload.city))
         }),
         catchError(error => {
           return of(checkPincodeDetailFailure(data.deliveryDetailsState, error))

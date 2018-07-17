@@ -7,7 +7,8 @@ import {
   SAVE_ADDRESS_SELECTED,
   CHECK_PINCODE_DETAIL_LOADING,
   CHECK_PINCODE_DETAIL_SUCCESS,
-  CHECK_PINCODE_DETAIL_FAILURE
+  CHECK_PINCODE_DETAIL_FAILURE,
+  UPDATE_ADDRESS_FORM_VALUE
 } from './deliveryDetailsActionTypes'
 
 export default function deliveryDetailsReducer (state = initialState, action) {
@@ -89,6 +90,17 @@ export default function deliveryDetailsReducer (state = initialState, action) {
             isError: action.isError,
             error: action.error
           }
+        }
+      }
+
+    // address form value update
+    case UPDATE_ADDRESS_FORM_VALUE:
+      return {
+        ...state,
+        addressForm: {
+          ...state.addressForm,
+          state: action.state,
+          city: action.city
         }
       }
 

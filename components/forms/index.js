@@ -15,7 +15,8 @@ const FormWrapper = (props) => {
     patientFormState,
     deliveryFormState,
     deliveryDetailsState,
-    checkPincodeDetailLoading
+    checkPincodeDetailLoading,
+    updateAddressFormValue
   } = props
   switch (props.type) {
     case 'loginForm':
@@ -61,6 +62,7 @@ const FormWrapper = (props) => {
         customerId={props.customerState.payload.id}
         mobile={props.customerState.payload.mobile}
         checkPincodeDetailLoading={checkPincodeDetailLoading}
+        updateAddressFormValue={updateAddressFormValue}
       />
 
     default :

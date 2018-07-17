@@ -44,14 +44,23 @@ const styles = theme => ({
 })
 
 class DeliveryForm extends React.Component {
+  onPincodeInput (handleChange, event) {
+    if (event.target.value.length === 6) {
+      this.props.checkPincodeDetailLoading(
+        this.props.deliveryDetailsState,
+        event.target.value
+      )
+    }
+    handleChange(event)
+  }
   render () {
     const {
       values,
       touched,
       errors,
       isSubmitting,
-      handleChange,
       handleSubmit,
+      handleChange,
       classes
     } = this.props
     return (
@@ -122,7 +131,7 @@ class DeliveryForm extends React.Component {
           <Input
             id='pincode'
             type='number'
-            onChange={handleChange}
+            onChange={this.onPincodeInput.bind(this, handleChange)}
             value={values.pincode}
           />
           {
@@ -273,16 +282,17 @@ class DeliveryForm extends React.Component {
 }
 
 export default withStyles(styles)(withFormik({
+  enableReinitialize: true,
   mapPropsToValues: (props) => {
     return {
-      full_name: '',
-      mobile: '',
-      pincode: '',
-      locality: '',
-      street1: '',
-      street2: '',
-      city: 'DELHI',
-      state: 'DELHI'
+      full_name: props.deliveryDetailsState.addressForm.full_name,
+      mobile: props.deliveryDetailsState.addressForm.mobile,
+      pincode: props.deliveryDetailsState.addressForm.pincode,
+      locality: props.deliveryDetailsState.addressForm.locality,
+      street1: props.deliveryDetailsState.addressForm.street1,
+      street2: props.deliveryDetailsState.addressForm.street2,
+      city: props.deliveryDetailsState.addressForm.city,
+      state: props.deliveryDetailsState.addressForm.state
     }
   },
   validationSchema: Yup.object().shape({

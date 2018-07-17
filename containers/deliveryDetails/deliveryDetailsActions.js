@@ -8,7 +8,8 @@ import {
   SUBMIT_DELIVERY_DETAILS_FAILURE,
   CHECK_PINCODE_DETAIL_LOADING,
   CHECK_PINCODE_DETAIL_SUCCESS,
-  CHECK_PINCODE_DETAIL_FAILURE
+  CHECK_PINCODE_DETAIL_FAILURE,
+  UPDATE_ADDRESS_FORM_VALUE
 } from './deliveryDetailsActionTypes'
 
 /**
@@ -109,7 +110,7 @@ export function submitDeliveryDetailsFailure (deliveryDetailsState, error) {
   }
 }
 
-export function checkPincodeDetailLoading (deliveryDetailsState, pincode) {
+export function checkPincodeDetailLoading (deliveryDetailsState, pincode, updateAddressFormValue) {
   return {
     type: CHECK_PINCODE_DETAIL_LOADING,
     deliveryDetailsState,
@@ -136,5 +137,14 @@ export function checkPincodeDetailFailure (deliveryDetailsState, error) {
     isLoading: false,
     error: error,
     isError: true
+  }
+}
+
+export function updateAddressFormValue (deliveryDetailsState, state, city) {
+  return {
+    type: UPDATE_ADDRESS_FORM_VALUE,
+    deliveryDetailsState,
+    state,
+    city
   }
 }
