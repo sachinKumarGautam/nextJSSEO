@@ -163,6 +163,7 @@ class DeliveryForm extends React.Component {
           className={classes.formControl}
           aria-describedby='city'
           error={errors.city && touched.city}
+          disabled='true'
         >
           <InputLabel
             className={classes.labelStyle}
@@ -189,6 +190,7 @@ class DeliveryForm extends React.Component {
           className={classes.formControl}
           aria-describedby='state'
           error={errors.state && touched.state}
+          disabled='true'
         >
           <InputLabel
             className={classes.labelStyle}
@@ -233,8 +235,8 @@ export default withStyles(styles)(withFormik({
       mobile: '',
       pincode: '',
       locality: '',
-      street1: 'deafult street1',
-      street2: 'deafult street2',
+      street1: '',
+      street2: '',
       city: '',
       state: ''
     }
