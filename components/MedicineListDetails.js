@@ -8,10 +8,9 @@ import ProductPackSize from './ProductPackSize'
 import ProductPrice from './ProductPrice'
 import StrokePrice from './StrokePrice'
 import EstimatedPriceLabel from './EstimatedPriceLabel'
-import AddToCartWrapper from '../containers/cartDetails/addToCartWrapper/index'
 import {PRODUCT_DETAILS} from '../routes/RouteConstant'
-
-// import RefillDueDays from './RefillDueDays'
+import Button from './button/Button'
+import { commonWrapperHOC } from './HOCWrapper/CommonWrapper'
 
 const styles = theme => {
   return {
@@ -56,35 +55,17 @@ const styles = theme => {
     buttonWrapperStyle: {
       marginTop: theme.spacing.unit,
       float: 'right'
+    },
+    cursor: {
+      cursor: 'pointer'
     }
   }
 }
 
 class MedicineListDetails extends React.Component {
-  constructor (props) {
-    super(props)
-    this.handleOpenPincodeDialog = this.handleOpenPincodeDialog.bind(this)
-    this.handleClosePincodeDialog = this.handleClosePincodeDialog.bind(this)
-    this.addToCart = this.addToCart.bind(this)
-    this.state = {
-      pincodeDialogOpen: false
-    }
-  }
-
   addToCart (event) {
-    this.props.incrementCartItemLoading(this.props.cartState, this.props.itemDetails)
-  }
-
-  handleOpenPincodeDialog () {
-    this.setState({
-      pincodeDialogOpen: true
-    })
-  }
-
-  handleClosePincodeDialog () {
-    this.setState({
-      pincodeDialogOpen: false
-    })
+    console.log('I was in add to cart ')
+    this.props.addToCartHandler(this.props.itemDetails)
   }
 
   render () {
@@ -94,14 +75,13 @@ class MedicineListDetails extends React.Component {
 
     const city = this.props.checkPincodeState.payload.city
     return (
-
       <div className={props.classes.medicineListContentWrapper}>
         <Link
           prefetch
           href={`${PRODUCT_DETAILS}?id=${props.itemDetails.slug}&location=${city}`}
           as={`${PRODUCT_DETAILS}/${props.itemDetails.slug}/${city}`}
         >
-          <div>
+          <div onClick={this.props.onSelectItem} className={props.classes.cursor}>
             <ProductName
               variant={'body1'}
               name={props.itemDetails.name}
@@ -144,20 +124,16 @@ class MedicineListDetails extends React.Component {
             mrp={props.itemDetails.mrp}
           />
           <div className={props.classes.buttonWrapperStyle}>
-            <AddToCartWrapper
+            <Button
               variant='outlined'
               classes={{
                 root: props.classes.buttonRoot,
                 label: props.classes.buttonLabel
               }}
-              // style={{float: 'right'}}
+              size='small'
+              color='primary'
+              onClick={this.addToCart.bind(this)} // this is coming from HOC
               label={'Add To Cart'}
-              open={this.state.pincodeDialogOpen}
-              handleOpenPincodeDialog={this.handleOpenPincodeDialog}
-              handleClose={this.handleClosePincodeDialog}
-              addToCart={this.addToCart}
-              checkPincodeState={props.checkPincodeState}
-              checkPincodeLoading={props.checkPincodeLoading}
             />
           </div>
         </div>
@@ -166,4 +142,4 @@ class MedicineListDetails extends React.Component {
   }
 }
 
-export default withStyles(styles)(MedicineListDetails)
+export default commonWrapperHOC(withStyles(styles)(MedicineListDetails))

@@ -136,6 +136,7 @@ function renderSuggestion ({
     >
       <MedicineListDetails
         itemDetails={suggestion}
+        openPicodeDialogFrom
         incrementCartItemLoading={incrementCartItemLoading}
         cartState={cartState}
         checkPincodeLoading={checkPincodeLoading}
@@ -162,15 +163,16 @@ class SearchMedicine extends React.Component {
   }
 
   searchMedicineOnChange (event) {
-    this.props.searchMedicineLoading(
-      this.props.searchMedicineState,
-      this.props.checkPincodeState.payload.id,
-      event.target.value
-    )
+    if (event.target.value.length > 3) {
+      this.props.searchMedicineLoading(
+        this.props.searchMedicineState,
+        this.props.checkPincodeState.payload.id,
+        event.target.value
+      )
+    }
   }
 
-  onSelectItem (itemDetails, props) {
-    this.props.updateInProgressMedicineState(this.props.searchMedicineState, itemDetails)
+  onSelectItem () {
   }
 
   onSearchMedicine (medicineName) {
@@ -182,37 +184,22 @@ class SearchMedicine extends React.Component {
   stateChangeHandler = changes => {
     let {
       isOpen = this.state.isOpen,
+      inputValue = this.state.inputValue,
       type
     } = changes
 
-    console.log(Downshift.stateChangeTypes)
-    // isOpen =
-    //   type === (Downshift.stateChangeTypes.blurInput
-    //   || Downshift.stateChangeTypes.itemMouseEnter
-    //   || Downshift.stateChangeTypes.changeInput
-    // ) || isOpen ? true : false
+    // console.log('this.state.isOpen : ', this.state.isOpen)
+    // console.log('isOpen : ', isOpen)
+    console.warn('type : ', type, Downshift.stateChangeTypes)
 
-    // console.log('type: ',type, 'changes.isOpen: ', changes.isOpen, this.state.isOpen)
-
-    // if(type !== Downshift.stateChangeTypes.mouseUp){
-    //   this.setState({
-    //     isOpen: isOpen || this.state.isOpen,
-    //   })
-    // }
-
-    // if(type === Downshift.stateChangeTypes.itemMouseEnter){
-    //   this.setState({
-    //     isOpen: true
-    //   })
-    // }
-  }
-
-  onOuterClick = () => (
-    // {console.log('sachin')}
+    isOpen = (type === Downshift.stateChangeTypes.blurInput)
+      ? this.state.isOpen : isOpen
+    // || type === Downshift.stateChangeTypes.clickItem
     this.setState({
-      isOpen: false
+      isOpen,
+      inputValue
     })
-  )
+  }
 
   render () {
     const {
@@ -228,8 +215,10 @@ class SearchMedicine extends React.Component {
     return (
       <div className={classes.root}>
         <Downshift
-          // onStateChange={this.stateChangeHandler}
+          onStateChange={this.stateChangeHandler}
           // onOuterClick={this.onOuterClick}
+          // onSelectItem={this.onSelectItem}
+          isOpen={isOpen}
         >
           {({ getInputProps, getItemProps, getMenuProps, isOpen, inputValue, selectedItem, highlightedIndex }) => (
             <div className={classes.container}>
@@ -239,7 +228,7 @@ class SearchMedicine extends React.Component {
                 InputProps: getInputProps({
                   placeholder: 'Search medicine...',
                   id: 'search-medicine',
-                  autofocus: true,
+                  autoFocus: true,
                   onChange: this.searchMedicineOnChange,
                   inputValue
                 }),

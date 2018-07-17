@@ -52,18 +52,6 @@ function getPincodeErrorMsg (pincodeFormError, inValidPincodeError, pincodeLoadi
 }
 
 class PincodeDialog extends React.Component {
-  constructor (props) {
-    super(props)
-    this.onClick = this.onClick.bind(this)
-  }
-
-  onClick (event) {
-    console.log('event1', event)
-    event.stopPropagation()
-    event.preventDefault()
-    return 0
-  }
-
   render () {
     const {
       props
@@ -90,9 +78,8 @@ class PincodeDialog extends React.Component {
       ? PINCODE_INVALID : ''
 
     return (
-      <div onClick={this.onClick}>
+      <div>
         <Dialog
-          // disableBackdropClick
           open={props.open}
           onClose={props.handleClose}
           aria-labelledby='form-dialog-title'
@@ -104,7 +91,7 @@ class PincodeDialog extends React.Component {
             <DialogContentText>
                 Enter Delivery Pincode
             </DialogContentText>
-            <form onSubmit={props.handleSubmit}>
+            <form onSubmit={handleSubmit}>
               <FormControl
                 className={classes.formControl}
                 aria-describedby='pincode'
@@ -163,7 +150,16 @@ export default withStyles(styles)(withFormik({
     pincode: Yup.number().required(PINCODE_REQUIRED)
   }),
   handleSubmit: (values, { props, setSubmitting }) => {
-    props.onSubmit(props.checkPincodeState, props.handleClose, setSubmitting, values)
+    console.log('inProgressCartItem', props.inProgressCartItem)
+    getInProgressCartItem
+    props.onSubmit(
+      props.checkPincodeState,
+      props.handleClose,
+      setSubmitting,
+      values,
+      props.incrementCartItemLoading,
+      props.inProgressCartItem
+    )
   },
   displayName: 'pincode' // helps with React DevTools
 })(PincodeDialog))

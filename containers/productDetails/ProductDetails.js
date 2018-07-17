@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-
 import { withStyles } from '@material-ui/core/styles'
 import Grid from '@material-ui/core/Grid'
 
@@ -39,6 +38,7 @@ class ProductDetails extends Component {
               productDetailsState={this.props.productDetailsState}
               incrementCartItemLoading={this.props.incrementCartItemLoading}
               cartState={this.props.cartState}
+              addToCartHandler={this.props.addToCartHandler}
               onChangeQuantity={this.props.onChangeQuantity}
             />
           </Grid>

@@ -1,5 +1,7 @@
 import React from 'react'
 
+import flowRight from 'lodash.flowright'
+
 import Header from '../components/layouts/header'
 import Footer from '../components/layouts/footer'
 
@@ -20,6 +22,8 @@ import {
   getAnonymousCartIdLoading,
   incrementCartItemLoading
 } from '../containers/cartDetails/cartActions'
+
+import { commonWrapperHOC } from '../components/HOCWrapper/CommonWrapper'
 
 import {checkPincodeLoading} from '../containers/location/pincode/pincodeAction'
 
@@ -84,7 +88,6 @@ class ProductDetails extends React.Component {
       cartState
     } = this.props
     const { query } = Router
-
     return (
       <div>
         <Header />
@@ -98,6 +101,7 @@ class ProductDetails extends React.Component {
                   checkPincodeLoading={actions.checkPincodeLoading}
                   incrementCartItemLoading={actions.incrementCartItemLoading}
                   cartState={cartState}
+                  addToCartHandler={this.props.addToCartHandler}
                   onChangeQuantity={actions.onChangeQuantity}
                 />
                 : 'Page not found'
@@ -140,7 +144,7 @@ function mapDispatchToProps (dispatch) {
   }
 }
 
-export default connect(
+export default commonWrapperHOC(connect(
   mapStateToProps,
   mapDispatchToProps
-)(withRoot(withStyles(styles)(ProductDetails)))
+)(withRoot(withStyles(styles)(ProductDetails))))

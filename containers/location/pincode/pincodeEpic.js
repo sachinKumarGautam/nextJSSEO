@@ -1,5 +1,5 @@
 import { of } from 'rxjs/observable/of'
-import { mergeMap, catchError, map } from 'rxjs/operators'
+import { mergeMap, catchError, flatMap } from 'rxjs/operators'
 import { ofType } from 'redux-observable'
 import {CHECK_PINCODE_LOADING} from './pincodeActionTypes'
 import {checkPincodeSuccess, checkPincodeFailure} from './pincodeAction'
@@ -16,13 +16,22 @@ export function checkPincode (action$, store) {
     ofType(CHECK_PINCODE_LOADING),
     mergeMap(data => {
       const checkPincodeState = store.getState().checkPincodeState
+      const cartState = store.getState().cartState
       return http(checkPincode$(data.pincode)).pipe(
-        map(result => {
+        flatMap(result => {
           setTimeout(() => {
             data.handleClose()
           }, 350)
           data.setSubmitting(false)
-          return checkPincodeSuccess(checkPincodeState, result)
+          if (typeof data.incrementCartItemLoading === 'function') {
+            // checks if any add to cart function is comming from parent and invokes it
+            console.log(' this is sachin')
+            return of(data.incrementCartItemLoading(cartState, data.inProgressCartItem),
+              checkPincodeSuccess(checkPincodeState, result)
+            )
+          } else {
+            return checkPincodeSuccess(checkPincodeState, result)
+          }
         }),
         catchError(error => {
           data.setSubmitting(false)

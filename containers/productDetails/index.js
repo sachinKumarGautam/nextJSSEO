@@ -49,6 +49,7 @@ class ProductDetailsWrapper extends Component {
             incrementCartItemLoading={this.props.incrementCartItemLoading}
             cartState={this.props.cartState}
             onChangeQuantity={this.props.onChangeQuantity}
+            addToCartHandler={this.props.addToCartHandler}
           />
         </section>
         <section>

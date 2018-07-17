@@ -11,6 +11,7 @@ import ProductDiscount from '../../components/ProductDiscount'
 import DeliveryInfoWrapper from '../../components/DeliveryInfoWrapper'
 import QuantityField from '../../components/QuantityField'
 import AddToCartButton from '../cartDetails/addToCartWrapper'
+import Button from '../../components/button'
 
 /*
   Product price
@@ -72,7 +73,6 @@ class ProductPriceDetails extends Component {
 
   render () {
     const { classes } = this.props
-
     return (
       <div>
         <Card elevation={1} className={classes.card}>
@@ -106,13 +106,12 @@ class ProductPriceDetails extends Component {
               <QuantityField
                 onChangeQuantity={this.onChangeQuantity}
               />
-              <AddToCartButton
-                open={this.state.pincodeDialogOpen}
-                handleOpenPincodeDialog={this.handleOpenPincodeDialog}
-                handleClose={this.handleClosePincodeDialog}
-                addToCart={this.addToCart}
-                checkPincodeState={this.props.checkPincodeState}
-                checkPincodeLoading={this.props.checkPincodeLoading}
+              <Button
+                variant='raised'
+                size='small'
+                color='primary'
+                onClick={this.props.addToCartHandler.bind(this, this.props.productDetailsState.payload)} // it check first any selected city then add to cart
+                label={'Add To Cart'}
               />
             </div>
           </CardContent>
