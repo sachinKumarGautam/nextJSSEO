@@ -1,20 +1,32 @@
 import {
   CHECK_PINCODE_LOADING,
   CHECK_PINCODE_SUCCESS,
-  CHECK_PINCODE_FAILURE
+  CHECK_PINCODE_FAILURE,
+  HANDLE_PINCODE_DIALOG
 } from './pincodeActionTypes'
+
+export function openPincodeDialog (checkPincodeState, isOpen = false) {
+  return {
+    type: HANDLE_PINCODE_DIALOG,
+    isOpen
+  }
+}
 
 export function checkPincodeLoading (
   checkPincodeState,
   handleClose,
   setSubmitting,
-  values
+  values,
+  incrementCartItemLoading = null,
+  inProgressCartItem = {}
 ) {
   return {
     type: CHECK_PINCODE_LOADING,
     checkPincodeState,
     handleClose,
     setSubmitting,
+    incrementCartItemLoading,
+    inProgressCartItem,
     pincode: values.pincode,
     isLoading: true,
     isError: false,

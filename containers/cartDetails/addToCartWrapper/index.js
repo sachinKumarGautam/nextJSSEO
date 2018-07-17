@@ -6,14 +6,30 @@ class AddToCartWrapper extends React.Component {
   constructor (props) {
     super(props)
     this.addToCartHandler = this.addToCartHandler.bind(this)
+    this.state = {
+      open: false
+    }
   }
+
+  openPincodeModal () {
+    this.setState({
+      open: true
+    })
+  }
+
+  // handleClose = () => (
+  //   this.setState({
+  //     open: true
+  //   })
+  // )
 
   addToCartHandler (event) {
     event.stopPropagation()
     if (this.props.checkPincodeState.payload.pincode) {
       this.props.addToCart()
     } else {
-      this.props.handleOpenPincodeDialog()
+      // this.props.handleOpenPincodeDialog()
+      this.openPincodeModal()
     }
   }
 
@@ -28,9 +44,21 @@ class AddToCartWrapper extends React.Component {
           label={'Add To Cart'}
         />
         <PincodeDialog
-          open={this.props.open}
+          open={this.state.open}
           onSubmit={this.props.checkPincodeLoading}
-          handleClose={this.props.handleClose}
+          handleClose={() =>
+            this.setState({
+              open: false
+            })}
+          checkPincodeState={this.props.checkPincodeState}
+        />
+        <PincodeDialog
+          open={this.state.open}
+          onSubmit={this.props.checkPincodeLoading}
+          handleClose={() =>
+            this.setState({
+              open: false
+            })}
           checkPincodeState={this.props.checkPincodeState}
         />
       </React.Fragment>

@@ -136,8 +136,10 @@ function renderSuggestion ({
     >
       <MedicineListDetails
         itemDetails={suggestion}
+        openPicodeDialogFrom
         incrementCartItemLoading={incrementCartItemLoading}
         cartState={cartState}
+        checkPincodeLoading={checkPincodeLoading}
         checkPincodeState={checkPincodeState}
       />
     </li>
@@ -151,27 +153,52 @@ function getSuggestions (searchMedicineResult) {
 class SearchMedicine extends React.Component {
   constructor (props) {
     super(props)
+    this.state = {
+      isOpen: false
+    }
     this.searchMedicineOnChange = this.searchMedicineOnChange.bind(this)
+    this.stateChangeHandler = this.stateChangeHandler.bind(this)
     this.onSelectItem = this.onSelectItem.bind(this)
     this.onSearchMedicine = this.onSearchMedicine.bind(this)
   }
 
   searchMedicineOnChange (event) {
-    this.props.searchMedicineLoading(
-      this.props.searchMedicineState,
-      this.props.checkPincodeState.payload.id,
-      event.target.value
-    )
+    if (event.target.value.length > 3) {
+      this.props.searchMedicineLoading(
+        this.props.searchMedicineState,
+        this.props.checkPincodeState.payload.id,
+        event.target.value
+      )
+    }
   }
 
-  onSelectItem (itemDetails, props) {
-    this.props.updateInProgressMedicineState(this.props.searchMedicineState, itemDetails)
+  onSelectItem () {
   }
 
   onSearchMedicine (medicineName) {
     const href = `${MEDICINE_LIST_PRODUCT}?productName=${medicineName}`
     const as = `${MEDICINE_LIST_PRODUCT}/${medicineName}`
     Router.push(href, as)
+  }
+
+  stateChangeHandler = changes => {
+    let {
+      isOpen = this.state.isOpen,
+      inputValue = this.state.inputValue,
+      type
+    } = changes
+
+    // console.log('this.state.isOpen : ', this.state.isOpen)
+    // console.log('isOpen : ', isOpen)
+    console.warn('type : ', type, Downshift.stateChangeTypes)
+
+    isOpen = (type === Downshift.stateChangeTypes.blurInput)
+      ? this.state.isOpen : isOpen
+    // || type === Downshift.stateChangeTypes.clickItem
+    this.setState({
+      isOpen,
+      inputValue
+    })
   }
 
   render () {
@@ -183,13 +210,15 @@ class SearchMedicine extends React.Component {
       cartState,
       incrementCartItemLoading
     } = this.props
+    const isOpen = this.state.isOpen
     const searchMedicineResult = searchMedicineState.payload.searchMedicineResult
     return (
       <div className={classes.root}>
         <Downshift
-          // onStateChange={({ inputValue }) => {
-          //   return inputValue && this.setState({ inputValue })
-          // }}
+          onStateChange={this.stateChangeHandler}
+          // onOuterClick={this.onOuterClick}
+          // onSelectItem={this.onSelectItem}
+          isOpen={isOpen}
         >
           {({ getInputProps, getItemProps, getMenuProps, isOpen, inputValue, selectedItem, highlightedIndex }) => (
             <div className={classes.container}>
@@ -199,7 +228,7 @@ class SearchMedicine extends React.Component {
                 InputProps: getInputProps({
                   placeholder: 'Search medicine...',
                   id: 'search-medicine',
-                  autofocus: true,
+                  autoFocus: true,
                   onChange: this.searchMedicineOnChange,
                   inputValue
                 }),

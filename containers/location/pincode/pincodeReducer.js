@@ -3,7 +3,8 @@ import initialState from './pincodeModal'
 import {
   CHECK_PINCODE_LOADING,
   CHECK_PINCODE_SUCCESS,
-  CHECK_PINCODE_FAILURE
+  CHECK_PINCODE_FAILURE,
+  HANDLE_PINCODE_DIALOG
 } from './pincodeActionTypes'
 
 export default function checkPincodeReducer (state = initialState, action) {
@@ -53,6 +54,12 @@ export default function checkPincodeReducer (state = initialState, action) {
           isError: action.isError,
           error: action.error
         }
+      }
+
+    case HANDLE_PINCODE_DIALOG:
+      return {
+        ...state,
+        isPincodeDialogOpen: action.isOpen
       }
 
     default:

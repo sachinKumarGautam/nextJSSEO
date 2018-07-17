@@ -9,6 +9,7 @@ import ProductPrice from './ProductPrice'
 import StrokePrice from './StrokePrice'
 import EstimatedPriceLabel from './EstimatedPriceLabel'
 import AddToCartWrapper from '../containers/cartDetails/addToCartWrapper/index'
+import Button from './button/Button'
 
 const styles = theme => {
   return {
@@ -135,18 +136,15 @@ class RelatedMedicinesCard extends React.Component {
             estimatePriceText={'*Estimated Price'}
           />
         </div>
-        <AddToCartWrapper
-          open={this.state.pincodeDialogOpen}
-          handleOpenPincodeDialog={this.handleOpenPincodeDialog}
-          handleClose={this.handleClosePincodeDialog}
-          addToCart={this.addToCart}
+        <Button
           variant='outlined'
+          color='primary'
           classes={{
             root: props.classes.buttonRoot,
             label: props.classes.buttonLabel
           }}
-          checkPincodeState={this.props.checkPincodeState}
-          checkPincodeLoading={this.props.checkPincodeLoading}
+          onClick={this.addToCartHandler}
+          label={'Add To Cart'}
         />
       </div>
     )
