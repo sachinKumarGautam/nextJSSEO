@@ -12,6 +12,8 @@ import withRoot from '../src/withRoot'
 import Paper from '@material-ui/core/Paper'
 import Router from 'next/router'
 
+import Head from 'next/head'
+
 import ProductDetailsWrapper from '../containers/productDetails'
 
 import { getProductDetailLoading, onChangeQuantity } from '../containers/productDetails/productDetailsActions'
@@ -87,6 +89,9 @@ class ProductDetails extends React.Component {
 
     return (
       <div>
+        <Head>
+          <title>Product Detail</title>
+        </Head>
         <Header />
         <div className={this.props.classes.wrapperStyle}>
           <Paper className={classes.root} elevation={1}>

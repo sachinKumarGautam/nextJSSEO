@@ -9,6 +9,8 @@ import withRoot from '../src/withRoot'
 
 import { connect } from 'react-redux'
 
+import Head from 'next/head'
+
 import Paper from '@material-ui/core/Paper'
 
 import OrderListWrapper from '../containers/orderList'
@@ -51,6 +53,9 @@ class Orders extends React.Component {
   render () {
     return (
       <div>
+        <Head>
+          <title>Order List</title>
+        </Head>
         <Header />
         <div className={this.props.classes.wrapperStyle}>
           <Paper className={this.props.classes.root} elevation={1}>

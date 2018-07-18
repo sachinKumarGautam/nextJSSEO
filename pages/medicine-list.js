@@ -6,6 +6,8 @@ import { withStyles } from '@material-ui/core/styles'
 import { bindActionCreators } from 'redux'
 import Router from 'next/router'
 
+import Head from 'next/head'
+
 import withRoot from '../src/withRoot'
 
 import { connect } from 'react-redux'
@@ -61,6 +63,9 @@ class MedicineList extends React.Component {
 
     return (
       <div>
+        <Head>
+          <title>Medicine List</title>
+        </Head>
         <Header />
         <div className={this.props.classes.root}>
           <MedicineListWrapper

@@ -12,6 +12,8 @@ import PatientDetailsWrapper from '../containers/patientDetails'
 
 import Paper from '@material-ui/core/Paper'
 
+import Head from 'next/head'
+
 import {
   getPatientDetailsListLoading,
   savePatientSelected,
@@ -50,6 +52,9 @@ class PatientDetails extends React.Component {
   render () {
     return (
       <div>
+        <Head>
+          <title>Patient List</title>
+        </Head>
         <Header />
         <div className={this.props.classes.wrapperStyle}>
           <Paper className={this.props.classes.root} elevation={1}>
