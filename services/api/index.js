@@ -262,6 +262,13 @@ const getCityStateUsingPincode$ = (pincode) => (
   })
 )
 
+const searchLocalityForPincode$ = (state, city, pincode, searchString) => (
+  makeAjaxRequest({
+    method: 'GET',
+    url: fetchUrl('shipping', 'place/' + state + '/' + city + '/' + pincode + '?locality=' + searchString, 'GET_LIST')
+  })
+)
+
 export {
   getMoleculeSummary$,
   getMedicineList$,
@@ -294,5 +301,6 @@ export {
   getSliderImages$,
   applyCouponForCart$,
   teleConsultation$,
-  getCityStateUsingPincode$
+  getCityStateUsingPincode$,
+  searchLocalityForPincode$
 }

@@ -30,7 +30,7 @@ class Avatar extends Component {
           </Grid>
           <Grid item xs={8}>
             <Typography className={this.props.classes.userName}>
-              {this.props.cartState.payload.patient_full_name}
+              {this.props.cartState.payload.patient_details.payload.patient_full_name}
             </Typography>
           </Grid>
         </Grid>

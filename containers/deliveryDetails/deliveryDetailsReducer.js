@@ -8,7 +8,10 @@ import {
   CHECK_PINCODE_DETAIL_LOADING,
   CHECK_PINCODE_DETAIL_SUCCESS,
   CHECK_PINCODE_DETAIL_FAILURE,
-  UPDATE_ADDRESS_FORM_VALUE
+  UPDATE_ADDRESS_FORM_VALUE,
+  GET_LOCALITY_LIST_LOADING,
+  GET_LOCALITY_LIST_SUCCESS,
+  GET_LOCALITY_LIST_FAILURE
 } from './deliveryDetailsActionTypes'
 
 export default function deliveryDetailsReducer (state = initialState, action) {
@@ -101,6 +104,47 @@ export default function deliveryDetailsReducer (state = initialState, action) {
           ...state.addressForm,
           state: action.state,
           city: action.city
+        }
+      }
+
+    // locality detail list loading
+    case GET_LOCALITY_LIST_LOADING:
+      return {
+        ...state,
+        addressLocalityList: {
+          ...state.addressLocalityList,
+          isLoading: action.isLoading,
+          errorState: {
+            ...state.addressLocalityList.errorState,
+            isError: action.isError,
+            error: action.error
+          }
+        }
+      }
+
+    // locality detail list sucess
+    case GET_LOCALITY_LIST_SUCCESS:
+      return {
+        ...state,
+        addressLocalityList: {
+          ...state.addressLocalityList,
+          payload: action.payload,
+          isLoading: action.isLoading
+        }
+      }
+
+    // locality detail list failure
+    case GET_LOCALITY_LIST_FAILURE:
+      return {
+        ...state,
+        addressLocalityList: {
+          ...state.addressLocalityList,
+          isLoading: action.isLoading,
+          errorState: {
+            ...state.addressLocalityList.errorState,
+            isError: action.isError,
+            error: action.error
+          }
         }
       }
 

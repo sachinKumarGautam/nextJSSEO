@@ -54,6 +54,7 @@ class PatientDetailForm extends React.Component {
           </DialogTitle>
           <DialogContent>
             <Form
+              isCartPage={this.props.isCartPage}
               type={'patientForm'}
               onSubmit={this.props.submitPatientDetailsLoading}
               customerState={this.props.customerState}

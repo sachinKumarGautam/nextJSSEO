@@ -24,6 +24,14 @@ const initialState = {
     street2: '',
     city: '',
     state: ''
+  },
+  addressLocalityList: {
+    payload: [],
+    isLoading: false,
+    errorState: {
+      isError: false,
+      error: {}
+    }
   }
 }
 

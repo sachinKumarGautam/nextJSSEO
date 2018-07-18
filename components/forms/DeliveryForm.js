@@ -285,12 +285,12 @@ export default withStyles(styles)(withFormik({
   enableReinitialize: true,
   mapPropsToValues: (props) => {
     return {
-      full_name: props.deliveryDetailsState.addressForm.full_name,
-      mobile: props.deliveryDetailsState.addressForm.mobile,
-      pincode: props.deliveryDetailsState.addressForm.pincode,
-      locality: props.deliveryDetailsState.addressForm.locality,
-      street1: props.deliveryDetailsState.addressForm.street1,
-      street2: props.deliveryDetailsState.addressForm.street2,
+      full_name: '',
+      mobile: '',
+      pincode: '',
+      locality: '',
+      street1: '',
+      street2: '',
       city: props.deliveryDetailsState.addressForm.city,
       state: props.deliveryDetailsState.addressForm.state
     }
@@ -305,7 +305,15 @@ export default withStyles(styles)(withFormik({
     state: Yup.string().required(STATE_REQUIRED)
   }),
   handleSubmit: (values, { props, setSubmitting }) => {
-    props.onSubmit(props.deliveryDetailsState, props.deliveryFormState, props.customerId, setSubmitting, props.closeModal, values)
+    props.onSubmit(
+      props.deliveryDetailsState,
+      props.deliveryFormState,
+      props.customerId,
+      setSubmitting,
+      props.closeModal,
+      values,
+      props.isCartPage
+    )
   },
   displayName: 'DeliveryForm' // helps with React DevTools
 })(DeliveryForm))

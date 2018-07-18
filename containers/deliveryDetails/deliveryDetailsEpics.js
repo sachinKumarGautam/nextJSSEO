@@ -6,7 +6,8 @@ import http from '../../services/api/ajaxWrapper'
 import {
   GET_DELIVERY_DETAILS_LIST_LOADING,
   SUBMIT_DELIVERY_DETAILS_LOADING,
-  CHECK_PINCODE_DETAIL_LOADING
+  CHECK_PINCODE_DETAIL_LOADING,
+  GET_LOCALITY_LIST_LOADING
 } from './deliveryDetailsActionTypes'
 
 import {
@@ -17,13 +18,20 @@ import {
   getDeliveryDetailsListLoading,
   checkPincodeDetailSuccess,
   checkPincodeDetailFailure,
-  updateAddressFormValue
+  updateAddressFormValue,
+  getLocalityDetailListSuccess,
+  getLocalityDetailListFailure
 } from './deliveryDetailsActions'
+
+import {
+  saveDeliveryAddressToCartLoading
+} from '../cartDetails/cartActions'
 
 import {
   getDeliveryDetailsList$,
   submitDeliveryDetails$,
-  getCityStateUsingPincode$
+  getCityStateUsingPincode$,
+  searchLocalityForPincode$
 } from '../../services/api'
 
 /**
@@ -61,12 +69,25 @@ export function submitDeliveryDetails (action$, store) {
     ofType(SUBMIT_DELIVERY_DETAILS_LOADING),
     mergeMap(data => {
       const deliveryDetailsState = store.getState().deliveryDetailsState
+      const cartState = store.getState().cartState
+
       return http(submitDeliveryDetails$(data.customerId, data.values)).pipe(
         flatMap(result => {
           data.setSubmitting(false)
           data.closeModal()
-          return of(submitDeliveryDetailsSuccess(deliveryDetailsState, result),
-            getDeliveryDetailsListLoading(deliveryDetailsState, data.customerId))
+
+          if (data.isCartPage) {
+            return of(
+              submitDeliveryDetailsSuccess(deliveryDetailsState, result),
+              saveDeliveryAddressToCartLoading(cartState, result.body.payload.id),
+              getDeliveryDetailsListLoading(deliveryDetailsState, data.customerId)
+            )
+          } else {
+            return of(
+              submitDeliveryDetailsSuccess(deliveryDetailsState, result),
+              getDeliveryDetailsListLoading(deliveryDetailsState, data.customerId)
+            )
+          }
         }),
         catchError(error => {
           data.setSubmitting(false)
@@ -93,6 +114,39 @@ export function checkPincodeServicability (action$, store) {
         }),
         catchError(error => {
           return of(checkPincodeDetailFailure(data.deliveryDetailsState, error))
+        })
+      )
+    })
+  )
+}
+
+/**
+ * Represents to the get the locality list on basis of pincode, state and city.
+ * @param {object} action$ - this is the ActionsObservable
+ * @param {object} store - to access the state from reducers
+ */
+export function getLocalityList (action$, store) {
+  return action$.pipe(
+    ofType(GET_LOCALITY_LIST_LOADING),
+    mergeMap(data => {
+      return http(
+        searchLocalityForPincode$(
+          data.state,
+          data.city,
+          data.pincode,
+          data.queryString
+        )
+      ).pipe(
+        map(result => {
+          return (
+            getLocalityDetailListSuccess(
+              data.deliveryDetailsState,
+              result.body.payload.content
+            )
+          )
+        }),
+        catchError(error => {
+          return of(getLocalityDetailListFailure(data.deliveryDetailsState, error))
         })
       )
     })

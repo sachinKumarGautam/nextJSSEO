@@ -14,12 +14,13 @@ import Link from 'next/link'
 const styles = theme => {
   return {
     title: {
-      color: theme.palette.customGrey.grey600,
-      fontWeight: theme.typography.fontWeightBold
+      ...theme.typography.title,
+      color: theme.palette.customGrey.grey600
     },
     articleListWrapper: {
       listStyle: 'none',
-      paddingLeft: 0
+      paddingLeft: 0,
+      paddingBottom: 0
     },
     viewAllLink: {
       ...theme.typography.caption,

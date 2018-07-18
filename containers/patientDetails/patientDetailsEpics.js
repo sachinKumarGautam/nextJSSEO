@@ -22,6 +22,10 @@ import {
 } from '../refillPatients/refillActions'
 
 import {
+  savePatientToCartLoading
+} from '../cartDetails/cartActions'
+
+import {
   getPatientDetailsList$, submitPatientDetails$
 } from '../../services/api'
 
@@ -64,14 +68,27 @@ export function submitPatient (action$, store) {
   return action$.pipe(
     ofType(SUBMIT_PATIENT_LOADING),
     mergeMap(data => {
-      const patientDetailsState = store.getState().store
+      const patientDetailsState = store.getState().patientDetailsState
+      const cartState = store.getState().cartState
       const customerId = store.getState().customerState.payload.id
+
       return http(submitPatientDetails$(data.customerId, data.values)).pipe(
         flatMap(result => {
           data.setSubmitting(false)
           data.closeModal()
-          return of(submitPatientDetailsSuccess(data.patientDetailsState, result),
-            getPatientDetailsListLoading(patientDetailsState, customerId))
+
+          if (data.isCartPage) {
+            return of(
+              submitPatientDetailsSuccess(data.patientDetailsState, result),
+              savePatientToCartLoading(cartState, result.body.payload, cartState.payload.uid),
+              getPatientDetailsListLoading(patientDetailsState, customerId)
+            )
+          } else {
+            return of(
+              submitPatientDetailsSuccess(data.patientDetailsState, result),
+              getPatientDetailsListLoading(patientDetailsState, customerId)
+            )
+          }
         }),
         catchError(error => {
           data.setSubmitting(false)

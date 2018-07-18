@@ -46,6 +46,7 @@ const FormWrapper = (props) => {
 
     case 'patientForm':
       return <PatientForm
+        isCartPage={props.isCartPage}
         closeModal={closeModal}
         onSubmit={onSubmit}
         patientFormState={patientFormState}
@@ -55,6 +56,7 @@ const FormWrapper = (props) => {
 
     case 'deliveryForm':
       return <DeliveryForm
+        isCartPage={props.isCartPage}
         closeModal={closeModal}
         onSubmit={onSubmit}
         deliveryDetailsState={deliveryDetailsState}

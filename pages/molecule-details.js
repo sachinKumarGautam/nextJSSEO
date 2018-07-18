@@ -67,7 +67,7 @@ class MoleculeDetails extends React.Component {
       )
     }
 
-    if (query.name) {
+    if (query.name && !this.props.medicineListState.payload.length) {
       // Represents to get medicine list with page size and size per page.
       this.props.actions.getRelatedMedicinesLoading(
         this.props.medicineListState,

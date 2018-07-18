@@ -8,12 +8,13 @@ const styles = theme => {
     label: {
       ...theme.typography.body3,
       color: theme.palette.customGrey.grey600,
-      marginLeft: theme.spacing.unit
+      marginLeft: theme.spacing.unit * 1.75
     },
     assuredServiceWrapper: {
       display: 'flex',
       alignItems: 'center',
-      marginTop: theme.spacing.unit
+      marginTop: theme.spacing.unit,
+      marginLeft: theme.spacing.unit * 1.25
     }
   }
 }

@@ -3,6 +3,12 @@ import React, { Component } from 'react'
 import Grid from '@material-ui/core/Grid'
 import { withStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
+import ReactTooltip from 'react-tooltip'
+
+import {
+  CARE_POINT_DESCRIPTION,
+  CARE_POINT_PLUS_DESCRIPTION
+} from '../messages/commonMsg'
 
 const styles = theme => ({
   priceDetailsWrapper: {
@@ -32,6 +38,35 @@ const styles = theme => ({
     paddingTop: theme.spacing.unit * 1.25,
     textAlign: 'right',
     paddingRight: theme.spacing.unit * 3
+  },
+  infoWrapper: {
+    display: 'flex',
+    flexDirection: 'row'
+  },
+  iconStyle: {
+    width: theme.spacing.unit * 1.75,
+    height: theme.spacing.unit * 1.75,
+    marginLeft: theme.spacing.unit,
+    marginTop: theme.spacing.unit * 1.75
+  },
+  paper: {
+    padding: theme.spacing.unit,
+    width: theme.spacing.unit * 25,
+    backgroundColor: `${theme.palette.customGrey.grey50} !important`,
+    pointerEvents: 'auto !important',
+    '&:after': {
+      borderRightColor: `${theme.palette.customGrey.grey50} !important`
+    },
+    '&:hover': {
+      visibility: 'visible !important',
+      opacity: '1 !important'
+    },
+    borderRadius: '4px'
+  },
+  description: {
+    fontSize: theme.typography.pxToRem(10),
+    color: theme.palette.customGrey.grey500,
+    marginBottom: theme.spacing.unit
   }
 })
 
@@ -47,12 +82,66 @@ class PriceDetails extends Component {
             <Typography className={this.props.classes.discount}>
               Discount
             </Typography>
-            <Typography className={this.props.classes.discount}>
-              Care Points
-            </Typography>
-            <Typography className={this.props.classes.discount}>
-              Care Points Plus
-            </Typography>
+            <div className={this.props.classes.infoWrapper} id='care_point'>
+              <Typography className={this.props.classes.discount}>
+                Care Points
+              </Typography>
+              <a
+                href='#'
+                data-tip
+                data-for='care_point'
+              >
+                <img
+                  src='/static/images/info-outline.svg'
+                  className={this.props.classes.iconStyle}
+                />
+                <ReactTooltip
+                  id='care_point'
+                  effect='solid'
+                  place='right'
+                  className={this.props.classes.paper}
+                  delayHide={1000}
+                  delayShow={1000}
+                >
+                  <Typography
+                    variant='caption'
+                    className={this.props.classes.popoverContent}
+                  >
+                    {CARE_POINT_DESCRIPTION}
+                  </Typography>
+                </ReactTooltip>
+              </a>
+            </div>
+            <div className={this.props.classes.infoWrapper}>
+              <Typography className={this.props.classes.discount}>
+                Care Points Plus
+              </Typography>
+              <a
+                href='#'
+                data-tip
+                data-for='care_point_plus'
+              >
+                <img
+                  src='/static/images/info-outline.svg'
+                  className={this.props.classes.iconStyle}
+                />
+                <ReactTooltip
+                  id='care_point_plus'
+                  effect='solid'
+                  place='right'
+                  className={this.props.classes.paper}
+                  delayHide={1000}
+                  delayShow={1000}
+                >
+                  <Typography
+                    variant='caption'
+                    className={this.props.classes.popoverContent}
+                  >
+                    {CARE_POINT_PLUS_DESCRIPTION}
+                  </Typography>
+                </ReactTooltip>
+              </a>
+            </div>
             {
               this.props.cartState.payload.coupon_code &&
               <Typography className={this.props.classes.discount}>

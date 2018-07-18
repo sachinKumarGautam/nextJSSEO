@@ -11,8 +11,8 @@ const styles = theme => {
       alignItems: 'flex-start'
     },
     label: {
-      ...theme.typography.subheading,
-      marginRight: theme.spacing.unit,
+      ...theme.typography.body2,
+      marginRight: theme.spacing.unit * 1.125,
       fontWeight: theme.typography.fontWeightBold,
       color: theme.palette.customGrey.grey600
     }

@@ -8,6 +8,7 @@ import Typography from '@material-ui/core/Typography'
 import Button from '../../components/button'
 
 import AddressDetails from './AddressDetails'
+import SelectedAddressDetails from './SelectedAddressDetails'
 
 import AddDeliveryAddressButton from '../deliveryDetails/AddDeliveryAddressButton'
 
@@ -40,7 +41,8 @@ class AddressDetailsExpansionPanel extends React.Component {
       <ExpansionPanel
         expanded={this.props.expanded === 'panel4'}
         onChange={
-          this.props.loginState.isAuthenticated
+          this.props.loginState.isAuthenticated &&
+          this.props.cartState.payload.patient_details.payload.patient_id
             ? this.props.handleChange
             : null
         }
@@ -52,15 +54,27 @@ class AddressDetailsExpansionPanel extends React.Component {
             content: this.props.patientContentWrapper
           }}
         >
-          <img src='/static/images/attachedPrescriptions.svg' className={this.props.imageIcon} />
+          <img src='/static/images/delivery.svg' className={this.props.imageIcon} />
           <div className={this.props.patientWrapper}>
             <div className={this.props.checkedIconWrapper}>
-              <Typography
-                component='h1'
-                className={this.props.heading}
-              >
-                Delivery Details
-              </Typography>
+              {
+                this.props.expanded !== 'panel4' &&
+                this.props.cartState.payload.shipping_address_details.payload.shipping_address_id
+                  ? (
+                    <SelectedAddressDetails
+                      heading={this.props.heading}
+                      patientDetails={this.props.patientDetails}
+                      shipping_address={this.props.cartState.payload.shipping_address_details.payload.shipping_address}
+                    />
+                  ) : (
+                    <Typography
+                      component='h1'
+                      className={this.props.heading}
+                    >
+                    Delivery Details
+                    </Typography>
+                  )
+              }
               {
                 this.props.addressIdSelected
                   ? (

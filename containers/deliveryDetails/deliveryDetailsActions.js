@@ -9,7 +9,10 @@ import {
   CHECK_PINCODE_DETAIL_LOADING,
   CHECK_PINCODE_DETAIL_SUCCESS,
   CHECK_PINCODE_DETAIL_FAILURE,
-  UPDATE_ADDRESS_FORM_VALUE
+  UPDATE_ADDRESS_FORM_VALUE,
+  GET_LOCALITY_LIST_LOADING,
+  GET_LOCALITY_LIST_SUCCESS,
+  GET_LOCALITY_LIST_FAILURE
 } from './deliveryDetailsActionTypes'
 
 /**
@@ -76,7 +79,8 @@ export function submitDeliveryDetailsLoading (
   customerId,
   setSubmitting,
   closeModal,
-  values
+  values,
+  isCartPage = false
 ) {
   return {
     type: SUBMIT_DELIVERY_DETAILS_LOADING,
@@ -88,7 +92,8 @@ export function submitDeliveryDetailsLoading (
     values,
     isLoading: true,
     error: null,
-    isError: false
+    isError: false,
+    isCartPage: isCartPage
   }
 }
 
@@ -146,5 +151,41 @@ export function updateAddressFormValue (deliveryDetailsState, state, city) {
     deliveryDetailsState,
     state,
     city
+  }
+}
+
+export function getLocalityDetailListLoading (
+  deliveryDetailsState,
+  pincode,
+  state,
+  city,
+  queryString
+) {
+  return {
+    type: GET_LOCALITY_LIST_LOADING,
+    deliveryDetailsState,
+    pincode,
+    isLoading: true,
+    error: null,
+    isError: false
+  }
+}
+
+export function getLocalityDetailListSuccess (deliveryDetailsState, result) {
+  return {
+    type: GET_LOCALITY_LIST_SUCCESS,
+    deliveryDetailsState,
+    payload: result,
+    isLoading: true
+  }
+}
+
+export function getLocalityDetailListFailure (deliveryDetailsState, error) {
+  return {
+    type: GET_LOCALITY_LIST_FAILURE,
+    deliveryDetailsState,
+    isLoading: false,
+    error: error,
+    isError: true
   }
 }

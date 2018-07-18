@@ -8,12 +8,14 @@ const styles = theme => {
     deliveryTATWrapper: {
       display: 'flex',
       alignItems: 'center',
-      marginTop: theme.spacing.unit
+      marginTop: theme.spacing.unit,
+      marginLeft: theme.spacing.unit * 1.5
     },
     deliveryTATLabel: {
+      ...theme.typography.caption,
       fontWeight: theme.typography.fontWeightBold,
       color: theme.palette.customGrey.grey500,
-      marginLeft: theme.spacing.unit
+      marginLeft: theme.spacing.unit * 1.25
     }
   }
 }

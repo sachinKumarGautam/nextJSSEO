@@ -25,3 +25,10 @@ export const CHECK_PINCODE_DETAIL_FAILURE = 'CHECK_PINCODE_DETAIL_FAILURE'
 
 // update address form values
 export const UPDATE_ADDRESS_FORM_VALUE = 'UPDATE_ADDRESS_FORM_VALUE'
+
+// get adress locality list based on pincode, state and city
+export const GET_LOCALITY_LIST_LOADING = 'GET_LOCALITY_LIST_LOADING'
+
+export const GET_LOCALITY_LIST_SUCCESS = 'GET_LOCALITY_LIST_SUCCESS'
+
+export const GET_LOCALITY_LIST_FAILURE = 'GET_LOCALITY_LIST_FAILURE'

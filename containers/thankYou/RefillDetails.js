@@ -38,7 +38,7 @@ const styles = theme => ({
   },
   buttonStyle: {
     ...theme.typography.caption,
-    marginRight: theme.spacing.unit * 3
+    marginRight: theme.spacing.unit * 5
   },
   close: {
     width: theme.spacing.unit * 4,

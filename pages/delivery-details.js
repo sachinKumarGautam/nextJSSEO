@@ -62,6 +62,7 @@ class DeliveryDetails extends React.Component {
               customerState={this.props.customerState}
               checkPincodeDetailLoading={this.props.actions.checkPincodeDetailLoading}
               updateAddressFormValue={this.props.actions.updateAddressFormValue}
+              cartState={this.props.cartState}
             />
           </Paper>
         </div>
@@ -73,6 +74,7 @@ class DeliveryDetails extends React.Component {
 
 function mapStateToProps (state) {
   return {
+    cartState: state.cartState,
     deliveryDetailsState: state.deliveryDetailsState,
     customerState: state.customerState
   }
