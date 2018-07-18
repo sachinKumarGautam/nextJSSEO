@@ -22,26 +22,16 @@ export function commonWrapperHOC (Page) {
     }
 
     addToCartHandler (inProgressCartItem, event) {
-      console.log('inProgressCartItem', inProgressCartItem)
       if (this.props.checkPincodeState.payload.pincode) {
-        console.log('I was here')
         this.props.actions.incrementCartItemLoading(this.props.cartState, inProgressCartItem)
       } else {
         this.setState({
-          inProgressCartItem: inProgressCartItem
-        }, () => this.saveInProgressCartItem(this.state.inProgressCartItem))
+          inProgressCartItem
+        })
 
         this.props.actions.openPincodeDialog(this.props.checkPincodeState, true)
       }
     }
-
-    saveInProgressCartItem = (inProgressCartItem) => {
-      return inProgressCartItem
-    }
-
-    getInProgressCartItem = () => (
-      saveInProgressCartItem
-    )
 
   handleClose = () => (
     this.props.actions.openPincodeDialog(this.props.checkPincodeState, false)
@@ -49,6 +39,7 @@ export function commonWrapperHOC (Page) {
 
   render () {
     const { checkPincodeState, actions } = this.props
+    const { inProgressCartItem } = this.state
     return (
       <React.Fragment>
         <Page {...this.props}
@@ -59,7 +50,7 @@ export function commonWrapperHOC (Page) {
           open={checkPincodeState.isPincodeDialogOpen}
           onSubmit={actions.checkPincodeLoading}
           incrementCartItemLoading={actions.incrementCartItemLoading}
-          getInProgressCartItem={this.getInProgressCartItem}
+          inProgressCartItem={inProgressCartItem}
           handleClose={this.handleClose}
           checkPincodeState={checkPincodeState}
         />

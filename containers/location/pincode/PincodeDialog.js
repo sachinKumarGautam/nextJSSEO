@@ -151,7 +151,7 @@ export default withStyles(styles)(withFormik({
   }),
   handleSubmit: (values, { props, setSubmitting }) => {
     console.log('inProgressCartItem', props.inProgressCartItem)
-    getInProgressCartItem
+    // getInProgressCartItem
     props.onSubmit(
       props.checkPincodeState,
       props.handleClose,
