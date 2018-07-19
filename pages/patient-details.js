@@ -15,7 +15,8 @@ import Paper from '@material-ui/core/Paper'
 import {
   getPatientDetailsListLoading,
   savePatientSelected,
-  submitPatientDetailsLoading
+  submitPatientDetailsLoading,
+  resetPatientSelected
 } from '../containers/patientDetails/patientDetailsActions'
 
 const styles = theme => ({
@@ -59,6 +60,7 @@ class PatientDetails extends React.Component {
               submitPatientDetailsLoading={this.props.actions.submitPatientDetailsLoading}
               customerState={this.props.customerState}
               cartState={this.props.cartState}
+              resetPatientSelected={this.props.actions.resetPatientSelected}
             />
           </Paper>
         </div>
@@ -82,7 +84,8 @@ function mapDispatchToProps (dispatch) {
       {
         getPatientDetailsListLoading,
         savePatientSelected,
-        submitPatientDetailsLoading
+        submitPatientDetailsLoading,
+        resetPatientSelected
       },
       dispatch
     )

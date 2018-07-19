@@ -5,7 +5,8 @@ import {
   SAVE_PATIENT_SELECTED,
   SUBMIT_PATIENT_LOADING,
   SUBMIT_PATIENT_SUCCESS,
-  SUBMIT_PATIENT_FAILURE
+  SUBMIT_PATIENT_FAILURE,
+  RESET_PATIENT_SELECTED
 } from './patientDetailsActionTypes'
 
 /**
@@ -63,11 +64,11 @@ export function getPatientDetailsListFailure (patientDetailsState, error) {
  * @param {object} patientDetailsState - The object maintained for payload, loading and error state.
  * @param {number} patientIdSelected - The value of the selected patientId
  */
-export function savePatientSelected (patientDetailsState, patientIdSelected) {
+export function savePatientSelected (patientDetailsState, patientDetail) {
   return {
     type: SAVE_PATIENT_SELECTED,
     patientDetailsState,
-    patientIdSelected: patientIdSelected
+    patientDetail: patientDetail
   }
 }
 
@@ -85,7 +86,8 @@ export function submitPatientDetailsLoading (
   setSubmitting,
   closeModal,
   values,
-  isCartPage = false
+  isCartPage = false,
+  isEdit = false
 ) {
   return {
     type: SUBMIT_PATIENT_LOADING,
@@ -97,7 +99,8 @@ export function submitPatientDetailsLoading (
     closeModal,
     values: values,
     setSubmitting,
-    isCartPage: isCartPage
+    isCartPage: isCartPage,
+    isEdit: isEdit
   }
 }
 
@@ -127,5 +130,12 @@ export function submitPatientDetailsFailure (patientDetailsState, error) {
     isLoading: false,
     isError: true,
     error: error
+  }
+}
+
+export function resetPatientSelected (patientDetailsState) {
+  return {
+    type: RESET_PATIENT_SELECTED,
+    patientDetailsState
   }
 }

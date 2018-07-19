@@ -78,6 +78,13 @@ class Main extends Component {
     })
   }
 
+  saveDeliveryAddressToCart (deliveryDetail) {
+    this.props.saveDeliveryAddressSelected(
+      this.props.deliveryDetailsState,
+      deliveryDetail
+    )
+  }
+
   render () {
     return (
       <Card elevation={'1'} className={this.props.classes.card}>
@@ -108,6 +115,8 @@ class Main extends Component {
             </div>
           </div>
           <AddressDetailsCardWrapper
+            openDeliveryFormModal={this.openDeliveryFormModal.bind(this)}
+            saveDeliveryAddressToCart={this.saveDeliveryAddressToCart.bind(this)}
             payload={this.props.deliveryDetailsState.payload}
             addressDetailsCardWrapper={this.props.classes.addressDetailsCardWrapper}
           />

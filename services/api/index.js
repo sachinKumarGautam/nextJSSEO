@@ -53,6 +53,15 @@ const submitPatientDetails$ = (customerId, patientDetails) => (
 
 )
 
+const editPatientDetails$ = (customerId, patientDetails, patientId) => (
+
+  makeAjaxRequest({
+    method: 'PUT',
+    url: fetchUrl('account', 'customer/' + customerId + '/patient/' + patientId, 'CREATE'),
+    body: patientDetails
+  })
+)
+
 const getOrderList$ = (customerId, page, size) => (
   makeAjaxRequest({
     method: 'GET',
@@ -286,5 +295,6 @@ export {
   getPatientPastMedicineList$,
   getSliderImages$,
   applyCouponForCart$,
-  teleConsultation$
+  teleConsultation$,
+  editPatientDetails$
 }

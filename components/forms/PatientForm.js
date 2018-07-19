@@ -184,12 +184,13 @@ class PatientForm extends React.Component {
 }
 
 export default withStyles(styles)(withFormik({
+  enableReinitialize: true,
   mapPropsToValues: (props) => {
     return {
-      full_name: '',
-      gender: '',
-      mobile: '',
-      age: ''
+      full_name: props.patientFormState.patient.full_name,
+      gender: props.patientFormState.patient.gender,
+      mobile: props.patientFormState.patient.mobile,
+      age: props.patientFormState.patient.age
     }
   },
   validationSchema: Yup.object().shape({
@@ -198,13 +199,20 @@ export default withStyles(styles)(withFormik({
     gender: Yup.string().required(GENDER_REQUIRED)
   }),
   handleSubmit: (values, { props, setSubmitting }) => {
+    let isEdit = false
+
+    if (props.patientFormState.patient.full_name) {
+      isEdit = true
+    }
+
     props.onSubmit(
       props.patientFormState,
       props.customerId,
       setSubmitting,
       props.closeModal,
       values,
-      props.isCartPage
+      props.isCartPage,
+      isEdit
     )
   },
   displayName: 'PatientForm' // helps with React DevTools

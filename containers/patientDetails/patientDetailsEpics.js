@@ -26,7 +26,9 @@ import {
 } from '../cartDetails/cartActions'
 
 import {
-  getPatientDetailsList$, submitPatientDetails$
+  getPatientDetailsList$,
+  submitPatientDetails$,
+  editPatientDetails$
 } from '../../services/api'
 
 /**
@@ -71,8 +73,14 @@ export function submitPatient (action$, store) {
       const patientDetailsState = store.getState().patientDetailsState
       const cartState = store.getState().cartState
       const customerId = store.getState().customerState.payload.id
+      let api
 
-      return http(submitPatientDetails$(data.customerId, data.values)).pipe(
+      if (data.isEdit) {
+        api = editPatientDetails$(data.customerId, data.values, data.patientDetailsState.patient.id)
+      } else {
+        api = submitPatientDetails$(data.customerId, data.values)
+      }
+      return http(api).pipe(
         flatMap(result => {
           data.setSubmitting(false)
           data.closeModal()

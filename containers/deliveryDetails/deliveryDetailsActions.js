@@ -58,11 +58,11 @@ export function getDeliveryDetailsListFailure (deliveryDetailsState, error) {
  * @param {object} patientDetailsState - The object maintained for payload, loading and error state.
  * @param {number} patientIdSelected - The value of the selected addressId
  */
-export function saveAddressSelected (deliveryDetailsState, addressIdSelected) {
+export function saveDeliveryAddressSelected (deliveryDetailsState, deliveryDetail) {
   return {
     type: SAVE_ADDRESS_SELECTED,
     deliveryDetailsState,
-    addressIdSelected: addressIdSelected
+    deliveryDetail: deliveryDetail
   }
 }
 

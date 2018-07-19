@@ -45,7 +45,7 @@ export default function deliveryDetailsReducer (state = initialState, action) {
     case SAVE_ADDRESS_SELECTED:
       return {
         ...state,
-        addressIdSelected: action.addressIdSelected
+        address: action.deliveryDetail
       }
 
     default:

@@ -7,7 +7,8 @@ import {
   SAVE_PATIENT_SELECTED,
   SUBMIT_PATIENT_LOADING,
   SUBMIT_PATIENT_SUCCESS,
-  SUBMIT_PATIENT_FAILURE
+  SUBMIT_PATIENT_FAILURE,
+  RESET_PATIENT_SELECTED
 } from './patientDetailsActionTypes'
 
 export default function patientDetailsReducer (state = initialState, action) {
@@ -48,7 +49,7 @@ export default function patientDetailsReducer (state = initialState, action) {
     case SAVE_PATIENT_SELECTED:
       return {
         ...state,
-        patientIdSelected: action.patientIdSelected
+        patient: action.patientDetail
       }
 
     // update loading details of add new patient API
@@ -90,6 +91,12 @@ export default function patientDetailsReducer (state = initialState, action) {
             error: action.error
           }
         }
+      }
+
+    case RESET_PATIENT_SELECTED:
+      return {
+        ...state,
+        patient: initialState.patient
       }
 
     default:

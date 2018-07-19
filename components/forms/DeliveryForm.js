@@ -227,16 +227,17 @@ class DeliveryForm extends React.Component {
 }
 
 export default withStyles(styles)(withFormik({
+  enableReinitialize: true,
   mapPropsToValues: (props) => {
     return {
-      full_name: '',
-      mobile: '',
-      pincode: '',
-      locality: '',
-      street1: 'deafult street1',
-      street2: 'deafult street2',
-      city: '',
-      state: ''
+      full_name: props.deliveryDetailsState.address.full_name,
+      mobile: props.deliveryDetailsState.address.mobile,
+      pincode: props.deliveryDetailsState.address.pincode,
+      locality: props.deliveryDetailsState.address.locality,
+      street1: props.deliveryDetailsState.address.street1,
+      street2: props.deliveryDetailsState.address.street2,
+      city: props.deliveryDetailsState.address.city,
+      state: props.deliveryDetailsState.address.state
     }
   },
   validationSchema: Yup.object().shape({

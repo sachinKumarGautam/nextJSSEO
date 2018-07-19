@@ -14,7 +14,7 @@ import Paper from '@material-ui/core/Paper'
 
 import {
   getDeliveryDetailsListLoading,
-  saveAddressSelected,
+  saveDeliveryAddressSelected,
   submitDeliveryDetailsLoading
 } from '../containers/deliveryDetails/deliveryDetailsActions'
 
@@ -55,7 +55,7 @@ class DeliveryDetails extends React.Component {
           <Paper className={this.props.classes.root} elevation={1}>
             <DeliveryDetailsWrapper
               deliveryDetailsState={this.props.deliveryDetailsState}
-              saveAddressSelected={this.props.actions.saveAddressSelected}
+              saveDeliveryAddressSelected={this.props.actions.saveDeliveryAddressSelected}
               submitDeliveryDetailsLoading={this.props.actions.submitDeliveryDetailsLoading}
               customerState={this.props.customerState}
               cartState={this.props.cartState}
@@ -81,7 +81,7 @@ function mapDispatchToProps (dispatch) {
     actions: bindActionCreators(
       {
         getDeliveryDetailsListLoading,
-        saveAddressSelected,
+        saveDeliveryAddressSelected,
         submitDeliveryDetailsLoading
       },
       dispatch
