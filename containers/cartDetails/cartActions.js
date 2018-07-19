@@ -83,6 +83,7 @@ export function getCartDetailsSuccess (
     source: result.source,
     cart_items: result.cart_items,
     cart_prescriptions: result.cart_prescriptions,
+    payment_channels: result.payment_channels,
     source_type: result.source_type,
     delivery_option: result.delivery_option,
     service_type: result.service_type
