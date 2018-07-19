@@ -107,7 +107,8 @@ export default function cartReducer (state = initialState, action) {
           cart_prescriptions: action.cart_prescriptions,
           source_type: action.source_type,
           delivery_option: action.delivery_option,
-          service_type: action.service_type
+          service_type: action.service_type,
+          payment_channels: action.payment_channels
         }
       }
 
@@ -425,6 +426,7 @@ export default function cartReducer (state = initialState, action) {
     case cartActionTypes.SUBMIT_ORDER_SUCCESS:
       return {
         ...state,
+        payment_gateway: action.payment_gateway,
         orderResponse: {
           ...state.orderResponse,
           payload: {

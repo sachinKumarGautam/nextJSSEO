@@ -356,10 +356,11 @@ export function deletePrescriptionFailure (cartState, error) {
   }
 }
 
-export function submitOrderLoading (cartState) {
+export function submitOrderLoading (cartState, paymentChannel) {
   return {
     type: cartActionTypes.SUBMIT_ORDER_LOADING,
     cartState,
+    paymentChannel: paymentChannel,
     isLoading: true,
     isError: false
   }
@@ -369,6 +370,7 @@ export function submitOrderSuccess (cartState, result) {
   return {
     type: cartActionTypes.SUBMIT_ORDER_SUCCESS,
     cartState,
+    payment_gateway: result.payment_gateway,
     order_number: result.order.id,
     delivery_option: result.order.delivery_option,
     service_type: result.order.service_type,

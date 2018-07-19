@@ -82,14 +82,57 @@ class CartDetails extends Component {
     this.props.incrementCartItemLoading(this.props.cartState, cartItem)
   }
 
+  openCheckout (cartState) {
+    const paymentGateway = cartState.payment_gateway
+
+    if (
+      paymentGateway &&
+      paymentGateway.amount >= 1
+    ) {
+      const amount = (paymentGateway.amount * 100).toFixed()
+
+      let options = {
+        'key_id': 'rzp_test_XuRgeVefqaaxKa',
+        'amount': amount,
+        'order_id': paymentGateway.ref_transaction_id,
+        'name': 'asdasd',
+        'description': 'Purchase Description',
+        'image': 'adasd',
+        'handler': (response) => {
+          //this.verifyPayment(response)
+        },
+        'modal': {
+          'ondismiss': () => {
+            this.onModalDismiss()
+          }
+        },
+        'prefill': {
+          'name': 'lakshita verma',
+          'email': 'lakshita.verma@lifcare.in',
+          'contact': '8800372718',
+          'method': paymentGateway.sub_method
+        },
+        'theme': {
+          'color': 'rgb(128, 194, 65)'
+        }
+      }
+
+      let razorpay = new window.Razorpay(options)
+      razorpay.open()
+    }
+  }
+
+  onModalDismiss() {
+    this.props.resetCartState()
+  }
+
   componentDidUpdate (prevProps) {
     if (
       this.props.cartState.orderResponse.payload.order_number !==
       prevProps.cartState.orderResponse.payload.order_number
     ) {
-      Router.push({ pathname: THANK_YOU })
-
-      this.props.resetCartState()
+      // Router.push({ pathname: THANK_YOU })
+      this.openCheckout(this.props.cartState)
     }
   }
 

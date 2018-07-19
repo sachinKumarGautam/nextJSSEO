@@ -2,6 +2,8 @@ import React from 'react'
 
 import Grid from '@material-ui/core/Grid'
 import Radio from '@material-ui/core/Radio'
+import RadioGroup from '@material-ui/core/RadioGroup'
+import FormControlLabel from '@material-ui/core/FormControlLabel'
 import ExpansionPanel from '@material-ui/core/ExpansionPanel'
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails'
 import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary'
@@ -10,10 +12,21 @@ import Typography from '@material-ui/core/Typography'
 import Button from '../../components/button'
 
 class PaymentExpansionPanel extends React.Component {
+  state = {
+    paymentChannel: ''
+  }
+
   placeOrder () {
     this.props.submitOrderLoading(
-      this.props.cartState
+      this.props.cartState,
+      this.state.paymentChannel
     )
+  }
+
+  handlePaymentChannelsChange(event) {
+    this.setState({
+      paymentChannel: event.target.value
+    })
   }
 
   render () {
@@ -43,24 +56,31 @@ class PaymentExpansionPanel extends React.Component {
           }}
         >
           <Grid container spacing={24}>
-            <Grid item xs={1}>
-              <Radio
-                checked
-                name='radio-button-demo'
-                classes={{
-                  root: this.props.radioButton,
-                  checked: this.props.checked
-                }}
-              />
-            </Grid>
-            <Grid item xs={8}>
-              <Typography
-                component='h2'
-                className={this.props.paymentDescription}
-              >
-                CASH ON DELIVERY
-              </Typography>
-            </Grid>
+            <RadioGroup
+              aria-label="Payment Channels"
+              name="payment_channels"
+              value={this.state.paymentChannel}
+              onChange={this.handlePaymentChannelsChange.bind(this)}
+            >
+              {
+                this.props.cartState.payload.payment_channels.map(payment_channel => {
+                  return (
+                    <FormControlLabel
+                      value={payment_channel.method}
+                      control={
+                        <Radio
+                          classes={{
+                            root: this.props.radioButton,
+                            checked: this.props.checked
+                          }}
+                        />
+                      }
+                      label={payment_channel.name}
+                    />
+                  )
+                })
+              }
+            </RadioGroup>
           </Grid>
           <Button
             size='small'

@@ -48,6 +48,7 @@ const initialState = {
     coupon_code: '',
     care_points: 0,
     coupon_discount: 0,
+    payment_channels: [],
     cart_prescriptions: [],
     is_doctor_callback: {
       payload: false,
@@ -81,6 +82,7 @@ const initialState = {
     isViewImageVisible: false,
     visibleImageUrl: ''
   },
+  payment_gateway: {},
   orderResponse: {
     payload: {
       order_number: null,

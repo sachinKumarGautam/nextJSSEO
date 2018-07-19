@@ -424,6 +424,13 @@ export function submitOrderEpic (action$, store) {
         cart_uid: data.cartState.payload.uid
       }
 
+      if (data.paymentChannel !== '') {
+          body = {
+            ...body,
+            payment_method: data.paymentChannel
+          }
+        }
+
       return http(submitOrder$(data.cartState, body)).pipe(
         map(result => {
           return submitOrderSuccess(data.cartState, result.body.payload)
