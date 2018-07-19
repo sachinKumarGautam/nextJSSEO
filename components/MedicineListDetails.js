@@ -75,7 +75,6 @@ class MedicineListDetails extends React.Component {
 
   addToCart (event) {
     event.stopPropagation()
-    console.log('I was in add to cart ')
     this.props.addToCartHandler(this.props.itemDetails)
   }
 

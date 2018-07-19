@@ -22,6 +22,7 @@ import {
 } from '../containers/medicineList/medicineListActions'
 
 import { checkPincodeLoading } from '../containers/location/pincode/pincodeAction'
+import {commonWrapperHOC} from '../components/HOCWrapper/CommonWrapper'
 
 const styles = theme => ({
   root: {
@@ -87,6 +88,7 @@ class MoleculeDetails extends React.Component {
             <MoleculeDetailsWrapper
               checkPincodeLoading={this.props.actions.checkPincodeLoading}
               checkPincodeState={this.props.checkPincodeState}
+              addToCartHandler={this.props.addToCartHandler}
             />
           </Paper>
         </div>
@@ -117,7 +119,7 @@ function mapDispatchToProps (dispatch) {
   }
 }
 
-export default connect(
+export default commonWrapperHOC(connect(
   mapStateToProps,
   mapDispatchToProps
-)(withRoot(withStyles(styles)(MoleculeDetails)))
+)(withRoot(withStyles(styles)(MoleculeDetails))))

@@ -91,7 +91,7 @@ class ProductDetails extends React.Component {
     return (
       <div>
         <Header
-          addToCartHandler={this.props.addToCartHandler}
+          // addToCartHandler={this.props.addToCartHandler}
         />
         <div className={this.props.classes.wrapperStyle}>
           <Paper className={classes.root} elevation={1}>

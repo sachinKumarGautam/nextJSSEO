@@ -103,11 +103,15 @@ const styles = theme => ({
   badge: {
     width: theme.spacing.unit * 2,
     height: theme.spacing.unit * 2,
-    top: theme.spacing.unit * -0.75,
+    top: theme.typography.pxToRem(-8),
     right: 0,
     left: theme.spacing.unit * 2,
     color: theme.palette.common.white,
-    fontSize: theme.spacing.unit * 1.625
+    padding: theme.typography.pxToRem(9),
+    fontSize: theme.typography.pxToRem(10)
+  },
+  badgeRoot: {
+    // padding: theme.spacing.unit * 2
   },
   iconStyle: {
     fontSize: theme.spacing.unit * 3.25
@@ -138,6 +142,7 @@ class CartIcon extends Component {
               badgeContent={cartItems.length}
               color='primary'
               classes={{
+                root: classes.badgeRoot,
                 badge: classes.badge
               }}
             >

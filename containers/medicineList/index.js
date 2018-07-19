@@ -9,26 +9,23 @@ import MedicineList from './MedicineList'
   medicine list
 */
 
-class MedicineListWrapper extends Component {
-  render () {
-    return (
-      <div>
+const MedicineListWrapper = (props) => (
+    <div>
         <BreadCrumbs />
         <section >
           <MedicineList
-            medicineListState={this.props.medicineState}
-            query={this.props.query}
-            getRelatedMedicinesLoading={this.props.getRelatedMedicinesLoading}
-            checkPincodeState={this.props.checkPincodeState}
-            moleculeName={this.props.moleculeName}
-            incrementCartItemLoading={this.props.incrementCartItemLoading}
-            cartState={this.props.cartState}
-            checkPincodeLoading={this.props.checkPincodeLoading}
+            medicineListState={props.medicineState}
+            query={props.query}
+            addToCartHandler={props.addToCartHandler}
+            getRelatedMedicinesLoading={props.getRelatedMedicinesLoading}
+            checkPincodeState={props.checkPincodeState}
+            moleculeName={props.moleculeName}
+            incrementCartItemLoading={props.incrementCartItemLoading}
+            cartState={props.cartState}
+            checkPincodeLoading={props.checkPincodeLoading}
           />
         </section>
       </div>
-    )
-  }
-}
+  )
 
 export default MedicineListWrapper

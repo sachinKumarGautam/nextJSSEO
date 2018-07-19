@@ -15,6 +15,7 @@ import {searchMedicineLoading} from '../containers/searchMedicine/searchMedicine
 import {getRelatedMedicinesLoading} from '../containers/medicineList/medicineListActions'
 import {incrementCartItemLoading} from '../containers/cartDetails/cartActions'
 import { checkPincodeLoading } from '../containers/location/pincode/pincodeAction'
+import {commonWrapperHOC} from '../components/HOCWrapper/CommonWrapper'
 
 const styles = theme => ({
   root: {
@@ -64,6 +65,7 @@ class MedicineList extends React.Component {
         <Header />
         <div className={this.props.classes.root}>
           <MedicineListWrapper
+            addToCartHandler={this.props.addToCartHandler}
             cartState={this.props.cartState}
             checkPincodeState={this.props.checkPincodeState}
             moleculeName={Router.query.name}
@@ -107,7 +109,7 @@ function mapDispatchToProps (dispatch) {
   }
 }
 
-export default connect(
+export default commonWrapperHOC(connect(
   mapStateToProps,
   mapDispatchToProps
-)(withRoot(withStyles(styles)(MedicineList)))
+)(withRoot(withStyles(styles)(MedicineList))))

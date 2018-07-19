@@ -19,7 +19,7 @@ const styles = theme => ({
     boxShadow: 'none'
   },
   wrapper: {
-    position: 'relative',
+    position: 'relative'
   },
   loaderPrimary: {
     color: theme.palette.primary.main,
@@ -34,8 +34,8 @@ const styles = theme => ({
     margin: '0 auto',
     top: '50%',
     left: '50%',
-    marginTop:  -(theme.spacing.unit * 1.5),
-    marginLeft: -(theme.spacing.unit * 1.5),
+    marginTop: -(theme.spacing.unit * 1.5),
+    marginLeft: -(theme.spacing.unit * 1.5)
   },
   loader: {
     color: theme.palette.common.white,
@@ -48,7 +48,7 @@ const styles = theme => ({
 
 function getButtonLoaderClassNames (loaderColor, loaderPosition, classes) {
   let className = ''
-  if(loaderPosition) className = classes.centerLoader
+  if (loaderPosition) className = classes.centerLoader
   else if (loaderColor) className = classes.centerLoader
   else className = classes.loader
   return className

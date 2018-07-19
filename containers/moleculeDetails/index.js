@@ -61,6 +61,7 @@ class MoleculeDetailsWrapper extends Component {
           <Grid item xs={3}>
             <RelatedMedicines
               moleculeName={this.props.moleculeDetailsStatePayload.name}
+              addToCartHandler={this.props.addToCartHandler}
               medicineList={this.props.medicineListState.payload}
               checkPincodeLoading={this.props.checkPincodeLoading}
               checkPincodeState={this.props.checkPincodeState}

@@ -55,7 +55,7 @@ const styles = theme => {
       marginBottom: theme.spacing.unit
     },
     buttonRoot: {
-      border: `1px solid ${theme.palette.primary.main}`,
+      border: `1px solid ${theme.palette.primary.main}`
     },
     buttonLabel: {
       color: '#80c241'
@@ -75,7 +75,8 @@ class RelatedMedicinesCard extends React.Component {
   }
 
   addToCart (event) {
-    this.props.incrementCartItemLoading(this.props.cartState, this.props.itemDetails)
+    event.stopPropagation()
+    this.props.addToCartHandler(this.props.itemDetails)
   }
 
   handleOpenPincodeDialog () {
@@ -142,7 +143,7 @@ class RelatedMedicinesCard extends React.Component {
             root: props.classes.buttonRoot,
             label: props.classes.buttonLabel
           }}
-          onClick={this.addToCartHandler}
+          onClick={this.addToCart}
           label={'Add To Cart'}
         />
       </div>

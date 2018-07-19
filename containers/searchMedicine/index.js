@@ -4,7 +4,7 @@ import Downshift from 'downshift'
 import { withStyles } from '@material-ui/core/styles'
 import TextField from '@material-ui/core/TextField'
 import Paper from '@material-ui/core/Paper'
-import CircularProgress from '@material-ui/core/CircularProgress';
+import CircularProgress from '@material-ui/core/CircularProgress'
 import Button from '../../components/button'
 import SearchIcon from '@material-ui/icons/Search'
 import MedicineListDetails from '../../components/MedicineListDetails'
@@ -46,7 +46,7 @@ const styles = theme => ({
     // boxShadow: '0 1px 3px 0 rgba(0, 0, 0, 0.16)'
   },
   inputFocused: {
-    border: `1px solid ${theme.palette.primary.main}`,
+    border: `1px solid ${theme.palette.primary.main}`
   },
   searchButton: {
     borderColor: theme.palette.customGrey.grey200,
@@ -174,15 +174,15 @@ class SearchMedicine extends React.Component {
     this.onSearchMedicine = this.onSearchMedicine.bind(this)
   }
 
-  searchMedicineOnChange(event){
+  searchMedicineOnChange (event) {
     if (event.target.value.length > 3) {
-     this.props.searchMedicineLoading(
+      this.props.searchMedicineLoading(
         this.props.searchMedicineState,
         this.props.checkPincodeState.payload.id,
         event.target.value
-        )
-      }
+      )
     }
+  }
 
   onSearchMedicine (medicineName) {
     const href = `${MEDICINE_LIST_PRODUCT}?productName=${medicineName}`
@@ -197,9 +197,9 @@ class SearchMedicine extends React.Component {
     } = changes
 
     isOpen = (type === Downshift.stateChangeTypes.blurInput) ? this.state.isOpen : isOpen
-    // restrict closing of search item list because of pincode dialog invokes blur event on search bar 
+    // restrict closing of search item list because of pincode dialog invokes blur event on search bar
     this.setState({
-      isOpen,
+      isOpen
     })
   }
 
