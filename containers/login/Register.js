@@ -48,7 +48,14 @@ class Register extends React.Component {
   }
 
   render () {
-    const { classes, customerState, customerRegisterLoading, closeLoginModal, loginState } = this.props
+    const { 
+      classes, 
+      customerState, 
+      customerRegisterLoading, 
+      closeLoginModal, 
+      loginState,
+      checkReferralCodeLoading
+     } = this.props
     return (
       <div className={classes.container}>
         <Form
@@ -57,6 +64,7 @@ class Register extends React.Component {
           onSubmit={customerRegisterLoading}
           loginState={loginState}
           customerState={customerState}
+          checkReferralCodeLoading={checkReferralCodeLoading}
         />
         <Typography
           variant='caption'

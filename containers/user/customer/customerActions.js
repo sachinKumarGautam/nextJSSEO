@@ -5,7 +5,10 @@ import {
   UPDATE_PHONE_NUMBER,
   FETCH_USER_INFO_LOADING,
   FETCH_USER_INFO_SUCCESS,
-  FETCH_USER_INFO_FAILURE
+  FETCH_USER_INFO_FAILURE,
+  CHECK_REFERRAL_CODE_LOADING,
+  CHECK_REFERRAL_CODE_SUCCESS,
+  CHECK_REFERRAL_CODE_FAILURE
 } from './customerActionTypes'
 
 export function fetchUserInfoLoading (customerState, phoneNumber) {
@@ -62,6 +65,7 @@ export function customerRegisterLoading (
   setSubmitting,
   values
 ) {
+  console.log('sachin')
   return {
     type: CUSTOMER_REGISTER_LOADING,
     customerState,
@@ -100,3 +104,33 @@ export function customerRegisterFailure (customerState, error) {
 
   }
 }
+
+export function checkReferralCodeLoading (customerState, referralCode) {
+  return {
+    type: CHECK_REFERRAL_CODE_LOADING,
+    customerState,
+    referralCode,
+    isLoading: true,
+    isError: false,
+    error: null
+  }
+}
+
+export function checkReferralCodeSuccess (customerState, result) {
+  return {
+    type: CHECK_REFERRAL_CODE_SUCCESS,
+    customerState,
+    isLoading: false
+  }
+}
+
+export function checkReferralCodeFailure (customerState, error) {
+  return {
+    type: CHECK_REFERRAL_CODE_FAILURE,
+    customerState,
+    isLoading: false,
+    isError: true,
+    error: error
+  }
+}
+

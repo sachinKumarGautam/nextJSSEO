@@ -7,7 +7,14 @@ const initialState = {
     gender: '',
     membership_code: '',
     memebership_type: '',
-    referral_code: '',
+    referral_code: {
+      payload: '',
+      isLoading: false,
+      errorState: {
+        isError: false,
+        error: null
+      }
+    },
     reference_code: ''
   },
   isLoadingFetchCustomerDetails: false,

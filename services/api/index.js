@@ -255,6 +255,14 @@ const teleConsultation$ = (cartUid, isDoctorCallback) => (
   })
 )
 
+const checkReferralCode$ = (value) => (
+
+  makeAjaxRequest({
+    method: 'GET',
+    url: fetchUrl('account', 'customer/' + value + '/referral-info', 'CREATE')
+  })
+)
+
 export {
   getMoleculeSummary$,
   getMedicineList$,
@@ -286,5 +294,6 @@ export {
   getPatientPastMedicineList$,
   getSliderImages$,
   applyCouponForCart$,
-  teleConsultation$
+  teleConsultation$,
+  checkReferralCode$
 }

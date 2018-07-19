@@ -14,7 +14,8 @@ const FormWrapper = (props) => {
     customerState,
     patientFormState,
     deliveryFormState,
-    deliveryDetailsState
+    deliveryDetailsState,
+    checkReferralCodeLoading
   } = props
   switch (props.type) {
     case 'loginForm':
@@ -32,6 +33,7 @@ const FormWrapper = (props) => {
         onSubmit={onSubmit}
         loginState={loginState}
         customerState={customerState}
+        checkReferralCodeLoading={checkReferralCodeLoading}
       />
 
     case 'OTPForm':

@@ -116,6 +116,14 @@ class Header extends React.Component {
     )
   }
 
+  /*
+(
+                  this.state.openLoginDialog ||
+                  this.props.cartState.isCartOpenLoginDialog ||
+                  this.props.cartState.isCartOpenRegisterDialog
+                ) &&
+  */
+
   render () {
     const {
       classes,
@@ -168,17 +176,9 @@ class Header extends React.Component {
                   label={'Login / Register'}
                 />}
               {
-                (
-                  this.state.openLoginDialog ||
-                  this.props.cartState.isCartOpenLoginDialog ||
-                  this.props.cartState.isCartOpenRegisterDialog
-                ) &&
+                
                 <Login
-                  openLoginDialog={
-                    this.state.openLoginDialog ||
-                    this.props.cartState.isCartOpenLoginDialog ||
-                    this.props.cartState.isCartOpenRegisterDialog
-                  }
+                  openLoginDialog={true} //this.state.openLoginDialog || this.props.cartState.isCartOpenLoginDialog || this.props.cartState.isCartOpenRegisterDialog
                   openLoginModal={this.openLoginModal}
                   isCartOpenRegisterDialog={this.props.cartState.isCartOpenRegisterDialog}
                   closeLoginModal={this.closeLoginModal}

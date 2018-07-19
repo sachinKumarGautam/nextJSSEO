@@ -10,7 +10,8 @@ import {
 
 import {
   registerCustomer,
-  fetchUserInfo
+  fetchUserInfo,
+  checkReferralCode
 } from '../containers/user/customer/customerEpics'
 
 import {
@@ -120,5 +121,6 @@ export const rootEpic = combineEpics(
   getPatientPastMedicineList,
   getBackGroungImages,
   applyCouponCode,
-  optDoctorCallback
+  optDoctorCallback,
+  checkReferralCode
 )
