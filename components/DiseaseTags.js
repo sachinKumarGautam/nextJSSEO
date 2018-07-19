@@ -6,9 +6,11 @@ import Chip from '@material-ui/core/Chip'
 const styles = theme => {
   return {
     tags: {
-      ...theme.typography.subheading,
+      ...theme.typography.body2,
       color: theme.palette.customGrey.grey600,
-      marginRight: theme.spacing.unit
+      marginRight: theme.spacing.unit * 1.25,
+      backgroundColor: theme.palette.secondary.main,
+      border: `1px solid ${theme.palette.customGrey.grey100}`
     }
   }
 }

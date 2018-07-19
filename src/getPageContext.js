@@ -50,6 +50,9 @@ const theme = createMuiTheme({
         // boxShadow: 'none',
         borderRadius: 32
       },
+      outlined: {
+        border: '#80c241'
+      },
       raisedPrimary: {
         // boxShadow: 'none'
       },

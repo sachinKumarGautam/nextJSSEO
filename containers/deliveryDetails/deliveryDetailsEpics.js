@@ -16,6 +16,10 @@ import {
 } from './deliveryDetailsActions'
 
 import {
+  saveDeliveryAddressToCartLoading
+} from '../cartDetails/cartActions'
+
+import {
   getDeliveryDetailsList$,
   submitDeliveryDetails$
 } from '../../services/api'
@@ -55,12 +59,25 @@ export function submitDeliveryDetails (action$, store) {
     ofType(SUBMIT_DELIVERY_DETAILS_LOADING),
     mergeMap(data => {
       const deliveryDetailsState = store.getState().deliveryDetailsState
+      const cartState = store.getState().cartState
+
       return http(submitDeliveryDetails$(data.customerId, data.values)).pipe(
         flatMap(result => {
           data.setSubmitting(false)
           data.closeModal()
-          return of(submitDeliveryDetailsSuccess(deliveryDetailsState, result),
-            getDeliveryDetailsListLoading(deliveryDetailsState, data.customerId))
+
+          if (data.isCartPage) {
+            return of(
+              submitDeliveryDetailsSuccess(deliveryDetailsState, result),
+              saveDeliveryAddressToCartLoading(cartState, result.body.payload.id),
+              getDeliveryDetailsListLoading(deliveryDetailsState, data.customerId)
+            )
+          } else {
+            return of(
+              submitDeliveryDetailsSuccess(deliveryDetailsState, result),
+              getDeliveryDetailsListLoading(deliveryDetailsState, data.customerId)
+            )
+          }
         }),
         catchError(error => {
           data.setSubmitting(false)

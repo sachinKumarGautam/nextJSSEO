@@ -5,6 +5,7 @@ import Typography from '@material-ui/core/Typography'
 
 const styles = theme => ({
   estimatedPrice: {
+    ...theme.typography.caption,
     color: theme.palette.customGrey.grey200
   }
 })

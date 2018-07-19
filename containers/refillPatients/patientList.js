@@ -16,8 +16,13 @@ const styles = theme => ({
       }
     }
   },
-  primary: {},
-  icon: {}
+  primary: {
+    ...theme.typography.caption,
+    color: theme.palette.customGrey.grey500
+  },
+  icon: {
+    marginRight: theme.spacing.unit * 1.81
+  }
 })
 
 class PatientList extends Component {
@@ -44,7 +49,7 @@ class PatientList extends Component {
               onClick={this.getPastMedicines.bind(this, patient.id, patient.full_name)}
             >
               <ListItemIcon className={classes.icon}>
-                <img src='/static/images/loggedIn.svg' />
+                <img src='/static/images/shape-copy.svg' />
               </ListItemIcon>
               <ListItemText
                 classes={{ primary: classes.primary }}

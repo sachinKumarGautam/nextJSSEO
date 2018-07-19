@@ -52,11 +52,9 @@ const styles = theme => ({
     paddingRight: theme.spacing.unit * 4.5
   },
   toolbar: {
-    // margin: `0 ${theme.spacing.unit * 3}px`,
     marginBottom: 0,
     height: theme.spacing.unit * 7.5,
     display: 'flex',
-    // width: '100%',
     justifyContent: 'space-between'
   },
   button: {
@@ -152,6 +150,7 @@ class Header extends React.Component {
                 checkPincodeState={checkPincodeState}
                 checkPincodeLoading={this.props.actions.checkPincodeLoading}
                 searchMedicineLoading={actions.searchMedicineLoading}
+                addToCartHandler={this.props.addToCartHandler}
               />
               <CartIcon
                 cartState={this.props.cartState}
@@ -189,6 +188,7 @@ class Header extends React.Component {
             </Toolbar>
             <Subheader
               isAuthenticated={this.props.loginState.isAuthenticated}
+              openLoginModal={this.openLoginModal}
             />
             <GoToCartSnackbar
               goToCartSnackbar={this.props.actions.goToCartSnackbar}

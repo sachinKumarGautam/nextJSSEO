@@ -16,6 +16,6 @@ export const formatDateWithMonth = (date) => {
 
 export const formatDate = (date) => {
   let formattedDate = new Date(date)
-  formattedDate = formattedDate.getFullYear() + '/' + ('0' + (formattedDate.getMonth() + 1)).slice(-2) + '/' + ('0' + formattedDate.getDate()).slice(-2)
+  formattedDate = ('0' + formattedDate.getDate()).slice(-2) + '/' + ('0' + (formattedDate.getMonth() + 1)).slice(-2) + '/' + formattedDate.getFullYear()
   return formattedDate
 }

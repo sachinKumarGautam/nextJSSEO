@@ -14,7 +14,7 @@ import {searchMedicine$} from '../../services/api/index'
 export function searchMedicine (action$, store) {
   return action$.pipe(
     ofType(SEARCH_MEDICINE_LOADING),
-    debounceTime(1000),
+    debounceTime(500),
     mergeMap(data => {
       const searchMedicineState = store.getState().searchMedicineState
       return http(searchMedicine$(data.value, data.facilityId)).pipe(

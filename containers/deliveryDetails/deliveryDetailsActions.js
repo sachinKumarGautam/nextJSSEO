@@ -72,7 +72,8 @@ export function submitDeliveryDetailsLoading (
   customerId,
   setSubmitting,
   closeModal,
-  values
+  values,
+  isCartPage = false
 ) {
   return {
     type: SUBMIT_DELIVERY_DETAILS_LOADING,
@@ -84,7 +85,8 @@ export function submitDeliveryDetailsLoading (
     values,
     isLoading: true,
     error: null,
-    isError: false
+    isError: false,
+    isCartPage: isCartPage
   }
 }
 

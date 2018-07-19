@@ -5,7 +5,8 @@ import PincodeDialog from '../../containers/location/pincode/PincodeDialog'
 
 import { incrementCartItemLoading } from '../../containers/cartDetails/cartActions'
 import { openPincodeDialog, checkPincodeLoading } from '../../containers/location/pincode/pincodeAction'
-import {FormatColorReset} from '@material-ui/icons'
+
+import withRoot from '../../src/withRoot'
 
 export function commonWrapperHOC (Page) {
   class CommomWrapper extends React.Component {
@@ -83,7 +84,7 @@ export function commonWrapperHOC (Page) {
   return connect(
     mapStateToProps,
     mapDispatchToProps
-  )(CommomWrapper)
+  )(withRoot(CommomWrapper))
 }
 
 // export default (mapStateToProps, mapDispatchToProps) => (Page) => {

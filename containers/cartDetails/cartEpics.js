@@ -269,9 +269,9 @@ export function savePatientToCartEpic (action$, store) {
   return action$.pipe(
     ofType(SAVE_PATIENT_TO_CART_LOADING),
     mergeMap(data => {
-      return http(savePatientToCart$(data.cartId, data.patientId)).pipe(
+      return http(savePatientToCart$(data.cartId, data.patient.id)).pipe(
         map(result => {
-          return savePatientToCartSuccess(data.cartState, result.body.payload)
+          return savePatientToCartSuccess(data.cartState, data.patient, result.body.payload)
         }),
         catchError(error => {
           return of(savePatientToCartFailure(data.cartState, error))
@@ -296,7 +296,7 @@ export function saveDeliveryAddressToCartEpic (action$, store) {
         )
       ).pipe(
         map(result => {
-          return saveDeliveryAddressToCartSuccess(data.cartState, result.body.payload.shipping_address_id)
+          return saveDeliveryAddressToCartSuccess(data.cartState, result.body.payload)
         }),
         catchError(error => {
           return of(saveDeliveryAddressToCartFailure(data.cartState, error))

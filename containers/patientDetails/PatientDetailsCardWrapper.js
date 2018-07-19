@@ -12,8 +12,6 @@ const PatientDetailsCardWrapper = props => (
           <Grid item xs={6}>
             <PatientDetailsCard
               patientDetail={patientDetail}
-              savePatientSelected={props.savePatientSelected}
-              patientIdSelected={props.patientIdSelected}
             />
           </Grid>
         )

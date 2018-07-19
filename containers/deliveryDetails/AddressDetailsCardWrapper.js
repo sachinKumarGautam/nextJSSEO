@@ -12,8 +12,6 @@ const AddressDetailsCardWrapper = props => (
           <Grid item xs={6}>
             <AddressDetailsCard
               deliveryDetail={deliveryDetail}
-              saveAddressSelected={props.saveAddressSelected}
-              addressIdSelected={props.addressIdSelected}
             />
           </Grid>
         )

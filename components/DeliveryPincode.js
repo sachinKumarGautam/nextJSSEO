@@ -6,20 +6,22 @@ import Typography from '@material-ui/core/Typography'
 const styles = theme => {
   return {
     deliveryPincodeWrapper: {
-      marginTop: theme.spacing.unit,
-      display: 'inline-block'
+      marginTop: theme.spacing.unit * 1.25,
+      display: 'inline-block',
+      marginLeft: theme.spacing.unit * 1.5
     },
     deliveryLabel: {
-      ...theme.typography.body1,
+      ...theme.typography.caption,
       fontWeight: theme.typography.fontWeightBold,
       color: theme.palette.customGrey.grey600,
       display: 'inherit'
     },
     deliveryPincode: {
-      ...theme.typography.body1,
+      ...theme.typography.caption,
       color: theme.palette.customGrey.grey500,
-      marginLeft: theme.spacing.unit,
-      display: 'inherit'
+      marginLeft: theme.spacing.unit * 0.75,
+      display: 'inherit',
+      marginRight: theme.spacing.unit * 2.25
     },
     deliveryChangeLabel: {
       ...theme.typography.caption,

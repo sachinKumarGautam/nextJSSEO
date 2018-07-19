@@ -32,6 +32,16 @@ const styles = theme => ({
     paddingTop: theme.spacing.unit * 1.25,
     textAlign: 'right',
     paddingRight: theme.spacing.unit * 3
+  },
+  infoWrapper: {
+    display: 'flex',
+    flexDirection: 'row'
+  },
+  iconStyle: {
+    width: theme.spacing.unit * 1.75,
+    height: theme.spacing.unit * 1.75,
+    marginLeft: theme.spacing.unit,
+    marginTop: theme.spacing.unit * 1.75
   }
 })
 
@@ -47,12 +57,24 @@ class PriceDetails extends Component {
             <Typography className={this.props.classes.discount}>
               Discount
             </Typography>
-            <Typography className={this.props.classes.discount}>
-              Care Points
-            </Typography>
-            <Typography className={this.props.classes.discount}>
-              Care Points Plus
-            </Typography>
+            <div className={this.props.classes.infoWrapper}>
+              <Typography className={this.props.classes.discount}>
+                Care Points
+              </Typography>
+              <img
+                src='/static/images/info-outline.svg'
+                className={this.props.classes.iconStyle}
+              />
+            </div>
+            <div className={this.props.classes.infoWrapper}>
+              <Typography className={this.props.classes.discount}>
+                Care Points Plus
+              </Typography>
+              <img
+                src='/static/images/info-outline.svg'
+                className={this.props.classes.iconStyle}
+              />
+            </div>
             {
               this.props.cartState.payload.coupon_code &&
               <Typography className={this.props.classes.discount}>

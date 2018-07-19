@@ -10,12 +10,15 @@ import StrokePrice from './StrokePrice'
 import EstimatedPriceLabel from './EstimatedPriceLabel'
 import {PRODUCT_DETAILS} from '../routes/RouteConstant'
 import Button from './button/Button'
-import { commonWrapperHOC } from './HOCWrapper/CommonWrapper'
+// import { commonWrapperHOC } from './HOCWrapper/CommonWrapper'
 
 const styles = theme => {
   return {
     customName: {
-      display: 'inline-block'
+      ...theme.typography.body2,
+      display: 'inline-block',
+      marginBottom: theme.spacing.unit / 4,
+      fontWeight: theme.typography.fontWeightBold
     },
     customBrand: {
       ...theme.typography.body3
@@ -25,8 +28,9 @@ const styles = theme => {
     },
     customPrice: {
       ...theme.typography.body1,
-      marginRight: theme.spacing.unit,
+      marginRight: theme.spacing.unit * 1.25,
       display: 'inline-block',
+      marginBottom: theme.spacing.unit / 4,
       marginLeft: theme.spacing.unit
     },
     customStrokePrice: {
@@ -63,7 +67,14 @@ const styles = theme => {
 }
 
 class MedicineListDetails extends React.Component {
+  constructor (props) {
+    super(props)
+
+    this.addToCart = this.addToCart.bind(this)
+  }
+
   addToCart (event) {
+    event.stopPropagation()
     console.log('I was in add to cart ')
     this.props.addToCartHandler(this.props.itemDetails)
   }
@@ -132,7 +143,7 @@ class MedicineListDetails extends React.Component {
               }}
               size='small'
               color='primary'
-              onClick={this.addToCart.bind(this)} // this is coming from HOC
+              onClick={this.addToCart} // this is coming from HOC
               label={'Add To Cart'}
             />
           </div>
@@ -142,4 +153,4 @@ class MedicineListDetails extends React.Component {
   }
 }
 
-export default commonWrapperHOC(withStyles(styles)(MedicineListDetails))
+export default withStyles(styles)(MedicineListDetails)

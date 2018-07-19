@@ -10,7 +10,8 @@ const styles = theme => ({
   imageStyle: {
     width: theme.spacing.unit * 17,
     height: theme.spacing.unit * 19,
-    borderRadius: theme.spacing.unit / 2
+    borderRadius: theme.spacing.unit / 2,
+    padding: theme.spacing.unit / 2
   },
   prescriptionName: {
     color: theme.palette.customGrey.grey500,

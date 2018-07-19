@@ -35,6 +35,9 @@ const styles = theme => ({
     display: 'flex',
     alignItems: 'baseline',
     marginTop: theme.spacing.unit * 2
+  },
+  label: {
+    color: theme.palette.primary.main
   }
 })
 
@@ -107,8 +110,11 @@ class ProductPriceDetails extends Component {
                 onChangeQuantity={this.onChangeQuantity}
               />
               <Button
-                variant='raised'
+                variant='outlined'
                 size='small'
+                classes={{
+                  label: classes.label
+                }}
                 color='primary'
                 onClick={this.props.addToCartHandler.bind(this, this.props.productDetailsState.payload)} // it check first any selected city then add to cart
                 label={'Add To Cart'}
