@@ -27,6 +27,7 @@ const DeliveryDetailsWrapper = props => (
           checkPincodeDetailLoading={props.checkPincodeDetailLoading}
           updateAddressFormValue={props.updateAddressFormValue}
           cartState={props.cartState}
+          getLocalityDetailListLoading={props.getLocalityDetailListLoading}
         />
       </Grid>
     </Grid>

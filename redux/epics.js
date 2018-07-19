@@ -28,7 +28,8 @@ import {
 import {
   getDeliveryDetailsList,
   submitDeliveryDetails,
-  checkPincodeServicability
+  checkPincodeServicability,
+  getLocalityList
 } from '../containers/deliveryDetails/deliveryDetailsEpics'
 
 import {
@@ -122,5 +123,6 @@ export const rootEpic = combineEpics(
   getBackGroungImages,
   applyCouponCode,
   optDoctorCallback,
-  checkPincodeServicability
+  checkPincodeServicability,
+  getLocalityList
 )

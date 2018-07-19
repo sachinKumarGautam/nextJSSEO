@@ -145,12 +145,12 @@ export function checkPincodeDetailFailure (deliveryDetailsState, error) {
   }
 }
 
-export function updateAddressFormValue (deliveryDetailsState, state, city) {
+export function updateAddressFormValue (deliveryDetailsState, name, value) {
   return {
     type: UPDATE_ADDRESS_FORM_VALUE,
     deliveryDetailsState,
-    state,
-    city
+    name,
+    value
   }
 }
 
@@ -165,6 +165,9 @@ export function getLocalityDetailListLoading (
     type: GET_LOCALITY_LIST_LOADING,
     deliveryDetailsState,
     pincode,
+    state,
+    city,
+    queryString,
     isLoading: true,
     error: null,
     isError: false

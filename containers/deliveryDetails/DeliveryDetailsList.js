@@ -106,6 +106,7 @@ class Main extends Component {
                 closeDeliveryFormModal={this.closeDeliveryFormModal}
                 checkPincodeDetailLoading={this.props.checkPincodeDetailLoading}
                 updateAddressFormValue={this.props.updateAddressFormValue}
+                getLocalityDetailListLoading={this.props.getLocalityDetailListLoading}
               />
             </div>
           </div>

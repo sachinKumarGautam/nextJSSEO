@@ -102,8 +102,7 @@ export default function deliveryDetailsReducer (state = initialState, action) {
         ...state,
         addressForm: {
           ...state.addressForm,
-          state: action.state,
-          city: action.city
+          [action.name]: action.value
         }
       }
 

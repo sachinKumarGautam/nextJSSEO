@@ -110,7 +110,9 @@ export function checkPincodeServicability (action$, store) {
       return http(getCityStateUsingPincode$(data.pincode)).pipe(
         flatMap(result => {
           return of(checkPincodeDetailSuccess(data.deliveryDetailsState, result.body.payload),
-            updateAddressFormValue(data.deliveryDetailsState, result.body.payload.state, result.body.payload.city))
+            updateAddressFormValue(data.deliveryDetailsState, 'city', result.body.payload.city),
+            updateAddressFormValue(data.deliveryDetailsState, 'state', result.body.payload.state)
+          )
         }),
         catchError(error => {
           return of(checkPincodeDetailFailure(data.deliveryDetailsState, error))
