@@ -25,7 +25,10 @@ const DeliveryDetailsWrapper = props => (
           submitDeliveryDetailsLoading={props.submitDeliveryDetailsLoading}
           saveDeliveryAddressSelected={props.saveDeliveryAddressSelected}
           customerState={props.customerState}
+          checkPincodeDetailLoading={props.checkPincodeDetailLoading}
+          updateAddressFormValue={props.updateAddressFormValue}
           cartState={props.cartState}
+          getLocalityDetailListLoading={props.getLocalityDetailListLoading}
         />
       </Grid>
     </Grid>

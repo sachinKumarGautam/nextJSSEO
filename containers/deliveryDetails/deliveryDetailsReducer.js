@@ -4,7 +4,14 @@ import {
   GET_DELIVERY_DETAILS_LIST_LOADING,
   GET_DELIVERY_DETAILS_LIST_SUCCESS,
   GET_DELIVERY_DETAILS_LIST_FAILURE,
-  SAVE_ADDRESS_SELECTED
+  SAVE_ADDRESS_SELECTED,
+  CHECK_PINCODE_DETAIL_LOADING,
+  CHECK_PINCODE_DETAIL_SUCCESS,
+  CHECK_PINCODE_DETAIL_FAILURE,
+  UPDATE_ADDRESS_FORM_VALUE,
+  GET_LOCALITY_LIST_LOADING,
+  GET_LOCALITY_LIST_SUCCESS,
+  GET_LOCALITY_LIST_FAILURE
 } from './deliveryDetailsActionTypes'
 
 export default function deliveryDetailsReducer (state = initialState, action) {
@@ -46,6 +53,98 @@ export default function deliveryDetailsReducer (state = initialState, action) {
       return {
         ...state,
         address: action.deliveryDetail
+      }
+
+    // pincode check loading
+    case CHECK_PINCODE_DETAIL_LOADING:
+      return {
+        ...state,
+        pincodeCheck: {
+          ...state.pincodeCheck,
+          isLoading: action.isLoading,
+          errorState: {
+            ...state.pincodeCheck.errorState,
+            isError: action.isError,
+            error: action.error
+          }
+        }
+      }
+
+    // pincode check sucess
+    case CHECK_PINCODE_DETAIL_SUCCESS:
+      return {
+        ...state,
+        pincodeCheck: {
+          ...state.pincodeCheck,
+          payload: action.payload,
+          isLoading: action.isLoading
+        }
+      }
+
+    // pincode check failure
+    case CHECK_PINCODE_DETAIL_FAILURE:
+      return {
+        ...state,
+        pincodeCheck: {
+          ...state.pincodeCheck,
+          isLoading: action.isLoading,
+          errorState: {
+            ...state.pincodeCheck.errorState,
+            isError: action.isError,
+            error: action.error
+          }
+        }
+      }
+
+    // address form value update
+    case UPDATE_ADDRESS_FORM_VALUE:
+      return {
+        ...state,
+        addressForm: {
+          ...state.addressForm,
+          [action.name]: action.value
+        }
+      }
+
+    // locality detail list loading
+    case GET_LOCALITY_LIST_LOADING:
+      return {
+        ...state,
+        addressLocalityList: {
+          ...state.addressLocalityList,
+          isLoading: action.isLoading,
+          errorState: {
+            ...state.addressLocalityList.errorState,
+            isError: action.isError,
+            error: action.error
+          }
+        }
+      }
+
+    // locality detail list sucess
+    case GET_LOCALITY_LIST_SUCCESS:
+      return {
+        ...state,
+        addressLocalityList: {
+          ...state.addressLocalityList,
+          payload: action.payload,
+          isLoading: action.isLoading
+        }
+      }
+
+    // locality detail list failure
+    case GET_LOCALITY_LIST_FAILURE:
+      return {
+        ...state,
+        addressLocalityList: {
+          ...state.addressLocalityList,
+          isLoading: action.isLoading,
+          errorState: {
+            ...state.addressLocalityList.errorState,
+            isError: action.isError,
+            error: action.error
+          }
+        }
       }
 
     default:
