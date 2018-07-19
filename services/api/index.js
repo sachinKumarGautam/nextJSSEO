@@ -56,7 +56,7 @@ const submitPatientDetails$ = (customerId, patientDetails) => (
 const editPatientDetails$ = (customerId, patientDetails, patientId) => (
 
   makeAjaxRequest({
-    method: 'PUT',
+    method: 'PATCH',
     url: fetchUrl('account', 'customer/' + customerId + '/patient/' + patientId, 'CREATE'),
     body: patientDetails
   })
@@ -222,6 +222,15 @@ const submitDeliveryDetails$ = (customerId, deliveryAddressData) => (
 
 )
 
+const editDeliveryDetails$ = (customerId, deliveryAddressData, addressId) => (
+
+  makeAjaxRequest({
+    method: 'PATCH',
+    url: fetchUrl('account', 'customer/' + customerId + '/shipping-address/' + addressId, 'CREATE'),
+    body: deliveryAddressData
+  })
+)
+
 const submitRefillDate$ = (orderId, refillDay) => (
   makeAjaxRequest({
     method: 'PUT',
@@ -312,5 +321,6 @@ export {
   teleConsultation$,
   editPatientDetails$,
   getCityStateUsingPincode$,
-  searchLocalityForPincode$
+  searchLocalityForPincode$,
+  editDeliveryDetails$
 }

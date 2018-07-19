@@ -80,6 +80,7 @@ export function submitPatient (action$, store) {
       } else {
         api = submitPatientDetails$(data.customerId, data.values)
       }
+
       return http(api).pipe(
         flatMap(result => {
           data.setSubmitting(false)

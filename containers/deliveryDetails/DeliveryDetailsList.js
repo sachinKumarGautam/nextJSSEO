@@ -60,15 +60,17 @@ class Main extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      openDeliveryFormDialog: false
+      openDeliveryFormDialog: false,
+      isEdit: false
     }
     this.openDeliveryFormModal = this.openDeliveryFormModal.bind(this)
     this.closeDeliveryFormModal = this.closeDeliveryFormModal.bind(this)
   }
 
-  openDeliveryFormModal () {
+  openDeliveryFormModal (isEdit) {
     this.setState({
-      openDeliveryFormDialog: true
+      openDeliveryFormDialog: true,
+      isEdit: isEdit
     })
   }
 
@@ -105,6 +107,7 @@ class Main extends Component {
                 onClick={this.openDeliveryFormModal.bind(this)}
               />
               <DeliveryDetailForm
+                isEdit={this.state.isEdit}
                 onSubmit={this.props.submitDeliveryDetailsLoading}
                 openDeliveryFormDialog={this.state.openDeliveryFormDialog}
                 customerState={this.props.customerState}

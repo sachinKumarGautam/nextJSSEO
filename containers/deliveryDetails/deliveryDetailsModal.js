@@ -1,7 +1,6 @@
 const initialState = {
   payload: [],
   deliveryFormState: {},
-  address: {},
   isLoading: false,
   errorState: {
     isError: false,
@@ -16,6 +15,7 @@ const initialState = {
     }
   },
   addressForm: {
+    id: 0,
     full_name: '',
     mobile: '',
     pincode: '',

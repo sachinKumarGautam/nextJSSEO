@@ -52,7 +52,18 @@ export default function deliveryDetailsReducer (state = initialState, action) {
     case SAVE_ADDRESS_SELECTED:
       return {
         ...state,
-        address: action.deliveryDetail
+        addressForm: {
+          ...state.addressForm,
+          id: action.deliveryDetail.id,
+          full_name: action.deliveryDetail.full_name,
+          mobile: action.deliveryDetail.mobile,
+          pincode: action.deliveryDetail.pincode,
+          locality: action.deliveryDetail.locality,
+          street1: action.deliveryDetail.street1,
+          street2: action.deliveryDetail.street2,
+          city: action.deliveryDetail.city,
+          state: action.deliveryDetail.state
+        }
       }
 
     // pincode check loading

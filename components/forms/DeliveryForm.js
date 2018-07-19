@@ -297,7 +297,8 @@ export default withStyles(styles)(withFormik({
       setSubmitting,
       props.closeModal,
       values,
-      props.isCartPage
+      props.isCartPage,
+      props.isEdit
     )
   },
   displayName: 'DeliveryForm' // helps with React DevTools

@@ -60,13 +60,8 @@ class PatientForm extends React.Component {
           aria-describedby='full-name'
           error={errors.full_name && touched.full_name}
         >
-          <InputLabel
-            className={classes.labelStyle}
-            htmlFor='full_name'
-          >
-            Full Name
-          </InputLabel>
           <Input
+            placeholder='Full Name'
             id='full_name'
             type='text'
             onChange={handleChange}
@@ -86,12 +81,6 @@ class PatientForm extends React.Component {
           aria-describedby='gender'
           error={errors.gender && touched.gender}
         >
-          <InputLabel
-            className={classes.labelStyle}
-            htmlFor='gender'
-          >
-            Gender
-          </InputLabel>
           <Select
             value={values.gender}
             onChange={handleChange}
@@ -122,13 +111,8 @@ class PatientForm extends React.Component {
           aria-describedby='age'
           error={errors.age && touched.age}
         >
-          <InputLabel
-            className={classes.labelStyle}
-            htmlFor='age'
-          >
-            Age
-          </InputLabel>
           <Input
+            placeholder='Age'
             id='age'
             type='text'
             onChange={handleChange}
@@ -148,13 +132,8 @@ class PatientForm extends React.Component {
           aria-describedby='mobile'
           error={errors.mobile && touched.mobile}
         >
-          <InputLabel
-            className={classes.labelStyle}
-            htmlFor='mobile'
-          >
-            Contact No.
-          </InputLabel>
           <Input
+            placeholder='Contact No.'
             id='mobile'
             type='text'
             onChange={handleChange}

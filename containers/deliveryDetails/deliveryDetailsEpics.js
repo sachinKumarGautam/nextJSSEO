@@ -31,7 +31,8 @@ import {
   getDeliveryDetailsList$,
   submitDeliveryDetails$,
   getCityStateUsingPincode$,
-  searchLocalityForPincode$
+  searchLocalityForPincode$,
+  editDeliveryDetails$
 } from '../../services/api'
 
 /**
@@ -70,8 +71,15 @@ export function submitDeliveryDetails (action$, store) {
     mergeMap(data => {
       const deliveryDetailsState = store.getState().deliveryDetailsState
       const cartState = store.getState().cartState
+      let api
 
-      return http(submitDeliveryDetails$(data.customerId, data.values)).pipe(
+      if (data.isEdit) {
+        api = editDeliveryDetails$(data.customerId, data.values, data.deliveryDetailsState.addressForm.id)
+      } else {
+        api = submitDeliveryDetails$(data.customerId, data.values)
+      }
+
+      return http(api).pipe(
         flatMap(result => {
           data.setSubmitting(false)
           data.closeModal()

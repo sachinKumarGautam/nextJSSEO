@@ -12,7 +12,7 @@ const AddressDetailsCardWrapper = props => (
           <Grid item xs={6} onClick={props.saveDeliveryAddressToCart.bind(this, deliveryDetail)}>
             <AddressDetailsCard
               deliveryDetail={deliveryDetail}
-              openDeliveryFormModal={props.openDeliveryFormModal}
+              openDeliveryFormModal={props.openDeliveryFormModal.bind(this, true)}
             />
           </Grid>
         )
