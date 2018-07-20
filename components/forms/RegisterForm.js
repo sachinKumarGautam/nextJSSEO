@@ -51,7 +51,7 @@ class RegisterForm extends React.Component {
     this.emptyHandleSubmit = this.emptyHandleSubmit.bind(this)
   }
 
-  componentDidUpdate(prevProps) {
+  componentDidUpdate (prevProps) {
     const referralValue = this.props.customerState.payload.referral_code.payload
     const prevReferralValue = prevProps.customerState.payload.referral_code.payload
     if(referralValue !== prevReferralValue ){
