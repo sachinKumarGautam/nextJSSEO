@@ -1,7 +1,5 @@
 import React from 'react'
 
-import flowRight from 'lodash.flowright'
-
 import Header from '../components/layouts/header'
 import Footer from '../components/layouts/footer'
 

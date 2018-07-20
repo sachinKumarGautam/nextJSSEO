@@ -8,6 +8,7 @@ import { CART_DETAILS } from '../../routes/RouteConstant'
 import { ITEM_ADDED_TO_CART } from '../../containers/messages/cartMessages'
 import { SNACK_BAR_DURATION } from '../../components/constants/Constants'
 import Button from '../../components/button'
+import green from '@material-ui/core/colors/green'
 import Typography from '@material-ui/core/Typography'
 
 const styles = theme => ({
@@ -35,6 +36,9 @@ const styles = theme => ({
     marginTop: theme.spacing.unit,
     marginRight: theme.spacing.unit * 2,
     color: theme.palette.secondary.main
+  },
+  snackbarSuccess: {
+    backgroundColor: green[600]
   }
 })
 
@@ -43,15 +47,15 @@ class GoToCartSnackbar extends React.Component {
     open: false,
     vertical: 'top',
     horizontal: 'right'
-  };
+  }
 
   handleClick = state => () => {
     this.setState({ open: true, ...state })
-  };
+  }
 
   handleClose = () => {
     this.props.goToCartSnackbar(this.props.cartState, false)
-  };
+  }
 
   render () {
     const { classes } = this.props
@@ -63,6 +67,7 @@ class GoToCartSnackbar extends React.Component {
               vertical: 'bottom',
               horizontal: 'center'
             }}
+            className={classes.snackbarSuccess}
             autoHideDuration={SNACK_BAR_DURATION}
             open={this.props.cartState.payload.showAddToCartSnackBar}
             onClose={this.handleClose}
@@ -82,14 +87,12 @@ class GoToCartSnackbar extends React.Component {
             // ]}
             message={
               <div className={classes.buttonWrappr}>
-                <Typography
-                  variant='caption'
-                  className={classes.text}
-                >
+                <Typography variant='caption' className={classes.text}>
                   {ITEM_ADDED_TO_CART}
                 </Typography>
                 <Button
                   size='small'
+                  variant='success'
                   className={classes.editButton}
                   classes={{
                     root: classes.couponButtonRoot,

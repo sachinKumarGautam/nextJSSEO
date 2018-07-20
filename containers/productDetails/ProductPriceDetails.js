@@ -10,7 +10,6 @@ import StrokePrice from '../../components/StrokePrice'
 import ProductDiscount from '../../components/ProductDiscount'
 import DeliveryInfoWrapper from '../../components/DeliveryInfoWrapper'
 import QuantityField from '../../components/QuantityField'
-import AddToCartButton from '../cartDetails/addToCartWrapper'
 import Button from '../../components/button'
 
 /*
@@ -54,7 +53,10 @@ class ProductPriceDetails extends Component {
   }
 
   addToCart () {
-    this.props.incrementCartItemLoading(this.props.cartState, this.props.productDetailsState.payload)
+    this.props.incrementCartItemLoading(
+      this.props.cartState,
+      this.props.productDetailsState.payload
+    )
   }
 
   handleOpenPincodeDialog () {
@@ -65,7 +67,10 @@ class ProductPriceDetails extends Component {
 
   onChangeQuantity (event) {
     // sub 1 from select quantity coz medicine is incremented by 1 already in api (epic)
-    this.props.onChangeQuantity(this.props.productDetailsState, event.target.value - 1)
+    this.props.onChangeQuantity(
+      this.props.productDetailsState,
+      event.target.value - 1
+    )
   }
 
   handleClosePincodeDialog () {
@@ -83,11 +88,11 @@ class ProductPriceDetails extends Component {
             <div className={classes.priceWrapper}>
               <ProductPrice
                 variant={'headline'}
-                sellingPrice={this.props.productDetailsState.payload.selling_price}
+                sellingPrice={
+                  this.props.productDetailsState.payload.selling_price
+                }
               />
-              <EstimatedPriceLabel
-                estimatePriceText={'*Estimated Price'}
-              />
+              <EstimatedPriceLabel estimatePriceText={'*Estimated Price'} />
             </div>
             <div className={classes.priceWrapper}>
               <StrokePrice
@@ -98,17 +103,13 @@ class ProductPriceDetails extends Component {
                 discount={this.props.productDetailsState.payload.discount}
               />
             </div>
-            {
-              this.props.checkPincodeState.payload.pincode &&
+            {this.props.checkPincodeState.payload.pincode &&
               <DeliveryInfoWrapper
                 checkPincodeState={this.props.checkPincodeState}
                 openPincodeDialog={this.handleOpenPincodeDialog}
-              />
-            }
+              />}
             <div className={classes.cardActions}>
-              <QuantityField
-                onChangeQuantity={this.onChangeQuantity}
-              />
+              <QuantityField onChangeQuantity={this.onChangeQuantity} />
               <Button
                 variant='outlined'
                 size='small'
@@ -116,7 +117,10 @@ class ProductPriceDetails extends Component {
                   label: classes.label
                 }}
                 color='primary'
-                onClick={this.props.addToCartHandler.bind(this, this.props.productDetailsState.payload)} // it check first any selected city then add to cart
+                onClick={this.props.addToCartHandler.bind(
+                  this,
+                  this.props.productDetailsState.payload
+                )} // it check first any selected city then add to cart
                 label={'Add To Cart'}
               />
             </div>

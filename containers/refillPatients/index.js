@@ -43,8 +43,8 @@ class RefillPatientsWrapper extends Component {
               <RefillMedicineList
                 pastMedicineState={this.props.pastMedicineState}
                 checkPincodeState={this.props.checkPincodeState}
+                addToCartHandler={this.props.addToCartHandler}
                 cartState={this.props.cartState}
-                incrementCartItemLoading={this.props.actions.incrementCartItemLoading}
                 checkPincodeLoading={this.props.actions.checkPincodeLoading}
               />
             </section>
