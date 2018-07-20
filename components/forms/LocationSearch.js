@@ -122,11 +122,11 @@ function getSuggestions (locationSearchResult) {
 class LocationSearch extends React.Component {
   constructor (props) {
     super(props)
-    this.searchMedicineOnChange = this.searchMedicineOnChange.bind(this)
+    this.searchLocalityOnChange = this.searchLocalityOnChange.bind(this)
     this.onSelectItem = this.onSelectItem.bind(this)
   }
 
-  searchMedicineOnChange (event) {
+  searchLocalityOnChange (event) {
     this.props.getLocalityDetailListLoading(
       this.props.deliveryDetailsState,
       this.props.deliveryDetailsState.pincodeCheck.payload.pincode,
@@ -164,7 +164,7 @@ class LocationSearch extends React.Component {
                   placeholder: 'Search Locality',
                   id: 'search-locality',
                   autofocus: true,
-                  onChange: this.searchMedicineOnChange,
+                  onChange: this.searchLocalityOnChange,
                   inputValue
                 })
               })}
