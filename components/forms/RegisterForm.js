@@ -9,8 +9,9 @@ import MenuItem from '@material-ui/core/MenuItem'
 import FormHelperText from '@material-ui/core/FormHelperText'
 import FormControl from '@material-ui/core/FormControl'
 import Button from '../../components/button'
-import { withStyles } from '@material-ui/core/styles'
+import CircularProgress from '@material-ui/core/CircularProgress'
 
+import { withStyles } from '@material-ui/core/styles'
 
 import {
   FULL_NAME_REQUIRED,
@@ -34,10 +35,14 @@ const styles = theme => ({
   },
   formHelperText: {
     textAlign: 'center'
+  },
+  progress: {
+    position: 'absolute',
+    right: theme.spacing.unit * 1.5,
+    bottom: theme.spacing.unit,
+    color: theme.palette.customGrey.grey100
   }
 })
-
-
 
 class RegisterForm extends React.Component {
 
@@ -53,7 +58,6 @@ class RegisterForm extends React.Component {
   }
 
   checkReferralCode (value) {
-    
     this.props.checkReferralCodeLoading(this.props.customerState, value)
   }
 
@@ -65,8 +69,13 @@ class RegisterForm extends React.Component {
       isSubmitting,
       handleChange,
       handleSubmit,
-      classes
+      classes,
+      customerState
     } = this.props
+
+    const referralCodeError = customerState.payload.referral_code.errorState.error 
+    ? customerState.payload.referral_code.errorState.error.error.status  
+    : ''
 
     return (
       <form onSubmit={handleSubmit}>
@@ -75,11 +84,11 @@ class RegisterForm extends React.Component {
           aria-describedby='full-name'
           error={errors.full_name && touched.full_name}
         >
-          <InputLabel htmlFor='full_name'>Full Name</InputLabel>
           <Input
             id='full_name'
             type='text'
             onChange={handleChange}
+            placeholder={'Full Name'}
             value={values.full_name}
           />
           {
@@ -96,10 +105,10 @@ class RegisterForm extends React.Component {
           aria-describedby='mobile'
           error={errors.mobile && touched.mobile}
         >
-          <InputLabel htmlFor='mobile'>Phone number</InputLabel>
           <Input
             id='mobile'
             type='text'
+            placeholder={'Mobile'}
             onChange={handleChange}
             value={values.mobile}
           />
@@ -117,10 +126,10 @@ class RegisterForm extends React.Component {
           aria-describedby='gender'
           error={errors.gender && touched.gender}
         >
-          <InputLabel htmlFor='gender'>Gender</InputLabel>
           <Select
             value={values.gender}
             onChange={handleChange}
+            placeholder={'Gender'}
             inputProps={{
               name: 'gender',
               id: 'gender',
@@ -131,7 +140,7 @@ class RegisterForm extends React.Component {
               <em>Gender</em>
             </MenuItem>
             <MenuItem value={'male'}>Male</MenuItem>
-            <MenuItem value={'femlae'}>Female</MenuItem>
+            <MenuItem value={'female'}>Female</MenuItem>
             <MenuItem value={'others'}>Others</MenuItem>
           </Select>
           {
@@ -146,20 +155,21 @@ class RegisterForm extends React.Component {
         <FormControl
           className={classes.formControl}
           aria-describedby='referral_code'
-          error={errors.referral_code && touched.referral_code}
+          error={(errors.referral_code && touched.referral_code) || referralCodeError}
         >
-          <InputLabel htmlFor='referral-code'>Referral code</InputLabel>
           <Input
             id='referral_code'
+            placeholder={'Referral Code'}
             onChange={this.onChangeReferralCode.bind(this, handleChange)}
             value={values.referral_code}
           />
+          { customerState.payload.referral_code.isLoading && <CircularProgress className={classes.progress} size={20} />}
           {
-            errors.referral_code && touched.referral_code &&
+            ((errors.referral_code && touched.referral_code) || referralCodeError) &&
             <FormHelperText
               id='referral_code'
             >
-              {errors.referral_code}
+              {referralCodeError ? `Please enter a valid Referral Code` : errors.referral_code}
             </FormHelperText>
           }
         </FormControl>
@@ -168,10 +178,10 @@ class RegisterForm extends React.Component {
           aria-describedby='membership_code'
           error={errors.membership_code && touched.membership_code}
         >
-          <InputLabel htmlFor='membership_code'>Membership code</InputLabel>
           <Input
             id='membership_code'
             disabled
+            placeholder={'Membership Code'}
             onChange={handleChange}
             value={values.membership_code}
           />

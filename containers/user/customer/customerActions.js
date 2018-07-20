@@ -120,11 +120,13 @@ export function checkReferralCodeSuccess (customerState, result) {
   return {
     type: CHECK_REFERRAL_CODE_SUCCESS,
     customerState,
+    referralCode: result.body.payload.reference_code,
     isLoading: false
   }
 }
 
 export function checkReferralCodeFailure (customerState, error) {
+  console.log(error)
   return {
     type: CHECK_REFERRAL_CODE_FAILURE,
     customerState,

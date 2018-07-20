@@ -1,5 +1,5 @@
 import { of } from 'rxjs/observable/of'
-import { mergeMap, catchError, map, flatMap } from 'rxjs/operators'
+import { mergeMap, catchError, map, flatMap, debounceTime } from 'rxjs/operators'
 import { ofType } from 'redux-observable'
 import {
   CUSTOMER_REGISTER_LOADING, 
@@ -66,10 +66,12 @@ export function fetchUserInfo (action$, store) {
 }
 
 export function checkReferralCode (action$, store) {
+  console.log('dddkojo')
   return action$.pipe(
     ofType(CHECK_REFERRAL_CODE_LOADING),
+    debounceTime(350),
     mergeMap(data => {
-      console.log('kapil')
+      console.log('checkReferralCode')
       const customerState = store.getState().customerState
       return http(checkReferralCode$(data.referralCode)).pipe(
         map(result => {
