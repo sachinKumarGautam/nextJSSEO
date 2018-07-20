@@ -10,22 +10,22 @@ import MedicineList from './MedicineList'
 */
 
 const MedicineListWrapper = (props) => (
-    <div>
-        <BreadCrumbs />
-        <section >
-          <MedicineList
-            medicineListState={props.medicineState}
-            query={props.query}
-            addToCartHandler={props.addToCartHandler}
-            getRelatedMedicinesLoading={props.getRelatedMedicinesLoading}
-            checkPincodeState={props.checkPincodeState}
-            moleculeName={props.moleculeName}
-            incrementCartItemLoading={props.incrementCartItemLoading}
-            cartState={props.cartState}
-            checkPincodeLoading={props.checkPincodeLoading}
-          />
-        </section>
-      </div>
-  )
+  <div>
+    <BreadCrumbs />
+    <section >
+      <MedicineList
+        medicineListState={props.medicineState}
+        query={props.query}
+        addToCartHandler={props.addToCartHandler}
+        getRelatedMedicinesLoading={props.getRelatedMedicinesLoading}
+        checkPincodeState={props.checkPincodeState}
+        moleculeName={props.moleculeName}
+        incrementCartItemLoading={props.incrementCartItemLoading}
+        cartState={props.cartState}
+        checkPincodeLoading={props.checkPincodeLoading}
+      />
+    </section>
+  </div>
+)
 
 export default MedicineListWrapper

@@ -2,7 +2,7 @@ import { of } from 'rxjs/observable/of'
 import { mergeMap, catchError, map, flatMap, debounceTime } from 'rxjs/operators'
 import { ofType } from 'redux-observable'
 import {
-  CUSTOMER_REGISTER_LOADING, 
+  CUSTOMER_REGISTER_LOADING,
   FETCH_USER_INFO_LOADING,
   CHECK_REFERRAL_CODE_LOADING
 } from './customerActionTypes'
@@ -34,7 +34,6 @@ export function registerCustomer (action$, store) {
           setTimeout(() => {
             data.closeLoginModal()
           }, 250)
-          // TODO: remove store.dispatch as it might be deprecated in future
           return of(toggleAuthentication(loginState, true),
             customerRegisterSuccess(customerState, result),
             cartTransferLoading(cartState))
@@ -66,12 +65,10 @@ export function fetchUserInfo (action$, store) {
 }
 
 export function checkReferralCode (action$, store) {
-  console.log('dddkojo')
   return action$.pipe(
     ofType(CHECK_REFERRAL_CODE_LOADING),
     debounceTime(350),
     mergeMap(data => {
-      console.log('checkReferralCode')
       const customerState = store.getState().customerState
       return http(checkReferralCode$(data.referralCode)).pipe(
         map(result => {

@@ -48,14 +48,14 @@ class Register extends React.Component {
   }
 
   render () {
-    const { 
-      classes, 
-      customerState, 
-      customerRegisterLoading, 
-      closeLoginModal, 
+    const {
+      classes,
+      customerState,
+      customerRegisterLoading,
+      closeLoginModal,
       loginState,
       checkReferralCodeLoading
-     } = this.props
+    } = this.props
     return (
       <div className={classes.container}>
         <Form

@@ -1,10 +1,9 @@
 import { withFormik } from 'formik'
 import * as Yup from 'yup'
-import debounce from 'lodash.debounce';
+import debounce from 'lodash.debounce'
 
 import Input from '@material-ui/core/Input'
 import Select from '@material-ui/core/Select'
-import InputLabel from '@material-ui/core/InputLabel'
 import MenuItem from '@material-ui/core/MenuItem'
 import FormHelperText from '@material-ui/core/FormHelperText'
 import FormControl from '@material-ui/core/FormControl'
@@ -16,9 +15,9 @@ import { withStyles } from '@material-ui/core/styles'
 import {
   FULL_NAME_REQUIRED,
   MOBILE_REQUIRED,
-  GENDER_REQUIRED
+  GENDER_REQUIRED,
+  REFERRAL_CODE_INVALID
 } from '../../containers/messages/ValidationMsg'
-import TransactionHistory from '../../containers/carePoint/TransactionHistory'
 
 // Helper styles for demo
 
@@ -45,20 +44,38 @@ const styles = theme => ({
 })
 
 class RegisterForm extends React.Component {
-
   constructor (props) {
     super(props)
-    this.onChangeReferralCode = this.onChangeReferralCode.bind(this)
+    // this.onChangeReferralCode = this.onChangeReferralCode.bind(this)
     this.checkReferralCode = debounce(this.checkReferralCode, 350)
+    this.emptyHandleSubmit = this.emptyHandleSubmit.bind(this)
   }
 
-  onChangeReferralCode (handleChange, event) {
+  componentDidUpdate(prevProps) {
+    const referralValue = this.props.customerState.payload.referral_code.payload
+    const prevReferralValue = prevProps.customerState.payload.referral_code.payload
+    if(referralValue !== prevReferralValue ){
+        this.props.setFieldValue('referral_code', referralValue)
+      }
+  }
+
+  onChangeReferralCode = event => {
     this.checkReferralCode(event.target.value)
-    handleChange(event)
+    this.props.handleChange(event)
+  }
+
+  onChangePhoneNumber = event => {
+    if(event.target.value.length < 11){
+      this.props.handleChange(event)
+    }
   }
 
   checkReferralCode (value) {
-    this.props.checkReferralCodeLoading(this.props.customerState, value)
+    if (value.length) { this.props.checkReferralCodeLoading(this.props.customerState, value) }
+  }
+
+  emptyHandleSubmit (event) {
+    event.preventDefault()
   }
 
   render () {
@@ -73,12 +90,20 @@ class RegisterForm extends React.Component {
       customerState
     } = this.props
 
-    const referralCodeError = customerState.payload.referral_code.errorState.error 
-    ? customerState.payload.referral_code.errorState.error.error.status  
-    : ''
+    const referralCodeError = customerState.payload.referral_code.errorState.error
+      ? customerState.payload.referral_code.errorState.error.error.status
+      : ''
+    const referralCodeLoading = customerState.payload.referral_code.isLoading
 
+    const referralCodeValue = this.props.values.referral_code
+
+    console.log(this.props.values)
     return (
-      <form onSubmit={handleSubmit}>
+      <form 
+        onSubmit={(!referralCodeValue 
+          || !referralCodeError ) && !referralCodeLoading
+          ? handleSubmit 
+          : this.emptyHandleSubmit}>
         <FormControl
           className={classes.formControl}
           aria-describedby='full-name'
@@ -87,6 +112,7 @@ class RegisterForm extends React.Component {
           <Input
             id='full_name'
             type='text'
+            autoComplete={'off'}
             onChange={handleChange}
             placeholder={'Full Name'}
             value={values.full_name}
@@ -108,8 +134,9 @@ class RegisterForm extends React.Component {
           <Input
             id='mobile'
             type='text'
+            autoComplete={'off'}
             placeholder={'Mobile'}
-            onChange={handleChange}
+            onChange={this.onChangePhoneNumber}
             value={values.mobile}
           />
           {
@@ -155,21 +182,22 @@ class RegisterForm extends React.Component {
         <FormControl
           className={classes.formControl}
           aria-describedby='referral_code'
-          error={(errors.referral_code && touched.referral_code) || referralCodeError}
+          error={values.referral_code && ((errors.referral_code && touched.referral_code) || referralCodeError)}
         >
           <Input
             id='referral_code'
+            autoComplete={'off'}
             placeholder={'Referral Code'}
-            onChange={this.onChangeReferralCode.bind(this, handleChange)}
+            onChange={this.onChangeReferralCode}
             value={values.referral_code}
           />
           { customerState.payload.referral_code.isLoading && <CircularProgress className={classes.progress} size={20} />}
           {
-            ((errors.referral_code && touched.referral_code) || referralCodeError) &&
+            (values.referral_code && ((errors.referral_code && touched.referral_code) || referralCodeError)) &&
             <FormHelperText
               id='referral_code'
             >
-              {referralCodeError ? `Please enter a valid Referral Code` : errors.referral_code}
+              {referralCodeError ? REFERRAL_CODE_INVALID : errors.referral_code}
             </FormHelperText>
           }
         </FormControl>
@@ -186,11 +214,11 @@ class RegisterForm extends React.Component {
             value={values.membership_code}
           />
           {
-            errors.referral_code && touched.referral_code &&
+            errors.membership_code && touched.membership_code &&
             <FormHelperText
-              id='referral_code'
+              id='membership_code'
             >
-              {errors.referral_code}
+              {errors.membership_code}
             </FormHelperText>
           }
         </FormControl>
@@ -209,7 +237,7 @@ class RegisterForm extends React.Component {
 }
 
 export default withStyles(styles)(withFormik({
-  enableReinitialize: true,
+  enableReinitialize: false,
   mapPropsToValues: (props) => {
     return {
       full_name: '',
@@ -229,7 +257,7 @@ export default withStyles(styles)(withFormik({
     full_name: Yup.string().required(FULL_NAME_REQUIRED),
     mobile: Yup.number().required(MOBILE_REQUIRED),
     gender: Yup.string().required(GENDER_REQUIRED),
-    referral_code: Yup.string()
+    referral_code: Yup.string().max(10, REFERRAL_CODE_INVALID)
   }),
   handleSubmit: (values, { props, setSubmitting }) => {
     props.onSubmit(props.customerState, props.closeLoginModal, setSubmitting, values)

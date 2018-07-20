@@ -44,7 +44,7 @@ class LoginWrapper extends React.Component {
     super(props)
 
     this.state = {
-      modalName: 'register'
+      modalName: 'login'
     }
     this.toggleForm = this.toggleForm.bind(this)
   }
@@ -62,7 +62,7 @@ class LoginWrapper extends React.Component {
       })
     } else {
       this.setState({
-        modalName: 'register'
+        modalName: 'login'
       })
     }
   }
@@ -149,8 +149,6 @@ function mapDispatchToProps (dispatch) {
     )
   }
 }
-
-// export default connect(mapStateToProps, mapDispatchToProps)(LoginWrapper)
 
 export default connect(
   mapStateToProps,

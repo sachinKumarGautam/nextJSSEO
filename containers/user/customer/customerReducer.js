@@ -101,22 +101,22 @@ export default function (state = initialState, action) {
         }
       }
 
-      case CHECK_REFERRAL_CODE_LOADING:
-        return {
-          ...state,
-          payload: {
-            ...state.payload,
-            referral_code: {
-              ...state.payload.referral_code,
-              isLoading: action.isLoading,
-              errorState: {
-                ...state.payload.referral_code.errorState,
-                isError: action.isError,
-                error: action.error
-              }
+    case CHECK_REFERRAL_CODE_LOADING:
+      return {
+        ...state,
+        payload: {
+          ...state.payload,
+          referral_code: {
+            ...state.payload.referral_code,
+            isLoading: action.isLoading,
+            errorState: {
+              ...state.payload.referral_code.errorState,
+              isError: action.isError,
+              error: action.error
             }
           }
         }
+      }
 
     case CHECK_REFERRAL_CODE_SUCCESS:
       return {
@@ -132,22 +132,21 @@ export default function (state = initialState, action) {
       }
 
     case CHECK_REFERRAL_CODE_FAILURE:
-    return {
-      ...state,
-      payload: {
-        ...state.payload,
-        referral_code: {
-          ...state.payload.referral_code,
-          isLoading: action.isLoading,
-          errorState: {
-            ...state.payload.referral_code.errorState,
-            isError: action.isError,
-            error: action.error
+      return {
+        ...state,
+        payload: {
+          ...state.payload,
+          referral_code: {
+            ...state.payload.referral_code,
+            isLoading: action.isLoading,
+            errorState: {
+              ...state.payload.referral_code.errorState,
+              isError: action.isError,
+              error: action.error
+            }
           }
         }
       }
-    }
-
 
     case UPDATE_PHONE_NUMBER:
       return {

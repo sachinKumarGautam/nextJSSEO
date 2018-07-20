@@ -175,10 +175,17 @@ class Header extends React.Component {
                   className={classes.button}
                   label={'Login / Register'}
                 />}
-              {
-                
+              {(
+                  this.state.openLoginDialog ||
+                  this.props.cartState.isCartOpenLoginDialog ||
+                  this.props.cartState.isCartOpenRegisterDialog
+                ) &&
                 <Login
-                  openLoginDialog={true} //this.state.openLoginDialog || this.props.cartState.isCartOpenLoginDialog || this.props.cartState.isCartOpenRegisterDialog
+                  openLoginDialog={
+                    this.state.openLoginDialog 
+                    || this.props.cartState.isCartOpenLoginDialog 
+                    || this.props.cartState.isCartOpenRegisterDialog
+                    }
                   openLoginModal={this.openLoginModal}
                   isCartOpenRegisterDialog={this.props.cartState.isCartOpenRegisterDialog}
                   closeLoginModal={this.closeLoginModal}

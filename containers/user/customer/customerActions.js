@@ -65,7 +65,6 @@ export function customerRegisterLoading (
   setSubmitting,
   values
 ) {
-  console.log('sachin')
   return {
     type: CUSTOMER_REGISTER_LOADING,
     customerState,
@@ -126,7 +125,6 @@ export function checkReferralCodeSuccess (customerState, result) {
 }
 
 export function checkReferralCodeFailure (customerState, error) {
-  console.log(error)
   return {
     type: CHECK_REFERRAL_CODE_FAILURE,
     customerState,
@@ -135,4 +133,3 @@ export function checkReferralCodeFailure (customerState, error) {
     error: error
   }
 }
-
