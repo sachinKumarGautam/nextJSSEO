@@ -45,8 +45,11 @@ class DeliveryForm extends React.Component {
   onPincodeInput (handleChange, event) {
     if (event.target.value.length === 6) {
       this.props.checkPincodeDetailLoading(
-        this.props.deliveryDetailsState,
-        event.target.value
+        this.props.checkPincodeState,
+        '',
+        '',
+        event.target.value,
+        true
       )
     }
 

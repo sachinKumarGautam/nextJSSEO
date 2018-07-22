@@ -17,7 +17,8 @@ const FormWrapper = (props) => {
     deliveryDetailsState,
     checkPincodeDetailLoading,
     updateAddressFormValue,
-    getLocalityDetailListLoading
+    getLocalityDetailListLoading,
+    checkPincodeState
   } = props
   switch (props.type) {
     case 'loginForm':
@@ -67,6 +68,7 @@ const FormWrapper = (props) => {
         checkPincodeDetailLoading={checkPincodeDetailLoading}
         updateAddressFormValue={updateAddressFormValue}
         getLocalityDetailListLoading={getLocalityDetailListLoading}
+        checkPincodeState={checkPincodeState}
       />
 
     default :

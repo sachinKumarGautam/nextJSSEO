@@ -16,10 +16,13 @@ import {
   getDeliveryDetailsListLoading,
   saveAddressSelected,
   submitDeliveryDetailsLoading,
-  checkPincodeDetailLoading,
   updateAddressFormValue,
   getLocalityDetailListLoading
 } from '../containers/deliveryDetails/deliveryDetailsActions'
+
+import {
+  checkPincodeLoading
+} from '../containers/location/pincode/pincodeAction'
 
 const styles = theme => ({
   root: {
@@ -61,10 +64,11 @@ class DeliveryDetails extends React.Component {
               saveAddressSelected={this.props.actions.saveAddressSelected}
               submitDeliveryDetailsLoading={this.props.actions.submitDeliveryDetailsLoading}
               customerState={this.props.customerState}
-              checkPincodeDetailLoading={this.props.actions.checkPincodeDetailLoading}
+              checkPincodeLoading={this.props.actions.checkPincodeLoading}
               updateAddressFormValue={this.props.actions.updateAddressFormValue}
               cartState={this.props.cartState}
               getLocalityDetailListLoading={this.props.actions.getLocalityDetailListLoading}
+              checkPincodeState={this.props.checkPincodeState}
             />
           </Paper>
         </div>
@@ -78,7 +82,8 @@ function mapStateToProps (state) {
   return {
     cartState: state.cartState,
     deliveryDetailsState: state.deliveryDetailsState,
-    customerState: state.customerState
+    customerState: state.customerState,
+    checkPincodeState: state.checkPincodeState
   }
 }
 
@@ -89,7 +94,7 @@ function mapDispatchToProps (dispatch) {
         getDeliveryDetailsListLoading,
         saveAddressSelected,
         submitDeliveryDetailsLoading,
-        checkPincodeDetailLoading,
+        checkPincodeLoading,
         updateAddressFormValue,
         getLocalityDetailListLoading
       },
