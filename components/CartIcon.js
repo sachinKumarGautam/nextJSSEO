@@ -11,15 +11,13 @@ import ReactTooltip from 'react-tooltip'
 
 import Button from './button'
 
-import Link from 'next/link'
+// import Link from 'next/link'
+import Router from 'next/router'
 
-import {
-  CART_DETAILS
-} from '../routes/RouteConstant'
+import { CART_DETAILS } from '../routes/RouteConstant'
+import { NO_CART_ITEM } from '../containers/messages/cartMessages'
 
-import {
-  NO_CART_ITEM
-} from '../containers/messages/cartMessages'
+import { getReplacedString } from '../utils/replaceConstants'
 
 const styles = theme => ({
   button: {
@@ -117,6 +115,11 @@ const styles = theme => ({
 class CartIcon extends Component {
   state = {
     quantity: 4
+  };
+
+  redirectToPath (path) {
+    const url = getReplacedString(path)
+    Router.push(url)
   }
 
   render () {
@@ -125,11 +128,7 @@ class CartIcon extends Component {
 
     return (
       <div>
-        <a
-          className={classes.moleculeTag}
-          data-tip
-          data-for='cartIcon'
-        >
+        <a className={classes.moleculeTag} data-tip data-for='cartIcon'>
           <IconButton
             className={classes.button}
             aria-label='Add to shopping cart'
@@ -141,7 +140,7 @@ class CartIcon extends Component {
                 badge: classes.badge
               }}
             >
-              <ShoppingCartIcon classes={{root: classes.iconStyle}} />
+              <ShoppingCartIcon classes={{ root: classes.iconStyle }} />
             </Badge>
           </IconButton>
         </a>
@@ -154,16 +153,10 @@ class CartIcon extends Component {
           delayShow={100}
         >
           <div className={classes.summaryMenuWrapper}>
-            <Typography
-              variant='caption'
-              className={classes.summaryStyle}
-            >
+            <Typography variant='caption' className={classes.summaryStyle}>
               Order Summary
             </Typography>
-            <Typography
-              variant='caption'
-              className={classes.itemStyle}
-            >
+            <Typography variant='caption' className={classes.itemStyle}>
               {cartItems.length} item(s)
             </Typography>
           </div>
@@ -173,7 +166,8 @@ class CartIcon extends Component {
               variant='caption'
               className={
                 this.state.quantity
-                  ? classes.medicineNameStyle : classes.noItemTextStyle
+                  ? classes.medicineNameStyle
+                  : classes.noItemTextStyle
               }
             >
               {
@@ -184,28 +178,29 @@ class CartIcon extends Component {
             </Typography>
             {
               cartItems.length
-                ? <Typography
-                  variant='caption'
-                  className={classes.priceStyle}
-                >
-                    &#8377; {cartItems.length && cartItems[cartItems.length - 1].mrp}
-                </Typography>
+                ? (
+                  <Typography variant='caption' className={classes.priceStyle}>
+                  &#8377;{' '}
+                    {cartItems.length && cartItems[cartItems.length - 1].mrp}
+                  </Typography>
+                )
                 : null
             }
           </div>
           <div className={classes.buttonStyle}>
-            <Link prefetch href={CART_DETAILS}>
-              <Button
-                size='small'
-                variant='outlined'
-                color='primary'
-                classes={{
-                  root: classes.buttonRoot,
-                  label: classes.buttonLabel
-                }}
-                label={'Proceed to Cart'}
-              />
-            </Link>
+            {/* <Link prefetch href={}> */}
+            <Button
+              size='small'
+              variant='outlined'
+              color='primary'
+              classes={{
+                root: classes.buttonRoot,
+                label: classes.buttonLabel
+              }}
+              label={'Proceed to Cart'}
+              onClick={this.redirectToPath.bind(this, CART_DETAILS)}
+            />
+            {/* </Link> */}
           </div>
         </ReactTooltip>
       </div>
