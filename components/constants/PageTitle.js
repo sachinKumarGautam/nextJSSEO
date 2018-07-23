@@ -47,3 +47,8 @@ export const refillPatient = {
   title: 'Patient Refill Medicines',
   description: ''
 }
+
+export const homePage = {
+  title: 'Home',
+  description: ''
+}

@@ -18,6 +18,10 @@ import {
   getBackGroundImagesLoading
 } from '../containers/homePage/homePageActions'
 
+import {
+  homePage
+} from '../components/constants/PageTitle'
+
 const styles = theme => ({
   root: {
     paddingTop: theme.spacing.unit * 2,
@@ -51,7 +55,7 @@ class HomePage extends React.Component {
     return (
       <div>
         <Head>
-          <title>Home</title>
+          <title>{homePage.title}</title>
         </Head>
         <Header />
         <div>
