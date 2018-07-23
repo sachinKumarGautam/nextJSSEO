@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 
 import BreadCrumbs from '../../components/BreadCrumbs'
 import MedicineList from './MedicineList'

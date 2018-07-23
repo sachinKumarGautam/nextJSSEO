@@ -19,6 +19,7 @@ export function checkPincode (action$, store) {
     ofType(CHECK_PINCODE_LOADING),
     mergeMap(data => {
       const checkPincodeState = store.getState().checkPincodeState
+      const cartState = store.getState().cartState
       const deliveryDetailsState = store.getState().deliveryDetailsState
       return http(checkPincode$(data.pincode)).pipe(
         flatMap(result => {

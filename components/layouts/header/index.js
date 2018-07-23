@@ -20,9 +20,6 @@ import {
   searchMedicineLoading,
   updateInProgressMedicineState
 } from '../../../containers/searchMedicine/searchMedicineAction'
-import {
-  checkPincodeLoading
-} from '../../../containers/location/pincode/pincodeAction'
 
 import GoToCartSnackbar from '../../../containers/cartDetails/GoToCartSnackbar'
 
@@ -223,7 +220,8 @@ function mapDispatchToProps (dispatch) {
         searchMedicineLoading,
         getAnonymousCartIdLoading,
         updateIsCartOpenRegisterModalFlag,
-        goToCartSnackbar
+        goToCartSnackbar,
+        updateInProgressMedicineState
       },
       dispatch
     )

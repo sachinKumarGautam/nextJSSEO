@@ -22,13 +22,8 @@ import {
   getRelatedMedicinesLoading
 } from '../containers/medicineList/medicineListActions'
 
-import { incrementCartItemLoading } from '../containers/cartDetails/cartActions'
-
-import {
-  checkPincodeLoading
-} from '../containers/location/pincode/pincodeAction'
-
 import { medicineList } from '../components/constants/PageTitle'
+import { withCommonWrapper } from '../components/HOCWrapper/CommonWrapper'
 
 const styles = theme => ({
   root: {
