@@ -12,6 +12,8 @@ import withRoot from '../src/withRoot'
 import Paper from '@material-ui/core/Paper'
 import Router from 'next/router'
 
+import Head from 'next/head'
+
 import ProductDetailsWrapper from '../containers/productDetails'
 
 import { getProductDetailLoading, onChangeQuantity } from '../containers/productDetails/productDetailsActions'
@@ -22,6 +24,10 @@ import {
 } from '../containers/cartDetails/cartActions'
 
 import {checkPincodeLoading} from '../containers/location/pincode/pincodeAction'
+
+import {
+  productDetail
+} from '../components/constants/PageTitle'
 
 const styles = theme => ({
   root: {
@@ -87,6 +93,9 @@ class ProductDetails extends React.Component {
 
     return (
       <div>
+        <Head>
+          <title>{productDetail.title}</title>
+        </Head>
         <Header />
         <div className={this.props.classes.wrapperStyle}>
           <Paper className={classes.root} elevation={1}>

@@ -11,6 +11,8 @@ import Footer from '../components/layouts/footer'
 
 import Paper from '@material-ui/core/Paper'
 
+import Head from 'next/head'
+
 import MoleculeDetailsWrapper from '../containers/moleculeDetails'
 
 import {
@@ -22,6 +24,10 @@ import {
 } from '../containers/medicineList/medicineListActions'
 
 import { checkPincodeLoading } from '../containers/location/pincode/pincodeAction'
+
+import {
+  moleculeList
+} from '../components/constants/PageTitle'
 
 const styles = theme => ({
   root: {
@@ -79,6 +85,9 @@ class MoleculeDetails extends React.Component {
   render () {
     return (
       <div>
+        <Head>
+          <title>{moleculeList.title}</title>
+        </Head>
         <Header />
         <div className={this.props.classes.wrapperStyle}>
           <Paper className={this.props.classes.root} elevation={1}>

@@ -3,6 +3,8 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
+import Head from 'next/head'
+
 import { withStyles } from '@material-ui/core/styles'
 import withRoot from '../src/withRoot'
 
@@ -17,6 +19,10 @@ import {
   saveAddressSelected,
   submitDeliveryDetailsLoading
 } from '../containers/deliveryDetails/deliveryDetailsActions'
+
+import {
+  deliveryDetails
+} from '../components/constants/PageTitle'
 
 const styles = theme => ({
   root: {
@@ -50,6 +56,9 @@ class DeliveryDetails extends React.Component {
   render () {
     return (
       <div>
+        <Head>
+          <title>{deliveryDetails.title}</title>
+        </Head>
         <Header />
         <div className={this.props.classes.wrapperStyle}>
           <Paper className={this.props.classes.root} elevation={1}>
