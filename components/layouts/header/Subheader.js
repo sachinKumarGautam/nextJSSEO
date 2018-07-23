@@ -7,6 +7,8 @@ import Router from 'next/router'
 
 import { REFILL_PATIENTS, HOME_PAGE } from '../../../routes/RouteConstant'
 
+import { getReplacedString } from '../../../utils/replaceConstants'
+
 const styles = theme => ({
   horizontalSubheader: {
     display: 'flex',
@@ -53,24 +55,24 @@ class Subheader extends React.Component {
   }
 
   toggleHover (item) {
-    this.setState((prevState) => ({
+    this.setState(prevState => ({
       hover: {
         [item]: !prevState.hover[item]
       }
-    })
-    )
+    }))
   }
 
   redirectToRefill () {
     if (this.props.isAuthenticated) {
-      Router.push(REFILL_PATIENTS)
+      const url = getReplacedString(REFILL_PATIENTS)
+      Router.push(url)
     } else {
       this.props.openLoginModal.call(this)
     }
   }
 
   render () {
-    const {classes} = this.props
+    const { classes } = this.props
 
     return (
       <ul className={classes.horizontalSubheader}>
@@ -87,9 +89,14 @@ class Subheader extends React.Component {
               /> */}
               <Typography
                 variant={'body2'}
-                className={this.state.hover.orderMedicine ? `${classes.subHeaderText} ${classes.hover}` : classes.subHeaderText}
-                component='h1'>
-                  Order Medicine
+                className={
+                  this.state.hover.orderMedicine
+                    ? `${classes.subHeaderText} ${classes.hover}`
+                    : classes.subHeaderText
+                }
+                component='h1'
+              >
+                Order Medicine
               </Typography>
             </a>
           </Link>
@@ -104,8 +111,13 @@ class Subheader extends React.Component {
             {/* <img src='/static/images/repeat-button.svg' /> */}
             <Typography
               variant={'body2'}
-              className={this.state.hover.repeatPastMedicine ? `${classes.subHeaderText} ${classes.hover}` : classes.subHeaderText}
-              component='h1'>
+              className={
+                this.state.hover.repeatPastMedicine
+                  ? `${classes.subHeaderText} ${classes.hover}`
+                  : classes.subHeaderText
+              }
+              component='h1'
+            >
               Refill Past Medicines
             </Typography>
           </a>
@@ -121,9 +133,14 @@ class Subheader extends React.Component {
             {/* <img src='/static/images/repeat-button.svg' /> */}
             <Typography
               variant={'body2'}
-              className={this.state.hover.diseases ? `${classes.subHeaderText} ${classes.hover}` : classes.subHeaderText}
-              component='h1'>
-                Diseases
+              className={
+                this.state.hover.diseases
+                  ? `${classes.subHeaderText} ${classes.hover}`
+                  : classes.subHeaderText
+              }
+              component='h1'
+            >
+              Diseases
             </Typography>
           </a>
         </li>
@@ -138,9 +155,15 @@ class Subheader extends React.Component {
             {/* <img src='/static/images/blog.svg' /> */}
             <Typography
               variant={'body2'}
-              className={this.state.hover.healthContent ? `${classes.subHeaderText} ${classes.hover}` : classes.subHeaderText}
+              className={
+                this.state.hover.healthContent
+                  ? `${classes.subHeaderText} ${classes.hover}`
+                  : classes.subHeaderText
+              }
               component='h1'
-            >Health & Content</Typography>
+            >
+              Health & Content
+            </Typography>
           </a>
         </li>
       </ul>
