@@ -472,7 +472,8 @@ export default function cartReducer (state = initialState, action) {
     case cartActionTypes.RESET_CART_STATE:
       return {
         ...state,
-        payload: initialState.payload
+        payload: initialState.payload,
+        payment: initialState.payment
       }
 
     case cartActionTypes.GO_TO_CART_SNACKBAR:
@@ -586,6 +587,60 @@ export default function cartReducer (state = initialState, action) {
               error: {}
             }
           }
+        }
+      }
+
+    case cartActionTypes.VERIFY_PAYMENT_LOADING:
+      return {
+        ...state,
+        payment: {
+          ...state.payment,
+          isLoading: action.isLoading,
+          errorState: {
+            ...state.payment.errorState,
+            isError: action.isError
+          }
+        }
+      }
+
+    case cartActionTypes.VERIFY_PAYMENT_SUCCESS:
+      return {
+        ...state,
+        orderResponse: {
+          ...state.orderResponse,
+          isLoading: action.isLoading,
+          order_number: action.order_number
+        },
+        payment: {
+          ...state.payment,
+          isLoading: action.isLoading,
+          isPaymentSuccessful: action.isPaymentSuccessful,
+          isPaymentFailure: action.isPaymentFailure
+        }
+      }
+
+    case cartActionTypes.VERIFY_PAYMENT_FAILURE:
+      return {
+        ...state,
+        payment: {
+          ...state.payment,
+          isLoading: action.isLoading,
+          isPaymentFailure: action.isPaymentFailure,
+          errorState: {
+            ...state.payment.errorState,
+            isError: action.isError,
+            error: action.error
+          }
+        }
+      }
+
+    case cartActionTypes.UPDATE_PAYMENT_FAILURE_FLAG:
+      return {
+        ...state,
+        payment: {
+          ...state.payment,
+          isPaymentFailure: action.isPaymentFailure,
+          isPaymentSuccessful: action.isPaymentSuccessful
         }
       }
 

@@ -99,9 +99,10 @@ class CartDetails extends Component {
         'description': 'Purchase Description',
         'image': 'adasd',
         'handler': (response) => {
-          //this.verifyPayment(response)
+          this.verifyPayment(response)
         },
         'modal': {
+          escape: true,
           'ondismiss': () => {
             this.onModalDismiss()
           }
@@ -122,8 +123,21 @@ class CartDetails extends Component {
     }
   }
 
-  onModalDismiss() {
-    this.props.resetCartState()
+  onModalDismiss () {
+    const isPaymentFailure = true
+
+    this.props.updatePaymentFailureFlag(
+      this.props.cartState,
+      isPaymentFailure
+    )
+  }
+
+  verifyPayment (response) {
+    this.props.verifyPaymentLoading(
+      this.props.cartState,
+      response,
+      this.props.cartState.payment_gateway.order_id
+    )
   }
 
   componentDidUpdate (prevProps) {
@@ -133,6 +147,26 @@ class CartDetails extends Component {
     ) {
       // Router.push({ pathname: THANK_YOU })
       this.openCheckout(this.props.cartState)
+    }
+
+    if (
+      (this.props.cartState.payment.isPaymentSuccessful !==
+      prevProps.cartState.payment.isPaymentSuccessful) &&
+      this.props.cartState.payment.isPaymentSuccessful
+    ) {
+      this.props.resetCartState()
+      // specify the path of thank you page
+      // let orderConfirmationUrl = `${THANK_YOU}?order-id=${this.props.cartState.orderResponse.order_number}&customer-id=${this.props.cartState.payload.customer_id}&patient-id=${this.props.cartState.payload.patient_id}`
+      Router.push({ pathname: THANK_YOU })
+    }
+
+    if (
+      (this.props.cartState.payment.isPaymentFailure !==
+      prevProps.cartState.payment.isPaymentFailure) &&
+      this.props.cartState.payment.isPaymentFailure
+    ) {
+      // let orderConfirmationUrl = `${THANK_YOU}?order-id=${this.props.cartState.orderResponse.order_number}&is-payment-page=true`
+      Router.push({ pathname: THANK_YOU })
     }
   }
 

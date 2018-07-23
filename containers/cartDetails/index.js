@@ -26,7 +26,9 @@ import {
   resetCartState,
   applyCouponCodeLoading,
   updateCouponCode,
-  optForDoctorCallbackLoading
+  optForDoctorCallbackLoading,
+  verifyPaymentLoading,
+  updatePaymentFailureFlag
 } from './cartActions'
 
 import {
@@ -131,6 +133,8 @@ class CartDetailsWrapper extends Component {
                 resetCartState={this.props.actions.resetCartState}
                 applyCouponCodeLoading={this.props.actions.applyCouponCodeLoading}
                 updateCouponCode={this.props.actions.updateCouponCode}
+                verifyPaymentLoading={this.props.actions.verifyPaymentLoading}
+                updatePaymentFailureFlag={this.props.actions.updatePaymentFailureFlag}
               />
             </section>
           </Grid>
@@ -173,7 +177,9 @@ function mapDispatchToProps (dispatch) {
         submitDeliveryDetailsLoading,
         applyCouponCodeLoading,
         updateCouponCode,
-        optForDoctorCallbackLoading
+        optForDoctorCallbackLoading,
+        verifyPaymentLoading,
+        updatePaymentFailureFlag
       },
       dispatch
     )

@@ -16,7 +16,8 @@ import {
   DELETE_PRESCRIPTION_LOADING,
   SUBMIT_ORDER_LOADING,
   SUBMIT_COUPON_CODE_LOADING,
-  OPT_DOCTOR_CALLBACK_LOADING
+  OPT_DOCTOR_CALLBACK_LOADING,
+  VERIFY_PAYMENT_LOADING
 } from './cartActionTypes'
 
 import {
@@ -41,7 +42,9 @@ import {
   applyCouponCodeSuccess,
   applyCouponCodeFailure,
   optForDoctorCallbackSuccess,
-  optForDoctorCallbackFailure
+  optForDoctorCallbackFailure,
+  verifyPaymentSuccess,
+  verifyPaymentFailure
 } from './cartActions'
 
 import {
@@ -56,7 +59,8 @@ import {
   deletePrescriptionEpic$,
   submitOrder$,
   applyCouponForCart$,
-  teleConsultation$
+  teleConsultation$,
+  verifyPayment$
 } from '../../services/api'
 
 export function getAnonymousCartIdEpic (action$, store) {
@@ -425,11 +429,11 @@ export function submitOrderEpic (action$, store) {
       }
 
       if (data.paymentChannel !== '') {
-          body = {
-            ...body,
-            payment_method: data.paymentChannel
-          }
+        body = {
+          ...body,
+          payment_method: data.paymentChannel
         }
+      }
 
       return http(submitOrder$(data.cartState, body)).pipe(
         map(result => {
@@ -475,6 +479,35 @@ export function optDoctorCallback (action$, store) {
         }),
         catchError(error => {
           return of(optForDoctorCallbackFailure(data.cartState, error))
+        })
+      )
+    })
+  )
+}
+
+export function verifyPaymentEpic (action$, store) {
+  return action$.pipe(
+    ofType(VERIFY_PAYMENT_LOADING),
+    mergeMap(data => {
+      const razorpayDetails = {
+        razorpay_order_id: data.razorpay_order_id,
+        razorpay_payment_id: data.razorpay_payment_id,
+        razorpay_signature: data.razorpay_signature
+      }
+
+      const body = {
+        gateway_name: 'RAZOR_PAY',
+        gateway_data: razorpayDetails
+      }
+
+      return http(verifyPayment$(data.orderId, body)).pipe(
+        map(result => {
+          const payload = result.body.payload.order
+
+          return verifyPaymentSuccess(data.cartState, payload)
+        }),
+        catchError(error => {
+          return of(verifyPaymentFailure(data.cartState, error))
         })
       )
     })

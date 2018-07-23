@@ -23,7 +23,7 @@ class PaymentExpansionPanel extends React.Component {
     )
   }
 
-  handlePaymentChannelsChange(event) {
+  handlePaymentChannelsChange (event) {
     this.setState({
       paymentChannel: event.target.value
     })
@@ -57,16 +57,16 @@ class PaymentExpansionPanel extends React.Component {
         >
           <Grid container spacing={24}>
             <RadioGroup
-              aria-label="Payment Channels"
-              name="payment_channels"
+              aria-label='Payment Channels'
+              name='payment_channels'
               value={this.state.paymentChannel}
               onChange={this.handlePaymentChannelsChange.bind(this)}
             >
               {
-                this.props.cartState.payload.payment_channels.map(payment_channel => {
+                this.props.cartState.payload.payment_channels.map(paymentChannel => {
                   return (
                     <FormControlLabel
-                      value={payment_channel.method}
+                      value={paymentChannel.method}
                       control={
                         <Radio
                           classes={{
@@ -75,7 +75,7 @@ class PaymentExpansionPanel extends React.Component {
                           }}
                         />
                       }
-                      label={payment_channel.name}
+                      label={paymentChannel.name}
                     />
                   )
                 })

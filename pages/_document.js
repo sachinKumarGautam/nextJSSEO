@@ -37,7 +37,7 @@ class MyDocument extends Document {
             href="https://fonts.googleapis.com/css?family=Roboto:300,400,500"
           /> */}
 
-          <script src="https://checkout.razorpay.com/v1/checkout.js" async></script>
+          <script src='https://checkout.razorpay.com/v1/checkout.js' async />
         </Head>
         <body>
           <Main />

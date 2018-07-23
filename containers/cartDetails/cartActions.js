@@ -488,3 +488,54 @@ export function optForDoctorCallbackFailure (cartState, error) {
     error: error
   }
 }
+
+export function verifyPaymentLoading (
+  cartState,
+  response,
+  orderId
+) {
+  return {
+    type: cartActionTypes.VERIFY_PAYMENT_LOADING,
+    cartState,
+    orderId: orderId,
+    razorpay_order_id: response.razorpay_order_id,
+    razorpay_payment_id: response.razorpay_payment_id,
+    razorpay_signature: response.razorpay_signature,
+    isLoading: true,
+    isError: false
+  }
+}
+
+export function verifyPaymentSuccess (cartState, payload) {
+  return {
+    type: cartActionTypes.VERIFY_PAYMENT_SUCCESS,
+    cartState,
+    order_number: payload.id,
+    isPaymentSuccessful: true,
+    isPaymentFailure: false,
+    isLoading: false
+  }
+}
+
+export function verifyPaymentFailure (cartState, error) {
+  return {
+    type: cartActionTypes.VERIFY_PAYMENT_FAILURE,
+    cartState,
+    isLoading: false,
+    isPaymentFailure: true,
+    isError: true,
+    error: error
+  }
+}
+
+export function updatePaymentFailureFlag (
+  cartState,
+  isPaymentFailure
+) {
+  return {
+    type: cartActionTypes.UPDATE_PAYMENT_FAILURE_FLAG,
+    cartState,
+    isPaymentFailure: isPaymentFailure,
+    isPaymentSuccessful: false
+  }
+}

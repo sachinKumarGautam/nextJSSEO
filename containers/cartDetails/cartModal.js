@@ -83,6 +83,16 @@ const initialState = {
     visibleImageUrl: ''
   },
   payment_gateway: {},
+  payment: {
+    payload: {},
+    isPaymentSuccessful: false,
+    isPaymentFailure: false,
+    isLoading: false,
+    errorState: {
+      isError: false,
+      error: {}
+    }
+  },
   orderResponse: {
     payload: {
       order_number: null,

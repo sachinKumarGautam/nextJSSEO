@@ -255,6 +255,14 @@ const teleConsultation$ = (cartUid, isDoctorCallback) => (
   })
 )
 
+const verifyPayment$ = (orderId, body) => (
+  makeAjaxRequest({
+    method: 'POST',
+    url: fetchUrl('order', orderId + '/payment/verify', 'CREATE'),
+    body: body
+  })
+)
+
 export {
   getMoleculeSummary$,
   getMedicineList$,
@@ -286,5 +294,6 @@ export {
   getPatientPastMedicineList$,
   getSliderImages$,
   applyCouponForCart$,
-  teleConsultation$
+  teleConsultation$,
+  verifyPayment$
 }
