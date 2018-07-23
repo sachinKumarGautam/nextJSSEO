@@ -23,7 +23,11 @@ class ProductDetails extends Component {
   render () {
     return (
       <div>
-        <Grid container spacing={24} className={this.props.classes.productDetailsWrapper}>
+        <Grid
+          container
+          spacing={24}
+          className={this.props.classes.productDetailsWrapper}
+        >
           <Grid item xs={8}>
             <ProductInfo
               toggleHover={this.props.toggleHover}
@@ -34,12 +38,10 @@ class ProductDetails extends Component {
           <Grid item xs={4}>
             <ProductPriceDetails
               checkPincodeState={this.props.checkPincodeState}
-              checkPincodeLoading={this.props.checkPincodeLoading}
               productDetailsState={this.props.productDetailsState}
-              incrementCartItemLoading={this.props.incrementCartItemLoading}
-              cartState={this.props.cartState}
               addToCartHandler={this.props.addToCartHandler}
               onChangeQuantity={this.props.onChangeQuantity}
+              openPincodeDialog={this.props.openPincodeDialog}
             />
           </Grid>
         </Grid>

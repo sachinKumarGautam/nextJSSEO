@@ -15,6 +15,7 @@ import RefillPatientsWrapper from '../containers/refillPatients'
 import {
   getPatientDetailsListLoading
 } from '../containers/patientDetails/patientDetailsActions'
+import { withCommonWrapper } from '../components/HOCWrapper/CommonWrapper'
 
 const styles = theme => ({
   root: {
@@ -41,7 +42,7 @@ class RefillPatient extends Component {
     this.props.actions.getPatientDetailsListLoading(
       this.props.patientDetailsState,
       this.props.customerState.payload.id, // pass customer id,
-      {isRefillPatients: true}
+      { isRefillPatients: true }
     )
   }
 
@@ -51,7 +52,9 @@ class RefillPatient extends Component {
         <Header />
         <div className={this.props.classes.wrapperStyle}>
           <Paper className={this.props.classes.root} elevation={1}>
-            <RefillPatientsWrapper />
+            <RefillPatientsWrapper
+              addToCartHandler={this.props.addToCartHandler}
+            />
           </Paper>
         </div>
         <Footer />
@@ -78,7 +81,8 @@ function mapDispatchToProps (dispatch) {
   }
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(withRoot(withStyles(styles)(RefillPatient)))
+export default withCommonWrapper(
+  connect(mapStateToProps, mapDispatchToProps)(
+    withRoot(withStyles(styles)(RefillPatient))
+  )
+)

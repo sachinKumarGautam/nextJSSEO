@@ -1,9 +1,9 @@
 import { of } from 'rxjs/observable/of'
 import { mergeMap, catchError, flatMap } from 'rxjs/operators'
 import { ofType } from 'redux-observable'
-import {CHECK_PINCODE_LOADING} from './pincodeActionTypes'
-import {checkPincodeSuccess, checkPincodeFailure} from './pincodeAction'
-import {checkPincode$} from '../../../services/api'
+import { CHECK_PINCODE_LOADING } from './pincodeActionTypes'
+import { checkPincodeSuccess, checkPincodeFailure } from './pincodeAction'
+import { checkPincode$ } from '../../../services/api'
 import http from '../../../services/api/ajaxWrapper'
 
 /**
@@ -25,8 +25,8 @@ export function checkPincode (action$, store) {
           data.setSubmitting(false)
           if (typeof data.incrementCartItemLoading === 'function') {
             // checks if any add to cart function is comming from parent and invokes it
-            console.log(' this is sachin')
-            return of(data.incrementCartItemLoading(cartState, data.inProgressCartItem),
+            return of(
+              data.incrementCartItemLoading(cartState, data.inProgressCartItem),
               checkPincodeSuccess(checkPincodeState, result)
             )
           } else {
@@ -35,7 +35,12 @@ export function checkPincode (action$, store) {
         }),
         catchError(error => {
           data.setSubmitting(false)
-          return of(checkPincodeFailure(checkPincodeState, error.response.body.error.code))
+          return of(
+            checkPincodeFailure(
+              checkPincodeState,
+              error.response.body.error.code
+            )
+          )
         })
       )
     })

@@ -8,7 +8,6 @@ import ProductPackSize from './ProductPackSize'
 import ProductPrice from './ProductPrice'
 import StrokePrice from './StrokePrice'
 import EstimatedPriceLabel from './EstimatedPriceLabel'
-import AddToCartWrapper from '../containers/cartDetails/addToCartWrapper/index'
 import Button from './button/Button'
 
 const styles = theme => {
@@ -92,9 +91,7 @@ class RelatedMedicinesCard extends React.Component {
   }
 
   render () {
-    const {
-      props
-    } = this
+    const { props } = this
 
     return (
       <div>

@@ -1,17 +1,21 @@
-import AddToCartWrapper from '../../containers/cartDetails/addToCartWrapper'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import PincodeDialog from '../../containers/location/pincode/PincodeDialog'
 
 import { incrementCartItemLoading } from '../../containers/cartDetails/cartActions'
-import { openPincodeDialog, checkPincodeLoading } from '../../containers/location/pincode/pincodeAction'
+import {
+  openPincodeDialog,
+  checkPincodeLoading
+} from '../../containers/location/pincode/pincodeAction'
 
 import withRoot from '../../src/withRoot'
 
-export function commonWrapperHOC (Page) {
+export function withCommonWrapper (Page) {
   class CommomWrapper extends React.Component {
     static getInitialProps (ctx) {
-      if (Page.getInitialProps) { return Page.getInitialProps(ctx) }
+      if (Page.getInitialProps) {
+        return Page.getInitialProps(ctx)
+      }
     }
 
     constructor (props) {
@@ -24,40 +28,44 @@ export function commonWrapperHOC (Page) {
 
     addToCartHandler (inProgressCartItem, event) {
       if (this.props.checkPincodeState.payload.pincode) {
-        this.props.actions.incrementCartItemLoading(this.props.cartState, inProgressCartItem)
+        this.props.actions.incrementCartItemLoading(
+          this.props.cartState,
+          inProgressCartItem
+        )
       } else {
         this.setState({
           inProgressCartItem
         })
 
-        this.props.actions.openPincodeDialog(this.props.checkPincodeState, true)
+        this.props.actions.openPincodeDialog(
+          this.props.checkPincodeState,
+          true
+        )
       }
     }
 
-  handleClose = () => (
-    this.props.actions.openPincodeDialog(this.props.checkPincodeState, false)
-  )
+    handleClose = () =>
+      this.props.actions.openPincodeDialog(this.props.checkPincodeState, false);
 
-  render () {
-    const { checkPincodeState, actions } = this.props
-    const { inProgressCartItem } = this.state
-    return (
-      <React.Fragment>
-        <Page {...this.props}
-          addToCartHandler={this.addToCartHandler}
-        />
-        <PincodeDialog
-          {...this.props}
-          open={checkPincodeState.isPincodeDialogOpen}
-          onSubmit={actions.checkPincodeLoading}
-          incrementCartItemLoading={actions.incrementCartItemLoading}
-          inProgressCartItem={inProgressCartItem}
-          handleClose={this.handleClose}
-          checkPincodeState={checkPincodeState}
-        />
-      </React.Fragment>
-    )
-  }
+    render () {
+      const { checkPincodeState, actions } = this.props
+
+      const { inProgressCartItem } = this.state
+      return (
+        <React.Fragment>
+          <Page {...this.props} addToCartHandler={this.addToCartHandler} />
+          <PincodeDialog
+            {...this.props}
+            open={checkPincodeState.isPincodeDialogOpen}
+            onSubmit={actions.checkPincodeLoading}
+            incrementCartItemLoading={actions.incrementCartItemLoading}
+            inProgressCartItem={inProgressCartItem}
+            handleClose={this.handleClose}
+            checkPincodeState={checkPincodeState}
+          />
+        </React.Fragment>
+      )
+    }
   }
 
   function mapStateToProps (state) {
@@ -89,5 +97,5 @@ export function commonWrapperHOC (Page) {
 
 // export default (mapStateToProps, mapDispatchToProps) => (Page) => {
 //   Page = connect(mapStateToProps, mapDispatchToProps)(Page)
-//   return commonWrapperHOC(Page)
+//   return withCommonWrapper(Page)
 // }

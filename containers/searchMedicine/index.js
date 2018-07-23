@@ -11,7 +11,7 @@ import MedicineListDetails from '../../components/MedicineListDetails'
 
 import { MEDICINE_LIST_PRODUCT } from '../../routes/RouteConstant'
 
-// import { commonWrapperHOC } from '../../components/HOCWrapper/CommonWrapper'
+// import { withCommonWrapper } from '../../components/HOCWrapper/CommonWrapper'
 
 const styles = theme => ({
   root: {
@@ -93,10 +93,18 @@ const styles = theme => ({
 })
 
 function renderInput (inputProps) {
-  const { InputProps, classes, ref, onChange, searchMedicineIsLoading, ...other } = inputProps
+  const {
+    InputProps,
+    classes,
+    ref,
+    onChange,
+    searchMedicineIsLoading,
+    ...other
+  } = inputProps
   return (
     <div className={classes.searchBar}>
-      {searchMedicineIsLoading && <CircularProgress className={classes.progress} size={20} />}
+      {searchMedicineIsLoading &&
+        <CircularProgress className={classes.progress} size={20} />}
       <TextField
         InputProps={{
           disableUnderline: true,
@@ -114,7 +122,11 @@ function renderInput (inputProps) {
         classes={{
           root: classes.searchButton
         }}
-        onClick={InputProps.inputValue ? inputProps.onSearchClick.bind(this, InputProps.inputValue) : null}
+        onClick={
+          InputProps.inputValue
+            ? inputProps.onSearchClick.bind(this, InputProps.inputValue)
+            : null
+        }
         label={<SearchIcon className={classes.iconColor} />}
       />
     </div>
@@ -131,27 +143,20 @@ function renderSuggestion ({
   highlightedSearchItem,
   selectedSearchItem,
   onSelectItem,
-  checkPincodeLoading,
   checkPincodeState,
-  cartState,
-  incrementCartItemLoading,
   addToCartHandler
 }) {
   const isHighlighted = highlightedIndex === index
   const isSelected = (selectedItem || '').indexOf(suggestion.label) > -1
 
-  const listStyle = isHighlighted ? highlightedSearchItem : (isSelected ? selectedSearchItem : searchItemStyle)
+  const listStyle = isHighlighted
+    ? highlightedSearchItem
+    : isSelected ? selectedSearchItem : searchItemStyle
   return (
-    <li
-      {...itemProps}
-      className={listStyle}
-    >
+    <li {...itemProps} className={listStyle}>
       <MedicineListDetails
         itemDetails={suggestion}
         openPicodeDialogFrom
-        incrementCartItemLoading={incrementCartItemLoading}
-        cartState={cartState}
-        checkPincodeLoading={checkPincodeLoading}
         checkPincodeState={checkPincodeState}
         addToCartHandler={addToCartHandler}
       />
@@ -191,12 +196,11 @@ class SearchMedicine extends React.Component {
   }
 
   stateChangeHandler = changes => {
-    let {
-      isOpen = this.state.isOpen,
-      type
-    } = changes
+    let { isOpen = this.state.isOpen, type } = changes
 
-    isOpen = (type === Downshift.stateChangeTypes.blurInput) ? this.state.isOpen : isOpen
+    isOpen = type === Downshift.stateChangeTypes.blurInput
+      ? this.state.isOpen
+      : isOpen
     // restrict closing of search item list because of pincode dialog invokes blur event on search bar
     this.setState({
       isOpen
@@ -207,14 +211,12 @@ class SearchMedicine extends React.Component {
     const {
       classes,
       searchMedicineState,
-      checkPincodeLoading,
       checkPincodeState,
-      cartState,
-      incrementCartItemLoading,
       addToCartHandler
     } = this.props
     const isOpen = this.state.isOpen
-    const searchMedicineResult = searchMedicineState.payload.searchMedicineResult
+    const searchMedicineResult =
+      searchMedicineState.payload.searchMedicineResult
     const searchMedicineIsLoading = searchMedicineState.isLoading
     return (
       <div className={classes.root}>
@@ -224,7 +226,15 @@ class SearchMedicine extends React.Component {
           // onSelectItem={this.onSelectItem}
           isOpen={isOpen}
         >
-          {({ getInputProps, getItemProps, getMenuProps, isOpen, inputValue, selectedItem, highlightedIndex }) => (
+          {({
+            getInputProps,
+            getItemProps,
+            getMenuProps,
+            isOpen,
+            inputValue,
+            selectedItem,
+            highlightedIndex
+          }) => (
             <div className={classes.container}>
               {renderInput({
                 fullWidth: true,
@@ -239,13 +249,15 @@ class SearchMedicine extends React.Component {
                 onSearchClick: this.onSearchMedicine,
                 searchMedicineIsLoading
               })}
-              {isOpen ? (
-                <Paper className={classes.paper} square>
+              {isOpen
+                ? <Paper className={classes.paper} square>
                   <ul
                     {...getMenuProps()}
                     className={classes.searchContentWrapper}
                   >
-                    {getSuggestions(searchMedicineResult).map((suggestion, index) =>
+                    {getSuggestions(
+                      searchMedicineResult
+                    ).map((suggestion, index) =>
                       renderSuggestion({
                         suggestion,
                         index,
@@ -258,16 +270,13 @@ class SearchMedicine extends React.Component {
                         searchItemStyle: classes.searchItem,
                         highlightedSearchItem: `${classes.searchItem} ${classes.highlightedSearchItem}`,
                         selectedSearchItem: `${classes.searchItem} ${classes.selectedSearchItem}`,
-                        checkPincodeLoading,
                         checkPincodeState,
-                        cartState,
-                        incrementCartItemLoading,
                         addToCartHandler
                       })
                     )}
                   </ul>
                 </Paper>
-              ) : null}
+                : null}
             </div>
           )}
         </Downshift>

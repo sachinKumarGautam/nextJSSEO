@@ -15,23 +15,22 @@ import CartIcon from '../../CartIcon'
 import Login from '../../../containers/login'
 import getPageContext from '../../../src/getPageContext'
 import MenuWrapper from '../../../containers/menu'
-import { searchMedicineLoading } from '../../../containers/searchMedicine/searchMedicineAction'
-import { checkPincodeLoading } from '../../../containers/location/pincode/pincodeAction'
-import { commonWrapperHOC } from '../../../components/HOCWrapper/CommonWrapper'
+import {
+  searchMedicineLoading
+} from '../../../containers/searchMedicine/searchMedicineAction'
+
+import { withCommonWrapper } from '../../../components/HOCWrapper/CommonWrapper'
 
 import GoToCartSnackbar from '../../../containers/cartDetails/GoToCartSnackbar'
 
 import {
   getAnonymousCartIdLoading,
   updateIsCartOpenLoginFlag,
-  incrementCartItemLoading,
   updateIsCartOpenRegisterModalFlag,
   goToCartSnackbar
 } from '../../../containers/cartDetails/cartActions'
 
-import {
-  HOME_PAGE
-} from '../../../routes/RouteConstant'
+import { HOME_PAGE } from '../../../routes/RouteConstant'
 
 import Router from 'next/router'
 
@@ -81,7 +80,10 @@ class Header extends React.Component {
   }
 
   componentDidMount () {
-    if (!this.props.loginState.isAuthenticated && !this.props.cartState.payload.uid) {
+    if (
+      !this.props.loginState.isAuthenticated &&
+      !this.props.cartState.payload.uid
+    ) {
       this.props.actions.getAnonymousCartIdLoading(
         this.props.cartState,
         this.props.checkPincodeState.payload.source,
@@ -150,22 +152,19 @@ class Header extends React.Component {
               <img
                 className={classes.lifcareLogoStyle}
                 src='/static/images/logo-green.svg'
-                onClick={() => { Router.push({ pathname: HOME_PAGE }) }}
+                onClick={() => {
+                  Router.push({ pathname: HOME_PAGE })
+                }}
               />
               <SearchMedicine
                 searchMedicineState={searchMedicineState}
-                cartState={this.props.cartState}
-                incrementCartItemLoading={this.props.actions.incrementCartItemLoading}
                 checkPincodeState={checkPincodeState}
-                checkPincodeLoading={this.props.actions.checkPincodeLoading}
                 searchMedicineLoading={actions.searchMedicineLoading}
                 addToCartHandler={this.props.addToCartHandler}
               />
-              <CartIcon
-                cartState={this.props.cartState}
-              />
+              <CartIcon cartState={this.props.cartState} />
               {loginState.isAuthenticated && <MenuWrapper />}
-              { !loginState.isAuthenticated &&
+              {!loginState.isAuthenticated &&
                 <Button
                   variant='raised'
                   size='medium'
@@ -175,24 +174,23 @@ class Header extends React.Component {
                   className={classes.button}
                   label={'Login / Register'}
                 />}
-              {(
-                  this.state.openLoginDialog ||
-                  this.props.cartState.isCartOpenLoginDialog ||
-                  this.props.cartState.isCartOpenRegisterDialog
-                ) &&
+              {(this.state.openLoginDialog ||
+                this.props.cartState.isCartOpenLoginDialog ||
+                this.props.cartState.isCartOpenRegisterDialog) &&
                 <Login
                   openLoginDialog={
-                    this.state.openLoginDialog 
-                    || this.props.cartState.isCartOpenLoginDialog 
-                    || this.props.cartState.isCartOpenRegisterDialog
-                    }
+                    this.state.openLoginDialog ||
+                      this.props.cartState.isCartOpenLoginDialog ||
+                      this.props.cartState.isCartOpenRegisterDialog
+                  }
                   openLoginModal={this.openLoginModal}
-                  isCartOpenRegisterDialog={this.props.cartState.isCartOpenRegisterDialog}
+                  isCartOpenRegisterDialog={
+                    this.props.cartState.isCartOpenRegisterDialog
+                  }
                   closeLoginModal={this.closeLoginModal}
                   loginState={loginState}
                   customerState={customerState}
-                />
-              }
+                />}
             </Toolbar>
             <Subheader
               isAuthenticated={this.props.loginState.isAuthenticated}
@@ -225,9 +223,7 @@ function mapDispatchToProps (dispatch) {
       {
         updateIsCartOpenLoginFlag,
         searchMedicineLoading,
-        checkPincodeLoading,
         getAnonymousCartIdLoading,
-        incrementCartItemLoading,
         updateIsCartOpenRegisterModalFlag,
         goToCartSnackbar
       },
@@ -236,7 +232,6 @@ function mapDispatchToProps (dispatch) {
   }
 }
 
-export default commonWrapperHOC(withStyles(styles)(connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Header)))
+export default withCommonWrapper(
+  withStyles(styles)(connect(mapStateToProps, mapDispatchToProps)(Header))
+)

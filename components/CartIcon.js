@@ -13,13 +13,9 @@ import Button from './button'
 
 import Link from 'next/link'
 
-import {
-  CART_DETAILS
-} from '../routes/RouteConstant'
+import { CART_DETAILS } from '../routes/RouteConstant'
 
-import {
-  NO_CART_ITEM
-} from '../containers/messages/cartMessages'
+import { NO_CART_ITEM } from '../containers/messages/cartMessages'
 
 const styles = theme => ({
   button: {
@@ -114,7 +110,8 @@ const styles = theme => ({
     // padding: theme.spacing.unit * 2
   },
   iconStyle: {
-    fontSize: theme.spacing.unit * 3.25
+    fontSize: theme.spacing.unit * 3.25,
+    color: theme.palette.customGrey.grey600
   }
 })
 
@@ -129,13 +126,10 @@ class CartIcon extends Component {
 
     return (
       <div>
-        <a
-          className={classes.moleculeTag}
-          data-tip
-          data-for='cartIcon'
-        >
+        <a className={classes.moleculeTag} data-tip data-for='cartIcon'>
           <IconButton
             className={classes.button}
+            color={'primary'}
             aria-label='Add to shopping cart'
           >
             <Badge
@@ -146,7 +140,7 @@ class CartIcon extends Component {
                 badge: classes.badge
               }}
             >
-              <ShoppingCartIcon classes={{root: classes.iconStyle}} />
+              <ShoppingCartIcon classes={{ root: classes.iconStyle }} />
             </Badge>
           </IconButton>
         </a>
@@ -159,16 +153,10 @@ class CartIcon extends Component {
           delayShow={100}
         >
           <div className={classes.summaryMenuWrapper}>
-            <Typography
-              variant='caption'
-              className={classes.summaryStyle}
-            >
+            <Typography variant='caption' className={classes.summaryStyle}>
               Order Summary
             </Typography>
-            <Typography
-              variant='caption'
-              className={classes.itemStyle}
-            >
+            <Typography variant='caption' className={classes.itemStyle}>
               {cartItems.length} item(s)
             </Typography>
           </div>
@@ -178,25 +166,19 @@ class CartIcon extends Component {
               variant='caption'
               className={
                 this.state.quantity
-                  ? classes.medicineNameStyle : classes.noItemTextStyle
+                  ? classes.medicineNameStyle
+                  : classes.noItemTextStyle
               }
             >
-              {
-                cartItems.length
-                  ? cartItems[cartItems.length - 1].name
-                  : NO_CART_ITEM
-              }
+              {cartItems.length
+                ? cartItems[cartItems.length - 1].name
+                : NO_CART_ITEM}
             </Typography>
-            {
-              cartItems.length
-                ? <Typography
-                  variant='caption'
-                  className={classes.priceStyle}
-                >
-                    &#8377; {cartItems.length && cartItems[cartItems.length - 1].mrp}
-                </Typography>
-                : null
-            }
+            {cartItems.length
+              ? <Typography variant='caption' className={classes.priceStyle}>
+                  ₹ {cartItems.length && cartItems[cartItems.length - 1].mrp}
+              </Typography>
+              : null}
           </div>
           <div className={classes.buttonStyle}>
             <Link prefetch href={CART_DETAILS}>
