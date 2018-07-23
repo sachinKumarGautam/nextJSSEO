@@ -25,6 +25,10 @@ import {
 
 import { checkPincodeLoading } from '../containers/location/pincode/pincodeAction'
 
+import {
+  moleculeList
+} from '../components/constants/PageTitle'
+
 const styles = theme => ({
   root: {
     paddingTop: theme.spacing.unit * 3,
@@ -84,7 +88,7 @@ class MoleculeDetails extends React.Component {
     return (
       <div>
         <Head>
-          <title>Molecule Details</title>
+          <title>{moleculeList.title}</title>
         </Head>
         <Header />
         <div className={this.props.classes.wrapperStyle}>

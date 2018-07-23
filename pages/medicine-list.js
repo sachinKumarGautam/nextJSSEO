@@ -17,6 +17,9 @@ import {searchMedicineLoading} from '../containers/searchMedicine/searchMedicine
 import {getRelatedMedicinesLoading} from '../containers/medicineList/medicineListActions'
 import {incrementCartItemLoading} from '../containers/cartDetails/cartActions'
 import { checkPincodeLoading } from '../containers/location/pincode/pincodeAction'
+import {
+  medicineList
+} from '../components/constants/PageTitle'
 
 const styles = theme => ({
   root: {
@@ -64,7 +67,7 @@ class MedicineList extends React.Component {
     return (
       <div>
         <Head>
-          <title>Medicine List</title>
+          <title>{medicineList.title}</title>
         </Head>
         <Header />
         <div className={this.props.classes.root}>

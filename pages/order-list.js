@@ -19,6 +19,10 @@ import {
   getOrderListDetailsLoading
 } from '../containers/orderList/orderListActions'
 
+import {
+  orderList
+} from '../components/constants/PageTitle'
+
 const styles = theme => ({
   root: {
     paddingTop: theme.spacing.unit * 3,
@@ -54,7 +58,7 @@ class Orders extends React.Component {
     return (
       <div>
         <Head>
-          <title>Order List</title>
+          <title>{orderList.title}</title>
         </Head>
         <Header />
         <div className={this.props.classes.wrapperStyle}>

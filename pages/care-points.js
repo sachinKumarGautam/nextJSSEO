@@ -19,6 +19,8 @@ import {
   getCarePointDetailsLoading
 } from '../containers/carePoint/carePointActions'
 
+import {carePoint} from '../components/constants/PageTitle'
+
 const styles = theme => ({
   root: {
     paddingTop: theme.spacing.unit * 3,
@@ -53,7 +55,7 @@ class CarePoints extends React.Component {
     return (
       <div>
         <Head>
-          <title>Care Points</title>
+          <title>{carePoint.title}</title>
         </Head>
         <Header />
         <div className={this.props.classes.wrapperStyle}>

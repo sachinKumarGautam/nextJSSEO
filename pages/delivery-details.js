@@ -20,6 +20,10 @@ import {
   submitDeliveryDetailsLoading
 } from '../containers/deliveryDetails/deliveryDetailsActions'
 
+import {
+  deliveryDetails
+} from '../components/constants/PageTitle'
+
 const styles = theme => ({
   root: {
     paddingTop: theme.spacing.unit * 3,
@@ -53,7 +57,7 @@ class DeliveryDetails extends React.Component {
     return (
       <div>
         <Head>
-          <title>Delivery Address List</title>
+          <title>{deliveryDetails.title}</title>
         </Head>
         <Header />
         <div className={this.props.classes.wrapperStyle}>

@@ -25,6 +25,10 @@ import {
 
 import {checkPincodeLoading} from '../containers/location/pincode/pincodeAction'
 
+import {
+  productDetail
+} from '../components/constants/PageTitle'
+
 const styles = theme => ({
   root: {
     paddingTop: theme.spacing.unit * 3,
@@ -90,7 +94,7 @@ class ProductDetails extends React.Component {
     return (
       <div>
         <Head>
-          <title>Product Detail</title>
+          <title>{productDetail.title}</title>
         </Head>
         <Header />
         <div className={this.props.classes.wrapperStyle}>

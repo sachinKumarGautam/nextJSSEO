@@ -18,6 +18,10 @@ import {
   getPatientDetailsListLoading
 } from '../containers/patientDetails/patientDetailsActions'
 
+import {
+  refillPatient
+} from '../components/constants/PageTitle'
+
 const styles = theme => ({
   root: {
     paddingTop: theme.spacing.unit * 3,
@@ -51,7 +55,7 @@ class RefillPatient extends Component {
     return (
       <div>
         <Head>
-          <title>Patient Refill Medicines</title>
+          <title>{refillPatient.title}</title>
         </Head>
         <Header />
         <div className={this.props.classes.wrapperStyle}>
