@@ -9,6 +9,10 @@ import Head from 'next/head'
 
 import CartDetailsWrapper from '../containers/cartDetails'
 
+import {
+  cartDetail
+} from '../components/constants/PageTitle'
+
 const styles = theme => ({
   root: {
     paddingTop: theme.spacing.unit * 3,
@@ -54,7 +58,7 @@ const styles = theme => ({
 const CartDetails = props => (
   <div>
     <Head>
-      <title>Cart</title>
+      <title>{cartDetail.title}</title>
     </Head>
     <Header />
     <div className={props.classes.root}>

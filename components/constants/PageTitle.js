@@ -52,3 +52,8 @@ export const homePage = {
   title: 'Home',
   description: ''
 }
+
+export const cartDetail = {
+  title: 'Cart',
+  description: ''
+}
