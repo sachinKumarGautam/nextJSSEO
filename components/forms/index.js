@@ -4,7 +4,7 @@ import OTPForm from './OTPForm'
 import PatientForm from './PatientForm'
 import DeliveryForm from './DeliveryForm'
 
-const FormWrapper = (props) => {
+const FormWrapper = props => {
   const {
     closeLoginModal,
     toggleForm,
@@ -15,61 +15,77 @@ const FormWrapper = (props) => {
     patientFormState,
     deliveryFormState,
     deliveryDetailsState,
-    checkReferralCodeLoading
+    checkPincodeDetailLoading,
+    updateAddressFormValue,
+    getLocalityDetailListLoading,
+    checkPincodeState
   } = props
   switch (props.type) {
     case 'loginForm':
-      return <LoginForm
-        closeLoginModal={closeLoginModal}
-        toggleForm={toggleForm}
-        onSubmit={onSubmit}
-        loginState={loginState}
-      />
+      return (
+        <LoginForm
+          closeLoginModal={closeLoginModal}
+          toggleForm={toggleForm}
+          onSubmit={onSubmit}
+          loginState={loginState}
+        />
+      )
 
     case 'registerForm':
-      return <RegisterForm
-        closeLoginModal={closeLoginModal}
-        toggleForm={toggleForm}
-        onSubmit={onSubmit}
-        loginState={loginState}
-        customerState={customerState}
-        checkReferralCodeLoading={checkReferralCodeLoading}
-      />
+      return (
+        <RegisterForm
+          closeLoginModal={closeLoginModal}
+          toggleForm={toggleForm}
+          onSubmit={onSubmit}
+          loginState={loginState}
+          customerState={customerState}
+          checkReferralCodeLoading={checkReferralCodeLoading}
+        />
+      )
 
     case 'OTPForm':
-      return <OTPForm
-        closeLoginModal={closeLoginModal}
-        toggleForm={toggleForm}
-        onSubmit={onSubmit}
-        loginState={loginState}
-      />
+      return (
+        <OTPForm
+          closeLoginModal={closeLoginModal}
+          toggleForm={toggleForm}
+          onSubmit={onSubmit}
+          loginState={loginState}
+        />
+      )
 
     case 'patientForm':
-      return <PatientForm
-        isCartPage={props.isCartPage}
-        closeModal={closeModal}
-        onSubmit={onSubmit}
-        patientFormState={patientFormState}
-        customerId={props.customerState.payload.id}
-        mobile={props.customerState.payload.mobile}
-      />
+      return (
+        <PatientForm
+          isCartPage={props.isCartPage}
+          closeModal={closeModal}
+          onSubmit={onSubmit}
+          patientFormState={patientFormState}
+          customerId={props.customerState.payload.id}
+          mobile={props.customerState.payload.mobile}
+        />
+      )
 
     case 'deliveryForm':
-      return <DeliveryForm
-        isCartPage={props.isCartPage}
-        closeModal={closeModal}
-        onSubmit={onSubmit}
-        deliveryDetailsState={deliveryDetailsState}
-        deliveryFormState={deliveryFormState}
-        customerId={props.customerState.payload.id}
-        mobile={props.customerState.payload.mobile}
-      />
+      return (
+        <DeliveryForm
+          isCartPage={props.isCartPage}
+          closeModal={closeModal}
+          onSubmit={onSubmit}
+          deliveryDetailsState={deliveryDetailsState}
+          deliveryFormState={deliveryFormState}
+          customerId={props.customerState.payload.id}
+          mobile={props.customerState.payload.mobile}
+          checkPincodeDetailLoading={checkPincodeDetailLoading}
+          updateAddressFormValue={updateAddressFormValue}
+          getLocalityDetailListLoading={getLocalityDetailListLoading}
+          checkPincodeState={checkPincodeState}
+        />
+      )
 
-    default :
-      return <LoginForm
-        closeLoginModal={closeLoginModal}
-        toggleForm={toggleForm}
-      />
+    default:
+      return (
+        <LoginForm closeLoginModal={closeLoginModal} toggleForm={toggleForm} />
+      )
   }
 }
 

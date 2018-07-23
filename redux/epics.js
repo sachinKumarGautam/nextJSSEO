@@ -21,7 +21,8 @@ import { searchMedicine } from '../containers/searchMedicine/searchMedicineEpic'
 
 import {
   getDeliveryDetailsList,
-  submitDeliveryDetails
+  submitDeliveryDetails,
+  getLocalityList
 } from '../containers/deliveryDetails/deliveryDetailsEpics'
 
 import {
@@ -105,5 +106,6 @@ export const rootEpic = combineEpics(
   applyCouponCode,
   optDoctorCallback,
   checkReferralCode,
-  getMembershipCodeLoading
+  getMembershipCodeLoading,
+  getLocalityList
 )

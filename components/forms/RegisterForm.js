@@ -53,10 +53,20 @@ class RegisterForm extends React.Component {
 
   componentDidUpdate (prevProps) {
     const referralValue = this.props.customerState.payload.referral_code.payload
-    const prevReferralValue = prevProps.customerState.payload.referral_code.payload
-    if(referralValue !== prevReferralValue ){
-        this.props.setFieldValue('referral_code', referralValue)
-      }
+    const prevReferralValue =
+      prevProps.customerState.payload.referral_code.payload
+    const membershipCode = this.props.customerState.payload.membership_code
+      .payload
+
+    const prevMembershipCode =
+      prevState.customerState.payload.membership_code.payload
+    if (referralValue !== prevReferralValue) {
+      this.props.setFieldValue('referral_code', referralValue)
+    }
+
+    if (membershipCode !== prevMembershipCode) {
+      this.props.setFieldValue('membership_code', membershipCode)
+    }
   }
 
   onChangeReferralCode = event => {
@@ -65,13 +75,15 @@ class RegisterForm extends React.Component {
   }
 
   onChangePhoneNumber = event => {
-    if(event.target.value.length < 11){
+    if (event.target.value.length < 11) {
       this.props.handleChange(event)
     }
   }
 
   checkReferralCode (value) {
-    if (value.length) { this.props.checkReferralCodeLoading(this.props.customerState, value) }
+    if (value.length) {
+      this.props.checkReferralCodeLoading(this.props.customerState, value)
+    }
   }
 
   emptyHandleSubmit (event) {
@@ -90,7 +102,8 @@ class RegisterForm extends React.Component {
       customerState
     } = this.props
 
-    const referralCodeError = customerState.payload.referral_code.errorState.error
+    const referralCodeError = customerState.payload.referral_code.errorState
+      .error
       ? customerState.payload.referral_code.errorState.error.error.status
       : ''
     const referralCodeLoading = customerState.payload.referral_code.isLoading
@@ -98,11 +111,13 @@ class RegisterForm extends React.Component {
     const referralCodeValue = this.props.values.referral_code
 
     return (
-      <form 
-        onSubmit={(!referralCodeValue 
-          || !referralCodeError ) && !referralCodeLoading
-          ? handleSubmit 
-          : this.emptyHandleSubmit}>
+      <form
+        onSubmit={
+          (!referralCodeValue || !referralCodeError) && !referralCodeLoading
+            ? handleSubmit
+            : this.emptyHandleSubmit
+        }
+      >
         <FormControl
           className={classes.formControl}
           aria-describedby='full-name'
@@ -116,14 +131,11 @@ class RegisterForm extends React.Component {
             placeholder={'Full Name'}
             value={values.full_name}
           />
-          {
-            errors.full_name && touched.full_name &&
-            <FormHelperText
-              id='full_name'
-            >
+          {errors.full_name &&
+            touched.full_name &&
+            <FormHelperText id='full_name'>
               {errors.full_name}
-            </FormHelperText>
-          }
+            </FormHelperText>}
         </FormControl>
         <FormControl
           className={classes.formControl}
@@ -138,14 +150,11 @@ class RegisterForm extends React.Component {
             onChange={this.onChangePhoneNumber}
             value={values.mobile}
           />
-          {
-            errors.mobile && touched.mobile &&
-            <FormHelperText
-              id='mobile'
-            >
+          {errors.mobile &&
+            touched.mobile &&
+            <FormHelperText id='mobile'>
               {errors.mobile}
-            </FormHelperText>
-          }
+            </FormHelperText>}
         </FormControl>
         <FormControl
           className={classes.formControl}
@@ -169,19 +178,20 @@ class RegisterForm extends React.Component {
             <MenuItem value={'female'}>Female</MenuItem>
             <MenuItem value={'others'}>Others</MenuItem>
           </Select>
-          {
-            errors.gender && touched.gender &&
-            <FormHelperText
-              id='gender'
-            >
+          {errors.gender &&
+            touched.gender &&
+            <FormHelperText id='gender'>
               {errors.gender}
-            </FormHelperText>
-          }
+            </FormHelperText>}
         </FormControl>
         <FormControl
           className={classes.formControl}
           aria-describedby='referral_code'
-          error={values.referral_code && ((errors.referral_code && touched.referral_code) || referralCodeError)}
+          error={
+            values.referral_code &&
+              ((errors.referral_code && touched.referral_code) ||
+                referralCodeError)
+          }
         >
           <Input
             id='referral_code'
@@ -190,37 +200,34 @@ class RegisterForm extends React.Component {
             onChange={this.onChangeReferralCode}
             value={values.referral_code}
           />
-          { customerState.payload.referral_code.isLoading && <CircularProgress className={classes.progress} size={20} />}
-          {
-            (values.referral_code && ((errors.referral_code && touched.referral_code) || referralCodeError)) &&
-            <FormHelperText
-              id='referral_code'
-            >
-              {referralCodeError ? REFERRAL_CODE_INVALID : errors.referral_code}
-            </FormHelperText>
-          }
+          {customerState.payload.referral_code.isLoading &&
+            <CircularProgress className={classes.progress} size={20} />}
+          {values.referral_code &&
+            ((errors.referral_code && touched.referral_code) ||
+              referralCodeError) &&
+              <FormHelperText id='referral_code'>
+                {referralCodeError ? REFERRAL_CODE_INVALID : errors.referral_code}
+              </FormHelperText>}
         </FormControl>
-        <FormControl
-          className={classes.formControl}
-          aria-describedby='membership_code'
-          error={errors.membership_code && touched.membership_code}
-        >
-          <Input
-            id='membership_code'
-            disabled
-            placeholder={'Membership Code'}
-            onChange={handleChange}
-            value={values.membership_code}
-          />
-          {
-            errors.membership_code && touched.membership_code &&
-            <FormHelperText
+        {props.customerState.payload.membership_code.payload &&
+          <FormControl
+            className={classes.formControl}
+            aria-describedby='membership_code'
+            error={errors.membership_code && touched.membership_code}
+          >
+            <Input
               id='membership_code'
-            >
-              {errors.membership_code}
-            </FormHelperText>
-          }
-        </FormControl>
+              disabled
+              placeholder={'Membership Code'}
+              onChange={handleChange}
+              value={values.membership_code}
+            />
+            {errors.membership_code &&
+              touched.membership_code &&
+              <FormHelperText id='membership_code'>
+                {errors.membership_code}
+              </FormHelperText>}
+          </FormControl>}
         <div className={classes.buttonWrapper}>
           <Button
             type='submit'
@@ -235,31 +242,38 @@ class RegisterForm extends React.Component {
   }
 }
 
-export default withStyles(styles)(withFormik({
-  enableReinitialize: false,
-  mapPropsToValues: (props) => {
-    return {
-      full_name: '',
-      gender: '',
-      mobile: props.loginState.payload.initialMobile,
-      membership_code: '',
-      referral_code: props.customerState.payload.referral_code.payload,
-      age: '',
-      id: '',
-      membership_type: '',
-      reference_code: '',
-      email: '',
-      default_location: 'J-58, 3rd floor, lajpat Nagar 4'
-    }
-  },
-  validationSchema: Yup.object().shape({
-    full_name: Yup.string().required(FULL_NAME_REQUIRED),
-    mobile: Yup.number().required(MOBILE_REQUIRED),
-    gender: Yup.string().required(GENDER_REQUIRED),
-    referral_code: Yup.string().max(10, REFERRAL_CODE_INVALID)
-  }),
-  handleSubmit: (values, { props, setSubmitting }) => {
-    props.onSubmit(props.customerState, props.closeLoginModal, setSubmitting, values)
-  },
-  displayName: 'RegisterForm' // helps with React DevTools
-})(RegisterForm))
+export default withStyles(styles)(
+  withFormik({
+    enableReinitialize: false,
+    mapPropsToValues: props => {
+      return {
+        full_name: '',
+        gender: '',
+        mobile: props.loginState.payload.initialMobile,
+        membership_code: props.customerState.payload.membership_code.payload,
+        referral_code: props.customerState.payload.referral_code.payload,
+        age: '',
+        id: '',
+        membership_type: '',
+        reference_code: '',
+        email: '',
+        default_location: 'J-58, 3rd floor, lajpat Nagar 4'
+      }
+    },
+    validationSchema: Yup.object().shape({
+      full_name: Yup.string().required(FULL_NAME_REQUIRED),
+      mobile: Yup.number().required(MOBILE_REQUIRED),
+      gender: Yup.string().required(GENDER_REQUIRED),
+      referral_code: Yup.string().max(10, REFERRAL_CODE_INVALID)
+    }),
+    handleSubmit: (values, { props, setSubmitting }) => {
+      props.onSubmit(
+        props.customerState,
+        props.closeLoginModal,
+        setSubmitting,
+        values
+      )
+    },
+    displayName: 'RegisterForm' // helps with React DevTools
+  })(RegisterForm)
+)

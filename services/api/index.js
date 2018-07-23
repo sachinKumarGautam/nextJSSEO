@@ -264,6 +264,23 @@ const getMembershipCode$ = mobileNumber =>
     url: fetchUrl('account', 'lead/member/' + mobileNumber, 'CREATE')
   })
 
+const searchLocalityForPincode$ = (state, city, pincode, searchString) =>
+  makeAjaxRequest({
+    method: 'GET',
+    url: fetchUrl(
+      'shipping',
+      'place/' +
+        state +
+        '/' +
+        city +
+        '/' +
+        pincode +
+        '?locality=' +
+        searchString,
+      'GET_LIST'
+    )
+  })
+
 export {
   getMoleculeSummary$,
   getMedicineList$,
@@ -297,5 +314,6 @@ export {
   applyCouponForCart$,
   teleConsultation$,
   checkReferralCode$,
-  getMembershipCode$
+  getMembershipCode$,
+  searchLocalityForPincode$
 }
