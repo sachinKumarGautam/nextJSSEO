@@ -8,8 +8,41 @@ import {
   FETCH_USER_INFO_FAILURE,
   CHECK_REFERRAL_CODE_LOADING,
   CHECK_REFERRAL_CODE_SUCCESS,
-  CHECK_REFERRAL_CODE_FAILURE
+  CHECK_REFERRAL_CODE_FAILURE,
+  GET_MEMBERSHIP_CODE_LOADING,
+  GET_MEMBERSHIP_CODE_SUCCESS,
+  GET_MEMBERSHIP_CODE_FAILURE
 } from './customerActionTypes'
+
+export function getMembershipCodeLoading (customerState, phoneNumber) {
+  return {
+    type: GET_MEMBERSHIP_CODE_LOADING,
+    phoneNumber,
+    customerState,
+    isLoading: true,
+    isError: false,
+    error: null
+  }
+}
+
+export function getMembershipCodeSuccess (customerState, result) {
+  return {
+    type: GET_MEMBERSHIP_CODE_SUCCESS,
+    customerState,
+    isLoading: false,
+    membership_code: result.body.payload.membership_code,
+  }
+}
+
+export function getMembershipCodeFailure (customerState, error) {
+  return {
+    type: GET_MEMBERSHIP_CODE_FAILURE,
+    customerState,
+    isLoading: false,
+    isError: true,
+    error: error
+  }
+}
 
 export function fetchUserInfoLoading (customerState, phoneNumber) {
   return {
@@ -100,7 +133,6 @@ export function customerRegisterFailure (customerState, error) {
     isLoading: false,
     isError: true,
     error: error
-
   }
 }
 

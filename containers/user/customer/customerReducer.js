@@ -10,7 +10,9 @@ import {
   FETCH_USER_INFO_FAILURE,
   CHECK_REFERRAL_CODE_LOADING,
   CHECK_REFERRAL_CODE_SUCCESS,
-  CHECK_REFERRAL_CODE_FAILURE
+  CHECK_REFERRAL_CODE_FAILURE,
+  GET_MEMBERSHIP_CODE_SUCCESS,
+  GET_MEMBERSHIP_CODE_FAILURE
 } from './customerActionTypes'
 
 export default function (state = initialState, action) {
@@ -141,6 +143,53 @@ export default function (state = initialState, action) {
             isLoading: action.isLoading,
             errorState: {
               ...state.payload.referral_code.errorState,
+              isError: action.isError,
+              error: action.error
+            }
+          }
+        }
+      }
+
+    case GET_MEMBERSHIP_CODE_LOADING:
+      return {
+        ...state,
+        payload: {
+          ...state.payload,
+          membership_code: {
+            ...state.payload.membership_code,
+            isLoading: action.isLoading,
+            errorState: {
+              ...state.payload.membership_code.errorState,
+              isError: action.isError,
+              error: action.error
+            }
+          }
+        }
+      }
+
+    case GET_MEMBERSHIP_CODE_SUCCESS:
+      return {
+        ...state,
+        payload: {
+          ...state.payload,
+          membership_code: {
+            ...state.payload.membership_code,
+            payload: action.membership_code,
+            isLoading: action.isLoading
+          }
+        }
+      }
+
+    case GET_MEMBERSHIP_CODE_FAILURE:
+      return {
+        ...state,
+        payload: {
+          ...state.payload,
+          membership_code: {
+            ...state.payload.membership_code,
+            isLoading: action.isLoading,
+            errorState: {
+              ...state.payload.membership_code.errorState,
               isError: action.isError,
               error: action.error
             }
