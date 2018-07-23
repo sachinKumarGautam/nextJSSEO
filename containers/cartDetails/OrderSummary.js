@@ -269,7 +269,7 @@ class OrderSummary extends React.Component {
           patientDetails={this.props.classes.patientDetails}
           updateAddressFormValue={this.props.updateAddressFormValue}
           getLocalityDetailListLoading={this.props.getLocalityDetailListLoading}
-          checkPincodeDetailLoading={this.props.checkPincodeDetailLoading}
+          checkPincodeDetailLoading={this.props.checkPincodeLoading}
         />
         <PaymentExpansionPanel
           expanded={this.state.expanded}
