@@ -4,7 +4,9 @@ import { ofType } from 'redux-observable'
 import http from '../../services/api/ajaxWrapper'
 
 import {
-  GET_DELIVERY_DETAILS_LIST_LOADING, SUBMIT_DELIVERY_DETAILS_LOADING
+  GET_DELIVERY_DETAILS_LIST_LOADING,
+  SUBMIT_DELIVERY_DETAILS_LOADING,
+  GET_LOCALITY_LIST_LOADING
 } from './deliveryDetailsActionTypes'
 
 import {
@@ -12,7 +14,9 @@ import {
   getDeliveryDetailsListFailure,
   submitDeliveryDetailsSuccess,
   submitDeliveryDetailsFailure,
-  getDeliveryDetailsListLoading
+  getDeliveryDetailsListLoading,
+  getLocalityDetailListSuccess,
+  getLocalityDetailListFailure
 } from './deliveryDetailsActions'
 
 import {
@@ -21,7 +25,8 @@ import {
 
 import {
   getDeliveryDetailsList$,
-  submitDeliveryDetails$
+  submitDeliveryDetails$,
+  searchLocalityForPincode$
 } from '../../services/api'
 
 /**
@@ -82,6 +87,39 @@ export function submitDeliveryDetails (action$, store) {
         catchError(error => {
           data.setSubmitting(false)
           return of(submitDeliveryDetailsFailure(deliveryDetailsState, error))
+        })
+      )
+    })
+  )
+}
+
+/**
+ * Represents to the get the locality list on basis of pincode, state and city.
+ * @param {object} action$ - this is the ActionsObservable
+ * @param {object} store - to access the state from reducers
+ */
+export function getLocalityList (action$, store) {
+  return action$.pipe(
+    ofType(GET_LOCALITY_LIST_LOADING),
+    mergeMap(data => {
+      return http(
+        searchLocalityForPincode$(
+          data.state,
+          data.city,
+          data.pincode,
+          data.queryString
+        )
+      ).pipe(
+        map(result => {
+          return (
+            getLocalityDetailListSuccess(
+              data.deliveryDetailsState,
+              result.body.payload.content
+            )
+          )
+        }),
+        catchError(error => {
+          return of(getLocalityDetailListFailure(data.deliveryDetailsState, error))
         })
       )
     })

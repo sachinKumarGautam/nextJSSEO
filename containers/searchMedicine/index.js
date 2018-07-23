@@ -74,7 +74,8 @@ const styles = theme => ({
   },
   searchItem: {
     '&:not(:last-child)': {
-      borderBottom: `1px solid ${theme.palette.customGrey.grey100}`
+      borderBottom: `1px solid ${theme.palette.customGrey.grey100}`,
+      paddingBottom: theme.spacing.unit
     },
     paddingTop: theme.spacing.unit * 2,
     paddingBottom: theme.spacing.unit * 2

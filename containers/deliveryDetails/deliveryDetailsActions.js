@@ -5,7 +5,11 @@ import {
   SAVE_ADDRESS_SELECTED,
   SUBMIT_DELIVERY_DETAILS_LOADING,
   SUBMIT_DELIVERY_DETAILS_SUCCESS,
-  SUBMIT_DELIVERY_DETAILS_FAILURE
+  SUBMIT_DELIVERY_DETAILS_FAILURE,
+  UPDATE_ADDRESS_FORM_VALUE,
+  GET_LOCALITY_LIST_LOADING,
+  GET_LOCALITY_LIST_SUCCESS,
+  GET_LOCALITY_LIST_FAILURE
 } from './deliveryDetailsActionTypes'
 
 /**
@@ -101,6 +105,54 @@ export function submitDeliveryDetailsSuccess (deliveryDetailsState, result) {
 export function submitDeliveryDetailsFailure (deliveryDetailsState, error) {
   return {
     type: SUBMIT_DELIVERY_DETAILS_FAILURE,
+    deliveryDetailsState,
+    isLoading: false,
+    error: error,
+    isError: true
+  }
+}
+
+export function updateAddressFormValue (deliveryDetailsState, name, value) {
+  return {
+    type: UPDATE_ADDRESS_FORM_VALUE,
+    deliveryDetailsState,
+    name,
+    value
+  }
+}
+
+export function getLocalityDetailListLoading (
+  deliveryDetailsState,
+  pincode,
+  state,
+  city,
+  queryString
+) {
+  return {
+    type: GET_LOCALITY_LIST_LOADING,
+    deliveryDetailsState,
+    pincode,
+    state,
+    city,
+    queryString,
+    isLoading: true,
+    error: null,
+    isError: false
+  }
+}
+
+export function getLocalityDetailListSuccess (deliveryDetailsState, result) {
+  return {
+    type: GET_LOCALITY_LIST_SUCCESS,
+    deliveryDetailsState,
+    payload: result,
+    isLoading: true
+  }
+}
+
+export function getLocalityDetailListFailure (deliveryDetailsState, error) {
+  return {
+    type: GET_LOCALITY_LIST_FAILURE,
     deliveryDetailsState,
     isLoading: false,
     error: error,
