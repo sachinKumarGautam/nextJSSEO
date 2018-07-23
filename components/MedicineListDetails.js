@@ -1,6 +1,7 @@
 import React from 'react'
 import Link from 'next/link'
 import { withStyles } from '@material-ui/core/styles'
+import Typography from '@material-ui/core/Typography'
 
 import ProductName from './ProductName'
 import ProductBrand from './ProductBrand'
@@ -60,6 +61,10 @@ const styles = theme => {
     buttonWrapperStyle: {
       marginTop: theme.spacing.unit,
       float: 'right'
+    },
+    deliveryTat: {
+      ...theme.typography.body3,
+      color: theme.palette.customGrey.grey500
     }
   }
 }
@@ -129,6 +134,14 @@ class MedicineListDetails extends React.Component {
                   ? props.itemDetails.pack_size.name : props.itemDetails.pack_size
               }
             />
+            <Typography
+              gutterBottom
+              variant='caption'
+              component='h1'
+              className={props.classes.deliveryTat}
+            >
+              Delivery by {props.checkPincodeState.payload.delivery_day} days
+            </Typography>
           </div>
         </Link>
         <div>
