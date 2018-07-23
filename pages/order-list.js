@@ -9,6 +9,8 @@ import withRoot from '../src/withRoot'
 
 import { connect } from 'react-redux'
 
+import Head from 'next/head'
+
 import Paper from '@material-ui/core/Paper'
 
 import OrderListWrapper from '../containers/orderList'
@@ -16,6 +18,10 @@ import OrderListWrapper from '../containers/orderList'
 import {
   getOrderListDetailsLoading
 } from '../containers/orderList/orderListActions'
+
+import {
+  orderList
+} from '../components/constants/PageTitle'
 
 const styles = theme => ({
   root: {
@@ -51,6 +57,9 @@ class Orders extends React.Component {
   render () {
     return (
       <div>
+        <Head>
+          <title>{orderList.title}</title>
+        </Head>
         <Header />
         <div className={this.props.classes.wrapperStyle}>
           <Paper className={this.props.classes.root} elevation={1}>

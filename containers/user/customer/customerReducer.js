@@ -12,7 +12,8 @@ import {
   CHECK_REFERRAL_CODE_SUCCESS,
   CHECK_REFERRAL_CODE_FAILURE,
   GET_MEMBERSHIP_CODE_SUCCESS,
-  GET_MEMBERSHIP_CODE_FAILURE
+  GET_MEMBERSHIP_CODE_FAILURE,
+  GET_MEMBERSHIP_CODE_LOADING
 } from './customerActionTypes'
 
 export default function (state = initialState, action) {

@@ -12,6 +12,8 @@ import Button from '../../components/button'
 import green from '@material-ui/core/colors/green'
 import Typography from '@material-ui/core/Typography'
 
+import { getReplacedString } from '../../utils/replaceConstants'
+
 const styles = theme => ({
   couponButtonRoot: {
     border: 'none',
@@ -48,10 +50,15 @@ const styles = theme => ({
 })
 
 class GoToCartSnackbar extends React.Component {
-  state = {
-    open: false,
-    vertical: 'top',
-    horizontal: 'right'
+  constructor (props) {
+    super(props)
+    this.state = {
+      open: false,
+      vertical: 'top',
+      horizontal: 'right'
+    }
+
+    this.cartUrl = getReplacedString(CART_DETAILS)
   }
 
   handleClick = state => () => {
@@ -66,7 +73,7 @@ class GoToCartSnackbar extends React.Component {
     const { classes } = this.props
     return (
       <div>
-        <Link prefetch href={CART_DETAILS}>
+        <Link prefetch href={this.cartUrl}>
           <Snackbar
             anchorOrigin={{
               vertical: 'bottom',
@@ -106,7 +113,6 @@ class GoToCartSnackbar extends React.Component {
             />
           </Snackbar>
         </Link>
-
       </div>
     )
   }

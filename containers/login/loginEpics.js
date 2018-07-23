@@ -17,12 +17,11 @@ import {
 
 import {
   updatePhoneNumber,
-  fetchUserInfoLoading
+  fetchUserInfoLoading,
+  getMembershipCodeLoading
 } from '../user/customer/customerActions'
 
-import {
-  cartTransferLoading
-} from '../cartDetails/cartActions'
+import { cartTransferLoading } from '../cartDetails/cartActions'
 
 import { sendOtp$, verifyOtp$ } from '../../services/api'
 
@@ -75,10 +74,12 @@ export function verifyOTP (action$, store) {
 
           if (isNewUser) {
             successObservable = of(
-              verifyOtpSuccess(loginState, result, isNewUser)
+              verifyOtpSuccess(loginState, result, isNewUser),
+              getMembershipCodeLoading(customerState, mobile)
             )
           } else {
-            successObservable = of(toggleAuthentication(loginState, true),
+            successObservable = of(
+              toggleAuthentication(loginState, true),
               fetchUserInfoLoading(customerState, mobile),
               verifyOtpSuccess(loginState, result, isNewUser),
               updatePhoneNumber(customerState, mobile),
@@ -89,6 +90,7 @@ export function verifyOTP (action$, store) {
           return successObservable
         }),
         catchError(error => {
+          console.log(error)
           data.setSubmitting(false)
           return of(verifyOtpFailure(loginState, error))
         })

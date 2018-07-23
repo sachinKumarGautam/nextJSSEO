@@ -97,7 +97,6 @@ class RegisterForm extends React.Component {
 
     const referralCodeValue = this.props.values.referral_code
 
-    console.log(this.props.values)
     return (
       <form 
         onSubmit={(!referralCodeValue 

@@ -12,6 +12,8 @@ import withRoot from '../src/withRoot'
 import Paper from '@material-ui/core/Paper'
 import Router from 'next/router'
 
+import Head from 'next/head'
+
 import ProductDetailsWrapper from '../containers/productDetails'
 
 import {
@@ -24,6 +26,8 @@ import {
 } from '../containers/cartDetails/cartActions'
 
 import { withCommonWrapper } from '../components/HOCWrapper/CommonWrapper'
+
+import { productDetail } from '../components/constants/PageTitle'
 
 const styles = theme => ({
   root: {
@@ -83,9 +87,10 @@ class ProductDetails extends React.Component {
     const { query } = Router
     return (
       <div>
-        <Header
-        // addToCartHandler={this.props.addToCartHandler}
-        />
+        <Head>
+          <title>{productDetail.title}</title>
+        </Head>
+        <Header />
         <div className={this.props.classes.wrapperStyle}>
           <Paper className={classes.root} elevation={1}>
             {query.id && query.id !== 'undefined'
@@ -94,7 +99,7 @@ class ProductDetails extends React.Component {
                 getProductDetailLoading={actions.getProductDetailLoading}
                 addToCartHandler={this.props.addToCartHandler}
                 onChangeQuantity={actions.onChangeQuantity}
-              />
+                />
               : 'Page not found'}
           </Paper>
         </div>

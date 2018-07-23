@@ -7,7 +7,7 @@ import CardContent from '@material-ui/core/CardContent'
 
 import RelatedMedicinesCard from './RelatedMedicinesCard'
 
-import { MEDICINE_LIST_MOLECULE } from '../routes/RouteConstant'
+import { PRODUCT_SEARCH } from '../routes/RouteConstant'
 
 import Link from 'next/link'
 
@@ -71,8 +71,8 @@ const RelatedMedicines = props => (
       </CardContent>
     </Card>
     <Link
-      as={`${MEDICINE_LIST_MOLECULE}/${props.moleculeName}`}
-      href={`${MEDICINE_LIST_MOLECULE}?name=${props.moleculeName}`}
+      as={`${PRODUCT_SEARCH}/?molecule-name=${props.moleculeName}`}
+      href={`${PRODUCT_SEARCH}?molecule-name=${props.moleculeName}`}
     >
       <a className={props.classes.viewAllLink}>view all</a>
     </Link>
