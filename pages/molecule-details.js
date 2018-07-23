@@ -65,13 +65,11 @@ class MoleculeDetails extends React.Component {
         this.props.moleculeDetailsState,
         query.id// pass salt id // 5a61a295ae8bdc26685f2b09 // query.id
       )
-    }
 
-    if (query.name && !this.props.medicineListState.payload.length) {
       // Represents to get medicine list with page size and size per page.
       this.props.actions.getRelatedMedicinesLoading(
         this.props.medicineListState,
-        query.name, // pass salt name //query.name
+        query.id, // pass salt name //query.name
         0, // page number
         3 // page size
       )

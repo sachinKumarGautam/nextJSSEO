@@ -10,6 +10,8 @@ import { SNACK_BAR_DURATION } from '../../components/constants/Constants'
 import Button from '../../components/button'
 import Typography from '@material-ui/core/Typography'
 
+import { getReplacedString } from '../../utils/replaceConstants'
+
 const styles = theme => ({
   // close: {
   //   width: theme.spacing.unit * 4,
@@ -43,11 +45,16 @@ const styles = theme => ({
 })
 
 class GoToCartSnackbar extends React.Component {
-  state = {
-    open: false,
-    vertical: 'top',
-    horizontal: 'right'
-  };
+  constructor (props) {
+    super(props)
+    this.state = {
+      open: false,
+      vertical: 'top',
+      horizontal: 'right'
+    }
+
+    this.cartUrl = getReplacedString(CART_DETAILS)
+  }
 
   handleClick = state => () => {
     this.setState({ open: true, ...state })
@@ -61,7 +68,7 @@ class GoToCartSnackbar extends React.Component {
     const { classes } = this.props
     return (
       <div>
-        <Link prefetch href={CART_DETAILS}>
+        <Link prefetch href={this.cartUrl}>
           <Snackbar
             anchorOrigin={{
               vertical: 'bottom',
@@ -86,10 +93,7 @@ class GoToCartSnackbar extends React.Component {
             // ]}
             message={
               <div className={classes.buttonWrappr}>
-                <Typography
-                  variant='caption'
-                  className={classes.text}
-                >
+                <Typography variant='caption' className={classes.text}>
                   {ITEM_ADDED_TO_CART}
                 </Typography>
                 <Button
@@ -106,7 +110,6 @@ class GoToCartSnackbar extends React.Component {
             }
           />
         </Link>
-
       </div>
     )
   }
