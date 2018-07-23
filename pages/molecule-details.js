@@ -21,8 +21,10 @@ import {
   getRelatedMedicinesLoading
 } from '../containers/medicineList/medicineListActions'
 
-import { checkPincodeLoading } from '../containers/location/pincode/pincodeAction'
-import {commonWrapperHOC} from '../components/HOCWrapper/CommonWrapper'
+import {
+  checkPincodeLoading
+} from '../containers/location/pincode/pincodeAction'
+import { withCommonWrapper } from '../components/HOCWrapper/CommonWrapper'
 
 const styles = theme => ({
   root: {
@@ -53,18 +55,18 @@ class MoleculeDetails extends React.Component {
 
   // }
 
-  static getInitialProps ({query}) {
+  static getInitialProps ({ query }) {
     return query
   }
 
   componentDidMount () {
     // Represents to get molecule details.
-    const {query} = Router
+    const { query } = Router
 
     if (Router.query.id) {
       this.props.actions.getMoleculeSummaryLoading(
         this.props.moleculeDetailsState,
-        query.id// pass salt id // 5a61a295ae8bdc26685f2b09 // query.id
+        query.id // pass salt id // 5a61a295ae8bdc26685f2b09 // query.id
       )
     }
 
@@ -119,7 +121,8 @@ function mapDispatchToProps (dispatch) {
   }
 }
 
-export default commonWrapperHOC(connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(withRoot(withStyles(styles)(MoleculeDetails))))
+export default withCommonWrapper(
+  connect(mapStateToProps, mapDispatchToProps)(
+    withRoot(withStyles(styles)(MoleculeDetails))
+  )
+)

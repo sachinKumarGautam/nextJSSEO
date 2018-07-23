@@ -11,7 +11,7 @@ import MedicineListDetails from '../../components/MedicineListDetails'
 
 import { MEDICINE_LIST_PRODUCT } from '../../routes/RouteConstant'
 
-// import { commonWrapperHOC } from '../../components/HOCWrapper/CommonWrapper'
+// import { withCommonWrapper } from '../../components/HOCWrapper/CommonWrapper'
 
 const styles = theme => ({
   root: {

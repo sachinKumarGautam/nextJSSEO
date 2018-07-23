@@ -21,7 +21,7 @@ import {
   incrementCartItemLoading
 } from '../containers/cartDetails/cartActions'
 
-import { commonWrapperHOC } from '../components/HOCWrapper/CommonWrapper'
+import { withCommonWrapper } from '../components/HOCWrapper/CommonWrapper'
 
 import {checkPincodeLoading} from '../containers/location/pincode/pincodeAction'
 
@@ -144,7 +144,7 @@ function mapDispatchToProps (dispatch) {
   }
 }
 
-export default commonWrapperHOC(connect(
+export default withCommonWrapper(connect(
   mapStateToProps,
   mapDispatchToProps
 )(withRoot(withStyles(styles)(ProductDetails))))

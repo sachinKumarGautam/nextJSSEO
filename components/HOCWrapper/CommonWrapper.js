@@ -10,7 +10,7 @@ import {
 
 import withRoot from '../../src/withRoot'
 
-export function commonWrapperHOC (Page) {
+export function withCommonWrapper (Page) {
   class CommomWrapper extends React.Component {
     static getInitialProps (ctx) {
       if (Page.getInitialProps) {
@@ -91,12 +91,11 @@ export function commonWrapperHOC (Page) {
 
   return connect(
     mapStateToProps,
-
     mapDispatchToProps
   )(withRoot(CommomWrapper))
 }
 
 // export default (mapStateToProps, mapDispatchToProps) => (Page) => {
 //   Page = connect(mapStateToProps, mapDispatchToProps)(Page)
-//   return commonWrapperHOC(Page)
+//   return withCommonWrapper(Page)
 // }

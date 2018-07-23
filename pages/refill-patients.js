@@ -15,7 +15,7 @@ import RefillPatientsWrapper from '../containers/refillPatients'
 import {
   getPatientDetailsListLoading
 } from '../containers/patientDetails/patientDetailsActions'
-import { commonWrapperHOC } from '../components/HOCWrapper/CommonWrapper'
+import { withCommonWrapper } from '../components/HOCWrapper/CommonWrapper'
 
 const styles = theme => ({
   root: {
@@ -81,7 +81,7 @@ function mapDispatchToProps (dispatch) {
   }
 }
 
-export default commonWrapperHOC(
+export default withCommonWrapper(
   connect(mapStateToProps, mapDispatchToProps)(
     withRoot(withStyles(styles)(RefillPatient))
   )

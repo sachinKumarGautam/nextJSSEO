@@ -15,7 +15,7 @@ import {searchMedicineLoading} from '../containers/searchMedicine/searchMedicine
 import {getRelatedMedicinesLoading} from '../containers/medicineList/medicineListActions'
 import {incrementCartItemLoading} from '../containers/cartDetails/cartActions'
 import { checkPincodeLoading } from '../containers/location/pincode/pincodeAction'
-import {commonWrapperHOC} from '../components/HOCWrapper/CommonWrapper'
+import {withCommonWrapper} from '../components/HOCWrapper/CommonWrapper'
 
 const styles = theme => ({
   root: {
@@ -109,7 +109,7 @@ function mapDispatchToProps (dispatch) {
   }
 }
 
-export default commonWrapperHOC(connect(
+export default withCommonWrapper(connect(
   mapStateToProps,
   mapDispatchToProps
 )(withRoot(withStyles(styles)(MedicineList))))

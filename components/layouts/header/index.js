@@ -17,7 +17,7 @@ import getPageContext from '../../../src/getPageContext'
 import MenuWrapper from '../../../containers/menu'
 import { searchMedicineLoading } from '../../../containers/searchMedicine/searchMedicineAction'
 import { checkPincodeLoading } from '../../../containers/location/pincode/pincodeAction'
-import { commonWrapperHOC } from '../../../components/HOCWrapper/CommonWrapper'
+import { withCommonWrapper } from '../../../components/HOCWrapper/CommonWrapper'
 
 import GoToCartSnackbar from '../../../containers/cartDetails/GoToCartSnackbar'
 
@@ -232,7 +232,7 @@ function mapDispatchToProps (dispatch) {
   }
 }
 
-export default commonWrapperHOC(
+export default withCommonWrapper(
   withStyles(styles)(
     connect(
       mapStateToProps,

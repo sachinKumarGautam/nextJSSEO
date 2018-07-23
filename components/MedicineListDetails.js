@@ -8,9 +8,9 @@ import ProductPackSize from './ProductPackSize'
 import ProductPrice from './ProductPrice'
 import StrokePrice from './StrokePrice'
 import EstimatedPriceLabel from './EstimatedPriceLabel'
-import {PRODUCT_DETAILS} from '../routes/RouteConstant'
+import { PRODUCT_DETAILS } from '../routes/RouteConstant'
 import Button from './button/Button'
-// import { commonWrapperHOC } from './HOCWrapper/CommonWrapper'
+// import { withCommonWrapper } from './HOCWrapper/CommonWrapper'
 
 const styles = theme => {
   return {
@@ -79,9 +79,7 @@ class MedicineListDetails extends React.Component {
   }
 
   render () {
-    const {
-      props
-    } = this
+    const { props } = this
 
     const city = this.props.checkPincodeState.payload.city
     return (
@@ -91,7 +89,10 @@ class MedicineListDetails extends React.Component {
           href={`${PRODUCT_DETAILS}?id=${props.itemDetails.slug}&location=${city}`}
           as={`${PRODUCT_DETAILS}/${props.itemDetails.slug}/${city}`}
         >
-          <div onClick={this.props.onSelectItem} className={props.classes.cursor}>
+          <div
+            onClick={this.props.onSelectItem}
+            className={props.classes.cursor}
+          >
             <ProductName
               variant={'body1'}
               name={props.itemDetails.name}
@@ -111,8 +112,9 @@ class MedicineListDetails extends React.Component {
               customStyle={props.classes.customPackSize}
               packType={props.itemDetails.pack_type}
               packSize={
-                (props.itemDetails.pack_size && props.itemDetails.pack_size.name)
-                  ? props.itemDetails.pack_size.name : props.itemDetails.pack_size
+                props.itemDetails.pack_size && props.itemDetails.pack_size.name
+                  ? props.itemDetails.pack_size.name
+                  : props.itemDetails.pack_size
               }
             />
           </div>
