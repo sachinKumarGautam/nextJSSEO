@@ -12,9 +12,15 @@ import Paper from '@material-ui/core/Paper'
 
 import HomePageWrapper from '../containers/homePage'
 
+import Head from 'next/head'
+
 import {
   getBackGroundImagesLoading
 } from '../containers/homePage/homePageActions'
+
+import {
+  homePage
+} from '../components/constants/PageTitle'
 
 const styles = theme => ({
   root: {
@@ -48,6 +54,9 @@ class HomePage extends React.Component {
   render () {
     return (
       <div>
+        <Head>
+          <title>{homePage.title}</title>
+        </Head>
         <Header />
         <div>
           <Paper className={this.props.classes.root} elevation={1}>

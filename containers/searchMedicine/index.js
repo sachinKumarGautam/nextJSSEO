@@ -9,7 +9,7 @@ import Button from '../../components/button'
 import SearchIcon from '@material-ui/icons/Search'
 import MedicineListDetails from '../../components/MedicineListDetails'
 
-import { MEDICINE_LIST_PRODUCT } from '../../routes/RouteConstant'
+import { PRODUCT_SEARCH } from '../../routes/RouteConstant'
 
 const styles = theme => ({
   root: {
@@ -170,8 +170,8 @@ class SearchMedicine extends React.Component {
   }
 
   onSearchMedicine (medicineName) {
-    const href = `${MEDICINE_LIST_PRODUCT}?productName=${medicineName}`
-    const as = `${MEDICINE_LIST_PRODUCT}/${medicineName}`
+    const href = `${PRODUCT_SEARCH}?slug=${medicineName}`
+    const as = `${PRODUCT_SEARCH}?slug=${medicineName}`
     Router.push(href, as)
   }
 

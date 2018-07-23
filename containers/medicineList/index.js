@@ -20,7 +20,6 @@ class MedicineListWrapper extends Component {
             query={this.props.query}
             getRelatedMedicinesLoading={this.props.getRelatedMedicinesLoading}
             checkPincodeState={this.props.checkPincodeState}
-            moleculeName={this.props.moleculeName}
             incrementCartItemLoading={this.props.incrementCartItemLoading}
             cartState={this.props.cartState}
             checkPincodeLoading={this.props.checkPincodeLoading}

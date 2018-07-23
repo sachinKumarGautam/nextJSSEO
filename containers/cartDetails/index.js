@@ -33,7 +33,6 @@ import {
   getDeliveryDetailsListLoading,
   submitDeliveryDetailsLoading,
   updateAddressFormValue,
-  checkPincodeDetailLoading,
   getLocalityDetailListLoading
 } from '../deliveryDetails/deliveryDetailsActions'
 
@@ -122,7 +121,6 @@ class CartDetailsWrapper extends Component {
                 submitDeliveryDetailsLoading={this.props.actions.submitDeliveryDetailsLoading}
                 optForDoctorCallbackLoading={this.props.actions.optForDoctorCallbackLoading}
                 updateAddressFormValue={this.props.actions.updateAddressFormValue}
-                checkPincodeDetailLoading={this.props.actions.checkPincodeDetailLoading}
                 getLocalityDetailListLoading={this.props.actions.getLocalityDetailListLoading}
               />
             </section>
@@ -181,7 +179,6 @@ function mapDispatchToProps (dispatch) {
         updateCouponCode,
         optForDoctorCallbackLoading,
         updateAddressFormValue,
-        checkPincodeDetailLoading,
         getLocalityDetailListLoading
       },
       dispatch

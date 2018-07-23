@@ -11,6 +11,8 @@ import Footer from '../components/layouts/footer'
 
 import Paper from '@material-ui/core/Paper'
 
+import Head from 'next/head'
+
 import MoleculeDetailsWrapper from '../containers/moleculeDetails'
 
 import {
@@ -22,6 +24,10 @@ import {
 } from '../containers/medicineList/medicineListActions'
 
 import { checkPincodeLoading } from '../containers/location/pincode/pincodeAction'
+
+import {
+  moleculeList
+} from '../components/constants/PageTitle'
 
 const styles = theme => ({
   root: {
@@ -65,13 +71,11 @@ class MoleculeDetails extends React.Component {
         this.props.moleculeDetailsState,
         query.id// pass salt id // 5a61a295ae8bdc26685f2b09 // query.id
       )
-    }
 
-    if (query.name && !this.props.medicineListState.payload.length) {
       // Represents to get medicine list with page size and size per page.
       this.props.actions.getRelatedMedicinesLoading(
         this.props.medicineListState,
-        query.name, // pass salt name //query.name
+        query.id, // pass salt name //query.name
         0, // page number
         3 // page size
       )
@@ -81,6 +85,9 @@ class MoleculeDetails extends React.Component {
   render () {
     return (
       <div>
+        <Head>
+          <title>{moleculeList.title}</title>
+        </Head>
         <Header />
         <div className={this.props.classes.wrapperStyle}>
           <Paper className={this.props.classes.root} elevation={1}>
