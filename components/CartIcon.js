@@ -11,11 +11,13 @@ import ReactTooltip from 'react-tooltip'
 
 import Button from './button'
 
-import Link from 'next/link'
+// import Link from 'next/link'
+import Router from 'next/router'
 
 import { CART_DETAILS } from '../routes/RouteConstant'
-
 import { NO_CART_ITEM } from '../containers/messages/cartMessages'
+
+import { getReplacedString } from '../utils/replaceConstants'
 
 const styles = theme => ({
   button: {
@@ -120,6 +122,11 @@ class CartIcon extends Component {
     quantity: 4
   }
 
+  redirectToPath (path) {
+    const url = getReplacedString(path)
+    Router.push(url)
+  }
+
   render () {
     const { classes } = this.props
     const cartItems = this.props.cartState.payload.cart_items.payload
@@ -176,23 +183,25 @@ class CartIcon extends Component {
             </Typography>
             {cartItems.length
               ? <Typography variant='caption' className={classes.priceStyle}>
-                  ₹ {cartItems.length && cartItems[cartItems.length - 1].mrp}
+                  ₹{' '}
+                {cartItems.length && cartItems[cartItems.length - 1].mrp}
               </Typography>
               : null}
           </div>
           <div className={classes.buttonStyle}>
-            <Link prefetch href={CART_DETAILS}>
-              <Button
-                size='small'
-                variant='outlined'
-                color='primary'
-                classes={{
-                  root: classes.buttonRoot,
-                  label: classes.buttonLabel
-                }}
-                label={'Proceed to Cart'}
-              />
-            </Link>
+            {/* <Link prefetch href={}> */}
+            <Button
+              size='small'
+              variant='outlined'
+              color='primary'
+              classes={{
+                root: classes.buttonRoot,
+                label: classes.buttonLabel
+              }}
+              label={'Proceed to Cart'}
+              onClick={this.redirectToPath.bind(this, CART_DETAILS)}
+            />
+            {/* </Link> */}
           </div>
         </ReactTooltip>
       </div>

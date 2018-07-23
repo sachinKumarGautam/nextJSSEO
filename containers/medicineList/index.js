@@ -19,7 +19,6 @@ const MedicineListWrapper = props => (
         addToCartHandler={props.addToCartHandler}
         getRelatedMedicinesLoading={props.getRelatedMedicinesLoading}
         checkPincodeState={props.checkPincodeState}
-        moleculeName={props.moleculeName}
       />
     </section>
   </div>

@@ -1,25 +1,23 @@
-export const ORDER = '/order-list'
+export const ORDER = '/customer/customer_id/orders'
 
-export const PRESCRIPTION = '/prescription-list'
+export const PRESCRIPTION = '/customer/customer_id/prescriptions'
 
-export const CARE_POINTS = '/care-points'
+export const CARE_POINTS = '/customer/customer_id/care-points'
 
-export const ADDRESS_LIST = '/delivery-details'
+export const ADDRESS_LIST = '/customer/customer_id/delivery-addresses'
 
-export const PATIENT_LIST = '/patient-details'
+export const PATIENT_LIST = '/customer/customer_id/patients'
 
-export const PRODUCT_DETAILS = '/product-details'
+export const PRODUCT_DETAILS = '/product'
 
-export const MOLECULE_DETAILS = '/molecule-details'
+export const MOLECULE_DETAILS = '/product/molecule'
 
-export const CART_DETAILS = '/cart-details'
+export const CART_DETAILS = '/cart/cart_id'
 
 export const THANK_YOU = '/order-confirmation'
 
-export const REFILL_PATIENTS = '/refill-patients'
+export const REFILL_PATIENTS = '/customer/customer_id/patient-refills'
 
 export const HOME_PAGE = '/'
 
-export const MEDICINE_LIST_PRODUCT = '/medicine-list/product'
-
-export const MEDICINE_LIST_MOLECULE = '/medicine-list/molecule'
+export const PRODUCT_SEARCH = '/product/search'

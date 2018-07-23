@@ -17,6 +17,12 @@ import Paper from '@material-ui/core/Paper'
 
 import PrescriptionDetailsWrapper from '../containers/prescription'
 
+import Head from 'next/head'
+
+import {
+  prescriptionList
+} from '../components/constants/PageTitle'
+
 const styles = theme => ({
   root: {
     paddingTop: theme.spacing.unit * 3,
@@ -49,6 +55,9 @@ class Prescription extends React.Component {
   render () {
     return (
       <div>
+        <Head>
+          <title>{prescriptionList.title}</title>
+        </Head>
         <Header />
         <div className={this.props.classes.wrapperStyle}>
           <Paper className={this.props.classes.root} elevation={1}>
