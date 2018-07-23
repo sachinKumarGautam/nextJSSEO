@@ -1,5 +1,5 @@
 import { of } from 'rxjs/observable/of'
-import { mergeMap, catchError, map } from 'rxjs/operators'
+import { mergeMap, catchError, flatMap } from 'rxjs/operators'
 import { ofType } from 'redux-observable'
 import {CHECK_PINCODE_LOADING} from './pincodeActionTypes'
 import {checkPincodeSuccess, checkPincodeFailure} from './pincodeAction'
@@ -19,7 +19,7 @@ export function checkPincode (action$, store) {
       const checkPincodeState = store.getState().checkPincodeState
       const deliveryDetailsState = store.getState().deliveryDetailsState
       return http(checkPincode$(data.pincode)).pipe(
-        map(result => {
+        flatMap(result => {
           if (data.isDeliveryAddress) {
             return of(checkPincodeSuccess(checkPincodeState, result),
               updateAddressFormValue(deliveryDetailsState, 'city', result.body.payload.city),

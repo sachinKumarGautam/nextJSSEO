@@ -7,14 +7,6 @@ const initialState = {
     isError: false,
     error: {}
   },
-  pincodeCheck: {
-    payload: {},
-    isLoading: false,
-    errorState: {
-      isError: false,
-      error: {}
-    }
-  },
   addressForm: {
     full_name: '',
     mobile: '',

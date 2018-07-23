@@ -129,9 +129,9 @@ class LocationSearch extends React.Component {
   searchLocalityOnChange (event) {
     this.props.getLocalityDetailListLoading(
       this.props.deliveryDetailsState,
-      this.props.deliveryDetailsState.pincodeCheck.payload.pincode,
-      this.props.deliveryDetailsState.pincodeCheck.payload.state,
-      this.props.deliveryDetailsState.pincodeCheck.payload.city,
+      this.props.deliveryDetailsState.addressForm.pincode,
+      this.props.deliveryDetailsState.addressForm.state,
+      this.props.deliveryDetailsState.addressForm.city,
       event.target.value
     )
     this.props.onChange(event.target.value)
