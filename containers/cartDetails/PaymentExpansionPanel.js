@@ -8,6 +8,7 @@ import Typography from '@material-ui/core/Typography'
 
 import Button from '../../components/button'
 import TermsAndCondition from './TermsAndCondition'
+import PaymentDeliveryDetail from './PaymentDeliveryDetail'
 
 class PaymentExpansionPanel extends React.Component {
   placeOrder () {
@@ -42,6 +43,7 @@ class PaymentExpansionPanel extends React.Component {
             root: this.props.thankYouWrapper
           }}
         >
+          <PaymentDeliveryDetail />
           <div className={this.props.radioWrapper}>
             <Radio
               checked
