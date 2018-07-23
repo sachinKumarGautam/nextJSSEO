@@ -96,7 +96,6 @@ export const rootEpic = combineEpics(
   getCartDetailsEpic,
   // decrementCartItemLoadingEpic,
   decrementCartItemEpic,
-  // incrementCartItemLoadingEpic,
   incrementCartItemEpic,
   // deleteCartItemLoadingEpic,
   deleteCartItemEpic,

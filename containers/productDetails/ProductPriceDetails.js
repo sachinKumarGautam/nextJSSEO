@@ -43,26 +43,8 @@ const styles = theme => ({
 class ProductPriceDetails extends Component {
   constructor (props) {
     super(props)
-    this.handleOpenPincodeDialog = this.handleOpenPincodeDialog.bind(this)
-    this.handleClosePincodeDialog = this.handleClosePincodeDialog.bind(this)
+    this.handleChangePincodeDialog = this.handleChangePincodeDialog.bind(this)
     this.onChangeQuantity = this.onChangeQuantity.bind(this)
-    this.addToCart = this.addToCart.bind(this)
-    this.state = {
-      pincodeDialogOpen: false
-    }
-  }
-
-  addToCart () {
-    this.props.incrementCartItemLoading(
-      this.props.cartState,
-      this.props.productDetailsState.payload
-    )
-  }
-
-  handleOpenPincodeDialog () {
-    this.setState({
-      pincodeDialogOpen: true
-    })
   }
 
   onChangeQuantity (event) {
@@ -73,10 +55,8 @@ class ProductPriceDetails extends Component {
     )
   }
 
-  handleClosePincodeDialog () {
-    this.setState({
-      pincodeDialogOpen: false
-    })
+  handleChangePincodeDialog () {
+    this.props.openPincodeDialog(this.props.checkPincodeState, true)
   }
 
   render () {
@@ -106,7 +86,7 @@ class ProductPriceDetails extends Component {
             {this.props.checkPincodeState.payload.pincode &&
               <DeliveryInfoWrapper
                 checkPincodeState={this.props.checkPincodeState}
-                openPincodeDialog={this.handleOpenPincodeDialog}
+                openPincodeDialog={this.handleChangePincodeDialog}
               />}
             <div className={classes.cardActions}>
               <QuantityField onChangeQuantity={this.onChangeQuantity} />

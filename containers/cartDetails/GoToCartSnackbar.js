@@ -1,5 +1,6 @@
 import React from 'react'
 import Snackbar from '@material-ui/core/Snackbar'
+import SnackbarContent from '@material-ui/core/SnackbarContent'
 import { withStyles } from '@material-ui/core/styles'
 import Link from 'next/link'
 import { CART_DETAILS } from '../../routes/RouteConstant'
@@ -28,7 +29,7 @@ const styles = theme => ({
     fontWeight: theme.typography.fontWeightBold,
     color: theme.palette.secondary.main
   },
-  buttonWrappr: {
+  buttonWrapper: {
     display: 'flex',
     flexDirection: 'row'
   },
@@ -38,7 +39,11 @@ const styles = theme => ({
     color: theme.palette.secondary.main
   },
   snackbarSuccess: {
-    backgroundColor: green[600]
+    backgroundColor: green[600],
+    borderRadius: theme.spacing.unit / 2
+  },
+  anchorOriginBottomCenter: {
+    marginBottom: theme.spacing.unit * 2
   }
 })
 
@@ -67,43 +72,39 @@ class GoToCartSnackbar extends React.Component {
               vertical: 'bottom',
               horizontal: 'center'
             }}
-            className={classes.snackbarSuccess}
+            classes={{
+              anchorOriginBottomCenter: classes.anchorOriginBottomCenter
+            }}
             autoHideDuration={SNACK_BAR_DURATION}
             open={this.props.cartState.payload.showAddToCartSnackBar}
             onClose={this.handleClose}
             ContentProps={{
               'aria-describedby': 'cart-items'
             }}
-            // action={[
-            //   <IconButton
-            //     key='goToCart'
-            //     aria-label='Close'
-            //     color='inherit'
-            //     className={classes.close}
-            //     onClick={this.handleClose}
-            //   >
-            //     <AddShoppingCartIcon />
-            //   </IconButton>
-            // ]}
-            message={
-              <div className={classes.buttonWrappr}>
-                <Typography variant='caption' className={classes.text}>
-                  {ITEM_ADDED_TO_CART}
-                </Typography>
-                <Button
-                  size='small'
-                  variant='success'
-                  className={classes.editButton}
-                  classes={{
-                    root: classes.couponButtonRoot,
-                    label: classes.editButtonLabel
-                  }}
-                  label={'Go To Cart'}
-                  onClick={this.handleClose}
-                />
-              </div>
-            }
-          />
+          >
+            <SnackbarContent
+              className={classes.snackbarSuccess}
+              aria-describedby='client-snackbar'
+              message={
+                <div className={classes.buttonWrapper}>
+                  <Typography variant='caption' className={classes.text}>
+                    {ITEM_ADDED_TO_CART}
+                  </Typography>
+                  <Button
+                    size='small'
+                    variant='success'
+                    className={classes.editButton}
+                    classes={{
+                      root: classes.couponButtonRoot,
+                      label: classes.editButtonLabel
+                    }}
+                    label={'Go To Cart'}
+                    onClick={this.handleClose}
+                  />
+                </div>
+              }
+            />
+          </Snackbar>
         </Link>
 
       </div>

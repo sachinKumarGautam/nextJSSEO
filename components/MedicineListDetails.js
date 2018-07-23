@@ -10,7 +10,6 @@ import StrokePrice from './StrokePrice'
 import EstimatedPriceLabel from './EstimatedPriceLabel'
 import { PRODUCT_DETAILS } from '../routes/RouteConstant'
 import Button from './button/Button'
-// import { withCommonWrapper } from './HOCWrapper/CommonWrapper'
 
 const styles = theme => {
   return {
@@ -69,7 +68,6 @@ const styles = theme => {
 class MedicineListDetails extends React.Component {
   constructor (props) {
     super(props)
-
     this.addToCart = this.addToCart.bind(this)
   }
 

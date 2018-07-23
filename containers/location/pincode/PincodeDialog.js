@@ -13,7 +13,11 @@ import DialogActions from '@material-ui/core/DialogActions'
 import DialogContent from '@material-ui/core/DialogContent'
 import DialogContentText from '@material-ui/core/DialogContentText'
 
-import { PINCODE_INVALID, CHECKING_PINCODE, PINCODE_REQUIRED } from '../../messages/ValidationMsg'
+import {
+  PINCODE_INVALID,
+  CHECKING_PINCODE,
+  PINCODE_REQUIRED
+} from '../../messages/ValidationMsg'
 
 const styles = theme => ({
   paper: {
@@ -41,7 +45,11 @@ const styles = theme => ({
   }
 })
 
-function getPincodeErrorMsg (pincodeFormError, inValidPincodeError, pincodeLoading) {
+function getPincodeErrorMsg (
+  pincodeFormError,
+  inValidPincodeError,
+  pincodeLoading
+) {
   if (pincodeLoading) {
     return CHECKING_PINCODE
   } else if (pincodeFormError) {
@@ -53,9 +61,7 @@ function getPincodeErrorMsg (pincodeFormError, inValidPincodeError, pincodeLoadi
 
 class PincodeDialog extends React.Component {
   render () {
-    const {
-      props
-    } = this
+    const { props } = this
 
     const {
       values,
@@ -72,10 +78,14 @@ class PincodeDialog extends React.Component {
     const pincodeLoading = checkPincodeState.isLoading
     const pincodeError = checkPincodeState.errorState.error
 
-    const pincodeFormError = errors.pincode && touched.pincode ? errors.pincode : ''
+    const pincodeFormError = errors.pincode && touched.pincode
+      ? errors.pincode
+      : ''
 
-    const inValidPincodeError = touched.pincode && pincodeError === 'NotFoundException'
-      ? PINCODE_INVALID : ''
+    const inValidPincodeError = touched.pincode &&
+      pincodeError === 'NotFoundException'
+      ? PINCODE_INVALID
+      : ''
 
     return (
       <div>
@@ -89,7 +99,7 @@ class PincodeDialog extends React.Component {
         >
           <DialogContent>
             <DialogContentText>
-                Enter Delivery Pincode
+              Enter Delivery Pincode
             </DialogContentText>
             <form onSubmit={handleSubmit}>
               <FormControl
@@ -110,10 +120,12 @@ class PincodeDialog extends React.Component {
                   onBlur={handleBlur}
                   placeholder={'Enter you pincode'}
                 />
-                <FormHelperText
-                  id='pincode'
-                >
-                  {getPincodeErrorMsg(pincodeFormError, inValidPincodeError, pincodeLoading)}
+                <FormHelperText id='pincode'>
+                  {getPincodeErrorMsg(
+                    pincodeFormError,
+                    inValidPincodeError,
+                    pincodeLoading
+                  )}
                 </FormHelperText>
               </FormControl>
             </form>
@@ -123,6 +135,7 @@ class PincodeDialog extends React.Component {
               <Button
                 onClick={props.handleClose}
                 label={'Cancel'}
+                variant='flat'
                 color='primary'
                 classes={{
                   label: classes.buttonLabel
@@ -144,22 +157,24 @@ class PincodeDialog extends React.Component {
   }
 }
 
-export default withStyles(styles)(withFormik({
-  mapPropsToValues: (props) => ({ pincode: props.checkPincodeState.payload.pincode }),
-  validationSchema: Yup.object().shape({
-    pincode: Yup.number().required(PINCODE_REQUIRED)
-  }),
-  handleSubmit: (values, { props, setSubmitting }) => {
-    console.log('inProgressCartItem', props.inProgressCartItem)
-    // getInProgressCartItem
-    props.onSubmit(
-      props.checkPincodeState,
-      props.handleClose,
-      setSubmitting,
-      values,
-      props.incrementCartItemLoading,
-      props.inProgressCartItem
-    )
-  },
-  displayName: 'pincode' // helps with React DevTools
-})(PincodeDialog))
+export default withStyles(styles)(
+  withFormik({
+    mapPropsToValues: props => ({
+      pincode: props.checkPincodeState.payload.pincode
+    }),
+    validationSchema: Yup.object().shape({
+      pincode: Yup.number().required(PINCODE_REQUIRED)
+    }),
+    handleSubmit: (values, { props, setSubmitting }) => {
+      props.onSubmit(
+        props.checkPincodeState,
+        props.handleClose,
+        setSubmitting,
+        values,
+        props.incrementCartItemLoading,
+        props.inProgressCartItem
+      )
+    },
+    displayName: 'pincode' // helps with React DevTools
+  })(PincodeDialog)
+)

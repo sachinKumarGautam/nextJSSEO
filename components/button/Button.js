@@ -54,7 +54,7 @@ function getButtonLoaderClassNames (loaderColor, loaderPosition, classes) {
   return className
 }
 
-const CommonButton = (buttonProps) => {
+const CommonButton = buttonProps => {
   const {
     classes,
     isloading,
@@ -74,21 +74,22 @@ const CommonButton = (buttonProps) => {
   } = buttonProps
   return (
     <div>
-      <div
-        className={classes.wrapper}
-      >
+      <div className={classes.wrapper}>
         <Button
-          className={isloading && !loaderPosition
-            ? classNames(className, classes.buttonloader)
-            : classNames(className, classes.button)
+          variant={variant || null}
+          className={
+            isloading && !loaderPosition
+              ? classNames(className, classes.buttonloader)
+              : classNames(className, classes.button)
           }
           type={type || 'text'}
           color={color}
           href={href || null}
           mini={mini || null}
-          disabled={(loaderPosition === 'center' && isloading) || disabled || null}
+          disabled={
+            (loaderPosition === 'center' && isloading) || disabled || null
+          }
           fullWidth={fullWidth || null}
-          variant={variant || null}
           classes={{
             root: classes.root || {},
             label: classes.label
@@ -97,10 +98,15 @@ const CommonButton = (buttonProps) => {
         >
           {label}
         </Button>
-        {isloading && <CircularProgress
-          size={loaderSize || 22}
-          className={getButtonLoaderClassNames(loaderColor, loaderPosition, classes)}
-        />}
+        {isloading &&
+          <CircularProgress
+            size={loaderSize || 22}
+            className={getButtonLoaderClassNames(
+              loaderColor,
+              loaderPosition,
+              classes
+            )}
+          />}
       </div>
     </div>
   )

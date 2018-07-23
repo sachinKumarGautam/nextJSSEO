@@ -15,8 +15,10 @@ import CartIcon from '../../CartIcon'
 import Login from '../../../containers/login'
 import getPageContext from '../../../src/getPageContext'
 import MenuWrapper from '../../../containers/menu'
-import { searchMedicineLoading } from '../../../containers/searchMedicine/searchMedicineAction'
-import { checkPincodeLoading } from '../../../containers/location/pincode/pincodeAction'
+import {
+  searchMedicineLoading
+} from '../../../containers/searchMedicine/searchMedicineAction'
+
 import { withCommonWrapper } from '../../../components/HOCWrapper/CommonWrapper'
 
 import GoToCartSnackbar from '../../../containers/cartDetails/GoToCartSnackbar'
@@ -24,7 +26,6 @@ import GoToCartSnackbar from '../../../containers/cartDetails/GoToCartSnackbar'
 import {
   getAnonymousCartIdLoading,
   updateIsCartOpenLoginFlag,
-  incrementCartItemLoading,
   updateIsCartOpenRegisterModalFlag,
   goToCartSnackbar
 } from '../../../containers/cartDetails/cartActions'
@@ -149,18 +150,13 @@ class Header extends React.Component {
               />
               <SearchMedicine
                 searchMedicineState={searchMedicineState}
-                cartState={this.props.cartState}
-                incrementCartItemLoading={
-                  this.props.actions.incrementCartItemLoading
-                }
                 checkPincodeState={checkPincodeState}
-                checkPincodeLoading={this.props.actions.checkPincodeLoading}
                 searchMedicineLoading={actions.searchMedicineLoading}
                 addToCartHandler={this.props.addToCartHandler}
               />
               <CartIcon cartState={this.props.cartState} />
               {loginState.isAuthenticated && <MenuWrapper />}
-              {!loginState.isAuthenticated && (
+              {!loginState.isAuthenticated &&
                 <Button
                   variant='raised'
                   size='medium'
@@ -169,26 +165,24 @@ class Header extends React.Component {
                   onClick={this.openLoginModal}
                   className={classes.button}
                   label={'Login / Register'}
-                />
-              )}
+                />}
               {(this.state.openLoginDialog ||
                 this.props.cartState.isCartOpenLoginDialog ||
-                this.props.cartState.isCartOpenRegisterDialog) && (
-                  <Login
-                    openLoginDialog={
-                      this.state.openLoginDialog ||
-                    this.props.cartState.isCartOpenLoginDialog ||
-                    this.props.cartState.isCartOpenRegisterDialog
-                    }
-                    openLoginModal={this.openLoginModal}
-                    isCartOpenRegisterDialog={
+                this.props.cartState.isCartOpenRegisterDialog) &&
+                <Login
+                  openLoginDialog={
+                    this.state.openLoginDialog ||
+                      this.props.cartState.isCartOpenLoginDialog ||
                       this.props.cartState.isCartOpenRegisterDialog
-                    }
-                    closeLoginModal={this.closeLoginModal}
-                    loginState={loginState}
-                    customerState={customerState}
-                  />
-                )}
+                  }
+                  openLoginModal={this.openLoginModal}
+                  isCartOpenRegisterDialog={
+                    this.props.cartState.isCartOpenRegisterDialog
+                  }
+                  closeLoginModal={this.closeLoginModal}
+                  loginState={loginState}
+                  customerState={customerState}
+                />}
             </Toolbar>
             <Subheader
               isAuthenticated={this.props.loginState.isAuthenticated}
@@ -221,9 +215,7 @@ function mapDispatchToProps (dispatch) {
       {
         updateIsCartOpenLoginFlag,
         searchMedicineLoading,
-        checkPincodeLoading,
         getAnonymousCartIdLoading,
-        incrementCartItemLoading,
         updateIsCartOpenRegisterModalFlag,
         goToCartSnackbar
       },
@@ -233,10 +225,5 @@ function mapDispatchToProps (dispatch) {
 }
 
 export default withCommonWrapper(
-  withStyles(styles)(
-    connect(
-      mapStateToProps,
-      mapDispatchToProps
-    )(Header)
-  )
+  withStyles(styles)(connect(mapStateToProps, mapDispatchToProps)(Header))
 )

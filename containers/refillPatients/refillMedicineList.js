@@ -31,7 +31,6 @@ const styles = theme => {
 
 class RefillMedicineList extends Component {
   render () {
-    const { cartState, checkPincodeLoading } = this.props
     return (
       <div>
         <Card elevation={'1'}>
@@ -50,9 +49,7 @@ class RefillMedicineList extends Component {
                   <MedicineListDetails
                     itemDetails={itemDetails}
                     isRefillMedicines
-                    cartState={cartState}
                     addToCartHandler={this.props.addToCartHandler}
-                    checkPincodeLoading={checkPincodeLoading}
                     checkPincodeState={this.props.checkPincodeState}
                   />
                 </li>

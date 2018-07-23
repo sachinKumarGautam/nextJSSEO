@@ -9,10 +9,10 @@ import MedicineList from './MedicineList'
   medicine list
 */
 
-const MedicineListWrapper = (props) => (
+const MedicineListWrapper = props => (
   <div>
     <BreadCrumbs />
-    <section >
+    <section>
       <MedicineList
         medicineListState={props.medicineState}
         query={props.query}
@@ -20,9 +20,6 @@ const MedicineListWrapper = (props) => (
         getRelatedMedicinesLoading={props.getRelatedMedicinesLoading}
         checkPincodeState={props.checkPincodeState}
         moleculeName={props.moleculeName}
-        incrementCartItemLoading={props.incrementCartItemLoading}
-        cartState={props.cartState}
-        checkPincodeLoading={props.checkPincodeLoading}
       />
     </section>
   </div>

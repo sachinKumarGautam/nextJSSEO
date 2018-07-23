@@ -1,7 +1,10 @@
 /* eslint-disable no-underscore-dangle */
 
 import { SheetsRegistry } from 'jss'
-import { createMuiTheme, createGenerateClassName } from '@material-ui/core/styles'
+import {
+  createMuiTheme,
+  createGenerateClassName
+} from '@material-ui/core/styles'
 // import purple from '@material-ui/core/colors/purple'
 // import green from '@material-ui/core/colors/green'
 
@@ -47,14 +50,10 @@ const theme = createMuiTheme({
     },
     MuiButton: {
       root: {
-        // boxShadow: 'none',
         borderRadius: 32
       },
       outlined: {
-        border: '#80c241'
-      },
-      raisedPrimary: {
-        // boxShadow: 'none'
+        border: '1px solid #80c241'
       },
       label: {
         color: '#fff',

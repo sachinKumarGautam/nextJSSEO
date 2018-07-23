@@ -45,7 +45,7 @@ const styles = theme => {
   }
 }
 
-const RelatedMedicines = (props) => (
+const RelatedMedicines = props => (
   <div className={props.classes.relatedMedicinesWrapper}>
     <Typography
       gutterBottom
@@ -61,12 +61,9 @@ const RelatedMedicines = (props) => (
           {props.medicineList.map((item, index) => (
             <li className={props.classes.listItem}>
               <RelatedMedicinesCard
-                checkPincodeLoading={props.checkPincodeLoading}
                 checkPincodeState={props.checkPincodeState}
                 itemDetails={item}
                 addToCartHandler={props.addToCartHandler}
-                incrementCartItemLoading={props.incrementCartItemLoading}
-                cartState={props.cartState}
               />
             </li>
           ))}

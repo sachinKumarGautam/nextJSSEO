@@ -21,9 +21,6 @@ import {
   getRelatedMedicinesLoading
 } from '../containers/medicineList/medicineListActions'
 
-import {
-  checkPincodeLoading
-} from '../containers/location/pincode/pincodeAction'
 import { withCommonWrapper } from '../components/HOCWrapper/CommonWrapper'
 
 const styles = theme => ({
@@ -88,7 +85,6 @@ class MoleculeDetails extends React.Component {
         <div className={this.props.classes.wrapperStyle}>
           <Paper className={this.props.classes.root} elevation={1}>
             <MoleculeDetailsWrapper
-              checkPincodeLoading={this.props.actions.checkPincodeLoading}
               checkPincodeState={this.props.checkPincodeState}
               addToCartHandler={this.props.addToCartHandler}
             />
@@ -113,8 +109,7 @@ function mapDispatchToProps (dispatch) {
     actions: bindActionCreators(
       {
         getMoleculeSummaryLoading,
-        getRelatedMedicinesLoading,
-        checkPincodeLoading
+        getRelatedMedicinesLoading
       },
       dispatch
     )
