@@ -8,14 +8,16 @@ export function checkPincodeLoading (
   checkPincodeState,
   handleClose,
   setSubmitting,
-  values
+  values,
+  isDeliveryAddress
 ) {
   return {
     type: CHECK_PINCODE_LOADING,
     checkPincodeState,
-    handleClose,
-    setSubmitting,
-    pincode: values.pincode,
+    handleClose: handleClose,
+    setSubmitting: setSubmitting,
+    isDeliveryAddress: isDeliveryAddress,
+    pincode: isDeliveryAddress ? values : values.pincode,
     isLoading: true,
     isError: false,
     error: {}

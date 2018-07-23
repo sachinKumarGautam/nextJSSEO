@@ -267,6 +267,9 @@ class OrderSummary extends React.Component {
           checkedIconWrapper={this.props.classes.checkedIconWrapper}
           checkedIcon={this.props.classes.checkedIcon}
           patientDetails={this.props.classes.patientDetails}
+          updateAddressFormValue={this.props.updateAddressFormValue}
+          getLocalityDetailListLoading={this.props.getLocalityDetailListLoading}
+          checkPincodeDetailLoading={this.props.checkPincodeLoading}
         />
         <PaymentExpansionPanel
           expanded={this.state.expanded}

@@ -1,15 +1,8 @@
 import React from 'react'
-import Router from 'next/router'
 import Downshift from 'downshift'
 import { withStyles } from '@material-ui/core/styles'
 import TextField from '@material-ui/core/TextField'
 import Paper from '@material-ui/core/Paper'
-// import MenuItem from '@material-ui/core/MenuItem'
-import Button from '../../components/button'
-import SearchIcon from '@material-ui/icons/Search'
-import MedicineListDetails from '../../components/MedicineListDetails'
-
-import { PRODUCT_SEARCH } from '../../routes/RouteConstant'
 
 const styles = theme => ({
   root: {
@@ -17,69 +10,63 @@ const styles = theme => ({
   },
   container: {
     flexGrow: 1,
-    width: theme.spacing.unit * 80,
+    width: theme.spacing.unit * 41.75,
     margin: '0 auto',
     position: 'relative'
   },
   paper: {
     position: 'absolute',
-    maxHeight: theme.spacing.unit * 50,
+    maxHeight: theme.spacing.unit * 20,
     overflow: 'scroll',
     zIndex: 1,
     left: 0,
     right: 0,
-    marginLeft: theme.spacing.unit * 2,
-    marginRight: theme.spacing.unit * 2
-  },
-  chip: {
-    margin: `${theme.spacing.unit / 2}px ${theme.spacing.unit / 4}px`
+    width: theme.spacing.unit * 41.75
   },
   inputFormControl: {
+    ...theme.typography.body1,
+    color: theme.palette.customGrey.grey400,
     flexWrap: 'wrap',
-    width: theme.spacing.unit * 80,
-    paddingLeft: theme.spacing.unit * 2,
+    width: theme.spacing.unit * 41.75,
     borderColor: theme.palette.customGrey.grey200,
-    border: `1px solid ${theme.palette.common.black}`,
-    borderRadius: theme.spacing.unit * 2,
-    boxShadow: '0 1px 3px 0 rgba(0, 0, 0, 0.16)'
+    borderBottom: `1px solid ${theme.palette.customGrey.grey200}`,
+    borderRadius: 0,
+    marginTop: theme.spacing.unit * 2
   },
   inputFocused: {
-    border: `1px solid ${theme.palette.primary.main}`
-  },
-  searchButton: {
-    borderColor: theme.palette.customGrey.grey200,
-    position: 'absolute',
-    right: 0,
-    height: theme.spacing.unit * 4,
-    borderRadius: `0px ${theme.spacing.unit * 2}px ${theme.spacing.unit * 2}px 0px`
+    borderBottom: `2px solid ${theme.palette.primary.main}`
   },
   searchBar: {
     display: 'flex',
     flexDirection: 'row',
     borderRadius: `0px ${theme.spacing.unit * 2}px ${theme.spacing.unit * 2}px 0px`
   },
-  iconColor: {
-    color: theme.palette.customGrey.grey500
-  },
-  searchContentWrapper: {
-    listStyle: 'none',
-    paddingLeft: 0,
-    marginTop: 0,
-    marginBottom: 0
-  },
   searchItem: {
+    ...theme.typography.caption,
+    color: theme.palette.customGrey.grey400,
     '&:not(:last-child)': {
-      borderBottom: `1px solid ${theme.palette.customGrey.grey100}`,
-      paddingBottom: theme.spacing.unit
+      ...theme.typography.caption,
+      color: theme.palette.customGrey.grey400,
+      borderBottom: `1px solid ${theme.palette.customGrey.grey100}`
     },
     paddingTop: theme.spacing.unit * 2,
     paddingBottom: theme.spacing.unit * 2
   },
   highlightedSearchItem: {
+    ...theme.typography.caption,
+    color: theme.palette.customGrey.grey400,
     backgroundColor: theme.palette.customGrey.grey50
   },
   selectedSearchItem: {
+    ...theme.typography.caption,
+    color: theme.palette.customGrey.grey400,
     fontWeight: theme.typography.fontWeightBold
+  },
+  searchContentWrapper: {
+    listStyle: 'none',
+    padding: theme.spacing.unit * 2,
+    marginTop: 0,
+    marginBottom: 0
   }
 })
 
@@ -99,14 +86,6 @@ function renderInput (inputProps) {
         }}
         {...other}
       />
-      <Button
-        color='primary'
-        classes={{
-          root: classes.searchButton
-        }}
-        onClick={InputProps.inputValue ? inputProps.onSearchClick.bind(this, InputProps.inputValue) : null}
-        label={<SearchIcon className={classes.iconColor} />}
-      />
     </div>
   )
 }
@@ -120,11 +99,7 @@ function renderSuggestion ({
   searchItemStyle,
   highlightedSearchItem,
   selectedSearchItem,
-  onSelectItem,
-  checkPincodeLoading,
-  checkPincodeState,
-  cartState,
-  incrementCartItemLoading
+  onSelectItem
 }) {
   const isHighlighted = highlightedIndex === index
   const isSelected = (selectedItem || '').indexOf(suggestion.label) > -1
@@ -135,59 +110,47 @@ function renderSuggestion ({
       {...itemProps}
       className={listStyle}
     >
-      <MedicineListDetails
-        itemDetails={suggestion}
-        incrementCartItemLoading={incrementCartItemLoading}
-        cartState={cartState}
-        checkPincodeState={checkPincodeState}
-      />
+      {suggestion.locality}
     </li>
   )
 }
 
-function getSuggestions (searchMedicineResult) {
-  return searchMedicineResult
+function getSuggestions (locationSearchResult) {
+  return locationSearchResult
 }
 
-class SearchMedicine extends React.Component {
+class LocationSearch extends React.Component {
   constructor (props) {
     super(props)
-    this.searchMedicineOnChange = this.searchMedicineOnChange.bind(this)
+    this.searchLocalityOnChange = this.searchLocalityOnChange.bind(this)
     this.onSelectItem = this.onSelectItem.bind(this)
-    this.onSearchMedicine = this.onSearchMedicine.bind(this)
   }
 
-  searchMedicineOnChange (event) {
-    this.props.searchMedicineLoading(
-      this.props.searchMedicineState,
-      this.props.checkPincodeState.payload.id,
+  searchLocalityOnChange (event) {
+    this.props.getLocalityDetailListLoading(
+      this.props.deliveryDetailsState,
+      this.props.deliveryDetailsState.addressForm.pincode,
+      this.props.deliveryDetailsState.addressForm.state,
+      this.props.deliveryDetailsState.addressForm.city,
       event.target.value
     )
+    this.props.onChange(event.target.value)
   }
 
-  onSelectItem (itemDetails, props) {
-    this.props.updateInProgressMedicineState(this.props.searchMedicineState, itemDetails)
-  }
-
-  onSearchMedicine (medicineName) {
-    const href = `${PRODUCT_SEARCH}?slug=${medicineName}`
-    const as = `${PRODUCT_SEARCH}?slug=${medicineName}`
-    Router.push(href, as)
+  onSelectItem (itemDetails) {
+    this.props.onChange(itemDetails)
   }
 
   render () {
     const {
       classes,
-      searchMedicineState,
-      checkPincodeLoading,
-      checkPincodeState,
-      cartState,
-      incrementCartItemLoading
+      deliveryDetailsState
     } = this.props
-    const searchMedicineResult = searchMedicineState.payload.searchMedicineResult
+    const locationSearchResult = deliveryDetailsState.addressLocalityList.payload
     return (
       <div className={classes.root}>
         <Downshift
+          onChange={this.onSelectItem}
           // onStateChange={({ inputValue }) => {
           //   return inputValue && this.setState({ inputValue })
           // }}
@@ -198,13 +161,12 @@ class SearchMedicine extends React.Component {
                 fullWidth: true,
                 classes,
                 InputProps: getInputProps({
-                  placeholder: 'Search medicine...',
-                  id: 'search-medicine',
+                  placeholder: 'Search Locality',
+                  id: 'search-locality',
                   autofocus: true,
-                  onChange: this.searchMedicineOnChange,
+                  onChange: this.searchLocalityOnChange,
                   inputValue
-                }),
-                onSearchClick: this.onSearchMedicine
+                })
               })}
               {isOpen ? (
                 <Paper className={classes.paper} square>
@@ -212,23 +174,19 @@ class SearchMedicine extends React.Component {
                     {...getMenuProps()}
                     className={classes.searchContentWrapper}
                   >
-                    {getSuggestions(searchMedicineResult).map((suggestion, index) =>
+                    {getSuggestions(locationSearchResult).map((suggestion, index) =>
                       renderSuggestion({
                         suggestion,
                         index,
                         itemProps: getItemProps({
-                          item: suggestion.name
+                          item: suggestion.locality
                         }),
                         highlightedIndex,
                         selectedItem,
                         onSelectItem: this.onSelectItem,
                         searchItemStyle: classes.searchItem,
                         highlightedSearchItem: `${classes.searchItem} ${classes.highlightedSearchItem}`,
-                        selectedSearchItem: `${classes.searchItem} ${classes.selectedSearchItem}`,
-                        checkPincodeLoading,
-                        checkPincodeState,
-                        cartState,
-                        incrementCartItemLoading
+                        selectedSearchItem: `${classes.searchItem} ${classes.selectedSearchItem}`
                       })
                     )}
                   </ul>
@@ -242,4 +200,4 @@ class SearchMedicine extends React.Component {
   }
 }
 
-export default withStyles(styles)(SearchMedicine)
+export default withStyles(styles)(LocationSearch)

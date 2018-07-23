@@ -17,8 +17,14 @@ import Paper from '@material-ui/core/Paper'
 import {
   getDeliveryDetailsListLoading,
   saveAddressSelected,
-  submitDeliveryDetailsLoading
+  submitDeliveryDetailsLoading,
+  updateAddressFormValue,
+  getLocalityDetailListLoading
 } from '../containers/deliveryDetails/deliveryDetailsActions'
+
+import {
+  checkPincodeLoading
+} from '../containers/location/pincode/pincodeAction'
 
 import {
   deliveryDetails
@@ -67,7 +73,11 @@ class DeliveryDetails extends React.Component {
               saveAddressSelected={this.props.actions.saveAddressSelected}
               submitDeliveryDetailsLoading={this.props.actions.submitDeliveryDetailsLoading}
               customerState={this.props.customerState}
+              checkPincodeLoading={this.props.actions.checkPincodeLoading}
+              updateAddressFormValue={this.props.actions.updateAddressFormValue}
               cartState={this.props.cartState}
+              getLocalityDetailListLoading={this.props.actions.getLocalityDetailListLoading}
+              checkPincodeState={this.props.checkPincodeState}
             />
           </Paper>
         </div>
@@ -81,7 +91,8 @@ function mapStateToProps (state) {
   return {
     cartState: state.cartState,
     deliveryDetailsState: state.deliveryDetailsState,
-    customerState: state.customerState
+    customerState: state.customerState,
+    checkPincodeState: state.checkPincodeState
   }
 }
 
@@ -91,7 +102,10 @@ function mapDispatchToProps (dispatch) {
       {
         getDeliveryDetailsListLoading,
         saveAddressSelected,
-        submitDeliveryDetailsLoading
+        submitDeliveryDetailsLoading,
+        checkPincodeLoading,
+        updateAddressFormValue,
+        getLocalityDetailListLoading
       },
       dispatch
     )

@@ -15,7 +15,10 @@ const AddressDetails = props => (
         customerState={props.customerState}
         deliveryDetailsState={props.deliveryDetailsState}
         deliveryFormState={props.deliveryFormState}
-        closeModal={props.closeDeliveryFormModal}
+        closeDeliveryFormModal={props.closeDeliveryFormModal}
+        updateAddressFormValue={props.updateAddressFormValue}
+        checkPincodeDetailLoading={props.checkPincodeDetailLoading}
+        getLocalityDetailListLoading={props.getLocalityDetailListLoading}
       />
     </Grid>
     {
