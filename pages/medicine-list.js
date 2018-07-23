@@ -6,6 +6,8 @@ import { withStyles } from '@material-ui/core/styles'
 import { bindActionCreators } from 'redux'
 import Router from 'next/router'
 
+import Head from 'next/head'
+
 import withRoot from '../src/withRoot'
 
 import { connect } from 'react-redux'
@@ -15,6 +17,9 @@ import {searchMedicineLoading} from '../containers/searchMedicine/searchMedicine
 import {getRelatedMedicinesLoading} from '../containers/medicineList/medicineListActions'
 import {incrementCartItemLoading} from '../containers/cartDetails/cartActions'
 import { checkPincodeLoading } from '../containers/location/pincode/pincodeAction'
+import {
+  medicineList
+} from '../components/constants/PageTitle'
 
 const styles = theme => ({
   root: {
@@ -36,12 +41,12 @@ const styles = theme => ({
 class MedicineList extends React.Component {
   componentDidMount () {
     const {query} = Router
-    // Represents to get medicine list with page size and size per page.
 
-    if (query.name && !this.props.medicineListState.payload.length) {
+    // Represents to get medicine list with page size and size per page.
+    if (query.moleculeName) {
       this.props.actions.getRelatedMedicinesLoading(
         this.props.medicineListState,
-        query.name, // pass salt name
+        query.moleculeName, // pass salt name
         0, // page number
         10 // page size
       )
@@ -61,12 +66,14 @@ class MedicineList extends React.Component {
 
     return (
       <div>
+        <Head>
+          <title>{medicineList.title}</title>
+        </Head>
         <Header />
         <div className={this.props.classes.root}>
           <MedicineListWrapper
             cartState={this.props.cartState}
             checkPincodeState={this.props.checkPincodeState}
-            moleculeName={Router.query.name}
             incrementCartItemLoading={this.props.actions.incrementCartItemLoading}
             searchMedicineLoading={this.props.actions.searchMedicineLoading}
             query={query}

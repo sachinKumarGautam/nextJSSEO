@@ -108,7 +108,7 @@ class MedicineListDetails extends React.Component {
         <Link
           prefetch
           href={`${PRODUCT_DETAILS}?id=${props.itemDetails.slug}&location=${city}`}
-          as={`${PRODUCT_DETAILS}/${props.itemDetails.slug}/${city}`}
+          as={`${PRODUCT_DETAILS}/${props.itemDetails.slug}?location=${city}`}
         >
           <div>
             <ProductName

@@ -88,7 +88,7 @@ class MedicineList extends React.Component {
           component='h1'
           className={classes.title}
         >
-          Available medicines for {this.props.moleculeName}
+          Available medicines for {this.props.query.moleculeName ? this.props.query.moleculeName : this.props.query.productName}
         </Typography>
         <Card elevation={1}>
           <CardContent>
