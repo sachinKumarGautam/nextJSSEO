@@ -17,17 +17,18 @@ export function checkPincodeLoading (
   handleClose,
   setSubmitting,
   values,
+  isDeliveryAddress,  
   incrementCartItemLoading = null,
   inProgressCartItem = {},
-  isDeliveryAddress
 ) {
   return {
     type: CHECK_PINCODE_LOADING,
     checkPincodeState,
     handleClose: handleClose,
     setSubmitting: setSubmitting,
-    incrementCartItemLoading,
     isDeliveryAddress: isDeliveryAddress,
+    incrementCartItemLoading,
+    inProgressCartItem,
     pincode: isDeliveryAddress ? values : values.pincode,
     isLoading: true,
     isError: false,
