@@ -116,14 +116,6 @@ class Header extends React.Component {
     )
   }
 
-  /*
-(
-                  this.state.openLoginDialog ||
-                  this.props.cartState.isCartOpenLoginDialog ||
-                  this.props.cartState.isCartOpenRegisterDialog
-                ) &&
-  */
-
   render () {
     const {
       classes,

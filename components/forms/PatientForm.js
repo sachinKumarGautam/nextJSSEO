@@ -43,6 +43,18 @@ const styles = theme => ({
 })
 
 class PatientForm extends React.Component {
+  handleChangeAge = event => {
+    if (event.target.value < 150) {
+      this.props.handleChange(event)
+    }
+  }
+
+  handleChangeMobile = event => {
+    if (event.target.value.length <= 10) {
+      this.props.handleChange(event)
+    }
+  }
+
   render () {
     const {
       values,
@@ -60,10 +72,7 @@ class PatientForm extends React.Component {
           aria-describedby='full-name'
           error={errors.full_name && touched.full_name}
         >
-          <InputLabel
-            className={classes.labelStyle}
-            htmlFor='full_name'
-          >
+          <InputLabel className={classes.labelStyle} htmlFor='full_name'>
             Full Name
           </InputLabel>
           <Input
@@ -72,24 +81,18 @@ class PatientForm extends React.Component {
             onChange={handleChange}
             value={values.full_name}
           />
-          {
-            errors.full_name && touched.full_name &&
-            <FormHelperText
-              id='full_name'
-            >
+          {errors.full_name &&
+            touched.full_name &&
+            <FormHelperText id='full_name'>
               {errors.full_name}
-            </FormHelperText>
-          }
+            </FormHelperText>}
         </FormControl>
         <FormControl
           className={classes.formControl}
           aria-describedby='gender'
           error={errors.gender && touched.gender}
         >
-          <InputLabel
-            className={classes.labelStyle}
-            htmlFor='gender'
-          >
+          <InputLabel className={classes.labelStyle} htmlFor='gender'>
             Gender
           </InputLabel>
           <Select
@@ -108,66 +111,51 @@ class PatientForm extends React.Component {
             <MenuItem value={'femlae'}>Female</MenuItem>
             <MenuItem value={'others'}>Others</MenuItem>
           </Select>
-          {
-            errors.gender && touched.gender &&
-            <FormHelperText
-              id='gender'
-            >
+          {errors.gender &&
+            touched.gender &&
+            <FormHelperText id='gender'>
               {errors.gender}
-            </FormHelperText>
-          }
+            </FormHelperText>}
         </FormControl>
         <FormControl
           className={classes.formControl}
           aria-describedby='age'
           error={errors.age && touched.age}
         >
-          <InputLabel
-            className={classes.labelStyle}
-            htmlFor='age'
-          >
+          <InputLabel className={classes.labelStyle} htmlFor='age'>
             Age
           </InputLabel>
           <Input
             id='age'
             type='text'
-            onChange={handleChange}
+            onChange={this.handleChangeAge}
             value={values.age}
           />
-          {
-            errors.age && touched.age &&
-            <FormHelperText
-              id='age'
-            >
+          {errors.age &&
+            touched.age &&
+            <FormHelperText id='age'>
               {errors.age}
-            </FormHelperText>
-          }
+            </FormHelperText>}
         </FormControl>
         <FormControl
           className={classes.formControl}
           aria-describedby='mobile'
           error={errors.mobile && touched.mobile}
         >
-          <InputLabel
-            className={classes.labelStyle}
-            htmlFor='mobile'
-          >
+          <InputLabel className={classes.labelStyle} htmlFor='mobile'>
             Contact No.
           </InputLabel>
           <Input
             id='mobile'
             type='text'
-            onChange={handleChange}
+            onChange={this.handleChangeMobile}
             value={values.mobile}
           />
-          {
-            errors.mobile && touched.mobile &&
-            <FormHelperText
-              id='mobile'
-            >
+          {errors.mobile &&
+            touched.mobile &&
+            <FormHelperText id='mobile'>
               {errors.mobile}
-            </FormHelperText>
-          }
+            </FormHelperText>}
         </FormControl>
         <div className={classes.buttonWrapper}>
           <Button
@@ -183,29 +171,31 @@ class PatientForm extends React.Component {
   }
 }
 
-export default withStyles(styles)(withFormik({
-  mapPropsToValues: (props) => {
-    return {
-      full_name: '',
-      gender: '',
-      mobile: '',
-      age: ''
-    }
-  },
-  validationSchema: Yup.object().shape({
-    full_name: Yup.string().required(FULL_NAME_REQUIRED),
-    mobile: Yup.number().required(MOBILE_REQUIRED),
-    gender: Yup.string().required(GENDER_REQUIRED)
-  }),
-  handleSubmit: (values, { props, setSubmitting }) => {
-    props.onSubmit(
-      props.patientFormState,
-      props.customerId,
-      setSubmitting,
-      props.closeModal,
-      values,
-      props.isCartPage
-    )
-  },
-  displayName: 'PatientForm' // helps with React DevTools
-})(PatientForm))
+export default withStyles(styles)(
+  withFormik({
+    mapPropsToValues: props => {
+      return {
+        full_name: '',
+        gender: '',
+        mobile: '',
+        age: ''
+      }
+    },
+    validationSchema: Yup.object().shape({
+      full_name: Yup.string().required(FULL_NAME_REQUIRED),
+      mobile: Yup.number().required(MOBILE_REQUIRED),
+      gender: Yup.string().required(GENDER_REQUIRED)
+    }),
+    handleSubmit: (values, { props, setSubmitting }) => {
+      props.onSubmit(
+        props.patientFormState,
+        props.customerId,
+        setSubmitting,
+        props.closeModal,
+        values,
+        props.isCartPage
+      )
+    },
+    displayName: 'PatientForm' // helps with React DevTools
+  })(PatientForm)
+)
