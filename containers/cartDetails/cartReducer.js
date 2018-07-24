@@ -644,6 +644,61 @@ export default function cartReducer (state = initialState, action) {
         }
       }
 
+    case cartActionTypes.PAYMENT_INITIATE_LOADING:
+      return {
+        ...state,
+        payment: {
+          ...state.payment,
+          isLoading: action.isLoading,
+          errorState: {
+            ...state.payment.errorState,
+            isError: action.isError
+          }
+        }
+      }
+
+    case cartActionTypes.PAYMENT_INITIATE_SUCCESS:
+      return {
+        ...state,
+        payment: {
+          ...state.payment,
+          isLoading: action.isLoading
+        },
+        orderSummary: {
+          ...state.orderSummary,
+          payload: {
+            ...state.orderSummary.payload,
+            state: action.state,
+            status: action.status,
+            payment_confirmation_time: action.payment_confirmation_time,
+            payment_cancellation_time: action.payment_cancellation_time,
+            customer_care_number: action.customer_care_number
+          }
+        },
+        orderResponse: {
+          ...state.orderResponse,
+          isLoading: action.isLoading,
+          order_number: action.order_number,
+          order_type: action.order_type
+        },
+        payment_gateway: action.payment_gateway,
+        isOrderSubmitted: action.isOrderSubmitted
+      }
+
+    case cartActionTypes.PAYMENT_INITIATE_FAILURE:
+      return {
+        ...state,
+        payment: {
+          ...state.payment,
+          isLoading: action.isLoading,
+          errorState: {
+            ...state.payment.errorState,
+            isError: action.isError,
+            error: action.error
+          }
+        }
+      }
+
     default:
       return state
   }

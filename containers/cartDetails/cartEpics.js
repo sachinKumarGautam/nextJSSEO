@@ -17,7 +17,8 @@ import {
   SUBMIT_ORDER_LOADING,
   SUBMIT_COUPON_CODE_LOADING,
   OPT_DOCTOR_CALLBACK_LOADING,
-  VERIFY_PAYMENT_LOADING
+  VERIFY_PAYMENT_LOADING,
+  PAYMENT_INITIATE_LOADING
 } from './cartActionTypes'
 
 import {
@@ -44,7 +45,9 @@ import {
   optForDoctorCallbackSuccess,
   optForDoctorCallbackFailure,
   verifyPaymentSuccess,
-  verifyPaymentFailure
+  verifyPaymentFailure,
+  paymentInitiateSuccess,
+  paymentInitiateFailure
 } from './cartActions'
 
 import {
@@ -60,7 +63,8 @@ import {
   submitOrder$,
   applyCouponForCart$,
   teleConsultation$,
-  verifyPayment$
+  verifyPayment$,
+  paymentInitiate$
 } from '../../services/api'
 
 export function getAnonymousCartIdEpic (action$, store) {
@@ -508,6 +512,30 @@ export function verifyPaymentEpic (action$, store) {
         }),
         catchError(error => {
           return of(verifyPaymentFailure(data.cartState, error))
+        })
+      )
+    })
+  )
+}
+
+export function paymentInitiateEpic (action$, store) {
+  return action$.pipe(
+    ofType(PAYMENT_INITIATE_LOADING),
+    mergeMap(data => {
+      const body = {
+        order_id: data.orderId,
+        payment_method: data.cartState.paymentMode
+      }
+
+      return http(paymentInitiate$(body)).pipe(
+        map(result => {
+          const payload = result.body.payload.order
+          const paymentGateway = result.body.payload.payment_gateway
+
+          return paymentInitiateSuccess(data.cartState, payload, paymentGateway)
+        }),
+        catchError(error => {
+          return of(paymentInitiateFailure(data.cartState, error))
         })
       )
     })

@@ -539,3 +539,49 @@ export function updatePaymentFailureFlag (
     isPaymentSuccessful: false
   }
 }
+
+export function paymentInitiateLoading (
+  cartState,
+  orderId
+) {
+  return {
+    type: cartActionTypes.PAYMENT_INITIATE_LOADING,
+    cartState,
+    orderId: orderId,
+    isLoading: true,
+    isError: false
+  }
+}
+
+export function paymentInitiateSuccess (
+  cartState,
+  payload,
+  paymentGateway
+) {
+  return {
+    type: cartActionTypes.PAYMENT_INITIATE_SUCCESS,
+    cartState,
+    order_number: payload.id,
+    order_type: payload.order_type,
+    payment_gateway: paymentGateway,
+    isOrderSubmitted: true,
+    state: payload.state,
+    status: payload.status,
+    payment_confirmation_time: payload.payment_confirmation_time,
+    payment_cancellation_time: payload.payment_cancellation_time > 60
+      ? payload.payment_cancellation_time / 60 + ' hours '
+      : payload.payment_cancellation_time + ' minutes ',
+    customer_care_number: payload.customer_care_number,
+    isLoading: false
+  }
+}
+
+export function paymentInitiateFailure (cartState, error) {
+  return {
+    type: cartActionTypes.PAYMENT_INITIATE_FAILURE,
+    cartState,
+    isLoading: false,
+    isError: true,
+    error: error
+  }
+}

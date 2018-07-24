@@ -263,6 +263,14 @@ const verifyPayment$ = (orderId, body) => (
   })
 )
 
+const paymentInitiate$ = (body) => (
+  makeAjaxRequest({
+    method: 'POST',
+    url: fetchUrl('order', 'payment/initiate', 'CREATE'),
+    body: body
+  })
+)
+
 export {
   getMoleculeSummary$,
   getMedicineList$,
@@ -295,5 +303,6 @@ export {
   getSliderImages$,
   applyCouponForCart$,
   teleConsultation$,
-  verifyPayment$
+  verifyPayment$,
+  paymentInitiate$
 }
