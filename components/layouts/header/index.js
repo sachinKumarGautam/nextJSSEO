@@ -17,8 +17,7 @@ import getPageContext from '../../../src/getPageContext'
 import MenuWrapper from '../../../containers/menu'
 import { withCommonWrapper } from '../../../components/HOCWrapper/CommonWrapper'
 import {
-  searchMedicineLoading,
-  updateInProgressMedicineState
+  searchMedicineLoading
 } from '../../../containers/searchMedicine/searchMedicineAction'
 
 import GoToCartSnackbar from '../../../containers/cartDetails/GoToCartSnackbar'
@@ -152,9 +151,6 @@ class Header extends React.Component {
                 searchMedicineState={searchMedicineState}
                 checkPincodeState={checkPincodeState}
                 searchMedicineLoading={actions.searchMedicineLoading}
-                updateInProgressMedicineState={
-                  actions.updateInProgressMedicineState
-                }
                 addToCartHandler={this.props.addToCartHandler}
               />
               <CartIcon cartState={this.props.cartState} />
@@ -220,8 +216,7 @@ function mapDispatchToProps (dispatch) {
         searchMedicineLoading,
         getAnonymousCartIdLoading,
         updateIsCartOpenRegisterModalFlag,
-        goToCartSnackbar,
-        updateInProgressMedicineState
+        goToCartSnackbar
       },
       dispatch
     )

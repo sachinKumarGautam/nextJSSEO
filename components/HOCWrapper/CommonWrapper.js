@@ -2,7 +2,9 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import PincodeDialog from '../../containers/location/pincode/PincodeDialog'
 
-import { incrementCartItemLoading } from '../../containers/cartDetails/cartActions'
+import {
+  incrementCartItemLoading
+} from '../../containers/cartDetails/cartActions'
 import {
   openPincodeDialog,
   checkPincodeLoading
@@ -37,15 +39,14 @@ export function withCommonWrapper (Page) {
           inProgressCartItem
         })
 
-        this.props.actions.openPincodeDialog(
-          this.props.checkPincodeState,
-          true
-        )
+        this.props.actions.openPincodeDialog(this.props.checkPincodeState, {
+          isOpen: true
+        })
       }
     }
 
     handleClose = () =>
-      this.props.actions.openPincodeDialog(this.props.checkPincodeState, false);
+      this.props.actions.openPincodeDialog(this.props.checkPincodeState, false)
 
     render () {
       const { checkPincodeState, actions } = this.props
@@ -89,10 +90,7 @@ export function withCommonWrapper (Page) {
     }
   }
 
-  return connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )(withRoot(CommomWrapper))
+  return connect(mapStateToProps, mapDispatchToProps)(withRoot(CommomWrapper))
 }
 
 // export default (mapStateToProps, mapDispatchToProps) => (Page) => {

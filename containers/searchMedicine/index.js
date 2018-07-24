@@ -43,14 +43,13 @@ const styles = theme => ({
     borderColor: theme.palette.customGrey.grey200,
     border: `1px solid ${theme.palette.common.black}`,
     borderRadius: theme.spacing.unit * 4
-    // boxShadow: '0 1px 3px 0 rgba(0, 0, 0, 0.16)'
   },
   inputFocused: {
     border: `1px solid ${theme.palette.primary.main}`
   },
   searchButton: {
     borderColor: theme.palette.customGrey.grey200,
-    borderLeft: '1px solid black',
+    borderLeft: `1px solid ${theme.palette.common.black}`,
     position: 'absolute',
     right: 0,
     top: -(theme.spacing.unit * 2.2),

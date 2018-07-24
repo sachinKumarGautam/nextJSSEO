@@ -171,6 +171,7 @@ export default withStyles(styles)(
         props.handleClose,
         setSubmitting,
         values,
+        { isDeliveryAddress: false },
         props.incrementCartItemLoading,
         props.inProgressCartItem
       )
