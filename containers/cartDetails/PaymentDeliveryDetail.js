@@ -7,7 +7,9 @@ import ReactTooltip from 'react-tooltip'
 
 import {
   LF_ASSURED,
-  UREGNT_DELIVERY
+  UREGNT_DELIVERY,
+  VERIFICATION_RX,
+  LF_ASSURED_DETAIL
 } from '../messages/cartMessages'
 
 const styles = theme => ({
@@ -75,7 +77,7 @@ class PaymentDeliveryDetail extends Component {
             varaint='caption'
             className={this.props.classes.asssuredText}
           >
-            Your order is covered under LifCare Assured.
+            {LF_ASSURED_DETAIL}
           </Typography>
           <a
             href='#'
@@ -111,7 +113,7 @@ class PaymentDeliveryDetail extends Component {
             varaint='caption'
             className={this.props.classes.text}
           >
-            Verification of a valid prescription is pending for this order, for the commencement of the LifCare Assured service guarantee.
+            {VERIFICATION_RX}
           </Typography>
         </div>
         <div className={this.props.classes.textWrapper}>
