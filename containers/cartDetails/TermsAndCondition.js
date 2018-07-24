@@ -3,6 +3,11 @@ import React, { Component } from 'react'
 import Typography from '@material-ui/core/Typography'
 import { withStyles } from '@material-ui/core/styles'
 
+import {
+  GENUINE_MEDICINE,
+  THIRD_TERM
+} from '../messages/termsAndCondition'
+
 const styles = theme => ({
   textWrapper: {
     display: 'flex',
@@ -58,7 +63,7 @@ class TermsAndCondition extends Component {
             varaint='caption'
             className={this.props.classes.text}
           >
-            100% Genuine Medicines
+            {GENUINE_MEDICINE}
           </Typography>
         </div>
         <div className={this.props.classes.textWrapper}>
@@ -82,7 +87,7 @@ class TermsAndCondition extends Component {
             varaint='caption'
             className={this.props.classes.text}
           >
-            Free Delivery at your door step* *T&C apply
+            {THIRD_TERM}
           </Typography>
         </div>
       </div>
