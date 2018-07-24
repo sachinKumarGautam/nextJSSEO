@@ -57,3 +57,8 @@ export const cartDetail = {
   title: 'Cart',
   description: ''
 }
+
+export const orderDetail = {
+  title: 'Order Details',
+  description: ''
+}
