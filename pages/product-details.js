@@ -87,11 +87,10 @@ class ProductDetails extends React.Component {
     const { query } = Router
     return (
       <div>
-        <Header>
-          <Head>
-            <title>{productDetail.title}</title>
-          </Head>
-        </Header>
+        <Head>
+          <title>{productDetail.title}</title>
+        </Head>
+        <Header />
         <div className={this.props.classes.wrapperStyle}>
           <Paper className={classes.root} elevation={1}>
             {query.id && query.id !== 'undefined'

@@ -19,7 +19,6 @@ import { withCommonWrapper } from '../../../components/HOCWrapper/CommonWrapper'
 import {
   searchMedicineLoading
 } from '../../../containers/searchMedicine/searchMedicineAction'
-
 import GoToCartSnackbar from '../../../containers/cartDetails/GoToCartSnackbar'
 
 import {
@@ -116,6 +115,14 @@ class Header extends React.Component {
       isCartOpenRegisterDialog
     )
   }
+
+  /*
+(
+                  this.state.openLoginDialog ||
+                  this.props.cartState.isCartOpenLoginDialog ||
+                  this.props.cartState.isCartOpenRegisterDialog
+                ) &&
+  */
 
   render () {
     const {

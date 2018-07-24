@@ -92,8 +92,3 @@ export function withCommonWrapper (Page) {
 
   return connect(mapStateToProps, mapDispatchToProps)(withRoot(CommomWrapper))
 }
-
-// export default (mapStateToProps, mapDispatchToProps) => (Page) => {
-//   Page = connect(mapStateToProps, mapDispatchToProps)(Page)
-//   return withCommonWrapper(Page)
-// }

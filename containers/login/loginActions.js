@@ -39,7 +39,13 @@ export function sendOtpFailure (loginState, error) {
   }
 }
 
-export function verifyOtpLoading (loginState, setSubmitting, closeLoginModal, toggleForm, values) {
+export function verifyOtpLoading (
+  loginState,
+  setSubmitting,
+  closeLoginModal,
+  toggleForm,
+  values
+) {
   return {
     type: OTP_VERIFIED_LOADING,
     loginState,
