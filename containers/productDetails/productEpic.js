@@ -23,7 +23,6 @@ export function getProductDetails (action$, store) {
           return of(getProductDetailSuccess(productDetailsState, result, data.values))
         }),
         catchError(error => {
-          console.log(error)
           return of(getProductDetailFailure(productDetailsState, error))
         })
       )

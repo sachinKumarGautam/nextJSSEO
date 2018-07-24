@@ -62,7 +62,7 @@ class MedicineList extends React.Component {
     this.props.getRelatedMedicinesLoading(
       this.props.medicineListState,
       'Multivitamin', // pass salt name
-      (this.state.page + 1), // page number
+      this.state.page + 1, // page number
       10 // page size
     )
 
@@ -74,11 +74,9 @@ class MedicineList extends React.Component {
   render () {
     const {
       medicineListState,
-      incrementCartItemLoading,
-      cartState,
       classes,
       checkPincodeState,
-      checkPincodeLoading
+      addToCartHandler
     } = this.props
     return (
       <div className={classes.medicineListWrapper}>
@@ -93,23 +91,20 @@ class MedicineList extends React.Component {
         <Card elevation={1}>
           <CardContent>
             <ul className={classes.articleListWrapper}>
-              {
-                medicineListState.map((itemDetails) => (
-                  <li className={classes.listItem}>
-                    <MedicineListDetails
-                      itemDetails={itemDetails}
-                      checkPincodeState={checkPincodeState}
-                      checkPincodeLoading={checkPincodeLoading}
-                      incrementCartItemLoading={incrementCartItemLoading}
-                      cartState={cartState}
-                    />
-                  </li>
-                ))
-              }
+              {medicineListState.map(itemDetails => (
+                <li className={classes.listItem}>
+                  <MedicineListDetails
+                    itemDetails={itemDetails}
+                    addToCartHandler={addToCartHandler}
+                    checkPincodeState={checkPincodeState}
+                  />
+                </li>
+              ))}
             </ul>
           </CardContent>
         </Card>
-        { medicineListState && !this.props.query.productName &&
+        {medicineListState &&
+          !this.props.query.productName &&
           <div className={classes.buttonWrapper}>
             <Button
               size='medium'

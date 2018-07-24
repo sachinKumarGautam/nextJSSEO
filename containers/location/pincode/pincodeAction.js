@@ -1,15 +1,25 @@
 import {
   CHECK_PINCODE_LOADING,
   CHECK_PINCODE_SUCCESS,
-  CHECK_PINCODE_FAILURE
+  CHECK_PINCODE_FAILURE,
+  HANDLE_PINCODE_DIALOG
 } from './pincodeActionTypes'
+
+export function openPincodeDialog (checkPincodeState, {isOpen}) {
+  return {
+    type: HANDLE_PINCODE_DIALOG,
+    isOpen
+  }
+}
 
 export function checkPincodeLoading (
   checkPincodeState,
   handleClose,
   setSubmitting,
   values,
-  isDeliveryAddress
+  { isDeliveryAddress },
+  incrementCartItemLoading = null,
+  inProgressCartItem = {}
 ) {
   return {
     type: CHECK_PINCODE_LOADING,
@@ -17,6 +27,8 @@ export function checkPincodeLoading (
     handleClose: handleClose,
     setSubmitting: setSubmitting,
     isDeliveryAddress: isDeliveryAddress,
+    incrementCartItemLoading: incrementCartItemLoading,
+    inProgressCartItem: inProgressCartItem,
     pincode: isDeliveryAddress ? values : values.pincode,
     isLoading: true,
     isError: false,

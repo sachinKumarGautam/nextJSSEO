@@ -13,13 +13,17 @@ import withRoot from '../src/withRoot'
 import { connect } from 'react-redux'
 
 import MedicineListWrapper from '../containers/medicineList'
-import {searchMedicineLoading} from '../containers/searchMedicine/searchMedicineAction'
-import {getRelatedMedicinesLoading} from '../containers/medicineList/medicineListActions'
-import {incrementCartItemLoading} from '../containers/cartDetails/cartActions'
-import { checkPincodeLoading } from '../containers/location/pincode/pincodeAction'
+
 import {
-  medicineList
-} from '../components/constants/PageTitle'
+  searchMedicineLoading
+} from '../containers/searchMedicine/searchMedicineAction'
+
+import {
+  getRelatedMedicinesLoading
+} from '../containers/medicineList/medicineListActions'
+
+import { medicineList } from '../components/constants/PageTitle'
+import { withCommonWrapper } from '../components/HOCWrapper/CommonWrapper'
 
 const styles = theme => ({
   root: {
@@ -40,7 +44,8 @@ const styles = theme => ({
 
 class MedicineList extends React.Component {
   componentDidMount () {
-    const {query} = Router
+    const { query } = Router
+    // Represents to get medicine list with page size and size per page.
 
     // Represents to get medicine list with page size and size per page.
     if (query.moleculeName) {
@@ -62,7 +67,7 @@ class MedicineList extends React.Component {
   }
 
   render () {
-    const {query} = Router
+    const { query } = Router
 
     return (
       <div>
@@ -72,17 +77,19 @@ class MedicineList extends React.Component {
         <Header />
         <div className={this.props.classes.root}>
           <MedicineListWrapper
-            cartState={this.props.cartState}
+            addToCartHandler={this.props.addToCartHandler}
             checkPincodeState={this.props.checkPincodeState}
-            incrementCartItemLoading={this.props.actions.incrementCartItemLoading}
+            moleculeName={Router.query.name}
             searchMedicineLoading={this.props.actions.searchMedicineLoading}
             query={query}
-            checkPincodeLoading={this.props.actions.checkPincodeLoading}
-            getRelatedMedicinesLoading={this.props.actions.getRelatedMedicinesLoading}
+            getRelatedMedicinesLoading={
+              this.props.actions.getRelatedMedicinesLoading
+            }
             medicineState={
               query.productName
                 ? this.props.searchMedicineState.payload.searchMedicineResult
-                : this.props.medicineListState.payload}
+                : this.props.medicineListState.payload
+            }
           />
         </div>
         <Footer />
@@ -95,8 +102,7 @@ function mapStateToProps (state) {
   return {
     medicineListState: state.medicineListState,
     searchMedicineState: state.searchMedicineState,
-    checkPincodeState: state.checkPincodeState,
-    cartState: state.cartState
+    checkPincodeState: state.checkPincodeState
   }
 }
 
@@ -105,16 +111,15 @@ function mapDispatchToProps (dispatch) {
     actions: bindActionCreators(
       {
         getRelatedMedicinesLoading,
-        searchMedicineLoading,
-        incrementCartItemLoading,
-        checkPincodeLoading
+        searchMedicineLoading
       },
       dispatch
     )
   }
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(withRoot(withStyles(styles)(MedicineList)))
+export default withCommonWrapper(
+  connect(mapStateToProps, mapDispatchToProps)(
+    withRoot(withStyles(styles)(MedicineList))
+  )
+)

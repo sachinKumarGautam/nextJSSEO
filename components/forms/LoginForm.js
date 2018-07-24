@@ -47,7 +47,6 @@ class LoginForm extends React.Component {
       handleBlur,
       handleSubmit,
       classes
-      // toggleForm
     } = this.props
     return (
       <form onSubmit={handleSubmit}>
