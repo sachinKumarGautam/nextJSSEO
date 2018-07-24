@@ -5,7 +5,7 @@ import {
   HANDLE_PINCODE_DIALOG
 } from './pincodeActionTypes'
 
-export function openPincodeDialog (checkPincodeState, isOpen = false) {
+export function openPincodeDialog (checkPincodeState, { isOpen }) {
   return {
     type: HANDLE_PINCODE_DIALOG,
     isOpen
@@ -17,9 +17,9 @@ export function checkPincodeLoading (
   handleClose,
   setSubmitting,
   values,
-  isDeliveryAddress,  
+  { isDeliveryAddress },
   incrementCartItemLoading = null,
-  inProgressCartItem = {},
+  inProgressCartItem = {}
 ) {
   return {
     type: CHECK_PINCODE_LOADING,
@@ -27,8 +27,8 @@ export function checkPincodeLoading (
     handleClose: handleClose,
     setSubmitting: setSubmitting,
     isDeliveryAddress: isDeliveryAddress,
-    incrementCartItemLoading,
-    inProgressCartItem,
+    incrementCartItemLoading: incrementCartItemLoading,
+    inProgressCartItem: inProgressCartItem,
     pincode: isDeliveryAddress ? values : values.pincode,
     isLoading: true,
     isError: false,

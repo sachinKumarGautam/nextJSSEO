@@ -56,7 +56,7 @@ class ProductPriceDetails extends Component {
   }
 
   handleChangePincodeDialog () {
-    this.props.openPincodeDialog(this.props.checkPincodeState, true)
+    this.props.openPincodeDialog(this.props.checkPincodeState, { isOpen: true })
   }
 
   render () {

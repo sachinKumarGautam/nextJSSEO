@@ -19,6 +19,7 @@ export function checkPincode (action$, store) {
     ofType(CHECK_PINCODE_LOADING),
     mergeMap(data => {
       const checkPincodeState = store.getState().checkPincodeState
+      const cartState = store.getState().cartState
       const deliveryDetailsState = store.getState().deliveryDetailsState
       return http(checkPincode$(data.pincode)).pipe(
         flatMap(result => {
@@ -42,6 +43,7 @@ export function checkPincode (action$, store) {
             }, 350)
             data.setSubmitting(false)
             if (typeof data.incrementCartItemLoading === 'function') {
+              // only invokes in case of cart item increment
               // checks if any add to cart function is comming from parent and invokes it
               return of(
                 data.incrementCartItemLoading(
@@ -51,15 +53,17 @@ export function checkPincode (action$, store) {
                 checkPincodeSuccess(checkPincodeState, result)
               )
             } else {
-              return checkPincodeSuccess(checkPincodeState, result)
+              return of(checkPincodeSuccess(checkPincodeState, result))
             }
           }
         }),
         catchError(error => {
           if (data.isDeliveryAddress) {
-            return checkPincodeFailure(
-              checkPincodeState,
-              error.response.body.error.code
+            return of(
+              checkPincodeFailure(
+                checkPincodeState,
+                error.response.body.error.code
+              )
             )
           } else {
             data.setSubmitting(false)

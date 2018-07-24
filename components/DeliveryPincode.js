@@ -40,11 +40,7 @@ const DeliveryPincode = props => (
     <Typography component={'span'} className={props.classes.deliveryPincode}>
       to pincode {props.pincode}
       <a
-        onClick={props.openPincodeDialog.bind(
-          this,
-          props.checkPincodeState,
-          true
-        )}
+        onClick={props.openPincodeDialog}
         className={props.classes.deliveryChangeLabel}
       >
         Change

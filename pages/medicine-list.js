@@ -13,13 +13,16 @@ import withRoot from '../src/withRoot'
 import { connect } from 'react-redux'
 
 import MedicineListWrapper from '../containers/medicineList'
+
 import {
   searchMedicineLoading
 } from '../containers/searchMedicine/searchMedicineAction'
+
 import {
   getRelatedMedicinesLoading
 } from '../containers/medicineList/medicineListActions'
 
+import { medicineList } from '../components/constants/PageTitle'
 import { withCommonWrapper } from '../components/HOCWrapper/CommonWrapper'
 import { medicineList } from '../components/constants/PageTitle'
 
@@ -43,7 +46,6 @@ const styles = theme => ({
 class MedicineList extends React.Component {
   componentDidMount () {
     const { query } = Router
-
     // Represents to get medicine list with page size and size per page.
     if (query.moleculeName) {
       this.props.actions.getRelatedMedicinesLoading(

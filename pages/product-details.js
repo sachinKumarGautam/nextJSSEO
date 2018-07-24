@@ -109,12 +109,6 @@ class ProductDetails extends React.Component {
   }
 }
 
-// ProductDetails.getInitialProps = async ({ req }) => {
-//   const res = await fetch('https://api.github.com/repos/zeit/next.js')
-//   const json = await res.json()
-//   return { stars: json.stargazers_count }
-// }
-
 function mapStateToProps (state) {
   return {
     productDetailsState: state.productDetailsState,

@@ -15,11 +15,10 @@ import CartIcon from '../../CartIcon'
 import Login from '../../../containers/login'
 import getPageContext from '../../../src/getPageContext'
 import MenuWrapper from '../../../containers/menu'
+import { withCommonWrapper } from '../../../components/HOCWrapper/CommonWrapper'
 import {
-  searchMedicineLoading,
-  updateInProgressMedicineState
+  searchMedicineLoading
 } from '../../../containers/searchMedicine/searchMedicineAction'
-
 import { withCommonWrapper } from '../../../components/HOCWrapper/CommonWrapper'
 
 import GoToCartSnackbar from '../../../containers/cartDetails/GoToCartSnackbar'
@@ -162,9 +161,6 @@ class Header extends React.Component {
                 checkPincodeState={checkPincodeState}
                 searchMedicineLoading={actions.searchMedicineLoading}
                 addToCartHandler={this.props.addToCartHandler}
-                updateInProgressMedicineState={
-                  actions.updateInProgressMedicineState
-                }
               />
               <CartIcon cartState={this.props.cartState} />
               {loginState.isAuthenticated && <MenuWrapper />}

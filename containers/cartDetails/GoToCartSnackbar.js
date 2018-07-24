@@ -9,7 +9,6 @@ import { CART_DETAILS } from '../../routes/RouteConstant'
 import { ITEM_ADDED_TO_CART } from '../../containers/messages/cartMessages'
 import { SNACK_BAR_DURATION } from '../../components/constants/Constants'
 import Button from '../../components/button'
-import green from '@material-ui/core/colors/green'
 import Typography from '@material-ui/core/Typography'
 
 import { getReplacedString } from '../../utils/replaceConstants'
@@ -41,7 +40,7 @@ const styles = theme => ({
     color: theme.palette.secondary.main
   },
   snackbarSuccess: {
-    backgroundColor: green[600],
+    backgroundColor: theme.palette.customGreen.green400,
     borderRadius: theme.spacing.unit / 2
   },
   anchorOriginBottomCenter: {

@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 
 import BreadCrumbs from '../../components/BreadCrumbs'
 import MedicineList from './MedicineList'
@@ -19,7 +19,6 @@ const MedicineListWrapper = props => (
         addToCartHandler={props.addToCartHandler}
         getRelatedMedicinesLoading={props.getRelatedMedicinesLoading}
         checkPincodeState={props.checkPincodeState}
-        moleculeName={props.moleculeName}
       />
     </section>
   </div>
