@@ -10,8 +10,6 @@ import { withStyles } from '@material-ui/core/styles'
 import withRoot from '../src/withRoot'
 import Paper from '@material-ui/core/Paper'
 
-import Head from 'next/head'
-
 import RefillPatientsWrapper from '../containers/refillPatients'
 
 import {
@@ -54,10 +52,7 @@ class RefillPatient extends Component {
   render () {
     return (
       <div>
-        <Head>
-          <title>{refillPatient.title}</title>
-        </Head>
-        <Header />
+        <Header title={refillPatient.title} />
         <div className={this.props.classes.wrapperStyle}>
           <Paper className={this.props.classes.root} elevation={1}>
             <RefillPatientsWrapper />

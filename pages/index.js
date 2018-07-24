@@ -12,8 +12,6 @@ import Paper from '@material-ui/core/Paper'
 
 import HomePageWrapper from '../containers/homePage'
 
-import Head from 'next/head'
-
 import {
   getBackGroundImagesLoading
 } from '../containers/homePage/homePageActions'
@@ -54,10 +52,7 @@ class HomePage extends React.Component {
   render () {
     return (
       <div>
-        <Head>
-          <title>{homePage.title}</title>
-        </Head>
-        <Header />
+        <Header title={homePage.title} />
         <div>
           <Paper className={this.props.classes.root} elevation={1}>
             <HomePageWrapper />
