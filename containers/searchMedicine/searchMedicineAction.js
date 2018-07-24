@@ -1,8 +1,7 @@
 import {
   SEARCH_MEDICINE_LOADING,
   SEARCH_MEDICINE_SUCCESS,
-  SEARCH_MEDICINE_FAILURE,
-  UPDATE_INPROGRESS_MEDICINE_STATE
+  SEARCH_MEDICINE_FAILURE
 } from './searchMedicineActionTypes'
 
 /**
@@ -46,14 +45,5 @@ export function searchMedicineFailure (searchMedicineState, error) {
     isLoading: false,
     isError: error,
     error: error
-  }
-}
-
-export function updateInProgressMedicineState (searchMedicineState, selectedMedicineDetails) {
-  console.log(selectedMedicineDetails)
-  return {
-    type: UPDATE_INPROGRESS_MEDICINE_STATE,
-    searchMedicineState
-
   }
 }
