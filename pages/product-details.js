@@ -12,8 +12,6 @@ import withRoot from '../src/withRoot'
 import Paper from '@material-ui/core/Paper'
 import Router from 'next/router'
 
-import Head from 'next/head'
-
 import ProductDetailsWrapper from '../containers/productDetails'
 
 import {
@@ -87,10 +85,7 @@ class ProductDetails extends React.Component {
     const { query } = Router
     return (
       <div>
-        <Head>
-          <title>{productDetail.title}</title>
-        </Head>
-        <Header />
+        <Header title={productDetail.title} />
         <div className={this.props.classes.wrapperStyle}>
           <Paper className={classes.root} elevation={1}>
             {query.id && query.id !== 'undefined'

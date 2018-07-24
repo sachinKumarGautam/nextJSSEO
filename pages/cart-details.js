@@ -5,8 +5,6 @@ import Footer from '../components/layouts/footer'
 import { withStyles } from '@material-ui/core/styles'
 import withRoot from '../src/withRoot'
 
-import Head from 'next/head'
-
 import CartDetailsWrapper from '../containers/cartDetails'
 
 import {
@@ -57,10 +55,7 @@ const styles = theme => ({
 
 const CartDetails = props => (
   <div>
-    <Head>
-      <title>{cartDetail.title}</title>
-    </Head>
-    <Header />
+    <Header title={cartDetail.title} />
     <div className={props.classes.root}>
       <CartDetailsWrapper />
     </div>

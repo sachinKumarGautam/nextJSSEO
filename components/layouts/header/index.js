@@ -5,7 +5,7 @@ import { bindActionCreators } from 'redux'
 
 import { withStyles } from '@material-ui/core/styles'
 
-// import Head from './Head'
+import Head from 'next/head'
 import AppBar from '@material-ui/core/AppBar'
 import Button from '../../button'
 import Toolbar from '@material-ui/core/Toolbar'
@@ -136,10 +136,10 @@ class Header extends React.Component {
 
     return (
       <div className={classes.root}>
+        <Head>
+          <title>{this.props.title}</title>
+        </Head>
         <AppBar elevation={1} className={classes.appBar} position='fixed'>
-          {/* <Head
-          pageTitle={'Lifcare Product Details Page'}
-        /> */}
           <div className={classes.appBarInnerComp}>
             <Toolbar
               classes={{

@@ -5,8 +5,6 @@ import Footer from '../components/layouts/footer'
 import { withStyles } from '@material-ui/core/styles'
 import { bindActionCreators } from 'redux'
 
-import Head from 'next/head'
-
 import withRoot from '../src/withRoot'
 
 import { connect } from 'react-redux'
@@ -54,10 +52,7 @@ class CarePoints extends React.Component {
   render () {
     return (
       <div>
-        <Head>
-          <title>{carePoint.title}</title>
-        </Head>
-        <Header />
+        <Header title={carePoint.title} />
         <div className={this.props.classes.wrapperStyle}>
           <Paper className={this.props.classes.root} elevation={1}>
             <CarePointWrapper />

@@ -8,8 +8,6 @@ import Footer from '../components/layouts/footer'
 
 import ThankyouWrapper from '../containers/thankYou'
 
-import Head from 'next/head'
-
 import {
   orderConfirmation
 } from '../components/constants/PageTitle'
@@ -35,10 +33,7 @@ class OrderConfirmationWrapper extends React.Component {
   render () {
     return (
       <div>
-        <Head>
-          <title>{orderConfirmation.title}</title>
-        </Head>
-        <Header />
+        <Header title={orderConfirmation.title} />
         <div className={this.props.classes.root}>
           <ThankyouWrapper />
         </div>
