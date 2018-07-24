@@ -90,7 +90,6 @@ export function verifyOTP (action$, store) {
           return successObservable
         }),
         catchError(error => {
-          console.log(error)
           data.setSubmitting(false)
           return of(verifyOtpFailure(loginState, error))
         })

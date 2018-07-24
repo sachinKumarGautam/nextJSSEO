@@ -59,7 +59,7 @@ class RegisterForm extends React.Component {
       .payload
 
     const prevMembershipCode =
-      prevState.customerState.payload.membership_code.payload
+      prevProps.customerState.payload.membership_code.payload
     if (referralValue !== prevReferralValue) {
       this.props.setFieldValue('referral_code', referralValue)
     }
@@ -209,7 +209,7 @@ class RegisterForm extends React.Component {
                 {referralCodeError ? REFERRAL_CODE_INVALID : errors.referral_code}
               </FormHelperText>}
         </FormControl>
-        {props.customerState.payload.membership_code.payload &&
+        {this.props.customerState.payload.membership_code.payload &&
           <FormControl
             className={classes.formControl}
             aria-describedby='membership_code'

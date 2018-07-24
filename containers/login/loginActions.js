@@ -71,7 +71,6 @@ export function verifyOtpSuccess (loginState, result) {
 }
 
 export function verifyOtpFailure (loginState, error) {
-  console.log('error', error)
   return {
     type: OTP_VERIFIED_FAILURE,
     loginState,

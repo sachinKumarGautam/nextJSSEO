@@ -19,8 +19,6 @@ import { withCommonWrapper } from '../../../components/HOCWrapper/CommonWrapper'
 import {
   searchMedicineLoading
 } from '../../../containers/searchMedicine/searchMedicineAction'
-import { withCommonWrapper } from '../../../components/HOCWrapper/CommonWrapper'
-
 import GoToCartSnackbar from '../../../containers/cartDetails/GoToCartSnackbar'
 
 import {

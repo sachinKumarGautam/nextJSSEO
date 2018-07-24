@@ -1,11 +1,5 @@
 import { of } from 'rxjs/observable/of'
-import {
-  mergeMap,
-  catchError,
-  map,
-  flatMap,
-  debounceTime
-} from 'rxjs/operators'
+import { mergeMap, catchError, map, flatMap } from 'rxjs/operators'
 import { ofType } from 'redux-observable'
 import {
   CUSTOMER_REGISTER_LOADING,

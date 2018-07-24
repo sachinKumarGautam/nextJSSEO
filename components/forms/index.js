@@ -18,7 +18,8 @@ const FormWrapper = props => {
     checkPincodeDetailLoading,
     updateAddressFormValue,
     getLocalityDetailListLoading,
-    checkPincodeState
+    checkPincodeState,
+    checkReferralCodeLoading
   } = props
   switch (props.type) {
     case 'loginForm':

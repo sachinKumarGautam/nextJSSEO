@@ -24,7 +24,6 @@ import {
 
 import { medicineList } from '../components/constants/PageTitle'
 import { withCommonWrapper } from '../components/HOCWrapper/CommonWrapper'
-import { medicineList } from '../components/constants/PageTitle'
 
 const styles = theme => ({
   root: {

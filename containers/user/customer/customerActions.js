@@ -30,7 +30,7 @@ export function getMembershipCodeSuccess (customerState, result) {
     type: GET_MEMBERSHIP_CODE_SUCCESS,
     customerState,
     isLoading: false,
-    membership_code: result.body.payload.membership_code,
+    membership_code: result.body.payload.membership_code
   }
 }
 
