@@ -8,3 +8,4 @@ export const OTP_REQUIRED = 'OTP is required'
 export const GENDER_REQUIRED = 'Gender is required'
 export const PINCODE_INVALID = `Sorry! We don't service in your area. Please change pincode`
 export const CHECKING_PINCODE = 'Checking pincode...'
+export const STREET1_REQUIRED = 'Please enter Flat/House/Office No.'

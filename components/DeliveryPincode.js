@@ -26,17 +26,25 @@ const styles = theme => {
     deliveryChangeLabel: {
       ...theme.typography.caption,
       marginLeft: theme.spacing.unit * 2,
-      color: theme.palette.primary.main
+      color: theme.palette.primary.main,
+      cursor: 'pointer'
     }
   }
 }
 
-const DeliveryPincode = (props) => (
+const DeliveryPincode = props => (
   <div className={props.classes.deliveryPincodeWrapper}>
-    <Typography component={'span'} className={props.classes.deliveryLabel}>Delivery </Typography>
+    <Typography component={'span'} className={props.classes.deliveryLabel}>
+      Delivery{' '}
+    </Typography>
     <Typography component={'span'} className={props.classes.deliveryPincode}>
       to pincode {props.pincode}
-      <a onClick={props.openPincodeDialog.bind(this)} className={props.classes.deliveryChangeLabel}>Change</a>
+      <a
+        onClick={props.openPincodeDialog}
+        className={props.classes.deliveryChangeLabel}
+      >
+        Change
+      </a>
     </Typography>
   </div>
 )

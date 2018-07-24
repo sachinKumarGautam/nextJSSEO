@@ -31,13 +31,17 @@ import {
 
 import {
   getDeliveryDetailsListLoading,
-  submitDeliveryDetailsLoading
+  submitDeliveryDetailsLoading,
+  updateAddressFormValue,
+  getLocalityDetailListLoading
 } from '../deliveryDetails/deliveryDetailsActions'
 
 import {
   getPatientDetailsListLoading,
   submitPatientDetailsLoading
 } from '../patientDetails/patientDetailsActions'
+
+import {checkPincodeLoading} from '../location/pincode/pincodeAction'
 
 /*
   bread crumbs
@@ -118,6 +122,9 @@ class CartDetailsWrapper extends Component {
                 submitPatientDetailsLoading={this.props.actions.submitPatientDetailsLoading}
                 submitDeliveryDetailsLoading={this.props.actions.submitDeliveryDetailsLoading}
                 optForDoctorCallbackLoading={this.props.actions.optForDoctorCallbackLoading}
+                updateAddressFormValue={this.props.actions.updateAddressFormValue}
+                checkPincodeLoading={this.props.actions.checkPincodeLoading}
+                getLocalityDetailListLoading={this.props.actions.getLocalityDetailListLoading}
               />
             </section>
           </Grid>
@@ -173,7 +180,10 @@ function mapDispatchToProps (dispatch) {
         submitDeliveryDetailsLoading,
         applyCouponCodeLoading,
         updateCouponCode,
-        optForDoctorCallbackLoading
+        optForDoctorCallbackLoading,
+        updateAddressFormValue,
+        getLocalityDetailListLoading,
+        checkPincodeLoading
       },
       dispatch
     )

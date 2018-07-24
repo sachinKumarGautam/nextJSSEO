@@ -255,6 +255,13 @@ const teleConsultation$ = (cartUid, isDoctorCallback) => (
   })
 )
 
+const searchLocalityForPincode$ = (state, city, pincode, searchString) => (
+  makeAjaxRequest({
+    method: 'GET',
+    url: fetchUrl('shipping', 'place/' + state + '/' + city + '/' + pincode + '?locality=' + searchString, 'GET_LIST')
+  })
+)
+
 export {
   getMoleculeSummary$,
   getMedicineList$,
@@ -286,5 +293,6 @@ export {
   getPatientPastMedicineList$,
   getSliderImages$,
   applyCouponForCart$,
-  teleConsultation$
+  teleConsultation$,
+  searchLocalityForPincode$
 }

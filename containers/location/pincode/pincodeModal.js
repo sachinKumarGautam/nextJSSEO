@@ -14,6 +14,7 @@ const initialState = {
     is_urgent_dl_available: '',
     urgent_delivery_charge: ''
   },
+  isPincodeDialogOpen: false,
   isLoading: false,
   errorState: {
     isError: false,
