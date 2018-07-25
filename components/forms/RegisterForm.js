@@ -17,7 +17,8 @@ import {
   MOBILE_REQUIRED,
   GENDER_REQUIRED,
   MOBILE_INVALID,
-  REFERRAL_CODE_INVALID
+  REFERRAL_CODE_INVALID,
+  MOBILE_VALIDATION_REGEX
 } from '../../containers/messages/ValidationMsg'
 
 // Helper styles for demo
@@ -266,7 +267,7 @@ export default withStyles(styles)(
       mobile: Yup.string().trim()
         .min(10, MOBILE_INVALID)
         .max(10, MOBILE_INVALID)
-        .matches(/^[6-9]\d{9}$/, {
+        .matches(MOBILE_VALIDATION_REGEX, {
           message: MOBILE_INVALID
         })
         .required(MOBILE_REQUIRED),

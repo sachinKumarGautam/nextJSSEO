@@ -15,7 +15,8 @@ import { withStyles } from '@material-ui/core/styles'
 
 import {
   MOBILE_REQUIRED,
-  MOBILE_INVALID
+  MOBILE_INVALID,
+  MOBILE_VALIDATION_REGEX
 } from '../../containers/messages/ValidationMsg'
 
 // Helper styles for demo
@@ -110,7 +111,7 @@ export default withStyles(styles)(
         .trim()
         .min(10, MOBILE_INVALID)
         .max(10, MOBILE_INVALID)
-        .matches(/^[6-9]\d{9}$/, {
+        .matches(MOBILE_VALIDATION_REGEX, {
           message: MOBILE_INVALID
         })
         .required(MOBILE_REQUIRED)
