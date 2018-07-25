@@ -30,6 +30,7 @@ const DeliveryDetailsWrapper = props => (
           cartState={props.cartState}
           getLocalityDetailListLoading={props.getLocalityDetailListLoading}
           checkPincodeState={props.checkPincodeState}
+          resetDeliveryAddressSelected={props.resetDeliveryAddressSelected}
         />
       </Grid>
     </Grid>

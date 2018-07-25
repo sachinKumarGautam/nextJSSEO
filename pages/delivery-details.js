@@ -17,7 +17,8 @@ import {
   saveDeliveryAddressSelected,
   submitDeliveryDetailsLoading,
   updateAddressFormValue,
-  getLocalityDetailListLoading
+  getLocalityDetailListLoading,
+  resetDeliveryAddressSelected
 } from '../containers/deliveryDetails/deliveryDetailsActions'
 
 import {
@@ -73,6 +74,7 @@ class DeliveryDetails extends React.Component {
               cartState={this.props.cartState}
               getLocalityDetailListLoading={this.props.actions.getLocalityDetailListLoading}
               checkPincodeState={this.props.checkPincodeState}
+              resetDeliveryAddressSelected={this.props.actions.resetDeliveryAddressSelected}
             />
           </Paper>
         </div>
@@ -100,7 +102,8 @@ function mapDispatchToProps (dispatch) {
         submitDeliveryDetailsLoading,
         checkPincodeLoading,
         updateAddressFormValue,
-        getLocalityDetailListLoading
+        getLocalityDetailListLoading,
+        resetDeliveryAddressSelected
       },
       dispatch
     )

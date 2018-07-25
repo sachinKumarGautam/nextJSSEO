@@ -9,7 +9,7 @@ const AddressDetailsCardWrapper = props => (
     {
       props.payload.map(deliveryDetail => {
         return (
-          <Grid item xs={6} onClick={props.saveDeliveryAddressToCart.bind(this, deliveryDetail)}>
+          <Grid item xs={6} onClick={props.saveDeliveryAddressSelected.bind(this, deliveryDetail)}>
             <AddressDetailsCard
               deliveryDetail={deliveryDetail}
               openDeliveryFormModal={props.openDeliveryFormModal.bind(this, true)}

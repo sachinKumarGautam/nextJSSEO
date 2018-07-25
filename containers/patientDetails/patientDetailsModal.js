@@ -1,6 +1,11 @@
 const initialState = {
   payload: [],
-  patient: {},
+  patient: {
+    full_name: '',
+    gender: '',
+    age: '',
+    mobile: ''
+  },
   isLoading: false,
   errorState: {
     isError: false,

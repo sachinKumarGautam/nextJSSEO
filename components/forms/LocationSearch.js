@@ -71,7 +71,8 @@ const styles = theme => ({
 })
 
 function renderInput (inputProps) {
-  const { InputProps, classes, ref, onChange, ...other } = inputProps
+  const { InputProps, classes, locality, ref, onChange, ...other } = inputProps
+  console.log(inputProps)
   return (
     <div className={classes.searchBar}>
       <TextField
@@ -147,6 +148,8 @@ class LocationSearch extends React.Component {
       deliveryDetailsState
     } = this.props
     const locationSearchResult = deliveryDetailsState.addressLocalityList.payload
+    const locality = deliveryDetailsState.addressForm.locality
+
     return (
       <div className={classes.root}>
         <Downshift
@@ -160,6 +163,7 @@ class LocationSearch extends React.Component {
               {renderInput({
                 fullWidth: true,
                 classes,
+                locality,
                 InputProps: getInputProps({
                   placeholder: 'Search Locality',
                   id: 'search-locality',

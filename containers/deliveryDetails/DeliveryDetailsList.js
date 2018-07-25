@@ -78,9 +78,11 @@ class Main extends Component {
     this.setState({
       openDeliveryFormDialog: false
     })
+
+    this.props.resetDeliveryAddressSelected(this.props.deliveryDetailsState)
   }
 
-  saveDeliveryAddressToCart (deliveryDetail) {
+  saveDeliveryAddressSelected (deliveryDetail) {
     this.props.saveDeliveryAddressSelected(
       this.props.deliveryDetailsState,
       deliveryDetail
@@ -123,7 +125,7 @@ class Main extends Component {
           </div>
           <AddressDetailsCardWrapper
             openDeliveryFormModal={this.openDeliveryFormModal.bind(this)}
-            saveDeliveryAddressToCart={this.saveDeliveryAddressToCart.bind(this)}
+            saveDeliveryAddressSelected={this.saveDeliveryAddressSelected.bind(this)}
             payload={this.props.deliveryDetailsState.payload}
             addressDetailsCardWrapper={this.props.classes.addressDetailsCardWrapper}
           />

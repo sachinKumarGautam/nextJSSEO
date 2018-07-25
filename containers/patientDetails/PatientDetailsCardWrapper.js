@@ -9,7 +9,7 @@ const PatientDetailsCardWrapper = props => (
     {
       props.payload.map(patientDetail => {
         return (
-          <Grid item xs={6} onClick={props.savePatientToCart.bind(this, patientDetail)}>
+          <Grid item xs={6} onClick={props.savePatientSelected.bind(this, patientDetail)}>
             <PatientDetailsCard
               openPatientFormModal={props.openPatientFormModal}
               patientDetail={patientDetail}
