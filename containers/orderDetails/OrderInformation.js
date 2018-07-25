@@ -42,6 +42,10 @@ const styles = theme => ({
 })
 
 class OrderInformation extends Component {
+  componentDidMount () {
+    this.props.getOrderDetailsLoading(this.props.orderDetailsState, 100681649)
+  }
+
   render () {
     return (
       <div>

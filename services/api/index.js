@@ -281,6 +281,12 @@ const searchLocalityForPincode$ = (state, city, pincode, searchString) =>
     )
   })
 
+const getOrderDetails$ = orderId =>
+  makeAjaxRequest({
+    method: 'GET',
+    url: fetchUrl('order', orderId, 'CREATE')
+  })
+
 export {
   getMoleculeSummary$,
   getMedicineList$,
@@ -315,5 +321,6 @@ export {
   teleConsultation$,
   checkReferralCode$,
   getMembershipCode$,
-  searchLocalityForPincode$
+  searchLocalityForPincode$,
+  getOrderDetails$
 }

@@ -69,6 +69,10 @@ import {
 
 import { getBackGroungImages } from '../containers/homePage/homePageEpics'
 
+import {
+  getOrderDetails
+} from '../containers/orderDetails/orderDetailsEpics'
+
 export const rootEpic = combineEpics(
   getMoleculeSummary,
   getRelatedMedicines,
@@ -107,5 +111,6 @@ export const rootEpic = combineEpics(
   optDoctorCallback,
   checkReferralCode,
   getMembershipCodeLoading,
-  getLocalityList
+  getLocalityList,
+  getOrderDetails
 )
