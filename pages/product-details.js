@@ -14,14 +14,18 @@ import Router from 'next/router'
 
 import ProductDetailsWrapper from '../containers/productDetails'
 
-import { getProductDetailLoading, onChangeQuantity } from '../containers/productDetails/productDetailsActions'
+import {
+  getProductDetailLoading,
+  onChangeQuantity
+} from '../containers/productDetails/productDetailsActions'
 
 import {
-  getAnonymousCartIdLoading,
-  incrementCartItemLoading
+  getAnonymousCartIdLoading
 } from '../containers/cartDetails/cartActions'
 
-import {checkPincodeLoading} from '../containers/location/pincode/pincodeAction'
+import { withCommonWrapper } from '../components/HOCWrapper/CommonWrapper'
+
+import { productDetail } from '../components/constants/PageTitle'
 
 const styles = theme => ({
   root: {
@@ -47,7 +51,7 @@ class ProductDetails extends React.Component {
   state = {
     id: ''
   }
-  static getInitialProps ({query}) {
+  static getInitialProps ({ query }) {
     return query
   }
 
@@ -77,31 +81,21 @@ class ProductDetails extends React.Component {
   }
 
   render () {
-    const {
-      classes,
-      actions,
-      checkPincodeState,
-      cartState
-    } = this.props
+    const { classes, actions, checkPincodeState } = this.props
     const { query } = Router
-
     return (
       <div>
-        <Header />
+        <Header title={productDetail.title} />
         <div className={this.props.classes.wrapperStyle}>
           <Paper className={classes.root} elevation={1}>
-            {
-              query.id && query.id !== 'undefined'
-                ? <ProductDetailsWrapper
-                  checkPincodeState={checkPincodeState}
-                  getProductDetailLoading={actions.getProductDetailLoading}
-                  checkPincodeLoading={actions.checkPincodeLoading}
-                  incrementCartItemLoading={actions.incrementCartItemLoading}
-                  cartState={cartState}
-                  onChangeQuantity={actions.onChangeQuantity}
-                />
-                : 'Page not found'
-            }
+            {query.id && query.id !== 'undefined'
+              ? <ProductDetailsWrapper
+                checkPincodeState={checkPincodeState}
+                getProductDetailLoading={actions.getProductDetailLoading}
+                addToCartHandler={this.props.addToCartHandler}
+                onChangeQuantity={actions.onChangeQuantity}
+              />
+              : 'Page not found'}
           </Paper>
         </div>
         <Footer />
@@ -109,12 +103,6 @@ class ProductDetails extends React.Component {
     )
   }
 }
-
-// ProductDetails.getInitialProps = async ({ req }) => {
-//   const res = await fetch('https://api.github.com/repos/zeit/next.js')
-//   const json = await res.json()
-//   return { stars: json.stargazers_count }
-// }
 
 function mapStateToProps (state) {
   return {
@@ -131,8 +119,6 @@ function mapDispatchToProps (dispatch) {
       {
         getProductDetailLoading,
         getAnonymousCartIdLoading,
-        checkPincodeLoading,
-        incrementCartItemLoading,
         onChangeQuantity
       },
       dispatch
@@ -140,7 +126,8 @@ function mapDispatchToProps (dispatch) {
   }
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(withRoot(withStyles(styles)(ProductDetails)))
+export default withCommonWrapper(
+  connect(mapStateToProps, mapDispatchToProps)(
+    withRoot(withStyles(styles)(ProductDetails))
+  )
+)

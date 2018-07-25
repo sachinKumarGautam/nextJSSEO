@@ -1,7 +1,7 @@
 const getApiServiceVersion = (apiServiceType) => {
   switch (apiServiceType) {
     case 'order':
-      return 'v6'
+      return 'v5'
 
     case 'cart':
       return 'v5'

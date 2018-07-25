@@ -21,7 +21,11 @@ import {
   getRelatedMedicinesLoading
 } from '../containers/medicineList/medicineListActions'
 
-import { checkPincodeLoading } from '../containers/location/pincode/pincodeAction'
+import { withCommonWrapper } from '../components/HOCWrapper/CommonWrapper'
+
+import {
+  moleculeList
+} from '../components/constants/PageTitle'
 
 const styles = theme => ({
   root: {
@@ -52,26 +56,24 @@ class MoleculeDetails extends React.Component {
 
   // }
 
-  static getInitialProps ({query}) {
+  static getInitialProps ({ query }) {
     return query
   }
 
   componentDidMount () {
     // Represents to get molecule details.
-    const {query} = Router
+    const { query } = Router
 
     if (Router.query.id) {
       this.props.actions.getMoleculeSummaryLoading(
         this.props.moleculeDetailsState,
-        query.id// pass salt id // 5a61a295ae8bdc26685f2b09 // query.id
+        query.id // pass salt id // 5a61a295ae8bdc26685f2b09 // query.id
       )
-    }
 
-    if (query.name && !this.props.medicineListState.payload.length) {
       // Represents to get medicine list with page size and size per page.
       this.props.actions.getRelatedMedicinesLoading(
         this.props.medicineListState,
-        query.name, // pass salt name //query.name
+        query.id, // pass salt name //query.name
         0, // page number
         3 // page size
       )
@@ -81,12 +83,12 @@ class MoleculeDetails extends React.Component {
   render () {
     return (
       <div>
-        <Header />
+        <Header title={moleculeList.title} />
         <div className={this.props.classes.wrapperStyle}>
           <Paper className={this.props.classes.root} elevation={1}>
             <MoleculeDetailsWrapper
-              checkPincodeLoading={this.props.actions.checkPincodeLoading}
               checkPincodeState={this.props.checkPincodeState}
+              addToCartHandler={this.props.addToCartHandler}
             />
           </Paper>
         </div>
@@ -109,15 +111,15 @@ function mapDispatchToProps (dispatch) {
     actions: bindActionCreators(
       {
         getMoleculeSummaryLoading,
-        getRelatedMedicinesLoading,
-        checkPincodeLoading
+        getRelatedMedicinesLoading
       },
       dispatch
     )
   }
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(withRoot(withStyles(styles)(MoleculeDetails)))
+export default withCommonWrapper(
+  connect(mapStateToProps, mapDispatchToProps)(
+    withRoot(withStyles(styles)(MoleculeDetails))
+  )
+)

@@ -8,7 +8,7 @@ import ProductPackSize from './ProductPackSize'
 import ProductPrice from './ProductPrice'
 import StrokePrice from './StrokePrice'
 import EstimatedPriceLabel from './EstimatedPriceLabel'
-import AddToCartWrapper from '../containers/cartDetails/addToCartWrapper/index'
+import Button from './button/Button'
 
 const styles = theme => {
   return {
@@ -54,8 +54,7 @@ const styles = theme => {
       marginBottom: theme.spacing.unit
     },
     buttonRoot: {
-      border: `1px solid ${theme.palette.primary.main}`,
-      backgroundColor: theme.palette.secondary.main
+      border: `1px solid ${theme.palette.primary.main}`
     },
     buttonLabel: {
       color: '#80c241'
@@ -75,7 +74,8 @@ class RelatedMedicinesCard extends React.Component {
   }
 
   addToCart (event) {
-    this.props.incrementCartItemLoading(this.props.cartState, this.props.itemDetails)
+    event.stopPropagation()
+    this.props.addToCartHandler(this.props.itemDetails)
   }
 
   handleOpenPincodeDialog () {
@@ -91,9 +91,7 @@ class RelatedMedicinesCard extends React.Component {
   }
 
   render () {
-    const {
-      props
-    } = this
+    const { props } = this
 
     return (
       <div>
@@ -135,18 +133,15 @@ class RelatedMedicinesCard extends React.Component {
             estimatePriceText={'*Estimated Price'}
           />
         </div>
-        <AddToCartWrapper
-          open={this.state.pincodeDialogOpen}
-          handleOpenPincodeDialog={this.handleOpenPincodeDialog}
-          handleClose={this.handleClosePincodeDialog}
-          addToCart={this.addToCart}
+        <Button
           variant='outlined'
+          color='primary'
           classes={{
             root: props.classes.buttonRoot,
             label: props.classes.buttonLabel
           }}
-          checkPincodeState={this.props.checkPincodeState}
-          checkPincodeLoading={this.props.checkPincodeLoading}
+          onClick={this.addToCart}
+          label={'Add To Cart'}
         />
       </div>
     )

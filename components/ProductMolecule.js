@@ -59,8 +59,8 @@ const PopoverContent = (props) => (
       {props.item.description ? props.item.description : ''}
     </Typography>
     <Link
-      as={`${MOLECULE_DETAILS}/${props.item.id}/${props.item.name}`}
-      href={`${MOLECULE_DETAILS}?id=${props.item.id}&name=${props.item.name}`}
+      as={`${MOLECULE_DETAILS}/${props.item.slug}`}
+      href={`${MOLECULE_DETAILS}?id=${props.item.slug}`}
     >
       <a className={props.styles.popoverLink}>Read more..</a>
     </Link>

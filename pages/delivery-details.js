@@ -16,10 +16,17 @@ import {
   getDeliveryDetailsListLoading,
   saveDeliveryAddressSelected,
   submitDeliveryDetailsLoading,
-  checkPincodeDetailLoading,
   updateAddressFormValue,
   getLocalityDetailListLoading
 } from '../containers/deliveryDetails/deliveryDetailsActions'
+
+import {
+  checkPincodeLoading
+} from '../containers/location/pincode/pincodeAction'
+
+import {
+  deliveryDetails
+} from '../components/constants/PageTitle'
 
 const styles = theme => ({
   root: {
@@ -53,7 +60,7 @@ class DeliveryDetails extends React.Component {
   render () {
     return (
       <div>
-        <Header />
+        <Header title={deliveryDetails.title} />
         <div className={this.props.classes.wrapperStyle}>
           <Paper className={this.props.classes.root} elevation={1}>
             <DeliveryDetailsWrapper
@@ -61,10 +68,11 @@ class DeliveryDetails extends React.Component {
               saveDeliveryAddressSelected={this.props.actions.saveDeliveryAddressSelected}
               submitDeliveryDetailsLoading={this.props.actions.submitDeliveryDetailsLoading}
               customerState={this.props.customerState}
-              checkPincodeDetailLoading={this.props.actions.checkPincodeDetailLoading}
+              checkPincodeLoading={this.props.actions.checkPincodeLoading}
               updateAddressFormValue={this.props.actions.updateAddressFormValue}
               cartState={this.props.cartState}
               getLocalityDetailListLoading={this.props.actions.getLocalityDetailListLoading}
+              checkPincodeState={this.props.checkPincodeState}
             />
           </Paper>
         </div>
@@ -78,7 +86,8 @@ function mapStateToProps (state) {
   return {
     cartState: state.cartState,
     deliveryDetailsState: state.deliveryDetailsState,
-    customerState: state.customerState
+    customerState: state.customerState,
+    checkPincodeState: state.checkPincodeState
   }
 }
 
@@ -89,7 +98,7 @@ function mapDispatchToProps (dispatch) {
         getDeliveryDetailsListLoading,
         saveDeliveryAddressSelected,
         submitDeliveryDetailsLoading,
-        checkPincodeDetailLoading,
+        checkPincodeLoading,
         updateAddressFormValue,
         getLocalityDetailListLoading
       },

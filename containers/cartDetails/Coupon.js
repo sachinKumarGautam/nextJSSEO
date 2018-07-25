@@ -5,12 +5,11 @@ import TextField from '@material-ui/core/TextField'
 import Dialog from '@material-ui/core/Dialog'
 import DialogActions from '@material-ui/core/DialogActions'
 import DialogContent from '@material-ui/core/DialogContent'
-import DialogContentText from '@material-ui/core/DialogContentText'
 import DialogTitle from '@material-ui/core/DialogTitle'
 
+import CouponMessage from './CouponMessage'
 import EditCoupon from './EditCoupon'
 import Button from '../../components/button'
-import {COUPON_MESSAGE} from '../messages/couponMessage'
 
 const styles = theme => ({
   buttonStyle: {
@@ -19,15 +18,17 @@ const styles = theme => ({
   },
   buttonRoot: {
     border: `1px dashed ${theme.palette.customGrey.grey200}`,
-    borderRadius: 0
+    borderRadius: 0,
+    width: '100%'
   },
   buttonLabel: {
+    ...theme.typography.body2,
     color: theme.palette.customGrey.grey700,
     paddingLeft: theme.spacing.unit * 2,
     paddingRight: theme.spacing.unit * 2,
     textAlign: 'center',
-    paddingTop: theme.spacing.unit * 2.125,
-    paddingBottom: theme.spacing.unit * 2
+    paddingTop: theme.spacing.unit,
+    paddingBottom: theme.spacing.unit
   },
   couponWrapper: {
     marginTop: theme.spacing.unit * 2.25,
@@ -47,7 +48,7 @@ const styles = theme => ({
     color: theme.palette.customGreen.green300
   },
   paper: {
-    maxWidth: theme.spacing.unit * 40
+    width: theme.spacing.unit * 40
   },
   contentRoot: {
     ...theme.typography.caption
@@ -147,6 +148,7 @@ class Coupon extends Component {
   render () {
     return (
       <div className={this.props.classes.couponWrapper}>
+        <CouponMessage />
         {
           !this.props.cartState.couponDetail.isCouponApplied
             ? <Button
@@ -184,13 +186,13 @@ class Coupon extends Component {
               value={this.props.cartState.couponDetail.couponCode}
               onChange={this.onChange.bind(this)}
             />
-            <DialogContentText
+            {/* <DialogContentText
               classes={{
                 root: this.props.classes.contentRoot
               }}
             >
               {COUPON_MESSAGE}
-            </DialogContentText>
+            </DialogContentText> */}
           </DialogContent>
           <DialogActions>
             <Button

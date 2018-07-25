@@ -17,6 +17,8 @@ import {
   getCarePointDetailsLoading
 } from '../containers/carePoint/carePointActions'
 
+import {carePoint} from '../components/constants/PageTitle'
+
 const styles = theme => ({
   root: {
     paddingTop: theme.spacing.unit * 3,
@@ -50,7 +52,7 @@ class CarePoints extends React.Component {
   render () {
     return (
       <div>
-        <Header />
+        <Header title={carePoint.title} />
         <div className={this.props.classes.wrapperStyle}>
           <Paper className={this.props.classes.root} elevation={1}>
             <CarePointWrapper />

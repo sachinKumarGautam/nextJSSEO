@@ -11,7 +11,7 @@ import Login from './Login'
 import Register from './Register'
 import OTP from './OTP'
 import { sendOtpLoading, verifyOtpLoading } from './loginActions'
-import { customerRegisterLoading } from '../user/customer/customerActions'
+import { customerRegisterLoading, checkReferralCodeLoading } from '../user/customer/customerActions'
 
 /*
     index.js
@@ -67,14 +67,6 @@ class LoginWrapper extends React.Component {
     }
   }
 
-  // componentWillReceiveProps(nextProps) {
-  //   if(nextProps.isCartOpenRegisterDialog && nextProps.modalName !== this.state.modalName ){
-  //     this.setState({
-  //       modalName: 'register'
-  //     })
-  //   }
-  // }
-
   getModal (name) {
     switch (name) {
       case 'login':
@@ -91,6 +83,7 @@ class LoginWrapper extends React.Component {
           closeLoginModal={this.props.closeLoginModal}
           loginState={this.props.loginState}
           customerState={this.props.customerState}
+          checkReferralCodeLoading={this.props.actions.checkReferralCodeLoading}
           customerRegisterLoading={this.props.actions.customerRegisterLoading}
         />
 
@@ -149,14 +142,13 @@ function mapDispatchToProps (dispatch) {
       {
         sendOtpLoading,
         verifyOtpLoading,
-        customerRegisterLoading
+        customerRegisterLoading,
+        checkReferralCodeLoading
       },
       dispatch
     )
   }
 }
-
-// export default connect(mapStateToProps, mapDispatchToProps)(LoginWrapper)
 
 export default connect(
   mapStateToProps,

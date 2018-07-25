@@ -65,6 +65,7 @@ class DeliveryDetailForm extends React.Component {
               checkPincodeDetailLoading={this.props.checkPincodeDetailLoading}
               updateAddressFormValue={this.props.updateAddressFormValue}
               getLocalityDetailListLoading={this.props.getLocalityDetailListLoading}
+              checkPincodeState={this.props.checkPincodeState}
             />
           </DialogContent>
         </Dialog>

@@ -1,6 +1,7 @@
 import React from 'react'
 import Link from 'next/link'
 import { withStyles } from '@material-ui/core/styles'
+import Typography from '@material-ui/core/Typography'
 
 import ProductName from './ProductName'
 import ProductBrand from './ProductBrand'
@@ -8,10 +9,8 @@ import ProductPackSize from './ProductPackSize'
 import ProductPrice from './ProductPrice'
 import StrokePrice from './StrokePrice'
 import EstimatedPriceLabel from './EstimatedPriceLabel'
-import AddToCartWrapper from '../containers/cartDetails/addToCartWrapper/index'
-import {PRODUCT_DETAILS} from '../routes/RouteConstant'
-
-// import RefillDueDays from './RefillDueDays'
+import { PRODUCT_DETAILS } from '../routes/RouteConstant'
+import Button from './button/Button'
 
 const styles = theme => {
   return {
@@ -60,6 +59,13 @@ const styles = theme => {
     buttonWrapperStyle: {
       marginTop: theme.spacing.unit,
       float: 'right'
+    },
+    deliveryTat: {
+      ...theme.typography.body3,
+      color: theme.palette.customGrey.grey500
+    },
+    cursor: {
+      cursor: 'pointer'
     }
   }
 }
@@ -67,45 +73,29 @@ const styles = theme => {
 class MedicineListDetails extends React.Component {
   constructor (props) {
     super(props)
-    this.handleOpenPincodeDialog = this.handleOpenPincodeDialog.bind(this)
-    this.handleClosePincodeDialog = this.handleClosePincodeDialog.bind(this)
     this.addToCart = this.addToCart.bind(this)
-    this.state = {
-      pincodeDialogOpen: false
-    }
   }
 
   addToCart (event) {
-    this.props.incrementCartItemLoading(this.props.cartState, this.props.itemDetails)
-  }
-
-  handleOpenPincodeDialog () {
-    this.setState({
-      pincodeDialogOpen: true
-    })
-  }
-
-  handleClosePincodeDialog () {
-    this.setState({
-      pincodeDialogOpen: false
-    })
+    event.stopPropagation()
+    this.props.addToCartHandler(this.props.itemDetails)
   }
 
   render () {
-    const {
-      props
-    } = this
+    const { props } = this
 
     const city = this.props.checkPincodeState.payload.city
     return (
-
       <div className={props.classes.medicineListContentWrapper}>
         <Link
           prefetch
           href={`${PRODUCT_DETAILS}?id=${props.itemDetails.slug}&location=${city}`}
-          as={`${PRODUCT_DETAILS}/${props.itemDetails.slug}/${city}`}
+          as={`${PRODUCT_DETAILS}/${props.itemDetails.slug}?location=${city}`}
         >
-          <div>
+          <div
+            onClick={this.props.onSelectItem}
+            className={props.classes.cursor}
+          >
             <ProductName
               variant={'body1'}
               name={props.itemDetails.name}
@@ -125,10 +115,19 @@ class MedicineListDetails extends React.Component {
               customStyle={props.classes.customPackSize}
               packType={props.itemDetails.pack_type}
               packSize={
-                (props.itemDetails.pack_size && props.itemDetails.pack_size.name)
-                  ? props.itemDetails.pack_size.name : props.itemDetails.pack_size
+                props.itemDetails.pack_size && props.itemDetails.pack_size.name
+                  ? props.itemDetails.pack_size.name
+                  : props.itemDetails.pack_size
               }
             />
+            <Typography
+              gutterBottom
+              variant='caption'
+              component='h1'
+              className={props.classes.deliveryTat}
+            >
+              Delivery by {props.checkPincodeState.payload.delivery_day} days
+            </Typography>
           </div>
         </Link>
         <div>
@@ -148,20 +147,16 @@ class MedicineListDetails extends React.Component {
             mrp={props.itemDetails.mrp}
           />
           <div className={props.classes.buttonWrapperStyle}>
-            <AddToCartWrapper
+            <Button
               variant='outlined'
               classes={{
                 root: props.classes.buttonRoot,
                 label: props.classes.buttonLabel
               }}
-              // style={{float: 'right'}}
+              size='small'
+              color='primary'
+              onClick={this.addToCart} // this is coming from HOC
               label={'Add To Cart'}
-              open={this.state.pincodeDialogOpen}
-              handleOpenPincodeDialog={this.handleOpenPincodeDialog}
-              handleClose={this.handleClosePincodeDialog}
-              addToCart={this.addToCart}
-              checkPincodeState={props.checkPincodeState}
-              checkPincodeLoading={props.checkPincodeLoading}
             />
           </div>
         </div>

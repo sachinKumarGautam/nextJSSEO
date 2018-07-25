@@ -1,34 +1,27 @@
 import { combineEpics } from 'redux-observable'
 
-import {
-  getMoleculeSummary
-} from '../containers/moleculeDetails/moleculeEpics'
+import { getMoleculeSummary } from '../containers/moleculeDetails/moleculeEpics'
 
-import {
-  sendOTP, verifyOTP
-} from '../containers/login/loginEpics'
+import { sendOTP, verifyOTP } from '../containers/login/loginEpics'
 
 import {
   registerCustomer,
-  fetchUserInfo
+  fetchUserInfo,
+  checkReferralCode,
+  getMembershipCodeLoading
 } from '../containers/user/customer/customerEpics'
 
 import {
   getRelatedMedicines
 } from '../containers/medicineList/medicineListEpics'
 
-import {
-  getProductDetails
-} from '../containers/productDetails/productEpic'
+import { getProductDetails } from '../containers/productDetails/productEpic'
 
-import {
-  searchMedicine
-} from '../containers/searchMedicine/searchMedicineEpic'
+import { searchMedicine } from '../containers/searchMedicine/searchMedicineEpic'
 
 import {
   getDeliveryDetailsList,
   submitDeliveryDetails,
-  checkPincodeServicability,
   getLocalityList
 } from '../containers/deliveryDetails/deliveryDetailsEpics'
 
@@ -37,17 +30,13 @@ import {
   submitPatient
 } from '../containers/patientDetails/patientDetailsEpics'
 
-import {
-  getOrderListDetails
-} from '../containers/orderList/orderListEpics'
+import { getOrderListDetails } from '../containers/orderList/orderListEpics'
 
 import {
   getPrescriptionList
 } from '../containers/prescription/prescriptionEpics'
 
-import {
-  carePointsList
-} from '../containers/carePoint/carePointEpics'
+import { carePointsList } from '../containers/carePoint/carePointEpics'
 
 import {
   getAnonymousCartIdEpic,
@@ -68,13 +57,9 @@ import {
   optDoctorCallback
 } from '../containers/cartDetails/cartEpics'
 
-import {
-  checkPincode
-} from '../containers/location/pincode/pincodeEpic'
+import { checkPincode } from '../containers/location/pincode/pincodeEpic'
 
-import {
-  submitRefillDate
-} from '../containers/thankYou/thankYouEpics'
+import { submitRefillDate } from '../containers/thankYou/thankYouEpics'
 // import * as actions from './actions'
 // import * as types from './actionTypes'
 
@@ -82,9 +67,7 @@ import {
   getPatientPastMedicineList
 } from '../containers/refillPatients/refillEpics'
 
-import {
-  getBackGroungImages
-} from '../containers/homePage/homePageEpics'
+import { getBackGroungImages } from '../containers/homePage/homePageEpics'
 
 export const rootEpic = combineEpics(
   getMoleculeSummary,
@@ -98,7 +81,6 @@ export const rootEpic = combineEpics(
   getCartDetailsEpic,
   // decrementCartItemLoadingEpic,
   decrementCartItemEpic,
-  // incrementCartItemLoadingEpic,
   incrementCartItemEpic,
   // deleteCartItemLoadingEpic,
   deleteCartItemEpic,
@@ -123,6 +105,7 @@ export const rootEpic = combineEpics(
   getBackGroungImages,
   applyCouponCode,
   optDoctorCallback,
-  checkPincodeServicability,
+  checkReferralCode,
+  getMembershipCodeLoading,
   getLocalityList
 )

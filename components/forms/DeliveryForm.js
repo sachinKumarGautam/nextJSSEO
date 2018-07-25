@@ -43,10 +43,14 @@ const styles = theme => ({
 
 class DeliveryForm extends React.Component {
   onPincodeInput (handleChange, event) {
-    if (event.target.value.length === 6) {
+    if (event.target.value.length > 6) return
+    else if (event.target.value.length === 6) {
       this.props.checkPincodeDetailLoading(
-        this.props.deliveryDetailsState,
-        event.target.value
+        this.props.checkPincodeState,
+        { handleClose: '' },
+        { setSubmitting: '' },
+        event.target.value,
+        { isDeliveryAddress: true }
       )
     }
 
@@ -58,6 +62,7 @@ class DeliveryForm extends React.Component {
   }
 
   onChange (name, handleChange, event) {
+    if (name === 'mobile' && event.target.value.length > 10) return
     this.props.updateAddressFormValue(
       this.props.deliveryDetailsState,
       name,
@@ -98,14 +103,11 @@ class DeliveryForm extends React.Component {
             onChange={this.onChange.bind(this, 'full_name', handleChange)}
             value={values.full_name}
           />
-          {
-            errors.full_name && touched.full_name &&
-            <FormHelperText
-              id='full_name'
-            >
+          {errors.full_name &&
+            touched.full_name &&
+            <FormHelperText id='full_name'>
               {errors.full_name}
-            </FormHelperText>
-          }
+            </FormHelperText>}
         </FormControl>
         <FormControl
           className={classes.formControl}
@@ -120,14 +122,11 @@ class DeliveryForm extends React.Component {
             onChange={this.onChange.bind(this, 'mobile', handleChange)}
             value={values.mobile}
           />
-          {
-            errors.mobile && touched.mobile &&
-            <FormHelperText
-              id='mobile'
-            >
+          {errors.mobile &&
+            touched.mobile &&
+            <FormHelperText id='mobile'>
               {errors.mobile}
-            </FormHelperText>
-          }
+            </FormHelperText>}
         </FormControl>
         <FormControl
           className={classes.formControl}
@@ -142,14 +141,11 @@ class DeliveryForm extends React.Component {
             onChange={this.onPincodeInput.bind(this, handleChange)}
             value={values.pincode}
           />
-          {
-            errors.pincode && touched.pincode &&
-            <FormHelperText
-              id='pincode'
-            >
+          {errors.pincode &&
+            touched.pincode &&
+            <FormHelperText id='pincode'>
               {errors.pincode}
-            </FormHelperText>
-          }
+            </FormHelperText>}
         </FormControl>
         <FormControl
           className={classes.formControl}
@@ -159,16 +155,15 @@ class DeliveryForm extends React.Component {
           <LocationSearch
             onChange={this.onLocalityChange.bind(this, handleChange)}
             deliveryDetailsState={this.props.deliveryDetailsState}
-            getLocalityDetailListLoading={this.props.getLocalityDetailListLoading}
+            getLocalityDetailListLoading={
+              this.props.getLocalityDetailListLoading
+            }
           />
-          {
-            errors.locality && touched.locality &&
-            <FormHelperText
-              id='locality'
-            >
+          {errors.locality &&
+            touched.locality &&
+            <FormHelperText id='locality'>
               {errors.locality}
-            </FormHelperText>
-          }
+            </FormHelperText>}
         </FormControl>
         <FormControl
           className={classes.formControl}
@@ -183,19 +178,13 @@ class DeliveryForm extends React.Component {
             onChange={this.onChange.bind(this, 'street1', handleChange)}
             value={values.street1}
           />
-          {
-            errors.street1 && touched.street1 &&
-            <FormHelperText
-              id='street1'
-            >
+          {errors.street1 &&
+            touched.street1 &&
+            <FormHelperText id='street1'>
               {errors.street1}
-            </FormHelperText>
-          }
+            </FormHelperText>}
         </FormControl>
-        <FormControl
-          className={classes.formControl}
-          aria-describedby='street2'
-        >
+        <FormControl className={classes.formControl} aria-describedby='street2'>
           <Input
             placeholder='Street/Society(Optional)'
             className={classes.valueStyle}
@@ -209,7 +198,7 @@ class DeliveryForm extends React.Component {
           className={classes.formControl}
           aria-describedby='city'
           error={errors.city && touched.city}
-          disabled='true'
+          disabled
         >
           <Input
             placeholder='  City'
@@ -219,20 +208,17 @@ class DeliveryForm extends React.Component {
             onChange={handleChange}
             value={values.city}
           />
-          {
-            errors.city && touched.city &&
-            <FormHelperText
-              id='city'
-            >
+          {errors.city &&
+            touched.city &&
+            <FormHelperText id='city'>
               {errors.city}
-            </FormHelperText>
-          }
+            </FormHelperText>}
         </FormControl>
         <FormControl
           className={classes.formControl}
           aria-describedby='state'
           error={errors.state && touched.state}
-          disabled='true'
+          disabled
         >
           <Input
             placeholder='State'
@@ -242,14 +228,11 @@ class DeliveryForm extends React.Component {
             onChange={handleChange}
             value={values.state}
           />
-          {
-            errors.city && touched.state &&
-            <FormHelperText
-              id='state'
-            >
+          {errors.city &&
+            touched.state &&
+            <FormHelperText id='state'>
               {errors.state}
-            </FormHelperText>
-          }
+            </FormHelperText>}
         </FormControl>
 
         <div className={classes.buttonWrapper}>

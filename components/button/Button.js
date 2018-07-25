@@ -2,12 +2,8 @@ import Button from '@material-ui/core/Button'
 import { withStyles } from '@material-ui/core/styles'
 import classNames from 'classnames'
 import CircularProgress from '@material-ui/core/CircularProgress'
-import {SignalCellularNull} from '@material-ui/icons'
 
 const styles = theme => ({
-  root: {
-    flexGrow: 1
-  },
   button: {
     flexGrow: 1,
     position: 'relative',
@@ -32,6 +28,15 @@ const styles = theme => ({
     marginTop: -(theme.spacing.unit * 1.5),
     marginLeft: -(theme.spacing.unit * 4.25)
   },
+  centerLoader: {
+    color: theme.palette.primary.main,
+    position: 'absolute',
+    margin: '0 auto',
+    top: '50%',
+    left: '50%',
+    marginTop: -(theme.spacing.unit * 1.5),
+    marginLeft: -(theme.spacing.unit * 1.5)
+  },
   loader: {
     color: theme.palette.common.white,
     position: 'absolute',
@@ -41,7 +46,15 @@ const styles = theme => ({
   }
 })
 
-const CommonButton = (buttonProps) => {
+function getButtonLoaderClassNames (loaderColor, loaderPosition, classes) {
+  let className = ''
+  if (loaderPosition) className = classes.centerLoader
+  else if (loaderColor) className = classes.centerLoader
+  else className = classes.loader
+  return className
+}
+
+const CommonButton = buttonProps => {
   const {
     classes,
     isloading,
@@ -56,25 +69,27 @@ const CommonButton = (buttonProps) => {
     color,
     type,
     onClick,
-    className
+    className,
+    loaderPosition
   } = buttonProps
   return (
     <div>
-      <div
-        className={classes.wrapper}
-      >
+      <div className={classes.wrapper}>
         <Button
-          className={isloading
-            ? classNames(className, classes.buttonloader)
-            : classNames(className, classes.button)
+          variant={variant || null}
+          className={
+            isloading && !loaderPosition
+              ? classNames(className, classes.buttonloader)
+              : classNames(className, classes.button)
           }
-          type={type || SignalCellularNull}
+          type={type || 'text'}
           color={color}
           href={href || null}
           mini={mini || null}
-          disabled={disabled || null}
+          disabled={
+            (loaderPosition === 'center' && isloading) || disabled || null
+          }
           fullWidth={fullWidth || null}
-          variant={variant || null}
           classes={{
             root: classes.root || {},
             label: classes.label
@@ -83,10 +98,15 @@ const CommonButton = (buttonProps) => {
         >
           {label}
         </Button>
-        {isloading && <CircularProgress
-          size={loaderSize || 22}
-          className={loaderColor ? classes.loaderPrimary : classes.loader}
-        />}
+        {isloading &&
+          <CircularProgress
+            size={loaderSize || 22}
+            className={getButtonLoaderClassNames(
+              loaderColor,
+              loaderPosition,
+              classes
+            )}
+          />}
       </div>
     </div>
   )

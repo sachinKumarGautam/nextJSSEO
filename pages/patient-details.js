@@ -19,6 +19,10 @@ import {
   resetPatientSelected
 } from '../containers/patientDetails/patientDetailsActions'
 
+import {
+  patientDetails
+} from '../components/constants/PageTitle'
+
 const styles = theme => ({
   root: {
     paddingTop: theme.spacing.unit * 3,
@@ -51,7 +55,7 @@ class PatientDetails extends React.Component {
   render () {
     return (
       <div>
-        <Header />
+        <Header title={patientDetails.title} />
         <div className={this.props.classes.wrapperStyle}>
           <Paper className={this.props.classes.root} elevation={1}>
             <PatientDetailsWrapper

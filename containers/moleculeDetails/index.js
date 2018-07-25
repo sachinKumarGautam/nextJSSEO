@@ -10,8 +10,6 @@ import MoleculeDetails from './MoleculeDetails'
 import MoleculeDetailsContent from './MoleculeDetailsContent'
 import RelatedMedicines from '../../components/RelatedMedicines'
 import RelatedArticles from '../../components/RelatedArticles'
-import { incrementCartItemLoading } from '../../containers/cartDetails/cartActions'
-
 /*
   bread crumbs
   Molecule Details
@@ -29,12 +27,11 @@ class MoleculeDetailsWrapper extends Component {
   }
 
   toggleHover (item) {
-    this.setState((prevState) => ({
+    this.setState(prevState => ({
       hover: {
         [item]: !prevState.hover[item]
       }
-    })
-    )
+    }))
   }
 
   render () {
@@ -47,13 +44,17 @@ class MoleculeDetailsWrapper extends Component {
               <MoleculeDetails
                 toggleHover={this.toggleHover.bind(this)}
                 hover={this.state.hover}
-                moleculeDetailsStatePayload={this.props.moleculeDetailsStatePayload}
+                moleculeDetailsStatePayload={
+                  this.props.moleculeDetailsStatePayload
+                }
               />
             </section>
             <section>
               <MoleculeDetailsContent
                 hover={this.state.hover}
-                moleculeDetailsStatePayload={this.props.moleculeDetailsStatePayload}
+                moleculeDetailsStatePayload={
+                  this.props.moleculeDetailsStatePayload
+                }
               />
             </section>
           </Grid>
@@ -61,10 +62,9 @@ class MoleculeDetailsWrapper extends Component {
           <Grid item xs={3}>
             <RelatedMedicines
               moleculeName={this.props.moleculeDetailsStatePayload.name}
+              addToCartHandler={this.props.addToCartHandler}
               medicineList={this.props.medicineListState.payload}
-              checkPincodeLoading={this.props.checkPincodeLoading}
               checkPincodeState={this.props.checkPincodeState}
-              incrementCartItemLoading={this.props.actions.incrementCartItemLoading}
               cartState={this.props.cartState}
             />
             <RelatedArticles />
@@ -85,16 +85,10 @@ function mapStateToProps (state) {
 
 function mapDispatchToProps (dispatch) {
   return {
-    actions: bindActionCreators(
-      {
-        incrementCartItemLoading
-      },
-      dispatch
-    )
+    actions: bindActionCreators({}, dispatch)
   }
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(MoleculeDetailsWrapper)
+export default connect(mapStateToProps, mapDispatchToProps)(
+  MoleculeDetailsWrapper
+)

@@ -112,6 +112,9 @@ class AddressDetailsExpansionPanel extends React.Component {
             saveAddressSelected={this.saveAddressSelected.bind(this)}
             addressIdSelected={this.props.addressIdSelected}
             addressDetailsWrapper={this.props.patientDetailsWrapper}
+            updateAddressFormValue={this.props.updateAddressFormValue}
+            checkPincodeDetailLoading={this.props.checkPincodeDetailLoading}
+            getLocalityDetailListLoading={this.props.getLocalityDetailListLoading}
           />
           <Button
             size='small'

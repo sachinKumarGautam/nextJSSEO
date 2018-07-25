@@ -69,7 +69,7 @@ export function getMoleculeSummary (action$, store) {
     mergeMap(data => {
       return http(getMoleculeSummary$(data.saltId)).pipe(
         map(result => {
-          return getMoleculeSummarySuccess(data.moleculeState, result.body.payload.content[0])
+          return getMoleculeSummarySuccess(data.moleculeState, result.body.payload)
         }),
         catchError(error => {
           return of(getMoleculeSummaryFailure(data.moleculeState, error))

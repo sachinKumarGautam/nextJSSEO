@@ -23,6 +23,11 @@ class MyDocument extends Document {
           />
           {/* PWA primary color */}
           <meta name='theme-color' content={pageContext.theme.palette.primary.main} />
+          <link
+            rel='icon'
+            type='image/png'
+            href={'/static/images/favicon.png'}
+          />
           <link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet' />
           <link
             rel='stylesheet'

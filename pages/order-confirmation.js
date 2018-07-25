@@ -8,6 +8,10 @@ import Footer from '../components/layouts/footer'
 
 import ThankyouWrapper from '../containers/thankYou'
 
+import {
+  orderConfirmation
+} from '../components/constants/PageTitle'
+
 const styles = theme => ({
   root: {
     paddingTop: theme.spacing.unit * 3,
@@ -29,7 +33,7 @@ class OrderConfirmationWrapper extends React.Component {
   render () {
     return (
       <div>
-        <Header />
+        <Header title={orderConfirmation.title} />
         <div className={this.props.classes.root}>
           <ThankyouWrapper />
         </div>

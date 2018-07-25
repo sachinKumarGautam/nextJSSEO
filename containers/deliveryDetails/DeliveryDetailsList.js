@@ -117,6 +117,7 @@ class Main extends Component {
                 checkPincodeDetailLoading={this.props.checkPincodeDetailLoading}
                 updateAddressFormValue={this.props.updateAddressFormValue}
                 getLocalityDetailListLoading={this.props.getLocalityDetailListLoading}
+                checkPincodeState={this.props.checkPincodeState}
               />
             </div>
           </div>

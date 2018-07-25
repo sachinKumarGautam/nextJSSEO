@@ -23,9 +23,15 @@ npm manifest:
       "@material-ui/icons": "^1.1.0",
       "babel-eslint": "^8.2.5",
       "downshift": "^2.0.6",
+      "eslint-loader": "1.9.0",
+      "eslint-plugin-flowtype": "2.35.0",
+      "eslint-plugin-jsx-a11y": "5.1.1",
+      "eslint-plugin-react": "7.1.0",
       "express": "^4.16.3",
       "formik": "^0.11.11",
       "jss": "latest",
+      "lodash.debounce": "^4.0.8",
+      "lodash.flowright": "^3.5.0",
       "next": "latest",
       "next-redux-wrapper": "^2.0.0-beta.6",
       "prop-types": "latest",
@@ -48,16 +54,17 @@ npm manifest:
       "superagent": "^3.8.1",
       "svg-sprite-loader": "0.3.1",
       "universal-rx-request": "^1.0.3",
-      "yup": "^0.25.1",
-      "eslint": "4.4.1",
-      "eslint-loader": "1.9.0",
-      "eslint-plugin-flowtype": "2.35.0",
-      "eslint-plugin-import": "2.7.0",
-      "eslint-plugin-jsx-a11y": "5.1.1",
-      "eslint-plugin-react": "7.1.0"
+      "yup": "^0.25.1"
     },
     "devDependencies": {
+      "eslint": "^5.1.0",
+      "eslint-config-standard": "^11.0.0",
+      "eslint-plugin-import": "^2.13.0",
+      "eslint-plugin-node": "^7.0.1",
+      "eslint-plugin-promise": "^3.8.0",
+      "eslint-plugin-standard": "^3.1.0",
       "husky": "^0.14.3",
+      "prettier-eslint": "^8.8.2",
       "standard": "^11.0.0"
     },
     "scripts": {
@@ -832,6 +839,12 @@ Lockfile:
     dependencies:
       acorn "^3.0.4"
   
+  acorn-jsx@^4.1.1:
+    version "4.1.1"
+    resolved "https://registry.yarnpkg.com/acorn-jsx/-/acorn-jsx-4.1.1.tgz#e8e41e48ea2fe0c896740610ab6a4ffd8add225e"
+    dependencies:
+      acorn "^5.0.3"
+  
   acorn@^3.0.4:
     version "3.3.0"
     resolved "https://registry.yarnpkg.com/acorn/-/acorn-3.3.0.tgz#45e37fb39e8da3f25baee3ff5369e2bb5f22017a"
@@ -840,7 +853,7 @@ Lockfile:
     version "4.0.13"
     resolved "https://registry.yarnpkg.com/acorn/-/acorn-4.0.13.tgz#105495ae5361d697bd195c825192e1ad7f253787"
   
-  acorn@^5.0.0, acorn@^5.5.0:
+  acorn@^5.0.0, acorn@^5.0.3, acorn@^5.5.0, acorn@^5.6.0:
     version "5.7.1"
     resolved "https://registry.yarnpkg.com/acorn/-/acorn-5.7.1.tgz#f095829297706a7c9776958c0afc8930a9b9d9d8"
   
@@ -852,7 +865,7 @@ Lockfile:
     version "3.2.0"
     resolved "https://registry.yarnpkg.com/ajv-keywords/-/ajv-keywords-3.2.0.tgz#e86b819c602cf8821ad637413698f1dec021847a"
   
-  ajv@^5.1.5, ajv@^5.2.0, ajv@^5.2.3, ajv@^5.3.0:
+  ajv@^5.1.5, ajv@^5.2.3, ajv@^5.3.0:
     version "5.5.2"
     resolved "https://registry.yarnpkg.com/ajv/-/ajv-5.5.2.tgz#73b5eeca3fab653e3d3f9422b341ad42205dc965"
     dependencies:
@@ -861,7 +874,7 @@ Lockfile:
       fast-json-stable-stringify "^2.0.0"
       json-schema-traverse "^0.3.0"
   
-  ajv@^6.0.1, ajv@^6.1.0:
+  ajv@^6.0.1, ajv@^6.1.0, ajv@^6.5.0:
     version "6.5.2"
     resolved "https://registry.yarnpkg.com/ajv/-/ajv-6.5.2.tgz#678495f9b82f7cca6be248dd92f59bff5e1f4360"
     dependencies:
@@ -898,7 +911,7 @@ Lockfile:
     version "2.2.1"
     resolved "https://registry.yarnpkg.com/ansi-styles/-/ansi-styles-2.2.1.tgz#b432dd3358b634cf75e1e4664368240533c1ddbe"
   
-  ansi-styles@^3.2.1:
+  ansi-styles@^3.2.0, ansi-styles@^3.2.1:
     version "3.2.1"
     resolved "https://registry.yarnpkg.com/ansi-styles/-/ansi-styles-3.2.1.tgz#41fbb20243e50b12be0f04b8dedbf07520ce841d"
     dependencies:
@@ -1044,7 +1057,7 @@ Lockfile:
     dependencies:
       ast-types-flow "0.0.7"
   
-  babel-code-frame@^6.22.0:
+  babel-code-frame@^6.22.0, babel-code-frame@^6.26.0:
     version "6.26.0"
     resolved "https://registry.yarnpkg.com/babel-code-frame/-/babel-code-frame-6.26.0.tgz#63fd43f7dc1e3bb7ce35947db8fe369a3f58c74b"
     dependencies:
@@ -1524,6 +1537,10 @@ Lockfile:
     version "2.13.0"
     resolved "https://registry.yarnpkg.com/commander/-/commander-2.13.0.tgz#6964bca67685df7c1f1430c584f07d7597885b9c"
   
+  common-tags@^1.4.0:
+    version "1.8.0"
+    resolved "https://registry.yarnpkg.com/common-tags/-/common-tags-1.8.0.tgz#8e3153e542d4a39e9b10554434afaaf98956a937"
+  
   commondir@^1.0.1:
     version "1.0.1"
     resolved "https://registry.yarnpkg.com/commondir/-/commondir-1.0.1.tgz#ddd800da0c66127393cca5950ea968a3aaf1253b"
@@ -1647,6 +1664,16 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/cross-spawn/-/cross-spawn-5.1.0.tgz#e8bd0efee58fcff6f8f94510a0a554bbfa235449"
     dependencies:
       lru-cache "^4.0.1"
+      shebang-command "^1.2.0"
+      which "^1.2.9"
+  
+  cross-spawn@^6.0.5:
+    version "6.0.5"
+    resolved "https://registry.yarnpkg.com/cross-spawn/-/cross-spawn-6.0.5.tgz#4a5ec7c64dfae22c3a14124dbacdee846d80cbc4"
+    dependencies:
+      nice-try "^1.0.4"
+      path-key "^2.0.1"
+      semver "^5.5.0"
       shebang-command "^1.2.0"
       which "^1.2.9"
   
@@ -1850,6 +1877,10 @@ Lockfile:
       miller-rabin "^4.0.0"
       randombytes "^2.0.0"
   
+  dlv@^1.1.0:
+    version "1.1.2"
+    resolved "https://registry.yarnpkg.com/dlv/-/dlv-1.1.2.tgz#270f6737b30d25b6657a7e962c784403f85137e5"
+  
   doctrine@1.5.0:
     version "1.5.0"
     resolved "https://registry.yarnpkg.com/doctrine/-/doctrine-1.5.0.tgz#379dce730f6166f76cefa4e6707a159b02c5a6fa"
@@ -2008,7 +2039,7 @@ Lockfile:
     dependencies:
       stackframe "^1.0.4"
   
-  es-abstract@^1.5.1, es-abstract@^1.7.0:
+  es-abstract@^1.10.0, es-abstract@^1.5.1, es-abstract@^1.7.0:
     version "1.12.0"
     resolved "https://registry.yarnpkg.com/es-abstract/-/es-abstract-1.12.0.tgz#9dbbdd27c6856f0001421ca18782d786bf8a6165"
     dependencies:
@@ -2100,7 +2131,7 @@ Lockfile:
     version "5.0.0"
     resolved "https://registry.yarnpkg.com/eslint-config-standard-jsx/-/eslint-config-standard-jsx-5.0.0.tgz#4abfac554f38668e0078c664569e7b2384e5d2aa"
   
-  eslint-config-standard@11.0.0:
+  eslint-config-standard@11.0.0, eslint-config-standard@^11.0.0:
     version "11.0.0"
     resolved "https://registry.yarnpkg.com/eslint-config-standard/-/eslint-config-standard-11.0.0.tgz#87ee0d3c9d95382dc761958cbb23da9eea31e0ba"
   
@@ -2121,12 +2152,19 @@ Lockfile:
       object-hash "^1.1.4"
       rimraf "^2.6.1"
   
-  eslint-module-utils@^2.1.1:
+  eslint-module-utils@^2.1.1, eslint-module-utils@^2.2.0:
     version "2.2.0"
     resolved "https://registry.yarnpkg.com/eslint-module-utils/-/eslint-module-utils-2.2.0.tgz#b270362cd88b1a48ad308976ce7fa54e98411746"
     dependencies:
       debug "^2.6.8"
       pkg-dir "^1.0.0"
+  
+  eslint-plugin-es@^1.3.1:
+    version "1.3.1"
+    resolved "https://registry.yarnpkg.com/eslint-plugin-es/-/eslint-plugin-es-1.3.1.tgz#5acb2565db4434803d1d46a9b4cbc94b345bd028"
+    dependencies:
+      eslint-utils "^1.3.0"
+      regexpp "^2.0.0"
   
   eslint-plugin-flowtype@2.35.0:
     version "2.35.0"
@@ -2134,20 +2172,20 @@ Lockfile:
     dependencies:
       lodash "^4.15.0"
   
-  eslint-plugin-import@2.7.0:
-    version "2.7.0"
-    resolved "https://registry.yarnpkg.com/eslint-plugin-import/-/eslint-plugin-import-2.7.0.tgz#21de33380b9efb55f5ef6d2e210ec0e07e7fa69f"
+  eslint-plugin-import@^2.13.0:
+    version "2.13.0"
+    resolved "https://registry.yarnpkg.com/eslint-plugin-import/-/eslint-plugin-import-2.13.0.tgz#df24f241175e312d91662dc91ca84064caec14ed"
     dependencies:
-      builtin-modules "^1.1.1"
       contains-path "^0.1.0"
       debug "^2.6.8"
       doctrine "1.5.0"
       eslint-import-resolver-node "^0.3.1"
-      eslint-module-utils "^2.1.1"
+      eslint-module-utils "^2.2.0"
       has "^1.0.1"
-      lodash.cond "^4.3.0"
+      lodash "^4.17.4"
       minimatch "^3.0.3"
       read-pkg-up "^2.0.0"
+      resolve "^1.6.0"
   
   eslint-plugin-import@~2.9.0:
     version "2.9.0"
@@ -2176,6 +2214,17 @@ Lockfile:
       emoji-regex "^6.1.0"
       jsx-ast-utils "^1.4.0"
   
+  eslint-plugin-node@^7.0.1:
+    version "7.0.1"
+    resolved "https://registry.yarnpkg.com/eslint-plugin-node/-/eslint-plugin-node-7.0.1.tgz#a6e054e50199b2edd85518b89b4e7b323c9f36db"
+    dependencies:
+      eslint-plugin-es "^1.3.1"
+      eslint-utils "^1.3.1"
+      ignore "^4.0.2"
+      minimatch "^3.0.4"
+      resolve "^1.8.1"
+      semver "^5.5.0"
+  
   eslint-plugin-node@~6.0.0:
     version "6.0.1"
     resolved "https://registry.yarnpkg.com/eslint-plugin-node/-/eslint-plugin-node-6.0.1.tgz#bf19642298064379315d7a4b2a75937376fa05e4"
@@ -2184,6 +2233,10 @@ Lockfile:
       minimatch "^3.0.4"
       resolve "^1.3.3"
       semver "^5.4.1"
+  
+  eslint-plugin-promise@^3.8.0:
+    version "3.8.0"
+    resolved "https://registry.yarnpkg.com/eslint-plugin-promise/-/eslint-plugin-promise-3.8.0.tgz#65ebf27a845e3c1e9d6f6a5622ddd3801694b621"
   
   eslint-plugin-promise@~3.7.0:
     version "3.7.0"
@@ -2206,6 +2259,10 @@ Lockfile:
       jsx-ast-utils "^2.0.1"
       prop-types "^15.6.0"
   
+  eslint-plugin-standard@^3.1.0:
+    version "3.1.0"
+    resolved "https://registry.yarnpkg.com/eslint-plugin-standard/-/eslint-plugin-standard-3.1.0.tgz#2a9e21259ba4c47c02d53b2d0c9135d4b1022d47"
+  
   eslint-plugin-standard@~3.0.1:
     version "3.0.1"
     resolved "https://registry.yarnpkg.com/eslint-plugin-standard/-/eslint-plugin-standard-3.0.1.tgz#34d0c915b45edc6f010393c7eef3823b08565cf2"
@@ -2217,36 +2274,47 @@ Lockfile:
       esrecurse "^4.1.0"
       estraverse "^4.1.1"
   
+  eslint-scope@^4.0.0:
+    version "4.0.0"
+    resolved "https://registry.yarnpkg.com/eslint-scope/-/eslint-scope-4.0.0.tgz#50bf3071e9338bcdc43331794a0cb533f0136172"
+    dependencies:
+      esrecurse "^4.1.0"
+      estraverse "^4.1.1"
+  
+  eslint-utils@^1.3.0, eslint-utils@^1.3.1:
+    version "1.3.1"
+    resolved "https://registry.yarnpkg.com/eslint-utils/-/eslint-utils-1.3.1.tgz#9a851ba89ee7c460346f97cf8939c7298827e512"
+  
   eslint-visitor-keys@^1.0.0:
     version "1.0.0"
     resolved "https://registry.yarnpkg.com/eslint-visitor-keys/-/eslint-visitor-keys-1.0.0.tgz#3f3180fb2e291017716acb4c9d6d5b5c34a6a81d"
   
-  eslint@4.4.1:
-    version "4.4.1"
-    resolved "https://registry.yarnpkg.com/eslint/-/eslint-4.4.1.tgz#99cd7eafcffca2ff99a5c8f5f2a474d6364b4bd3"
+  eslint@^4.0.0:
+    version "4.19.1"
+    resolved "https://registry.yarnpkg.com/eslint/-/eslint-4.19.1.tgz#32d1d653e1d90408854bfb296f076ec7e186a300"
     dependencies:
-      ajv "^5.2.0"
+      ajv "^5.3.0"
       babel-code-frame "^6.22.0"
-      chalk "^1.1.3"
+      chalk "^2.1.0"
       concat-stream "^1.6.0"
       cross-spawn "^5.1.0"
-      debug "^2.6.8"
-      doctrine "^2.0.0"
+      debug "^3.1.0"
+      doctrine "^2.1.0"
       eslint-scope "^3.7.1"
-      espree "^3.5.0"
+      eslint-visitor-keys "^1.0.0"
+      espree "^3.5.4"
       esquery "^1.0.0"
-      estraverse "^4.2.0"
       esutils "^2.0.2"
       file-entry-cache "^2.0.0"
       functional-red-black-tree "^1.0.1"
       glob "^7.1.2"
-      globals "^9.17.0"
+      globals "^11.0.1"
       ignore "^3.3.3"
       imurmurhash "^0.1.4"
       inquirer "^3.0.6"
       is-resolvable "^1.0.0"
       js-yaml "^3.9.1"
-      json-stable-stringify "^1.0.1"
+      json-stable-stringify-without-jsonify "^1.0.1"
       levn "^0.3.0"
       lodash "^4.17.4"
       minimatch "^3.0.2"
@@ -2254,13 +2322,59 @@ Lockfile:
       natural-compare "^1.4.0"
       optionator "^0.8.2"
       path-is-inside "^1.0.2"
-      pluralize "^4.0.0"
+      pluralize "^7.0.0"
       progress "^2.0.0"
+      regexpp "^1.0.1"
       require-uncached "^1.0.3"
       semver "^5.3.0"
+      strip-ansi "^4.0.0"
       strip-json-comments "~2.0.1"
-      table "^4.0.1"
+      table "4.0.2"
       text-table "~0.2.0"
+  
+  eslint@^5.1.0:
+    version "5.1.0"
+    resolved "https://registry.yarnpkg.com/eslint/-/eslint-5.1.0.tgz#2ed611f1ce163c0fb99e1e0cda5af8f662dff645"
+    dependencies:
+      ajv "^6.5.0"
+      babel-code-frame "^6.26.0"
+      chalk "^2.1.0"
+      cross-spawn "^6.0.5"
+      debug "^3.1.0"
+      doctrine "^2.1.0"
+      eslint-scope "^4.0.0"
+      eslint-utils "^1.3.1"
+      eslint-visitor-keys "^1.0.0"
+      espree "^4.0.0"
+      esquery "^1.0.1"
+      esutils "^2.0.2"
+      file-entry-cache "^2.0.0"
+      functional-red-black-tree "^1.0.1"
+      glob "^7.1.2"
+      globals "^11.7.0"
+      ignore "^3.3.3"
+      imurmurhash "^0.1.4"
+      inquirer "^5.2.0"
+      is-resolvable "^1.1.0"
+      js-yaml "^3.11.0"
+      json-stable-stringify-without-jsonify "^1.0.1"
+      levn "^0.3.0"
+      lodash "^4.17.5"
+      minimatch "^3.0.4"
+      mkdirp "^0.5.1"
+      natural-compare "^1.4.0"
+      optionator "^0.8.2"
+      path-is-inside "^1.0.2"
+      pluralize "^7.0.0"
+      progress "^2.0.0"
+      regexpp "^1.1.0"
+      require-uncached "^1.0.3"
+      semver "^5.5.0"
+      string.prototype.matchall "^2.0.0"
+      strip-ansi "^4.0.0"
+      strip-json-comments "^2.0.1"
+      table "^4.0.3"
+      text-table "^0.2.0"
   
   eslint@~4.18.0:
     version "4.18.2"
@@ -2304,18 +2418,25 @@ Lockfile:
       table "4.0.2"
       text-table "~0.2.0"
   
-  espree@^3.5.0, espree@^3.5.2:
+  espree@^3.5.2, espree@^3.5.4:
     version "3.5.4"
     resolved "https://registry.yarnpkg.com/espree/-/espree-3.5.4.tgz#b0f447187c8a8bed944b815a660bddf5deb5d1a7"
     dependencies:
       acorn "^5.5.0"
       acorn-jsx "^3.0.0"
   
+  espree@^4.0.0:
+    version "4.0.0"
+    resolved "https://registry.yarnpkg.com/espree/-/espree-4.0.0.tgz#253998f20a0f82db5d866385799d912a83a36634"
+    dependencies:
+      acorn "^5.6.0"
+      acorn-jsx "^4.1.1"
+  
   esprima@^4.0.0:
     version "4.0.0"
     resolved "https://registry.yarnpkg.com/esprima/-/esprima-4.0.0.tgz#4499eddcd1110e0b218bacf2fa7f7f59f55ca804"
   
-  esquery@^1.0.0:
+  esquery@^1.0.0, esquery@^1.0.1:
     version "1.0.1"
     resolved "https://registry.yarnpkg.com/esquery/-/esquery-1.0.1.tgz#406c51658b1f5991a5f9b62b1dc25b00e3e5c708"
     dependencies:
@@ -2327,7 +2448,7 @@ Lockfile:
     dependencies:
       estraverse "^4.1.0"
   
-  estraverse@^4.0.0, estraverse@^4.1.0, estraverse@^4.1.1, estraverse@^4.2.0:
+  estraverse@^4.0.0, estraverse@^4.1.0, estraverse@^4.1.1:
     version "4.2.0"
     resolved "https://registry.yarnpkg.com/estraverse/-/estraverse-4.2.0.tgz#0dee3fed31fcd469618ce7342099fc1afa0bdb13"
   
@@ -2449,7 +2570,7 @@ Lockfile:
     version "3.0.1"
     resolved "https://registry.yarnpkg.com/extend/-/extend-3.0.1.tgz#a755ea7bc1adfcc5a31ce7e762dbaadc5e636444"
   
-  external-editor@^2.0.4:
+  external-editor@^2.0.4, external-editor@^2.1.0:
     version "2.2.0"
     resolved "https://registry.yarnpkg.com/external-editor/-/external-editor-2.2.0.tgz#045511cfd8d133f3846673d1047c154e214ad3d5"
     dependencies:
@@ -2779,13 +2900,9 @@ Lockfile:
       min-document "^2.19.0"
       process "~0.5.1"
   
-  globals@^11.0.1, globals@^11.1.0:
+  globals@^11.0.1, globals@^11.1.0, globals@^11.7.0:
     version "11.7.0"
     resolved "https://registry.yarnpkg.com/globals/-/globals-11.7.0.tgz#a583faa43055b1aca771914bf68258e2fc125673"
-  
-  globals@^9.17.0:
-    version "9.18.0"
-    resolved "https://registry.yarnpkg.com/globals/-/globals-9.18.0.tgz#aa3896b3e69b487f17e31ed2143d69a8e30c2d8a"
   
   globby@^5.0.0:
     version "5.0.0"
@@ -2990,6 +3107,10 @@ Lockfile:
     version "3.3.10"
     resolved "https://registry.yarnpkg.com/ignore/-/ignore-3.3.10.tgz#0a97fb876986e8081c631160f8f9f389157f0043"
   
+  ignore@^4.0.2:
+    version "4.0.2"
+    resolved "https://registry.yarnpkg.com/ignore/-/ignore-4.0.2.tgz#0a8dd228947ec78c2d7f736b1642a9f7317c1905"
+  
   image-size@^0.3.5:
     version "0.3.5"
     resolved "https://registry.yarnpkg.com/image-size/-/image-size-0.3.5.tgz#83240eab2fb5b00b04aab8c74b0471e9cba7ad8c"
@@ -3003,6 +3124,10 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/indefinite-observable/-/indefinite-observable-1.0.1.tgz#09915423cc8d6f7eb1cb7882ad134633c9a6edc3"
     dependencies:
       symbol-observable "1.0.4"
+  
+  indent-string@^3.2.0:
+    version "3.2.0"
+    resolved "https://registry.yarnpkg.com/indent-string/-/indent-string-3.2.0.tgz#4a5fd6d27cc332f37e5419a504dbb837105c9289"
   
   indexof@0.0.1:
     version "0.0.1"
@@ -3042,6 +3167,24 @@ Lockfile:
       run-async "^2.2.0"
       rx-lite "^4.0.8"
       rx-lite-aggregates "^4.0.8"
+      string-width "^2.1.0"
+      strip-ansi "^4.0.0"
+      through "^2.3.6"
+  
+  inquirer@^5.2.0:
+    version "5.2.0"
+    resolved "https://registry.yarnpkg.com/inquirer/-/inquirer-5.2.0.tgz#db350c2b73daca77ff1243962e9f22f099685726"
+    dependencies:
+      ansi-escapes "^3.0.0"
+      chalk "^2.0.0"
+      cli-cursor "^2.1.0"
+      cli-width "^2.0.0"
+      external-editor "^2.1.0"
+      figures "^2.0.0"
+      lodash "^4.3.0"
+      mute-stream "0.0.7"
+      run-async "^2.2.0"
+      rxjs "^5.5.2"
       string-width "^2.1.0"
       strip-ansi "^4.0.0"
       through "^2.3.6"
@@ -3258,7 +3401,7 @@ Lockfile:
     dependencies:
       has "^1.0.1"
   
-  is-resolvable@^1.0.0:
+  is-resolvable@^1.0.0, is-resolvable@^1.1.0:
     version "1.1.0"
     resolved "https://registry.yarnpkg.com/is-resolvable/-/is-resolvable-1.1.0.tgz#fb18f87ce1feb925169c9a407c19318a3206ed88"
   
@@ -3307,7 +3450,7 @@ Lockfile:
     version "3.0.2"
     resolved "https://registry.yarnpkg.com/js-tokens/-/js-tokens-3.0.2.tgz#9866df395102130e38f7f996bceb65443209c25b"
   
-  js-yaml@^3.9.1:
+  js-yaml@^3.11.0, js-yaml@^3.9.1:
     version "3.12.0"
     resolved "https://registry.yarnpkg.com/js-yaml/-/js-yaml-3.12.0.tgz#eaed656ec8344f10f527c6bfa1b6e2244de167d1"
     dependencies:
@@ -3342,12 +3485,6 @@ Lockfile:
     version "1.0.1"
     resolved "https://registry.yarnpkg.com/json-stable-stringify-without-jsonify/-/json-stable-stringify-without-jsonify-1.0.1.tgz#9db7b59496ad3f3cfef30a75142d2d930ad72651"
   
-  json-stable-stringify@^1.0.1:
-    version "1.0.1"
-    resolved "https://registry.yarnpkg.com/json-stable-stringify/-/json-stable-stringify-1.0.1.tgz#9a759d39c5f2ff503fd5300646ed445f88c4f9af"
-    dependencies:
-      jsonify "~0.0.0"
-  
   json2mq@^0.2.0:
     version "0.2.0"
     resolved "https://registry.yarnpkg.com/json2mq/-/json2mq-0.2.0.tgz#b637bd3ba9eabe122c83e9720483aeb10d2c904a"
@@ -3357,10 +3494,6 @@ Lockfile:
   json5@^0.5.0, json5@^0.5.1:
     version "0.5.1"
     resolved "https://registry.yarnpkg.com/json5/-/json5-0.5.1.tgz#1eade7acc012034ad84e2396767ead9fa5495821"
-  
-  jsonify@~0.0.0:
-    version "0.0.0"
-    resolved "https://registry.yarnpkg.com/jsonify/-/jsonify-0.0.0.tgz#2c74b6ee41d93ca51b7b5aaee8f503631d252a73"
   
   jss-camel-case@^6.0.0, jss-camel-case@^6.1.0:
     version "6.1.0"
@@ -3561,10 +3694,6 @@ Lockfile:
     version "4.5.0"
     resolved "https://registry.yarnpkg.com/lodash.clonedeep/-/lodash.clonedeep-4.5.0.tgz#e23f3f9c4f8fbdde872529c1071857a086e5ccef"
   
-  lodash.cond@^4.3.0:
-    version "4.5.2"
-    resolved "https://registry.yarnpkg.com/lodash.cond/-/lodash.cond-4.5.2.tgz#f471a1da486be60f6ab955d17115523dd1d255d5"
-  
   lodash.debounce@^4.0.8:
     version "4.0.8"
     resolved "https://registry.yarnpkg.com/lodash.debounce/-/lodash.debounce-4.0.8.tgz#82d79bff30a67c4005ffd5e2515300ad9ca4d7af"
@@ -3581,6 +3710,10 @@ Lockfile:
     version "4.4.0"
     resolved "https://registry.yarnpkg.com/lodash.flatten/-/lodash.flatten-4.4.0.tgz#f31c22225a9632d2bbf8e4addbef240aa765a61f"
   
+  lodash.flowright@^3.5.0:
+    version "3.5.0"
+    resolved "https://registry.yarnpkg.com/lodash.flowright/-/lodash.flowright-3.5.0.tgz#2b5fff399716d7e7dc5724fe9349f67065184d67"
+  
   lodash.foreach@^4.3.0:
     version "4.5.0"
     resolved "https://registry.yarnpkg.com/lodash.foreach/-/lodash.foreach-4.5.0.tgz#1a6a35eace401280c7f06dddec35165ab27e3e53"
@@ -3593,7 +3726,7 @@ Lockfile:
     version "4.6.0"
     resolved "https://registry.yarnpkg.com/lodash.map/-/lodash.map-4.6.0.tgz#771ec7839e3473d9c4cde28b19394c3562f4f6d3"
   
-  lodash.merge@^4.4.0:
+  lodash.merge@^4.4.0, lodash.merge@^4.6.0:
     version "4.6.1"
     resolved "https://registry.yarnpkg.com/lodash.merge/-/lodash.merge-4.6.1.tgz#adc25d9cb99b9391c59624f379fbba60d7111d54"
   
@@ -3617,9 +3750,24 @@ Lockfile:
     version "4.5.2"
     resolved "https://registry.yarnpkg.com/lodash.topath/-/lodash.topath-4.5.2.tgz#3616351f3bba61994a0931989660bd03254fd009"
   
+  lodash.unescape@4.0.1:
+    version "4.0.1"
+    resolved "https://registry.yarnpkg.com/lodash.unescape/-/lodash.unescape-4.0.1.tgz#bf2249886ce514cda112fae9218cdc065211fc9c"
+  
   lodash@^4.15.0, lodash@^4.17.10, lodash@^4.17.4, lodash@^4.17.5, lodash@^4.2.0, lodash@^4.2.1, lodash@^4.3.0, lodash@^4.5.1:
     version "4.17.10"
     resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.10.tgz#1b7793cf7259ea38fb3661d4d38b3260af8ae4e7"
+  
+  loglevel-colored-level-prefix@^1.0.0:
+    version "1.0.0"
+    resolved "https://registry.yarnpkg.com/loglevel-colored-level-prefix/-/loglevel-colored-level-prefix-1.0.0.tgz#6a40218fdc7ae15fc76c3d0f3e676c465388603e"
+    dependencies:
+      chalk "^1.1.3"
+      loglevel "^1.4.1"
+  
+  loglevel@^1.4.1:
+    version "1.6.1"
+    resolved "https://registry.yarnpkg.com/loglevel/-/loglevel-1.6.1.tgz#e0fc95133b6ef276cdc8887cdaf24aa6f156f8fa"
   
   longest@^1.0.1:
     version "1.0.1"
@@ -3971,6 +4119,10 @@ Lockfile:
       webpack-sources "1.1.0"
       write-file-webpack-plugin "4.2.0"
   
+  nice-try@^1.0.4:
+    version "1.0.4"
+    resolved "https://registry.yarnpkg.com/nice-try/-/nice-try-1.0.4.tgz#d93962f6c52f2c1558c0fbda6d512819f1efe1c4"
+  
   node-fetch@^1.0.1:
     version "1.7.3"
     resolved "https://registry.yarnpkg.com/node-fetch/-/node-fetch-1.7.3.tgz#980f6f72d85211a5347c6b2bc18c5b84c3eb47ef"
@@ -4306,7 +4458,7 @@ Lockfile:
     version "1.0.2"
     resolved "https://registry.yarnpkg.com/path-is-inside/-/path-is-inside-1.0.2.tgz#365417dede44430d1c11af61027facf074bdfc53"
   
-  path-key@^2.0.0:
+  path-key@^2.0.0, path-key@^2.0.1:
     version "2.0.1"
     resolved "https://registry.yarnpkg.com/path-key/-/path-key-2.0.1.tgz#411cadb574c5a140d3a4b1910d40d80cc9f40b40"
   
@@ -4383,10 +4535,6 @@ Lockfile:
     dependencies:
       find-up "^2.1.0"
   
-  pluralize@^4.0.0:
-    version "4.0.0"
-    resolved "https://registry.yarnpkg.com/pluralize/-/pluralize-4.0.0.tgz#59b708c1c0190a2f692f1c7618c446b052fd1762"
-  
   pluralize@^7.0.0:
     version "7.0.0"
     resolved "https://registry.yarnpkg.com/pluralize/-/pluralize-7.0.0.tgz#298b89df8b93b0221dbf421ad2b1b1ea23fc6777"
@@ -4415,6 +4563,35 @@ Lockfile:
   preserve@^0.2.0:
     version "0.2.0"
     resolved "https://registry.yarnpkg.com/preserve/-/preserve-0.2.0.tgz#815ed1f6ebc65926f865b310c0713bcb3315ce4b"
+  
+  prettier-eslint@^8.8.2:
+    version "8.8.2"
+    resolved "https://registry.yarnpkg.com/prettier-eslint/-/prettier-eslint-8.8.2.tgz#fcb29a48ab4524e234680797fe70e9d136ccaf0b"
+    dependencies:
+      babel-runtime "^6.26.0"
+      common-tags "^1.4.0"
+      dlv "^1.1.0"
+      eslint "^4.0.0"
+      indent-string "^3.2.0"
+      lodash.merge "^4.6.0"
+      loglevel-colored-level-prefix "^1.0.0"
+      prettier "^1.7.0"
+      pretty-format "^23.0.1"
+      require-relative "^0.8.7"
+      typescript "^2.5.1"
+      typescript-eslint-parser "^16.0.0"
+      vue-eslint-parser "^2.0.2"
+  
+  prettier@^1.7.0:
+    version "1.13.7"
+    resolved "https://registry.yarnpkg.com/prettier/-/prettier-1.13.7.tgz#850f3b8af784a49a6ea2d2eaa7ed1428a34b7281"
+  
+  pretty-format@^23.0.1:
+    version "23.2.0"
+    resolved "https://registry.yarnpkg.com/pretty-format/-/pretty-format-23.2.0.tgz#3b0aaa63c018a53583373c1cb3a5d96cc5e83017"
+    dependencies:
+      ansi-regex "^3.0.0"
+      ansi-styles "^3.2.0"
   
   private@^0.1.6:
     version "0.1.8"
@@ -4799,6 +4976,20 @@ Lockfile:
       extend-shallow "^3.0.2"
       safe-regex "^1.1.0"
   
+  regexp.prototype.flags@^1.2.0:
+    version "1.2.0"
+    resolved "https://registry.yarnpkg.com/regexp.prototype.flags/-/regexp.prototype.flags-1.2.0.tgz#6b30724e306a27833eeb171b66ac8890ba37e41c"
+    dependencies:
+      define-properties "^1.1.2"
+  
+  regexpp@^1.0.1, regexpp@^1.1.0:
+    version "1.1.0"
+    resolved "https://registry.yarnpkg.com/regexpp/-/regexpp-1.1.0.tgz#0e3516dd0b7904f413d2d4193dce4618c3a689ab"
+  
+  regexpp@^2.0.0:
+    version "2.0.0"
+    resolved "https://registry.yarnpkg.com/regexpp/-/regexpp-2.0.0.tgz#b2a7534a85ca1b033bcf5ce9ff8e56d4e0755365"
+  
   regexpu-core@^4.1.3:
     version "4.2.0"
     resolved "https://registry.yarnpkg.com/regexpu-core/-/regexpu-core-4.2.0.tgz#a3744fa03806cffe146dea4421a3e73bdcc47b1d"
@@ -4860,6 +5051,10 @@ Lockfile:
     version "1.0.1"
     resolved "https://registry.yarnpkg.com/require-main-filename/-/require-main-filename-1.0.1.tgz#97f717b69d48784f5f526a6c5aa8ffdda055a4d1"
   
+  require-relative@^0.8.7:
+    version "0.8.7"
+    resolved "https://registry.yarnpkg.com/require-relative/-/require-relative-0.8.7.tgz#7999539fc9e047a37928fa196f8e1563dabd36de"
+  
   require-uncached@^1.0.3:
     version "1.0.3"
     resolved "https://registry.yarnpkg.com/require-uncached/-/require-uncached-1.0.3.tgz#4e0d56d6c9662fd31e43011c4b95aa49955421d3"
@@ -4885,7 +5080,7 @@ Lockfile:
     dependencies:
       path-parse "^1.0.5"
   
-  resolve@^1.3.2, resolve@^1.3.3, resolve@^1.5.0:
+  resolve@^1.3.2, resolve@^1.3.3, resolve@^1.5.0, resolve@^1.6.0, resolve@^1.8.1:
     version "1.8.1"
     resolved "https://registry.yarnpkg.com/resolve/-/resolve-1.8.1.tgz#82f1ec19a423ac1fbd080b0bab06ba36e84a7a26"
     dependencies:
@@ -4988,7 +5183,7 @@ Lockfile:
     dependencies:
       rafl "~1.2.1"
   
-  "semver@2 || 3 || 4 || 5", semver@^5.3.0, semver@^5.4.1:
+  "semver@2 || 3 || 4 || 5", semver@5.5.0, semver@^5.3.0, semver@^5.4.1, semver@^5.5.0:
     version "5.5.0"
     resolved "https://registry.yarnpkg.com/semver/-/semver-5.5.0.tgz#dc4bbc7a6ca9d916dee5d43516f0092b58f7b8ab"
   
@@ -5312,6 +5507,16 @@ Lockfile:
       is-fullwidth-code-point "^2.0.0"
       strip-ansi "^4.0.0"
   
+  string.prototype.matchall@^2.0.0:
+    version "2.0.0"
+    resolved "https://registry.yarnpkg.com/string.prototype.matchall/-/string.prototype.matchall-2.0.0.tgz#2af8fe3d2d6dc53ca2a59bd376b089c3c152b3c8"
+    dependencies:
+      define-properties "^1.1.2"
+      es-abstract "^1.10.0"
+      function-bind "^1.1.1"
+      has-symbols "^1.0.0"
+      regexp.prototype.flags "^1.2.0"
+  
   string_decoder@^1.0.0, string_decoder@~1.1.1:
     version "1.1.1"
     resolved "https://registry.yarnpkg.com/string_decoder/-/string_decoder-1.1.1.tgz#9cf1611ba62685d7030ae9e4ba34149c3af03fc8"
@@ -5342,7 +5547,7 @@ Lockfile:
     version "2.0.0"
     resolved "https://registry.yarnpkg.com/strip-indent/-/strip-indent-2.0.0.tgz#5ef8db295d01e6ed6cbf7aab96998d7822527b68"
   
-  strip-json-comments@~2.0.1:
+  strip-json-comments@^2.0.1, strip-json-comments@~2.0.1:
     version "2.0.1"
     resolved "https://registry.yarnpkg.com/strip-json-comments/-/strip-json-comments-2.0.1.tgz#3c531942e908c2697c0ec344858c286c7ca0a60a"
   
@@ -5441,7 +5646,7 @@ Lockfile:
       slice-ansi "1.0.0"
       string-width "^2.1.1"
   
-  table@^4.0.1:
+  table@^4.0.3:
     version "4.0.3"
     resolved "https://registry.yarnpkg.com/table/-/table-4.0.3.tgz#00b5e2b602f1794b9acaf9ca908a76386a7813bc"
     dependencies:
@@ -5468,7 +5673,7 @@ Lockfile:
       safe-buffer "^5.1.2"
       yallist "^3.0.2"
   
-  text-table@~0.2.0:
+  text-table@^0.2.0, text-table@~0.2.0:
     version "0.2.0"
     resolved "https://registry.yarnpkg.com/text-table/-/text-table-0.2.0.tgz#7f5ee823ae805207c00af2df4a84ec3fcfa570b4"
   
@@ -5576,6 +5781,17 @@ Lockfile:
   typedarray@^0.0.6:
     version "0.0.6"
     resolved "https://registry.yarnpkg.com/typedarray/-/typedarray-0.0.6.tgz#867ac74e3864187b1d3d47d996a78ec5c8830777"
+  
+  typescript-eslint-parser@^16.0.0:
+    version "16.0.1"
+    resolved "https://registry.yarnpkg.com/typescript-eslint-parser/-/typescript-eslint-parser-16.0.1.tgz#b40681c7043b222b9772748b700a000b241c031b"
+    dependencies:
+      lodash.unescape "4.0.1"
+      semver "5.5.0"
+  
+  typescript@^2.5.1:
+    version "2.9.2"
+    resolved "https://registry.yarnpkg.com/typescript/-/typescript-2.9.2.tgz#1cbf61d05d6b96269244eb6a3bce4bd914e0f00c"
   
   ua-parser-js@^0.7.18:
     version "0.7.18"
@@ -5766,6 +5982,17 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/vm-browserify/-/vm-browserify-0.0.4.tgz#5d7ea45bbef9e4a6ff65f95438e0a87c357d5a73"
     dependencies:
       indexof "0.0.1"
+  
+  vue-eslint-parser@^2.0.2:
+    version "2.0.3"
+    resolved "https://registry.yarnpkg.com/vue-eslint-parser/-/vue-eslint-parser-2.0.3.tgz#c268c96c6d94cfe3d938a5f7593959b0ca3360d1"
+    dependencies:
+      debug "^3.1.0"
+      eslint-scope "^3.7.1"
+      eslint-visitor-keys "^1.0.0"
+      espree "^3.5.2"
+      esquery "^1.0.0"
+      lodash "^4.17.4"
   
   walk@2.3.9:
     version "2.3.9"

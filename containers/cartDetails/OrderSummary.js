@@ -82,10 +82,12 @@ const styles = theme => ({
     marginLeft: theme.spacing.unit * 6.25
   },
   paymentDescription: {
+    ...theme.typography.body2,
     marginTop: theme.spacing.unit * 1.25
   },
   radioButton: {
     color: theme.palette.customGrey.grey500,
+    marginLeft: theme.spacing.unit * 4,
     '&$checked': {
       color: theme.palette.customGreen.green300
     }
@@ -126,6 +128,11 @@ const styles = theme => ({
     fontSize: theme.spacing.unit * 2,
     marginLeft: theme.spacing.unit * 2.5,
     color: theme.palette.customGrey.grey500
+  },
+  radioWrapper: {
+    display: 'flex',
+    flexDirection: 'row',
+    marginTop: theme.spacing.unit * 2
   }
 })
 
@@ -267,6 +274,9 @@ class OrderSummary extends React.Component {
           checkedIconWrapper={this.props.classes.checkedIconWrapper}
           checkedIcon={this.props.classes.checkedIcon}
           patientDetails={this.props.classes.patientDetails}
+          updateAddressFormValue={this.props.updateAddressFormValue}
+          getLocalityDetailListLoading={this.props.getLocalityDetailListLoading}
+          checkPincodeDetailLoading={this.props.checkPincodeLoading}
         />
         <PaymentExpansionPanel
           expanded={this.state.expanded}
@@ -282,6 +292,7 @@ class OrderSummary extends React.Component {
           paymentDescription={this.props.classes.paymentDescription}
           nextButtonRoot={this.props.classes.nextButtonRoot}
           submitOrderLoading={this.props.submitOrderLoading}
+          radioWrapper={this.props.classes.radioWrapper}
         />
         <Snackbar
           anchorOrigin={{

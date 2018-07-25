@@ -31,11 +31,6 @@ const styles = theme => {
 
 class RefillMedicineList extends Component {
   render () {
-    const {
-      incrementCartItemLoading,
-      cartState,
-      checkPincodeLoading
-    } = this.props
     return (
       <div>
         <Card elevation={'1'}>
@@ -49,20 +44,16 @@ class RefillMedicineList extends Component {
               Treatments of {this.props.pastMedicineState.selectedPatientName}
             </Typography>
             <ul className={this.props.classes.medicineListWrapper}>
-              {
-                this.props.pastMedicineState.payload.map((itemDetails) => (
-                  <li className={this.props.classes.listItem}>
-                    <MedicineListDetails
-                      itemDetails={itemDetails}
-                      isRefillMedicines
-                      cartState={cartState}
-                      incrementCartItemLoading={incrementCartItemLoading}
-                      checkPincodeLoading={checkPincodeLoading}
-                      checkPincodeState={this.props.checkPincodeState}
-                    />
-                  </li>
-                ))
-              }
+              {this.props.pastMedicineState.payload.map(itemDetails => (
+                <li className={this.props.classes.listItem}>
+                  <MedicineListDetails
+                    itemDetails={itemDetails}
+                    isRefillMedicines
+                    addToCartHandler={this.props.addToCartHandler}
+                    checkPincodeState={this.props.checkPincodeState}
+                  />
+                </li>
+              ))}
             </ul>
           </CardContent>
         </Card>

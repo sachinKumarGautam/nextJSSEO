@@ -1,9 +1,12 @@
 import { of } from 'rxjs/observable/of'
-import { mergeMap, catchError, map } from 'rxjs/operators'
+import { mergeMap, catchError, flatMap } from 'rxjs/operators'
 import { ofType } from 'redux-observable'
-import {CHECK_PINCODE_LOADING} from './pincodeActionTypes'
-import {checkPincodeSuccess, checkPincodeFailure} from './pincodeAction'
-import {checkPincode$} from '../../../services/api'
+import { CHECK_PINCODE_LOADING } from './pincodeActionTypes'
+import { checkPincodeSuccess, checkPincodeFailure } from './pincodeAction'
+import {
+  updateAddressFormValue
+} from '../../deliveryDetails/deliveryDetailsActions'
+import { checkPincode$ } from '../../../services/api'
 import http from '../../../services/api/ajaxWrapper'
 
 /**
@@ -16,17 +19,61 @@ export function checkPincode (action$, store) {
     ofType(CHECK_PINCODE_LOADING),
     mergeMap(data => {
       const checkPincodeState = store.getState().checkPincodeState
+      const cartState = store.getState().cartState
+      const deliveryDetailsState = store.getState().deliveryDetailsState
       return http(checkPincode$(data.pincode)).pipe(
-        map(result => {
-          setTimeout(() => {
-            data.handleClose()
-          }, 350)
-          data.setSubmitting(false)
-          return checkPincodeSuccess(checkPincodeState, result)
+        flatMap(result => {
+          if (data.isDeliveryAddress) {
+            return of(
+              checkPincodeSuccess(checkPincodeState, result),
+              updateAddressFormValue(
+                deliveryDetailsState,
+                'city',
+                result.body.payload.city
+              ),
+              updateAddressFormValue(
+                deliveryDetailsState,
+                'state',
+                result.body.payload.state
+              )
+            )
+          } else {
+            setTimeout(() => {
+              data.handleClose()
+            }, 350)
+            data.setSubmitting(false)
+            if (typeof data.incrementCartItemLoading === 'function') {
+              // only invokes in case of cart item increment
+              // checks if any add to cart function is comming from parent and invokes it
+              return of(
+                data.incrementCartItemLoading(
+                  cartState,
+                  data.inProgressCartItem
+                ),
+                checkPincodeSuccess(checkPincodeState, result)
+              )
+            } else {
+              return of(checkPincodeSuccess(checkPincodeState, result))
+            }
+          }
         }),
         catchError(error => {
-          data.setSubmitting(false)
-          return of(checkPincodeFailure(checkPincodeState, error.response.body.error.code))
+          if (data.isDeliveryAddress) {
+            return of(
+              checkPincodeFailure(
+                checkPincodeState,
+                error.response.body.error.code
+              )
+            )
+          } else {
+            data.setSubmitting(false)
+            return of(
+              checkPincodeFailure(
+                checkPincodeState,
+                error.response.body.error.code
+              )
+            )
+          }
         })
       )
     })
