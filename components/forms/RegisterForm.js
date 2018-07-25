@@ -16,6 +16,7 @@ import {
   FULL_NAME_REQUIRED,
   MOBILE_REQUIRED,
   GENDER_REQUIRED,
+  MOBILE_INVALID,
   REFERRAL_CODE_INVALID
 } from '../../containers/messages/ValidationMsg'
 
@@ -60,7 +61,7 @@ class RegisterForm extends React.Component {
 
     const prevMembershipCode =
       prevProps.customerState.payload.membership_code.payload
-    if (referralValue !== prevReferralValue) {
+    if (referralValue && referralValue !== prevReferralValue) {
       this.props.setFieldValue('referral_code', referralValue)
     }
 
@@ -144,7 +145,7 @@ class RegisterForm extends React.Component {
         >
           <Input
             id='mobile'
-            type='text'
+            type='number'
             autoComplete={'off'}
             placeholder={'Mobile'}
             onChange={this.onChangePhoneNumber}
@@ -261,10 +262,16 @@ export default withStyles(styles)(
       }
     },
     validationSchema: Yup.object().shape({
-      full_name: Yup.string().required(FULL_NAME_REQUIRED),
-      mobile: Yup.number().required(MOBILE_REQUIRED),
+      full_name: Yup.string().trim().required(FULL_NAME_REQUIRED),
+      mobile: Yup.string().trim()
+        .min(10, MOBILE_INVALID)
+        .max(10, MOBILE_INVALID)
+        .matches(/^[6-9]\d{9}$/, {
+          message: MOBILE_INVALID
+        })
+        .required(MOBILE_REQUIRED),
       gender: Yup.string().required(GENDER_REQUIRED),
-      referral_code: Yup.string().max(10, REFERRAL_CODE_INVALID)
+      referral_code: Yup.string().trim().max(10, REFERRAL_CODE_INVALID)
     }),
     handleSubmit: (values, { props, setSubmitting }) => {
       props.onSubmit(

@@ -111,6 +111,7 @@ export default function (state = initialState, action) {
           ...state.payload,
           referral_code: {
             ...state.payload.referral_code,
+            payload: action.referralCode,
             isLoading: action.isLoading,
             errorState: {
               ...state.payload.referral_code.errorState,

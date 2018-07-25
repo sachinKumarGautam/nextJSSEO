@@ -79,7 +79,7 @@ export function checkReferralCode (action$, store) {
     ofType(CHECK_REFERRAL_CODE_LOADING),
     mergeMap(data => {
       const customerState = store.getState().customerState
-      return http(checkReferralCode$(data.referralCode)).pipe(
+      return http(checkReferralCode$(data.referralCodeInputValue)).pipe(
         map(result => {
           return checkReferralCodeSuccess(customerState, result)
         }),
