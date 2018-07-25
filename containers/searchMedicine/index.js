@@ -48,8 +48,7 @@ const styles = theme => ({
     border: `1px solid ${theme.palette.primary.main}`
   },
   searchButton: {
-    borderColor: theme.palette.customGrey.grey200,
-    borderLeft: `1px solid ${theme.palette.common.black}`,
+    borderLeft: `1px solid ${theme.palette.customGrey.grey200}`,
     position: 'absolute',
     right: 0,
     top: -(theme.spacing.unit * 2.2),
@@ -119,6 +118,7 @@ function renderInput (inputProps) {
       />
       <Button
         color='primary'
+        variant='flat'
         classes={{
           root: classes.searchButton
         }}
@@ -254,26 +254,26 @@ class SearchMedicine extends React.Component {
                   <ul
                     {...getMenuProps()}
                     className={classes.searchContentWrapper}
-                  >
+                    >
                     {getSuggestions(
-                      searchMedicineResult
-                    ).map((suggestion, index) =>
-                      renderSuggestion({
-                        suggestion,
-                        index,
-                        itemProps: getItemProps({
-                          item: suggestion.name
-                        }),
-                        highlightedIndex,
-                        selectedItem,
-                        onSelectItem: this.onSelectItem,
-                        searchItemStyle: classes.searchItem,
-                        highlightedSearchItem: `${classes.searchItem} ${classes.highlightedSearchItem}`,
-                        selectedSearchItem: `${classes.searchItem} ${classes.selectedSearchItem}`,
-                        checkPincodeState,
-                        addToCartHandler
-                      })
-                    )}
+                        searchMedicineResult
+                      ).map((suggestion, index) =>
+                        renderSuggestion({
+                          suggestion,
+                          index,
+                          itemProps: getItemProps({
+                            item: suggestion.name
+                          }),
+                          highlightedIndex,
+                          selectedItem,
+                          onSelectItem: this.onSelectItem,
+                          searchItemStyle: classes.searchItem,
+                          highlightedSearchItem: `${classes.searchItem} ${classes.highlightedSearchItem}`,
+                          selectedSearchItem: `${classes.searchItem} ${classes.selectedSearchItem}`,
+                          checkPincodeState,
+                          addToCartHandler
+                        })
+                      )}
                   </ul>
                 </Paper>
                 : null}

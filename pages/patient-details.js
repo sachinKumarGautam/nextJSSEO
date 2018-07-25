@@ -18,9 +18,7 @@ import {
   submitPatientDetailsLoading
 } from '../containers/patientDetails/patientDetailsActions'
 
-import {
-  patientDetails
-} from '../components/constants/PageTitle'
+import { patientDetails } from '../components/constants/PageTitle'
 
 const styles = theme => ({
   root: {
@@ -52,6 +50,7 @@ class PatientDetails extends React.Component {
   }
 
   render () {
+    console.log(this.props)
     return (
       <div>
         <Header title={patientDetails.title} />
@@ -60,7 +59,9 @@ class PatientDetails extends React.Component {
             <PatientDetailsWrapper
               patientDetailsState={this.props.patientDetailsState}
               savePatientSelected={this.props.actions.savePatientSelected}
-              submitPatientDetailsLoading={this.props.actions.submitPatientDetailsLoading}
+              submitPatientDetailsLoading={
+                this.props.actions.submitPatientDetailsLoading
+              }
               customerState={this.props.customerState}
               cartState={this.props.cartState}
             />
@@ -93,7 +94,6 @@ function mapDispatchToProps (dispatch) {
   }
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(withRoot(withStyles(styles)(PatientDetails)))
+export default connect(mapStateToProps, mapDispatchToProps)(
+  withRoot(withStyles(styles)(PatientDetails))
+)

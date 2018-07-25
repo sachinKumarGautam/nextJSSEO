@@ -3,12 +3,12 @@ import PropTypes from 'prop-types'
 import { MuiThemeProvider } from '@material-ui/core/styles'
 import CssBaseline from '@material-ui/core/CssBaseline'
 import getPageContext from './getPageContext'
+import { withCommonWrapper } from '../components/HOCWrapper/CommonWrapper'
 
 function withRoot (Component) {
   class WithRoot extends React.Component {
     constructor (props, context) {
       super(props, context)
-
       this.pageContext = this.props.pageContext || getPageContext()
     }
 
@@ -20,7 +20,7 @@ function withRoot (Component) {
       }
     }
 
-    pageContext = null;
+    pageContext = null
 
     render () {
       // MuiThemeProvider makes the theme available down the React tree thanks to React context.
