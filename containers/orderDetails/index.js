@@ -17,6 +17,7 @@ class OrderDetailsWrapper extends Component {
         <BreadCrumbs />
         <section >
           <OrderDetails
+            cartState={this.props.cartState}
             orderDetailsState={this.props.orderDetailsState}
           />
         </section>
@@ -27,6 +28,7 @@ class OrderDetailsWrapper extends Component {
 
 function mapStateToProps (state) {
   return {
+    cartState: state.cartState,
     orderDetailsState: state.orderDetailsState
   }
 }

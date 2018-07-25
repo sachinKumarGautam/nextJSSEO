@@ -4,8 +4,8 @@ import { withStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
 
 const styles = theme => ({
-  paymentStatus: {
-    float: 'right'
+  prescriptionText: {
+    fontSize: theme.spacing.unit * 2.25
   }
 })
 
@@ -13,6 +13,7 @@ const Prescriptions = (props) => {
   return (
     <div>
       <Typography
+        className={props.classes.prescriptionText}
       >
         Attached Prescription
       </Typography>

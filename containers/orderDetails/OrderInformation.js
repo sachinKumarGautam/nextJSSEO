@@ -58,6 +58,7 @@ class OrderInformation extends Component {
               </Typography>
             </div>
             <OrderContentWrapper
+              cartState={this.props.cartState}
               orderDetailsState={this.props.orderDetailsState}
             />
           </CardContent>

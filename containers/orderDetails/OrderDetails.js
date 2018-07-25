@@ -15,6 +15,7 @@ class OrderDetails extends Component {
           </Grid>
           <Grid item xs={10}>
             <OrderInformation
+              cartState={this.props.cartState}
               orderDetailsState={this.props.orderDetailsState}
             />
           </Grid>
