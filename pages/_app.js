@@ -18,7 +18,7 @@ export default withRedux(initStore, {debug: true})(class MyApp extends App {
               // {...pageProps}
               pageProps={pageProps}
               Component={Component}
-             />
+            />
           </PersistGate>
         </Provider>
       </Container>
