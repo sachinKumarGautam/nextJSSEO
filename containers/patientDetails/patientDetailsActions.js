@@ -109,12 +109,17 @@ export function submitPatientDetailsLoading (
  * @param {object} patientDetailsState - The object maintained for payload, loading and error state.
  * @param {array} result - The result obtained from the API response
  */
-export function submitPatientDetailsSuccess (patientDetailsState, result) {
+export function submitPatientDetailsSuccess (
+  patientDetailsState,
+  result,
+  modifiedPatientDetailsList
+) {
   return {
     type: SUBMIT_PATIENT_SUCCESS,
     patientDetailsState,
     isLoading: false,
-    patientDetailsList: result
+    patientDetailsList: result,
+    modifiedPatientDetailsList: modifiedPatientDetailsList
   }
 }
 

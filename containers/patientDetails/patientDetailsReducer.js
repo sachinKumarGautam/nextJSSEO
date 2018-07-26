@@ -75,7 +75,8 @@ export default function patientDetailsReducer (state = initialState, action) {
           ...state.addNewPatient,
           payload: action.patientDetailsList,
           isLoading: action.isLoading
-        }
+        },
+        payload: action.modifiedPatientDetailsList
       }
 
     // update loading details of add new patient API

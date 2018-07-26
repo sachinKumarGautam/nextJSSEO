@@ -9,7 +9,8 @@ import {
   GET_LOCALITY_LIST_LOADING,
   GET_LOCALITY_LIST_SUCCESS,
   GET_LOCALITY_LIST_FAILURE,
-  RESET_DELIVERY_ADDRESS_SELECTED
+  RESET_DELIVERY_ADDRESS_SELECTED,
+  SUBMIT_DELIVERY_DETAILS_SUCCESS
 } from './deliveryDetailsActionTypes'
 
 export default function deliveryDetailsReducer (state = initialState, action) {
@@ -119,6 +120,12 @@ export default function deliveryDetailsReducer (state = initialState, action) {
       return {
         ...state,
         addressForm: initialState.addressForm
+      }
+
+    case SUBMIT_DELIVERY_DETAILS_SUCCESS:
+      return {
+        ...state,
+        payload: action.modifiedAddressDetailsList
       }
 
     default:
