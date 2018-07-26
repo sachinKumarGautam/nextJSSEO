@@ -7,9 +7,7 @@ import withRoot from '../src/withRoot'
 
 import CartDetailsWrapper from '../containers/cartDetails'
 
-import {
-  cartDetail
-} from '../components/constants/PageTitle'
+import { cartDetail } from '../components/constants/PageTitle'
 
 const styles = theme => ({
   root: {
@@ -55,7 +53,10 @@ const styles = theme => ({
 
 const CartDetails = props => (
   <div>
-    <Header title={cartDetail.title} />
+    <Header
+      title={cartDetail.title}
+      addToCartHandler={props.addToCartHandler}
+    />
     <div className={props.classes.root}>
       <CartDetailsWrapper />
     </div>

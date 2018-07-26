@@ -3,7 +3,6 @@ import PropTypes from 'prop-types'
 import { MuiThemeProvider } from '@material-ui/core/styles'
 import CssBaseline from '@material-ui/core/CssBaseline'
 import getPageContext from './getPageContext'
-import { withCommonWrapper } from '../components/HOCWrapper/CommonWrapper'
 
 function withRoot (Component) {
   class WithRoot extends React.Component {

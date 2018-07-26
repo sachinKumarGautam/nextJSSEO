@@ -11,8 +11,6 @@ import MedicineListDetails from '../../components/MedicineListDetails'
 
 import { PRODUCT_SEARCH } from '../../routes/RouteConstant'
 
-// import { withCommonWrapper } from '../../components/HOCWrapper/CommonWrapper'
-
 const styles = theme => ({
   root: {
     flexGrow: 1

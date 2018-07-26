@@ -17,7 +17,7 @@ import {
   getCarePointDetailsLoading
 } from '../containers/carePoint/carePointActions'
 
-import {carePoint} from '../components/constants/PageTitle'
+import { carePoint } from '../components/constants/PageTitle'
 
 const styles = theme => ({
   root: {
@@ -50,9 +50,10 @@ class CarePoints extends React.Component {
   }
 
   render () {
+    const { addToCartHandler } = this.props
     return (
       <div>
-        <Header title={carePoint.title} />
+        <Header title={carePoint.title} addToCartHandler={addToCartHandler} />
         <div className={this.props.classes.wrapperStyle}>
           <Paper className={this.props.classes.root} elevation={1}>
             <CarePointWrapper />
@@ -82,7 +83,6 @@ function mapDispatchToProps (dispatch) {
   }
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(withRoot(withStyles(styles)(CarePoints)))
+export default connect(mapStateToProps, mapDispatchToProps)(
+  withRoot(withStyles(styles)(CarePoints))
+)

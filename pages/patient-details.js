@@ -50,10 +50,13 @@ class PatientDetails extends React.Component {
   }
 
   render () {
-    console.log(this.props)
+    const { addToCartHandler } = this.props
     return (
       <div>
-        <Header title={patientDetails.title} />
+        <Header
+          title={patientDetails.title}
+          addToCartHandler={addToCartHandler}
+        />
         <div className={this.props.classes.wrapperStyle}>
           <Paper className={this.props.classes.root} elevation={1}>
             <PatientDetailsWrapper
