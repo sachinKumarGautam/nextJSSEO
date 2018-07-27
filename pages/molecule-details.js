@@ -21,11 +21,7 @@ import {
   getRelatedMedicinesLoading
 } from '../containers/medicineList/medicineListActions'
 
-import { withCommonWrapper } from '../components/HOCWrapper/CommonWrapper'
-
-import {
-  moleculeList
-} from '../components/constants/PageTitle'
+import { moleculeList } from '../components/constants/PageTitle'
 
 const styles = theme => ({
   root: {
@@ -81,14 +77,18 @@ class MoleculeDetails extends React.Component {
   }
 
   render () {
+    const { addToCartHandler, classes } = this.props
     return (
       <div>
-        <Header title={moleculeList.title} />
-        <div className={this.props.classes.wrapperStyle}>
-          <Paper className={this.props.classes.root} elevation={1}>
+        <Header
+          title={moleculeList.title}
+          addToCartHandler={addToCartHandler}
+        />
+        <div className={classes.wrapperStyle}>
+          <Paper className={classes.root} elevation={1}>
             <MoleculeDetailsWrapper
               checkPincodeState={this.props.checkPincodeState}
-              addToCartHandler={this.props.addToCartHandler}
+              addToCartHandler={addToCartHandler}
             />
           </Paper>
         </div>
@@ -118,8 +118,6 @@ function mapDispatchToProps (dispatch) {
   }
 }
 
-export default withCommonWrapper(
-  connect(mapStateToProps, mapDispatchToProps)(
-    withRoot(withStyles(styles)(MoleculeDetails))
-  )
+export default connect(mapStateToProps, mapDispatchToProps)(
+  withRoot(withStyles(styles)(MoleculeDetails))
 )
