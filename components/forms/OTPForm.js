@@ -10,7 +10,10 @@ import { withStyles } from '@material-ui/core/styles'
 
 // Helper styles for demo
 
-import { OTP_REQUIRED } from '../../containers/messages/ValidationMsg'
+import {
+  OTP_REQUIRED,
+  OTP_INVALID
+} from '../../containers/messages/ValidationMsg'
 import { OTP_PLACEHOLDER } from '../../containers/messages/PlaceholderMsg'
 
 const styles = theme => ({
@@ -74,11 +77,6 @@ class OTPForm extends React.Component {
             classes={{
               input: classes.otpInput
             }}
-            // inputProps={{
-            //   classes: {
-            //     root: classes.otpInput,
-            //   },
-            // }}
             onChange={this.handleChange}
             placeholder={OTP_PLACEHOLDER}
           />
@@ -107,8 +105,8 @@ export default withStyles(styles)(
     mapPropsToValues: () => ({ otp: '' }),
     validationSchema: Yup.object().shape({
       otp: Yup.number()
-        // .min(10, 'Please enter valid phone number')
-        // .max(10, 'Please enter valid phone number')
+        .min(4, OTP_INVALID)
+        .max(4, OTP_INVALID)
         .required(OTP_REQUIRED)
     }),
     handleSubmit: (values, { props, setSubmitting }) => {

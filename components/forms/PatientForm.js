@@ -14,7 +14,9 @@ import { withStyles } from '@material-ui/core/styles'
 import {
   FULL_NAME_REQUIRED,
   MOBILE_REQUIRED,
-  GENDER_REQUIRED
+  GENDER_REQUIRED,
+  MOBILE_INVALID,
+  MOBILE_VALIDATION_REGEX
 } from '../../containers/messages/ValidationMsg'
 
 // Helper styles for demo
@@ -147,7 +149,7 @@ class PatientForm extends React.Component {
           </InputLabel>
           <Input
             id='mobile'
-            type='text'
+            type='number'
             onChange={this.handleChangeMobile}
             value={values.mobile}
           />
@@ -182,8 +184,14 @@ export default withStyles(styles)(
       }
     },
     validationSchema: Yup.object().shape({
-      full_name: Yup.string().required(FULL_NAME_REQUIRED),
-      mobile: Yup.number().required(MOBILE_REQUIRED),
+      full_name: Yup.string().trim().required(FULL_NAME_REQUIRED),
+      mobile: Yup.string()
+        .min(10, MOBILE_INVALID)
+        .max(10, MOBILE_INVALID)
+        .matches(MOBILE_VALIDATION_REGEX, {
+          message: MOBILE_INVALID
+        })
+        .required(MOBILE_REQUIRED),
       gender: Yup.string().required(GENDER_REQUIRED)
     }),
     handleSubmit: (values, { props, setSubmitting }) => {
