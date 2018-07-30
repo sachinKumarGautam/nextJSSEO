@@ -13,7 +13,9 @@ import { withStyles } from '@material-ui/core/styles'
 import {
   FULL_NAME_REQUIRED,
   MOBILE_REQUIRED,
-  GENDER_REQUIRED
+  GENDER_REQUIRED,
+  MOBILE_INVALID,
+  MOBILE_VALIDATION_REGEX
 } from '../../containers/messages/ValidationMsg'
 
 // Helper styles for demo
@@ -137,7 +139,7 @@ class PatientForm extends React.Component {
           <Input
             placeholder='Contact No.'
             id='mobile'
-            type='text'
+            type='number'
             onChange={this.handleChangeMobile}
             value={values.mobile}
           />
@@ -161,37 +163,45 @@ class PatientForm extends React.Component {
   }
 }
 
-export default withStyles(styles)(withFormik({
-  enableReinitialize: true,
-  mapPropsToValues: (props) => {
-    return {
-      full_name: props.patientFormState.patient.full_name,
-      gender: props.patientFormState.patient.gender,
-      mobile: props.patientFormState.patient.mobile,
-      age: props.patientFormState.patient.age
-    }
-  },
-  validationSchema: Yup.object().shape({
-    full_name: Yup.string().required(FULL_NAME_REQUIRED),
-    mobile: Yup.number().required(MOBILE_REQUIRED),
-    gender: Yup.string().required(GENDER_REQUIRED)
-  }),
-  handleSubmit: (values, { props, setSubmitting }) => {
-    let isEdit = false
+export default withStyles(styles)(
+  withFormik({
+    enableReinitialize: true,
+    mapPropsToValues: props => {
+      return {
+        full_name: props.patientFormState.patient.full_name,
+        gender: props.patientFormState.patient.gender,
+        mobile: props.patientFormState.patient.mobile,
+        age: props.patientFormState.patient.age
+      }
+    },
+    validationSchema: Yup.object().shape({
+      full_name: Yup.string().trim().required(FULL_NAME_REQUIRED),
+      mobile: Yup.string()
+        .min(10, MOBILE_INVALID)
+        .max(10, MOBILE_INVALID)
+        .matches(MOBILE_VALIDATION_REGEX, {
+          message: MOBILE_INVALID
+        })
+        .required(MOBILE_REQUIRED),
+      gender: Yup.string().required(GENDER_REQUIRED)
+    }),
+    handleSubmit: (values, { props, setSubmitting }) => {
+      let isEdit = false
 
-    if (props.patientFormState.patient.full_name) {
-      isEdit = true
-    }
+      if (props.patientFormState.patient.full_name) {
+        isEdit = true
+      }
 
-    props.onSubmit(
-      props.patientFormState,
-      props.customerId,
-      setSubmitting,
-      props.closeModal,
-      values,
-      props.isCartPage,
-      isEdit
-    )
-  },
-  displayName: 'PatientForm' // helps with React DevTools
-})(PatientForm))
+      props.onSubmit(
+        props.patientFormState,
+        props.customerId,
+        setSubmitting,
+        props.closeModal,
+        values,
+        props.isCartPage,
+        isEdit
+      )
+    },
+    displayName: 'PatientForm' // helps with React DevTools
+  })(PatientForm)
+)

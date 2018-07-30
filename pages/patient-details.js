@@ -19,9 +19,7 @@ import {
   resetPatientSelected
 } from '../containers/patientDetails/patientDetailsActions'
 
-import {
-  patientDetails
-} from '../components/constants/PageTitle'
+import { patientDetails } from '../components/constants/PageTitle'
 
 const styles = theme => ({
   root: {
@@ -53,15 +51,21 @@ class PatientDetails extends React.Component {
   }
 
   render () {
+    const { addToCartHandler } = this.props
     return (
       <div>
-        <Header title={patientDetails.title} />
+        <Header
+          title={patientDetails.title}
+          addToCartHandler={addToCartHandler}
+        />
         <div className={this.props.classes.wrapperStyle}>
           <Paper className={this.props.classes.root} elevation={1}>
             <PatientDetailsWrapper
               patientDetailsState={this.props.patientDetailsState}
               savePatientSelected={this.props.actions.savePatientSelected}
-              submitPatientDetailsLoading={this.props.actions.submitPatientDetailsLoading}
+              submitPatientDetailsLoading={
+                this.props.actions.submitPatientDetailsLoading
+              }
               customerState={this.props.customerState}
               cartState={this.props.cartState}
               resetPatientSelected={this.props.actions.resetPatientSelected}
@@ -96,7 +100,6 @@ function mapDispatchToProps (dispatch) {
   }
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(withRoot(withStyles(styles)(PatientDetails)))
+export default connect(mapStateToProps, mapDispatchToProps)(
+  withRoot(withStyles(styles)(PatientDetails))
+)

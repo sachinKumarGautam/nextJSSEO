@@ -23,8 +23,6 @@ import {
   getAnonymousCartIdLoading
 } from '../containers/cartDetails/cartActions'
 
-import { withCommonWrapper } from '../components/HOCWrapper/CommonWrapper'
-
 import { productDetail } from '../components/constants/PageTitle'
 
 const styles = theme => ({
@@ -81,18 +79,21 @@ class ProductDetails extends React.Component {
   }
 
   render () {
-    const { classes, actions, checkPincodeState } = this.props
+    const { classes, actions, checkPincodeState, addToCartHandler } = this.props
     const { query } = Router
     return (
       <div>
-        <Header title={productDetail.title} />
+        <Header
+          title={productDetail.title}
+          addToCartHandler={addToCartHandler}
+        />
         <div className={this.props.classes.wrapperStyle}>
           <Paper className={classes.root} elevation={1}>
             {query.id && query.id !== 'undefined'
               ? <ProductDetailsWrapper
                 checkPincodeState={checkPincodeState}
                 getProductDetailLoading={actions.getProductDetailLoading}
-                addToCartHandler={this.props.addToCartHandler}
+                addToCartHandler={addToCartHandler}
                 onChangeQuantity={actions.onChangeQuantity}
               />
               : 'Page not found'}
@@ -126,8 +127,6 @@ function mapDispatchToProps (dispatch) {
   }
 }
 
-export default withCommonWrapper(
-  connect(mapStateToProps, mapDispatchToProps)(
-    withRoot(withStyles(styles)(ProductDetails))
-  )
+export default connect(mapStateToProps, mapDispatchToProps)(
+  withRoot(withStyles(styles)(ProductDetails))
 )

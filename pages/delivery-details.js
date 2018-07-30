@@ -25,9 +25,7 @@ import {
   checkPincodeLoading
 } from '../containers/location/pincode/pincodeAction'
 
-import {
-  deliveryDetails
-} from '../components/constants/PageTitle'
+import { deliveryDetails } from '../components/constants/PageTitle'
 
 const styles = theme => ({
   root: {
@@ -59,9 +57,13 @@ class DeliveryDetails extends React.Component {
   }
 
   render () {
+    const { addToCartHandler } = this.props
     return (
       <div>
-        <Header title={deliveryDetails.title} />
+        <Header
+          title={deliveryDetails.title}
+          addToCartHandler={addToCartHandler}
+        />
         <div className={this.props.classes.wrapperStyle}>
           <Paper className={this.props.classes.root} elevation={1}>
             <DeliveryDetailsWrapper
@@ -72,7 +74,9 @@ class DeliveryDetails extends React.Component {
               checkPincodeLoading={this.props.actions.checkPincodeLoading}
               updateAddressFormValue={this.props.actions.updateAddressFormValue}
               cartState={this.props.cartState}
-              getLocalityDetailListLoading={this.props.actions.getLocalityDetailListLoading}
+              getLocalityDetailListLoading={
+                this.props.actions.getLocalityDetailListLoading
+              }
               checkPincodeState={this.props.checkPincodeState}
               resetDeliveryAddressSelected={this.props.actions.resetDeliveryAddressSelected}
             />
@@ -110,7 +114,6 @@ function mapDispatchToProps (dispatch) {
   }
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(withRoot(withStyles(styles)(DeliveryDetails)))
+export default connect(mapStateToProps, mapDispatchToProps)(
+  withRoot(withStyles(styles)(DeliveryDetails))
+)

@@ -140,10 +140,11 @@ export function checkReferralCodeLoading (customerState, referralCode) {
   return {
     type: CHECK_REFERRAL_CODE_LOADING,
     customerState,
-    referralCode,
+    referralCodeInputValue: referralCode,
     isLoading: true,
     isError: false,
-    error: null
+    error: null,
+    referralCode: ''
   }
 }
 

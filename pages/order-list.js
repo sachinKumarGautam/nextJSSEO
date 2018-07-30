@@ -17,9 +17,7 @@ import {
   getOrderListDetailsLoading
 } from '../containers/orderList/orderListActions'
 
-import {
-  orderList
-} from '../components/constants/PageTitle'
+import { orderList } from '../components/constants/PageTitle'
 
 const styles = theme => ({
   root: {
@@ -53,9 +51,10 @@ class Orders extends React.Component {
   }
 
   render () {
+    const { addToCartHandler } = this.props
     return (
       <div>
-        <Header title={orderList.title} />
+        <Header title={orderList.title} addToCartHandler={addToCartHandler} />
         <div className={this.props.classes.wrapperStyle}>
           <Paper className={this.props.classes.root} elevation={1}>
             <OrderListWrapper />
@@ -85,7 +84,6 @@ function mapDispatchToProps (dispatch) {
   }
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(withRoot(withStyles(styles)(Orders)))
+export default connect(mapStateToProps, mapDispatchToProps)(
+  withRoot(withStyles(styles)(Orders))
+)
