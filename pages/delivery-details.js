@@ -3,8 +3,6 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
-import Head from 'next/head'
-
 import { withStyles } from '@material-ui/core/styles'
 import withRoot from '../src/withRoot'
 
@@ -26,9 +24,7 @@ import {
   checkPincodeLoading
 } from '../containers/location/pincode/pincodeAction'
 
-import {
-  deliveryDetails
-} from '../components/constants/PageTitle'
+import { deliveryDetails } from '../components/constants/PageTitle'
 
 const styles = theme => ({
   root: {
@@ -60,23 +56,28 @@ class DeliveryDetails extends React.Component {
   }
 
   render () {
+    const { addToCartHandler } = this.props
     return (
       <div>
-        <Head>
-          <title>{deliveryDetails.title}</title>
-        </Head>
-        <Header />
+        <Header
+          title={deliveryDetails.title}
+          addToCartHandler={addToCartHandler}
+        />
         <div className={this.props.classes.wrapperStyle}>
           <Paper className={this.props.classes.root} elevation={1}>
             <DeliveryDetailsWrapper
               deliveryDetailsState={this.props.deliveryDetailsState}
               saveAddressSelected={this.props.actions.saveAddressSelected}
-              submitDeliveryDetailsLoading={this.props.actions.submitDeliveryDetailsLoading}
+              submitDeliveryDetailsLoading={
+                this.props.actions.submitDeliveryDetailsLoading
+              }
               customerState={this.props.customerState}
               checkPincodeLoading={this.props.actions.checkPincodeLoading}
               updateAddressFormValue={this.props.actions.updateAddressFormValue}
               cartState={this.props.cartState}
-              getLocalityDetailListLoading={this.props.actions.getLocalityDetailListLoading}
+              getLocalityDetailListLoading={
+                this.props.actions.getLocalityDetailListLoading
+              }
               checkPincodeState={this.props.checkPincodeState}
             />
           </Paper>
@@ -112,7 +113,6 @@ function mapDispatchToProps (dispatch) {
   }
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(withRoot(withStyles(styles)(DeliveryDetails)))
+export default connect(mapStateToProps, mapDispatchToProps)(
+  withRoot(withStyles(styles)(DeliveryDetails))
+)

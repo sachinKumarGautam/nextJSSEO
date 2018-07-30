@@ -12,8 +12,6 @@ import withRoot from '../src/withRoot'
 import Paper from '@material-ui/core/Paper'
 import Router from 'next/router'
 
-import Head from 'next/head'
-
 import ProductDetailsWrapper from '../containers/productDetails'
 
 import {
@@ -24,8 +22,6 @@ import {
 import {
   getAnonymousCartIdLoading
 } from '../containers/cartDetails/cartActions'
-
-import { withCommonWrapper } from '../components/HOCWrapper/CommonWrapper'
 
 import { productDetail } from '../components/constants/PageTitle'
 
@@ -83,21 +79,21 @@ class ProductDetails extends React.Component {
   }
 
   render () {
-    const { classes, actions, checkPincodeState } = this.props
+    const { classes, actions, checkPincodeState, addToCartHandler } = this.props
     const { query } = Router
     return (
       <div>
-        <Head>
-          <title>{productDetail.title}</title>
-        </Head>
-        <Header />
+        <Header
+          title={productDetail.title}
+          addToCartHandler={addToCartHandler}
+        />
         <div className={this.props.classes.wrapperStyle}>
           <Paper className={classes.root} elevation={1}>
             {query.id && query.id !== 'undefined'
               ? <ProductDetailsWrapper
                 checkPincodeState={checkPincodeState}
                 getProductDetailLoading={actions.getProductDetailLoading}
-                addToCartHandler={this.props.addToCartHandler}
+                addToCartHandler={addToCartHandler}
                 onChangeQuantity={actions.onChangeQuantity}
               />
               : 'Page not found'}
@@ -131,8 +127,6 @@ function mapDispatchToProps (dispatch) {
   }
 }
 
-export default withCommonWrapper(
-  connect(mapStateToProps, mapDispatchToProps)(
-    withRoot(withStyles(styles)(ProductDetails))
-  )
+export default connect(mapStateToProps, mapDispatchToProps)(
+  withRoot(withStyles(styles)(ProductDetails))
 )

@@ -10,18 +10,13 @@ import { withStyles } from '@material-ui/core/styles'
 import withRoot from '../src/withRoot'
 import Paper from '@material-ui/core/Paper'
 
-import Head from 'next/head'
-
 import RefillPatientsWrapper from '../containers/refillPatients'
 
 import {
   getPatientDetailsListLoading
 } from '../containers/patientDetails/patientDetailsActions'
-import { withCommonWrapper } from '../components/HOCWrapper/CommonWrapper'
 
-import {
-  refillPatient
-} from '../components/constants/PageTitle'
+import { refillPatient } from '../components/constants/PageTitle'
 
 const styles = theme => ({
   root: {
@@ -53,12 +48,14 @@ class RefillPatient extends Component {
   }
 
   render () {
+    const { addToCartHandler, classes } = this.props
+
     return (
       <div>
-        <Head>
-          <title>{refillPatient.title}</title>
-        </Head>
-        <Header />
+        <Header
+          title={refillPatient.title}
+          addToCartHandler={addToCartHandler}
+        />
         <div className={this.props.classes.wrapperStyle}>
           <Paper className={this.props.classes.root} elevation={1}>
             <RefillPatientsWrapper
@@ -90,8 +87,6 @@ function mapDispatchToProps (dispatch) {
   }
 }
 
-export default withCommonWrapper(
-  connect(mapStateToProps, mapDispatchToProps)(
-    withRoot(withStyles(styles)(RefillPatient))
-  )
+export default connect(mapStateToProps, mapDispatchToProps)(
+  withRoot(withStyles(styles)(RefillPatient))
 )

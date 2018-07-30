@@ -60,6 +60,12 @@ function getPincodeErrorMsg (
 }
 
 class PincodeDialog extends React.Component {
+  handleChange = event => {
+    if (event.target.value.length <= 6) {
+      this.props.handleChange(event)
+    }
+  }
+
   render () {
     const { props } = this
 
@@ -68,7 +74,6 @@ class PincodeDialog extends React.Component {
       touched,
       errors,
       isSubmitting,
-      handleChange,
       handleBlur,
       handleSubmit,
       classes,
@@ -116,7 +121,7 @@ class PincodeDialog extends React.Component {
                   id='pincode'
                   type='number'
                   value={values.pincode}
-                  onChange={handleChange}
+                  onChange={this.handleChange}
                   onBlur={handleBlur}
                   placeholder={'Enter you pincode'}
                 />

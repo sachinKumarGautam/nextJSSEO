@@ -37,7 +37,7 @@ app
     // refill patients page
     server.get('/customer/:id/patient-refills', (req, res) => {
       const actualPage = '/refill-patients'
-      const queryParams = { id: req.params.id, location: req.query.location }
+      const queryParams = { id: req.params.id }
       app.render(req, res, actualPage, queryParams)
     })
 

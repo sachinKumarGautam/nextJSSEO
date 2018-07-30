@@ -5,7 +5,7 @@ import { bindActionCreators } from 'redux'
 
 import { withStyles } from '@material-ui/core/styles'
 
-// import Head from './Head'
+import Head from 'next/head'
 import AppBar from '@material-ui/core/AppBar'
 import Button from '../../button'
 import Toolbar from '@material-ui/core/Toolbar'
@@ -15,7 +15,6 @@ import CartIcon from '../../CartIcon'
 import Login from '../../../containers/login'
 import getPageContext from '../../../src/getPageContext'
 import MenuWrapper from '../../../containers/menu'
-import { withCommonWrapper } from '../../../components/HOCWrapper/CommonWrapper'
 import {
   searchMedicineLoading
 } from '../../../containers/searchMedicine/searchMedicineAction'
@@ -116,14 +115,6 @@ class Header extends React.Component {
     )
   }
 
-  /*
-(
-                  this.state.openLoginDialog ||
-                  this.props.cartState.isCartOpenLoginDialog ||
-                  this.props.cartState.isCartOpenRegisterDialog
-                ) &&
-  */
-
   render () {
     const {
       classes,
@@ -133,13 +124,12 @@ class Header extends React.Component {
       customerState,
       checkPincodeState
     } = this.props
-
     return (
       <div className={classes.root}>
+        <Head>
+          <title>{this.props.title}</title>
+        </Head>
         <AppBar elevation={1} className={classes.appBar} position='fixed'>
-          {/* <Head
-          pageTitle={'Lifcare Product Details Page'}
-        /> */}
           <div className={classes.appBarInnerComp}>
             <Toolbar
               classes={{
@@ -230,6 +220,6 @@ function mapDispatchToProps (dispatch) {
   }
 }
 
-export default withCommonWrapper(
-  withStyles(styles)(connect(mapStateToProps, mapDispatchToProps)(Header))
+export default withStyles(styles)(
+  connect(mapStateToProps, mapDispatchToProps)(Header)
 )

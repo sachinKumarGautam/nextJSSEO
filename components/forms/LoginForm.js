@@ -14,7 +14,9 @@ import AccountCircle from '@material-ui/icons/StayPrimaryPortrait'
 import { withStyles } from '@material-ui/core/styles'
 
 import {
-  MOBILE_REQUIRED
+  MOBILE_REQUIRED,
+  MOBILE_INVALID,
+  MOBILE_VALIDATION_REGEX
 } from '../../containers/messages/ValidationMsg'
 
 // Helper styles for demo
@@ -37,13 +39,18 @@ const styles = theme => ({
 })
 
 class LoginForm extends React.Component {
+  handleChange = event => {
+    if (event.target.value.length <= 10) {
+      this.props.handleChange(event)
+    }
+  }
+
   render () {
     const {
       values,
       touched,
       errors,
       isSubmitting,
-      handleChange,
       handleBlur,
       handleSubmit,
       classes
@@ -65,19 +72,20 @@ class LoginForm extends React.Component {
             id='mobile'
             type='number'
             value={values.mobile}
-            onChange={handleChange}
+            onChange={this.handleChange}
             onBlur={handleBlur}
             placeholder={'Enter registered mobile no.'}
           />
-          {
-            errors.mobile && touched.mobile &&
-            <FormHelperText
-              id='name-helper-text'
-            >
+          {errors.mobile &&
+            touched.mobile &&
+            <FormHelperText id='name-helper-text'>
               {errors.mobile}
-            </FormHelperText>
-          }
-          <Typography variant='caption' className={classes.formHelperText} component='h6'>
+            </FormHelperText>}
+          <Typography
+            variant='caption'
+            className={classes.formHelperText}
+            component='h6'
+          >
             We will send you an SMS with an OTP to this number
           </Typography>
         </FormControl>
@@ -95,16 +103,22 @@ class LoginForm extends React.Component {
   }
 }
 
-export default withStyles(styles)(withFormik({
-  mapPropsToValues: () => ({ mobile: '' }),
-  validationSchema: Yup.object().shape({
-    mobile: Yup.number()
-    // .min(10, 'Please enter valid phone number')
-    // .max(10, 'Please enter valid phone number')
-      .required(MOBILE_REQUIRED)
-  }),
-  handleSubmit: (values, { props, changeLoadingState, setSubmitting }) => {
-    props.onSubmit(props.loginState, setSubmitting, props.toggleForm, values)
-  },
-  displayName: 'LoginForm' // helps with React DevTools
-})(LoginForm))
+export default withStyles(styles)(
+  withFormik({
+    mapPropsToValues: () => ({ mobile: '' }),
+    validationSchema: Yup.object().shape({
+      mobile: Yup.string()
+        .trim()
+        .min(10, MOBILE_INVALID)
+        .max(10, MOBILE_INVALID)
+        .matches(MOBILE_VALIDATION_REGEX, {
+          message: MOBILE_INVALID
+        })
+        .required(MOBILE_REQUIRED)
+    }),
+    handleSubmit: (values, { props, changeLoadingState, setSubmitting }) => {
+      props.onSubmit(props.loginState, setSubmitting, props.toggleForm, values)
+    },
+    displayName: 'LoginForm' // helps with React DevTools
+  })(LoginForm)
+)

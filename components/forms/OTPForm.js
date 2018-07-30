@@ -11,9 +11,10 @@ import { withStyles } from '@material-ui/core/styles'
 // Helper styles for demo
 
 import {
-  OTP_REQUIRED
+  OTP_REQUIRED,
+  OTP_INVALID
 } from '../../containers/messages/ValidationMsg'
-import {OTP_PLACEHOLDER} from '../../containers/messages/PlaceholderMsg'
+import { OTP_PLACEHOLDER } from '../../containers/messages/PlaceholderMsg'
 
 const styles = theme => ({
   formControl: {
@@ -45,16 +46,21 @@ class OTPForm extends React.Component {
     this.state = { isSubmit: false }
   }
 
+  handleChange = event => {
+    if (event.target.value.length <= 4) {
+      this.props.handleChange(event)
+    }
+  }
+
   render () {
     const {
       values,
       touched,
       errors,
       isSubmitting,
-      handleChange,
       handleSubmit,
       classes
-    //   closeLoginModal
+      //   closeLoginModal
     } = this.props
     return (
       <form onSubmit={handleSubmit}>
@@ -71,22 +77,14 @@ class OTPForm extends React.Component {
             classes={{
               input: classes.otpInput
             }}
-            // inputProps={{
-            //   classes: {
-            //     root: classes.otpInput,
-            //   },
-            // }}
-            onChange={handleChange}
+            onChange={this.handleChange}
             placeholder={OTP_PLACEHOLDER}
           />
-          {
-            errors.otp && touched.otp &&
-            <FormHelperText
-              id='otp'
-            >
+          {errors.otp &&
+            touched.otp &&
+            <FormHelperText id='otp'>
               {errors.otp}
-            </FormHelperText>
-          }
+            </FormHelperText>}
         </FormControl>
         <div className={classes.buttonWrapper}>
           <Button
@@ -102,16 +100,24 @@ class OTPForm extends React.Component {
   }
 }
 
-export default withStyles(styles)(withFormik({
-  mapPropsToValues: () => ({ otp: '' }),
-  validationSchema: Yup.object().shape({
-    otp: Yup.number()
-      // .min(10, 'Please enter valid phone number')
-      // .max(10, 'Please enter valid phone number')
-      .required(OTP_REQUIRED)
-  }),
-  handleSubmit: (values, { props, setSubmitting }) => {
-    props.onSubmit(props.loginState, setSubmitting, props.closeLoginModal, props.toggleForm, values)
-  },
-  displayName: 'OTPForm' // helps with React DevTools
-})(OTPForm))
+export default withStyles(styles)(
+  withFormik({
+    mapPropsToValues: () => ({ otp: '' }),
+    validationSchema: Yup.object().shape({
+      otp: Yup.number()
+        .min(4, OTP_INVALID)
+        .max(4, OTP_INVALID)
+        .required(OTP_REQUIRED)
+    }),
+    handleSubmit: (values, { props, setSubmitting }) => {
+      props.onSubmit(
+        props.loginState,
+        setSubmitting,
+        props.closeLoginModal,
+        props.toggleForm,
+        values
+      )
+    },
+    displayName: 'OTPForm' // helps with React DevTools
+  })(OTPForm)
+)

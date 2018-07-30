@@ -6,8 +6,6 @@ import { withStyles } from '@material-ui/core/styles'
 import { bindActionCreators } from 'redux'
 import Router from 'next/router'
 
-import Head from 'next/head'
-
 import withRoot from '../src/withRoot'
 
 import { connect } from 'react-redux'
@@ -23,7 +21,6 @@ import {
 } from '../containers/medicineList/medicineListActions'
 
 import { medicineList } from '../components/constants/PageTitle'
-import { withCommonWrapper } from '../components/HOCWrapper/CommonWrapper'
 
 const styles = theme => ({
   root: {
@@ -66,27 +63,31 @@ class MedicineList extends React.Component {
 
   render () {
     const { query } = Router
-
+    const {
+      addToCartHandler,
+      checkPincodeState,
+      searchMedicineState,
+      actions,
+      medicineListState
+    } = this.props
     return (
       <div>
-        <Head>
-          <title>{medicineList.title}</title>
-        </Head>
-        <Header />
+        <Header
+          title={medicineList.title}
+          addToCartHandler={addToCartHandler}
+        />
         <div className={this.props.classes.root}>
           <MedicineListWrapper
-            addToCartHandler={this.props.addToCartHandler}
-            checkPincodeState={this.props.checkPincodeState}
+            addToCartHandler={addToCartHandler}
+            checkPincodeState={checkPincodeState}
             moleculeName={Router.query.name}
-            searchMedicineLoading={this.props.actions.searchMedicineLoading}
+            searchMedicineLoading={actions.searchMedicineLoading}
             query={query}
-            getRelatedMedicinesLoading={
-              this.props.actions.getRelatedMedicinesLoading
-            }
+            getRelatedMedicinesLoading={actions.getRelatedMedicinesLoading}
             medicineState={
               query.productName
-                ? this.props.searchMedicineState.payload.searchMedicineResult
-                : this.props.medicineListState.payload
+                ? searchMedicineState.payload.searchMedicineResult
+                : medicineListState.payload
             }
           />
         </div>
@@ -116,8 +117,6 @@ function mapDispatchToProps (dispatch) {
   }
 }
 
-export default withCommonWrapper(
-  connect(mapStateToProps, mapDispatchToProps)(
-    withRoot(withStyles(styles)(MedicineList))
-  )
+export default connect(mapStateToProps, mapDispatchToProps)(
+  withRoot(withStyles(styles)(MedicineList))
 )

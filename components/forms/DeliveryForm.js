@@ -15,7 +15,9 @@ import {
   LOCALITY_REQUIRED,
   CITY_REQUIRED,
   PINCODE_REQUIRED,
-  STREET1_REQUIRED
+  STREET1_REQUIRED,
+  MOBILE_INVALID,
+  MOBILE_VALIDATION_REGEX
 } from '../../containers/messages/ValidationMsg'
 
 // Helper styles for demo
@@ -43,13 +45,14 @@ const styles = theme => ({
 
 class DeliveryForm extends React.Component {
   onPincodeInput (handleChange, event) {
-    if (event.target.value.length === 6) {
+    if (event.target.value.length > 6) return
+    else if (event.target.value.length === 6) {
       this.props.checkPincodeDetailLoading(
         this.props.checkPincodeState,
-        {handleClose: ''},
-        {setSubmitting: ''},
+        { handleClose: '' },
+        { setSubmitting: '' },
         event.target.value,
-        {isDeliveryAddress: true}
+        { isDeliveryAddress: true }
       )
     }
 
@@ -61,6 +64,7 @@ class DeliveryForm extends React.Component {
   }
 
   onChange (name, handleChange, event) {
+    if (name === 'mobile' && event.target.value.length > 10) return
     this.props.updateAddressFormValue(
       this.props.deliveryDetailsState,
       name,
@@ -101,14 +105,11 @@ class DeliveryForm extends React.Component {
             onChange={this.onChange.bind(this, 'full_name', handleChange)}
             value={values.full_name}
           />
-          {
-            errors.full_name && touched.full_name &&
-            <FormHelperText
-              id='full_name'
-            >
+          {errors.full_name &&
+            touched.full_name &&
+            <FormHelperText id='full_name'>
               {errors.full_name}
-            </FormHelperText>
-          }
+            </FormHelperText>}
         </FormControl>
         <FormControl
           className={classes.formControl}
@@ -119,18 +120,15 @@ class DeliveryForm extends React.Component {
             placeholder='Phone No.'
             className={classes.valueStyle}
             id='mobile'
-            type='text'
+            type='number'
             onChange={this.onChange.bind(this, 'mobile', handleChange)}
             value={values.mobile}
           />
-          {
-            errors.mobile && touched.mobile &&
-            <FormHelperText
-              id='mobile'
-            >
+          {errors.mobile &&
+            touched.mobile &&
+            <FormHelperText id='mobile'>
               {errors.mobile}
-            </FormHelperText>
-          }
+            </FormHelperText>}
         </FormControl>
         <FormControl
           className={classes.formControl}
@@ -145,14 +143,11 @@ class DeliveryForm extends React.Component {
             onChange={this.onPincodeInput.bind(this, handleChange)}
             value={values.pincode}
           />
-          {
-            errors.pincode && touched.pincode &&
-            <FormHelperText
-              id='pincode'
-            >
+          {errors.pincode &&
+            touched.pincode &&
+            <FormHelperText id='pincode'>
               {errors.pincode}
-            </FormHelperText>
-          }
+            </FormHelperText>}
         </FormControl>
         <FormControl
           className={classes.formControl}
@@ -162,16 +157,15 @@ class DeliveryForm extends React.Component {
           <LocationSearch
             onChange={this.onLocalityChange.bind(this, handleChange)}
             deliveryDetailsState={this.props.deliveryDetailsState}
-            getLocalityDetailListLoading={this.props.getLocalityDetailListLoading}
+            getLocalityDetailListLoading={
+              this.props.getLocalityDetailListLoading
+            }
           />
-          {
-            errors.locality && touched.locality &&
-            <FormHelperText
-              id='locality'
-            >
+          {errors.locality &&
+            touched.locality &&
+            <FormHelperText id='locality'>
               {errors.locality}
-            </FormHelperText>
-          }
+            </FormHelperText>}
         </FormControl>
         <FormControl
           className={classes.formControl}
@@ -186,19 +180,13 @@ class DeliveryForm extends React.Component {
             onChange={this.onChange.bind(this, 'street1', handleChange)}
             value={values.street1}
           />
-          {
-            errors.street1 && touched.street1 &&
-            <FormHelperText
-              id='street1'
-            >
+          {errors.street1 &&
+            touched.street1 &&
+            <FormHelperText id='street1'>
               {errors.street1}
-            </FormHelperText>
-          }
+            </FormHelperText>}
         </FormControl>
-        <FormControl
-          className={classes.formControl}
-          aria-describedby='street2'
-        >
+        <FormControl className={classes.formControl} aria-describedby='street2'>
           <Input
             placeholder='Street/Society(Optional)'
             className={classes.valueStyle}
@@ -212,7 +200,7 @@ class DeliveryForm extends React.Component {
           className={classes.formControl}
           aria-describedby='city'
           error={errors.city && touched.city}
-          disabled='true'
+          disabled
         >
           <Input
             placeholder='  City'
@@ -222,20 +210,17 @@ class DeliveryForm extends React.Component {
             onChange={handleChange}
             value={values.city}
           />
-          {
-            errors.city && touched.city &&
-            <FormHelperText
-              id='city'
-            >
+          {errors.city &&
+            touched.city &&
+            <FormHelperText id='city'>
               {errors.city}
-            </FormHelperText>
-          }
+            </FormHelperText>}
         </FormControl>
         <FormControl
           className={classes.formControl}
           aria-describedby='state'
           error={errors.state && touched.state}
-          disabled='true'
+          disabled
         >
           <Input
             placeholder='State'
@@ -245,14 +230,11 @@ class DeliveryForm extends React.Component {
             onChange={handleChange}
             value={values.state}
           />
-          {
-            errors.city && touched.state &&
-            <FormHelperText
-              id='state'
-            >
+          {errors.city &&
+            touched.state &&
+            <FormHelperText id='state'>
               {errors.state}
-            </FormHelperText>
-          }
+            </FormHelperText>}
         </FormControl>
 
         <div className={classes.buttonWrapper}>
@@ -269,39 +251,48 @@ class DeliveryForm extends React.Component {
   }
 }
 
-export default withStyles(styles)(withFormik({
-  enableReinitialize: true,
-  mapPropsToValues: (props) => {
-    return {
-      full_name: props.deliveryDetailsState.addressForm.full_name,
-      mobile: props.deliveryDetailsState.addressForm.mobile,
-      pincode: props.deliveryDetailsState.addressForm.pincode,
-      locality: props.deliveryDetailsState.addressForm.locality,
-      street1: props.deliveryDetailsState.addressForm.street1,
-      street2: props.deliveryDetailsState.addressForm.street2,
-      city: props.deliveryDetailsState.addressForm.city,
-      state: props.deliveryDetailsState.addressForm.state
-    }
-  },
-  validationSchema: Yup.object().shape({
-    full_name: Yup.string().required(FULL_NAME_REQUIRED),
-    mobile: Yup.number().required(MOBILE_REQUIRED),
-    pincode: Yup.string().required(PINCODE_REQUIRED),
-    locality: Yup.string().required(LOCALITY_REQUIRED),
-    street1: Yup.string().required(STREET1_REQUIRED),
-    city: Yup.string().required(CITY_REQUIRED),
-    state: Yup.string().required(STATE_REQUIRED)
-  }),
-  handleSubmit: (values, { props, setSubmitting }) => {
-    props.onSubmit(
-      props.deliveryDetailsState,
-      props.deliveryFormState,
-      props.customerId,
-      setSubmitting,
-      props.closeModal,
-      values,
-      props.isCartPage
-    )
-  },
-  displayName: 'DeliveryForm' // helps with React DevTools
-})(DeliveryForm))
+export default withStyles(styles)(
+  withFormik({
+    enableReinitialize: true,
+    mapPropsToValues: props => {
+      return {
+        full_name: props.deliveryDetailsState.addressForm.full_name,
+        mobile: props.deliveryDetailsState.addressForm.mobile,
+        pincode: props.deliveryDetailsState.addressForm.pincode,
+        locality: props.deliveryDetailsState.addressForm.locality,
+        street1: props.deliveryDetailsState.addressForm.street1,
+        street2: props.deliveryDetailsState.addressForm.street2,
+        city: props.deliveryDetailsState.addressForm.city,
+        state: props.deliveryDetailsState.addressForm.state
+      }
+    },
+    validationSchema: Yup.object().shape({
+      full_name: Yup.string().trim().required(FULL_NAME_REQUIRED),
+      mobile: Yup.string()
+        .trim()
+        .min(10, MOBILE_INVALID)
+        .max(10, MOBILE_INVALID)
+        .matches(MOBILE_VALIDATION_REGEX, {
+          message: MOBILE_INVALID
+        })
+        .required(MOBILE_REQUIRED),
+      pincode: Yup.string().trim().required(PINCODE_REQUIRED),
+      locality: Yup.string().trim().required(LOCALITY_REQUIRED),
+      street1: Yup.string().trim().required(STREET1_REQUIRED),
+      city: Yup.string().trim().required(CITY_REQUIRED),
+      state: Yup.string().trim().required(STATE_REQUIRED)
+    }),
+    handleSubmit: (values, { props, setSubmitting }) => {
+      props.onSubmit(
+        props.deliveryDetailsState,
+        props.deliveryFormState,
+        props.customerId,
+        setSubmitting,
+        props.closeModal,
+        values,
+        props.isCartPage
+      )
+    },
+    displayName: 'DeliveryForm' // helps with React DevTools
+  })(DeliveryForm)
+)

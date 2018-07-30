@@ -8,11 +8,7 @@ import Footer from '../components/layouts/footer'
 
 import ThankyouWrapper from '../containers/thankYou'
 
-import Head from 'next/head'
-
-import {
-  orderConfirmation
-} from '../components/constants/PageTitle'
+import { orderConfirmation } from '../components/constants/PageTitle'
 
 const styles = theme => ({
   root: {
@@ -33,12 +29,13 @@ const styles = theme => ({
 
 class OrderConfirmationWrapper extends React.Component {
   render () {
+    const { addToCartHandler } = this.props
     return (
       <div>
-        <Head>
-          <title>{orderConfirmation.title}</title>
-        </Head>
-        <Header />
+        <Header
+          title={orderConfirmation.title}
+          addToCartHandler={addToCartHandler}
+        />
         <div className={this.props.classes.root}>
           <ThankyouWrapper />
         </div>

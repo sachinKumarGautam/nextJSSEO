@@ -17,11 +17,7 @@ import Paper from '@material-ui/core/Paper'
 
 import PrescriptionDetailsWrapper from '../containers/prescription'
 
-import Head from 'next/head'
-
-import {
-  prescriptionList
-} from '../components/constants/PageTitle'
+import { prescriptionList } from '../components/constants/PageTitle'
 
 const styles = theme => ({
   root: {
@@ -53,12 +49,13 @@ class Prescription extends React.Component {
   }
 
   render () {
+    const { addToCartHandler } = this.props
     return (
       <div>
-        <Head>
-          <title>{prescriptionList.title}</title>
-        </Head>
-        <Header />
+        <Header
+          title={prescriptionList.title}
+          addToCartHandler={addToCartHandler}
+        />
         <div className={this.props.classes.wrapperStyle}>
           <Paper className={this.props.classes.root} elevation={1}>
             <PrescriptionDetailsWrapper />
@@ -88,7 +85,6 @@ function mapDispatchToProps (dispatch) {
   }
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(withRoot(withStyles(styles)(Prescription)))
+export default connect(mapStateToProps, mapDispatchToProps)(
+  withRoot(withStyles(styles)(Prescription))
+)

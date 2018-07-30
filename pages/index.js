@@ -12,15 +12,11 @@ import Paper from '@material-ui/core/Paper'
 
 import HomePageWrapper from '../containers/homePage'
 
-import Head from 'next/head'
-
 import {
   getBackGroundImagesLoading
 } from '../containers/homePage/homePageActions'
 
-import {
-  homePage
-} from '../components/constants/PageTitle'
+import { homePage } from '../components/constants/PageTitle'
 
 const styles = theme => ({
   root: {
@@ -52,14 +48,12 @@ class HomePage extends React.Component {
   }
 
   render () {
+    const { addToCartHandler, classes } = this.props
     return (
       <div>
-        <Head>
-          <title>{homePage.title}</title>
-        </Head>
-        <Header />
+        <Header title={homePage.title} addToCartHandler={addToCartHandler} />
         <div>
-          <Paper className={this.props.classes.root} elevation={1}>
+          <Paper className={classes.root} elevation={1}>
             <HomePageWrapper />
           </Paper>
         </div>
@@ -86,7 +80,6 @@ function mapDispatchToProps (dispatch) {
   }
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(withRoot(withStyles(styles)(HomePage)))
+export default connect(mapStateToProps, mapDispatchToProps)(
+  withRoot(withStyles(styles)(HomePage))
+)
