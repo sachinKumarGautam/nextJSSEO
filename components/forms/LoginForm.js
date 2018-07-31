@@ -13,7 +13,11 @@ import InputAdornment from '@material-ui/core/InputAdornment'
 import AccountCircle from '@material-ui/icons/StayPrimaryPortrait'
 import { withStyles } from '@material-ui/core/styles'
 
-import { MOBILE_REQUIRED } from '../../containers/messages/ValidationMsg'
+import {
+  MOBILE_REQUIRED,
+  MOBILE_INVALID,
+  MOBILE_VALIDATION_REGEX
+} from '../../containers/messages/ValidationMsg'
 
 // Helper styles for demo
 
@@ -104,7 +108,12 @@ export default withStyles(styles)(
     mapPropsToValues: () => ({ mobile: '' }),
     validationSchema: Yup.object().shape({
       mobile: Yup.string()
-        .min(10, 'Please enter valid phone number')
+        .trim()
+        .min(10, MOBILE_INVALID)
+        .max(10, MOBILE_INVALID)
+        .matches(MOBILE_VALIDATION_REGEX, {
+          message: MOBILE_INVALID
+        })
         .required(MOBILE_REQUIRED)
     }),
     handleSubmit: (values, { props, changeLoadingState, setSubmitting }) => {

@@ -15,7 +15,9 @@ import {
   LOCALITY_REQUIRED,
   CITY_REQUIRED,
   PINCODE_REQUIRED,
-  STREET1_REQUIRED
+  STREET1_REQUIRED,
+  MOBILE_INVALID,
+  MOBILE_VALIDATION_REGEX
 } from '../../containers/messages/ValidationMsg'
 
 // Helper styles for demo
@@ -118,7 +120,7 @@ class DeliveryForm extends React.Component {
             placeholder='Phone No.'
             className={classes.valueStyle}
             id='mobile'
-            type='text'
+            type='number'
             onChange={this.onChange.bind(this, 'mobile', handleChange)}
             value={values.mobile}
           />
@@ -265,13 +267,20 @@ export default withStyles(styles)(
       }
     },
     validationSchema: Yup.object().shape({
-      full_name: Yup.string().required(FULL_NAME_REQUIRED),
-      mobile: Yup.number().required(MOBILE_REQUIRED),
-      pincode: Yup.string().required(PINCODE_REQUIRED),
-      locality: Yup.string().required(LOCALITY_REQUIRED),
-      street1: Yup.string().required(STREET1_REQUIRED),
-      city: Yup.string().required(CITY_REQUIRED),
-      state: Yup.string().required(STATE_REQUIRED)
+      full_name: Yup.string().trim().required(FULL_NAME_REQUIRED),
+      mobile: Yup.string()
+        .trim()
+        .min(10, MOBILE_INVALID)
+        .max(10, MOBILE_INVALID)
+        .matches(MOBILE_VALIDATION_REGEX, {
+          message: MOBILE_INVALID
+        })
+        .required(MOBILE_REQUIRED),
+      pincode: Yup.string().trim().required(PINCODE_REQUIRED),
+      locality: Yup.string().trim().required(LOCALITY_REQUIRED),
+      street1: Yup.string().trim().required(STREET1_REQUIRED),
+      city: Yup.string().trim().required(CITY_REQUIRED),
+      state: Yup.string().trim().required(STATE_REQUIRED)
     }),
     handleSubmit: (values, { props, setSubmitting }) => {
       props.onSubmit(

@@ -3,21 +3,29 @@ import Head from 'next/head'
 import Link from 'next/link'
 import NProgress from 'nprogress'
 import Router from 'next/router'
+import LinearProgress from '@material-ui/core/LinearProgress'
+
+// import '../../../routeLoader.css'
+
+function LinearIndeterminate (props) {
+  const { classes } = props
+  return (
+    <div>
+      <LinearProgress />
+    </div>
+  )
+}
 
 Router.onRouteChangeStart = url => {
-  console.log(`Loading: ${url}`)
   NProgress.start()
 }
 Router.onRouteChangeComplete = () => NProgress.done()
 Router.onRouteChangeError = () => NProgress.done()
 
-
 export default () => (
-  <div style={{ marginBottom: 60, position: 'absolute' }}>
-    <div>kapil</div>
+  <div>
     <Head>
-      {/* Import CSS for nprogress */}
-      <link rel='stylesheet' type='text/css' href='../../../routerLoader.css' />
+      <link rel='stylesheet' type='text/css' href='/static/nprogress.css' />
     </Head>
   </div>
 )

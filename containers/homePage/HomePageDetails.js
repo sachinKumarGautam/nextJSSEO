@@ -16,7 +16,7 @@ class HomePageWrapper extends Component {
     let settings = {
       dots: false,
       arrows: false,
-      infinite: true,
+      infinite: false,
       speed: 1000,
       slidesToShow: 1,
       slidesToScroll: 1,

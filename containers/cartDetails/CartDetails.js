@@ -17,6 +17,8 @@ import Router from 'next/router'
 import { THANK_YOU } from '../../routes/RouteConstant'
 
 import { NO_MEDICINES } from '../messages/cartMessages'
+import CartItemLoader
+  from '../../components/loader/cartLoaders/CartItemLoaderWrapper'
 
 /*
   avatar
@@ -104,33 +106,36 @@ class CartDetails extends Component {
             </Typography>
           </div>
           <div className={this.props.classes.scrollWrapper}>
-            {this.props.cartState.payload.patient_details.payload.patient_id ? (
-              <div>
+            {this.props.cartState.payload.patient_details.payload.patient_id
+              ? <div>
                 <Avatar cartState={this.props.cartState} />
                 <Divider />
               </div>
-            ) : null}
-            {this.props.cartState.payload.cart_items.payload.length ? (
-              <MedicineList
-                cartState={this.props.cartState}
-                decrementCartItem={this.decrementCartItem.bind(this)}
-                incrementCartItem={this.incrementCartItem.bind(this)}
-              />
-            ) : (
-              <div>
-                <Typography className={this.props.classes.medicineListWrapper}>
+              : null}
+            {this.props.cartState.payload.cart_items.payload.length
+              ? <React.Fragment>
+                <CartItemLoader />
+                <MedicineList
+                  cartState={this.props.cartState}
+                  decrementCartItem={this.decrementCartItem.bind(this)}
+                  incrementCartItem={this.incrementCartItem.bind(this)}
+                  />
+              </React.Fragment>
+              : <div>
+                <Typography
+                  className={this.props.classes.medicineListWrapper}
+                  >
                   {NO_MEDICINES}
                 </Typography>
                 <Divider />
-              </div>
-            )}
-            {this.props.cartState.payload.patient_details.payload.patient_id ? (
-              <Coupon
+              </div>}
+            {this.props.cartState.payload.patient_details.payload.patient_id
+              ? <Coupon
                 applyCouponCodeLoading={this.props.applyCouponCodeLoading}
                 updateCouponCode={this.props.updateCouponCode}
                 cartState={this.props.cartState}
-              />
-            ) : null}
+                />
+              : null}
             <PriceDetails cartState={this.props.cartState} />
           </div>
           <TotalAmount cartState={this.props.cartState} />

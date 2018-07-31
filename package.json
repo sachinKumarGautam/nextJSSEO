@@ -22,6 +22,7 @@
     "nprogress": "^0.2.0",
     "prop-types": "latest",
     "react": "latest",
+    "react-content-loader": "^3.1.2",
     "react-dom": "latest",
     "react-jss": "latest",
     "react-lazyload": "^2.3.0",
@@ -36,7 +37,6 @@
     "require-hacker": "^3.0.0",
     "rxjs": "^5.5.2",
     "slick-carousel": "^1.8.1",
-    "standard": "^11.0.1",
     "superagent": "^3.8.1",
     "svg-sprite-loader": "0.3.1",
     "universal-rx-request": "^1.0.3",
@@ -49,9 +49,7 @@
     "eslint-plugin-node": "^7.0.1",
     "eslint-plugin-promise": "^3.8.0",
     "eslint-plugin-standard": "^3.1.0",
-    "husky": "^0.14.3",
-    "prettier-eslint": "^8.8.2",
-    "standard": "^11.0.0"
+    "husky": "^0.14.3"
   },
   "scripts": {
     "precommit": "standard --parser babel-eslint --plugin flowtype",

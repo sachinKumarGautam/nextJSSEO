@@ -1,6 +1,7 @@
 import React from 'react'
 
 import { withStyles } from '@material-ui/core/styles'
+import BreadCrumbsLoader from './loader/BreadCrumbsLoader'
 
 const styles = theme => {
   return {
@@ -20,14 +21,15 @@ const styles = theme => {
   }
 }
 
-const BreadCrumbs = (props) => (
+const BreadCrumbs = props => (
   <nav>
     <div className={props.classes.navWrapper}>
       {/* <a href='#' className={props.classes.breadCrumb}>First</a>
-      <span className={props.classes.breadCrumbArrow}>></span>
+      <span className={props.classes.breadCrumbArrow}>&gt;</span>
       <a href='#' className={props.classes.breadCrumb}>Second</a>
-      <span className={props.classes.breadCrumbArrow}>></span>
+      <span className={props.classes.breadCrumbArrow}>&gt;</span>
       <a href='#' className={props.classes.breadCrumb}>Third</a> */}
+      <BreadCrumbsLoader />
     </div>
   </nav>
 )

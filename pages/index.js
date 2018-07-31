@@ -16,9 +16,8 @@ import {
   getBackGroundImagesLoading
 } from '../containers/homePage/homePageActions'
 
-import {
-  homePage
-} from '../components/constants/PageTitle'
+import { homePage } from '../components/constants/PageTitle'
+import Loader from '../components/loader'
 
 const styles = theme => ({
   root: {
@@ -50,11 +49,13 @@ class HomePage extends React.Component {
   }
 
   render () {
+    const { addToCartHandler, classes } = this.props
     return (
       <div>
-        <Header title={homePage.title} />
+        {/* <Loader />           */}
+        <Header title={homePage.title} addToCartHandler={addToCartHandler} />
         <div>
-          <Paper className={this.props.classes.root} elevation={1}>
+          <Paper className={classes.root} elevation={1}>
             <HomePageWrapper />
           </Paper>
         </div>
@@ -81,7 +82,6 @@ function mapDispatchToProps (dispatch) {
   }
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(withRoot(withStyles(styles)(HomePage)))
+export default connect(mapStateToProps, mapDispatchToProps)(
+  withRoot(withStyles(styles)(HomePage))
+)

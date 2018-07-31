@@ -16,7 +16,6 @@ import CartIcon from '../../CartIcon'
 import Login from '../../../containers/login'
 import getPageContext from '../../../src/getPageContext'
 import MenuWrapper from '../../../containers/menu'
-import { withCommonWrapper } from '../../../components/HOCWrapper/CommonWrapper'
 import {
   searchMedicineLoading
 } from '../../../containers/searchMedicine/searchMedicineAction'
@@ -126,7 +125,6 @@ class Header extends React.Component {
       customerState,
       checkPincodeState
     } = this.props
-
     return (
       <React.Fragment>
         <RouteLoader />
@@ -226,6 +224,6 @@ function mapDispatchToProps (dispatch) {
   }
 }
 
-export default withCommonWrapper(
-  withStyles(styles)(connect(mapStateToProps, mapDispatchToProps)(Header))
+export default withStyles(styles)(
+  connect(mapStateToProps, mapDispatchToProps)(Header)
 )

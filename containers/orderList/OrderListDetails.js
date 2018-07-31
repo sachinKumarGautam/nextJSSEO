@@ -10,6 +10,8 @@ import OrderHeader from './OrderHeader'
 import OrderContent from './OrderContent'
 import OrderFooter from './OrderFooter'
 import Button from '../../components/button'
+import OrderListsLoader
+  from '../../components/loader/orderDetailsLoader/OrderListsLoader'
 
 const styles = theme => ({
   card: {
@@ -71,6 +73,7 @@ class OrderListDetails extends Component {
   render () {
     return (
       <Card elevation={'1'} className={this.props.classes.card}>
+        <OrderListsLoader />
         <CardContent className={this.props.classes.cardContent}>
           <Typography
             gutterBottom
@@ -80,25 +83,17 @@ class OrderListDetails extends Component {
           >
             My Orders
           </Typography>
-          {
-            this.props.orderListState.payload.map((orderDetails) => {
-              return (
-                <div className={this.props.classes.orderDetailWrapper}>
-                  <OrderHeader
-                    orderDetails={orderDetails}
-                  />
-                  <Divider />
-                  <OrderContent
-                    orderDetails={orderDetails}
-                  />
-                  <Divider />
-                  <OrderFooter
-                    orderDetails={orderDetails}
-                  />
-                </div>
-              )
-            })
-          }
+          {this.props.orderListState.payload.map(orderDetails => {
+            return (
+              <div className={this.props.classes.orderDetailWrapper}>
+                <OrderHeader orderDetails={orderDetails} />
+                <Divider />
+                <OrderContent orderDetails={orderDetails} />
+                <Divider />
+                <OrderFooter orderDetails={orderDetails} />
+              </div>
+            )
+          })}
           <div className={this.props.classes.buttonWrapper}>
             <Button
               size='medium'

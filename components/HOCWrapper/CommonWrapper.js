@@ -13,7 +13,7 @@ import {
 import withRoot from '../../src/withRoot'
 
 export function withCommonWrapper (Page) {
-  class CommomWrapper extends React.Component {
+  class CommonWrapper extends React.Component {
     static getInitialProps (ctx) {
       if (Page.getInitialProps) {
         return Page.getInitialProps(ctx)
@@ -90,5 +90,5 @@ export function withCommonWrapper (Page) {
     }
   }
 
-  return connect(mapStateToProps, mapDispatchToProps)(withRoot(CommomWrapper))
+  return connect(mapStateToProps, mapDispatchToProps)(withRoot(CommonWrapper))
 }

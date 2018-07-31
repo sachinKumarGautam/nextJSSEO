@@ -8,6 +8,7 @@ import { bindActionCreators } from 'redux'
 import withRoot from '../src/withRoot'
 
 import MenuItems from './MenuItems'
+import SideListItemsLoader from '../components/loader/SideListItemLoader'
 import { logoutWithReload } from '../utils/removePersistState'
 
 const styles = theme => {
@@ -43,6 +44,7 @@ class SideMenu extends Component {
         <p className={this.props.classes.nameStyle}>
           {this.props.customerState.payload.full_name}
         </p>
+        <SideListItemsLoader />
         <MenuItems
           customOrderStyle={this.props.classes.orderStyle}
           customMenuStyle={this.props.classes.menuStyle}
@@ -62,15 +64,10 @@ function mapStateToProps (state) {
 
 function mapDispatchToProps (dispatch) {
   return {
-    actions: bindActionCreators(
-      {
-      },
-      dispatch
-    )
+    actions: bindActionCreators({}, dispatch)
   }
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(withRoot(withStyles(styles)(SideMenu)))
+export default connect(mapStateToProps, mapDispatchToProps)(
+  withRoot(withStyles(styles)(SideMenu))
+)

@@ -82,6 +82,9 @@ const theme = createMuiTheme({
     values: {
       lg: 1366
     }
+  },
+  zIndex: {
+    topProgressBar: 1600
   }
 })
 

@@ -3,6 +3,8 @@ import React, { Component } from 'react'
 import { withStyles } from '@material-ui/core/styles'
 
 import MenuItem from '@material-ui/core/MenuItem'
+import Link from 'next/link'
+
 
 import Router from 'next/router'
 import {
@@ -56,18 +58,23 @@ class MenuItems extends Component {
 
     return (
       <div className={this.props.classes.listWrapper}>
+        <Link prefetch href={`/customer/${100111098}/orders`}>
         <MenuItem
           className={orderStyle}
-          onClick={this.redirectToPath.bind(this, ORDER)}
+          // onClick={this.redirectToPath.bind(this, ORDER)}
         >
           Orders
         </MenuItem>
+        </Link>
+        <Link prefetch href={`/customer/${100111098}/patients`}>
         <MenuItem
           className={menuStyle}
-          onClick={this.redirectToPath.bind(this, PATIENT_LIST)}
+          // onClick={this.redirectToPath.bind(this, PATIENT_LIST)}
         >
           Patients
         </MenuItem>
+        </Link>
+        
         <MenuItem
           className={menuStyle}
           onClick={this.redirectToPath.bind(this, ADDRESS_LIST)}
@@ -86,14 +93,10 @@ class MenuItems extends Component {
         >
           Care Points / Care Points +
         </MenuItem>
-        {
-          !this.props.isSideMenu &&
-          <MenuItem className={menuStyle}>Content</MenuItem>
-        }
-        {
-          !this.props.isSideMenu &&
-          <MenuItem className={menuStyle}>Bookmarks</MenuItem>
-        }
+        {!this.props.isSideMenu &&
+          <MenuItem className={menuStyle}>Content</MenuItem>}
+        {!this.props.isSideMenu &&
+          <MenuItem className={menuStyle}>Bookmarks</MenuItem>}
         <MenuItem className={menuStyle} onClick={this.props.logout}>
           Log out
         </MenuItem>
