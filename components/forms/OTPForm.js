@@ -104,7 +104,7 @@ export default withStyles(styles)(
   withFormik({
     mapPropsToValues: () => ({ otp: '' }),
     validationSchema: Yup.object().shape({
-      otp: Yup.number()
+      otp: Yup.string()
         .min(4, OTP_INVALID)
         .max(4, OTP_INVALID)
         .required(OTP_REQUIRED)
