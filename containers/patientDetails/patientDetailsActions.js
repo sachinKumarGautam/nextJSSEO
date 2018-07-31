@@ -16,7 +16,7 @@ import {
 export function getPatientDetailsListLoading (
   patientDetailsState,
   customerId,
-  isRefillPatients
+  {isRefillPatients} = false
 ) {
   return {
     type: GET_PATIENT_DETAILS_LIST_LOADING,

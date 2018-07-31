@@ -83,6 +83,13 @@ app
       app.render(req, res, actualPage, queryParams)
     })
 
+    // home page
+    server.get('/', (req, res) => {
+      const actualPage = '/'
+      const queryParams = { authentication: req.query.authentication, path: req.query.path }
+      app.render(req, res, actualPage, queryParams)
+    })
+
     server.get('*', (req, res) => {
       return handle(req, res)
     })

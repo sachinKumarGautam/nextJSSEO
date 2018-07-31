@@ -1,22 +1,27 @@
 import React, { Component } from 'react'
-
+// dependencies
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-
-import Header from '../components/layouts/header'
-import Footer from '../components/layouts/footer'
-
+import flowRight from 'lodash.flowright'
+import Router from 'next/router'
 import { withStyles } from '@material-ui/core/styles'
-import withRoot from '../src/withRoot'
 import Paper from '@material-ui/core/Paper'
 
+// components
+import Header from '../components/layouts/header'
+import Footer from '../components/layouts/footer'
+import withRoot from '../src/withRoot'
 import RefillPatientsWrapper from '../containers/refillPatients'
 
 import {
   getPatientDetailsListLoading
 } from '../containers/patientDetails/patientDetailsActions'
 
+// page title
 import { refillPatient } from '../components/constants/PageTitle'
+
+// HOC for authentication
+import withAuth from '../components/HOCWrapper/AuthWrapper'
 
 const styles = theme => ({
   root: {
@@ -40,9 +45,16 @@ const styles = theme => ({
 
 class RefillPatient extends Component {
   componentDidMount () {
+    let customerId = this.props.customerState.payload.id
+    const { query } = Router
+
+    if (query.id === this.props.customerState.payload.id) {
+      customerId = query.id
+    }
+
     this.props.actions.getPatientDetailsListLoading(
       this.props.patientDetailsState,
-      this.props.customerState.payload.id, // pass customer id,
+      customerId, // pass customer id,
       { isRefillPatients: true }
     )
   }
@@ -56,8 +68,8 @@ class RefillPatient extends Component {
           title={refillPatient.title}
           addToCartHandler={addToCartHandler}
         />
-        <div className={this.props.classes.wrapperStyle}>
-          <Paper className={this.props.classes.root} elevation={1}>
+        <div className={classes.wrapperStyle}>
+          <Paper className={classes.root} elevation={1}>
             <RefillPatientsWrapper
               addToCartHandler={this.props.addToCartHandler}
             />
@@ -87,6 +99,8 @@ function mapDispatchToProps (dispatch) {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(
-  withRoot(withStyles(styles)(RefillPatient))
+export default flowRight([withAuth])(
+  connect(mapStateToProps, mapDispatchToProps)(
+    withRoot(withStyles(styles)(RefillPatient))
+  )
 )
