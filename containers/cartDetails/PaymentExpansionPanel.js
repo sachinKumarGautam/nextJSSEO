@@ -10,6 +10,11 @@ import Button from '../../components/button'
 import TermsAndCondition from './TermsAndCondition'
 import PaymentDeliveryDetail from './PaymentDeliveryDetail'
 
+import {
+  LF_ASSURED,
+  NORMAL
+} from '../../components/constants/Constants'
+
 class PaymentExpansionPanel extends React.Component {
   placeOrder () {
     this.props.submitOrderLoading(
@@ -44,8 +49,8 @@ class PaymentExpansionPanel extends React.Component {
           }}
         >
           {
-            (this.props.cartState.payload.service_type === 'LF_ASSURED' ||
-            this.props.cartState.payload.delivery_option !== 'NORMAL') &&
+            (this.props.cartState.payload.service_type === LF_ASSURED ||
+            this.props.cartState.payload.delivery_option !== NORMAL) &&
             <PaymentDeliveryDetail
               cartState={this.props.cartState}
               optForExpressDeliveryLoading={this.props.optForExpressDeliveryLoading}

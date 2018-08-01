@@ -95,7 +95,7 @@ class ProductDetails extends React.Component {
                 getProductDetailLoading={actions.getProductDetailLoading}
                 addToCartHandler={addToCartHandler}
                 onChangeQuantity={actions.onChangeQuantity}
-                />
+              />
               : 'Page not found'}
           </Paper>
         </div>

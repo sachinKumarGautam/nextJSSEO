@@ -140,6 +140,7 @@ class CartDetailsWrapper extends Component {
                 resetCartState={this.props.actions.resetCartState}
                 applyCouponCodeLoading={this.props.actions.applyCouponCodeLoading}
                 updateCouponCode={this.props.actions.updateCouponCode}
+                checkPincodeState={this.props.checkPincodeState}
               />
             </section>
           </Grid>

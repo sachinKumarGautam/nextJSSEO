@@ -41,6 +41,7 @@ const FormWrapper = props => {
           loginState={loginState}
           customerState={customerState}
           checkReferralCodeLoading={checkReferralCodeLoading}
+          customerState={props.customerState}
         />
       )
 
@@ -80,6 +81,7 @@ const FormWrapper = props => {
           updateAddressFormValue={updateAddressFormValue}
           getLocalityDetailListLoading={getLocalityDetailListLoading}
           checkPincodeState={checkPincodeState}
+          customerState={props.customerState}
         />
       )
 

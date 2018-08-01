@@ -62,7 +62,8 @@ const styles = theme => {
     },
     deliveryTat: {
       ...theme.typography.body3,
-      color: theme.palette.customGrey.grey500
+      color: theme.palette.customGrey.grey500,
+      fontWeight: theme.typography.fontWeightBold
     },
     cursor: {
       cursor: 'pointer'
@@ -120,14 +121,17 @@ class MedicineListDetails extends React.Component {
                   : props.itemDetails.pack_size
               }
             />
-            <Typography
-              gutterBottom
-              variant='caption'
-              component='h1'
-              className={props.classes.deliveryTat}
-            >
-              Delivery by {props.checkPincodeState.payload.delivery_day} days
-            </Typography>
+            {
+              props.checkPincodeState.payload.pincode &&
+              <Typography
+                gutterBottom
+                variant='caption'
+                component='h1'
+                className={props.classes.deliveryTat}
+              >
+                Delivery by {props.checkPincodeState.payload.delivery_day} days
+              </Typography>
+            }
           </div>
         </Link>
         <div>

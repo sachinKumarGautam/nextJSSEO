@@ -18,6 +18,8 @@ import { THANK_YOU } from '../../routes/RouteConstant'
 
 import { NO_MEDICINES } from '../messages/cartMessages'
 
+import { getReplacedString } from '../../utils/replaceConstants'
+
 /*
   avatar
   medicine list
@@ -83,7 +85,8 @@ class CartDetails extends Component {
       this.props.cartState.orderResponse.payload.order_number !==
       prevProps.cartState.orderResponse.payload.order_number
     ) {
-      Router.push({ pathname: THANK_YOU })
+      const url = getReplacedString(THANK_YOU)
+      Router.push(url)
 
       this.props.resetCartState()
     }
@@ -115,6 +118,7 @@ class CartDetails extends Component {
                 cartState={this.props.cartState}
                 decrementCartItem={this.decrementCartItem.bind(this)}
                 incrementCartItem={this.incrementCartItem.bind(this)}
+                checkPincodeState={this.props.checkPincodeState}
               />
             ) : (
               <div>

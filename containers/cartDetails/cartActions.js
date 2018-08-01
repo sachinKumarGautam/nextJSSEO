@@ -365,6 +365,7 @@ export function submitOrderLoading (cartState) {
 }
 
 export function submitOrderSuccess (cartState, result) {
+  result = result.order
   return {
     type: cartActionTypes.SUBMIT_ORDER_SUCCESS,
     cartState,
