@@ -6,7 +6,7 @@ export function getReplacedString (originalMsg, obj) {
     mappedObject = {
       customer_id: store ? store.getState().customerState.payload.id : 0,
       patient_id: 0,
-      order_id: 0,
+      order_id: store ? store.getState().cartState.orderResponse.payload.order_number : 0,
       cart_id: store ? store.getState().cartState.payload.uid : 0
     }
   }

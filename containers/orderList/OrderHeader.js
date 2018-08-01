@@ -4,6 +4,11 @@ import { withStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
 import Location from '@material-ui/icons/LocationOn'
 
+import {
+  LF_ASSURED,
+  NORMAL
+} from '../../components/constants/Constants'
+
 const styles = theme => {
   return {
     wrapperStyle: {
@@ -20,7 +25,8 @@ const styles = theme => {
     },
     orderIdStyle: {
       color: theme.palette.customGreen.green300,
-      marginLeft: theme.spacing.unit
+      marginLeft: theme.spacing.unit,
+      marginRight: theme.spacing.unit
     },
     orderWrapper: {
       display: 'flex'
@@ -36,6 +42,9 @@ const styles = theme => {
       justifyContent: 'space-between',
       display: 'flex',
       flexDirection: 'row'
+    },
+    assuredImage: {
+      marginRight: theme.spacing.unit
     }
   }
 }
@@ -56,6 +65,14 @@ const OrderHeader = (props) => {
         >
           {props.orderDetails.id}
         </Typography>
+        {
+          props.orderDetails.service_type === LF_ASSURED &&
+          <img src='/static/images/assured-service.svg' className={props.classes.assuredImage} />
+        }
+        {
+          props.orderDetails.delivery_option !== NORMAL &&
+          <img src='/static/images/express-delivery-icon.svg' />
+        }
       </div>
       <div>
         <a className={props.classes.trackWrapper}>

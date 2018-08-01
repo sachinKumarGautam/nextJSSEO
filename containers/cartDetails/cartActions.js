@@ -365,28 +365,29 @@ export function submitOrderLoading (cartState) {
 }
 
 export function submitOrderSuccess (cartState, result) {
+  result = result.order
   return {
     type: cartActionTypes.SUBMIT_ORDER_SUCCESS,
     cartState,
-    order_number: result.order.id,
-    delivery_option: result.order.delivery_option,
-    service_type: result.order.service_type,
-    doctor_callback: result.order.doctor_callback,
-    order_prescriptions: result.order.order_prescriptions,
-    promised_delivery_date: result.order.promised_delivery_date,
-    patient_id: result.order.patient_id,
-    customer_id: result.order.customer_id,
-    customer_full_name: result.order.customer_full_name,
-    patient_full_name: result.order.patient_full_name,
-    discount: result.order.discount,
-    redeemed_care_points: result.order.redeemed_care_points,
-    redeemable_care_points: result.order.redeemable_care_points,
-    total_mrp: result.order.total_mrp,
-    total_sale_price: result.order.total_sale_price,
-    total_tax_amount: result.order.total_tax_amount,
-    facility_code: result.order.facility_code,
-    status: result.order.status,
-    source: result.order.source,
+    order_number: result.id,
+    delivery_option: result.delivery_option,
+    service_type: result.service_type,
+    doctor_callback: result.doctor_callback,
+    order_prescriptions: result.order_prescriptions,
+    promised_delivery_date: result.promised_delivery_date,
+    patient_id: result.patient_id,
+    customer_id: result.customer_id,
+    customer_full_name: result.customer_full_name,
+    patient_full_name: result.patient_full_name,
+    discount: result.discount,
+    redeemed_care_points: result.redeemed_care_points,
+    redeemable_care_points: result.redeemable_care_points,
+    total_mrp: result.total_mrp,
+    total_sale_price: result.total_sale_price,
+    total_tax_amount: result.total_tax_amount,
+    facility_code: result.facility_code,
+    status: result.status,
+    source: result.source,
     isLoading: false
   }
 }
