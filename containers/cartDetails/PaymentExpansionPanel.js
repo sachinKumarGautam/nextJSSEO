@@ -43,7 +43,13 @@ class PaymentExpansionPanel extends React.Component {
             root: this.props.thankYouWrapper
           }}
         >
-          <PaymentDeliveryDetail />
+          {
+            (this.props.cartState.payload.service_type === 'LF_ASSURED' ||
+            this.props.cartState.payload.delivery_option === 'NORMAL') &&
+            <PaymentDeliveryDetail
+              cartState={this.props.cartState}
+            />
+          }
           <div className={this.props.radioWrapper}>
             <Radio
               checked

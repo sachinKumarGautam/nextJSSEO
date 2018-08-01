@@ -16,7 +16,8 @@ import {
   DELETE_PRESCRIPTION_LOADING,
   SUBMIT_ORDER_LOADING,
   SUBMIT_COUPON_CODE_LOADING,
-  OPT_DOCTOR_CALLBACK_LOADING
+  OPT_DOCTOR_CALLBACK_LOADING,
+  OPT_EXPRESS_DELIVERY_LOADING
 } from './cartActionTypes'
 
 import {
@@ -41,7 +42,9 @@ import {
   applyCouponCodeSuccess,
   applyCouponCodeFailure,
   optForDoctorCallbackSuccess,
-  optForDoctorCallbackFailure
+  optForDoctorCallbackFailure,
+  optForExpressDeliverySuccess,
+  optForExpressDeliveryFailure
 } from './cartActions'
 
 import {
@@ -56,7 +59,8 @@ import {
   deletePrescriptionEpic$,
   submitOrder$,
   applyCouponForCart$,
-  teleConsultation$
+  teleConsultation$,
+  expressDelivery$
 } from '../../services/api'
 
 export function getAnonymousCartIdEpic (action$, store) {
@@ -467,6 +471,25 @@ export function optDoctorCallback (action$, store) {
         }),
         catchError(error => {
           return of(optForDoctorCallbackFailure(data.cartState, error))
+        })
+      )
+    })
+  )
+}
+
+export function optExpressDelivery (action$, store) {
+  return action$.pipe(
+    ofType(OPT_EXPRESS_DELIVERY_LOADING),
+    mergeMap(data => {
+      return http(expressDelivery$(data.cartUId, data.expressDeliveryCheck)).pipe(
+        map(result => {
+          return optForExpressDeliverySuccess(
+            data.cartState,
+            result.body.payload
+          )
+        }),
+        catchError(error => {
+          return of(optForExpressDeliveryFailure(data.cartState, error))
         })
       )
     })

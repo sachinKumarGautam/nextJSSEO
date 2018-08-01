@@ -485,3 +485,33 @@ export function optForDoctorCallbackFailure (cartState, error) {
     error: error
   }
 }
+
+export function optForExpressDeliveryLoading (cartState, cartUId, expressDeliveryCheck) {
+  return {
+    type: cartActionTypes.OPT_EXPRESS_DELIVERY_LOADING,
+    cartState,
+    isLoading: true,
+    isError: false,
+    cartUId,
+    expressDeliveryCheck
+  }
+}
+
+export function optForExpressDeliverySuccess (cartState, result) {
+  return {
+    type: cartActionTypes.OPT_EXPRESS_DELIVERY_SUCCESS,
+    cartState,
+    payload: result,
+    isLoading: false
+  }
+}
+
+export function optForExpressDeliveryFailure (cartState, error) {
+  return {
+    type: cartActionTypes.OPT_EXPRESS_DELIVERY_FAILURE,
+    cartState,
+    isLoading: false,
+    isError: true,
+    error: error
+  }
+}

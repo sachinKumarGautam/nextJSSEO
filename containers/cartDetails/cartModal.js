@@ -118,6 +118,14 @@ const initialState = {
       isError: false,
       error: {}
     }
+  },
+  expressDeliveryCheck: {
+    payload: {},
+    isLoading: false,
+    errorState: {
+      isError: false,
+      error: {}
+    }
   }
 }
 

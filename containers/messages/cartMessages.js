@@ -8,3 +8,5 @@ export const LF_ASSURED = '100% medicine availability. Delivery within promised 
 export const UREGNT_DELIVERY = 'Eligible for same day delivery. Additional express delivery charges of Rs. express_delivery_charge will be charged. Cashback of express_lcassured_undelivered_cashback% of order value upto a maximum of Rs. maximum_express_lcassured_cashback if service guarantee is not met.'
 export const LF_ASSURED_DETAIL = 'Your order is covered under LifCare Assured.'
 export const VERIFICATION_RX = 'Verification of a valid prescription is pending for this order, for the commencement of the LifCare Assured service guarantee.'
+export const DELIVERY_OPTION_URGENT = 'URGENT'
+export const DELIVERY_OPTION_NORMAL = 'NORMAL'

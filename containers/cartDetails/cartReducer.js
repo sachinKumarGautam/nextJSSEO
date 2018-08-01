@@ -587,6 +587,44 @@ export default function cartReducer (state = initialState, action) {
         }
       }
 
+    case cartActionTypes.OPT_EXPRESS_DELIVERY_LOADING:
+      return {
+        ...state,
+        expressDeliveryCheck: {
+          ...state.expressDeliveryCheck,
+          isLoading: action.isLoading,
+          errorState: {
+            ...state.expressDeliveryCheck.errorState,
+            error: action.error,
+            isError: action.isError
+          }
+        }
+      }
+
+    case cartActionTypes.OPT_EXPRESS_DELIVERY_SUCCESS:
+      return {
+        ...state,
+        expressDeliveryCheck: {
+          ...state.expressDeliveryCheck,
+          isLoading: action.isLoading,
+          payload: action.payload
+        }
+      }
+
+    case cartActionTypes.OPT_EXPRESS_DELIVERY_FAILURE:
+      return {
+        ...state,
+        expressDeliveryCheck: {
+          ...state.expressDeliveryCheck,
+          isLoading: action.isLoading,
+          errorState: {
+            ...state.expressDeliveryCheck.errorState,
+            error: action.error,
+            isError: action.isError
+          }
+        }
+      }
+
     default:
       return state
   }
