@@ -17,7 +17,9 @@ const styles = theme => ({
   title: {
     ...theme.typography.headline,
     color: theme.palette.customGrey.grey500,
-    marginLeft: theme.spacing.unit * 3
+    marginLeft: theme.spacing.unit * 5,
+    margin: theme.spacing.unit * 2.5,
+    fontSize: theme.spacing.unit * 1.75
   },
   buttonRoot: {
     border: `1px solid ${theme.palette.primary.main}`
@@ -58,7 +60,7 @@ class OrderInformation extends Component {
                 component='h1'
                 className={this.props.classes.title}
               >
-                Order Details
+                Go to My Orders
               </Typography>
             </div>
             <OrderContentWrapper

@@ -11,7 +11,8 @@ const styles = theme => ({
     flexDirection: 'row'
   },
   title: {
-    fontSize: theme.spacing.unit * 2.5
+    fontSize: theme.spacing.unit * 2.5,
+    paddingLeft: theme.spacing.unit * 2.5
   },
   iconButtonStyle: {
     color: theme.palette.customGreen.green300,
@@ -33,7 +34,7 @@ const OrderStatusDetails = (props) => {
       <Typography
         className={props.classes.title}
       >
-        Order No. 100787317
+        Order No. {props.orderId}
       </Typography>
       <div>
         <a className={props.classes.trackWrapper}>

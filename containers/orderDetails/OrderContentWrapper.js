@@ -11,11 +11,13 @@ import AddressDetails from './AddressDetails'
 import Prescriptions from './Prescriptions'
 import DeliveryDate from './DeliveryDate'
 import PaymentDetails from './PaymentDetails'
+import PaymentDeliveryDetail from './PaymentDeliveryDetail'
 import OrderStatusDetails from './OrderStatusDetails'
-import CouponMessage from '../cartDetails/CouponMessage'
-import PriceDetails from '../cartDetails/PriceDetails'
-import TotalAmount from '../cartDetails/TotalAmount'
-import TermsAndCondition from '../cartDetails/TermsAndCondition'
+import MedicineList from './MedicineList'
+import CouponMessage from './CouponMessage'
+import PriceDetails from './PriceDetails'
+import TotalAmount from './TotalAmount'
+import TermsAndCondition from './TermsAndCondition'
 
 import Button from '../../components/button'
 
@@ -72,6 +74,9 @@ const styles = theme => ({
     marginBottom: theme.spacing.unit * 5.37,
     marginTop: theme.spacing.unit * 5.37,
     justifyContent: 'center'
+  },
+  divider: {
+    marginLeft: theme.spacing.unit * 2.5
   }
 })
 
@@ -80,7 +85,9 @@ const steps = ['Processing', 'Confirmed', 'Dispatched', 'Delivered']
 const OrderContentWrapper = (props) => {
   return (
     <div className={props.classes.orderContentWrapper}>
-      <OrderStatusDetails />
+      <OrderStatusDetails
+        orderId={props.orderDetailsState.payload.id}
+      />
       <Divider />
       <PaymentDetails />
       <Stepper activeStep={0} alternativeLabel>
@@ -92,12 +99,18 @@ const OrderContentWrapper = (props) => {
           )
         })}
       </Stepper>
+      <PaymentDeliveryDetail />
       <DeliveryDate />
       <Prescriptions />
       <PatientDetails />
-      <AddressDetails />
+      <AddressDetails
+        shippingAddress={props.orderDetailsState.payload.shipping_address}
+      />
+      <MedicineList
+        orderItems={props.orderDetailsState.payload.order_items}
+      />
       <CouponMessage />
-      <Divider />
+      <Divider className={props.classes.divider} />
       <PriceDetails
         cartState={props.cartState}
       />

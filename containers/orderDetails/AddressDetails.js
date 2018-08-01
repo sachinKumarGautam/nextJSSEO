@@ -4,20 +4,52 @@ import { withStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
 
 const styles = theme => ({
+  addressDetailsWrapper: {
+    display: 'flex',
+    flexDirection: 'row',
+    paddingLeft: theme.spacing.unit * 2.5
+  },
   address: {
     fontSize: theme.spacing.unit * 2.25,
     fontWeight: theme.typography.fontWeightBold,
-    color: theme.palette.customGrey.grey500
+    color: theme.palette.customGrey.grey500,
+    marginLeft: theme.spacing.unit * 2.5
+  },
+  street: {
+    marginLeft: theme.spacing.unit * 7.5
+  },
+  image: {
+    height: theme.spacing.unit * 2,
+    width: theme.spacing.unit * 2,
+    marginTop: theme.spacing.unit * 0.625
   }
 })
 
 const AddressDetails = (props) => {
   return (
-    <Typography
-      className={props.classes.address}
-    >
-      Home
-    </Typography>
+    <div>
+      <div className={props.classes.addressDetailsWrapper}>
+        <img
+          src='/static/images/homeAddress.svg'
+          className={props.classes.image}
+        />
+        <Typography
+          className={props.classes.address}
+        >
+          Home
+        </Typography>
+      </div>
+      <Typography
+        className={props.classes.street}
+      >
+        {props.shippingAddress.street1}
+      </Typography>
+      <Typography
+        className={props.classes.street}
+      >
+        {props.shippingAddress.street2}
+      </Typography>
+    </div>
   )
 }
 
