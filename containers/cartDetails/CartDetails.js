@@ -118,6 +118,7 @@ class CartDetails extends Component {
                 cartState={this.props.cartState}
                 decrementCartItem={this.decrementCartItem.bind(this)}
                 incrementCartItem={this.incrementCartItem.bind(this)}
+                checkPincodeState={this.props.checkPincodeState}
               />
             ) : (
               <div>

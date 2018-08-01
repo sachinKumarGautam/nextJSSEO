@@ -80,6 +80,7 @@ const FormWrapper = props => {
           updateAddressFormValue={updateAddressFormValue}
           getLocalityDetailListLoading={getLocalityDetailListLoading}
           checkPincodeState={checkPincodeState}
+          customerState={props.customerState}
         />
       )
 
