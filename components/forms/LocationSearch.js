@@ -122,8 +122,8 @@ class LocationSearch extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
-     isOpen: false
-   }
+      isOpen: false
+    }
     this.searchLocalityOnChange = this.searchLocalityOnChange.bind(this)
     this.onSelectItem = this.onSelectItem.bind(this)
     this.stateChangeHandler = this.stateChangeHandler.bind(this)
