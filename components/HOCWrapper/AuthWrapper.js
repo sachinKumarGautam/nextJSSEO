@@ -19,7 +19,8 @@ export default function withAuth (WrappedComponent) {
     componentDidMount () {
       if (!this.props.loginState.isAuthenticated) {
         Router.replace(
-          `${HOME_PAGE}?authentication=false&path=${Router.asPath}`
+          `${HOME_PAGE}?authentication=false&path=${Router.asPath}`,
+          HOME_PAGE
         )
       }
     }
