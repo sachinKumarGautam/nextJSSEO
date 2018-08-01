@@ -86,7 +86,8 @@ export default function deliveryDetailsReducer (state = initialState, action) {
             ...state.addressLocalityList.errorState,
             isError: action.isError,
             error: action.error
-          }
+          },
+          payload: []
         }
       }
 

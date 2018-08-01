@@ -197,7 +197,7 @@ const deletePrescriptionEpic$ = (cartId, prescriptionId) =>
 const submitOrder$ = (cartState, body) =>
   makeAjaxRequest({
     method: 'POST',
-    url: fetchUrl('order', 'cart', 'CREATE'),
+    url: fetchUrl('order', 'cart/create', 'CREATE'),
     body: body
   })
 

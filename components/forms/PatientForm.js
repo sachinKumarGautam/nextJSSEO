@@ -104,7 +104,7 @@ class PatientForm extends React.Component {
               <em>Gender</em>
             </MenuItem>
             <MenuItem value={'Male'}>Male</MenuItem>
-            <MenuItem value={'Femlae'}>Female</MenuItem>
+            <MenuItem value={'Female'}>Female</MenuItem>
             <MenuItem value={'Others'}>Others</MenuItem>
           </Select>
           {errors.gender &&

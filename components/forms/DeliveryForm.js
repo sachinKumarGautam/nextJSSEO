@@ -44,6 +44,19 @@ const styles = theme => ({
 })
 
 class DeliveryForm extends React.Component {
+  componentDidMount () {
+    this.props.updateAddressFormValue(
+      this.props.deliveryDetailsState,
+      'full_name',
+      this.props.customerState.payload.full_name
+    )
+    this.props.updateAddressFormValue(
+      this.props.deliveryDetailsState,
+      'mobile',
+      this.props.customerState.payload.mobile
+    )
+  }
+
   onPincodeInput (handleChange, event) {
     if (event.target.value.length > 6) return
     else if (event.target.value.length === 6) {
