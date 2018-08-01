@@ -83,6 +83,20 @@ app
       app.render(req, res, actualPage, queryParams)
     })
 
+    // thank you page
+    server.get('/order/:id/order-confirmation', (req, res) => {
+      const actualPage = '/order-confirmation'
+      const queryParams = { id: req.params.id }
+      app.render(req, res, actualPage, queryParams)
+    })
+
+    // home page
+    server.get('/', (req, res) => {
+      const actualPage = '/'
+      const queryParams = { authentication: req.query.authentication, path: req.query.path }
+      app.render(req, res, actualPage, queryParams)
+    })
+
     server.get('*', (req, res) => {
       return handle(req, res)
     })

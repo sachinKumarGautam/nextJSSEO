@@ -309,7 +309,7 @@ export function saveDeliveryAddressToCartEpic (action$, store) {
 export function cartTransferEpic (action$, store) {
   return action$.pipe(
     ofType(CART_TRANSFER_LOADING),
-    switchMap(data => {
+    mergeMap(data => {
       return http(cartTransfer$(data.cartState.payload.uid)).pipe(
         map(result => {
           let cartItems = result.body.payload.cart_items
