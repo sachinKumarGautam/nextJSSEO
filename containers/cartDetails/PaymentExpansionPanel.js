@@ -45,9 +45,10 @@ class PaymentExpansionPanel extends React.Component {
         >
           {
             (this.props.cartState.payload.service_type === 'LF_ASSURED' ||
-            this.props.cartState.payload.delivery_option === 'NORMAL') &&
+            this.props.cartState.payload.delivery_option !== 'NORMAL') &&
             <PaymentDeliveryDetail
               cartState={this.props.cartState}
+              optForExpressDeliveryLoading={this.props.optForExpressDeliveryLoading}
             />
           }
           <div className={this.props.radioWrapper}>

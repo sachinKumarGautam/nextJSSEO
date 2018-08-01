@@ -26,7 +26,8 @@ import {
   resetCartState,
   applyCouponCodeLoading,
   updateCouponCode,
-  optForDoctorCallbackLoading
+  optForDoctorCallbackLoading,
+  optForExpressDeliveryLoading
 } from './cartActions'
 
 import {
@@ -125,6 +126,7 @@ class CartDetailsWrapper extends Component {
                 updateAddressFormValue={this.props.actions.updateAddressFormValue}
                 checkPincodeLoading={this.props.actions.checkPincodeLoading}
                 getLocalityDetailListLoading={this.props.actions.getLocalityDetailListLoading}
+                optForExpressDeliveryLoading={this.props.actions.optForExpressDeliveryLoading}
               />
             </section>
           </Grid>
@@ -183,7 +185,8 @@ function mapDispatchToProps (dispatch) {
         optForDoctorCallbackLoading,
         updateAddressFormValue,
         getLocalityDetailListLoading,
-        checkPincodeLoading
+        checkPincodeLoading,
+        optForExpressDeliveryLoading
       },
       dispatch
     )

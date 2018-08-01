@@ -293,6 +293,7 @@ class OrderSummary extends React.Component {
           nextButtonRoot={this.props.classes.nextButtonRoot}
           submitOrderLoading={this.props.submitOrderLoading}
           radioWrapper={this.props.classes.radioWrapper}
+          optForExpressDeliveryLoading={this.props.optForExpressDeliveryLoading}
         />
         <Snackbar
           anchorOrigin={{
