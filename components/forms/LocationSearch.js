@@ -126,16 +126,6 @@ class LocationSearch extends React.Component {
     }
     this.searchLocalityOnChange = this.searchLocalityOnChange.bind(this)
     this.onSelectItem = this.onSelectItem.bind(this)
-    this.stateChangeHandler = this.stateChangeHandler.bind(this)
-  }
-
-  stateChangeHandler = changes => {
-    let { isOpen = this.state.isOpen } = changes
-
-    isOpen = this.props.deliveryDetailsState.addressLocalityList.payload.length
-    this.setState({
-      isOpen
-    })
   }
 
   searchLocalityOnChange (event) {
@@ -147,10 +137,16 @@ class LocationSearch extends React.Component {
       event.target.value
     )
     this.props.onChange(event.target.value)
+    this.setState({
+      isOpen: this.props.deliveryDetailsState.addressLocalityList.payload.length > 0
+    })
   }
 
   onSelectItem (itemDetails) {
     this.props.onChange(itemDetails)
+    this.setState({
+      isOpen: false
+    })
   }
 
   render () {
@@ -164,7 +160,6 @@ class LocationSearch extends React.Component {
       <div className={classes.root}>
         <Downshift
           onChange={this.onSelectItem}
-          onStateChange={this.stateChangeHandler}
           isOpen={isOpen}
         >
           {({ getInputProps, getItemProps, getMenuProps, isOpen, inputValue, selectedItem, highlightedIndex }) => (
