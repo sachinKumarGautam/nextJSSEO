@@ -26,7 +26,13 @@ export function getOrderDetailsLoading (orderDetailsState, orderId) {
  * @param {array} result - The result obtained from the API response
  */
 
-export function getOrderDetailsSuccess (orderDetailsState, result) {
+export function getOrderDetailsSuccess (
+  orderDetailsState,
+  result,
+  orderStatusProgressDetails,
+  promisedDeliveryDate,
+  createdAt
+) {
   return {
     type: GET_ORDER_DETAILS_SUCCESS,
     orderDetailsState,
@@ -35,19 +41,27 @@ export function getOrderDetailsSuccess (orderDetailsState, result) {
     uid: result.uid,
     patient_id: result.patient_id,
     customer_id: result.customer_id,
+    created_at: createdAt,
     shipping_address_id: result.shipping_address_id,
     shipping_address: result.shipping_address,
     customer_full_name: result.customer_full_name,
     patient_full_name: result.patient_full_name,
+    patient_first_name: result.patient_first_name,
+    patient_last_name: result.patient_last_name,
     discount: result.discount,
     redeemed_care_points: result.redeemed_care_points,
-    redeemable_care_points: result.redeemable_care_points,
+    redeemed_cash: result.redeemed_cash,
     total_mrp: result.total_mrp,
     total_sale_price: result.total_sale_price,
     total_tax_amount: result.total_tax_amount,
     facility_code: result.facility_code,
+    state: result.state,
     status: result.status,
+    activeStep: orderStatusProgressDetails.activeStep,
+    viewStatus: orderStatusProgressDetails.viewStatus,
     source: result.source,
+    payment_method: result.payment_method,
+    promised_delivery_date: promisedDeliveryDate,
     order_items: result.order_items,
     order_prescriptions: result.order_prescriptions,
     source_type: result.source_type,

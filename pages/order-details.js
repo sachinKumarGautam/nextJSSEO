@@ -27,31 +27,6 @@ const styles = theme => ({
   },
   title: {
     fontWeight: theme.typography.fontWeightBold
-  },
-  loaderStyle: {
-    position: 'fixed',
-    height: '100%',
-    width: '100%',
-    justifyContent: 'center',
-    alignItems: 'center',
-    left: 0,
-    top: 0,
-    zIndex: '9999'
-  },
-  spinnerStyle: {
-    position: 'fixed',
-    height: '100%',
-    backgroundColor: '#fff',
-    flexDirection: 'column',
-    width: '100%',
-    justifyContent: 'center',
-    alignItems: 'center',
-    left: 0,
-    top: 0,
-    zIndex: '1'
-  },
-  progress: {
-    margin: theme.spacing.unit * 2
   }
 })
 

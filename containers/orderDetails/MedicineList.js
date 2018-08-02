@@ -16,7 +16,7 @@ const styles = theme => ({
     marginBottom: theme.spacing.unit * 2.5
   },
   medicineText: {
-    fontSize: theme.spacing.unit * 2.25,
+    fontSize: theme.spacing.unit * 2,
     color: theme.palette.customGrey.grey500
   },
   medicineNameWrapper: {
@@ -37,8 +37,7 @@ const styles = theme => ({
   amount: {
     ...theme.typography.subheading,
     fontSize: theme.spacing.unit * 2,
-    marginRight: theme.spacing.unit * 5.5,
-    marginTop: theme.spacing.unit * 2.875
+    marginRight: theme.spacing.unit * 5.5
   },
   amountWrapper: {
     textAlign: 'right'
@@ -97,7 +96,23 @@ const MedicineList = (props) => {
                     withoutImage
                   />
                   <Typography className={props.classes.deliveryByText}>
-                    Delivery by 2 days
+                    {
+                      orderItem.available_delivery_option &&
+                    orderItem.available_delivery_option === 'URGENT_DELIVERY'
+                        ? (
+                          orderItem.stock_availability === 'IN_STOCK'
+                            ? `Delivery by today`
+                            : (orderItem.min_delivery_day >= 0 && orderItem.max_delivery_day &&
+                        `Delivery by ${orderItem.max_delivery_day} days`)
+                        )
+                        : (
+                          orderItem.stock_availability === 'IN_STOCK'
+                            ? (orderItem.min_delivery_day >= 0 && orderItem.max_delivery_day &&
+                        `Delivery within ${orderItem.min_delivery_day}-${orderItem.max_delivery_day} days`)
+                            : (orderItem.min_delivery_day >= 0 && orderItem.max_delivery_day &&
+                        `Delivery by ${orderItem.max_delivery_day} days`)
+                        )
+                    }
                   </Typography>
                 </Grid>
                 <Grid item xs={4}>

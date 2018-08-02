@@ -10,9 +10,20 @@ const styles = theme => ({
     display: 'flex',
     flexDirection: 'row'
   },
+  orderWrapper: {
+    display: 'flex',
+    flexDirection: 'row'
+  },
   title: {
     fontSize: theme.spacing.unit * 2.5,
-    paddingLeft: theme.spacing.unit * 2.5
+    paddingLeft: theme.spacing.unit * 2.5,
+    color: theme.palette.customGrey.grey500
+  },
+  orderId: {
+    fontSize: theme.spacing.unit * 2.5,
+    marginLeft: theme.spacing.unit * 1.25,
+    fontWeight: theme.typography.fontWeightBold,
+    color: theme.palette.customGrey.grey500
   },
   iconButtonStyle: {
     color: theme.palette.customGreen.green300,
@@ -31,11 +42,18 @@ const styles = theme => ({
 const OrderStatusDetails = (props) => {
   return (
     <div className={props.classes.orderNoWrapper}>
-      <Typography
-        className={props.classes.title}
-      >
-        Order No. {props.orderId}
-      </Typography>
+      <div className={props.classes.orderWrapper}>
+        <Typography
+          className={props.classes.title}
+        >
+          Order No.
+        </Typography>
+        <Typography
+          className={props.classes.orderId}
+        >
+          {props.orderId}
+        </Typography>
+      </div>
       <div>
         <a className={props.classes.trackWrapper}>
           <Location className={props.classes.iconButtonStyle} />Track Order

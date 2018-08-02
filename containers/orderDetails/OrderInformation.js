@@ -4,6 +4,7 @@ import Card from '@material-ui/core/Card'
 import CardContent from '@material-ui/core/CardContent'
 import Typography from '@material-ui/core/Typography'
 import { withStyles } from '@material-ui/core/styles'
+import BackArrow from '@material-ui/icons/ArrowBack'
 
 import OrderContentWrapper from './OrderContentWrapper'
 
@@ -17,7 +18,7 @@ const styles = theme => ({
   title: {
     ...theme.typography.headline,
     color: theme.palette.customGrey.grey500,
-    marginLeft: theme.spacing.unit * 5,
+    marginLeft: theme.spacing.unit * 1.25,
     margin: theme.spacing.unit * 2.5,
     fontSize: theme.spacing.unit * 1.75
   },
@@ -38,14 +39,18 @@ const styles = theme => ({
   },
   buttonWrapper: {
     display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'space-between'
+    flexDirection: 'row'
+  },
+  image: {
+    marginLeft: theme.spacing.unit * 5,
+    color: theme.palette.customGrey.grey300,
+    marginTop: theme.spacing.unit * 2
   }
 })
 
 class OrderInformation extends Component {
   componentDidMount () {
-    this.props.getOrderDetailsLoading(this.props.orderDetailsState, 100681649)
+    this.props.getOrderDetailsLoading(this.props.orderDetailsState, 100682709)
   }
 
   render () {
@@ -54,6 +59,7 @@ class OrderInformation extends Component {
         <Card elevation={'1'} className={this.props.classes.card}>
           <CardContent className={this.props.classes.cardContent}>
             <div className={this.props.classes.buttonWrapper}>
+              <BackArrow classes={{ root: this.props.classes.image }} />
               <Typography
                 gutterBottom
                 variant='headline'

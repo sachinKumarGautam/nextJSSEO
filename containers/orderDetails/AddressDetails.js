@@ -10,7 +10,7 @@ const styles = theme => ({
     paddingLeft: theme.spacing.unit * 2.5
   },
   address: {
-    fontSize: theme.spacing.unit * 2.25,
+    fontSize: theme.spacing.unit * 2,
     fontWeight: theme.typography.fontWeightBold,
     color: theme.palette.customGrey.grey500,
     marginLeft: theme.spacing.unit * 2.5
@@ -36,7 +36,7 @@ const AddressDetails = (props) => {
         <Typography
           className={props.classes.address}
         >
-          Home
+          {props.shippingAddress.type}
         </Typography>
       </div>
       <Typography

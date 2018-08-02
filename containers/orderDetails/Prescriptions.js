@@ -9,7 +9,8 @@ const styles = theme => ({
   },
   prescriptionText: {
     paddingTop: theme.spacing.unit * 1.75,
-    fontSize: theme.spacing.unit * 2.25
+    fontSize: theme.spacing.unit * 2,
+    color: theme.palette.customGrey.grey500
   },
   image: {
     height: theme.spacing.unit * 10,
@@ -26,10 +27,16 @@ const Prescriptions = (props) => {
       >
         Attached Prescription
       </Typography>
-      <img
-        src='/static/images/profile.svg'
-        className={props.classes.image}
-      />
+      {
+        props.orderPrescriptions.map(orderPrescription => {
+          return (
+            <img
+              src={orderPrescription.location}
+              className={props.classes.image}
+            />
+          )
+        })
+      }
     </div>
   )
 }

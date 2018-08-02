@@ -4,7 +4,7 @@ import { withStyles } from '@material-ui/core/styles'
 import Divider from '@material-ui/core/Divider'
 import Stepper from '@material-ui/core/Stepper'
 import Step from '@material-ui/core/Step'
-import StepLabel from '@material-ui/core/StepLabel'
+import Typography from '@material-ui/core/Typography'
 
 import PatientDetails from './PatientDetails'
 import AddressDetails from './AddressDetails'
@@ -77,6 +77,23 @@ const styles = theme => ({
   },
   divider: {
     marginLeft: theme.spacing.unit * 2.5
+  },
+  image: {
+    height: theme.spacing.unit * 3,
+    width: theme.spacing.unit * 3,
+    marginLeft: theme.spacing.unit * 10
+  },
+  stepLabel: {
+    marginLeft: theme.spacing.unit * 7.5,
+    marginTop: theme.spacing.unit * 2,
+    color: theme.palette.customGrey.grey500,
+    fontSize: theme.spacing.unit * 1.75
+  },
+  stepLabelGreyed: {
+    marginLeft: theme.spacing.unit * 7.5,
+    marginTop: theme.spacing.unit * 2,
+    color: theme.palette.customGrey.grey100,
+    fontSize: theme.spacing.unit * 1.75
   }
 })
 
@@ -89,33 +106,71 @@ const OrderContentWrapper = (props) => {
         orderId={props.orderDetailsState.payload.id}
       />
       <Divider />
-      <PaymentDetails />
-      <Stepper activeStep={0} alternativeLabel>
-        {steps.map(label => {
-          return (
-            <Step key={label}>
-              <StepLabel>{label}</StepLabel>
-            </Step>
-          )
+      <PaymentDetails
+        createdAt={props.orderDetailsState.payload.created_at}
+        paymentMethod={props.orderDetailsState.payload.payment_method}
+        paymentStatus={props.orderDetailsState.payload.viewStatus}
+      />
+      <Stepper activeStep={props.orderDetailsState.payload.activeStep + 1} alternativeLabel>
+        {steps.map((label, index) => {
+          if (index <= props.orderDetailsState.payload.activeStep) {
+            return (
+              <Step key={label}>
+                <img src='/static/images/checkedBazooka.svg' className={props.classes.image} />
+                <Typography className={props.classes.stepLabel}>
+                  {label}
+                </Typography>
+              </Step>
+            )
+          } else {
+            return (
+              <Step key={label}>
+                <img src='/static/images/greyBazooka.svg' className={props.classes.image} />
+                <Typography className={props.classes.stepLabelGreyed}>
+                  {label}
+                </Typography>
+              </Step>
+            )
+          }
         })}
       </Stepper>
-      <PaymentDeliveryDetail />
-      <DeliveryDate />
-      <Prescriptions />
-      <PatientDetails />
+      <PaymentDeliveryDetail
+        deliveryOption={props.orderDetailsState.payload.delivery_option}
+        serviceType={props.orderDetailsState.payload.service_type}
+      />
+      <DeliveryDate
+        promisedDeliveryDate={props.orderDetailsState.payload.promised_delivery_date}
+      />
+      {
+        props.orderDetailsState.payload.order_prescriptions.length
+          ? (
+            <Prescriptions
+              orderPrescriptions={props.orderDetailsState.payload.order_prescriptions}
+            />
+          ) : null
+      }
+      <PatientDetails
+        patientFirstName={props.orderDetailsState.payload.patient_first_name}
+        patientLastName={props.orderDetailsState.payload.patient_last_name}
+      />
       <AddressDetails
         shippingAddress={props.orderDetailsState.payload.shipping_address}
       />
-      <MedicineList
-        orderItems={props.orderDetailsState.payload.order_items}
-      />
+      {
+        props.orderDetailsState.payload.order_items.length
+          ? (
+            <MedicineList
+              orderItems={props.orderDetailsState.payload.order_items}
+            />
+          ) : null
+      }
       <CouponMessage />
       <Divider className={props.classes.divider} />
       <PriceDetails
-        cartState={props.cartState}
+        orderDetailsState={props.orderDetailsState}
       />
       <TotalAmount
-        cartState={props.cartState}
+        orderDetailsState={props.orderDetailsState}
       />
       <TermsAndCondition />
       <div className={props.classes.buttonWrapper}>

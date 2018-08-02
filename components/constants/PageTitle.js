@@ -59,6 +59,6 @@ export const cartDetail = {
 }
 
 export const orderDetail = {
-  title: 'Order Details',
+  title: 'Order Detail',
   description: ''
 }

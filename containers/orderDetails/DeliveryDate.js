@@ -8,12 +8,14 @@ const styles = theme => ({
     paddingLeft: theme.spacing.unit * 2.5
   },
   deliveryDateText: {
-    fontSize: theme.spacing.unit * 2.25
+    fontSize: theme.spacing.unit * 2,
+    color: theme.palette.customGrey.grey700
   },
   deliveryDate: {
-    fontSize: theme.spacing.unit * 2.25,
+    fontSize: theme.spacing.unit * 2,
     fontWeight: theme.typography.fontWeightBold,
-    marginTop: theme.spacing.unit * 1.25
+    marginTop: theme.spacing.unit * 1.25,
+    color: theme.palette.customGrey.grey500
   }
 })
 
@@ -28,7 +30,7 @@ const DeliveryDate = (props) => {
       <Typography
         className={props.classes.deliveryDate}
       >
-        08 Apr 2018
+        {props.promisedDeliveryDate}
       </Typography>
     </div>
   )

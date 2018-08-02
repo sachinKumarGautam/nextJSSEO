@@ -16,6 +16,14 @@ import {
   getOrderDetails$
 } from '../../services/api'
 
+import {
+  getOrderStatusProgressDetails
+} from '../../utils/getOrderStatusProgressDetails'
+
+import {
+  formatDateWithMonth
+} from '../../utils/FormatDate'
+
 /**
  * Represents to the epic of get molecule detail/summary
  * @param {object} action$ - this is the ActionsObservable
@@ -27,7 +35,18 @@ export function getOrderDetails (action$, store) {
     mergeMap(data => {
       return http(getOrderDetails$(data.orderId)).pipe(
         map(result => {
-          return getOrderDetailsSuccess(data.orderDetailsState, result.body.payload)
+          const payload = result.body.payload
+          const orderStatusProgressDetails = getOrderStatusProgressDetails(payload.state, payload.status)
+          const promisedDeliveryDate = formatDateWithMonth(payload.promised_delivery_date)
+          const createdAt = formatDateWithMonth(payload.created_at)
+
+          return getOrderDetailsSuccess(
+            data.orderDetailsState,
+            payload,
+            orderStatusProgressDetails,
+            promisedDeliveryDate,
+            createdAt
+          )
         }),
         catchError(error => {
           return of(getOrderDetailsFailure(data.orderDetailsState, error))

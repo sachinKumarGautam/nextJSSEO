@@ -50,7 +50,7 @@ const PaymentDetails = (props) => {
           <Typography
             className={props.classes.placedOnText}
           >
-            06 Apr 2018
+            {props.createdAt}
           </Typography>
         </div>
         <div className={props.classes.placedOnWrapper}>
@@ -62,7 +62,7 @@ const PaymentDetails = (props) => {
           <Typography
             className={props.classes.paymentText}
           >
-            Credit Card
+            {props.paymentMethod}
           </Typography>
         </div>
       </Grid>
@@ -70,7 +70,7 @@ const PaymentDetails = (props) => {
         <Typography
           className={props.classes.paymentStatusText}
         >
-          Status: Payment Pending
+          Status: {props.paymentStatus}
         </Typography>
       </Grid>
     </Grid>

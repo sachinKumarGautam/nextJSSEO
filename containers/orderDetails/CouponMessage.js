@@ -13,7 +13,8 @@ const styles = theme => ({
     paddingRight: theme.spacing.unit,
     paddingBottom: theme.spacing.unit,
     marginBottom: theme.spacing.unit * 1.5,
-    marginLeft: theme.spacing.unit * 2.5
+    marginLeft: theme.spacing.unit * 2.5,
+    marginRight: theme.spacing.unit * 5
   },
   couponMessage: {
     ...theme.typography.body3,

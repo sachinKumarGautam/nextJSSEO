@@ -144,52 +144,30 @@ class PriceDetails extends Component {
               </a>
             </div>
             {
-              this.props.cartState.payload.coupon_code &&
+              this.props.orderDetailsState.payload.coupon_code &&
               <Typography className={this.props.classes.discount}>
                 Coupon Discount
               </Typography>
             }
-            {
-              // <Typography className={this.props.classes.itemTotal}>
-              //   Amount Payable
-              // </Typography>
-              // <Typography className={this.props.classes.itemTotal}>
-              //   Amount Paid
-              // </Typography>
-              // <Typography className={this.props.classes.itemTotal}>
-              //   Remaining Amount Payable
-              // </Typography>
-            }
           </Grid>
           <Grid item xs={4}>
             <Typography className={this.props.classes.itemTotalAmount}>
-              Rs. {this.props.cartState.payload.total_mrp}
+              Rs. {this.props.orderDetailsState.payload.total_mrp}
             </Typography>
             <Typography className={this.props.classes.discountAmount}>
-              - Rs. {this.props.cartState.payload.discount}
+              - Rs. {this.props.orderDetailsState.payload.discount}
             </Typography>
             <Typography className={this.props.classes.discountAmount}>
-              - Rs. {this.props.cartState.payload.redeemed_care_points}
+              - Rs. {this.props.orderDetailsState.payload.redeemed_care_points}
             </Typography>
             <Typography className={this.props.classes.discountAmount}>
-              - Rs. {this.props.cartState.payload.redeemable_care_points}
+              - Rs. {this.props.orderDetailsState.payload.redeemed_cash}
             </Typography>
             {
-              this.props.cartState.payload.coupon_code &&
+              this.props.orderDetailsState.payload.coupon_code &&
               <Typography className={this.props.classes.discountAmount}>
-                - Rs. {this.props.cartState.payload.coupon_discount}
+                - Rs. {this.props.orderDetailsState.payload.coupon_discount}
               </Typography>
-            }
-            {
-              // <Typography className={this.props.classes.itemTotalAmount}>
-              //   Rs. 800.00
-              // </Typography>
-              // <Typography className={this.props.classes.itemTotalAmount}>
-              //   Rs. 0.00
-              // </Typography>
-              // <Typography className={this.props.classes.itemTotalAmount}>
-              //   Rs. 800.00
-              // </Typography>
             }
           </Grid>
         </Grid>

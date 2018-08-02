@@ -8,10 +8,11 @@ const styles = theme => ({
     display: 'flex',
     flexDirection: 'row',
     paddingLeft: theme.spacing.unit * 2.5,
-    marginBottom: theme.spacing.unit * 1.25
+    marginBottom: theme.spacing.unit * 1.25,
+    marginTop: theme.spacing.unit * 1.25
   },
   patientName: {
-    fontSize: theme.spacing.unit * 2.25,
+    fontSize: theme.spacing.unit * 2,
     fontWeight: theme.typography.fontWeightBold,
     color: theme.palette.customGrey.grey500,
     marginLeft: theme.spacing.unit * 2.5
@@ -33,7 +34,7 @@ const PatientDetails = (props) => {
       <Typography
         className={props.classes.patientName}
       >
-        Jyoti Arora
+        {props.patientFirstName + ' ' + props.patientLastName}
       </Typography>
     </div>
   )
