@@ -172,7 +172,9 @@ const OrderContentWrapper = (props) => {
       <TotalAmount
         orderDetailsState={props.orderDetailsState}
       />
-      <TermsAndCondition />
+      <TermsAndCondition
+        sellerName={props.orderDetailsState.payload.seller_name}
+      />
       <div className={props.classes.buttonWrapper}>
         <Button
           size='small'
