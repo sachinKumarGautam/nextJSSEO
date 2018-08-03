@@ -6,8 +6,8 @@ import Checkbox from '@material-ui/core/Checkbox'
 import ReactTooltip from 'react-tooltip'
 
 import {
-  LF_ASSURED,
-  UREGNT_DELIVERY,
+  LF_ASSURED_TEXT,
+  UREGNT_DELIVERY_TEXT,
   VERIFICATION_RX,
   LF_ASSURED_DETAIL
 } from '../messages/cartMessages'
@@ -99,7 +99,7 @@ class PaymentDeliveryDetail extends Component {
               <Typography
                 variant='caption'
               >
-                {LF_ASSURED}
+                {LF_ASSURED_TEXT}
               </Typography>
             </ReactTooltip>
           </a>
@@ -154,7 +154,7 @@ class PaymentDeliveryDetail extends Component {
               <Typography
                 variant='caption'
               >
-                {UREGNT_DELIVERY}
+                {UREGNT_DELIVERY_TEXT}
               </Typography>
             </ReactTooltip>
           </a>

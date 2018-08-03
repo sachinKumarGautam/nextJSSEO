@@ -9,6 +9,11 @@ import ProductName from '../../components/ProductName'
 import ProductBrand from '../../components/ProductBrand'
 import ProductPackSize from '../../components/ProductPackSize'
 
+import {
+  URGENT_DELIVERY,
+  IN_STOCK
+} from '../../components/constants/Constants'
+
 const styles = theme => ({
   medicineListWrapper: {
     paddingLeft: theme.spacing.unit * 2.5,
@@ -98,15 +103,15 @@ const MedicineList = (props) => {
                   <Typography className={props.classes.deliveryByText}>
                     {
                       orderItem.available_delivery_option &&
-                    orderItem.available_delivery_option === 'URGENT_DELIVERY'
+                      orderItem.available_delivery_option === URGENT_DELIVERY
                         ? (
-                          orderItem.stock_availability === 'IN_STOCK'
+                          orderItem.stock_availability === IN_STOCK
                             ? `Delivery by today`
                             : (orderItem.min_delivery_day >= 0 && orderItem.max_delivery_day &&
                         `Delivery by ${orderItem.max_delivery_day} days`)
                         )
                         : (
-                          orderItem.stock_availability === 'IN_STOCK'
+                          orderItem.stock_availability === IN_STOCK
                             ? (orderItem.min_delivery_day >= 0 && orderItem.max_delivery_day &&
                         `Delivery within ${orderItem.min_delivery_day}-${orderItem.max_delivery_day} days`)
                             : (orderItem.min_delivery_day >= 0 && orderItem.max_delivery_day &&

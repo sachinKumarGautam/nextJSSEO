@@ -6,7 +6,9 @@ import ReactTooltip from 'react-tooltip'
 
 import {
   LF_ASSURED,
-  UREGNT_DELIVERY,
+  URGENT_DELIVERY,
+  LF_ASSURED_TEXT,
+  UREGNT_DELIVERY_TEXT,
   VERIFICATION_RX,
   LF_ASSURED_DETAIL,
   EXPRESS_DELIVERY_DETAIL
@@ -71,7 +73,7 @@ class PaymentDeliveryDetail extends Component {
     return (
       <div className={this.props.classes.mainWrapper}>
         {
-          this.props.serviceType === 'LF_ASSURED' &&
+          this.props.serviceType === LF_ASSURED &&
           <div className={this.props.classes.textWrapper}>
             <img
               src='/static/images/shape.svg'
@@ -103,14 +105,14 @@ class PaymentDeliveryDetail extends Component {
                 <Typography
                   variant='caption'
                 >
-                  {LF_ASSURED}
+                  {LF_ASSURED_TEXT}
                 </Typography>
               </ReactTooltip>
             </a>
           </div>
         }
         {
-          this.props.deliveryOption === 'URGENT_DELIVERY' &&
+          this.props.deliveryOption === URGENT_DELIVERY &&
           <div className={this.props.classes.textWrapper}>
             <img
               src='/static/images/express-delivery-icon.svg'
@@ -142,7 +144,7 @@ class PaymentDeliveryDetail extends Component {
                 <Typography
                   variant='caption'
                 >
-                  {UREGNT_DELIVERY}
+                  {UREGNT_DELIVERY_TEXT}
                 </Typography>
               </ReactTooltip>
             </a>
