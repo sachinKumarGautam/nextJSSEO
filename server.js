@@ -13,7 +13,7 @@ app
     // molecule details page
     server.get('/product/molecule/:id', (req, res) => {
       const actualPage = '/molecule-details'
-      const queryParams = { id: req.params.id }
+      const queryParams = { molecule_id: req.params.id }
       app.render(req, res, actualPage, queryParams)
     })
 
@@ -30,49 +30,49 @@ app
     // product details page
     server.get('/product/:id', (req, res) => {
       const actualPage = '/product-details'
-      const queryParams = { id: req.params.id, location: req.query.location }
+      const queryParams = { product_id: req.params.id, location: req.query.location }
       app.render(req, res, actualPage, queryParams)
     })
 
     // refill patients page
     server.get('/customer/:id/patient-refills', (req, res) => {
       const actualPage = '/refill-patients'
-      const queryParams = { id: req.params.id }
+      const queryParams = { customer_id: req.params.id }
       app.render(req, res, actualPage, queryParams)
     })
 
     // patient list page
     server.get('/customer/:id/patients', (req, res) => {
       const actualPage = '/patient-details'
-      const queryParams = { id: req.params.id }
+      const queryParams = { customer_id: req.params.id }
       app.render(req, res, actualPage, queryParams)
     })
 
     // shipping address list page
     server.get('/customer/:id/delivery-addresses', (req, res) => {
       const actualPage = '/delivery-details'
-      const queryParams = { id: req.params.id }
+      const queryParams = { customer_id: req.params.id }
       app.render(req, res, actualPage, queryParams)
     })
 
     // order list page
     server.get('/customer/:id/orders', (req, res) => {
       const actualPage = '/order-list'
-      const queryParams = { id: req.params.id }
+      const queryParams = { customer_id: req.params.id }
       app.render(req, res, actualPage, queryParams)
     })
 
     // prescription list page
     server.get('/customer/:id/prescriptions', (req, res) => {
       const actualPage = '/prescription-list'
-      const queryParams = { id: req.params.id }
+      const queryParams = { customer_id: req.params.id }
       app.render(req, res, actualPage, queryParams)
     })
 
     // care points list page
     server.get('/customer/:id/care-points', (req, res) => {
       const actualPage = '/care-points'
-      const queryParams = { id: req.params.id }
+      const queryParams = { customer_id: req.params.id }
       app.render(req, res, actualPage, queryParams)
     })
 

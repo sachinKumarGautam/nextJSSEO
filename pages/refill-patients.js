@@ -8,8 +8,7 @@ import { withStyles } from '@material-ui/core/styles'
 import Paper from '@material-ui/core/Paper'
 
 // components
-import Header from '../components/layouts/header'
-import Footer from '../components/layouts/footer'
+import Layout from '../components/layouts/Layout'
 import withRoot from '../src/withRoot'
 import RefillPatientsWrapper from '../containers/refillPatients'
 
@@ -45,16 +44,16 @@ const styles = theme => ({
 
 class RefillPatient extends Component {
   componentDidMount () {
-    let customerId = this.props.customerState.payload.id
+    // let customerId = this.props.customerState.payload.id
     const { query } = Router
 
-    if (query.id === this.props.customerState.payload.id) {
-      customerId = query.id
-    }
+    // if (query.id === this.props.customerState.payload.id) {
+    //   customerId = query.id
+    // }
 
     this.props.actions.getPatientDetailsListLoading(
       this.props.patientDetailsState,
-      customerId, // pass customer id,
+      query.customer_id, // pass customer id,
       { isRefillPatients: true }
     )
   }
@@ -63,11 +62,10 @@ class RefillPatient extends Component {
     const { addToCartHandler, classes } = this.props
 
     return (
-      <div>
-        <Header
-          title={refillPatient.title}
-          addToCartHandler={addToCartHandler}
-        />
+      <Layout
+        title={refillPatient.title}
+        addToCartHandler={addToCartHandler}
+      >
         <div className={classes.wrapperStyle}>
           <Paper className={classes.root} elevation={1}>
             <RefillPatientsWrapper
@@ -75,8 +73,7 @@ class RefillPatient extends Component {
             />
           </Paper>
         </div>
-        <Footer />
-      </div>
+      </Layout>
     )
   }
 }
