@@ -73,7 +73,7 @@ class OrderListDetails extends Component {
     })
   }
 
-  redirectToOrderDeatails(orderId) {
+  redirectToOrderDeatails (orderId) {
     const mappedObject = {
       order_id: orderId
     }

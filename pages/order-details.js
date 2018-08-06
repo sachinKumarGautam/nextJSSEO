@@ -32,7 +32,7 @@ const styles = theme => ({
 })
 
 class OrderDetails extends React.Component {
-  render() {
+  render () {
     const { query } = Router
 
     return (

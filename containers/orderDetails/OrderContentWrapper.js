@@ -168,19 +168,19 @@ const OrderContentWrapper = (props) => {
       <Divider className={props.classes.divider} />
       {
         props.orderDetailsState.payload.order_items.length
-        ? (
-          <PriceDetails
-            orderDetailsState={props.orderDetailsState}
-          />
-        ) : null
+          ? (
+            <PriceDetails
+              orderDetailsState={props.orderDetailsState}
+            />
+          ) : null
       }
       {
         props.orderDetailsState.payload.order_items.length
-        ? (
-          <TotalAmount
-            orderDetailsState={props.orderDetailsState}
-          />
-        ) : null
+          ? (
+            <TotalAmount
+              orderDetailsState={props.orderDetailsState}
+            />
+          ) : null
       }
       <TermsAndCondition
         sellerName={props.orderDetailsState.payload.seller_name}

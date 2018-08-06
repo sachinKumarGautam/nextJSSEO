@@ -14,7 +14,7 @@ import {
 
 import {
   LF_ASSURED,
-  URGENT_DELIVERY,
+  URGENT_DELIVERY
 } from '../../components/constants/Constants'
 
 const styles = theme => ({

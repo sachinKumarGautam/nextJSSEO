@@ -66,7 +66,7 @@ class OrderInformation extends Component {
     )
   }
 
-  redirectToOrdersPage(path) {
+  redirectToOrdersPage (path) {
     const url = getReplacedString(path)
     Router.push(url)
   }
