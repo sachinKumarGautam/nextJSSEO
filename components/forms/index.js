@@ -41,7 +41,6 @@ const FormWrapper = props => {
           loginState={loginState}
           customerState={customerState}
           checkReferralCodeLoading={checkReferralCodeLoading}
-          customerState={props.customerState}
         />
       )
 

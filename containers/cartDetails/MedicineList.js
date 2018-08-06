@@ -31,7 +31,7 @@ const styles = theme => ({
   },
   packType: {
     ...theme.typography.caption,
-    marginLeft: theme.spacing.unit * 3.875,
+    marginLeft: theme.spacing.unit * 3.875
   },
   amount: {
     ...theme.typography.subheading,
