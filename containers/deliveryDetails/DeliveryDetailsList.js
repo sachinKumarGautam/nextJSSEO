@@ -61,16 +61,26 @@ class Main extends Component {
     super(props)
     this.state = {
       openDeliveryFormDialog: false,
+      isAddNewAddressButtonClicked: false,
       isEdit: false
     }
     this.openDeliveryFormModal = this.openDeliveryFormModal.bind(this)
     this.closeDeliveryFormModal = this.closeDeliveryFormModal.bind(this)
   }
 
+  addNewAddressButton () {
+    this.setState({
+      isAddNewAddressButtonClicked: true
+    })
+
+    this.openDeliveryFormModal()
+  }
+
   openDeliveryFormModal (isEdit) {
     this.setState({
       openDeliveryFormDialog: true,
-      isEdit: isEdit
+      isEdit: isEdit,
+      isAddNewAddressButtonClicked: false
     })
   }
 
@@ -106,10 +116,11 @@ class Main extends Component {
               <AddDeliveryAddressButton
                 buttonRoot={this.props.classes.buttonRoot}
                 buttonLabel={this.props.classes.buttonLabel}
-                onClick={this.openDeliveryFormModal.bind(this)}
+                onClick={this.addNewAddressButton.bind(this)}
               />
               <DeliveryDetailForm
                 isEdit={this.state.isEdit}
+                isAddNewAddressButtonClicked={this.state.isAddNewAddressButtonClicked}
                 onSubmit={this.props.submitDeliveryDetailsLoading}
                 openDeliveryFormDialog={this.state.openDeliveryFormDialog}
                 customerState={this.props.customerState}

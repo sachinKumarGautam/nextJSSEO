@@ -50,7 +50,12 @@ class DeliveryDetailForm extends React.Component {
               root: classes.dialogTitle
             }}
           >
-            {'ADD NEW ADDRESS'}
+            {
+              this.props.isEdit &&
+              !this.props.isAddNewAddressButtonClicked
+                ? 'EDIT ADDRESS'
+                : 'ADD NEW ADDRESS'
+            }
           </DialogTitle>
           <DialogContent>
             <Form

@@ -94,11 +94,8 @@ class PatientForm extends React.Component {
           <Select
             value={values.gender}
             onChange={handleChange}
-            inputProps={{
-              name: 'gender',
-              id: 'gender',
-              placeholder: 'Gender'
-            }}
+            name='gender'
+            displayEmpty
           >
             <MenuItem value=''>
               <em>Gender</em>
@@ -139,7 +136,6 @@ class PatientForm extends React.Component {
           <Input
             placeholder='Contact No.'
             id='mobile'
-            type='number'
             onChange={this.handleChangeMobile}
             value={values.mobile}
           />
