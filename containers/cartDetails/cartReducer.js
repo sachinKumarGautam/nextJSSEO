@@ -72,6 +72,7 @@ export default function cartReducer (state = initialState, action) {
         payload: {
           ...state.payload,
           id: action.id,
+          available_delivery_option: action.available_delivery_option,
           uid: action.uid,
           patient_details: {
             ...state.payload.patient_details,
@@ -107,7 +108,8 @@ export default function cartReducer (state = initialState, action) {
           cart_prescriptions: action.cart_prescriptions,
           source_type: action.source_type,
           delivery_option: action.delivery_option,
-          service_type: action.service_type
+          service_type: action.service_type,
+          preferred_delivery_option: action.preferred_delivery_option
         }
       }
 
@@ -237,6 +239,8 @@ export default function cartReducer (state = initialState, action) {
         ...state,
         payload: {
           ...state.payload,
+          available_delivery_option: action.available_delivery_option,
+          preferred_delivery_option: action.preferred_delivery_option,
           shipping_address_details: {
             ...state.payload.shipping_address_details,
             isLoading: action.isLoading,
@@ -608,6 +612,10 @@ export default function cartReducer (state = initialState, action) {
           ...state.expressDeliveryCheck,
           isLoading: action.isLoading,
           payload: action.payload
+        },
+        payload: {
+          ...state.payload,
+          preferred_delivery_option: action.preferred_delivery_option
         }
       }
 

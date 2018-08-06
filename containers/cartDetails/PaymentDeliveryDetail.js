@@ -15,8 +15,7 @@ import {
 import {
   DELIVERY_OPTION_URGENT,
   DELIVERY_OPTION_NORMAL,
-  LF_ASSURED,
-  NORMAL
+  LF_ASSURED
 } from '../../components/constants/Constants'
 
 const styles = theme => ({
@@ -80,6 +79,14 @@ class PaymentDeliveryDetail extends Component {
     }
   }
 
+  componentDidMount () {
+    if (this.props.cartState.payload.preferred_delivery_option === DELIVERY_OPTION_URGENT) {
+      this.setState({
+        isExpressDelivery: true
+      })
+    }
+  }
+
   onExpressDeliveryClick () {
     this.setState({
       isExpressDelivery: !this.state.isExpressDelivery
@@ -92,6 +99,7 @@ class PaymentDeliveryDetail extends Component {
   }
 
   render () {
+    let indexOfUrgentDelivery = this.props.cartState.payload.available_delivery_option.indexOf(DELIVERY_OPTION_URGENT)
     return (
       <div className={this.props.classes.mainWrapper}>
         {
@@ -148,7 +156,7 @@ class PaymentDeliveryDetail extends Component {
           </div>
         }
         {
-          this.props.cartState.payload.delivery_option !== NORMAL &&
+          indexOfUrgentDelivery !== -1 &&
           <div className={this.props.classes.textWrapper}>
             <Checkbox
               checked={this.state.isExpressDelivery}

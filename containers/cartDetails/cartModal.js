@@ -1,6 +1,8 @@
 const initialState = {
   payload: {
     id: 0,
+    available_delivery_option: [],
+    preferred_delivery_option: '',
     uid: '',
     customer_id: 0,
     customer_first_name: '',
