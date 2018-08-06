@@ -15,6 +15,7 @@ class OrderDetails extends Component {
           </Grid>
           <Grid item xs={10}>
             <OrderInformation
+              orderId={this.props.orderId}
               cartState={this.props.cartState}
               orderDetailsState={this.props.orderDetailsState}
               getOrderDetailsLoading={this.props.getOrderDetailsLoading}

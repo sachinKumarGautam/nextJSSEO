@@ -6,6 +6,7 @@ import { withStyles } from '@material-ui/core/styles'
 import withRoot from '../src/withRoot'
 
 import Head from 'next/head'
+import Router from 'next/router'
 
 import OrderDetailsWrapper from '../containers/orderDetails'
 
@@ -30,17 +31,25 @@ const styles = theme => ({
   }
 })
 
-const OrderDetails = props => (
-  <div>
-    <Head>
-      <title>{orderDetail.title}</title>
-    </Head>
-    <Header />
-    <div className={props.classes.root}>
-      <OrderDetailsWrapper />
-    </div>
-    <Footer />
-  </div>
-)
+class OrderDetails extends React.Component {
+  render() {
+    const { query } = Router
+
+    return (
+      <div>
+        <Head>
+          <title>{orderDetail.title}</title>
+        </Head>
+        <Header />
+        <div className={this.props.classes.root}>
+          <OrderDetailsWrapper
+            orderId={query.id}
+          />
+        </div>
+        <Footer />
+      </div>
+    )
+  }
+}
 
 export default withRoot(withStyles(styles)(OrderDetails))

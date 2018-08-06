@@ -5,14 +5,17 @@ import { withStyles } from '@material-ui/core/styles'
 import ReactTooltip from 'react-tooltip'
 
 import {
-  LF_ASSURED,
-  URGENT_DELIVERY,
   LF_ASSURED_TEXT,
   UREGNT_DELIVERY_TEXT,
   VERIFICATION_RX,
   LF_ASSURED_DETAIL,
   EXPRESS_DELIVERY_DETAIL
 } from '../messages/cartMessages'
+
+import {
+  LF_ASSURED,
+  URGENT_DELIVERY,
+} from '../../components/constants/Constants'
 
 const styles = theme => ({
   textWrapper: {

@@ -6,7 +6,17 @@ import Typography from '@material-ui/core/Typography'
 import { withStyles } from '@material-ui/core/styles'
 import BackArrow from '@material-ui/icons/ArrowBack'
 
+import Router from 'next/router'
+
 import OrderContentWrapper from './OrderContentWrapper'
+
+import {
+  ORDER
+} from '../../routes/RouteConstant'
+
+import {
+  getReplacedString
+} from '../../utils/replaceConstants'
 
 const styles = theme => ({
   card: {
@@ -50,7 +60,15 @@ const styles = theme => ({
 
 class OrderInformation extends Component {
   componentDidMount () {
-    this.props.getOrderDetailsLoading(this.props.orderDetailsState, 100682709)
+    this.props.getOrderDetailsLoading(
+      this.props.orderDetailsState,
+      this.props.orderId
+    )
+  }
+
+  redirectToOrdersPage(path) {
+    const url = getReplacedString(path)
+    Router.push(url)
   }
 
   render () {
@@ -59,7 +77,10 @@ class OrderInformation extends Component {
         <Card elevation={'1'} className={this.props.classes.card}>
           <CardContent className={this.props.classes.cardContent}>
             <div className={this.props.classes.buttonWrapper}>
-              <BackArrow classes={{ root: this.props.classes.image }} />
+              <BackArrow
+                classes={{ root: this.props.classes.image }}
+                onClick={this.redirectToOrdersPage.bind(this, ORDER)}
+              />
               <Typography
                 gutterBottom
                 variant='headline'

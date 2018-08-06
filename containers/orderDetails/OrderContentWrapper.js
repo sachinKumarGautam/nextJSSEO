@@ -166,12 +166,22 @@ const OrderContentWrapper = (props) => {
       }
       <CouponMessage />
       <Divider className={props.classes.divider} />
-      <PriceDetails
-        orderDetailsState={props.orderDetailsState}
-      />
-      <TotalAmount
-        orderDetailsState={props.orderDetailsState}
-      />
+      {
+        props.orderDetailsState.payload.order_items.length
+        ? (
+          <PriceDetails
+            orderDetailsState={props.orderDetailsState}
+          />
+        ) : null
+      }
+      {
+        props.orderDetailsState.payload.order_items.length
+        ? (
+          <TotalAmount
+            orderDetailsState={props.orderDetailsState}
+          />
+        ) : null
+      }
       <TermsAndCondition
         sellerName={props.orderDetailsState.payload.seller_name}
       />
