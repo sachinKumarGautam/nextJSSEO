@@ -7,6 +7,7 @@ import ProductMolecule from '../../components/ProductMolecule'
 import DiseaseTagsWrapper from '../../components/DiseaseTagsWrapper'
 import ProductOverview from '../../components/ProductOverview'
 import ProductInfoNav from '../../components/ProductInfoNav'
+import CommonContentLoader from '../../components/loader/CommonContentLoader'
 
 /*
   Product name
@@ -33,8 +34,11 @@ class ProductInfo extends Component {
         <ProductPackSize
           variant={'subheading'}
           packType={this.props.productDetailsState.payload.pack_type}
-          packSize={this.props.productDetailsState.payload.pack_size
-            ? this.props.productDetailsState.payload.pack_size.name : ''}
+          packSize={
+            this.props.productDetailsState.payload.pack_size
+              ? this.props.productDetailsState.payload.pack_size.name
+              : ''
+          }
         />
         <ProductMolecule
           variant={'body1'}
@@ -50,6 +54,9 @@ class ProductInfo extends Component {
           toggleHover={this.props.toggleHover}
           hover={this.props.hover}
         />
+        {/* insert Loader comp here  */}
+        {/* <CommonContentLoader /> */}
+        
       </div>
     )
   }

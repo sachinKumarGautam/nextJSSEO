@@ -11,9 +11,16 @@ import MedicineList from './MedicineList'
 
 const MedicineListWrapper = props => (
   <div>
-    <BreadCrumbs />
+    <BreadCrumbs
+    isLoading={
+          props.isLoadingRelatedMedicine || props.isLoadingSearchMedicine
+        }
+     />
     <section>
       <MedicineList
+        isLoading={
+          props.isLoadingRelatedMedicine || props.isLoadingSearchMedicine
+        }
         medicineListState={props.medicineState}
         query={props.query}
         addToCartHandler={props.addToCartHandler}

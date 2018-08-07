@@ -37,6 +37,7 @@
     "require-hacker": "^3.0.0",
     "rxjs": "^5.5.2",
     "slick-carousel": "^1.8.1",
+    "standard": "^11.0.1",
     "superagent": "^3.8.1",
     "svg-sprite-loader": "0.3.1",
     "universal-rx-request": "^1.0.3",

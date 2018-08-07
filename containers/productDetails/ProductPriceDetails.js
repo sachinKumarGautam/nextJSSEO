@@ -11,6 +11,8 @@ import ProductDiscount from '../../components/ProductDiscount'
 import DeliveryInfoWrapper from '../../components/DeliveryInfoWrapper'
 import QuantityField from '../../components/QuantityField'
 import Button from '../../components/button'
+import ProductPriceDetailsLoader
+  from '../../components/loader/ProductPriceDetailsLoader'
 
 /*
   Product price
@@ -64,7 +66,7 @@ class ProductPriceDetails extends Component {
     return (
       <div>
         <Card elevation={1} className={classes.card}>
-          <CardContent className={classes.cardContent}>
+          {/* <CardContent className={classes.cardContent}>
             <div className={classes.priceWrapper}>
               <ProductPrice
                 variant={'headline'}
@@ -104,7 +106,9 @@ class ProductPriceDetails extends Component {
                 label={'Add To Cart'}
               />
             </div>
-          </CardContent>
+          </CardContent> */}
+          {/* Insert loader comp here */}
+          <ProductPriceDetailsLoader />
         </Card>
       </div>
     )

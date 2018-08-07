@@ -1,7 +1,8 @@
 import React from 'react'
 
 import { withStyles } from '@material-ui/core/styles'
-import BreadCrumbsLoader from './loader/BreadCrumbsLoader'
+import BreadCrumbsLoader from './activityIndicator/loader/BreadCrumbsLoader'
+import ActivityIndicator from './activityIndicator/'
 
 const styles = theme => {
   return {
@@ -22,16 +23,20 @@ const styles = theme => {
 }
 
 const BreadCrumbs = props => (
-  <nav>
-    <div className={props.classes.navWrapper}>
-      {/* <a href='#' className={props.classes.breadCrumb}>First</a>
-      <span className={props.classes.breadCrumbArrow}>&gt;</span>
-      <a href='#' className={props.classes.breadCrumb}>Second</a>
-      <span className={props.classes.breadCrumbArrow}>&gt;</span>
-      <a href='#' className={props.classes.breadCrumb}>Third</a> */}
-      <BreadCrumbsLoader />
-    </div>
-  </nav>
+  <ActivityIndicator
+    isLoading={props.isLoading}
+    LoaderComp={<BreadCrumbsLoader />}
+  >
+    <nav>
+      <div className={props.classes.navWrapper}>
+        <a href='#' className={props.classes.breadCrumb}>First</a>
+        <span className={props.classes.breadCrumbArrow}>&gt;</span>
+        <a href='#' className={props.classes.breadCrumb}>Second</a>
+        <span className={props.classes.breadCrumbArrow}>&gt;</span>
+        <a href='#' className={props.classes.breadCrumb}>Third</a>
+      </div>
+    </nav>
+  </ActivityIndicator>
 )
 
 export default withStyles(styles)(BreadCrumbs)

@@ -17,7 +17,7 @@ import {
 } from '../containers/homePage/homePageActions'
 
 import { homePage } from '../components/constants/PageTitle'
-import Loader from '../components/loader'
+import Loader from '../components/activityIndicator/loader'
 
 const styles = theme => ({
   root: {
@@ -52,7 +52,7 @@ class HomePage extends React.Component {
     const { addToCartHandler, classes } = this.props
     return (
       <div>
-        {/* <Loader />           */}
+        {/* <Loader /> */}
         <Header title={homePage.title} addToCartHandler={addToCartHandler} />
         <div>
           <Paper className={classes.root} elevation={1}>

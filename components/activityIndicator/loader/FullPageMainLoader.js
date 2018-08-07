@@ -17,7 +17,6 @@ const styles = theme => ({
     right: 0
   },
   innerWrapper: {
-    zIndex: 'inherit',
     position: 'fixed',
     zIndex: 10400,
     top: '50%',
@@ -27,11 +26,19 @@ const styles = theme => ({
     width: 64,
     height: 64,
     clear: 'both',
-    border: `1px ${theme.palette.customGrey.grey500} solid`,
+    border: `1px ${theme.palette.customGrey.grey200} solid`,
     borderTop: '1px white solid',
-    WebkitAnimation: 'spCircRot 1s infinite linear',
-    animation: 'spCircRot 1s infinite linear',
+    WebkitAnimation: 'spin 1s infinite linear',
+    animation: 'spin 1s infinite linear',
     borderRadius: '50%'
+  },
+  '@keyframes spin': {
+    from: {
+      transform: 'rotate(0deg)'
+    },
+    to: {
+      transform: 'rotate(359deg)'
+    }
   },
   leaf: {
     zIndex: 10400,
@@ -53,26 +60,6 @@ const styles = theme => ({
     // animation: 'spCircRot 1s infinite linear',
     // borderRadius: '50%',
   },
-  circle: {
-    width: 64,
-    height: 64,
-    clear: 'both',
-    zIndex: 10402,
-    // margin: '20px auto',
-    border: `1px ${theme.palette.customGrey.grey500} solid`,
-    borderTop: '1px white solid'
-    // WebkitAnimation: 'spCircRot 1s infinite linear',
-    // animation: 'spCircRot 1s infinite linear',
-    // borderRadius: '50%'
-  },
-  '@keyframes spCircRot': {
-    from: {
-      transform: 'rotate(0deg, -50%, -50%)'
-    },
-    to: {
-      transform: 'rotate(359deg, -50%, -50%)'
-    }
-  }
 })
 
 const FullPageMainLoader = ({ classes }) => {

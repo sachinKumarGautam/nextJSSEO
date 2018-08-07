@@ -5,6 +5,7 @@ import { bindActionCreators } from 'redux'
 
 import { withStyles } from '@material-ui/core/styles'
 import Grid from '@material-ui/core/Grid'
+import Grow from '@material-ui/core/Grow'
 
 import BreadCrumbs from '../../components/BreadCrumbs'
 
@@ -41,7 +42,10 @@ import {
   submitPatientDetailsLoading
 } from '../patientDetails/patientDetailsActions'
 
-import {checkPincodeLoading} from '../location/pincode/pincodeAction'
+import { checkPincodeLoading } from '../location/pincode/pincodeAction'
+import ActivityIndicator from '../../components/activityIndicator/index'
+import PlaceOrderLoader
+  from '../../components/activityIndicator/loader/PlaceOrderLoader'
 
 /*
   bread crumbs
@@ -53,6 +57,9 @@ const styles = theme => ({
   stickyWrapper: {
     position: 'sticky',
     top: theme.spacing.unit * 13.875
+  },
+  blurCartPage: {
+    filter: 'blur(20px)'
   }
 })
 
@@ -60,10 +67,7 @@ class CartDetailsWrapper extends Component {
   componentDidMount () {
     const cartUid = this.props.cartState.payload.uid
 
-    this.props.actions.getCartDetailsLoading(
-      this.props.cartState,
-      cartUid
-    )
+    this.props.actions.getCartDetailsLoading(this.props.cartState, cartUid)
 
     if (this.props.customerState.payload.id) {
       this.props.actions.getPatientDetailsListLoading(
@@ -80,12 +84,9 @@ class CartDetailsWrapper extends Component {
 
   componentDidUpdate (prevProps) {
     if (
-      (
-        this.props.customerState.payload.id !==
-        prevProps.customerState.payload.id
-      ) && (
-        !this.props.cartState.orderResponse.payload.order_number
-      )
+      this.props.customerState.payload.id !==
+        prevProps.customerState.payload.id &&
+      !this.props.cartState.orderResponse.payload.order_number
     ) {
       this.props.actions.getPatientDetailsListLoading(
         this.props.patientDetailsState,
@@ -100,10 +101,23 @@ class CartDetailsWrapper extends Component {
   }
 
   render () {
+    const { classes } = this.props
     return (
       <div>
-        <BreadCrumbs />
-        <Grid container>
+        <BreadCrumbs isLoading={this.props.cartState.isLoading} />
+        {/* <ActivityIndicator
+          isLoading={this.props.cartState.isLoading}
+          LoaderComp={
+            }> */}
+        <PlaceOrderLoader isLoading={this.props.cartState.isLoading} />
+        <Grid
+          container
+          className={
+            this.props.cartState.isLoading
+              ? classes.blurCartPage
+              : classes.blurCartPage
+          }
+        >
           <Grid item xs={7}>
             <section>
               <OrderSummary
@@ -112,36 +126,65 @@ class CartDetailsWrapper extends Component {
                 customerState={this.props.customerState}
                 patientDetailsState={this.props.patientDetailsState}
                 deliveryDetailsState={this.props.deliveryDetailsState}
-                savePatientToCartLoading={this.props.actions.savePatientToCartLoading}
-                saveDeliveryAddressToCartLoading={this.props.actions.saveDeliveryAddressToCartLoading}
-                updateIsCartOpenLoginFlag={this.props.actions.updateIsCartOpenLoginFlag}
-                uploadPrescriptionLoading={this.props.actions.uploadPrescriptionLoading}
-                deletePrescriptionLoading={this.props.actions.deletePrescriptionLoading}
+                savePatientToCartLoading={
+                  this.props.actions.savePatientToCartLoading
+                }
+                saveDeliveryAddressToCartLoading={
+                  this.props.actions.saveDeliveryAddressToCartLoading
+                }
+                updateIsCartOpenLoginFlag={
+                  this.props.actions.updateIsCartOpenLoginFlag
+                }
+                uploadPrescriptionLoading={
+                  this.props.actions.uploadPrescriptionLoading
+                }
+                deletePrescriptionLoading={
+                  this.props.actions.deletePrescriptionLoading
+                }
                 submitOrderLoading={this.props.actions.submitOrderLoading}
-                updateIsCartOpenRegisterModalFlag={this.props.actions.updateIsCartOpenRegisterModalFlag}
-                submitPatientDetailsLoading={this.props.actions.submitPatientDetailsLoading}
-                submitDeliveryDetailsLoading={this.props.actions.submitDeliveryDetailsLoading}
-                optForDoctorCallbackLoading={this.props.actions.optForDoctorCallbackLoading}
-                updateAddressFormValue={this.props.actions.updateAddressFormValue}
+                updateIsCartOpenRegisterModalFlag={
+                  this.props.actions.updateIsCartOpenRegisterModalFlag
+                }
+                submitPatientDetailsLoading={
+                  this.props.actions.submitPatientDetailsLoading
+                }
+                submitDeliveryDetailsLoading={
+                  this.props.actions.submitDeliveryDetailsLoading
+                }
+                optForDoctorCallbackLoading={
+                  this.props.actions.optForDoctorCallbackLoading
+                }
+                updateAddressFormValue={
+                  this.props.actions.updateAddressFormValue
+                }
                 checkPincodeLoading={this.props.actions.checkPincodeLoading}
-                getLocalityDetailListLoading={this.props.actions.getLocalityDetailListLoading}
+                getLocalityDetailListLoading={
+                  this.props.actions.getLocalityDetailListLoading
+                }
               />
             </section>
           </Grid>
           <Grid item xs={5}>
-            <section className={this.props.classes.stickyWrapper}>
+            <section className={classes.stickyWrapper}>
               <CartDetails
                 cartState={this.props.cartState}
-                incrementCartItemLoading={this.props.actions.incrementCartItemLoading}
-                decrementCartItemLoading={this.props.actions.decrementCartItemLoading}
+                incrementCartItemLoading={
+                  this.props.actions.incrementCartItemLoading
+                }
+                decrementCartItemLoading={
+                  this.props.actions.decrementCartItemLoading
+                }
                 deleteCartItemLoading={this.props.actions.deleteCartItemLoading}
                 resetCartState={this.props.actions.resetCartState}
-                applyCouponCodeLoading={this.props.actions.applyCouponCodeLoading}
+                applyCouponCodeLoading={
+                  this.props.actions.applyCouponCodeLoading
+                }
                 updateCouponCode={this.props.actions.updateCouponCode}
               />
             </section>
           </Grid>
         </Grid>
+        {/* </ActivityIndicator> */}
       </div>
     )
   }
@@ -190,7 +233,6 @@ function mapDispatchToProps (dispatch) {
   }
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(withStyles(styles)(CartDetailsWrapper))
+export default connect(mapStateToProps, mapDispatchToProps)(
+  withStyles(styles)(CartDetailsWrapper)
+)
