@@ -12,7 +12,7 @@ import DeliveryInfoWrapper from '../../components/DeliveryInfoWrapper'
 import QuantityField from '../../components/QuantityField'
 import Button from '../../components/button'
 import ProductPriceDetailsLoader
-  from '../../components/loader/ProductPriceDetailsLoader'
+  from '../../components/activityIndicator/loader/ProductPriceDetailsLoader'
 
 /*
   Product price

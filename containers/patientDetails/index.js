@@ -13,13 +13,13 @@ const PatientDetailsWrapper = props => (
   <div>
     <BreadCrumbs
       isLoading={props.patientDetailsState.isLoading}
-     />
+    />
     <Grid container spacing={24}>
       <Grid item xs={2}>
         <aside>
           <SideMenu
             isLoading={props.patientDetailsState.isLoading}
-           />
+          />
         </aside>
       </Grid>
       <Grid item xs={10}>

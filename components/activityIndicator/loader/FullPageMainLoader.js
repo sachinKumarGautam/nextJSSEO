@@ -59,7 +59,7 @@ const styles = theme => ({
     // WebkitAnimation: 'spCircRot 1s infinite linear',
     // animation: 'spCircRot 1s infinite linear',
     // borderRadius: '50%',
-  },
+  }
 })
 
 const FullPageMainLoader = ({ classes }) => {

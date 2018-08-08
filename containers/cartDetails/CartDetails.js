@@ -86,7 +86,9 @@ class CartDetails extends Component {
       this.props.cartState.orderResponse.payload.order_number !==
       prevProps.cartState.orderResponse.payload.order_number
     ) {
-      Router.push({ pathname: THANK_YOU })
+      setTimeout(() => {
+        Router.push({ pathname: THANK_YOU })
+      }, 2800)
 
       this.props.resetCartState()
     }
@@ -123,12 +125,12 @@ class CartDetails extends Component {
                     cartState={this.props.cartState}
                     decrementCartItem={this.decrementCartItem.bind(this)}
                     incrementCartItem={this.incrementCartItem.bind(this)}
-                    />
+                  />
                 </React.Fragment>
                 : <div>
                   <Typography
                     className={this.props.classes.medicineListWrapper}
-                    >
+                  >
                     {NO_MEDICINES}
                   </Typography>
                   <Divider />
@@ -138,12 +140,13 @@ class CartDetails extends Component {
                   applyCouponCodeLoading={this.props.applyCouponCodeLoading}
                   updateCouponCode={this.props.updateCouponCode}
                   cartState={this.props.cartState}
-                  />
+                />
                 : null}
               <PriceDetails cartState={this.props.cartState} />
             </div>
           </ActivityIndicator>
-          {!this.props.cartState.isLoading && <TotalAmount cartState={this.props.cartState} />}
+          {!this.props.cartState.isLoading &&
+            <TotalAmount cartState={this.props.cartState} />}
         </CardContent>
       </Card>
     )

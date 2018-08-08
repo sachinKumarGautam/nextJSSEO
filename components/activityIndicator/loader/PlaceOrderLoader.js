@@ -1,17 +1,26 @@
 import { withStyles } from '@material-ui/core/styles'
 import Styles from './simpleLoader.css'
 import Paper from '@material-ui/core/Paper'
-import Grow from '@material-ui/core/Grow'
+import Fade from '@material-ui/core/Fade'
+import Zoom from '@material-ui/core/Zoom'
+
 import DoneIcon from '@material-ui/icons/Done'
 
 const styles = theme => ({
-  // TODO:  need to do fix ZIndex
-  mainDiv: {
+  // TODO:  need to do fix z-Index
+  fullPageWrapper: {
     zIndex: 10410,
     height: '100%',
-    width: '100%'
+    width: '100%',
+    left: 0,
+    right: 0,
+    top: 0,
+    bottom: 0
   },
-  innerWrapper: {
+  itemVisible: {
+    visibility: 'hidden'
+  },
+  spinnner: {
     position: 'fixed',
     zIndex: 1040,
     top: '50%',
@@ -30,16 +39,9 @@ const styles = theme => ({
   orderPlacedText: {
     marginTop: theme.spacing.unit * 4
   },
-  mainDiv: {
-    // top: '50%',
-    // left: '50%',
-    // marginRight: '-50%',
-    transform: 'translate(-50%, -50%) !important'
-  },
   doneIcon: {
     color: theme.palette.primary.main,
     position: 'fixed',
-    zIndex: 1040,
     top: '50%',
     left: '50%',
     marginRight: '-50%',
@@ -66,7 +68,7 @@ const styles = theme => ({
     top: '50%',
     left: '50%',
     marginRight: '-50%',
-    transform: 'translate(-50%, -50%) !important',
+    transform: 'translate(-50%, -50%)  !important',
     width: 120,
     height: 120,
     clear: 'both',
@@ -107,46 +109,53 @@ class PlaceOrderLoader extends React.Component {
       this.setState({
         isShowAnimation: true
       })
-      // setTimeout(() => {
-      //   this.setState({
-      //     isShowAnimation: false
-      //   })
-      // }, 2000)
+      setTimeout(() => {
+        this.setState({
+          isShowAnimation: false
+        })
+      }, 2000)
     }
   }
 
   render () {
     const { classes, isLoading } = this.props
+    const isShowAnimation = this.state.isShowAnimation
     return (
-      <div>
-        {<div className={classes.innerWrapper} />}
-        <Grow
-          {...(this.state.isShowAnimation ? { timeout: 1050 } : {})}
-          in={this.state.isShowAnimation}
+      <React.Fragment>
+        {isLoading && <div className={classes.fullPageWrapper} />}
+        {isLoading && <div className={classes.spinnner} />}
+        <Fade
+          {...(isShowAnimation ? { timeout: 650 } : {})}
+          in={isShowAnimation}
         >
           <Paper
             elevation={1}
-            className={`${classes.successAnimationWrapper1}`}
+            className={!isShowAnimation
+              ? `${classes.successAnimationWrapper1} ${classes.itemVisible}`
+              : classes.successAnimationWrapper1
+            }
           />
-        </Grow>
+        </Fade>
 
-        <Grow
-          {...(this.state.isShowAnimation ? { timeout: 550 } : {})}
-          in={this.state.isShowAnimation}
+        <Fade
+          {...(isShowAnimation ? { timeout: 2000 } : {})}
+          in={isShowAnimation}
         >
-          <Paper elevation={1} className={classes.successAnimationWrapper2}>
+          <Paper elevation={1}
+            className={!isShowAnimation
+              ? `${classes.successAnimationWrapper2} ${classes.itemVisible}`
+              : classes.successAnimationWrapper2
+            }
+          >
             <DoneIcon className={classes.doneIcon} />
           </Paper>
-        </Grow>
-        <Grow
-          {...(this.state.isShowAnimation ? { timeout: 650 } : {})}
-          in={this.state.isShowAnimation}
-        >
+        </Fade>
+        {/* <Fade in={isShowAnimation}>
           <div className={classes.orderPlacedText}>
             Order Placed
           </div>
-        </Grow>
-      </div>
+        </Fade> */}
+      </React.Fragment>
     )
   }
 }

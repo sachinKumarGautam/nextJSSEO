@@ -7,7 +7,8 @@ import ProductMolecule from '../../components/ProductMolecule'
 import DiseaseTagsWrapper from '../../components/DiseaseTagsWrapper'
 import ProductOverview from '../../components/ProductOverview'
 import ProductInfoNav from '../../components/ProductInfoNav'
-import CommonContentLoader from '../../components/loader/CommonContentLoader'
+import CommonContentLoader
+  from '../../components/activityIndicator/loader/CommonContentLoader'
 
 /*
   Product name
@@ -56,7 +57,7 @@ class ProductInfo extends Component {
         />
         {/* insert Loader comp here  */}
         {/* <CommonContentLoader /> */}
-        
+
       </div>
     )
   }

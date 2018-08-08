@@ -1,6 +1,4 @@
 import ContentLoader from 'react-content-loader'
-import ProductPriceDetails
-  from '../../containers/productDetails/ProductPriceDetails'
 
 const ProductPriceDetailsLoader = () => (
   <ContentLoader

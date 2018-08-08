@@ -89,7 +89,7 @@ class MedicineListDetails extends React.Component {
 
     const city = props.checkPincodeState.payload.city
     return (
-      <ActivityIndicator 
+      <ActivityIndicator
         isLoading={props.isLoading}
         LoaderComp={<MultipleMedicineLoader />}
       >

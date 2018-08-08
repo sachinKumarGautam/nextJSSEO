@@ -8,7 +8,7 @@ import CardContent from '@material-ui/core/CardContent'
 import RelatedMedicinesCard from './RelatedMedicinesCard'
 
 import { PRODUCT_SEARCH } from '../routes/RouteConstant'
-import SideListItemsLoader from './loader/SideListItemLoader'
+import SideListItemsLoader from './activityIndicator/loader/SideListItemLoader'
 
 import Link from 'next/link'
 

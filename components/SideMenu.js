@@ -43,20 +43,20 @@ class SideMenu extends Component {
     const { isLoading } = this.props
     return (
       <ActivityIndicator
-       isLoading={isLoading}
-       LoaderComp={<SideListItemsLoader />}
+        isLoading={isLoading}
+        LoaderComp={<SideListItemsLoader />}
       >
-      <div>
-        <p className={this.props.classes.nameStyle}>
-          {this.props.customerState.payload.full_name}
-        </p>
-        <MenuItems
-          customOrderStyle={this.props.classes.orderStyle}
-          customMenuStyle={this.props.classes.menuStyle}
-          isSideMenu
-          logout={this.logout}
-        />
-      </div>
+        <div>
+          <p className={this.props.classes.nameStyle}>
+            {this.props.customerState.payload.full_name}
+          </p>
+          <MenuItems
+            customOrderStyle={this.props.classes.orderStyle}
+            customMenuStyle={this.props.classes.menuStyle}
+            isSideMenu
+            logout={this.logout}
+          />
+        </div>
       </ActivityIndicator>
     )
   }

@@ -1,9 +1,6 @@
 import ContentLoader from 'react-content-loader'
 import { withStyles } from '@material-ui/core/styles'
 
-import ProductPriceDetails
-  from '../../containers/productDetails/ProductPriceDetails'
-
 const styles = theme => {
   return {
     loaderWrapper: {

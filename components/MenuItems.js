@@ -5,7 +5,6 @@ import { withStyles } from '@material-ui/core/styles'
 import MenuItem from '@material-ui/core/MenuItem'
 import Link from 'next/link'
 
-
 import Router from 'next/router'
 import {
   ORDER,
@@ -59,22 +58,22 @@ class MenuItems extends Component {
     return (
       <div className={this.props.classes.listWrapper}>
         <Link prefetch href={`/customer/${100111098}/orders`}>
-        <MenuItem
-          className={orderStyle}
+          <MenuItem
+            className={orderStyle}
           // onClick={this.redirectToPath.bind(this, ORDER)}
-        >
+          >
           Orders
-        </MenuItem>
+          </MenuItem>
         </Link>
         <Link prefetch href={`/customer/${100111098}/patients`}>
-        <MenuItem
-          className={menuStyle}
+          <MenuItem
+            className={menuStyle}
           // onClick={this.redirectToPath.bind(this, PATIENT_LIST)}
-        >
+          >
           Patients
-        </MenuItem>
+          </MenuItem>
         </Link>
-        
+
         <MenuItem
           className={menuStyle}
           onClick={this.redirectToPath.bind(this, ADDRESS_LIST)}

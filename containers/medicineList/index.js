@@ -12,10 +12,10 @@ import MedicineList from './MedicineList'
 const MedicineListWrapper = props => (
   <div>
     <BreadCrumbs
-    isLoading={
-          props.isLoadingRelatedMedicine || props.isLoadingSearchMedicine
-        }
-     />
+      isLoading={
+        props.isLoadingRelatedMedicine || props.isLoadingSearchMedicine
+      }
+    />
     <section>
       <MedicineList
         isLoading={

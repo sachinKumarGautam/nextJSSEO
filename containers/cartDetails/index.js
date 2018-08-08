@@ -27,7 +27,8 @@ import {
   resetCartState,
   applyCouponCodeLoading,
   updateCouponCode,
-  optForDoctorCallbackLoading
+  optForDoctorCallbackLoading,
+  resetApiStateSubmitOrder
 } from './cartActions'
 
 import {
@@ -59,15 +60,15 @@ const styles = theme => ({
     top: theme.spacing.unit * 13.875
   },
   blurCartPage: {
-    filter: 'blur(20px)'
+    filter: 'blur(30px)'
   }
 })
 
 class CartDetailsWrapper extends Component {
   componentDidMount () {
     const cartUid = this.props.cartState.payload.uid
-
     this.props.actions.getCartDetailsLoading(this.props.cartState, cartUid)
+    this.props.actions.resetApiStateSubmitOrder() // reset Submit order api state
 
     if (this.props.customerState.payload.id) {
       this.props.actions.getPatientDetailsListLoading(
@@ -102,21 +103,23 @@ class CartDetailsWrapper extends Component {
 
   render () {
     const { classes } = this.props
+    const submitOrderLoading = this.props.cartState.orderResponse.isLoading
     return (
       <div>
-        <BreadCrumbs isLoading={this.props.cartState.isLoading} />
-        {/* <ActivityIndicator
-          isLoading={this.props.cartState.isLoading}
-          LoaderComp={
-            }> */}
-        <PlaceOrderLoader isLoading={this.props.cartState.isLoading} />
+        <BreadCrumbs
+          isLoading={
+            this.props.cartState.isLoading ||
+          this.props.cartState.orderResponse.payload.order_number
+          }
+        />
+        {/* Full page loader for Submit order and it add success animation */}
+        <PlaceOrderLoader
+          isLoading={submitOrderLoading}
+          orderNumber={this.props.cartState.orderResponse.payload.order_number}
+        />
         <Grid
           container
-          className={
-            this.props.cartState.isLoading
-              ? classes.blurCartPage
-              : classes.blurCartPage
-          }
+          className={submitOrderLoading ? classes.blurCartPage : ''}
         >
           <Grid item xs={7}>
             <section>
@@ -226,7 +229,8 @@ function mapDispatchToProps (dispatch) {
         optForDoctorCallbackLoading,
         updateAddressFormValue,
         getLocalityDetailListLoading,
-        checkPincodeLoading
+        checkPincodeLoading,
+        resetApiStateSubmitOrder
       },
       dispatch
     )
