@@ -24,6 +24,7 @@ class CarePointWrapper extends Component {
           <CarePoint
             carePointState={this.props.carePointState}
             getCarePointDetailsLoading={this.props.actions.getCarePointDetailsLoading}
+            customerState={this.props.customerState}
           />
         </section>
       </div>
@@ -44,7 +45,8 @@ function mapDispatchToProps (dispatch) {
 
 function mapStateToProps (state) {
   return {
-    carePointState: state.carePointState
+    carePointState: state.carePointState,
+    customerState: state.customerState
   }
 }
 

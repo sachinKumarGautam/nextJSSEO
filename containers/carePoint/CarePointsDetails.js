@@ -49,6 +49,7 @@ class CarePointsDetails extends Component {
             <TransactionHistoryHeader
               carePointState={this.props.carePointState}
               getCarePointDetailsLoading={this.props.getCarePointDetailsLoading}
+              customerState={this.props.customerState}
             />
             <TransactionHistoryWrapper
               carePointState={this.props.carePointState}
