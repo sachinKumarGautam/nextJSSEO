@@ -2,7 +2,7 @@ import React from 'react'
 
 import { withStyles } from '@material-ui/core/styles'
 import BreadCrumbsLoader from './activityIndicator/loader/BreadCrumbsLoader'
-import ActivityIndicator from './activityIndicator/'
+import ActivityIndicator from './activityIndicator'
 
 const styles = theme => {
   return {
