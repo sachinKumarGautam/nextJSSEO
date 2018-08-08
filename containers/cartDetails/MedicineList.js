@@ -31,8 +31,7 @@ const styles = theme => ({
   },
   packType: {
     ...theme.typography.caption,
-    marginLeft: theme.spacing.unit * 3.875,
-    marginBottom: theme.spacing.unit * 3.125
+    marginLeft: theme.spacing.unit * 3.875
   },
   amount: {
     ...theme.typography.subheading,
@@ -48,6 +47,13 @@ const styles = theme => ({
     flexDirection: 'row',
     marginRight: theme.spacing.unit * 3,
     justifyContent: 'flex-end'
+  },
+  deliveryTat: {
+    ...theme.typography.body3,
+    color: theme.palette.customGrey.grey500,
+    fontWeight: theme.typography.fontWeightBold,
+    marginLeft: theme.spacing.unit * 3.875,
+    marginBottom: theme.spacing.unit * 1.75
   }
 })
 
@@ -78,6 +84,17 @@ class MedicineList extends Component {
                       packSize={cartItem.per_pack_qty}
                       withoutImage
                     />
+                    {
+                      this.props.checkPincodeState.payload.pincode &&
+                      <Typography
+                        gutterBottom
+                        variant='caption'
+                        component='h1'
+                        className={this.props.classes.deliveryTat}
+                      >
+                        Delivery by {this.props.checkPincodeState.payload.delivery_day} days
+                      </Typography>
+                    }
                   </Grid>
                   <Grid item xs={4}>
                     <div className={this.props.classes.amountWrapper}>

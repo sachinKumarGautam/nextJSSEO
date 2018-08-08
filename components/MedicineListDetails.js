@@ -65,7 +65,8 @@ const styles = theme => {
     },
     deliveryTat: {
       ...theme.typography.body3,
-      color: theme.palette.customGrey.grey500
+      color: theme.palette.customGrey.grey500,
+      fontWeight: theme.typography.fontWeightBold
     },
     cursor: {
       cursor: 'pointer'
@@ -89,10 +90,60 @@ class MedicineListDetails extends React.Component {
 
     const city = props.checkPincodeState.payload.city
     return (
+<<<<<<< HEAD
       <ActivityIndicator
         isLoading={props.isLoading}
         LoaderComp={<MultipleMedicineLoader />}
       >
+=======
+      <div className={props.classes.medicineListContentWrapper}>
+        <Link
+          prefetch
+          href={`${PRODUCT_DETAILS}?id=${props.itemDetails.slug}&location=${city}`}
+          as={`${PRODUCT_DETAILS}/${props.itemDetails.slug}?location=${city}`}
+        >
+          <div
+            onClick={this.props.onSelectItem}
+            className={props.classes.cursor}
+          >
+            <ProductName
+              variant={'body1'}
+              name={props.itemDetails.name}
+              customStyle={props.classes.customName}
+            />
+
+            {/* {props.isRefillMedicines && <RefillDueDays />} */}
+            <ProductBrand
+              variant={'caption'}
+              withoutImage
+              customStyle={props.classes.customBrand}
+              brand={props.itemDetails.brand_name}
+            />
+            <ProductPackSize
+              variant={'caption'}
+              withoutImage
+              customStyle={props.classes.customPackSize}
+              packType={props.itemDetails.pack_type}
+              packSize={
+                props.itemDetails.pack_size && props.itemDetails.pack_size.name
+                  ? props.itemDetails.pack_size.name
+                  : props.itemDetails.pack_size
+              }
+            />
+            {
+              props.checkPincodeState.payload.pincode &&
+              <Typography
+                gutterBottom
+                variant='caption'
+                component='h1'
+                className={props.classes.deliveryTat}
+              >
+                Delivery by {props.checkPincodeState.payload.delivery_day} days
+              </Typography>
+            }
+          </div>
+        </Link>
+>>>>>>> f884be6568a5ed2bf3f8832454cb7c78d8b97559
         <div>
           <div className={props.classes.medicineListContentWrapper}>
             <Link

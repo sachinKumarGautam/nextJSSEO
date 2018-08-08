@@ -73,7 +73,9 @@ class Header extends React.Component {
     this.openLoginModal = this.openLoginModal.bind(this)
     this.closeLoginModal = this.closeLoginModal.bind(this)
     this.state = {
-      openLoginDialog: false
+      openLoginDialog: (this.props.authentication && !this.props.loginState.isAuthenticated)
+        ? this.props.authentication
+        : false
     }
   }
 
@@ -88,6 +90,16 @@ class Header extends React.Component {
         this.props.checkPincodeState.payload.id,
         ''
       )
+    }
+  }
+
+  componentDidUpdate (prevProps) {
+    if (
+      this.props.authentication &&
+      this.props.path &&
+      prevProps.customerState.payload.id !== this.props.customerState.payload.id
+    ) {
+      Router.push(this.props.path)
     }
   }
 

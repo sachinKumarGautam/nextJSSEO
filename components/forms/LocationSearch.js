@@ -49,8 +49,7 @@ const styles = theme => ({
       color: theme.palette.customGrey.grey400,
       borderBottom: `1px solid ${theme.palette.customGrey.grey100}`
     },
-    paddingTop: theme.spacing.unit * 2,
-    paddingBottom: theme.spacing.unit * 2
+    padding: theme.spacing.unit * 2
   },
   highlightedSearchItem: {
     ...theme.typography.caption,
@@ -64,7 +63,7 @@ const styles = theme => ({
   },
   searchContentWrapper: {
     listStyle: 'none',
-    padding: theme.spacing.unit * 2,
+    padding: 0,
     marginTop: 0,
     marginBottom: 0
   }
@@ -122,6 +121,9 @@ function getSuggestions (locationSearchResult) {
 class LocationSearch extends React.Component {
   constructor (props) {
     super(props)
+    this.state = {
+      isOpen: false
+    }
     this.searchLocalityOnChange = this.searchLocalityOnChange.bind(this)
     this.onSelectItem = this.onSelectItem.bind(this)
   }
@@ -135,10 +137,16 @@ class LocationSearch extends React.Component {
       event.target.value
     )
     this.props.onChange(event.target.value)
+    this.setState({
+      isOpen: this.props.deliveryDetailsState.addressLocalityList.payload.length > 0
+    })
   }
 
   onSelectItem (itemDetails) {
     this.props.onChange(itemDetails)
+    this.setState({
+      isOpen: false
+    })
   }
 
   render () {
@@ -147,13 +155,12 @@ class LocationSearch extends React.Component {
       deliveryDetailsState
     } = this.props
     const locationSearchResult = deliveryDetailsState.addressLocalityList.payload
+    const isOpen = this.state.isOpen
     return (
       <div className={classes.root}>
         <Downshift
           onChange={this.onSelectItem}
-          // onStateChange={({ inputValue }) => {
-          //   return inputValue && this.setState({ inputValue })
-          // }}
+          isOpen={isOpen}
         >
           {({ getInputProps, getItemProps, getMenuProps, isOpen, inputValue, selectedItem, highlightedIndex }) => (
             <div className={classes.container}>

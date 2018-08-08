@@ -311,7 +311,7 @@ export function saveDeliveryAddressToCartEpic (action$, store) {
 export function cartTransferEpic (action$, store) {
   return action$.pipe(
     ofType(CART_TRANSFER_LOADING),
-    switchMap(data => {
+    mergeMap(data => {
       return http(cartTransfer$(data.cartState.payload.uid)).pipe(
         map(result => {
           let cartItems = result.body.payload.cart_items
@@ -422,11 +422,10 @@ export function deletePrescriptionEpic (action$, store) {
 export function submitOrderEpic (action$, store) {
   return action$.pipe(
     ofType(SUBMIT_ORDER_LOADING),
-    switchMap(data => {
+    mergeMap(data => {
       let body = {
         cart_uid: data.cartState.payload.uid
       }
-
       return http(submitOrder$(data.cartState, body)).pipe(
         map(result => {
           return submitOrderSuccess(data.cartState, result.body.payload)

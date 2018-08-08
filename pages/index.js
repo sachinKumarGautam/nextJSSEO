@@ -19,6 +19,8 @@ import {
 import { homePage } from '../components/constants/PageTitle'
 import Loader from '../components/activityIndicator/loader'
 
+import Router from 'next/router'
+
 const styles = theme => ({
   root: {
     paddingTop: theme.spacing.unit * 2,
@@ -50,10 +52,15 @@ class HomePage extends React.Component {
 
   render () {
     const { addToCartHandler, classes } = this.props
+    const { query } = Router
     return (
       <div>
-        {/* <Loader /> */}
-        <Header title={homePage.title} addToCartHandler={addToCartHandler} />
+        <Header
+          title={homePage.title}
+          addToCartHandler={addToCartHandler}
+          authentication={query.authentication}
+          path={query.path}
+        />
         <div>
           <Paper className={classes.root} elevation={1}>
             <HomePageWrapper />

@@ -183,6 +183,7 @@ class CartDetailsWrapper extends Component {
                   this.props.actions.applyCouponCodeLoading
                 }
                 updateCouponCode={this.props.actions.updateCouponCode}
+                checkPincodeState={this.props.checkPincodeState}
               />
             </section>
           </Grid>
