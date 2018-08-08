@@ -17,7 +17,6 @@ import {
 } from '../containers/homePage/homePageActions'
 
 import { homePage } from '../components/constants/PageTitle'
-import Loader from '../components/activityIndicator/loader'
 
 import Router from 'next/router'
 

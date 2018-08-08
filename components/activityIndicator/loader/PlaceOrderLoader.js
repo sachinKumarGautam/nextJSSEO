@@ -1,5 +1,4 @@
 import { withStyles } from '@material-ui/core/styles'
-import Styles from './simpleLoader.css'
 import Paper from '@material-ui/core/Paper'
 import Fade from '@material-ui/core/Fade'
 import Zoom from '@material-ui/core/Zoom'
@@ -130,9 +129,10 @@ class PlaceOrderLoader extends React.Component {
         >
           <Paper
             elevation={1}
-            className={!isShowAnimation
-              ? `${classes.successAnimationWrapper1} ${classes.itemVisible}`
-              : classes.successAnimationWrapper1
+            className={
+              !isShowAnimation
+                ? `${classes.successAnimationWrapper1} ${classes.itemVisible}`
+                : classes.successAnimationWrapper1
             }
           />
         </Fade>
@@ -141,10 +141,12 @@ class PlaceOrderLoader extends React.Component {
           {...(isShowAnimation ? { timeout: 2000 } : {})}
           in={isShowAnimation}
         >
-          <Paper elevation={1}
-            className={!isShowAnimation
-              ? `${classes.successAnimationWrapper2} ${classes.itemVisible}`
-              : classes.successAnimationWrapper2
+          <Paper
+            elevation={1}
+            className={
+              !isShowAnimation
+                ? `${classes.successAnimationWrapper2} ${classes.itemVisible}`
+                : classes.successAnimationWrapper2
             }
           >
             <DoneIcon className={classes.doneIcon} />

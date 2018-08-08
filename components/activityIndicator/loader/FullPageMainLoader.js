@@ -1,6 +1,5 @@
 import { withStyles } from '@material-ui/core/styles'
 import Backdrop from '@material-ui/core/Backdrop'
-import Styles from './simpleLoader.css'
 
 const styles = theme => ({
   mainDiv: {

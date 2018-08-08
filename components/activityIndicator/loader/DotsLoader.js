@@ -1,5 +1,4 @@
 import { withStyles } from '@material-ui/core/styles'
-import Styles from './simpleLoader.css'
 
 const styles = theme => ({
   loader: {

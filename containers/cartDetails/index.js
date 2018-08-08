@@ -60,7 +60,7 @@ const styles = theme => ({
     top: theme.spacing.unit * 13.875
   },
   blurCartPage: {
-    filter: 'blur(30px)'
+    filter: `blur(${pxToRem(theme.typography)})`
   }
 })
 
@@ -109,7 +109,7 @@ class CartDetailsWrapper extends Component {
         <BreadCrumbs
           isLoading={
             this.props.cartState.isLoading ||
-          this.props.cartState.orderResponse.payload.order_number
+              this.props.cartState.orderResponse.payload.order_number
           }
         />
         {/* Full page loader for Submit order and it add success animation */}

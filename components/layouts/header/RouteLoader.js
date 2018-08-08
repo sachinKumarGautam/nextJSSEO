@@ -5,8 +5,6 @@ import NProgress from 'nprogress'
 import Router from 'next/router'
 import LinearProgress from '@material-ui/core/LinearProgress'
 
-// import '../../../routeLoader.css'
-
 function LinearIndeterminate (props) {
   const { classes } = props
   return (
