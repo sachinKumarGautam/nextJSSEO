@@ -10,6 +10,8 @@ import ProductInfoNav from '../../components/ProductInfoNav'
 import CommonContentLoader
   from '../../components/activityIndicator/loader/CommonContentLoader'
 
+import ActivityIndicator from '../../components/activityIndicator'
+
 /*
   Product name
   product brand
@@ -22,43 +24,44 @@ import CommonContentLoader
 
 class ProductInfo extends Component {
   render () {
+    const { productDetailsState } = this.props
     return (
-      <div>
-        <ProductName
-          variant={'title'}
-          name={this.props.productDetailsState.payload.name}
-        />
-        <ProductBrand
-          variant={'subheading'}
-          brand={this.props.productDetailsState.payload.brand}
-        />
-        <ProductPackSize
-          variant={'subheading'}
-          packType={this.props.productDetailsState.payload.pack_type}
-          packSize={
-            this.props.productDetailsState.payload.pack_size
-              ? this.props.productDetailsState.payload.pack_size.name
-              : ''
-          }
-        />
-        <ProductMolecule
-          variant={'body1'}
-          salts={this.props.productDetailsState.payload.salts}
-        />
-        <DiseaseTagsWrapper
-          diseases={this.props.productDetailsState.payload.diseases}
-        />
-        <ProductOverview
-          overview={this.props.productDetailsState.payload.description}
-        />
-        <ProductInfoNav
-          toggleHover={this.props.toggleHover}
-          hover={this.props.hover}
-        />
-        {/* insert Loader comp here  */}
-        {/* <CommonContentLoader /> */}
-
-      </div>
+      <React.Fragment>
+        <ActivityIndicator
+          isLoading={productDetailsState.isLoadingGetProductDetails}
+          LoaderComp={<CommonContentLoader />}
+          compName={'ProductInfo'}
+        >
+          <ProductName
+            variant={'title'}
+            name={productDetailsState.payload.name}
+          />
+          <ProductBrand
+            variant={'subheading'}
+            brand={productDetailsState.payload.brand}
+          />
+          <ProductPackSize
+            variant={'subheading'}
+            packType={productDetailsState.payload.pack_type}
+            packSize={
+              productDetailsState.payload.pack_size
+                ? productDetailsState.payload.pack_size.name
+                : ''
+            }
+          />
+          <ProductMolecule
+            variant={'body1'}
+            salts={productDetailsState.payload.salts}
+          />
+          <DiseaseTagsWrapper diseases={productDetailsState.payload.diseases} />
+          <ProductOverview overview={productDetailsState.payload.description} />
+        </ActivityIndicator>
+        {productDetailsState.isLoadingGetProductDetails &&
+          <ProductInfoNav
+            toggleHover={this.props.toggleHover}
+            hover={this.props.hover}
+          />}
+      </React.Fragment>
     )
   }
 }

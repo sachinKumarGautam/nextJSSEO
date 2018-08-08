@@ -13,6 +13,7 @@ import QuantityField from '../../components/QuantityField'
 import Button from '../../components/button'
 import ProductPriceDetailsLoader
   from '../../components/activityIndicator/loader/ProductPriceDetailsLoader'
+import ActivityIndicator from '../../components/activityIndicator'
 
 /*
   Product price
@@ -62,53 +63,55 @@ class ProductPriceDetails extends Component {
   }
 
   render () {
-    const { classes } = this.props
+    const { classes, productDetailsState } = this.props
     return (
       <div>
         <Card elevation={1} className={classes.card}>
-          {/* <CardContent className={classes.cardContent}>
-            <div className={classes.priceWrapper}>
-              <ProductPrice
-                variant={'headline'}
-                sellingPrice={
-                  this.props.productDetailsState.payload.selling_price
-                }
-              />
-              <EstimatedPriceLabel estimatePriceText={'*Estimated Price'} />
-            </div>
-            <div className={classes.priceWrapper}>
-              <StrokePrice
-                variant={'body1'}
-                mrp={this.props.productDetailsState.payload.selling_price}
-              />
-              <ProductDiscount
-                discount={this.props.productDetailsState.payload.discount}
-              />
-            </div>
-            {this.props.checkPincodeState.payload.pincode &&
-              <DeliveryInfoWrapper
-                checkPincodeState={this.props.checkPincodeState}
-                openPincodeDialog={this.handleChangePincodeDialog}
-              />}
-            <div className={classes.cardActions}>
-              <QuantityField onChangeQuantity={this.onChangeQuantity} />
-              <Button
-                variant='outlined'
-                size='small'
-                classes={{
-                  label: classes.label
-                }}
-                color='primary'
-                onClick={this.props.addToCartHandler.bind(
-                  this,
-                  this.props.productDetailsState.payload
-                )} // it check first any selected city then add to cart
-                label={'Add To Cart'}
-              />
-            </div>
-          </CardContent> */}
+          <ActivityIndicator
+            isLoading={productDetailsState.isLoadingGetProductDetails}
+            LoaderComp={<ProductPriceDetailsLoader />}
+          >
+            <CardContent className={classes.cardContent}>
+              <div className={classes.priceWrapper}>
+                <ProductPrice
+                  variant={'headline'}
+                  sellingPrice={productDetailsState.payload.selling_price}
+                />
+                <EstimatedPriceLabel estimatePriceText={'*Estimated Price'} />
+              </div>
+              <div className={classes.priceWrapper}>
+                <StrokePrice
+                  variant={'body1'}
+                  mrp={productDetailsState.payload.selling_price}
+                />
+                <ProductDiscount
+                  discount={productDetailsState.payload.discount}
+                />
+              </div>
+              {this.props.checkPincodeState.payload.pincode &&
+                <DeliveryInfoWrapper
+                  checkPincodeState={this.props.checkPincodeState}
+                  openPincodeDialog={this.handleChangePincodeDialog}
+                />}
+              <div className={classes.cardActions}>
+                <QuantityField onChangeQuantity={this.onChangeQuantity} />
+                <Button
+                  variant='outlined'
+                  size='small'
+                  classes={{
+                    label: classes.label
+                  }}
+                  color='primary'
+                  onClick={this.props.addToCartHandler.bind(
+                    this,
+                    productDetailsState.payload
+                  )} // it check first any selected city then add to cart
+                  label={'Add To Cart'}
+                />
+              </div>
+            </CardContent>
+          </ActivityIndicator>
           {/* Insert loader comp here */}
-          <ProductPriceDetailsLoader />
         </Card>
       </div>
     )

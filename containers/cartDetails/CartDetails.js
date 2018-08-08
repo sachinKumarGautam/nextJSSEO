@@ -90,7 +90,7 @@ class CartDetails extends Component {
     ) {
       const url = getReplacedString(THANK_YOU)
       setTimeout(() => {
-      Router.push(url)
+        Router.push(url)
       }, 2800)
 
       this.props.resetCartState()
@@ -116,39 +116,43 @@ class CartDetails extends Component {
             LoaderComp={<CartItemLoader />}
           >
             <div className={this.props.classes.scrollWrapper}>
-            {this.props.cartState.payload.patient_details.payload.patient_id ? (
-              <div>
-                <Avatar cartState={this.props.cartState} />
-                <Divider />
-              </div>
-            ) : null}
-            {this.props.cartState.payload.cart_items.payload.length ? (
-              <MedicineList
-                cartState={this.props.cartState}
-                decrementCartItem={this.decrementCartItem.bind(this)}
-                incrementCartItem={this.incrementCartItem.bind(this)}
-                checkPincodeState={this.props.checkPincodeState}
-              />
-            ) : (
-              <div>
-                <Typography className={this.props.classes.medicineListWrapper}>
-                  {NO_MEDICINES}
-                </Typography>
-                <Divider />
-              </div>
-            )}
-            {this.props.cartState.payload.patient_details.payload.patient_id ? (
-              <Coupon
-                applyCouponCodeLoading={this.props.applyCouponCodeLoading}
-                updateCouponCode={this.props.updateCouponCode}
-                cartState={this.props.cartState}
-              />
-            ) : null}
-            <PriceDetails cartState={this.props.cartState} />
-          </div>
+              {this.props.cartState.payload.patient_details.payload.patient_id
+                ? <div>
+                  <Avatar cartState={this.props.cartState} />
+                  <Divider />
+                </div>
+                : null}
+              {this.props.cartState.payload.cart_items.payload.length
+                ? <MedicineList
+                  cartState={this.props.cartState}
+                  decrementCartItem={this.decrementCartItem.bind(this)}
+                  incrementCartItem={this.incrementCartItem.bind(this)}
+                  checkPincodeState={this.props.checkPincodeState}
+                />
+                : <div>
+                  <Typography
+                    className={this.props.classes.medicineListWrapper}
+                  >
+                    {NO_MEDICINES}
+                  </Typography>
+                  <Divider />
+                </div>}
+              {this.props.cartState.payload.patient_details.payload.patient_id
+                ? <Coupon
+                  applyCouponCodeLoading={this.props.applyCouponCodeLoading}
+                  updateCouponCode={this.props.updateCouponCode}
+                  cartState={this.props.cartState}
+                />
+                : null}
+              <PriceDetails cartState={this.props.cartState} />
+            </div>
           </ActivityIndicator>
           {!this.props.cartState.isLoading &&
             <TotalAmount cartState={this.props.cartState} />}
         </CardContent>
+      </Card>
+    )
+  }
+}
 
 export default withStyles(styles)(CartDetails)
