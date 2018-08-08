@@ -60,7 +60,7 @@ const styles = theme => ({
     top: theme.spacing.unit * 13.875
   },
   blurCartPage: {
-    filter: `blur(${pxToRem(theme.typography)})`
+    filter: `blur(${theme.typography.pxToRem(30)})`
   }
 })
 

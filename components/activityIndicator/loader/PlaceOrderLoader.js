@@ -104,7 +104,11 @@ class PlaceOrderLoader extends React.Component {
   }
 
   componentDidUpdate (prevProps) {
-    if (!this.props.isLoading && prevProps.isLoading) {
+    if (
+      !this.props.isLoading &&
+      prevProps.isLoading &&
+      prevProps.orderNumber !== this.props.orderNumber
+    ) {
       this.setState({
         isShowAnimation: true
       })
