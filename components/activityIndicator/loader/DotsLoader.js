@@ -1,5 +1,5 @@
 import { withStyles } from '@material-ui/core/styles'
-;``
+  ;``
 const styles = theme => ({
   loader: {
     width: theme.typography.pxToRem(100),
