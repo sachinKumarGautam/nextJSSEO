@@ -153,18 +153,21 @@ class PaymentDeliveryDetail extends Component {
             </a>
           </div>
         }
-        <div className={this.props.classes.textWrapper}>
-          <img
-            src='/static/images/rx-pending.svg'
-            className={this.props.classes.rxImageStyle}
-          />
-          <Typography
-            varaint='caption'
-            className={this.props.classes.text}
-          >
-            {VERIFICATION_RX}
-          </Typography>
-        </div>
+        {
+          this.props.serviceType === LF_ASSURED &&
+          <div className={this.props.classes.textWrapper}>
+            <img
+              src='/static/images/rx-pending.svg'
+              className={this.props.classes.rxImageStyle}
+            />
+            <Typography
+              varaint='caption'
+              className={this.props.classes.text}
+            >
+              {VERIFICATION_RX}
+            </Typography>
+          </div>
+        }
       </div>
     )
   }

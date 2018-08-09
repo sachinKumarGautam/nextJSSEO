@@ -16,7 +16,7 @@ const styles = theme => ({
     marginLeft: theme.spacing.unit * 2.5
   },
   street: {
-    marginLeft: theme.spacing.unit * 7.5
+    marginLeft: theme.spacing.unit * 6.875
   },
   image: {
     height: theme.spacing.unit * 2,

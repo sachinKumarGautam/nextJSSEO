@@ -13,6 +13,7 @@ import DeliveryDate from './DeliveryDate'
 import PaymentDetails from './PaymentDetails'
 import PaymentDeliveryDetail from './PaymentDeliveryDetail'
 import OrderStatusDetails from './OrderStatusDetails'
+import OrderDetailsFooter from './OrderDetailsFooter'
 import MedicineList from './MedicineList'
 import CouponMessage from './CouponMessage'
 import PriceDetails from './PriceDetails'
@@ -34,6 +35,7 @@ import Button from '../../components/button'
   PricingDetails
   Terms&Conditions
   Buttons
+  OrderDetailsFooter
 */
 
 const styles = theme => ({
@@ -80,20 +82,22 @@ const styles = theme => ({
   },
   image: {
     height: theme.spacing.unit * 3,
-    width: theme.spacing.unit * 3,
-    marginLeft: theme.spacing.unit * 10
+    width: theme.spacing.unit * 3
   },
   stepLabel: {
-    marginLeft: theme.spacing.unit * 7.5,
     marginTop: theme.spacing.unit * 2,
     color: theme.palette.customGrey.grey500,
     fontSize: theme.spacing.unit * 1.75
   },
   stepLabelGreyed: {
-    marginLeft: theme.spacing.unit * 7.5,
     marginTop: theme.spacing.unit * 2,
     color: theme.palette.customGrey.grey100,
     fontSize: theme.spacing.unit * 1.75
+  },
+  steps: {
+    display: 'flex',
+    alignItems: 'center',
+    flexDirection: 'column'
   }
 })
 
@@ -115,7 +119,7 @@ const OrderContentWrapper = (props) => {
         {steps.map((label, index) => {
           if (index <= props.orderDetailsState.payload.activeStep) {
             return (
-              <Step key={label}>
+              <Step key={label} className={props.classes.steps}>
                 <img src='/static/images/checkedBazooka.svg' className={props.classes.image} />
                 <Typography className={props.classes.stepLabel}>
                   {label}
@@ -124,7 +128,7 @@ const OrderContentWrapper = (props) => {
             )
           } else {
             return (
-              <Step key={label}>
+              <Step key={label} className={props.classes.steps}>
                 <img src='/static/images/greyBazooka.svg' className={props.classes.image} />
                 <Typography className={props.classes.stepLabelGreyed}>
                   {label}
@@ -210,6 +214,7 @@ const OrderContentWrapper = (props) => {
           label={'Convert to COD'}
         />
       </div>
+      <OrderDetailsFooter />
     </div>
   )
 }
