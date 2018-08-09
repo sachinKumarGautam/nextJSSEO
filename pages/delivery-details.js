@@ -8,8 +8,7 @@ import Router from 'next/router'
 
 // components
 import withRoot from '../src/withRoot'
-import Header from '../components/layouts/header'
-import Footer from '../components/layouts/footer'
+import Layout from '../components/layouts/Layout'
 import DeliveryDetailsWrapper from '../containers/deliveryDetails'
 
 import {
@@ -49,28 +48,27 @@ const styles = theme => ({
 
 class DeliveryDetails extends React.Component {
   componentDidMount () {
-    let customerId = this.props.customerState.payload.id
+    // let customerId = this.props.customerState.payload.id
     const { query } = Router
 
-    if (query.id === this.props.customerState.payload.id) {
-      customerId = query.id
-    }
+    // if (query.id === this.props.customerState.payload.id) {
+    //   customerId = query.id
+    // }
 
     // Represents to get delivery details.
     this.props.actions.getDeliveryDetailsListLoading(
       this.props.deliveryDetailsState,
-      customerId // pass customer id
+      query.customer_id // pass customer id
     )
   }
 
   render () {
     const { addToCartHandler } = this.props
     return (
-      <div>
-        <Header
-          title={deliveryDetails.title}
-          addToCartHandler={addToCartHandler}
-        />
+      <Layout
+        title={deliveryDetails.title}
+        addToCartHandler={addToCartHandler}
+      >
         <div className={this.props.classes.wrapperStyle}>
           <Paper className={this.props.classes.root} elevation={1}>
             <DeliveryDetailsWrapper
@@ -90,8 +88,7 @@ class DeliveryDetails extends React.Component {
             />
           </Paper>
         </div>
-        <Footer />
-      </div>
+      </Layout>
     )
   }
 }

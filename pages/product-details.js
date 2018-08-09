@@ -1,17 +1,14 @@
+// dependencies
 import React from 'react'
-
-import Header from '../components/layouts/header'
-import Footer from '../components/layouts/footer'
-
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-
 import { withStyles } from '@material-ui/core/styles'
-import withRoot from '../src/withRoot'
-
 import Paper from '@material-ui/core/Paper'
 import Router from 'next/router'
 
+// components
+import withRoot from '../src/withRoot'
+import Layout from '../components/layouts/Layout'
 import ProductDetailsWrapper from '../containers/productDetails'
 
 import {
@@ -23,6 +20,7 @@ import {
   getAnonymousCartIdLoading
 } from '../containers/cartDetails/cartActions'
 
+// page title
 import { productDetail } from '../components/constants/PageTitle'
 
 const styles = theme => ({
@@ -46,33 +44,27 @@ const styles = theme => ({
 })
 
 class ProductDetails extends React.Component {
-  state = {
-    id: ''
-  }
   static getInitialProps ({ query }) {
     return query
   }
 
   componentDidMount () {
     const { query } = Router
-    if (Router.query.id) {
+    if (query.product_id) {
       this.props.actions.getProductDetailLoading(
         this.props.productDetailsState,
-        query.id,
+        query.product_id,
         query.location
       )
     }
-    this.setState({
-      id: Router.query.id
-    })
   }
 
   componentDidUpdate (prevProps) {
     const { query } = Router
-    if (prevProps.id !== Router.query.id) {
+    if (prevProps.product_id !== query.product_id) {
       this.props.actions.getProductDetailLoading(
         this.props.productDetailsState,
-        query.id,
+        query.product_id,
         query.location
       )
     }
@@ -82,14 +74,13 @@ class ProductDetails extends React.Component {
     const { classes, actions, checkPincodeState, addToCartHandler } = this.props
     const { query } = Router
     return (
-      <div>
-        <Header
-          title={productDetail.title}
-          addToCartHandler={addToCartHandler}
-        />
+      <Layout
+        title={productDetail.title}
+        addToCartHandler={addToCartHandler}
+      >
         <div className={this.props.classes.wrapperStyle}>
           <Paper className={classes.root} elevation={1}>
-            {query.id && query.id !== 'undefined'
+            {query.product_id && query.product_id !== 'undefined'
               ? <ProductDetailsWrapper
                 checkPincodeState={checkPincodeState}
                 getProductDetailLoading={actions.getProductDetailLoading}
@@ -99,8 +90,7 @@ class ProductDetails extends React.Component {
               : 'Page not found'}
           </Paper>
         </div>
-        <Footer />
-      </div>
+      </Layout>
     )
   }
 }

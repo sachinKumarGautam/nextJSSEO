@@ -8,8 +8,7 @@ import Paper from '@material-ui/core/Paper'
 
 // components
 import withRoot from '../src/withRoot'
-import Header from '../components/layouts/header'
-import Footer from '../components/layouts/footer'
+import Layout from '../components/layouts/Layout'
 import PatientDetailsWrapper from '../containers/patientDetails'
 
 import {
@@ -43,28 +42,27 @@ const styles = theme => ({
 
 class PatientDetails extends React.Component {
   componentDidMount () {
-    let customerId = this.props.customerState.payload.id
+    // let customerId = this.props.customerState.payload.id
     const { query } = Router
 
-    if (query.id === this.props.customerState.payload.id) {
-      customerId = query.id
-    }
+    // if (query.id === this.props.customerState.payload.id) {
+    //   customerId = query.id
+    // }
 
     // Represents to get patient details.
     this.props.actions.getPatientDetailsListLoading(
       this.props.patientDetailsState,
-      customerId // pass customer id
+      query.customer_id // pass customer id
     )
   }
 
   render () {
     const { addToCartHandler } = this.props
     return (
-      <div>
-        <Header
-          title={patientDetails.title}
-          addToCartHandler={addToCartHandler}
-        />
+      <Layout
+        title={patientDetails.title}
+        addToCartHandler={addToCartHandler}
+      >
         <div className={this.props.classes.wrapperStyle}>
           <Paper className={this.props.classes.root} elevation={1}>
             <PatientDetailsWrapper
@@ -78,8 +76,7 @@ class PatientDetails extends React.Component {
             />
           </Paper>
         </div>
-        <Footer />
-      </div>
+      </Layout>
     )
   }
 }
