@@ -10,6 +10,9 @@ import OrderHeader from './OrderHeader'
 import OrderContent from './OrderContent'
 import OrderFooter from './OrderFooter'
 import Button from '../../components/button'
+import OrderListsLoader
+  from '../../components/activityIndicator/loader/orderDetailsLoader/OrderListsLoader'
+import ActivityIndicator from '../../components/activityIndicator/index'
 
 import { getReplacedString } from '../../utils/replaceConstants'
 import { ORDER_DETAILS } from '../../routes/RouteConstant'
@@ -37,7 +40,8 @@ const styles = theme => ({
     marginBottom: theme.spacing.unit * 6
   },
   buttonRoot: {
-    backgroundColor: '#ffffff'
+    backgroundColor: theme.palette.common.white,
+    border: `0.5px solid ${theme.palette.customGrey.grey200}`
   },
   buttonLabel: {
     ...theme.typography.body3,
@@ -83,6 +87,7 @@ class OrderListDetails extends Component {
   }
 
   render () {
+    const { orderListState } = this.props
     return (
       <Card elevation={'1'} className={this.props.classes.card}>
         <CardContent className={this.props.classes.cardContent}>
@@ -94,8 +99,12 @@ class OrderListDetails extends Component {
           >
             My Orders
           </Typography>
-          {
-            this.props.orderListState.payload.map((orderDetails) => {
+          <ActivityIndicator
+            isLoading={orderListState.isLoading}
+            LoaderComp={<OrderListsLoader />}
+            bottomLoader
+          >
+            {this.props.orderListState.payload.map(orderDetails => {
               return (
                 <div
                   className={this.props.classes.orderDetailWrapper}
@@ -105,20 +114,18 @@ class OrderListDetails extends Component {
                     orderDetails={orderDetails}
                   />
                   <Divider />
-                  <OrderContent
-                    orderDetails={orderDetails}
-                  />
+                  <OrderContent orderDetails={orderDetails} />
                   <Divider />
-                  <OrderFooter
-                    orderDetails={orderDetails}
-                  />
+                  <OrderFooter orderDetails={orderDetails} />
                 </div>
               )
-            })
-          }
+            })}
+          </ActivityIndicator>
           <div className={this.props.classes.buttonWrapper}>
             <Button
               size='medium'
+              loaderColor={'primary'}
+              // isloading={orderListState.isLoading}
               variant='outlined'
               className={this.props.classes.button}
               classes={{
