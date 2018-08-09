@@ -8,6 +8,8 @@ import CardContent from '@material-ui/core/CardContent'
 import RelatedMedicinesCard from './RelatedMedicinesCard'
 
 import { PRODUCT_SEARCH } from '../routes/RouteConstant'
+import SideListItemsLoader from './activityIndicator/loader/SideListItemLoader'
+import ActivityIndicator from './activityIndicator'
 
 import Link from 'next/link'
 
@@ -56,19 +58,24 @@ const RelatedMedicines = props => (
       Available medicines for {props.moleculeName}
     </Typography>
     <Card elevation={1}>
-      <CardContent>
-        <ul className={props.classes.articleListWrapper}>
-          {props.medicineList.map((item, index) => (
-            <li className={props.classes.listItem}>
-              <RelatedMedicinesCard
-                checkPincodeState={props.checkPincodeState}
-                itemDetails={item}
-                addToCartHandler={props.addToCartHandler}
-              />
-            </li>
-          ))}
-        </ul>
-      </CardContent>
+      <ActivityIndicator
+        isLoading={props.isLoadingMedicineList}
+        LoaderComp={<SideListItemsLoader />}
+      >
+        <CardContent>
+          <ul className={props.classes.articleListWrapper}>
+            {props.medicineList.map((item, index) => (
+              <li className={props.classes.listItem}>
+                <RelatedMedicinesCard
+                  checkPincodeState={props.checkPincodeState}
+                  itemDetails={item}
+                  addToCartHandler={props.addToCartHandler}
+                />
+              </li>
+            ))}
+          </ul>
+        </CardContent>
+      </ActivityIndicator>
     </Card>
     <Link
       as={`${PRODUCT_SEARCH}/?molecule-name=${props.moleculeName}`}

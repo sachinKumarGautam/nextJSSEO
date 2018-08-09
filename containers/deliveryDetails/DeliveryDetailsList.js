@@ -125,11 +125,15 @@ class Main extends Component {
                 openDeliveryFormDialog={this.state.openDeliveryFormDialog}
                 customerState={this.props.customerState}
                 deliveryDetailsState={this.props.deliveryDetailsState}
-                deliveryFormState={this.props.deliveryDetailsState.deliveryFormState}
+                deliveryFormState={
+                  this.props.deliveryDetailsState.deliveryFormState
+                }
                 closeDeliveryFormModal={this.closeDeliveryFormModal}
                 checkPincodeDetailLoading={this.props.checkPincodeDetailLoading}
                 updateAddressFormValue={this.props.updateAddressFormValue}
-                getLocalityDetailListLoading={this.props.getLocalityDetailListLoading}
+                getLocalityDetailListLoading={
+                  this.props.getLocalityDetailListLoading
+                }
                 checkPincodeState={this.props.checkPincodeState}
               />
             </div>
@@ -137,8 +141,11 @@ class Main extends Component {
           <AddressDetailsCardWrapper
             openDeliveryFormModal={this.openDeliveryFormModal.bind(this)}
             saveDeliveryAddressSelected={this.saveDeliveryAddressSelected.bind(this)}
+            isLoading={this.props.deliveryDetailsState.isLoading}
             payload={this.props.deliveryDetailsState.payload}
-            addressDetailsCardWrapper={this.props.classes.addressDetailsCardWrapper}
+            addressDetailsCardWrapper={
+              this.props.classes.addressDetailsCardWrapper
+            }
           />
         </CardContent>
       </Card>
