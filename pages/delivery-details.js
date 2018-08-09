@@ -4,7 +4,6 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { withStyles } from '@material-ui/core/styles'
 import Paper from '@material-ui/core/Paper'
-import flowRight from 'lodash.flowright'
 import Router from 'next/router'
 
 // components
@@ -27,9 +26,6 @@ import {
 
 // page title
 import { deliveryDetails } from '../components/constants/PageTitle'
-
-// HOC for authentication
-import withAuth from '../components/HOCWrapper/AuthWrapper'
 
 const styles = theme => ({
   root: {
@@ -125,8 +121,6 @@ function mapDispatchToProps (dispatch) {
   }
 }
 
-export default flowRight([withAuth])(
-  connect(mapStateToProps, mapDispatchToProps)(
-    withRoot(withStyles(styles)(DeliveryDetails))
-  )
+export default connect(mapStateToProps, mapDispatchToProps)(
+  withRoot(withStyles(styles)(DeliveryDetails))
 )
