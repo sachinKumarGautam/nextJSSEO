@@ -489,3 +489,10 @@ export function resetApiStateSubmitOrder () {
     error: null
   }
 }
+
+export function isCartInvalid (cartState, is_cart_invalid) {
+  return {
+    type: cartActionTypes.IS_CART_INVALID,
+    is_cart_invalid: is_cart_invalid
+  }
+}

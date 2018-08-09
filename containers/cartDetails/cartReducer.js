@@ -601,6 +601,15 @@ export default function cartReducer (state = initialState, action) {
         }
       }
 
+    case cartActionTypes.IS_CART_INVALID:
+      return {
+        ...state,
+        payload: {
+          ...state.payload,
+          is_cart_invalid: action.is_cart_invalid
+        }
+      }
+
     default:
       return state
   }
