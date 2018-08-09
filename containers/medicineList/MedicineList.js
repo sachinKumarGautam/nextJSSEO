@@ -76,7 +76,8 @@ class MedicineList extends React.Component {
       medicineListState,
       classes,
       checkPincodeState,
-      addToCartHandler
+      addToCartHandler,
+      isLoading
     } = this.props
     return (
       <div className={classes.medicineListWrapper}>
@@ -86,7 +87,11 @@ class MedicineList extends React.Component {
           component='h1'
           className={classes.title}
         >
-          Available medicines for {this.props.query.moleculeName ? this.props.query.moleculeName : this.props.query.productName}
+          Available medicines for
+          {' '}
+          {this.props.query.moleculeName
+            ? this.props.query.moleculeName
+            : this.props.query.productName}
         </Typography>
         <Card elevation={1}>
           <CardContent>
@@ -94,6 +99,7 @@ class MedicineList extends React.Component {
               {medicineListState.map(itemDetails => (
                 <li className={classes.listItem}>
                   <MedicineListDetails
+                    isLoading={isLoading}
                     itemDetails={itemDetails}
                     addToCartHandler={addToCartHandler}
                     checkPincodeState={checkPincodeState}

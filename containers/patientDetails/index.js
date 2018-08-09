@@ -5,18 +5,21 @@ import Grid from '@material-ui/core/Grid'
 import BreadCrumbs from '../../components/BreadCrumbs'
 import SideMenu from '../../components/SideMenu'
 import PatientDetailsList from './PatientDetailsList'
-
 /*
   bread crumbs
 */
 
 const PatientDetailsWrapper = props => (
   <div>
-    <BreadCrumbs />
+    <BreadCrumbs
+      isLoading={props.patientDetailsState.isLoading}
+    />
     <Grid container spacing={24}>
       <Grid item xs={2}>
         <aside>
-          <SideMenu />
+          <SideMenu
+            isLoading={props.patientDetailsState.isLoading}
+          />
         </aside>
       </Grid>
       <Grid item xs={10}>

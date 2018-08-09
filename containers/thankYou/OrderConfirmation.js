@@ -5,7 +5,7 @@ import Grid from '@material-ui/core/Grid'
 import OrderConfirmationDetails from './OrderConfirmationDetails'
 import MyCartDetails from './MyCartDetails'
 
-const OrderConfirmation = (props) => {
+const OrderConfirmation = props => {
   return (
     <Grid container>
       <Grid item xs={7}>
@@ -16,9 +16,7 @@ const OrderConfirmation = (props) => {
         />
       </Grid>
       <Grid item xs={5}>
-        <MyCartDetails
-          cartState={props.cartState}
-        />
+        <MyCartDetails cartState={props.cartState} />
       </Grid>
     </Grid>
   )

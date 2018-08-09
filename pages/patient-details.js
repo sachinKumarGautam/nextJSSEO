@@ -3,7 +3,6 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { withStyles } from '@material-ui/core/styles'
-import flowRight from 'lodash.flowright'
 import Router from 'next/router'
 import Paper from '@material-ui/core/Paper'
 
@@ -20,9 +19,6 @@ import {
 
 // page title
 import { patientDetails } from '../components/constants/PageTitle'
-
-// HOC for authentication
-import withAuth from '../components/HOCWrapper/AuthWrapper'
 
 const styles = theme => ({
   root: {
@@ -106,8 +102,6 @@ function mapDispatchToProps (dispatch) {
   }
 }
 
-export default flowRight([withAuth])(
-  connect(mapStateToProps, mapDispatchToProps)(
-    withRoot(withStyles(styles)(PatientDetails))
-  )
+export default connect(mapStateToProps, mapDispatchToProps)(
+  withRoot(withStyles(styles)(PatientDetails))
 )
