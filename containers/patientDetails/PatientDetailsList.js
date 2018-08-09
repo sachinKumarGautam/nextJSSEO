@@ -96,14 +96,19 @@ class PatientDetailsList extends Component {
                 openPatientFormDialog={this.state.openPatientFormDialog}
                 patientFormState={this.props.patientDetailsState}
                 customerState={this.props.customerState}
-                submitPatientDetailsLoading={this.props.submitPatientDetailsLoading}
+                submitPatientDetailsLoading={
+                  this.props.submitPatientDetailsLoading
+                }
                 isEdit={'false'}
               />
             </div>
           </div>
           <PatientDetailsCardWrapper
             payload={this.props.patientDetailsState.payload}
-            patientDetailsCardWrapper={this.props.classes.patientDetailsCardWrapper}
+            isLoading={this.props.patientDetailsState.isLoading}
+            patientDetailsCardWrapper={
+              this.props.classes.patientDetailsCardWrapper
+            }
           />
         </CardContent>
       </Card>

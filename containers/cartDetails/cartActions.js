@@ -101,10 +101,7 @@ export function getCartDetailsFailure (cartState, error) {
   }
 }
 
-export function decrementCartItemLoading (
-  cartState,
-  medicineSelected
-) {
+export function decrementCartItemLoading (cartState, medicineSelected) {
   return {
     type: cartActionTypes.DECREMENT_CART_ITEM_LOADING,
     cartState: cartState,
@@ -112,10 +109,7 @@ export function decrementCartItemLoading (
   }
 }
 
-export function incrementCartItemLoading (
-  cartState,
-  medicineSelected
-) {
+export function incrementCartItemLoading (cartState, medicineSelected) {
   return {
     type: cartActionTypes.INCREMENT_CART_ITEM_LOADING,
     cartState: cartState,
@@ -123,10 +117,7 @@ export function incrementCartItemLoading (
   }
 }
 
-export function deleteCartItemLoading (
-  cartState,
-  medicineSelected
-) {
+export function deleteCartItemLoading (cartState, medicineSelected) {
   return {
     type: cartActionTypes.DELETE_CART_ITEM_LOADING,
     cartState: cartState,
@@ -156,11 +147,7 @@ export function putCartItemFailure (cartState, cartItems) {
   }
 }
 
-export function savePatientToCartLoading (
-  cartState,
-  patient,
-  cartId
-) {
+export function savePatientToCartLoading (cartState, patient, cartId) {
   return {
     type: cartActionTypes.SAVE_PATIENT_TO_CART_LOADING,
     cartState,
@@ -172,9 +159,7 @@ export function savePatientToCartLoading (
   }
 }
 
-export function cartTransferLoading (
-  cartState
-) {
+export function cartTransferLoading (cartState) {
   return {
     type: cartActionTypes.CART_TRANSFER_LOADING,
     cartState: cartState,
@@ -205,10 +190,7 @@ export function savePatientToCartFailure (cartState, error) {
   }
 }
 
-export function saveDeliveryAddressToCartLoading (
-  cartState,
-  shippingAddressId
-) {
+export function saveDeliveryAddressToCartLoading (cartState, shippingAddressId) {
   return {
     type: cartActionTypes.SAVE_DELIVERY_ADDRESS_TO_CART_LOADING,
     cartState,
@@ -241,7 +223,12 @@ export function saveDeliveryAddressToCartFailure (cartState, error) {
   }
 }
 
-export function cartTransferSuccess (cartState, result, cartItems, cartPrescriptions) {
+export function cartTransferSuccess (
+  cartState,
+  result,
+  cartItems,
+  cartPrescriptions
+) {
   let payload = result.body.payload
   return {
     type: cartActionTypes.CART_TRANSFER_SUCCESS,
@@ -283,7 +270,10 @@ export function updateIsCartOpenLoginFlag (cartState, isCartOpenLoginDialog) {
   }
 }
 
-export function updateIsCartOpenRegisterModalFlag (cartState, isCartOpenRegisterDialog) {
+export function updateIsCartOpenRegisterModalFlag (
+  cartState,
+  isCartOpenRegisterDialog
+) {
   return {
     type: cartActionTypes.UPDATE_IS_CART_OPEN_REGISTER_MODAL_FLAG,
     cartState: cartState,
@@ -461,7 +451,11 @@ export function updateCouponCode (cartState, value) {
   }
 }
 
-export function optForDoctorCallbackLoading (cartState, cartUId, doctorCallback) {
+export function optForDoctorCallbackLoading (
+  cartState,
+  cartUId,
+  doctorCallback
+) {
   return {
     type: cartActionTypes.OPT_DOCTOR_CALLBACK_LOADING,
     cartState,
@@ -519,5 +513,14 @@ export function optForExpressDeliveryFailure (cartState, error) {
     isLoading: false,
     isError: true,
     error: error
+  }
+}
+
+export function resetApiStateSubmitOrder () {
+  return {
+    type: cartActionTypes.RESET_SUBMIT_ORDER_CART_STATE,
+    isLoading: false,
+    isError: false,
+    error: null
   }
 }

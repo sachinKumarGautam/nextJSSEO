@@ -11,6 +11,8 @@ import StrokePrice from './StrokePrice'
 import EstimatedPriceLabel from './EstimatedPriceLabel'
 import { PRODUCT_DETAILS } from '../routes/RouteConstant'
 import Button from './button/Button'
+import ActivityIndicator from './activityIndicator/index'
+import MultipleMedicineLoader from './activityIndicator/loader/medicineListLoader/MultipleMedicineLoader'
 
 const styles = theme => {
   return {
@@ -87,84 +89,92 @@ class MedicineListDetails extends React.Component {
 
     const city = this.props.checkPincodeState.payload.city
     return (
-      <div className={props.classes.medicineListContentWrapper}>
-        <Link
-          prefetch
-          href={`${PRODUCT_DETAILS}?id=${props.itemDetails.slug}&location=${city}`}
-          as={`${PRODUCT_DETAILS}/${props.itemDetails.slug}?location=${city}`}
-        >
-          <div
-            onClick={this.props.onSelectItem}
-            className={props.classes.cursor}
+      <ActivityIndicator
+        isLoading={props.isLoading}
+        LoaderComp={<MultipleMedicineLoader />}
+      >
+        <div className={props.classes.medicineListContentWrapper}>
+          <Link
+            prefetch
+            href={`${PRODUCT_DETAILS}?id=${props.itemDetails.slug}&location=${city}`}
+            as={`${PRODUCT_DETAILS}/${props.itemDetails.slug}?location=${city}`}
           >
-            <ProductName
-              variant={'body1'}
-              name={props.itemDetails.name}
-              customStyle={props.classes.customName}
-            />
+            <div
+              onClick={this.props.onSelectItem}
+              className={props.classes.cursor}
+            >
+              <ProductName
+                variant={'body1'}
+                name={props.itemDetails.name}
+                customStyle={props.classes.customName}
+              />
 
-            {/* {props.isRefillMedicines && <RefillDueDays />} */}
-            <ProductBrand
+              {/* {props.isRefillMedicines && <RefillDueDays />} */}
+              <ProductBrand
+                variant={'caption'}
+                withoutImage
+                customStyle={props.classes.customBrand}
+                brand={props.itemDetails.brand_name}
+              />
+              <ProductPackSize
+                variant={'caption'}
+                withoutImage
+                customStyle={props.classes.customPackSize}
+                packType={props.itemDetails.pack_type}
+                packSize={
+                  props.itemDetails.pack_size &&
+                    props.itemDetails.pack_size.name
+                    ? props.itemDetails.pack_size.name
+                    : props.itemDetails.pack_size
+                }
+              />
+              {props.checkPincodeState.payload.pincode &&
+                <Typography
+                  gutterBottom
+                  variant='caption'
+                  component='h1'
+                  className={props.classes.deliveryTat}
+                >
+                  Delivery by
+                  {' '}
+                  {props.checkPincodeState.payload.delivery_day}
+                  {' '}
+                  days
+                </Typography>}
+            </div>
+          </Link>
+          <div>
+            <EstimatedPriceLabel
               variant={'caption'}
-              withoutImage
-              customStyle={props.classes.customBrand}
-              brand={props.itemDetails.brand_name}
+              customStyle={props.classes.customEstimatedLabel}
+              estimatePriceText={'*Est. Price '}
             />
-            <ProductPackSize
+            <ProductPrice
+              variant={'body1'}
+              customStyle={props.classes.customPrice}
+              sellingPrice={props.itemDetails.selling_price}
+            />
+            <StrokePrice
               variant={'caption'}
-              withoutImage
-              customStyle={props.classes.customPackSize}
-              packType={props.itemDetails.pack_type}
-              packSize={
-                props.itemDetails.pack_size && props.itemDetails.pack_size.name
-                  ? props.itemDetails.pack_size.name
-                  : props.itemDetails.pack_size
-              }
+              customStyle={props.classes.customStrokePrice}
+              mrp={props.itemDetails.mrp}
             />
-            {
-              props.checkPincodeState.payload.pincode &&
-              <Typography
-                gutterBottom
-                variant='caption'
-                component='h1'
-                className={props.classes.deliveryTat}
-              >
-                Delivery by {props.checkPincodeState.payload.delivery_day} days
-              </Typography>
-            }
-          </div>
-        </Link>
-        <div>
-          <EstimatedPriceLabel
-            variant={'caption'}
-            customStyle={props.classes.customEstimatedLabel}
-            estimatePriceText={'*Est. Price '}
-          />
-          <ProductPrice
-            variant={'body1'}
-            customStyle={props.classes.customPrice}
-            sellingPrice={props.itemDetails.selling_price}
-          />
-          <StrokePrice
-            variant={'caption'}
-            customStyle={props.classes.customStrokePrice}
-            mrp={props.itemDetails.mrp}
-          />
-          <div className={props.classes.buttonWrapperStyle}>
-            <Button
-              variant='outlined'
-              classes={{
-                root: props.classes.buttonRoot,
-                label: props.classes.buttonLabel
-              }}
-              size='small'
-              color='primary'
-              onClick={this.addToCart} // this is coming from HOC
-              label={'Add To Cart'}
-            />
+            <div className={props.classes.buttonWrapperStyle}>
+              <Button
+                variant='outlined'
+                classes={{
+                  root: props.classes.buttonRoot,
+                  label: props.classes.buttonLabel
+                }}
+                size='small'
+                color='primary'
+                onClick={this.addToCart} // this is coming from HOC
+                label={'Add To Cart'}
+              />
+            </div>
           </div>
         </div>
-      </div>
+      </ActivityIndicator>
     )
   }
 }

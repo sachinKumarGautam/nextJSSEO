@@ -18,29 +18,45 @@ class MyDocument extends Document {
             name='viewport'
             content={
               'user-scalable=0, initial-scale=1, ' +
-              'minimum-scale=1, width=device-width, height=device-height'
+                'minimum-scale=1, width=device-width, height=device-height'
             }
           />
           {/* PWA primary color */}
-          <meta name='theme-color' content={pageContext.theme.palette.primary.main} />
+          <meta
+            name='theme-color'
+            content={pageContext.theme.palette.primary.main}
+          />
           <link
             rel='icon'
             type='image/png'
             href={'/static/images/favicon.png'}
           />
-          <link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet' />
+          <link
+            href='https://fonts.googleapis.com/css?family=Lato'
+            rel='stylesheet'
+          />
           <link
             rel='stylesheet'
             href='https://use.fontawesome.com/releases/v5.0.13/css/all.css'
             integrity='sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp'
             crossorigin='anonymous'
           />
-          <link rel='stylesheet' type='text/css' charset='UTF-8' href='https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.css' />
-          <link rel='stylesheet' type='text/css' href='https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css' />
-          {/* <link
-            rel="stylesheet"
-            href="https://fonts.googleapis.com/css?family=Roboto:300,400,500"
-          /> */}
+          <link
+            rel='stylesheet'
+            type='text/css'
+            charset='UTF-8'
+            href='https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.css'
+          />
+          <link
+            rel='stylesheet'
+            type='text/css'
+            href='https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css'
+          />
+
+          <link
+            rel='stylesheet'
+            href='https://fonts.googleapis.com/css?family=Roboto:300,400,500'
+          />
         </Head>
         <body>
           <Main />
@@ -88,7 +104,9 @@ MyDocument.getInitialProps = ctx => {
         <style
           id='jss-server-side'
           // eslint-disable-next-line react/no-danger
-          dangerouslySetInnerHTML={{ __html: pageContext.sheetsRegistry.toString() }}
+          dangerouslySetInnerHTML={{
+            __html: pageContext.sheetsRegistry.toString()
+          }}
         />
         {flush() || null}
       </React.Fragment>

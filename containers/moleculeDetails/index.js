@@ -63,6 +63,7 @@ class MoleculeDetailsWrapper extends Component {
             <RelatedMedicines
               moleculeName={this.props.moleculeDetailsStatePayload.name}
               addToCartHandler={this.props.addToCartHandler}
+              isLoadingMedicineList={this.props.medicineListState.isLoading}
               medicineList={this.props.medicineListState.payload}
               checkPincodeState={this.props.checkPincodeState}
               cartState={this.props.cartState}

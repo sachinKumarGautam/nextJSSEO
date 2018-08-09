@@ -633,6 +633,20 @@ export default function cartReducer (state = initialState, action) {
         }
       }
 
+    case cartActionTypes.RESET_SUBMIT_ORDER_CART_STATE:
+      return {
+        ...state,
+        orderResponse: {
+          ...state.orderResponse,
+          isLoading: action.isLoading,
+          errorState: {
+            ...state.orderResponse.errorState,
+            isError: action.isError,
+            error: action.error
+          }
+        }
+      }
+
     default:
       return state
   }

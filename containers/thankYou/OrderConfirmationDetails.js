@@ -11,7 +11,11 @@ import Button from '../../components/button'
 
 import Router from 'next/router'
 
-import {HOME_PAGE} from '../../routes/RouteConstant'
+import ActivityIndicator from '../../components/activityIndicator/index'
+import CommonContentLoader
+  from '../../components/activityIndicator/loader/CommonContentLoader'
+
+import { HOME_PAGE } from '../../routes/RouteConstant'
 
 const styles = theme => ({
   cardContent: {
@@ -56,46 +60,51 @@ const styles = theme => ({
   }
 })
 
-const OrderConfirmationDetails = (props) => {
+const OrderConfirmationDetails = props => {
   return (
     <Card elevation={'1'}>
-      <CardContent className={props.classes.cardContent}>
-        <ThankyouDetails
-          cartState={props.cartState}
-        />
-        <Divider />
-        <RefillDetails
-          submitRefillDateLoading={props.submitRefillDateLoading}
-          thankYouState={props.thankYouState}
-          cartState={props.cartState}
-        />
-        <div className={props.classes.buttonWrapper}>
-          <Button
-            size='small'
-            variant='outlined'
-            color='primary'
-            classes={{
-              root: props.classes.buttonViewRoot,
-              label: props.classes.buttonViewLabel
-            }}
-            className={props.classes.buttonViewStyle}
-            // onClick={this.handleClickOpen}
-            label={'VIEW YOUR ORDER'}
+      <ActivityIndicator
+        isLoading={props.cartState.isLoading}
+        LoaderComp={<CommonContentLoader />}
+      >
+        <CardContent className={props.classes.cardContent}>
+          <ThankyouDetails cartState={props.cartState} />
+          <Divider />
+          <RefillDetails
+            submitRefillDateLoading={props.submitRefillDateLoading}
+            thankYouState={props.thankYouState}
+            cartState={props.cartState}
           />
-          <Button
-            size='small'
-            variant='outlined'
-            color='primary'
-            classes={{
-              root: props.classes.buttonHomeRoot,
-              label: props.classes.buttonHomeLabel
-            }}
-            className={props.classes.buttonHomeStyle}
-            onClick={() => { Router.push({ pathname: HOME_PAGE }) }}
-            label={'HOME'}
-          />
-        </div>
-      </CardContent>
+          <div className={props.classes.buttonWrapper}>
+            <Button
+              size='small'
+              variant='outlined'
+              color='primary'
+              classes={{
+                root: props.classes.buttonViewRoot,
+                label: props.classes.buttonViewLabel
+              }}
+              className={props.classes.buttonViewStyle}
+              // onClick={this.handleClickOpen}
+              label={'VIEW YOUR ORDER'}
+            />
+            <Button
+              size='small'
+              variant='outlined'
+              color='primary'
+              classes={{
+                root: props.classes.buttonHomeRoot,
+                label: props.classes.buttonHomeLabel
+              }}
+              className={props.classes.buttonHomeStyle}
+              onClick={() => {
+                Router.push({ pathname: HOME_PAGE })
+              }}
+              label={'HOME'}
+            />
+          </div>
+        </CardContent>
+      </ActivityIndicator>
     </Card>
   )
 }

@@ -26,7 +26,7 @@ class ThankyouWrapper extends Component {
   render () {
     return (
       <div>
-        <BreadCrumbs />
+        <BreadCrumbs isLoading={this.props.cartState.isLoading} />
         <section>
           <OrderConfirmation
             submitRefillDateLoading={this.props.actions.submitRefillDateLoading}
