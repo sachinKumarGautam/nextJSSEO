@@ -7,11 +7,12 @@ import Grid from '@material-ui/core/Grid'
 
 class PrescriptionDetails extends Component {
   render () {
+    const {prescriptionState} = this.props
     return (
       <div>
         <Grid container spacing={24}>
           <Grid item xs={2}>
-            <SideMenu />
+            <SideMenu isLoading={prescriptionState.isLoading} />
           </Grid>
           <Grid item xs={10}>
             <PrescriptionList

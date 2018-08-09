@@ -42,6 +42,7 @@ class RefillPatientsWrapper extends Component {
           <Grid item xs={9}>
             <section>
               <RefillMedicineList
+                isLoading={this.props.pastMedicineState.isLoading}
                 pastMedicineState={this.props.pastMedicineState}
                 addToCartHandler={this.props.addToCartHandler}
                 checkPincodeState={this.props.checkPincodeState}

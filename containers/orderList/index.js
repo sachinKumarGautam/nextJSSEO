@@ -16,14 +16,15 @@ import {
 
 class OrderListWrapper extends Component {
   render () {
+    const {orderListState, customerState, actions} = this.props
     return (
       <div>
-        <BreadCrumbs />
+        <BreadCrumbs isLoading={orderListState.isLoading} />
         <section >
           <OrderList
-            orderListState={this.props.orderListState}
-            getOrderListDetailsLoading={this.props.actions.getOrderListDetailsLoading}
-            customerState={this.props.customerState}
+            orderListState={orderListState}
+            getOrderListDetailsLoading={actions.getOrderListDetailsLoading}
+            customerState={customerState}
           />
         </section>
       </div>

@@ -11,10 +11,11 @@ import PrescriptionDetails from './PrescriptionDetails'
 
 class PrescriptionDetailsWrapper extends Component {
   render () {
+    const { prescriptionState } = this.props
     return (
       <div>
-        <BreadCrumbs />
-        <section >
+        <BreadCrumbs isLoading={prescriptionState.isLoading} />
+        <section>
           <PrescriptionDetails
             prescriptionState={this.props.prescriptionState}
           />
@@ -30,6 +31,4 @@ function mapStateToProps (state) {
   }
 }
 
-export default connect(
-  mapStateToProps
-)(PrescriptionDetailsWrapper)
+export default connect(mapStateToProps)(PrescriptionDetailsWrapper)

@@ -78,6 +78,8 @@ class MedicineList extends React.Component {
         />
         <div className={this.props.classes.root}>
           <MedicineListWrapper
+            isLoadingRelatedMedicine={medicineListState.isLoading}
+            isLoadingSearchMedicine={searchMedicineState.isLoading}
             addToCartHandler={addToCartHandler}
             checkPincodeState={checkPincodeState}
             moleculeName={Router.query.name}
