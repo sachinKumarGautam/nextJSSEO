@@ -59,13 +59,13 @@ class MenuItems extends Component {
       <div className={this.props.classes.listWrapper}>
         <MenuItem
           className={orderStyle}
-          // onClick={this.redirectToPath.bind(this, ORDER)}
+          onClick={this.redirectToPath.bind(this, ORDER)}
         >
           Orders
         </MenuItem>
         <MenuItem
           className={menuStyle}
-          // onClick={this.redirectToPath.bind(this, PATIENT_LIST)}
+          onClick={this.redirectToPath.bind(this, PATIENT_LIST)}
         >
           Patients
         </MenuItem>
