@@ -14,7 +14,10 @@ export default withRedux(initStore, { debug: true })(
       return (
         <Container>
           <Provider store={store}>
-            <PersistGate persistor={store.__persistor} loading={null}>
+            <PersistGate
+              persistor={store.__persistor}
+              loading={<div>Loading</div>}
+            >
               <WrapperComp {...this.props} />
             </PersistGate>
           </Provider>

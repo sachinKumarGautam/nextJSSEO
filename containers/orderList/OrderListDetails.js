@@ -35,7 +35,7 @@ const styles = theme => ({
     marginBottom: theme.spacing.unit * 6
   },
   buttonRoot: {
-    backgroundColor: '#ffffff',
+    backgroundColor: theme.palette.common.white,
     border: `0.5px solid ${theme.palette.customGrey.grey200}`
   },
   buttonLabel: {

@@ -5,7 +5,7 @@ const styles = theme => {
   return {
     loaderWrapper: {
       display: 'inline-block',
-      width: '310px'
+      width: theme.spacing.unit * 38.75
     }
   }
 }

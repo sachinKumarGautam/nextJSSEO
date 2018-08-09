@@ -8,9 +8,9 @@ const styles = theme => {
       border: `1px solid ${theme.palette.customGrey.grey250}`,
       // padding: theme.spacing.unit * 2.5,
       borderRadius: theme.spacing.unit * 0.5,
-      width: '310px',
+      width: theme.typography.pxToRem(310),
       '&: not(: first-child)': {
-        marginLeft: '20px'
+        marginLeft: theme.typography.pxToRem(20)
       }
     }
   }

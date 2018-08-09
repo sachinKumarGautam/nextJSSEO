@@ -57,23 +57,18 @@ class MenuItems extends Component {
 
     return (
       <div className={this.props.classes.listWrapper}>
-        <Link prefetch href={`/customer/${100111098}/orders`}>
-          <MenuItem
-            className={orderStyle}
+        <MenuItem
+          className={orderStyle}
           // onClick={this.redirectToPath.bind(this, ORDER)}
-          >
+        >
           Orders
-          </MenuItem>
-        </Link>
-        <Link prefetch href={`/customer/${100111098}/patients`}>
-          <MenuItem
-            className={menuStyle}
+        </MenuItem>
+        <MenuItem
+          className={menuStyle}
           // onClick={this.redirectToPath.bind(this, PATIENT_LIST)}
-          >
+        >
           Patients
-          </MenuItem>
-        </Link>
-
+        </MenuItem>
         <MenuItem
           className={menuStyle}
           onClick={this.redirectToPath.bind(this, ADDRESS_LIST)}

@@ -431,8 +431,6 @@ export function submitOrderEpic (action$, store) {
           return submitOrderSuccess(data.cartState, result.body.payload)
         }),
         catchError(error => {
-          console.log('error', error)
-
           return of(submitOrderFailure(data.cartState, error))
         })
       )

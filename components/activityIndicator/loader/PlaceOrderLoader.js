@@ -8,7 +8,7 @@ import DoneIcon from '@material-ui/icons/Done'
 const styles = theme => ({
   // TODO:  need to do fix z-Index
   fullPageWrapper: {
-    zIndex: 10410,
+    zIndex: 10410, // TODO: Need to have proper zIndex config for this
     height: '100%',
     width: '100%',
     left: 0,
@@ -21,13 +21,13 @@ const styles = theme => ({
   },
   spinnner: {
     position: 'fixed',
-    zIndex: 1040,
+    zIndex: 1040, // TODO: Need to have proper zIndex config for this
     top: '50%',
     left: '50%',
     marginRight: '-50%',
     transform: 'translate(-50%, -50%)',
-    width: 64,
-    height: 64,
+    width: theme.spacing.unit * 8,
+    height: theme.spacing.unit * 8,
     clear: 'both',
     border: `1px ${theme.palette.customGrey.grey200} solid`,
     borderTop: '1px white solid',
@@ -45,37 +45,37 @@ const styles = theme => ({
     left: '50%',
     marginRight: '-50%',
     transform: 'translate(-50%, -50%)',
-    width: 120,
-    height: 120
+    width: theme.typography.pxToRem(120),
+    height: theme.typography.pxToRem(120)
   },
   successAnimationWrapper1: {
     position: 'fixed',
-    zIndex: 1040,
+    zIndex: 1040, // TODO: Need to have proper zIndex config for this
     backgroundColor: theme.palette.primary.main,
     top: '50%',
     left: '50%',
     marginRight: '-50%',
     transform: 'translate(-50%, -50%) !important',
-    width: 140,
-    height: 140,
+    width: theme.typography.pxToRem(140),
+    height: theme.typography.pxToRem(140),
     clear: 'both',
     borderRadius: '50%'
   },
   successAnimationWrapper2: {
     position: 'fixed',
-    zIndex: 1040,
+    zIndex: 1040, // TODO: Need to have proper zIndex config for this
     top: '50%',
     left: '50%',
     marginRight: '-50%',
     transform: 'translate(-50%, -50%)  !important',
-    width: 120,
-    height: 120,
+    width: theme.typography.pxToRem(120),
+    height: theme.typography.pxToRem(120),
     clear: 'both',
     borderRadius: '50%'
   },
   paper: {
-    height: '50px',
-    width: '50px',
+    height: theme.typography.pxToRem(50),
+    width: theme.typography.pxToRem(50),
     backgroundColor: 'black'
   },
   '@keyframes spin': {
@@ -104,11 +104,7 @@ class PlaceOrderLoader extends React.Component {
   }
 
   componentDidUpdate (prevProps) {
-    if (
-      !this.props.isLoading &&
-      prevProps.isLoading &&
-      prevProps.orderNumber !== this.props.orderNumber
-    ) {
+    if (prevProps.orderNumber !== this.props.orderNumber) {
       this.setState({
         isShowAnimation: true
       })
@@ -116,7 +112,7 @@ class PlaceOrderLoader extends React.Component {
         this.setState({
           isShowAnimation: false
         })
-      }, 2000)
+      }, 2600)
     }
   }
 
@@ -126,7 +122,7 @@ class PlaceOrderLoader extends React.Component {
     return (
       <React.Fragment>
         {isLoading && <div className={classes.fullPageWrapper} />}
-        {isLoading && <div className={classes.spinnner} />}
+        {!!isLoading && <div className={classes.spinnner} />}
         <Fade
           {...(isShowAnimation ? { timeout: 650 } : {})}
           in={isShowAnimation}

@@ -7,7 +7,7 @@ const styles = theme => ({
   },
   outerWrapper: {
     position: 'fixed',
-    zIndex: 10400,
+    zIndex: 10400, // TODO: Need to have proper zIndex config for this
     top: 0,
     bottom: 0,
     left: 0,
@@ -15,13 +15,13 @@ const styles = theme => ({
   },
   innerWrapper: {
     position: 'fixed',
-    zIndex: 10400,
+    zIndex: 10400, // TODO: Need to have proper zIndex config for this
     top: '50%',
     left: '50%',
     marginRight: '-50%',
     transform: 'translate(-50%, -50%)',
-    width: 64,
-    height: 64,
+    width: theme.spacing.unit * 8,
+    height: theme.spacing.unit * 8,
     clear: 'both',
     border: `1px ${theme.palette.customGrey.grey200} solid`,
     borderTop: '1px white solid',

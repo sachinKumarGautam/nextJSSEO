@@ -107,10 +107,7 @@ class CartDetailsWrapper extends Component {
     return (
       <div>
         <BreadCrumbs
-          isLoading={
-            this.props.cartState.isLoading ||
-              this.props.cartState.orderResponse.payload.order_number
-          }
+          isLoading={this.props.cartState.isLoading || submitOrderLoading}
         />
         {/* Full page loader for Submit order and it add success animation */}
         <PlaceOrderLoader

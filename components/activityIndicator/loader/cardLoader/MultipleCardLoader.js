@@ -8,7 +8,7 @@ const styles = theme => {
       width: '100%',
       justifyContent: 'space-around',
       '&: not(: first-child)': {
-        marginLeft: '20px'
+        marginLeft: theme.typography.pxToRem(20)
       }
     }
   }
