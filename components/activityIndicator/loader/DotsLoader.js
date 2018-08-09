@@ -1,5 +1,4 @@
 import { withStyles } from '@material-ui/core/styles'
-  ;``
 const styles = theme => ({
   loader: {
     width: theme.typography.pxToRem(100),
@@ -16,9 +15,6 @@ const styles = theme => ({
     backgroundColor: theme.palette.primary.main,
     margin: `${theme.typography.pxToRem(35)} ${theme.typography.pxToRem(5)}`,
     opacity: 0,
-    '&:nth-child(1))': {
-      animation: 'opacitychange 1s ease-in-out infinite'
-    },
     '&:nth-child(1))': {
       animation: 'opacitychange 1s ease-in-out infinite'
     },

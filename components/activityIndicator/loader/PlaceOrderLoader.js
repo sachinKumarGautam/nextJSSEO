@@ -1,7 +1,6 @@
 import { withStyles } from '@material-ui/core/styles'
 import Paper from '@material-ui/core/Paper'
 import Fade from '@material-ui/core/Fade'
-import Zoom from '@material-ui/core/Zoom'
 
 import DoneIcon from '@material-ui/icons/Done'
 

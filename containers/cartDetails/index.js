@@ -5,7 +5,6 @@ import { bindActionCreators } from 'redux'
 
 import { withStyles } from '@material-ui/core/styles'
 import Grid from '@material-ui/core/Grid'
-import Grow from '@material-ui/core/Grow'
 
 import BreadCrumbs from '../../components/BreadCrumbs'
 
@@ -44,7 +43,6 @@ import {
 } from '../patientDetails/patientDetailsActions'
 
 import { checkPincodeLoading } from '../location/pincode/pincodeAction'
-import ActivityIndicator from '../../components/activityIndicator/index'
 import PlaceOrderLoader
   from '../../components/activityIndicator/loader/PlaceOrderLoader'
 
