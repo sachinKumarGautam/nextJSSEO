@@ -1,24 +1,22 @@
+// dependencies
 import React from 'react'
-import Header from '../components/layouts/header'
-import Footer from '../components/layouts/footer'
-
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-
 import { withStyles } from '@material-ui/core/styles'
-import withRoot from '../src/withRoot'
-
 import Paper from '@material-ui/core/Paper'
+import Router from 'next/router'
 
+// components
+import withRoot from '../src/withRoot'
+import Layout from '../components/layouts/Layout'
 import HomePageWrapper from '../containers/homePage'
 
 import {
   getBackGroundImagesLoading
 } from '../containers/homePage/homePageActions'
 
+// page title
 import { homePage } from '../components/constants/PageTitle'
-
-import Router from 'next/router'
 
 const styles = theme => ({
   root: {
@@ -53,20 +51,18 @@ class HomePage extends React.Component {
     const { addToCartHandler, classes } = this.props
     const { query } = Router
     return (
-      <div>
-        <Header
-          title={homePage.title}
-          addToCartHandler={addToCartHandler}
-          authentication={query.authentication}
-          path={query.path}
-        />
+      <Layout
+        title={homePage.title}
+        addToCartHandler={addToCartHandler}
+        authentication={query.authentication}
+        path={query.path}
+      >
         <div>
           <Paper className={classes.root} elevation={1}>
             <HomePageWrapper />
           </Paper>
         </div>
-        <Footer />
-      </div>
+      </Layout>
     )
   }
 }

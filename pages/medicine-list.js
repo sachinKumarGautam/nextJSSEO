@@ -1,15 +1,13 @@
+// dependencies
 import React from 'react'
-import Header from '../components/layouts/header'
-import Footer from '../components/layouts/footer'
-
 import { withStyles } from '@material-ui/core/styles'
 import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
 import Router from 'next/router'
 
+// components
 import withRoot from '../src/withRoot'
-
-import { connect } from 'react-redux'
-
+import Layout from '../components/layouts/Layout'
 import MedicineListWrapper from '../containers/medicineList'
 
 import {
@@ -20,6 +18,7 @@ import {
   getRelatedMedicinesLoading
 } from '../containers/medicineList/medicineListActions'
 
+// page title
 import { medicineList } from '../components/constants/PageTitle'
 
 const styles = theme => ({
@@ -71,13 +70,14 @@ class MedicineList extends React.Component {
       medicineListState
     } = this.props
     return (
-      <div>
-        <Header
-          title={medicineList.title}
-          addToCartHandler={addToCartHandler}
-        />
+      <Layout
+        title={medicineList.title}
+        addToCartHandler={addToCartHandler}
+      >
         <div className={this.props.classes.root}>
           <MedicineListWrapper
+            isLoadingRelatedMedicine={medicineListState.isLoading}
+            isLoadingSearchMedicine={searchMedicineState.isLoading}
             addToCartHandler={addToCartHandler}
             checkPincodeState={checkPincodeState}
             moleculeName={Router.query.name}
@@ -91,8 +91,7 @@ class MedicineList extends React.Component {
             }
           />
         </div>
-        <Footer />
-      </div>
+      </Layout>
     )
   }
 }

@@ -47,6 +47,7 @@ class RefillMedicineList extends Component {
               {this.props.pastMedicineState.payload.map(itemDetails => (
                 <li className={this.props.classes.listItem}>
                   <MedicineListDetails
+                    isLoading={this.props.isLoading}
                     itemDetails={itemDetails}
                     isRefillMedicines
                     addToCartHandler={this.props.addToCartHandler}

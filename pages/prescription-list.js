@@ -4,13 +4,11 @@ import { withStyles } from '@material-ui/core/styles'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import Paper from '@material-ui/core/Paper'
-import flowRight from 'lodash.flowright'
 import Router from 'next/router'
 
 // components
 import withRoot from '../src/withRoot'
-import Header from '../components/layouts/header'
-import Footer from '../components/layouts/footer'
+import Layout from '../components/layouts/Layout'
 import PrescriptionDetailsWrapper from '../containers/prescription'
 
 import {
@@ -19,9 +17,6 @@ import {
 
 // page title
 import { prescriptionList } from '../components/constants/PageTitle'
-
-// HOC for authentication
-import withAuth from '../components/HOCWrapper/AuthWrapper'
 
 const styles = theme => ({
   root: {
@@ -45,35 +40,33 @@ const styles = theme => ({
 
 class Prescription extends React.Component {
   componentDidMount () {
-    let customerId = this.props.customerState.payload.id
+    // let customerId = this.props.customerState.payload.id
     const { query } = Router
 
-    if (query.id === this.props.customerState.payload.id) {
-      customerId = query.id
-    }
+    // if (query.id === this.props.customerState.payload.id) {
+    //   customerId = query.id
+    // }
 
     // Represents to get prescription list.
     this.props.actions.getPrescriptionListLoading(
       this.props.prescriptionState,
-      customerId
+      query.customer_id
     )
   }
 
   render () {
     const { addToCartHandler } = this.props
     return (
-      <div>
-        <Header
-          title={prescriptionList.title}
-          addToCartHandler={addToCartHandler}
-        />
+      <Layout
+        title={prescriptionList.title}
+        addToCartHandler={addToCartHandler}
+      >
         <div className={this.props.classes.wrapperStyle}>
           <Paper className={this.props.classes.root} elevation={1}>
             <PrescriptionDetailsWrapper />
           </Paper>
         </div>
-        <Footer />
-      </div>
+      </Layout>
     )
   }
 }
@@ -96,8 +89,6 @@ function mapDispatchToProps (dispatch) {
   }
 }
 
-export default flowRight([withAuth])(
-  connect(mapStateToProps, mapDispatchToProps)(
-    withRoot(withStyles(styles)(Prescription))
-  )
+export default connect(mapStateToProps, mapDispatchToProps)(
+  withRoot(withStyles(styles)(Prescription))
 )

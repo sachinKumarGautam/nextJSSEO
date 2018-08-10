@@ -4,8 +4,8 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
 import { withStyles } from '@material-ui/core/styles'
+import RouteLoader from './RouteLoader'
 
-import Head from 'next/head'
 import AppBar from '@material-ui/core/AppBar'
 import Button from '../../button'
 import Toolbar from '@material-ui/core/Toolbar'
@@ -94,7 +94,7 @@ class Header extends React.Component {
 
   componentDidUpdate (prevProps) {
     if (
-      this.props.authentication &&
+      !this.props.authentication &&
       this.props.path &&
       prevProps.customerState.payload.id !== this.props.customerState.payload.id
     ) {
@@ -137,72 +137,72 @@ class Header extends React.Component {
       checkPincodeState
     } = this.props
     return (
-      <div className={classes.root}>
-        <Head>
-          <title>{this.props.title}</title>
-        </Head>
-        <AppBar elevation={1} className={classes.appBar} position='fixed'>
-          <div className={classes.appBarInnerComp}>
-            <Toolbar
-              classes={{
-                root: classes.toolbar
-              }}
-              disableGutters
-            >
-              <img
-                className={classes.lifcareLogoStyle}
-                src='/static/images/logo-green.svg'
-                onClick={() => {
-                  Router.push({ pathname: HOME_PAGE })
+      <React.Fragment>
+        <RouteLoader />
+        <div className={classes.root}>
+          <AppBar elevation={1} className={classes.appBar} position='fixed'>
+            <div className={classes.appBarInnerComp}>
+              <Toolbar
+                classes={{
+                  root: classes.toolbar
                 }}
-              />
-              <SearchMedicine
-                searchMedicineState={searchMedicineState}
-                checkPincodeState={checkPincodeState}
-                searchMedicineLoading={actions.searchMedicineLoading}
-                addToCartHandler={this.props.addToCartHandler}
-              />
-              <CartIcon cartState={this.props.cartState} />
-              {loginState.isAuthenticated && <MenuWrapper />}
-              {!loginState.isAuthenticated &&
-                <Button
-                  variant='raised'
-                  size='medium'
-                  color='primary'
-                  aria-label='login'
-                  onClick={this.openLoginModal}
-                  className={classes.button}
-                  label={'Login / Register'}
-                />}
-              {(this.state.openLoginDialog ||
-                this.props.cartState.isCartOpenLoginDialog ||
-                this.props.cartState.isCartOpenRegisterDialog) &&
-                <Login
-                  openLoginDialog={
-                    this.state.openLoginDialog ||
-                      this.props.cartState.isCartOpenLoginDialog ||
+                disableGutters
+              >
+                <img
+                  className={classes.lifcareLogoStyle}
+                  src='/static/images/logo-green.svg'
+                  onClick={() => {
+                    Router.push({ pathname: HOME_PAGE })
+                  }}
+                />
+                <SearchMedicine
+                  searchMedicineState={searchMedicineState}
+                  checkPincodeState={checkPincodeState}
+                  searchMedicineLoading={actions.searchMedicineLoading}
+                  addToCartHandler={this.props.addToCartHandler}
+                />
+                <CartIcon cartState={this.props.cartState} />
+                {loginState.isAuthenticated && <MenuWrapper />}
+                {!loginState.isAuthenticated &&
+                  <Button
+                    variant='raised'
+                    size='medium'
+                    color='primary'
+                    aria-label='login'
+                    onClick={this.openLoginModal}
+                    className={classes.button}
+                    label={'Login / Register'}
+                  />}
+                {(this.state.openLoginDialog ||
+                  this.props.cartState.isCartOpenLoginDialog ||
+                  this.props.cartState.isCartOpenRegisterDialog) &&
+                  <Login
+                    openLoginDialog={
+                      this.state.openLoginDialog ||
+                        this.props.cartState.isCartOpenLoginDialog ||
+                        this.props.cartState.isCartOpenRegisterDialog
+                    }
+                    openLoginModal={this.openLoginModal}
+                    isCartOpenRegisterDialog={
                       this.props.cartState.isCartOpenRegisterDialog
-                  }
-                  openLoginModal={this.openLoginModal}
-                  isCartOpenRegisterDialog={
-                    this.props.cartState.isCartOpenRegisterDialog
-                  }
-                  closeLoginModal={this.closeLoginModal}
-                  loginState={loginState}
-                  customerState={customerState}
-                />}
-            </Toolbar>
-            <Subheader
-              isAuthenticated={this.props.loginState.isAuthenticated}
-              openLoginModal={this.openLoginModal}
-            />
-            <GoToCartSnackbar
-              goToCartSnackbar={this.props.actions.goToCartSnackbar}
-              cartState={this.props.cartState}
-            />
-          </div>
-        </AppBar>
-      </div>
+                    }
+                    closeLoginModal={this.closeLoginModal}
+                    loginState={loginState}
+                    customerState={customerState}
+                  />}
+              </Toolbar>
+              <Subheader
+                isAuthenticated={this.props.loginState.isAuthenticated}
+                openLoginModal={this.openLoginModal}
+              />
+              <GoToCartSnackbar
+                goToCartSnackbar={this.props.actions.goToCartSnackbar}
+                cartState={this.props.cartState}
+              />
+            </div>
+          </AppBar>
+        </div>
+      </React.Fragment>
     )
   }
 }
