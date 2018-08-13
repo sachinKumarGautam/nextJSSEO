@@ -6,11 +6,17 @@ import Checkbox from '@material-ui/core/Checkbox'
 import ReactTooltip from 'react-tooltip'
 
 import {
-  LF_ASSURED,
+  LF_ASSURED_MESSAGE,
   UREGNT_DELIVERY,
   VERIFICATION_RX,
   LF_ASSURED_DETAIL
 } from '../messages/cartMessages'
+
+import {
+  DELIVERY_OPTION_URGENT,
+  DELIVERY_OPTION_NORMAL,
+  LF_ASSURED
+} from '../../components/constants/Constants'
 
 const styles = theme => ({
   textWrapper: {
@@ -66,99 +72,135 @@ const styles = theme => ({
 })
 
 class PaymentDeliveryDetail extends Component {
+  constructor (props) {
+    super(props)
+    this.state = {
+      isExpressDelivery: false
+    }
+  }
+
+  componentDidMount () {
+    if (this.props.cartState.payload.preferred_delivery_option === DELIVERY_OPTION_URGENT) {
+      this.setState({
+        isExpressDelivery: true
+      })
+    }
+  }
+
+  onExpressDeliveryClick () {
+    this.setState({
+      isExpressDelivery: !this.state.isExpressDelivery
+    })
+    this.props.optForExpressDeliveryLoading(
+      this.props.cartState,
+      this.props.cartState.payload.uid,
+      !this.state.isExpressDelivery ? DELIVERY_OPTION_URGENT : DELIVERY_OPTION_NORMAL
+    )
+  }
+
   render () {
+    let indexOfUrgentDelivery = this.props.cartState.payload.available_delivery_option.indexOf(DELIVERY_OPTION_URGENT)
     return (
       <div className={this.props.classes.mainWrapper}>
-        <div className={this.props.classes.textWrapper}>
-          <img
-            src='/static/images/shape.svg'
-          />
-          <Typography
-            varaint='caption'
-            className={this.props.classes.asssuredText}
-          >
-            {LF_ASSURED_DETAIL}
-          </Typography>
-          <a
-            href='#'
-            data-tip
-            data-for='assured'
-          >
+        {
+          this.props.cartState.payload.service_type === LF_ASSURED &&
+          <div className={this.props.classes.textWrapper}>
             <img
-              src='/static/images/info-outline.svg'
-              className={this.props.classes.tooltipIconInage}
+              src='/static/images/shape.svg'
             />
-            <ReactTooltip
-              id='assured'
-              effect='solid'
-              place='right'
-              className={this.props.classes.paper}
-              delayHide={1000}
-              delayShow={1000}
+            <Typography
+              varaint='caption'
+              className={this.props.classes.asssuredText}
             >
-              <Typography
-                variant='caption'
+              {LF_ASSURED_DETAIL}
+            </Typography>
+            <a
+              href='#'
+              data-tip
+              data-for='assured'
+            >
+              <img
+                src='/static/images/info-outline.svg'
+                className={this.props.classes.tooltipIconInage}
+              />
+              <ReactTooltip
+                id='assured'
+                effect='solid'
+                place='right'
+                className={this.props.classes.paper}
+                delayHide={1000}
+                delayShow={1000}
               >
-                {LF_ASSURED}
-              </Typography>
-            </ReactTooltip>
-          </a>
-        </div>
-        <div className={this.props.classes.textWrapper}>
-          <img
-            src='/static/images/rx-pending.svg'
-            className={this.props.classes.rxImageStyle}
-          />
-          <Typography
-            varaint='caption'
-            className={this.props.classes.text}
-          >
-            {VERIFICATION_RX}
-          </Typography>
-        </div>
-        <div className={this.props.classes.textWrapper}>
-          <Checkbox
-            checked={false}
-            classes={{
-              root: this.props.classes.checkboxRoot
-            }}
-            // onChange={this.onClickOfDoctorCallBack.bind(this)}
-            color='primary'
-          />
-          <img
-            src='/static/images/express-delivery-icon.svg'
-          />
-          <Typography
-            varaint='caption'
-            className={this.props.classes.text}
-          >
-            Express Delivery
-          </Typography>
-          <a
-            href='#'
-            data-tip
-            data-for='urgent_delivery'
-          >
+                <Typography
+                  variant='caption'
+                >
+                  {LF_ASSURED_MESSAGE}
+                </Typography>
+              </ReactTooltip>
+            </a>
+          </div>
+        }
+        {
+          this.props.cartState.payload.service_type === LF_ASSURED &&
+          <div className={this.props.classes.textWrapper}>
             <img
-              src='/static/images/info-outline.svg'
-              className={this.props.classes.tooltipIconInage}
+              src='/static/images/rx-pending.svg'
+              className={this.props.classes.rxImageStyle}
             />
-            <ReactTooltip
-              id='urgent_delivery'
-              effect='solid'
-              place='right'
-              className={this.props.classes.paper}
-              delayHide={1000}
-              delayShow={1000}
+            <Typography
+              varaint='caption'
+              className={this.props.classes.text}
             >
-              <Typography
-                variant='caption'
+              {VERIFICATION_RX}
+            </Typography>
+          </div>
+        }
+        {
+          indexOfUrgentDelivery !== -1 &&
+          <div className={this.props.classes.textWrapper}>
+            <Checkbox
+              checked={this.state.isExpressDelivery}
+              classes={{
+                root: this.props.classes.checkboxRoot
+              }}
+              onChange={this.onExpressDeliveryClick.bind(this)}
+              color='primary'
+            />
+            <img
+              src='/static/images/express-delivery-icon.svg'
+            />
+            <Typography
+              varaint='caption'
+              className={this.props.classes.text}
+            >
+              Express Delivery
+            </Typography>
+            <a
+              href='#'
+              data-tip
+              data-for='urgent_delivery'
+            >
+              <img
+                src='/static/images/info-outline.svg'
+                className={this.props.classes.tooltipIconInage}
+              />
+              <ReactTooltip
+                id='urgent_delivery'
+                effect='solid'
+                place='right'
+                className={this.props.classes.paper}
+                delayHide={1000}
+                delayShow={1000}
               >
-                {UREGNT_DELIVERY}
-              </Typography>
-            </ReactTooltip>
-          </a>
-        </div>
+                <Typography
+                  variant='caption'
+                >
+                  {UREGNT_DELIVERY}
+                </Typography>
+              </ReactTooltip>
+            </a>
+          </div>
+        }
       </div>
     )
   }
