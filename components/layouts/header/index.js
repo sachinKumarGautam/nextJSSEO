@@ -85,12 +85,12 @@ class Header extends React.Component {
       !this.props.loginState.isAuthenticated &&
       !this.props.cartState.payload.uid
     ) {
-      // this.props.actions.getAnonymousCartIdLoading(
-      //   this.props.cartState,
-      //   this.props.checkPincodeState.payload.source,
-      //   this.props.checkPincodeState.payload.id,
-      //   ''
-      // )
+      this.props.actions.getAnonymousCartIdLoading(
+        this.props.cartState,
+        this.props.checkPincodeState.payload.source,
+        this.props.checkPincodeState.payload.id,
+        ''
+      )
     }
   }
 

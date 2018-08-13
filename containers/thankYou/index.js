@@ -11,12 +11,12 @@ import { getAnonymousCartIdLoading } from '../cartDetails/cartActions'
 
 class ThankyouWrapper extends Component {
   componentDidMount () {
-    // this.props.actions.getAnonymousCartIdLoading(
-    //   this.props.cartState,
-    //   this.props.checkPincodeState.payload.source,
-    //   this.props.checkPincodeState.payload.id,
-    //   ''
-    // )
+    this.props.actions.getAnonymousCartIdLoading(
+      this.props.cartState,
+      this.props.checkPincodeState.payload.source,
+      this.props.checkPincodeState.payload.id,
+      ''
+    )
   }
 
   render () {

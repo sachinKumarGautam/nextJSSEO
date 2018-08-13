@@ -16,16 +16,16 @@ let http = propGenerator => {
       return response
     })
     .catch(data => {
-      // NProgress.done()
+      // stop loader even request fails
+      NProgress.done()
       if (data.error.status === 401) {
         // return re vaidate function
         // return tokenReAuth(propGenerator)
-        return null
+        return Observable.throw(data)
       } else if (data.error.status === 412) {
         const cartState = store.getState().cartState
         const isCart = true
 
-        console.log(data)
         return of(
           Observable.throw(data),
           Observable.throw(store.dispatch(isCartInvalid(cartState, isCart)))
