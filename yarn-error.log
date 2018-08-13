@@ -1,5 +1,5 @@
 Arguments: 
-  /usr/local/Cellar/node/9.11.1/bin/node /usr/local/bin/yarn standard --fix
+  /usr/local/Cellar/node/9.11.1/bin/node /usr/local/bin/yarn dev
 
 PATH: 
   /usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
@@ -23,6 +23,7 @@ npm manifest:
       "@material-ui/icons": "^1.1.0",
       "@zeit/next-css": "^0.2.0",
       "babel-eslint": "^8.2.5",
+      "cookie-parser": "^1.4.3",
       "downshift": "^2.0.6",
       "eslint-loader": "1.9.0",
       "eslint-plugin-flowtype": "2.35.0",
@@ -30,6 +31,7 @@ npm manifest:
       "eslint-plugin-react": "7.1.0",
       "express": "^4.16.3",
       "formik": "^0.11.11",
+      "js-cookie": "^2.2.0",
       "jss": "latest",
       "lodash.debounce": "^4.0.8",
       "lodash.flowright": "^3.5.0",
@@ -1582,13 +1584,9 @@ Lockfile:
     dependencies:
       color-name "1.1.1"
   
-  color-name@1.1.1:
+  color-name@1.1.1, color-name@^1.0.0:
     version "1.1.1"
     resolved "https://registry.yarnpkg.com/color-name/-/color-name-1.1.1.tgz#4b1415304cf50028ea81643643bd82ea05803689"
-  
-  color-name@^1.0.0:
-    version "1.1.3"
-    resolved "https://registry.yarnpkg.com/color-name/-/color-name-1.1.3.tgz#a7d0558bd89c42f795dd42328f740831ca53bc25"
   
   color-string@^0.3.0:
     version "0.3.0"
@@ -1684,6 +1682,13 @@ Lockfile:
   convert-source-map@1.5.1, convert-source-map@^1.1.0:
     version "1.5.1"
     resolved "https://registry.yarnpkg.com/convert-source-map/-/convert-source-map-1.5.1.tgz#b8278097b9bc229365de5c62cf5fcaed8b5599e5"
+  
+  cookie-parser@^1.4.3:
+    version "1.4.3"
+    resolved "https://registry.yarnpkg.com/cookie-parser/-/cookie-parser-1.4.3.tgz#0fe31fa19d000b95f4aadf1f53fdc2b8a203baa5"
+    dependencies:
+      cookie "0.3.1"
+      cookie-signature "1.0.6"
   
   cookie-signature@1.0.6:
     version "1.0.6"
@@ -2111,16 +2116,9 @@ Lockfile:
     dependencies:
       domelementtype "1"
   
-  domutils@1.5.1:
+  domutils@1.5.1, domutils@^1.5.1:
     version "1.5.1"
     resolved "https://registry.yarnpkg.com/domutils/-/domutils-1.5.1.tgz#dcd8488a26f563d61079e48c9f7b7e32373682cf"
-    dependencies:
-      dom-serializer "0"
-      domelementtype "1"
-  
-  domutils@^1.5.1:
-    version "1.7.0"
-    resolved "https://registry.yarnpkg.com/domutils/-/domutils-1.7.0.tgz#56ea341e834e06e6748af7a1cb25da67ea9f8c2a"
     dependencies:
       dom-serializer "0"
       domelementtype "1"
@@ -2144,11 +2142,7 @@ Lockfile:
     version "1.1.1"
     resolved "https://registry.yarnpkg.com/ee-first/-/ee-first-1.1.1.tgz#590c61156b0ae2f4f0255732a158b266bc56b21d"
   
-  electron-to-chromium@^1.2.7:
-    version "1.3.52"
-    resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.3.52.tgz#d2d9f1270ba4a3b967b831c40ef71fb4d9ab5ce0"
-  
-  electron-to-chromium@^1.3.47:
+  electron-to-chromium@^1.2.7, electron-to-chromium@^1.3.47:
     version "1.3.50"
     resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.3.50.tgz#7438b76f92b41b919f3fbdd350fbd0757dacddf7"
   
@@ -2455,9 +2449,9 @@ Lockfile:
     version "3.0.1"
     resolved "https://registry.yarnpkg.com/eslint-plugin-standard/-/eslint-plugin-standard-3.0.1.tgz#34d0c915b45edc6f010393c7eef3823b08565cf2"
   
-  eslint-scope@^3.7.1:
-    version "3.7.3"
-    resolved "https://registry.yarnpkg.com/eslint-scope/-/eslint-scope-3.7.3.tgz#bb507200d3d17f60247636160b4826284b108535"
+  eslint-scope@^3.7.1, eslint-scope@~3.7.1:
+    version "3.7.1"
+    resolved "https://registry.yarnpkg.com/eslint-scope/-/eslint-scope-3.7.1.tgz#3d63c3edfda02e06e01a452ad88caacc7cdcb6e8"
     dependencies:
       esrecurse "^4.1.0"
       estraverse "^4.1.1"
@@ -2465,13 +2459,6 @@ Lockfile:
   eslint-scope@^4.0.0:
     version "4.0.0"
     resolved "https://registry.yarnpkg.com/eslint-scope/-/eslint-scope-4.0.0.tgz#50bf3071e9338bcdc43331794a0cb533f0136172"
-    dependencies:
-      esrecurse "^4.1.0"
-      estraverse "^4.1.1"
-  
-  eslint-scope@~3.7.1:
-    version "3.7.1"
-    resolved "https://registry.yarnpkg.com/eslint-scope/-/eslint-scope-3.7.1.tgz#3d63c3edfda02e06e01a452ad88caacc7cdcb6e8"
     dependencies:
       esrecurse "^4.1.0"
       estraverse "^4.1.1"
@@ -3222,7 +3209,7 @@ Lockfile:
       inherits "^2.0.1"
       readable-stream "^2.0.2"
   
-  http-errors@1.6.2:
+  http-errors@1.6.2, http-errors@~1.6.2:
     version "1.6.2"
     resolved "https://registry.yarnpkg.com/http-errors/-/http-errors-1.6.2.tgz#0a002cc85707192a7e7946ceedc11155f60ec736"
     dependencies:
@@ -3230,15 +3217,6 @@ Lockfile:
       inherits "2.0.3"
       setprototypeof "1.0.3"
       statuses ">= 1.3.1 < 2"
-  
-  http-errors@~1.6.2:
-    version "1.6.3"
-    resolved "https://registry.yarnpkg.com/http-errors/-/http-errors-1.6.3.tgz#8b55680bb4be283a0b5bf4ea2e38580be1d9320d"
-    dependencies:
-      depd "~1.1.2"
-      inherits "2.0.3"
-      setprototypeof "1.1.0"
-      statuses ">= 1.4.0 < 2"
   
   http-status@1.0.1:
     version "1.0.1"
@@ -3260,15 +3238,9 @@ Lockfile:
     version "1.0.2"
     resolved "https://registry.yarnpkg.com/hyphenate-style-name/-/hyphenate-style-name-1.0.2.tgz#31160a36930adaf1fc04c6074f7eb41465d4ec4b"
   
-  iconv-lite@0.4.19:
+  iconv-lite@0.4.19, iconv-lite@^0.4.17, iconv-lite@^0.4.4, iconv-lite@~0.4.13:
     version "0.4.19"
     resolved "https://registry.yarnpkg.com/iconv-lite/-/iconv-lite-0.4.19.tgz#f7468f60135f5e5dad3399c0a81be9a1603a082b"
-  
-  iconv-lite@^0.4.17, iconv-lite@^0.4.4, iconv-lite@~0.4.13:
-    version "0.4.23"
-    resolved "https://registry.yarnpkg.com/iconv-lite/-/iconv-lite-0.4.23.tgz#297871f63be507adcfbfca715d0cd0eed84e9a63"
-    dependencies:
-      safer-buffer ">= 2.1.2 < 3"
   
   icss-replace-symbols@^1.1.0:
     version "1.1.0"
@@ -3658,6 +3630,10 @@ Lockfile:
   js-base64@^2.1.9:
     version "2.4.5"
     resolved "https://registry.yarnpkg.com/js-base64/-/js-base64-2.4.5.tgz#e293cd3c7c82f070d700fc7a1ca0a2e69f101f92"
+  
+  js-cookie@^2.2.0:
+    version "2.2.0"
+    resolved "https://registry.yarnpkg.com/js-cookie/-/js-cookie-2.2.0.tgz#1b2c279a6eece380a12168b92485265b35b1effb"
   
   js-tokens@^3.0.0, js-tokens@^3.0.2:
     version "3.0.2"
@@ -5174,13 +5150,9 @@ Lockfile:
       inherits "^2.0.3"
       pump "^2.0.0"
   
-  punycode@1.3.2:
+  punycode@1.3.2, punycode@^1.2.4:
     version "1.3.2"
     resolved "https://registry.yarnpkg.com/punycode/-/punycode-1.3.2.tgz#9653a036fb7c1ee42342f2325cceefea3926c48d"
-  
-  punycode@^1.2.4:
-    version "1.4.1"
-    resolved "https://registry.yarnpkg.com/punycode/-/punycode-1.4.1.tgz#c0d5a63b2718800ad8e1eb0fa5269c84dd41845e"
   
   punycode@^2.1.0:
     version "2.1.1"
@@ -5190,13 +5162,9 @@ Lockfile:
     version "1.5.1"
     resolved "https://registry.yarnpkg.com/q/-/q-1.5.1.tgz#7e32f75b41381291d04611f1bf14109ac00651d7"
   
-  qs@6.5.1:
+  qs@6.5.1, qs@^6.5.1:
     version "6.5.1"
     resolved "https://registry.yarnpkg.com/qs/-/qs-6.5.1.tgz#349cdf6eef89ec45c12d7d5eb3fc0c870343a6d8"
-  
-  qs@^6.5.1:
-    version "6.5.2"
-    resolved "https://registry.yarnpkg.com/qs/-/qs-6.5.2.tgz#cb3ae806e8740444584ef154ce8ee98d403f3e36"
   
   query-string@^4.1.0:
     version "4.3.4"
@@ -5680,11 +5648,11 @@ Lockfile:
     dependencies:
       symbol-observable "1.0.1"
   
-  safe-buffer@5.1.1:
+  safe-buffer@5.1.1, safe-buffer@^5.0.1, safe-buffer@^5.1.0, safe-buffer@^5.1.1, safe-buffer@~5.1.0, safe-buffer@~5.1.1:
     version "5.1.1"
     resolved "https://registry.yarnpkg.com/safe-buffer/-/safe-buffer-5.1.1.tgz#893312af69b2123def71f57889001671eeb2c853"
   
-  safe-buffer@^5.0.1, safe-buffer@^5.1.0, safe-buffer@^5.1.1, safe-buffer@^5.1.2, safe-buffer@~5.1.0, safe-buffer@~5.1.1:
+  safe-buffer@^5.1.2:
     version "5.1.2"
     resolved "https://registry.yarnpkg.com/safe-buffer/-/safe-buffer-5.1.2.tgz#991ec69d296e0313747d59bdfd2b745c35f8828d"
   
@@ -5693,10 +5661,6 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/safe-regex/-/safe-regex-1.1.0.tgz#40a3669f3b077d1e943d44629e157dd48023bf2e"
     dependencies:
       ret "~0.1.10"
-  
-  "safer-buffer@>= 2.1.2 < 3":
-    version "2.1.2"
-    resolved "https://registry.yarnpkg.com/safer-buffer/-/safer-buffer-2.1.2.tgz#44fa161b0187b9549dd84bb91802f9bd8385cd6a"
   
   sax@^1.2.4, sax@~1.2.1:
     version "1.2.4"
@@ -5982,17 +5946,13 @@ Lockfile:
       define-property "^0.2.5"
       object-copy "^0.1.0"
   
-  "statuses@>= 1.3.1 < 2", "statuses@>= 1.4.0 < 2":
-    version "1.5.0"
-    resolved "https://registry.yarnpkg.com/statuses/-/statuses-1.5.0.tgz#161c7dac177659fd9811f43771fa99381478628c"
+  "statuses@>= 1.3.1 < 2", statuses@~1.4.0:
+    version "1.4.0"
+    resolved "https://registry.yarnpkg.com/statuses/-/statuses-1.4.0.tgz#bb73d446da2796106efcc1b601a253d6c46bd087"
   
   statuses@~1.3.1:
     version "1.3.1"
     resolved "https://registry.yarnpkg.com/statuses/-/statuses-1.3.1.tgz#faf51b9eb74aaef3b3acf4ad5f61abf24cb7b93e"
-  
-  statuses@~1.4.0:
-    version "1.4.0"
-    resolved "https://registry.yarnpkg.com/statuses/-/statuses-1.4.0.tgz#bb73d446da2796106efcc1b601a253d6c46bd087"
   
   stream-browserify@^2.0.1:
     version "2.0.1"
@@ -6757,7 +6717,7 @@ Trace:
   Error: Command failed.
   Exit code: 1
   Command: sh
-  Arguments: -c /Users/apple/Documents/kronos/node_modules/.bin/standard --fix
+  Arguments: -c node server.js
   Directory: /Users/apple/Documents/kronos
   Output:
   

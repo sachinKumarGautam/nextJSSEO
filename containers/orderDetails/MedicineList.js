@@ -102,7 +102,6 @@ const MedicineList = (props) => {
                   />
                   <Typography className={props.classes.deliveryByText}>
                     {
-                      orderItem.available_delivery_option &&
                       orderItem.available_delivery_option === URGENT_DELIVERY
                         ? (
                           orderItem.stock_availability === IN_STOCK

@@ -287,6 +287,15 @@ const getOrderDetails$ = orderId =>
     url: fetchUrl('order', orderId, 'CREATE')
   })
 
+const expressDelivery$ = (cartId, deliveryOption) => (
+
+  makeAjaxRequest({
+    method: 'PATCH',
+    url: fetchUrl('cart', cartId + '/preferred-delivery-option/' + deliveryOption, 'CREATE')
+  })
+
+)
+
 export {
   getMoleculeSummary$,
   getMedicineList$,
@@ -322,5 +331,6 @@ export {
   checkReferralCode$,
   getMembershipCode$,
   searchLocalityForPincode$,
-  getOrderDetails$
+  getOrderDetails$,
+  expressDelivery$
 }

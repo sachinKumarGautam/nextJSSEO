@@ -3,14 +3,12 @@ import React from 'react'
 import { withStyles } from '@material-ui/core/styles'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import flowRight from 'lodash.flowright'
 import Router from 'next/router'
 import Paper from '@material-ui/core/Paper'
 
 // components
 import withRoot from '../src/withRoot'
-import Header from '../components/layouts/header'
-import Footer from '../components/layouts/footer'
+import Layout from '../components/layouts/Layout'
 import CarePointWrapper from '../containers/carePoint'
 
 import {
@@ -19,9 +17,6 @@ import {
 
 // page title
 import { carePoint } from '../components/constants/PageTitle'
-
-// HOC for authentication
-import withAuth from '../components/HOCWrapper/AuthWrapper'
 
 const styles = theme => ({
   root: {
@@ -45,17 +40,17 @@ const styles = theme => ({
 
 class CarePoints extends React.Component {
   componentDidMount () {
-    let customerId = this.props.customerState.payload.id
+    // let customerId = this.props.customerState.payload.id
     const { query } = Router
 
-    if (query.id === this.props.customerState.payload.id) {
-      customerId = query.id
-    }
+    // if (query.id === this.props.customerState.payload.id) {
+    //   customerId = query.id
+    // }
 
     // Represents to get care point with customer Id.
     this.props.actions.getCarePointDetailsLoading(
       this.props.carePointState,
-      customerId,
+      query.customer_id,
       'all'
     )
   }
@@ -63,15 +58,16 @@ class CarePoints extends React.Component {
   render () {
     const { addToCartHandler } = this.props
     return (
-      <div>
-        <Header title={carePoint.title} addToCartHandler={addToCartHandler} />
+      <Layout
+        title={carePoint.title}
+        addToCartHandler={addToCartHandler}
+      >
         <div className={this.props.classes.wrapperStyle}>
           <Paper className={this.props.classes.root} elevation={1}>
             <CarePointWrapper />
           </Paper>
         </div>
-        <Footer />
-      </div>
+      </Layout>
     )
   }
 }
@@ -94,8 +90,6 @@ function mapDispatchToProps (dispatch) {
   }
 }
 
-export default flowRight([withAuth])(
-  connect(mapStateToProps, mapDispatchToProps)(
-    withRoot(withStyles(styles)(CarePoints))
-  )
+export default connect(mapStateToProps, mapDispatchToProps)(
+  withRoot(withStyles(styles)(CarePoints))
 )

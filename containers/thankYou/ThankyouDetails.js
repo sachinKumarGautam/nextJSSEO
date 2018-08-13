@@ -58,7 +58,7 @@ const ThankyouDetails = (props) => {
     <div>
       <div className={props.classes.orderWrapper}>
         <img
-          src='static/images/bg-chk.svg'
+          src='/static/images/bg-chk.svg'
           alt='check'
           className={props.classes.imageStyle}
         />

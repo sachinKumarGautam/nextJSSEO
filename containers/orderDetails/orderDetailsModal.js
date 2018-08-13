@@ -22,6 +22,7 @@ const initialState = {
     viewStatus: '',
     status: '',
     source: '',
+    seller_name: '',
     payment_method: '',
     promised_delivery_date: 0,
     order_items: [],

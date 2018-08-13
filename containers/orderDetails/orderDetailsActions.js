@@ -5,7 +5,7 @@ import {
 } from './orderDetailsActionTypes'
 
 /**
- * Represents to the loading state to get the molecule details according to the salt id.
+ * Represents to the loading state to get the order details according to the order id.
  * @param {object} orderDetailsState - The object maintained for payload, loading and error state.
  * @param {string} orderId - The value of the salt id according to which list will occur
  */
@@ -21,17 +21,14 @@ export function getOrderDetailsLoading (orderDetailsState, orderId) {
 }
 
 /**
- * Represents to the success state to get the molecule details.
+ * Represents to the success state to get the order details.
  * @param {object} orderDetailsState - The object maintained for payload, loading and error state.
  * @param {array} result - The result obtained from the API response
  */
 
 export function getOrderDetailsSuccess (
   orderDetailsState,
-  result,
-  orderStatusProgressDetails,
-  promisedDeliveryDate,
-  createdAt
+  result
 ) {
   return {
     type: GET_ORDER_DETAILS_SUCCESS,
@@ -41,7 +38,7 @@ export function getOrderDetailsSuccess (
     uid: result.uid,
     patient_id: result.patient_id,
     customer_id: result.customer_id,
-    created_at: createdAt,
+    created_at: result.created_at,
     shipping_address_id: result.shipping_address_id,
     shipping_address: result.shipping_address,
     customer_full_name: result.customer_full_name,
@@ -57,11 +54,12 @@ export function getOrderDetailsSuccess (
     facility_code: result.facility_code,
     state: result.state,
     status: result.status,
-    activeStep: orderStatusProgressDetails.activeStep,
-    viewStatus: orderStatusProgressDetails.viewStatus,
+    activeStep: result.activeStep,
+    viewStatus: result.viewStatus,
     source: result.source,
+    seller_name: result.seller_name,
     payment_method: result.payment_method,
-    promised_delivery_date: promisedDeliveryDate,
+    promised_delivery_date: result.promised_delivery_date,
     order_items: result.order_items,
     order_prescriptions: result.order_prescriptions,
     source_type: result.source_type,
@@ -71,7 +69,7 @@ export function getOrderDetailsSuccess (
 }
 
 /**
- * Represents to the error state to get the molecule details.
+ * Represents to the error state to get the order details.
  * @param {object} orderDetailsState - The object maintained for payload, loading and error state.
  * @param {object} error - The error details when API throws an error
  */

@@ -25,7 +25,7 @@ import {
 } from '../../utils/FormatDate'
 
 /**
- * Represents to the epic of get molecule detail/summary
+ * Represents to the epic of get order detail/summary
  * @param {object} action$ - this is the ActionsObservable
  * @param {object} store - to access the state from reducers
  */
@@ -37,15 +37,18 @@ export function getOrderDetails (action$, store) {
         map(result => {
           const payload = result.body.payload
           const orderStatusProgressDetails = getOrderStatusProgressDetails(payload.state, payload.status)
-          const promisedDeliveryDate = formatDateWithMonth(payload.promised_delivery_date)
-          const createdAt = formatDateWithMonth(payload.created_at)
+          const modifiedPayload = {
+            ...payload,
+            viewStatus: orderStatusProgressDetails.viewStatus,
+            activeStep: orderStatusProgressDetails.activeStep,
+            promised_delivery_date: formatDateWithMonth(payload.promised_delivery_date),
+            created_at: formatDateWithMonth(payload.created_at),
+            seller_name: payload.seller_name ? payload.seller_name : 'trusted channel partner'
+          }
 
           return getOrderDetailsSuccess(
             data.orderDetailsState,
-            payload,
-            orderStatusProgressDetails,
-            promisedDeliveryDate,
-            createdAt
+            modifiedPayload
           )
         }),
         catchError(error => {

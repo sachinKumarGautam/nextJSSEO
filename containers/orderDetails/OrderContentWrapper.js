@@ -2,10 +2,8 @@ import React from 'react'
 
 import { withStyles } from '@material-ui/core/styles'
 import Divider from '@material-ui/core/Divider'
-import Stepper from '@material-ui/core/Stepper'
-import Step from '@material-ui/core/Step'
-import Typography from '@material-ui/core/Typography'
 
+import Bazooka from './Bazooka'
 import PatientDetails from './PatientDetails'
 import AddressDetails from './AddressDetails'
 import Prescriptions from './Prescriptions'
@@ -79,29 +77,8 @@ const styles = theme => ({
   },
   divider: {
     marginLeft: theme.spacing.unit * 2.5
-  },
-  image: {
-    height: theme.spacing.unit * 3,
-    width: theme.spacing.unit * 3
-  },
-  stepLabel: {
-    marginTop: theme.spacing.unit * 2,
-    color: theme.palette.customGrey.grey500,
-    fontSize: theme.spacing.unit * 1.75
-  },
-  stepLabelGreyed: {
-    marginTop: theme.spacing.unit * 2,
-    color: theme.palette.customGrey.grey100,
-    fontSize: theme.spacing.unit * 1.75
-  },
-  steps: {
-    display: 'flex',
-    alignItems: 'center',
-    flexDirection: 'column'
   }
 })
-
-const steps = ['Processing', 'Confirmed', 'Dispatched', 'Delivered']
 
 const OrderContentWrapper = (props) => {
   return (
@@ -115,29 +92,9 @@ const OrderContentWrapper = (props) => {
         paymentMethod={props.orderDetailsState.payload.payment_method}
         paymentStatus={props.orderDetailsState.payload.viewStatus}
       />
-      <Stepper activeStep={props.orderDetailsState.payload.activeStep + 1} alternativeLabel>
-        {steps.map((label, index) => {
-          if (index <= props.orderDetailsState.payload.activeStep) {
-            return (
-              <Step key={label} className={props.classes.steps}>
-                <img src='/static/images/checkedBazooka.svg' className={props.classes.image} />
-                <Typography className={props.classes.stepLabel}>
-                  {label}
-                </Typography>
-              </Step>
-            )
-          } else {
-            return (
-              <Step key={label} className={props.classes.steps}>
-                <img src='/static/images/greyBazooka.svg' className={props.classes.image} />
-                <Typography className={props.classes.stepLabelGreyed}>
-                  {label}
-                </Typography>
-              </Step>
-            )
-          }
-        })}
-      </Stepper>
+      <Bazooka
+        orderDetailsState={props.orderDetailsState}
+      />
       <PaymentDeliveryDetail
         deliveryOption={props.orderDetailsState.payload.delivery_option}
         serviceType={props.orderDetailsState.payload.service_type}

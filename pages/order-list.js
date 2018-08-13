@@ -4,13 +4,11 @@ import { withStyles } from '@material-ui/core/styles'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import Paper from '@material-ui/core/Paper'
-import flowRight from 'lodash.flowright'
 import Router from 'next/router'
 
 // components
 import withRoot from '../src/withRoot'
-import Header from '../components/layouts/header'
-import Footer from '../components/layouts/footer'
+import Layout from '../components/layouts/Layout'
 import OrderListWrapper from '../containers/orderList'
 
 import {
@@ -19,9 +17,6 @@ import {
 
 // page title
 import { orderList } from '../components/constants/PageTitle'
-
-// HOC for authentication
-import withAuth from '../components/HOCWrapper/AuthWrapper'
 
 const styles = theme => ({
   root: {
@@ -45,17 +40,17 @@ const styles = theme => ({
 
 class Orders extends React.Component {
   componentDidMount () {
-    let customerId = this.props.customerState.payload.id
+    // let customerId = this.props.customerState.payload.id
     const { query } = Router
 
-    if (query.id === this.props.customerState.payload.id) {
-      customerId = query.id
-    }
+    // if (query.id === this.props.customerState.payload.id) {
+    //   customerId = query.id
+    // }
 
     // Represents to get order list details with page size and size per page.
     this.props.actions.getOrderListDetailsLoading(
       this.props.orderListState,
-      customerId, // pass customer Id
+      query.customer_id, // pass customer Id
       0, // page number
       10 // page size
     )
@@ -64,15 +59,16 @@ class Orders extends React.Component {
   render () {
     const { addToCartHandler } = this.props
     return (
-      <div>
-        <Header title={orderList.title} addToCartHandler={addToCartHandler} />
+      <Layout
+        title={orderList.title}
+        addToCartHandler={addToCartHandler}
+      >
         <div className={this.props.classes.wrapperStyle}>
           <Paper className={this.props.classes.root} elevation={1}>
             <OrderListWrapper />
           </Paper>
         </div>
-        <Footer />
-      </div>
+      </Layout>
     )
   }
 }
@@ -95,8 +91,6 @@ function mapDispatchToProps (dispatch) {
   }
 }
 
-export default flowRight([withAuth])(
-  connect(mapStateToProps, mapDispatchToProps)(
-    withRoot(withStyles(styles)(Orders))
-  )
+export default connect(mapStateToProps, mapDispatchToProps)(
+  withRoot(withStyles(styles)(Orders))
 )
