@@ -427,6 +427,7 @@ export default function cartReducer (state = initialState, action) {
         ...state,
         orderResponse: {
           ...state.orderResponse,
+          isLoading: action.isLoading,
           payload: {
             ...state.orderResponse.payload,
             order_number: action.order_number,

@@ -73,7 +73,8 @@ class Header extends React.Component {
     this.openLoginModal = this.openLoginModal.bind(this)
     this.closeLoginModal = this.closeLoginModal.bind(this)
     this.state = {
-      openLoginDialog: (this.props.authentication && !this.props.loginState.isAuthenticated)
+      openLoginDialog: this.props.authentication &&
+        !this.props.loginState.isAuthenticated
         ? this.props.authentication
         : false
     }
@@ -84,12 +85,12 @@ class Header extends React.Component {
       !this.props.loginState.isAuthenticated &&
       !this.props.cartState.payload.uid
     ) {
-      this.props.actions.getAnonymousCartIdLoading(
-        this.props.cartState,
-        this.props.checkPincodeState.payload.source,
-        this.props.checkPincodeState.payload.id,
-        ''
-      )
+      // this.props.actions.getAnonymousCartIdLoading(
+      //   this.props.cartState,
+      //   this.props.checkPincodeState.payload.source,
+      //   this.props.checkPincodeState.payload.id,
+      //   ''
+      // )
     }
   }
 

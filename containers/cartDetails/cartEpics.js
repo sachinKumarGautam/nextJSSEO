@@ -460,12 +460,14 @@ export function optDoctorCallback (action$, store) {
     mergeMap(data => {
       return http(teleConsultation$(data.cartUId, data.doctorCallback)).pipe(
         map(result => {
+          console.log("success", result)
           return optForDoctorCallbackSuccess(
             data.cartState,
             result.body.payload.doctor_callback
           )
         }),
         catchError(error => {
+          console.log("error",error);
           return of(optForDoctorCallbackFailure(data.cartState, error))
         })
       )

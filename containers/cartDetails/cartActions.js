@@ -491,8 +491,10 @@ export function resetApiStateSubmitOrder () {
 }
 
 export function isCartInvalid (cartState, is_cart_invalid) {
+  console.log('sachin1', is_cart_invalid)
   return {
     type: cartActionTypes.IS_CART_INVALID,
+    cartState,
     is_cart_invalid: is_cart_invalid
   }
 }
