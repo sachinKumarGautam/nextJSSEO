@@ -9,7 +9,7 @@ import ActivityIndicator from '../../components/activityIndicator/index'
 import ComponentSpecificError from '../../components/activityIndicator/error/ComponentSpecificError'
 
 class PatientDetailsCardWrapper extends Component {
-  tryAgain(){
+  tryAgain () {
     this.props.getPatientDetailsListLoading(
       this.props.patientDetailsState,
       this.props.customerState.payload.id
@@ -19,7 +19,7 @@ class PatientDetailsCardWrapper extends Component {
   render () {
     return (
       <Grid
-        container={this.props.errorState.isError ? false: true}
+        container={!this.props.errorState.isError}
         spacing={24}
         className={this.props.patientDetailsCardWrapper}
       >

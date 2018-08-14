@@ -109,13 +109,13 @@ class OrderListDetails extends Component {
             isError={orderListState.errorState.isError}
             ErrorComp={
               this.state.isShowMore
-              ? <SnackbarErrorMessage
-                error={orderListState.errorState.error}
-              />
-              : <ComponentSpecificError
-                error={orderListState.errorState.error}
-                tryAgain={this.tryAgain.bind(this)}
-              />
+                ? <SnackbarErrorMessage
+                  error={orderListState.errorState.error}
+                />
+                : <ComponentSpecificError
+                  error={orderListState.errorState.error}
+                  tryAgain={this.tryAgain.bind(this)}
+                />
             }
             bottomError={this.state.isShowMore}
           >

@@ -64,7 +64,7 @@ class MedicineList extends React.Component {
       'Multivitamin', // pass salt name
       this.state.page + 1, // page number
       10, // page size
-      true //is show more button
+      true // is show more button
     )
 
     this.setState({

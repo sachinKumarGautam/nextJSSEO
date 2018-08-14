@@ -22,7 +22,7 @@ import {
 // page title
 import { moleculeList } from '../components/constants/PageTitle'
 
-//activity indicatoe
+// activity indicatoe
 import ActivityIndicator from '../components/activityIndicator'
 import FullPageError from '../components/activityIndicator/error/FullPageError'
 

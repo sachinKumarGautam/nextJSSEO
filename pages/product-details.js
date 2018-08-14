@@ -23,7 +23,7 @@ import {
 // page title
 import { productDetail } from '../components/constants/PageTitle'
 
-//activity indicatoe
+// activity indicatoe
 import ActivityIndicator from '../components/activityIndicator'
 import FullPageError from '../components/activityIndicator/error/FullPageError'
 
@@ -74,7 +74,7 @@ class ProductDetails extends React.Component {
     }
   }
 
-  tryAgain() {
+  tryAgain () {
     const { query } = Router
     this.props.actions.getProductDetailLoading(
       this.props.productDetailsState,

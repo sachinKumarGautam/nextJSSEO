@@ -159,9 +159,6 @@ class CartDetailsWrapper extends Component {
                 checkPincodeLoading={this.props.actions.checkPincodeLoading}
                 getLocalityDetailListLoading={this.props.actions.getLocalityDetailListLoading}
                 optForExpressDeliveryLoading={this.props.actions.optForExpressDeliveryLoading}
-                getLocalityDetailListLoading={
-                  this.props.actions.getLocalityDetailListLoading
-                }
               />
             </section>
           </Grid>

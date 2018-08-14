@@ -18,7 +18,7 @@ import {
 // page title
 import { refillPatient } from '../components/constants/PageTitle'
 
-//activity indicator
+// activity indicator
 import ActivityIndicator from '../components/activityIndicator'
 import FullPageError from '../components/activityIndicator/error/FullPageError'
 

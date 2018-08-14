@@ -51,7 +51,7 @@ const styles = theme => {
 }
 
 class RelatedMedicines extends React.Component {
-  tryAgain() {
+  tryAgain () {
     const { query } = Router
 
     this.props.getRelatedMedicinesLoading(

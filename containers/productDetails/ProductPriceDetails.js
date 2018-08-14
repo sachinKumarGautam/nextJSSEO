@@ -14,7 +14,6 @@ import Button from '../../components/button'
 import ProductPriceDetailsLoader
   from '../../components/activityIndicator/loader/ProductPriceDetailsLoader'
 import ActivityIndicator from '../../components/activityIndicator'
-import FullPageError from '../../components/activityIndicator/error/FullPageError'
 
 /*
   Product price

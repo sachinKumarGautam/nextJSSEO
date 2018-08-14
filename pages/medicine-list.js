@@ -21,7 +21,7 @@ import {
 // page title
 import { medicineList } from '../components/constants/PageTitle'
 
-//activity indicatoe
+// activity indicatoe
 import ActivityIndicator from '../components/activityIndicator'
 import FullPageError from '../components/activityIndicator/error/FullPageError'
 import SnackbarErrorMessage from '../components/activityIndicator/error/SnackbarErrorMessage'
@@ -53,7 +53,7 @@ class MedicineList extends React.Component {
         query.moleculeName, // pass salt name
         0, // page number
         10, // page size
-        false //is show more button
+        false // is show more button
       )
     }
 
@@ -66,7 +66,7 @@ class MedicineList extends React.Component {
     }
   }
 
-  tryAgain(){
+  tryAgain () {
     const { query } = Router
     // Represents to get medicine list with page size and size per page.
     if (query.moleculeName) {
@@ -75,7 +75,7 @@ class MedicineList extends React.Component {
         query.moleculeName, // pass salt name
         0, // page number
         10, // page size,
-        false //is show more button
+        false // is show more button
       )
     }
 
@@ -110,21 +110,21 @@ class MedicineList extends React.Component {
             }
             ErrorComp={
               this.props.medicineListState.isShowMore
-              ? <SnackbarErrorMessage
-                error={
-                  this.props.searchMedicineState.errorState.isError
-                  ? this.props.searchMedicineState.errorState
-                  : this.props.medicineListState.errorState.error
-                }
-              />
-              : <FullPageError
-                error={
-                  this.props.searchMedicineState.errorState.isError
-                  ? this.props.searchMedicineState.errorState
-                  : this.props.medicineListState.errorState.error
-                }
-                tryAgain={this.tryAgain.bind(this)}
-              />
+                ? <SnackbarErrorMessage
+                  error={
+                    this.props.searchMedicineState.errorState.isError
+                      ? this.props.searchMedicineState.errorState
+                      : this.props.medicineListState.errorState.error
+                  }
+                />
+                : <FullPageError
+                  error={
+                    this.props.searchMedicineState.errorState.isError
+                      ? this.props.searchMedicineState.errorState
+                      : this.props.medicineListState.errorState.error
+                  }
+                  tryAgain={this.tryAgain.bind(this)}
+                />
             }
             bottomError={this.props.medicineListState.isShowMore}
           >

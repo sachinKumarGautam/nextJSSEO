@@ -33,7 +33,7 @@ const styles = theme => {
 }
 
 class RefillMedicineList extends Component {
-  tryAgain() {
+  tryAgain () {
     this.props.getRefillPastMedicinesLoading(
       this.props.pastMedicineState,
       this.props.pastMedicineState.selectedPatientId

@@ -27,20 +27,20 @@ const styles = theme => {
 }
 
 class SnackbarErrorMessage extends Component {
-  constructor(props) {
+  constructor (props) {
     super(props)
-    this.state={
+    this.state = {
       open: false
     }
   }
 
-  componentDidMount() {
+  componentDidMount () {
     this.setState({
       open: true
     })
   }
 
-  handleClose() {
+  handleClose () {
     this.setState({
       open: false
     })
