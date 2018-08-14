@@ -17,6 +17,7 @@ class CarePoint extends Component {
             <CarePointsDetails
               carePointState={this.props.carePointState}
               getCarePointDetailsLoading={this.props.getCarePointDetailsLoading}
+              customerState={this.props.customerState}
             />
           </Grid>
         </Grid>

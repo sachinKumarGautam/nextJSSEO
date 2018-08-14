@@ -1,16 +1,14 @@
+// dependencies
 import React from 'react'
-
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import Router from 'next/router'
-
 import { withStyles } from '@material-ui/core/styles'
-import withRoot from '../src/withRoot'
-import Header from '../components/layouts/header'
-import Footer from '../components/layouts/footer'
-
 import Paper from '@material-ui/core/Paper'
 
+// components
+import withRoot from '../src/withRoot'
+import Layout from '../components/layouts/Layout'
 import MoleculeDetailsWrapper from '../containers/moleculeDetails'
 
 import {
@@ -21,6 +19,7 @@ import {
   getRelatedMedicinesLoading
 } from '../containers/medicineList/medicineListActions'
 
+// page title
 import { moleculeList } from '../components/constants/PageTitle'
 
 const styles = theme => ({
@@ -60,16 +59,16 @@ class MoleculeDetails extends React.Component {
     // Represents to get molecule details.
     const { query } = Router
 
-    if (Router.query.id) {
+    if (Router.query.molecule_id) {
       this.props.actions.getMoleculeSummaryLoading(
         this.props.moleculeDetailsState,
-        query.id // pass salt id // 5a61a295ae8bdc26685f2b09 // query.id
+        query.molecule_id // pass salt id // 5a61a295ae8bdc26685f2b09 // query.id
       )
 
       // Represents to get medicine list with page size and size per page.
       this.props.actions.getRelatedMedicinesLoading(
         this.props.medicineListState,
-        query.id, // pass salt name //query.name
+        query.molecule_id, // pass salt name //query.name
         0, // page number
         3 // page size
       )
@@ -79,11 +78,10 @@ class MoleculeDetails extends React.Component {
   render () {
     const { addToCartHandler, classes } = this.props
     return (
-      <div>
-        <Header
-          title={moleculeList.title}
-          addToCartHandler={addToCartHandler}
-        />
+      <Layout
+        title={moleculeList.title}
+        addToCartHandler={addToCartHandler}
+      >
         <div className={classes.wrapperStyle}>
           <Paper className={classes.root} elevation={1}>
             <MoleculeDetailsWrapper
@@ -92,8 +90,7 @@ class MoleculeDetails extends React.Component {
             />
           </Paper>
         </div>
-        <Footer />
-      </div>
+      </Layout>
     )
   }
 }

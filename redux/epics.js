@@ -54,7 +54,8 @@ import {
   deletePrescriptionEpic,
   submitOrderEpic,
   applyCouponCode,
-  optDoctorCallback
+  optDoctorCallback,
+  optExpressDelivery
 } from '../containers/cartDetails/cartEpics'
 
 import { checkPincode } from '../containers/location/pincode/pincodeEpic'
@@ -107,5 +108,6 @@ export const rootEpic = combineEpics(
   optDoctorCallback,
   checkReferralCode,
   getMembershipCodeLoading,
-  getLocalityList
+  getLocalityList,
+  optExpressDelivery
 )

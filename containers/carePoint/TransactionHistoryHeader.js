@@ -51,7 +51,7 @@ class TransactionHistoryHeader extends Component {
   onClickOfRadio (event, value) {
     this.props.getCarePointDetailsLoading(
       this.props.carePointState,
-      100036079,
+      this.props.customerState.payload.id,
       value
     )
 
