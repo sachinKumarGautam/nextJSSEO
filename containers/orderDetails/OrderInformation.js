@@ -11,7 +11,8 @@ import Router from 'next/router'
 import OrderContentWrapper from './OrderContentWrapper'
 
 import {
-  ORDER
+  ORDER,
+  HOME_PAGE
 } from '../../routes/RouteConstant'
 
 import {
@@ -66,8 +67,15 @@ class OrderInformation extends Component {
     )
   }
 
-  redirectToOrdersPage (path) {
-    const url = getReplacedString(path)
+  redirectToOrdersPage () {
+    let url
+
+    if(this.props.cartState.orderResponse.payload.order_number) {
+      url = getReplacedString(HOME_PAGE)
+    } else {
+      url = getReplacedString(ORDER)
+    }
+
     Router.push(url)
   }
 
@@ -79,7 +87,7 @@ class OrderInformation extends Component {
             <div className={this.props.classes.buttonWrapper}>
               <BackArrow
                 classes={{ root: this.props.classes.image }}
-                onClick={this.redirectToOrdersPage.bind(this, ORDER)}
+                onClick={this.redirectToOrdersPage.bind(this)}
               />
               <Typography
                 gutterBottom
@@ -87,7 +95,11 @@ class OrderInformation extends Component {
                 component='h1'
                 className={this.props.classes.title}
               >
-                Go to My Orders
+                {
+                  this.props.cartState.orderResponse.payload.order_number
+                  ? 'Go to Home'
+                  : 'Go to My Orders'
+                }
               </Typography>
             </div>
             <OrderContentWrapper
