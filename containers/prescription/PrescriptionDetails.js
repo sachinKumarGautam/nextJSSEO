@@ -17,6 +17,8 @@ class PrescriptionDetails extends Component {
           <Grid item xs={10}>
             <PrescriptionList
               prescriptionState={this.props.prescriptionState}
+              getPrescriptionListLoading={this.props.getPrescriptionListLoading}
+              customerState={this.props.customerState}
             />
           </Grid>
         </Grid>

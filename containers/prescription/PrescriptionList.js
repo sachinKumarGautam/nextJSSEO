@@ -71,6 +71,8 @@ class PrescriptionList extends Component {
             </div>
             <PrescriptionContentWrapper
               prescriptionState={this.props.prescriptionState}
+              getPrescriptionListLoading={this.props.getPrescriptionListLoading}
+              customerState={this.props.customerState}
             />
           </CardContent>
         </Card>
