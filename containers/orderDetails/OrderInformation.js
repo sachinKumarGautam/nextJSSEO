@@ -70,7 +70,7 @@ class OrderInformation extends Component {
   redirectToOrdersPage () {
     let url
 
-    if(this.props.cartState.orderResponse.payload.order_number) {
+    if (this.props.cartState.orderResponse.payload.order_number) {
       url = getReplacedString(HOME_PAGE)
     } else {
       url = getReplacedString(ORDER)
@@ -97,8 +97,8 @@ class OrderInformation extends Component {
               >
                 {
                   this.props.cartState.orderResponse.payload.order_number
-                  ? 'Go to Home'
-                  : 'Go to My Orders'
+                    ? 'Go to Home'
+                    : 'Go to My Orders'
                 }
               </Typography>
             </div>

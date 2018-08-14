@@ -34,7 +34,7 @@ class ThankyouWrapper extends Component {
     )
   }
 
-  viewYouOrder() {
+  viewYouOrder () {
     const url = getReplacedString(ORDER_DETAILS)
     Router.push(url)
   }
