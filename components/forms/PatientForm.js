@@ -4,7 +4,6 @@ import * as Yup from 'yup'
 
 import Input from '@material-ui/core/Input'
 import Select from '@material-ui/core/Select'
-import InputLabel from '@material-ui/core/InputLabel'
 import MenuItem from '@material-ui/core/MenuItem'
 import FormHelperText from '@material-ui/core/FormHelperText'
 import FormControl from '@material-ui/core/FormControl'
@@ -74,10 +73,8 @@ class PatientForm extends React.Component {
           aria-describedby='full-name'
           error={errors.full_name && touched.full_name}
         >
-          <InputLabel className={classes.labelStyle} htmlFor='full_name'>
-            Full Name
-          </InputLabel>
           <Input
+            placeholder='Full Name'
             id='full_name'
             type='text'
             onChange={handleChange}
@@ -94,24 +91,18 @@ class PatientForm extends React.Component {
           aria-describedby='gender'
           error={errors.gender && touched.gender}
         >
-          <InputLabel className={classes.labelStyle} htmlFor='gender'>
-            Gender
-          </InputLabel>
           <Select
             value={values.gender}
             onChange={handleChange}
-            inputProps={{
-              name: 'gender',
-              id: 'gender',
-              placeholder: 'Gender'
-            }}
+            name='gender'
+            displayEmpty
           >
             <MenuItem value=''>
               <em>Gender</em>
             </MenuItem>
-            <MenuItem value={'male'}>Male</MenuItem>
-            <MenuItem value={'femlae'}>Female</MenuItem>
-            <MenuItem value={'others'}>Others</MenuItem>
+            <MenuItem value={'Male'}>Male</MenuItem>
+            <MenuItem value={'Female'}>Female</MenuItem>
+            <MenuItem value={'Others'}>Others</MenuItem>
           </Select>
           {errors.gender &&
             touched.gender &&
@@ -124,10 +115,8 @@ class PatientForm extends React.Component {
           aria-describedby='age'
           error={errors.age && touched.age}
         >
-          <InputLabel className={classes.labelStyle} htmlFor='age'>
-            Age
-          </InputLabel>
           <Input
+            placeholder='Age'
             id='age'
             type='text'
             onChange={this.handleChangeAge}
@@ -144,12 +133,9 @@ class PatientForm extends React.Component {
           aria-describedby='mobile'
           error={errors.mobile && touched.mobile}
         >
-          <InputLabel className={classes.labelStyle} htmlFor='mobile'>
-            Contact No.
-          </InputLabel>
           <Input
+            placeholder='Contact No.'
             id='mobile'
-            type='number'
             onChange={this.handleChangeMobile}
             value={values.mobile}
           />
@@ -175,12 +161,13 @@ class PatientForm extends React.Component {
 
 export default withStyles(styles)(
   withFormik({
+    enableReinitialize: true,
     mapPropsToValues: props => {
       return {
-        full_name: '',
-        gender: '',
-        mobile: '',
-        age: ''
+        full_name: props.patientFormState.patient.full_name,
+        gender: props.patientFormState.patient.gender,
+        mobile: props.patientFormState.patient.mobile,
+        age: props.patientFormState.patient.age
       }
     },
     validationSchema: Yup.object().shape({
@@ -195,13 +182,20 @@ export default withStyles(styles)(
       gender: Yup.string().required(GENDER_REQUIRED)
     }),
     handleSubmit: (values, { props, setSubmitting }) => {
+      let isEdit = false
+
+      if (props.patientFormState.patient.full_name) {
+        isEdit = true
+      }
+
       props.onSubmit(
         props.patientFormState,
         props.customerId,
         setSubmitting,
         props.closeModal,
         values,
-        props.isCartPage
+        props.isCartPage,
+        isEdit
       )
     },
     displayName: 'PatientForm' // helps with React DevTools

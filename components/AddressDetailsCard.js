@@ -104,7 +104,7 @@ const AddressDetailsCard = props => (
             SELECT
           </Typography>
         ) : (
-          <div onClick={this.handleClickOpen}>
+          <div onClick={props.openDeliveryFormModal}>
             <Typography
               variant='caption'
               className={props.classes.selectButtonLabel}

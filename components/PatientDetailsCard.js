@@ -110,7 +110,7 @@ const PatientDetailsCard = props => (
                       SELECT
                     </Typography>
                   ) : (
-                    <div onClick={this.handleClickOpen}>
+                    <div onClick={props.openPatientFormModal}>
                       <Typography
                         variant='caption'
                         className={props.classes.selectButtonLabel}
