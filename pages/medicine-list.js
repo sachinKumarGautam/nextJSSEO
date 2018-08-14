@@ -21,6 +21,11 @@ import {
 // page title
 import { medicineList } from '../components/constants/PageTitle'
 
+//activity indicatoe
+import ActivityIndicator from '../components/activityIndicator'
+import FullPageError from '../components/activityIndicator/error/FullPageError'
+import SnackbarErrorMessage from '../components/activityIndicator/error/SnackbarErrorMessage'
+
 const styles = theme => ({
   root: {
     paddingTop: theme.spacing.unit * 3,
@@ -47,7 +52,30 @@ class MedicineList extends React.Component {
         this.props.medicineListState,
         query.moleculeName, // pass salt name
         0, // page number
-        10 // page size
+        10, // page size
+        false //is show more button
+      )
+    }
+
+    if (query.productName) {
+      this.props.actions.searchMedicineLoading(
+        this.props.searchMedicineState,
+        this.props.checkPincodeState.payload.id,
+        query.productName
+      )
+    }
+  }
+
+  tryAgain(){
+    const { query } = Router
+    // Represents to get medicine list with page size and size per page.
+    if (query.moleculeName) {
+      this.props.actions.getRelatedMedicinesLoading(
+        this.props.medicineListState,
+        query.moleculeName, // pass salt name
+        0, // page number
+        10, // page size,
+        false //is show more button
       )
     }
 
@@ -75,21 +103,48 @@ class MedicineList extends React.Component {
         addToCartHandler={addToCartHandler}
       >
         <div className={this.props.classes.root}>
-          <MedicineListWrapper
-            isLoadingRelatedMedicine={medicineListState.isLoading}
-            isLoadingSearchMedicine={searchMedicineState.isLoading}
-            addToCartHandler={addToCartHandler}
-            checkPincodeState={checkPincodeState}
-            moleculeName={Router.query.name}
-            searchMedicineLoading={actions.searchMedicineLoading}
-            query={query}
-            getRelatedMedicinesLoading={actions.getRelatedMedicinesLoading}
-            medicineState={
-              query.productName
-                ? searchMedicineState.payload.searchMedicineResult
-                : medicineListState.payload
+          <ActivityIndicator
+            isError={
+              this.props.medicineListState.errorState.isError ||
+              this.props.searchMedicineState.errorState.isError
             }
-          />
+            ErrorComp={
+              this.props.medicineListState.isShowMore
+              ? <SnackbarErrorMessage
+                error={
+                  this.props.searchMedicineState.errorState.isError
+                  ? this.props.searchMedicineState.errorState
+                  : this.props.medicineListState.errorState.error
+                }
+              />
+              : <FullPageError
+                error={
+                  this.props.searchMedicineState.errorState.isError
+                  ? this.props.searchMedicineState.errorState
+                  : this.props.medicineListState.errorState.error
+                }
+                tryAgain={this.tryAgain.bind(this)}
+              />
+            }
+            bottomError={this.props.medicineListState.isShowMore}
+          >
+            <MedicineListWrapper
+              isLoadingRelatedMedicine={medicineListState.isLoading}
+              isLoadingSearchMedicine={searchMedicineState.isLoading}
+              addToCartHandler={addToCartHandler}
+              checkPincodeState={checkPincodeState}
+              moleculeName={Router.query.name}
+              searchMedicineLoading={actions.searchMedicineLoading}
+              query={query}
+              getRelatedMedicinesLoading={actions.getRelatedMedicinesLoading}
+              medicineState={
+                query.productName
+                  ? searchMedicineState.payload.searchMedicineResult
+                  : medicineListState.payload
+              }
+              medicineListState={medicineListState}
+            />
+          </ActivityIndicator>
         </div>
       </Layout>
     )

@@ -43,7 +43,7 @@ export function searchMedicineFailure (searchMedicineState, error) {
     type: SEARCH_MEDICINE_FAILURE,
     searchMedicineState,
     isLoading: false,
-    isError: error,
+    isError: true,
     error: error
   }
 }

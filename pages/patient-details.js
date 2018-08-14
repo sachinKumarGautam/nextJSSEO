@@ -73,6 +73,7 @@ class PatientDetails extends React.Component {
               }
               customerState={this.props.customerState}
               cartState={this.props.cartState}
+              getPatientDetailsListLoading={this.props.actions.getPatientDetailsListLoading}
             />
           </Paper>
         </div>

@@ -106,9 +106,12 @@ class PatientDetailsList extends Component {
           <PatientDetailsCardWrapper
             payload={this.props.patientDetailsState.payload}
             isLoading={this.props.patientDetailsState.isLoading}
+            errorState={this.props.patientDetailsState.errorState}
             patientDetailsCardWrapper={
               this.props.classes.patientDetailsCardWrapper
             }
+            getPatientDetailsListLoading={this.props.getPatientDetailsListLoading}
+            customerState={this.props.customerState}
           />
         </CardContent>
       </Card>

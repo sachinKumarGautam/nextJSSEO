@@ -23,6 +23,10 @@ import {
 // page title
 import { productDetail } from '../components/constants/PageTitle'
 
+//activity indicatoe
+import ActivityIndicator from '../components/activityIndicator'
+import FullPageError from '../components/activityIndicator/error/FullPageError'
+
 const styles = theme => ({
   root: {
     paddingTop: theme.spacing.unit * 3,
@@ -70,6 +74,15 @@ class ProductDetails extends React.Component {
     }
   }
 
+  tryAgain() {
+    const { query } = Router
+    this.props.actions.getProductDetailLoading(
+      this.props.productDetailsState,
+      query.product_id,
+      query.location
+    )
+  }
+
   render () {
     const { classes, actions, checkPincodeState, addToCartHandler } = this.props
     const { query } = Router
@@ -79,16 +92,26 @@ class ProductDetails extends React.Component {
         addToCartHandler={addToCartHandler}
       >
         <div className={this.props.classes.wrapperStyle}>
-          <Paper className={classes.root} elevation={1}>
-            {query.product_id && query.product_id !== 'undefined'
-              ? <ProductDetailsWrapper
-                checkPincodeState={checkPincodeState}
-                getProductDetailLoading={actions.getProductDetailLoading}
-                addToCartHandler={addToCartHandler}
-                onChangeQuantity={actions.onChangeQuantity}
+          <ActivityIndicator
+            isError={this.props.productDetailsState.errorStateGetProductDetails.isError}
+            ErrorComp={
+              <FullPageError
+                error={this.props.productDetailsState.errorStateGetProductDetails.error}
+                tryAgain={this.tryAgain.bind(this)}
               />
-              : 'Page not found'}
-          </Paper>
+            }
+          >
+            <Paper className={classes.root} elevation={1}>
+              {query.product_id && query.product_id !== 'undefined'
+                ? <ProductDetailsWrapper
+                  checkPincodeState={checkPincodeState}
+                  getProductDetailLoading={actions.getProductDetailLoading}
+                  addToCartHandler={addToCartHandler}
+                  onChangeQuantity={actions.onChangeQuantity}
+                />
+                : 'Page not found'}
+            </Paper>
+          </ActivityIndicator>
         </div>
       </Layout>
     )

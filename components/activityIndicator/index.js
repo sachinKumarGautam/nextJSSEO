@@ -2,12 +2,21 @@ import React from 'react'
 
 class ActivityIndicator extends React.Component {
   render () {
-    const { isLoading, LoaderComp, bottomLoader } = this.props
+    const {
+      isLoading,
+      LoaderComp,
+      bottomLoader,
+      isError,
+      bottomError,
+      ErrorComp
+    } = this.props
+
     return (
       <React.Fragment>
-        {!bottomLoader && !isLoading && this.props.children}
-        {bottomLoader && this.props.children}
+        {((!bottomError && !isError) && (!bottomLoader && !isLoading)) && this.props.children}
+        {(bottomError || bottomLoader) && this.props.children}
         {isLoading && (LoaderComp || null)}
+        {isError && (ErrorComp || null)}
       </React.Fragment>
     )
   }

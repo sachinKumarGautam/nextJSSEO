@@ -8,6 +8,9 @@ import Typography from '@material-ui/core/Typography'
 
 import MedicineListDetails from '../../components/MedicineListDetails'
 
+import ActivityIndicator from '../../components/activityIndicator'
+import ComponentSpecificError from '../../components/activityIndicator/error/ComponentSpecificError'
+
 const styles = theme => {
   return {
     medicineListWrapper: {
@@ -30,6 +33,12 @@ const styles = theme => {
 }
 
 class RefillMedicineList extends Component {
+  tryAgain() {
+    this.props.getRefillPastMedicinesLoading(
+      this.props.pastMedicineState,
+      this.props.pastMedicineState.selectedPatientId
+    )
+  }
   render () {
     return (
       <div>
@@ -43,19 +52,29 @@ class RefillMedicineList extends Component {
             >
               Treatments of {this.props.pastMedicineState.selectedPatientName}
             </Typography>
-            <ul className={this.props.classes.medicineListWrapper}>
-              {this.props.pastMedicineState.payload.map(itemDetails => (
-                <li className={this.props.classes.listItem}>
-                  <MedicineListDetails
-                    isLoading={this.props.isLoading}
-                    itemDetails={itemDetails}
-                    isRefillMedicines
-                    addToCartHandler={this.props.addToCartHandler}
-                    checkPincodeState={this.props.checkPincodeState}
-                  />
-                </li>
-              ))}
-            </ul>
+            <ActivityIndicator
+              isError={this.props.pastMedicineState.errorState.isError}
+              ErrorComp={
+                <ComponentSpecificError
+                  error={this.props.pastMedicineState.errorState.error}
+                  tryAgain={this.tryAgain.bind(this)}
+                />
+              }
+            >
+              <ul className={this.props.classes.medicineListWrapper}>
+                {this.props.pastMedicineState.payload.map(itemDetails => (
+                  <li className={this.props.classes.listItem}>
+                    <MedicineListDetails
+                      isLoading={this.props.isLoading}
+                      itemDetails={itemDetails}
+                      isRefillMedicines
+                      addToCartHandler={this.props.addToCartHandler}
+                      checkPincodeState={this.props.checkPincodeState}
+                    />
+                  </li>
+                ))}
+              </ul>
+            </ActivityIndicator>
           </CardContent>
         </Card>
       </div>

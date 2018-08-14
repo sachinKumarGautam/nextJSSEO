@@ -10,6 +10,10 @@ import MoleculeDetails from './MoleculeDetails'
 import MoleculeDetailsContent from './MoleculeDetailsContent'
 import RelatedMedicines from '../../components/RelatedMedicines'
 import RelatedArticles from '../../components/RelatedArticles'
+import {
+  getRelatedMedicinesLoading
+} from '../medicineList/medicineListActions'
+
 /*
   bread crumbs
   Molecule Details
@@ -67,6 +71,8 @@ class MoleculeDetailsWrapper extends Component {
               medicineList={this.props.medicineListState.payload}
               checkPincodeState={this.props.checkPincodeState}
               cartState={this.props.cartState}
+              medicineListState={this.props.medicineListState}
+              getRelatedMedicinesLoading={this.props.actions.getRelatedMedicinesLoading}
             />
             <RelatedArticles />
           </Grid>
@@ -86,7 +92,9 @@ function mapStateToProps (state) {
 
 function mapDispatchToProps (dispatch) {
   return {
-    actions: bindActionCreators({}, dispatch)
+    actions: bindActionCreators({
+      getRelatedMedicinesLoading
+    }, dispatch)
   }
 }
 

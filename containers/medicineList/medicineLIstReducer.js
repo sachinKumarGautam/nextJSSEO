@@ -17,7 +17,8 @@ export default function medicineListReducer (state = initialState, action) {
           ...state.errorState,
           isError: action.isError,
           error: action.error
-        }
+        },
+        isShowMore: action.isShowMore
       }
 
     // update success details of medicine list API
