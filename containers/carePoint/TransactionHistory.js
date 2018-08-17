@@ -38,7 +38,7 @@ const styles = theme => ({
   }
 })
 
-const Fragment = () => <React.Fragment/>
+const Fragment = React.Fragment
 
 class TransactionHistory extends Component {
   render () {
@@ -49,7 +49,6 @@ class TransactionHistory extends Component {
       : this.props.carePointsDetails.care_point
     return (
       <Fragment>
-      <div>sachin</div>
       <div className={this.props.classes.transactionDetailWrapper}>
         <div>
           <Typography

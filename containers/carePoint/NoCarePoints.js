@@ -28,16 +28,20 @@ const styles = theme => ({
   }
 })
 
-const NoCarePoints = ({isLoading, classes}) => (
-  <div className={classes.root}>
+const NoCarePoints = ({isLoading, classes, carePointList}) => (
+  <React.Fragment>
+    {(isLoading || !carePointList.length) &&
+      <div className={classes.root}>
     <Loader loaderType={'commonSpinner'} isLoading={isLoading}/>
-    {!isLoading && 
-    <div className={classes.noCarePointsWrapper}>
-    <img className={classes.noCarePointsIcon} src='/static/images/ic_no_prescription_found@2x.png'/>
-      <Typography  variant={'subheading'}>No care points</Typography>
-    </div>
+    {!isLoading && !carePointList.length &&
+      <div className={classes.noCarePointsWrapper}>
+        <img className={classes.noCarePointsIcon} src='/static/images/ic_no_prescription_found@2x.png'/>
+        <Typography  variant={'subheading'}>No care points</Typography>
+      </div>
     }
   </div>
+    }
+  </React.Fragment>
 )
 
 export default withStyles(styles)(NoCarePoints)
