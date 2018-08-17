@@ -85,7 +85,9 @@ export function getCartDetailsSuccess (
     cart_prescriptions: result.cart_prescriptions,
     source_type: result.source_type,
     delivery_option: result.delivery_option,
-    service_type: result.service_type
+    service_type: result.service_type,
+    available_delivery_option: result.available_delivery_option,
+    preferred_delivery_option: result.preferred_delivery_option
   }
 }
 
@@ -205,7 +207,9 @@ export function saveDeliveryAddressToCartSuccess (cartState, result) {
     cartState,
     shipping_address_id: result.shipping_address_id,
     shipping_address: result.shipping_address,
-    isLoading: false
+    available_delivery_option: result.available_delivery_option,
+    isLoading: false,
+    preferred_delivery_option: result.preferred_delivery_option
   }
 }
 
@@ -474,6 +478,37 @@ export function optForDoctorCallbackSuccess (cartState, result) {
 export function optForDoctorCallbackFailure (cartState, error) {
   return {
     type: cartActionTypes.OPT_DOCTOR_CALLBACK_FAILURE,
+    cartState,
+    isLoading: false,
+    isError: true,
+    error: error
+  }
+}
+
+export function optForExpressDeliveryLoading (cartState, cartUId, expressDeliveryCheck) {
+  return {
+    type: cartActionTypes.OPT_EXPRESS_DELIVERY_LOADING,
+    cartState,
+    isLoading: true,
+    isError: false,
+    cartUId,
+    expressDeliveryCheck
+  }
+}
+
+export function optForExpressDeliverySuccess (cartState, result) {
+  return {
+    type: cartActionTypes.OPT_EXPRESS_DELIVERY_SUCCESS,
+    cartState,
+    payload: result,
+    isLoading: false,
+    preferred_delivery_option: result.preferred_delivery_option
+  }
+}
+
+export function optForExpressDeliveryFailure (cartState, error) {
+  return {
+    type: cartActionTypes.OPT_EXPRESS_DELIVERY_FAILURE,
     cartState,
     isLoading: false,
     isError: true,

@@ -6,7 +6,6 @@ import { bindActionCreators } from 'redux'
 import { withStyles } from '@material-ui/core/styles'
 import RouteLoader from './RouteLoader'
 
-import Head from 'next/head'
 import AppBar from '@material-ui/core/AppBar'
 import Button from '../../button'
 import Toolbar from '@material-ui/core/Toolbar'
@@ -96,7 +95,7 @@ class Header extends React.Component {
 
   componentDidUpdate (prevProps) {
     if (
-      this.props.authentication &&
+      !this.props.authentication &&
       this.props.path &&
       prevProps.customerState.payload.id !== this.props.customerState.payload.id
     ) {
@@ -142,9 +141,6 @@ class Header extends React.Component {
       <React.Fragment>
         <RouteLoader />
         <div className={classes.root}>
-          <Head>
-            <title>{this.props.title}</title>
-          </Head>
           <AppBar elevation={1} className={classes.appBar} position='fixed'>
             <div className={classes.appBarInnerComp}>
               <Toolbar

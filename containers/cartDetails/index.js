@@ -27,6 +27,7 @@ import {
   applyCouponCodeLoading,
   updateCouponCode,
   optForDoctorCallbackLoading,
+  optForExpressDeliveryLoading,
   resetApiStateSubmitOrder
 } from './cartActions'
 
@@ -58,7 +59,7 @@ const styles = theme => ({
     top: theme.spacing.unit * 13.875
   },
   blurCartPage: {
-    filter: `blur(${theme.typography.pxToRem(30)})`
+    filter: `blur(${theme.typography.pxToRem(60)})`
   }
 })
 
@@ -156,9 +157,8 @@ class CartDetailsWrapper extends Component {
                   this.props.actions.updateAddressFormValue
                 }
                 checkPincodeLoading={this.props.actions.checkPincodeLoading}
-                getLocalityDetailListLoading={
-                  this.props.actions.getLocalityDetailListLoading
-                }
+                getLocalityDetailListLoading={this.props.actions.getLocalityDetailListLoading}
+                optForExpressDeliveryLoading={this.props.actions.optForExpressDeliveryLoading}
               />
             </section>
           </Grid>
@@ -226,6 +226,7 @@ function mapDispatchToProps (dispatch) {
         updateAddressFormValue,
         getLocalityDetailListLoading,
         checkPincodeLoading,
+        optForExpressDeliveryLoading,
         resetApiStateSubmitOrder
       },
       dispatch

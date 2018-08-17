@@ -133,7 +133,6 @@ class DeliveryForm extends React.Component {
             placeholder='Phone No.'
             className={classes.valueStyle}
             id='mobile'
-            type='number'
             onChange={this.onChange.bind(this, 'mobile', handleChange)}
             value={values.mobile}
           />
@@ -303,7 +302,8 @@ export default withStyles(styles)(
         setSubmitting,
         props.closeModal,
         values,
-        props.isCartPage
+        props.isCartPage,
+        props.isEdit
       )
     },
     displayName: 'DeliveryForm' // helps with React DevTools

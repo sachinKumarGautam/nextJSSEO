@@ -50,17 +50,23 @@ class DeliveryDetailForm extends React.Component {
               root: classes.dialogTitle
             }}
           >
-            {'ADD NEW ADDRESS'}
+            {
+              this.props.isEdit &&
+              !this.props.isAddNewAddressButtonClicked
+                ? 'EDIT ADDRESS'
+                : 'ADD NEW ADDRESS'
+            }
           </DialogTitle>
           <DialogContent>
             <Form
+              isEdit={this.props.isEdit}
               isCartPage={this.props.isCartPage}
               type={'deliveryForm'}
               onSubmit={this.props.onSubmit}
               customerState={this.props.customerState}
               deliveryDetailsState={this.props.deliveryDetailsState}
               deliveryFormState={this.props.deliveryFormState}
-              closeModal={this.props.closeModal}
+              closeModal={this.props.closeDeliveryFormModal}
               checkPincodeDetailLoading={this.props.checkPincodeDetailLoading}
               updateAddressFormValue={this.props.updateAddressFormValue}
               getLocalityDetailListLoading={this.props.getLocalityDetailListLoading}

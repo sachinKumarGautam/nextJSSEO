@@ -9,7 +9,7 @@ const styles = theme => {
       justifyContent: 'space-between'
     },
     loaderItem: {
-      width: theme.typography.pxTpRem(240)
+      width: theme.typography.pxToRem(240)
     }
   }
 }

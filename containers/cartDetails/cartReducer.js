@@ -72,6 +72,7 @@ export default function cartReducer (state = initialState, action) {
         payload: {
           ...state.payload,
           id: action.id,
+          available_delivery_option: action.available_delivery_option,
           uid: action.uid,
           patient_details: {
             ...state.payload.patient_details,
@@ -107,7 +108,8 @@ export default function cartReducer (state = initialState, action) {
           cart_prescriptions: action.cart_prescriptions,
           source_type: action.source_type,
           delivery_option: action.delivery_option,
-          service_type: action.service_type
+          service_type: action.service_type,
+          preferred_delivery_option: action.preferred_delivery_option
         }
       }
 
@@ -237,6 +239,8 @@ export default function cartReducer (state = initialState, action) {
         ...state,
         payload: {
           ...state.payload,
+          available_delivery_option: action.available_delivery_option,
+          preferred_delivery_option: action.preferred_delivery_option,
           shipping_address_details: {
             ...state.payload.shipping_address_details,
             isLoading: action.isLoading,
@@ -584,6 +588,48 @@ export default function cartReducer (state = initialState, action) {
               isError: action.isError,
               error: {}
             }
+          }
+        }
+      }
+
+    case cartActionTypes.OPT_EXPRESS_DELIVERY_LOADING:
+      return {
+        ...state,
+        expressDeliveryCheck: {
+          ...state.expressDeliveryCheck,
+          isLoading: action.isLoading,
+          errorState: {
+            ...state.expressDeliveryCheck.errorState,
+            error: action.error,
+            isError: action.isError
+          }
+        }
+      }
+
+    case cartActionTypes.OPT_EXPRESS_DELIVERY_SUCCESS:
+      return {
+        ...state,
+        expressDeliveryCheck: {
+          ...state.expressDeliveryCheck,
+          isLoading: action.isLoading,
+          payload: action.payload
+        },
+        payload: {
+          ...state.payload,
+          preferred_delivery_option: action.preferred_delivery_option
+        }
+      }
+
+    case cartActionTypes.OPT_EXPRESS_DELIVERY_FAILURE:
+      return {
+        ...state,
+        expressDeliveryCheck: {
+          ...state.expressDeliveryCheck,
+          isLoading: action.isLoading,
+          errorState: {
+            ...state.expressDeliveryCheck.errorState,
+            error: action.error,
+            isError: action.isError
           }
         }
       }
