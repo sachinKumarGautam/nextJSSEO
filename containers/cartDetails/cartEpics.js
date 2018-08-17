@@ -97,32 +97,37 @@ export function getCartDetailsEpic (action$, store) {
   )
 }
 
-// function cartApiLoadingHandling (
-//   cartState,
-//   medicineSelected
-// ) {
-//   let cartItems = cartState.payload.cart_items.payload
-//
-//   cartItems.forEach((cartMedicine, index) => {
-//     if (cartMedicine.id === medicineSelected.id) {
-//       cartItems[index] = {
-//         ...cartMedicine,
-//         isLoading: true,
-//         errorState: {
-//           ...cartMedicine.errorState,
-//           isError: false
-//         }
-//       }
-//
-//       return false
-//     }
-//   })
-//
-//   return putCartItemSuccess(
-//     cartState,
-//     cartState.payload
-//   )
-// }
+function cartApiLoadingHandling (
+  cartState,
+  medicineSelected
+) {
+  let cartItems = cartState.payload.cart_items.payload
+
+  cartItems.forEach((cartMedicine, index) => {
+    if (cartMedicine.id === medicineSelected.id) {
+      cartItems[index] = {
+        ...cartMedicine,
+        isLoading: true,
+        errorState: {
+          ...cartMedicine.errorState,
+          isError: false
+        }
+      }
+
+      return false
+    }
+  })
+
+  const payload = {
+    ...cartState.payload,
+    cart_items: cartItems
+  }
+
+  return putCartItemSuccess(
+    cartState,
+    payload
+  )
+}
 
 function cartApiErrorHandling (cartState, medicineSelected, error) {
   let cartItems = cartState.payload.cart_items.payload
@@ -143,20 +148,28 @@ function cartApiErrorHandling (cartState, medicineSelected, error) {
     }
   })
 
-  return putCartItemSuccess(cartState, cartState.payload)
+  const payload = {
+    ...cartState.payload,
+    cart_items: cartItems
+  }
+
+  return putCartItemSuccess(
+    cartState,
+    payload
+  )
 }
 
-// export function decrementCartItemLoadingEpic (action$, store) {
-//   return action$.pipe(
-//     ofType(DECREMENT_CART_ITEM_LOADING),
-//     mergeMap(data => {
-//       return of(cartApiLoadingHandling(
-//           data.cartState,
-//           data.medicineSelected
-//         ))
-//     })
-//   )
-// }
+export function decrementCartItemLoadingEpic (action$, store) {
+  return action$.pipe(
+    ofType(DECREMENT_CART_ITEM_LOADING),
+    mergeMap(data => {
+      return of(cartApiLoadingHandling(
+        data.cartState,
+        data.medicineSelected
+      ))
+    })
+  )
+}
 
 export function decrementCartItemEpic (action$, store) {
   return action$.pipe(
@@ -186,17 +199,17 @@ export function decrementCartItemEpic (action$, store) {
   )
 }
 
-// export function incrementCartItemLoadingEpic (action$, store) {
-//   return action$.pipe(
-//     ofType(INCREMENT_CART_ITEM_LOADING),
-//     mergeMap(data => {
-//       return of(cartApiLoadingHandling(
-//           data.cartState,
-//           data.medicineSelected
-//         ))
-//     })
-//   )
-// }
+export function incrementCartItemLoadingEpic (action$, store) {
+  return action$.pipe(
+    ofType(INCREMENT_CART_ITEM_LOADING),
+    mergeMap(data => {
+      return of(cartApiLoadingHandling(
+        data.cartState,
+        data.medicineSelected
+      ))
+    })
+  )
+}
 
 export function incrementCartItemEpic (action$, store) {
   return action$.pipe(
@@ -229,17 +242,17 @@ export function incrementCartItemEpic (action$, store) {
   )
 }
 
-// export function deleteCartItemLoadingEpic (action$, store) {
-//   return action$.pipe(
-//     ofType(DELETE_CART_ITEM_LOADING),
-//     mergeMap(data => {
-//       return of(cartApiLoadingHandling(
-//           data.cartState,
-//           data.medicineSelected
-//         ))
-//     })
-//   )
-// }
+export function deleteCartItemLoadingEpic (action$, store) {
+  return action$.pipe(
+    ofType(DELETE_CART_ITEM_LOADING),
+    mergeMap(data => {
+      return of(cartApiLoadingHandling(
+        data.cartState,
+        data.medicineSelected
+      ))
+    })
+  )
+}
 
 export function deleteCartItemEpic (action$, store) {
   return action$.pipe(
