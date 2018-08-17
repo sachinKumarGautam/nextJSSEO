@@ -2,20 +2,19 @@ import React, { Component } from 'react'
 
 import Typography from '@material-ui/core/Typography'
 import { withStyles } from '@material-ui/core/styles'
-import Checkbox from '@material-ui/core/Checkbox'
 import ReactTooltip from 'react-tooltip'
 
 import {
   LF_ASSURED_TEXT,
   UREGNT_DELIVERY_TEXT,
   VERIFICATION_RX,
-  LF_ASSURED_DETAIL
+  LF_ASSURED_DETAIL,
+  EXPRESS_DELIVERY_DETAIL
 } from '../messages/cartMessages'
 
 import {
-  DELIVERY_OPTION_URGENT,
-  DELIVERY_OPTION_NORMAL,
-  LF_ASSURED
+  LF_ASSURED,
+  URGENT_DELIVERY
 } from '../../components/constants/Constants'
 
 const styles = theme => ({
@@ -28,17 +27,18 @@ const styles = theme => ({
     ...theme.typography.body3,
     color: theme.palette.customGrey.grey200,
     textAlign: 'left',
-    marginLeft: theme.spacing.unit
+    marginLeft: theme.spacing.unit,
+    fontSize: theme.spacing.unit * 1.75
   },
   mainWrapper: {
-    marginLeft: theme.spacing.unit * 6,
+    marginLeft: theme.spacing.unit * 2.5,
     marginTop: theme.spacing.unit * 2
   },
   asssuredText: {
     ...theme.typography.body3,
-    color: theme.palette.customGrey.grey200,
     textAlign: 'left',
-    marginLeft: theme.spacing.unit * 1.5
+    marginLeft: theme.spacing.unit * 1.5,
+    fontSize: theme.spacing.unit * 2
   },
   checkboxRoot: {
     width: theme.spacing.unit * 2,
@@ -46,7 +46,7 @@ const styles = theme => ({
     marginRight: theme.spacing.unit * 1.25
   },
   rxImageStyle: {
-    width: theme.spacing.unit * 1.75,
+    width: theme.spacing.unit * 2.75,
     height: theme.spacing.unit * 2.75
   },
   paper: {
@@ -67,46 +67,20 @@ const styles = theme => ({
     height: theme.spacing.unit * 1.5,
     marginLeft: theme.spacing.unit * 0.75,
     width: theme.spacing.unit * 1.5,
-    marginTop: theme.spacing.unit * 0.25
+    marginTop: theme.spacing.unit
   }
 })
 
 class PaymentDeliveryDetail extends Component {
-  constructor (props) {
-    super(props)
-    this.state = {
-      isExpressDelivery: false
-    }
-  }
-
-  componentDidMount () {
-    if (this.props.cartState.payload.preferred_delivery_option === DELIVERY_OPTION_URGENT) {
-      this.setState({
-        isExpressDelivery: true
-      })
-    }
-  }
-
-  onExpressDeliveryClick () {
-    this.setState({
-      isExpressDelivery: !this.state.isExpressDelivery
-    })
-    this.props.optForExpressDeliveryLoading(
-      this.props.cartState,
-      this.props.cartState.payload.uid,
-      !this.state.isExpressDelivery ? DELIVERY_OPTION_URGENT : DELIVERY_OPTION_NORMAL
-    )
-  }
-
   render () {
-    let indexOfUrgentDelivery = this.props.cartState.payload.available_delivery_option.indexOf(DELIVERY_OPTION_URGENT)
     return (
       <div className={this.props.classes.mainWrapper}>
         {
-          this.props.cartState.payload.service_type === LF_ASSURED &&
+          this.props.serviceType === LF_ASSURED &&
           <div className={this.props.classes.textWrapper}>
             <img
               src='/static/images/shape.svg'
+              className={this.props.classes.rxImageStyle}
             />
             <Typography
               varaint='caption'
@@ -141,39 +115,17 @@ class PaymentDeliveryDetail extends Component {
           </div>
         }
         {
-          this.props.cartState.payload.service_type === LF_ASSURED &&
+          this.props.deliveryOption === URGENT_DELIVERY &&
           <div className={this.props.classes.textWrapper}>
             <img
-              src='/static/images/rx-pending.svg'
+              src='/static/images/express-delivery-icon.svg'
               className={this.props.classes.rxImageStyle}
             />
             <Typography
               varaint='caption'
-              className={this.props.classes.text}
+              className={this.props.classes.asssuredText}
             >
-              {VERIFICATION_RX}
-            </Typography>
-          </div>
-        }
-        {
-          indexOfUrgentDelivery !== -1 &&
-          <div className={this.props.classes.textWrapper}>
-            <Checkbox
-              checked={this.state.isExpressDelivery}
-              classes={{
-                root: this.props.classes.checkboxRoot
-              }}
-              onChange={this.onExpressDeliveryClick.bind(this)}
-              color='primary'
-            />
-            <img
-              src='/static/images/express-delivery-icon.svg'
-            />
-            <Typography
-              varaint='caption'
-              className={this.props.classes.text}
-            >
-              Express Delivery
+              {EXPRESS_DELIVERY_DETAIL}
             </Typography>
             <a
               href='#'
@@ -199,6 +151,21 @@ class PaymentDeliveryDetail extends Component {
                 </Typography>
               </ReactTooltip>
             </a>
+          </div>
+        }
+        {
+          this.props.serviceType === LF_ASSURED &&
+          <div className={this.props.classes.textWrapper}>
+            <img
+              src='/static/images/rx-pending.svg'
+              className={this.props.classes.rxImageStyle}
+            />
+            <Typography
+              varaint='caption'
+              className={this.props.classes.text}
+            >
+              {VERIFICATION_RX}
+            </Typography>
           </div>
         }
       </div>

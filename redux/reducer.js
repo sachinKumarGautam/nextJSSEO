@@ -20,6 +20,7 @@ import prescriptionReducers from '../containers/prescription/prescriptionReducer
 import thankYouReducer from '../containers/thankYou/thankYouReducer'
 import refillReducer from '../containers/refillPatients/refillReducer'
 import homePageReducers from '../containers/homePage/homePageReducers'
+import orderDetailsReducer from '../containers/orderDetails/orderDetailsReducer'
 
 const isengard = (store, action) => {
   return (
@@ -49,7 +50,8 @@ const appReducer = combineReducers({
   orderListState: orderListReducers,
   thankYouState: thankYouReducer,
   pastMedicineState: refillReducer,
-  homePageState: homePageReducers
+  homePageState: homePageReducers,
+  orderDetailsState: orderDetailsReducer
 })
 
 // export const persistConfig = {

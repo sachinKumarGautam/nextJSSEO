@@ -14,6 +14,11 @@ import OrderListsLoader
   from '../../components/activityIndicator/loader/orderDetailsLoader/OrderListsLoader'
 import ActivityIndicator from '../../components/activityIndicator/index'
 
+import { getReplacedString } from '../../utils/replaceConstants'
+import { ORDER_DETAILS } from '../../routes/RouteConstant'
+
+import Router from 'next/router'
+
 const styles = theme => ({
   card: {
     marginLeft: theme.spacing.unit * 6
@@ -72,6 +77,15 @@ class OrderListDetails extends Component {
     })
   }
 
+  redirectToOrderDeatails (orderId) {
+    const mappedObject = {
+      order_id: orderId
+    }
+
+    const url = getReplacedString(ORDER_DETAILS, mappedObject)
+    Router.push(url)
+  }
+
   render () {
     const { orderListState } = this.props
     return (
@@ -92,8 +106,13 @@ class OrderListDetails extends Component {
           >
             {this.props.orderListState.payload.map(orderDetails => {
               return (
-                <div className={this.props.classes.orderDetailWrapper}>
-                  <OrderHeader orderDetails={orderDetails} />
+                <div
+                  className={this.props.classes.orderDetailWrapper}
+                >
+                  <OrderHeader
+                    orderDetails={orderDetails}
+                    redirectToOrderDeatails={this.redirectToOrderDeatails.bind(this, orderDetails.id)}
+                  />
                   <Divider />
                   <OrderContent orderDetails={orderDetails} />
                   <Divider />

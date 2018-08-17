@@ -21,3 +21,5 @@ export const REFILL_PATIENTS = '/customer/customer_id/patient-refills'
 export const HOME_PAGE = '/'
 
 export const PRODUCT_SEARCH = '/product/search'
+
+export const ORDER_DETAILS = '/order/order_id'
