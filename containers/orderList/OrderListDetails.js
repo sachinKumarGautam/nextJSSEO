@@ -108,10 +108,10 @@ class OrderListDetails extends Component {
               return (
                 <div
                   className={this.props.classes.orderDetailWrapper}
-                  onClick={this.redirectToOrderDeatails.bind(this, orderDetails.id)}
                 >
                   <OrderHeader
                     orderDetails={orderDetails}
+                    redirectToOrderDeatails={this.redirectToOrderDeatails.bind(this, orderDetails.id)}
                   />
                   <Divider />
                   <OrderContent orderDetails={orderDetails} />

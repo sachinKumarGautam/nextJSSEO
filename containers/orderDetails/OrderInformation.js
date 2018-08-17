@@ -55,7 +55,8 @@ const styles = theme => ({
   image: {
     marginLeft: theme.spacing.unit * 5,
     color: theme.palette.customGrey.grey300,
-    marginTop: theme.spacing.unit * 2
+    marginTop: theme.spacing.unit * 2,
+    cursor: 'pointer'
   }
 })
 

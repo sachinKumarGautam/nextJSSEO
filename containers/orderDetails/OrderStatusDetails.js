@@ -2,7 +2,7 @@ import React from 'react'
 
 import { withStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
-import Location from '@material-ui/icons/LocationOn'
+// import Location from '@material-ui/icons/LocationOn'
 
 const styles = theme => ({
   orderNoWrapper: {
@@ -54,11 +54,13 @@ const OrderStatusDetails = (props) => {
           {props.orderId}
         </Typography>
       </div>
-      <div>
-        <a className={props.classes.trackWrapper}>
-          <Location className={props.classes.iconButtonStyle} />Track Order
-        </a>
-      </div>
+      {
+        // <div>
+        //   <a className={props.classes.trackWrapper}>
+        //     <Location className={props.classes.iconButtonStyle} />Track Order
+        //   </a>
+        // </div>
+      }
     </div>
   )
 }
