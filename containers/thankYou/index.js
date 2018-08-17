@@ -12,9 +12,7 @@ import {
   submitRefillDateLoading
 } from './thankYouActions'
 
-import {
-  getAnonymousCartIdLoading
-} from '../cartDetails/cartActions'
+import { getAnonymousCartIdLoading } from '../cartDetails/cartActions'
 
 import {
   ORDER_DETAILS
@@ -76,7 +74,4 @@ function mapStateToProps (state) {
   }
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(ThankyouWrapper)
+export default connect(mapStateToProps, mapDispatchToProps)(ThankyouWrapper)
