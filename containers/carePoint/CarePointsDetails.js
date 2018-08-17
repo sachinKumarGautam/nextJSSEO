@@ -11,6 +11,8 @@ import CarePointsDescription from './CarePointsDescription'
 import TransactionHistoryHeader from './TransactionHistoryHeader'
 import TransactionHistoryWrapper from './TransactionHistoryWrapper'
 
+import NoCartPoints from './NoCarePoints'
+
 const styles = theme => ({
   card: {
     marginLeft: theme.spacing.unit * 6
@@ -54,6 +56,7 @@ class CarePointsDetails extends Component {
             <TransactionHistoryWrapper
               carePointState={this.props.carePointState}
             />
+            {/* <NoCartPoints isLoading={this.props.carePointState.isLoading}/> */}
           </div>
         </CardContent>
       </Card>
