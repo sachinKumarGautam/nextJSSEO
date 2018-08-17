@@ -49,6 +49,13 @@ const submitPatientDetails$ = (customerId, patientDetails) =>
     body: patientDetails
   })
 
+const editPatientDetails$ = (customerId, patientDetails, patientId) =>
+  makeAjaxRequest({
+    method: 'PATCH',
+    url: fetchUrl('account', 'customer/' + customerId + '/patient/' + patientId, 'CREATE'),
+    body: patientDetails
+  })
+
 const getOrderList$ = (customerId, page, size) =>
   makeAjaxRequest({
     method: 'GET',
@@ -211,6 +218,13 @@ const submitDeliveryDetails$ = (customerId, deliveryAddressData) =>
     body: deliveryAddressData
   })
 
+const editDeliveryDetails$ = (customerId, deliveryAddressData, addressId) =>
+  makeAjaxRequest({
+    method: 'PATCH',
+    url: fetchUrl('account', 'customer/' + customerId + '/shipping-address/' + addressId, 'CREATE'),
+    body: deliveryAddressData
+  })
+
 const submitRefillDate$ = (orderId, refillDay) =>
   makeAjaxRequest({
     method: 'PUT',
@@ -328,9 +342,11 @@ export {
   getSliderImages$,
   applyCouponForCart$,
   teleConsultation$,
+  editPatientDetails$,
+  searchLocalityForPincode$,
+  editDeliveryDetails$,
   checkReferralCode$,
   getMembershipCode$,
-  searchLocalityForPincode$,
   getOrderDetails$,
   expressDelivery$
 }

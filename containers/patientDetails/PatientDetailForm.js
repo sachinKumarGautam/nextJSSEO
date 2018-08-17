@@ -50,7 +50,11 @@ class PatientDetailForm extends React.Component {
               root: classes.dialogTitle
             }}
           >
-            {'ADD NEW PATIENT'}
+            {
+              this.props.patientFormState.patient.full_name
+                ? 'EDIT PATIENT'
+                : 'ADD NEW PATIENT'
+            }
           </DialogTitle>
           <DialogContent>
             <Form

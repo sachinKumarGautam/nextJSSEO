@@ -4,6 +4,7 @@ import thunkMiddleware from 'redux-thunk'
 import { createEpicMiddleware } from 'redux-observable'
 import reducer from './reducer'
 import { rootEpic } from './epics'
+import errorReporter from '../utils/errorReporter'
 
 const composeEnhancers = (typeof window !== 'undefined' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) || compose
 
@@ -13,7 +14,7 @@ export let store = null
 function makeConfiguredStore (rootReducer, initialState) {
   const epicMiddleware = createEpicMiddleware(rootEpic)
   // const logger = createLogger({ collapsed: true }) // log every action to see what's happening behind the scenes.
-  const reduxMiddleware = composeEnhancers(applyMiddleware(thunkMiddleware, epicMiddleware))
+  const reduxMiddleware = composeEnhancers(applyMiddleware(thunkMiddleware, epicMiddleware, errorReporter))
 
   return createStore(rootReducer, initialState, reduxMiddleware)
 };

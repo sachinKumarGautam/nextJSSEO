@@ -49,7 +49,7 @@ const ListContent = (props) => {
       <ul>
         {
           props.content && props.content.map((item) => (
-            <li className={props.classes.content}>
+            item && <li className={props.classes.content}>
               <Typography
                 gutterBottom
                 variant='body1'

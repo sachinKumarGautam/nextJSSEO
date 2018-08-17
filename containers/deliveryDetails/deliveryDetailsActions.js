@@ -9,7 +9,8 @@ import {
   UPDATE_ADDRESS_FORM_VALUE,
   GET_LOCALITY_LIST_LOADING,
   GET_LOCALITY_LIST_SUCCESS,
-  GET_LOCALITY_LIST_FAILURE
+  GET_LOCALITY_LIST_FAILURE,
+  RESET_DELIVERY_ADDRESS_SELECTED
 } from './deliveryDetailsActionTypes'
 
 /**
@@ -62,11 +63,11 @@ export function getDeliveryDetailsListFailure (deliveryDetailsState, error) {
  * @param {object} patientDetailsState - The object maintained for payload, loading and error state.
  * @param {number} patientIdSelected - The value of the selected addressId
  */
-export function saveAddressSelected (deliveryDetailsState, addressIdSelected) {
+export function saveDeliveryAddressSelected (deliveryDetailsState, deliveryDetail) {
   return {
     type: SAVE_ADDRESS_SELECTED,
     deliveryDetailsState,
-    addressIdSelected: addressIdSelected
+    deliveryDetail: deliveryDetail
   }
 }
 
@@ -77,7 +78,8 @@ export function submitDeliveryDetailsLoading (
   setSubmitting,
   closeModal,
   values,
-  isCartPage = false
+  isCartPage = false,
+  isEdit = false
 ) {
   return {
     type: SUBMIT_DELIVERY_DETAILS_LOADING,
@@ -90,15 +92,21 @@ export function submitDeliveryDetailsLoading (
     isLoading: true,
     error: null,
     isError: false,
-    isCartPage: isCartPage
+    isCartPage: isCartPage,
+    isEdit: isEdit
   }
 }
 
-export function submitDeliveryDetailsSuccess (deliveryDetailsState, result) {
+export function submitDeliveryDetailsSuccess (
+  deliveryDetailsState,
+  result,
+  modifiedAddressDetailsList
+) {
   return {
     type: SUBMIT_DELIVERY_DETAILS_SUCCESS,
     deliveryDetailsState,
-    isLoading: true
+    isLoading: true,
+    modifiedAddressDetailsList: modifiedAddressDetailsList
   }
 }
 
@@ -157,5 +165,12 @@ export function getLocalityDetailListFailure (deliveryDetailsState, error) {
     isLoading: false,
     error: error,
     isError: true
+  }
+}
+
+export function resetDeliveryAddressSelected (deliveryDetailsState) {
+  return {
+    type: RESET_DELIVERY_ADDRESS_SELECTED,
+    deliveryDetailsState
   }
 }
