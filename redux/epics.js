@@ -41,11 +41,11 @@ import { carePointsList } from '../containers/carePoint/carePointEpics'
 import {
   getAnonymousCartIdEpic,
   getCartDetailsEpic,
-  // decrementCartItemLoadingEpic,
+  decrementCartItemLoadingEpic,
   decrementCartItemEpic,
-  // incrementCartItemLoadingEpic,
+  incrementCartItemLoadingEpic,
   incrementCartItemEpic,
-  // deleteCartItemLoadingEpic,
+  deleteCartItemLoadingEpic,
   deleteCartItemEpic,
   savePatientToCartEpic,
   cartTransferEpic,
@@ -70,6 +70,10 @@ import {
 
 import { getBackGroungImages } from '../containers/homePage/homePageEpics'
 
+import {
+  getOrderDetails
+} from '../containers/orderDetails/orderDetailsEpics'
+
 export const rootEpic = combineEpics(
   getMoleculeSummary,
   getRelatedMedicines,
@@ -80,10 +84,11 @@ export const rootEpic = combineEpics(
   getProductDetails,
   getAnonymousCartIdEpic,
   getCartDetailsEpic,
-  // decrementCartItemLoadingEpic,
+  decrementCartItemLoadingEpic,
   decrementCartItemEpic,
   incrementCartItemEpic,
-  // deleteCartItemLoadingEpic,
+  incrementCartItemLoadingEpic,
+  deleteCartItemLoadingEpic,
   deleteCartItemEpic,
   searchMedicine,
   fetchUserInfo,
@@ -109,5 +114,6 @@ export const rootEpic = combineEpics(
   checkReferralCode,
   getMembershipCodeLoading,
   getLocalityList,
+  getOrderDetails,
   optExpressDelivery
 )

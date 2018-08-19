@@ -85,7 +85,7 @@ const OrderConfirmationDetails = props => {
                 label: props.classes.buttonViewLabel
               }}
               className={props.classes.buttonViewStyle}
-              // onClick={this.handleClickOpen}
+              onClick={props.viewYouOrder}
               label={'VIEW YOUR ORDER'}
             />
             <Button

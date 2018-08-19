@@ -295,6 +295,12 @@ const searchLocalityForPincode$ = (state, city, pincode, searchString) =>
     )
   })
 
+const getOrderDetails$ = orderId =>
+  makeAjaxRequest({
+    method: 'GET',
+    url: fetchUrl('order', orderId, 'CREATE')
+  })
+
 const expressDelivery$ = (cartId, deliveryOption) => (
 
   makeAjaxRequest({
@@ -341,5 +347,6 @@ export {
   editDeliveryDetails$,
   checkReferralCode$,
   getMembershipCode$,
+  getOrderDetails$,
   expressDelivery$
 }

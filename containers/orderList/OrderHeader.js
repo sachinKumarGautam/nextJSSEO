@@ -2,7 +2,7 @@ import React from 'react'
 
 import { withStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
-import Location from '@material-ui/icons/LocationOn'
+// import Location from '@material-ui/icons/LocationOn'
 
 import {
   LF_ASSURED,
@@ -26,7 +26,8 @@ const styles = theme => {
     orderIdStyle: {
       color: theme.palette.customGreen.green300,
       marginLeft: theme.spacing.unit,
-      marginRight: theme.spacing.unit
+      marginRight: theme.spacing.unit,
+      cursor: 'pointer'
     },
     orderWrapper: {
       display: 'flex'
@@ -62,6 +63,7 @@ const OrderHeader = (props) => {
         <Typography
           variant='caption'
           className={props.classes.orderIdStyle}
+          onClick={props.redirectToOrderDeatails}
         >
           {props.orderDetails.id}
         </Typography>
@@ -74,11 +76,13 @@ const OrderHeader = (props) => {
           <img src='/static/images/express-delivery-icon.svg' />
         }
       </div>
-      <div>
-        <a className={props.classes.trackWrapper}>
-          <Location className={props.classes.iconButtonStyle} />Track Order
-        </a>
-      </div>
+      {
+        // <div>
+        //   <a className={props.classes.trackWrapper}>
+        //     <Location className={props.classes.iconButtonStyle} />Track Order
+        //   </a>
+        // </div>
+      }
     </div>
   )
 }
