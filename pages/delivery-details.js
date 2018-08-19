@@ -13,10 +13,11 @@ import DeliveryDetailsWrapper from '../containers/deliveryDetails'
 
 import {
   getDeliveryDetailsListLoading,
-  saveAddressSelected,
+  saveDeliveryAddressSelected,
   submitDeliveryDetailsLoading,
   updateAddressFormValue,
-  getLocalityDetailListLoading
+  getLocalityDetailListLoading,
+  resetDeliveryAddressSelected
 } from '../containers/deliveryDetails/deliveryDetailsActions'
 
 import {
@@ -73,10 +74,8 @@ class DeliveryDetails extends React.Component {
           <Paper className={this.props.classes.root} elevation={1}>
             <DeliveryDetailsWrapper
               deliveryDetailsState={this.props.deliveryDetailsState}
-              saveAddressSelected={this.props.actions.saveAddressSelected}
-              submitDeliveryDetailsLoading={
-                this.props.actions.submitDeliveryDetailsLoading
-              }
+              saveDeliveryAddressSelected={this.props.actions.saveDeliveryAddressSelected}
+              submitDeliveryDetailsLoading={this.props.actions.submitDeliveryDetailsLoading}
               customerState={this.props.customerState}
               checkPincodeLoading={this.props.actions.checkPincodeLoading}
               updateAddressFormValue={this.props.actions.updateAddressFormValue}
@@ -85,6 +84,8 @@ class DeliveryDetails extends React.Component {
                 this.props.actions.getLocalityDetailListLoading
               }
               checkPincodeState={this.props.checkPincodeState}
+              resetDeliveryAddressSelected={this.props.actions.resetDeliveryAddressSelected}
+              getDeliveryDetailsListLoading={this.props.actions.getDeliveryDetailsListLoading}
             />
           </Paper>
         </div>
@@ -107,11 +108,12 @@ function mapDispatchToProps (dispatch) {
     actions: bindActionCreators(
       {
         getDeliveryDetailsListLoading,
-        saveAddressSelected,
+        saveDeliveryAddressSelected,
         submitDeliveryDetailsLoading,
         checkPincodeLoading,
         updateAddressFormValue,
-        getLocalityDetailListLoading
+        getLocalityDetailListLoading,
+        resetDeliveryAddressSelected
       },
       dispatch
     )

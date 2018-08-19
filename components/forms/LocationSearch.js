@@ -71,6 +71,7 @@ const styles = theme => ({
 
 function renderInput (inputProps) {
   const { InputProps, classes, ref, onChange, ...other } = inputProps
+
   return (
     <div className={classes.searchBar}>
       <TextField
@@ -155,10 +156,13 @@ class LocationSearch extends React.Component {
       deliveryDetailsState
     } = this.props
     const locationSearchResult = deliveryDetailsState.addressLocalityList.payload
+    const locality = deliveryDetailsState.addressForm.locality
     const isOpen = this.state.isOpen
+
     return (
       <div className={classes.root}>
         <Downshift
+          selectedItem={locality}
           onChange={this.onSelectItem}
           isOpen={isOpen}
         >

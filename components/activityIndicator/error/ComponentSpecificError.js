@@ -41,7 +41,7 @@ const styles = theme => {
 }
 
 class ComponentSpecificError extends Component {
-  onClickOfTryAgain () {
+  onClickOfTryAgain = () => {
     this.props.tryAgain()
   }
   render () {
@@ -59,18 +59,21 @@ class ComponentSpecificError extends Component {
         >
           We’re facing some outage at our end. Our best minds are working on it.
         </Typography>
-        <Button
-          size='small'
-          color='primary'
-          variant='outline'
-          classes={{
-            root: this.props.classes.buttonRoot,
-            label: this.props.classes.buttonLabel
-          }}
-          className={this.props.classes.buttonStyle}
-          onClick={this.onClickOfTryAgain.bind(this)}
-          label={'Try Again'}
-        />
+        {
+          !this.props.noButton &&
+          <Button
+            size='small'
+            color='primary'
+            variant='outline'
+            classes={{
+              root: this.props.classes.buttonRoot,
+              label: this.props.classes.buttonLabel
+            }}
+            className={this.props.classes.buttonStyle}
+            onClick={this.onClickOfTryAgain}
+            label={'Try Again'}
+          />
+        }
       </div>
     )
   }

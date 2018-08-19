@@ -36,8 +36,11 @@ class PatientDetailsCardWrapper extends Component {
         >
           {this.props.payload.map(patientDetail => {
             return (
-              <Grid item xs={6}>
-                <PatientDetailsCard patientDetail={patientDetail} />
+              <Grid item xs={6} onClick={this.props.savePatientSelected.bind(this, patientDetail)}>
+                <PatientDetailsCard
+                  openPatientFormModal={this.props.openPatientFormModal}
+                  patientDetail={patientDetail}
+                />
               </Grid>
             )
           })}

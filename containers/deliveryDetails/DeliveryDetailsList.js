@@ -60,15 +60,27 @@ class Main extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      openDeliveryFormDialog: false
+      openDeliveryFormDialog: false,
+      isAddNewAddressButtonClicked: false,
+      isEdit: false
     }
     this.openDeliveryFormModal = this.openDeliveryFormModal.bind(this)
     this.closeDeliveryFormModal = this.closeDeliveryFormModal.bind(this)
   }
 
-  openDeliveryFormModal () {
+  addNewAddressButton () {
     this.setState({
-      openDeliveryFormDialog: true
+      isAddNewAddressButtonClicked: true
+    })
+
+    this.openDeliveryFormModal()
+  }
+
+  openDeliveryFormModal (isEdit) {
+    this.setState({
+      openDeliveryFormDialog: true,
+      isEdit: isEdit,
+      isAddNewAddressButtonClicked: false
     })
   }
 
@@ -76,6 +88,15 @@ class Main extends Component {
     this.setState({
       openDeliveryFormDialog: false
     })
+
+    this.props.resetDeliveryAddressSelected(this.props.deliveryDetailsState)
+  }
+
+  saveDeliveryAddressSelected (deliveryDetail) {
+    this.props.saveDeliveryAddressSelected(
+      this.props.deliveryDetailsState,
+      deliveryDetail
+    )
   }
 
   render () {
@@ -95,9 +116,11 @@ class Main extends Component {
               <AddDeliveryAddressButton
                 buttonRoot={this.props.classes.buttonRoot}
                 buttonLabel={this.props.classes.buttonLabel}
-                onClick={this.openDeliveryFormModal.bind(this)}
+                onClick={this.addNewAddressButton.bind(this)}
               />
               <DeliveryDetailForm
+                isEdit={this.state.isEdit}
+                isAddNewAddressButtonClicked={this.state.isAddNewAddressButtonClicked}
                 onSubmit={this.props.submitDeliveryDetailsLoading}
                 openDeliveryFormDialog={this.state.openDeliveryFormDialog}
                 customerState={this.props.customerState}
@@ -116,11 +139,17 @@ class Main extends Component {
             </div>
           </div>
           <AddressDetailsCardWrapper
+            openDeliveryFormModal={this.openDeliveryFormModal.bind(this)}
+            saveDeliveryAddressSelected={this.saveDeliveryAddressSelected.bind(this)}
             isLoading={this.props.deliveryDetailsState.isLoading}
+            errorState={this.props.deliveryDetailsState.errorState}
             payload={this.props.deliveryDetailsState.payload}
             addressDetailsCardWrapper={
               this.props.classes.addressDetailsCardWrapper
             }
+            customerState={this.props.customerState}
+            getDeliveryDetailsListLoading={this.props.getDeliveryDetailsListLoading}
+            deliveryDetailsState={this.props.deliveryDetailsState}
           />
         </CardContent>
       </Card>
