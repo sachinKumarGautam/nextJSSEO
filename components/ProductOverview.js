@@ -26,21 +26,21 @@ const styles = theme => {
 const ProductOverview = (props) => (
   <React.Fragment>
     {props.overview && <div className={props.classes.overviewWrapper}>
-  <Typography
-    gutterBottom
-    component='h5'
-    className={props.classes.label}
-  >
+      <Typography
+        gutterBottom
+        component='h5'
+        className={props.classes.label}
+      >
     Overview:
-  </Typography>
-  <Typography
-    gutterBottom
-    component='h5'
-    className={props.classes.overview}
-  >
-    {props.overview}
-  </Typography>
-</div>}
+      </Typography>
+      <Typography
+        gutterBottom
+        component='h5'
+        className={props.classes.overview}
+      >
+        {props.overview}
+      </Typography>
+    </div>}
   </React.Fragment>
 )
 

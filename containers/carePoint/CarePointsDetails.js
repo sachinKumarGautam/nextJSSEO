@@ -56,8 +56,8 @@ class CarePointsDetails extends Component {
             {!this.props.carePointState.isLoading && <TransactionHistoryWrapper
               carePointState={this.props.carePointState}
             />}
-            <NoCartPoints 
-            isLoading={this.props.carePointState.isLoading}
+            <NoCartPoints
+              isLoading={this.props.carePointState.isLoading}
               carePointList={this.props.carePointState.payload.customer_wallet_transactions.content}
             />
           </div>

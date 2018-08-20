@@ -49,56 +49,56 @@ class TransactionHistory extends Component {
       : this.props.carePointsDetails.care_point
     return (
       <Fragment>
-      <div className={this.props.classes.transactionDetailWrapper}>
-        <div>
-          <Typography
-            gutterBottom
-            variant='body2'
-            className={this.props.classes.earnedStyle}
-          >
-            {this.props.carePointsDetails.display_transaction_type}
-          </Typography>
-          <Typography
-            gutterBottom
-            variant='caption'
-            className={this.props.classes.detailStyle}
-          >
-            {this.props.carePointsDetails.display_comment}
-          </Typography>
-          <Typography
-            gutterBottom
-            variant='caption'
-            className={this.props.classes.detailStyle}
-          >
-            {transactionDate}
-          </Typography>
-        </div>
-        <div>
-          <Typography
-            gutterBottom
-            variant='body2'
-            className={
-              this.props.carePointsDetails.transaction_type === 'credit'
-                ? this.props.classes.earnedAmountStyle
-                : this.props.classes.debitedAmountStyle
-            }
-          >
-            {
-              this.props.carePointsDetails.transaction_type === 'credit'
-                ? `+${carePoint}` : `-${carePoint}`
-            }
-          </Typography>
-          {
-            this.props.carePointsDetails.transaction_type === 'credit' &&
+        <div className={this.props.classes.transactionDetailWrapper}>
+          <div>
+            <Typography
+              gutterBottom
+              variant='body2'
+              className={this.props.classes.earnedStyle}
+            >
+              {this.props.carePointsDetails.display_transaction_type}
+            </Typography>
             <Typography
               gutterBottom
               variant='caption'
-              className={this.props.classes.validStyle}
+              className={this.props.classes.detailStyle}
             >
-              Valid till
+              {this.props.carePointsDetails.display_comment}
             </Typography>
-          }
-          { this.props.carePointsDetails.transaction_type === 'credit' &&
+            <Typography
+              gutterBottom
+              variant='caption'
+              className={this.props.classes.detailStyle}
+            >
+              {transactionDate}
+            </Typography>
+          </div>
+          <div>
+            <Typography
+              gutterBottom
+              variant='body2'
+              className={
+                this.props.carePointsDetails.transaction_type === 'credit'
+                  ? this.props.classes.earnedAmountStyle
+                  : this.props.classes.debitedAmountStyle
+              }
+            >
+              {
+                this.props.carePointsDetails.transaction_type === 'credit'
+                  ? `+${carePoint}` : `-${carePoint}`
+              }
+            </Typography>
+            {
+              this.props.carePointsDetails.transaction_type === 'credit' &&
+              <Typography
+                gutterBottom
+                variant='caption'
+                className={this.props.classes.validStyle}
+              >
+              Valid till
+              </Typography>
+            }
+            { this.props.carePointsDetails.transaction_type === 'credit' &&
             <Typography
               gutterBottom
               variant='caption'
@@ -106,9 +106,9 @@ class TransactionHistory extends Component {
             >
               {expiryDate}
             </Typography>
-          }
+            }
+          </div>
         </div>
-      </div>
       </Fragment>
     )
   }
