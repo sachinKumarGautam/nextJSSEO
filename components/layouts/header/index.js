@@ -72,7 +72,8 @@ class Header extends React.Component {
     this.openLoginModal = this.openLoginModal.bind(this)
     this.closeLoginModal = this.closeLoginModal.bind(this)
     this.state = {
-      openLoginDialog: (this.props.authentication && !this.props.loginState.isAuthenticated)
+      openLoginDialog: this.props.authentication &&
+        !this.props.loginState.isAuthenticated
         ? this.props.authentication
         : false
     }

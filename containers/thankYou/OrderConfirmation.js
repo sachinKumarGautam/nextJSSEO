@@ -13,6 +13,7 @@ const OrderConfirmation = props => {
           cartState={props.cartState}
           submitRefillDateLoading={props.submitRefillDateLoading}
           thankYouState={props.thankYouState}
+          viewYouOrder={props.viewYouOrder}
         />
       </Grid>
       <Grid item xs={5}>

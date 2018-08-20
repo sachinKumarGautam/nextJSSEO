@@ -171,6 +171,13 @@ app
       }
     })
 
+    // order details page
+    server.get('/order/:id', (req, res) => {
+      const actualPage = '/order-details'
+      const queryParams = { id: req.params.id }
+      app.render(req, res, actualPage, queryParams)
+    })
+
     // home page
     server.get('/', (req, res) => {
       const actualPage = '/'
