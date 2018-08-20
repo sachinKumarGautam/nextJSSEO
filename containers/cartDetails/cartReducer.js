@@ -537,6 +537,12 @@ export default function cartReducer (state = initialState, action) {
         }
       }
 
+    case cartActionTypes.RESET_COUPON_STATE:
+      return {
+        ...state,
+        couponDetail: initialState.couponDetail
+      }
+
     case cartActionTypes.UPDATE_COUPON_CODE_VALUE:
       return {
         ...state,

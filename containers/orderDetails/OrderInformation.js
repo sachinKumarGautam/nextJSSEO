@@ -19,6 +19,9 @@ import {
   getReplacedString
 } from '../../utils/replaceConstants'
 
+import ActivityIndicator from '../../components/activityIndicator/index'
+import ComponentSpecificError from '../../components/activityIndicator/error/ComponentSpecificError'
+
 const styles = theme => ({
   card: {
     marginLeft: theme.spacing.unit * 6
@@ -80,33 +83,50 @@ class OrderInformation extends Component {
     Router.push(url)
   }
 
+  tryAgain () {
+    this.props.getOrderDetailsLoading(
+      this.props.orderDetailsState,
+      this.props.orderId
+    )
+  }
+
   render () {
     return (
       <div>
         <Card elevation={'1'} className={this.props.classes.card}>
           <CardContent className={this.props.classes.cardContent}>
-            <div className={this.props.classes.buttonWrapper}>
-              <BackArrow
-                classes={{ root: this.props.classes.image }}
-                onClick={this.redirectToOrdersPage.bind(this)}
+            <ActivityIndicator
+              isError={this.props.orderDetailsState.errorState.isError}
+              ErrorComp={
+                <ComponentSpecificError
+                  error={this.props.orderDetailsState.errorState.error}
+                  tryAgain={this.tryAgain.bind(this)}
+                />
+              }
+            >
+              <div className={this.props.classes.buttonWrapper}>
+                <BackArrow
+                  classes={{ root: this.props.classes.image }}
+                  onClick={this.redirectToOrdersPage.bind(this)}
+                />
+                <Typography
+                  gutterBottom
+                  variant='headline'
+                  component='h1'
+                  className={this.props.classes.title}
+                >
+                  {
+                    this.props.cartState.orderResponse.payload.order_number
+                      ? 'Go to Home'
+                      : 'Go to My Orders'
+                  }
+                </Typography>
+              </div>
+              <OrderContentWrapper
+                cartState={this.props.cartState}
+                orderDetailsState={this.props.orderDetailsState}
               />
-              <Typography
-                gutterBottom
-                variant='headline'
-                component='h1'
-                className={this.props.classes.title}
-              >
-                {
-                  this.props.cartState.orderResponse.payload.order_number
-                    ? 'Go to Home'
-                    : 'Go to My Orders'
-                }
-              </Typography>
-            </div>
-            <OrderContentWrapper
-              cartState={this.props.cartState}
-              orderDetailsState={this.props.orderDetailsState}
-            />
+            </ActivityIndicator>
           </CardContent>
         </Card>
       </div>

@@ -74,7 +74,11 @@ class SnackbarErrorMessage extends Component {
                   variant='caption'
                   className={this.props.classes.snackbarMessage}
                 >
-                  Oops!! Something went wrong
+                  {
+                    this.props.error.response
+                      ? this.props.error.response.body.error.message
+                      : 'Oops!! Something went wrong'
+                  }
                 </Typography>
               </div>
             }

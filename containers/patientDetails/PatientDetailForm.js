@@ -43,6 +43,7 @@ class PatientDetailForm extends React.Component {
               error={this.props.patientFormState.addNewPatient.errorState.error}
             />
           }
+          bottomError
         >
           <Dialog
             open={this.props.openPatientFormDialog}

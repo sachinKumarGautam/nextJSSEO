@@ -6,6 +6,7 @@ import Dialog from '@material-ui/core/Dialog'
 import DialogActions from '@material-ui/core/DialogActions'
 import DialogContent from '@material-ui/core/DialogContent'
 import DialogTitle from '@material-ui/core/DialogTitle'
+import DialogContentText from '@material-ui/core/DialogContentText'
 
 import CouponMessage from './CouponMessage'
 import EditCoupon from './EditCoupon'
@@ -51,7 +52,8 @@ const styles = theme => ({
     width: theme.spacing.unit * 40
   },
   contentRoot: {
-    ...theme.typography.caption
+    ...theme.typography.caption,
+    color: theme.palette.customRed.red200
   },
   couponDetailWrapper: {
     marginTop: theme.spacing.unit * 2.25,
@@ -126,6 +128,7 @@ class Coupon extends Component {
         ''
       )
     }
+    this.props.resetCouponDetail()
   }
 
   onChange (event) {
@@ -186,13 +189,21 @@ class Coupon extends Component {
               value={this.props.cartState.couponDetail.couponCode}
               onChange={this.onChange.bind(this)}
             />
-            {/* <DialogContentText
-              classes={{
-                root: this.props.classes.contentRoot
-              }}
-            >
-              {COUPON_MESSAGE}
-            </DialogContentText> */}
+            {
+              this.props.cartState.couponDetail.errorState.isError
+                ? <DialogContentText
+                  classes={{
+                    root: this.props.classes.contentRoot
+                  }}
+                >
+                  {
+                    this.props.cartState.couponDetail.errorState.error.response
+                      ? this.props.cartState.couponDetail.errorState.error.response.body.error.message
+                      : 'Oops!! Something went wrong'
+                  }
+                </DialogContentText>
+                : null
+            }
           </DialogContent>
           <DialogActions>
             <Button

@@ -43,6 +43,7 @@ class DeliveryDetailForm extends React.Component {
               error={this.props.deliveryDetailsState.errorState.error}
             />
           }
+          bottomError
         >
           <Dialog
             open={this.props.openDeliveryFormDialog}

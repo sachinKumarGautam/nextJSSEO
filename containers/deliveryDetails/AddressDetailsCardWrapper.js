@@ -9,9 +9,8 @@ import MultipleCardLoader
 import ComponentSpecificError
   from '../../components/activityIndicator/error/ComponentSpecificError'
 
-
 class AddressDetailsCardWrapper extends React.Component {
-  tryAgain() {
+  tryAgain () {
     this.props.getDeliveryDetailsListLoading(
       this.props.deliveryDetailsState,
       this.props.customerState.payload.id
@@ -20,7 +19,7 @@ class AddressDetailsCardWrapper extends React.Component {
   render () {
     return (
       <Grid
-        container={this.props.errorState.isError ? false : true}
+        container={!this.props.errorState.isError}
         spacing={24}
         className={this.props.addressDetailsCardWrapper}
       >

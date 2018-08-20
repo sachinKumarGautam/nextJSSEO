@@ -443,6 +443,12 @@ export function applyCouponCodeFailure (cartState, error) {
   }
 }
 
+export function resetCouponDetail () {
+  return {
+    type: cartActionTypes.RESET_COUPON_STATE
+  }
+}
+
 export function updateCouponCode (cartState, value) {
   return {
     type: cartActionTypes.UPDATE_COUPON_CODE_VALUE,

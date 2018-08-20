@@ -9,7 +9,7 @@ import ActivityIndicator from '../../components/activityIndicator'
 import ComponentSpecificError from '../../components/activityIndicator/error/ComponentSpecificError'
 
 class PrescriptionContentWrapper extends React.Component {
-  tryAgain() {
+  tryAgain () {
     this.props.getPrescriptionListLoading(
       this.props.prescriptionState,
       this.props.customerState.payload.id
@@ -19,7 +19,7 @@ class PrescriptionContentWrapper extends React.Component {
     const { isLoading } = this.props.prescriptionState
     return (
       <Grid
-        container={this.props.prescriptionState.errorState.isError ? false: true}
+        container={!this.props.prescriptionState.errorState.isError}
         spacing={24}
       >
         <ActivityIndicator
