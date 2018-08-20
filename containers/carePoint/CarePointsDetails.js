@@ -11,7 +11,7 @@ import CarePointsDescription from './CarePointsDescription'
 import TransactionHistoryHeader from './TransactionHistoryHeader'
 import TransactionHistoryWrapper from './TransactionHistoryWrapper'
 
-import NoCartPoints from './NoCarePoints'
+import NoCarePoints from './NoCarePoints'
 
 const styles = theme => ({
   card: {
@@ -56,7 +56,7 @@ class CarePointsDetails extends Component {
             {!this.props.carePointState.isLoading && <TransactionHistoryWrapper
               carePointState={this.props.carePointState}
             />}
-            <NoCartPoints
+            <NoCarePoints
               isLoading={this.props.carePointState.isLoading}
               carePointList={this.props.carePointState.payload.customer_wallet_transactions.content}
             />

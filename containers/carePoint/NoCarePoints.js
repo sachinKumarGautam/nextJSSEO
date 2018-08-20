@@ -6,7 +6,7 @@ const styles = theme => ({
   root: {
     margin: 'auto',
     width: '100%',
-    minHeight: '150px',
+    minHeight: theme.typography.pxToRem(150),
     display: 'block',
     position: 'relative',
     display: 'flex',
