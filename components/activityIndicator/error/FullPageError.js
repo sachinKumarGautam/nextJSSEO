@@ -16,8 +16,8 @@ const styles = theme => {
       color: theme.palette.customGrey.grey350
     },
     errorWrapper: {
-      textAlign: 'center'
-      // marginTop: theme.spacing.unit * 8
+      textAlign: 'center',
+      marginTop: theme.spacing.unit * 18
     },
     buttonRoot: {
       border: `1px solid ${theme.palette.primary.main}`

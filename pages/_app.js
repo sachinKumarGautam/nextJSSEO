@@ -9,6 +9,13 @@ import WrapperComp from './wrapperComp'
 
 export default withRedux(initStore, { debug: true })(
   class MyApp extends App {
+    componentDidCatch(error, errorInfo) {
+      console.log(
+        'error',
+        error,
+        errorInfo
+      )
+    }
     render () {
       const { store } = this.props
       return (

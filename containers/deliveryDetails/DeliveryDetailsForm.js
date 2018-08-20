@@ -37,10 +37,10 @@ class DeliveryDetailForm extends React.Component {
     return (
       <div>
         <ActivityIndicator
-          isError={this.props.deliveryDetailsState.errorState.isError}
+          isError={this.props.deliveryDetailsState.addressForm.errorState.isError}
           ErrorComp={
             <SnackbarErrorMessage
-              error={this.props.deliveryDetailsState.errorState.error}
+              error={this.props.deliveryDetailsState.addressForm.errorState.error}
             />
           }
           bottomError
