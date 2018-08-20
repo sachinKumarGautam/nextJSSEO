@@ -56,7 +56,7 @@ class ProductInfo extends Component {
           <DiseaseTagsWrapper diseases={productDetailsState.payload.diseases} />
           <ProductOverview overview={productDetailsState.payload.description} />
         </ActivityIndicator>
-        {productDetailsState.isLoadingGetProductDetails &&
+        {!productDetailsState.isLoadingGetProductDetails &&
           <ProductInfoNav
             toggleHover={this.props.toggleHover}
             hover={this.props.hover}

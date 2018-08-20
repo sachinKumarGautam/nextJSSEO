@@ -14,6 +14,11 @@ const initialState = {
       isError: false,
       error: {}
     }
+  },
+  isLoading: false,
+  errorState: {
+    isError: false,
+    error: null
   }
 }
 
