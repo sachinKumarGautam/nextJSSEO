@@ -43,7 +43,7 @@ const styles = theme => ({
     textAlign: 'right'
   },
   buttonWrapper: {
-    minWidth: '100px',
+    minWidth: theme.typography.pxToRem(100),
     display: 'flex',
     flexDirection: 'row',
     marginRight: theme.spacing.unit * 3,
