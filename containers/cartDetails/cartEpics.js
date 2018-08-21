@@ -123,9 +123,11 @@ function cartApiLoadingHandling (
     cart_items: cartItems
   }
 
-  return putCartItemSuccess(
-    cartState,
-    payload
+  return of(
+    putCartItemSuccess(
+      cartState,
+      payload
+    )
   )
 }
 
@@ -153,9 +155,12 @@ function cartApiErrorHandling (cartState, medicineSelected, error) {
     cart_items: cartItems
   }
 
-  return putCartItemSuccess(
-    cartState,
-    payload
+  return of(
+    putCartItemFailure(
+      cartState,
+      payload,
+      error
+    )
   )
 }
 

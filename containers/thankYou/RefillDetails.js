@@ -40,6 +40,12 @@ const styles = theme => ({
     ...theme.typography.caption,
     marginRight: theme.spacing.unit * 5
   },
+  selectedButtonStyle: {
+    ...theme.typography.caption,
+    marginRight: theme.spacing.unit * 5,
+    color: theme.palette.primary.main,
+    opacity: 0.08
+  },
   close: {
     width: theme.spacing.unit * 4,
     height: theme.spacing.unit * 4
@@ -128,7 +134,11 @@ class RefillDetails extends Component {
                     root: this.props.classes.buttonRoot,
                     label: this.props.classes.buttonLabel
                   }}
-                  className={this.props.classes.buttonStyle}
+                  className={
+                    (this.props.thankYouState.payload.display_repeat_day + 3) === item.value
+                    ? this.props.classes.selectedButtonStyle
+                    : this.props.classes.buttonStyle
+                  }
                   onClick={this.onClickOfRefillDay.bind(this, item)}
                   label={item.label}
                 />

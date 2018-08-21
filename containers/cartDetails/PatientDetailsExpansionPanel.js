@@ -124,7 +124,8 @@ class PatientDetailsExpansionPanel extends React.Component {
             }}
             label={'NEXT'}
             onClick={
-              this.props.loginState.isAuthenticated
+              this.props.loginState.isAuthenticated &&
+              this.props.cartState.payload.patient_details.payload.patient_id
                 ? this.props.handleNextChange
                 : null
             }

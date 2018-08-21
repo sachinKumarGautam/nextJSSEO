@@ -121,21 +121,24 @@ class OrderListDetails extends Component {
               )
             })}
           </ActivityIndicator>
-          <div className={this.props.classes.buttonWrapper}>
-            <Button
-              size='medium'
-              loaderColor={'primary'}
-              // isloading={orderListState.isLoading}
-              variant='outlined'
-              className={this.props.classes.button}
-              classes={{
-                root: this.props.classes.buttonRoot,
-                label: this.props.classes.buttonLabel
-              }}
-              onClick={this.onClickOfShowMore.bind(this)}
-              label={'Show more'}
-            />
-          </div>
+          {
+            this.props.orderListState.payload.length > 9 &&
+            <div className={this.props.classes.buttonWrapper}>
+              <Button
+                size='medium'
+                loaderColor={'primary'}
+                // isloading={orderListState.isLoading}
+                variant='outlined'
+                className={this.props.classes.button}
+                classes={{
+                  root: this.props.classes.buttonRoot,
+                  label: this.props.classes.buttonLabel
+                }}
+                onClick={this.onClickOfShowMore.bind(this)}
+                label={'Show more'}
+              />
+            </div>
+          }
         </CardContent>
       </Card>
     )
