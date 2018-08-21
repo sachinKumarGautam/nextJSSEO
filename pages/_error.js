@@ -4,12 +4,12 @@ import Layout from '../components/layouts/Layout'
 import SnackbarErrorMessage from '../components/activityIndicator/error/SnackbarErrorMessage'
 
 export default class Error extends React.Component {
-  static getInitialProps({ res, err }) {
-    const statusCode = res ? res.statusCode : err ? err.statusCode : null;
+  static getInitialProps ({ res, err }) {
+    const statusCode = res ? res.statusCode : err ? err.statusCode : null
     return { statusCode }
   }
 
-  render() {
+  render () {
     return (
       <Layout
         addToCartHandler={this.props.addToCartHandler}
@@ -19,8 +19,8 @@ export default class Error extends React.Component {
             (this.props.statusCode === 404 ||
             this.props.statusCode === 500 ||
             this.props.statusCode === 502)
-            ? <PageNotFound/>
-            : <SnackbarErrorMessage/>}
+              ? <PageNotFound />
+              : <SnackbarErrorMessage />}
         </div>
       </Layout>
     )

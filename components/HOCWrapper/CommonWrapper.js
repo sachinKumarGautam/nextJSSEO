@@ -12,6 +12,9 @@ import {
 
 import withRoot from '../../src/withRoot'
 
+import ActivityIndicator from '../activityIndicator/index'
+import SnackbarErrorMessage from '../activityIndicator/error/SnackbarErrorMessage'
+
 export function withCommonWrapper (Page) {
   class CommonWrapper extends React.Component {
     static getInitialProps (ctx) {
@@ -54,7 +57,17 @@ export function withCommonWrapper (Page) {
       const { inProgressCartItem } = this.state
       return (
         <React.Fragment>
-          <Page {...this.props} addToCartHandler={this.addToCartHandler} />
+          <ActivityIndicator
+            isError={this.props.cartState.payload.cart_items.errorState.isError}
+            ErrorComp={
+              <SnackbarErrorMessage
+                error={this.props.cartState.payload.cart_items.errorState.error}
+              />
+            }
+            bottomError
+          >
+            <Page {...this.props} addToCartHandler={this.addToCartHandler} />
+          </ActivityIndicator>
           <PincodeDialog
             {...this.props}
             open={checkPincodeState.isPincodeDialogOpen}

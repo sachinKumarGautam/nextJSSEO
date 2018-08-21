@@ -8,6 +8,7 @@ import CircularProgress from '@material-ui/core/CircularProgress'
 import Button from '../../components/button'
 import SearchIcon from '@material-ui/icons/Search'
 import MedicineListDetails from '../../components/MedicineListDetails'
+import Typography from '@material-ui/core/Typography'
 
 import { PRODUCT_SEARCH } from '../../routes/RouteConstant'
 
@@ -86,6 +87,10 @@ const styles = theme => ({
     position: 'absolute',
     left: theme.spacing.unit * 1.5,
     color: theme.palette.customGrey.grey100
+  },
+  errorMessage: {
+    ...theme.typography.caption,
+    color: theme.palette.customRed.red200
   }
 })
 
@@ -278,6 +283,17 @@ class SearchMedicine extends React.Component {
             </div>
           )}
         </Downshift>
+        {
+          this.props.searchMedicineState.errorState.isError &&
+          <Typography
+            component='caption'
+            className={this.props.classes.errorMessage}
+          >
+            {this.props.searchMedicineState.errorState.error.response
+              ? this.props.searchMedicineState.errorState.error.response.body.error.message
+              : 'Oops!! Something went wrong'}
+          </Typography>
+        }
       </div>
     )
   }

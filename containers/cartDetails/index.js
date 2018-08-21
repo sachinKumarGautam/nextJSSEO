@@ -135,7 +135,9 @@ class CartDetailsWrapper extends Component {
             this.props.patientDetailsState.addNewPatient.errorState.isError ||
             this.props.cartState.expressDeliveryCheck.errorState.isError ||
             this.props.cartState.payload.cart_items.errorState.isError ||
-            this.props.cartState.payload.is_doctor_callback.errorState.isError
+            this.props.cartState.payload.is_doctor_callback.errorState.isError ||
+            this.props.cartState.payload.patient_details.errorState.isError ||
+            this.props.cartState.payload.shipping_address_details.errorState.isError
           }
           ErrorComp={
             (this.props.cartState.errorState.isError)
@@ -154,7 +156,9 @@ class CartDetailsWrapper extends Component {
                 this.props.patientDetailsState.addNewPatient.errorState.error ||
                 this.props.cartState.expressDeliveryCheck.errorState.error ||
                 this.props.cartState.payload.cart_items.errorState.error ||
-                this.props.cartState.payload.is_doctor_callback.errorState.error
+                this.props.cartState.payload.is_doctor_callback.errorState.error ||
+                this.props.cartState.payload.patient_details.errorState.error ||
+                this.props.cartState.payload.shipping_address_details.errorState.error
                 }
               />
           }

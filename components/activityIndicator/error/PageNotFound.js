@@ -23,7 +23,7 @@ const styles = theme => {
     errorWrapper: {
       textAlign: 'center',
       marginTop: theme.spacing.unit * 18,
-      marginBottom:  theme.spacing.unit * 18
+      marginBottom: theme.spacing.unit * 18
     },
     buttonRoot: {
       borderRadius: theme.spacing.unit / 4
