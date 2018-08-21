@@ -57,6 +57,7 @@ function getButtonLoaderClassNames (loaderColor, loaderPosition, classes) {
 const CommonButton = buttonProps => {
   const {
     classes,
+    size,
     isloading,
     loaderSize,
     loaderColor,
@@ -83,6 +84,7 @@ const CommonButton = buttonProps => {
               : classNames(className, classes.button)
           }
           type={type || 'text'}
+          size={size}
           color={color}
           href={href || null}
           mini={mini || null}

@@ -2,22 +2,28 @@ import { withStyles } from '@material-ui/core/styles'
 import CircularProgress from '@material-ui/core/CircularProgress'
 
 const styles = theme => ({
-  progress: {
-    margin: theme.spacing.unit * 2
+  spinnerWrapper: {
+    // margin: theme.spacing.unit * 2,
+    position: 'relative',
+    margin: 'auto'
   },
   progressWrapper: {
-    display: 'flex',
+    margin: '0 auto',
+    display: 'block',
     justifyContent: 'center',
     alignItems: 'center'
   }
 })
 
 function CommonSpinner (props) {
-  const { classes } = props
+  const { classes, customStyle, size } = props
+  const loaderClassNames = `${classes.progressWrapper} ${classes.customStyle}`
   return (
-    <div className={classes.progressWrapper}>
-      <CircularProgress className={classes.progress} size={50} thickness={2} />
-    </div>
+    <CircularProgress
+      className={props.customStyle}
+      size={size || 50}
+      thickness={2}
+    />
   )
 }
 

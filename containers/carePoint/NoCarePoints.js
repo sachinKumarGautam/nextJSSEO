@@ -4,12 +4,13 @@ import Typography from '@material-ui/core/Typography'
 
 const styles = theme => ({
   root: {
-    margin: 'auto',
+    margin: theme.spacing.unit * 2,
     width: '100%',
     minHeight: theme.typography.pxToRem(150),
     position: 'relative',
     display: 'flex',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    alignItems: 'center'
   },
   noCarePointsIcon: {
     height: theme.spacing.unit * 7,
@@ -27,19 +28,21 @@ const styles = theme => ({
   }
 })
 
-const NoCarePoints = ({isLoading, classes, carePointList}) => (
+const NoCarePoints = ({ isLoading, classes, carePointList }) => (
   <React.Fragment>
     {(isLoading || !carePointList.length) &&
       <div className={classes.root}>
         <Loader loaderType={'commonSpinner'} isLoading={isLoading} />
-        {!isLoading && !carePointList.length &&
-        <div className={classes.noCarePointsWrapper}>
-          <img className={classes.noCarePointsIcon} src='/static/images/ic_no_prescription_found@2x.png' />
-          <Typography variant={'subheading'}>No care points</Typography>
-        </div>
-        }
-      </div>
-    }
+        {!isLoading &&
+          !carePointList.length &&
+          <div className={classes.noCarePointsWrapper}>
+            <img
+              className={classes.noCarePointsIcon}
+              src='/static/images/ic_no_prescription_found@2x.png'
+            />
+            <Typography variant={'subheading'}>No care points</Typography>
+          </div>}
+      </div>}
   </React.Fragment>
 )
 
