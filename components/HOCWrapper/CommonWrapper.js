@@ -3,7 +3,9 @@ import { bindActionCreators } from 'redux'
 import PincodeDialog from '../../containers/location/pincode/PincodeDialog'
 
 import {
-  incrementCartItemLoading
+  incrementCartItemLoading,
+  getAnonymousCartIdLoading,
+  resetCartState
 } from '../../containers/cartDetails/cartActions'
 import {
   openPincodeDialog,
@@ -14,6 +16,7 @@ import withRoot from '../../src/withRoot'
 
 import ActivityIndicator from '../activityIndicator/index'
 import SnackbarErrorMessage from '../activityIndicator/error/SnackbarErrorMessage'
+import DialogueErrorMessage from '../activityIndicator/error/DialogueErrorMessage'
 
 export function withCommonWrapper (Page) {
   class CommonWrapper extends React.Component {
@@ -51,6 +54,16 @@ export function withCommonWrapper (Page) {
     handleClose = () =>
       this.props.actions.openPincodeDialog(this.props.checkPincodeState, false)
 
+    handleCartInvalid() {
+      this.props.resetCartState()
+      this.props.actions.getAnonymousCartIdLoading(
+        this.props.cartState,
+        this.props.checkPincodeState.payload.source,
+        this.props.checkPincodeState.payload.id,
+        ''
+      )
+    }
+
     render () {
       const { checkPincodeState, actions } = this.props
 
@@ -58,9 +71,18 @@ export function withCommonWrapper (Page) {
       return (
         <React.Fragment>
           <ActivityIndicator
-            isError={this.props.cartState.payload.cart_items.errorState.isError}
+            isError={
+              this.props.cartState.payload.cart_items.errorState.isError ||
+              this.props.cartState.payload.is_cart_invalid
+            }
             ErrorComp={
-              <SnackbarErrorMessage
+              this.props.cartState.payload.is_cart_invalid
+              ?<DialogueErrorMessage
+                dialogueTitle={'Invalid Cart'}
+                dialogueContent={'This cart became invalid as you have already placed this order!'}
+                handleCartInvalid={this.handleCartInvalid.bind(this)}
+              />
+              :<SnackbarErrorMessage
                 error={this.props.cartState.payload.cart_items.errorState.error}
               />
             }
@@ -96,7 +118,8 @@ export function withCommonWrapper (Page) {
         {
           incrementCartItemLoading,
           openPincodeDialog,
-          checkPincodeLoading
+          checkPincodeLoading,
+          getAnonymousCartIdLoading
         },
         dispatch
       )

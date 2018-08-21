@@ -69,7 +69,8 @@
     "globals": [
       "fetch",
       "it",
-      "URL"
+      "URL",
+      "React"
     ]
   }
 }

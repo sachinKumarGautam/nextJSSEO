@@ -21,25 +21,30 @@ export default withRedux(initStore, { debug: true })(
         isError: true
       })
     }
+
+    static async getInitialProps ({ Component, router, ctx }) {
+      let pageProps = {}
+
+      if (Component.getInitialProps) {
+        pageProps = await Component.getInitialProps(ctx)
+      }
+
+      return {pageProps}
+    }
+
     render () {
       const { store } = this.props
       return (
-        <div>
-          {/* {
-            this.state.isError &&
-            <PageNotFound/>
-          } */}
-          <Container>
-            <Provider store={store}>
-              <PersistGate
-                persistor={store.__persistor}
-                loading={<div>Loading</div>}
-              >
-                <WrapperComp {...this.props} />
-              </PersistGate>
-            </Provider>
-          </Container>
-        </div>
+        <Container>
+          <Provider store={store}>
+            <PersistGate
+              persistor={store.__persistor}
+              loading={null}
+            >
+              <WrapperComp {...this.props} />
+            </PersistGate>
+          </Provider>
+        </Container>
       )
     }
   }

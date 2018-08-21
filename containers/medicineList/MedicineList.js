@@ -90,9 +90,9 @@ class MedicineList extends React.Component {
         >
           Available medicines for
           {' '}
-          {this.props.query.moleculeName
-            ? this.props.query.moleculeName
-            : this.props.query.productName}
+          {this.props.moleculeName
+            ? this.props.moleculeName
+            : this.props.productName}
         </Typography>
         <Card elevation={1}>
           <CardContent>
@@ -111,7 +111,7 @@ class MedicineList extends React.Component {
           </CardContent>
         </Card>
         {medicineListState &&
-          !this.props.query.productName &&
+          !this.props.productName &&
           <div className={classes.buttonWrapper}>
             <Button
               size='medium'

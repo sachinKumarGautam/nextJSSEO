@@ -84,8 +84,7 @@ class ProductDetails extends React.Component {
   }
 
   render () {
-    const { classes, actions, checkPincodeState, addToCartHandler } = this.props
-    const { query } = Router
+    const { classes, actions, checkPincodeState, addToCartHandler, product_id } = this.props
     return (
       <Layout
         title={productDetail.title}
@@ -101,15 +100,15 @@ class ProductDetails extends React.Component {
               />
             }
           >
-            <Paper className={classes.root} elevation={1}>
-              {query.product_id && query.product_id !== 'undefined'
-                ? <ProductDetailsWrapper
-                  checkPincodeState={checkPincodeState}
-                  getProductDetailLoading={actions.getProductDetailLoading}
-                  addToCartHandler={addToCartHandler}
-                  onChangeQuantity={actions.onChangeQuantity}
-                />
-                : 'Page not found'}
+          <Paper className={classes.root} elevation={1}>
+            {product_id && product_id !== 'undefined'
+              ? <ProductDetailsWrapper
+                checkPincodeState={checkPincodeState}
+                getProductDetailLoading={actions.getProductDetailLoading}
+                addToCartHandler={addToCartHandler}
+                onChangeQuantity={actions.onChangeQuantity}
+              />
+              : 'Page not found'}
             </Paper>
           </ActivityIndicator>
         </div>

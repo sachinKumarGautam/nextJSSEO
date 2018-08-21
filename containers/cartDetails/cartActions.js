@@ -105,6 +105,7 @@ export function decrementCartItemLoading (cartState, medicineSelected) {
   return {
     type: cartActionTypes.DECREMENT_CART_ITEM_LOADING,
     cartState: cartState,
+    isLoading: true,
     medicineSelected: medicineSelected
   }
 }
@@ -113,6 +114,7 @@ export function incrementCartItemLoading (cartState, medicineSelected) {
   return {
     type: cartActionTypes.INCREMENT_CART_ITEM_LOADING,
     cartState: cartState,
+    isLoading: true,
     medicineSelected: medicineSelected
   }
 }
@@ -121,14 +123,17 @@ export function deleteCartItemLoading (cartState, medicineSelected) {
   return {
     type: cartActionTypes.DELETE_CART_ITEM_LOADING,
     cartState: cartState,
+    isLoading: true,
     medicineSelected: medicineSelected
   }
 }
 
 export function putCartItemSuccess (cartState, result) {
+  debugger
   return {
     type: cartActionTypes.PUT_CART_ITEM_SUCCESS,
     cartState,
+    isLoading: false,
     cart_items: result.cart_items,
     discount: result.discount,
     redeemed_care_points: result.redeemed_care_points,
@@ -139,11 +144,23 @@ export function putCartItemSuccess (cartState, result) {
   }
 }
 
-export function putCartItemFailure (cartState, cartItems) {
+export function putCartItemFailure (cartState, result, error) {
   return {
     type: cartActionTypes.PUT_CART_ITEM_FAILURE,
     cartState,
-    cartItems: cartItems
+    isLoading: false,
+    isError: true,
+    error: error,
+    cart_items: result.cart_items
+  }
+}
+
+export function resetSavePatientToCartError (cartState) {
+  return {
+    type: cartActionTypes.RESET_SAVE_PATIENT_TO_CART_ERROR,
+    cartState: cartState,
+    isError: false,
+    error: {}
   }
 }
 
@@ -187,6 +204,15 @@ export function savePatientToCartFailure (cartState, error) {
     isLoading: false,
     isError: true,
     error: error
+  }
+}
+
+export function resetSaveDeliveryAddressToCartError (cartState) {
+  return {
+    type: cartActionTypes.RESET_SAVE_DELIVERY_ADDRESS_TO_CART_ERROR,
+    cartState: cartState,
+    isError: false,
+    error: {}
   }
 }
 
@@ -281,10 +307,20 @@ export function updateIsCartOpenRegisterModalFlag (
   }
 }
 
+export function resetUploadPrescriptionError (cartState) {
+  return {
+    type: cartActionTypes.RESET_UPLOAD_PRESCRIPTION_ERROR,
+    cartState: cartState,
+    isError: false,
+    error: {}
+  }
+}
+
 export function uploadPrescriptionLoading (cartState, file) {
   return {
     type: cartActionTypes.UPLOAD_PRESCRIPTION_LOADING,
     cartState: cartState,
+    isLoading: true,
     uploadedFiles: file
   }
 }
