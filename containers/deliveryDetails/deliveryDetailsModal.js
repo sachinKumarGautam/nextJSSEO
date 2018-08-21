@@ -15,7 +15,12 @@ const initialState = {
     street1: '',
     street2: '',
     city: '',
-    state: ''
+    state: '',
+    isLoading: false,
+    errorState: {
+      isError: false,
+      error: {}
+    }
   },
   addressLocalityList: {
     payload: [],

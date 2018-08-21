@@ -71,8 +71,7 @@ class ProductDetails extends React.Component {
   }
 
   render () {
-    const { classes, actions, checkPincodeState, addToCartHandler } = this.props
-    const { query } = Router
+    const { classes, actions, checkPincodeState, addToCartHandler, product_id } = this.props
     return (
       <Layout
         title={productDetail.title}
@@ -80,7 +79,7 @@ class ProductDetails extends React.Component {
       >
         <div className={this.props.classes.wrapperStyle}>
           <Paper className={classes.root} elevation={1}>
-            {query.product_id && query.product_id !== 'undefined'
+            {product_id && product_id !== 'undefined'
               ? <ProductDetailsWrapper
                 checkPincodeState={checkPincodeState}
                 getProductDetailLoading={actions.getProductDetailLoading}

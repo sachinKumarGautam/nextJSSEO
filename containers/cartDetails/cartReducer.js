@@ -516,6 +516,7 @@ export default function cartReducer (state = initialState, action) {
         ...state,
         orderResponse: {
           ...state.orderResponse,
+          isLoading: action.isLoading,
           payload: {
             ...state.orderResponse.payload,
             order_number: action.order_number,
@@ -729,6 +730,15 @@ export default function cartReducer (state = initialState, action) {
             isError: action.isError,
             error: action.error
           }
+        }
+      }
+
+    case cartActionTypes.IS_CART_INVALID:
+      return {
+        ...state,
+        payload: {
+          ...state.payload,
+          is_cart_invalid: action.is_cart_invalid
         }
       }
 

@@ -24,22 +24,24 @@ const styles = theme => {
 }
 
 const ProductOverview = (props) => (
-  <div className={props.classes.overviewWrapper}>
-    <Typography
-      gutterBottom
-      component='h5'
-      className={props.classes.label}
-    >
-      Overview:
-    </Typography>
-    <Typography
-      gutterBottom
-      component='h5'
-      className={props.classes.overview}
-    >
-      {props.overview}
-    </Typography>
-  </div>
+  <React.Fragment>
+    {props.overview && <div className={props.classes.overviewWrapper}>
+      <Typography
+        gutterBottom
+        component='h5'
+        className={props.classes.label}
+      >
+    Overview:
+      </Typography>
+      <Typography
+        gutterBottom
+        component='h5'
+        className={props.classes.overview}
+      >
+        {props.overview}
+      </Typography>
+    </div>}
+  </React.Fragment>
 )
 
 export default withStyles(styles)(ProductOverview)
