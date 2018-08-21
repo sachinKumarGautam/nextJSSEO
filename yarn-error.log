@@ -85,7 +85,8 @@ npm manifest:
       "globals": [
         "fetch",
         "it",
-        "URL"
+        "URL",
+        "React"
       ]
     }
   }

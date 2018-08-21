@@ -38,6 +38,7 @@ class PatientDetailsExpansionPanel extends React.Component {
   }
 
   render () {
+    const patientDetails = this.props.cartState.payload.patient_details
     return (
       <ExpansionPanel
         expanded={this.props.expanded === 'panel3'}
@@ -62,12 +63,12 @@ class PatientDetailsExpansionPanel extends React.Component {
             <div className={this.props.checkedIconWrapper}>
               {
                 this.props.expanded !== 'panel3' &&
-                this.props.cartState.payload.patient_details.payload.patient_id
+                patientDetails.payload.patient_id
                   ? (
                     <SelectedPatientDetails
                       heading={this.props.heading}
                       patientDetails={this.props.patientDetails}
-                      patient={this.props.cartState.payload.patient_details.payload}
+                      patient={patientDetails.payload}
                     />
                   ) : (
                     <Typography
@@ -124,7 +125,8 @@ class PatientDetailsExpansionPanel extends React.Component {
             }}
             label={'NEXT'}
             onClick={
-              this.props.loginState.isAuthenticated
+              this.props.loginState.isAuthenticated &&
+              patientDetails.payload.patient_id
                 ? this.props.handleNextChange
                 : null
             }
