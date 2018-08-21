@@ -23,12 +23,15 @@ class PaymentExpansionPanel extends React.Component {
   }
 
   render () {
+    const shippingAddressDetails= this.props.cartState.payload.shipping_address_details
+    const patientDetails = this.props.cartState.payload.patient_details
+
     return (
       <ExpansionPanel
         expanded={this.props.expanded === 'panel5'}
         onChange={
           this.props.loginState.isAuthenticated &&
-          this.props.cartState.payload.shipping_address_details.payload.shipping_address_id
+          shippingAddressDetails.payload.shipping_address_id
             ? this.props.handleChange
             : null
         }
@@ -83,8 +86,8 @@ class PaymentExpansionPanel extends React.Component {
             label={'Place Order'}
             onClick={this.placeOrder.bind(this)}
             disabled={
-              !this.props.cartState.payload.patient_details.payload.patient_id ||
-              !this.props.cartState.payload.shipping_address_details.payload.shipping_address_id
+              !patientDetails.payload.patient_id ||
+              !shippingAddressDetails.payload.shipping_address_id
             }
           />
         </ExpansionPanelDetails>

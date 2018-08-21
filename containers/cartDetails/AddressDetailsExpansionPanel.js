@@ -37,12 +37,15 @@ class AddressDetailsExpansionPanel extends React.Component {
   }
 
   render () {
+    const shippingAddressDetails = this.props.cartState.payload.shipping_address_details
+    const patientDetails = this.props.cartState.payload.patient_details
+
     return (
       <ExpansionPanel
         expanded={this.props.expanded === 'panel4'}
         onChange={
           this.props.loginState.isAuthenticated &&
-          this.props.cartState.payload.patient_details.payload.patient_id
+          patientDetails.payload.patient_id
             ? this.props.handleChange
             : null
         }
@@ -59,12 +62,12 @@ class AddressDetailsExpansionPanel extends React.Component {
             <div className={this.props.checkedIconWrapper}>
               {
                 this.props.expanded !== 'panel4' &&
-                this.props.cartState.payload.shipping_address_details.payload.shipping_address_id
+                shippingAddressDetails.payload.shipping_address_id
                   ? (
                     <SelectedAddressDetails
                       heading={this.props.heading}
                       patientDetails={this.props.patientDetails}
-                      shipping_address={this.props.cartState.payload.shipping_address_details.payload.shipping_address}
+                      shipping_address={shippingAddressDetails.payload.shipping_address}
                     />
                   ) : (
                     <Typography
@@ -125,7 +128,7 @@ class AddressDetailsExpansionPanel extends React.Component {
             }}
             label={'NEXT'}
             onClick={
-              this.props.cartState.payload.shipping_address_details.payload.shipping_address_id
+              shippingAddressDetails.payload.shipping_address_id
                 ? this.props.handleNextChange
                 : null
             }
