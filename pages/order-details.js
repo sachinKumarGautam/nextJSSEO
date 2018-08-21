@@ -32,8 +32,13 @@ const styles = theme => ({
 })
 
 class OrderDetails extends React.Component {
+  static getInitialProps ({ query }) {
+    return query
+  }
+
   render () {
-    const { query } = Router
+    // const { query } = Router
+    const { id } = this.props
 
     return (
       <div>
@@ -43,7 +48,7 @@ class OrderDetails extends React.Component {
         <Header />
         <div className={this.props.classes.root}>
           <OrderDetailsWrapper
-            orderId={query.id}
+            orderId={id}
           />
         </div>
         <Footer />

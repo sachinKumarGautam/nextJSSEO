@@ -9,6 +9,16 @@ import WrapperComp from './wrapperComp'
 
 export default withRedux(initStore, { debug: true })(
   class MyApp extends App {
+    static async getInitialProps ({ Component, router, ctx }) {
+      let pageProps = {}
+
+      if (Component.getInitialProps) {
+        pageProps = await Component.getInitialProps(ctx)
+      }
+
+      return {pageProps}
+    }
+
     render () {
       const { store } = this.props
       return (
@@ -16,7 +26,7 @@ export default withRedux(initStore, { debug: true })(
           <Provider store={store}>
             <PersistGate
               persistor={store.__persistor}
-              loading={<div>Loading</div>}
+              loading={null}
             >
               <WrapperComp {...this.props} />
             </PersistGate>
