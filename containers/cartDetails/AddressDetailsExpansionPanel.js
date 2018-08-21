@@ -126,8 +126,8 @@ class AddressDetailsExpansionPanel extends React.Component {
             label={'NEXT'}
             onClick={
               this.props.cartState.payload.shipping_address_details.payload.shipping_address_id
-              ? this.props.handleNextChange
-              : null
+                ? this.props.handleNextChange
+                : null
             }
           />
         </ExpansionPanelDetails>

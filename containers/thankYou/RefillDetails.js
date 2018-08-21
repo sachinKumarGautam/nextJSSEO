@@ -136,8 +136,8 @@ class RefillDetails extends Component {
                   }}
                   className={
                     (this.props.thankYouState.payload.display_repeat_day + 3) === item.value
-                    ? this.props.classes.selectedButtonStyle
-                    : this.props.classes.buttonStyle
+                      ? this.props.classes.selectedButtonStyle
+                      : this.props.classes.buttonStyle
                   }
                   onClick={this.onClickOfRefillDay.bind(this, item)}
                   label={item.label}

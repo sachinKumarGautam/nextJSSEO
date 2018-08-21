@@ -26,6 +26,7 @@ import {
   getCartDetailsSuccess,
   getCartDetailsFailure,
   putCartItemSuccess,
+  putCartItemFailure,
   savePatientToCartSuccess,
   savePatientToCartFailure,
   saveDeliveryAddressToCartSuccess,
