@@ -71,7 +71,13 @@ const styles = theme => ({
 })
 
 class CartDetails extends Component {
+  state = {
+    quantityStatus: null
+  }
   decrementCartItem (cartItem) {
+    this.setState({
+      quantityStatus: 'decrease'
+    })
     if (cartItem.quantity === 1) {
       this.props.deleteCartItemLoading(this.props.cartState, cartItem)
     } else {
@@ -80,6 +86,9 @@ class CartDetails extends Component {
   }
 
   incrementCartItem (cartItem) {
+    this.setState({
+      quantityStatus: 'increase'
+    })
     this.props.incrementCartItemLoading(this.props.cartState, cartItem)
   }
 
@@ -128,6 +137,7 @@ class CartDetails extends Component {
                   decrementCartItem={this.decrementCartItem.bind(this)}
                   incrementCartItem={this.incrementCartItem.bind(this)}
                   checkPincodeState={this.props.checkPincodeState}
+                  quantityStatus={this.state.quantityStatus}
                 />
                 : <div>
                   <Typography
