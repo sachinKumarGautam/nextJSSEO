@@ -7,7 +7,6 @@ const styles = theme => ({
     margin: theme.spacing.unit * 2,
     width: '100%',
     minHeight: theme.typography.pxToRem(150),
-    display: 'block',
     position: 'relative',
     display: 'flex',
     justifyContent: 'center',

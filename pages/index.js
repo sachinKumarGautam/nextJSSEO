@@ -4,7 +4,6 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { withStyles } from '@material-ui/core/styles'
 import Paper from '@material-ui/core/Paper'
-import Router from 'next/router'
 
 // components
 import withRoot from '../src/withRoot'
@@ -40,6 +39,10 @@ const styles = theme => ({
 })
 
 class HomePage extends React.Component {
+  static getInitialProps ({ query }) {
+    return query
+  }
+
   componentDidMount () {
     this.props.actions.getBackGroundImagesLoading(
       this.props.homePageState,
@@ -48,14 +51,13 @@ class HomePage extends React.Component {
   }
 
   render () {
-    const { addToCartHandler, classes } = this.props
-    const { query } = Router
+    const { addToCartHandler, classes, authentication, path } = this.props
     return (
       <Layout
         title={homePage.title}
         addToCartHandler={addToCartHandler}
-        authentication={query.authentication}
-        path={query.path}
+        authentication={authentication}
+        path={path}
       >
         <div>
           <Paper className={classes.root} elevation={1}>

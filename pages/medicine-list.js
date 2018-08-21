@@ -39,6 +39,10 @@ const styles = theme => ({
 })
 
 class MedicineList extends React.Component {
+  static getInitialProps ({ query }) {
+    return query
+  }
+
   componentDidMount () {
     const { query } = Router
     // Represents to get medicine list with page size and size per page.
@@ -61,13 +65,14 @@ class MedicineList extends React.Component {
   }
 
   render () {
-    const { query } = Router
     const {
       addToCartHandler,
       checkPincodeState,
       searchMedicineState,
       actions,
-      medicineListState
+      medicineListState,
+      moleculeName,
+      productName
     } = this.props
     return (
       <Layout
@@ -80,12 +85,12 @@ class MedicineList extends React.Component {
             isLoadingSearchMedicine={searchMedicineState.isLoading}
             addToCartHandler={addToCartHandler}
             checkPincodeState={checkPincodeState}
-            moleculeName={Router.query.name}
+            moleculeName={moleculeName}
+            productName={productName}
             searchMedicineLoading={actions.searchMedicineLoading}
-            query={query}
             getRelatedMedicinesLoading={actions.getRelatedMedicinesLoading}
             medicineState={
-              query.productName
+              productName
                 ? searchMedicineState.payload.searchMedicineResult
                 : medicineListState.payload
             }

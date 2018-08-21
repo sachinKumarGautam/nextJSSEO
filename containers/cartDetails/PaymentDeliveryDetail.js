@@ -99,7 +99,9 @@ class PaymentDeliveryDetail extends Component {
   }
 
   render () {
-    let indexOfUrgentDelivery = this.props.cartState.payload.available_delivery_option.indexOf(DELIVERY_OPTION_URGENT)
+    const availableDeliveryOption = this.props.cartState.payload.available_delivery_option
+    const indexOfUrgentDelivery = availableDeliveryOption && availableDeliveryOption.indexOf(DELIVERY_OPTION_URGENT)
+
     return (
       <div className={this.props.classes.mainWrapper}>
         {
