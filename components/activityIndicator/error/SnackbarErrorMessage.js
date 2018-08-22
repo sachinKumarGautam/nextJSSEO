@@ -6,6 +6,7 @@ import Snackbar from '@material-ui/core/Snackbar'
 import SnackbarContent from '@material-ui/core/SnackbarContent'
 
 import { SNACK_BAR_DURATION } from '../../constants/Constants'
+import { CUSTOM_MESSGAE_SNACKBAR } from '../../../containers/messages/errorMessages'
 
 const styles = theme => {
   return {
@@ -79,7 +80,7 @@ class SnackbarErrorMessage extends Component {
                   {
                     this.props.error.response
                       ? this.props.error.response.body.error.message
-                      : 'Oops!! Something went wrong'
+                      : CUSTOM_MESSGAE_SNACKBAR
                   }
                 </Typography>
               </div>

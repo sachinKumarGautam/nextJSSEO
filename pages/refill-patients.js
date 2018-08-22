@@ -43,7 +43,11 @@ const styles = theme => ({
 })
 
 class RefillPatient extends Component {
-  componentDidMount () {
+  constructor (props) {
+    super(props)
+    this.getRefillDetail = this.getRefillDetail.bind(this)
+  }
+  getRefillDetail () {
     // let customerId = this.props.customerState.payload.id
     const { query } = Router
 
@@ -57,15 +61,12 @@ class RefillPatient extends Component {
       { isRefillPatients: true }
     )
   }
+  componentDidMount () {
+    this.getRefillDetail()
+  }
 
   tryAgain () {
-    const { query } = Router
-
-    this.props.actions.getPatientDetailsListLoading(
-      this.props.patientDetailsState,
-      query.customer_id, // pass customer id,
-      { isRefillPatients: true }
-    )
+    this.getRefillDetail()
   }
 
   render () {

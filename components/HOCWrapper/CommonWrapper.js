@@ -5,7 +5,8 @@ import PincodeDialog from '../../containers/location/pincode/PincodeDialog'
 import {
   incrementCartItemLoading,
   getAnonymousCartIdLoading,
-  resetCartState
+  resetCartState,
+  resetCartItemErrorState
 } from '../../containers/cartDetails/cartActions'
 import {
   openPincodeDialog,
@@ -64,6 +65,10 @@ export function withCommonWrapper (Page) {
       )
     }
 
+    resetState () {
+      this.props.actions.resetCartItemErrorState()
+    }
+
     render () {
       const { checkPincodeState, actions } = this.props
 
@@ -84,6 +89,7 @@ export function withCommonWrapper (Page) {
                 />
                 : <SnackbarErrorMessage
                   error={this.props.cartState.payload.cart_items.errorState.error}
+                  resetState={this.resetState.bind(this)}
                 />
             }
             bottomError
@@ -119,7 +125,8 @@ export function withCommonWrapper (Page) {
           incrementCartItemLoading,
           openPincodeDialog,
           checkPincodeLoading,
-          getAnonymousCartIdLoading
+          getAnonymousCartIdLoading,
+          resetCartItemErrorState
         },
         dispatch
       )

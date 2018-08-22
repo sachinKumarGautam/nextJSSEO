@@ -68,12 +68,12 @@ const OrderConfirmationDetails = props => {
         isLoading={props.cartState.isLoading}
         LoaderComp={<CommonContentLoader />}
         isError={
-          this.props.thankYouState.errorState.isError
+          props.thankYouState.errorState.isError
         }
         ErrorComp={
           <SnackbarErrorMessage
             error={
-              this.props.thankYouState.errorState.error
+              props.thankYouState.errorState.error
             }
           />
         }

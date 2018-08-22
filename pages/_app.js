@@ -21,6 +21,7 @@ export default withRedux(initStore, { debug: true })(
       this.state = {
         isError: false
       }
+      this.getErrorComponent = this.getErrorComponent.bind(this)
     }
 
     onClickOfHome () {
@@ -37,6 +38,19 @@ export default withRedux(initStore, { debug: true })(
       })
     }
 
+    getErrorComponent () {
+      return (<div style={{textAlign: 'center', margin: '25%'}}>
+        <Typography
+          variant='subheading'
+        >
+          Something went wrong!
+        </Typography>
+        <Button color='primary' onClick={this.onClickOfHome.bind(this)}>
+          Go To Home
+        </Button>
+      </div>)
+    }
+
     static async getInitialProps ({ Component, router, ctx }) {
       let pageProps = {}
 
@@ -49,18 +63,7 @@ export default withRedux(initStore, { debug: true })(
 
     render () {
       if (this.state.isError) {
-        return (
-          <div style={{textAlign: 'center', margin: '25%'}}>
-            <Typography
-              variant='subheading'
-            >
-              Something went wrong!
-            </Typography>
-            <Button color='primary' onClick={this.onClickOfHome.bind(this)}>
-              Go To Home
-            </Button>
-          </div>
-        )
+        return this.getErrorComponent()
       }
       const { store } = this.props
       return (

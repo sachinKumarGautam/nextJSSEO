@@ -3,6 +3,10 @@ import React, { Component } from 'react'
 import { withStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
 import Button from '../../button'
+import {
+  ERROR_MESSAGE_TEXT,
+  ERROR_MESSAGE_DESCRIPTION
+} from '../../../containers/messages/errorMessages'
 
 const styles = theme => {
   return {
@@ -51,13 +55,13 @@ class ComponentSpecificError extends Component {
           variant='subheading'
           className={this.props.classes.textStyle}
         >
-          Something went wrong!
+          {ERROR_MESSAGE_TEXT}
         </Typography>
         <Typography
           variant='subheading'
           className={this.props.classes.anotherTextStyle}
         >
-          We’re facing some outage at our end. Our best minds are working on it.
+          {ERROR_MESSAGE_DESCRIPTION}
         </Typography>
         {
           !this.props.noButton &&

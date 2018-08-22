@@ -26,6 +26,7 @@ import { productDetail } from '../components/constants/PageTitle'
 // activity indicatoe
 import ActivityIndicator from '../components/activityIndicator'
 import FullPageError from '../components/activityIndicator/error/FullPageError'
+import PageNotFound from '../components/activityIndicator/error/PageNotFound'
 
 const styles = theme => ({
   root: {
@@ -48,6 +49,10 @@ const styles = theme => ({
 })
 
 class ProductDetails extends React.Component {
+  constructor (props) {
+    super(props)
+    this.getErrorComponent = this.getErrorComponent.bind(this)
+  }
   static getInitialProps ({ query }) {
     return query
   }
@@ -83,6 +88,25 @@ class ProductDetails extends React.Component {
     )
   }
 
+  getErrorComponent () {
+    if (
+      this.props.productDetailsState.errorStateGetProductDetails.error &&
+      this.props.productDetailsState.errorStateGetProductDetails.error.response &&
+      this.props.productDetailsState.errorStateGetProductDetails.error.response.statusCode === 404
+    ) {
+      return (
+        <PageNotFound />
+      )
+    } else {
+      return (
+        <FullPageError
+          error={this.props.productDetailsState.errorStateGetProductDetails.error}
+          tryAgain={this.tryAgain.bind(this)}
+        />
+      )
+    }
+  }
+
   render () {
     const { classes, actions, checkPincodeState, addToCartHandler, product_id } = this.props
     return (
@@ -93,12 +117,7 @@ class ProductDetails extends React.Component {
         <div className={this.props.classes.wrapperStyle}>
           <ActivityIndicator
             isError={this.props.productDetailsState.errorStateGetProductDetails.isError}
-            ErrorComp={
-              <FullPageError
-                error={this.props.productDetailsState.errorStateGetProductDetails.error}
-                tryAgain={this.tryAgain.bind(this)}
-              />
-            }
+            ErrorComp={this.getErrorComponent()}
           >
             <Paper className={classes.root} elevation={1}>
               {product_id && product_id !== 'undefined'

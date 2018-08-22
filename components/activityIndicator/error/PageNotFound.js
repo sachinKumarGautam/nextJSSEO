@@ -8,6 +8,10 @@ import {
   HOME_PAGE
 } from '../../../routes/RouteConstant'
 import { getReplacedString } from '../../../utils/replaceConstants'
+import {
+  PAGE_NOT_FOUND_TEXT,
+  PAGE_NOT_FOUND_MESSAGE
+} from '../../../containers/messages/errorMessages'
 
 const styles = theme => {
   return {
@@ -62,13 +66,13 @@ class PageNotFound extends Component {
           variant='subheading'
           className={this.props.classes.textStyle}
         >
-          Oops!
+          {PAGE_NOT_FOUND_TEXT}
         </Typography>
         <Typography
           variant='subheading'
           className={this.props.classes.anotherTextStyle}
         >
-          We can’t seem to find the page your are looking for.
+          {PAGE_NOT_FOUND_MESSAGE}
         </Typography>
         <Button
           size='small'

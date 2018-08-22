@@ -748,6 +748,23 @@ export default function cartReducer (state = initialState, action) {
         }
       }
 
+    case cartActionTypes.RESET_CART_ITEM_RESET_STATE:
+      return {
+        ...state,
+        payload: {
+          ...state.payload,
+          cart_items: {
+            ...state.payload.cart_items,
+            isLoading: action.isLoading,
+            errorState: {
+              ...state.payload.cart_items.errorState,
+              isError: action.isError,
+              error: action.error
+            }
+          }
+        }
+      }
+
     default:
       return state
   }

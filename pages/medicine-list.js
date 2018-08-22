@@ -44,11 +44,17 @@ const styles = theme => ({
 })
 
 class MedicineList extends React.Component {
+  constructor (props) {
+    super(props)
+    this.getMedicineDetail = this.getMedicineDetail.bind(this)
+    this.tryAgain = this.tryAgain.bind(this)
+    this.getErrorComponent = this.getErrorComponent.bind(this)
+  }
   static getInitialProps ({ query }) {
     return query
   }
 
-  componentDidMount () {
+  getMedicineDetail () {
     const { query } = Router
     // Represents to get medicine list with page size and size per page.
     if (query.moleculeName) {
@@ -70,24 +76,35 @@ class MedicineList extends React.Component {
     }
   }
 
-  tryAgain () {
-    const { query } = Router
-    // Represents to get medicine list with page size and size per page.
-    if (query.moleculeName) {
-      this.props.actions.getRelatedMedicinesLoading(
-        this.props.medicineListState,
-        query.moleculeName, // pass salt name
-        0, // page number
-        10, // page size,
-        false // is show more button
-      )
-    }
+  componentDidMount () {
+    this.getMedicineDetail()
+  }
 
-    if (query.productName) {
-      this.props.actions.searchMedicineLoading(
-        this.props.searchMedicineState,
-        this.props.checkPincodeState.payload.id,
-        query.productName
+  tryAgain () {
+    this.getMedicineDetail()
+  }
+
+  getErrorComponent () {
+    if (this.props.medicineListState.isShowMore) {
+      return (
+        <SnackbarErrorMessage
+          error={
+            this.props.searchMedicineState.errorState.isError
+              ? this.props.searchMedicineState.errorState
+              : this.props.medicineListState.errorState.error
+          }
+        />
+      )
+    } else if (!this.props.medicineListState.isShowMore) {
+      return (
+        <FullPageError
+          error={
+            this.props.searchMedicineState.errorState.isError
+              ? this.props.searchMedicineState.errorState
+              : this.props.medicineListState.errorState.error
+          }
+          tryAgain={this.tryAgain}
+        />
       )
     }
   }
@@ -113,25 +130,8 @@ class MedicineList extends React.Component {
               this.props.medicineListState.errorState.isError ||
               this.props.searchMedicineState.errorState.isError
             }
-            ErrorComp={
-              this.props.medicineListState.isShowMore
-                ? <SnackbarErrorMessage
-                  error={
-                    this.props.searchMedicineState.errorState.isError
-                      ? this.props.searchMedicineState.errorState
-                      : this.props.medicineListState.errorState.error
-                  }
-                />
-                : <FullPageError
-                  error={
-                    this.props.searchMedicineState.errorState.isError
-                      ? this.props.searchMedicineState.errorState
-                      : this.props.medicineListState.errorState.error
-                  }
-                  tryAgain={this.tryAgain.bind(this)}
-                />
-            }
-            bottomError={ this.props.medicineListState.isShowMore}
+            ErrorComp={this.getErrorComponent()}
+            bottomError={this.props.medicineListState.isShowMore}
           >
             <MedicineListWrapper
               isLoadingRelatedMedicine={medicineListState.isLoading}

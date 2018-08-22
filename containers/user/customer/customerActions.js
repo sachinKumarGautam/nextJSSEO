@@ -11,7 +11,8 @@ import {
   CHECK_REFERRAL_CODE_FAILURE,
   GET_MEMBERSHIP_CODE_LOADING,
   GET_MEMBERSHIP_CODE_SUCCESS,
-  GET_MEMBERSHIP_CODE_FAILURE
+  GET_MEMBERSHIP_CODE_FAILURE,
+  RESET_CUSTOMER_FORM_STATE
 } from './customerActionTypes'
 
 export function getMembershipCodeLoading (customerState, phoneNumber) {
@@ -164,5 +165,14 @@ export function checkReferralCodeFailure (customerState, error) {
     isLoading: false,
     isError: true,
     error: error
+  }
+}
+
+export function resetCustomerFormState () {
+  return {
+    type: RESET_CUSTOMER_FORM_STATE,
+    isLoading: false,
+    isError: false,
+    error: null
   }
 }

@@ -566,6 +566,15 @@ export function resetApiStateSubmitOrder () {
   }
 }
 
+export function resetCartItemErrorState () {
+  return {
+    type: cartActionTypes.RESET_CART_ITEM_RESET_STATE,
+    isLoading: false,
+    isError: false,
+    error: null
+  }
+}
+
 export function isCartInvalid (cartState, isCartInvalid) {
   return {
     type: cartActionTypes.IS_CART_INVALID,

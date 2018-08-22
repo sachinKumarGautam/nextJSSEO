@@ -6,11 +6,15 @@ import Dialog from '@material-ui/core/Dialog'
 import DialogActions from '@material-ui/core/DialogActions'
 import DialogContent from '@material-ui/core/DialogContent'
 import DialogTitle from '@material-ui/core/DialogTitle'
-import DialogContentText from '@material-ui/core/DialogContentText'
 
 import CouponMessage from './CouponMessage'
 import EditCoupon from './EditCoupon'
 import Button from '../../components/button'
+import TextErrorMessage from '../../components/activityIndicator/error/TextErrorMessage'
+
+import {
+  CUSTOM_MESSGAE_SNACKBAR
+} from '../messages/errorMessages'
 
 const styles = theme => ({
   buttonStyle: {
@@ -191,17 +195,14 @@ class Coupon extends Component {
             />
             {
               this.props.cartState.couponDetail.errorState.isError
-                ? <DialogContentText
-                  classes={{
-                    root: this.props.classes.contentRoot
-                  }}
-                >
-                  {
+                ? <TextErrorMessage
+                  errorMessage={
                     this.props.cartState.couponDetail.errorState.error.response
                       ? this.props.cartState.couponDetail.errorState.error.response.body.error.message
-                      : 'Oops!! Something went wrong'
+                      : CUSTOM_MESSGAE_SNACKBAR
                   }
-                </DialogContentText>
+                  customStyle={this.props.classes.contentRoot}
+                />
                 : null
             }
           </DialogContent>

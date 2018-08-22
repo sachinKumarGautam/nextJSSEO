@@ -72,6 +72,12 @@ const styles = theme => ({
 })
 
 class CartDetailsWrapper extends Component {
+  constructor (props) {
+    super(props)
+    this.getErrorComponent = this.getErrorComponent.bind(this)
+    this.tryAgain = this.tryAgain.bind(this)
+    this.resetState = this.resetState.bind(this)
+  }
   componentDidMount () {
     const cartUid = this.props.cartState.payload.uid
     this.props.actions.getCartDetailsLoading(this.props.cartState, cartUid)
@@ -121,6 +127,36 @@ class CartDetailsWrapper extends Component {
     this.props.actions.resetUploadPrescriptionError()
   }
 
+  getErrorComponent () {
+    if (this.props.cartState.errorState.isError) {
+      return (
+        <FullPageError
+          error={
+            this.props.cartState.errorState.error
+          }
+          tryAgain={this.tryAgain}
+        />
+      )
+    } else {
+      return (
+        <SnackbarErrorMessage
+          error={
+            this.props.patientDetailsState.errorState.error ||
+            this.props.deliveryDetailsState.errorState.error ||
+            this.props.cartState.orderResponse.errorState.error ||
+            this.props.cartState.prescriptionDetails.errorState.error ||
+            this.props.cartState.expressDeliveryCheck.errorState.error ||
+            this.props.cartState.payload.cart_items.errorState.error ||
+            this.props.cartState.payload.is_doctor_callback.errorState.error ||
+            this.props.cartState.payload.patient_details.errorState.error ||
+            this.props.cartState.payload.shipping_address_details.errorState.error
+          }
+          resetState={this.resetState}
+        />
+      )
+    }
+  }
+
   render () {
     const { classes } = this.props
     const submitOrderLoading = this.props.cartState.orderResponse.isLoading
@@ -141,38 +177,14 @@ class CartDetailsWrapper extends Component {
             this.props.deliveryDetailsState.errorState.isError ||
             this.props.cartState.orderResponse.errorState.isError ||
             this.props.cartState.prescriptionDetails.errorState.isError ||
-            this.props.patientDetailsState.addNewPatient.errorState.isError ||
             this.props.cartState.expressDeliveryCheck.errorState.isError ||
             this.props.cartState.payload.cart_items.errorState.isError ||
             this.props.cartState.payload.is_doctor_callback.errorState.isError ||
             this.props.cartState.payload.patient_details.errorState.isError ||
             this.props.cartState.payload.shipping_address_details.errorState.isError
           }
-          ErrorComp={
-            (this.props.cartState.errorState.isError)
-              ? <FullPageError
-                error={
-                  this.props.cartState.errorState.error
-                }
-                tryAgain={this.tryAgain.bind(this)}
-              />
-              : <SnackbarErrorMessage
-                error={
-                  this.props.patientDetailsState.errorState.error ||
-                  this.props.deliveryDetailsState.errorState.error ||
-                  this.props.cartState.orderResponse.errorState.error ||
-                  this.props.cartState.prescriptionDetails.errorState.error ||
-                  this.props.patientDetailsState.addNewPatient.errorState.error ||
-                  this.props.cartState.expressDeliveryCheck.errorState.error ||
-                  this.props.cartState.payload.cart_items.errorState.error ||
-                  this.props.cartState.payload.is_doctor_callback.errorState.error ||
-                  this.props.cartState.payload.patient_details.errorState.error ||
-                  this.props.cartState.payload.shipping_address_details.errorState.error
-                }
-                resetState={this.resetState.bind(this)}
-              />
-          }
-          bottomError={this.props.cartState.errorState.isError ? false : true}
+          ErrorComp={this.getErrorComponent()}
+          bottomError={!this.props.cartState.errorState.isError}
         >
           <Grid
             container

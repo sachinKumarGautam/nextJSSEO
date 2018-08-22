@@ -19,6 +19,10 @@ import {
   PINCODE_REQUIRED
 } from '../../messages/ValidationMsg'
 
+import {
+  CUSTOM_MESSGAE_SNACKBAR
+} from '../../messages/errorMessages'
+
 const styles = theme => ({
   paper: {
     minWidth: theme.spacing.unit * 62.5
@@ -58,7 +62,7 @@ function getPincodeErrorMsg (
   } else if (!pincodeFormError && inValidPincodeError) {
     return inValidPincodeError
   } else if (checkPincodeState.errorState.isError) {
-    return 'Oops!! Something went wrong'
+    return CUSTOM_MESSGAE_SNACKBAR
   }
 }
 
@@ -112,7 +116,7 @@ class PincodeDialog extends React.Component {
               <FormControl
                 className={classes.formControl}
                 aria-describedby='pincode'
-                error={pincodeFormError || inValidPincodeError}
+                error={pincodeFormError || inValidPincodeError || checkPincodeState.errorState.isError}
               >
                 <Input
                   autoFocus
