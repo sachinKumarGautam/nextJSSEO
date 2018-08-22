@@ -186,7 +186,7 @@ export default function cartReducer (state = initialState, action) {
           ...state.payload,
           cart_items: {
             ...state.payload.cart_items,
-            payload: action.cartItems,
+            payload: action.cart_items,
             isLoading: action.isLoading,
             errorState: {
               ...state.payload.cart_items.errorState,

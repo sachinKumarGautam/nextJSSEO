@@ -130,7 +130,7 @@ class MedicineList extends React.Component {
                   }
                   tryAgain={this.tryAgain.bind(this)}
                 />
-              }
+            }
           >
             <MedicineListWrapper
               isLoadingRelatedMedicine={medicineListState.isLoading}

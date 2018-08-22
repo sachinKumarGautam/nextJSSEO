@@ -129,7 +129,6 @@ export function deleteCartItemLoading (cartState, medicineSelected) {
 }
 
 export function putCartItemSuccess (cartState, result) {
-  debugger
   return {
     type: cartActionTypes.PUT_CART_ITEM_SUCCESS,
     cartState,

@@ -62,7 +62,7 @@ export function checkPincode (action$, store) {
             return of(
               checkPincodeFailure(
                 checkPincodeState,
-                error.response.body.error.code
+                error
               )
             )
           } else {
@@ -70,7 +70,7 @@ export function checkPincode (action$, store) {
             return of(
               checkPincodeFailure(
                 checkPincodeState,
-                error.response.body.error.code
+                error
               )
             )
           }

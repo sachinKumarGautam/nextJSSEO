@@ -23,7 +23,7 @@ class PaymentExpansionPanel extends React.Component {
   }
 
   render () {
-    const shippingAddressDetails= this.props.cartState.payload.shipping_address_details
+    const shippingAddressDetails = this.props.cartState.payload.shipping_address_details
     const patientDetails = this.props.cartState.payload.patient_details
 
     return (

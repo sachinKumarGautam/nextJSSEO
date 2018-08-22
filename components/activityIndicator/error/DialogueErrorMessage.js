@@ -42,7 +42,7 @@ class DialogueErrorMessage extends Component {
     }
   }
 
-  componentDidMount(){
+  componentDidMount () {
     this.setState({
       open: true
     })

@@ -33,7 +33,10 @@ import {
   optForDoctorCallbackLoading,
   optForExpressDeliveryLoading,
   resetApiStateSubmitOrder,
-  resetCouponDetail
+  resetCouponDetail,
+  resetSavePatientToCartError,
+  resetSaveDeliveryAddressToCartError,
+  resetUploadPrescriptionError
 } from './cartActions'
 
 import {
@@ -112,6 +115,12 @@ class CartDetailsWrapper extends Component {
     )
   }
 
+  resetState () {
+    this.props.actions.resetSavePatientToCartError()
+    this.props.actions.resetSaveDeliveryAddressToCartError()
+    this.props.actions.resetUploadPrescriptionError()
+  }
+
   render () {
     const { classes } = this.props
     const submitOrderLoading = this.props.cartState.orderResponse.isLoading
@@ -150,16 +159,17 @@ class CartDetailsWrapper extends Component {
               : <SnackbarErrorMessage
                 error={
                   this.props.patientDetailsState.errorState.error ||
-                this.props.deliveryDetailsState.errorState.error ||
-                this.props.cartState.orderResponse.errorState.error ||
-                this.props.cartState.prescriptionDetails.errorState.error ||
-                this.props.patientDetailsState.addNewPatient.errorState.error ||
-                this.props.cartState.expressDeliveryCheck.errorState.error ||
-                this.props.cartState.payload.cart_items.errorState.error ||
-                this.props.cartState.payload.is_doctor_callback.errorState.error ||
-                this.props.cartState.payload.patient_details.errorState.error ||
-                this.props.cartState.payload.shipping_address_details.errorState.error
+                  this.props.deliveryDetailsState.errorState.error ||
+                  this.props.cartState.orderResponse.errorState.error ||
+                  this.props.cartState.prescriptionDetails.errorState.error ||
+                  this.props.patientDetailsState.addNewPatient.errorState.error ||
+                  this.props.cartState.expressDeliveryCheck.errorState.error ||
+                  this.props.cartState.payload.cart_items.errorState.error ||
+                  this.props.cartState.payload.is_doctor_callback.errorState.error ||
+                  this.props.cartState.payload.patient_details.errorState.error ||
+                  this.props.cartState.payload.shipping_address_details.errorState.error
                 }
+                resetState={this.resetState.bind(this)}
               />
           }
           bottomError={!this.props.cartState.errorState.isError}
@@ -281,7 +291,10 @@ function mapDispatchToProps (dispatch) {
         checkPincodeLoading,
         optForExpressDeliveryLoading,
         resetApiStateSubmitOrder,
-        resetCouponDetail
+        resetCouponDetail,
+        resetSavePatientToCartError,
+        resetSaveDeliveryAddressToCartError,
+        resetUploadPrescriptionError
       },
       dispatch
     )

@@ -123,7 +123,7 @@ function cartApiLoadingHandling (
     ...cartState.payload,
     cart_items: cartItems
   }
-  
+
   return of(
     putCartItemSuccess(
       cartState,
@@ -139,7 +139,7 @@ function cartApiErrorHandling (cartState, medicineSelected, error) {
     if (cartMedicine.id === medicineSelected.id) {
       cartItems[index] = {
         ...cartMedicine,
-        isLoading: true,
+        isLoading: false,
         errorState: {
           ...cartMedicine.errorState,
           isError: true,

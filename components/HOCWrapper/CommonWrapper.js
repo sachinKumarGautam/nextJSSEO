@@ -54,7 +54,7 @@ export function withCommonWrapper (Page) {
     handleClose = () =>
       this.props.actions.openPincodeDialog(this.props.checkPincodeState, false)
 
-    handleCartInvalid() {
+    handleCartInvalid () {
       this.props.resetCartState()
       this.props.actions.getAnonymousCartIdLoading(
         this.props.cartState,
@@ -77,14 +77,14 @@ export function withCommonWrapper (Page) {
             }
             ErrorComp={
               this.props.cartState.payload.is_cart_invalid
-              ?<DialogueErrorMessage
-                dialogueTitle={'Invalid Cart'}
-                dialogueContent={'This cart became invalid as you have already placed this order!'}
-                handleCartInvalid={this.handleCartInvalid.bind(this)}
-              />
-              :<SnackbarErrorMessage
-                error={this.props.cartState.payload.cart_items.errorState.error}
-              />
+                ? <DialogueErrorMessage
+                  dialogueTitle={'Invalid Cart'}
+                  dialogueContent={'This cart became invalid as you have already placed this order!'}
+                  handleCartInvalid={this.handleCartInvalid.bind(this)}
+                />
+                : <SnackbarErrorMessage
+                  error={this.props.cartState.payload.cart_items.errorState.error}
+                />
             }
             bottomError
           >

@@ -44,6 +44,8 @@ class SnackbarErrorMessage extends Component {
     this.setState({
       open: false
     })
+
+    this.props.resetState && this.props.resetState()
   }
 
   render () {

@@ -48,7 +48,8 @@ const styles = theme => ({
 function getPincodeErrorMsg (
   pincodeFormError,
   inValidPincodeError,
-  pincodeLoading
+  pincodeLoading,
+  checkPincodeState
 ) {
   if (pincodeLoading) {
     return CHECKING_PINCODE
@@ -56,6 +57,8 @@ function getPincodeErrorMsg (
     return pincodeFormError
   } else if (!pincodeFormError && inValidPincodeError) {
     return inValidPincodeError
+  } else if (checkPincodeState.errorState.isError) {
+    return 'Oops!! Something went wrong'
   }
 }
 
@@ -82,7 +85,6 @@ class PincodeDialog extends React.Component {
     } = props
     const pincodeLoading = checkPincodeState.isLoading
     const pincodeError = checkPincodeState.errorState.error
-
     const pincodeFormError = errors.pincode && touched.pincode
       ? errors.pincode
       : ''
@@ -129,7 +131,8 @@ class PincodeDialog extends React.Component {
                   {getPincodeErrorMsg(
                     pincodeFormError,
                     inValidPincodeError,
-                    pincodeLoading
+                    pincodeLoading,
+                    checkPincodeState
                   )}
                 </FormHelperText>
               </FormControl>

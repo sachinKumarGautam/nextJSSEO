@@ -100,15 +100,15 @@ class ProductDetails extends React.Component {
               />
             }
           >
-          <Paper className={classes.root} elevation={1}>
-            {product_id && product_id !== 'undefined'
-              ? <ProductDetailsWrapper
-                checkPincodeState={checkPincodeState}
-                getProductDetailLoading={actions.getProductDetailLoading}
-                addToCartHandler={addToCartHandler}
-                onChangeQuantity={actions.onChangeQuantity}
-              />
-              : 'Page not found'}
+            <Paper className={classes.root} elevation={1}>
+              {product_id && product_id !== 'undefined'
+                ? <ProductDetailsWrapper
+                  checkPincodeState={checkPincodeState}
+                  getProductDetailLoading={actions.getProductDetailLoading}
+                  addToCartHandler={addToCartHandler}
+                  onChangeQuantity={actions.onChangeQuantity}
+                />
+                : 'Page not found'}
             </Paper>
           </ActivityIndicator>
         </div>
