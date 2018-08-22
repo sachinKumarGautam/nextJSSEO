@@ -77,6 +77,7 @@ const OrderConfirmationDetails = props => {
             }
           />
         }
+        bottomError
       >
         <CardContent className={props.classes.cardContent}>
           <ThankyouDetails cartState={props.cartState} />

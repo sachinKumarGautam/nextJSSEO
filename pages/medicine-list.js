@@ -131,6 +131,7 @@ class MedicineList extends React.Component {
                   tryAgain={this.tryAgain.bind(this)}
                 />
             }
+            bottomError={ this.props.medicineListState.isShowMore}
           >
             <MedicineListWrapper
               isLoadingRelatedMedicine={medicineListState.isLoading}
