@@ -57,17 +57,18 @@ const styles = theme => ({
     marginBottom: theme.spacing.unit * 1.75
   },
   fabProgress: {
-    color: '#80c241',
-    zIndex: 1,
+    color: theme.palette.primary.main,
+    zIndex: theme.spacing.unit,
     // width: theme.typography.pxToRem(27),
     // height: theme.typography.pxToRem(27),
     marginLeft: theme.spacing.unit * 1.125,
-    marginTop: 1,
+    marginTop: theme.spacing.unit,
     position: 'absolute'
   },
   buttonImage: {
     // position: 'absolute',
-    // right: 0
+    // right: 0,
+    cursor: 'pointer'
   },
   iconButton: {
     alignItems: 'center',

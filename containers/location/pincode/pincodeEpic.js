@@ -42,15 +42,16 @@ export function checkPincode (action$, store) {
               data.handleClose()
             }, 350)
             data.setSubmitting(false)
+            console.log(typeof data.incrementCartItemLoading)
             if (typeof data.incrementCartItemLoading === 'function') {
               // only invokes in case of cart item increment
               // checks if any add to cart function is comming from parent and invokes it
               return of(
+                checkPincodeSuccess(checkPincodeState, result),
                 data.incrementCartItemLoading(
                   cartState,
                   data.inProgressCartItem
-                ),
-                checkPincodeSuccess(checkPincodeState, result)
+                )
               )
             } else {
               return of(checkPincodeSuccess(checkPincodeState, result))

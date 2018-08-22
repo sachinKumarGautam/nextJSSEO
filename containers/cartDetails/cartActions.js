@@ -111,6 +111,7 @@ export function decrementCartItemLoading (cartState, medicineSelected) {
 }
 
 export function incrementCartItemLoading (cartState, medicineSelected) {
+  console.log('medicine selected', medicineSelected)
   return {
     type: cartActionTypes.INCREMENT_CART_ITEM_LOADING,
     cartState: cartState,
@@ -520,7 +521,11 @@ export function optForDoctorCallbackFailure (cartState, error) {
   }
 }
 
-export function optForExpressDeliveryLoading (cartState, cartUId, expressDeliveryCheck) {
+export function optForExpressDeliveryLoading (
+  cartState,
+  cartUId,
+  expressDeliveryCheck
+) {
   return {
     type: cartActionTypes.OPT_EXPRESS_DELIVERY_LOADING,
     cartState,
