@@ -7,6 +7,9 @@ import CardContent from '@material-ui/core/CardContent'
 import Typography from '@material-ui/core/Typography'
 
 import MedicineListDetails from '../../components/MedicineListDetails'
+import ActivityIndicator from '../../components/activityIndicator/index'
+import MultipleMedicineLoader
+  from '../../components/activityIndicator/loader/medicineListLoader/MultipleMedicineLoader'
 
 const styles = theme => {
   return {
@@ -43,19 +46,23 @@ class RefillMedicineList extends Component {
             >
               Treatments of {this.props.pastMedicineState.selectedPatientName}
             </Typography>
-            <ul className={this.props.classes.medicineListWrapper}>
-              {this.props.pastMedicineState.payload.map(itemDetails => (
-                <li className={this.props.classes.listItem}>
-                  <MedicineListDetails
-                    isLoading={this.props.isLoading}
-                    itemDetails={itemDetails}
-                    isRefillMedicines
-                    addToCartHandler={this.props.addToCartHandler}
-                    checkPincodeState={this.props.checkPincodeState}
-                  />
-                </li>
-              ))}
-            </ul>
+            <ActivityIndicator
+              isLoading={this.props.isLoading}
+              LoaderComp={<MultipleMedicineLoader />}
+            >
+              <ul className={this.props.classes.medicineListWrapper}>
+                {this.props.pastMedicineState.payload.map(itemDetails => (
+                  <li className={this.props.classes.listItem}>
+                    <MedicineListDetails
+                      itemDetails={itemDetails}
+                      isRefillMedicines
+                      addToCartHandler={this.props.addToCartHandler}
+                      checkPincodeState={this.props.checkPincodeState}
+                    />
+                  </li>
+                ))}
+              </ul>
+            </ActivityIndicator>
           </CardContent>
         </Card>
       </div>

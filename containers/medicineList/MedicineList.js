@@ -8,6 +8,9 @@ import withRoot from '../../src/withRoot'
 
 import Button from '../../components/button'
 import MedicineListDetails from '../../components/MedicineListDetails'
+import MultipleMedicineLoader
+  from '../../components/activityIndicator/loader/medicineListLoader/MultipleMedicineLoader'
+import ActivityIndicator from '../../components/activityIndicator'
 
 const styles = theme => {
   return {
@@ -59,12 +62,22 @@ class MedicineList extends React.Component {
 
   // Represents to get medicine list when clicked on show more with page size and size per page.
   onClickOfShowMore () {
-    this.props.getRelatedMedicinesLoading(
-      this.props.medicineListState,
-      'Multivitamin', // pass salt name
-      this.state.page + 1, // page number
-      10 // page size
-    )
+    if (this.props.productName) {
+      this.props.searchMedicineLoading(
+        this.props.searchMedicineState,
+        this.props.checkPincodeState.payload.id,
+        this.props.productName,
+        this.state.page + 1, // page number
+        10 // page size
+      )
+    } else {
+      this.props.getRelatedMedicinesLoading(
+        this.props.medicineListState,
+        this.props.moleculeName, // pass salt name
+        this.state.page + 1, // page number
+        10 // page size
+      )
+    }
 
     this.setState({
       page: this.state.page + 1
@@ -79,6 +92,7 @@ class MedicineList extends React.Component {
       addToCartHandler,
       isLoading
     } = this.props
+
     return (
       <div className={classes.medicineListWrapper}>
         <Typography
@@ -94,30 +108,35 @@ class MedicineList extends React.Component {
             : this.props.productName}
         </Typography>
         <Card elevation={1}>
-          <CardContent>
-            <ul className={classes.articleListWrapper}>
-              {medicineListState.map(itemDetails => (
-                <li className={classes.listItem}>
-                  <MedicineListDetails
-                    isLoading={isLoading}
-                    itemDetails={itemDetails}
-                    addToCartHandler={addToCartHandler}
-                    checkPincodeState={checkPincodeState}
-                  />
-                </li>
-              ))}
-            </ul>
-          </CardContent>
+          <ActivityIndicator
+            isLoading={isLoading}
+            LoaderComp={<MultipleMedicineLoader />}
+          >
+            <CardContent>
+              <ul className={classes.articleListWrapper}>
+                {medicineListState.map(itemDetails => (
+                  <li className={classes.listItem}>
+                    <MedicineListDetails
+                      isLoading={isLoading}
+                      itemDetails={itemDetails}
+                      addToCartHandler={addToCartHandler}
+                      checkPincodeState={checkPincodeState}
+                    />
+                  </li>
+                ))}
+              </ul>
+            </CardContent>
+          </ActivityIndicator>
         </Card>
         {medicineListState &&
-          !this.props.productName &&
           <div className={classes.buttonWrapper}>
             <Button
               size='medium'
               variant='outlined'
-              disabled={medicineListState.isLoading}
+              disabled={isLoading}
               loaderColor={'primary'}
-              isloading={medicineListState.isLoading}
+              loaderPosition={'center'}
+              isloading={isLoading}
               classes={{
                 root: classes.buttonRoot,
                 label: classes.buttonLabel

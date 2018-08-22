@@ -52,7 +52,11 @@ const submitPatientDetails$ = (customerId, patientDetails) =>
 const editPatientDetails$ = (customerId, patientDetails, patientId) =>
   makeAjaxRequest({
     method: 'PATCH',
-    url: fetchUrl('account', 'customer/' + customerId + '/patient/' + patientId, 'CREATE'),
+    url: fetchUrl(
+      'account',
+      'customer/' + customerId + '/patient/' + patientId,
+      'CREATE'
+    ),
     body: patientDetails
   })
 
@@ -117,11 +121,11 @@ const registerCustomer$ = data =>
     body: data
   })
 
-const searchMedicine$ = (inputValue, facilityCode) =>
+const searchMedicine$ = (inputValue, facilityCode, pageNumber, pageSize) =>
   makeAjaxRequest({
     method: 'GET',
     url: fetchUrl('catalog', 'medicine/search', 'QUERY_STRING', {
-      query_string: `q=${inputValue}&facility-code=${facilityCode}`
+      query_string: `q=${inputValue}&facility-code=${facilityCode}&size=${pageSize}&page=${pageNumber}`
     })
   })
 
@@ -221,7 +225,11 @@ const submitDeliveryDetails$ = (customerId, deliveryAddressData) =>
 const editDeliveryDetails$ = (customerId, deliveryAddressData, addressId) =>
   makeAjaxRequest({
     method: 'PATCH',
-    url: fetchUrl('account', 'customer/' + customerId + '/shipping-address/' + addressId, 'CREATE'),
+    url: fetchUrl(
+      'account',
+      'customer/' + customerId + '/shipping-address/' + addressId,
+      'CREATE'
+    ),
     body: deliveryAddressData
   })
 
@@ -301,14 +309,15 @@ const getOrderDetails$ = orderId =>
     url: fetchUrl('order', orderId, 'CREATE')
   })
 
-const expressDelivery$ = (cartId, deliveryOption) => (
-
+const expressDelivery$ = (cartId, deliveryOption) =>
   makeAjaxRequest({
     method: 'PATCH',
-    url: fetchUrl('cart', cartId + '/preferred-delivery-option/' + deliveryOption, 'CREATE')
+    url: fetchUrl(
+      'cart',
+      cartId + '/preferred-delivery-option/' + deliveryOption,
+      'CREATE'
+    )
   })
-
-)
 
 export {
   getMoleculeSummary$,

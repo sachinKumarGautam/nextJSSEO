@@ -59,7 +59,9 @@ class MedicineList extends React.Component {
       this.props.actions.searchMedicineLoading(
         this.props.searchMedicineState,
         this.props.checkPincodeState.payload.id,
-        query.productName
+        query.productName,
+        0, // page number
+        10 // page size
       )
     }
   }
@@ -75,14 +77,12 @@ class MedicineList extends React.Component {
       productName
     } = this.props
     return (
-      <Layout
-        title={medicineList.title}
-        addToCartHandler={addToCartHandler}
-      >
+      <Layout title={medicineList.title} addToCartHandler={addToCartHandler}>
         <div className={this.props.classes.root}>
           <MedicineListWrapper
             isLoadingRelatedMedicine={medicineListState.isLoading}
             isLoadingSearchMedicine={searchMedicineState.isLoading}
+            searchMedicineState={searchMedicineState}
             addToCartHandler={addToCartHandler}
             checkPincodeState={checkPincodeState}
             moleculeName={moleculeName}

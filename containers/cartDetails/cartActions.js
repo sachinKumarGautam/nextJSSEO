@@ -520,7 +520,11 @@ export function optForDoctorCallbackFailure (cartState, error) {
   }
 }
 
-export function optForExpressDeliveryLoading (cartState, cartUId, expressDeliveryCheck) {
+export function optForExpressDeliveryLoading (
+  cartState,
+  cartUId,
+  expressDeliveryCheck
+) {
   return {
     type: cartActionTypes.OPT_EXPRESS_DELIVERY_LOADING,
     cartState,
