@@ -41,7 +41,7 @@ const styles = theme => {
       // backgroundColor: '#ffffff',
     },
     buttonLabel: {
-      color: theme.palette.primary.main
+      color: theme.palette.customGrey.grey200
     },
     buttonWrapper: {
       display: 'flex',

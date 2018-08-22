@@ -1,8 +1,8 @@
 import React from 'react'
 
 import { withStyles } from '@material-ui/core/styles'
-import BreadCrumbsLoader from './activityIndicator/loader/BreadCrumbsLoader'
-import ActivityIndicator from './activityIndicator'
+// import BreadCrumbsLoader from './activityIndicator/loader/BreadCrumbsLoader'
+// import ActivityIndicator from './activityIndicator'
 
 const styles = theme => {
   return {
@@ -22,8 +22,9 @@ const styles = theme => {
   }
 }
 
-const BreadCrumbs = props => // <ActivityIndicator
-//   isLoading={props.isLoading}
+const BreadCrumbs = (
+  props // <ActivityIndicator
+) => //   isLoading={props.isLoading}
 //   LoaderComp={<BreadCrumbsLoader />}
 // >
 //   <nav>

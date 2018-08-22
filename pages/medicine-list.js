@@ -74,7 +74,7 @@ class MedicineList extends React.Component {
       actions,
       medicineListState,
       moleculeName,
-      productName,
+      productName
     } = this.props
     return (
       <Layout title={medicineList.title} addToCartHandler={addToCartHandler}>
