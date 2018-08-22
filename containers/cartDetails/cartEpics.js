@@ -123,7 +123,7 @@ function cartApiLoadingHandling (
     ...cartState.payload,
     cart_items: cartItems
   }
-  
+
   return of(
     putCartItemSuccess(
       cartState,

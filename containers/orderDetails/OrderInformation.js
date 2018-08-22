@@ -11,8 +11,7 @@ import Router from 'next/router'
 import OrderContentWrapper from './OrderContentWrapper'
 
 import {
-  ORDER,
-  HOME_PAGE
+  ORDER
 } from '../../routes/RouteConstant'
 
 import {
@@ -69,13 +68,7 @@ class OrderInformation extends Component {
   }
 
   redirectToOrdersPage () {
-    let url
-
-    if (this.props.cartState.orderResponse.payload.order_number) {
-      url = getReplacedString(HOME_PAGE)
-    } else {
-      url = getReplacedString(ORDER)
-    }
+    const url = getReplacedString(ORDER)
 
     Router.push(url)
   }
@@ -96,11 +89,7 @@ class OrderInformation extends Component {
                 component='h1'
                 className={this.props.classes.title}
               >
-                {
-                  this.props.cartState.orderResponse.payload.order_number
-                    ? 'Go to Home'
-                    : 'Go to My Orders'
-                }
+                Go to My Orders
               </Typography>
             </div>
             <OrderContentWrapper
