@@ -182,7 +182,9 @@ class SearchMedicine extends React.Component {
       this.props.searchMedicineLoading(
         this.props.searchMedicineState,
         this.props.checkPincodeState.payload.id,
-        event.target.value
+        event.target.value,
+        0, // page number
+        10 // page size
       )
     }
   }
@@ -216,6 +218,7 @@ class SearchMedicine extends React.Component {
     const searchMedicineResult =
       searchMedicineState.payload.searchMedicineResult
     const searchMedicineIsLoading = searchMedicineState.isLoading
+
     return (
       <div className={classes.root}>
         <Downshift
@@ -252,26 +255,26 @@ class SearchMedicine extends React.Component {
                   <ul
                     {...getMenuProps()}
                     className={classes.searchContentWrapper}
-                  >
+                    >
                     {getSuggestions(
-                      searchMedicineResult
-                    ).map((suggestion, index) =>
-                      renderSuggestion({
-                        suggestion,
-                        index,
-                        itemProps: getItemProps({
-                          item: suggestion.name
-                        }),
-                        highlightedIndex,
-                        selectedItem,
-                        onSelectItem: this.onSelectItem,
-                        searchItemStyle: classes.searchItem,
-                        highlightedSearchItem: `${classes.searchItem} ${classes.highlightedSearchItem}`,
-                        selectedSearchItem: `${classes.searchItem} ${classes.selectedSearchItem}`,
-                        checkPincodeState,
-                        addToCartHandler
-                      })
-                    )}
+                        searchMedicineResult
+                      ).map((suggestion, index) =>
+                        renderSuggestion({
+                          suggestion,
+                          index,
+                          itemProps: getItemProps({
+                            item: suggestion.name
+                          }),
+                          highlightedIndex,
+                          selectedItem,
+                          onSelectItem: this.onSelectItem,
+                          searchItemStyle: classes.searchItem,
+                          highlightedSearchItem: `${classes.searchItem} ${classes.highlightedSearchItem}`,
+                          selectedSearchItem: `${classes.searchItem} ${classes.selectedSearchItem}`,
+                          checkPincodeState,
+                          addToCartHandler
+                        })
+                      )}
                   </ul>
                 </Paper>
                 : null}

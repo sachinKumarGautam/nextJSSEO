@@ -130,7 +130,6 @@ class CartIcon extends Component {
   render () {
     const { classes } = this.props
     const cartItems = this.props.cartState.payload.cart_items.payload
-
     return (
       <div>
         <a className={classes.moleculeTag} data-tip data-for='cartIcon'>

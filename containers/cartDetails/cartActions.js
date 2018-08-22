@@ -111,7 +111,6 @@ export function decrementCartItemLoading (cartState, medicineSelected) {
 }
 
 export function incrementCartItemLoading (cartState, medicineSelected) {
-  console.log('medicine selected', medicineSelected)
   return {
     type: cartActionTypes.INCREMENT_CART_ITEM_LOADING,
     cartState: cartState,
