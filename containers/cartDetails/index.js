@@ -172,7 +172,7 @@ class CartDetailsWrapper extends Component {
                 resetState={this.resetState.bind(this)}
               />
           }
-          bottomError={!this.props.cartState.errorState.isError}
+          bottomError={this.props.cartState.errorState.isError ? false : true}
         >
           <Grid
             container
