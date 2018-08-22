@@ -21,7 +21,7 @@ function CommonSpinner (props) {
     <CircularProgress
       className={props.customStyle}
       size={size || 50}
-      thickness={2}
+      thickness={4}
     />
   )
 }

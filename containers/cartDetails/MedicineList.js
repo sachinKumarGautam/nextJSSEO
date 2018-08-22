@@ -57,23 +57,18 @@ const styles = theme => ({
     marginBottom: theme.spacing.unit * 1.75
   },
   fabProgress: {
-    color: theme.palette.primary.main,
-    zIndex: theme.spacing.unit,
-    // width: theme.typography.pxToRem(27),
-    // height: theme.typography.pxToRem(27),
-    marginLeft: theme.spacing.unit * 1.125,
-    marginTop: theme.spacing.unit,
-    position: 'absolute'
+    color: theme.palette.primary.main
   },
   buttonImage: {
-    // position: 'absolute',
-    // right: 0,
-    cursor: 'pointer'
+    position: 'absolute'
   },
   iconButton: {
     alignItems: 'center',
+    justifyContent: 'center',
     display: 'flex',
-    position: 'relative'
+    position: 'relative',
+    minHeight: '50px',
+    minWidth: '50px'
   }
 })
 
@@ -140,7 +135,7 @@ class MedicineList extends Component {
                         isLoading={
                           quantityStatus === 'decrease' && cartItem.isLoading
                         }
-                        size={26}
+                        size={28}
                         customStyle={this.props.classes.fabProgress}
                       />
                     </div>
@@ -165,7 +160,7 @@ class MedicineList extends Component {
                         isLoading={
                           quantityStatus === 'increase' && cartItem.isLoading
                         }
-                        size={26}
+                        size={28}
                         customStyle={this.props.classes.fabProgress}
                       />
                     </div>
