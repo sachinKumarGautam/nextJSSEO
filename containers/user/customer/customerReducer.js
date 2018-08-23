@@ -84,7 +84,10 @@ export default function (state = initialState, action) {
           full_name: action.full_name,
           default_patient_id: action.default_patient_id,
           gender: action.gender,
-          membership_code: action.membership_code,
+          membership_code: {
+            ...state.payload.memebership_code,
+            payload: action.membership_code
+          },
           memebership_type: action.memebership_type,
           referral_code: {
             ...state.payload.referral_code,

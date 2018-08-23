@@ -113,10 +113,18 @@ class LoginWrapper extends React.Component {
     return (
       <div>
         <ActivityIndicator
-          isError={this.props.customerState.errorStateCustomerRegister.isError}
+          isError={
+            this.props.customerState.errorStateCustomerRegister.isError ||
+            this.props.customerState.payload.membership_code.errorState.isError ||
+            this.props.customerState.payload.referral_code.errorState.isError
+          }
           ErrorComp={
             <SnackbarErrorMessage
-              error={this.props.customerState.errorStateCustomerRegister.error}
+              error={
+                this.props.customerState.errorStateCustomerRegister.error ||
+                this.props.customerState.payload.membership_code.errorState.error ||
+                this.props.customerState.payload.referral_code.errorState.error
+              }
               resetState={this.resetState.bind(this)}
             />
           }
