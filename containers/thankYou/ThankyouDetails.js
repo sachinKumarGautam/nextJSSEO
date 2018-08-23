@@ -42,7 +42,8 @@ const styles = theme => ({
   },
   deliveryDateValue: {
     color: theme.palette.customGrey.grey500,
-    marginBottom: theme.spacing.unit * 1.5
+    marginBottom: theme.spacing.unit * 1.5,
+    fontWeight: theme.typography.fontWeightBold
   },
   description: {
     color: theme.palette.customGrey.grey500,
@@ -57,7 +58,7 @@ const ThankyouDetails = (props) => {
     <div>
       <div className={props.classes.orderWrapper}>
         <img
-          src='static/images/bg-chk.svg'
+          src='/static/images/bg-chk.svg'
           alt='check'
           className={props.classes.imageStyle}
         />
@@ -65,7 +66,7 @@ const ThankyouDetails = (props) => {
           variant='display1'
           className={props.classes.thankyou}
         >
-          Thankyou for your order
+          Thank you for your order
         </Typography>
       </div>
       <div className={props.classes.orderWrapper}>

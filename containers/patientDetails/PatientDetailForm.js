@@ -1,6 +1,4 @@
-import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
-
+import React from 'react'
 import { withStyles } from '@material-ui/core/styles'
 import Dialog from '@material-ui/core/Dialog'
 import DialogContent from '@material-ui/core/DialogContent'
@@ -8,6 +6,9 @@ import DialogTitle from '@material-ui/core/DialogTitle'
 import Fade from '@material-ui/core/Fade'
 
 import Form from '../../components/forms/index'
+
+import ActivityIndicator from '../../components/activityIndicator/index'
+import SnackbarErrorMessage from '../../components/activityIndicator/error/SnackbarErrorMessage'
 
 const styles = theme => ({
   paper: {
@@ -35,35 +36,48 @@ class PatientDetailForm extends React.Component {
     const { classes } = this.props
     return (
       <div>
-        <Dialog
-          open={this.props.openPatientFormDialog}
-          TransitionComponent={Transition}
-          keepMounted
-          onClose={this.props.closePatientFormModal}
-          aria-labelledby='patient-detail-form'
-          classes={{
-            paper: classes.paper
-          }}
+        <ActivityIndicator
+          isError={this.props.patientFormState.addNewPatient.errorState.isError}
+          ErrorComp={
+            <SnackbarErrorMessage
+              error={this.props.patientFormState.addNewPatient.errorState.error}
+            />
+          }
+          bottomError
         >
-          <DialogTitle
-            id='modal'
-            disableTypography
+          <Dialog
+            open={this.props.openPatientFormDialog}
+            TransitionComponent={Transition}
+            keepMounted
+            onClose={this.props.closePatientFormModal}
+            aria-labelledby='patient-detail-form'
             classes={{
-              root: classes.dialogTitle
+              paper: classes.paper
             }}
           >
-            {'ADD NEW PATIENT'}
-          </DialogTitle>
-          <DialogContent>
-            <Form
-              type={'patientForm'}
-              onSubmit={this.props.submitPatientDetailsLoading}
-              customerState={this.props.customerState}
-              patientFormState={this.props.patientFormState}
-              closeModal={this.props.closePatientFormModal}
-            />
-          </DialogContent>
-        </Dialog>
+            <DialogTitle
+              id='modal'
+              disableTypography
+              classes={{
+                root: classes.dialogTitle
+              }}
+            >
+              {this.props.patientFormState.patient.full_name
+                ? 'EDIT PATIENT'
+                : 'ADD NEW PATIENT'}
+            </DialogTitle>
+            <DialogContent>
+              <Form
+                isCartPage={this.props.isCartPage}
+                type={'patientForm'}
+                onSubmit={this.props.submitPatientDetailsLoading}
+                customerState={this.props.customerState}
+                patientFormState={this.props.patientFormState}
+                closeModal={this.props.closePatientFormModal}
+              />
+            </DialogContent>
+          </Dialog>
+        </ActivityIndicator>
       </div>
     )
   }

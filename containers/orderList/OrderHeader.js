@@ -2,7 +2,12 @@ import React from 'react'
 
 import { withStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
-import Location from '@material-ui/icons/LocationOn'
+// import Location from '@material-ui/icons/LocationOn'
+
+import {
+  LF_ASSURED,
+  NORMAL
+} from '../../components/constants/Constants'
 
 const styles = theme => {
   return {
@@ -20,7 +25,9 @@ const styles = theme => {
     },
     orderIdStyle: {
       color: theme.palette.customGreen.green300,
-      marginLeft: theme.spacing.unit
+      marginLeft: theme.spacing.unit,
+      marginRight: theme.spacing.unit,
+      cursor: 'pointer'
     },
     orderWrapper: {
       display: 'flex'
@@ -36,6 +43,9 @@ const styles = theme => {
       justifyContent: 'space-between',
       display: 'flex',
       flexDirection: 'row'
+    },
+    assuredImage: {
+      marginRight: theme.spacing.unit
     }
   }
 }
@@ -53,15 +63,26 @@ const OrderHeader = (props) => {
         <Typography
           variant='caption'
           className={props.classes.orderIdStyle}
+          onClick={props.redirectToOrderDeatails}
         >
           {props.orderDetails.id}
         </Typography>
+        {
+          props.orderDetails.service_type === LF_ASSURED &&
+          <img src='/static/images/assured-service.svg' className={props.classes.assuredImage} />
+        }
+        {
+          props.orderDetails.delivery_option !== NORMAL &&
+          <img src='/static/images/express-delivery-icon.svg' />
+        }
       </div>
-      <div>
-        <a className={props.classes.trackWrapper}>
-          <Location className={props.classes.iconButtonStyle} />Track Order
-        </a>
-      </div>
+      {
+        // <div>
+        //   <a className={props.classes.trackWrapper}>
+        //     <Location className={props.classes.iconButtonStyle} />Track Order
+        //   </a>
+        // </div>
+      }
     </div>
   )
 }

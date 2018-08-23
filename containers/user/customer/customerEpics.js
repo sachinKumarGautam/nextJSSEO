@@ -1,18 +1,32 @@
 import { of } from 'rxjs/observable/of'
 import { mergeMap, catchError, map, flatMap } from 'rxjs/operators'
 import { ofType } from 'redux-observable'
-import {CUSTOMER_REGISTER_LOADING, FETCH_USER_INFO_LOADING} from './customerActionTypes'
+import {
+  CUSTOMER_REGISTER_LOADING,
+  FETCH_USER_INFO_LOADING,
+  CHECK_REFERRAL_CODE_LOADING,
+  GET_MEMBERSHIP_CODE_LOADING
+} from './customerActionTypes'
 import {
   customerRegisterSuccess,
   customerRegisterFailure,
   fetchUserInfoSuccess,
-  fetchUserInfoFailure
+  fetchUserInfoFailure,
+  checkReferralCodeFailure,
+  checkReferralCodeSuccess,
+  getMembershipCodeSuccess,
+  getMembershipCodeFailure
 } from './customerActions'
 import { toggleAuthentication } from '../../login/loginActions'
 
 import http from '../../../services/api/ajaxWrapper'
-import {fetchUserInfo$, registerCustomer$} from '../../../services/api/index'
-import {cartTransferLoading} from '../../cartDetails/cartActions'
+import {
+  fetchUserInfo$,
+  registerCustomer$,
+  checkReferralCode$,
+  getMembershipCode$
+} from '../../../services/api/index'
+import { cartTransferLoading } from '../../cartDetails/cartActions'
 
 export function registerCustomer (action$, store) {
   return action$.pipe(
@@ -28,10 +42,11 @@ export function registerCustomer (action$, store) {
           setTimeout(() => {
             data.closeLoginModal()
           }, 250)
-          // TODO: remove store.dispatch as it might be deprecated in future
-          return of(toggleAuthentication(loginState, true),
+          return of(
+            toggleAuthentication(loginState, true),
             customerRegisterSuccess(customerState, result),
-            cartTransferLoading(cartState))
+            cartTransferLoading(cartState)
+          )
         }),
         catchError(error => {
           data.setSubmitting(false)
@@ -53,6 +68,40 @@ export function fetchUserInfo (action$, store) {
         }),
         catchError(error => {
           return of(fetchUserInfoFailure(customerState, error))
+        })
+      )
+    })
+  )
+}
+
+export function checkReferralCode (action$, store) {
+  return action$.pipe(
+    ofType(CHECK_REFERRAL_CODE_LOADING),
+    mergeMap(data => {
+      const customerState = store.getState().customerState
+      return http(checkReferralCode$(data.referralCodeInputValue)).pipe(
+        map(result => {
+          return checkReferralCodeSuccess(customerState, result)
+        }),
+        catchError(error => {
+          return of(checkReferralCodeFailure(customerState, error))
+        })
+      )
+    })
+  )
+}
+
+export function getMembershipCodeLoading (action$, store) {
+  return action$.pipe(
+    ofType(GET_MEMBERSHIP_CODE_LOADING),
+    mergeMap(data => {
+      const customerState = store.getState().customerState
+      return http(getMembershipCode$(data.phoneNumber)).pipe(
+        map(result => {
+          return getMembershipCodeSuccess(customerState, result)
+        }),
+        catchError(error => {
+          return of(getMembershipCodeFailure(customerState, error))
         })
       )
     })

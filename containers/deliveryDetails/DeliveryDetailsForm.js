@@ -1,6 +1,4 @@
-import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
-
+import React from 'react'
 import { withStyles } from '@material-ui/core/styles'
 import Dialog from '@material-ui/core/Dialog'
 import DialogContent from '@material-ui/core/DialogContent'
@@ -8,6 +6,9 @@ import DialogTitle from '@material-ui/core/DialogTitle'
 import Fade from '@material-ui/core/Fade'
 
 import Form from '../../components/forms/index'
+
+import ActivityIndicator from '../../components/activityIndicator/index'
+import SnackbarErrorMessage from '../../components/activityIndicator/error/SnackbarErrorMessage'
 
 const styles = theme => ({
   paper: {
@@ -35,36 +36,57 @@ class DeliveryDetailForm extends React.Component {
     const { classes } = this.props
     return (
       <div>
-        <Dialog
-          open={this.props.openDeliveryFormDialog}
-          TransitionComponent={Transition}
-          keepMounted
-          onClose={this.props.closeDeliveryFormModal}
-          aria-labelledby='delivery-detail-form'
-          classes={{
-            paper: classes.paper
-          }}
+        <ActivityIndicator
+          isError={this.props.deliveryDetailsState.addressForm.errorState.isError}
+          ErrorComp={
+            <SnackbarErrorMessage
+              error={this.props.deliveryDetailsState.addressForm.errorState.error}
+            />
+          }
+          bottomError
         >
-          <DialogTitle
-            id='modal'
-            disableTypography
+          <Dialog
+            open={this.props.openDeliveryFormDialog}
+            TransitionComponent={Transition}
+            keepMounted
+            onClose={this.props.closeDeliveryFormModal}
+            aria-labelledby='delivery-detail-form'
             classes={{
-              root: classes.dialogTitle
+              paper: classes.paper
             }}
           >
-            {'ADD NEW ADDRESS'}
-          </DialogTitle>
-          <DialogContent>
-            <Form
-              type={'deliveryForm'}
-              onSubmit={this.props.onSubmit}
-              customerState={this.props.customerState}
-              deliveryDetailsState={this.props.deliveryDetailsState}
-              deliveryFormState={this.props.deliveryFormState}
-              closeModal={this.props.closeModal}
-            />
-          </DialogContent>
-        </Dialog>
+            <DialogTitle
+              id='modal'
+              disableTypography
+              classes={{
+                root: classes.dialogTitle
+              }}
+            >
+              {
+                this.props.isEdit &&
+                !this.props.isAddNewAddressButtonClicked
+                  ? 'EDIT ADDRESS'
+                  : 'ADD NEW ADDRESS'
+              }
+            </DialogTitle>
+            <DialogContent>
+              <Form
+                isEdit={this.props.isEdit}
+                isCartPage={this.props.isCartPage}
+                type={'deliveryForm'}
+                onSubmit={this.props.onSubmit}
+                customerState={this.props.customerState}
+                deliveryDetailsState={this.props.deliveryDetailsState}
+                deliveryFormState={this.props.deliveryFormState}
+                closeModal={this.props.closeDeliveryFormModal}
+                checkPincodeDetailLoading={this.props.checkPincodeDetailLoading}
+                updateAddressFormValue={this.props.updateAddressFormValue}
+                getLocalityDetailListLoading={this.props.getLocalityDetailListLoading}
+                checkPincodeState={this.props.checkPincodeState}
+              />
+            </DialogContent>
+          </Dialog>
+        </ActivityIndicator>
       </div>
     )
   }

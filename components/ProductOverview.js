@@ -11,35 +11,37 @@ const styles = theme => {
       alignItems: 'flex-start'
     },
     label: {
-      ...theme.typography.subheading,
-      marginRight: theme.spacing.unit,
+      ...theme.typography.body2,
+      marginRight: theme.spacing.unit * 2.125,
       fontWeight: theme.typography.fontWeightBold,
       color: theme.palette.customGrey.grey600
     },
     overview: {
-      ...theme.typography.subheading,
+      ...theme.typography.body2,
       color: theme.palette.customGrey.grey500
     }
   }
 }
 
 const ProductOverview = (props) => (
-  <div className={props.classes.overviewWrapper}>
-    <Typography
-      gutterBottom
-      component='h5'
-      className={props.classes.label}
-    >
-      Overview:
-    </Typography>
-    <Typography
-      gutterBottom
-      component='h5'
-      className={props.classes.overview}
-    >
-      {props.overview}
-    </Typography>
-  </div>
+  <React.Fragment>
+    {props.overview && <div className={props.classes.overviewWrapper}>
+      <Typography
+        gutterBottom
+        component='h5'
+        className={props.classes.label}
+      >
+    Overview:
+      </Typography>
+      <Typography
+        gutterBottom
+        component='h5'
+        className={props.classes.overview}
+      >
+        {props.overview}
+      </Typography>
+    </div>}
+  </React.Fragment>
 )
 
 export default withStyles(styles)(ProductOverview)

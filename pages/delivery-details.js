@@ -1,25 +1,31 @@
+// dependencies
 import React from 'react'
-
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-
 import { withStyles } from '@material-ui/core/styles'
-import withRoot from '../src/withRoot'
-
-import Header from '../components/layouts/header'
-import Footer from '../components/layouts/footer'
-import DeliveryDetailsWrapper from '../containers/deliveryDetails'
-
 import Paper from '@material-ui/core/Paper'
+import Router from 'next/router'
 
-import { rootEpic } from '../redux/epics'
-import { of } from 'rxjs/observable/of'
+// components
+import withRoot from '../src/withRoot'
+import Layout from '../components/layouts/Layout'
+import DeliveryDetailsWrapper from '../containers/deliveryDetails'
 
 import {
   getDeliveryDetailsListLoading,
-  saveAddressSelected,
-  submitDeliveryDetailsLoading
+  saveDeliveryAddressSelected,
+  submitDeliveryDetailsLoading,
+  updateAddressFormValue,
+  getLocalityDetailListLoading,
+  resetDeliveryAddressSelected
 } from '../containers/deliveryDetails/deliveryDetailsActions'
+
+import {
+  checkPincodeLoading
+} from '../containers/location/pincode/pincodeAction'
+
+// page title
+import { deliveryDetails } from '../components/constants/PageTitle'
 
 const styles = theme => ({
   root: {
@@ -43,37 +49,57 @@ const styles = theme => ({
 
 class DeliveryDetails extends React.Component {
   componentDidMount () {
+    // let customerId = this.props.customerState.payload.id
+    const { query } = Router
+
+    // if (query.id === this.props.customerState.payload.id) {
+    //   customerId = query.id
+    // }
+
     // Represents to get delivery details.
     this.props.actions.getDeliveryDetailsListLoading(
       this.props.deliveryDetailsState,
-      this.props.customerState.payload.id // pass customer id
+      query.customer_id // pass customer id
     )
   }
 
   render () {
+    const { addToCartHandler } = this.props
     return (
-      <div>
-        <Header />
+      <Layout
+        title={deliveryDetails.title}
+        addToCartHandler={addToCartHandler}
+      >
         <div className={this.props.classes.wrapperStyle}>
           <Paper className={this.props.classes.root} elevation={1}>
             <DeliveryDetailsWrapper
               deliveryDetailsState={this.props.deliveryDetailsState}
-              saveAddressSelected={this.props.actions.saveAddressSelected}
+              saveDeliveryAddressSelected={this.props.actions.saveDeliveryAddressSelected}
               submitDeliveryDetailsLoading={this.props.actions.submitDeliveryDetailsLoading}
               customerState={this.props.customerState}
+              checkPincodeLoading={this.props.actions.checkPincodeLoading}
+              updateAddressFormValue={this.props.actions.updateAddressFormValue}
+              cartState={this.props.cartState}
+              getLocalityDetailListLoading={
+                this.props.actions.getLocalityDetailListLoading
+              }
+              checkPincodeState={this.props.checkPincodeState}
+              resetDeliveryAddressSelected={this.props.actions.resetDeliveryAddressSelected}
+              getDeliveryDetailsListLoading={this.props.actions.getDeliveryDetailsListLoading}
             />
           </Paper>
         </div>
-        <Footer />
-      </div>
+      </Layout>
     )
   }
 }
 
 function mapStateToProps (state) {
   return {
+    cartState: state.cartState,
     deliveryDetailsState: state.deliveryDetailsState,
-    customerState: state.customerState
+    customerState: state.customerState,
+    checkPincodeState: state.checkPincodeState
   }
 }
 
@@ -82,15 +108,18 @@ function mapDispatchToProps (dispatch) {
     actions: bindActionCreators(
       {
         getDeliveryDetailsListLoading,
-        saveAddressSelected,
-        submitDeliveryDetailsLoading
+        saveDeliveryAddressSelected,
+        submitDeliveryDetailsLoading,
+        checkPincodeLoading,
+        updateAddressFormValue,
+        getLocalityDetailListLoading,
+        resetDeliveryAddressSelected
       },
       dispatch
     )
   }
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(withRoot(withStyles(styles)(DeliveryDetails)))
+export default connect(mapStateToProps, mapDispatchToProps)(
+  withRoot(withStyles(styles)(DeliveryDetails))
+)

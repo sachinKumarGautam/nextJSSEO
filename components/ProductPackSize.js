@@ -6,7 +6,9 @@ import Typography from '@material-ui/core/Typography'
 const styles = theme => {
   return {
     packSize: {
-      color: theme.palette.customGrey.grey500
+      ...theme.typography.caption,
+      color: theme.palette.customGrey.grey200,
+      marginBottom: theme.spacing.units
     }
   }
 }
@@ -18,7 +20,13 @@ const ProductPackSize = (props) => (
     component='h4'
     className={`${props.classes.packSize} ${props.customStyle}`}
   >
-    {!props.withoutImage && <i class='fas fa-pills' />} {props.packType} / {props.packSize}
+    {
+      !props.withoutImage &&
+        <i
+          class='fas fa-pills'
+          style={{color: '#9b9b9b', marginRight: '6px'}}
+        />
+    } {props.packType} / {props.packSize}
   </Typography>
 )
 

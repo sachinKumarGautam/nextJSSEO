@@ -68,6 +68,8 @@ export function getCartDetailsSuccess (
     uid: result.uid,
     patient_id: result.patient_id,
     customer_id: result.customer_id,
+    shipping_address_id: result.shipping_address_id,
+    shipping_address: result.shipping_address,
     customer_full_name: result.customer_full_name,
     patient_full_name: result.patient_full_name,
     discount: result.discount,
@@ -83,7 +85,9 @@ export function getCartDetailsSuccess (
     cart_prescriptions: result.cart_prescriptions,
     source_type: result.source_type,
     delivery_option: result.delivery_option,
-    service_type: result.service_type
+    service_type: result.service_type,
+    available_delivery_option: result.available_delivery_option,
+    preferred_delivery_option: result.preferred_delivery_option
   }
 }
 
@@ -97,35 +101,29 @@ export function getCartDetailsFailure (cartState, error) {
   }
 }
 
-export function decrementCartItemLoading (
-  cartState,
-  medicineSelected
-) {
+export function decrementCartItemLoading (cartState, medicineSelected) {
   return {
     type: cartActionTypes.DECREMENT_CART_ITEM_LOADING,
     cartState: cartState,
+    isLoading: true,
     medicineSelected: medicineSelected
   }
 }
 
-export function incrementCartItemLoading (
-  cartState,
-  medicineSelected
-) {
+export function incrementCartItemLoading (cartState, medicineSelected) {
   return {
     type: cartActionTypes.INCREMENT_CART_ITEM_LOADING,
     cartState: cartState,
+    isLoading: true,
     medicineSelected: medicineSelected
   }
 }
 
-export function deleteCartItemLoading (
-  cartState,
-  medicineSelected
-) {
+export function deleteCartItemLoading (cartState, medicineSelected) {
   return {
     type: cartActionTypes.DELETE_CART_ITEM_LOADING,
     cartState: cartState,
+    isLoading: true,
     medicineSelected: medicineSelected
   }
 }
@@ -134,6 +132,7 @@ export function putCartItemSuccess (cartState, result) {
   return {
     type: cartActionTypes.PUT_CART_ITEM_SUCCESS,
     cartState,
+    isLoading: false,
     cart_items: result.cart_items,
     discount: result.discount,
     redeemed_care_points: result.redeemed_care_points,
@@ -144,23 +143,31 @@ export function putCartItemSuccess (cartState, result) {
   }
 }
 
-export function putCartItemFailure (cartState, cartItems) {
+export function putCartItemFailure (cartState, result, error) {
   return {
     type: cartActionTypes.PUT_CART_ITEM_FAILURE,
     cartState,
-    cartItems: cartItems
+    isLoading: false,
+    isError: true,
+    error: error,
+    cart_items: result.cart_items
   }
 }
 
-export function savePatientToCartLoading (
-  cartState,
-  patientId,
-  cartId
-) {
+export function resetSavePatientToCartError (cartState) {
+  return {
+    type: cartActionTypes.RESET_SAVE_PATIENT_TO_CART_ERROR,
+    cartState: cartState,
+    isError: false,
+    error: {}
+  }
+}
+
+export function savePatientToCartLoading (cartState, patient, cartId) {
   return {
     type: cartActionTypes.SAVE_PATIENT_TO_CART_LOADING,
     cartState,
-    patientId: patientId,
+    patient: patient,
     cartId: cartId,
     isLoading: true,
     isError: false,
@@ -168,9 +175,7 @@ export function savePatientToCartLoading (
   }
 }
 
-export function cartTransferLoading (
-  cartState
-) {
+export function cartTransferLoading (cartState) {
   return {
     type: cartActionTypes.CART_TRANSFER_LOADING,
     cartState: cartState,
@@ -180,11 +185,12 @@ export function cartTransferLoading (
   }
 }
 
-export function savePatientToCartSuccess (cartState, result) {
+export function savePatientToCartSuccess (cartState, patient, result) {
   return {
     type: cartActionTypes.SAVE_PATIENT_TO_CART_SUCCESS,
     cartState,
     patient_id: result.patient_id,
+    patient: patient,
     patient_full_name: result.patient_full_name,
     isLoading: false
   }
@@ -200,10 +206,16 @@ export function savePatientToCartFailure (cartState, error) {
   }
 }
 
-export function saveDeliveryAddressToCartLoading (
-  cartState,
-  shippingAddressId
-) {
+export function resetSaveDeliveryAddressToCartError (cartState) {
+  return {
+    type: cartActionTypes.RESET_SAVE_DELIVERY_ADDRESS_TO_CART_ERROR,
+    cartState: cartState,
+    isError: false,
+    error: {}
+  }
+}
+
+export function saveDeliveryAddressToCartLoading (cartState, shippingAddressId) {
   return {
     type: cartActionTypes.SAVE_DELIVERY_ADDRESS_TO_CART_LOADING,
     cartState,
@@ -214,12 +226,15 @@ export function saveDeliveryAddressToCartLoading (
   }
 }
 
-export function saveDeliveryAddressToCartSuccess (cartState, shipping_address_id) {
+export function saveDeliveryAddressToCartSuccess (cartState, result) {
   return {
     type: cartActionTypes.SAVE_DELIVERY_ADDRESS_TO_CART_SUCCESS,
     cartState,
-    shipping_address_id: shipping_address_id,
-    isLoading: false
+    shipping_address_id: result.shipping_address_id,
+    shipping_address: result.shipping_address,
+    available_delivery_option: result.available_delivery_option,
+    isLoading: false,
+    preferred_delivery_option: result.preferred_delivery_option
   }
 }
 
@@ -233,7 +248,12 @@ export function saveDeliveryAddressToCartFailure (cartState, error) {
   }
 }
 
-export function cartTransferSuccess (cartState, result, cartItems, cartPrescriptions) {
+export function cartTransferSuccess (
+  cartState,
+  result,
+  cartItems,
+  cartPrescriptions
+) {
   let payload = result.body.payload
   return {
     type: cartActionTypes.CART_TRANSFER_SUCCESS,
@@ -275,7 +295,10 @@ export function updateIsCartOpenLoginFlag (cartState, isCartOpenLoginDialog) {
   }
 }
 
-export function updateIsCartOpenRegisterModalFlag (cartState, isCartOpenRegisterDialog) {
+export function updateIsCartOpenRegisterModalFlag (
+  cartState,
+  isCartOpenRegisterDialog
+) {
   return {
     type: cartActionTypes.UPDATE_IS_CART_OPEN_REGISTER_MODAL_FLAG,
     cartState: cartState,
@@ -283,10 +306,20 @@ export function updateIsCartOpenRegisterModalFlag (cartState, isCartOpenRegister
   }
 }
 
+export function resetUploadPrescriptionError (cartState) {
+  return {
+    type: cartActionTypes.RESET_UPLOAD_PRESCRIPTION_ERROR,
+    cartState: cartState,
+    isError: false,
+    error: {}
+  }
+}
+
 export function uploadPrescriptionLoading (cartState, file) {
   return {
     type: cartActionTypes.UPLOAD_PRESCRIPTION_LOADING,
     cartState: cartState,
+    isLoading: true,
     uploadedFiles: file
   }
 }
@@ -361,28 +394,29 @@ export function submitOrderLoading (cartState) {
 }
 
 export function submitOrderSuccess (cartState, result) {
+  result = result.order
   return {
     type: cartActionTypes.SUBMIT_ORDER_SUCCESS,
     cartState,
-    order_number: result.order.id,
-    delivery_option: result.order.delivery_option,
-    service_type: result.order.service_type,
-    doctor_callback: result.order.doctor_callback,
-    order_prescriptions: result.order.order_prescriptions,
-    promised_delivery_date: result.order.promised_delivery_date,
-    patient_id: result.order.patient_id,
-    customer_id: result.order.customer_id,
-    customer_full_name: result.order.customer_full_name,
-    patient_full_name: result.order.patient_full_name,
-    discount: result.order.discount,
-    redeemed_care_points: result.order.redeemed_care_points,
-    redeemable_care_points: result.order.redeemable_care_points,
-    total_mrp: result.order.total_mrp,
-    total_sale_price: result.order.total_sale_price,
-    total_tax_amount: result.order.total_tax_amount,
-    facility_code: result.order.facility_code,
-    status: result.order.status,
-    source: result.order.source,
+    order_number: result.id,
+    delivery_option: result.delivery_option,
+    service_type: result.service_type,
+    doctor_callback: result.doctor_callback,
+    order_prescriptions: result.order_prescriptions,
+    promised_delivery_date: result.promised_delivery_date,
+    patient_id: result.patient_id,
+    customer_id: result.customer_id,
+    customer_full_name: result.customer_full_name,
+    patient_full_name: result.patient_full_name,
+    discount: result.discount,
+    redeemed_care_points: result.redeemed_care_points,
+    redeemable_care_points: result.redeemable_care_points,
+    total_mrp: result.total_mrp,
+    total_sale_price: result.total_sale_price,
+    total_tax_amount: result.total_tax_amount,
+    facility_code: result.facility_code,
+    status: result.status,
+    source: result.source,
     isLoading: false
   }
 }
@@ -444,6 +478,12 @@ export function applyCouponCodeFailure (cartState, error) {
   }
 }
 
+export function resetCouponDetail () {
+  return {
+    type: cartActionTypes.RESET_COUPON_STATE
+  }
+}
+
 export function updateCouponCode (cartState, value) {
   return {
     type: cartActionTypes.UPDATE_COUPON_CODE_VALUE,
@@ -452,7 +492,11 @@ export function updateCouponCode (cartState, value) {
   }
 }
 
-export function optForDoctorCallbackLoading (cartState, cartUId, doctorCallback) {
+export function optForDoctorCallbackLoading (
+  cartState,
+  cartUId,
+  doctorCallback
+) {
   return {
     type: cartActionTypes.OPT_DOCTOR_CALLBACK_LOADING,
     cartState,
@@ -479,5 +523,66 @@ export function optForDoctorCallbackFailure (cartState, error) {
     isLoading: false,
     isError: true,
     error: error
+  }
+}
+
+export function optForExpressDeliveryLoading (
+  cartState,
+  cartUId,
+  expressDeliveryCheck
+) {
+  return {
+    type: cartActionTypes.OPT_EXPRESS_DELIVERY_LOADING,
+    cartState,
+    isLoading: true,
+    isError: false,
+    cartUId,
+    expressDeliveryCheck
+  }
+}
+
+export function optForExpressDeliverySuccess (cartState, result) {
+  return {
+    type: cartActionTypes.OPT_EXPRESS_DELIVERY_SUCCESS,
+    cartState,
+    payload: result,
+    isLoading: false,
+    preferred_delivery_option: result.preferred_delivery_option
+  }
+}
+
+export function optForExpressDeliveryFailure (cartState, error) {
+  return {
+    type: cartActionTypes.OPT_EXPRESS_DELIVERY_FAILURE,
+    cartState,
+    isLoading: false,
+    isError: true,
+    error: error
+  }
+}
+
+export function resetApiStateSubmitOrder () {
+  return {
+    type: cartActionTypes.RESET_SUBMIT_ORDER_CART_STATE,
+    isLoading: false,
+    isError: false,
+    error: null
+  }
+}
+
+export function resetCartItemErrorState () {
+  return {
+    type: cartActionTypes.RESET_CART_ITEM_RESET_STATE,
+    isLoading: false,
+    isError: false,
+    error: null
+  }
+}
+
+export function isCartInvalid (cartState, isCartInvalid) {
+  return {
+    type: cartActionTypes.IS_CART_INVALID,
+    cartState,
+    is_cart_invalid: isCartInvalid
   }
 }

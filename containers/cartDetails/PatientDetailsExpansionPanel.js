@@ -8,6 +8,7 @@ import Typography from '@material-ui/core/Typography'
 import Button from '../../components/button'
 
 import PatientDetails from './PatientDetails'
+import SelectedPatientDetails from './SelectedPatientDetails'
 
 import AddPatientButton from '../patientDetails/AddPatientButton'
 
@@ -28,22 +29,26 @@ class PatientDetailsExpansionPanel extends React.Component {
     })
   }
 
-  savePatientSelected (patientIdSelected) {
+  savePatientSelected (patientSelected) {
     this.props.savePatientToCartLoading(
       this.props.cartState,
-      patientIdSelected,
+      patientSelected,
       this.props.cartState.payload.uid
     )
   }
 
   render () {
+    const patientDetails = this.props.cartState.payload.patient_details
     return (
       <ExpansionPanel
         expanded={this.props.expanded === 'panel3'}
         onChange={
-          this.props.loginState.isAuthenticated
-            ? this.props.handleChange
-            : null
+          this.props.loginState.isAuthenticated &&
+          (
+            this.props.cartState.payload.cart_items.payload.length ||
+            this.props.cartState.payload.cart_prescriptions.length ||
+            this.props.cartState.payload.is_doctor_callback.payload
+          ) ? this.props.handleChange : null
         }
         className={this.props.expansionPanel}
       >
@@ -56,12 +61,24 @@ class PatientDetailsExpansionPanel extends React.Component {
           <img src='/static/images/loggedIn.svg' className={this.props.imageIcon} />
           <div className={this.props.patientWrapper}>
             <div className={this.props.checkedIconWrapper}>
-              <Typography
-                component='h1'
-                className={this.props.heading}
-              >
-                Patient Details
-              </Typography>
+              {
+                this.props.expanded !== 'panel3' &&
+                patientDetails.payload.patient_id
+                  ? (
+                    <SelectedPatientDetails
+                      heading={this.props.heading}
+                      patientDetails={this.props.patientDetails}
+                      patient={patientDetails.payload}
+                    />
+                  ) : (
+                    <Typography
+                      component='h1'
+                      className={this.props.heading}
+                    >
+                    Patient Details
+                    </Typography>
+                  )
+              }
               {
                 this.props.patientIdSelected
                   ? (
@@ -108,7 +125,8 @@ class PatientDetailsExpansionPanel extends React.Component {
             }}
             label={'NEXT'}
             onClick={
-              this.props.loginState.isAuthenticated
+              this.props.loginState.isAuthenticated &&
+              patientDetails.payload.patient_id
                 ? this.props.handleNextChange
                 : null
             }

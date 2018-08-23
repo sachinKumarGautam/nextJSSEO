@@ -7,7 +7,14 @@ import {
   UPDATE_PHONE_NUMBER,
   FETCH_USER_INFO_LOADING,
   FETCH_USER_INFO_SUCCESS,
-  FETCH_USER_INFO_FAILURE
+  FETCH_USER_INFO_FAILURE,
+  CHECK_REFERRAL_CODE_LOADING,
+  CHECK_REFERRAL_CODE_SUCCESS,
+  CHECK_REFERRAL_CODE_FAILURE,
+  GET_MEMBERSHIP_CODE_SUCCESS,
+  GET_MEMBERSHIP_CODE_FAILURE,
+  GET_MEMBERSHIP_CODE_LOADING,
+  RESET_CUSTOMER_FORM_STATE
 } from './customerActionTypes'
 
 export default function (state = initialState, action) {
@@ -33,7 +40,10 @@ export default function (state = initialState, action) {
           full_name: action.full_name,
           gender: action.gender,
           age: action.age,
-          referral_code: action.referral_code,
+          referral_code: {
+            ...state.payload.referral_code,
+            payload: action.referral_code
+          },
           default_location: action.default_location,
           reference_code: action.reference_code,
           membership_code: action.membership_code,
@@ -74,9 +84,15 @@ export default function (state = initialState, action) {
           full_name: action.full_name,
           default_patient_id: action.default_patient_id,
           gender: action.gender,
-          membership_code: action.membership_code,
+          membership_code: {
+            ...state.payload.memebership_code,
+            payload: action.membership_code
+          },
           memebership_type: action.memebership_type,
-          referral_code: action.referral_code,
+          referral_code: {
+            ...state.payload.referral_code,
+            payload: action.referral_code
+          },
           reference_code: action.reference_code
         }
       }
@@ -92,12 +108,118 @@ export default function (state = initialState, action) {
         }
       }
 
+    case CHECK_REFERRAL_CODE_LOADING:
+      return {
+        ...state,
+        payload: {
+          ...state.payload,
+          referral_code: {
+            ...state.payload.referral_code,
+            payload: action.referralCode,
+            isLoading: action.isLoading,
+            errorState: {
+              ...state.payload.referral_code.errorState,
+              isError: action.isError,
+              error: action.error
+            }
+          }
+        }
+      }
+
+    case CHECK_REFERRAL_CODE_SUCCESS:
+      return {
+        ...state,
+        payload: {
+          ...state.payload,
+          referral_code: {
+            ...state.payload.referral_code,
+            payload: action.referralCode,
+            isLoading: action.isLoading
+          }
+        }
+      }
+
+    case CHECK_REFERRAL_CODE_FAILURE:
+      return {
+        ...state,
+        payload: {
+          ...state.payload,
+          referral_code: {
+            ...state.payload.referral_code,
+            isLoading: action.isLoading,
+            errorState: {
+              ...state.payload.referral_code.errorState,
+              isError: action.isError,
+              error: action.error
+            }
+          }
+        }
+      }
+
+    case GET_MEMBERSHIP_CODE_LOADING:
+      return {
+        ...state,
+        payload: {
+          ...state.payload,
+          membership_code: {
+            ...state.payload.membership_code,
+            isLoading: action.isLoading,
+            errorState: {
+              ...state.payload.membership_code.errorState,
+              isError: action.isError,
+              error: action.error
+            }
+          }
+        }
+      }
+
+    case GET_MEMBERSHIP_CODE_SUCCESS:
+      return {
+        ...state,
+        payload: {
+          ...state.payload,
+          membership_code: {
+            ...state.payload.membership_code,
+            payload: action.membership_code,
+            isLoading: action.isLoading
+          }
+        }
+      }
+
+    case GET_MEMBERSHIP_CODE_FAILURE:
+      return {
+        ...state,
+        payload: {
+          ...state.payload,
+          membership_code: {
+            ...state.payload.membership_code,
+            isLoading: action.isLoading,
+            errorState: {
+              ...state.payload.membership_code.errorState,
+              isError: action.isError,
+              error: action.error
+            }
+          }
+        }
+      }
+
     case UPDATE_PHONE_NUMBER:
       return {
         ...state,
         payload: {
           ...state.payload,
           mobile: action.mobile
+        }
+      }
+
+    case RESET_CUSTOMER_FORM_STATE:
+      return {
+        ...state,
+        isLoadingCustomerRegister: action.isLoading,
+        errorStateCustomerRegister: {
+          ...state.errorStateCustomerRegister,
+          isError: action.isError,
+          error: action.error
         }
       }
 

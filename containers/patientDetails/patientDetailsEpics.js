@@ -22,7 +22,13 @@ import {
 } from '../refillPatients/refillActions'
 
 import {
-  getPatientDetailsList$, submitPatientDetails$
+  savePatientToCartLoading
+} from '../cartDetails/cartActions'
+
+import {
+  getPatientDetailsList$,
+  submitPatientDetails$,
+  editPatientDetails$
 } from '../../services/api'
 
 /**
@@ -64,14 +70,60 @@ export function submitPatient (action$, store) {
   return action$.pipe(
     ofType(SUBMIT_PATIENT_LOADING),
     mergeMap(data => {
-      const patientDetailsState = store.getState().store
+      const patientDetailsState = store.getState().patientDetailsState
+      const cartState = store.getState().cartState
       const customerId = store.getState().customerState.payload.id
-      return http(submitPatientDetails$(data.customerId, data.values)).pipe(
+      let api
+
+      if (data.isEdit) {
+        api = editPatientDetails$(data.customerId, data.values, data.patientDetailsState.patient.id)
+      } else {
+        api = submitPatientDetails$(data.customerId, data.values)
+      }
+
+      return http(api).pipe(
         flatMap(result => {
+          let modifiedPatientDetailsList = data.patientDetailsState.payload
+
+          if (data.isEdit) {
+            modifiedPatientDetailsList = data.patientDetailsState.payload.map(patient => {
+              if (data.patientDetailsState.patient.id === patient.id) {
+                return {
+                  ...patient,
+                  full_name: result.body.payload.full_name,
+                  age: result.body.payload.age,
+                  gender: result.body.payload.gender,
+                  mobile: result.body.payload.mobile
+                }
+              } else {
+                return {
+                  ...patient
+                }
+              }
+            })
+          }
+
           data.setSubmitting(false)
           data.closeModal()
-          return of(submitPatientDetailsSuccess(data.patientDetailsState, result),
-            getPatientDetailsListLoading(patientDetailsState, customerId))
+
+          if (data.isCartPage) {
+            return of(
+              submitPatientDetailsSuccess(data.patientDetailsState, result, modifiedPatientDetailsList),
+              savePatientToCartLoading(cartState, result.body.payload, cartState.payload.uid),
+              getPatientDetailsListLoading(patientDetailsState, customerId)
+            )
+          } else {
+            if (data.isEdit) {
+              return of(
+                submitPatientDetailsSuccess(data.patientDetailsState, result, modifiedPatientDetailsList)
+              )
+            } else {
+              return of(
+                submitPatientDetailsSuccess(data.patientDetailsState, result, modifiedPatientDetailsList),
+                getPatientDetailsListLoading(patientDetailsState, customerId)
+              )
+            }
+          }
         }),
         catchError(error => {
           data.setSubmitting(false)

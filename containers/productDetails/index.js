@@ -11,6 +11,10 @@ import { bindActionCreators } from 'redux'
 // import { withStyles } from '@material-ui/core/styles'
 // import withRoot from '../../src/withRoot'
 
+import {
+  openPincodeDialog
+} from '../../containers/location/pincode/pincodeAction'
+
 /*
   bread crumbs
   Product Details
@@ -26,12 +30,11 @@ class ProductDetailsWrapper extends Component {
   }
 
   toggleHover (item) {
-    this.setState((prevState) => ({
+    this.setState(prevState => ({
       hover: {
         [item]: !prevState.hover[item]
       }
-    })
-    )
+    }))
   }
 
   render () {
@@ -43,12 +46,11 @@ class ProductDetailsWrapper extends Component {
           <ProductDetails
             toggleHover={this.toggleHover.bind(this)}
             hover={this.state.hover}
+            openPincodeDialog={this.props.actions.openPincodeDialog}
             checkPincodeState={this.props.checkPincodeState}
             productDetailsState={this.props.productDetailsState}
-            checkPincodeLoading={this.props.checkPincodeLoading}
-            incrementCartItemLoading={this.props.incrementCartItemLoading}
-            cartState={this.props.cartState}
             onChangeQuantity={this.props.onChangeQuantity}
+            addToCartHandler={this.props.addToCartHandler}
           />
         </section>
         <section>
@@ -71,15 +73,10 @@ function mapStateToProps (state) {
 
 function mapDispatchToProps (dispatch) {
   return {
-    actions: bindActionCreators(
-      {
-      },
-      dispatch
-    )
+    actions: bindActionCreators({ openPincodeDialog }, dispatch)
   }
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(ProductDetailsWrapper)
+export default connect(mapStateToProps, mapDispatchToProps)(
+  ProductDetailsWrapper
+)

@@ -11,15 +11,13 @@ import ReactTooltip from 'react-tooltip'
 
 import Button from './button'
 
-import Link from 'next/link'
+// import Link from 'next/link'
+import Router from 'next/router'
 
-import {
-  CART_DETAILS
-} from '../routes/RouteConstant'
+import { CART_DETAILS } from '../routes/RouteConstant'
+import { NO_CART_ITEM } from '../containers/messages/cartMessages'
 
-import {
-  NO_CART_ITEM
-} from '../containers/messages/cartMessages'
+import { getReplacedString } from '../utils/replaceConstants'
 
 const styles = theme => ({
   button: {
@@ -71,9 +69,11 @@ const styles = theme => ({
     border: `1px solid ${theme.palette.primary.main}`
   },
   buttonLabel: {
-    ...theme.typography.body3,
+    ...theme.typography.caption,
     color: theme.palette.primary.main,
-    fontWeight: theme.typography.fontWeightBold
+    fontWeight: theme.typography.fontWeightBold,
+    paddingLeft: theme.spacing.unit * 4,
+    paddingRight: theme.spacing.unit * 4
   },
   buttonStyle: {
     textAlign: 'center',
@@ -101,14 +101,19 @@ const styles = theme => ({
   badge: {
     width: theme.spacing.unit * 2,
     height: theme.spacing.unit * 2,
-    top: theme.spacing.unit * -0.75,
+    top: theme.typography.pxToRem(-8),
     right: 0,
     left: theme.spacing.unit * 2,
     color: theme.palette.common.white,
-    fontSize: theme.spacing.unit * 1.625
+    padding: theme.typography.pxToRem(9),
+    fontSize: theme.typography.pxToRem(10)
+  },
+  badgeRoot: {
+    // padding: theme.spacing.unit * 2
   },
   iconStyle: {
-    fontSize: theme.spacing.unit * 3.25
+    fontSize: theme.spacing.unit * 3.25,
+    color: theme.palette.customGrey.grey600
   }
 })
 
@@ -117,29 +122,31 @@ class CartIcon extends Component {
     quantity: 4
   }
 
+  redirectToPath (path) {
+    const url = getReplacedString(path)
+    Router.push(url)
+  }
+
   render () {
     const { classes } = this.props
     const cartItems = this.props.cartState.payload.cart_items.payload
-
     return (
       <div>
-        <a
-          className={classes.moleculeTag}
-          data-tip
-          data-for='cartIcon'
-        >
+        <a className={classes.moleculeTag} data-tip data-for='cartIcon'>
           <IconButton
             className={classes.button}
+            color={'primary'}
             aria-label='Add to shopping cart'
           >
             <Badge
               badgeContent={cartItems.length}
               color='primary'
               classes={{
+                root: classes.badgeRoot,
                 badge: classes.badge
               }}
             >
-              <ShoppingCartIcon classes={{root: classes.iconStyle}} />
+              <ShoppingCartIcon classes={{ root: classes.iconStyle }} />
             </Badge>
           </IconButton>
         </a>
@@ -152,16 +159,10 @@ class CartIcon extends Component {
           delayShow={100}
         >
           <div className={classes.summaryMenuWrapper}>
-            <Typography
-              variant='caption'
-              className={classes.summaryStyle}
-            >
+            <Typography variant='caption' className={classes.summaryStyle}>
               Order Summary
             </Typography>
-            <Typography
-              variant='caption'
-              className={classes.itemStyle}
-            >
+            <Typography variant='caption' className={classes.itemStyle}>
               {cartItems.length} item(s)
             </Typography>
           </div>
@@ -171,39 +172,35 @@ class CartIcon extends Component {
               variant='caption'
               className={
                 this.state.quantity
-                  ? classes.medicineNameStyle : classes.noItemTextStyle
+                  ? classes.medicineNameStyle
+                  : classes.noItemTextStyle
               }
             >
-              {
-                cartItems.length
-                  ? cartItems[cartItems.length - 1].name
-                  : NO_CART_ITEM
-              }
+              {cartItems.length
+                ? cartItems[cartItems.length - 1].name
+                : NO_CART_ITEM}
             </Typography>
-            {
-              this.state.quantity
-                ? <Typography
-                  variant='caption'
-                  className={classes.priceStyle}
-                >
-                    Rs. {cartItems.length && cartItems[cartItems.length - 1].mrp}
-                </Typography>
-                : null
-            }
+            {cartItems.length
+              ? <Typography variant='caption' className={classes.priceStyle}>
+                  ₹{' '}
+                {cartItems.length && cartItems[cartItems.length - 1].mrp}
+              </Typography>
+              : null}
           </div>
           <div className={classes.buttonStyle}>
-            <Link prefetch href={CART_DETAILS}>
-              <Button
-                size='small'
-                variant='outlined'
-                color='primary'
-                classes={{
-                  root: classes.buttonRoot,
-                  label: classes.buttonLabel
-                }}
-                label={'PROCEED TO CART'}
-              />
-            </Link>
+            {/* <Link prefetch href={}> */}
+            <Button
+              size='small'
+              variant='outlined'
+              color='primary'
+              classes={{
+                root: classes.buttonRoot,
+                label: classes.buttonLabel
+              }}
+              label={'Proceed to Cart'}
+              onClick={this.redirectToPath.bind(this, CART_DETAILS)}
+            />
+            {/* </Link> */}
           </div>
         </ReactTooltip>
       </div>

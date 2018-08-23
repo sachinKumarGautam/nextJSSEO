@@ -1,29 +1,38 @@
 const initialState = {
   payload: {
     id: 0,
+    available_delivery_option: [],
+    preferred_delivery_option: '',
     uid: '',
     customer_id: 0,
     customer_first_name: '',
     customer_last_name: '',
     facility_code: 0,
-    patient_id: {
-      payload: 0,
+    patient_details: {
+      payload: {
+        patient_id: 0,
+        patient_full_name: '',
+        age: 0,
+        gender: '',
+        mobile: ''
+      },
       isLoading: false,
       errorState: {
         isError: false,
         error: {}
       }
     },
-    patient_full_name: '',
-    shipping_address_id: {
-      payload: 0,
+    shipping_address_details: {
+      payload: {
+        shipping_address_id: 0,
+        shipping_address: {}
+      },
       isLoading: false,
       errorState: {
         isError: false,
         error: {}
       }
     },
-    shipping_address: {},
     type: '',
     comment: '',
     total_mrp: 0,
@@ -105,6 +114,14 @@ const initialState = {
   couponDetail: {
     couponCode: '',
     isCouponApplied: false,
+    payload: {},
+    isLoading: false,
+    errorState: {
+      isError: false,
+      error: {}
+    }
+  },
+  expressDeliveryCheck: {
     payload: {},
     isLoading: false,
     errorState: {

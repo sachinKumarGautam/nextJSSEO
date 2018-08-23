@@ -6,35 +6,45 @@ import Typography from '@material-ui/core/Typography'
 const styles = theme => {
   return {
     deliveryPincodeWrapper: {
-      marginTop: theme.spacing.unit,
-      display: 'inline-block'
+      marginTop: theme.spacing.unit * 1.25,
+      display: 'inline-block',
+      marginLeft: theme.spacing.unit * 1.5
     },
     deliveryLabel: {
-      ...theme.typography.body1,
+      ...theme.typography.caption,
       fontWeight: theme.typography.fontWeightBold,
       color: theme.palette.customGrey.grey600,
       display: 'inherit'
     },
     deliveryPincode: {
-      ...theme.typography.body1,
+      ...theme.typography.caption,
       color: theme.palette.customGrey.grey500,
-      marginLeft: theme.spacing.unit,
-      display: 'inherit'
+      marginLeft: theme.spacing.unit * 0.75,
+      display: 'inherit',
+      marginRight: theme.spacing.unit * 2.25
     },
     deliveryChangeLabel: {
       ...theme.typography.caption,
       marginLeft: theme.spacing.unit * 2,
-      color: theme.palette.primary.main
+      color: theme.palette.primary.main,
+      cursor: 'pointer'
     }
   }
 }
 
-const DeliveryPincode = (props) => (
+const DeliveryPincode = props => (
   <div className={props.classes.deliveryPincodeWrapper}>
-    <Typography component={'span'} className={props.classes.deliveryLabel}>Delivery </Typography>
+    <Typography component={'span'} className={props.classes.deliveryLabel}>
+      Delivery{' '}
+    </Typography>
     <Typography component={'span'} className={props.classes.deliveryPincode}>
       to pincode {props.pincode}
-      <a onClick={props.openPincodeDialog.bind(this)} className={props.classes.deliveryChangeLabel}>Change</a>
+      <a
+        onClick={props.openPincodeDialog}
+        className={props.classes.deliveryChangeLabel}
+      >
+        Change
+      </a>
     </Typography>
   </div>
 )

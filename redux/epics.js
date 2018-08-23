@@ -1,33 +1,28 @@
 import { combineEpics } from 'redux-observable'
 
-import {
-  getMoleculeSummary
-} from '../containers/moleculeDetails/moleculeEpics'
+import { getMoleculeSummary } from '../containers/moleculeDetails/moleculeEpics'
 
-import {
-  sendOTP, verifyOTP
-} from '../containers/login/loginEpics'
+import { sendOTP, verifyOTP } from '../containers/login/loginEpics'
 
 import {
   registerCustomer,
-  fetchUserInfo
+  fetchUserInfo,
+  checkReferralCode,
+  getMembershipCodeLoading
 } from '../containers/user/customer/customerEpics'
 
 import {
   getRelatedMedicines
 } from '../containers/medicineList/medicineListEpics'
 
-import {
-  getProductDetails
-} from '../containers/productDetails/productEpic'
+import { getProductDetails } from '../containers/productDetails/productEpic'
 
-import {
-  searchMedicine
-} from '../containers/searchMedicine/searchMedicineEpic'
+import { searchMedicine } from '../containers/searchMedicine/searchMedicineEpic'
 
 import {
   getDeliveryDetailsList,
-  submitDeliveryDetails
+  submitDeliveryDetails,
+  getLocalityList
 } from '../containers/deliveryDetails/deliveryDetailsEpics'
 
 import {
@@ -35,26 +30,22 @@ import {
   submitPatient
 } from '../containers/patientDetails/patientDetailsEpics'
 
-import {
-  getOrderListDetails
-} from '../containers/orderList/orderListEpics'
+import { getOrderListDetails } from '../containers/orderList/orderListEpics'
 
 import {
   getPrescriptionList
 } from '../containers/prescription/prescriptionEpics'
 
-import {
-  carePointsList
-} from '../containers/carePoint/carePointEpics'
+import { carePointsList } from '../containers/carePoint/carePointEpics'
 
 import {
   getAnonymousCartIdEpic,
   getCartDetailsEpic,
-  // decrementCartItemLoadingEpic,
+  decrementCartItemLoadingEpic,
   decrementCartItemEpic,
-  // incrementCartItemLoadingEpic,
+  incrementCartItemLoadingEpic,
   incrementCartItemEpic,
-  // deleteCartItemLoadingEpic,
+  deleteCartItemLoadingEpic,
   deleteCartItemEpic,
   savePatientToCartEpic,
   cartTransferEpic,
@@ -63,16 +54,13 @@ import {
   deletePrescriptionEpic,
   submitOrderEpic,
   applyCouponCode,
-  optDoctorCallback
+  optDoctorCallback,
+  optExpressDelivery
 } from '../containers/cartDetails/cartEpics'
 
-import {
-  checkPincode
-} from '../containers/location/pincode/pincodeEpic'
+import { checkPincode } from '../containers/location/pincode/pincodeEpic'
 
-import {
-  submitRefillDate
-} from '../containers/thankYou/thankYouEpics'
+import { submitRefillDate } from '../containers/thankYou/thankYouEpics'
 // import * as actions from './actions'
 // import * as types from './actionTypes'
 
@@ -80,9 +68,11 @@ import {
   getPatientPastMedicineList
 } from '../containers/refillPatients/refillEpics'
 
+import { getBackGroungImages } from '../containers/homePage/homePageEpics'
+
 import {
-  getBackGroungImages
-} from '../containers/homePage/homePageEpics'
+  getOrderDetails
+} from '../containers/orderDetails/orderDetailsEpics'
 
 export const rootEpic = combineEpics(
   getMoleculeSummary,
@@ -94,11 +84,11 @@ export const rootEpic = combineEpics(
   getProductDetails,
   getAnonymousCartIdEpic,
   getCartDetailsEpic,
-  // decrementCartItemLoadingEpic,
+  decrementCartItemLoadingEpic,
   decrementCartItemEpic,
-  // incrementCartItemLoadingEpic,
+  incrementCartItemLoadingEpic,
   incrementCartItemEpic,
-  // deleteCartItemLoadingEpic,
+  deleteCartItemLoadingEpic,
   deleteCartItemEpic,
   searchMedicine,
   fetchUserInfo,
@@ -120,5 +110,10 @@ export const rootEpic = combineEpics(
   getPatientPastMedicineList,
   getBackGroungImages,
   applyCouponCode,
-  optDoctorCallback
+  optDoctorCallback,
+  checkReferralCode,
+  getMembershipCodeLoading,
+  getLocalityList,
+  getOrderDetails,
+  optExpressDelivery
 )

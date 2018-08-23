@@ -1,7 +1,6 @@
 import React from 'react'
 
 import Typography from '@material-ui/core/Typography'
-import Button from './button'
 
 import { withStyles } from '@material-ui/core/styles'
 
@@ -13,8 +12,7 @@ const styles = theme => {
       borderRadius: theme.spacing.unit * 0.5
     },
     addressWrapperSelectedStyle: {
-      border: `1px solid ${theme.palette.customGrey.grey250}`,
-      backgroundColor: theme.palette.customGreen.green200,
+      border: `2px solid ${theme.palette.primary.main}`,
       padding: theme.spacing.unit * 2.5,
       borderRadius: theme.spacing.unit * 0.5
     },
@@ -66,7 +64,11 @@ const AddressDetailsCard = props => (
         ? props.classes.addressWrapperSelectedStyle
         : props.classes.addressWrapperStyle
     }
-    onClick={props.saveAddressSelected.bind(this, props.deliveryDetail.id)}
+    onClick={
+      props.saveAddressSelected
+        ? props.saveAddressSelected.bind(this, props.deliveryDetail.id)
+        : null
+    }
   >
     <div className={props.classes.addressTypeWrapper}>
       <img src='/static/images/home.svg' className={props.classes.addressTypeImage} />
@@ -102,7 +104,7 @@ const AddressDetailsCard = props => (
             SELECT
           </Typography>
         ) : (
-          <div onClick={this.handleClickOpen}>
+          <div onClick={props.openDeliveryFormModal}>
             <Typography
               variant='caption'
               className={props.classes.selectButtonLabel}

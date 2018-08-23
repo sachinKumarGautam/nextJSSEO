@@ -11,6 +11,8 @@ import CarePointsDescription from './CarePointsDescription'
 import TransactionHistoryHeader from './TransactionHistoryHeader'
 import TransactionHistoryWrapper from './TransactionHistoryWrapper'
 
+import NoCarePoints from './NoCarePoints'
+
 const styles = theme => ({
   card: {
     marginLeft: theme.spacing.unit * 6
@@ -49,10 +51,19 @@ class CarePointsDetails extends Component {
             <TransactionHistoryHeader
               carePointState={this.props.carePointState}
               getCarePointDetailsLoading={this.props.getCarePointDetailsLoading}
+              customerState={this.props.customerState}
             />
-            <TransactionHistoryWrapper
+            {!this.props.carePointState.isLoading && <TransactionHistoryWrapper
               carePointState={this.props.carePointState}
-            />
+            />}
+            {
+              !this.props.carePointState.errorState.isError &&
+              !this.props.carePointState.payload.length &&
+              <NoCarePoints
+                isLoading={this.props.carePointState.isLoading}
+                carePointList={this.props.carePointState.payload.customer_wallet_transactions.content}
+              />
+            }
           </div>
         </CardContent>
       </Card>

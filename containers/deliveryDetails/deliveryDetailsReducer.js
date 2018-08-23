@@ -4,7 +4,15 @@ import {
   GET_DELIVERY_DETAILS_LIST_LOADING,
   GET_DELIVERY_DETAILS_LIST_SUCCESS,
   GET_DELIVERY_DETAILS_LIST_FAILURE,
-  SAVE_ADDRESS_SELECTED
+  SAVE_ADDRESS_SELECTED,
+  UPDATE_ADDRESS_FORM_VALUE,
+  GET_LOCALITY_LIST_LOADING,
+  GET_LOCALITY_LIST_SUCCESS,
+  GET_LOCALITY_LIST_FAILURE,
+  RESET_DELIVERY_ADDRESS_SELECTED,
+  SUBMIT_DELIVERY_DETAILS_SUCCESS,
+  SUBMIT_DELIVERY_DETAILS_LOADING,
+  SUBMIT_DELIVERY_DETAILS_FAILURE
 } from './deliveryDetailsActionTypes'
 
 export default function deliveryDetailsReducer (state = initialState, action) {
@@ -45,7 +53,119 @@ export default function deliveryDetailsReducer (state = initialState, action) {
     case SAVE_ADDRESS_SELECTED:
       return {
         ...state,
-        addressIdSelected: action.addressIdSelected
+        addressForm: {
+          ...state.addressForm,
+          id: action.deliveryDetail.id,
+          full_name: action.deliveryDetail.full_name,
+          mobile: action.deliveryDetail.mobile,
+          pincode: action.deliveryDetail.pincode,
+          locality: action.deliveryDetail.locality,
+          street1: action.deliveryDetail.street1,
+          street2: action.deliveryDetail.street2,
+          city: action.deliveryDetail.city,
+          state: action.deliveryDetail.state
+        }
+      }
+
+    // address form value update
+    case UPDATE_ADDRESS_FORM_VALUE:
+      return {
+        ...state,
+        addressForm: {
+          ...state.addressForm,
+          [action.name]: action.value
+        }
+      }
+
+    // locality detail list loading
+    case GET_LOCALITY_LIST_LOADING:
+      return {
+        ...state,
+        addressLocalityList: {
+          ...state.addressLocalityList,
+          isLoading: action.isLoading,
+          errorState: {
+            ...state.addressLocalityList.errorState,
+            isError: action.isError,
+            error: action.error
+          },
+          payload: []
+        }
+      }
+
+    // locality detail list sucess
+    case GET_LOCALITY_LIST_SUCCESS:
+      return {
+        ...state,
+        addressLocalityList: {
+          ...state.addressLocalityList,
+          payload: action.payload,
+          isLoading: action.isLoading
+        }
+      }
+
+    // locality detail list failure
+    case GET_LOCALITY_LIST_FAILURE:
+      return {
+        ...state,
+        addressLocalityList: {
+          ...state.addressLocalityList,
+          isLoading: action.isLoading,
+          errorState: {
+            ...state.addressLocalityList.errorState,
+            isError: action.isError,
+            error: action.error
+          }
+        }
+      }
+
+    case RESET_DELIVERY_ADDRESS_SELECTED:
+      return {
+        ...state,
+        addressForm: initialState.addressForm
+      }
+
+    case SUBMIT_DELIVERY_DETAILS_LOADING:
+      return {
+        ...state,
+        addressForm: {
+          ...state.addressForm,
+          isLoading: action.isLoading,
+          errorState: {
+            ...state.addressForm.errorState,
+            error: action.error,
+            isError: action.isError
+          }
+        }
+      }
+
+    case SUBMIT_DELIVERY_DETAILS_FAILURE :
+      return {
+        ...state,
+        addressForm: {
+          ...state.addressForm,
+          isLoading: action.isLoading,
+          errorState: {
+            ...state.addressForm.errorState,
+            error: action.error,
+            isError: action.isError
+          }
+        }
+      }
+
+    case SUBMIT_DELIVERY_DETAILS_SUCCESS:
+      return {
+        ...state,
+        payload: action.modifiedAddressDetailsList,
+        addressForm: {
+          ...state.addressForm,
+          isLoading: action.isLoading,
+          errorState: {
+            ...state.addressForm.errorState,
+            error: action.error,
+            isError: action.isError
+          }
+        }
       }
 
     default:

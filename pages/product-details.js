@@ -1,27 +1,32 @@
+// dependencies
 import React from 'react'
-
-import Header from '../components/layouts/header'
-import Footer from '../components/layouts/footer'
-
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-
 import { withStyles } from '@material-ui/core/styles'
-import withRoot from '../src/withRoot'
-
 import Paper from '@material-ui/core/Paper'
 import Router from 'next/router'
 
+// components
+import withRoot from '../src/withRoot'
+import Layout from '../components/layouts/Layout'
 import ProductDetailsWrapper from '../containers/productDetails'
 
-import { getProductDetailLoading, onChangeQuantity } from '../containers/productDetails/productDetailsActions'
+import {
+  getProductDetailLoading,
+  onChangeQuantity
+} from '../containers/productDetails/productDetailsActions'
 
 import {
-  getAnonymousCartIdLoading,
-  incrementCartItemLoading
+  getAnonymousCartIdLoading
 } from '../containers/cartDetails/cartActions'
 
-import {checkPincodeLoading} from '../containers/location/pincode/pincodeAction'
+// page title
+import { productDetail } from '../components/constants/PageTitle'
+
+// activity indicatoe
+import ActivityIndicator from '../components/activityIndicator'
+import FullPageError from '../components/activityIndicator/error/FullPageError'
+import PageNotFound from '../components/activityIndicator/error/PageNotFound'
 
 const styles = theme => ({
   root: {
@@ -44,77 +49,92 @@ const styles = theme => ({
 })
 
 class ProductDetails extends React.Component {
-  state = {
-    id: ''
+  constructor (props) {
+    super(props)
+    this.getErrorComponent = this.getErrorComponent.bind(this)
+    this.getProductDetail = this.getProductDetail.bind(this)
   }
-  static getInitialProps ({query}) {
+  static getInitialProps ({ query }) {
     return query
   }
 
-  componentDidMount () {
+  getProductDetail() {
     const { query } = Router
-    if (Router.query.id) {
+    if (query.product_id) {
       this.props.actions.getProductDetailLoading(
         this.props.productDetailsState,
-        query.id,
+        query.product_id,
         query.location
       )
     }
-    this.setState({
-      id: Router.query.id
-    })
+  }
+
+  componentDidMount () {
+    this.getProductDetail()
   }
 
   componentDidUpdate (prevProps) {
     const { query } = Router
-    if (prevProps.id !== Router.query.id) {
+    if (prevProps.product_id !== query.product_id) {
       this.props.actions.getProductDetailLoading(
         this.props.productDetailsState,
-        query.id,
+        query.product_id,
         query.location
+      )
+    }
+  }
+
+  tryAgain () {
+    this.getProductDetail()
+  }
+
+  getErrorComponent () {
+    if (
+      this.props.productDetailsState.errorStateGetProductDetails.error &&
+      this.props.productDetailsState.errorStateGetProductDetails.error.response &&
+      this.props.productDetailsState.errorStateGetProductDetails.error.response.statusCode === 404
+    ) {
+      return (
+        <PageNotFound />
+      )
+    } else {
+      return (
+        <FullPageError
+          error={this.props.productDetailsState.errorStateGetProductDetails.error}
+          tryAgain={this.tryAgain.bind(this)}
+        />
       )
     }
   }
 
   render () {
-    const {
-      classes,
-      actions,
-      checkPincodeState,
-      cartState
-    } = this.props
-    const { query } = Router
-
+    const { classes, actions, checkPincodeState, addToCartHandler, product_id } = this.props
     return (
-      <div>
-        <Header />
+      <Layout
+        title={productDetail.title}
+        addToCartHandler={addToCartHandler}
+      >
         <div className={this.props.classes.wrapperStyle}>
-          <Paper className={classes.root} elevation={1}>
-            {
-              query.id && query.id !== 'undefined'
+          <ActivityIndicator
+            isError={this.props.productDetailsState.errorStateGetProductDetails.isError}
+            ErrorComp={this.getErrorComponent()}
+          >
+            <Paper className={classes.root} elevation={1}>
+              {product_id && product_id !== 'undefined'
                 ? <ProductDetailsWrapper
                   checkPincodeState={checkPincodeState}
                   getProductDetailLoading={actions.getProductDetailLoading}
-                  checkPincodeLoading={actions.checkPincodeLoading}
-                  incrementCartItemLoading={actions.incrementCartItemLoading}
-                  cartState={cartState}
+                  addToCartHandler={addToCartHandler}
                   onChangeQuantity={actions.onChangeQuantity}
                 />
-                : 'Page not found'
-            }
-          </Paper>
+                : 'Page not found'}
+            </Paper>
+          </ActivityIndicator>
         </div>
-        <Footer />
-      </div>
+      </Layout>
     )
   }
 }
-
-// ProductDetails.getInitialProps = async ({ req }) => {
-//   const res = await fetch('https://api.github.com/repos/zeit/next.js')
-//   const json = await res.json()
-//   return { stars: json.stargazers_count }
-// }
 
 function mapStateToProps (state) {
   return {
@@ -131,8 +151,6 @@ function mapDispatchToProps (dispatch) {
       {
         getProductDetailLoading,
         getAnonymousCartIdLoading,
-        checkPincodeLoading,
-        incrementCartItemLoading,
         onChangeQuantity
       },
       dispatch
@@ -140,7 +158,6 @@ function mapDispatchToProps (dispatch) {
   }
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(withRoot(withStyles(styles)(ProductDetails)))
+export default connect(mapStateToProps, mapDispatchToProps)(
+  withRoot(withStyles(styles)(ProductDetails))
+)

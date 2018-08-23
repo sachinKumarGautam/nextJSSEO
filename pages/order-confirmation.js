@@ -1,13 +1,14 @@
+// dependencies
 import React from 'react'
-
 import { withStyles } from '@material-ui/core/styles'
+
+// components
 import withRoot from '../src/withRoot'
-
-import Header from '../components/layouts/header'
-import Footer from '../components/layouts/footer'
-
+import Layout from '../components/layouts/Layout'
 import ThankyouWrapper from '../containers/thankYou'
-import Paper from '@material-ui/core/Paper'
+
+// page title
+import { orderConfirmation } from '../components/constants/PageTitle'
 
 const styles = theme => ({
   root: {
@@ -28,14 +29,16 @@ const styles = theme => ({
 
 class OrderConfirmationWrapper extends React.Component {
   render () {
+    const { addToCartHandler } = this.props
     return (
-      <div>
-        <Header />
+      <Layout
+        title={orderConfirmation.title}
+        addToCartHandler={addToCartHandler}
+      >
         <div className={this.props.classes.root}>
           <ThankyouWrapper />
         </div>
-        <Footer />
-      </div>
+      </Layout>
     )
   }
 }

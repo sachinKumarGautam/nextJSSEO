@@ -26,7 +26,8 @@ const styles = theme => {
       textDecoration: 'none',
       color: theme.palette.customGrey.grey600,
       '&:hover': {
-        transitionDelay: '2s'
+        transitionDelay: '2s',
+        color: theme.palette.primary.main
       }
     },
     linkLabel: {

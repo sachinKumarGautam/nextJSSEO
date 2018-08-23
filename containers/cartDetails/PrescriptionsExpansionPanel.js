@@ -42,7 +42,11 @@ class PrescriptionsExpansionPanel extends React.Component {
     return (
       <ExpansionPanel
         expanded={this.props.expanded === 'panel2'}
-        onChange={this.props.handleChange}
+        onChange={
+          this.props.loginState.isAuthenticated
+            ? this.props.handleChange
+            : null
+        }
         className={this.props.expansionPanel}
       >
         <ExpansionPanelSummary expandIcon={<div />}>

@@ -5,6 +5,9 @@ import MenuItem from '@material-ui/core/MenuItem'
 import { withStyles } from '@material-ui/core/styles'
 import ListItemIcon from '@material-ui/core/ListItemIcon'
 import ListItemText from '@material-ui/core/ListItemText'
+import ActivityIndicator from '../../components/activityIndicator'
+import SideListItemsLoader
+  from '../../components/activityIndicator/loader/SideListItemLoader'
 
 const styles = theme => ({
   menuItem: {
@@ -16,8 +19,13 @@ const styles = theme => ({
       }
     }
   },
-  primary: {},
-  icon: {}
+  primary: {
+    ...theme.typography.caption,
+    color: theme.palette.customGrey.grey500
+  },
+  icon: {
+    marginRight: theme.spacing.unit * 1.81
+  }
 })
 
 class PatientList extends Component {
@@ -36,15 +44,22 @@ class PatientList extends Component {
   render () {
     const { classes, patientDetailsState } = this.props
     return (
-      <div>
+      <ActivityIndicator
+        isLoading={patientDetailsState.isLoading}
+        LoaderComp={<SideListItemsLoader />}
+      >
         <MenuList>
           {patientDetailsState.payload.map((patient, index) => (
             <MenuItem
               className={classes.menuItem}
-              onClick={this.getPastMedicines.bind(this, patient.id, patient.full_name)}
+              onClick={this.getPastMedicines.bind(
+                this,
+                patient.id,
+                patient.full_name
+              )}
             >
               <ListItemIcon className={classes.icon}>
-                <img src='/static/images/loggedIn.svg' />
+                <img src='/static/images/shape-copy.svg' />
               </ListItemIcon>
               <ListItemText
                 classes={{ primary: classes.primary }}
@@ -54,7 +69,7 @@ class PatientList extends Component {
             </MenuItem>
           ))}
         </MenuList>
-      </div>
+      </ActivityIndicator>
     )
   }
 }

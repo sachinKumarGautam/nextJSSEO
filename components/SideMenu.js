@@ -8,6 +8,8 @@ import { bindActionCreators } from 'redux'
 import withRoot from '../src/withRoot'
 
 import MenuItems from './MenuItems'
+import SideListItemsLoader from '../components/activityIndicator/loader/SideListItemLoader'
+import ActivityIndicator from '../components/activityIndicator'
 import { logoutWithReload } from '../utils/removePersistState'
 
 const styles = theme => {
@@ -38,18 +40,24 @@ class SideMenu extends Component {
   }
 
   render () {
+    const { isLoading } = this.props
     return (
-      <div>
-        <p className={this.props.classes.nameStyle}>
-          {this.props.customerState.payload.full_name}
-        </p>
-        <MenuItems
-          customOrderStyle={this.props.classes.orderStyle}
-          customMenuStyle={this.props.classes.menuStyle}
-          isSideMenu
-          logout={this.logout}
-        />
-      </div>
+      <ActivityIndicator
+        isLoading={isLoading}
+        LoaderComp={<SideListItemsLoader />}
+      >
+        <div>
+          <p className={this.props.classes.nameStyle}>
+            {this.props.customerState.payload.full_name}
+          </p>
+          <MenuItems
+            customOrderStyle={this.props.classes.orderStyle}
+            customMenuStyle={this.props.classes.menuStyle}
+            isSideMenu
+            logout={this.logout}
+          />
+        </div>
+      </ActivityIndicator>
     )
   }
 }
@@ -62,15 +70,10 @@ function mapStateToProps (state) {
 
 function mapDispatchToProps (dispatch) {
   return {
-    actions: bindActionCreators(
-      {
-      },
-      dispatch
-    )
+    actions: bindActionCreators({}, dispatch)
   }
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(withRoot(withStyles(styles)(SideMenu)))
+export default connect(mapStateToProps, mapDispatchToProps)(
+  withRoot(withStyles(styles)(SideMenu))
+)

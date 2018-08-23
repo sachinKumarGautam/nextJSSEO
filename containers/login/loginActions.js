@@ -8,6 +8,8 @@ import {
   TOGGLE_AUTHENTICATION
 } from './loginActionTypes'
 
+import { setCookie, removeCookie } from '../../utils/cookie'
+
 export function sendOtpLoading (loginState, setSubmitting, toggleForm, values) {
   return {
     type: SEND_OTP_LOADING,
@@ -39,7 +41,13 @@ export function sendOtpFailure (loginState, error) {
   }
 }
 
-export function verifyOtpLoading (loginState, setSubmitting, closeLoginModal, toggleForm, values) {
+export function verifyOtpLoading (
+  loginState,
+  setSubmitting,
+  closeLoginModal,
+  toggleForm,
+  values
+) {
   return {
     type: OTP_VERIFIED_LOADING,
     loginState,
@@ -54,6 +62,7 @@ export function verifyOtpLoading (loginState, setSubmitting, closeLoginModal, to
 }
 
 export function verifyOtpSuccess (loginState, result) {
+  setCookie('token', result.body.access_token)
   return {
     type: OTP_VERIFIED_SUCCESS,
     loginState,
@@ -83,6 +92,7 @@ export function toggleAuthentication (loginState, status) {
 }
 
 export function logout () {
+  removeCookie('token')
   return {
     type: 'RESET_APPLICATION_STATE'
   }
