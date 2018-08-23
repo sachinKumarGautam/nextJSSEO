@@ -1,9 +1,13 @@
 import React, { Component } from 'react'
 
 import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
 
 import BreadCrumbs from '../../components/BreadCrumbs'
 import PrescriptionDetails from './PrescriptionDetails'
+import {
+  getPrescriptionListLoading
+} from './prescriptionActions'
 /*
   bread crumbs
   order list
@@ -18,6 +22,8 @@ class PrescriptionDetailsWrapper extends Component {
         <section>
           <PrescriptionDetails
             prescriptionState={this.props.prescriptionState}
+            getPrescriptionListLoading={this.props.actions.getPrescriptionListLoading}
+            customerState={this.props.customerState}
           />
         </section>
       </div>
@@ -27,8 +33,20 @@ class PrescriptionDetailsWrapper extends Component {
 
 function mapStateToProps (state) {
   return {
-    prescriptionState: state.prescriptionState
+    prescriptionState: state.prescriptionState,
+    customerState: state.customerState
   }
 }
 
-export default connect(mapStateToProps)(PrescriptionDetailsWrapper)
+function mapDispatchToProps (dispatch) {
+  return {
+    actions: bindActionCreators(
+      {
+        getPrescriptionListLoading
+      },
+      dispatch
+    )
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(PrescriptionDetailsWrapper)

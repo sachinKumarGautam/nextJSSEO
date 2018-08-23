@@ -10,6 +10,11 @@ import DialogTitle from '@material-ui/core/DialogTitle'
 import CouponMessage from './CouponMessage'
 import EditCoupon from './EditCoupon'
 import Button from '../../components/button'
+import TextErrorMessage from '../../components/activityIndicator/error/TextErrorMessage'
+
+import {
+  CUSTOM_MESSGAE_SNACKBAR
+} from '../messages/errorMessages'
 
 const styles = theme => ({
   buttonStyle: {
@@ -51,7 +56,8 @@ const styles = theme => ({
     width: theme.spacing.unit * 40
   },
   contentRoot: {
-    ...theme.typography.caption
+    ...theme.typography.caption,
+    color: theme.palette.customRed.red200
   },
   couponDetailWrapper: {
     marginTop: theme.spacing.unit * 2.25,
@@ -126,6 +132,7 @@ class Coupon extends Component {
         ''
       )
     }
+    this.props.resetCouponDetail()
   }
 
   onChange (event) {
@@ -186,13 +193,18 @@ class Coupon extends Component {
               value={this.props.cartState.couponDetail.couponCode}
               onChange={this.onChange.bind(this)}
             />
-            {/* <DialogContentText
-              classes={{
-                root: this.props.classes.contentRoot
-              }}
-            >
-              {COUPON_MESSAGE}
-            </DialogContentText> */}
+            {
+              this.props.cartState.couponDetail.errorState.isError
+                ? <TextErrorMessage
+                  errorMessage={
+                    this.props.cartState.couponDetail.errorState.error.response
+                      ? this.props.cartState.couponDetail.errorState.error.response.body.error.message
+                      : CUSTOM_MESSGAE_SNACKBAR
+                  }
+                  customStyle={this.props.classes.contentRoot}
+                />
+                : null
+            }
           </DialogContent>
           <DialogActions>
             <Button

@@ -13,6 +13,7 @@ import {
   getRefillPastMedicinesLoading,
   updateSelectedPatientDetails
 } from './refillActions'
+
 /*
   bread crumbs
   side menu of patient list
@@ -46,6 +47,7 @@ class RefillPatientsWrapper extends Component {
                 pastMedicineState={this.props.pastMedicineState}
                 addToCartHandler={this.props.addToCartHandler}
                 checkPincodeState={this.props.checkPincodeState}
+                getRefillPastMedicinesLoading={this.props.actions.getRefillPastMedicinesLoading}
               />
             </section>
           </Grid>

@@ -186,7 +186,7 @@ export default function cartReducer (state = initialState, action) {
           ...state.payload,
           cart_items: {
             ...state.payload.cart_items,
-            payload: action.cartItems,
+            payload: action.cart_items,
             isLoading: action.isLoading,
             errorState: {
               ...state.payload.cart_items.errorState,
@@ -416,6 +416,27 @@ export default function cartReducer (state = initialState, action) {
             isError: action.isError,
             error: action.error
           }
+        },
+        payload: {
+          ...state.payload,
+          is_doctor_callback: {
+            ...state.payload.is_doctor_callback,
+            isLoading: action.isLoading,
+            errorState: {
+              ...state.payload.is_doctor_callback.errorState,
+              isError: action.isError,
+              error: {}
+            }
+          }
+        },
+        expressDeliveryCheck: {
+          ...state.expressDeliveryCheck,
+          isLoading: action.isLoading,
+          errorState: {
+            ...state.expressDeliveryCheck.errorState,
+            error: action.error,
+            isError: action.isError
+          }
         }
       }
 
@@ -622,6 +643,12 @@ export default function cartReducer (state = initialState, action) {
         }
       }
 
+    case cartActionTypes.RESET_COUPON_STATE:
+      return {
+        ...state,
+        couponDetail: initialState.couponDetail
+      }
+
     case cartActionTypes.UPDATE_COUPON_CODE_VALUE:
       return {
         ...state,
@@ -739,6 +766,23 @@ export default function cartReducer (state = initialState, action) {
         payload: {
           ...state.payload,
           is_cart_invalid: action.is_cart_invalid
+        }
+      }
+
+    case cartActionTypes.RESET_CART_ITEM_RESET_STATE:
+      return {
+        ...state,
+        payload: {
+          ...state.payload,
+          cart_items: {
+            ...state.payload.cart_items,
+            isLoading: action.isLoading,
+            errorState: {
+              ...state.payload.cart_items.errorState,
+              isError: action.isError,
+              error: action.error
+            }
+          }
         }
       }
 

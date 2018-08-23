@@ -75,13 +75,16 @@ class MedicineList extends React.Component {
         this.props.medicineListState,
         this.props.moleculeName, // pass salt name
         this.state.page + 1, // page number
-        10 // page size
+        10, // page size,
+        true
       )
     }
 
     this.setState({
       page: this.state.page + 1
     })
+
+    this.props.updateIsShowMore()
   }
 
   render () {

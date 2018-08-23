@@ -22,6 +22,10 @@ import {
 // page title
 import { moleculeList } from '../components/constants/PageTitle'
 
+// activity indicatoe
+import ActivityIndicator from '../components/activityIndicator'
+import FullPageError from '../components/activityIndicator/error/FullPageError'
+
 const styles = theme => ({
   root: {
     paddingTop: theme.spacing.unit * 3,
@@ -75,6 +79,14 @@ class MoleculeDetails extends React.Component {
     }
   }
 
+  tryAgain () {
+    const { query } = Router
+    this.props.actions.getMoleculeSummaryLoading(
+      this.props.moleculeDetailsState,
+      query.molecule_id // pass salt id // 5a61a295ae8bdc26685f2b09 // query.id
+    )
+  }
+
   render () {
     const { addToCartHandler, classes } = this.props
     return (
@@ -83,12 +95,22 @@ class MoleculeDetails extends React.Component {
         addToCartHandler={addToCartHandler}
       >
         <div className={classes.wrapperStyle}>
-          <Paper className={classes.root} elevation={1}>
-            <MoleculeDetailsWrapper
-              checkPincodeState={this.props.checkPincodeState}
-              addToCartHandler={addToCartHandler}
-            />
-          </Paper>
+          <ActivityIndicator
+            isError={this.props.moleculeDetailsState.errorState.isError}
+            ErrorComp={
+              <FullPageError
+                error={this.props.moleculeDetailsState.errorState.error}
+                tryAgain={this.tryAgain.bind(this)}
+              />
+            }
+          >
+            <Paper className={classes.root} elevation={1}>
+              <MoleculeDetailsWrapper
+                checkPincodeState={this.props.checkPincodeState}
+                addToCartHandler={addToCartHandler}
+              />
+            </Paper>
+          </ActivityIndicator>
         </div>
       </Layout>
     )

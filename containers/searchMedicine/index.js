@@ -8,8 +8,13 @@ import CircularProgress from '@material-ui/core/CircularProgress'
 import Button from '../../components/button'
 import SearchIcon from '@material-ui/icons/Search'
 import MedicineListDetails from '../../components/MedicineListDetails'
+import TextErrorMessage from '../../components/activityIndicator/error/TextErrorMessage'
 
 import { PRODUCT_SEARCH } from '../../routes/RouteConstant'
+
+import {
+  CUSTOM_MESSGAE_SNACKBAR
+} from '../messages/errorMessages'
 
 const styles = theme => ({
   root: {
@@ -86,6 +91,14 @@ const styles = theme => ({
     position: 'absolute',
     left: theme.spacing.unit * 1.5,
     color: theme.palette.customGrey.grey100
+  },
+  errorMessage: {
+    ...theme.typography.caption,
+    color: theme.palette.customRed.red200,
+    fontSize: theme.typography.pxToRem(11),
+    textAlign: 'left',
+    paddingLeft: theme.spacing.unit * 18,
+    width: theme.spacing.unit * 80
   }
 })
 
@@ -221,6 +234,15 @@ class SearchMedicine extends React.Component {
 
     return (
       <div className={classes.root}>
+        {
+          this.props.searchMedicineState.errorState.isError &&
+          <TextErrorMessage
+            errorMessage={this.props.searchMedicineState.errorState.error.response
+              ? this.props.searchMedicineState.errorState.error.response.body.error.message
+              : CUSTOM_MESSGAE_SNACKBAR}
+            customStyle={this.props.classes.errorMessage}
+          />
+        }
         <Downshift
           onStateChange={this.stateChangeHandler}
           // onOuterClick={this.onOuterClick}

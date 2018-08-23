@@ -71,7 +71,7 @@ const ListContent = props => {
             className={props.classes.currentlyWorking}
             variant={'body2'}
             component='div'
-            >
+          >
             {CURRENTLY_WORKING_SECTION}
           </Typography>
           : null}

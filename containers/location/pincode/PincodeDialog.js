@@ -19,6 +19,10 @@ import {
   PINCODE_REQUIRED
 } from '../../messages/ValidationMsg'
 
+import {
+  CUSTOM_MESSGAE_SNACKBAR
+} from '../../messages/errorMessages'
+
 const styles = theme => ({
   paper: {
     minWidth: theme.spacing.unit * 62.5
@@ -48,7 +52,8 @@ const styles = theme => ({
 function getPincodeErrorMsg (
   pincodeFormError,
   inValidPincodeError,
-  pincodeLoading
+  pincodeLoading,
+  checkPincodeState
 ) {
   if (pincodeLoading) {
     return CHECKING_PINCODE
@@ -56,6 +61,8 @@ function getPincodeErrorMsg (
     return pincodeFormError
   } else if (!pincodeFormError && inValidPincodeError) {
     return inValidPincodeError
+  } else if (checkPincodeState.errorState.isError) {
+    return CUSTOM_MESSGAE_SNACKBAR
   }
 }
 
@@ -82,7 +89,6 @@ class PincodeDialog extends React.Component {
     } = props
     const pincodeLoading = checkPincodeState.isLoading
     const pincodeError = checkPincodeState.errorState.error
-
     const pincodeFormError = errors.pincode && touched.pincode
       ? errors.pincode
       : ''
@@ -110,7 +116,7 @@ class PincodeDialog extends React.Component {
               <FormControl
                 className={classes.formControl}
                 aria-describedby='pincode'
-                error={pincodeFormError || inValidPincodeError}
+                error={pincodeFormError || inValidPincodeError || checkPincodeState.errorState.isError}
               >
                 <Input
                   autoFocus
@@ -129,7 +135,8 @@ class PincodeDialog extends React.Component {
                   {getPincodeErrorMsg(
                     pincodeFormError,
                     inValidPincodeError,
-                    pincodeLoading
+                    pincodeLoading,
+                    checkPincodeState
                   )}
                 </FormHelperText>
               </FormControl>

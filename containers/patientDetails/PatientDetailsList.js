@@ -117,9 +117,12 @@ class PatientDetailsList extends Component {
             savePatientSelected={this.savePatientSelected.bind(this)}
             payload={this.props.patientDetailsState.payload}
             isLoading={this.props.patientDetailsState.isLoading}
+            errorState={this.props.patientDetailsState.errorState}
             patientDetailsCardWrapper={
               this.props.classes.patientDetailsCardWrapper
             }
+            getPatientDetailsListLoading={this.props.getPatientDetailsListLoading}
+            customerState={this.props.customerState}
           />
         </CardContent>
       </Card>
