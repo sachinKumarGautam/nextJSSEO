@@ -109,7 +109,7 @@ const TableContent = props => {
                     gutterBottom
                     variant='body1'
                     className={props.classes.contentBody}
-                    >
+                  >
                     {props.content.avoid}
                   </Typography>}
               </TableCell>
@@ -149,7 +149,7 @@ const TableContent = props => {
                     gutterBottom
                     variant='body1'
                     className={props.classes.contentBody}
-                    >
+                  >
                     {props.content.food}
                   </Typography>}
               </TableCell>
@@ -189,7 +189,7 @@ const TableContent = props => {
                     gutterBottom
                     variant='body1'
                     className={props.classes.contentBody}
-                    >
+                  >
                     {props.content.storage}
                   </Typography>}
               </TableCell>
@@ -229,7 +229,7 @@ const TableContent = props => {
                     gutterBottom
                     variant='body1'
                     className={props.classes.contentBody}
-                    >
+                  >
                     {props.content.miss_dose}
                   </Typography>}
               </TableCell>
