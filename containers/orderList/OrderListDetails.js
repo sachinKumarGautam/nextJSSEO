@@ -13,6 +13,8 @@ import Button from '../../components/button'
 import OrderListsLoader
   from '../../components/activityIndicator/loader/orderDetailsLoader/OrderListsLoader'
 import ActivityIndicator from '../../components/activityIndicator/index'
+import ComponentSpecificError from '../../components/activityIndicator/error/ComponentSpecificError'
+import SnackbarErrorMessage from '../../components/activityIndicator/error/SnackbarErrorMessage'
 
 import { getReplacedString } from '../../utils/replaceConstants'
 import { ORDER_DETAILS } from '../../routes/RouteConstant'
@@ -60,7 +62,8 @@ class OrderListDetails extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      page: 0
+      page: 0,
+      isShowMore: false
     }
   }
 
@@ -73,7 +76,21 @@ class OrderListDetails extends Component {
     )
 
     this.setState({
-      page: this.state.page + 1
+      page: this.state.page + 1,
+      isShowMore: true
+    })
+  }
+
+  tryAgain () {
+    this.props.getOrderListDetailsLoading(
+      this.props.orderListState,
+      this.props.customerState.payload.id, // pass customer Id
+      0, // page number
+      10 // page size
+    )
+
+    this.setState({
+      isShowMore: false
     })
   }
 
@@ -102,7 +119,19 @@ class OrderListDetails extends Component {
           <ActivityIndicator
             isLoading={orderListState.isLoading}
             LoaderComp={<OrderListsLoader />}
-            bottomLoader
+            bottomLoader={this.state.isShowMore}
+            isError={orderListState.errorState.isError}
+            ErrorComp={
+              this.state.isShowMore
+                ? <SnackbarErrorMessage
+                  error={orderListState.errorState.error}
+                />
+                : <ComponentSpecificError
+                  error={orderListState.errorState.error}
+                  tryAgain={this.tryAgain.bind(this)}
+                />
+            }
+            bottomError={this.state.isShowMore}
           >
             {this.props.orderListState.payload.map(orderDetails => {
               return (
@@ -120,25 +149,25 @@ class OrderListDetails extends Component {
                 </div>
               )
             })}
+            {
+              this.state.page !== this.props.orderListState.totalPages &&
+              <div className={this.props.classes.buttonWrapper}>
+                <Button
+                  size='medium'
+                  loaderColor={'primary'}
+                  // isloading={orderListState.isLoading}
+                  variant='outlined'
+                  className={this.props.classes.button}
+                  classes={{
+                    root: this.props.classes.buttonRoot,
+                    label: this.props.classes.buttonLabel
+                  }}
+                  onClick={this.onClickOfShowMore.bind(this)}
+                  label={'Show more'}
+                />
+              </div>
+            }
           </ActivityIndicator>
-          {
-            this.state.page !== this.props.orderListState.totalPages &&
-            <div className={this.props.classes.buttonWrapper}>
-              <Button
-                size='medium'
-                loaderColor={'primary'}
-                // isloading={orderListState.isLoading}
-                variant='outlined'
-                className={this.props.classes.button}
-                classes={{
-                  root: this.props.classes.buttonRoot,
-                  label: this.props.classes.buttonLabel
-                }}
-                onClick={this.onClickOfShowMore.bind(this)}
-                label={'Show more'}
-              />
-            </div>
-          }
         </CardContent>
       </Card>
     )

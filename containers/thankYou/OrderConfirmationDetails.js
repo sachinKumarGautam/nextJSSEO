@@ -14,6 +14,7 @@ import Router from 'next/router'
 import ActivityIndicator from '../../components/activityIndicator/index'
 import CommonContentLoader
   from '../../components/activityIndicator/loader/CommonContentLoader'
+import SnackbarErrorMessage from '../../components/activityIndicator/error/SnackbarErrorMessage'
 
 import { HOME_PAGE } from '../../routes/RouteConstant'
 
@@ -66,6 +67,17 @@ const OrderConfirmationDetails = props => {
       <ActivityIndicator
         isLoading={props.cartState.isLoading}
         LoaderComp={<CommonContentLoader />}
+        isError={
+          props.thankYouState.errorState.isError
+        }
+        ErrorComp={
+          <SnackbarErrorMessage
+            error={
+              props.thankYouState.errorState.error
+            }
+          />
+        }
+        bottomError
       >
         <CardContent className={props.classes.cardContent}>
           <ThankyouDetails cartState={props.cartState} />

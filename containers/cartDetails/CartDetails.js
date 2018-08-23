@@ -152,6 +152,7 @@ class CartDetails extends Component {
                   applyCouponCodeLoading={this.props.applyCouponCodeLoading}
                   updateCouponCode={this.props.updateCouponCode}
                   cartState={this.props.cartState}
+                  resetCouponDetail={this.props.resetCouponDetail}
                 />
                 : null}
               <PriceDetails cartState={this.props.cartState} />

@@ -11,7 +11,14 @@ import Login from './Login'
 import Register from './Register'
 import OTP from './OTP'
 import { sendOtpLoading, verifyOtpLoading } from './loginActions'
-import { customerRegisterLoading, checkReferralCodeLoading } from '../user/customer/customerActions'
+import {
+  customerRegisterLoading,
+  checkReferralCodeLoading,
+  resetCustomerFormState
+} from '../user/customer/customerActions'
+
+import ActivityIndicator from '../../components/activityIndicator/index'
+import SnackbarErrorMessage from '../../components/activityIndicator/error/SnackbarErrorMessage'
 
 /*
     index.js
@@ -67,6 +74,10 @@ class LoginWrapper extends React.Component {
     }
   }
 
+  resetState () {
+    this.props.actions.resetCustomerFormState()
+  }
+
   getModal (name) {
     switch (name) {
       case 'login':
@@ -101,29 +112,48 @@ class LoginWrapper extends React.Component {
     const { classes } = this.props
     return (
       <div>
-        <Dialog
-          open={this.props.openLoginDialog}
-          TransitionComponent={Transition}
-          keepMounted
-          onClose={this.props.closeLoginModal}
-          aria-labelledby='login-to-order-medicine'
-          classes={{
-            paper: classes.paper
-          }}
+        <ActivityIndicator
+          isError={
+            this.props.customerState.errorStateCustomerRegister.isError ||
+            this.props.customerState.payload.membership_code.errorState.isError ||
+            this.props.customerState.payload.referral_code.errorState.isError
+          }
+          ErrorComp={
+            <SnackbarErrorMessage
+              error={
+                this.props.customerState.errorStateCustomerRegister.error ||
+                this.props.customerState.payload.membership_code.errorState.error ||
+                this.props.customerState.payload.referral_code.errorState.error
+              }
+              resetState={this.resetState.bind(this)}
+            />
+          }
+          bottomError
         >
-          <DialogTitle
-            id='modal'
-            disableTypography
+          <Dialog
+            open={this.props.openLoginDialog}
+            TransitionComponent={Transition}
+            keepMounted
+            onClose={this.props.closeLoginModal}
+            aria-labelledby='login-to-order-medicine'
             classes={{
-              root: classes.dialogTitle
+              paper: classes.paper
             }}
           >
-            {this.state.modalName.toUpperCase()}
-          </DialogTitle>
-          <DialogContent>
-            {this.getModal(this.state.modalName)}
-          </DialogContent>
-        </Dialog>
+            <DialogTitle
+              id='modal'
+              disableTypography
+              classes={{
+                root: classes.dialogTitle
+              }}
+            >
+              {this.state.modalName.toUpperCase()}
+            </DialogTitle>
+            <DialogContent>
+              {this.getModal(this.state.modalName)}
+            </DialogContent>
+          </Dialog>
+        </ActivityIndicator>
       </div>
     )
   }
@@ -143,7 +173,8 @@ function mapDispatchToProps (dispatch) {
         sendOtpLoading,
         verifyOtpLoading,
         customerRegisterLoading,
-        checkReferralCodeLoading
+        checkReferralCodeLoading,
+        resetCustomerFormState
       },
       dispatch
     )

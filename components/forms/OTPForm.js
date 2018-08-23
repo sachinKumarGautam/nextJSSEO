@@ -15,6 +15,7 @@ import {
   OTP_INVALID
 } from '../../containers/messages/ValidationMsg'
 import { OTP_PLACEHOLDER } from '../../containers/messages/PlaceholderMsg'
+import {CUSTOM_MESSGAE_SNACKBAR} from '../../containers/messages/errorMessages'
 
 const styles = theme => ({
   formControl: {
@@ -59,15 +60,17 @@ class OTPForm extends React.Component {
       errors,
       isSubmitting,
       handleSubmit,
-      classes
+      classes,
+      loginState
       //   closeLoginModal
     } = this.props
+    console.log(this.props)
     return (
       <form onSubmit={handleSubmit}>
         <FormControl
           className={classes.formControl}
           aria-describedby='otp'
-          error={errors.otp && touched.otp}
+          error={(errors.otp && touched.otp) || loginState.errorStateVerifyOtp.isError}
         >
           <Input
             autoComplete='off'
@@ -84,6 +87,10 @@ class OTPForm extends React.Component {
             touched.otp &&
             <FormHelperText id='otp'>
               {errors.otp}
+            </FormHelperText>}
+          {loginState.errorStateVerifyOtp.isError &&
+            <FormHelperText id='otp'>
+              {CUSTOM_MESSGAE_SNACKBAR}
             </FormHelperText>}
         </FormControl>
         <div className={classes.buttonWrapper}>

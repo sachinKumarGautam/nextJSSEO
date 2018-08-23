@@ -48,6 +48,7 @@ class OTP extends React.Component {
           closeLoginModal={this.props.closeLoginModal}
           toggleForm={toggleForm}
           onSubmit={verifyOtpLoading}
+          loginState={this.props.loginState}
         />
       </div>
     )

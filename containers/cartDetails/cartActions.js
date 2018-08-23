@@ -478,6 +478,12 @@ export function applyCouponCodeFailure (cartState, error) {
   }
 }
 
+export function resetCouponDetail () {
+  return {
+    type: cartActionTypes.RESET_COUPON_STATE
+  }
+}
+
 export function updateCouponCode (cartState, value) {
   return {
     type: cartActionTypes.UPDATE_COUPON_CODE_VALUE,
@@ -558,6 +564,15 @@ export function optForExpressDeliveryFailure (cartState, error) {
 export function resetApiStateSubmitOrder () {
   return {
     type: cartActionTypes.RESET_SUBMIT_ORDER_CART_STATE,
+    isLoading: false,
+    isError: false,
+    error: null
+  }
+}
+
+export function resetCartItemErrorState () {
+  return {
+    type: cartActionTypes.RESET_CART_ITEM_RESET_STATE,
     isLoading: false,
     isError: false,
     error: null

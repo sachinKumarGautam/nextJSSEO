@@ -29,6 +29,8 @@ const MedicineListWrapper = props => (
         searchMedicineLoading={props.searchMedicineLoading}
         getRelatedMedicinesLoading={props.getRelatedMedicinesLoading}
         checkPincodeState={props.checkPincodeState}
+        medicineList={props.medicineListState}
+        updateIsShowMore={props.updateIsShowMore}
       />
     </section>
   </div>

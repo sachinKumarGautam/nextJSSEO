@@ -74,6 +74,7 @@ class PatientDetails extends React.Component {
               }
               customerState={this.props.customerState}
               cartState={this.props.cartState}
+              getPatientDetailsListLoading={this.props.actions.getPatientDetailsListLoading}
               resetPatientSelected={this.props.actions.resetPatientSelected}
             />
           </Paper>

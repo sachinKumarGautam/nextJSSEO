@@ -19,6 +19,10 @@ import {
   MOBILE_VALIDATION_REGEX
 } from '../../containers/messages/ValidationMsg'
 
+import {
+  CUSTOM_MESSGAE_SNACKBAR
+} from '../../containers/messages/errorMessages'
+
 // Helper styles for demo
 
 const styles = theme => ({
@@ -53,14 +57,15 @@ class LoginForm extends React.Component {
       isSubmitting,
       handleBlur,
       handleSubmit,
-      classes
+      classes,
+      loginState
     } = this.props
     return (
       <form onSubmit={handleSubmit}>
         <FormControl
           className={classes.formControl}
           aria-describedby='mobile-number'
-          error={errors.mobile && touched.mobile}
+          error={(errors.mobile && touched.mobile) || loginState.errorStateSendOtp.isError}
         >
           <Input
             startAdornment={
@@ -80,6 +85,10 @@ class LoginForm extends React.Component {
             touched.mobile &&
             <FormHelperText id='name-helper-text'>
               {errors.mobile}
+            </FormHelperText>}
+          {loginState.errorStateSendOtp.isError &&
+            <FormHelperText id='name-helper-text'>
+              {CUSTOM_MESSGAE_SNACKBAR}
             </FormHelperText>}
           <Typography
             variant='caption'

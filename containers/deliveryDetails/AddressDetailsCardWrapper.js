@@ -6,25 +6,48 @@ import AddressDetailsCard from '../../components/AddressDetailsCard'
 import ActivityIndicator from '../../components/activityIndicator/index'
 import MultipleCardLoader
   from '../../components/activityIndicator/loader/cardLoader/MultipleCardLoader'
+import ComponentSpecificError
+  from '../../components/activityIndicator/error/ComponentSpecificError'
 
-const AddressDetailsCardWrapper = props => (
-  <Grid container spacing={24} className={props.addressDetailsCardWrapper}>
-    <ActivityIndicator
-      LoaderComp={<MultipleCardLoader />}
-      isLoading={props.isLoading}
-    >
-      {props.payload.map(deliveryDetail => {
-        return (
-          <Grid item xs={6} onClick={props.saveDeliveryAddressSelected.bind(this, deliveryDetail)}>
-            <AddressDetailsCard
-              deliveryDetail={deliveryDetail}
-              openDeliveryFormModal={props.openDeliveryFormModal.bind(this, true)}
+class AddressDetailsCardWrapper extends React.Component {
+  tryAgain () {
+    this.props.getDeliveryDetailsListLoading(
+      this.props.deliveryDetailsState,
+      this.props.customerState.payload.id
+    )
+  }
+  render () {
+    return (
+      <Grid
+        container={!this.props.errorState.isError}
+        spacing={24}
+        className={this.props.addressDetailsCardWrapper}
+      >
+        <ActivityIndicator
+          LoaderComp={<MultipleCardLoader />}
+          isLoading={this.props.isLoading}
+          isError={this.props.errorState.isError}
+          ErrorComp={
+            <ComponentSpecificError
+              error={this.props.errorState.error}
+              tryAgain={this.tryAgain.bind(this)}
             />
-          </Grid>
-        )
-      })}
-    </ActivityIndicator>
-  </Grid>
-)
+          }
+        >
+          {this.props.payload.map(deliveryDetail => {
+            return (
+              <Grid item xs={6} onClick={this.props.saveDeliveryAddressSelected.bind(this, deliveryDetail)}>
+                <AddressDetailsCard
+                  deliveryDetail={deliveryDetail}
+                  openDeliveryFormModal={this.props.openDeliveryFormModal.bind(this, true)}
+                />
+              </Grid>
+            )
+          })}
+        </ActivityIndicator>
+      </Grid>
+    )
+  }
+}
 
 export default AddressDetailsCardWrapper

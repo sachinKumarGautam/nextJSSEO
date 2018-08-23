@@ -13,7 +13,8 @@ import {
   CHECK_REFERRAL_CODE_FAILURE,
   GET_MEMBERSHIP_CODE_SUCCESS,
   GET_MEMBERSHIP_CODE_FAILURE,
-  GET_MEMBERSHIP_CODE_LOADING
+  GET_MEMBERSHIP_CODE_LOADING,
+  RESET_CUSTOMER_FORM_STATE
 } from './customerActionTypes'
 
 export default function (state = initialState, action) {
@@ -83,7 +84,10 @@ export default function (state = initialState, action) {
           full_name: action.full_name,
           default_patient_id: action.default_patient_id,
           gender: action.gender,
-          membership_code: action.membership_code,
+          membership_code: {
+            ...state.payload.membership_code,
+            payload: action.membership_code
+          },
           memebership_type: action.memebership_type,
           referral_code: {
             ...state.payload.referral_code,
@@ -205,6 +209,17 @@ export default function (state = initialState, action) {
         payload: {
           ...state.payload,
           mobile: action.mobile
+        }
+      }
+
+    case RESET_CUSTOMER_FORM_STATE:
+      return {
+        ...state,
+        isLoadingCustomerRegister: action.isLoading,
+        errorStateCustomerRegister: {
+          ...state.errorStateCustomerRegister,
+          isError: action.isError,
+          error: action.error
         }
       }
 

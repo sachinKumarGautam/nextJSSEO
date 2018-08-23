@@ -85,6 +85,7 @@ class DeliveryDetails extends React.Component {
               }
               checkPincodeState={this.props.checkPincodeState}
               resetDeliveryAddressSelected={this.props.actions.resetDeliveryAddressSelected}
+              getDeliveryDetailsListLoading={this.props.actions.getDeliveryDetailsListLoading}
             />
           </Paper>
         </div>

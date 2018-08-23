@@ -23,6 +23,11 @@ import {
 // page title
 import { productDetail } from '../components/constants/PageTitle'
 
+// activity indicatoe
+import ActivityIndicator from '../components/activityIndicator'
+import FullPageError from '../components/activityIndicator/error/FullPageError'
+import PageNotFound from '../components/activityIndicator/error/PageNotFound'
+
 const styles = theme => ({
   root: {
     paddingTop: theme.spacing.unit * 3,
@@ -44,11 +49,16 @@ const styles = theme => ({
 })
 
 class ProductDetails extends React.Component {
+  constructor (props) {
+    super(props)
+    this.getErrorComponent = this.getErrorComponent.bind(this)
+    this.getProductDetail = this.getProductDetail.bind(this)
+  }
   static getInitialProps ({ query }) {
     return query
   }
 
-  componentDidMount () {
+  getProductDetail () {
     const { query } = Router
     if (query.product_id) {
       this.props.actions.getProductDetailLoading(
@@ -57,6 +67,10 @@ class ProductDetails extends React.Component {
         query.location
       )
     }
+  }
+
+  componentDidMount () {
+    this.getProductDetail()
   }
 
   componentDidUpdate (prevProps) {
@@ -70,6 +84,29 @@ class ProductDetails extends React.Component {
     }
   }
 
+  tryAgain () {
+    this.getProductDetail()
+  }
+
+  getErrorComponent () {
+    if (
+      this.props.productDetailsState.errorStateGetProductDetails.error &&
+      this.props.productDetailsState.errorStateGetProductDetails.error.response &&
+      this.props.productDetailsState.errorStateGetProductDetails.error.response.statusCode === 404
+    ) {
+      return (
+        <PageNotFound />
+      )
+    } else {
+      return (
+        <FullPageError
+          error={this.props.productDetailsState.errorStateGetProductDetails.error}
+          tryAgain={this.tryAgain.bind(this)}
+        />
+      )
+    }
+  }
+
   render () {
     const { classes, actions, checkPincodeState, addToCartHandler, product_id } = this.props
     return (
@@ -78,16 +115,21 @@ class ProductDetails extends React.Component {
         addToCartHandler={addToCartHandler}
       >
         <div className={this.props.classes.wrapperStyle}>
-          <Paper className={classes.root} elevation={1}>
-            {product_id && product_id !== 'undefined'
-              ? <ProductDetailsWrapper
-                checkPincodeState={checkPincodeState}
-                getProductDetailLoading={actions.getProductDetailLoading}
-                addToCartHandler={addToCartHandler}
-                onChangeQuantity={actions.onChangeQuantity}
-              />
-              : 'Page not found'}
-          </Paper>
+          <ActivityIndicator
+            isError={this.props.productDetailsState.errorStateGetProductDetails.isError}
+            ErrorComp={this.getErrorComponent()}
+          >
+            <Paper className={classes.root} elevation={1}>
+              {product_id && product_id !== 'undefined'
+                ? <ProductDetailsWrapper
+                  checkPincodeState={checkPincodeState}
+                  getProductDetailLoading={actions.getProductDetailLoading}
+                  addToCartHandler={addToCartHandler}
+                  onChangeQuantity={actions.onChangeQuantity}
+                />
+                : 'Page not found'}
+            </Paper>
+          </ActivityIndicator>
         </div>
       </Layout>
     )

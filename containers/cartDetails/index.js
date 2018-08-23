@@ -11,6 +11,10 @@ import BreadCrumbs from '../../components/BreadCrumbs'
 import OrderSummary from './OrderSummary'
 import CartDetails from './CartDetails'
 
+import ActivityIndicator from '../../components/activityIndicator/index'
+import FullPageError from '../../components/activityIndicator/error/FullPageError'
+import SnackbarErrorMessage from '../../components/activityIndicator/error/SnackbarErrorMessage'
+
 import {
   updateIsCartOpenLoginFlag,
   getCartDetailsLoading,
@@ -28,7 +32,11 @@ import {
   updateCouponCode,
   optForDoctorCallbackLoading,
   optForExpressDeliveryLoading,
-  resetApiStateSubmitOrder
+  resetApiStateSubmitOrder,
+  resetCouponDetail,
+  resetSavePatientToCartError,
+  resetSaveDeliveryAddressToCartError,
+  resetUploadPrescriptionError
 } from './cartActions'
 
 import {
@@ -64,6 +72,12 @@ const styles = theme => ({
 })
 
 class CartDetailsWrapper extends Component {
+  constructor (props) {
+    super(props)
+    this.getErrorComponent = this.getErrorComponent.bind(this)
+    this.tryAgain = this.tryAgain.bind(this)
+    this.resetState = this.resetState.bind(this)
+  }
   componentDidMount () {
     const cartUid = this.props.cartState.payload.uid
     this.props.actions.getCartDetailsLoading(this.props.cartState, cartUid)
@@ -100,6 +114,49 @@ class CartDetailsWrapper extends Component {
     }
   }
 
+  tryAgain () {
+    this.props.actions.getCartDetailsLoading(
+      this.props.cartState,
+      this.props.cartState.payload.uid
+    )
+  }
+
+  resetState () {
+    this.props.actions.resetSavePatientToCartError()
+    this.props.actions.resetSaveDeliveryAddressToCartError()
+    this.props.actions.resetUploadPrescriptionError()
+  }
+
+  getErrorComponent () {
+    if (this.props.cartState.errorState.isError) {
+      return (
+        <FullPageError
+          error={
+            this.props.cartState.errorState.error
+          }
+          tryAgain={this.tryAgain}
+        />
+      )
+    } else {
+      return (
+        <SnackbarErrorMessage
+          error={
+            this.props.patientDetailsState.errorState.error ||
+            this.props.deliveryDetailsState.errorState.error ||
+            this.props.cartState.orderResponse.errorState.error ||
+            this.props.cartState.prescriptionDetails.errorState.error ||
+            this.props.cartState.expressDeliveryCheck.errorState.error ||
+            this.props.cartState.payload.cart_items.errorState.error ||
+            this.props.cartState.payload.is_doctor_callback.errorState.error ||
+            this.props.cartState.payload.patient_details.errorState.error ||
+            this.props.cartState.payload.shipping_address_details.errorState.error
+          }
+          resetState={this.resetState}
+        />
+      )
+    }
+  }
+
   render () {
     const { classes } = this.props
     const submitOrderLoading = this.props.cartState.orderResponse.isLoading
@@ -113,76 +170,94 @@ class CartDetailsWrapper extends Component {
           isLoading={submitOrderLoading}
           orderNumber={this.props.cartState.orderResponse.payload.order_number}
         />
-        <Grid
-          container
-          className={submitOrderLoading ? classes.blurCartPage : ''}
+        <ActivityIndicator
+          isError={
+            this.props.cartState.errorState.isError ||
+            this.props.patientDetailsState.errorState.isError ||
+            this.props.deliveryDetailsState.errorState.isError ||
+            this.props.cartState.orderResponse.errorState.isError ||
+            this.props.cartState.prescriptionDetails.errorState.isError ||
+            this.props.cartState.expressDeliveryCheck.errorState.isError ||
+            this.props.cartState.payload.cart_items.errorState.isError ||
+            this.props.cartState.payload.is_doctor_callback.errorState.isError ||
+            this.props.cartState.payload.patient_details.errorState.isError ||
+            this.props.cartState.payload.shipping_address_details.errorState.isError
+          }
+          ErrorComp={this.getErrorComponent()}
+          bottomError={!this.props.cartState.errorState.isError}
         >
-          <Grid item xs={7}>
-            <section>
-              <OrderSummary
-                loginState={this.props.loginState}
-                cartState={this.props.cartState}
-                customerState={this.props.customerState}
-                patientDetailsState={this.props.patientDetailsState}
-                deliveryDetailsState={this.props.deliveryDetailsState}
-                savePatientToCartLoading={
-                  this.props.actions.savePatientToCartLoading
-                }
-                saveDeliveryAddressToCartLoading={
-                  this.props.actions.saveDeliveryAddressToCartLoading
-                }
-                updateIsCartOpenLoginFlag={
-                  this.props.actions.updateIsCartOpenLoginFlag
-                }
-                uploadPrescriptionLoading={
-                  this.props.actions.uploadPrescriptionLoading
-                }
-                deletePrescriptionLoading={
-                  this.props.actions.deletePrescriptionLoading
-                }
-                submitOrderLoading={this.props.actions.submitOrderLoading}
-                updateIsCartOpenRegisterModalFlag={
-                  this.props.actions.updateIsCartOpenRegisterModalFlag
-                }
-                submitPatientDetailsLoading={
-                  this.props.actions.submitPatientDetailsLoading
-                }
-                submitDeliveryDetailsLoading={
-                  this.props.actions.submitDeliveryDetailsLoading
-                }
-                optForDoctorCallbackLoading={
-                  this.props.actions.optForDoctorCallbackLoading
-                }
-                updateAddressFormValue={
-                  this.props.actions.updateAddressFormValue
-                }
-                checkPincodeLoading={this.props.actions.checkPincodeLoading}
-                getLocalityDetailListLoading={this.props.actions.getLocalityDetailListLoading}
-                optForExpressDeliveryLoading={this.props.actions.optForExpressDeliveryLoading}
-              />
-            </section>
+          <Grid
+            container
+            className={submitOrderLoading ? classes.blurCartPage : ''}
+          >
+            <Grid item xs={7}>
+              <section>
+                <OrderSummary
+                  loginState={this.props.loginState}
+                  cartState={this.props.cartState}
+                  customerState={this.props.customerState}
+                  patientDetailsState={this.props.patientDetailsState}
+                  deliveryDetailsState={this.props.deliveryDetailsState}
+                  savePatientToCartLoading={
+                    this.props.actions.savePatientToCartLoading
+                  }
+                  saveDeliveryAddressToCartLoading={
+                    this.props.actions.saveDeliveryAddressToCartLoading
+                  }
+                  updateIsCartOpenLoginFlag={
+                    this.props.actions.updateIsCartOpenLoginFlag
+                  }
+                  uploadPrescriptionLoading={
+                    this.props.actions.uploadPrescriptionLoading
+                  }
+                  deletePrescriptionLoading={
+                    this.props.actions.deletePrescriptionLoading
+                  }
+                  submitOrderLoading={this.props.actions.submitOrderLoading}
+                  updateIsCartOpenRegisterModalFlag={
+                    this.props.actions.updateIsCartOpenRegisterModalFlag
+                  }
+                  submitPatientDetailsLoading={
+                    this.props.actions.submitPatientDetailsLoading
+                  }
+                  submitDeliveryDetailsLoading={
+                    this.props.actions.submitDeliveryDetailsLoading
+                  }
+                  optForDoctorCallbackLoading={
+                    this.props.actions.optForDoctorCallbackLoading
+                  }
+                  updateAddressFormValue={
+                    this.props.actions.updateAddressFormValue
+                  }
+                  checkPincodeLoading={this.props.actions.checkPincodeLoading}
+                  getLocalityDetailListLoading={this.props.actions.getLocalityDetailListLoading}
+                  optForExpressDeliveryLoading={this.props.actions.optForExpressDeliveryLoading}
+                />
+              </section>
+            </Grid>
+            <Grid item xs={5}>
+              <section className={classes.stickyWrapper}>
+                <CartDetails
+                  cartState={this.props.cartState}
+                  incrementCartItemLoading={
+                    this.props.actions.incrementCartItemLoading
+                  }
+                  decrementCartItemLoading={
+                    this.props.actions.decrementCartItemLoading
+                  }
+                  deleteCartItemLoading={this.props.actions.deleteCartItemLoading}
+                  resetCartState={this.props.actions.resetCartState}
+                  applyCouponCodeLoading={
+                    this.props.actions.applyCouponCodeLoading
+                  }
+                  updateCouponCode={this.props.actions.updateCouponCode}
+                  checkPincodeState={this.props.checkPincodeState}
+                  resetCouponDetail={this.props.actions.resetCouponDetail}
+                />
+              </section>
+            </Grid>
           </Grid>
-          <Grid item xs={5}>
-            <section className={classes.stickyWrapper}>
-              <CartDetails
-                cartState={this.props.cartState}
-                incrementCartItemLoading={
-                  this.props.actions.incrementCartItemLoading
-                }
-                decrementCartItemLoading={
-                  this.props.actions.decrementCartItemLoading
-                }
-                deleteCartItemLoading={this.props.actions.deleteCartItemLoading}
-                resetCartState={this.props.actions.resetCartState}
-                applyCouponCodeLoading={
-                  this.props.actions.applyCouponCodeLoading
-                }
-                updateCouponCode={this.props.actions.updateCouponCode}
-                checkPincodeState={this.props.checkPincodeState}
-              />
-            </section>
-          </Grid>
-        </Grid>
+        </ActivityIndicator>
         {/* </ActivityIndicator> */}
       </div>
     )
@@ -227,7 +302,11 @@ function mapDispatchToProps (dispatch) {
         getLocalityDetailListLoading,
         checkPincodeLoading,
         optForExpressDeliveryLoading,
-        resetApiStateSubmitOrder
+        resetApiStateSubmitOrder,
+        resetCouponDetail,
+        resetSavePatientToCartError,
+        resetSaveDeliveryAddressToCartError,
+        resetUploadPrescriptionError
       },
       dispatch
     )

@@ -11,6 +11,8 @@ import ActivityIndicator from '../../components/activityIndicator/index'
 import MultipleMedicineLoader
   from '../../components/activityIndicator/loader/medicineListLoader/MultipleMedicineLoader'
 
+import ComponentSpecificError from '../../components/activityIndicator/error/ComponentSpecificError'
+
 const styles = theme => {
   return {
     medicineListWrapper: {
@@ -33,6 +35,12 @@ const styles = theme => {
 }
 
 class RefillMedicineList extends Component {
+  tryAgain () {
+    this.props.getRefillPastMedicinesLoading(
+      this.props.pastMedicineState,
+      this.props.pastMedicineState.selectedPatientId
+    )
+  }
   render () {
     return (
       <div>
@@ -47,6 +55,13 @@ class RefillMedicineList extends Component {
               Treatments of {this.props.pastMedicineState.selectedPatientName}
             </Typography>
             <ActivityIndicator
+              isError={this.props.pastMedicineState.errorState.isError}
+              ErrorComp={
+                <ComponentSpecificError
+                  error={this.props.pastMedicineState.errorState.error}
+                  tryAgain={this.tryAgain.bind(this)}
+                />
+              }
               isLoading={this.props.isLoading}
               LoaderComp={<MultipleMedicineLoader />}
             >
@@ -54,6 +69,7 @@ class RefillMedicineList extends Component {
                 {this.props.pastMedicineState.payload.map(itemDetails => (
                   <li className={this.props.classes.listItem}>
                     <MedicineListDetails
+                      isLoading={this.props.isLoading}
                       itemDetails={itemDetails}
                       isRefillMedicines
                       addToCartHandler={this.props.addToCartHandler}

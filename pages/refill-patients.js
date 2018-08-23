@@ -18,6 +18,10 @@ import {
 // page title
 import { refillPatient } from '../components/constants/PageTitle'
 
+// activity indicator
+import ActivityIndicator from '../components/activityIndicator'
+import FullPageError from '../components/activityIndicator/error/FullPageError'
+
 const styles = theme => ({
   root: {
     paddingTop: theme.spacing.unit * 3,
@@ -39,7 +43,11 @@ const styles = theme => ({
 })
 
 class RefillPatient extends Component {
-  componentDidMount () {
+  constructor (props) {
+    super(props)
+    this.getRefillDetail = this.getRefillDetail.bind(this)
+  }
+  getRefillDetail () {
     // let customerId = this.props.customerState.payload.id
     const { query } = Router
 
@@ -53,6 +61,13 @@ class RefillPatient extends Component {
       { isRefillPatients: true }
     )
   }
+  componentDidMount () {
+    this.getRefillDetail()
+  }
+
+  tryAgain () {
+    this.getRefillDetail()
+  }
 
   render () {
     const { addToCartHandler, classes } = this.props
@@ -63,11 +78,21 @@ class RefillPatient extends Component {
         addToCartHandler={addToCartHandler}
       >
         <div className={classes.wrapperStyle}>
-          <Paper className={classes.root} elevation={1}>
-            <RefillPatientsWrapper
-              addToCartHandler={this.props.addToCartHandler}
-            />
-          </Paper>
+          <ActivityIndicator
+            isError={this.props.patientDetailsState.errorState.isError}
+            ErrorComp={
+              <FullPageError
+                error={this.props.patientDetailsState.errorState.error}
+                tryAgain={this.tryAgain.bind(this)}
+              />
+            }
+          >
+            <Paper className={classes.root} elevation={1}>
+              <RefillPatientsWrapper
+                addToCartHandler={this.props.addToCartHandler}
+              />
+            </Paper>
+          </ActivityIndicator>
         </div>
       </Layout>
     )

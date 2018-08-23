@@ -21,6 +21,11 @@ import {
 // page title
 import { medicineList } from '../components/constants/PageTitle'
 
+// activity indicatoe
+import ActivityIndicator from '../components/activityIndicator'
+import FullPageError from '../components/activityIndicator/error/FullPageError'
+import SnackbarErrorMessage from '../components/activityIndicator/error/SnackbarErrorMessage'
+
 const styles = theme => ({
   root: {
     paddingTop: theme.spacing.unit * 3,
@@ -39,11 +44,20 @@ const styles = theme => ({
 })
 
 class MedicineList extends React.Component {
+  constructor (props) {
+    super(props)
+    this.state = {
+      isShowMore: false
+    }
+    this.getMedicineDetail = this.getMedicineDetail.bind(this)
+    this.tryAgain = this.tryAgain.bind(this)
+    this.getErrorComponent = this.getErrorComponent.bind(this)
+  }
   static getInitialProps ({ query }) {
     return query
   }
 
-  componentDidMount () {
+  getMedicineDetail () {
     const { query } = Router
     // Represents to get medicine list with page size and size per page.
     if (query.moleculeName) {
@@ -51,7 +65,8 @@ class MedicineList extends React.Component {
         this.props.medicineListState,
         query.moleculeName, // pass salt name
         0, // page number
-        10 // page size
+        10, // page size
+        false // is show more button
       )
     }
 
@@ -62,6 +77,49 @@ class MedicineList extends React.Component {
         query.productName,
         0, // page number
         10 // page size
+      )
+    }
+
+    this.setState({
+      isShowMore: false
+    })
+  }
+
+  updateIsShowMore () {
+    this.setState({
+      isShowMore: true
+    })
+  }
+
+  componentDidMount () {
+    this.getMedicineDetail()
+  }
+
+  tryAgain () {
+    this.getMedicineDetail()
+  }
+
+  getErrorComponent () {
+    if (this.state.isShowMore) {
+      return (
+        <SnackbarErrorMessage
+          error={
+            this.props.searchMedicineState.errorState.isError
+              ? this.props.searchMedicineState.errorState
+              : this.props.medicineListState.errorState.error
+          }
+        />
+      )
+    } else if (!this.state.isShowMore) {
+      return (
+        <FullPageError
+          error={
+            this.props.searchMedicineState.errorState.isError
+              ? this.props.searchMedicineState.errorState
+              : this.props.medicineListState.errorState.error
+          }
+          tryAgain={this.tryAgain}
+        />
       )
     }
   }
@@ -79,22 +137,33 @@ class MedicineList extends React.Component {
     return (
       <Layout title={medicineList.title} addToCartHandler={addToCartHandler}>
         <div className={this.props.classes.root}>
-          <MedicineListWrapper
-            isLoadingRelatedMedicine={medicineListState.isLoading}
-            isLoadingSearchMedicine={searchMedicineState.isLoading}
-            searchMedicineState={searchMedicineState}
-            addToCartHandler={addToCartHandler}
-            checkPincodeState={checkPincodeState}
-            moleculeName={moleculeName}
-            productName={productName}
-            searchMedicineLoading={actions.searchMedicineLoading}
-            getRelatedMedicinesLoading={actions.getRelatedMedicinesLoading}
-            medicineState={
-              productName
-                ? searchMedicineState.payload.searchMedicineResult
-                : medicineListState.payload
+          <ActivityIndicator
+            isError={
+              this.props.medicineListState.errorState.isError ||
+              this.props.searchMedicineState.errorState.isError
             }
-          />
+            ErrorComp={this.getErrorComponent()}
+            bottomError={this.state.isShowMore}
+          >
+            <MedicineListWrapper
+              isLoadingRelatedMedicine={medicineListState.isLoading}
+              isLoadingSearchMedicine={searchMedicineState.isLoading}
+              searchMedicineState={searchMedicineState}
+              addToCartHandler={addToCartHandler}
+              checkPincodeState={checkPincodeState}
+              moleculeName={moleculeName}
+              productName={productName}
+              searchMedicineLoading={actions.searchMedicineLoading}
+              getRelatedMedicinesLoading={actions.getRelatedMedicinesLoading}
+              medicineState={
+                productName
+                  ? searchMedicineState.payload.searchMedicineResult
+                  : medicineListState.payload
+              }
+
+              updateIsShowMore={this.updateIsShowMore.bind(this)}
+            />
+          </ActivityIndicator>
         </div>
       </Layout>
     )
