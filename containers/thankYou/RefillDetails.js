@@ -87,8 +87,8 @@ class RefillDetails extends Component {
 
   componentDidUpdate (prevProps) {
     if (
-      this.props.thankYouState.payload.repeat_day !==
-      prevProps.thankYouState.payload.repeat_day
+      this.props.thankYouState.payload.next_refill_day !==
+      prevProps.thankYouState.payload.next_refill_day
     ) {
       this.setState({
         open: true
@@ -104,7 +104,7 @@ class RefillDetails extends Component {
 
   render () {
     let date = new Date()
-    date = date.setDate(date.getDate() + this.props.thankYouState.payload.repeat_day)
+    date = date.setDate(date.getDate() + this.props.thankYouState.payload.next_refill_day)
     let refillDate = formatDate(date)
     return (
       <div>
