@@ -131,7 +131,8 @@ export function withCommonWrapper (Page) {
           openPincodeDialog,
           checkPincodeLoading,
           getAnonymousCartIdLoading,
-          resetCartItemErrorState
+          resetCartItemErrorState,
+          resetCartState
         },
         dispatch
       )
