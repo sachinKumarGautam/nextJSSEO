@@ -52,12 +52,13 @@ class ProductDetails extends React.Component {
   constructor (props) {
     super(props)
     this.getErrorComponent = this.getErrorComponent.bind(this)
+    this.getProductDetail = this.getProductDetail.bind(this)
   }
   static getInitialProps ({ query }) {
     return query
   }
 
-  componentDidMount () {
+  getProductDetail() {
     const { query } = Router
     if (query.product_id) {
       this.props.actions.getProductDetailLoading(
@@ -66,6 +67,10 @@ class ProductDetails extends React.Component {
         query.location
       )
     }
+  }
+
+  componentDidMount () {
+    this.getProductDetail()
   }
 
   componentDidUpdate (prevProps) {
@@ -80,12 +85,7 @@ class ProductDetails extends React.Component {
   }
 
   tryAgain () {
-    const { query } = Router
-    this.props.actions.getProductDetailLoading(
-      this.props.productDetailsState,
-      query.product_id,
-      query.location
-    )
+    this.getProductDetail()
   }
 
   getErrorComponent () {

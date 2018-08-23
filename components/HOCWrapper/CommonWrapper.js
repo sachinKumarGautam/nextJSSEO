@@ -19,6 +19,11 @@ import ActivityIndicator from '../activityIndicator/index'
 import SnackbarErrorMessage from '../activityIndicator/error/SnackbarErrorMessage'
 import DialogueErrorMessage from '../activityIndicator/error/DialogueErrorMessage'
 
+import {
+  INVALID_CART_TEXT,
+  INVALID_CART_DESCRIPTION
+} from '../../containers/messages/errorMessages'
+
 export function withCommonWrapper (Page) {
   class CommonWrapper extends React.Component {
     static getInitialProps (ctx) {
@@ -83,8 +88,8 @@ export function withCommonWrapper (Page) {
             ErrorComp={
               this.props.cartState.payload.is_cart_invalid
                 ? <DialogueErrorMessage
-                  dialogueTitle={'Invalid Cart'}
-                  dialogueContent={'This cart became invalid as you have already placed this order!'}
+                  dialogueTitle={INVALID_CART_TEXT}
+                  dialogueContent={INVALID_CART_DESCRIPTION}
                   handleCartInvalid={this.handleCartInvalid.bind(this)}
                 />
                 : <SnackbarErrorMessage

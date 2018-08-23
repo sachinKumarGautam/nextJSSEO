@@ -12,6 +12,10 @@ import TextErrorMessage from '../../components/activityIndicator/error/TextError
 
 import { PRODUCT_SEARCH } from '../../routes/RouteConstant'
 
+import {
+  CUSTOM_MESSGAE_SNACKBAR
+} from '../messages/errorMessages'
+
 const styles = theme => ({
   root: {
     flexGrow: 1
@@ -235,7 +239,7 @@ class SearchMedicine extends React.Component {
           <TextErrorMessage
             errorMessage={this.props.searchMedicineState.errorState.error.response
               ? this.props.searchMedicineState.errorState.error.response.body.error.message
-              : 'Oops!! Something went wrong'}
+              : CUSTOM_MESSGAE_SNACKBAR}
             customStyle={this.props.classes.errorMessage}
           />
         }
