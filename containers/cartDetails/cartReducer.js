@@ -416,6 +416,27 @@ export default function cartReducer (state = initialState, action) {
             isError: action.isError,
             error: action.error
           }
+        },
+        payload: {
+          ...state.payload,
+          is_doctor_callback: {
+            ...state.payload.is_doctor_callback,
+            isLoading: action.isLoading,
+            errorState: {
+              ...state.payload.is_doctor_callback.errorState,
+              isError: action.isError,
+              error: {}
+            }
+          }
+        },
+        expressDeliveryCheck: {
+          ...state.expressDeliveryCheck,
+          isLoading: action.isLoading,
+          errorState: {
+            ...state.expressDeliveryCheck.errorState,
+            error: action.error,
+            isError: action.isError
+          }
         }
       }
 
