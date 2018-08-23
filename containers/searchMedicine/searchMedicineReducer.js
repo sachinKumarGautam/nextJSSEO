@@ -25,7 +25,8 @@ export default function searchMedicineReducer (state = initialState, action) {
         ...state,
         payload: {
           ...state.payload,
-          searchMedicineResult: action.payload
+          searchMedicineResult: action.payload,
+          totalPages: action.totalPages
         },
         isLoading: action.isLoading
       }

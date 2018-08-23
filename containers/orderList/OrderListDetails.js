@@ -122,7 +122,7 @@ class OrderListDetails extends Component {
             })}
           </ActivityIndicator>
           {
-            this.props.orderListState.payload.length > 9 &&
+            this.state.page !== this.props.orderListState.totalPages &&
             <div className={this.props.classes.buttonWrapper}>
               <Button
                 size='medium'

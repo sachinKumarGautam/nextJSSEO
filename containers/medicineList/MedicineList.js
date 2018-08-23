@@ -128,7 +128,9 @@ class MedicineList extends React.Component {
             </CardContent>
           </ActivityIndicator>
         </Card>
-        {medicineListState &&
+        {
+          medicineListState &&
+          this.state.page !== this.props.searchMedicineState.payload.totalPages &&
           <div className={classes.buttonWrapper}>
             <Button
               size='medium'
