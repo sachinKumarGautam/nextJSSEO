@@ -17,12 +17,11 @@ const styles = theme => ({
 
 function CommonSpinner (props) {
   const { classes, customStyle, size } = props
-  const loaderClassNames = `${classes.progressWrapper} ${classes.customStyle}`
   return (
     <CircularProgress
       className={props.customStyle}
       size={size || 50}
-      thickness={2}
+      thickness={4}
     />
   )
 }

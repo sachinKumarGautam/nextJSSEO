@@ -99,13 +99,12 @@ export function submitDeliveryDetailsLoading (
 
 export function submitDeliveryDetailsSuccess (
   deliveryDetailsState,
-  result,
   modifiedAddressDetailsList
 ) {
   return {
     type: SUBMIT_DELIVERY_DETAILS_SUCCESS,
     deliveryDetailsState,
-    isLoading: true,
+    isLoading: false,
     modifiedAddressDetailsList: modifiedAddressDetailsList
   }
 }

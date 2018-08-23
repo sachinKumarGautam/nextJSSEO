@@ -19,9 +19,26 @@ export function searchMedicine (action$, store) {
     ofType(SEARCH_MEDICINE_LOADING),
     mergeMap(data => {
       const searchMedicineState = store.getState().searchMedicineState
-      return http(searchMedicine$(data.value, data.facilityId)).pipe(
+      return http(
+        searchMedicine$(
+          data.value,
+          data.facilityId,
+          data.pageNumber,
+          data.pageSize
+        )
+      ).pipe(
         map(result => {
-          return searchMedicineSuccess(searchMedicineState, result)
+          let modifiedResponse
+          if (data.pageNumber) {
+            modifiedResponse = [
+              ...searchMedicineState.payload.searchMedicineResult,
+              ...result.body.payload.content
+            ]
+          } else {
+            modifiedResponse = result.body.payload.content
+          }
+
+          return searchMedicineSuccess(searchMedicineState, modifiedResponse)
         }),
         catchError(error => {
           return of(searchMedicineFailure(searchMedicineState, error))

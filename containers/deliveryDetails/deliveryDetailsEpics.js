@@ -105,18 +105,18 @@ export function submitDeliveryDetails (action$, store) {
 
           if (data.isCartPage) {
             return of(
-              submitDeliveryDetailsSuccess(deliveryDetailsState, result, modifiedAddressDetailsList),
+              submitDeliveryDetailsSuccess(deliveryDetailsState, modifiedAddressDetailsList),
               saveDeliveryAddressToCartLoading(cartState, result.body.payload.id),
               getDeliveryDetailsListLoading(deliveryDetailsState, data.customerId)
             )
           } else {
             if (data.isEdit) {
               return of(
-                submitDeliveryDetailsSuccess(deliveryDetailsState, result, modifiedAddressDetailsList)
+                submitDeliveryDetailsSuccess(deliveryDetailsState, modifiedAddressDetailsList)
               )
             } else {
               return of(
-                submitDeliveryDetailsSuccess(deliveryDetailsState, result, modifiedAddressDetailsList),
+                submitDeliveryDetailsSuccess(deliveryDetailsState, modifiedAddressDetailsList),
                 getDeliveryDetailsListLoading(deliveryDetailsState, data.customerId)
               )
             }

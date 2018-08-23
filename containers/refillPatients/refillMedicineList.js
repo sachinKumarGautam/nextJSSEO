@@ -7,8 +7,10 @@ import CardContent from '@material-ui/core/CardContent'
 import Typography from '@material-ui/core/Typography'
 
 import MedicineListDetails from '../../components/MedicineListDetails'
+import ActivityIndicator from '../../components/activityIndicator/index'
+import MultipleMedicineLoader
+  from '../../components/activityIndicator/loader/medicineListLoader/MultipleMedicineLoader'
 
-import ActivityIndicator from '../../components/activityIndicator'
 import ComponentSpecificError from '../../components/activityIndicator/error/ComponentSpecificError'
 
 const styles = theme => {
@@ -60,6 +62,8 @@ class RefillMedicineList extends Component {
                   tryAgain={this.tryAgain.bind(this)}
                 />
               }
+              isLoading={this.props.isLoading}
+              LoaderComp={<MultipleMedicineLoader />}
             >
               <ul className={this.props.classes.medicineListWrapper}>
                 {this.props.pastMedicineState.payload.map(itemDetails => (

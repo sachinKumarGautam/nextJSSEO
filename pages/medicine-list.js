@@ -46,6 +46,9 @@ const styles = theme => ({
 class MedicineList extends React.Component {
   constructor (props) {
     super(props)
+    this.state = {
+      isShowMore: false
+    }
     this.getMedicineDetail = this.getMedicineDetail.bind(this)
     this.tryAgain = this.tryAgain.bind(this)
     this.getErrorComponent = this.getErrorComponent.bind(this)
@@ -71,9 +74,21 @@ class MedicineList extends React.Component {
       this.props.actions.searchMedicineLoading(
         this.props.searchMedicineState,
         this.props.checkPincodeState.payload.id,
-        query.productName
+        query.productName,
+        0, // page number
+        10 // page size
       )
     }
+
+    this.setState({
+      isShowMore: false
+    })
+  }
+
+  updateIsShowMore () {
+    this.setState({
+      isShowMore: true
+    })
   }
 
   componentDidMount () {
@@ -85,7 +100,7 @@ class MedicineList extends React.Component {
   }
 
   getErrorComponent () {
-    if (this.props.medicineListState.isShowMore) {
+    if (this.state.isShowMore) {
       return (
         <SnackbarErrorMessage
           error={
@@ -95,7 +110,7 @@ class MedicineList extends React.Component {
           }
         />
       )
-    } else if (!this.props.medicineListState.isShowMore) {
+    } else if (!this.state.isShowMore) {
       return (
         <FullPageError
           error={
@@ -120,10 +135,7 @@ class MedicineList extends React.Component {
       productName
     } = this.props
     return (
-      <Layout
-        title={medicineList.title}
-        addToCartHandler={addToCartHandler}
-      >
+      <Layout title={medicineList.title} addToCartHandler={addToCartHandler}>
         <div className={this.props.classes.root}>
           <ActivityIndicator
             isError={
@@ -131,11 +143,12 @@ class MedicineList extends React.Component {
               this.props.searchMedicineState.errorState.isError
             }
             ErrorComp={this.getErrorComponent()}
-            bottomError={this.props.medicineListState.isShowMore}
+            bottomError={this.state.isShowMore}
           >
             <MedicineListWrapper
               isLoadingRelatedMedicine={medicineListState.isLoading}
               isLoadingSearchMedicine={searchMedicineState.isLoading}
+              searchMedicineState={searchMedicineState}
               addToCartHandler={addToCartHandler}
               checkPincodeState={checkPincodeState}
               moleculeName={moleculeName}
@@ -147,7 +160,8 @@ class MedicineList extends React.Component {
                   ? searchMedicineState.payload.searchMedicineResult
                   : medicineListState.payload
               }
-              bottomError={this.props.medicineListState.isShowMore}
+
+              updateIsShowMore={this.updateIsShowMore.bind(this)}
             />
           </ActivityIndicator>
         </div>

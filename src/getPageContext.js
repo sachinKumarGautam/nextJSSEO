@@ -36,6 +36,7 @@ const theme = createMuiTheme({
       yellow400: '#f5a623'
     },
     customGreen: {
+      green100: 'rgba(128, 194, 65, 0.08)',
       green200: '#F3FDE8',
       green300: '#78b437',
       green400: '#389e48'
