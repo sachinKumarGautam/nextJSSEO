@@ -18,6 +18,7 @@ import SnackbarErrorMessage from '../../components/activityIndicator/error/Snack
 
 import { getReplacedString } from '../../utils/replaceConstants'
 import { ORDER_DETAILS } from '../../routes/RouteConstant'
+import {NO_ORDER_LIST} from '../messages/noDataMessage'
 
 import Router from 'next/router'
 
@@ -55,6 +56,12 @@ const styles = theme => ({
   },
   button: {
     marginBottom: theme.spacing.unit * 14
+  },
+  noContent: {
+    color: theme.palette.customGrey.grey500,
+    textAlign: 'center',
+    marginTop: theme.spacing.unit * 1.25,
+    fontWeight: theme.typography.fontWeightBold
   }
 })
 
@@ -133,37 +140,50 @@ class OrderListDetails extends Component {
             }
             bottomError={this.state.isShowMore}
           >
-            {this.props.orderListState.payload.map(orderDetails => {
-              return (
-                <div
-                  className={this.props.classes.orderDetailWrapper}
-                >
-                  <OrderHeader
-                    orderDetails={orderDetails}
-                    redirectToOrderDeatails={this.redirectToOrderDeatails.bind(this, orderDetails.id)}
+            {this.props.orderListState.payload.length
+              ? this.props.orderListState.payload.map(orderDetails => {
+                return (
+                  <div
+                    className={this.props.classes.orderDetailWrapper}
+                  >
+                    <OrderHeader
+                      orderDetails={orderDetails}
+                      redirectToOrderDeatails={this.redirectToOrderDeatails.bind(this, orderDetails.id)}
+                    />
+                    <Divider />
+                    <OrderContent orderDetails={orderDetails} />
+                    <Divider />
+                    <OrderFooter orderDetails={orderDetails} />
+                  </div>
+                )
+              })
+              : <Typography
+                gutterBottom
+                variant='body2'
+                className={this.props.classes.noContent}
+              >
+                {NO_ORDER_LIST}
+              </Typography>
+            }
+            {
+              this.props.orderListState.payload.length
+                ? <div className={this.props.classes.buttonWrapper}>
+                  <Button
+                    size='medium'
+                    loaderColor={'primary'}
+                    // isloading={orderListState.isLoading}
+                    variant='outlined'
+                    className={this.props.classes.button}
+                    classes={{
+                      root: this.props.classes.buttonRoot,
+                      label: this.props.classes.buttonLabel
+                    }}
+                    onClick={this.onClickOfShowMore.bind(this)}
+                    label={'Show more'}
                   />
-                  <Divider />
-                  <OrderContent orderDetails={orderDetails} />
-                  <Divider />
-                  <OrderFooter orderDetails={orderDetails} />
                 </div>
-              )
-            })}
-            <div className={this.props.classes.buttonWrapper}>
-              <Button
-                size='medium'
-                loaderColor={'primary'}
-                // isloading={orderListState.isLoading}
-                variant='outlined'
-                className={this.props.classes.button}
-                classes={{
-                  root: this.props.classes.buttonRoot,
-                  label: this.props.classes.buttonLabel
-                }}
-                onClick={this.onClickOfShowMore.bind(this)}
-                label={'Show more'}
-              />
-            </div>
+                : null
+            }
           </ActivityIndicator>
         </CardContent>
       </Card>

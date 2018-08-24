@@ -11,6 +11,10 @@ export default function searchMedicineReducer (state = initialState, action) {
     case SEARCH_MEDICINE_LOADING:
       return {
         ...state,
+        payload: {
+          ...state.payload,
+          searchMedicineResult: action.payload
+        },
         isLoading: action.isLoading,
         errorState: {
           ...state.errorState,
