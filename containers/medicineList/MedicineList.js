@@ -12,6 +12,10 @@ import MultipleMedicineLoader
   from '../../components/activityIndicator/loader/medicineListLoader/MultipleMedicineLoader'
 import ActivityIndicator from '../../components/activityIndicator'
 
+import {
+  NO_MEDICINE_LIST
+} from '../messages/noDataMessage'
+
 const styles = theme => {
   return {
     title: {
@@ -47,6 +51,12 @@ const styles = theme => {
       display: 'flex',
       justifyContent: 'center',
       marginTop: theme.spacing.unit * 4
+    },
+    noMedicineText: {
+      color: theme.palette.customGrey.grey500,
+      textAlign: 'center',
+      marginTop: theme.spacing.unit * 1.25,
+      fontWeight: theme.typography.fontWeightBold
     }
   }
 }
@@ -116,23 +126,34 @@ class MedicineList extends React.Component {
             LoaderComp={<MultipleMedicineLoader />}
           >
             <CardContent>
-              <ul className={classes.articleListWrapper}>
-                {medicineListState.map(itemDetails => (
-                  <li className={classes.listItem}>
-                    <MedicineListDetails
-                      isLoading={isLoading}
-                      itemDetails={itemDetails}
-                      addToCartHandler={addToCartHandler}
-                      checkPincodeState={checkPincodeState}
-                    />
-                  </li>
-                ))}
-              </ul>
+              {
+                medicineListState.length
+                  ? <ul className={classes.articleListWrapper}>
+                    {medicineListState.map(itemDetails => (
+                      <li className={classes.listItem}>
+                        <MedicineListDetails
+                          isLoading={isLoading}
+                          itemDetails={itemDetails}
+                          addToCartHandler={addToCartHandler}
+                          checkPincodeState={checkPincodeState}
+                        />
+                      </li>
+                    ))}
+                  </ul>
+                  : <Typography
+                    gutterBottom
+                    variant='body2'
+                    className={classes.noMedicineText}
+                  >
+                    {NO_MEDICINE_LIST}
+                  </Typography>
+              }
+
             </CardContent>
           </ActivityIndicator>
         </Card>
-        {medicineListState &&
-          <div className={classes.buttonWrapper}>
+        {medicineListState.length
+          ? <div className={classes.buttonWrapper}>
             <Button
               size='medium'
               variant='outlined'
@@ -147,7 +168,9 @@ class MedicineList extends React.Component {
               onClick={this.onClickOfShowMore}
               label={'Show more'}
             />
-          </div>}
+          </div>
+          : null
+        }
       </div>
     )
   }

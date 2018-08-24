@@ -58,7 +58,7 @@ class ProductDetails extends React.Component {
     return query
   }
 
-  getProductDetail() {
+  getProductDetail () {
     const { query } = Router
     if (query.product_id) {
       this.props.actions.getProductDetailLoading(

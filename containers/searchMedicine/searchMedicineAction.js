@@ -25,7 +25,8 @@ export function searchMedicineLoading (
     pageSize,
     isLoading: true,
     isError: false,
-    error: null
+    error: null,
+    payload: []
   }
 }
 

@@ -7,6 +7,8 @@ import MultipleCardLoader
   from '../../components/activityIndicator/loader/cardLoader/MultipleCardLoader'
 import ActivityIndicator from '../../components/activityIndicator'
 import ComponentSpecificError from '../../components/activityIndicator/error/ComponentSpecificError'
+import Typography from '@material-ui/core/Typography'
+import {NO_PRESCRIPTION_LIST} from '../messages/noDataMessage'
 
 class PrescriptionContentWrapper extends React.Component {
   tryAgain () {
@@ -19,7 +21,10 @@ class PrescriptionContentWrapper extends React.Component {
     const { isLoading } = this.props.prescriptionState
     return (
       <Grid
-        container={!this.props.prescriptionState.errorState.isError}
+        container={
+          !this.props.prescriptionState.errorState.isError &&
+          this.props.prescriptionState.payload.length
+        }
         spacing={24}
       >
         <ActivityIndicator
@@ -33,18 +38,28 @@ class PrescriptionContentWrapper extends React.Component {
             />
           }
         >
-          {this.props.prescriptionState.payload.map(prescriptionDetails => {
-            return prescriptionDetails.prescription.map(prescription => {
-              return (
-                <Grid item xs={6}>
-                  <PrescriptionContent
-                    prescriptionDetails={prescriptionDetails}
-                    prescription={prescription}
-                  />
-                </Grid>
-              )
-            })
-          })}
+          {
+            this.props.prescriptionState.payload.length
+              ? this.props.prescriptionState.payload.map(prescriptionDetails => {
+                return prescriptionDetails.prescription.map(prescription => {
+                  return (
+                    <Grid item xs={6}>
+                      <PrescriptionContent
+                        prescriptionDetails={prescriptionDetails}
+                        prescription={prescription}
+                      />
+                    </Grid>
+                  )
+                })
+              })
+              : <Typography
+                gutterBottom
+                variant='body2'
+                className={this.props.noContent}
+              >
+                {NO_PRESCRIPTION_LIST}
+              </Typography>
+          }
         </ActivityIndicator>
       </Grid>
     )
