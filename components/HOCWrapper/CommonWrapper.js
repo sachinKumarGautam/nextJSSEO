@@ -61,7 +61,7 @@ export function withCommonWrapper (Page) {
       this.props.actions.openPincodeDialog(this.props.checkPincodeState, false)
 
     handleCartInvalid () {
-      this.props.resetCartState()
+      this.props.actions.resetCartState()
       this.props.actions.getAnonymousCartIdLoading(
         this.props.cartState,
         this.props.checkPincodeState.payload.source,

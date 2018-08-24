@@ -64,7 +64,6 @@ class OTPForm extends React.Component {
       loginState
       //   closeLoginModal
     } = this.props
-    console.log(this.props)
     return (
       <form onSubmit={handleSubmit}>
         <FormControl

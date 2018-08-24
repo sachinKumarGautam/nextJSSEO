@@ -46,7 +46,10 @@ export default function (state = initialState, action) {
           },
           default_location: action.default_location,
           reference_code: action.reference_code,
-          membership_code: action.membership_code,
+          membership_code: {
+            ...state.payload.membership_code,
+            payload: action.membership_code
+          },
           mobile: action.mobile,
           email: action.email
         }
