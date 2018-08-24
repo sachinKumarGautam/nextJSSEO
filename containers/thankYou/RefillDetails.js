@@ -40,6 +40,10 @@ const styles = theme => ({
     ...theme.typography.caption,
     marginRight: theme.spacing.unit * 5
   },
+  selectedButtonStyle: {
+    marginRight: theme.spacing.unit * 5,
+    backgroundColor: theme.palette.customGreen.green100
+  },
   close: {
     width: theme.spacing.unit * 4,
     height: theme.spacing.unit * 4
@@ -83,8 +87,8 @@ class RefillDetails extends Component {
 
   componentDidUpdate (prevProps) {
     if (
-      this.props.thankYouState.payload.repeat_day !==
-      prevProps.thankYouState.payload.repeat_day
+      this.props.thankYouState.payload.next_refill_day !==
+      prevProps.thankYouState.payload.next_refill_day
     ) {
       this.setState({
         open: true
@@ -100,7 +104,7 @@ class RefillDetails extends Component {
 
   render () {
     let date = new Date()
-    date = date.setDate(date.getDate() + this.props.thankYouState.payload.repeat_day)
+    date = date.setDate(date.getDate() + this.props.thankYouState.payload.next_refill_day)
     let refillDate = formatDate(date)
     return (
       <div>
@@ -128,7 +132,11 @@ class RefillDetails extends Component {
                     root: this.props.classes.buttonRoot,
                     label: this.props.classes.buttonLabel
                   }}
-                  className={this.props.classes.buttonStyle}
+                  className={
+                    this.props.thankYouState.payload.next_refill_day === item.value
+                      ? this.props.classes.selectedButtonStyle
+                      : this.props.classes.buttonStyle
+                  }
                   onClick={this.onClickOfRefillDay.bind(this, item)}
                   label={item.label}
                 />

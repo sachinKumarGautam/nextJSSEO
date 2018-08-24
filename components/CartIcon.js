@@ -101,21 +101,26 @@ const styles = theme => ({
   badge: {
     width: theme.spacing.unit * 2,
     height: theme.spacing.unit * 2,
-    top: theme.spacing.unit * -0.75,
+    top: theme.typography.pxToRem(-8),
     right: 0,
     left: theme.spacing.unit * 2,
     color: theme.palette.common.white,
-    fontSize: theme.spacing.unit * 1.625
+    padding: theme.typography.pxToRem(9),
+    fontSize: theme.typography.pxToRem(10)
+  },
+  badgeRoot: {
+    // padding: theme.spacing.unit * 2
   },
   iconStyle: {
-    fontSize: theme.spacing.unit * 3.25
+    fontSize: theme.spacing.unit * 3.25,
+    color: theme.palette.customGrey.grey600
   }
 })
 
 class CartIcon extends Component {
   state = {
     quantity: 4
-  };
+  }
 
   redirectToPath (path) {
     const url = getReplacedString(path)
@@ -125,18 +130,19 @@ class CartIcon extends Component {
   render () {
     const { classes } = this.props
     const cartItems = this.props.cartState.payload.cart_items.payload
-
     return (
       <div>
         <a className={classes.moleculeTag} data-tip data-for='cartIcon'>
           <IconButton
             className={classes.button}
+            color={'primary'}
             aria-label='Add to shopping cart'
           >
             <Badge
               badgeContent={cartItems.length}
               color='primary'
               classes={{
+                root: classes.badgeRoot,
                 badge: classes.badge
               }}
             >
@@ -170,22 +176,16 @@ class CartIcon extends Component {
                   : classes.noItemTextStyle
               }
             >
-              {
-                cartItems.length
-                  ? cartItems[cartItems.length - 1].name
-                  : NO_CART_ITEM
-              }
+              {cartItems.length
+                ? cartItems[cartItems.length - 1].name
+                : NO_CART_ITEM}
             </Typography>
-            {
-              cartItems.length
-                ? (
-                  <Typography variant='caption' className={classes.priceStyle}>
-                  &#8377;{' '}
-                    {cartItems.length && cartItems[cartItems.length - 1].mrp}
-                  </Typography>
-                )
-                : null
-            }
+            {cartItems.length
+              ? <Typography variant='caption' className={classes.priceStyle}>
+                  ₹{' '}
+                {cartItems.length && cartItems[cartItems.length - 1].mrp}
+              </Typography>
+              : null}
           </div>
           <div className={classes.buttonStyle}>
             {/* <Link prefetch href={}> */}

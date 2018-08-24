@@ -46,187 +46,206 @@ const styles = theme => {
       transition: '0.2s'
     },
     currentlyWorking: {
-      padding: theme.spacing.unit * 2
+      padding: theme.spacing.unit * 2,
+      color: theme.palette.customGrey.grey200,
+      marginLeft: theme.spacing.unit * 4
     }
   }
 }
 
-const TableContent = (props) => (
-
-  <div id={props.itemKey}>
-    <div className={props.classes.titleWrapper}>
-      <img src={props.src} />
-      <Typography
-        gutterBottom
-        variant='title'
-        component='h1'
-        className={props.hover.precautions ? `${props.classes.title} ${props.classes.hover}` : props.classes.title}
-      >
-        {props.title}
-      </Typography>
+const TableContent = props => {
+  return (
+    <div id={props.itemKey}>
+      <div className={props.classes.titleWrapper}>
+        <img src={props.src} />
+        <Typography
+          gutterBottom
+          variant='title'
+          component='h1'
+          className={
+            props.hover.precautions
+              ? `${props.classes.title} ${props.classes.hover}`
+              : props.classes.title
+          }
+        >
+          {props.title}
+        </Typography>
+      </div>
+      {Object.keys(props.content).length !== 0 &&
+        <Table className={props.classes.tableWrapper}>
+          <TableBody>
+            <TableRow>
+              <TableCell
+                component='th'
+                scope='row'
+                className={props.classes.contentKeyCell}
+              >
+                <div className={props.classes.contentKeyWrapper}>
+                  <img src={'/static/images/avoidPrecaution.svg'} />
+                  <Typography
+                    gutterBottom
+                    variant='body1'
+                    className={props.classes.contentKey}
+                  >
+                    {'Avoid'}
+                  </Typography>
+                </div>
+              </TableCell>
+              <TableCell component='th' scope='row'>
+                {typeof props.content['avoid'] === 'object'
+                  ? props.content['avoid'] &&
+                      props.content['avoid'].map(item => {
+                        return (
+                          <Typography
+                            gutterBottom
+                            variant='body1'
+                            className={props.classes.contentBody}
+                          >
+                            {`${item}`}
+                          </Typography>
+                        )
+                      })
+                  : <Typography
+                    gutterBottom
+                    variant='body1'
+                    className={props.classes.contentBody}
+                  >
+                    {props.content.avoid}
+                  </Typography>}
+              </TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell
+                component='th'
+                scope='row'
+                className={props.classes.contentKeyCell}
+              >
+                <div className={props.classes.contentKeyWrapper}>
+                  <img src={'/static/images/foodPrecaution.svg'} />
+                  <Typography
+                    gutterBottom
+                    variant='body1'
+                    className={props.classes.contentKey}
+                  >
+                    {'Food'}
+                  </Typography>
+                </div>
+              </TableCell>
+              <TableCell component='th' scope='row'>
+                {typeof props.content['food'] === 'object'
+                  ? props.content['food'] &&
+                      props.content['food'].map(item => {
+                        return (
+                          <Typography
+                            gutterBottom
+                            variant='body1'
+                            className={props.classes.contentBody}
+                          >
+                            {`${item}`}
+                          </Typography>
+                        )
+                      })
+                  : <Typography
+                    gutterBottom
+                    variant='body1'
+                    className={props.classes.contentBody}
+                  >
+                    {props.content.food}
+                  </Typography>}
+              </TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell
+                component='th'
+                scope='row'
+                className={props.classes.contentKeyCell}
+              >
+                <div className={props.classes.contentKeyWrapper}>
+                  <img src={'/static/images/storagePrecaution.svg'} />
+                  <Typography
+                    gutterBottom
+                    variant='body1'
+                    className={props.classes.contentKey}
+                  >
+                    {'Storage'}
+                  </Typography>
+                </div>
+              </TableCell>
+              <TableCell component='th' scope='row'>
+                {typeof props.content['storage'] === 'object'
+                  ? props.content['storage'] &&
+                      props.content['storage'].map(item => {
+                        return (
+                          <Typography
+                            gutterBottom
+                            variant='body1'
+                            className={props.classes.contentBody}
+                          >
+                            {`${item}`}
+                          </Typography>
+                        )
+                      })
+                  : <Typography
+                    gutterBottom
+                    variant='body1'
+                    className={props.classes.contentBody}
+                  >
+                    {props.content.storage}
+                  </Typography>}
+              </TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell
+                component='th'
+                scope='row'
+                className={props.classes.contentKeyCell}
+              >
+                <div className={props.classes.contentKeyWrapper}>
+                  <img src={'/static/images/missDosePrecaution.svg'} />
+                  <Typography
+                    gutterBottom
+                    variant='body1'
+                    className={props.classes.contentKey}
+                  >
+                    {'MissDose'}
+                  </Typography>
+                </div>
+              </TableCell>
+              <TableCell component='th' scope='row'>
+                {typeof props.content['miss_dose'] === 'object'
+                  ? props.content['miss_dose'] &&
+                      props.content['miss_dose'].map(item => {
+                        return (
+                          <Typography
+                            gutterBottom
+                            variant='body1'
+                            className={props.classes.contentBody}
+                          >
+                            {`${item}`}
+                          </Typography>
+                        )
+                      })
+                  : <Typography
+                    gutterBottom
+                    variant='body1'
+                    className={props.classes.contentBody}
+                  >
+                    {props.content.miss_dose}
+                  </Typography>}
+              </TableCell>
+            </TableRow>
+          </TableBody>
+        </Table>}
+      {Object.keys(props.content).length === 0 &&
+        <Typography
+          className={props.classes.currentlyWorking}
+          variant={'body2'}
+          component='div'
+        >
+          {CURRENTLY_WORKING_SECTION}
+        </Typography>}
     </div>
-    { props.content &&
-
-    <Table className={props.classes.tableWrapper}>
-      <TableBody>
-        <TableRow>
-          <TableCell component='th' scope='row' className={props.classes.contentKeyCell}>
-            <div className={props.classes.contentKeyWrapper}>
-              <img src={'/static/images/avoidPrecaution.svg'} />
-              <Typography
-                gutterBottom
-                variant='body1'
-                className={props.classes.contentKey}
-              >
-                {'Avoid'}
-              </Typography>
-            </div>
-          </TableCell>
-          <TableCell component='th' scope='row'>
-            { typeof props.content['avoid'] === 'object'
-              ? props.content['avoid'] && props.content['avoid'].map((item) => {
-                return (
-                  <Typography
-                    gutterBottom
-                    variant='body1'
-                    className={props.classes.contentBody}
-                  >
-                    {`${item}`}
-                  </Typography>
-                )
-              })
-
-              : <Typography
-                gutterBottom
-                variant='body1'
-                className={props.classes.contentBody}
-              >
-                {props.content.avoid}
-              </Typography>
-            }
-          </TableCell>
-        </TableRow>
-        <TableRow>
-          <TableCell component='th' scope='row' className={props.classes.contentKeyCell}>
-            <div className={props.classes.contentKeyWrapper}>
-              <img src={'/static/images/foodPrecaution.svg'} />
-              <Typography
-                gutterBottom
-                variant='body1'
-                className={props.classes.contentKey}
-              >
-                {'Food'}
-              </Typography>
-            </div>
-          </TableCell>
-          <TableCell component='th' scope='row'>
-            { typeof props.content['food'] === 'object'
-              ? props.content['food'] && props.content['food'].map((item) => {
-                return (
-                  <Typography
-                    gutterBottom
-                    variant='body1'
-                    className={props.classes.contentBody}
-                  >
-                    {`${item}`}
-                  </Typography>
-                )
-              })
-
-              : <Typography
-                gutterBottom
-                variant='body1'
-                className={props.classes.contentBody}
-              >
-                {props.content.food}
-              </Typography>
-            }
-          </TableCell>
-        </TableRow>
-        <TableRow>
-          <TableCell component='th' scope='row' className={props.classes.contentKeyCell}>
-            <div className={props.classes.contentKeyWrapper}>
-              <img src={'/static/images/storagePrecaution.svg'} />
-              <Typography
-                gutterBottom
-                variant='body1'
-                className={props.classes.contentKey}
-              >
-                {'Storage'}
-              </Typography>
-            </div>
-          </TableCell>
-          <TableCell component='th' scope='row'>
-            { typeof props.content['storage'] === 'object'
-              ? props.content['storage'] && props.content['storage'].map((item) => {
-                return (
-                  <Typography
-                    gutterBottom
-                    variant='body1'
-                    className={props.classes.contentBody}
-                  >
-                    {`${item}`}
-                  </Typography>
-                )
-              })
-
-              : <Typography
-                gutterBottom
-                variant='body1'
-                className={props.classes.contentBody}
-              >
-                {props.content.storage}
-              </Typography>
-            }
-          </TableCell>
-        </TableRow>
-        <TableRow>
-          <TableCell component='th' scope='row' className={props.classes.contentKeyCell}>
-            <div className={props.classes.contentKeyWrapper}>
-              <img src={'/static/images/missDosePrecaution.svg'} />
-              <Typography
-                gutterBottom
-                variant='body1'
-                className={props.classes.contentKey}
-              >
-                {'MissDose'}
-              </Typography>
-            </div>
-          </TableCell>
-          <TableCell component='th' scope='row'>
-            { typeof props.content['miss_dose'] === 'object'
-              ? props.content['miss_dose'] && props.content['miss_dose'].map((item) => {
-                return (
-                  <Typography
-                    gutterBottom
-                    variant='body1'
-                    className={props.classes.contentBody}
-                  >
-                    {`${item}`}
-                  </Typography>
-                )
-              })
-
-              : <Typography
-                gutterBottom
-                variant='body1'
-                className={props.classes.contentBody}
-              >
-                {props.content.miss_dose}
-              </Typography>
-            }
-          </TableCell>
-        </TableRow>
-      </TableBody>
-    </Table>
-    }
-    {
-      !props.content &&
-      <Typography className={props.classes.currentlyWorking} variant={'body2'} component='div'>
-        {CURRENTLY_WORKING_SECTION}
-      </Typography>
-    }
-  </div>
-)
+  )
+}
 
 export default withStyles(styles)(TableContent)

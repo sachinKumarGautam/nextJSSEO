@@ -18,7 +18,8 @@ import {
   SUBMIT_COUPON_CODE_LOADING,
   OPT_DOCTOR_CALLBACK_LOADING,
   VERIFY_PAYMENT_LOADING,
-  PAYMENT_INITIATE_LOADING
+  PAYMENT_INITIATE_LOADING,
+  OPT_EXPRESS_DELIVERY_LOADING
 } from './cartActionTypes'
 
 import {
@@ -27,6 +28,7 @@ import {
   getCartDetailsSuccess,
   getCartDetailsFailure,
   putCartItemSuccess,
+  putCartItemFailure,
   savePatientToCartSuccess,
   savePatientToCartFailure,
   saveDeliveryAddressToCartSuccess,
@@ -47,7 +49,9 @@ import {
   verifyPaymentSuccess,
   verifyPaymentFailure,
   paymentInitiateSuccess,
-  paymentInitiateFailure
+  paymentInitiateFailure,
+  optForExpressDeliverySuccess,
+  optForExpressDeliveryFailure
 } from './cartActions'
 
 import {
@@ -64,14 +68,17 @@ import {
   applyCouponForCart$,
   teleConsultation$,
   verifyPayment$,
-  paymentInitiate$
+  paymentInitiate$,
+  expressDelivery$
 } from '../../services/api'
 
 export function getAnonymousCartIdEpic (action$, store) {
   return action$.pipe(
     ofType(GET_ANONYMOUS_CART_ID_LOADING),
     mergeMap(data => {
-      return http(getAnonymousCartId$(data.source, data.facility_code, data.source_type)).pipe(
+      return http(
+        getAnonymousCartId$(data.source, data.facility_code, data.source_type)
+      ).pipe(
         map(result => {
           return getAnonymousCartIdSuccess(data.cartState, result.body.payload)
         }),
@@ -99,37 +106,9 @@ export function getCartDetailsEpic (action$, store) {
   )
 }
 
-// function cartApiLoadingHandling (
-//   cartState,
-//   medicineSelected
-// ) {
-//   let cartItems = cartState.payload.cart_items.payload
-//
-//   cartItems.forEach((cartMedicine, index) => {
-//     if (cartMedicine.id === medicineSelected.id) {
-//       cartItems[index] = {
-//         ...cartMedicine,
-//         isLoading: true,
-//         errorState: {
-//           ...cartMedicine.errorState,
-//           isError: false
-//         }
-//       }
-//
-//       return false
-//     }
-//   })
-//
-//   return putCartItemSuccess(
-//     cartState,
-//     cartState.payload
-//   )
-// }
-
-function cartApiErrorHandling (
+function cartApiLoadingHandling (
   cartState,
-  medicineSelected,
-  error
+  medicineSelected
 ) {
   let cartItems = cartState.payload.cart_items.payload
 
@@ -138,6 +117,37 @@ function cartApiErrorHandling (
       cartItems[index] = {
         ...cartMedicine,
         isLoading: true,
+        errorState: {
+          ...cartMedicine.errorState,
+          isError: false
+        }
+      }
+
+      return false
+    }
+  })
+
+  const payload = {
+    ...cartState.payload,
+    cart_items: cartItems
+  }
+
+  return of(
+    putCartItemSuccess(
+      cartState,
+      payload
+    )
+  )
+}
+
+function cartApiErrorHandling (cartState, medicineSelected, error) {
+  let cartItems = cartState.payload.cart_items.payload
+
+  cartItems.forEach((cartMedicine, index) => {
+    if (cartMedicine.id === medicineSelected.id) {
+      cartItems[index] = {
+        ...cartMedicine,
+        isLoading: false,
         errorState: {
           ...cartMedicine.errorState,
           isError: true,
@@ -149,23 +159,31 @@ function cartApiErrorHandling (
     }
   })
 
-  return putCartItemSuccess(
-    cartState,
-    cartState.payload
+  const payload = {
+    ...cartState.payload,
+    cart_items: cartItems
+  }
+
+  return of(
+    putCartItemFailure(
+      cartState,
+      payload,
+      error
+    )
   )
 }
 
-// export function decrementCartItemLoadingEpic (action$, store) {
-//   return action$.pipe(
-//     ofType(DECREMENT_CART_ITEM_LOADING),
-//     mergeMap(data => {
-//       return of(cartApiLoadingHandling(
-//           data.cartState,
-//           data.medicineSelected
-//         ))
-//     })
-//   )
-// }
+export function decrementCartItemLoadingEpic (action$, store) {
+  return action$.pipe(
+    ofType(DECREMENT_CART_ITEM_LOADING),
+    mergeMap(data => {
+      return cartApiLoadingHandling(
+        data.cartState,
+        data.medicineSelected
+      )
+    })
+  )
+}
 
 export function decrementCartItemEpic (action$, store) {
   return action$.pipe(
@@ -195,17 +213,17 @@ export function decrementCartItemEpic (action$, store) {
   )
 }
 
-// export function incrementCartItemLoadingEpic (action$, store) {
-//   return action$.pipe(
-//     ofType(INCREMENT_CART_ITEM_LOADING),
-//     mergeMap(data => {
-//       return of(cartApiLoadingHandling(
-//           data.cartState,
-//           data.medicineSelected
-//         ))
-//     })
-//   )
-// }
+export function incrementCartItemLoadingEpic (action$, store) {
+  return action$.pipe(
+    ofType(INCREMENT_CART_ITEM_LOADING),
+    mergeMap(data => {
+      return cartApiLoadingHandling(
+        data.cartState,
+        data.medicineSelected
+      )
+    })
+  )
+}
 
 export function incrementCartItemEpic (action$, store) {
   return action$.pipe(
@@ -220,35 +238,33 @@ export function incrementCartItemEpic (action$, store) {
       return http(putCartItem$(cartUid, medicineIncremented)).pipe(
         flatMap(result => {
           if (medicineIncremented.quantity === 1) {
-            return of(goToCartSnackbar(data.cartState, true),
-              putCartItemSuccess(data.cartState, result.body.payload))
+            return of(
+              goToCartSnackbar(data.cartState, true),
+              putCartItemSuccess(data.cartState, result.body.payload)
+            )
           } else {
             return of(putCartItemSuccess(data.cartState, result.body.payload))
           }
         }),
         catchError(error => {
-          return of(cartApiErrorHandling(
-            data.cartState,
-            data.medicineSelected,
-            error
-          ))
+          return cartApiErrorHandling(data.cartState, data.medicineSelected, error)
         })
       )
     })
   )
 }
 
-// export function deleteCartItemLoadingEpic (action$, store) {
-//   return action$.pipe(
-//     ofType(DELETE_CART_ITEM_LOADING),
-//     mergeMap(data => {
-//       return of(cartApiLoadingHandling(
-//           data.cartState,
-//           data.medicineSelected
-//         ))
-//     })
-//   )
-// }
+export function deleteCartItemLoadingEpic (action$, store) {
+  return action$.pipe(
+    ofType(DELETE_CART_ITEM_LOADING),
+    mergeMap(data => {
+      return cartApiLoadingHandling(
+        data.cartState,
+        data.medicineSelected
+      )
+    })
+  )
+}
 
 export function deleteCartItemEpic (action$, store) {
   return action$.pipe(
@@ -279,7 +295,11 @@ export function savePatientToCartEpic (action$, store) {
     mergeMap(data => {
       return http(savePatientToCart$(data.cartId, data.patient.id)).pipe(
         map(result => {
-          return savePatientToCartSuccess(data.cartState, data.patient, result.body.payload)
+          return savePatientToCartSuccess(
+            data.cartState,
+            data.patient,
+            result.body.payload
+          )
         }),
         catchError(error => {
           return of(savePatientToCartFailure(data.cartState, error))
@@ -304,7 +324,10 @@ export function saveDeliveryAddressToCartEpic (action$, store) {
         )
       ).pipe(
         map(result => {
-          return saveDeliveryAddressToCartSuccess(data.cartState, result.body.payload)
+          return saveDeliveryAddressToCartSuccess(
+            data.cartState,
+            result.body.payload
+          )
         }),
         catchError(error => {
           return of(saveDeliveryAddressToCartFailure(data.cartState, error))
@@ -317,7 +340,7 @@ export function saveDeliveryAddressToCartEpic (action$, store) {
 export function cartTransferEpic (action$, store) {
   return action$.pipe(
     ofType(CART_TRANSFER_LOADING),
-    switchMap(data => {
+    mergeMap(data => {
       return http(cartTransfer$(data.cartState.payload.uid)).pipe(
         map(result => {
           let cartItems = result.body.payload.cart_items
@@ -330,12 +353,14 @@ export function cartTransferEpic (action$, store) {
             }
           })
 
-          let updatedCartPrescriptions = cartPrescriptions.map((prescription, index) => {
-            return {
-              ...prescription,
-              url: prescription.location
+          let updatedCartPrescriptions = cartPrescriptions.map(
+            (prescription, index) => {
+              return {
+                ...prescription,
+                url: prescription.location
+              }
             }
-          })
+          )
           return cartTransferSuccess(
             data.cartState,
             result,
@@ -359,20 +384,19 @@ export function uploadPrescriptionEpic (action$, store) {
       formData.append('file', data.uploadedFiles)
 
       return http(
-        uploadPrescriptionEpic$(
-          data.cartState.payload.uid,
-          formData
-        )
+        uploadPrescriptionEpic$(data.cartState.payload.uid, formData)
       ).pipe(
         map(result => {
           let cartPrescriptions = result.body.payload.cart_prescriptions
 
-          let updatedCartPrescriptions = cartPrescriptions.map((prescription, index) => {
-            return {
-              ...prescription,
-              url: prescription.location
+          let updatedCartPrescriptions = cartPrescriptions.map(
+            (prescription, index) => {
+              return {
+                ...prescription,
+                url: prescription.location
+              }
             }
-          })
+          )
 
           return uploadPrescriptionSuccess(
             data.cartState,
@@ -392,23 +416,23 @@ export function deletePrescriptionEpic (action$, store) {
   return action$.pipe(
     ofType(DELETE_PRESCRIPTION_LOADING),
     switchMap(data => {
-      const prescriptionId = data.cartState.payload.cart_prescriptions[data.deletedFileIndex].id
+      const prescriptionId =
+        data.cartState.payload.cart_prescriptions[data.deletedFileIndex].id
 
       return http(
-        deletePrescriptionEpic$(
-          data.cartState.payload.uid,
-          prescriptionId
-        )
+        deletePrescriptionEpic$(data.cartState.payload.uid, prescriptionId)
       ).pipe(
         map(result => {
           let cartPrescriptions = result.body.payload.cart_prescriptions
 
-          let updatedCartPrescriptions = cartPrescriptions.map((prescription, index) => {
-            return {
-              ...prescription,
-              url: prescription.location
+          let updatedCartPrescriptions = cartPrescriptions.map(
+            (prescription, index) => {
+              return {
+                ...prescription,
+                url: prescription.location
+              }
             }
-          })
+          )
 
           return deletePrescriptionSuccess(
             data.cartState,
@@ -427,7 +451,7 @@ export function deletePrescriptionEpic (action$, store) {
 export function submitOrderEpic (action$, store) {
   return action$.pipe(
     ofType(SUBMIT_ORDER_LOADING),
-    switchMap(data => {
+    mergeMap(data => {
       let body = {
         cart_uid: data.cartState.payload.uid
       }
@@ -457,10 +481,7 @@ export function applyCouponCode (action$, store) {
     mergeMap(data => {
       return http(applyCouponForCart$(data.cartId, data.couponCode)).pipe(
         map(result => {
-          return applyCouponCodeSuccess(
-            data.cartState,
-            result.body.payload
-          )
+          return applyCouponCodeSuccess(data.cartState, result.body.payload)
         }),
         catchError(error => {
           return of(applyCouponCodeFailure(data.cartState, error))
@@ -536,6 +557,25 @@ export function paymentInitiateEpic (action$, store) {
         }),
         catchError(error => {
           return of(paymentInitiateFailure(data.cartState, error))
+        })
+      )
+    })
+  )
+}
+
+export function optExpressDelivery (action$, store) {
+  return action$.pipe(
+    ofType(OPT_EXPRESS_DELIVERY_LOADING),
+    mergeMap(data => {
+      return http(expressDelivery$(data.cartUId, data.expressDeliveryCheck)).pipe(
+        map(result => {
+          return optForExpressDeliverySuccess(
+            data.cartState,
+            result.body.payload
+          )
+        }),
+        catchError(error => {
+          return of(optForExpressDeliveryFailure(data.cartState, error))
         })
       )
     })

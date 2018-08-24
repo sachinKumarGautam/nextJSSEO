@@ -13,8 +13,6 @@ import {
   getRefillPastMedicinesLoading,
   updateSelectedPatientDetails
 } from './refillActions'
-import {incrementCartItemLoading} from '../cartDetails/cartActions'
-import {checkPincodeLoading} from '../location/pincode/pincodeAction'
 
 /*
   bread crumbs
@@ -32,20 +30,24 @@ class RefillPatientsWrapper extends Component {
             <aside>
               <PatientList
                 patientDetailsState={this.props.patientDetailsState}
-                getRefillPastMedicinesLoading={this.props.actions.getRefillPastMedicinesLoading}
+                getRefillPastMedicinesLoading={
+                  this.props.actions.getRefillPastMedicinesLoading
+                }
                 pastMedicineState={this.props.pastMedicineState}
-                updateSelectedPatientDetails={this.props.actions.updateSelectedPatientDetails}
+                updateSelectedPatientDetails={
+                  this.props.actions.updateSelectedPatientDetails
+                }
               />
             </aside>
           </Grid>
           <Grid item xs={9}>
             <section>
               <RefillMedicineList
+                isLoading={this.props.pastMedicineState.isLoading}
                 pastMedicineState={this.props.pastMedicineState}
+                addToCartHandler={this.props.addToCartHandler}
                 checkPincodeState={this.props.checkPincodeState}
-                cartState={this.props.cartState}
-                incrementCartItemLoading={this.props.actions.incrementCartItemLoading}
-                checkPincodeLoading={this.props.actions.checkPincodeLoading}
+                getRefillPastMedicinesLoading={this.props.actions.getRefillPastMedicinesLoading}
               />
             </section>
           </Grid>
@@ -59,8 +61,7 @@ function mapStateToProps (state) {
   return {
     pastMedicineState: state.pastMedicineState,
     patientDetailsState: state.patientDetailsState,
-    checkPincodeState: state.checkPincodeState,
-    cartState: state.cartState
+    checkPincodeState: state.checkPincodeState
   }
 }
 
@@ -69,16 +70,13 @@ function mapDispatchToProps (dispatch) {
     actions: bindActionCreators(
       {
         getRefillPastMedicinesLoading,
-        updateSelectedPatientDetails,
-        incrementCartItemLoading,
-        checkPincodeLoading
+        updateSelectedPatientDetails
       },
       dispatch
     )
   }
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(RefillPatientsWrapper)
+export default connect(mapStateToProps, mapDispatchToProps)(
+  RefillPatientsWrapper
+)

@@ -12,19 +12,26 @@ import DeliveryDetailsList from './DeliveryDetailsList'
 
 const DeliveryDetailsWrapper = props => (
   <div>
-    <BreadCrumbs />
+    <BreadCrumbs isLoading={props.deliveryDetailsState.isLoading} />
     <Grid container spacing={24}>
       <Grid item xs={2}>
         <aside>
-          <SideMenu />
+          <SideMenu isLoading={props.deliveryDetailsState.isLoading} />
         </aside>
       </Grid>
       <Grid item xs={10}>
         <DeliveryDetailsList
           deliveryDetailsState={props.deliveryDetailsState}
           submitDeliveryDetailsLoading={props.submitDeliveryDetailsLoading}
+          saveDeliveryAddressSelected={props.saveDeliveryAddressSelected}
           customerState={props.customerState}
+          checkPincodeDetailLoading={props.checkPincodeLoading}
+          updateAddressFormValue={props.updateAddressFormValue}
           cartState={props.cartState}
+          getLocalityDetailListLoading={props.getLocalityDetailListLoading}
+          checkPincodeState={props.checkPincodeState}
+          resetDeliveryAddressSelected={props.resetDeliveryAddressSelected}
+          getDeliveryDetailsListLoading={props.getDeliveryDetailsListLoading}
         />
       </Grid>
     </Grid>

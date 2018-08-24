@@ -1,26 +1,21 @@
+// dependencies
 import React from 'react'
-import Header from '../components/layouts/header'
-import Footer from '../components/layouts/footer'
-
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-
 import { withStyles } from '@material-ui/core/styles'
-import withRoot from '../src/withRoot'
-
 import Paper from '@material-ui/core/Paper'
 
+// components
+import withRoot from '../src/withRoot'
+import Layout from '../components/layouts/Layout'
 import HomePageWrapper from '../containers/homePage'
-
-import Head from 'next/head'
 
 import {
   getBackGroundImagesLoading
 } from '../containers/homePage/homePageActions'
 
-import {
-  homePage
-} from '../components/constants/PageTitle'
+// page title
+import { homePage } from '../components/constants/PageTitle'
 
 const styles = theme => ({
   root: {
@@ -44,6 +39,10 @@ const styles = theme => ({
 })
 
 class HomePage extends React.Component {
+  static getInitialProps ({ query }) {
+    return query
+  }
+
   componentDidMount () {
     this.props.actions.getBackGroundImagesLoading(
       this.props.homePageState,
@@ -52,19 +51,20 @@ class HomePage extends React.Component {
   }
 
   render () {
+    const { addToCartHandler, classes, authentication, path } = this.props
     return (
-      <div>
-        <Head>
-          <title>{homePage.title}</title>
-        </Head>
-        <Header />
+      <Layout
+        title={homePage.title}
+        addToCartHandler={addToCartHandler}
+        authentication={authentication}
+        path={path}
+      >
         <div>
-          <Paper className={this.props.classes.root} elevation={1}>
+          <Paper className={classes.root} elevation={1}>
             <HomePageWrapper />
           </Paper>
         </div>
-        <Footer />
-      </div>
+      </Layout>
     )
   }
 }
@@ -86,7 +86,6 @@ function mapDispatchToProps (dispatch) {
   }
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(withRoot(withStyles(styles)(HomePage)))
+export default connect(mapStateToProps, mapDispatchToProps)(
+  withRoot(withStyles(styles)(HomePage))
+)

@@ -3,14 +3,38 @@ import React from 'react'
 import Grid from '@material-ui/core/Grid'
 
 import PrescriptionContent from './PrescriptionContent'
+import MultipleCardLoader
+  from '../../components/activityIndicator/loader/cardLoader/MultipleCardLoader'
+import ActivityIndicator from '../../components/activityIndicator'
+import ComponentSpecificError from '../../components/activityIndicator/error/ComponentSpecificError'
 
-const PrescriptionContentWrapper = (props) => {
-  return (
-    <div>
-      {
-        <Grid container spacing={24}>
-          {props.prescriptionState.payload.map((prescriptionDetails) => {
-            return prescriptionDetails.prescription.map((prescription) => {
+class PrescriptionContentWrapper extends React.Component {
+  tryAgain () {
+    this.props.getPrescriptionListLoading(
+      this.props.prescriptionState,
+      this.props.customerState.payload.id
+    )
+  }
+  render () {
+    const { isLoading } = this.props.prescriptionState
+    return (
+      <Grid
+        container={!this.props.prescriptionState.errorState.isError}
+        spacing={24}
+      >
+        <ActivityIndicator
+          isLoading={isLoading}
+          LoaderComp={<MultipleCardLoader />}
+          isError={this.props.prescriptionState.errorState.isError}
+          ErrorComp={
+            <ComponentSpecificError
+              error={this.props.prescriptionState.errorState.error}
+              tryAgain={this.tryAgain.bind(this)}
+            />
+          }
+        >
+          {this.props.prescriptionState.payload.map(prescriptionDetails => {
+            return prescriptionDetails.prescription.map(prescription => {
               return (
                 <Grid item xs={6}>
                   <PrescriptionContent
@@ -21,10 +45,10 @@ const PrescriptionContentWrapper = (props) => {
               )
             })
           })}
-        </Grid>
-      }
-    </div>
-  )
+        </ActivityIndicator>
+      </Grid>
+    )
+  }
 }
 
 export default PrescriptionContentWrapper

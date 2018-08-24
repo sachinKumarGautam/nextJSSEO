@@ -4,10 +4,10 @@ export function getReplacedString (originalMsg, obj) {
   let mappedObject = obj
   if (!mappedObject) {
     mappedObject = {
-      customer_id: store.getState().customerState.payload.id,
+      customer_id: store ? store.getState().customerState.payload.id : 0,
       patient_id: 0,
-      order_id: 0,
-      cart_id: store.getState().cartState.payload.uid
+      order_id: store ? store.getState().cartState.orderResponse.payload.order_number : 0,
+      cart_id: store ? store.getState().cartState.payload.uid : 0
     }
   }
   let updatedMsg

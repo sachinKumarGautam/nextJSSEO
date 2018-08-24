@@ -10,6 +10,16 @@ import OrderHeader from './OrderHeader'
 import OrderContent from './OrderContent'
 import OrderFooter from './OrderFooter'
 import Button from '../../components/button'
+import OrderListsLoader
+  from '../../components/activityIndicator/loader/orderDetailsLoader/OrderListsLoader'
+import ActivityIndicator from '../../components/activityIndicator/index'
+import ComponentSpecificError from '../../components/activityIndicator/error/ComponentSpecificError'
+import SnackbarErrorMessage from '../../components/activityIndicator/error/SnackbarErrorMessage'
+
+import { getReplacedString } from '../../utils/replaceConstants'
+import { ORDER_DETAILS } from '../../routes/RouteConstant'
+
+import Router from 'next/router'
 
 const styles = theme => ({
   card: {
@@ -32,7 +42,8 @@ const styles = theme => ({
     marginBottom: theme.spacing.unit * 6
   },
   buttonRoot: {
-    backgroundColor: '#ffffff'
+    backgroundColor: theme.palette.common.white,
+    border: `0.5px solid ${theme.palette.customGrey.grey200}`
   },
   buttonLabel: {
     ...theme.typography.body3,
@@ -51,7 +62,8 @@ class OrderListDetails extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      page: 0
+      page: 0,
+      isShowMore: false
     }
   }
 
@@ -64,11 +76,35 @@ class OrderListDetails extends Component {
     )
 
     this.setState({
-      page: this.state.page + 1
+      page: this.state.page + 1,
+      isShowMore: true
     })
   }
 
+  tryAgain () {
+    this.props.getOrderListDetailsLoading(
+      this.props.orderListState,
+      this.props.customerState.payload.id, // pass customer Id
+      0, // page number
+      10 // page size
+    )
+
+    this.setState({
+      isShowMore: false
+    })
+  }
+
+  redirectToOrderDeatails (orderId) {
+    const mappedObject = {
+      order_id: orderId
+    }
+
+    const url = getReplacedString(ORDER_DETAILS, mappedObject)
+    Router.push(url)
+  }
+
   render () {
+    const { orderListState } = this.props
     return (
       <Card elevation={'1'} className={this.props.classes.card}>
         <CardContent className={this.props.classes.cardContent}>
@@ -80,38 +116,55 @@ class OrderListDetails extends Component {
           >
             My Orders
           </Typography>
-          {
-            this.props.orderListState.payload.map((orderDetails) => {
+          <ActivityIndicator
+            isLoading={orderListState.isLoading}
+            LoaderComp={<OrderListsLoader />}
+            bottomLoader={this.state.isShowMore}
+            isError={orderListState.errorState.isError}
+            ErrorComp={
+              this.state.isShowMore
+                ? <SnackbarErrorMessage
+                  error={orderListState.errorState.error}
+                />
+                : <ComponentSpecificError
+                  error={orderListState.errorState.error}
+                  tryAgain={this.tryAgain.bind(this)}
+                />
+            }
+            bottomError={this.state.isShowMore}
+          >
+            {this.props.orderListState.payload.map(orderDetails => {
               return (
-                <div className={this.props.classes.orderDetailWrapper}>
+                <div
+                  className={this.props.classes.orderDetailWrapper}
+                >
                   <OrderHeader
                     orderDetails={orderDetails}
+                    redirectToOrderDeatails={this.redirectToOrderDeatails.bind(this, orderDetails.id)}
                   />
                   <Divider />
-                  <OrderContent
-                    orderDetails={orderDetails}
-                  />
+                  <OrderContent orderDetails={orderDetails} />
                   <Divider />
-                  <OrderFooter
-                    orderDetails={orderDetails}
-                  />
+                  <OrderFooter orderDetails={orderDetails} />
                 </div>
               )
-            })
-          }
-          <div className={this.props.classes.buttonWrapper}>
-            <Button
-              size='medium'
-              variant='outlined'
-              className={this.props.classes.button}
-              classes={{
-                root: this.props.classes.buttonRoot,
-                label: this.props.classes.buttonLabel
-              }}
-              onClick={this.onClickOfShowMore.bind(this)}
-              label={'Show more'}
-            />
-          </div>
+            })}
+            <div className={this.props.classes.buttonWrapper}>
+              <Button
+                size='medium'
+                loaderColor={'primary'}
+                // isloading={orderListState.isLoading}
+                variant='outlined'
+                className={this.props.classes.button}
+                classes={{
+                  root: this.props.classes.buttonRoot,
+                  label: this.props.classes.buttonLabel
+                }}
+                onClick={this.onClickOfShowMore.bind(this)}
+                label={'Show more'}
+              />
+            </div>
+          </ActivityIndicator>
         </CardContent>
       </Card>
     )

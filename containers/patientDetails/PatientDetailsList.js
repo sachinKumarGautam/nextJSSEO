@@ -70,6 +70,15 @@ class PatientDetailsList extends Component {
     this.setState({
       openPatientFormDialog: false
     })
+
+    this.props.resetPatientSelected(this.props.patientDetailsState)
+  }
+
+  savePatientSelected (patientDetail) {
+    this.props.savePatientSelected(
+      this.props.patientDetailsState,
+      patientDetail
+    )
   }
 
   render () {
@@ -96,14 +105,24 @@ class PatientDetailsList extends Component {
                 openPatientFormDialog={this.state.openPatientFormDialog}
                 patientFormState={this.props.patientDetailsState}
                 customerState={this.props.customerState}
-                submitPatientDetailsLoading={this.props.submitPatientDetailsLoading}
+                submitPatientDetailsLoading={
+                  this.props.submitPatientDetailsLoading
+                }
                 isEdit={'false'}
               />
             </div>
           </div>
           <PatientDetailsCardWrapper
+            openPatientFormModal={this.openPatientFormModal.bind(this)}
+            savePatientSelected={this.savePatientSelected.bind(this)}
             payload={this.props.patientDetailsState.payload}
-            patientDetailsCardWrapper={this.props.classes.patientDetailsCardWrapper}
+            isLoading={this.props.patientDetailsState.isLoading}
+            errorState={this.props.patientDetailsState.errorState}
+            patientDetailsCardWrapper={
+              this.props.classes.patientDetailsCardWrapper
+            }
+            getPatientDetailsListLoading={this.props.getPatientDetailsListLoading}
+            customerState={this.props.customerState}
           />
         </CardContent>
       </Card>

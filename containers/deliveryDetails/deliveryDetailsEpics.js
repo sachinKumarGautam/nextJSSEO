@@ -4,7 +4,9 @@ import { ofType } from 'redux-observable'
 import http from '../../services/api/ajaxWrapper'
 
 import {
-  GET_DELIVERY_DETAILS_LIST_LOADING, SUBMIT_DELIVERY_DETAILS_LOADING
+  GET_DELIVERY_DETAILS_LIST_LOADING,
+  SUBMIT_DELIVERY_DETAILS_LOADING,
+  GET_LOCALITY_LIST_LOADING
 } from './deliveryDetailsActionTypes'
 
 import {
@@ -12,7 +14,9 @@ import {
   getDeliveryDetailsListFailure,
   submitDeliveryDetailsSuccess,
   submitDeliveryDetailsFailure,
-  getDeliveryDetailsListLoading
+  getDeliveryDetailsListLoading,
+  getLocalityDetailListSuccess,
+  getLocalityDetailListFailure
 } from './deliveryDetailsActions'
 
 import {
@@ -21,7 +25,9 @@ import {
 
 import {
   getDeliveryDetailsList$,
-  submitDeliveryDetails$
+  submitDeliveryDetails$,
+  searchLocalityForPincode$,
+  editDeliveryDetails$
 } from '../../services/api'
 
 /**
@@ -60,28 +66,98 @@ export function submitDeliveryDetails (action$, store) {
     mergeMap(data => {
       const deliveryDetailsState = store.getState().deliveryDetailsState
       const cartState = store.getState().cartState
+      let api
 
-      return http(submitDeliveryDetails$(data.customerId, data.values)).pipe(
+      if (data.isEdit) {
+        api = editDeliveryDetails$(data.customerId, data.values, data.deliveryDetailsState.addressForm.id)
+      } else {
+        api = submitDeliveryDetails$(data.customerId, data.values)
+      }
+
+      return http(api).pipe(
         flatMap(result => {
+          let modifiedAddressDetailsList = data.deliveryDetailsState.payload
+
+          if (data.isEdit) {
+            modifiedAddressDetailsList = data.deliveryDetailsState.payload.map(address => {
+              if (data.deliveryDetailsState.addressForm.id === address.id) {
+                return {
+                  ...address,
+                  full_name: result.body.payload.full_name,
+                  mobile: result.body.payload.mobile,
+                  pincode: result.body.payload.pincode,
+                  locality: result.body.payload.locality,
+                  street1: result.body.payload.street1,
+                  street2: result.body.payload.street2,
+                  city: result.body.payload.city,
+                  state: result.body.payload.state
+                }
+              } else {
+                return {
+                  ...address
+                }
+              }
+            })
+          }
+
           data.setSubmitting(false)
           data.closeModal()
 
           if (data.isCartPage) {
             return of(
-              submitDeliveryDetailsSuccess(deliveryDetailsState, result),
+              submitDeliveryDetailsSuccess(deliveryDetailsState, modifiedAddressDetailsList),
               saveDeliveryAddressToCartLoading(cartState, result.body.payload.id),
               getDeliveryDetailsListLoading(deliveryDetailsState, data.customerId)
             )
           } else {
-            return of(
-              submitDeliveryDetailsSuccess(deliveryDetailsState, result),
-              getDeliveryDetailsListLoading(deliveryDetailsState, data.customerId)
-            )
+            if (data.isEdit) {
+              return of(
+                submitDeliveryDetailsSuccess(deliveryDetailsState, modifiedAddressDetailsList)
+              )
+            } else {
+              return of(
+                submitDeliveryDetailsSuccess(deliveryDetailsState, modifiedAddressDetailsList),
+                getDeliveryDetailsListLoading(deliveryDetailsState, data.customerId)
+              )
+            }
           }
         }),
         catchError(error => {
           data.setSubmitting(false)
           return of(submitDeliveryDetailsFailure(deliveryDetailsState, error))
+        })
+      )
+    })
+  )
+}
+
+/**
+ * Represents to the get the locality list on basis of pincode, state and city.
+ * @param {object} action$ - this is the ActionsObservable
+ * @param {object} store - to access the state from reducers
+ */
+export function getLocalityList (action$, store) {
+  return action$.pipe(
+    ofType(GET_LOCALITY_LIST_LOADING),
+    mergeMap(data => {
+      return http(
+        searchLocalityForPincode$(
+          data.state,
+          data.city,
+          data.pincode,
+          data.queryString
+        )
+      ).pipe(
+        map(result => {
+          return (
+            getLocalityDetailListSuccess(
+              data.deliveryDetailsState,
+              result.body.payload.content
+            )
+          )
+        }),
+        catchError(error => {
+          return of(getLocalityDetailListFailure(data.deliveryDetailsState, error))
         })
       )
     })

@@ -1,26 +1,26 @@
 import React, { Component } from 'react'
-
+// dependencies
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-
-import Header from '../components/layouts/header'
-import Footer from '../components/layouts/footer'
-
+import Router from 'next/router'
 import { withStyles } from '@material-ui/core/styles'
-import withRoot from '../src/withRoot'
 import Paper from '@material-ui/core/Paper'
 
-import Head from 'next/head'
-
+// components
+import Layout from '../components/layouts/Layout'
+import withRoot from '../src/withRoot'
 import RefillPatientsWrapper from '../containers/refillPatients'
 
 import {
   getPatientDetailsListLoading
 } from '../containers/patientDetails/patientDetailsActions'
 
-import {
-  refillPatient
-} from '../components/constants/PageTitle'
+// page title
+import { refillPatient } from '../components/constants/PageTitle'
+
+// activity indicator
+import ActivityIndicator from '../components/activityIndicator'
+import FullPageError from '../components/activityIndicator/error/FullPageError'
 
 const styles = theme => ({
   root: {
@@ -43,28 +43,58 @@ const styles = theme => ({
 })
 
 class RefillPatient extends Component {
-  componentDidMount () {
+  constructor (props) {
+    super(props)
+    this.getRefillDetail = this.getRefillDetail.bind(this)
+  }
+  getRefillDetail () {
+    // let customerId = this.props.customerState.payload.id
+    const { query } = Router
+
+    // if (query.id === this.props.customerState.payload.id) {
+    //   customerId = query.id
+    // }
+
     this.props.actions.getPatientDetailsListLoading(
       this.props.patientDetailsState,
-      this.props.customerState.payload.id, // pass customer id,
-      {isRefillPatients: true}
+      query.customer_id, // pass customer id,
+      { isRefillPatients: true }
     )
+  }
+  componentDidMount () {
+    this.getRefillDetail()
+  }
+
+  tryAgain () {
+    this.getRefillDetail()
   }
 
   render () {
+    const { addToCartHandler, classes } = this.props
+
     return (
-      <div>
-        <Head>
-          <title>{refillPatient.title}</title>
-        </Head>
-        <Header />
-        <div className={this.props.classes.wrapperStyle}>
-          <Paper className={this.props.classes.root} elevation={1}>
-            <RefillPatientsWrapper />
-          </Paper>
+      <Layout
+        title={refillPatient.title}
+        addToCartHandler={addToCartHandler}
+      >
+        <div className={classes.wrapperStyle}>
+          <ActivityIndicator
+            isError={this.props.patientDetailsState.errorState.isError}
+            ErrorComp={
+              <FullPageError
+                error={this.props.patientDetailsState.errorState.error}
+                tryAgain={this.tryAgain.bind(this)}
+              />
+            }
+          >
+            <Paper className={classes.root} elevation={1}>
+              <RefillPatientsWrapper
+                addToCartHandler={this.props.addToCartHandler}
+              />
+            </Paper>
+          </ActivityIndicator>
         </div>
-        <Footer />
-      </div>
+      </Layout>
     )
   }
 }
@@ -87,7 +117,6 @@ function mapDispatchToProps (dispatch) {
   }
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(withRoot(withStyles(styles)(RefillPatient)))
+export default connect(mapStateToProps, mapDispatchToProps)(
+  withRoot(withStyles(styles)(RefillPatient))
+)

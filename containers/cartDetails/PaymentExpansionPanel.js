@@ -1,6 +1,5 @@
 import React from 'react'
 
-import Grid from '@material-ui/core/Grid'
 import Radio from '@material-ui/core/Radio'
 import RadioGroup from '@material-ui/core/RadioGroup'
 import FormControlLabel from '@material-ui/core/FormControlLabel'
@@ -10,6 +9,13 @@ import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary'
 import Typography from '@material-ui/core/Typography'
 
 import Button from '../../components/button'
+import TermsAndCondition from './TermsAndCondition'
+import PaymentDeliveryDetail from './PaymentDeliveryDetail'
+
+import {
+  LF_ASSURED,
+  NORMAL
+} from '../../components/constants/Constants'
 
 class PaymentExpansionPanel extends React.Component {
   state = {
@@ -30,12 +36,15 @@ class PaymentExpansionPanel extends React.Component {
   }
 
   render () {
+    const shippingAddressDetails = this.props.cartState.payload.shipping_address_details
+    const patientDetails = this.props.cartState.payload.patient_details
+
     return (
       <ExpansionPanel
         expanded={this.props.expanded === 'panel5'}
         onChange={
           this.props.loginState.isAuthenticated &&
-          this.props.cartState.payload.shipping_address_details.payload.shipping_address_id
+          shippingAddressDetails.payload.shipping_address_id
             ? this.props.handleChange
             : null
         }
@@ -55,7 +64,29 @@ class PaymentExpansionPanel extends React.Component {
             root: this.props.thankYouWrapper
           }}
         >
-          <Grid container spacing={24}>
+          {
+            (this.props.cartState.payload.service_type === LF_ASSURED ||
+            this.props.cartState.payload.delivery_option !== NORMAL) &&
+            <PaymentDeliveryDetail
+              cartState={this.props.cartState}
+              optForExpressDeliveryLoading={this.props.optForExpressDeliveryLoading}
+            />
+          }
+          <div className={this.props.radioWrapper}>
+            <Radio
+              checked
+              name='radio-button-demo'
+              classes={{
+                root: this.props.radioButton,
+                checked: this.props.checked
+              }}
+            />
+            <Typography
+              component='h2'
+              className={this.props.paymentDescription}
+            >
+              Cash On Delivery
+            </Typography>
             <RadioGroup
               aria-label='Payment Channels'
               name='payment_channels'
@@ -81,7 +112,8 @@ class PaymentExpansionPanel extends React.Component {
                 })
               }
             </RadioGroup>
-          </Grid>
+          </div>
+          <TermsAndCondition />
           <Button
             size='small'
             color='primary'
@@ -92,8 +124,8 @@ class PaymentExpansionPanel extends React.Component {
             label={'Place Order'}
             onClick={this.placeOrder.bind(this)}
             disabled={
-              !this.props.cartState.payload.patient_details.payload.patient_id ||
-              !this.props.cartState.payload.shipping_address_details.payload.shipping_address_id
+              !patientDetails.payload.patient_id ||
+              !shippingAddressDetails.payload.shipping_address_id
             }
           />
         </ExpansionPanelDetails>

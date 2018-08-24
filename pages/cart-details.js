@@ -1,17 +1,14 @@
+// dependencies
 import React from 'react'
-import Header from '../components/layouts/header'
-import Footer from '../components/layouts/footer'
-
 import { withStyles } from '@material-ui/core/styles'
+
+// components
 import withRoot from '../src/withRoot'
-
-import Head from 'next/head'
-
+import Layout from '../components/layouts/Layout'
 import CartDetailsWrapper from '../containers/cartDetails'
 
-import {
-  cartDetail
-} from '../components/constants/PageTitle'
+// page title
+import { cartDetail } from '../components/constants/PageTitle'
 
 const styles = theme => ({
   root: {
@@ -56,16 +53,14 @@ const styles = theme => ({
 })
 
 const CartDetails = props => (
-  <div>
-    <Head>
-      <title>{cartDetail.title}</title>
-    </Head>
-    <Header />
+  <Layout
+    title={cartDetail.title}
+    addToCartHandler={props.addToCartHandler}
+  >
     <div className={props.classes.root}>
       <CartDetailsWrapper />
     </div>
-    <Footer />
-  </div>
+  </Layout>
 )
 
 export default withRoot(withStyles(styles)(CartDetails))

@@ -20,12 +20,14 @@ const styles = theme => {
 }
 
 const DiseaseTagsWrapper = (props) => (
-  <div className={props.classes.diseaseTagsWrapper}>
-    <p className={props.classes.label}>
+  <React.Fragment>
+    {props.diseases && props.diseases.length ? <div className={props.classes.diseaseTagsWrapper}>
+      <p className={props.classes.label}>
       Primary Uses:
-    </p>
-    <p><DiseseTags diseases={props.diseases ? props.diseases : []} /></p>
-  </div>
+      </p>
+      <p><DiseseTags diseases={props.diseases ? props.diseases : []} /></p>
+    </div> : null}
+  </React.Fragment>
 )
 
 export default withStyles(styles)(DiseaseTagsWrapper)

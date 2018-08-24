@@ -5,8 +5,45 @@ import {
   UPDATE_PHONE_NUMBER,
   FETCH_USER_INFO_LOADING,
   FETCH_USER_INFO_SUCCESS,
-  FETCH_USER_INFO_FAILURE
+  FETCH_USER_INFO_FAILURE,
+  CHECK_REFERRAL_CODE_LOADING,
+  CHECK_REFERRAL_CODE_SUCCESS,
+  CHECK_REFERRAL_CODE_FAILURE,
+  GET_MEMBERSHIP_CODE_LOADING,
+  GET_MEMBERSHIP_CODE_SUCCESS,
+  GET_MEMBERSHIP_CODE_FAILURE,
+  RESET_CUSTOMER_FORM_STATE
 } from './customerActionTypes'
+
+export function getMembershipCodeLoading (customerState, phoneNumber) {
+  return {
+    type: GET_MEMBERSHIP_CODE_LOADING,
+    phoneNumber,
+    customerState,
+    isLoading: true,
+    isError: false,
+    error: null
+  }
+}
+
+export function getMembershipCodeSuccess (customerState, result) {
+  return {
+    type: GET_MEMBERSHIP_CODE_SUCCESS,
+    customerState,
+    isLoading: false,
+    membership_code: result.body.payload.membership_code
+  }
+}
+
+export function getMembershipCodeFailure (customerState, error) {
+  return {
+    type: GET_MEMBERSHIP_CODE_FAILURE,
+    customerState,
+    isLoading: false,
+    isError: true,
+    error: error
+  }
+}
 
 export function fetchUserInfoLoading (customerState, phoneNumber) {
   return {
@@ -97,6 +134,45 @@ export function customerRegisterFailure (customerState, error) {
     isLoading: false,
     isError: true,
     error: error
+  }
+}
 
+export function checkReferralCodeLoading (customerState, referralCode) {
+  return {
+    type: CHECK_REFERRAL_CODE_LOADING,
+    customerState,
+    referralCodeInputValue: referralCode,
+    isLoading: true,
+    isError: false,
+    error: null,
+    referralCode: ''
+  }
+}
+
+export function checkReferralCodeSuccess (customerState, result) {
+  return {
+    type: CHECK_REFERRAL_CODE_SUCCESS,
+    customerState,
+    referralCode: result.body.payload.reference_code,
+    isLoading: false
+  }
+}
+
+export function checkReferralCodeFailure (customerState, error) {
+  return {
+    type: CHECK_REFERRAL_CODE_FAILURE,
+    customerState,
+    isLoading: false,
+    isError: true,
+    error: error
+  }
+}
+
+export function resetCustomerFormState () {
+  return {
+    type: RESET_CUSTOMER_FORM_STATE,
+    isLoading: false,
+    isError: false,
+    error: null
   }
 }

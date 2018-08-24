@@ -11,7 +11,7 @@ import {
  * @param {number} page - The page number whose medicines to be shown
  * @param {number} size - The size of list per page
  */
-export function getRelatedMedicinesLoading (medicineState, saltName, page, size) {
+export function getRelatedMedicinesLoading (medicineState, saltName, page, size, isShowMore) {
   return {
     type: GET_RELATED_MEDICINES_LOADING,
     medicineState,
@@ -20,7 +20,8 @@ export function getRelatedMedicinesLoading (medicineState, saltName, page, size)
     error: {},
     saltName: saltName,
     page: page,
-    size: size
+    size: size,
+    isShowMore: isShowMore
   }
 }
 

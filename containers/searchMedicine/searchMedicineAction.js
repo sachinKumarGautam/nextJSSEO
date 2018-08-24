@@ -1,8 +1,7 @@
 import {
   SEARCH_MEDICINE_LOADING,
   SEARCH_MEDICINE_SUCCESS,
-  SEARCH_MEDICINE_FAILURE,
-  UPDATE_INPROGRESS_MEDICINE_STATE
+  SEARCH_MEDICINE_FAILURE
 } from './searchMedicineActionTypes'
 
 /**
@@ -10,12 +9,20 @@ import {
  * @param {object} searchMedicineState - The object maintained for payload, loading and error state.
  */
 
-export function searchMedicineLoading (searchMedicineState, facilityId, value) {
+export function searchMedicineLoading (
+  searchMedicineState,
+  facilityId,
+  value,
+  pageNumber,
+  pageSize
+) {
   return {
     type: SEARCH_MEDICINE_LOADING,
     searchMedicineState,
     facilityId,
     value,
+    pageNumber,
+    pageSize,
     isLoading: true,
     isError: false,
     error: null
@@ -30,7 +37,7 @@ export function searchMedicineSuccess (searchMedicineState, result) {
   return {
     type: SEARCH_MEDICINE_SUCCESS,
     searchMedicineState,
-    payload: result.body.payload.content,
+    payload: result,
     isLoading: false
   }
 }
@@ -44,16 +51,7 @@ export function searchMedicineFailure (searchMedicineState, error) {
     type: SEARCH_MEDICINE_FAILURE,
     searchMedicineState,
     isLoading: false,
-    isError: error,
+    isError: true,
     error: error
-  }
-}
-
-export function updateInProgressMedicineState (searchMedicineState, selectedMedicineDetails) {
-  console.log(selectedMedicineDetails)
-  return {
-    type: UPDATE_INPROGRESS_MEDICINE_STATE,
-    searchMedicineState
-
   }
 }

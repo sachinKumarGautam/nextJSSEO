@@ -5,9 +5,23 @@ const initialState = {
     mobile: '',
     default_patient_id: '',
     gender: '',
-    membership_code: '',
+    membership_code: {
+      payload: '',
+      isLoading: false,
+      errorState: {
+        isError: false,
+        error: null
+      }
+    },
     memebership_type: '',
-    referral_code: '',
+    referral_code: {
+      payload: '',
+      isLoading: false,
+      errorState: {
+        isError: false,
+        error: null
+      }
+    },
     reference_code: ''
   },
   isLoadingFetchCustomerDetails: false,

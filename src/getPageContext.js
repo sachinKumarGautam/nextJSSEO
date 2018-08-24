@@ -1,7 +1,10 @@
 /* eslint-disable no-underscore-dangle */
 
 import { SheetsRegistry } from 'jss'
-import { createMuiTheme, createGenerateClassName } from '@material-ui/core/styles'
+import {
+  createMuiTheme,
+  createGenerateClassName
+} from '@material-ui/core/styles'
 // import purple from '@material-ui/core/colors/purple'
 // import green from '@material-ui/core/colors/green'
 
@@ -21,6 +24,8 @@ const theme = createMuiTheme({
       grey200: '#9b9b9b',
       grey250: '#979797',
       grey300: '#bbbbbb',
+      grey350: '#535665',
+      grey400: '#7e808c',
       grey500: '#4a4a4a',
       grey600: '#3a3a3a',
       grey700: '#393939',
@@ -31,6 +36,7 @@ const theme = createMuiTheme({
       yellow400: '#f5a623'
     },
     customGreen: {
+      green100: 'rgba(128, 194, 65, 0.08)',
       green200: '#F3FDE8',
       green300: '#78b437',
       green400: '#389e48'
@@ -47,11 +53,10 @@ const theme = createMuiTheme({
     },
     MuiButton: {
       root: {
-        // boxShadow: 'none',
         borderRadius: 32
       },
-      raisedPrimary: {
-        // boxShadow: 'none'
+      outlined: {
+        border: '1px solid #80c241'
       },
       label: {
         color: '#fff',
@@ -80,6 +85,9 @@ const theme = createMuiTheme({
     values: {
       lg: 1366
     }
+  },
+  zIndex: {
+    topProgressBar: 1600
   }
 })
 
