@@ -39,6 +39,12 @@ const styles = theme => ({
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-between'
+  },
+  noContent: {
+    color: theme.palette.customGrey.grey500,
+    textAlign: 'center',
+    marginTop: theme.spacing.unit * 1.25,
+    fontWeight: theme.typography.fontWeightBold
   }
 })
 
@@ -73,6 +79,7 @@ class PrescriptionList extends Component {
               prescriptionState={this.props.prescriptionState}
               getPrescriptionListLoading={this.props.getPrescriptionListLoading}
               customerState={this.props.customerState}
+              noContent={this.props.classes.noContent}
             />
           </CardContent>
         </Card>

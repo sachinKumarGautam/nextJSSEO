@@ -13,6 +13,8 @@ import MultipleMedicineLoader
 
 import ComponentSpecificError from '../../components/activityIndicator/error/ComponentSpecificError'
 
+import {NO_REFILL_MEDICINE} from '../messages/noDataMessage'
+
 const styles = theme => {
   return {
     medicineListWrapper: {
@@ -29,6 +31,12 @@ const styles = theme => {
     treatmentHeading: {
       marginLeft: theme.spacing.unit * 3,
       marginBottom: theme.spacing.unit * 6.5,
+      fontWeight: theme.typography.fontWeightBold
+    },
+    noContent: {
+      color: theme.palette.customGrey.grey500,
+      textAlign: 'center',
+      marginTop: theme.spacing.unit * 1.25,
       fontWeight: theme.typography.fontWeightBold
     }
   }
@@ -65,19 +73,29 @@ class RefillMedicineList extends Component {
               isLoading={this.props.isLoading}
               LoaderComp={<MultipleMedicineLoader />}
             >
-              <ul className={this.props.classes.medicineListWrapper}>
-                {this.props.pastMedicineState.payload.map(itemDetails => (
-                  <li className={this.props.classes.listItem}>
-                    <MedicineListDetails
-                      isLoading={this.props.isLoading}
-                      itemDetails={itemDetails}
-                      isRefillMedicines
-                      addToCartHandler={this.props.addToCartHandler}
-                      checkPincodeState={this.props.checkPincodeState}
-                    />
-                  </li>
-                ))}
-              </ul>
+              {
+                this.props.pastMedicineState.payload.length
+                  ? <ul className={this.props.classes.medicineListWrapper}>
+                    {this.props.pastMedicineState.payload.map(itemDetails => (
+                      <li className={this.props.classes.listItem}>
+                        <MedicineListDetails
+                          isLoading={this.props.isLoading}
+                          itemDetails={itemDetails}
+                          isRefillMedicines
+                          addToCartHandler={this.props.addToCartHandler}
+                          checkPincodeState={this.props.checkPincodeState}
+                        />
+                      </li>
+                    ))}
+                  </ul>
+                  : <Typography
+                    gutterBottom
+                    variant='body2'
+                    className={this.props.classes.noContent}
+                  >
+                    {NO_REFILL_MEDICINE}
+                  </Typography>
+              }
             </ActivityIndicator>
           </CardContent>
         </Card>
