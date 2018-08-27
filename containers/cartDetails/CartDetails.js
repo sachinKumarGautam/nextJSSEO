@@ -171,7 +171,8 @@ class CartDetails extends Component {
       this.props.resetCartState()
       // specify the path of thank you page
       // let orderConfirmationUrl = `${THANK_YOU}?order-id=${this.props.cartState.orderResponse.order_number}&customer-id=${this.props.cartState.payload.customer_id}&patient-id=${this.props.cartState.payload.patient_id}`
-      Router.push({ pathname: THANK_YOU })
+      const url = getReplacedString(THANK_YOU)
+      Router.push(url)
     }
 
     if (

@@ -73,20 +73,6 @@ class PaymentExpansionPanel extends React.Component {
             />
           }
           <div className={this.props.radioWrapper}>
-            <Radio
-              checked
-              name='radio-button-demo'
-              classes={{
-                root: this.props.radioButton,
-                checked: this.props.checked
-              }}
-            />
-            <Typography
-              component='h2'
-              className={this.props.paymentDescription}
-            >
-              Cash On Delivery
-            </Typography>
             <RadioGroup
               aria-label='Payment Channels'
               name='payment_channels'
