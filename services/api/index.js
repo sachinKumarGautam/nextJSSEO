@@ -319,6 +319,15 @@ const expressDelivery$ = (cartId, deliveryOption) =>
     )
   })
 
+  const deleteCart$ = (cartUid) => (
+
+    makeAjaxRequest({
+      method: 'DELETE',
+      url: fetchUrl('cart', cartUid, 'CREATE')
+    })
+
+  )
+
 export {
   getMoleculeSummary$,
   getMedicineList$,
@@ -357,5 +366,6 @@ export {
   checkReferralCode$,
   getMembershipCode$,
   getOrderDetails$,
-  expressDelivery$
+  expressDelivery$,
+  deleteCart$
 }

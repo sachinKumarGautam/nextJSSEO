@@ -586,3 +586,40 @@ export function isCartInvalid (cartState, isCartInvalid) {
     is_cart_invalid: isCartInvalid
   }
 }
+
+export function deleteCartLoading (
+  cartState,
+  navigationState,
+  source,
+  facilityCode,
+  sourceType,
+  patientId
+) {
+  return {
+    type: cartActionTypes.DELETE_CART_LOADING,
+    cartState: cartState,
+    isLoading: true,
+    source: source,
+    facility_code: facilityCode,
+    source_type: sourceType,
+    patientId: patientId
+  }
+}
+
+export function deleteCartSuccess (cartState) {
+  return {
+    type: cartActionTypes.DELETE_CART_SUCCESS,
+    cartState,
+    isLoading: false
+  }
+}
+
+export function deleteCartFailure (cartState, error) {
+  return {
+    type: cartActionTypes.DELETE_CART_FAILURE,
+    cartState,
+    isLoading: false,
+    isError: true,
+    error: error
+  }
+}

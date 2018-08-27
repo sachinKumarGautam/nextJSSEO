@@ -17,7 +17,8 @@ import {
   SUBMIT_ORDER_LOADING,
   SUBMIT_COUPON_CODE_LOADING,
   OPT_DOCTOR_CALLBACK_LOADING,
-  OPT_EXPRESS_DELIVERY_LOADING
+  OPT_EXPRESS_DELIVERY_LOADING,
+  DELETE_CART_LOADING
 } from './cartActionTypes'
 
 import {
@@ -45,7 +46,10 @@ import {
   optForDoctorCallbackSuccess,
   optForDoctorCallbackFailure,
   optForExpressDeliverySuccess,
-  optForExpressDeliveryFailure
+  optForExpressDeliveryFailure,
+  deleteCartSuccess,
+  deleteCartFailure,
+  getAnonymousCartIdLoading
 } from './cartActions'
 
 import {
@@ -61,7 +65,8 @@ import {
   submitOrder$,
   applyCouponForCart$,
   teleConsultation$,
-  expressDelivery$
+  expressDelivery$,
+  deleteCart$
 } from '../../services/api'
 
 export function getAnonymousCartIdEpic (action$, store) {
@@ -507,6 +512,30 @@ export function optExpressDelivery (action$, store) {
         }),
         catchError(error => {
           return of(optForExpressDeliveryFailure(data.cartState, error))
+        })
+      )
+    })
+  )
+}
+
+export function deleteCartState (action$, store) {
+  return action$.pipe(
+    ofType(DELETE_CART_LOADING),
+    mergeMap(data => {
+      const cartUid = data.cartState.payload.uid
+      return http(deleteCart$(cartUid)).pipe(
+        flatMap(result => {
+          return of(
+            deleteCartSuccess(data.cartState, true),
+            getAnonymousCartIdLoading(
+              data.source,
+              data.facility_code,
+              data.source_type
+            )
+          )
+        }),
+        catchError(error => {
+          return deleteCartFailure(data.cartState, data.medicineSelected, error)
         })
       )
     })
