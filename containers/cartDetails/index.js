@@ -232,6 +232,7 @@ class CartDetailsWrapper extends Component {
                   checkPincodeLoading={this.props.actions.checkPincodeLoading}
                   getLocalityDetailListLoading={this.props.actions.getLocalityDetailListLoading}
                   optForExpressDeliveryLoading={this.props.actions.optForExpressDeliveryLoading}
+                  constantsState={this.props.constantsState}
                 />
               </section>
             </Grid>
@@ -271,7 +272,8 @@ function mapStateToProps (state) {
     customerState: state.customerState,
     patientDetailsState: state.patientDetailsState,
     deliveryDetailsState: state.deliveryDetailsState,
-    checkPincodeState: state.checkPincodeState
+    checkPincodeState: state.checkPincodeState,
+    constantsState: state.constantsState
   }
 }
 
