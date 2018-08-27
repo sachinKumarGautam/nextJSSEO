@@ -8,6 +8,7 @@ import ListItemText from '@material-ui/core/ListItemText'
 import ActivityIndicator from '../../components/activityIndicator'
 import SideListItemsLoader
   from '../../components/activityIndicator/loader/SideListItemLoader'
+import RefillPatientDialogue from './RefillPatientDialogue'
 
 const styles = theme => ({
   menuItem: {
@@ -29,16 +30,39 @@ const styles = theme => ({
 })
 
 class PatientList extends Component {
-  getPastMedicines (patientId, patientName) {
+  constructor(props){
+    super(props)
+    this.state={
+      open: false,
+      patientId: 0,
+      patientName: ''
+    }
+    this.handleClose=this.handleClose.bind(this)
+  }
+  getPastMedicines () {
     this.props.getRefillPastMedicinesLoading(
       this.props.pastMedicineState,
-      patientId
+      this.state.patientId
     )
     this.props.updateSelectedPatientDetails(
       this.props.pastMedicineState,
-      patientId,
-      patientName
+      this.state.patientId,
+      this.state.patientName
     )
+  }
+
+  onClickOfPatient (patientId, patientName) {
+    this.setState({
+      open: true,
+      patientId: patientId,
+      patientName: patientName
+    })
+  }
+
+  handleClose() {
+    this.setState({
+      open: false
+    })
   }
 
   render () {
@@ -52,11 +76,17 @@ class PatientList extends Component {
           {patientDetailsState.payload.map((patient, index) => (
             <MenuItem
               className={classes.menuItem}
-              onClick={this.getPastMedicines.bind(
+              onClick={this.onClickOfPatient.bind(
                 this,
                 patient.id,
                 patient.full_name
-              )}
+              )
+              //   this.getPastMedicines.bind(
+              //   this,
+              //   patient.id,
+              //   patient.full_name
+              // )
+            }
             >
               <ListItemIcon className={classes.icon}>
                 <img src='/static/images/shape-copy.svg' />
@@ -69,6 +99,10 @@ class PatientList extends Component {
             </MenuItem>
           ))}
         </MenuList>
+        <RefillPatientDialogue
+          open={this.state.open}
+          handleClose={this.handleClose}
+        />
       </ActivityIndicator>
     )
   }
