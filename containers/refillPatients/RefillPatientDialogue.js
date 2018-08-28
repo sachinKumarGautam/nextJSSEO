@@ -75,7 +75,7 @@ class RefillPatientDialogue extends Component {
             <Button
               size='small'
               color='primary'
-              // onClick={this.onClickOfApply.bind(this)}
+              onClick={this.props.onClickOfOk}
               classes={{
                 root: this.props.classes.refillPatientButtonRoot,
                 label: this.props.classes.refillPatientCancelButtonLabel

@@ -319,14 +319,14 @@ const expressDelivery$ = (cartId, deliveryOption) =>
     )
   })
 
-  const deleteCart$ = (cartUid) => (
+const deleteCart$ = (cartUid) => (
 
-    makeAjaxRequest({
-      method: 'DELETE',
-      url: fetchUrl('cart', cartUid, 'CREATE')
-    })
+  makeAjaxRequest({
+    method: 'DELETE',
+    url: fetchUrl('cart', cartUid, 'CREATE')
+  })
 
-  )
+)
 
 export {
   getMoleculeSummary$,

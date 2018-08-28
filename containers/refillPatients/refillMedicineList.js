@@ -15,6 +15,8 @@ import ComponentSpecificError from '../../components/activityIndicator/error/Com
 
 import {NO_REFILL_MEDICINE} from '../messages/noDataMessage'
 
+import RefillPatientDialogue from './RefillPatientDialogue'
+
 const styles = theme => {
   return {
     medicineListWrapper: {
@@ -43,12 +45,54 @@ const styles = theme => {
 }
 
 class RefillMedicineList extends Component {
+  constructor (props) {
+    super(props)
+    this.state = {
+      open: false,
+      medicineName: null
+    }
+    this.handleClose = this.handleClose.bind(this)
+    this.onClickOfPatient = this.onClickOfPatient.bind(this)
+    this.onClickOfOk = this.onClickOfOk.bind(this)
+    this.addMedicine = this.addMedicine.bind(this)
+  }
   tryAgain () {
     this.props.getRefillPastMedicinesLoading(
       this.props.pastMedicineState,
       this.props.pastMedicineState.selectedPatientId
     )
   }
+  onClickOfPatient (item) {
+    this.setState({
+      open: true,
+      medicineName: item
+    })
+  }
+
+  handleClose () {
+    this.setState({
+      open: false
+    })
+  }
+
+  onClickOfOk () {
+    this.props.deleteCartLoading(
+      this.props.cartState,
+      this.props.checkPincodeState.payload.source,
+      this.props.checkPincodeState.payload.id,
+      'REFILL',
+      this.props.pastMedicineState.selectedPatient,
+      this.addMedicine
+    )
+  }
+
+  addMedicine () {
+    this.props.addToCartHandler(this.state.medicineName)
+    this.setState({
+      open: false
+    })
+  }
+
   render () {
     return (
       <div>
@@ -84,6 +128,9 @@ class RefillMedicineList extends Component {
                           isRefillMedicines
                           addToCartHandler={this.props.addToCartHandler}
                           checkPincodeState={this.props.checkPincodeState}
+                          onClickOfPatient={this.onClickOfPatient}
+                          pastMedicineState={this.props.pastMedicineState}
+                          cartState={this.props.cartState}
                         />
                       </li>
                     ))}
@@ -97,6 +144,11 @@ class RefillMedicineList extends Component {
                   </Typography>
               }
             </ActivityIndicator>
+            <RefillPatientDialogue
+              open={this.state.open}
+              handleClose={this.handleClose}
+              onClickOfOk={this.onClickOfOk}
+            />
           </CardContent>
         </Card>
       </div>

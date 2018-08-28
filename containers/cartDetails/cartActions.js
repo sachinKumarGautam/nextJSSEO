@@ -4,7 +4,9 @@ export function getAnonymousCartIdLoading (
   cartState,
   source,
   facilityCode,
-  sourceType = ''
+  sourceType = '',
+  patientDetail,
+  addMedicine
 ) {
   return {
     type: cartActionTypes.GET_ANONYMOUS_CART_ID_LOADING,
@@ -13,7 +15,9 @@ export function getAnonymousCartIdLoading (
     isError: false,
     source: source,
     facility_code: facilityCode,
-    source_type: sourceType
+    source_type: sourceType,
+    patientDetail: patientDetail,
+    addMedicine: addMedicine
   }
 }
 
@@ -163,7 +167,13 @@ export function resetSavePatientToCartError (cartState) {
   }
 }
 
-export function savePatientToCartLoading (cartState, patient, cartId) {
+export function savePatientToCartLoading (
+  cartState,
+  patient,
+  cartId,
+  sourceType,
+  addMedicine
+) {
   return {
     type: cartActionTypes.SAVE_PATIENT_TO_CART_LOADING,
     cartState,
@@ -171,7 +181,9 @@ export function savePatientToCartLoading (cartState, patient, cartId) {
     cartId: cartId,
     isLoading: true,
     isError: false,
-    error: {}
+    error: {},
+    source_type: sourceType,
+    addMedicine: addMedicine
   }
 }
 
@@ -589,11 +601,11 @@ export function isCartInvalid (cartState, isCartInvalid) {
 
 export function deleteCartLoading (
   cartState,
-  navigationState,
   source,
   facilityCode,
   sourceType,
-  patientId
+  patientId,
+  addMedicine
 ) {
   return {
     type: cartActionTypes.DELETE_CART_LOADING,
@@ -602,7 +614,8 @@ export function deleteCartLoading (
     source: source,
     facility_code: facilityCode,
     source_type: sourceType,
-    patientId: patientId
+    patientId: patientId,
+    addMedicine
   }
 }
 
