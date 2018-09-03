@@ -3,18 +3,14 @@ import { mergeMap, catchError, map } from 'rxjs/operators'
 import { ofType } from 'redux-observable'
 import http from '../../services/api/ajaxWrapper'
 
-import {
-  GET_RELATED_MEDICINES_LOADING
-} from './medicineListActionTypes'
+import { GET_RELATED_MEDICINES_LOADING } from './medicineListActionTypes'
 
 import {
   getRelatedMedicinesSuccess,
   getRelatedMedicinesFailure
 } from './medicineListActions'
 
-import {
-  getMedicineList$
-} from '../../services/api'
+import { getMedicineList$ } from '../../services/api'
 
 /**
  * Represents to the epic of get medicine list.
@@ -27,15 +23,19 @@ export function getRelatedMedicines (action$, store) {
     mergeMap(data => {
       return http(getMedicineList$(data.saltName, data.page, data.size)).pipe(
         map(result => {
-          let modifiedResponse =
-            [...data.medicineState.payload, ...result.body.payload.content]
-          return getRelatedMedicinesSuccess(
-            data.medicineState,
-            modifiedResponse
-          )
+          const medicineListState = store.getState().medicineListState
+          console.log(medicineListState)
+          let modifiedResponse = [
+            ...medicineListState.payload,
+            ...result.body.payload.content
+          ]
+
+          return getRelatedMedicinesSuccess(medicineListState, modifiedResponse)
         }),
         catchError(error => {
-          return of(getRelatedMedicinesFailure(data.medicineState, error))
+          debugger
+          console.log('error', error)
+          return of(getRelatedMedicinesFailure(medicineListState, error))
         })
       )
     })

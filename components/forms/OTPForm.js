@@ -15,7 +15,9 @@ import {
   OTP_INVALID
 } from '../../containers/messages/ValidationMsg'
 import { OTP_PLACEHOLDER } from '../../containers/messages/PlaceholderMsg'
-import {CUSTOM_MESSGAE_SNACKBAR} from '../../containers/messages/errorMessages'
+import {
+  CUSTOM_MESSGAE_SNACKBAR
+} from '../../containers/messages/errorMessages'
 
 const styles = theme => ({
   formControl: {
@@ -69,12 +71,15 @@ class OTPForm extends React.Component {
         <FormControl
           className={classes.formControl}
           aria-describedby='otp'
-          error={(errors.otp && touched.otp) || loginState.errorStateVerifyOtp.isError}
+          error={
+            (errors.otp && touched.otp) ||
+              loginState.errorStateVerifyOtp.isError
+          }
         >
           <Input
             autoComplete='off'
             id='otp'
-            type='number'
+            // type='number'
             value={values.otp}
             classes={{
               input: classes.otpInput
@@ -113,6 +118,9 @@ export default withStyles(styles)(
       otp: Yup.string()
         .min(4, OTP_INVALID)
         .max(4, OTP_INVALID)
+        .matches(MOBILE_VALIDATION_REGEX, {
+          message: MOBILE_INVALID
+        })
         .required(OTP_REQUIRED)
     }),
     handleSubmit: (values, { props, setSubmitting }) => {

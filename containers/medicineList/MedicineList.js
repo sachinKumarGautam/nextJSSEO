@@ -78,7 +78,8 @@ class MedicineList extends React.Component {
         this.props.checkPincodeState.payload.id,
         this.props.productName,
         this.state.page + 1, // page number
-        10 // page size
+        10, // page size,
+        false // is header props is false
       )
     } else {
       this.props.getRelatedMedicinesLoading(
