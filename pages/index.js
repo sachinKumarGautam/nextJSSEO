@@ -14,6 +14,10 @@ import {
   getBackGroundImagesLoading
 } from '../containers/homePage/homePageActions'
 
+import {
+  fetchConstantsLoading
+} from '../components/constants/constantsAction'
+
 // page title
 import { homePage } from '../components/constants/PageTitle'
 
@@ -44,9 +48,15 @@ class HomePage extends React.Component {
   }
 
   componentDidMount () {
+    // get background images
     this.props.actions.getBackGroundImagesLoading(
       this.props.homePageState,
       'background'
+    )
+
+    // fetch app constants
+    this.props.actions.fetchConstantsLoading(
+      this.props.constantsState
     )
   }
 
@@ -71,7 +81,8 @@ class HomePage extends React.Component {
 
 function mapStateToProps (state) {
   return {
-    homePageState: state.homePageState
+    homePageState: state.homePageState,
+    constantsState: state.constantsState
   }
 }
 
@@ -79,7 +90,8 @@ function mapDispatchToProps (dispatch) {
   return {
     actions: bindActionCreators(
       {
-        getBackGroundImagesLoading
+        getBackGroundImagesLoading,
+        fetchConstantsLoading
       },
       dispatch
     )
