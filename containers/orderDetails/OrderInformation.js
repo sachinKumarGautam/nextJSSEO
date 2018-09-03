@@ -114,6 +114,7 @@ class OrderInformation extends Component {
               <OrderContentWrapper
                 cartState={this.props.cartState}
                 orderDetailsState={this.props.orderDetailsState}
+                constantsState={this.props.constantsState}
               />
             </ActivityIndicator>
           </CardContent>

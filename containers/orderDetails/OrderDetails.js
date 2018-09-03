@@ -19,6 +19,7 @@ class OrderDetails extends Component {
               cartState={this.props.cartState}
               orderDetailsState={this.props.orderDetailsState}
               getOrderDetailsLoading={this.props.getOrderDetailsLoading}
+              constantsState={this.props.constantsState}
             />
           </Grid>
         </Grid>

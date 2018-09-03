@@ -18,6 +18,10 @@ import {
   LF_ASSURED
 } from '../../components/constants/Constants'
 
+import {
+  getReplacedString
+} from '../../utils/replaceConstants'
+
 const styles = theme => ({
   textWrapper: {
     display: 'flex',
@@ -101,6 +105,7 @@ class PaymentDeliveryDetail extends Component {
   render () {
     const availableDeliveryOption = this.props.cartState.payload.available_delivery_option
     const indexOfUrgentDelivery = availableDeliveryOption && availableDeliveryOption.indexOf(DELIVERY_OPTION_URGENT)
+    const constantsPayload = this.props.constantsState.constants.payload
 
     return (
       <div className={this.props.classes.mainWrapper}>
@@ -136,7 +141,7 @@ class PaymentDeliveryDetail extends Component {
                 <Typography
                   variant='caption'
                 >
-                  {LF_ASSURED_TEXT}
+                  {getReplacedString(LF_ASSURED_TEXT, constantsPayload)}
                 </Typography>
               </ReactTooltip>
             </a>
@@ -197,7 +202,7 @@ class PaymentDeliveryDetail extends Component {
                 <Typography
                   variant='caption'
                 >
-                  {UREGNT_DELIVERY_TEXT}
+                  {getReplacedString(UREGNT_DELIVERY_TEXT, constantsPayload)}
                 </Typography>
               </ReactTooltip>
             </a>
