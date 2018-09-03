@@ -98,6 +98,7 @@ const initialState = {
   orderResponse: {
     payload: {
       order_number: null,
+      order_type: '',
       delivery_option: '',
       service_type: '',
       order_prescriptions: [],
@@ -133,6 +134,8 @@ const initialState = {
       error: {}
     }
   },
+  isOrderSubmitted: false,
+  isRedirectToOrderDetailsPage: false,
   expressDeliveryCheck: {
     payload: {},
     isLoading: false,

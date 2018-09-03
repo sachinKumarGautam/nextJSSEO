@@ -56,7 +56,8 @@ import {
   applyCouponCode,
   optDoctorCallback,
   verifyPaymentEpic,
-  optExpressDelivery
+  optExpressDelivery,
+  paymentInitiateEpic
 } from '../containers/cartDetails/cartEpics'
 
 import { checkPincode } from '../containers/location/pincode/pincodeEpic'
@@ -72,7 +73,8 @@ import {
 import { getBackGroungImages } from '../containers/homePage/homePageEpics'
 
 import {
-  getOrderDetails
+  getOrderDetails,
+  getPaymentChannelsEpic
 } from '../containers/orderDetails/orderDetailsEpics'
 
 export const rootEpic = combineEpics(
@@ -117,5 +119,7 @@ export const rootEpic = combineEpics(
   getMembershipCodeLoading,
   getLocalityList,
   getOrderDetails,
-  optExpressDelivery
+  getPaymentChannelsEpic,
+  optExpressDelivery,
+  paymentInitiateEpic
 )

@@ -23,6 +23,11 @@ import ActivityIndicator from '../../components/activityIndicator/index'
 
 import { getReplacedString } from '../../utils/replaceConstants'
 
+import  {
+  KEY_ID,
+  PAYMENT_EMAIL
+} from '../../utils/paymentConstants'
+
 /*
   avatar
   medicine list
@@ -102,12 +107,12 @@ class CartDetails extends Component {
       const amount = (paymentGateway.amount * 100).toFixed()
 
       let options = {
-        'key_id': 'rzp_test_XuRgeVefqaaxKa',
+        'key_id': KEY_ID,
         'amount': amount,
         'order_id': paymentGateway.ref_transaction_id,
-        'name': 'asdasd',
-        'description': 'Purchase Description',
-        'image': 'adasd',
+        'name': this.props.customerState.payload.full_name,
+        'description': cartState.orderResponse.payload.order_number,
+        'image': '/static/images/logo-green.svg',
         'handler': (response) => {
           this.verifyPayment(response)
         },
@@ -118,9 +123,9 @@ class CartDetails extends Component {
           }
         },
         'prefill': {
-          'name': 'lakshita verma',
-          'email': 'lakshita.verma@lifcare.in',
-          'contact': '8800372718',
+          'name': this.props.customerState.payload.full_name,
+          'email': PAYMENT_EMAIL,
+          'contact': this.props.customerState.payload.mobile,
           'method': paymentGateway.sub_method
         },
         'theme': {
@@ -152,14 +157,11 @@ class CartDetails extends Component {
 
   componentDidUpdate (prevProps) {
     if (
-      this.props.cartState.orderResponse.payload.order_number !==
-      prevProps.cartState.orderResponse.payload.order_number
+      (this.props.cartState.isOrderSubmitted !==
+      prevProps.cartState.isOrderSubmitted) &&
+      this.props.cartState.isOrderSubmitted &&
+      this.props.cartState.orderResponse.payload.order_type !== 'COD'
     ) {
-      // Router.push({ pathname: THANK_YOU })
-      // const url = getReplacedString(THANK_YOU)
-      // setTimeout(() => {
-      //   Router.push(url)
-      // }, 2800)
       this.openCheckout(this.props.cartState)
     }
 
@@ -169,10 +171,10 @@ class CartDetails extends Component {
       this.props.cartState.payment.isPaymentSuccessful
     ) {
       this.props.resetCartState()
-      // specify the path of thank you page
-      // let orderConfirmationUrl = `${THANK_YOU}?order-id=${this.props.cartState.orderResponse.order_number}&customer-id=${this.props.cartState.payload.customer_id}&patient-id=${this.props.cartState.payload.patient_id}`
       const url = getReplacedString(THANK_YOU)
-      Router.push(url)
+      const as=`${url}?payment-status=success`
+      const href=`${url}?payment-status=success`
+      Router.push(href, as)
     }
 
     if (
@@ -180,8 +182,24 @@ class CartDetails extends Component {
       prevProps.cartState.payment.isPaymentFailure) &&
       this.props.cartState.payment.isPaymentFailure
     ) {
-      // let orderConfirmationUrl = `${THANK_YOU}?order-id=${this.props.cartState.orderResponse.order_number}&is-payment-page=true`
-      Router.push({ pathname: THANK_YOU })
+      this.props.resetCartState()
+      const url = getReplacedString(THANK_YOU)
+      const as=`${url}?payment-status=failed`
+      const href=`${url}?payment-status=failed`
+      Router.push(href, as)
+    }
+
+    if (
+      (this.props.cartState.orderResponse.payload.order_number !==
+      prevProps.cartState.orderResponse.payload.order_number
+      ) &&
+      this.props.cartState.orderResponse.payload.order_type === 'COD'
+    ) {
+      this.props.resetCartState()
+      const url = getReplacedString(THANK_YOU)
+      const as=`${url}?payment-status=success`
+      const href=`${url}?payment-status=success`
+      Router.push(href, as)
     }
   }
 

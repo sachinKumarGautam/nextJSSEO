@@ -327,12 +327,21 @@ const verifyPayment$ = (orderId, body) => (
   })
 )
 
-const paymentInitiate$ = (body) => (
+const paymentInitiate$ = body => (
   makeAjaxRequest({
     method: 'POST',
     url: fetchUrl('order', 'payment/initiate', 'CREATE'),
     body: body
   })
+)
+
+const getPaymentChannels$ = orderId => (
+
+  makeAjaxRequest({
+    method: 'GET',
+    url: fetchUrl('order', orderId + '/payment/channels', 'CREATE')
+  })
+
 )
 
 export {
@@ -375,5 +384,6 @@ export {
   checkReferralCode$,
   getMembershipCode$,
   getOrderDetails$,
-  expressDelivery$
+  expressDelivery$,
+  getPaymentChannels$
 }

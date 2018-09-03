@@ -132,7 +132,8 @@ const styles = theme => ({
   radioWrapper: {
     display: 'flex',
     flexDirection: 'row',
-    marginTop: theme.spacing.unit * 2
+    marginTop: theme.spacing.unit * 2,
+    marginLeft: theme.spacing.unit * 1.875
   }
 })
 

@@ -401,6 +401,7 @@ export function submitOrderSuccess (cartState, result) {
     cartState,
     payment_gateway: result.payment_gateway,
     order_number: result.order.id,
+    order_type: result.order.order_type,
     delivery_option: result.order.delivery_option,
     service_type: result.order.service_type,
     doctor_callback: result.order.doctor_callback,
@@ -419,6 +420,7 @@ export function submitOrderSuccess (cartState, result) {
     facility_code: result.order.facility_code,
     status: result.order.status,
     source: result.order.source,
+    isOrderSubmitted: true,
     isLoading: false
   }
 }
@@ -616,12 +618,14 @@ export function updatePaymentFailureFlag (
 
 export function paymentInitiateLoading (
   cartState,
-  orderId
+  orderId,
+  paymentMode
 ) {
   return {
     type: cartActionTypes.PAYMENT_INITIATE_LOADING,
     cartState,
     orderId: orderId,
+    paymentMode: paymentMode,
     isLoading: true,
     isError: false
   }
@@ -683,5 +687,13 @@ export function isCartInvalid (cartState, isCartInvalid) {
     type: cartActionTypes.IS_CART_INVALID,
     cartState,
     is_cart_invalid: isCartInvalid
+  }
+}
+
+export function redirectToOrderDetailsPage (cartState) {
+  return {
+    type: cartActionTypes.REDIRECT_TO_ORDER_DETAILS_PAGE,
+    cartState,
+    isRedirectToOrderDetailsPage: true
   }
 }

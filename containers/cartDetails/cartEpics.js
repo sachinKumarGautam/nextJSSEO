@@ -51,7 +51,8 @@ import {
   paymentInitiateSuccess,
   paymentInitiateFailure,
   optForExpressDeliverySuccess,
-  optForExpressDeliveryFailure
+  optForExpressDeliveryFailure,
+  redirectToOrderDetailsPage
 } from './cartActions'
 
 import {
@@ -545,7 +546,7 @@ export function paymentInitiateEpic (action$, store) {
     mergeMap(data => {
       const body = {
         order_id: data.orderId,
-        payment_method: data.cartState.paymentMode
+        payment_method: data.paymentMode
       }
 
       return http(paymentInitiate$(body)).pipe(
@@ -556,7 +557,16 @@ export function paymentInitiateEpic (action$, store) {
           return paymentInitiateSuccess(data.cartState, payload, paymentGateway)
         }),
         catchError(error => {
-          return of(paymentInitiateFailure(data.cartState, error))
+          if(error.status === 400) {
+            return of(
+              redirectToOrderDetailsPage(data.cartState),
+              paymentInitiateFailure(data.cartState, error)
+            )
+          } else {
+            return of(
+              paymentInitiateFailure(data.cartState, error)
+            )
+          }
         })
       )
     })

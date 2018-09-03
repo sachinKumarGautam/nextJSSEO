@@ -537,12 +537,14 @@ export default function cartReducer (state = initialState, action) {
       return {
         ...state,
         payment_gateway: action.payment_gateway,
+        isOrderSubmitted: action.isOrderSubmitted,
         orderResponse: {
           ...state.orderResponse,
           isLoading: action.isLoading,
           payload: {
             ...state.orderResponse.payload,
             order_number: action.order_number,
+            order_type: action.order_type,
             isLoading: action.isLoading,
             service_type: action.service_type,
             delivery_option: action.delivery_option,
@@ -584,7 +586,8 @@ export default function cartReducer (state = initialState, action) {
       return {
         ...state,
         payload: initialState.payload,
-        payment: initialState.payment
+        payment: initialState.payment,
+        isOrderSubmitted: initialState.isOrderSubmitted
       }
 
     case cartActionTypes.GO_TO_CART_SNACKBAR:
@@ -837,22 +840,22 @@ export default function cartReducer (state = initialState, action) {
           ...state.payment,
           isLoading: action.isLoading
         },
-        orderSummary: {
-          ...state.orderSummary,
-          payload: {
-            ...state.orderSummary.payload,
-            state: action.state,
-            status: action.status,
-            payment_confirmation_time: action.payment_confirmation_time,
-            payment_cancellation_time: action.payment_cancellation_time,
-            customer_care_number: action.customer_care_number
-          }
+        payload: {
+          ...state.payload,
+          state: action.state,
+          status: action.status,
+          payment_confirmation_time: action.payment_confirmation_time,
+          payment_cancellation_time: action.payment_cancellation_time,
+          customer_care_number: action.customer_care_number
         },
         orderResponse: {
           ...state.orderResponse,
-          isLoading: action.isLoading,
-          order_number: action.order_number,
-          order_type: action.order_type
+          payload: {
+            ...state.orderResponse.payload,
+            isLoading: action.isLoading,
+            order_number: action.order_number,
+            order_type: action.order_type
+          }
         },
         payment_gateway: action.payment_gateway,
         isOrderSubmitted: action.isOrderSubmitted
@@ -897,6 +900,12 @@ export default function cartReducer (state = initialState, action) {
           }
         }
       }
+     
+    case cartActionTypes.REDIRECT_TO_ORDER_DETAILS_PAGE:
+      return {
+        ...state,
+        isRedirectToOrderDetailsPage: action.isRedirectToOrderDetailsPage
+      } 
 
     default:
       return state

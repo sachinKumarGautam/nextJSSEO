@@ -241,6 +241,7 @@ class CartDetailsWrapper extends Component {
               <section className={classes.stickyWrapper}>
                 <CartDetails
                   cartState={this.props.cartState}
+                  customerState={this.props.customerState}
                   incrementCartItemLoading={
                     this.props.actions.incrementCartItemLoading
                   }
