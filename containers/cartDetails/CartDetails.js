@@ -23,7 +23,7 @@ import ActivityIndicator from '../../components/activityIndicator/index'
 
 import { getReplacedString } from '../../utils/replaceConstants'
 
-import  {
+import {
   KEY_ID,
   PAYMENT_EMAIL
 } from '../../utils/paymentConstants'
@@ -172,8 +172,8 @@ class CartDetails extends Component {
     ) {
       this.props.resetCartState()
       const url = getReplacedString(THANK_YOU)
-      const as=`${url}?payment-status=success`
-      const href=`${url}?payment-status=success`
+      const as = `${url}?payment-status=success`
+      const href = `${url}?payment-status=success`
       Router.push(href, as)
     }
 
@@ -184,8 +184,8 @@ class CartDetails extends Component {
     ) {
       this.props.resetCartState()
       const url = getReplacedString(THANK_YOU)
-      const as=`${url}?payment-status=failed`
-      const href=`${url}?payment-status=failed`
+      const as = `${url}?payment-status=failed`
+      const href = `${url}?payment-status=failed`
       Router.push(href, as)
     }
 
@@ -197,8 +197,8 @@ class CartDetails extends Component {
     ) {
       this.props.resetCartState()
       const url = getReplacedString(THANK_YOU)
-      const as=`${url}?payment-status=success`
-      const href=`${url}?payment-status=success`
+      const as = `${url}?payment-status=success`
+      const href = `${url}?payment-status=success`
       Router.push(href, as)
     }
   }

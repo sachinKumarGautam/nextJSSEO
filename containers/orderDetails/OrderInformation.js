@@ -81,8 +81,8 @@ class OrderInformation extends Component {
     ) {
       this.props.resetCartState()
       const url = getReplacedString(THANK_YOU)
-      const as=`${url}?payment-status=success`
-      const href=`${url}?payment-status=success`
+      const as = `${url}?payment-status=success`
+      const href = `${url}?payment-status=success`
       Router.push(href, as)
     }
 
@@ -112,8 +112,8 @@ class OrderInformation extends Component {
   retryPayment () {
     this.props.resetCartState()
     const url = getReplacedString(THANK_YOU)
-    const as=`${url}?payment-status=retry`
-    const href=`${url}?payment-status=retry`
+    const as = `${url}?payment-status=retry`
+    const href = `${url}?payment-status=retry`
     Router.push(href, as)
   }
 

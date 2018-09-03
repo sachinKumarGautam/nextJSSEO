@@ -557,7 +557,7 @@ export function paymentInitiateEpic (action$, store) {
           return paymentInitiateSuccess(data.cartState, payload, paymentGateway)
         }),
         catchError(error => {
-          if(error.status === 400) {
+          if (error.status === 400) {
             return of(
               redirectToOrderDetailsPage(data.cartState),
               paymentInitiateFailure(data.cartState, error)

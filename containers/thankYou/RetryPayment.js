@@ -24,7 +24,7 @@ import {
   getReplacedString
 } from '../../utils/replaceConstants'
 
-import  {
+import {
   KEY_ID,
   PAYMENT_EMAIL
 } from '../../utils/paymentConstants'
@@ -116,11 +116,11 @@ class RetryPayment extends React.Component {
     paymentChannel: ''
   }
 
-  componentDidMount() {
-      this.props.getPaymentChannelsLoading(
-        this.props.orderDetailsState,
-        this.props.orderId
-      )
+  componentDidMount () {
+    this.props.getPaymentChannelsLoading(
+      this.props.orderDetailsState,
+      this.props.orderId
+    )
   }
 
   retryPayment () {
@@ -154,8 +154,8 @@ class RetryPayment extends React.Component {
     ) {
       this.props.resetCartState()
       const url = getReplacedString(THANK_YOU)
-      const as=`${url}?payment-status=success`
-      const href=`${url}?payment-status=success`
+      const as = `${url}?payment-status=success`
+      const href = `${url}?payment-status=success`
       Router.push(href, as)
     }
 
@@ -165,8 +165,8 @@ class RetryPayment extends React.Component {
       this.props.cartState.payment.isPaymentFailure
     ) {
       const url = getReplacedString(THANK_YOU)
-      const as=`${url}?payment-status=failed`
-      const href=`${url}?payment-status=failed`
+      const as = `${url}?payment-status=failed`
+      const href = `${url}?payment-status=failed`
       Router.push(href, as)
     }
 
@@ -178,8 +178,8 @@ class RetryPayment extends React.Component {
     ) {
       this.props.resetCartState()
       const url = getReplacedString(THANK_YOU)
-      const as=`${url}?payment-status=success`
-      const href=`${url}?payment-status=success`
+      const as = `${url}?payment-status=success`
+      const href = `${url}?payment-status=success`
       Router.push(href, as)
     }
 
@@ -258,7 +258,7 @@ class RetryPayment extends React.Component {
     )
   }
 
-  render() {
+  render () {
     return (
       <Card elevation={'1'}>
         <CardContent className={this.props.classes.cardContent}>
@@ -292,7 +292,7 @@ class RetryPayment extends React.Component {
               className={this.props.classes.selectPaymentMode}
             >
                 SELECT PAYMENT MODE
-              </Typography>
+            </Typography>
             <div className={this.props.classes.radioWrapper}>
               <RadioGroup
                 aria-label='Payment Channels'

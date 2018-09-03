@@ -80,8 +80,8 @@ class PaymentFailure extends React.Component {
     ) {
       this.props.resetCartState()
       const url = getReplacedString(THANK_YOU)
-      const as=`${url}?payment-status=success`
-      const href=`${url}?payment-status=success`
+      const as = `${url}?payment-status=success`
+      const href = `${url}?payment-status=success`
       Router.push(href, as)
     }
 
@@ -105,7 +105,7 @@ class PaymentFailure extends React.Component {
     )
   }
 
-  render() {
+  render () {
     return (
       <Card elevation={'1'}>
         <CardContent className={this.props.classes.cardContent}>
@@ -115,9 +115,9 @@ class PaymentFailure extends React.Component {
             }
             ErrorComp={
               <SnackbarErrorMessage
-                  error={
-                    this.props.cartState.payment.errorState.error
-                  }
+                error={
+                  this.props.cartState.payment.errorState.error
+                }
               />
             }
             bottomError

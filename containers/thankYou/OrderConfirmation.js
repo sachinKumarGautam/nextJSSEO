@@ -8,7 +8,6 @@ import RetryPayment from './RetryPayment'
 import MyCartDetails from './MyCartDetails'
 
 class OrderConfirmation extends React.Component {
-
   render () {
     return (
       <Grid container>

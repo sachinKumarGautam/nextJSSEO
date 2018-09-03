@@ -900,12 +900,12 @@ export default function cartReducer (state = initialState, action) {
           }
         }
       }
-     
+
     case cartActionTypes.REDIRECT_TO_ORDER_DETAILS_PAGE:
       return {
         ...state,
         isRedirectToOrderDetailsPage: action.isRedirectToOrderDetailsPage
-      } 
+      }
 
     default:
       return state

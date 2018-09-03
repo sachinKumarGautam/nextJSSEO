@@ -29,7 +29,7 @@ const styles = theme => ({
 })
 
 class OrderConfirmationWrapper extends React.Component {
-  static getInitialProps({query}) {
+  static getInitialProps ({query}) {
     return query
   }
 
@@ -46,7 +46,7 @@ class OrderConfirmationWrapper extends React.Component {
           <ThankyouWrapper
             queryParamPaymentStatus={query.paymentStatus}
             orderId={query.id}
-           />
+          />
         </div>
       </Layout>
     )

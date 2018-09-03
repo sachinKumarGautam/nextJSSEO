@@ -53,8 +53,8 @@ class ThankyouWrapper extends Component {
   retryPayment () {
     this.props.actions.resetCartState()
     const url = getReplacedString(THANK_YOU)
-    const as=`${url}?payment-status=retry`
-    const href=`${url}?payment-status=retry`
+    const as = `${url}?payment-status=retry`
+    const href = `${url}?payment-status=retry`
     Router.push(href, as)
   }
 
