@@ -7,6 +7,7 @@ import { withStyles } from '@material-ui/core/styles'
 import Radio from '@material-ui/core/Radio'
 import RadioGroup from '@material-ui/core/RadioGroup'
 import FormControlLabel from '@material-ui/core/FormControlLabel'
+import Snackbar from '@material-ui/core/Snackbar'
 
 import Button from '../../components/button'
 
@@ -25,6 +26,9 @@ import openRazorpayCheckout from '../../utils/openRazorpayCheckout'
 
 import ActivityIndicator from '../../components/activityIndicator/index'
 import ComponentSpecificError from '../../components/activityIndicator/error/ComponentSpecificError'
+
+import { SELECT_PAYMENT_MODE } from '../messages/cartMessages'
+import { SNACK_BAR_DURATION } from '../../components/constants/Constants'
 
 const styles = theme => ({
   cardContent: {
@@ -107,7 +111,8 @@ const styles = theme => ({
 
 class RetryPayment extends React.Component {
   state = {
-    paymentChannel: ''
+    paymentChannel: '',
+    isShowSnackbar: false
   }
 
   componentDidMount () {
@@ -118,11 +123,17 @@ class RetryPayment extends React.Component {
   }
 
   retryPayment () {
-    this.props.paymentInitiateLoading(
-      this.props.cartState,
-      this.props.orderId,
-      this.state.paymentChannel
-    )
+    if (this.state.paymentChannel !== '') {
+      this.props.paymentInitiateLoading(
+        this.props.cartState,
+        this.props.orderId,
+        this.state.paymentChannel
+      )
+    } else {
+      this.setState({
+        isShowSnackbar: true
+      })
+    }
   }
 
   handlePaymentChannelsChange (event) {
@@ -221,6 +232,12 @@ class RetryPayment extends React.Component {
     )
   }
 
+  handleClose () {
+    this.setState({
+      isShowSnackbar: false
+    })
+  }
+
   render () {
     return (
       <Card elevation={'1'}>
@@ -294,6 +311,19 @@ class RetryPayment extends React.Component {
               />
             </div>
           </ActivityIndicator>
+          <Snackbar
+            anchorOrigin={{
+              vertical: 'bottom',
+              horizontal: 'center'
+            }}
+            autoHideDuration={SNACK_BAR_DURATION}
+            open={this.state.isShowSnackbar}
+            onClose={this.handleClose.bind(this)}
+            ContentProps={{
+              'aria-describedby': 'cart-items'
+            }}
+            message={<span>{SELECT_PAYMENT_MODE}</span>}
+          />
         </CardContent>
       </Card>
     )

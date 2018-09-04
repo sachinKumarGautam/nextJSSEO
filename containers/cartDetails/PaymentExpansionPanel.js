@@ -7,31 +7,48 @@ import ExpansionPanel from '@material-ui/core/ExpansionPanel'
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails'
 import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary'
 import Typography from '@material-ui/core/Typography'
+import Snackbar from '@material-ui/core/Snackbar'
 
 import Button from '../../components/button'
 import TermsAndCondition from './TermsAndCondition'
 import PaymentDeliveryDetail from './PaymentDeliveryDetail'
 
+import { SELECT_PAYMENT_MODE } from '../messages/cartMessages'
+
 import {
   LF_ASSURED,
-  NORMAL
+  NORMAL,
+  SNACK_BAR_DURATION
 } from '../../components/constants/Constants'
 
 class PaymentExpansionPanel extends React.Component {
   state = {
-    paymentChannel: ''
+    paymentChannel: '',
+    isShowSnackbar: false
   }
 
   placeOrder () {
-    this.props.submitOrderLoading(
-      this.props.cartState,
-      this.state.paymentChannel
-    )
+    if (this.state.paymentChannel !== '') {
+      this.props.submitOrderLoading(
+        this.props.cartState,
+        this.state.paymentChannel
+      )
+    } else {
+      this.setState({
+        isShowSnackbar: true
+      })
+    }
   }
 
   handlePaymentChannelsChange (event) {
     this.setState({
       paymentChannel: event.target.value
+    })
+  }
+
+  handleClose () {
+    this.setState({
+      isShowSnackbar: false
     })
   }
 
@@ -114,6 +131,19 @@ class PaymentExpansionPanel extends React.Component {
               !patientDetails.payload.patient_id ||
               !shippingAddressDetails.payload.shipping_address_id
             }
+          />
+          <Snackbar
+            anchorOrigin={{
+              vertical: 'bottom',
+              horizontal: 'center'
+            }}
+            autoHideDuration={SNACK_BAR_DURATION}
+            open={this.state.isShowSnackbar}
+            onClose={this.handleClose.bind(this)}
+            ContentProps={{
+              'aria-describedby': 'cart-items'
+            }}
+            message={<span>{SELECT_PAYMENT_MODE}</span>}
           />
         </ExpansionPanelDetails>
       </ExpansionPanel>
