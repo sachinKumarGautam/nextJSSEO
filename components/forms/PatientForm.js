@@ -8,6 +8,7 @@ import MenuItem from '@material-ui/core/MenuItem'
 import FormHelperText from '@material-ui/core/FormHelperText'
 import FormControl from '@material-ui/core/FormControl'
 import Button from '../../components/button'
+import InputAdornment from '@material-ui/core/InputAdornment'
 import { withStyles } from '@material-ui/core/styles'
 
 import {
@@ -15,7 +16,8 @@ import {
   MOBILE_REQUIRED,
   GENDER_REQUIRED,
   MOBILE_INVALID,
-  MOBILE_VALIDATION_REGEX
+  MOBILE_VALIDATION_REGEX,
+  NUMBER_VALIDATION_REGEX
 } from '../../containers/messages/ValidationMsg'
 
 // Helper styles for demo
@@ -40,6 +42,9 @@ const styles = theme => ({
   },
   formHelperText: {
     textAlign: 'center'
+  },
+  mobilePrefix: {
+    marginBottom: theme.spacing.unit / 8
   }
 })
 
@@ -51,7 +56,11 @@ class PatientForm extends React.Component {
   }
 
   handleChangeMobile = event => {
-    if (event.target.value.length <= 10) {
+    const inputValue = event.target.value
+    const regexInputExpression = RegExp(NUMBER_VALIDATION_REGEX).test(
+      inputValue
+    )
+    if ((regexInputExpression && inputValue.length <= 10) || !inputValue) {
       this.props.handleChange(event)
     }
   }
@@ -79,6 +88,7 @@ class PatientForm extends React.Component {
             type='text'
             onChange={handleChange}
             value={values.full_name}
+
           />
           {errors.full_name &&
             touched.full_name &&
@@ -138,6 +148,11 @@ class PatientForm extends React.Component {
             id='mobile'
             onChange={this.handleChangeMobile}
             value={values.mobile}
+            startAdornment={
+              <InputAdornment position='start'>
+                <span className={classes.mobilePrefix}>{'+91'}</span>
+              </InputAdornment>
+            }
           />
           {errors.mobile &&
             touched.mobile &&

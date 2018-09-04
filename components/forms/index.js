@@ -19,7 +19,8 @@ const FormWrapper = props => {
     updateAddressFormValue,
     getLocalityDetailListLoading,
     checkPincodeState,
-    checkReferralCodeLoading
+    checkReferralCodeLoading,
+    resendButtonClick
   } = props
   switch (props.type) {
     case 'loginForm':
@@ -51,6 +52,7 @@ const FormWrapper = props => {
           toggleForm={toggleForm}
           onSubmit={onSubmit}
           loginState={loginState}
+          resendButtonClick={resendButtonClick}
         />
       )
 

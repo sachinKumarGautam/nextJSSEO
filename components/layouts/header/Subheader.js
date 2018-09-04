@@ -31,7 +31,8 @@ const styles = theme => ({
   subHeaderText: {
     fontWeight: theme.typography.fontWeightBold,
     color: theme.palette.customGrey.grey500,
-    paddingLeft: theme.spacing.unit * 2.25
+    paddingLeft: theme.spacing.unit * 2.25,
+    cursor: 'pointer'
   },
   hover: {
     color: theme.palette.primary.main

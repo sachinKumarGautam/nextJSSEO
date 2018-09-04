@@ -74,7 +74,7 @@ const CommonButton = buttonProps => {
     loaderPosition
   } = buttonProps
   return (
-    <div>
+    <React.Fragment>
       <div className={classes.wrapper}>
         <Button
           variant={variant || null}
@@ -110,7 +110,7 @@ const CommonButton = buttonProps => {
             )}
           />}
       </div>
-    </div>
+    </React.Fragment>
   )
 }
 
