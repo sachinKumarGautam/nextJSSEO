@@ -23,10 +23,7 @@ import ActivityIndicator from '../../components/activityIndicator/index'
 
 import { getReplacedString } from '../../utils/replaceConstants'
 
-import {
-  KEY_ID,
-  PAYMENT_EMAIL
-} from '../../utils/paymentConstants'
+import openRazorpayCheckout from '../../utils/openRazorpayCheckout'
 
 /*
   avatar
@@ -98,44 +95,12 @@ class CartDetails extends Component {
   }
 
   openCheckout (cartState) {
-    const paymentGateway = cartState.payment_gateway
-
-    if (
-      paymentGateway &&
-      paymentGateway.amount >= 1
-    ) {
-      const amount = (paymentGateway.amount * 100).toFixed()
-
-      let options = {
-        'key_id': KEY_ID,
-        'amount': amount,
-        'order_id': paymentGateway.ref_transaction_id,
-        'name': this.props.customerState.payload.full_name,
-        'description': cartState.orderResponse.payload.order_number,
-        'image': '/static/images/logo-green.svg',
-        'handler': (response) => {
-          this.verifyPayment(response)
-        },
-        'modal': {
-          escape: true,
-          'ondismiss': () => {
-            this.onModalDismiss()
-          }
-        },
-        'prefill': {
-          'name': this.props.customerState.payload.full_name,
-          'email': PAYMENT_EMAIL,
-          'contact': this.props.customerState.payload.mobile,
-          'method': paymentGateway.sub_method
-        },
-        'theme': {
-          'color': 'rgb(128, 194, 65)'
-        }
-      }
-
-      let razorpay = new window.Razorpay(options)
-      razorpay.open()
-    }
+    openRazorpayCheckout(
+      cartState,
+      this.props.customerState,
+      this.verifyPayment.bind(this),
+      this.onModalDismiss.bind(this)
+    )
   }
 
   onModalDismiss () {
