@@ -104,6 +104,7 @@ class LoginWrapper extends React.Component {
           closeLoginModal={this.props.closeLoginModal}
           loginState={this.props.loginState}
           verifyOtpLoading={this.props.actions.verifyOtpLoading}
+          sendOtpLoading={this.props.actions.sendOtpLoading}
         />
     }
   }
