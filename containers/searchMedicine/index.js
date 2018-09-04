@@ -197,7 +197,7 @@ class SearchMedicine extends React.Component {
         this.props.checkPincodeState.payload.id,
         event.target.value,
         0, // page number
-        10,// page size,
+        10, // page size,
         true // isHeader props is true
       )
     }

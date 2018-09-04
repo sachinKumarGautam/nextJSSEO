@@ -66,6 +66,7 @@ const styles = theme => ({
     alignItems: 'center',
     justifyContent: 'center',
     display: 'flex',
+    cursor: 'pointer',
     position: 'relative',
     minHeight: '50px',
     minWidth: '50px'
@@ -114,7 +115,7 @@ class MedicineList extends Component {
                 <Grid item xs={4}>
                   <div className={this.props.classes.amountWrapper}>
                     <Typography className={this.props.classes.amount}>
-                      Rs. {cartItem.mrp}
+                      ₹ {cartItem.mrp}
                     </Typography>
                   </div>
                   <div className={this.props.classes.buttonWrapper}>

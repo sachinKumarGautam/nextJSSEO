@@ -33,7 +33,6 @@ export function getRelatedMedicines (action$, store) {
           return getRelatedMedicinesSuccess(medicineListState, modifiedResponse)
         }),
         catchError(error => {
-          debugger
           console.log('error', error)
           return of(getRelatedMedicinesFailure(medicineListState, error))
         })

@@ -12,7 +12,8 @@ import { withStyles } from '@material-ui/core/styles'
 
 import {
   OTP_REQUIRED,
-  OTP_INVALID
+  OTP_INVALID,
+  NUMBER_VALIDATION_REGEX
 } from '../../containers/messages/ValidationMsg'
 import { OTP_PLACEHOLDER } from '../../containers/messages/PlaceholderMsg'
 import {
@@ -50,7 +51,11 @@ class OTPForm extends React.Component {
   }
 
   handleChange = event => {
-    if (event.target.value.length <= 4) {
+    const inputValue = event.target.value
+    const regexInputExpression = RegExp(NUMBER_VALIDATION_REGEX).test(
+      inputValue
+    )
+    if ((regexInputExpression && inputValue.length <= 4) || !inputValue) {
       this.props.handleChange(event)
     }
   }
@@ -118,8 +123,8 @@ export default withStyles(styles)(
       otp: Yup.string()
         .min(4, OTP_INVALID)
         .max(4, OTP_INVALID)
-        .matches(MOBILE_VALIDATION_REGEX, {
-          message: MOBILE_INVALID
+        .matches(NUMBER_VALIDATION_REGEX, {
+          message: OTP_INVALID
         })
         .required(OTP_REQUIRED)
     }),

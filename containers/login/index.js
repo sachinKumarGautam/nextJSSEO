@@ -18,7 +18,8 @@ import {
 } from '../user/customer/customerActions'
 
 import ActivityIndicator from '../../components/activityIndicator/index'
-import SnackbarErrorMessage from '../../components/activityIndicator/error/SnackbarErrorMessage'
+import SnackbarErrorMessage
+  from '../../components/activityIndicator/error/SnackbarErrorMessage'
 
 /*
     index.js
@@ -81,30 +82,38 @@ class LoginWrapper extends React.Component {
   getModal (name) {
     switch (name) {
       case 'login':
-        return <Login
-          toggleForm={this.toggleForm}
-          closeLoginModal={this.props.closeLoginModal}
-          sendOtpLoading={this.props.actions.sendOtpLoading}
-          loginState={this.props.loginState}
-        />
+        return (
+          <Login
+            toggleForm={this.toggleForm}
+            closeLoginModal={this.props.closeLoginModal}
+            sendOtpLoading={this.props.actions.sendOtpLoading}
+            loginState={this.props.loginState}
+          />
+        )
 
       case 'register':
-        return <Register
-          toggleForm={this.toggleForm}
-          closeLoginModal={this.props.closeLoginModal}
-          loginState={this.props.loginState}
-          customerState={this.props.customerState}
-          checkReferralCodeLoading={this.props.actions.checkReferralCodeLoading}
-          customerRegisterLoading={this.props.actions.customerRegisterLoading}
-        />
+        return (
+          <Register
+            toggleForm={this.toggleForm}
+            closeLoginModal={this.props.closeLoginModal}
+            loginState={this.props.loginState}
+            customerState={this.props.customerState}
+            checkReferralCodeLoading={
+              this.props.actions.checkReferralCodeLoading
+            }
+            customerRegisterLoading={this.props.actions.customerRegisterLoading}
+          />
+        )
 
       case 'otp':
-        return <OTP
-          toggleForm={this.toggleForm}
-          closeLoginModal={this.props.closeLoginModal}
-          loginState={this.props.loginState}
-          verifyOtpLoading={this.props.actions.verifyOtpLoading}
-        />
+        return (
+          <OTP
+            toggleForm={this.toggleForm}
+            closeLoginModal={this.props.closeLoginModal}
+            loginState={this.props.loginState}
+            verifyOtpLoading={this.props.actions.verifyOtpLoading}
+          />
+        )
     }
   }
 
@@ -115,15 +124,18 @@ class LoginWrapper extends React.Component {
         <ActivityIndicator
           isError={
             this.props.customerState.errorStateCustomerRegister.isError ||
-            this.props.customerState.payload.membership_code.errorState.isError ||
-            this.props.customerState.payload.referral_code.errorState.isError
+              this.props.customerState.payload.membership_code.errorState
+                .isError ||
+              this.props.customerState.payload.referral_code.errorState.isError
           }
           ErrorComp={
             <SnackbarErrorMessage
               error={
                 this.props.customerState.errorStateCustomerRegister.error ||
-                this.props.customerState.payload.membership_code.errorState.error ||
-                this.props.customerState.payload.referral_code.errorState.error
+                  this.props.customerState.payload.membership_code.errorState
+                    .error ||
+                  this.props.customerState.payload.referral_code.errorState
+                    .error
               }
               resetState={this.resetState.bind(this)}
             />
@@ -181,7 +193,6 @@ function mapDispatchToProps (dispatch) {
   }
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(withStyles(styles)(LoginWrapper))
+export default connect(mapStateToProps, mapDispatchToProps)(
+  withStyles(styles)(LoginWrapper)
+)

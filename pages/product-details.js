@@ -122,11 +122,11 @@ class ProductDetails extends React.Component {
             {product_id && product_id !== 'undefined' &&
               <Paper className={classes.root} elevation={1}>
                 <ProductDetailsWrapper
-                    checkPincodeState={checkPincodeState}
-                    getProductDetailLoading={actions.getProductDetailLoading}
-                    addToCartHandler={addToCartHandler}
-                    onChangeQuantity={actions.onChangeQuantity}
-                  />
+                  checkPincodeState={checkPincodeState}
+                  getProductDetailLoading={actions.getProductDetailLoading}
+                  addToCartHandler={addToCartHandler}
+                  onChangeQuantity={actions.onChangeQuantity}
+                />
               </Paper>
             }
           </ActivityIndicator>

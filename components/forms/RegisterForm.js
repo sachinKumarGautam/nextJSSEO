@@ -9,6 +9,7 @@ import FormHelperText from '@material-ui/core/FormHelperText'
 import FormControl from '@material-ui/core/FormControl'
 import Button from '../../components/button'
 import CircularProgress from '@material-ui/core/CircularProgress'
+import InputAdornment from '@material-ui/core/InputAdornment'
 
 import { withStyles } from '@material-ui/core/styles'
 
@@ -18,7 +19,8 @@ import {
   GENDER_REQUIRED,
   MOBILE_INVALID,
   REFERRAL_CODE_INVALID,
-  MOBILE_VALIDATION_REGEX
+  MOBILE_VALIDATION_REGEX,
+  NUMBER_VALIDATION_REGEX
 } from '../../containers/messages/ValidationMsg'
 
 // Helper styles for demo
@@ -42,6 +44,9 @@ const styles = theme => ({
     right: theme.spacing.unit * 1.5,
     bottom: theme.spacing.unit,
     color: theme.palette.customGrey.grey100
+  },
+  mobilePrefix: {
+    marginBottom: theme.spacing.unit / 8
   }
 })
 
@@ -77,7 +82,11 @@ class RegisterForm extends React.Component {
   }
 
   onChangePhoneNumber = event => {
-    if (event.target.value.length < 11) {
+    const inputValue = event.target.value
+    const regexInputExpression = RegExp(NUMBER_VALIDATION_REGEX).test(
+      inputValue
+    )
+    if ((regexInputExpression && inputValue.length <= 10) || !inputValue) {
       this.props.handleChange(event)
     }
   }
@@ -146,11 +155,15 @@ class RegisterForm extends React.Component {
         >
           <Input
             id='mobile'
-            type='number'
             autoComplete={'off'}
             placeholder={'Mobile'}
             onChange={this.onChangePhoneNumber}
             value={values.mobile}
+            startAdornment={
+              <InputAdornment position='start'>
+                <span className={classes.mobilePrefix}>{'+91'}</span>
+              </InputAdornment>
+            }
           />
           {errors.mobile &&
             touched.mobile &&
@@ -166,7 +179,7 @@ class RegisterForm extends React.Component {
           <Select
             value={values.gender}
             onChange={handleChange}
-            placeholder={'Gender'}
+            // placeholder={'Gender'}
             inputProps={{
               name: 'gender',
               id: 'gender',
@@ -264,7 +277,8 @@ export default withStyles(styles)(
     },
     validationSchema: Yup.object().shape({
       full_name: Yup.string().trim().required(FULL_NAME_REQUIRED),
-      mobile: Yup.string().trim()
+      mobile: Yup.string()
+        .trim()
         .min(10, MOBILE_INVALID)
         .max(10, MOBILE_INVALID)
         .matches(MOBILE_VALIDATION_REGEX, {
