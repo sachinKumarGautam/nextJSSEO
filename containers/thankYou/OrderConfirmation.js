@@ -23,6 +23,7 @@ class OrderConfirmation extends React.Component {
               retryPayment={this.props.retryPayment}
               orderId={this.props.orderId}
               getPaymentChannelsLoading={this.props.getPaymentChannelsLoading}
+              resetPaymentInitiateErrorState={this.props.resetPaymentInitiateErrorState}
               orderDetailsState={this.props.orderDetailsState}
             />
           }

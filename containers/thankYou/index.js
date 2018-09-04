@@ -17,7 +17,8 @@ import {
   paymentInitiateLoading,
   verifyPaymentLoading,
   resetCartState,
-  updatePaymentFailureFlag
+  updatePaymentFailureFlag,
+  resetPaymentInitiateErrorState
 } from '../cartDetails/cartActions'
 
 import {
@@ -76,6 +77,7 @@ class ThankyouWrapper extends Component {
             customerState={this.props.customerState}
             orderDetailsState={this.props.orderDetailsState}
             orderId={this.props.orderId}
+            resetPaymentInitiateErrorState={this.props.actions.resetPaymentInitiateErrorState}
             viewYouOrder={this.viewYouOrder.bind(this)}
             retryPayment={this.retryPayment.bind(this)}
           />
@@ -102,7 +104,8 @@ function mapDispatchToProps (dispatch) {
         paymentInitiateLoading,
         verifyPaymentLoading,
         updatePaymentFailureFlag,
-        resetCartState
+        resetCartState,
+        resetPaymentInitiateErrorState
       },
       dispatch
     )

@@ -105,6 +105,10 @@ class PaymentFailure extends React.Component {
     )
   }
 
+  resetPaymentInitiateErrorState () {
+    this.props.resetPaymentInitiateErrorState(this.props.cartState)
+  }
+
   render () {
     return (
       <Card elevation={'1'}>
@@ -118,6 +122,7 @@ class PaymentFailure extends React.Component {
                 error={
                   this.props.cartState.payment.errorState.error
                 }
+                resetState={this.resetPaymentInitiateErrorState.bind(this)}
               />
             }
             bottomError

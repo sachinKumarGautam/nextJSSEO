@@ -158,6 +158,7 @@ class RetryPayment extends React.Component {
       prevProps.cartState.payment.isPaymentFailure) &&
       this.props.cartState.payment.isPaymentFailure
     ) {
+      this.props.resetCartState()
       const url = getReplacedString(THANK_YOU)
       const as = `${url}?payment-status=failed`
       const href = `${url}?payment-status=failed`

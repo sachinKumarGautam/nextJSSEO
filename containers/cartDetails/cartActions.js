@@ -747,3 +747,12 @@ export function deleteCartFailure (cartState, error) {
     error: error
   }
 }
+
+export function resetPaymentInitiateErrorState (cartState) {
+  return {
+    type: cartActionTypes.RESET_PAYMENT_INITIATE_ERROR_STATE,
+    cartState,
+    isError: false,
+    error: {}
+  }
+}

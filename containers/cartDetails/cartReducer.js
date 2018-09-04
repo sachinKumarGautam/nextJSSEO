@@ -940,6 +940,19 @@ export default function cartReducer (state = initialState, action) {
         }
       }
 
+    case cartActionTypes.RESET_PAYMENT_INITIATE_ERROR_STATE:
+      return {
+        ...state,
+        payment: {
+          ...state.payment,
+          errorState: {
+            ...state.payment.errorState,
+            isError: action.isError,
+            error: action.error
+          }
+        }
+      }
+
     default:
       return state
   }
