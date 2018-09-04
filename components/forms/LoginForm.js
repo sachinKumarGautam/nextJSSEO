@@ -93,6 +93,7 @@ class LoginForm extends React.Component {
             value={values.mobile}
             onChange={this.handleChange}
             onBlur={handleBlur}
+            autoFocus
             placeholder={'Enter registered mobile no.'}
           />
           {errors.mobile &&
