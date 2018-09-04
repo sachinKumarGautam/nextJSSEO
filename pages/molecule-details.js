@@ -49,7 +49,6 @@ const styles = theme => ({
 class MoleculeDetails extends React.Component {
   // static async getInitialProps ({ store, isServer }) {
   //   const resultAction = await store.dispatch(getMoleculeSummaryLoading())
-  //   console.log('result', resultAction)
 
   //   return { payload: resultAction }
 

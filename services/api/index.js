@@ -344,6 +344,13 @@ const getPaymentChannels$ = orderId => (
 
 )
 
+const deleteCart$ = (cartUid) => (
+  makeAjaxRequest({
+    method: 'DELETE',
+    url: fetchUrl('cart', cartUid, 'CREATE')
+  })
+)
+
 const getConstants$ = () => (
   makeAjaxRequest({
     method: 'GET',
@@ -393,5 +400,6 @@ export {
   getOrderDetails$,
   expressDelivery$,
   getPaymentChannels$,
+  deleteCart$,
   getConstants$
 }

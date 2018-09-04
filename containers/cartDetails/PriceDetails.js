@@ -86,11 +86,7 @@ class PriceDetails extends Component {
               <Typography className={this.props.classes.discount}>
                 Care Points
               </Typography>
-              <a
-                href='#'
-                data-tip
-                data-for='care_point'
-              >
+              <a href='#' data-tip data-for='care_point'>
                 <img
                   src='/static/images/info-outline.svg'
                   className={this.props.classes.iconStyle}
@@ -116,11 +112,7 @@ class PriceDetails extends Component {
               <Typography className={this.props.classes.discount}>
                 Care Points Plus
               </Typography>
-              <a
-                href='#'
-                data-tip
-                data-for='care_point_plus'
-              >
+              <a href='#' data-tip data-for='care_point_plus'>
                 <img
                   src='/static/images/info-outline.svg'
                   className={this.props.classes.iconStyle}
@@ -142,12 +134,10 @@ class PriceDetails extends Component {
                 </ReactTooltip>
               </a>
             </div>
-            {
-              this.props.cartState.payload.coupon_code &&
+            {this.props.cartState.payload.coupon_code &&
               <Typography className={this.props.classes.discount}>
                 Coupon Discount
-              </Typography>
-            }
+              </Typography>}
             {
               // <Typography className={this.props.classes.itemTotal}>
               //   Amount Payable
@@ -162,23 +152,21 @@ class PriceDetails extends Component {
           </Grid>
           <Grid item xs={4}>
             <Typography className={this.props.classes.itemTotalAmount}>
-              Rs. {this.props.cartState.payload.total_mrp}
+            ₹{this.props.cartState.payload.total_mrp}
             </Typography>
             <Typography className={this.props.classes.discountAmount}>
-              - Rs. {this.props.cartState.payload.discount}
+              - ₹ {this.props.cartState.payload.discount}
             </Typography>
             <Typography className={this.props.classes.discountAmount}>
-              - Rs. {this.props.cartState.payload.redeemed_care_points}
+              - ₹ {this.props.cartState.payload.redeemed_care_points}
             </Typography>
             <Typography className={this.props.classes.discountAmount}>
-              - Rs. {this.props.cartState.payload.redeemable_care_points}
+              - ₹ {this.props.cartState.payload.redeemable_care_points}
             </Typography>
-            {
-              this.props.cartState.payload.coupon_code &&
+            {this.props.cartState.payload.coupon_code &&
               <Typography className={this.props.classes.discountAmount}>
-                - Rs. {this.props.cartState.payload.coupon_discount}
-              </Typography>
-            }
+                - ₹ {this.props.cartState.payload.coupon_discount}
+              </Typography>}
             {
               // <Typography className={this.props.classes.itemTotalAmount}>
               //   Rs. 800.00

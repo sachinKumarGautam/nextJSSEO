@@ -40,8 +40,7 @@ const styles = theme => ({
     color: theme.palette.secondary.main
   },
   snackbarSuccess: {
-    backgroundColor: theme.palette.customGreen.green400,
-    borderRadius: theme.spacing.unit / 2
+    backgroundColor: theme.palette.customGreen.green400
   },
   anchorOriginBottomCenter: {
     marginBottom: theme.spacing.unit * 2
@@ -99,11 +98,12 @@ class GoToCartSnackbar extends React.Component {
                   <Button
                     size='small'
                     variant='success'
+                    color={'primary'}
                     className={classes.editButton}
-                    classes={{
-                      root: classes.couponButtonRoot,
-                      label: classes.editButtonLabel
-                    }}
+                    // classes={{
+                    //   root: classes.couponButtonRoot,
+                    //   label: classes.editButtonLabel
+                    // }}
                     label={'Go To Cart'}
                     onClick={this.handleClose}
                   />
