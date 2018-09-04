@@ -8,6 +8,7 @@ import FormControl from '@material-ui/core/FormControl'
 import Button from '../../components/button'
 import { withStyles } from '@material-ui/core/styles'
 import LocationSearch from './LocationSearch'
+import InputAdornment from '@material-ui/core/InputAdornment'
 import {
   FULL_NAME_REQUIRED,
   MOBILE_REQUIRED,
@@ -17,7 +18,8 @@ import {
   PINCODE_REQUIRED,
   STREET1_REQUIRED,
   MOBILE_INVALID,
-  MOBILE_VALIDATION_REGEX
+  MOBILE_VALIDATION_REGEX,
+  NUMBER_VALIDATION_REGEX
 } from '../../containers/messages/ValidationMsg'
 
 // Helper styles for demo
@@ -40,6 +42,9 @@ const styles = theme => ({
   },
   formHelperText: {
     textAlign: 'center'
+  },
+  mobilePrefix: {
+    marginBottom: theme.spacing.unit / 8
   }
 })
 
@@ -77,12 +82,20 @@ class DeliveryForm extends React.Component {
   }
 
   onChange (name, handleChange, event) {
-    if (name === 'mobile' && event.target.value.length > 10) return
-    this.props.updateAddressFormValue(
-      this.props.deliveryDetailsState,
-      name,
-      event.target.value
+    const inputValue = event.target.value
+    const regexInputExpression = RegExp(NUMBER_VALIDATION_REGEX).test(
+      inputValue
     )
+    if (
+      (name === 'mobile' && inputValue.length <= 10 && regexInputExpression) ||
+      !inputValue
+    ) {
+      this.props.updateAddressFormValue(
+        this.props.deliveryDetailsState,
+        name,
+        inputValue
+      )
+    }
   }
 
   onLocalityChange (handleChange, value) {
@@ -135,6 +148,11 @@ class DeliveryForm extends React.Component {
             id='mobile'
             onChange={this.onChange.bind(this, 'mobile', handleChange)}
             value={values.mobile}
+            startAdornment={
+              <InputAdornment position='start'>
+                <span className={classes.mobilePrefix}>{'+91'}</span>
+              </InputAdornment>
+            }
           />
           {errors.mobile &&
             touched.mobile &&

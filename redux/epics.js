@@ -55,7 +55,8 @@ import {
   submitOrderEpic,
   applyCouponCode,
   optDoctorCallback,
-  optExpressDelivery
+  optExpressDelivery,
+  deleteCartState
 } from '../containers/cartDetails/cartEpics'
 
 import { checkPincode } from '../containers/location/pincode/pincodeEpic'
@@ -73,6 +74,10 @@ import { getBackGroungImages } from '../containers/homePage/homePageEpics'
 import {
   getOrderDetails
 } from '../containers/orderDetails/orderDetailsEpics'
+
+import {
+  getConstantsEpic
+} from '../components/constants/constantsEpic'
 
 export const rootEpic = combineEpics(
   getMoleculeSummary,
@@ -115,5 +120,7 @@ export const rootEpic = combineEpics(
   getMembershipCodeLoading,
   getLocalityList,
   getOrderDetails,
-  optExpressDelivery
+  optExpressDelivery,
+  deleteCartState,
+  getConstantsEpic
 )

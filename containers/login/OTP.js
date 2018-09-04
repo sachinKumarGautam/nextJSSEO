@@ -49,6 +49,7 @@ class OTP extends React.Component {
           toggleForm={toggleForm}
           onSubmit={verifyOtpLoading}
           loginState={this.props.loginState}
+          resendButtonClick={this.props.sendOtpLoading}
         />
       </div>
     )

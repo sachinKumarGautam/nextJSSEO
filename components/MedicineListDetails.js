@@ -78,8 +78,20 @@ class MedicineListDetails extends React.Component {
   }
 
   addToCart (event) {
-    event.stopPropagation()
-    this.props.addToCartHandler(this.props.itemDetails)
+    if (this.props.isRefillMedicines) {
+      if (
+        this.props.pastMedicineState.selectedPatientId ===
+        this.props.cartState.payload.patient_details.payload.patient_id
+      ) {
+        event.stopPropagation()
+        this.props.addToCartHandler(this.props.itemDetails)
+      } else {
+        this.props.onClickOfPatient(this.props.itemDetails)
+      }
+    } else {
+      event.stopPropagation()
+      this.props.addToCartHandler(this.props.itemDetails)
+    }
   }
 
   render () {

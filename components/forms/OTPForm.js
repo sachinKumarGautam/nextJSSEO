@@ -7,15 +7,19 @@ import FormHelperText from '@material-ui/core/FormHelperText'
 import FormControl from '@material-ui/core/FormControl'
 import Button from '../../components/button'
 import { withStyles } from '@material-ui/core/styles'
+import Typography from '@material-ui/core/Typography'
 
 // Helper styles for demo
 
 import {
   OTP_REQUIRED,
-  OTP_INVALID
+  OTP_INVALID,
+  NUMBER_VALIDATION_REGEX
 } from '../../containers/messages/ValidationMsg'
 import { OTP_PLACEHOLDER } from '../../containers/messages/PlaceholderMsg'
-import {CUSTOM_MESSGAE_SNACKBAR} from '../../containers/messages/errorMessages'
+import {
+  CUSTOM_MESSGAE_SNACKBAR
+} from '../../containers/messages/errorMessages'
 
 const styles = theme => ({
   formControl: {
@@ -38,19 +42,80 @@ const styles = theme => ({
   otpInput: {
     textAlign: 'center',
     letterSpacing: theme.spacing.unit / 2
+  },
+  resendTimer: {
+    ...theme.typography.body3,
+    color: theme.palette.customYellow.yellow400,
+    paddingTop: theme.spacing.unit
+  },
+  resendLink: {
+    ...theme.typography.body3,
+    color: theme.palette.customYellow.yellow400,
+    paddingTop: theme.spacing.unit,
+    textDecoration: 'underline',
+    cursor: 'pointer'
   }
 })
 
 class OTPForm extends React.Component {
   constructor (props) {
     super(props)
-    this.state = { isSubmit: false }
+    this.state = {
+      isSubmit: false,
+      initialCounter: 30,
+      updateCounter: 30,
+      isHideResetButton: true
+    }
+
+    this.customCountTimer = this.customCountTimer.bind(this)
+    this.resendOtp = this.resendOtp.bind(this)
+  }
+
+  componentDidMount () {
+    this.customCountTimer()
   }
 
   handleChange = event => {
-    if (event.target.value.length <= 4) {
+    const inputValue = event.target.value
+    const regexInputExpression = RegExp(NUMBER_VALIDATION_REGEX).test(
+      inputValue
+    )
+    if ((regexInputExpression && inputValue.length <= 4) || !inputValue) {
       this.props.handleChange(event)
     }
+  }
+
+  customCountTimer () {
+    this.setState({
+      isHideResetButton: true
+    })
+
+    this.otpResendTimer = setInterval(() => {
+      this.setState((prevState) => {
+        return {
+          updateCounter: prevState.updateCounter - 1
+        }
+      })
+
+      if (this.state.updateCounter === 0) {
+        this.setState({
+          updateCounter: this.state.initialCounter,
+          isHideResetButton: false
+        })
+
+        clearInterval(this.otpResendTimer)
+      }
+    }, 1000)
+  }
+
+  resendOtp () {
+    this.props.resendButtonClick(
+      this.props.loginState,
+      this.props.setSubmitting,
+      this.props.toggleForm,
+      {mobile: this.props.loginState.payload.initialMobile}
+    )
+    this.customCountTimer()
   }
 
   render () {
@@ -69,12 +134,15 @@ class OTPForm extends React.Component {
         <FormControl
           className={classes.formControl}
           aria-describedby='otp'
-          error={(errors.otp && touched.otp) || loginState.errorStateVerifyOtp.isError}
+          error={
+            (errors.otp && touched.otp) ||
+              loginState.errorStateVerifyOtp.isError
+          }
         >
           <Input
             autoComplete='off'
             id='otp'
-            type='number'
+            // type='number'
             value={values.otp}
             classes={{
               input: classes.otpInput
@@ -82,15 +150,29 @@ class OTPForm extends React.Component {
             onChange={this.handleChange}
             placeholder={OTP_PLACEHOLDER}
           />
-          {errors.otp &&
-            touched.otp &&
+          {
+            errors.otp && touched.otp &&
             <FormHelperText id='otp'>
               {errors.otp}
-            </FormHelperText>}
-          {loginState.errorStateVerifyOtp.isError &&
+            </FormHelperText>
+          }
+          {
+            loginState.errorStateVerifyOtp.isError &&
             <FormHelperText id='otp'>
               {CUSTOM_MESSGAE_SNACKBAR}
-            </FormHelperText>}
+            </FormHelperText>
+          }
+          {
+            this.state.isHideResetButton
+              ? (<Typography align='right' className={classes.resendTimer}>
+                Resend {this.state.updateCounter}
+              </Typography>)
+              : (<a onClick={this.resendOtp}>
+                <Typography align='right' className={classes.resendLink}>
+                  Resend OTP
+                </Typography>
+              </a>)
+          }
         </FormControl>
         <div className={classes.buttonWrapper}>
           <Button
@@ -113,6 +195,9 @@ export default withStyles(styles)(
       otp: Yup.string()
         .min(4, OTP_INVALID)
         .max(4, OTP_INVALID)
+        .matches(NUMBER_VALIDATION_REGEX, {
+          message: OTP_INVALID
+        })
         .required(OTP_REQUIRED)
     }),
     handleSubmit: (values, { props, setSubmitting }) => {
