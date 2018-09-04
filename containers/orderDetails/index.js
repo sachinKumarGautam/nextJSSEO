@@ -26,6 +26,7 @@ class OrderDetailsWrapper extends Component {
             cartState={this.props.cartState}
             orderDetailsState={this.props.orderDetailsState}
             getOrderDetailsLoading={this.props.actions.getOrderDetailsLoading}
+            constantsState={this.props.constantsState}
           />
         </section>
       </div>
@@ -36,7 +37,8 @@ class OrderDetailsWrapper extends Component {
 function mapStateToProps (state) {
   return {
     cartState: state.cartState,
-    orderDetailsState: state.orderDetailsState
+    orderDetailsState: state.orderDetailsState,
+    constantsState: state.constantsState
   }
 }
 

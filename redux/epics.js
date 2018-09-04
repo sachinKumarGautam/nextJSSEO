@@ -74,6 +74,10 @@ import {
   getOrderDetails
 } from '../containers/orderDetails/orderDetailsEpics'
 
+import {
+  getConstantsEpic
+} from '../components/constants/constantsEpic'
+
 export const rootEpic = combineEpics(
   getMoleculeSummary,
   getRelatedMedicines,
@@ -115,5 +119,6 @@ export const rootEpic = combineEpics(
   getMembershipCodeLoading,
   getLocalityList,
   getOrderDetails,
-  optExpressDelivery
+  optExpressDelivery,
+  getConstantsEpic
 )
