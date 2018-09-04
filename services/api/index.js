@@ -344,6 +344,13 @@ const getPaymentChannels$ = orderId => (
 
 )
 
+const getConstants$ = () => (
+  makeAjaxRequest({
+    method: 'GET',
+    url: fetchUrl('config', 'app-constant', 'GET_LIST')
+  })
+)
+
 export {
   getMoleculeSummary$,
   getMedicineList$,
@@ -385,5 +392,6 @@ export {
   getMembershipCode$,
   getOrderDetails$,
   expressDelivery$,
-  getPaymentChannels$
+  getPaymentChannels$,
+  getConstants$
 }

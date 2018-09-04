@@ -295,6 +295,7 @@ class OrderSummary extends React.Component {
           submitOrderLoading={this.props.submitOrderLoading}
           radioWrapper={this.props.classes.radioWrapper}
           optForExpressDeliveryLoading={this.props.optForExpressDeliveryLoading}
+          constantsState={this.props.constantsState}
         />
         <Snackbar
           anchorOrigin={{

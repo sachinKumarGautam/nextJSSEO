@@ -21,6 +21,7 @@ import thankYouReducer from '../containers/thankYou/thankYouReducer'
 import refillReducer from '../containers/refillPatients/refillReducer'
 import homePageReducers from '../containers/homePage/homePageReducers'
 import orderDetailsReducer from '../containers/orderDetails/orderDetailsReducer'
+import constantsReducer from '../components/constants/constantsReducer'
 
 const isengard = (store, action) => {
   return (
@@ -51,7 +52,8 @@ const appReducer = combineReducers({
   thankYouState: thankYouReducer,
   pastMedicineState: refillReducer,
   homePageState: homePageReducers,
-  orderDetailsState: orderDetailsReducer
+  orderDetailsState: orderDetailsReducer,
+  constantsState: constantsReducer
 })
 
 // export const persistConfig = {

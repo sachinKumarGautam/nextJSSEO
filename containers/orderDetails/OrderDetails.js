@@ -21,6 +21,7 @@ class OrderDetails extends Component {
               getOrderDetailsLoading={this.props.getOrderDetailsLoading}
               resetCartState={this.props.resetCartState}
               paymentInitiateLoading={this.props.paymentInitiateLoading}
+              constantsState={this.props.constantsState}
             />
           </Grid>
         </Grid>

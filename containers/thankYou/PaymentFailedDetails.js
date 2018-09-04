@@ -3,9 +3,6 @@ import React from 'react'
 import { withStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
 
-import {formatDate} from '../../utils/FormatDate'
-import {DESCRIPTION} from '../messages/thankyouMessages'
-
 const styles = theme => ({
   imageStyle: {
     marginLeft: theme.spacing.unit * 5,

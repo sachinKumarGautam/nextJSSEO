@@ -98,6 +98,7 @@ const OrderContentWrapper = (props) => {
       <PaymentDeliveryDetail
         deliveryOption={props.orderDetailsState.payload.delivery_option}
         serviceType={props.orderDetailsState.payload.service_type}
+        constantsState={props.constantsState}
       />
       <DeliveryDate
         promisedDeliveryDate={props.orderDetailsState.payload.promised_delivery_date}

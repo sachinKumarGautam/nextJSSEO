@@ -1,7 +1,6 @@
 import React from 'react'
 
 import Typography from '@material-ui/core/Typography'
-import Divider from '@material-ui/core/Divider'
 import Card from '@material-ui/core/Card'
 import CardContent from '@material-ui/core/CardContent'
 import { withStyles } from '@material-ui/core/styles'
@@ -9,14 +8,12 @@ import Radio from '@material-ui/core/Radio'
 import RadioGroup from '@material-ui/core/RadioGroup'
 import FormControlLabel from '@material-ui/core/FormControlLabel'
 
-import PaymentFailedDetails from './PaymentFailedDetails'
 import Button from '../../components/button'
 
 import Router from 'next/router'
 
 import {
   THANK_YOU,
-  HOME_PAGE,
   ORDER_DETAILS
 } from '../../routes/RouteConstant'
 

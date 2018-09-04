@@ -35,6 +35,7 @@ class OrderDetailsWrapper extends Component {
             resetCartState={this.props.actions.resetCartState}
             paymentInitiateLoading={this.props.actions.paymentInitiateLoading}
             getOrderDetailsLoading={this.props.actions.getOrderDetailsLoading}
+            constantsState={this.props.constantsState}
           />
           <Loader
             loaderType={'fullPageSpinner'}
@@ -49,7 +50,8 @@ class OrderDetailsWrapper extends Component {
 function mapStateToProps (state) {
   return {
     cartState: state.cartState,
-    orderDetailsState: state.orderDetailsState
+    orderDetailsState: state.orderDetailsState,
+    constantsState: state.constantsState
   }
 }
 

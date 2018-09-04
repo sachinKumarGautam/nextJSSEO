@@ -70,6 +70,7 @@ class PaymentExpansionPanel extends React.Component {
             <PaymentDeliveryDetail
               cartState={this.props.cartState}
               optForExpressDeliveryLoading={this.props.optForExpressDeliveryLoading}
+              constantsState={this.props.constantsState}
             />
           }
           <div className={this.props.radioWrapper}>

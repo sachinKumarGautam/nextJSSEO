@@ -160,6 +160,7 @@ class OrderInformation extends Component {
                 orderDetailsState={this.props.orderDetailsState}
                 retryPayment={this.retryPayment.bind(this)}
                 placeOrder={this.placeOrder.bind(this)}
+                constantsState={this.props.constantsState}
               />
             </ActivityIndicator>
           </CardContent>
