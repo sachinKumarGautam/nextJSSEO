@@ -55,7 +55,8 @@ import {
   submitOrderEpic,
   applyCouponCode,
   optDoctorCallback,
-  optExpressDelivery
+  optExpressDelivery,
+  deleteCartState
 } from '../containers/cartDetails/cartEpics'
 
 import { checkPincode } from '../containers/location/pincode/pincodeEpic'
@@ -120,5 +121,6 @@ export const rootEpic = combineEpics(
   getLocalityList,
   getOrderDetails,
   optExpressDelivery,
+  deleteCartState,
   getConstantsEpic
 )

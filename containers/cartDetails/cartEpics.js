@@ -17,7 +17,8 @@ import {
   SUBMIT_ORDER_LOADING,
   SUBMIT_COUPON_CODE_LOADING,
   OPT_DOCTOR_CALLBACK_LOADING,
-  OPT_EXPRESS_DELIVERY_LOADING
+  OPT_EXPRESS_DELIVERY_LOADING,
+  DELETE_CART_LOADING
 } from './cartActionTypes'
 
 import {
@@ -45,7 +46,11 @@ import {
   optForDoctorCallbackSuccess,
   optForDoctorCallbackFailure,
   optForExpressDeliverySuccess,
-  optForExpressDeliveryFailure
+  optForExpressDeliveryFailure,
+  deleteCartSuccess,
+  deleteCartFailure,
+  getAnonymousCartIdLoading,
+  savePatientToCartLoading
 } from './cartActions'
 
 import {
@@ -61,7 +66,8 @@ import {
   submitOrder$,
   applyCouponForCart$,
   teleConsultation$,
-  expressDelivery$
+  expressDelivery$,
+  deleteCart$
 } from '../../services/api'
 
 export function getAnonymousCartIdEpic (action$, store) {
@@ -71,8 +77,23 @@ export function getAnonymousCartIdEpic (action$, store) {
       return http(
         getAnonymousCartId$(data.source, data.facility_code, data.source_type)
       ).pipe(
-        map(result => {
-          return getAnonymousCartIdSuccess(data.cartState, result.body.payload)
+        flatMap(result => {
+          if (data.source_type === 'REFILL') {
+            return of(
+              getAnonymousCartIdSuccess(data.cartState, result.body.payload),
+              savePatientToCartLoading(
+                data.cartState,
+                data.patientDetail,
+                result.body.payload.uid,
+                data.source_type,
+                data.addMedicine
+              )
+            )
+          } else {
+            return of(
+              getAnonymousCartIdSuccess(data.cartState, result.body.payload)
+            )
+          }
         }),
         catchError(error => {
           return of(getAnonymousCartIdFailure(data.cartState, error))
@@ -286,12 +307,25 @@ export function savePatientToCartEpic (action$, store) {
     ofType(SAVE_PATIENT_TO_CART_LOADING),
     mergeMap(data => {
       return http(savePatientToCart$(data.cartId, data.patient.id)).pipe(
-        map(result => {
-          return savePatientToCartSuccess(
-            data.cartState,
-            data.patient,
-            result.body.payload
-          )
+        flatMap(result => {
+          if (data.source_type === 'REFILL') {
+            return of(
+              savePatientToCartSuccess(
+                data.cartState,
+                data.patient,
+                result.body.payload
+              ),
+              data.addMedicine
+            )
+          } else {
+            return of(
+              savePatientToCartSuccess(
+                data.cartState,
+                data.patient,
+                result.body.payload
+              )
+            )
+          }
         }),
         catchError(error => {
           return of(savePatientToCartFailure(data.cartState, error))
@@ -507,6 +541,33 @@ export function optExpressDelivery (action$, store) {
         }),
         catchError(error => {
           return of(optForExpressDeliveryFailure(data.cartState, error))
+        })
+      )
+    })
+  )
+}
+
+export function deleteCartState (action$, store) {
+  return action$.pipe(
+    ofType(DELETE_CART_LOADING),
+    mergeMap(data => {
+      const cartUid = data.cartState.payload.uid
+      return http(deleteCart$(cartUid)).pipe(
+        flatMap(result => {
+          return of(
+            deleteCartSuccess(data.cartState),
+            getAnonymousCartIdLoading(
+              data.cartState,
+              data.source,
+              data.facility_code,
+              data.source_type,
+              data.patientId,
+              data.addMedicine
+            )
+          )
+        }),
+        catchError(error => {
+          return deleteCartFailure(data.cartState, error)
         })
       )
     })
