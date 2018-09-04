@@ -46,7 +46,6 @@ import {
 //         url: `http://sandbox.lifcare.in/v6/catalog/salts?salt-ids=5a61a295ae8bdc26685f2b09`
 //       }).pipe(
 //         map(response => {
-//           console.log(response)
 //           // return of(
 //           //   getMoleculeSummarySuccess(data.moleculeState, response))
 //           // )

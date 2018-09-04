@@ -24,7 +24,6 @@ export function getRelatedMedicines (action$, store) {
       return http(getMedicineList$(data.saltName, data.page, data.size)).pipe(
         map(result => {
           const medicineListState = store.getState().medicineListState
-          console.log(medicineListState)
           let modifiedResponse = [
             ...medicineListState.payload,
             ...result.body.payload.content
@@ -33,7 +32,6 @@ export function getRelatedMedicines (action$, store) {
           return getRelatedMedicinesSuccess(medicineListState, modifiedResponse)
         }),
         catchError(error => {
-          console.log('error', error)
           return of(getRelatedMedicinesFailure(medicineListState, error))
         })
       )
