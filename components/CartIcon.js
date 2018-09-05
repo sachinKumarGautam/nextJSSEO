@@ -23,12 +23,6 @@ const styles = theme => ({
   button: {
     margin: theme.spacing.unit
   },
-  menuPaperProps: {
-    width: theme.spacing.unit * 32
-  },
-  menuStyle: {
-    top: theme.spacing.unit * 5
-  },
   summaryStyle: {
     ...theme.typography.body3,
     fontWeight: theme.typography.fontWeightBold,
@@ -81,8 +75,8 @@ const styles = theme => ({
     marginBottom: theme.spacing.unit * 2
   },
   paper: {
-    padding: theme.spacing.unit,
-    width: theme.spacing.unit * 25,
+    padding: theme.spacing.unit * 1.5,
+    width: theme.spacing.unit * 32,
     backgroundColor: `${theme.palette.secondary.main} !important`,
     pointerEvents: 'auto !important',
     '&:after': {
