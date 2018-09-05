@@ -12,6 +12,11 @@ import EstimatedPriceLabel from './EstimatedPriceLabel'
 import { PRODUCT_DETAILS } from '../routes/RouteConstant'
 import Button from './button/Button'
 
+import {
+  DELIVERY_OPTION_URGENT,
+  SERVICE_TYPE_LFASSURED
+} from '../components/constants/Constants'
+
 const styles = theme => {
   return {
     customName: {
@@ -111,7 +116,14 @@ class MedicineListDetails extends React.Component {
               name={props.itemDetails.name}
               customStyle={props.classes.customName}
             />
-
+            {
+              // props.available_delivery_option === DELIVERY_OPTION_URGENT &&
+              <img src='static/images/express-delivery-icon.svg' />
+            }
+            {
+              // props.available_delivery_option === SERVICE_TYPE_LFASSURED &&
+              <img src='static/images/assured-service.svg' />
+            }
             {/* {props.isRefillMedicines && <RefillDueDays />} */}
             <ProductBrand
               variant={'caption'}

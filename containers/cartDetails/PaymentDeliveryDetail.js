@@ -15,7 +15,7 @@ import {
 import {
   DELIVERY_OPTION_URGENT,
   DELIVERY_OPTION_NORMAL,
-  LF_ASSURED
+  SERVICE_TYPE_LFASSURED
 } from '../../components/constants/Constants'
 
 import {
@@ -111,7 +111,7 @@ class PaymentDeliveryDetail extends Component {
     return (
       <div className={this.props.classes.mainWrapper}>
         {
-          this.props.cartState.payload.service_type === LF_ASSURED &&
+          this.props.cartState.payload.service_type === SERVICE_TYPE_LFASSURED &&
           <div className={this.props.classes.textWrapper}>
             <img
               src='/static/images/shape.svg'
@@ -149,7 +149,7 @@ class PaymentDeliveryDetail extends Component {
           </div>
         }
         {
-          this.props.cartState.payload.service_type === LF_ASSURED &&
+          this.props.cartState.payload.service_type === SERVICE_TYPE_LFASSURED &&
           <div className={this.props.classes.textWrapper}>
             <img
               src='/static/images/rx-pending.svg'
