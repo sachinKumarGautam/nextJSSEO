@@ -47,7 +47,8 @@ const styles = theme => {
       alignItems: 'stretch',
       justifyContent: 'space-between',
       marginLeft: theme.spacing.unit * 3,
-      marginRight: theme.spacing.unit * 3
+      marginRight: theme.spacing.unit * 3,
+      cursor: 'pointer'
     },
     buttonRoot: {
       border: `1px solid ${theme.palette.primary.main}`
@@ -64,9 +65,6 @@ const styles = theme => {
       ...theme.typography.body3,
       color: theme.palette.customGrey.grey500,
       fontWeight: theme.typography.fontWeightBold
-    },
-    cursor: {
-      cursor: 'pointer'
     }
   }
 }
@@ -98,15 +96,14 @@ class MedicineListDetails extends React.Component {
     const { props } = this
     const city = this.props.checkPincodeState.payload.city
     return (
-      <div className={props.classes.medicineListContentWrapper}>
-        <Link
-          prefetch
-          href={`${PRODUCT_DETAILS}?id=${props.itemDetails.slug}&location=${city}`}
-          as={`${PRODUCT_DETAILS}/${props.itemDetails.slug}?location=${city}`}
-        >
+      <Link
+        prefetch
+        href={`${PRODUCT_DETAILS}?id=${props.itemDetails.slug}&location=${city}`}
+        as={`${PRODUCT_DETAILS}/${props.itemDetails.slug}?location=${city}`}
+      >
+        <div className={props.classes.medicineListContentWrapper}>
           <div
             onClick={this.props.onSelectItem}
-            className={props.classes.cursor}
           >
             <ProductName
               variant={'body1'}
@@ -146,38 +143,38 @@ class MedicineListDetails extends React.Component {
                 days
               </Typography>}
           </div>
-        </Link>
-        <div>
-          <EstimatedPriceLabel
-            variant={'caption'}
-            customStyle={props.classes.customEstimatedLabel}
-            estimatePriceText={'*Est. Price '}
-          />
-          <ProductPrice
-            variant={'body1'}
-            customStyle={props.classes.customPrice}
-            sellingPrice={props.itemDetails.selling_price}
-          />
-          <StrokePrice
-            variant={'caption'}
-            customStyle={props.classes.customStrokePrice}
-            mrp={props.itemDetails.mrp}
-          />
-          <div className={props.classes.buttonWrapperStyle}>
-            <Button
-              variant='outlined'
-              classes={{
-                root: props.classes.buttonRoot,
-                label: props.classes.buttonLabel
-              }}
-              size='small'
-              color='primary'
-              onClick={this.addToCart} // this is coming from HOC
-              label={'Add To Cart'}
+          <div>
+            <EstimatedPriceLabel
+              variant={'caption'}
+              customStyle={props.classes.customEstimatedLabel}
+              estimatePriceText={'*Est. Price '}
             />
+            <ProductPrice
+              variant={'body1'}
+              customStyle={props.classes.customPrice}
+              sellingPrice={props.itemDetails.selling_price}
+            />
+            <StrokePrice
+              variant={'caption'}
+              customStyle={props.classes.customStrokePrice}
+              mrp={props.itemDetails.mrp}
+            />
+            <div className={props.classes.buttonWrapperStyle}>
+              <Button
+                variant='outlined'
+                classes={{
+                  root: props.classes.buttonRoot,
+                  label: props.classes.buttonLabel
+                }}
+                size='small'
+                color='primary'
+                onClick={this.addToCart} // this is coming from HOC
+                label={'Add To Cart'}
+              />
+            </div>
           </div>
         </div>
-      </div>
+      </Link>
     )
   }
 }

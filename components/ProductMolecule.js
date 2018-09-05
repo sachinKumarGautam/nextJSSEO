@@ -27,12 +27,13 @@ const styles = theme => {
       backgroundColor: `${theme.palette.customGrey.grey50} !important`,
       pointerEvents: 'auto !important',
       '&:after': {
-        borderRightColor: `${theme.palette.customGrey.grey50} !important`
+        borderBottomColor: `${theme.palette.customGrey.grey50} !important`
       },
       '&:hover': {
         visibility: 'visible !important',
         opacity: '1 !important'
       },
+      opacity: '1 !important',
       borderRadius: '4px'
     },
     popoverContent: {
@@ -92,10 +93,10 @@ class ProductMolecule extends Component {
                 <ReactTooltip
                   id={popperId}
                   effect='solid'
-                  place='right'
+                  place='bottom'
                   className={classes.paper}
-                  delayHide={1000}
-                  delayShow={1000}
+                  delayHide={500}
+                  delayShow={500}
                 >
                   <PopoverContent item={item} styles={classes} />
                 </ReactTooltip>
