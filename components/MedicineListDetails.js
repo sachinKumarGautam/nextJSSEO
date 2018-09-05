@@ -84,6 +84,7 @@ class MedicineListDetails extends React.Component {
         event.stopPropagation()
         this.props.addToCartHandler(this.props.itemDetails)
       } else {
+        event.stopPropagation()
         this.props.onClickOfPatient(this.props.itemDetails)
       }
     } else {
