@@ -5,7 +5,7 @@ import CardContent from '@material-ui/core/CardContent'
 import { withStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
 
-import PriceDetails from '../cartDetails/PriceDetails'
+import PriceDetails from '../orderDetails/PriceDetails'
 import TotalAmount from '../cartDetails/TotalAmount'
 
 const styles = theme => ({
@@ -52,7 +52,7 @@ const MyCartDetails = (props) => {
           </Typography>
         </div>
         <PriceDetails
-          cartState={props.cartState.orderResponse}
+          orderDetailsState={props.cartState.orderResponse}
         />
         <TotalAmount
           cartState={props.cartState.orderResponse}

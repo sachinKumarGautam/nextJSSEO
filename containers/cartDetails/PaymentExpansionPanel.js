@@ -1,8 +1,5 @@
 import React from 'react'
 
-import Radio from '@material-ui/core/Radio'
-import RadioGroup from '@material-ui/core/RadioGroup'
-import FormControlLabel from '@material-ui/core/FormControlLabel'
 import ExpansionPanel from '@material-ui/core/ExpansionPanel'
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails'
 import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary'
@@ -10,6 +7,7 @@ import Typography from '@material-ui/core/Typography'
 import Snackbar from '@material-ui/core/Snackbar'
 
 import Button from '../../components/button'
+import PaymentChannels from '../../components/PaymentChannels'
 import TermsAndCondition from './TermsAndCondition'
 import PaymentDeliveryDetail from './PaymentDeliveryDetail'
 
@@ -28,7 +26,10 @@ class PaymentExpansionPanel extends React.Component {
   }
 
   placeOrder () {
-    if (this.state.paymentChannel !== '') {
+    if (
+      this.state.paymentChannel !== '' ||
+      !this.props.cartState.payload.cart_items.payload.length
+    ) {
       this.props.submitOrderLoading(
         this.props.cartState,
         this.state.paymentChannel
@@ -90,33 +91,24 @@ class PaymentExpansionPanel extends React.Component {
               constantsState={this.props.constantsState}
             />
           }
-          <div className={this.props.radioWrapper}>
-            <RadioGroup
-              aria-label='Payment Channels'
-              name='payment_channels'
-              value={this.state.paymentChannel}
-              onChange={this.handlePaymentChannelsChange.bind(this)}
-            >
-              {
-                this.props.cartState.payload.payment_channels.map(paymentChannel => {
-                  return (
-                    <FormControlLabel
-                      value={paymentChannel.method}
-                      control={
-                        <Radio
-                          classes={{
-                            root: this.props.radioButton,
-                            checked: this.props.checked
-                          }}
-                        />
-                      }
-                      label={paymentChannel.name}
-                    />
-                  )
-                })
-              }
-            </RadioGroup>
-          </div>
+          {
+            this.props.cartState.payload.cart_items.payload.length
+              ? (
+                <div>
+                  <Typography
+                    className={this.props.selectPaymentMode}
+                  >
+                    SELECT PAYMENT MODE
+                  </Typography>
+                  <PaymentChannels
+                    radioWrapper={this.props.radioWrapper}
+                    paymentChannel={this.state.paymentChannel}
+                    paymentChannelsPayload={this.props.cartState.payload.payment_channels}
+                    handlePaymentChannelsChange={this.handlePaymentChannelsChange.bind(this)}
+                  />
+                </div>
+              ) : null
+          }
           <TermsAndCondition />
           <Button
             size='small'

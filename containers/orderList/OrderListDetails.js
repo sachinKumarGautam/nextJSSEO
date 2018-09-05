@@ -17,7 +17,10 @@ import ComponentSpecificError from '../../components/activityIndicator/error/Com
 import SnackbarErrorMessage from '../../components/activityIndicator/error/SnackbarErrorMessage'
 
 import { getReplacedString } from '../../utils/replaceConstants'
-import { ORDER_DETAILS } from '../../routes/RouteConstant'
+import {
+  ORDER_DETAILS,
+  THANK_YOU
+} from '../../routes/RouteConstant'
 import {NO_ORDER_LIST} from '../messages/noDataMessage'
 
 import Router from 'next/router'
@@ -74,6 +77,21 @@ class OrderListDetails extends Component {
     }
   }
 
+  componentDidUpdate (prevProps) {
+    if (
+      (this.props.cartState.isOrderSubmitted !==
+      prevProps.cartState.isOrderSubmitted) &&
+      this.props.cartState.isOrderSubmitted &&
+      this.props.cartState.orderResponse.payload.order_type === 'COD'
+    ) {
+      this.props.resetCartState()
+      const url = getReplacedString(THANK_YOU)
+      const as = `${url}?payment-status=success`
+      const href = `${url}?payment-status=success`
+      Router.push(href, as)
+    }
+  }
+
   onClickOfShowMore () {
     this.props.getOrderListDetailsLoading(
       this.props.orderListState,
@@ -108,6 +126,28 @@ class OrderListDetails extends Component {
 
     const url = getReplacedString(ORDER_DETAILS, mappedObject)
     Router.push(url)
+  }
+
+  placeOrder (orderId) {
+    const paymentChannel = 'COD'
+
+    this.props.paymentInitiateLoading(
+      this.props.cartState,
+      orderId,
+      paymentChannel
+    )
+  }
+
+  retryPayment (orderId) {
+    const mappedObject = {
+      order_id: orderId
+    }
+
+    this.props.resetCartState()
+    const url = getReplacedString(THANK_YOU, mappedObject)
+    const as = `${url}?payment-status=retry`
+    const href = `${url}?payment-status=retry`
+    Router.push(href, as)
   }
 
   render () {
@@ -151,7 +191,11 @@ class OrderListDetails extends Component {
                       redirectToOrderDeatails={this.redirectToOrderDeatails.bind(this, orderDetails.id)}
                     />
                     <Divider />
-                    <OrderContent orderDetails={orderDetails} />
+                    <OrderContent
+                      orderDetails={orderDetails}
+                      placeOrder={this.placeOrder.bind(this, orderDetails.id)}
+                      retryPayment={this.retryPayment.bind(this, orderDetails.id)}
+                    />
                     <Divider />
                     <OrderFooter orderDetails={orderDetails} />
                   </div>

@@ -23,6 +23,10 @@ import {
 import ActivityIndicator from '../../components/activityIndicator/index'
 import ComponentSpecificError from '../../components/activityIndicator/error/ComponentSpecificError'
 
+import {
+  COD
+} from '../../components/constants/paymentConstants'
+
 const styles = theme => ({
   card: {
     marginLeft: theme.spacing.unit * 6
@@ -77,7 +81,7 @@ class OrderInformation extends Component {
       (this.props.cartState.isOrderSubmitted !==
       prevProps.cartState.isOrderSubmitted) &&
       this.props.cartState.isOrderSubmitted &&
-      this.props.cartState.orderResponse.payload.order_type === 'COD'
+      this.props.cartState.orderResponse.payload.order_type === COD
     ) {
       this.props.resetCartState()
       const url = getReplacedString(THANK_YOU)
@@ -118,7 +122,7 @@ class OrderInformation extends Component {
   }
 
   placeOrder () {
-    const paymentChannel = 'COD'
+    const paymentChannel = COD
 
     this.props.paymentInitiateLoading(
       this.props.cartState,

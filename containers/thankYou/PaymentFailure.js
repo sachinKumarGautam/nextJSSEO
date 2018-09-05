@@ -20,6 +20,10 @@ import {
   getReplacedString
 } from '../../utils/replaceConstants'
 
+import {
+  COD
+} from '../../components/constants/paymentConstants'
+
 import ActivityIndicator from '../../components/activityIndicator/index'
 import SnackbarErrorMessage from '../../components/activityIndicator/error/SnackbarErrorMessage'
 
@@ -76,7 +80,7 @@ class PaymentFailure extends React.Component {
       (this.props.cartState.isOrderSubmitted !==
       prevProps.cartState.isOrderSubmitted) &&
       this.props.cartState.isOrderSubmitted &&
-      this.props.cartState.orderResponse.payload.order_type === 'COD'
+      this.props.cartState.orderResponse.payload.order_type === COD
     ) {
       this.props.resetCartState()
       const url = getReplacedString(THANK_YOU)
@@ -96,7 +100,7 @@ class PaymentFailure extends React.Component {
   }
 
   placeOrder () {
-    const paymentChannel = 'COD'
+    const paymentChannel = COD
 
     this.props.paymentInitiateLoading(
       this.props.cartState,
@@ -133,6 +137,9 @@ class PaymentFailure extends React.Component {
             <Divider />
             <div className={this.props.classes.paymentPendingDesc}>
               <Typography>
+                {
+                  // TODO developer: use replacedString function
+                }
                 We have received your Order No. {this.props.cartState.orderResponse.payload.order_number}.
                 However, the payment was unsuccessful. If money has been deducted, your order will be confirmed in the next
                 {' ' + this.props.cartState.payload.payment_confirmation_time + ' '}

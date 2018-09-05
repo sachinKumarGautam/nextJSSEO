@@ -7,13 +7,20 @@ import PaymentFailure from './PaymentFailure'
 import RetryPayment from './RetryPayment'
 import MyCartDetails from './MyCartDetails'
 
+import {
+  PAYMENT_FAILED,
+  PAYMENT_SUCCESS,
+  PAYMENT_RETRY
+} from '../../components/constants/paymentConstants'
+
 class OrderConfirmation extends React.Component {
   render () {
     return (
       <Grid container>
         <Grid item xs={7}>
           {
-            this.props.queryParamPaymentStatus === 'failed' &&
+
+            this.props.queryParamPaymentStatus === PAYMENT_FAILED &&
             <PaymentFailure
               cartState={this.props.cartState}
               submitRefillDateLoading={this.props.submitRefillDateLoading}
@@ -28,7 +35,7 @@ class OrderConfirmation extends React.Component {
             />
           }
           {
-            this.props.queryParamPaymentStatus === 'success' &&
+            this.props.queryParamPaymentStatus === PAYMENT_SUCCESS &&
             <OrderConfirmationDetails
               cartState={this.props.cartState}
               submitRefillDateLoading={this.props.submitRefillDateLoading}
@@ -37,7 +44,7 @@ class OrderConfirmation extends React.Component {
             />
           }
           {
-            this.props.queryParamPaymentStatus === 'retry' &&
+            this.props.queryParamPaymentStatus === PAYMENT_RETRY &&
             <RetryPayment
               cartState={this.props.cartState}
               customerState={this.props.customerState}

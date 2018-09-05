@@ -1,7 +1,7 @@
 import {
   KEY_ID,
   PAYMENT_EMAIL
-} from './paymentConstants'
+} from '../components/constants/paymentConstants'
 
 export default function openRazorpayCheckout (
   cartState,
@@ -13,7 +13,7 @@ export default function openRazorpayCheckout (
 
   if (
     paymentGateway &&
-      paymentGateway.amount >= 1
+    paymentGateway.amount >= 1
   ) {
     const amount = (paymentGateway.amount * 100).toFixed()
     const options = getRazorpayOptions(

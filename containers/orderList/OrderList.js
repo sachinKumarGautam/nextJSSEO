@@ -19,6 +19,9 @@ class OrderList extends Component {
               orderListState={orderListState}
               getOrderListDetailsLoading={getOrderListDetailsLoading}
               customerState={customerState}
+              paymentInitiateLoading={this.props.paymentInitiateLoading}
+              resetCartState={this.props.resetCartState}
+              cartState={this.props.cartState}
             />
           </Grid>
         </Grid>

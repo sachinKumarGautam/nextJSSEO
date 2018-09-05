@@ -9,6 +9,11 @@ import OrderList from './OrderList'
 import {
   getOrderListDetailsLoading
 } from './orderListActions'
+
+import {
+  paymentInitiateLoading,
+  resetCartState
+} from '../cartDetails/cartActions'
 /*
   bread crumbs
   order list
@@ -25,6 +30,9 @@ class OrderListWrapper extends Component {
             orderListState={orderListState}
             getOrderListDetailsLoading={actions.getOrderListDetailsLoading}
             customerState={customerState}
+            paymentInitiateLoading={actions.paymentInitiateLoading}
+            resetCartState={actions.resetCartState}
+            cartState={this.props.cartState}
           />
         </section>
       </div>
@@ -36,7 +44,9 @@ function mapDispatchToProps (dispatch) {
   return {
     actions: bindActionCreators(
       {
-        getOrderListDetailsLoading
+        getOrderListDetailsLoading,
+        paymentInitiateLoading,
+        resetCartState
       },
       dispatch
     )
@@ -45,6 +55,7 @@ function mapDispatchToProps (dispatch) {
 
 function mapStateToProps (state) {
   return {
+    cartState: state.cartState,
     orderListState: state.orderListState,
     customerState: state.customerState
   }

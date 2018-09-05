@@ -556,8 +556,12 @@ export default function cartReducer (state = initialState, action) {
             customer_full_name: action.customer_full_name,
             patient_full_name: action.patient_full_name,
             discount: action.discount,
+            coupon_code: action.coupon_code,
+            coupon_discount: action.coupon_discount,
             redeemed_care_points: action.redeemed_care_points,
             redeemable_care_points: action.redeemable_care_points,
+            redeemed_cash: action.redeemed_cash,
+            redeemable_cash: action.redeemable_cash,
             total_mrp: action.total_mrp,
             total_sale_price: action.total_sale_price,
             total_tax_amount: action.total_tax_amount,
@@ -625,8 +629,21 @@ export default function cartReducer (state = initialState, action) {
         },
         payload: {
           ...state.payload,
-          coupon_discount: action.payload.coupon_discount,
-          coupon_code: action.payload.coupon_code
+          coupon_code: action.coupon_code,
+          coupon_discount: action.coupon_discount,
+          cart_items: {
+            ...state.payload.cart_items,
+            payload: action.cart_items
+          },
+          total_payable_amount: action.total_payable_amount,
+          total_sale_price: action.total_sale_price,
+          total_mrp: action.total_mrp,
+          redeemable_care_points: action.redeemable_care_points,
+          redeemable_cash: action.redeemable_cash,
+          total_tax_amount: action.total_tax_amount,
+          discount: action.discount,
+          shipping_fee: action.shipping_fee,
+          short_coupon_description: action.short_coupon_description
         }
       }
 
