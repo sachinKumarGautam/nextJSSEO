@@ -17,7 +17,7 @@ import ComponentSpecificError
 import { NO_REFILL_MEDICINE } from '../messages/noDataMessage'
 
 import RefillPatientDialogue from './RefillPatientDialogue'
-import {modifiyMedicineList} from '../../utils/common'
+import { modifiyMedicineList } from '../../utils/common'
 
 const styles = theme => {
   return {
@@ -123,19 +123,25 @@ class RefillMedicineList extends Component {
             >
               {this.props.pastMedicineState.payload.length
                 ? <ul className={this.props.classes.medicineListWrapper}>
-                  {modifiyMedicineList(pastMedicineList, cartItems).map(itemDetails => (
-                    <li className={this.props.classes.listItem}>
-                      <MedicineListDetails
-                        isLoading={this.props.isLoading}
-                        itemDetails={itemDetails}
-                        isRefillMedicines
-                        addToCartHandler={this.props.addToCartHandler}
-                        checkPincodeState={this.props.checkPincodeState}
-                        onClickOfPatient={this.onClickOfPatient}
-                        pastMedicineState={this.props.pastMedicineState}
-                        cartState={this.props.cartState}
+                  {modifiyMedicineList(
+                      pastMedicineList,
+                      cartItems
+                    ).map(itemDetails => (
+                      <li className={this.props.classes.listItem}>
+                        <MedicineListDetails
+                          isLoading={this.props.isLoading}
+                          itemDetails={itemDetails}
+                          checkIfAlredyExistInCart={
+                            itemDetails.is_exist_in_cart
+                          }
+                          isRefillMedicines
+                          addToCartHandler={this.props.addToCartHandler}
+                          checkPincodeState={this.props.checkPincodeState}
+                          onClickOfPatient={this.onClickOfPatient}
+                          pastMedicineState={this.props.pastMedicineState}
+                          cartState={this.props.cartState}
                         />
-                    </li>
+                      </li>
                     ))}
                 </ul>
                 : <Typography

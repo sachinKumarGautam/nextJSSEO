@@ -237,7 +237,6 @@ class SearchMedicine extends React.Component {
       searchMedicineState.payload.searchMedicineResult
     const searchMedicineIsLoading = searchMedicineState.isLoading
     const cartItems = cartState.payload.cart_items.payload
-    console.log(cartState)
     return (
       <div className={classes.root}>
         {this.props.searchMedicineState.errorState.isError &&
