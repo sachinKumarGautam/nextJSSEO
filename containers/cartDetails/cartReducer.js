@@ -786,6 +786,39 @@ export default function cartReducer (state = initialState, action) {
         }
       }
 
+    case cartActionTypes.DELETE_CART_LOADING:
+      return {
+        ...state,
+        payload: {
+          ...state.payload,
+          isLoading: action.isLoading
+        }
+      }
+
+    case cartActionTypes.DELETE_CART_SUCCESS:
+      return {
+        ...state,
+        payload: {
+          ...state.payload,
+          isLoading: action.isLoading,
+          payload: initialState.payload
+        }
+      }
+
+    case cartActionTypes.DELETE_CART_FAILURE:
+      return {
+        ...state,
+        payload: {
+          ...state.payload,
+          isLoading: action.isLoading,
+          errorState: {
+            ...state.payload.errorState,
+            isError: action.isError,
+            error: action.error
+          }
+        }
+      }
+
     default:
       return state
   }

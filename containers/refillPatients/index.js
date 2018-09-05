@@ -14,6 +14,9 @@ import {
   updateSelectedPatientDetails
 } from './refillActions'
 
+import {
+  deleteCartLoading
+} from '../cartDetails/cartActions'
 /*
   bread crumbs
   side menu of patient list
@@ -48,6 +51,8 @@ class RefillPatientsWrapper extends Component {
                 addToCartHandler={this.props.addToCartHandler}
                 checkPincodeState={this.props.checkPincodeState}
                 getRefillPastMedicinesLoading={this.props.actions.getRefillPastMedicinesLoading}
+                cartState={this.props.cartState}
+                deleteCartLoading={this.props.actions.deleteCartLoading}
               />
             </section>
           </Grid>
@@ -61,7 +66,8 @@ function mapStateToProps (state) {
   return {
     pastMedicineState: state.pastMedicineState,
     patientDetailsState: state.patientDetailsState,
-    checkPincodeState: state.checkPincodeState
+    checkPincodeState: state.checkPincodeState,
+    cartState: state.cartState
   }
 }
 
@@ -70,7 +76,8 @@ function mapDispatchToProps (dispatch) {
     actions: bindActionCreators(
       {
         getRefillPastMedicinesLoading,
-        updateSelectedPatientDetails
+        updateSelectedPatientDetails,
+        deleteCartLoading
       },
       dispatch
     )

@@ -38,12 +38,14 @@ export function getRefillPastMedicinesFailure (pastMedicineState, error) {
 export function updateSelectedPatientDetails (
   pastMedicineState,
   patientId,
-  patientName
+  patientName,
+  patient
 ) {
   return {
     type: UPDATE_REFILL_PATIENT_DETAILS,
     pastMedicineState,
     patientId: patientId,
-    patientName: patientName
+    patientName: patientName,
+    patient: patient
   }
 }
