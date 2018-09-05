@@ -11,6 +11,7 @@ import StrokePrice from './StrokePrice'
 import EstimatedPriceLabel from './EstimatedPriceLabel'
 import { PRODUCT_DETAILS } from '../routes/RouteConstant'
 import Button from './button/Button'
+import CheckIcon from '@material-ui/icons/Check'
 
 const styles = theme => {
   return {
@@ -58,7 +59,9 @@ const styles = theme => {
     },
     buttonWrapperStyle: {
       marginTop: theme.spacing.unit,
-      float: 'right'
+      float: 'right',
+      minWidth: theme.spacing.unit * 10,
+      display: 'inline-block'
     },
     deliveryTat: {
       ...theme.typography.body3,
@@ -67,9 +70,25 @@ const styles = theme => {
     },
     cursor: {
       cursor: 'pointer'
+    },
+    alreadyAdded: {
+      color: theme.palette.primary.main,
+      marginRight: theme.spacing.unit,
+      marginLeft: theme.spacing.unit,
+      display: 'inline-block'
+    },
+    outerClassName: {
+      display: 'flex'
     }
   }
 }
+
+const AlredyAdded = ({ className, outerClassName }) => (
+  <div className={outerClassName}>
+    <CheckIcon color={'primary'} />
+    <Typography component={'h4'} className={className}>Added</Typography>
+  </div>
+)
 
 class MedicineListDetails extends React.Component {
   constructor (props) {
@@ -84,6 +103,7 @@ class MedicineListDetails extends React.Component {
 
   render () {
     const { props } = this
+    const { checkIfAlredyExistInCart } = props
     const city = this.props.checkPincodeState.payload.city
     return (
       <div className={props.classes.medicineListContentWrapper}>
@@ -152,17 +172,23 @@ class MedicineListDetails extends React.Component {
             mrp={props.itemDetails.mrp}
           />
           <div className={props.classes.buttonWrapperStyle}>
-            <Button
-              variant='outlined'
-              classes={{
-                root: props.classes.buttonRoot,
-                label: props.classes.buttonLabel
-              }}
-              size='small'
-              color='primary'
-              onClick={this.addToCart} // this is coming from HOC
-              label={'Add To Cart'}
-            />
+            {!checkIfAlredyExistInCart &&
+              <Button
+                variant='outlined'
+                classes={{
+                  root: props.classes.buttonRoot,
+                  label: props.classes.buttonLabel
+                }}
+                size='small'
+                color='primary'
+                onClick={this.addToCart} // this is coming from HOC
+                label={'Add To Cart'}
+              />}
+            {checkIfAlredyExistInCart &&
+              <AlredyAdded
+                outerClassName={props.classes.outerClassName}
+                className={props.classes.alreadyAdded}
+              />}
           </div>
         </div>
       </div>

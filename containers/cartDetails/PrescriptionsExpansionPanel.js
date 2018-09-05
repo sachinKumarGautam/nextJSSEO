@@ -5,14 +5,13 @@ import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails'
 import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary'
 import Typography from '@material-ui/core/Typography'
 import Checkbox from '@material-ui/core/Checkbox'
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 
 import Button from '../../components/button'
 
 import ImagePicker from './ImagePicker'
 
-import {
-  PRESCRIPTION_DESCRIPTION
-} from '../messages/cartMessages'
+import { PRESCRIPTION_DESCRIPTION } from '../messages/cartMessages'
 
 class PrescriptionsExpansionPanel extends React.Component {
   onImageSelection (event) {
@@ -23,11 +22,7 @@ class PrescriptionsExpansionPanel extends React.Component {
   }
 
   onDeleteButton (index) {
-    this.props.deletePrescriptionLoading(
-      this.props.cartState,
-      [],
-      index
-    )
+    this.props.deletePrescriptionLoading(this.props.cartState, [], index)
   }
 
   onClickOfDoctorCallBack () {
@@ -42,35 +37,27 @@ class PrescriptionsExpansionPanel extends React.Component {
     return (
       <ExpansionPanel
         expanded={this.props.expanded === 'panel2'}
-        onChange={
-          this.props.loginState.isAuthenticated
-            ? this.props.handleChange
-            : null
-        }
+        onChange={this.props.handleChange}
         className={this.props.expansionPanel}
       >
-        <ExpansionPanelSummary expandIcon={<div />}>
-          <img src='/static/images/attachedPrescriptions.svg' className={this.props.imageIcon} />
-          <Typography
-            component='h1'
-            className={this.props.heading}
-          >
-            {
-              this.props.files.length
-                ? 'Attached Prescriptions'
-                : 'Upload Prescriptions'
-            }
+        <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
+          <img
+            src='/static/images/attachedPrescriptions.svg'
+            className={this.props.imageIcon}
+          />
+          <Typography component='h1' className={this.props.heading}>
+            {this.props.files.length
+              ? 'Attached Prescriptions'
+              : 'Upload Prescriptions'}
 
           </Typography>
-          {
-            (
-              this.props.files.length ||
-              this.props.cartState.payload.is_doctor_callback.payload
-            )
-              ? (
-                <img src='/static/images/checkedIcon.svg' className={this.props.checkedIcon} />
-              ) : null
-          }
+          {this.props.files.length ||
+            this.props.cartState.payload.is_doctor_callback.payload
+            ? <img
+              src='/static/images/checkedIcon.svg'
+              className={this.props.checkedIcon}
+            />
+            : null}
         </ExpansionPanelSummary>
         <ExpansionPanelDetails
           classes={{
@@ -89,7 +76,9 @@ class PrescriptionsExpansionPanel extends React.Component {
           <div className={this.props.checkboxWrapper}>
             <div className={this.props.checkbox}>
               <Checkbox
-                checked={this.props.cartState.payload.is_doctor_callback.payload}
+                checked={
+                  this.props.cartState.payload.is_doctor_callback.payload
+                }
                 onChange={this.onClickOfDoctorCallBack.bind(this)}
                 color='primary'
                 disabled={
@@ -111,11 +100,7 @@ class PrescriptionsExpansionPanel extends React.Component {
                 root: this.props.nextButtonRoot
               }}
               label={'NEXT'}
-              onClick={
-                this.props.loginState.isAuthenticated
-                  ? this.props.handleNextChange
-                  : null
-              }
+              onClick={this.props.handleNextChange}
             />
           </div>
         </ExpansionPanelDetails>
