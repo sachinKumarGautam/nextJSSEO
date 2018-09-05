@@ -24,7 +24,8 @@ import { medicineList } from '../components/constants/PageTitle'
 // activity indicatoe
 import ActivityIndicator from '../components/activityIndicator'
 import FullPageError from '../components/activityIndicator/error/FullPageError'
-import SnackbarErrorMessage from '../components/activityIndicator/error/SnackbarErrorMessage'
+import SnackbarErrorMessage
+  from '../components/activityIndicator/error/SnackbarErrorMessage'
 
 const styles = theme => ({
   root: {
@@ -140,7 +141,7 @@ class MedicineList extends React.Component {
           <ActivityIndicator
             isError={
               this.props.medicineListState.errorState.isError ||
-              this.props.searchMedicineState.errorState.isError
+                this.props.searchMedicineState.errorState.isError
             }
             ErrorComp={this.getErrorComponent()}
             bottomError={this.state.isShowMore}
@@ -160,8 +161,8 @@ class MedicineList extends React.Component {
                   ? searchMedicineState.payload.searchMedicineResult
                   : medicineListState.payload
               }
-
               updateIsShowMore={this.updateIsShowMore.bind(this)}
+              cartState={this.props.cartState}
             />
           </ActivityIndicator>
         </div>
@@ -174,7 +175,8 @@ function mapStateToProps (state) {
   return {
     medicineListState: state.medicineListState,
     searchMedicineState: state.searchMedicineState,
-    checkPincodeState: state.checkPincodeState
+    checkPincodeState: state.checkPincodeState,
+    cartState: state.cartState
   }
 }
 

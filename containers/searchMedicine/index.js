@@ -15,6 +15,7 @@ import { PRODUCT_SEARCH } from '../../routes/RouteConstant'
 
 import { CUSTOM_MESSGAE_SNACKBAR } from '../messages/errorMessages'
 import debounce from 'lodash.debounce'
+import { modifiyMedicineList } from '../../utils/common'
 
 const styles = theme => ({
   root: {
@@ -175,27 +176,6 @@ function renderSuggestion ({
   )
 }
 
-function getSuggestions (searchMedicineResult, cartState) {
-  const cartItems = cartState.payload.cart_items.payload
-  const updatedSearchMedicineResult = searchMedicineResult.map(searchItem => {
-    const checkIfAlredyExistInCart = cartItems.findIndex(
-      cartItem => searchItem.sku === cartItem.sku
-    )
-    if (checkIfAlredyExistInCart !== -1) {
-      return {
-        ...searchItem,
-        is_exist_in_cart: true
-      }
-    } else {
-      return {
-        ...searchItem,
-        is_exist_in_cart: false
-      }
-    }
-  })
-  return updatedSearchMedicineResult
-}
-
 class SearchMedicine extends React.Component {
   constructor (props) {
     super(props)
@@ -256,7 +236,8 @@ class SearchMedicine extends React.Component {
     const searchMedicineResult =
       searchMedicineState.payload.searchMedicineResult
     const searchMedicineIsLoading = searchMedicineState.isLoading
-
+    const cartItems = cartState.payload.cart_items.payload
+    console.log(cartState)
     return (
       <div className={classes.root}>
         {this.props.searchMedicineState.errorState.isError &&
@@ -264,7 +245,7 @@ class SearchMedicine extends React.Component {
             errorMessage={
               this.props.searchMedicineState.errorState.error.response
                 ? this.props.searchMedicineState.errorState.error.response.body
-                  .error.message
+                    .error.message
                 : CUSTOM_MESSGAE_SNACKBAR
             }
             customStyle={this.props.classes.errorMessage}
@@ -303,27 +284,27 @@ class SearchMedicine extends React.Component {
                   <ul
                     {...getMenuProps()}
                     className={classes.searchContentWrapper}
-                  >
-                    {getSuggestions(
-                      searchMedicineResult,
-                      cartState
-                    ).map((suggestion, index) =>
-                      renderSuggestion({
-                        suggestion,
-                        index,
-                        itemProps: getItemProps({
-                          item: suggestion.name
-                        }),
-                        highlightedIndex,
-                        selectedItem,
-                        onSelectItem: this.onSelectItem,
-                        searchItemStyle: classes.searchItem,
-                        highlightedSearchItem: `${classes.searchItem} ${classes.highlightedSearchItem}`,
-                        selectedSearchItem: `${classes.searchItem} ${classes.selectedSearchItem}`,
-                        checkPincodeState,
-                        addToCartHandler
-                      })
-                    )}
+                    >
+                    {modifiyMedicineList(
+                        searchMedicineResult,
+                        cartItems
+                      ).map((suggestion, index) =>
+                        renderSuggestion({
+                          suggestion,
+                          index,
+                          itemProps: getItemProps({
+                            item: suggestion.name
+                          }),
+                          highlightedIndex,
+                          selectedItem,
+                          onSelectItem: this.onSelectItem,
+                          searchItemStyle: classes.searchItem,
+                          highlightedSearchItem: `${classes.searchItem} ${classes.highlightedSearchItem}`,
+                          selectedSearchItem: `${classes.searchItem} ${classes.selectedSearchItem}`,
+                          checkPincodeState,
+                          addToCartHandler
+                        })
+                      )}
                   </ul>
                 </Paper>
                 : null}

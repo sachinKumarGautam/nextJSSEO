@@ -9,6 +9,7 @@ import ProductPrice from './ProductPrice'
 import StrokePrice from './StrokePrice'
 import EstimatedPriceLabel from './EstimatedPriceLabel'
 import Button from './button/Button'
+import AlreadyAdded from './AlreadyAdded'
 
 const styles = theme => {
   return {
@@ -92,7 +93,7 @@ class RelatedMedicinesCard extends React.Component {
 
   render () {
     const { props } = this
-
+    const checkIfAlredyExistInCart = props.checkIfAlredyExistInCart
     return (
       <div>
         <ProductName
@@ -133,16 +134,19 @@ class RelatedMedicinesCard extends React.Component {
             estimatePriceText={'*Estimated Price'}
           />
         </div>
-        <Button
-          variant='outlined'
-          color='primary'
-          classes={{
-            root: props.classes.buttonRoot,
-            label: props.classes.buttonLabel
-          }}
-          onClick={this.addToCart}
-          label={'Add To Cart'}
-        />
+        {!checkIfAlredyExistInCart &&
+          <Button
+            variant='outlined'
+            color='primary'
+            classes={{
+              root: props.classes.buttonRoot,
+              label: props.classes.buttonLabel
+            }}
+            onClick={this.addToCart}
+            label={'Add To Cart'}
+          />
+        }
+        {checkIfAlredyExistInCart && <AlreadyAdded />}
       </div>
     )
   }

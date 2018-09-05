@@ -12,9 +12,9 @@ import MultipleMedicineLoader
   from '../../components/activityIndicator/loader/medicineListLoader/MultipleMedicineLoader'
 import ActivityIndicator from '../../components/activityIndicator'
 
-import {
-  NO_MEDICINE_LIST
-} from '../messages/noDataMessage'
+import { modifiyMedicineList } from '../../utils/common'
+
+import { NO_MEDICINE_LIST } from '../messages/noDataMessage'
 
 const styles = theme => {
   return {
@@ -104,8 +104,10 @@ class MedicineList extends React.Component {
       classes,
       checkPincodeState,
       addToCartHandler,
-      isLoading
+      isLoading,
+      cartState
     } = this.props
+    const cartItems = cartState.payload.cart_items.payload
 
     return (
       <div className={classes.medicineListWrapper}>
@@ -127,28 +129,32 @@ class MedicineList extends React.Component {
             LoaderComp={<MultipleMedicineLoader />}
           >
             <CardContent>
-              {
-                medicineListState.length
-                  ? <ul className={classes.articleListWrapper}>
-                    {medicineListState.map(itemDetails => (
+              {medicineListState.length
+                ? <ul className={classes.articleListWrapper}>
+                  {modifiyMedicineList(
+                      medicineListState,
+                      cartItems
+                    ).map(itemDetails => (
                       <li className={classes.listItem}>
                         <MedicineListDetails
                           isLoading={isLoading}
+                          checkIfAlredyExistInCart={
+                            itemDetails.is_exist_in_cart
+                          }
                           itemDetails={itemDetails}
                           addToCartHandler={addToCartHandler}
                           checkPincodeState={checkPincodeState}
                         />
                       </li>
                     ))}
-                  </ul>
-                  : <Typography
-                    gutterBottom
-                    variant='body2'
-                    className={classes.noMedicineText}
+                </ul>
+                : <Typography
+                  gutterBottom
+                  variant='body2'
+                  className={classes.noMedicineText}
                   >
-                    {NO_MEDICINE_LIST}
-                  </Typography>
-              }
+                  {NO_MEDICINE_LIST}
+                </Typography>}
 
             </CardContent>
           </ActivityIndicator>
@@ -168,10 +174,9 @@ class MedicineList extends React.Component {
               }}
               onClick={this.onClickOfShowMore}
               label={'Show more'}
-            />
+              />
           </div>
-          : null
-        }
+          : null}
       </div>
     )
   }

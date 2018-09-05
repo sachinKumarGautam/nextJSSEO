@@ -11,7 +11,7 @@ import StrokePrice from './StrokePrice'
 import EstimatedPriceLabel from './EstimatedPriceLabel'
 import { PRODUCT_DETAILS } from '../routes/RouteConstant'
 import Button from './button/Button'
-import CheckIcon from '@material-ui/icons/Check'
+import AlreadyAdded from './AlreadyAdded'
 
 const styles = theme => {
   return {
@@ -68,25 +68,9 @@ const styles = theme => {
       ...theme.typography.body3,
       color: theme.palette.customGrey.grey500,
       fontWeight: theme.typography.fontWeightBold
-    },
-    alreadyAdded: {
-      color: theme.palette.primary.main,
-      marginRight: theme.spacing.unit,
-      marginLeft: theme.spacing.unit,
-      display: 'inline-block'
-    },
-    outerClassName: {
-      display: 'flex'
     }
   }
 }
-
-const AlredyAdded = ({ className, outerClassName }) => (
-  <div className={outerClassName}>
-    <CheckIcon color={'primary'} />
-    <Typography component={'h4'} className={className}>Added</Typography>
-  </div>
-)
 
 class MedicineListDetails extends React.Component {
   constructor (props) {
@@ -191,10 +175,8 @@ class MedicineListDetails extends React.Component {
                   label={'Add To Cart'}
                 />}
               {checkIfAlredyExistInCart &&
-                <AlredyAdded
-                  outerClassName={props.classes.outerClassName}
-                  className={props.classes.alreadyAdded}
-                />}
+                <AlreadyAdded/>
+                }
             </div>
           </div>
         </div>

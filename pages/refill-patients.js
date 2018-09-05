@@ -30,7 +30,9 @@ const styles = theme => ({
     paddingRight: theme.spacing.unit * 7,
     maxWidth: theme.breakpoints.values.lg,
     minWidth: theme.breakpoints.values.md,
+    minHeight: 'inherit',
     margin: '0 auto',
+    height: '100%',
     marginTop: theme.spacing.unit * 12
   },
   title: {
@@ -73,10 +75,7 @@ class RefillPatient extends Component {
     const { addToCartHandler, classes } = this.props
 
     return (
-      <Layout
-        title={refillPatient.title}
-        addToCartHandler={addToCartHandler}
-      >
+      <Layout title={refillPatient.title} addToCartHandler={addToCartHandler}>
         <div className={classes.wrapperStyle}>
           <ActivityIndicator
             isError={this.props.patientDetailsState.errorState.isError}
