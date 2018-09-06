@@ -13,11 +13,6 @@ import { PRODUCT_DETAILS } from '../routes/RouteConstant'
 import Button from './button/Button'
 import AlreadyAdded from './AlreadyAdded'
 
-import {
-  DELIVERY_OPTION_URGENT,
-  SERVICE_TYPE_LFASSURED
-} from '../components/constants/Constants'
-
 const styles = theme => {
   return {
     customName: {
@@ -117,15 +112,9 @@ class MedicineListDetails extends React.Component {
               variant={'body1'}
               name={props.itemDetails.name}
               customStyle={props.classes.customName}
+              serviceType={props.itemDetails.available_service_type}
+              deliveryOption={props.itemDetails.available_delivery_option}
             />
-            {
-              // props.available_delivery_option === DELIVERY_OPTION_URGENT &&
-              <img src='static/images/express-delivery-icon.svg' />
-            }
-            {
-              // props.available_delivery_option === SERVICE_TYPE_LFASSURED &&
-              <img src='static/images/assured-service.svg' />
-            }
             {/* {props.isRefillMedicines && <RefillDueDays />} */}
             <ProductBrand
               variant={'caption'}

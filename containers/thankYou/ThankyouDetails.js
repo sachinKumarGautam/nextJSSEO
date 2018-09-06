@@ -5,6 +5,10 @@ import Typography from '@material-ui/core/Typography'
 
 import {formatDate} from '../../utils/FormatDate'
 import {DESCRIPTION} from '../messages/thankyouMessages'
+import {
+  DELIVERY_OPTION_URGENT,
+  SERVICE_TYPE_LFASSURED
+} from '../../components/constants/Constants'
 
 const styles = theme => ({
   imageStyle: {
@@ -23,17 +27,20 @@ const styles = theme => ({
     fontSize: theme.typography.pxToRem(18),
     marginLeft: theme.spacing.unit * 5,
     color: theme.palette.customGrey.grey500,
-    marginBottom: theme.spacing.unit
+    // marginBottom: theme.spacing.unit
   },
   orderNumber: {
     fontSize: theme.typography.pxToRem(18),
     color: theme.palette.customGrey.grey500,
-    marginBottom: theme.spacing.unit,
-    fontWeight: theme.typography.fontWeightBold
+    // marginBottom: theme.spacing.unit,
+    fontWeight: theme.typography.fontWeightBold,
+    marginRight: theme.spacing.unit
   },
   orderWrapper: {
     display: 'flex',
-    flexDirection: 'row'
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: theme.spacing.unit
   },
   deliveryDate: {
     color: theme.palette.customGrey.grey500,
@@ -82,6 +89,14 @@ const ThankyouDetails = (props) => {
         >
           : {props.cartState.orderResponse.payload.order_number}
         </Typography>
+        {
+          props.cartState.orderResponse.payload.service_type === SERVICE_TYPE_LFASSURED &&
+          <img src='/static/images/assured-service.svg' />
+        }
+        {
+          props.cartState.orderResponse.payload.delivery_option === DELIVERY_OPTION_URGENT &&
+          <img src='/static/images/express-delivery-icon.svg' />
+        }
       </div>
       <div className={props.classes.orderWrapper}>
         <Typography
