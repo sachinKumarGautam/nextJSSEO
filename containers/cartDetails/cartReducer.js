@@ -96,6 +96,7 @@ export default function cartReducer (state = initialState, action) {
           redeemed_care_points: action.redeemed_care_points,
           redeemable_care_points: action.redeemable_care_points,
           total_mrp: action.total_mrp,
+          total_payable_amount: action.total_payable_amount,
           total_sale_price: action.total_sale_price,
           total_tax_amount: action.total_tax_amount,
           facility_code: action.facility_code,
@@ -175,6 +176,7 @@ export default function cartReducer (state = initialState, action) {
           redeemed_care_points: action.redeemed_care_points,
           redeemable_care_points: action.redeemable_care_points,
           total_mrp: action.total_mrp,
+          total_payable_amount: action.total_payable_amount,
           total_sale_price: action.total_sale_price,
           total_tax_amount: action.total_tax_amount
         }
@@ -563,6 +565,7 @@ export default function cartReducer (state = initialState, action) {
             redeemed_cash: action.redeemed_cash,
             redeemable_cash: action.redeemable_cash,
             total_mrp: action.total_mrp,
+            total_payable_amount: action.total_payable_amount,
             total_sale_price: action.total_sale_price,
             total_tax_amount: action.total_tax_amount,
             facility_code: action.facility_code,

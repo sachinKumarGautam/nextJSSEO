@@ -28,7 +28,7 @@ class PaymentExpansionPanel extends React.Component {
   placeOrder () {
     if (
       this.state.paymentChannel !== '' ||
-      !this.props.cartState.payload.cart_items.payload.length
+      !this.props.cartState.payload.total_payable_amount
     ) {
       this.props.submitOrderLoading(
         this.props.cartState,
@@ -92,7 +92,7 @@ class PaymentExpansionPanel extends React.Component {
             />
           }
           {
-            this.props.cartState.payload.cart_items.payload.length
+            this.props.cartState.payload.total_payable_amount
               ? (
                 <div>
                   <Typography

@@ -80,6 +80,7 @@ export function getCartDetailsSuccess (
     redeemed_care_points: result.redeemed_care_points,
     redeemable_care_points: result.redeemable_care_points,
     total_mrp: result.total_mrp,
+    total_payable_amount: result.total_payable_amount,
     total_sale_price: result.total_sale_price,
     total_tax_amount: result.total_tax_amount,
     facility_code: result.facility_code,
@@ -143,6 +144,7 @@ export function putCartItemSuccess (cartState, result) {
     redeemed_care_points: result.redeemed_care_points,
     redeemable_care_points: result.redeemable_care_points,
     total_mrp: result.total_mrp,
+    total_payable_amount: result.total_payable_amount,
     total_sale_price: result.total_sale_price,
     total_tax_amount: result.total_tax_amount
   }
@@ -431,6 +433,7 @@ export function submitOrderSuccess (cartState, result) {
     redeemed_cash: result.order.redeemed_cash,
     redeemable_cash: result.order.redeemable_cash,
     total_mrp: result.order.total_mrp,
+    total_payable_amount: result.order.total_payable_amount,
     total_sale_price: result.order.total_sale_price,
     total_tax_amount: result.order.total_tax_amount,
     facility_code: result.order.facility_code,

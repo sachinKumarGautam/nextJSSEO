@@ -23,6 +23,10 @@ import {
 } from '../../routes/RouteConstant'
 import {NO_ORDER_LIST} from '../messages/noDataMessage'
 
+import {
+  COD
+} from '../../components/constants/paymentConstants'
+
 import Router from 'next/router'
 
 const styles = theme => ({
@@ -82,7 +86,7 @@ class OrderListDetails extends Component {
       (this.props.cartState.isOrderSubmitted !==
       prevProps.cartState.isOrderSubmitted) &&
       this.props.cartState.isOrderSubmitted &&
-      this.props.cartState.orderResponse.payload.order_type === 'COD'
+      this.props.cartState.orderResponse.payload.order_type === COD
     ) {
       this.props.resetCartState()
       const url = getReplacedString(THANK_YOU)
@@ -129,7 +133,7 @@ class OrderListDetails extends Component {
   }
 
   placeOrder (orderId) {
-    const paymentChannel = 'COD'
+    const paymentChannel = COD
 
     this.props.paymentInitiateLoading(
       this.props.cartState,

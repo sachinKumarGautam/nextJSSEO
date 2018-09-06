@@ -20,6 +20,10 @@ import TermsAndCondition from './TermsAndCondition'
 
 import Button from '../../components/button'
 
+import {
+  PAYMENT_PENDING
+} from '../../components/constants/paymentConstants'
+
 /*
   OrderStatusDetails
   PaymentDetails
@@ -148,7 +152,7 @@ const OrderContentWrapper = (props) => {
         sellerName={props.orderDetailsState.payload.seller_name}
       />
       {
-        props.orderDetailsState.payload.status === 'PAYMENT_PENDING' &&
+        props.orderDetailsState.payload.status === PAYMENT_PENDING &&
         <div className={props.classes.buttonWrapper}>
           <Button
             size='small'

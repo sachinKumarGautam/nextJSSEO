@@ -36,6 +36,7 @@ const initialState = {
     type: '',
     comment: '',
     total_mrp: 0,
+    total_payable_amount: 0,
     item_count: 0,
     status: '',
     source: '',

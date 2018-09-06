@@ -79,6 +79,10 @@ import {
   deleteCart$
 } from '../../services/api'
 
+import {
+  PAYMENT_GATEWAY
+} from '../../components/constants/paymentConstants'
+
 export function getAnonymousCartIdEpic (action$, store) {
   return action$.pipe(
     ofType(GET_ANONYMOUS_CART_ID_LOADING),
@@ -556,7 +560,7 @@ export function verifyPaymentEpic (action$, store) {
       }
 
       const body = {
-        gateway_name: 'RAZOR_PAY',
+        gateway_name: PAYMENT_GATEWAY,
         gateway_data: razorpayDetails
       }
 

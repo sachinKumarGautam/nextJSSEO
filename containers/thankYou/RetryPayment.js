@@ -182,8 +182,8 @@ class RetryPayment extends React.Component {
     openRazorpayCheckout(
       cartState,
       this.props.customerState,
-      this.verifyPayment.bind(this),
-      this.onModalDismiss.bind(this)
+      this.verifyPayment,
+      this.onModalDismiss
     )
   }
 

@@ -6,6 +6,10 @@ import Typography from '@material-ui/core/Typography'
 
 import Button from '../../components/button'
 
+import {
+  PAYMENT_PENDING
+} from '../../components/constants/paymentConstants'
+
 const styles = theme => {
   return {
     userDetailWrapper: {
@@ -157,7 +161,7 @@ class OrderContent extends Component {
           </div>
         </div>
         {
-          this.props.orderDetails.status === 'PAYMENT_PENDING' &&
+          this.props.orderDetails.status === PAYMENT_PENDING &&
           <div className={this.props.classes.buttonWrapperStyle}>
             <Button
               size='small'
