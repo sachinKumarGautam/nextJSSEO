@@ -61,7 +61,7 @@ function getRazorpayOptions (
       'method': paymentGateway.sub_method
     },
     'theme': {
-      'color': 'rgb(128, 194, 65)'
+      'color': '#80c241'
     }
   }
 
