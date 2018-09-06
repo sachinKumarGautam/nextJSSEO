@@ -4,12 +4,11 @@ import ExpansionPanel from '@material-ui/core/ExpansionPanel'
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails'
 import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary'
 import Typography from '@material-ui/core/Typography'
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 
 import LoginDetails from './LoginDetails'
 
-import {
-  LOGIN_DESCRIPTION
-} from '../messages/cartMessages'
+import { LOGIN_DESCRIPTION } from '../messages/cartMessages'
 
 class LoginExpansionPanel extends React.Component {
   openLoginModal () {
@@ -41,24 +40,22 @@ class LoginExpansionPanel extends React.Component {
         }
         className={this.props.expansionPanel}
       >
-        <ExpansionPanelSummary expandIcon={<div />}>
-          <img src='/static/images/loggedIn.svg' className={this.props.imageIcon} />
+        <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
+          <img
+            src='/static/images/loggedIn.svg'
+            className={this.props.imageIcon}
+          />
           <Typography component='h1' className={this.props.heading}>
-            {
-              !this.props.loginState.isAuthenticated
-                ? (
-                  'Login/Register'
-                ) : (
-                  this.props.customerState.payload.full_name
-                )
-            }
+            {!this.props.loginState.isAuthenticated
+              ? 'Login/Register'
+              : this.props.customerState.payload.full_name}
           </Typography>
-          {
-            this.props.loginState.isAuthenticated
-              ? (
-                <img src='/static/images/checkedIcon.svg' className={this.props.checkedIcon} />
-              ) : null
-          }
+          {this.props.loginState.isAuthenticated
+            ? <img
+              src='/static/images/checkedIcon.svg'
+              className={this.props.checkedIcon}
+            />
+            : null}
         </ExpansionPanelSummary>
         <ExpansionPanelDetails
           classes={{

@@ -11,11 +11,13 @@ import ActivityIndicator from '../../components/activityIndicator/index'
 import MultipleMedicineLoader
   from '../../components/activityIndicator/loader/medicineListLoader/MultipleMedicineLoader'
 
-import ComponentSpecificError from '../../components/activityIndicator/error/ComponentSpecificError'
+import ComponentSpecificError
+  from '../../components/activityIndicator/error/ComponentSpecificError'
 
-import {NO_REFILL_MEDICINE} from '../messages/noDataMessage'
+import { NO_REFILL_MEDICINE } from '../messages/noDataMessage'
 
 import RefillPatientDialogue from './RefillPatientDialogue'
+import { modifiyMedicineList } from '../../utils/common'
 
 const styles = theme => {
   return {
@@ -94,6 +96,8 @@ class RefillMedicineList extends Component {
   }
 
   render () {
+    const pastMedicineList = this.props.pastMedicineState.payload
+    const cartItems = this.props.cartState.payload.cart_items.payload
     return (
       <div>
         <Card elevation={'1'}>
@@ -117,14 +121,19 @@ class RefillMedicineList extends Component {
               isLoading={this.props.isLoading}
               LoaderComp={<MultipleMedicineLoader />}
             >
-              {
-                this.props.pastMedicineState.payload.length
-                  ? <ul className={this.props.classes.medicineListWrapper}>
-                    {this.props.pastMedicineState.payload.map(itemDetails => (
+              {this.props.pastMedicineState.payload.length
+                ? <ul className={this.props.classes.medicineListWrapper}>
+                  {modifiyMedicineList(
+                      pastMedicineList,
+                      cartItems
+                    ).map(itemDetails => (
                       <li className={this.props.classes.listItem}>
                         <MedicineListDetails
                           isLoading={this.props.isLoading}
                           itemDetails={itemDetails}
+                          checkIfAlredyExistInCart={
+                            itemDetails.is_exist_in_cart
+                          }
                           isRefillMedicines
                           addToCartHandler={this.props.addToCartHandler}
                           checkPincodeState={this.props.checkPincodeState}
@@ -134,15 +143,14 @@ class RefillMedicineList extends Component {
                         />
                       </li>
                     ))}
-                  </ul>
-                  : <Typography
-                    gutterBottom
-                    variant='body2'
-                    className={this.props.classes.noContent}
+                </ul>
+                : <Typography
+                  gutterBottom
+                  variant='body2'
+                  className={this.props.classes.noContent}
                   >
-                    {NO_REFILL_MEDICINE}
-                  </Typography>
-              }
+                  {NO_REFILL_MEDICINE}
+                </Typography>}
             </ActivityIndicator>
             <RefillPatientDialogue
               open={this.state.open}

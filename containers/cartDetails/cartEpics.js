@@ -1,5 +1,12 @@
 import { of } from 'rxjs/observable/of'
-import { mergeMap, catchError, map, switchMap, flatMap } from 'rxjs/operators'
+import {
+  mergeMap,
+  catchError,
+  map,
+  switchMap,
+  flatMap,
+  debounceTime
+} from 'rxjs/operators'
 import { ofType } from 'redux-observable'
 import http from '../../services/api/ajaxWrapper'
 
@@ -132,10 +139,7 @@ export function getCartDetailsEpic (action$, store) {
   )
 }
 
-function cartApiLoadingHandling (
-  cartState,
-  medicineSelected
-) {
+function cartApiLoadingHandling (cartState, medicineSelected) {
   let cartItems = cartState.payload.cart_items.payload
 
   cartItems.forEach((cartMedicine, index) => {
@@ -158,12 +162,7 @@ function cartApiLoadingHandling (
     cart_items: cartItems
   }
 
-  return of(
-    putCartItemSuccess(
-      cartState,
-      payload
-    )
-  )
+  return of(putCartItemSuccess(cartState, payload))
 }
 
 function cartApiErrorHandling (cartState, medicineSelected, error) {
@@ -190,23 +189,14 @@ function cartApiErrorHandling (cartState, medicineSelected, error) {
     cart_items: cartItems
   }
 
-  return of(
-    putCartItemFailure(
-      cartState,
-      payload,
-      error
-    )
-  )
+  return of(putCartItemFailure(cartState, payload, error))
 }
 
 export function decrementCartItemLoadingEpic (action$, store) {
   return action$.pipe(
     ofType(DECREMENT_CART_ITEM_LOADING),
     mergeMap(data => {
-      return cartApiLoadingHandling(
-        data.cartState,
-        data.medicineSelected
-      )
+      return cartApiLoadingHandling(data.cartState, data.medicineSelected)
     })
   )
 }
@@ -214,6 +204,7 @@ export function decrementCartItemLoadingEpic (action$, store) {
 export function decrementCartItemEpic (action$, store) {
   return action$.pipe(
     ofType(DECREMENT_CART_ITEM_LOADING),
+    debounceTime(350),
     mergeMap(data => {
       let cartUid = data.cartState.payload.uid
 
@@ -243,10 +234,7 @@ export function incrementCartItemLoadingEpic (action$, store) {
   return action$.pipe(
     ofType(INCREMENT_CART_ITEM_LOADING),
     mergeMap(data => {
-      return cartApiLoadingHandling(
-        data.cartState,
-        data.medicineSelected
-      )
+      return cartApiLoadingHandling(data.cartState, data.medicineSelected)
     })
   )
 }
@@ -254,6 +242,7 @@ export function incrementCartItemLoadingEpic (action$, store) {
 export function incrementCartItemEpic (action$, store) {
   return action$.pipe(
     ofType(INCREMENT_CART_ITEM_LOADING),
+    debounceTime(350),
     mergeMap(data => {
       const cartUid = data.cartState.payload.uid
       const medicineIncremented = {
@@ -273,7 +262,11 @@ export function incrementCartItemEpic (action$, store) {
           }
         }),
         catchError(error => {
-          return cartApiErrorHandling(data.cartState, data.medicineSelected, error)
+          return cartApiErrorHandling(
+            data.cartState,
+            data.medicineSelected,
+            error
+          )
         })
       )
     })
@@ -284,10 +277,7 @@ export function deleteCartItemLoadingEpic (action$, store) {
   return action$.pipe(
     ofType(DELETE_CART_ITEM_LOADING),
     mergeMap(data => {
-      return cartApiLoadingHandling(
-        data.cartState,
-        data.medicineSelected
-      )
+      return cartApiLoadingHandling(data.cartState, data.medicineSelected)
     })
   )
 }
@@ -615,7 +605,9 @@ export function optExpressDelivery (action$, store) {
   return action$.pipe(
     ofType(OPT_EXPRESS_DELIVERY_LOADING),
     mergeMap(data => {
-      return http(expressDelivery$(data.cartUId, data.expressDeliveryCheck)).pipe(
+      return http(
+        expressDelivery$(data.cartUId, data.expressDeliveryCheck)
+      ).pipe(
         map(result => {
           return optForExpressDeliverySuccess(
             data.cartState,

@@ -147,6 +147,7 @@ class OTPForm extends React.Component {
             classes={{
               input: classes.otpInput
             }}
+            autoFocus
             onChange={this.handleChange}
             placeholder={OTP_PLACEHOLDER}
           />
