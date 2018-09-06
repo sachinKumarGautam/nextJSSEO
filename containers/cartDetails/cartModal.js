@@ -36,6 +36,7 @@ const initialState = {
     type: '',
     comment: '',
     total_mrp: 0,
+    total_payable_amount: 0,
     item_count: 0,
     status: '',
     source: '',
@@ -50,6 +51,7 @@ const initialState = {
     coupon_code: '',
     care_points: 0,
     coupon_discount: 0,
+    payment_channels: [],
     cart_prescriptions: [],
     is_doctor_callback: {
       payload: false,
@@ -83,9 +85,21 @@ const initialState = {
     isViewImageVisible: false,
     visibleImageUrl: ''
   },
+  payment_gateway: {},
+  payment: {
+    payload: {},
+    isPaymentSuccessful: false,
+    isPaymentFailure: false,
+    isLoading: false,
+    errorState: {
+      isError: false,
+      error: {}
+    }
+  },
   orderResponse: {
     payload: {
       order_number: null,
+      order_type: '',
       delivery_option: '',
       service_type: '',
       order_prescriptions: [],
@@ -96,8 +110,12 @@ const initialState = {
       customer_full_name: '',
       patient_full_name: '',
       discount: 0,
+      coupon_code: '',
+      coupon_discount: 0,
       redeemed_care_points: 0,
       redeemable_care_points: 0,
+      redeemed_cash: 0,
+      redeemable_cash: 0,
       total_mrp: 0,
       total_sale_price: 0,
       total_tax_amount: 0,
@@ -121,6 +139,8 @@ const initialState = {
       error: {}
     }
   },
+  isOrderSubmitted: false,
+  isRedirectToOrderDetailsPage: false,
   expressDeliveryCheck: {
     payload: {},
     isLoading: false,

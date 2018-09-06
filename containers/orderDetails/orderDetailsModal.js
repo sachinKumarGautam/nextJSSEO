@@ -40,6 +40,14 @@ const initialState = {
   errorState: {
     isError: false,
     error: {}
+  },
+  payment_channels: {
+    payload: [],
+    isLoading: false,
+    errorState: {
+      isError: false,
+      error: {}
+    }
   }
 }
 
