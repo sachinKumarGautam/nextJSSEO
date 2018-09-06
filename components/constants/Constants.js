@@ -1,4 +1,5 @@
 export const SNACK_BAR_DURATION = 6000
+export const SNACK_BAR_DURATION_3000 = 3000
 
 // delivery option type
 export const DELIVERY_OPTION_URGENT = 'URGENT'

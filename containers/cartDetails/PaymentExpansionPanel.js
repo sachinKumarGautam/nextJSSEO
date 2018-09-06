@@ -1,25 +1,57 @@
 import React from 'react'
 
-import Radio from '@material-ui/core/Radio'
 import ExpansionPanel from '@material-ui/core/ExpansionPanel'
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails'
 import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary'
 import Typography from '@material-ui/core/Typography'
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
+import Snackbar from '@material-ui/core/Snackbar'
 
 import Button from '../../components/button'
+import PaymentChannels from '../../components/PaymentChannels'
 import TermsAndCondition from './TermsAndCondition'
 import PaymentDeliveryDetail from './PaymentDeliveryDetail'
 
+import { SELECT_PAYMENT_MODE } from '../messages/cartMessages'
+
 import {
   SERVICE_TYPE_LFASSURED,
-  DELIVERY_OPTION_NORMAL
+  DELIVERY_OPTION_NORMAL,
+  SNACK_BAR_DURATION
 } from '../../components/constants/Constants'
 
 class PaymentExpansionPanel extends React.Component {
+  state = {
+    paymentChannel: '',
+    isShowSnackbar: false
+  }
+
   placeOrder () {
-    this.props.submitOrderLoading(
-      this.props.cartState
-    )
+    if (
+      this.state.paymentChannel !== '' ||
+      !this.props.cartState.payload.total_payable_amount
+    ) {
+      this.props.submitOrderLoading(
+        this.props.cartState,
+        this.state.paymentChannel
+      )
+    } else {
+      this.setState({
+        isShowSnackbar: true
+      })
+    }
+  }
+
+  handlePaymentChannelsChange (event) {
+    this.setState({
+      paymentChannel: event.target.value
+    })
+  }
+
+  handleClose () {
+    this.setState({
+      isShowSnackbar: false
+    })
   }
 
   render () {
@@ -37,7 +69,7 @@ class PaymentExpansionPanel extends React.Component {
         }
         className={this.props.expansionPanel}
       >
-        <ExpansionPanelSummary expandIcon={<div />}>
+        <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
           <img src='/static/images/payment.svg' className={this.props.imageIcon} />
           <Typography
             component='h1'
@@ -60,22 +92,24 @@ class PaymentExpansionPanel extends React.Component {
               constantsState={this.props.constantsState}
             />
           }
-          <div className={this.props.radioWrapper}>
-            <Radio
-              checked
-              name='radio-button-demo'
-              classes={{
-                root: this.props.radioButton,
-                checked: this.props.checked
-              }}
-            />
-            <Typography
-              component='h2'
-              className={this.props.paymentDescription}
-            >
-              Cash On Delivery
-            </Typography>
-          </div>
+          {
+            this.props.cartState.payload.total_payable_amount
+              ? (
+                <div>
+                  <Typography
+                    className={this.props.selectPaymentMode}
+                  >
+                    SELECT PAYMENT MODE
+                  </Typography>
+                  <PaymentChannels
+                    radioWrapper={this.props.radioWrapper}
+                    paymentChannel={this.state.paymentChannel}
+                    paymentChannelsPayload={this.props.cartState.payload.payment_channels}
+                    handlePaymentChannelsChange={this.handlePaymentChannelsChange.bind(this)}
+                  />
+                </div>
+              ) : null
+          }
           <TermsAndCondition />
           <Button
             size='small'
@@ -84,12 +118,29 @@ class PaymentExpansionPanel extends React.Component {
             classes={{
               root: this.props.nextButtonRoot
             }}
-            label={'Place Order'}
+            label={
+              this.props.cartState.payload.total_payable_amount
+              ? 'Place Order'
+              : 'Place a COD Order'
+            }
             onClick={this.placeOrder.bind(this)}
             disabled={
               !patientDetails.payload.patient_id ||
               !shippingAddressDetails.payload.shipping_address_id
             }
+          />
+          <Snackbar
+            anchorOrigin={{
+              vertical: 'bottom',
+              horizontal: 'center'
+            }}
+            autoHideDuration={SNACK_BAR_DURATION}
+            open={this.state.isShowSnackbar}
+            onClose={this.handleClose.bind(this)}
+            ContentProps={{
+              'aria-describedby': 'cart-items'
+            }}
+            message={<span>{SELECT_PAYMENT_MODE}</span>}
           />
         </ExpansionPanelDetails>
       </ExpansionPanel>

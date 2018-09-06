@@ -21,6 +21,7 @@ const MedicineListWrapper = props => (
         isLoading={
           props.isLoadingRelatedMedicine || props.isLoadingSearchMedicine
         }
+        cartState={props.cartState}
         searchMedicineState={props.searchMedicineState}
         medicineListState={props.medicineState}
         moleculeName={props.moleculeName}

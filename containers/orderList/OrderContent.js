@@ -4,7 +4,11 @@ import { withStyles } from '@material-ui/core/styles'
 import Person from '@material-ui/icons/Person'
 import Typography from '@material-ui/core/Typography'
 
-import {getOrderStatusProgressDetails} from '../../utils/orderStatus/OrderStatus'
+import Button from '../../components/button'
+
+import {
+  PAYMENT_PENDING
+} from '../../components/constants/paymentConstants'
 
 const styles = theme => {
   return {
@@ -62,7 +66,10 @@ const styles = theme => {
     },
     buttonWrapperStyle: {
       textAlign: 'right',
-      marginRight: theme.spacing.unit * 2
+      marginRight: theme.spacing.unit * 2,
+      display: 'flex',
+      justifyContent: 'flex-end',
+      marginBottom: theme.spacing.unit * 2
     },
     codButtonStyle: {
       ...theme.typography.caption,
@@ -100,10 +107,6 @@ const styles = theme => {
 
 class OrderContent extends Component {
   render () {
-    let state = this.props.orderDetails.state
-    let status = this.props.orderDetails.status
-    let orderStatus = getOrderStatusProgressDetails(state, status)
-    let viewStatus = orderStatus.viewStatus
     let itemsLeft = this.props.orderDetails.items.length - 3
     let image = this.props.orderDetails.prescriptions.length &&
       this.props.orderDetails.prescriptions[0].location
@@ -128,7 +131,7 @@ class OrderContent extends Component {
                 this.props.classes.statusStyle
               }
             >
-              {viewStatus}
+              {this.props.orderDetails.viewStatus}
             </Typography>
           </div>
         </div>
@@ -157,8 +160,8 @@ class OrderContent extends Component {
             </Typography>
           </div>
         </div>
-        {/* {
-          props.orderList.payment === 'failed' &&
+        {
+          this.props.orderDetails.status === PAYMENT_PENDING &&
           <div className={this.props.classes.buttonWrapperStyle}>
             <Button
               size='small'
@@ -169,20 +172,20 @@ class OrderContent extends Component {
                 label: this.props.classes.buttonLabel
               }}
               className={this.props.classes.codButtonStyle}
-              onClick={this.handleClickOpen}
+              onClick={this.props.retryPayment}
               label={'Retry Payment'}
             />
             <Button
               size='small'
               variant='raised'
               color='primary'
-              onClick={this.handleClickOpen}
+              onClick={this.props.placeOrder}
               className={this.props.classes.codButtonStyle}
               label={'Convert to COD'}
             />
           </div>
         }
-        <div className={this.props.classes.reviewWrapperStyle}>
+        {/* <div className={this.props.classes.reviewWrapperStyle}>
           <div className={this.props.classes.reviewHelpWrapper}>
             <Typography
               variant="caption"

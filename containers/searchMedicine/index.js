@@ -8,13 +8,14 @@ import CircularProgress from '@material-ui/core/CircularProgress'
 import Button from '../../components/button'
 import SearchIcon from '@material-ui/icons/Search'
 import MedicineListDetails from '../../components/MedicineListDetails'
-import TextErrorMessage from '../../components/activityIndicator/error/TextErrorMessage'
+import TextErrorMessage
+  from '../../components/activityIndicator/error/TextErrorMessage'
 
 import { PRODUCT_SEARCH } from '../../routes/RouteConstant'
 
-import {
-  CUSTOM_MESSGAE_SNACKBAR
-} from '../messages/errorMessages'
+import { CUSTOM_MESSGAE_SNACKBAR } from '../messages/errorMessages'
+import debounce from 'lodash.debounce'
+import { modifiyMedicineList } from '../../utils/common'
 
 const styles = theme => ({
   root: {
@@ -159,7 +160,6 @@ function renderSuggestion ({
 }) {
   const isHighlighted = highlightedIndex === index
   const isSelected = (selectedItem || '').indexOf(suggestion.label) > -1
-
   const listStyle = isHighlighted
     ? highlightedSearchItem
     : isSelected ? selectedSearchItem : searchItemStyle
@@ -167,16 +167,13 @@ function renderSuggestion ({
     <li {...itemProps} className={listStyle}>
       <MedicineListDetails
         itemDetails={suggestion}
+        checkIfAlredyExistInCart={suggestion.is_exist_in_cart}
         openPicodeDialogFrom
         checkPincodeState={checkPincodeState}
         addToCartHandler={addToCartHandler}
       />
     </li>
   )
-}
-
-function getSuggestions (searchMedicineResult) {
-  return searchMedicineResult
 }
 
 class SearchMedicine extends React.Component {
@@ -187,11 +184,17 @@ class SearchMedicine extends React.Component {
     }
     this.searchMedicineOnChange = this.searchMedicineOnChange.bind(this)
     this.stateChangeHandler = this.stateChangeHandler.bind(this)
-    this.onSearchMedicine = this.onSearchMedicine.bind(this)
+    this.onSearchClick = this.onSearchClick.bind(this)
+    this.searchMedicineDebounce = debounce(this.searchMedicineDebounce, 350)
   }
 
-  searchMedicineOnChange (event) {
-    if (event.target.value.length > 3) {
+  searchMedicineOnChange = event => {
+    event.persist()
+    this.searchMedicineDebounce(event)
+  }
+
+  searchMedicineDebounce (event) {
+    if (event.target.value) {
       this.props.searchMedicineLoading(
         this.props.searchMedicineState,
         this.props.checkPincodeState.payload.id,
@@ -203,7 +206,7 @@ class SearchMedicine extends React.Component {
     }
   }
 
-  onSearchMedicine (medicineName) {
+  onSearchClick (medicineName) {
     const href = `${PRODUCT_SEARCH}?slug=${medicineName}`
     const as = `${PRODUCT_SEARCH}?slug=${medicineName}`
     Router.push(href, as)
@@ -226,24 +229,26 @@ class SearchMedicine extends React.Component {
       classes,
       searchMedicineState,
       checkPincodeState,
-      addToCartHandler
+      addToCartHandler,
+      cartState
     } = this.props
     const isOpen = this.state.isOpen
     const searchMedicineResult =
       searchMedicineState.payload.searchMedicineResult
     const searchMedicineIsLoading = searchMedicineState.isLoading
-
+    const cartItems = cartState.payload.cart_items.payload
     return (
       <div className={classes.root}>
-        {
-          this.props.searchMedicineState.errorState.isError &&
+        {this.props.searchMedicineState.errorState.isError &&
           <TextErrorMessage
-            errorMessage={this.props.searchMedicineState.errorState.error.response
-              ? this.props.searchMedicineState.errorState.error.response.body.error.message
-              : CUSTOM_MESSGAE_SNACKBAR}
+            errorMessage={
+              this.props.searchMedicineState.errorState.error.response
+                ? this.props.searchMedicineState.errorState.error.response.body
+                    .error.message
+                : CUSTOM_MESSGAE_SNACKBAR
+            }
             customStyle={this.props.classes.errorMessage}
-          />
-        }
+          />}
         <Downshift
           onStateChange={this.stateChangeHandler}
           // onOuterClick={this.onOuterClick}
@@ -270,7 +275,7 @@ class SearchMedicine extends React.Component {
                   onChange: this.searchMedicineOnChange,
                   inputValue
                 }),
-                onSearchClick: this.onSearchMedicine,
+                onSearchClick: this.onSearchClick,
                 searchMedicineIsLoading
               })}
               {isOpen
@@ -278,26 +283,27 @@ class SearchMedicine extends React.Component {
                   <ul
                     {...getMenuProps()}
                     className={classes.searchContentWrapper}
-                  >
-                    {getSuggestions(
-                      searchMedicineResult
-                    ).map((suggestion, index) =>
-                      renderSuggestion({
-                        suggestion,
-                        index,
-                        itemProps: getItemProps({
-                          item: suggestion.name
-                        }),
-                        highlightedIndex,
-                        selectedItem,
-                        onSelectItem: this.onSelectItem,
-                        searchItemStyle: classes.searchItem,
-                        highlightedSearchItem: `${classes.searchItem} ${classes.highlightedSearchItem}`,
-                        selectedSearchItem: `${classes.searchItem} ${classes.selectedSearchItem}`,
-                        checkPincodeState,
-                        addToCartHandler
-                      })
-                    )}
+                    >
+                    {modifiyMedicineList(
+                        searchMedicineResult,
+                        cartItems
+                      ).map((suggestion, index) =>
+                        renderSuggestion({
+                          suggestion,
+                          index,
+                          itemProps: getItemProps({
+                            item: suggestion.name
+                          }),
+                          highlightedIndex,
+                          selectedItem,
+                          onSelectItem: this.onSelectItem,
+                          searchItemStyle: classes.searchItem,
+                          highlightedSearchItem: `${classes.searchItem} ${classes.highlightedSearchItem}`,
+                          selectedSearchItem: `${classes.searchItem} ${classes.selectedSearchItem}`,
+                          checkPincodeState,
+                          addToCartHandler
+                        })
+                      )}
                   </ul>
                 </Paper>
                 : null}

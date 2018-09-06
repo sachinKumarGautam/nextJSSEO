@@ -5,3 +5,5 @@ export const CARE_POINT_DESCRIPTION =
 
 export const CARE_POINT_PLUS_DESCRIPTION =
   'Care points+ is redeemable on your complete order amount. The final care points+ redeemed will be confirmed once the order is billed.'
+
+export const PLEASE_LOGIN = 'Please login to continue.'

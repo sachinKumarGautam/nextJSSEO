@@ -156,7 +156,7 @@ app
     // thank you page
     server.get('/order/:id/order-confirmation', (req, res) => {
       const actualPage = '/order-confirmation'
-      const queryParams = { id: req.params.id }
+      const queryParams = { id: req.params.id, paymentStatus: req.query['payment-status'] }
 
       if (!req.cookies.token) {
         res.redirect(url.format({

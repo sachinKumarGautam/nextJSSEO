@@ -11,6 +11,7 @@ import StrokePrice from './StrokePrice'
 import EstimatedPriceLabel from './EstimatedPriceLabel'
 import { PRODUCT_DETAILS } from '../routes/RouteConstant'
 import Button from './button/Button'
+import AlreadyAdded from './AlreadyAdded'
 
 import {
   DELIVERY_OPTION_URGENT,
@@ -64,7 +65,9 @@ const styles = theme => {
     },
     buttonWrapperStyle: {
       marginTop: theme.spacing.unit,
-      float: 'right'
+      float: 'right',
+      minWidth: theme.spacing.unit * 10,
+      display: 'inline-block'
     },
     deliveryTat: {
       ...theme.typography.body3,
@@ -100,6 +103,7 @@ class MedicineListDetails extends React.Component {
 
   render () {
     const { props } = this
+    const { checkIfAlredyExistInCart } = props
     const city = this.props.checkPincodeState.payload.city
     return (
       <Link
@@ -108,9 +112,7 @@ class MedicineListDetails extends React.Component {
         as={`${PRODUCT_DETAILS}/${props.itemDetails.slug}?location=${city}`}
       >
         <div className={props.classes.medicineListContentWrapper}>
-          <div
-            onClick={this.props.onSelectItem}
-          >
+          <div onClick={this.props.onSelectItem}>
             <ProductName
               variant={'body1'}
               name={props.itemDetails.name}
@@ -173,17 +175,19 @@ class MedicineListDetails extends React.Component {
               mrp={props.itemDetails.mrp}
             />
             <div className={props.classes.buttonWrapperStyle}>
-              <Button
-                variant='outlined'
-                classes={{
-                  root: props.classes.buttonRoot,
-                  label: props.classes.buttonLabel
-                }}
-                size='small'
-                color='primary'
-                onClick={this.addToCart} // this is coming from HOC
-                label={'Add To Cart'}
-              />
+              {!checkIfAlredyExistInCart
+                ? <Button
+                  variant='outlined'
+                  classes={{
+                    root: props.classes.buttonRoot,
+                    label: props.classes.buttonLabel
+                  }}
+                  size='small'
+                  color='primary'
+                  onClick={this.addToCart} // this is coming from HOC
+                  label={'Add To Cart'}
+                  />
+                : <AlreadyAdded />}
             </div>
           </div>
         </div>

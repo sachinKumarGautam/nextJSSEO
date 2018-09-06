@@ -16,6 +16,10 @@ import {
   getOrderList$
 } from '../../services/api'
 
+import {
+  getOrderStatusProgressDetails
+} from '../../utils/getOrderStatusProgressDetails'
+
 /**
  * Represents to the epic of get medicine list.
  * @param {object} action$ - this is the ActionsObservable
@@ -27,8 +31,18 @@ export function getOrderListDetails (action$, store) {
     mergeMap(data => {
       return http(getOrderList$(data.customerId, data.page, data.size)).pipe(
         map(result => {
-          let modifiedResponse =
+          let modifiedPayload =
             [...data.orderListState.payload, ...result.body.payload.content]
+          const modifiedResponse = modifiedPayload.map(payload => {
+            const orderStatus = getOrderStatusProgressDetails(payload.state, payload.status)
+            const viewStatus = orderStatus.viewStatus
+
+            return {
+              ...payload,
+              viewStatus: viewStatus
+            }
+          })
+
           return getOrderListDetailsSuccess(
             data.orderListState,
             modifiedResponse

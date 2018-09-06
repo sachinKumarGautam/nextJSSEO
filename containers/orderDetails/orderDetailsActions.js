@@ -1,7 +1,10 @@
 import {
   GET_ORDER_DETAILS_LOADING,
   GET_ORDER_DETAILS_SUCCESS,
-  GET_ORDER_DETAILS_FAILURE
+  GET_ORDER_DETAILS_FAILURE,
+  GET_PAYMENT_CHANNELS_LOADING,
+  GET_PAYMENT_CHANNELS_SUCCESS,
+  GET_PAYMENT_CHANNELS_FAILURE
 } from './orderDetailsActionTypes'
 
 /**
@@ -76,6 +79,36 @@ export function getOrderDetailsSuccess (
 export function getOrderDetailsFailure (orderDetailsState, error) {
   return {
     type: GET_ORDER_DETAILS_FAILURE,
+    orderDetailsState,
+    isLoading: false,
+    isError: true,
+    error: error
+  }
+}
+
+export function getPaymentChannelsLoading (orderDetailsState, orderId) {
+  return {
+    type: GET_PAYMENT_CHANNELS_LOADING,
+    orderDetailsState: orderDetailsState,
+    orderId: orderId,
+    isLoading: true,
+    isError: false,
+    error: {}
+  }
+}
+
+export function getPaymentChannelsSuccess (orderDetailsState, channels) {
+  return {
+    type: GET_PAYMENT_CHANNELS_SUCCESS,
+    orderDetailsState,
+    payment_channels: channels,
+    isLoading: false
+  }
+}
+
+export function getPaymentChannelsFailure (orderDetailsState, error) {
+  return {
+    type: GET_PAYMENT_CHANNELS_FAILURE,
     orderDetailsState,
     isLoading: false,
     isError: true,

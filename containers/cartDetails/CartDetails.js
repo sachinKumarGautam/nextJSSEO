@@ -23,6 +23,12 @@ import ActivityIndicator from '../../components/activityIndicator/index'
 
 import { getReplacedString } from '../../utils/replaceConstants'
 
+import openRazorpayCheckout from '../../utils/openRazorpayCheckout'
+
+import {
+  COD
+} from '../../components/constants/paymentConstants'
+
 /*
   avatar
   medicine list
@@ -71,9 +77,16 @@ const styles = theme => ({
 })
 
 class CartDetails extends Component {
-  state = {
-    quantityStatus: null
+  constructor (props) {
+    super(props)
+    this.state = {
+      quantityStatus: null
+    }
+
+    this.verifyPayment = this.verifyPayment.bind(this)
+    this.onModalDismiss = this.onModalDismiss.bind(this)
   }
+
   decrementCartItem (cartItem) {
     this.setState({
       quantityStatus: 'decrease'
@@ -92,17 +105,71 @@ class CartDetails extends Component {
     this.props.incrementCartItemLoading(this.props.cartState, cartItem)
   }
 
+  openCheckout (cartState) {
+    openRazorpayCheckout(
+      cartState,
+      this.props.customerState,
+      this.verifyPayment,
+      this.onModalDismiss
+    )
+  }
+
+  onModalDismiss () {
+    const isPaymentFailure = true
+
+    this.props.updatePaymentFailureFlag(
+      this.props.cartState,
+      isPaymentFailure
+    )
+  }
+
+  verifyPayment (response) {
+    this.props.verifyPaymentLoading(
+      this.props.cartState,
+      response,
+      this.props.cartState.payment_gateway.order_id
+    )
+  }
+
   componentDidUpdate (prevProps) {
     if (
-      this.props.cartState.orderResponse.payload.order_number !==
-      prevProps.cartState.orderResponse.payload.order_number
+      (this.props.cartState.isOrderSubmitted !==
+      prevProps.cartState.isOrderSubmitted) &&
+      this.props.cartState.isOrderSubmitted &&
+      this.props.cartState.orderResponse.payload.order_type !== COD
     ) {
-      const url = getReplacedString(THANK_YOU)
-      setTimeout(() => {
-        Router.push(url)
-      }, 2800)
-
+      this.openCheckout(this.props.cartState)
+    } else if (
+      (this.props.cartState.payment.isPaymentSuccessful !==
+      prevProps.cartState.payment.isPaymentSuccessful) &&
+      this.props.cartState.payment.isPaymentSuccessful
+    ) {
       this.props.resetCartState()
+      const url = getReplacedString(THANK_YOU)
+      const as = `${url}?payment-status=success`
+      const href = `${url}?payment-status=success`
+      Router.push(href, as)
+    } else if (
+      (this.props.cartState.payment.isPaymentFailure !==
+      prevProps.cartState.payment.isPaymentFailure) &&
+      this.props.cartState.payment.isPaymentFailure
+    ) {
+      this.props.resetCartState()
+      const url = getReplacedString(THANK_YOU)
+      const as = `${url}?payment-status=failed`
+      const href = `${url}?payment-status=failed`
+      Router.push(href, as)
+    } else if (
+      (this.props.cartState.orderResponse.payload.order_number !==
+      prevProps.cartState.orderResponse.payload.order_number
+      ) &&
+      this.props.cartState.orderResponse.payload.order_type === COD
+    ) {
+      this.props.resetCartState()
+      const url = getReplacedString(THANK_YOU)
+      const as = `${url}?payment-status=success`
+      const href = `${url}?payment-status=success`
+      Router.push(href, as)
     }
   }
 
