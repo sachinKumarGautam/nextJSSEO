@@ -134,8 +134,8 @@ class RelatedMedicinesCard extends React.Component {
             estimatePriceText={'*Estimated Price'}
           />
         </div>
-        {!checkIfAlredyExistInCart &&
-          <Button
+        {!checkIfAlredyExistInCart
+          ? <Button
             variant='outlined'
             color='primary'
             classes={{
@@ -144,9 +144,8 @@ class RelatedMedicinesCard extends React.Component {
             }}
             onClick={this.addToCart}
             label={'Add To Cart'}
-          />
-        }
-        {checkIfAlredyExistInCart && <AlreadyAdded />}
+            />
+          : <AlreadyAdded />}
       </div>
     )
   }

@@ -163,8 +163,8 @@ class MedicineListDetails extends React.Component {
               mrp={props.itemDetails.mrp}
             />
             <div className={props.classes.buttonWrapperStyle}>
-              {!checkIfAlredyExistInCart &&
-                <Button
+              {!checkIfAlredyExistInCart
+                ? <Button
                   variant='outlined'
                   classes={{
                     root: props.classes.buttonRoot,
@@ -174,10 +174,8 @@ class MedicineListDetails extends React.Component {
                   color='primary'
                   onClick={this.addToCart} // this is coming from HOC
                   label={'Add To Cart'}
-                />}
-              {checkIfAlredyExistInCart &&
-                <AlreadyAdded/>
-                }
+                  />
+                : <AlreadyAdded />}
             </div>
           </div>
         </div>
