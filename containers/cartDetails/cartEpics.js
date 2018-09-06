@@ -24,6 +24,8 @@ import {
   SUBMIT_ORDER_LOADING,
   SUBMIT_COUPON_CODE_LOADING,
   OPT_DOCTOR_CALLBACK_LOADING,
+  VERIFY_PAYMENT_LOADING,
+  PAYMENT_INITIATE_LOADING,
   OPT_EXPRESS_DELIVERY_LOADING,
   DELETE_CART_LOADING
 } from './cartActionTypes'
@@ -52,8 +54,13 @@ import {
   applyCouponCodeFailure,
   optForDoctorCallbackSuccess,
   optForDoctorCallbackFailure,
+  verifyPaymentSuccess,
+  verifyPaymentFailure,
+  paymentInitiateSuccess,
+  paymentInitiateFailure,
   optForExpressDeliverySuccess,
   optForExpressDeliveryFailure,
+  redirectToOrderDetailsPage,
   deleteCartSuccess,
   deleteCartFailure,
   getAnonymousCartIdLoading,
@@ -73,9 +80,15 @@ import {
   submitOrder$,
   applyCouponForCart$,
   teleConsultation$,
+  verifyPayment$,
+  paymentInitiate$,
   expressDelivery$,
   deleteCart$
 } from '../../services/api'
+
+import {
+  PAYMENT_GATEWAY
+} from '../../components/constants/paymentConstants'
 
 export function getAnonymousCartIdEpic (action$, store) {
   return action$.pipe(
@@ -471,6 +484,14 @@ export function submitOrderEpic (action$, store) {
       let body = {
         cart_uid: data.cartState.payload.uid
       }
+
+      if (data.paymentChannel !== '') {
+        body = {
+          ...body,
+          payment_method: data.paymentChannel
+        }
+      }
+
       return http(submitOrder$(data.cartState, body)).pipe(
         map(result => {
           return submitOrderSuccess(data.cartState, result.body.payload)
@@ -512,6 +533,68 @@ export function optDoctorCallback (action$, store) {
         }),
         catchError(error => {
           return of(optForDoctorCallbackFailure(data.cartState, error))
+        })
+      )
+    })
+  )
+}
+
+export function verifyPaymentEpic (action$, store) {
+  return action$.pipe(
+    ofType(VERIFY_PAYMENT_LOADING),
+    mergeMap(data => {
+      const razorpayDetails = {
+        razorpay_order_id: data.razorpay_order_id,
+        razorpay_payment_id: data.razorpay_payment_id,
+        razorpay_signature: data.razorpay_signature
+      }
+
+      const body = {
+        gateway_name: PAYMENT_GATEWAY,
+        gateway_data: razorpayDetails
+      }
+
+      return http(verifyPayment$(data.orderId, body)).pipe(
+        map(result => {
+          const payload = result.body.payload.order
+
+          return verifyPaymentSuccess(data.cartState, payload)
+        }),
+        catchError(error => {
+          return of(verifyPaymentFailure(data.cartState, error))
+        })
+      )
+    })
+  )
+}
+
+export function paymentInitiateEpic (action$, store) {
+  return action$.pipe(
+    ofType(PAYMENT_INITIATE_LOADING),
+    mergeMap(data => {
+      const body = {
+        order_id: data.orderId,
+        payment_method: data.paymentMode
+      }
+
+      return http(paymentInitiate$(body)).pipe(
+        map(result => {
+          const payload = result.body.payload.order
+          const paymentGateway = result.body.payload.payment_gateway
+
+          return paymentInitiateSuccess(data.cartState, payload, paymentGateway)
+        }),
+        catchError(error => {
+          if (error.status === 400) {
+            return of(
+              redirectToOrderDetailsPage(data.cartState),
+              paymentInitiateFailure(data.cartState, error)
+            )
+          } else {
+            return of(
+              paymentInitiateFailure(data.cartState, error)
+            )
+          }
         })
       )
     })

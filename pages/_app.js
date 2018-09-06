@@ -8,9 +8,7 @@ import { PersistGate } from 'redux-persist/integration/react'
 import WrapperComp from './wrapperComp'
 import Typography from '@material-ui/core/Typography'
 import Button from '@material-ui/core/Button'
-import {
-  HOME_PAGE
-} from '../routes/RouteConstant'
+import { HOME_PAGE } from '../routes/RouteConstant'
 import { getReplacedString } from '../utils/replaceConstants'
 import Router from 'next/router'
 
@@ -39,16 +37,16 @@ export default withRedux(initStore, { debug: true })(
     }
 
     getErrorComponent () {
-      return (<div style={{textAlign: 'center', margin: '25%'}}>
-        <Typography
-          variant='subheading'
-        >
-          Something went wrong!
-        </Typography>
-        <Button color='primary' onClick={this.onClickOfHome.bind(this)}>
-          Go To Home
-        </Button>
-      </div>)
+      return (
+        <div style={{ textAlign: 'center', margin: '25%' }}>
+          <Typography variant='subheading'>
+            Something went wrong!
+          </Typography>
+          <Button color='primary' onClick={this.onClickOfHome.bind(this)}>
+            Go To Home
+          </Button>
+        </div>
+      )
     }
 
     static async getInitialProps ({ Component, router, ctx }) {
@@ -58,7 +56,7 @@ export default withRedux(initStore, { debug: true })(
         pageProps = await Component.getInitialProps(ctx)
       }
 
-      return {pageProps}
+      return { pageProps }
     }
 
     render () {
@@ -69,10 +67,7 @@ export default withRedux(initStore, { debug: true })(
       return (
         <Container>
           <Provider store={store}>
-            <PersistGate
-              persistor={store.__persistor}
-              loading={null}
-            >
+            <PersistGate persistor={store.__persistor} loading={null}>
               <WrapperComp {...this.props} />
             </PersistGate>
           </Provider>

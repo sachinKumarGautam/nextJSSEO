@@ -18,7 +18,11 @@ import PriceDetails from './PriceDetails'
 import TotalAmount from './TotalAmount'
 import TermsAndCondition from './TermsAndCondition'
 
-// import Button from '../../components/button'
+import Button from '../../components/button'
+
+import {
+  PAYMENT_PENDING
+} from '../../components/constants/paymentConstants'
 
 /*
   OrderStatusDetails
@@ -148,31 +152,32 @@ const OrderContentWrapper = (props) => {
         sellerName={props.orderDetailsState.payload.seller_name}
       />
       {
-        // <div className={props.classes.buttonWrapper}>
-        //   <Button
-        //     size='small'
-        //     variant='outlined'
-        //     color='primary'
-        //     classes={{
-        //       root: props.classes.buttonViewRoot,
-        //       label: props.classes.buttonViewLabel
-        //     }}
-        //     className={props.classes.buttonViewStyle}
-        //     // onClick={this.handleClickOpen}
-        //     label={'Retry Payment'}
-        //   />
-        //   <Button
-        //     size='small'
-        //     variant='raised'
-        //     color='primary'
-        //     classes={{
-        //       label: props.classes.buttonHomeLabel
-        //     }}
-        //     className={props.classes.buttonHomeStyle}
-        //     // onClick={() => { Router.push({ pathname: HOME_PAGE }) }}
-        //     label={'Convert to COD'}
-        //   />
-        // </div>
+        props.orderDetailsState.payload.status === PAYMENT_PENDING &&
+        <div className={props.classes.buttonWrapper}>
+          <Button
+            size='small'
+            variant='outlined'
+            color='primary'
+            classes={{
+              root: props.classes.buttonViewRoot,
+              label: props.classes.buttonViewLabel
+            }}
+            className={props.classes.buttonViewStyle}
+            onClick={props.retryPayment}
+            label={'Retry Payment'}
+          />
+          <Button
+            size='small'
+            variant='raised'
+            color='primary'
+            classes={{
+              label: props.classes.buttonHomeLabel
+            }}
+            className={props.classes.buttonHomeStyle}
+            onClick={props.placeOrder}
+            label={'Convert to COD'}
+          />
+        </div>
       }
       {
         // <OrderDetailsFooter />

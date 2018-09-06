@@ -133,7 +133,13 @@ const styles = theme => ({
   radioWrapper: {
     display: 'flex',
     flexDirection: 'row',
-    marginTop: theme.spacing.unit * 2
+    marginTop: theme.spacing.unit * 2,
+    marginLeft: theme.spacing.unit * 1.875
+  },
+  selectPaymentMode: {
+    marginLeft: theme.spacing.unit * 6.25,
+    marginTop: theme.spacing.unit * 2.5,
+    fontSize: theme.spacing.unit * 1.75
   }
 })
 
@@ -315,6 +321,7 @@ class OrderSummary extends React.Component {
           checked={this.props.classes.checked}
           paymentDescription={this.props.classes.paymentDescription}
           nextButtonRoot={this.props.classes.nextButtonRoot}
+          selectPaymentMode={this.props.classes.selectPaymentMode}
           submitOrderLoading={this.props.submitOrderLoading}
           radioWrapper={this.props.classes.radioWrapper}
           optForExpressDeliveryLoading={this.props.optForExpressDeliveryLoading}

@@ -3,7 +3,10 @@ import initialState from './orderDetailsModal'
 import {
   GET_ORDER_DETAILS_LOADING,
   GET_ORDER_DETAILS_SUCCESS,
-  GET_ORDER_DETAILS_FAILURE
+  GET_ORDER_DETAILS_FAILURE,
+  GET_PAYMENT_CHANNELS_LOADING,
+  GET_PAYMENT_CHANNELS_SUCCESS,
+  GET_PAYMENT_CHANNELS_FAILURE
 } from './orderDetailsActionTypes'
 
 export default function orderDetailsReducer (state = initialState, action) {
@@ -68,6 +71,44 @@ export default function orderDetailsReducer (state = initialState, action) {
           ...state.errorState,
           isError: action.isError,
           error: action.error
+        }
+      }
+
+    case GET_PAYMENT_CHANNELS_LOADING:
+      return {
+        ...state,
+        payment_channels: {
+          ...state.payment_channels,
+          isLoading: action.isLoading,
+          errorState: {
+            ...state.payment_channels.errorState,
+            isError: action.isError,
+            error: action.error
+          }
+        }
+      }
+
+    case GET_PAYMENT_CHANNELS_SUCCESS:
+      return {
+        ...state,
+        payment_channels: {
+          ...state.payment_channels,
+          isLoading: action.isLoading,
+          payload: action.payment_channels
+        }
+      }
+
+    case GET_PAYMENT_CHANNELS_FAILURE:
+      return {
+        ...state,
+        payment_channels: {
+          ...state.payment_channels,
+          isLoading: action.isLoading,
+          errorState: {
+            ...state.payment_channels.errorState,
+            isError: action.isError,
+            error: action.error
+          }
         }
       }
 

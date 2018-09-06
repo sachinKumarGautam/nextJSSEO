@@ -55,7 +55,9 @@ import {
   submitOrderEpic,
   applyCouponCode,
   optDoctorCallback,
+  verifyPaymentEpic,
   optExpressDelivery,
+  paymentInitiateEpic,
   deleteCartState
 } from '../containers/cartDetails/cartEpics'
 
@@ -72,7 +74,8 @@ import {
 import { getBackGroungImages } from '../containers/homePage/homePageEpics'
 
 import {
-  getOrderDetails
+  getOrderDetails,
+  getPaymentChannelsEpic
 } from '../containers/orderDetails/orderDetailsEpics'
 
 import {
@@ -116,11 +119,14 @@ export const rootEpic = combineEpics(
   getBackGroungImages,
   applyCouponCode,
   optDoctorCallback,
+  verifyPaymentEpic,
   checkReferralCode,
   getMembershipCodeLoading,
   getLocalityList,
   getOrderDetails,
+  getPaymentChannelsEpic,
   optExpressDelivery,
+  paymentInitiateEpic,
   deleteCartState,
   getConstantsEpic
 )

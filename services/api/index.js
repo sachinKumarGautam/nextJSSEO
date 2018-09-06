@@ -319,6 +319,31 @@ const expressDelivery$ = (cartId, deliveryOption) =>
     )
   })
 
+const verifyPayment$ = (orderId, body) => (
+  makeAjaxRequest({
+    method: 'POST',
+    url: fetchUrl('order', orderId + '/payment/verify', 'CREATE'),
+    body: body
+  })
+)
+
+const paymentInitiate$ = body => (
+  makeAjaxRequest({
+    method: 'POST',
+    url: fetchUrl('order', 'payment/initiate', 'CREATE'),
+    body: body
+  })
+)
+
+const getPaymentChannels$ = orderId => (
+
+  makeAjaxRequest({
+    method: 'GET',
+    url: fetchUrl('order', orderId + '/payment/channels', 'CREATE')
+  })
+
+)
+
 const deleteCart$ = (cartUid) => (
   makeAjaxRequest({
     method: 'DELETE',
@@ -365,6 +390,8 @@ export {
   getSliderImages$,
   applyCouponForCart$,
   teleConsultation$,
+  verifyPayment$,
+  paymentInitiate$,
   editPatientDetails$,
   searchLocalityForPincode$,
   editDeliveryDetails$,
@@ -372,6 +399,7 @@ export {
   getMembershipCode$,
   getOrderDetails$,
   expressDelivery$,
+  getPaymentChannels$,
   deleteCart$,
   getConstants$
 }
