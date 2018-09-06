@@ -117,7 +117,11 @@ class PaymentExpansionPanel extends React.Component {
             classes={{
               root: this.props.nextButtonRoot
             }}
-            label={'Place Order'}
+            label={
+              this.props.cartState.payload.total_payable_amount
+              ? 'Place Order'
+              : 'Place a COD Order'
+            }
             onClick={this.placeOrder.bind(this)}
             disabled={
               !patientDetails.payload.patient_id ||
