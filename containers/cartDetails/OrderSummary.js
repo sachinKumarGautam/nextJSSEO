@@ -165,7 +165,8 @@ class OrderSummary extends React.Component {
   handleNextChange = (panel, expanded) => {
     if (
       !this.props.cartState.payload.cart_items.payload.length &&
-      !this.props.cartState.payload.is_doctor_callback.payload
+      !this.props.cartState.payload.is_doctor_callback.payload &&
+      !this.props.cartState.payload.cart_prescriptions.length
     ) {
       this.setState({
         isShowSnackbar: true

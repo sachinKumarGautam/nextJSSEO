@@ -65,6 +65,7 @@ const styles = theme => ({
       visibility: 'visible !important',
       opacity: '1 !important'
     },
+    opacity: '1 !important',
     borderRadius: '4px'
   },
   tooltipIconInage: {
@@ -108,8 +109,8 @@ class PaymentDeliveryDetail extends Component {
                 effect='solid'
                 place='right'
                 className={this.props.classes.paper}
-                delayHide={1000}
-                delayShow={1000}
+                // delayHide={1000}
+                delayShow={500}
               >
                 <Typography
                   variant='caption'
@@ -147,8 +148,8 @@ class PaymentDeliveryDetail extends Component {
                 effect='solid'
                 place='right'
                 className={this.props.classes.paper}
-                delayHide={1000}
-                delayShow={1000}
+                // delayHide={1000}
+                delayShow={500}
               >
                 <Typography
                   variant='caption'
