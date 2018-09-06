@@ -26,7 +26,7 @@ const styles = theme => ({
   order: {
     fontSize: theme.typography.pxToRem(18),
     marginLeft: theme.spacing.unit * 5,
-    color: theme.palette.customGrey.grey500,
+    color: theme.palette.customGrey.grey500
     // marginBottom: theme.spacing.unit
   },
   orderNumber: {

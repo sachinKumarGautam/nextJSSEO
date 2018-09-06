@@ -175,7 +175,7 @@ class MedicineListDetails extends React.Component {
                   color='primary'
                   onClick={this.addToCart} // this is coming from HOC
                   label={'Add To Cart'}
-                  />
+                />
                 : <AlreadyAdded />}
             </div>
           </div>

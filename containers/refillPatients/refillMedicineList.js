@@ -148,7 +148,7 @@ class RefillMedicineList extends Component {
                   gutterBottom
                   variant='body2'
                   className={this.props.classes.noContent}
-                  >
+                >
                   {NO_REFILL_MEDICINE}
                 </Typography>}
             </ActivityIndicator>

@@ -120,8 +120,8 @@ class PaymentExpansionPanel extends React.Component {
             }}
             label={
               this.props.cartState.payload.total_payable_amount
-              ? 'Place Order'
-              : 'Place a COD Order'
+                ? 'Place Order'
+                : 'Place a COD Order'
             }
             onClick={this.placeOrder.bind(this)}
             disabled={
