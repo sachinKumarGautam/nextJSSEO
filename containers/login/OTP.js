@@ -50,6 +50,7 @@ class OTP extends React.Component {
           onSubmit={verifyOtpLoading}
           loginState={this.props.loginState}
           resendButtonClick={this.props.sendOtpLoading}
+          isRegisterClicked={this.props.isRegisterClicked}
         />
       </div>
     )

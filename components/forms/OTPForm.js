@@ -181,7 +181,11 @@ class OTPForm extends React.Component {
             isloading={isSubmitting}
             variant='raised'
             color='primary'
-            label={'Login'}
+            label={
+              this.props.isRegisterClicked
+                ? 'Register'
+                : 'Login'
+            }
           />
         </div>
       </form>

@@ -17,6 +17,10 @@ import {
   resetCustomerFormState
 } from '../user/customer/customerActions'
 
+import {
+  updateIsCartOpenRegisterModalFlag
+} from '../cartDetails/cartActions'
+
 import ActivityIndicator from '../../components/activityIndicator/index'
 import SnackbarErrorMessage
   from '../../components/activityIndicator/error/SnackbarErrorMessage'
@@ -52,27 +56,37 @@ class LoginWrapper extends React.Component {
     super(props)
 
     this.state = {
-      modalName: 'login'
+      modalName: 'login',
+      isRegisterClicked: false
     }
     this.toggleForm = this.toggleForm.bind(this)
+    this.toggleRegisterClicked = this.toggleRegisterClicked.bind(this)
+  }
+
+  componentDidMount () {
+    if (this.props.cartState.isCartOpenRegisterDialog) {
+      this.setState({
+        isRegisterClicked: true
+      })
+    }
+  }
+
+  toggleRegisterClicked (name) {
+    if (name === 'loginClick') {
+      this.setState({
+        isRegisterClicked: false
+      })
+    } else if (name === 'registerClick') {
+      this.setState({
+        isRegisterClicked: true
+      })
+    }
   }
 
   toggleForm (name) {
     this.setState({
       modalName: name
     })
-  }
-
-  componentDidMount () {
-    if (this.props.isCartOpenRegisterDialog) {
-      this.setState({
-        modalName: 'register'
-      })
-    } else {
-      this.setState({
-        modalName: 'login'
-      })
-    }
   }
 
   resetState () {
@@ -85,9 +99,11 @@ class LoginWrapper extends React.Component {
         return (
           <Login
             toggleForm={this.toggleForm}
+            toggleRegisterClicked={this.toggleRegisterClicked}
             closeLoginModal={this.props.closeLoginModal}
             sendOtpLoading={this.props.actions.sendOtpLoading}
             loginState={this.props.loginState}
+            isRegisterClicked={this.state.isRegisterClicked}
           />
         )
 
@@ -113,6 +129,7 @@ class LoginWrapper extends React.Component {
             loginState={this.props.loginState}
             verifyOtpLoading={this.props.actions.verifyOtpLoading}
             sendOtpLoading={this.props.actions.sendOtpLoading}
+            isRegisterClicked={this.state.isRegisterClicked}
           />
         )
     }
@@ -160,7 +177,11 @@ class LoginWrapper extends React.Component {
                 root: classes.dialogTitle
               }}
             >
-              {this.state.modalName.toUpperCase()}
+              {
+                this.state.isRegisterClicked
+                  ? 'REGISTER'
+                  : 'LOGIN'
+              }
             </DialogTitle>
             <DialogContent>
               {this.getModal(this.state.modalName)}
@@ -174,6 +195,7 @@ class LoginWrapper extends React.Component {
 
 function mapStateToProps (state) {
   return {
+    cartState: state.cartState,
     loginState: state.loginState,
     customerState: state.customerState
   }
@@ -187,7 +209,8 @@ function mapDispatchToProps (dispatch) {
         verifyOtpLoading,
         customerRegisterLoading,
         checkReferralCodeLoading,
-        resetCustomerFormState
+        resetCustomerFormState,
+        updateIsCartOpenRegisterModalFlag
       },
       dispatch
     )

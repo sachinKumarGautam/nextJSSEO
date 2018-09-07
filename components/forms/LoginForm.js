@@ -120,7 +120,11 @@ class LoginForm extends React.Component {
             isloading={isSubmitting}
             variant='raised'
             color='primary'
-            label={'Login with OTP'}
+            label={
+              this.props.isRegisterClicked
+                ? 'Register with OTP'
+                : 'Login with OTP'
+            }
           />
         </div>
       </form>
