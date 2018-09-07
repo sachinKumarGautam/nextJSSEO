@@ -36,6 +36,7 @@ const initialState = {
     type: '',
     comment: '',
     total_mrp: 0,
+    total_sale_price: 0,
     total_payable_amount: 0,
     item_count: 0,
     status: '',
@@ -64,7 +65,10 @@ const initialState = {
     is_cart_invalid: false,
     source_type: '',
     delivery_option: '',
-    service_type: ''
+    service_type: '',
+    urgent_delivery_charge: 0,
+    redeemable_care_points: 0,
+    redeemable_cash: 0
   },
   isCartOpenLoginDialog: false,
   showAddToCartSnackBar: false,

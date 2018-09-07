@@ -793,12 +793,22 @@ export default function cartReducer (state = initialState, action) {
         ...state,
         expressDeliveryCheck: {
           ...state.expressDeliveryCheck,
-          isLoading: action.isLoading,
-          payload: action.payload
+          isLoading: action.isLoading
         },
         payload: {
           ...state.payload,
-          preferred_delivery_option: action.preferred_delivery_option
+          preferred_delivery_option: action.preferred_delivery_option,
+          urgent_delivery_charge: action.urgent_delivery_charge,
+          delivery_option: action.delivery_option,
+          service_type: action.service_type,
+          total_sale_price: action.total_sale_price,
+          total_payable_amount: action.total_payable_amount,
+          redeemable_care_points: action.redeemable_care_points,
+          redeemable_cash: action.redeemable_cash,
+          cart_items: {
+            ...state.payload.cart_items,
+            payload: action.cart_items
+          }
         }
       }
 

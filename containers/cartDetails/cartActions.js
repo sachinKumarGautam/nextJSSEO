@@ -621,7 +621,15 @@ export function optForExpressDeliverySuccess (cartState, result) {
     cartState,
     payload: result,
     isLoading: false,
-    preferred_delivery_option: result.preferred_delivery_option
+    preferred_delivery_option: result.preferred_delivery_option,
+    urgent_delivery_charge: result.urgent_delivery_charge,
+    delivery_option: result.delivery_option,
+    service_type: result.service_type,
+    total_sale_price: result.total_sale_price,
+    total_payable_amount: result.total_payable_amount,
+    redeemable_care_points: result.redeemable_care_points,
+    redeemable_cash: result.redeemable_cash,
+    cart_items: result.cart_items
   }
 }
 
