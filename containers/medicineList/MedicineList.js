@@ -132,27 +132,27 @@ class MedicineList extends React.Component {
               {medicineListState.length
                 ? <ul className={classes.articleListWrapper}>
                   {modifiyMedicineList(
-                      medicineListState,
-                      cartItems
-                    ).map(itemDetails => (
-                      <li className={classes.listItem}>
-                        <MedicineListDetails
-                          isLoading={isLoading}
-                          checkIfAlredyExistInCart={
-                            itemDetails.is_exist_in_cart
-                          }
-                          itemDetails={itemDetails}
-                          addToCartHandler={addToCartHandler}
-                          checkPincodeState={checkPincodeState}
-                        />
-                      </li>
-                    ))}
+                    medicineListState,
+                    cartItems
+                  ).map(itemDetails => (
+                    <li className={classes.listItem}>
+                      <MedicineListDetails
+                        isLoading={isLoading}
+                        checkIfAlredyExistInCart={
+                          itemDetails.is_exist_in_cart
+                        }
+                        itemDetails={itemDetails}
+                        addToCartHandler={addToCartHandler}
+                        checkPincodeState={checkPincodeState}
+                      />
+                    </li>
+                  ))}
                 </ul>
                 : <Typography
                   gutterBottom
                   variant='body2'
                   className={classes.noMedicineText}
-                  >
+                >
                   {NO_MEDICINE_LIST}
                 </Typography>}
 
@@ -174,7 +174,7 @@ class MedicineList extends React.Component {
               }}
               onClick={this.onClickOfShowMore}
               label={'Show more'}
-              />
+            />
           </div>
           : null}
       </div>
