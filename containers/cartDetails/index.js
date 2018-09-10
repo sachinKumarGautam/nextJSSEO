@@ -38,7 +38,8 @@ import {
   resetCouponDetail,
   resetSavePatientToCartError,
   resetSaveDeliveryAddressToCartError,
-  resetUploadPrescriptionError
+  resetUploadPrescriptionError,
+  updateLassuredExpressFlag
 } from './cartActions'
 
 import {
@@ -235,6 +236,8 @@ class CartDetailsWrapper extends Component {
                   getLocalityDetailListLoading={this.props.actions.getLocalityDetailListLoading}
                   optForExpressDeliveryLoading={this.props.actions.optForExpressDeliveryLoading}
                   constantsState={this.props.constantsState}
+                  checkPincodeState={this.props.checkPincodeState}
+                  updateLassuredExpressFlag={this.props.actions.updateLassuredExpressFlag}
                 />
               </section>
             </Grid>
@@ -315,7 +318,8 @@ function mapDispatchToProps (dispatch) {
         resetCouponDetail,
         resetSavePatientToCartError,
         resetSaveDeliveryAddressToCartError,
-        resetUploadPrescriptionError
+        resetUploadPrescriptionError,
+        updateLassuredExpressFlag
       },
       dispatch
     )

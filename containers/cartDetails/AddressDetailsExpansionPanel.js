@@ -1,10 +1,16 @@
 import React from 'react'
 
+import { withStyles } from '@material-ui/core/styles'
 import ExpansionPanel from '@material-ui/core/ExpansionPanel'
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails'
 import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary'
 import Typography from '@material-ui/core/Typography'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
+import Dialog from '@material-ui/core/Dialog'
+import DialogActions from '@material-ui/core/DialogActions'
+import DialogContent from '@material-ui/core/DialogContent'
+import DialogContentText from '@material-ui/core/DialogContentText'
+import DialogTitle from '@material-ui/core/DialogTitle'
 
 import Button from '../../components/button'
 
@@ -13,9 +19,38 @@ import SelectedAddressDetails from './SelectedAddressDetails'
 
 import AddDeliveryAddressButton from '../deliveryDetails/AddDeliveryAddressButton'
 
+import {
+  LIFCARE_URGENT_CONFLICT_MSG,
+  LIFCARE_ASSURED_CONFLICT_MSG
+} from '../messages/cartMessages'
+
+import {
+  DELIVERY_OPTION_URGENT
+} from '../../components/constants/Constants'
+
+const styles = theme => ({
+  dialogWrapper: {
+    width: theme.spacing.unit * 50
+  },
+  buttonRoot: {
+    border: 'none',
+    borderRadius: 0
+  },
+  cancelButtonLabel: {
+    color: theme.palette.customGrey.grey500
+  },
+  okButtonLabel: {
+    color: theme.palette.customGreen.green300
+  },
+  dialogContent: {
+    ...theme.typography.body1
+  }
+})
+
 class AddressDetailsExpansionPanel extends React.Component {
   state = {
-    openDeliveryFormDialog: false
+    openDeliveryFormDialog: false,
+    addressId: 0
   }
 
   openDeliveryFormModal () {
@@ -30,10 +65,40 @@ class AddressDetailsExpansionPanel extends React.Component {
     })
   }
 
-  saveAddressSelected (addressIdSelected) {
+  closeExpressDialog () {
+    this.props.updateLassuredExpressFlag(
+      this.props.cartState,
+      { isDialogOpen: false }
+    )
+  }
+
+  checkPincodeServiceble (deliveryDetails) {
+    // save address id in local state for further access it while assigning in cart
+    this.setState({
+      addressId: deliveryDetails.id
+    })
+
+    this.props.checkPincodeDetailLoading(
+      this.props.checkPincodeState,
+      null, // handle close function for closing pincode popup
+      null, // setSubmitting function while submitting form
+      {'pincode': deliveryDetails.pincode},
+      { isDeliveryAddress: false },
+      null, // incrementCartItemLoading function
+      {}, // inProgressCartItem details
+      { isCartAddressSelection: true },
+      { addressId: deliveryDetails.id }
+    )
+  }
+
+  saveSelectedAddress () {
     this.props.saveDeliveryAddressToCartLoading(
       this.props.cartState,
-      addressIdSelected
+      this.state.addressId
+    )
+    this.props.updateLassuredExpressFlag(
+      this.props.cartState,
+      { isDialogOpen: false }
     )
   }
 
@@ -113,7 +178,7 @@ class AddressDetailsExpansionPanel extends React.Component {
             deliveryFormState={this.props.deliveryFormState}
             deliveryDetailsState={this.props.deliveryDetailsState}
             closeDeliveryFormModal={this.closeDeliveryFormModal.bind(this)}
-            saveAddressSelected={this.saveAddressSelected.bind(this)}
+            checkPincodeServiceble={this.checkPincodeServiceble.bind(this)}
             addressIdSelected={this.props.addressIdSelected}
             addressDetailsWrapper={this.props.patientDetailsWrapper}
             updateAddressFormValue={this.props.updateAddressFormValue}
@@ -134,10 +199,62 @@ class AddressDetailsExpansionPanel extends React.Component {
                 : null
             }
           />
+
+          <Dialog
+            open={this.props.cartState.isLAssuredLExpressAlertOpen}
+            onClose={this.closeExpressDialog.bind(this)}
+            aria-labelledby='Express delivery alert'
+            classes={{
+              paper: this.props.classes.dialogWrapper
+            }}
+          >
+            <DialogTitle id='Express delivery alert'>
+              {
+                (this.props.cartState.payload.delivery_option === DELIVERY_OPTION_URGENT &&
+                !this.props.checkPincodeState.payload.is_urgent_dl_available)
+                  ? 'Lifcare Express Delivery Alert'
+                  : 'Lifcare Assured Service Alert'
+              }
+            </DialogTitle>
+            <DialogContent>
+              <DialogContentText>
+                {
+                  (this.props.cartState.payload.delivery_option === DELIVERY_OPTION_URGENT &&
+                  !this.props.checkPincodeState.payload.is_urgent_dl_available)
+                    ? LIFCARE_URGENT_CONFLICT_MSG
+                    : LIFCARE_ASSURED_CONFLICT_MSG
+                }
+              </DialogContentText>
+            </DialogContent>
+            <DialogActions>
+              <Button
+                onClick={this.closeExpressDialog.bind(this)}
+                color='primary'
+                classes={{
+                  root: this.props.classes.buttonRoot,
+                  label: this.props.classes.cancelButtonLabel
+                }}
+                label={'Cancel'}
+              >
+                Cancel
+              </Button>
+              <Button
+                onClick={this.saveSelectedAddress.bind(this)}
+                color='primary' autoFocus
+                classes={{
+                  root: this.props.classes.buttonRoot,
+                  label: this.props.classes.okButtonLabel
+                }}
+                label={'OK'}
+              >
+                OK
+              </Button>
+            </DialogActions>
+          </Dialog>
         </ExpansionPanelDetails>
       </ExpansionPanel>
     )
   }
 }
 
-export default AddressDetailsExpansionPanel
+export default withStyles(styles)(AddressDetailsExpansionPanel)

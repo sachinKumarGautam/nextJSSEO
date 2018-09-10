@@ -27,7 +27,7 @@ const AddressDetails = props => (
           <Grid item xs={6}>
             <AddressDetailsCard
               deliveryDetail={deliveryDetail}
-              saveAddressSelected={props.saveAddressSelected}
+              checkPincodeServiceble={props.checkPincodeServiceble}
               addressIdSelected={props.addressIdSelected}
               isCartPage={props.isCartPage}
             />

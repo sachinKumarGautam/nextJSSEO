@@ -310,6 +310,9 @@ export default function cartReducer (state = initialState, action) {
           ...state.payload,
           available_delivery_option: action.available_delivery_option,
           preferred_delivery_option: action.preferred_delivery_option,
+          delivery_option: action.delivery_option,
+          service_type: action.service_type,
+          urgent_delivery_charge: action.urgent_delivery_charge,
           shipping_address_details: {
             ...state.payload.shipping_address_details,
             isLoading: action.isLoading,
@@ -570,7 +573,8 @@ export default function cartReducer (state = initialState, action) {
             total_tax_amount: action.total_tax_amount,
             facility_code: action.facility_code,
             status: action.status,
-            source: action.source
+            source: action.source,
+            urgent_delivery_charge: action.urgent_delivery_charge
           }
         }
       }
@@ -981,6 +985,12 @@ export default function cartReducer (state = initialState, action) {
             error: action.error
           }
         }
+      }
+
+    case cartActionTypes.UPDATE_LFASSURED_EXPRESS_FLAG:
+      return {
+        ...state,
+        isLAssuredLExpressAlertOpen: action.isLAssuredLExpressAlertOpen
       }
 
     default:

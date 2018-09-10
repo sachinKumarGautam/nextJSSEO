@@ -19,7 +19,9 @@ export function checkPincodeLoading (
   values,
   { isDeliveryAddress },
   incrementCartItemLoading = null,
-  inProgressCartItem = {}
+  inProgressCartItem = {},
+  { isCartAddressSelection = false },
+  { addressId = 0 }
 ) {
   return {
     type: CHECK_PINCODE_LOADING,
@@ -30,6 +32,8 @@ export function checkPincodeLoading (
     incrementCartItemLoading: incrementCartItemLoading,
     inProgressCartItem: inProgressCartItem,
     pincode: isDeliveryAddress ? values : values.pincode,
+    isCartAddressSelection: isCartAddressSelection,
+    addressId: addressId,
     isLoading: true,
     isError: false,
     error: {}

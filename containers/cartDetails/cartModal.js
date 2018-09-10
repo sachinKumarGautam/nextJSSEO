@@ -125,7 +125,8 @@ const initialState = {
       total_tax_amount: 0,
       facility_code: 0,
       status: '',
-      source: ''
+      source: '',
+      urgent_delivery_charge: 0
     },
     isLoading: false,
     errorState: {
@@ -152,7 +153,8 @@ const initialState = {
       isError: false,
       error: {}
     }
-  }
+  },
+  isLAssuredLExpressAlertOpen: false
 }
 
 export default initialState

@@ -65,8 +65,8 @@ const AddressDetailsCard = props => (
         : props.classes.addressWrapperStyle
     }
     onClick={
-      props.saveAddressSelected
-        ? props.saveAddressSelected.bind(this, props.deliveryDetail.id)
+      props.checkPincodeServiceble
+        ? props.checkPincodeServiceble.bind(this, props.deliveryDetail)
         : null
     }
   >
@@ -90,6 +90,12 @@ const AddressDetailsCard = props => (
       className={props.classes.addressStyle}
     >
       {props.deliveryDetail.street2}
+    </Typography>
+    <Typography
+      variant='caption'
+      className={props.classes.addressStyle}
+    >
+      {props.deliveryDetail.city} - {props.deliveryDetail.pincode}
     </Typography>
     {
       props.isCartPage
