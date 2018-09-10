@@ -10,13 +10,9 @@ import withRoot from '../src/withRoot'
 import Layout from '../components/layouts/Layout'
 import HomePageWrapper from '../containers/homePage'
 
-import {
-  getBackGroundImagesLoading
-} from '../containers/homePage/homePageActions'
+import { getUserReviewLoading } from '../containers/homePage/homePageActions'
 
-import {
-  fetchConstantsLoading
-} from '../components/constants/constantsAction'
+import { fetchConstantsLoading } from '../components/constants/constantsAction'
 
 // page title
 import { homePage } from '../components/constants/PageTitle'
@@ -37,15 +33,10 @@ class HomePage extends React.Component {
 
   componentDidMount () {
     // get background images
-    this.props.actions.getBackGroundImagesLoading(
-      this.props.homePageState,
-      'background'
-    )
+    this.props.actions.getUserReviewLoading(this.props.homePageState)
 
     // fetch app constants
-    this.props.actions.fetchConstantsLoading(
-      this.props.constantsState
-    )
+    this.props.actions.fetchConstantsLoading(this.props.constantsState)
   }
 
   render () {
@@ -60,9 +51,7 @@ class HomePage extends React.Component {
       >
         <div>
           <Paper className={classes.root} elevation={1}>
-            <HomePageWrapper
-              addToCartHandler={addToCartHandler}
-            />
+            <HomePageWrapper addToCartHandler={addToCartHandler} />
           </Paper>
         </div>
       </Layout>
@@ -81,7 +70,7 @@ function mapDispatchToProps (dispatch) {
   return {
     actions: bindActionCreators(
       {
-        getBackGroundImagesLoading,
+        getUserReviewLoading,
         fetchConstantsLoading
       },
       dispatch
@@ -89,6 +78,7 @@ function mapDispatchToProps (dispatch) {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(
-  withRoot(withStyles(styles)(HomePage))
-)
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withRoot(withStyles(styles)(HomePage)))

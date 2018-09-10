@@ -9,7 +9,10 @@ import {
 } from '../searchMedicine/searchMedicineAction'
 
 import {
-  incrementCartItemLoading
+  incrementCartItemLoading,
+  uploadPrescriptionLoading,
+  resetCartItemErrorState,
+  resetUploadPrescriptionError
 } from '../cartDetails/cartActions'
 
 class HomePageWrapper extends Component {
@@ -25,6 +28,9 @@ class HomePageWrapper extends Component {
           cartState={this.props.cartState}
           loginState={this.props.loginState}
           incrementCartItemLoading={this.props.actions.incrementCartItemLoading}
+          uploadPrescriptionLoading={this.props.actions.uploadPrescriptionLoading}
+          resetCartItemErrorState={this.props.actions.resetCartItemErrorState}
+          resetUploadPrescriptionError={this.props.actions.resetUploadPrescriptionError}
         />
       </div>
     )
@@ -36,7 +42,10 @@ function mapDispatchToProps (dispatch) {
     actions: bindActionCreators(
       {
         searchMedicineLoading,
-        incrementCartItemLoading
+        incrementCartItemLoading,
+        uploadPrescriptionLoading,
+        resetCartItemErrorState,
+        resetUploadPrescriptionError
       },
       dispatch
     )

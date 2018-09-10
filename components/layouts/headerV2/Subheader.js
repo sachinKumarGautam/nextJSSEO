@@ -9,6 +9,7 @@ import { HOME_PAGE } from '../../../routes/RouteConstant'
 
 import { getReplacedString } from '../../../utils/replaceConstants'
 import { Grid } from '@material-ui/core'
+import {scrollTo} from '../../../utils/scrollToSections'
 
 const styles = theme => ({
   horizontalSubheader: {
@@ -58,7 +59,9 @@ class Subheader extends React.Component {
 
   redirectToHealth () {
     const url = getReplacedString(HOME_PAGE)
-    Router.push(url)
+    Router.push(url).then(() => {
+      return scrollTo('health-management')
+    })
   }
 
   render () {

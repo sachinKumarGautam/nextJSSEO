@@ -14,16 +14,16 @@ import CartIcon from '../../CartIcon'
 import Login from '../../../containers/login'
 import getPageContext from '../../../src/getPageContext'
 import MenuWrapper from '../../../containers/menu'
-import {
-  searchMedicineLoading
-} from '../../../containers/searchMedicine/searchMedicineAction'
+import { searchMedicineLoading } from '../../../containers/searchMedicine/searchMedicineAction'
 import GoToCartSnackbar from '../../../containers/cartDetails/GoToCartSnackbar'
+import Search from './Search'
 
 import {
   getAnonymousCartIdLoading,
   updateIsCartOpenLoginFlag,
   updateIsCartOpenRegisterModalFlag,
-  goToCartSnackbar
+  goToCartSnackbar,
+  uploadPrescriptionLoading
 } from '../../../containers/cartDetails/cartActions'
 
 import { HOME_PAGE } from '../../../routes/RouteConstant'
@@ -55,6 +55,9 @@ const styles = theme => ({
     alignItems: 'center',
     display: 'flex',
     flexDirection: 'row'
+  },
+  searchWrapper: {
+    display: 'none'
   }
 })
 
@@ -65,10 +68,10 @@ class Header extends React.Component {
     this.openLoginModal = this.openLoginModal.bind(this)
     this.closeLoginModal = this.closeLoginModal.bind(this)
     this.state = {
-      openLoginDialog: this.props.authentication &&
-        !this.props.loginState.isAuthenticated
-        ? this.props.authentication
-        : false
+      openLoginDialog:
+        this.props.authentication && !this.props.loginState.isAuthenticated
+          ? this.props.authentication
+          : false
     }
   }
 
@@ -145,64 +148,84 @@ class Header extends React.Component {
               />
             </Grid>
             <Grid item xs={loginState.isAuthenticated ? 6 : 5} lg={7}>
-              {
-                !this.props.isHomePage
-                  ? <SearchMedicine
-                    searchMedicineState={searchMedicineState}
-                    checkPincodeState={checkPincodeState}
-                    searchMedicineLoading={actions.searchMedicineLoading}
-                    addToCartHandler={this.props.addToCartHandler}
-                    cartState={this.props.cartState}
-                  />
-                  : null
-              }
+              {!this.props.isHomePage ? (
+                <SearchMedicine
+                  searchMedicineState={searchMedicineState}
+                  checkPincodeState={checkPincodeState}
+                  searchMedicineLoading={actions.searchMedicineLoading}
+                  addToCartHandler={this.props.addToCartHandler}
+                  cartState={this.props.cartState}
+                />
+              ) : null}
             </Grid>
-            <Grid item xs={3} lg={3}>
+            <Grid item xs={3} lg={loginState.isAuthenticated ? 3 : 2}>
               <Subheader
                 isAuthenticated={this.props.loginState.isAuthenticated}
                 openLoginModal={this.openLoginModal}
               />
             </Grid>
-            <Grid item xs={loginState.isAuthenticated ? 2 : 3} lg={loginState.isAuthenticated ? 1 : 2}>
+            <Grid
+              item
+              xs={loginState.isAuthenticated ? 2 : 3}
+              lg={loginState.isAuthenticated ? 1 : 2}
+            >
               <div className={this.props.classes.wrapCart}>
                 <CartIcon cartState={this.props.cartState} />
-                {
-                  loginState.isAuthenticated
-                    ? <MenuWrapper />
-                    : <Button
-                      variant='raised'
-                      size='medium'
-                      color='primary'
-                      aria-label='login'
-                      onClick={this.openLoginModal}
-                      className={classes.button}
-                      label={'Login / Register'}
-                    />
-                }
+                {loginState.isAuthenticated ? (
+                  <MenuWrapper />
+                ) : (
+                  <Button
+                    variant='raised'
+                    size='medium'
+                    color='primary'
+                    aria-label='login'
+                    onClick={this.openLoginModal}
+                    className={classes.button}
+                    label={'Login / Register'}
+                  />
+                )}
               </div>
             </Grid>
           </Grid>
           {(this.state.openLoginDialog ||
-                  this.props.cartState.isCartOpenLoginDialog ||
-                  this.props.cartState.isCartOpenRegisterDialog) &&
-                  <Login
-                    openLoginDialog={
-                      this.state.openLoginDialog ||
-                        this.props.cartState.isCartOpenLoginDialog ||
-                        this.props.cartState.isCartOpenRegisterDialog
-                    }
-                    openLoginModal={this.openLoginModal}
-                    isCartOpenRegisterDialog={
-                      this.props.cartState.isCartOpenRegisterDialog
-                    }
-                    closeLoginModal={this.closeLoginModal}
-                    loginState={loginState}
-                    customerState={customerState}
-                  />}
+            this.props.cartState.isCartOpenLoginDialog ||
+            this.props.cartState.isCartOpenRegisterDialog) && (
+              <Login
+                openLoginDialog={
+                  this.state.openLoginDialog ||
+                this.props.cartState.isCartOpenLoginDialog ||
+                this.props.cartState.isCartOpenRegisterDialog
+                }
+                openLoginModal={this.openLoginModal}
+                isCartOpenRegisterDialog={
+                  this.props.cartState.isCartOpenRegisterDialog
+                }
+                closeLoginModal={this.closeLoginModal}
+                loginState={loginState}
+                customerState={customerState}
+              />
+            )}
           <GoToCartSnackbar
             goToCartSnackbar={this.props.actions.goToCartSnackbar}
             cartState={this.props.cartState}
           />
+          {this.props.isHomePage && (
+            <div
+              id='search-header'
+              className={this.props.classes.searchWrapper}
+            >
+              <Search
+                searchMedicineState={searchMedicineState}
+                checkPincodeState={checkPincodeState}
+                searchMedicineLoading={actions.searchMedicineLoading}
+                addToCartHandler={this.props.addToCartHandler}
+                cartState={this.props.cartState}
+                uploadPrescriptionLoading={
+                  this.props.actions.uploadPrescriptionLoading
+                }
+              />
+            </div>
+          )}
         </AppBar>
       </React.Fragment>
     )
@@ -227,7 +250,8 @@ function mapDispatchToProps (dispatch) {
         searchMedicineLoading,
         getAnonymousCartIdLoading,
         updateIsCartOpenRegisterModalFlag,
-        goToCartSnackbar
+        goToCartSnackbar,
+        uploadPrescriptionLoading
       },
       dispatch
     )
@@ -235,5 +259,8 @@ function mapDispatchToProps (dispatch) {
 }
 
 export default withStyles(styles)(
-  connect(mapStateToProps, mapDispatchToProps)(Header)
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(Header)
 )

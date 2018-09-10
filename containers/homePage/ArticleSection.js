@@ -18,10 +18,6 @@ const styles = theme => {
       paddingTop: theme.spacing.unit * 5.125,
       marginBottom: theme.spacing.unit * 4.5
     },
-    imageStyle: {
-      marginBottom: theme.spacing.unit * 9.625,
-      textAlign: 'center'
-    },
     button: {
       margin: theme.spacing.unit
     },

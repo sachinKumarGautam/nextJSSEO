@@ -1,9 +1,7 @@
-import React, {Component} from 'react'
+import React, { Component } from 'react'
 
 import { withStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
-import SearchMedicine from '../searchMedicine/index'
-import Button from '@material-ui/core/Button'
 
 const styles = theme => {
   return {
@@ -45,9 +43,24 @@ const styles = theme => {
 }
 
 class DiscountDetailSection extends Component {
+  componentDidMount = () => {
+    window.addEventListener('scroll', function () {
+      const el = document.querySelector('#discount-section')
+      const header = document.querySelector('#search-header')
+
+      if (header) {
+        if (el.getBoundingClientRect().top < 100) {
+          header.style.display = 'block'
+        } else {
+          header.style.display = 'none'
+        }
+      }
+    })
+  }
+
   render () {
     return (
-      <div className={this.props.classes.discountWrapper}>
+      <div id='discount-section' className={this.props.classes.discountWrapper}>
         <Typography
           variant='body1'
           className={this.props.classes.firstTextStyle}
@@ -60,10 +73,7 @@ class DiscountDetailSection extends Component {
         >
           15% OFF
         </Typography>
-        <Typography
-          variant='body1'
-          className={this.props.classes.lastText}
-        >
+        <Typography variant='body1' className={this.props.classes.lastText}>
           discount on first order
         </Typography>
       </div>

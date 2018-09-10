@@ -17,7 +17,8 @@ class PrescriptionsExpansionPanel extends React.Component {
   onImageSelection (event) {
     this.props.uploadPrescriptionLoading(
       this.props.cartState,
-      event.target.files[0]
+      event.target.files[0],
+      false
     )
   }
 
