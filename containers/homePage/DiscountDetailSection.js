@@ -56,8 +56,10 @@ class DiscountDetailSection extends Component {
         }
       }
     })
-  }
-
+  };
+  // setElement = node => {
+  //   this.element = node;
+  // };
   render () {
     return (
       <div id='discount-section' className={this.props.classes.discountWrapper}>
