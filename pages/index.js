@@ -22,7 +22,9 @@ const styles = theme => ({
     paddingBottom: theme.spacing.unit * 2,
     margin: '0 auto',
     marginTop: theme.spacing.unit * 7.5,
-    width: '100%'
+    width: '100%',
+    maxWidth: theme.breakpoints.values.lg,
+    minWidth: theme.breakpoints.values.md
   }
 })
 

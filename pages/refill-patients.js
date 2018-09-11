@@ -31,7 +31,9 @@ const styles = theme => ({
     minHeight: 'inherit',
     margin: '0 auto',
     height: '100%',
-    marginTop: theme.spacing.unit * 7.5
+    marginTop: theme.spacing.unit * 7.5,
+    maxWidth: theme.breakpoints.values.lg,
+    minWidth: theme.breakpoints.values.md
   },
   title: {
     fontWeight: theme.typography.fontWeightBold

@@ -28,7 +28,9 @@ const styles = theme => ({
     paddingLeft: theme.spacing.unit * 7,
     paddingRight: theme.spacing.unit * 7,
     margin: '0 auto',
-    marginTop: theme.spacing.unit * 7.5
+    marginTop: theme.spacing.unit * 7.5,
+    maxWidth: theme.breakpoints.values.lg,
+    minWidth: theme.breakpoints.values.md
   },
   title: {
     fontWeight: theme.typography.fontWeightBold
