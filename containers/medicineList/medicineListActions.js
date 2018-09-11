@@ -30,10 +30,11 @@ export function getRelatedMedicinesLoading (medicineState, saltName, page, size,
  * @param {object} medicineState - The object maintained for payload, loading and error state.
  * @param {array} result - The medicine list obtained from the API response
  */
-export function getRelatedMedicinesSuccess (medicineState, result) {
+export function getRelatedMedicinesSuccess (medicineState, result, totalPages) {
   return {
     type: GET_RELATED_MEDICINES_SUCCESS,
     medicineState,
+    totalPages: totalPages,
     isLoading: false,
     payload: result
   }

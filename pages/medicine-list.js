@@ -126,6 +126,7 @@ class MedicineList extends React.Component {
   }
 
   render () {
+    const { query } = Router
     const {
       addToCartHandler,
       checkPincodeState,
@@ -153,6 +154,7 @@ class MedicineList extends React.Component {
               addToCartHandler={addToCartHandler}
               checkPincodeState={checkPincodeState}
               moleculeName={moleculeName}
+              queryMoleculeName={query.moleculeName}
               productName={productName}
               searchMedicineLoading={actions.searchMedicineLoading}
               getRelatedMedicinesLoading={actions.getRelatedMedicinesLoading}

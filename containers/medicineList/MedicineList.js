@@ -167,7 +167,8 @@ class MedicineList extends React.Component {
         </Card>
         {
           medicineListState.length &&
-          this.state.page !== this.props.searchMedicineState.payload.totalPages
+          this.props.queryMoleculeName &&
+          this.state.page !== this.props.medicineListState.totalPages
             ? (
               <div className={classes.buttonWrapper}>
                 <Button
