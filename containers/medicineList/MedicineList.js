@@ -70,12 +70,6 @@ class MedicineList extends React.Component {
     this.onClickOfShowMore = this.onClickOfShowMore.bind(this)
   }
 
-  componentDidMount () {
-    this.setState({
-      page: this.state.page + 1
-    })
-  }
-
   // Represents to get medicine list when clicked on show more with page size and size per page.
   onClickOfShowMore () {
     if (this.props.productName) {

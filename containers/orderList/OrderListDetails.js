@@ -81,12 +81,6 @@ class OrderListDetails extends Component {
     }
   }
 
-  componentDidMount () {
-    this.setState({
-      page: this.state.page + 1
-    })
-  }
-
   componentDidUpdate (prevProps) {
     if (
       (this.props.cartState.isOrderSubmitted !==
