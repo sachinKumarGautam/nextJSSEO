@@ -53,82 +53,90 @@ const styles = theme => {
   }
 }
 
-const PatientDetailsCard = props => (
-  <div
-    className={
-      (props.patientIdSelected === props.patientDetail.id)
-        ? props.classes.patientWrapperSelectedStyle
-        : props.classes.patientWrapperStyle
+class PatientDetailsCard extends React.Component {
+  handleOnClickPatientCard = () => {
+    // check source type and patient id selected  and patient id in cart
+    if (this.props.cartType === 'REFILL') {
+      this.props.onClickOfPatient(this.props.patientDetail)
+    } else {
+      this.props.savePatientSelected &&
+        this.props.savePatientSelected(this.props.patientDetail)
     }
-    onClick={
-      props.savePatientSelected
-        ? props.savePatientSelected.bind(this, props.patientDetail)
-        : null
-    }
+  }
 
-  >
-    <Grid container spacing={24}>
-      <Grid item xs={3}>
-        <img src='/static/images/profile.svg' />
-      </Grid>
-      <Grid item xs={9}>
-        <Typography
-          variant='caption'
-          className={props.classes.userNameStyle}
-        >
-          {props.patientDetail.full_name}
-        </Typography>
-        <div>
-          <Typography
-            variant='caption'
-            className={props.classes.genderStyle}
-          >
-            {props.patientDetail.gender} | {props.patientDetail.age}
-          </Typography>
-        </div>
-        <div>
-          <Typography
-            variant='caption'
-            className={props.classes.mobileStyle}
-          >
-            {props.patientDetail.mobile}
-          </Typography>
-        </div>
-        <div>
-          <Grid container spacing={24}>
-            <Grid item xs={4}>
-              {
-                props.isCartPage
-                  ? (
-                    <Typography
+  render () {
+    return (
+      <div
+        className={
+          this.props.patientIdSelected === this.props.patientDetail.id
+            ? this.props.classes.patientWrapperSelectedStyle
+            : this.props.classes.patientWrapperStyle
+        }
+        onClick={this.handleOnClickPatientCard}
+      >
+        <Grid container spacing={24}>
+          <Grid item xs={3}>
+            <img src='/static/images/profile.svg' />
+          </Grid>
+          <Grid item xs={9}>
+            <Typography
+              variant='caption'
+              className={this.props.classes.userNameStyle}
+            >
+              {this.props.patientDetail.full_name}
+            </Typography>
+            <div>
+              <Typography
+                variant='caption'
+                className={this.props.classes.genderStyle}
+              >
+                {this.props.patientDetail.gender}
+                {' '}
+                |
+                {' '}
+                {this.props.patientDetail.age}
+              </Typography>
+            </div>
+            <div>
+              <Typography
+                variant='caption'
+                className={this.props.classes.mobileStyle}
+              >
+                {this.props.patientDetail.mobile}
+              </Typography>
+            </div>
+            <div>
+              <Grid container spacing={24}>
+                <Grid item xs={4}>
+                  {this.props.isCartPage
+                    ? <Typography
                       variant='caption'
-                      className={props.classes.selectButtonLabel}
+                      className={this.props.classes.selectButtonLabel}
                       classes={{
-                        root: props.classes.selectButtonRoot
+                        root: this.props.classes.selectButtonRoot
                       }}
                     >
-                      SELECT
+                        SELECT
                     </Typography>
-                  ) : (
-                    <div onClick={props.openPatientFormModal}>
+                    : <div onClick={this.props.openPatientFormModal}>
                       <Typography
                         variant='caption'
-                        className={props.classes.selectButtonLabel}
+                        className={this.props.classes.selectButtonLabel}
                         classes={{
-                          root: props.classes.selectButtonRoot
+                          root: this.props.classes.selectButtonRoot
                         }}
                       >
-                        EDIT
+                          EDIT
                       </Typography>
-                    </div>
-                  )
-              }
-            </Grid>
+                    </div>}
+                </Grid>
+              </Grid>
+            </div>
           </Grid>
-        </div>
-      </Grid>
-    </Grid>
-  </div>
-)
+        </Grid>
+      </div>
+    )
+  }
+}
 
 export default withStyles(styles)(PatientDetailsCard)

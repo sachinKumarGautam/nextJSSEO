@@ -21,10 +21,12 @@ const PatientDetails = props => (
       return (
         <Grid item xs={6}>
           <PatientDetailsCard
+            onClickOfPatient={props.onClickOfPatient}
             patientDetail={patientDetail}
             savePatientSelected={props.savePatientSelected}
             patientIdSelected={props.patientIdSelected}
             isCartPage={props.isCartPage}
+            cartType={props.cartType}
           />
         </Grid>
       )

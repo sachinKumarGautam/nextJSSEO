@@ -44,11 +44,11 @@ class PatientDetailsExpansionPanel extends React.Component {
         expanded={this.props.expanded === 'panel3'}
         onChange={
           this.props.loginState.isAuthenticated &&
-          (
-            this.props.cartState.payload.cart_items.payload.length ||
-            this.props.cartState.payload.cart_prescriptions.length ||
-            this.props.cartState.payload.is_doctor_callback.payload
-          ) ? this.props.handleChange : null
+            (this.props.cartState.payload.cart_items.payload.length ||
+              this.props.cartState.payload.cart_prescriptions.length ||
+              this.props.cartState.payload.is_doctor_callback.payload)
+            ? this.props.handleChange
+            : null
         }
         className={this.props.expansionPanel}
       >
@@ -58,42 +58,35 @@ class PatientDetailsExpansionPanel extends React.Component {
             content: this.props.patientContentWrapper
           }}
         >
-          <img src='/static/images/loggedIn.svg' className={this.props.imageIcon} />
+          <img
+            src='/static/images/loggedIn.svg'
+            className={this.props.imageIcon}
+          />
           <div className={this.props.patientWrapper}>
             <div className={this.props.checkedIconWrapper}>
-              {
-                this.props.expanded !== 'panel3' &&
+              {this.props.expanded !== 'panel3' &&
                 patientDetails.payload.patient_id
-                  ? (
-                    <SelectedPatientDetails
-                      heading={this.props.heading}
-                      patientDetails={this.props.patientDetails}
-                      patient={patientDetails.payload}
-                    />
-                  ) : (
-                    <Typography
-                      component='h1'
-                      className={this.props.heading}
-                    >
+                ? <SelectedPatientDetails
+                  heading={this.props.heading}
+                  patientDetails={this.props.patientDetails}
+                  patient={patientDetails.payload}
+                />
+                : <Typography component='h1' className={this.props.heading}>
                     Patient Details
-                    </Typography>
-                  )
-              }
-              {
-                this.props.patientIdSelected
-                  ? (
-                    <img src='/static/images/checkedIcon.svg' className={this.props.checkedIcon} />
-                  ) : null
-              }
+                </Typography>}
+              {this.props.patientIdSelected
+                ? <img
+                  src='/static/images/checkedIcon.svg'
+                  className={this.props.checkedIcon}
+                />
+                : null}
             </div>
-            {
-              this.props.expanded === 'panel3' &&
+            {this.props.expanded === 'panel3' &&
               <AddPatientButton
                 buttonRoot={this.props.buttonRoot}
                 buttonLabel={this.props.buttonLabel}
                 onClick={this.openPatientFormModal.bind(this)}
-              />
-            }
+              />}
           </div>
         </ExpansionPanelSummary>
         <ExpansionPanelDetails
@@ -103,6 +96,7 @@ class PatientDetailsExpansionPanel extends React.Component {
         >
           <PatientDetails
             isCartPage
+            onClickOfPatient={this.props.onClickOfPatient}
             expanded={this.props.expanded}
             buttonRoot={this.props.buttonRoot}
             buttonLabel={this.props.buttonLabel}
@@ -115,6 +109,7 @@ class PatientDetailsExpansionPanel extends React.Component {
             savePatientSelected={this.savePatientSelected.bind(this)}
             patientIdSelected={this.props.patientIdSelected}
             patientDetailsWrapper={this.props.patientDetailsWrapper}
+            cartType={this.props.cartType}
           />
           <Button
             size='small'
@@ -126,7 +121,7 @@ class PatientDetailsExpansionPanel extends React.Component {
             label={'NEXT'}
             onClick={
               this.props.loginState.isAuthenticated &&
-              patientDetails.payload.patient_id
+                patientDetails.payload.patient_id
                 ? this.props.handleNextChange
                 : null
             }
