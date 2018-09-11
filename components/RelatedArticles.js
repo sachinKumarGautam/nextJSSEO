@@ -57,8 +57,8 @@ const RelatedArticles = (props) => (
         {
           props.publishedContent.map((articleDetail) => {
             return (
-              <li 
-                className={props.classes.listItem} 
+              <li
+                className={props.classes.listItem}
                 onClick={() => Router.push(articleDetail.web_link)}
               >
                 <ArticleCard
