@@ -70,7 +70,7 @@ class Subheader extends React.Component {
     return (
       <Grid container>
         <Grid item xs={4}>
-          <Link href={HOME_PAGE}>
+          <Link href={HOME_PAGE} passHref >
             <a
               onMouseEnter={this.toggleHover.bind(this, 'home')}
               onMouseLeave={this.toggleHover.bind(this, 'home')}

@@ -41,7 +41,7 @@ const styles = theme => ({
   inputFormControl: {
     flexWrap: 'wrap',
     width: 'auto',
-    paddingLeft: theme.spacing.unit * 2.5,
+    paddingLeft: theme.spacing.unit * 4,
     borderColor: theme.palette.customGrey.grey200,
     border: `1px solid ${theme.palette.common.black}`,
     borderRadius: theme.spacing.unit * 4,
@@ -90,8 +90,9 @@ const styles = theme => ({
   },
   progress: {
     position: 'absolute',
-    left: theme.spacing.unit * 1.5,
-    color: theme.palette.customGrey.grey100
+    left: theme.spacing.unit * 3.5,
+    color: theme.palette.primary.main,
+    zIndex: 999
   },
   errorMessage: {
     ...theme.typography.caption,
