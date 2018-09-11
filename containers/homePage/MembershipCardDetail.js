@@ -58,7 +58,7 @@ class MembershipCardDetail extends Component {
     const medicineSelected = {
       name: name,
       sku: sku,
-      quantity: 1
+      quantity: 0
     }
     this.props.incrementCartItemLoading(
       this.props.cartState,
