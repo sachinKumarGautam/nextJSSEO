@@ -9,3 +9,4 @@ export const UREGNT_DELIVERY_TEXT = 'Eligible for same day delivery. Additional 
 export const LF_ASSURED_DETAIL = 'Your order is covered under LifCare Assured.'
 export const EXPRESS_DELIVERY_DETAIL = 'Your order is covered under Express Delivery.'
 export const VERIFICATION_RX = 'Verification of a valid prescription is pending for this order, for the commencement of the LifCare Assured service guarantee.'
+export const SELECT_PAYMENT_MODE = 'Please select payment mode.'

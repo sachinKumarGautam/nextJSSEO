@@ -31,6 +31,8 @@ import {
   applyCouponCodeLoading,
   updateCouponCode,
   optForDoctorCallbackLoading,
+  verifyPaymentLoading,
+  updatePaymentFailureFlag,
   optForExpressDeliveryLoading,
   resetApiStateSubmitOrder,
   resetCouponDetail,
@@ -232,6 +234,7 @@ class CartDetailsWrapper extends Component {
                   checkPincodeLoading={this.props.actions.checkPincodeLoading}
                   getLocalityDetailListLoading={this.props.actions.getLocalityDetailListLoading}
                   optForExpressDeliveryLoading={this.props.actions.optForExpressDeliveryLoading}
+                  constantsState={this.props.constantsState}
                 />
               </section>
             </Grid>
@@ -239,6 +242,7 @@ class CartDetailsWrapper extends Component {
               <section className={classes.stickyWrapper}>
                 <CartDetails
                   cartState={this.props.cartState}
+                  customerState={this.props.customerState}
                   incrementCartItemLoading={
                     this.props.actions.incrementCartItemLoading
                   }
@@ -253,6 +257,8 @@ class CartDetailsWrapper extends Component {
                   updateCouponCode={this.props.actions.updateCouponCode}
                   checkPincodeState={this.props.checkPincodeState}
                   resetCouponDetail={this.props.actions.resetCouponDetail}
+                  verifyPaymentLoading={this.props.actions.verifyPaymentLoading}
+                  updatePaymentFailureFlag={this.props.actions.updatePaymentFailureFlag}
                 />
               </section>
             </Grid>
@@ -271,7 +277,8 @@ function mapStateToProps (state) {
     customerState: state.customerState,
     patientDetailsState: state.patientDetailsState,
     deliveryDetailsState: state.deliveryDetailsState,
-    checkPincodeState: state.checkPincodeState
+    checkPincodeState: state.checkPincodeState,
+    constantsState: state.constantsState
   }
 }
 
@@ -298,6 +305,8 @@ function mapDispatchToProps (dispatch) {
         applyCouponCodeLoading,
         updateCouponCode,
         optForDoctorCallbackLoading,
+        verifyPaymentLoading,
+        updatePaymentFailureFlag,
         updateAddressFormValue,
         getLocalityDetailListLoading,
         checkPincodeLoading,

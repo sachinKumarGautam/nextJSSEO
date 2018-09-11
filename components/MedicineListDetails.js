@@ -11,6 +11,7 @@ import StrokePrice from './StrokePrice'
 import EstimatedPriceLabel from './EstimatedPriceLabel'
 import { PRODUCT_DETAILS } from '../routes/RouteConstant'
 import Button from './button/Button'
+import AlreadyAdded from './AlreadyAdded'
 
 const styles = theme => {
   return {
@@ -47,7 +48,8 @@ const styles = theme => {
       alignItems: 'stretch',
       justifyContent: 'space-between',
       marginLeft: theme.spacing.unit * 3,
-      marginRight: theme.spacing.unit * 3
+      marginRight: theme.spacing.unit * 3,
+      cursor: 'pointer'
     },
     buttonRoot: {
       border: `1px solid ${theme.palette.primary.main}`
@@ -58,15 +60,14 @@ const styles = theme => {
     },
     buttonWrapperStyle: {
       marginTop: theme.spacing.unit,
-      float: 'right'
+      float: 'right',
+      minWidth: theme.spacing.unit * 10,
+      display: 'inline-block'
     },
     deliveryTat: {
       ...theme.typography.body3,
       color: theme.palette.customGrey.grey500,
       fontWeight: theme.typography.fontWeightBold
-    },
-    cursor: {
-      cursor: 'pointer'
     }
   }
 }
@@ -78,24 +79,35 @@ class MedicineListDetails extends React.Component {
   }
 
   addToCart (event) {
-    event.stopPropagation()
-    this.props.addToCartHandler(this.props.itemDetails)
+    if (this.props.isRefillMedicines) {
+      if (
+        this.props.pastMedicineState.selectedPatientId ===
+        this.props.cartState.payload.patient_details.payload.patient_id
+      ) {
+        event.stopPropagation()
+        this.props.addToCartHandler(this.props.itemDetails)
+      } else {
+        event.stopPropagation()
+        this.props.onClickOfPatient(this.props.itemDetails)
+      }
+    } else {
+      event.stopPropagation()
+      this.props.addToCartHandler(this.props.itemDetails)
+    }
   }
 
   render () {
     const { props } = this
+    const { checkIfAlredyExistInCart } = props
     const city = this.props.checkPincodeState.payload.city
     return (
-      <div className={props.classes.medicineListContentWrapper}>
-        <Link
-          prefetch
-          href={`${PRODUCT_DETAILS}?id=${props.itemDetails.slug}&location=${city}`}
-          as={`${PRODUCT_DETAILS}/${props.itemDetails.slug}?location=${city}`}
-        >
-          <div
-            onClick={this.props.onSelectItem}
-            className={props.classes.cursor}
-          >
+      <Link
+        prefetch
+        href={`${PRODUCT_DETAILS}?id=${props.itemDetails.slug}&location=${city}`}
+        as={`${PRODUCT_DETAILS}/${props.itemDetails.slug}?location=${city}`}
+      >
+        <div className={props.classes.medicineListContentWrapper}>
+          <div onClick={this.props.onSelectItem}>
             <ProductName
               variant={'body1'}
               name={props.itemDetails.name}
@@ -134,38 +146,40 @@ class MedicineListDetails extends React.Component {
                 days
               </Typography>}
           </div>
-        </Link>
-        <div>
-          <EstimatedPriceLabel
-            variant={'caption'}
-            customStyle={props.classes.customEstimatedLabel}
-            estimatePriceText={'*Est. Price '}
-          />
-          <ProductPrice
-            variant={'body1'}
-            customStyle={props.classes.customPrice}
-            sellingPrice={props.itemDetails.selling_price}
-          />
-          <StrokePrice
-            variant={'caption'}
-            customStyle={props.classes.customStrokePrice}
-            mrp={props.itemDetails.mrp}
-          />
-          <div className={props.classes.buttonWrapperStyle}>
-            <Button
-              variant='outlined'
-              classes={{
-                root: props.classes.buttonRoot,
-                label: props.classes.buttonLabel
-              }}
-              size='small'
-              color='primary'
-              onClick={this.addToCart} // this is coming from HOC
-              label={'Add To Cart'}
+          <div>
+            <EstimatedPriceLabel
+              variant={'caption'}
+              customStyle={props.classes.customEstimatedLabel}
+              estimatePriceText={'*Est. Price '}
             />
+            <ProductPrice
+              variant={'body1'}
+              customStyle={props.classes.customPrice}
+              sellingPrice={props.itemDetails.selling_price}
+            />
+            <StrokePrice
+              variant={'caption'}
+              customStyle={props.classes.customStrokePrice}
+              mrp={props.itemDetails.mrp}
+            />
+            <div className={props.classes.buttonWrapperStyle}>
+              {!checkIfAlredyExistInCart
+                ? <Button
+                  variant='outlined'
+                  classes={{
+                    root: props.classes.buttonRoot,
+                    label: props.classes.buttonLabel
+                  }}
+                  size='small'
+                  color='primary'
+                  onClick={this.addToCart} // this is coming from HOC
+                  label={'Add To Cart'}
+                />
+                : <AlreadyAdded />}
+            </div>
           </div>
         </div>
-      </div>
+      </Link>
     )
   }
 }

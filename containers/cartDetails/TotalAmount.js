@@ -23,10 +23,7 @@ const styles = theme => ({
 class TotalAmount extends Component {
   render () {
     return (
-      <Grid
-        container
-        className={this.props.classes.totalAmountWrapper}
-      >
+      <Grid container className={this.props.classes.totalAmountWrapper}>
         <Grid item xs={8}>
           <Typography className={this.props.classes.totalAmountText}>
             TOTAL AMOUNT
@@ -34,7 +31,7 @@ class TotalAmount extends Component {
         </Grid>
         <Grid item xs={4}>
           <Typography className={this.props.classes.totalAmount}>
-            Rs. {this.props.cartState.payload.total_sale_price}
+            ₹ {this.props.cartState.payload.total_payable_amount}
           </Typography>
         </Grid>
       </Grid>

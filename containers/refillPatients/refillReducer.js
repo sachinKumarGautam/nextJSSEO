@@ -42,7 +42,8 @@ export default function refillReducer (state = initialState, action) {
       return {
         ...state,
         selectedPatientId: action.patientId,
-        selectedPatientName: action.patientName
+        selectedPatientName: action.patientName,
+        selectedPatient: action.patient
       }
 
     default:

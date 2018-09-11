@@ -14,7 +14,8 @@ export function searchMedicineLoading (
   facilityId,
   value,
   pageNumber,
-  pageSize
+  pageSize,
+  isHeader = false
 ) {
   return {
     type: SEARCH_MEDICINE_LOADING,
@@ -25,7 +26,10 @@ export function searchMedicineLoading (
     pageSize,
     isLoading: true,
     isError: false,
-    error: null
+    error: null,
+    payload: !isHeader && pageNumber > 0
+      ? searchMedicineState.payload.searchMedicineResult
+      : []
   }
 }
 

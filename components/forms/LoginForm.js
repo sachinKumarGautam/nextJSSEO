@@ -16,7 +16,8 @@ import { withStyles } from '@material-ui/core/styles'
 import {
   MOBILE_REQUIRED,
   MOBILE_INVALID,
-  MOBILE_VALIDATION_REGEX
+  MOBILE_VALIDATION_REGEX,
+  NUMBER_VALIDATION_REGEX
 } from '../../containers/messages/ValidationMsg'
 
 import {
@@ -39,12 +40,22 @@ const styles = theme => ({
   formHelperText: {
     textAlign: 'center',
     marginTop: theme.spacing.unit
+  },
+  buttonStyle: {
+    width: theme.spacing.unit * 25
+  },
+  mobilePrefix: {
+    marginBottom: theme.spacing.unit / 8
   }
 })
 
 class LoginForm extends React.Component {
   handleChange = event => {
-    if (event.target.value.length <= 10) {
+    const inputValue = event.target.value
+    const regexInputExpression = RegExp(NUMBER_VALIDATION_REGEX).test(
+      inputValue
+    )
+    if ((regexInputExpression && inputValue.length <= 10) || !inputValue) {
       this.props.handleChange(event)
     }
   }
@@ -65,20 +76,24 @@ class LoginForm extends React.Component {
         <FormControl
           className={classes.formControl}
           aria-describedby='mobile-number'
-          error={(errors.mobile && touched.mobile) || loginState.errorStateSendOtp.isError}
+          error={
+            (errors.mobile && touched.mobile) ||
+              loginState.errorStateSendOtp.isError
+          }
         >
           <Input
             startAdornment={
               <InputAdornment position='start'>
                 <AccountCircle />
+                <span className={classes.mobilePrefix}>{'+91'}</span>
               </InputAdornment>
             }
             autoComplete='off'
             id='mobile'
-            type='number'
             value={values.mobile}
             onChange={this.handleChange}
             onBlur={handleBlur}
+            autoFocus
             placeholder={'Enter registered mobile no.'}
           />
           {errors.mobile &&
@@ -101,6 +116,7 @@ class LoginForm extends React.Component {
         <div className={classes.buttonWrapper}>
           <Button
             type='submit'
+            className={classes.buttonStyle}
             isloading={isSubmitting}
             variant='raised'
             color='primary'

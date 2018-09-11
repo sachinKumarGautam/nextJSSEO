@@ -10,6 +10,13 @@ import {
   getOrderDetailsLoading
 } from './orderDetailsActions'
 
+import {
+  resetCartState,
+  paymentInitiateLoading
+} from '../cartDetails/cartActions'
+
+import Loader from '../../components/activityIndicator/loader'
+
 /*
   bread crumbs
   order details
@@ -25,7 +32,14 @@ class OrderDetailsWrapper extends Component {
             orderId={this.props.orderId}
             cartState={this.props.cartState}
             orderDetailsState={this.props.orderDetailsState}
+            resetCartState={this.props.actions.resetCartState}
+            paymentInitiateLoading={this.props.actions.paymentInitiateLoading}
             getOrderDetailsLoading={this.props.actions.getOrderDetailsLoading}
+            constantsState={this.props.constantsState}
+          />
+          <Loader
+            loaderType={'fullPageSpinner'}
+            isLoading={this.props.cartState.payment.isLoading}
           />
         </section>
       </div>
@@ -36,7 +50,8 @@ class OrderDetailsWrapper extends Component {
 function mapStateToProps (state) {
   return {
     cartState: state.cartState,
-    orderDetailsState: state.orderDetailsState
+    orderDetailsState: state.orderDetailsState,
+    constantsState: state.constantsState
   }
 }
 
@@ -44,7 +59,9 @@ function mapDispatchToProps (dispatch) {
   return {
     actions: bindActionCreators(
       {
-        getOrderDetailsLoading
+        getOrderDetailsLoading,
+        resetCartState,
+        paymentInitiateLoading
       },
       dispatch
     )

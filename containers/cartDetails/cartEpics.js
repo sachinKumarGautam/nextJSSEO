@@ -1,5 +1,12 @@
 import { of } from 'rxjs/observable/of'
-import { mergeMap, catchError, map, switchMap, flatMap } from 'rxjs/operators'
+import {
+  mergeMap,
+  catchError,
+  map,
+  switchMap,
+  flatMap,
+  debounceTime
+} from 'rxjs/operators'
 import { ofType } from 'redux-observable'
 import http from '../../services/api/ajaxWrapper'
 
@@ -17,7 +24,10 @@ import {
   SUBMIT_ORDER_LOADING,
   SUBMIT_COUPON_CODE_LOADING,
   OPT_DOCTOR_CALLBACK_LOADING,
-  OPT_EXPRESS_DELIVERY_LOADING
+  VERIFY_PAYMENT_LOADING,
+  PAYMENT_INITIATE_LOADING,
+  OPT_EXPRESS_DELIVERY_LOADING,
+  DELETE_CART_LOADING
 } from './cartActionTypes'
 
 import {
@@ -44,8 +54,17 @@ import {
   applyCouponCodeFailure,
   optForDoctorCallbackSuccess,
   optForDoctorCallbackFailure,
+  verifyPaymentSuccess,
+  verifyPaymentFailure,
+  paymentInitiateSuccess,
+  paymentInitiateFailure,
   optForExpressDeliverySuccess,
-  optForExpressDeliveryFailure
+  optForExpressDeliveryFailure,
+  redirectToOrderDetailsPage,
+  deleteCartSuccess,
+  deleteCartFailure,
+  getAnonymousCartIdLoading,
+  savePatientToCartLoading
 } from './cartActions'
 
 import {
@@ -61,8 +80,15 @@ import {
   submitOrder$,
   applyCouponForCart$,
   teleConsultation$,
-  expressDelivery$
+  verifyPayment$,
+  paymentInitiate$,
+  expressDelivery$,
+  deleteCart$
 } from '../../services/api'
+
+import {
+  PAYMENT_GATEWAY
+} from '../../components/constants/paymentConstants'
 
 export function getAnonymousCartIdEpic (action$, store) {
   return action$.pipe(
@@ -71,8 +97,23 @@ export function getAnonymousCartIdEpic (action$, store) {
       return http(
         getAnonymousCartId$(data.source, data.facility_code, data.source_type)
       ).pipe(
-        map(result => {
-          return getAnonymousCartIdSuccess(data.cartState, result.body.payload)
+        flatMap(result => {
+          if (data.source_type === 'REFILL') {
+            return of(
+              getAnonymousCartIdSuccess(data.cartState, result.body.payload),
+              savePatientToCartLoading(
+                data.cartState,
+                data.patientDetail,
+                result.body.payload.uid,
+                data.source_type,
+                data.addMedicine
+              )
+            )
+          } else {
+            return of(
+              getAnonymousCartIdSuccess(data.cartState, result.body.payload)
+            )
+          }
         }),
         catchError(error => {
           return of(getAnonymousCartIdFailure(data.cartState, error))
@@ -98,10 +139,7 @@ export function getCartDetailsEpic (action$, store) {
   )
 }
 
-function cartApiLoadingHandling (
-  cartState,
-  medicineSelected
-) {
+function cartApiLoadingHandling (cartState, medicineSelected) {
   let cartItems = cartState.payload.cart_items.payload
 
   cartItems.forEach((cartMedicine, index) => {
@@ -124,12 +162,7 @@ function cartApiLoadingHandling (
     cart_items: cartItems
   }
 
-  return of(
-    putCartItemSuccess(
-      cartState,
-      payload
-    )
-  )
+  return of(putCartItemSuccess(cartState, payload))
 }
 
 function cartApiErrorHandling (cartState, medicineSelected, error) {
@@ -156,23 +189,14 @@ function cartApiErrorHandling (cartState, medicineSelected, error) {
     cart_items: cartItems
   }
 
-  return of(
-    putCartItemFailure(
-      cartState,
-      payload,
-      error
-    )
-  )
+  return of(putCartItemFailure(cartState, payload, error))
 }
 
 export function decrementCartItemLoadingEpic (action$, store) {
   return action$.pipe(
     ofType(DECREMENT_CART_ITEM_LOADING),
     mergeMap(data => {
-      return cartApiLoadingHandling(
-        data.cartState,
-        data.medicineSelected
-      )
+      return cartApiLoadingHandling(data.cartState, data.medicineSelected)
     })
   )
 }
@@ -180,6 +204,7 @@ export function decrementCartItemLoadingEpic (action$, store) {
 export function decrementCartItemEpic (action$, store) {
   return action$.pipe(
     ofType(DECREMENT_CART_ITEM_LOADING),
+    debounceTime(350),
     mergeMap(data => {
       let cartUid = data.cartState.payload.uid
 
@@ -209,10 +234,7 @@ export function incrementCartItemLoadingEpic (action$, store) {
   return action$.pipe(
     ofType(INCREMENT_CART_ITEM_LOADING),
     mergeMap(data => {
-      return cartApiLoadingHandling(
-        data.cartState,
-        data.medicineSelected
-      )
+      return cartApiLoadingHandling(data.cartState, data.medicineSelected)
     })
   )
 }
@@ -220,6 +242,7 @@ export function incrementCartItemLoadingEpic (action$, store) {
 export function incrementCartItemEpic (action$, store) {
   return action$.pipe(
     ofType(INCREMENT_CART_ITEM_LOADING),
+    debounceTime(350),
     mergeMap(data => {
       const cartUid = data.cartState.payload.uid
       const medicineIncremented = {
@@ -239,7 +262,11 @@ export function incrementCartItemEpic (action$, store) {
           }
         }),
         catchError(error => {
-          return cartApiErrorHandling(data.cartState, data.medicineSelected, error)
+          return cartApiErrorHandling(
+            data.cartState,
+            data.medicineSelected,
+            error
+          )
         })
       )
     })
@@ -250,10 +277,7 @@ export function deleteCartItemLoadingEpic (action$, store) {
   return action$.pipe(
     ofType(DELETE_CART_ITEM_LOADING),
     mergeMap(data => {
-      return cartApiLoadingHandling(
-        data.cartState,
-        data.medicineSelected
-      )
+      return cartApiLoadingHandling(data.cartState, data.medicineSelected)
     })
   )
 }
@@ -286,12 +310,25 @@ export function savePatientToCartEpic (action$, store) {
     ofType(SAVE_PATIENT_TO_CART_LOADING),
     mergeMap(data => {
       return http(savePatientToCart$(data.cartId, data.patient.id)).pipe(
-        map(result => {
-          return savePatientToCartSuccess(
-            data.cartState,
-            data.patient,
-            result.body.payload
-          )
+        flatMap(result => {
+          if (data.source_type === 'REFILL') {
+            return of(
+              savePatientToCartSuccess(
+                data.cartState,
+                data.patient,
+                result.body.payload
+              ),
+              data.addMedicine
+            )
+          } else {
+            return of(
+              savePatientToCartSuccess(
+                data.cartState,
+                data.patient,
+                result.body.payload
+              )
+            )
+          }
         }),
         catchError(error => {
           return of(savePatientToCartFailure(data.cartState, error))
@@ -447,6 +484,14 @@ export function submitOrderEpic (action$, store) {
       let body = {
         cart_uid: data.cartState.payload.uid
       }
+
+      if (data.paymentChannel !== '') {
+        body = {
+          ...body,
+          payment_method: data.paymentChannel
+        }
+      }
+
       return http(submitOrder$(data.cartState, body)).pipe(
         map(result => {
           return submitOrderSuccess(data.cartState, result.body.payload)
@@ -494,11 +539,75 @@ export function optDoctorCallback (action$, store) {
   )
 }
 
+export function verifyPaymentEpic (action$, store) {
+  return action$.pipe(
+    ofType(VERIFY_PAYMENT_LOADING),
+    mergeMap(data => {
+      const razorpayDetails = {
+        razorpay_order_id: data.razorpay_order_id,
+        razorpay_payment_id: data.razorpay_payment_id,
+        razorpay_signature: data.razorpay_signature
+      }
+
+      const body = {
+        gateway_name: PAYMENT_GATEWAY,
+        gateway_data: razorpayDetails
+      }
+
+      return http(verifyPayment$(data.orderId, body)).pipe(
+        map(result => {
+          const payload = result.body.payload.order
+
+          return verifyPaymentSuccess(data.cartState, payload)
+        }),
+        catchError(error => {
+          return of(verifyPaymentFailure(data.cartState, error))
+        })
+      )
+    })
+  )
+}
+
+export function paymentInitiateEpic (action$, store) {
+  return action$.pipe(
+    ofType(PAYMENT_INITIATE_LOADING),
+    mergeMap(data => {
+      const body = {
+        order_id: data.orderId,
+        payment_method: data.paymentMode
+      }
+
+      return http(paymentInitiate$(body)).pipe(
+        map(result => {
+          const payload = result.body.payload.order
+          const paymentGateway = result.body.payload.payment_gateway
+
+          return paymentInitiateSuccess(data.cartState, payload, paymentGateway)
+        }),
+        catchError(error => {
+          if (error.status === 400) {
+            return of(
+              redirectToOrderDetailsPage(data.cartState),
+              paymentInitiateFailure(data.cartState, error)
+            )
+          } else {
+            return of(
+              paymentInitiateFailure(data.cartState, error)
+            )
+          }
+        })
+      )
+    })
+  )
+}
+
 export function optExpressDelivery (action$, store) {
   return action$.pipe(
     ofType(OPT_EXPRESS_DELIVERY_LOADING),
     mergeMap(data => {
-      return http(expressDelivery$(data.cartUId, data.expressDeliveryCheck)).pipe(
+      return http(
+        expressDelivery$(data.cartUId, data.expressDeliveryCheck)
+      ).pipe(
         map(result => {
           return optForExpressDeliverySuccess(
             data.cartState,
@@ -507,6 +616,33 @@ export function optExpressDelivery (action$, store) {
         }),
         catchError(error => {
           return of(optForExpressDeliveryFailure(data.cartState, error))
+        })
+      )
+    })
+  )
+}
+
+export function deleteCartState (action$, store) {
+  return action$.pipe(
+    ofType(DELETE_CART_LOADING),
+    mergeMap(data => {
+      const cartUid = data.cartState.payload.uid
+      return http(deleteCart$(cartUid)).pipe(
+        flatMap(result => {
+          return of(
+            deleteCartSuccess(data.cartState),
+            getAnonymousCartIdLoading(
+              data.cartState,
+              data.source,
+              data.facility_code,
+              data.source_type,
+              data.patientId,
+              data.addMedicine
+            )
+          )
+        }),
+        catchError(error => {
+          return deleteCartFailure(data.cartState, error)
         })
       )
     })

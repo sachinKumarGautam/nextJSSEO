@@ -11,7 +11,7 @@ import ReactTooltip from 'react-tooltip'
 
 import Button from './button'
 
-// import Link from 'next/link'
+import Link from 'next/link'
 import Router from 'next/router'
 
 import { CART_DETAILS } from '../routes/RouteConstant'
@@ -22,12 +22,6 @@ import { getReplacedString } from '../utils/replaceConstants'
 const styles = theme => ({
   button: {
     margin: theme.spacing.unit
-  },
-  menuPaperProps: {
-    width: theme.spacing.unit * 32
-  },
-  menuStyle: {
-    top: theme.spacing.unit * 5
   },
   summaryStyle: {
     ...theme.typography.body3,
@@ -81,8 +75,8 @@ const styles = theme => ({
     marginBottom: theme.spacing.unit * 2
   },
   paper: {
-    padding: theme.spacing.unit,
-    width: theme.spacing.unit * 25,
+    padding: theme.spacing.unit * 1.5,
+    width: theme.spacing.unit * 32,
     backgroundColor: `${theme.palette.secondary.main} !important`,
     pointerEvents: 'auto !important',
     '&:after': {
@@ -92,6 +86,7 @@ const styles = theme => ({
       visibility: 'visible !important',
       opacity: '1 !important'
     },
+    opacity: '1 !important',
     borderRadius: '4px',
     boxShadow: '0 4px 4px 2px rgba(0, 0, 0, 0.14)'
   },
@@ -132,30 +127,32 @@ class CartIcon extends Component {
     const cartItems = this.props.cartState.payload.cart_items.payload
     return (
       <div>
-        <a className={classes.moleculeTag} data-tip data-for='cartIcon'>
-          <IconButton
-            className={classes.button}
-            color={'primary'}
-            aria-label='Add to shopping cart'
-          >
-            <Badge
-              badgeContent={cartItems.length}
-              color='primary'
-              classes={{
-                root: classes.badgeRoot,
-                badge: classes.badge
-              }}
+        <Link prefetch href={getReplacedString(CART_DETAILS)}>
+          <a className={classes.moleculeTag} data-tip data-for='cartIcon'>
+            <IconButton
+              className={classes.button}
+              color={'primary'}
+              aria-label='Add to shopping cart'
             >
-              <ShoppingCartIcon classes={{ root: classes.iconStyle }} />
-            </Badge>
-          </IconButton>
-        </a>
+              <Badge
+                badgeContent={cartItems.length}
+                color='primary'
+                classes={{
+                  root: classes.badgeRoot,
+                  badge: classes.badge
+                }}
+              >
+                <ShoppingCartIcon classes={{ root: classes.iconStyle }} />
+              </Badge>
+            </IconButton>
+          </a>
+        </Link>
         <ReactTooltip
           id='cartIcon'
           effect='solid'
           place='bottom'
           className={classes.paper}
-          delayHide={500}
+          // delayHide={500}
           delayShow={100}
         >
           <div className={classes.summaryMenuWrapper}>

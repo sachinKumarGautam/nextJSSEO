@@ -10,7 +10,8 @@ import AddressDetailsExpansionPanel from './AddressDetailsExpansionPanel'
 import PaymentExpansionPanel from './PaymentExpansionPanel'
 
 import { ATLEAST_ONE_ITEM } from '../../containers/messages/cartMessages'
-import { SNACK_BAR_DURATION } from '../../components/constants/Constants'
+import { PLEASE_LOGIN } from '../../containers/messages/commonMsg'
+import { SNACK_BAR_DURATION_3000 } from '../../components/constants/Constants'
 
 const styles = theme => ({
   root: {
@@ -132,18 +133,28 @@ const styles = theme => ({
   radioWrapper: {
     display: 'flex',
     flexDirection: 'row',
-    marginTop: theme.spacing.unit * 2
+    marginTop: theme.spacing.unit * 2,
+    marginLeft: theme.spacing.unit * 1.875
+  },
+  selectPaymentMode: {
+    marginLeft: theme.spacing.unit * 6.25,
+    marginTop: theme.spacing.unit * 2.5,
+    fontSize: theme.spacing.unit * 1.75
   }
 })
 
 class OrderSummary extends React.Component {
   state = {
     isShowSnackbar: false,
+    snackBarMsg: '',
     expanded: !this.props.loginState.isAuthenticated ? 'panel1' : 'panel2'
-  };
+  }
 
   componentDidUpdate (prevProps) {
-    if (this.props.loginState.isAuthenticated !== prevProps.loginState.isAuthenticated) {
+    if (
+      this.props.loginState.isAuthenticated !==
+      prevProps.loginState.isAuthenticated
+    ) {
       this.setState({
         expanded: 'panel2'
       })
@@ -154,24 +165,34 @@ class OrderSummary extends React.Component {
     this.setState({
       expanded: expanded ? panel : false
     })
-  };
+  }
 
   handleNextChange = (panel, expanded) => {
     if (
       !this.props.cartState.payload.cart_items.payload.length &&
-      !this.props.cartState.payload.is_doctor_callback.payload
+      !this.props.cartState.payload.is_doctor_callback.payload &&
+      !this.props.cartState.payload.cart_prescriptions.length
     ) {
       this.setState({
         isShowSnackbar: true
       })
-
+      this.setState({
+        snackBarMsg: ATLEAST_ONE_ITEM
+      })
+      return false
+    } else if (!this.props.loginState.isAuthenticated) {
+      this.setState({
+        isShowSnackbar: true
+      })
+      this.setState({
+        snackBarMsg: PLEASE_LOGIN
+      })
       return false
     }
-
     this.setState({
       expanded: expanded ? panel : false
     })
-  };
+  }
 
   handleClose () {
     this.setState({
@@ -198,7 +219,9 @@ class OrderSummary extends React.Component {
           registerButtonRoot={this.props.classes.registerButtonRoot}
           registerButtonLabel={this.props.classes.registerButtonLabel}
           updateIsCartOpenLoginFlag={this.props.updateIsCartOpenLoginFlag}
-          updateIsCartOpenRegisterModalFlag={this.props.updateIsCartOpenRegisterModalFlag}
+          updateIsCartOpenRegisterModalFlag={
+            this.props.updateIsCartOpenRegisterModalFlag
+          }
           checkedIcon={this.props.classes.checkedIcon}
         />
         <PrescriptionsExpansionPanel
@@ -240,7 +263,9 @@ class OrderSummary extends React.Component {
           savePatientToCartLoading={this.props.savePatientToCartLoading}
           customerState={this.props.customerState}
           patientDetailsState={this.props.patientDetailsState}
-          patientIdSelected={this.props.cartState.payload.patient_details.payload.patient_id}
+          patientIdSelected={
+            this.props.cartState.payload.patient_details.payload.patient_id
+          }
           patientDetailsWrapper={this.props.classes.patientDetailsWrapper}
           nextButtonRoot={this.props.classes.nextButtonRoot}
           handleNextChange={this.handleNextChange.bind(this, 'panel4', true)}
@@ -262,12 +287,17 @@ class OrderSummary extends React.Component {
           buttonLabel={this.props.classes.buttonLabel}
           thankYouWrapper={this.props.classes.thankYouWrapper}
           submitDeliveryDetailsLoading={this.props.submitDeliveryDetailsLoading}
-          saveDeliveryAddressToCartLoading={this.props.saveDeliveryAddressToCartLoading}
+          saveDeliveryAddressToCartLoading={
+            this.props.saveDeliveryAddressToCartLoading
+          }
           openDeliveryFormDialog={this.state.openDeliveryFormDialog}
           customerState={this.props.customerState}
           deliveryFormState={this.props.deliveryDetailsState.deliveryFormState}
           deliveryDetailsState={this.props.deliveryDetailsState}
-          addressIdSelected={this.props.cartState.payload.shipping_address_details.payload.shipping_address_id}
+          addressIdSelected={
+            this.props.cartState.payload.shipping_address_details.payload
+              .shipping_address_id
+          }
           patientDetailsWrapper={this.props.classes.patientDetailsWrapper}
           nextButtonRoot={this.props.classes.nextButtonRoot}
           handleNextChange={this.handleNextChange.bind(this, 'panel5', true)}
@@ -291,22 +321,24 @@ class OrderSummary extends React.Component {
           checked={this.props.classes.checked}
           paymentDescription={this.props.classes.paymentDescription}
           nextButtonRoot={this.props.classes.nextButtonRoot}
+          selectPaymentMode={this.props.classes.selectPaymentMode}
           submitOrderLoading={this.props.submitOrderLoading}
           radioWrapper={this.props.classes.radioWrapper}
           optForExpressDeliveryLoading={this.props.optForExpressDeliveryLoading}
+          constantsState={this.props.constantsState}
         />
         <Snackbar
           anchorOrigin={{
             vertical: 'bottom',
             horizontal: 'center'
           }}
-          autoHideDuration={SNACK_BAR_DURATION}
+          autoHideDuration={SNACK_BAR_DURATION_3000}
           open={this.state.isShowSnackbar}
           onClose={this.handleClose.bind(this)}
           ContentProps={{
             'aria-describedby': 'cart-items'
           }}
-          message={<span>{ATLEAST_ONE_ITEM}</span>}
+          message={<span>{this.state.snackBarMsg}</span>}
         />
       </div>
     )

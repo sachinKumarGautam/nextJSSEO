@@ -29,7 +29,7 @@ const styles = theme => ({
 })
 
 class PatientList extends Component {
-  getPastMedicines (patientId, patientName) {
+  getPastMedicines (patientId, patientName, patient) {
     this.props.getRefillPastMedicinesLoading(
       this.props.pastMedicineState,
       patientId
@@ -37,7 +37,8 @@ class PatientList extends Component {
     this.props.updateSelectedPatientDetails(
       this.props.pastMedicineState,
       patientId,
-      patientName
+      patientName,
+      patient
     )
   }
 
@@ -52,11 +53,14 @@ class PatientList extends Component {
           {patientDetailsState.payload.map((patient, index) => (
             <MenuItem
               className={classes.menuItem}
-              onClick={this.getPastMedicines.bind(
-                this,
-                patient.id,
-                patient.full_name
-              )}
+              onClick={
+                this.getPastMedicines.bind(
+                  this,
+                  patient.id,
+                  patient.full_name,
+                  patient
+                )
+              }
             >
               <ListItemIcon className={classes.icon}>
                 <img src='/static/images/shape-copy.svg' />

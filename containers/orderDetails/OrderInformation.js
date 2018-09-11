@@ -11,7 +11,9 @@ import Router from 'next/router'
 import OrderContentWrapper from './OrderContentWrapper'
 
 import {
-  ORDER
+  ORDER,
+  THANK_YOU,
+  ORDER_DETAILS
 } from '../../routes/RouteConstant'
 
 import {
@@ -20,6 +22,10 @@ import {
 
 import ActivityIndicator from '../../components/activityIndicator/index'
 import ComponentSpecificError from '../../components/activityIndicator/error/ComponentSpecificError'
+
+import {
+  COD
+} from '../../components/constants/paymentConstants'
 
 const styles = theme => ({
   card: {
@@ -70,6 +76,30 @@ class OrderInformation extends Component {
     )
   }
 
+  componentDidUpdate (prevProps) {
+    if (
+      (this.props.cartState.isOrderSubmitted !==
+      prevProps.cartState.isOrderSubmitted) &&
+      this.props.cartState.isOrderSubmitted &&
+      this.props.cartState.orderResponse.payload.order_type === COD
+    ) {
+      this.props.resetCartState()
+      const url = getReplacedString(THANK_YOU)
+      const as = `${url}?payment-status=success`
+      const href = `${url}?payment-status=success`
+      Router.push(href, as)
+    }
+
+    if (
+      (this.props.cartState.isRedirectToOrderDetailsPage !==
+      prevProps.cartState.isRedirectToOrderDetailsPage) &&
+      this.props.cartState.isRedirectToOrderDetailsPage
+    ) {
+      const url = getReplacedString(ORDER_DETAILS)
+      Router.push(url)
+    }
+  }
+
   redirectToOrdersPage () {
     const url = getReplacedString(ORDER)
 
@@ -80,6 +110,24 @@ class OrderInformation extends Component {
     this.props.getOrderDetailsLoading(
       this.props.orderDetailsState,
       this.props.orderId
+    )
+  }
+
+  retryPayment () {
+    this.props.resetCartState()
+    const url = getReplacedString(THANK_YOU)
+    const as = `${url}?payment-status=retry`
+    const href = `${url}?payment-status=retry`
+    Router.push(href, as)
+  }
+
+  placeOrder () {
+    const paymentChannel = COD
+
+    this.props.paymentInitiateLoading(
+      this.props.cartState,
+      this.props.orderId,
+      paymentChannel
     )
   }
 
@@ -114,6 +162,9 @@ class OrderInformation extends Component {
               <OrderContentWrapper
                 cartState={this.props.cartState}
                 orderDetailsState={this.props.orderDetailsState}
+                retryPayment={this.retryPayment.bind(this)}
+                placeOrder={this.placeOrder.bind(this)}
+                constantsState={this.props.constantsState}
               />
             </ActivityIndicator>
           </CardContent>

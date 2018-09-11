@@ -12,6 +12,10 @@ import MultipleMedicineLoader
   from '../../components/activityIndicator/loader/medicineListLoader/MultipleMedicineLoader'
 import ActivityIndicator from '../../components/activityIndicator'
 
+import { modifiyMedicineList } from '../../utils/common'
+
+import { NO_MEDICINE_LIST } from '../messages/noDataMessage'
+
 const styles = theme => {
   return {
     title: {
@@ -47,6 +51,12 @@ const styles = theme => {
       display: 'flex',
       justifyContent: 'center',
       marginTop: theme.spacing.unit * 4
+    },
+    noMedicineText: {
+      color: theme.palette.customGrey.grey500,
+      textAlign: 'center',
+      marginTop: theme.spacing.unit * 1.25,
+      fontWeight: theme.typography.fontWeightBold
     }
   }
 }
@@ -68,7 +78,8 @@ class MedicineList extends React.Component {
         this.props.checkPincodeState.payload.id,
         this.props.productName,
         this.state.page + 1, // page number
-        10 // page size
+        10, // page size,
+        false // is header props is false
       )
     } else {
       this.props.getRelatedMedicinesLoading(
@@ -93,8 +104,10 @@ class MedicineList extends React.Component {
       classes,
       checkPincodeState,
       addToCartHandler,
-      isLoading
+      isLoading,
+      cartState
     } = this.props
+    const cartItems = cartState.payload.cart_items.payload
 
     return (
       <div className={classes.medicineListWrapper}>
@@ -116,40 +129,58 @@ class MedicineList extends React.Component {
             LoaderComp={<MultipleMedicineLoader />}
           >
             <CardContent>
-              <ul className={classes.articleListWrapper}>
-                {medicineListState.map(itemDetails => (
-                  <li className={classes.listItem}>
-                    <MedicineListDetails
-                      isLoading={isLoading}
-                      itemDetails={itemDetails}
-                      addToCartHandler={addToCartHandler}
-                      checkPincodeState={checkPincodeState}
-                    />
-                  </li>
-                ))}
-              </ul>
+              {medicineListState.length
+                ? <ul className={classes.articleListWrapper}>
+                  {modifiyMedicineList(
+                    medicineListState,
+                    cartItems
+                  ).map(itemDetails => (
+                    <li className={classes.listItem}>
+                      <MedicineListDetails
+                        isLoading={isLoading}
+                        checkIfAlredyExistInCart={
+                          itemDetails.is_exist_in_cart
+                        }
+                        itemDetails={itemDetails}
+                        addToCartHandler={addToCartHandler}
+                        checkPincodeState={checkPincodeState}
+                      />
+                    </li>
+                  ))}
+                </ul>
+                : <Typography
+                  gutterBottom
+                  variant='body2'
+                  className={classes.noMedicineText}
+                >
+                  {NO_MEDICINE_LIST}
+                </Typography>}
+
             </CardContent>
           </ActivityIndicator>
         </Card>
         {
-          medicineListState &&
-          this.state.page !== this.props.searchMedicineState.payload.totalPages &&
-          <div className={classes.buttonWrapper}>
-            <Button
-              size='medium'
-              variant='outlined'
-              disabled={isLoading}
-              loaderColor={'primary'}
-              loaderPosition={'center'}
-              isloading={isLoading}
-              classes={{
-                root: classes.buttonRoot,
-                label: classes.buttonLabel
-              }}
-              onClick={this.onClickOfShowMore}
-              label={'Show more'}
-            />
-          </div>}
+          medicineListState.length &&
+          this.state.page !== this.props.searchMedicineState.payload.totalPages
+            ? (
+              <div className={classes.buttonWrapper}>
+                <Button
+                  size='medium'
+                  variant='outlined'
+                  disabled={isLoading}
+                  loaderColor={'primary'}
+                  loaderPosition={'center'}
+                  isloading={isLoading}
+                  classes={{
+                    root: classes.buttonRoot,
+                    label: classes.buttonLabel
+                  }}
+                  onClick={this.onClickOfShowMore}
+                  label={'Show more'}
+                />
+              </div>
+            ) : null
+        }
       </div>
     )
   }

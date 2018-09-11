@@ -1,6 +1,7 @@
 // dependencies
 import React from 'react'
 import { withStyles } from '@material-ui/core/styles'
+import Router from 'next/router'
 
 // components
 import withRoot from '../src/withRoot'
@@ -28,15 +29,24 @@ const styles = theme => ({
 })
 
 class OrderConfirmationWrapper extends React.Component {
+  static getInitialProps ({query}) {
+    return query
+  }
+
   render () {
+    const {query} = Router
     const { addToCartHandler } = this.props
+
     return (
       <Layout
         title={orderConfirmation.title}
         addToCartHandler={addToCartHandler}
       >
         <div className={this.props.classes.root}>
-          <ThankyouWrapper />
+          <ThankyouWrapper
+            queryParamPaymentStatus={query.paymentStatus}
+            orderId={query.id}
+          />
         </div>
       </Layout>
     )

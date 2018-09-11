@@ -119,16 +119,16 @@ class ProductDetails extends React.Component {
             isError={this.props.productDetailsState.errorStateGetProductDetails.isError}
             ErrorComp={this.getErrorComponent()}
           >
-            <Paper className={classes.root} elevation={1}>
-              {product_id && product_id !== 'undefined'
-                ? <ProductDetailsWrapper
+            {product_id && product_id !== 'undefined' &&
+              <Paper className={classes.root} elevation={1}>
+                <ProductDetailsWrapper
                   checkPincodeState={checkPincodeState}
                   getProductDetailLoading={actions.getProductDetailLoading}
                   addToCartHandler={addToCartHandler}
                   onChangeQuantity={actions.onChangeQuantity}
                 />
-                : 'Page not found'}
-            </Paper>
+              </Paper>
+            }
           </ActivityIndicator>
         </div>
       </Layout>
