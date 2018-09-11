@@ -89,7 +89,7 @@ class HealthCoachDetail extends Component {
                 variant='body1'
                 className={this.props.classes.captionTextStyle}
               >
-                  WEIGHT MANGEMENT
+                  WEIGHT MANAGEMENT
               </Typography>
             </Grid>
           </Grid>

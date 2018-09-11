@@ -16,6 +16,7 @@ import getPageContext from '../../../src/getPageContext'
 import MenuWrapper from '../../../containers/menu'
 import { searchMedicineLoading } from '../../../containers/searchMedicine/searchMedicineAction'
 import GoToCartSnackbar from '../../../containers/cartDetails/GoToCartSnackbar'
+import Toolbar from '@material-ui/core/Toolbar'
 import Search from './Search'
 
 import {
@@ -32,11 +33,18 @@ import Router from 'next/router'
 import { Grid } from '@material-ui/core'
 
 const styles = theme => ({
+  root: {
+    backgroundColor: theme.palette.common.white
+  },
   appBar: {
-    backgroundColor: theme.palette.common.white,
     paddingLeft: theme.spacing.unit * 4.375,
     paddingRight: theme.spacing.unit * 4.375,
-    width: '100%'
+    width: '100%',
+    maxWidth: theme.breakpoints.values.lg,
+    margin: '0 auto',
+    display: 'flex',
+    flexDirection: 'column',
+    flexGrow: 1
   },
   gridStyle: {
     alignItems: 'center',
@@ -58,6 +66,12 @@ const styles = theme => ({
   },
   searchWrapper: {
     display: 'none'
+  },
+  toolbar: {
+    marginBottom: 0,
+    height: theme.spacing.unit * 7.5,
+    display: 'flex',
+    justifyContent: 'space-between'
   }
 })
 
@@ -136,57 +150,67 @@ class Header extends React.Component {
     return (
       <React.Fragment>
         <RouteLoader />
-        <AppBar elevation={1} className={classes.appBar} position='fixed'>
-          <Grid container spacing={24} className={this.props.classes.gridStyle}>
-            <Grid item xs={1} lg={1}>
-              <img
-                className={classes.lifcareLogoStyle}
-                src='/static/images/logo-green.svg'
-                onClick={() => {
-                  Router.push({ pathname: HOME_PAGE })
-                }}
-              />
-            </Grid>
-            <Grid item xs={loginState.isAuthenticated ? 6 : 5} lg={7}>
-              {!this.props.isHomePage ? (
-                <SearchMedicine
-                  searchMedicineState={searchMedicineState}
-                  checkPincodeState={checkPincodeState}
-                  searchMedicineLoading={actions.searchMedicineLoading}
-                  addToCartHandler={this.props.addToCartHandler}
-                  cartState={this.props.cartState}
-                />
-              ) : null}
-            </Grid>
-            <Grid item xs={3} lg={loginState.isAuthenticated ? 3 : 2}>
-              <Subheader
-                isAuthenticated={this.props.loginState.isAuthenticated}
-                openLoginModal={this.openLoginModal}
-              />
-            </Grid>
-            <Grid
-              item
-              xs={loginState.isAuthenticated ? 2 : 3}
-              lg={loginState.isAuthenticated ? 1 : 2}
+        <AppBar elevation={1} className={classes.root} position='fixed'>
+          <div className={classes.appBar}>
+            <Toolbar
+              classes={{
+                root: classes.toolbar
+              }}
+              disableGutters
             >
-              <div className={this.props.classes.wrapCart}>
-                <CartIcon cartState={this.props.cartState} />
-                {loginState.isAuthenticated ? (
-                  <MenuWrapper />
-                ) : (
-                  <Button
-                    variant='raised'
-                    size='medium'
-                    color='primary'
-                    aria-label='login'
-                    onClick={this.openLoginModal}
-                    className={classes.button}
-                    label={'Login / Register'}
+              <Grid container spacing={24} className={this.props.classes.gridStyle}>
+                <Grid item xs={1} lg={1}>
+                  <img
+                    className={classes.lifcareLogoStyle}
+                    src='/static/images/logo-green.svg'
+                    onClick={() => {
+                      Router.push({ pathname: HOME_PAGE })
+                    }}
                   />
-                )}
-              </div>
-            </Grid>
-          </Grid>
+                </Grid>
+                <Grid item xs={loginState.isAuthenticated ? 6 : 5} lg={7}>
+                  {!this.props.isHomePage ? (
+                    <SearchMedicine
+                      searchMedicineState={searchMedicineState}
+                      checkPincodeState={checkPincodeState}
+                      searchMedicineLoading={actions.searchMedicineLoading}
+                      addToCartHandler={this.props.addToCartHandler}
+                      cartState={this.props.cartState}
+                    />
+                  ) : null}
+                </Grid>
+                <Grid item xs={3} lg={loginState.isAuthenticated ? 3 : 2}>
+                  <Subheader
+                    isAuthenticated={this.props.loginState.isAuthenticated}
+                    openLoginModal={this.openLoginModal}
+                  />
+                </Grid>
+                <Grid
+                  item
+                  xs={loginState.isAuthenticated ? 2 : 3}
+                  lg={loginState.isAuthenticated ? 1 : 2}
+                >
+                  <div className={this.props.classes.wrapCart}>
+                    <CartIcon cartState={this.props.cartState} />
+                    {loginState.isAuthenticated ? (
+                      <MenuWrapper />
+                    ) : (
+                      <Button
+                        variant='raised'
+                        size='medium'
+                        color='primary'
+                        aria-label='login'
+                        onClick={this.openLoginModal}
+                        className={classes.button}
+                        label={'Login / Register'}
+                      />
+                    )}
+                  </div>
+                </Grid>
+              </Grid>
+            </Toolbar>
+           
+         </div>
           {(this.state.openLoginDialog ||
             this.props.cartState.isCartOpenLoginDialog ||
             this.props.cartState.isCartOpenRegisterDialog) && (
