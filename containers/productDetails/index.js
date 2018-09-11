@@ -15,6 +15,8 @@ import {
   openPincodeDialog
 } from '../../containers/location/pincode/pincodeAction'
 
+import { storage } from '../../services/firebase'
+
 /*
   bread crumbs
   Product Details
@@ -25,8 +27,52 @@ class ProductDetailsWrapper extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      hover: {}
+      hover: {},
+      publishedContent: []
     }
+  }
+
+  componentDidMount () {
+    this.newsRef = storage.collection('news')
+
+    this.getRecentlyPublishedContent()
+  }
+
+  getRecentlyPublishedContent () {
+    this.queryLimitedData()
+  }
+
+  queryLimitedData () {
+    this.newsRef
+      .where('is_enabled', '==', true)
+      .where('is_published', '==', true)
+      .orderBy('created_at', 'desc')
+      .limit(3)
+      .onSnapshot((querySnapshot) => {
+        let payload = []
+
+        querySnapshot.forEach(function (doc) {
+          let docObj = doc.data()
+
+          docObj = {
+            ...docObj,
+            doc_id: doc.id,
+            isLoading: false
+          }
+
+          payload = [
+            ...payload,
+            docObj
+          ]
+        })
+        this.saveRecentlyPublishedContent(payload)
+      })
+  }
+
+  saveRecentlyPublishedContent (payload) {
+    this.setState({
+      publishedContent: payload
+    })
   }
 
   toggleHover (item) {
@@ -57,6 +103,7 @@ class ProductDetailsWrapper extends Component {
           <ProductDetailsContent
             hover={this.state.hover}
             productDetailsState={this.props.productDetailsState}
+            publishedContent={this.state.publishedContent}
           />
         </section>
       </div>

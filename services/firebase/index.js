@@ -19,6 +19,10 @@ var config = {
   storageBucket: 'lifcare-test.appspot.com',
   messagingSenderId: '10158808556'
 }
-firebase.initializeApp(config)
+
+if (!firebase.apps.length) {
+  firebase.initializeApp(config);
+}
+// firebase.initializeApp(config)
 
 export var storage = firebase.firestore()
