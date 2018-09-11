@@ -10,7 +10,7 @@ import Fade from '@material-ui/core/Fade'
 import Login from './Login'
 import Register from './Register'
 import OTP from './OTP'
-import { sendOtpLoading, verifyOtpLoading } from './loginActions'
+import { sendOtpLoading, verifyOtpLoading, resetLoginState } from './loginActions'
 import {
   customerRegisterLoading,
   checkReferralCodeLoading,
@@ -77,6 +77,7 @@ class LoginWrapper extends React.Component {
 
   resetState () {
     this.props.actions.resetCustomerFormState()
+    this.props.actions.resetLoginState()
   }
 
   getModal (name) {
@@ -187,7 +188,8 @@ function mapDispatchToProps (dispatch) {
         verifyOtpLoading,
         customerRegisterLoading,
         checkReferralCodeLoading,
-        resetCustomerFormState
+        resetCustomerFormState,
+        resetLoginState
       },
       dispatch
     )

@@ -7,7 +7,8 @@ import {
   OTP_VERIFIED_FAILURE,
   OTP_VERIFIED_LOADING,
   OTP_VERIFIED_SUCCESS,
-  TOGGLE_AUTHENTICATION
+  TOGGLE_AUTHENTICATION,
+  RESET_LOGIN_STATE
 } from './loginActionTypes'
 
 export default function (state = initialState, action) {
@@ -87,6 +88,13 @@ export default function (state = initialState, action) {
       return {
         ...state,
         isAuthenticated: action.status
+      }
+
+    case RESET_LOGIN_STATE:
+      return {
+        ...state,
+        errorStateVerifyOtp: initialState.errorStateVerifyOtp,
+        errorStateSendOtp: initialState.errorStateSendOtp
       }
 
     default:

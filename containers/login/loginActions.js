@@ -5,7 +5,8 @@ import {
   OTP_VERIFIED_LOADING,
   OTP_VERIFIED_FAILURE,
   OTP_VERIFIED_SUCCESS,
-  TOGGLE_AUTHENTICATION
+  TOGGLE_AUTHENTICATION,
+  RESET_LOGIN_STATE
 } from './loginActionTypes'
 
 import { setCookie, removeCookie } from '../../utils/cookie'
@@ -95,5 +96,11 @@ export function logout () {
   removeCookie('token')
   return {
     type: 'RESET_APPLICATION_STATE'
+  }
+}
+
+export function resetLoginState () {
+  return {
+    type: RESET_LOGIN_STATE
   }
 }
