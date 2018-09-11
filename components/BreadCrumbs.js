@@ -37,6 +37,6 @@ const BreadCrumbs = (props) => (
   //     </div>
   //   </nav>
   // </ActivityIndicator>
-  <div className={props.classes.navWrapper}></div>
+  <div className={props.classes.navWrapper} />
 )
 export default withStyles(styles)(BreadCrumbs)

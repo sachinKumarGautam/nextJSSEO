@@ -17,7 +17,9 @@ import {
   GENDER_REQUIRED,
   MOBILE_INVALID,
   MOBILE_VALIDATION_REGEX,
-  NUMBER_VALIDATION_REGEX
+  NUMBER_VALIDATION_REGEX,
+  NAME_VALIDATION_REGEX,
+  NAME_VALIDATION_MSG
 } from '../../containers/messages/ValidationMsg'
 
 // Helper styles for demo
@@ -88,7 +90,6 @@ class PatientForm extends React.Component {
             type='text'
             onChange={handleChange}
             value={values.full_name}
-
           />
           {errors.full_name &&
             touched.full_name &&
@@ -107,7 +108,7 @@ class PatientForm extends React.Component {
             name='gender'
             displayEmpty
           >
-            <MenuItem value=''>
+            <MenuItem disabled value=''>
               <em>Gender</em>
             </MenuItem>
             <MenuItem value={'Male'}>Male</MenuItem>
@@ -186,7 +187,10 @@ export default withStyles(styles)(
       }
     },
     validationSchema: Yup.object().shape({
-      full_name: Yup.string().trim().required(FULL_NAME_REQUIRED),
+      full_name: Yup.string()
+        .matches(NAME_VALIDATION_REGEX, NAME_VALIDATION_MSG)
+        .trim()
+        .required(FULL_NAME_REQUIRED),
       mobile: Yup.string()
         .min(10, MOBILE_INVALID)
         .max(10, MOBILE_INVALID)

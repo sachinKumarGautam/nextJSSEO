@@ -20,7 +20,9 @@ import {
   MOBILE_INVALID,
   REFERRAL_CODE_INVALID,
   MOBILE_VALIDATION_REGEX,
-  NUMBER_VALIDATION_REGEX
+  NUMBER_VALIDATION_REGEX,
+  NAME_VALIDATION_REGEX,
+  NAME_VALIDATION_MSG
 } from '../../containers/messages/ValidationMsg'
 
 // Helper styles for demo
@@ -186,7 +188,7 @@ class RegisterForm extends React.Component {
               placeholder: 'Gender'
             }}
           >
-            <MenuItem value=''>
+            <MenuItem value='' disabled>
               <em>Gender</em>
             </MenuItem>
             <MenuItem value={'male'}>Male</MenuItem>
@@ -276,7 +278,10 @@ export default withStyles(styles)(
       }
     },
     validationSchema: Yup.object().shape({
-      full_name: Yup.string().trim().required(FULL_NAME_REQUIRED),
+      full_name: Yup.string()
+        .matches(NAME_VALIDATION_REGEX, NAME_VALIDATION_MSG)
+        .trim()
+        .required(FULL_NAME_REQUIRED),
       mobile: Yup.string()
         .trim()
         .min(10, MOBILE_INVALID)
