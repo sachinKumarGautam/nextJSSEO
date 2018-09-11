@@ -184,6 +184,8 @@ class AddressDetailsExpansionPanel extends React.Component {
             updateAddressFormValue={this.props.updateAddressFormValue}
             checkPincodeDetailLoading={this.props.checkPincodeDetailLoading}
             getLocalityDetailListLoading={this.props.getLocalityDetailListLoading}
+            checkPincodeState={this.props.checkPincodeState}
+            inProgressAddressId={this.state.addressId}
           />
           <Button
             size='small'
