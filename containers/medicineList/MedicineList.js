@@ -93,7 +93,7 @@ class MedicineList extends React.Component {
 
     this.setState({
       page: this.state.page + 1
-    })
+    }, () => console.log('page', this.state.page))
 
     this.props.updateIsShowMore()
   }
