@@ -25,6 +25,8 @@ import {
   REFILL_DIALOG_CONTENT
 } from '../messages/refillPatientMessage'
 
+import { REFILL } from '../../components/constants/Constants'
+
 const styles = theme => {
   return {
     medicineListWrapper: {
@@ -73,10 +75,10 @@ class RefillMedicineList extends Component {
     const dialogTitle = ''
     this.setState({
       open: true,
-      dialogTitle: sourceType === 'REFILL'
+      dialogTitle: sourceType === REFILL
         ? SWITCH_PATIENT_DIALOG_TITLE
         : REFILL_DIALOG_TITLE,
-      dialogContent: sourceType === 'REFILL'
+      dialogContent: sourceType === REFILL
         ? SWITCH_PATIENT_DIALOG_CONTENT
         : REFILL_DIALOG_CONTENT,
       medicineName: item
@@ -97,7 +99,7 @@ class RefillMedicineList extends Component {
       this.props.cartState,
       this.props.checkPincodeState.payload.source,
       this.props.checkPincodeState.payload.id,
-      'REFILL',
+      REFILL,
       this.props.pastMedicineState.selectedPatient,
       this.addMedicine,
       true
@@ -137,31 +139,31 @@ class RefillMedicineList extends Component {
               {this.props.pastMedicineState.payload.length
                 ? <ul className={this.props.classes.medicineListWrapper}>
                   {modifiyMedicineList(
-                    pastMedicineList,
-                    cartItems
-                  ).map(itemDetails => (
-                    <li className={this.props.classes.listItem}>
-                      <MedicineListDetails
-                        isLoading={this.props.isLoading}
-                        itemDetails={itemDetails}
-                        checkIfAlredyExistInCart={
-                          itemDetails.is_exist_in_cart
-                        }
-                        isRefillMedicines
-                        addToCartHandler={this.props.addToCartHandler}
-                        checkPincodeState={this.props.checkPincodeState}
-                        onClickOfPatient={this.onClickOfPatient}
-                        pastMedicineState={this.props.pastMedicineState}
-                        cartState={this.props.cartState}
-                      />
-                    </li>
-                  ))}
+                      pastMedicineList,
+                      cartItems
+                    ).map(itemDetails => (
+                      <li className={this.props.classes.listItem}>
+                        <MedicineListDetails
+                          isLoading={this.props.isLoading}
+                          itemDetails={itemDetails}
+                          checkIfAlredyExistInCart={
+                            itemDetails.is_exist_in_cart
+                          }
+                          isRefillMedicines
+                          addToCartHandler={this.props.addToCartHandler}
+                          checkPincodeState={this.props.checkPincodeState}
+                          onClickOfPatient={this.onClickOfPatient}
+                          pastMedicineState={this.props.pastMedicineState}
+                          cartState={this.props.cartState}
+                        />
+                      </li>
+                    ))}
                 </ul>
                 : <Typography
                   gutterBottom
                   variant='body2'
                   className={this.props.classes.noContent}
-                >
+                  >
                   {NO_REFILL_MEDICINE}
                 </Typography>}
             </ActivityIndicator>

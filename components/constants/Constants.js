@@ -9,3 +9,4 @@ export const URGENT_DELIVERY = 'URGENT_DELIVERY'
 export const IN_STOCK = 'IN_STOCK'
 
 export const NORMAL = 'NORMAL'
+export const REFILL = 'REFILL'

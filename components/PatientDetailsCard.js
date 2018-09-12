@@ -4,6 +4,7 @@ import Grid from '@material-ui/core/Grid'
 import Typography from '@material-ui/core/Typography'
 
 import { withStyles } from '@material-ui/core/styles'
+import { REFILL } from './constants/Constants'
 
 const styles = theme => {
   return {
@@ -56,7 +57,7 @@ const styles = theme => {
 class PatientDetailsCard extends React.Component {
   handleOnClickPatientCard = () => {
     // check source type and patient id selected  and patient id in cart
-    if (this.props.cartType === 'REFILL') {
+    if (this.props.cartType === REFILL) {
       this.props.onClickOfPatient(this.props.patientDetail)
     } else {
       this.props.savePatientSelected &&
@@ -115,9 +116,9 @@ class PatientDetailsCard extends React.Component {
                       classes={{
                         root: this.props.classes.selectButtonRoot
                       }}
-                    >
+                      >
                         SELECT
-                    </Typography>
+                      </Typography>
                     : <div onClick={this.props.openPatientFormModal}>
                       <Typography
                         variant='caption'
@@ -125,9 +126,9 @@ class PatientDetailsCard extends React.Component {
                         classes={{
                           root: this.props.classes.selectButtonRoot
                         }}
-                      >
+                        >
                           EDIT
-                      </Typography>
+                        </Typography>
                     </div>}
                 </Grid>
               </Grid>
