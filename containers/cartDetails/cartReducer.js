@@ -451,7 +451,8 @@ export default function cartReducer (state = initialState, action) {
         ...state,
         prescriptionDetails: {
           ...state.prescriptionDetails,
-          isLoading: action.isLoading
+          isLoading: action.isLoading,
+          isHomePage: false
         }
       }
 
@@ -461,7 +462,8 @@ export default function cartReducer (state = initialState, action) {
         prescriptionDetails: {
           ...state.prescriptionDetails,
           isLoading: action.isLoading,
-          cartPrescriptionList: action.uploadedFiles
+          cartPrescriptionList: action.uploadedFiles,
+          isHomePage: action.isHomePage
         },
         payload: {
           ...state.payload,
@@ -479,7 +481,8 @@ export default function cartReducer (state = initialState, action) {
             ...state.prescriptionDetails.errorState,
             isError: action.isError,
             error: action.error
-          }
+          },
+          isHomePage: false
         }
       }
 

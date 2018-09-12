@@ -20,11 +20,11 @@ const styles = theme => ({
     paddingBottom: theme.spacing.unit * 3,
     paddingLeft: theme.spacing.unit * 7,
     paddingRight: theme.spacing.unit * 7,
-    maxWidth: theme.breakpoints.values.lg,
-    minWidth: theme.breakpoints.values.md,
     margin: '0 auto',
-    marginTop: theme.spacing.unit * 12,
-    minHeight: theme.spacing.unit * 100
+    marginTop: theme.spacing.unit * 7.5,
+    minHeight: theme.spacing.unit * 100,
+    maxWidth: theme.breakpoints.values.lg,
+    minWidth: theme.breakpoints.values.md
   },
   title: {
     fontWeight: theme.typography.fontWeightBold

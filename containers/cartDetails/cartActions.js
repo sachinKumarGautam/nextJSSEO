@@ -333,26 +333,29 @@ export function resetUploadPrescriptionError (cartState) {
   }
 }
 
-export function uploadPrescriptionLoading (cartState, file) {
+export function uploadPrescriptionLoading (cartState, file, isHomePage) {
   return {
     type: cartActionTypes.UPLOAD_PRESCRIPTION_LOADING,
     cartState: cartState,
     isLoading: true,
-    uploadedFiles: file
+    uploadedFiles: file,
+    isHomePage: isHomePage
   }
 }
 
 export function uploadPrescriptionSuccess (
   cartState,
   uploadedFiles,
-  cartPrescriptions
+  cartPrescriptions,
+  isHomePage
 ) {
   return {
     type: cartActionTypes.UPLOAD_PRESCRIPTION_SUCCESS,
     cartState,
     isLoading: false,
     cart_prescriptions: cartPrescriptions,
-    uploadedFiles: uploadedFiles
+    uploadedFiles: uploadedFiles,
+    isHomePage: isHomePage
   }
 }
 
