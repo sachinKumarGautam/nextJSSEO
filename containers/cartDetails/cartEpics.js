@@ -68,6 +68,10 @@ import {
 } from './cartActions'
 
 import {
+  toggleAuthentication
+} from '../login/loginActions'
+
+import {
   getAnonymousCartId$,
   getCartDetails$,
   putCartItem$,
@@ -374,6 +378,7 @@ export function cartTransferEpic (action$, store) {
         map(result => {
           let cartItems = result.body.payload.cart_items
           let cartPrescriptions = result.body.payload.cart_prescriptions
+          const loginState = store.getState().loginState
 
           cartItems.forEach((cartMedicine, index) => {
             cartItems[index] = {
@@ -390,11 +395,14 @@ export function cartTransferEpic (action$, store) {
               }
             }
           )
-          return cartTransferSuccess(
-            data.cartState,
-            result,
-            cartItems,
-            updatedCartPrescriptions
+          return of(
+            toggleAuthentication(loginState, true),
+            cartTransferSuccess(
+              data.cartState,
+              result,
+              cartItems,
+              updatedCartPrescriptions
+            )
           )
         }),
         catchError(error => {

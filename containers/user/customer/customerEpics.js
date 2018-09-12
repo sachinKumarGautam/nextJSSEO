@@ -17,7 +17,6 @@ import {
   getMembershipCodeSuccess,
   getMembershipCodeFailure
 } from './customerActions'
-import { toggleAuthentication } from '../../login/loginActions'
 
 import http from '../../../services/api/ajaxWrapper'
 import {
@@ -33,7 +32,6 @@ export function registerCustomer (action$, store) {
     ofType(CUSTOMER_REGISTER_LOADING),
     mergeMap(data => {
       const customerState = store.getState().customerState
-      const loginState = store.getState().loginState
       const cartState = store.getState().cartState
 
       return http(registerCustomer$(data.values)).pipe(
@@ -43,7 +41,6 @@ export function registerCustomer (action$, store) {
             data.closeLoginModal()
           }, 250)
           return of(
-            toggleAuthentication(loginState, true),
             customerRegisterSuccess(customerState, result),
             cartTransferLoading(cartState)
           )

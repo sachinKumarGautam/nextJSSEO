@@ -65,6 +65,7 @@ class Register extends React.Component {
           loginState={loginState}
           customerState={customerState}
           checkReferralCodeLoading={checkReferralCodeLoading}
+          isRegisterClicked={this.props.isRegisterClicked}
         />
         <Typography
           variant='caption'
@@ -75,7 +76,7 @@ class Register extends React.Component {
           <a
             href='#'
             className={classes.registerLabel}
-            onClick={this.props.toggleForm.bind(this, 'login')}
+            onClick={this.props.toggleRegisterClicked.bind(this, 'loginClick')}
           >
             Login
           </a>

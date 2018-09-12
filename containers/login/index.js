@@ -114,10 +114,12 @@ class LoginWrapper extends React.Component {
             closeLoginModal={this.props.closeLoginModal}
             loginState={this.props.loginState}
             customerState={this.props.customerState}
+            toggleRegisterClicked={this.toggleRegisterClicked}
             checkReferralCodeLoading={
               this.props.actions.checkReferralCodeLoading
             }
             customerRegisterLoading={this.props.actions.customerRegisterLoading}
+            isRegisterClicked={this.state.isRegisterClicked}
           />
         )
 
