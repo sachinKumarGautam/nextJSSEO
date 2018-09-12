@@ -439,6 +439,11 @@ export function submitOrderSuccess (cartState, result) {
     facility_code: result.order.facility_code,
     status: result.order.status,
     source: result.order.source,
+    payment_confirmation_time: result.order.payment_confirmation_time,
+    payment_cancellation_time: result.order.payment_cancellation_time > 60
+      ? result.order.payment_cancellation_time / 60 + ' hours '
+      : result.order.payment_cancellation_time + ' minutes ',
+    customer_care_number: result.order.customer_care_number,
     isOrderSubmitted: true,
     isLoading: false
   }

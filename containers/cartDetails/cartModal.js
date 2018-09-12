@@ -121,7 +121,10 @@ const initialState = {
       total_tax_amount: 0,
       facility_code: 0,
       status: '',
-      source: ''
+      source: '',
+      payment_confirmation_time: '',
+      payment_cancellation_time: '',
+      customer_care_number: ''
     },
     isLoading: false,
     errorState: {

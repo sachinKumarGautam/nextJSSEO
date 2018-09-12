@@ -570,7 +570,10 @@ export default function cartReducer (state = initialState, action) {
             total_tax_amount: action.total_tax_amount,
             facility_code: action.facility_code,
             status: action.status,
-            source: action.source
+            source: action.source,
+            payment_confirmation_time: action.payment_confirmation_time,
+            payment_cancellation_time: action.payment_cancellation_time,
+            customer_care_number: action.customer_care_number
           }
         }
       }
