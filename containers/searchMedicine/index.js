@@ -10,8 +10,7 @@ import SearchIcon from '@material-ui/icons/Search'
 import MedicineListDetails from '../../components/MedicineListDetails'
 import TextErrorMessage
   from '../../components/activityIndicator/error/TextErrorMessage'
-
-import { PRODUCT_SEARCH } from '../../routes/RouteConstant'
+import { PRODUCT_SEARCH, PRODUCT_DETAILS } from '../../routes/RouteConstant'
 
 import { CUSTOM_MESSGAE_SNACKBAR } from '../messages/errorMessages'
 import debounce from 'lodash.debounce'
@@ -170,6 +169,7 @@ function renderSuggestion ({
         itemDetails={suggestion}
         checkIfAlredyExistInCart={suggestion.is_exist_in_cart}
         openPicodeDialogFrom
+        onSelectItem={onSelectItem}
         checkPincodeState={checkPincodeState}
         addToCartHandler={addToCartHandler}
       />
@@ -181,7 +181,8 @@ class SearchMedicine extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
-      isOpen: false
+      isOpen: false,
+      highlightedIndex: ''
     }
     this.searchMedicineOnChange = this.searchMedicineOnChange.bind(this)
     this.stateChangeHandler = this.stateChangeHandler.bind(this)
@@ -214,15 +215,57 @@ class SearchMedicine extends React.Component {
   }
 
   stateChangeHandler = changes => {
-    let { isOpen = this.state.isOpen, type } = changes
+    let { isOpen = this.state.isOpen, type, highlightedIndex } = changes
+    const searchMedicineResult = this.props.searchMedicineState.payload
+      .searchMedicineResult
 
     isOpen = type === Downshift.stateChangeTypes.blurInput
       ? this.state.isOpen
       : isOpen
     // restrict closing of search item list because of pincode dialog invokes blur event on search bar
-    this.setState({
-      isOpen
-    })
+    this.setState(
+      prevState => ({
+        isOpen,
+        highlightedIndex: highlightedIndex,
+        prevHighlightedIndex: prevState.highlightedIndex
+      }),
+      () => {
+        this.handleOnEnterItem(
+          Downshift.stateChangeTypes,
+          searchMedicineResult,
+          type,
+          this.state.prevHighlightedIndex,
+          highlightedIndex
+        )
+      }
+    )
+  }
+
+  handleOnEnterItem = (
+    stateChangeTypes,
+    searchMedicineResult,
+    type,
+    prevHighlightedIndex,
+    highlightedIndex
+  ) => {
+    console.log(
+      highlightedIndex,
+      prevHighlightedIndex,
+      typeof prevHighlightedIndex,
+      type
+    )
+
+    // prevHighlightedIndex = typeof highlightedIndex === null &&
+    //   prevHighlightedIndex === 0
+    //   ? highlightedIndex
+    //   : prevHighlightedIndex
+    if (type === stateChangeTypes.keyDownEnter) {
+      const slug = searchMedicineResult[prevHighlightedIndex].slug
+      const city = this.props.checkPincodeState.payload.city
+      const href = `${PRODUCT_DETAILS}?id=${slug}&location=${city}`
+      const as = `${PRODUCT_DETAILS}/${slug}?location=${city}`
+      Router.push(href, as)
+    }
   }
 
   render () {
@@ -245,17 +288,12 @@ class SearchMedicine extends React.Component {
             errorMessage={
               this.props.searchMedicineState.errorState.error.response
                 ? this.props.searchMedicineState.errorState.error.response.body
-                  .error.message
+                    .error.message
                 : CUSTOM_MESSGAE_SNACKBAR
             }
             customStyle={this.props.classes.errorMessage}
           />}
-        <Downshift
-          onStateChange={this.stateChangeHandler}
-          // onOuterClick={this.onOuterClick}
-          // onSelectItem={this.onSelectItem}
-          isOpen={isOpen}
-        >
+        <Downshift onStateChange={this.stateChangeHandler} isOpen={isOpen}>
           {({
             getInputProps,
             getItemProps,
@@ -284,27 +322,27 @@ class SearchMedicine extends React.Component {
                   <ul
                     {...getMenuProps()}
                     className={classes.searchContentWrapper}
-                  >
+                    >
                     {modifiyMedicineList(
-                      searchMedicineResult,
-                      cartItems
-                    ).map((suggestion, index) =>
-                      renderSuggestion({
-                        suggestion,
-                        index,
-                        itemProps: getItemProps({
-                          item: suggestion.name
-                        }),
-                        highlightedIndex,
-                        selectedItem,
-                        onSelectItem: this.onSelectItem,
-                        searchItemStyle: classes.searchItem,
-                        highlightedSearchItem: `${classes.searchItem} ${classes.highlightedSearchItem}`,
-                        selectedSearchItem: `${classes.searchItem} ${classes.selectedSearchItem}`,
-                        checkPincodeState,
-                        addToCartHandler
-                      })
-                    )}
+                        searchMedicineResult,
+                        cartItems
+                      ).map((suggestion, index) =>
+                        renderSuggestion({
+                          suggestion,
+                          index,
+                          itemProps: getItemProps({
+                            item: suggestion.name
+                          }),
+                          highlightedIndex,
+                          selectedItem,
+                          onSelectItem: this.onSelectItem,
+                          searchItemStyle: classes.searchItem,
+                          highlightedSearchItem: `${classes.searchItem} ${classes.highlightedSearchItem}`,
+                          selectedSearchItem: `${classes.searchItem} ${classes.selectedSearchItem}`,
+                          checkPincodeState,
+                          addToCartHandler
+                        })
+                      )}
                   </ul>
                 </Paper>
                 : null}

@@ -107,7 +107,7 @@ class MedicineListDetails extends React.Component {
         as={`${PRODUCT_DETAILS}/${props.itemDetails.slug}?location=${city}`}
       >
         <div className={props.classes.medicineListContentWrapper}>
-          <div onClick={this.props.onSelectItem}>
+          <div>
             <ProductName
               variant={'body1'}
               name={props.itemDetails.name}
@@ -174,7 +174,7 @@ class MedicineListDetails extends React.Component {
                   color='primary'
                   onClick={this.addToCart} // this is coming from HOC
                   label={'Add To Cart'}
-                />
+                  />
                 : <AlreadyAdded />}
             </div>
           </div>
