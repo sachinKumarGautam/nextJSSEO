@@ -17,19 +17,19 @@ export function checkPincodeLoading (
   handleClose,
   setSubmitting,
   values,
-  { isDeliveryAddress },
-  incrementCartItemLoading = null,
-  inProgressCartItem = {}
+  {...defaultArgs} // an object with default values
 ) {
   return {
     type: CHECK_PINCODE_LOADING,
     checkPincodeState,
     handleClose: handleClose,
     setSubmitting: setSubmitting,
-    isDeliveryAddress: isDeliveryAddress,
-    incrementCartItemLoading: incrementCartItemLoading,
-    inProgressCartItem: inProgressCartItem,
-    pincode: isDeliveryAddress ? values : values.pincode,
+    isDeliveryAddress: defaultArgs.isDeliveryAddress,
+    incrementCartItemLoading: defaultArgs.incrementCartItemLoading,
+    inProgressCartItem: defaultArgs.inProgressCartItem,
+    pincode: defaultArgs.isDeliveryAddress ? values : values.pincode,
+    isCartAddressSelection: defaultArgs.isCartAddressSelection,
+    addressId: defaultArgs.addressId,
     isLoading: true,
     isError: false,
     error: {}
