@@ -15,8 +15,8 @@ const styles = theme => ({
   },
   spinnerCustomStyle: {
     position: 'absolute',
-    top: '20px',
-    right: '20px'
+    top: theme.spacing.unit * 2.5,
+    right: theme.spacing.unit * 2.5
   }
 })
 
