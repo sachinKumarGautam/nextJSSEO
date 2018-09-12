@@ -151,10 +151,11 @@ class PriceDetails extends Component {
               </Typography>
             }
             {
-              this.props.orderDetailsState.payload.urgent_delivery_charge &&
-              <Typography className={this.props.classes.discount}>
+              this.props.orderDetailsState.payload.urgent_delivery_charge
+              ? (<Typography className={this.props.classes.discount}>
                 Express Delivery Charges
-              </Typography>
+              </Typography>)
+              : null
             }
           </Grid>
           <Grid item xs={4}>
@@ -177,10 +178,11 @@ class PriceDetails extends Component {
               </Typography>
             }
             {
-              this.props.orderDetailsState.payload.urgent_delivery_charge &&
-              <Typography className={this.props.classes.discountAmount}>
+              this.props.orderDetailsState.payload.urgent_delivery_charge
+              ? (<Typography className={this.props.classes.discountAmount}>
                 {this.props.orderDetailsState.payload.urgent_delivery_charge}
-              </Typography>
+              </Typography>)
+              : null
             }
           </Grid>
         </Grid>

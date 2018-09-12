@@ -83,11 +83,13 @@ class AddressDetailsExpansionPanel extends React.Component {
       null, // handle close function for closing pincode popup
       null, // setSubmitting function while submitting form
       {'pincode': deliveryDetails.pincode},
-      { isDeliveryAddress: false },
-      null, // incrementCartItemLoading function
-      {}, // inProgressCartItem details
-      { isCartAddressSelection: true },
-      { addressId: deliveryDetails.id }
+      {
+        isDeliveryAddress: false,
+        incrementCartItemLoading: null,
+        inProgressCartItem: {},
+        isCartAddressSelection: true,
+        addressId: deliveryDetails.id
+      }
     )
   }
 
