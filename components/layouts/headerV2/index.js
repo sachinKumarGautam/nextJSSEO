@@ -209,8 +209,8 @@ class Header extends React.Component {
                 </Grid>
               </Grid>
             </Toolbar>
-           
-         </div>
+
+          </div>
           {(this.state.openLoginDialog ||
             this.props.cartState.isCartOpenLoginDialog ||
             this.props.cartState.isCartOpenRegisterDialog) && (

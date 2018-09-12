@@ -248,17 +248,6 @@ class SearchMedicine extends React.Component {
     prevHighlightedIndex,
     highlightedIndex
   ) => {
-    console.log(
-      highlightedIndex,
-      prevHighlightedIndex,
-      typeof prevHighlightedIndex,
-      type
-    )
-
-    // prevHighlightedIndex = typeof highlightedIndex === null &&
-    //   prevHighlightedIndex === 0
-    //   ? highlightedIndex
-    //   : prevHighlightedIndex
     if (type === stateChangeTypes.keyDownEnter) {
       const slug = searchMedicineResult[prevHighlightedIndex].slug
       const city = this.props.checkPincodeState.payload.city
@@ -288,7 +277,7 @@ class SearchMedicine extends React.Component {
             errorMessage={
               this.props.searchMedicineState.errorState.error.response
                 ? this.props.searchMedicineState.errorState.error.response.body
-                    .error.message
+                  .error.message
                 : CUSTOM_MESSGAE_SNACKBAR
             }
             customStyle={this.props.classes.errorMessage}
@@ -322,27 +311,27 @@ class SearchMedicine extends React.Component {
                   <ul
                     {...getMenuProps()}
                     className={classes.searchContentWrapper}
-                    >
+                  >
                     {modifiyMedicineList(
-                        searchMedicineResult,
-                        cartItems
-                      ).map((suggestion, index) =>
-                        renderSuggestion({
-                          suggestion,
-                          index,
-                          itemProps: getItemProps({
-                            item: suggestion.name
-                          }),
-                          highlightedIndex,
-                          selectedItem,
-                          onSelectItem: this.onSelectItem,
-                          searchItemStyle: classes.searchItem,
-                          highlightedSearchItem: `${classes.searchItem} ${classes.highlightedSearchItem}`,
-                          selectedSearchItem: `${classes.searchItem} ${classes.selectedSearchItem}`,
-                          checkPincodeState,
-                          addToCartHandler
-                        })
-                      )}
+                      searchMedicineResult,
+                      cartItems
+                    ).map((suggestion, index) =>
+                      renderSuggestion({
+                        suggestion,
+                        index,
+                        itemProps: getItemProps({
+                          item: suggestion.name
+                        }),
+                        highlightedIndex,
+                        selectedItem,
+                        onSelectItem: this.onSelectItem,
+                        searchItemStyle: classes.searchItem,
+                        highlightedSearchItem: `${classes.searchItem} ${classes.highlightedSearchItem}`,
+                        selectedSearchItem: `${classes.searchItem} ${classes.selectedSearchItem}`,
+                        checkPincodeState,
+                        addToCartHandler
+                      })
+                    )}
                   </ul>
                 </Paper>
                 : null}
