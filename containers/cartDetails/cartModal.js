@@ -83,6 +83,7 @@ const initialState = {
       error: {}
     },
     isViewImageVisible: false,
+    isHomePage: false,
     visibleImageUrl: ''
   },
   payment_gateway: {},

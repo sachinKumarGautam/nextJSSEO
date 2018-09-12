@@ -1,5 +1,5 @@
 const initialState = {
-  backGroundImage: {
+  userReview: {
     payload: [],
     isLoading: false,
     errorState: {
