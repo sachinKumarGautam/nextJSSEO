@@ -89,6 +89,8 @@ const OrderContentWrapper = (props) => {
     <div className={props.classes.orderContentWrapper}>
       <OrderStatusDetails
         orderId={props.orderDetailsState.payload.id}
+        serviceType={props.orderDetailsState.payload.service_type}
+        deliveryOption={props.orderDetailsState.payload.delivery_option}
       />
       <Divider />
       <PaymentDetails

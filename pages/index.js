@@ -10,35 +10,21 @@ import withRoot from '../src/withRoot'
 import Layout from '../components/layouts/Layout'
 import HomePageWrapper from '../containers/homePage'
 
-import {
-  getBackGroundImagesLoading
-} from '../containers/homePage/homePageActions'
+import { getUserReviewLoading } from '../containers/homePage/homePageActions'
 
-import {
-  fetchConstantsLoading
-} from '../components/constants/constantsAction'
+import { fetchConstantsLoading } from '../components/constants/constantsAction'
 
 // page title
 import { homePage } from '../components/constants/PageTitle'
 
 const styles = theme => ({
   root: {
-    paddingTop: theme.spacing.unit * 2,
     paddingBottom: theme.spacing.unit * 2,
-    paddingLeft: theme.spacing.unit * 7,
-    paddingRight: theme.spacing.unit * 7,
-    maxWidth: theme.breakpoints.values.lg,
-    minWidth: theme.breakpoints.values.md,
     margin: '0 auto',
-    marginTop: theme.spacing.unit * 12
-  },
-  title: {
-    fontWeight: theme.typography.fontWeightBold
-  },
-  wrapperStyle: {
-    paddingTop: theme.spacing.unit * 3,
-    paddingBottom: theme.spacing.unit * 3,
-    minHeight: theme.spacing.unit * 100
+    marginTop: theme.spacing.unit * 7.5,
+    width: '100%',
+    maxWidth: theme.breakpoints.values.lg,
+    minWidth: theme.breakpoints.values.md
   }
 })
 
@@ -49,15 +35,10 @@ class HomePage extends React.Component {
 
   componentDidMount () {
     // get background images
-    this.props.actions.getBackGroundImagesLoading(
-      this.props.homePageState,
-      'background'
-    )
+    this.props.actions.getUserReviewLoading(this.props.homePageState)
 
     // fetch app constants
-    this.props.actions.fetchConstantsLoading(
-      this.props.constantsState
-    )
+    this.props.actions.fetchConstantsLoading(this.props.constantsState)
   }
 
   render () {
@@ -68,10 +49,11 @@ class HomePage extends React.Component {
         addToCartHandler={addToCartHandler}
         authentication={authentication}
         path={path}
+        isHomePage
       >
         <div>
           <Paper className={classes.root} elevation={1}>
-            <HomePageWrapper />
+            <HomePageWrapper addToCartHandler={addToCartHandler} />
           </Paper>
         </div>
       </Layout>
@@ -90,7 +72,7 @@ function mapDispatchToProps (dispatch) {
   return {
     actions: bindActionCreators(
       {
-        getBackGroundImagesLoading,
+        getUserReviewLoading,
         fetchConstantsLoading
       },
       dispatch
@@ -98,6 +80,7 @@ function mapDispatchToProps (dispatch) {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(
-  withRoot(withStyles(styles)(HomePage))
-)
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withRoot(withStyles(styles)(HomePage)))

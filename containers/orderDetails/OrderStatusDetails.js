@@ -4,6 +4,11 @@ import { withStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
 // import Location from '@material-ui/icons/LocationOn'
 
+import {
+  DELIVERY_OPTION_URGENT,
+  SERVICE_TYPE_LFASSURED
+} from '../../components/constants/Constants'
+
 const styles = theme => ({
   orderNoWrapper: {
     justifyContent: 'space-between',
@@ -12,7 +17,8 @@ const styles = theme => ({
   },
   orderWrapper: {
     display: 'flex',
-    flexDirection: 'row'
+    flexDirection: 'row',
+    alignItems: 'center'
   },
   title: {
     fontSize: theme.spacing.unit * 2.25,
@@ -23,7 +29,8 @@ const styles = theme => ({
     fontSize: theme.spacing.unit * 2.25,
     marginLeft: theme.spacing.unit * 1.25,
     fontWeight: theme.typography.fontWeightBold,
-    color: theme.palette.customGrey.grey500
+    color: theme.palette.customGrey.grey500,
+    marginRight: theme.spacing.unit
   },
   iconButtonStyle: {
     color: theme.palette.customGreen.green300,
@@ -53,6 +60,14 @@ const OrderStatusDetails = (props) => {
         >
           {props.orderId}
         </Typography>
+        {
+          props.deliveryOption === DELIVERY_OPTION_URGENT &&
+          <img src='static/images/express-delivery-icon.svg' />
+        }
+        {
+          props.serviceType === SERVICE_TYPE_LFASSURED &&
+          <img src='static/images/assured-service.svg' />
+        }
       </div>
       {
         // <div>
