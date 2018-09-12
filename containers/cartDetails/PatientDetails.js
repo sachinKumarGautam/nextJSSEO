@@ -39,8 +39,8 @@ const PatientDetails = props => (
           <ActivityIndicator
             isLoading={
               patientDetail.id === props.inProgressPatientId
-              ? props.patientDetails.isLoading
-              : false
+                ? props.patientDetails.isLoading
+                : false
             }
             LoaderComp={
               <CommonSpinner

@@ -43,8 +43,8 @@ const AddressDetails = props => (
             <ActivityIndicator
               isLoading={
                 deliveryDetail.id === props.inProgressAddressId
-                ? (props.checkPincodeState.isLoading || props.shippingAddressDetails.isLoading)
-                : false
+                  ? (props.checkPincodeState.isLoading || props.shippingAddressDetails.isLoading)
+                  : false
               }
               LoaderComp={
                 <CommonSpinner
