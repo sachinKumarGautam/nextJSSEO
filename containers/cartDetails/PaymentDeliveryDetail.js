@@ -114,7 +114,7 @@ class PaymentDeliveryDetail extends Component {
           this.props.cartState.payload.service_type === SERVICE_TYPE_LFASSURED &&
           <div className={this.props.classes.textWrapper}>
             <img
-              src='/static/images/shape.svg'
+              src='/static/images/assured-service.svg'
             />
             <Typography
               varaint='caption'

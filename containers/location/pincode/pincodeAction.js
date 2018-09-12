@@ -17,7 +17,7 @@ export function checkPincodeLoading (
   handleClose,
   setSubmitting,
   values,
-  defaultArgs // an object with default values
+  {...defaultArgs} // an object with default values
 ) {
   return {
     type: CHECK_PINCODE_LOADING,
