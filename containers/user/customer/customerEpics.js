@@ -18,6 +18,10 @@ import {
   getMembershipCodeFailure
 } from './customerActions'
 
+import {
+  resetIsNewUserFlag
+} from '../../login/loginActions'
+
 import http from '../../../services/api/ajaxWrapper'
 import {
   fetchUserInfo$,
@@ -32,6 +36,7 @@ export function registerCustomer (action$, store) {
     ofType(CUSTOMER_REGISTER_LOADING),
     mergeMap(data => {
       const customerState = store.getState().customerState
+      const loginState = store.getState().loginState
       const cartState = store.getState().cartState
 
       return http(registerCustomer$(data.values)).pipe(
@@ -42,7 +47,8 @@ export function registerCustomer (action$, store) {
           }, 250)
           return of(
             customerRegisterSuccess(customerState, result),
-            cartTransferLoading(cartState)
+            cartTransferLoading(cartState),
+            resetIsNewUserFlag(loginState)
           )
         }),
         catchError(error => {

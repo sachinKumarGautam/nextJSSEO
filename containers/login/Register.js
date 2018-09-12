@@ -76,7 +76,7 @@ class Register extends React.Component {
           <a
             href='#'
             className={classes.registerLabel}
-            onClick={this.props.toggleRegisterClicked.bind(this, 'loginClick')}
+            onClick={this.props.toggleForm.bind(this, 'login')}
           >
             Login
           </a>
