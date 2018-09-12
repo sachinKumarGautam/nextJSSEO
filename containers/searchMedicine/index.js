@@ -154,7 +154,6 @@ function renderSuggestion ({
   searchItemStyle,
   highlightedSearchItem,
   selectedSearchItem,
-  onSelectItem,
   checkPincodeState,
   addToCartHandler
 }) {
@@ -169,7 +168,6 @@ function renderSuggestion ({
         itemDetails={suggestion}
         checkIfAlredyExistInCart={suggestion.is_exist_in_cart}
         openPicodeDialogFrom
-        onSelectItem={onSelectItem}
         checkPincodeState={checkPincodeState}
         addToCartHandler={addToCartHandler}
       />
@@ -277,7 +275,7 @@ class SearchMedicine extends React.Component {
             errorMessage={
               this.props.searchMedicineState.errorState.error.response
                 ? this.props.searchMedicineState.errorState.error.response.body
-                  .error.message
+                    .error.message
                 : CUSTOM_MESSGAE_SNACKBAR
             }
             customStyle={this.props.classes.errorMessage}
@@ -311,27 +309,26 @@ class SearchMedicine extends React.Component {
                   <ul
                     {...getMenuProps()}
                     className={classes.searchContentWrapper}
-                  >
+                    >
                     {modifiyMedicineList(
-                      searchMedicineResult,
-                      cartItems
-                    ).map((suggestion, index) =>
-                      renderSuggestion({
-                        suggestion,
-                        index,
-                        itemProps: getItemProps({
-                          item: suggestion.name
-                        }),
-                        highlightedIndex,
-                        selectedItem,
-                        onSelectItem: this.onSelectItem,
-                        searchItemStyle: classes.searchItem,
-                        highlightedSearchItem: `${classes.searchItem} ${classes.highlightedSearchItem}`,
-                        selectedSearchItem: `${classes.searchItem} ${classes.selectedSearchItem}`,
-                        checkPincodeState,
-                        addToCartHandler
-                      })
-                    )}
+                        searchMedicineResult,
+                        cartItems
+                      ).map((suggestion, index) =>
+                        renderSuggestion({
+                          suggestion,
+                          index,
+                          itemProps: getItemProps({
+                            item: suggestion.name
+                          }),
+                          highlightedIndex,
+                          selectedItem,
+                          searchItemStyle: classes.searchItem,
+                          highlightedSearchItem: `${classes.searchItem} ${classes.highlightedSearchItem}`,
+                          selectedSearchItem: `${classes.searchItem} ${classes.selectedSearchItem}`,
+                          checkPincodeState,
+                          addToCartHandler
+                        })
+                      )}
                   </ul>
                 </Paper>
                 : null}
