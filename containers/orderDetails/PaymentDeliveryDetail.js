@@ -13,8 +13,8 @@ import {
 } from '../messages/cartMessages'
 
 import {
-  LF_ASSURED,
-  URGENT_DELIVERY
+  SERVICE_TYPE_LFASSURED,
+  DELIVERY_OPTION_URGENT
 } from '../../components/constants/Constants'
 
 import {
@@ -83,7 +83,7 @@ class PaymentDeliveryDetail extends Component {
     return (
       <div className={this.props.classes.mainWrapper}>
         {
-          this.props.serviceType === LF_ASSURED &&
+          this.props.serviceType === SERVICE_TYPE_LFASSURED &&
           <div className={this.props.classes.textWrapper}>
             <img
               src='/static/images/shape.svg'
@@ -122,7 +122,7 @@ class PaymentDeliveryDetail extends Component {
           </div>
         }
         {
-          this.props.deliveryOption === URGENT_DELIVERY &&
+          this.props.deliveryOption === DELIVERY_OPTION_URGENT &&
           <div className={this.props.classes.textWrapper}>
             <img
               src='/static/images/express-delivery-icon.svg'
@@ -161,7 +161,7 @@ class PaymentDeliveryDetail extends Component {
           </div>
         }
         {
-          this.props.serviceType === LF_ASSURED &&
+          this.props.serviceType === SERVICE_TYPE_LFASSURED &&
           <div className={this.props.classes.textWrapper}>
             <img
               src='/static/images/rx-pending.svg'
