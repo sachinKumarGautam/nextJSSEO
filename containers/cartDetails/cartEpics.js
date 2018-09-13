@@ -374,11 +374,12 @@ export function cartTransferEpic (action$, store) {
   return action$.pipe(
     ofType(CART_TRANSFER_LOADING),
     mergeMap(data => {
+      const loginState = store.getState().loginState
+
       return http(cartTransfer$(data.cartState.payload.uid)).pipe(
-        map(result => {
+        flatMap(result => {
           let cartItems = result.body.payload.cart_items
           let cartPrescriptions = result.body.payload.cart_prescriptions
-          const loginState = store.getState().loginState
 
           cartItems.forEach((cartMedicine, index) => {
             cartItems[index] = {
@@ -395,14 +396,15 @@ export function cartTransferEpic (action$, store) {
               }
             }
           )
+
           return of(
-            toggleAuthentication(loginState, true),
             cartTransferSuccess(
               data.cartState,
               result,
               cartItems,
               updatedCartPrescriptions
-            )
+            ),
+            toggleAuthentication(loginState, true)
           )
         }),
         catchError(error => {
