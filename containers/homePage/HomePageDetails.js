@@ -11,7 +11,7 @@ import ActivityIndicator from '../../components/activityIndicator/index'
 import SnackbarErrorMessage
   from '../../components/activityIndicator/error/SnackbarErrorMessage'
 
-  import { storage } from '../../services/firebase'
+import { storage } from '../../services/firebase'
 
 class HomePageWrapper extends Component {
   constructor (props) {
@@ -65,10 +65,10 @@ class HomePageWrapper extends Component {
 
   saveRecentlyPublishedContent (payload) {
     const modifiedPayload = payload.map(item => {
-      const body = item.body.split(" ").slice(0,12).join(" ") + ' ...'
+      const body = item.body.split(' ').slice(0, 12).join(' ') + ' ...'
       return {
         ...item,
-        body: body 
+        body: body
       }
     })
 
@@ -111,7 +111,7 @@ class HomePageWrapper extends Component {
             incrementCartItemLoading={this.props.incrementCartItemLoading}
             cartState={this.props.cartState}
           />
-          <ArticleSection 
+          <ArticleSection
             publishedContent={this.state.publishedContent}
           />
           <Testimonal homePageState={this.props.homePageState} />
