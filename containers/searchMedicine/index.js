@@ -23,7 +23,7 @@ const styles = theme => ({
   },
   container: {
     flexGrow: 1,
-    width: theme.spacing.unit * 80,
+    width: 'auto',
     margin: '0 auto',
     position: 'relative'
   },
@@ -33,26 +33,24 @@ const styles = theme => ({
     overflow: 'scroll',
     zIndex: 1,
     left: 0,
-    right: 0,
-    marginLeft: theme.spacing.unit * 2,
-    marginRight: theme.spacing.unit * 2
+    right: 0
   },
   chip: {
     margin: `${theme.spacing.unit / 2}px ${theme.spacing.unit / 4}px`
   },
   inputFormControl: {
     flexWrap: 'wrap',
-    width: theme.spacing.unit * 80,
-    paddingLeft: theme.spacing.unit * 5,
+    width: 'auto',
+    paddingLeft: theme.spacing.unit * 4,
     borderColor: theme.palette.customGrey.grey200,
     border: `1px solid ${theme.palette.common.black}`,
-    borderRadius: theme.spacing.unit * 4
+    borderRadius: theme.spacing.unit * 4,
+    backgroundColor: theme.palette.secondary.main
   },
   inputFocused: {
-    border: `1px solid ${theme.palette.primary.main}`
+    border: `1px solid ${theme.palette.customGrey.grey100}`
   },
   searchButton: {
-    borderLeft: `1px solid ${theme.palette.customGrey.grey200}`,
     position: 'absolute',
     right: 0,
     top: -(theme.spacing.unit * 2.2),
@@ -63,10 +61,12 @@ const styles = theme => ({
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
-    borderRadius: `0px ${theme.spacing.unit * 2}px ${theme.spacing.unit * 2}px 0px`
+    borderRadius: `0px ${theme.spacing.unit * 2}px ${theme.spacing.unit * 2}px 0px`,
+    marginLeft: theme.spacing.unit * 2.5
   },
   iconColor: {
-    color: theme.palette.customGrey.grey500
+    color: theme.palette.customGrey.grey500,
+    marginLeft: theme.spacing.unit * 4
   },
   searchContentWrapper: {
     listStyle: 'none',
@@ -90,8 +90,9 @@ const styles = theme => ({
   },
   progress: {
     position: 'absolute',
-    left: theme.spacing.unit * 1.5,
-    color: theme.palette.customGrey.grey100
+    left: theme.spacing.unit * 3.5,
+    color: theme.palette.primary.main,
+    zIndex: 999
   },
   errorMessage: {
     ...theme.typography.caption,

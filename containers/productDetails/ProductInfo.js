@@ -35,6 +35,8 @@ class ProductInfo extends Component {
           <ProductName
             variant={'title'}
             name={productDetailsState.payload.name}
+            serviceType={productDetailsState.available_service_type}
+            deliveryOption={productDetailsState.available_delivery_option}
           />
           <ProductBrand
             variant={'subheading'}

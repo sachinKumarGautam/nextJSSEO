@@ -112,8 +112,9 @@ class MedicineListDetails extends React.Component {
               variant={'body1'}
               name={props.itemDetails.name}
               customStyle={props.classes.customName}
+              serviceType={props.itemDetails.available_service_type}
+              deliveryOption={props.itemDetails.available_delivery_option}
             />
-
             {/* {props.isRefillMedicines && <RefillDueDays />} */}
             <ProductBrand
               variant={'caption'}

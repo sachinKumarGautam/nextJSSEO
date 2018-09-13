@@ -108,7 +108,7 @@ class PatientForm extends React.Component {
             name='gender'
             displayEmpty
           >
-            <MenuItem disabled value=''>
+            <MenuItem value='' disabled>
               <em>Gender</em>
             </MenuItem>
             <MenuItem value={'Male'}>Male</MenuItem>

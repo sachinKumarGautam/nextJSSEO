@@ -20,9 +20,10 @@ const getCarePointsList$ = (customerId, cashType) =>
   makeAjaxRequest({
     method: 'GET',
     url: fetchUrl('', 'wallet/' + customerId + '/transaction', 'QUERY_STRING', {
-      query_string: cashType === 'all'
-        ? `size=10&page=0`
-        : `cash-type=${cashType}&size=100&page=0`
+      query_string:
+        cashType === 'all'
+          ? `size=10&page=0`
+          : `cash-type=${cashType}&size=100&page=0`
     })
   })
 
@@ -253,10 +254,10 @@ const getPatientPastMedicineList$ = (patientId, facilityCode) =>
     )
   })
 
-const getSliderImages$ = tagName =>
+const getUserReview$ = tagName =>
   makeAjaxRequest({
     method: 'GET',
-    url: fetchUrl('account', 'offer/tag/' + tagName, 'GET_LIST')
+    url: fetchUrl('account', 'customer/review', 'CREATE')
   })
 
 const applyCouponForCart$ = (cartUid, couponCode) =>
@@ -319,44 +320,37 @@ const expressDelivery$ = (cartId, deliveryOption) =>
     )
   })
 
-const verifyPayment$ = (orderId, body) => (
+const verifyPayment$ = (orderId, body) =>
   makeAjaxRequest({
     method: 'POST',
     url: fetchUrl('order', orderId + '/payment/verify', 'CREATE'),
     body: body
   })
-)
 
-const paymentInitiate$ = body => (
+const paymentInitiate$ = body =>
   makeAjaxRequest({
     method: 'POST',
     url: fetchUrl('order', 'payment/initiate', 'CREATE'),
     body: body
   })
-)
 
-const getPaymentChannels$ = orderId => (
-
+const getPaymentChannels$ = orderId =>
   makeAjaxRequest({
     method: 'GET',
     url: fetchUrl('order', orderId + '/payment/channels', 'CREATE')
   })
 
-)
-
-const deleteCart$ = (cartUid) => (
+const deleteCart$ = cartUid =>
   makeAjaxRequest({
     method: 'DELETE',
     url: fetchUrl('cart', cartUid, 'CREATE')
   })
-)
 
-const getConstants$ = () => (
+const getConstants$ = () =>
   makeAjaxRequest({
     method: 'GET',
     url: fetchUrl('config', 'app-constant', 'GET_LIST')
   })
-)
 
 export {
   getMoleculeSummary$,
@@ -387,7 +381,7 @@ export {
   submitDeliveryDetails$,
   submitRefillDate$,
   getPatientPastMedicineList$,
-  getSliderImages$,
+  getUserReview$,
   applyCouponForCart$,
   teleConsultation$,
   verifyPayment$,
