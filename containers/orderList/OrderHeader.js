@@ -5,8 +5,8 @@ import Typography from '@material-ui/core/Typography'
 // import Location from '@material-ui/icons/LocationOn'
 
 import {
-  LF_ASSURED,
-  NORMAL
+  SERVICE_TYPE_LFASSURED,
+  DELIVERY_OPTION_NORMAL
 } from '../../components/constants/Constants'
 
 const styles = theme => {
@@ -68,11 +68,11 @@ const OrderHeader = (props) => {
           {props.orderDetails.id}
         </Typography>
         {
-          props.orderDetails.service_type === LF_ASSURED &&
+          props.orderDetails.service_type === SERVICE_TYPE_LFASSURED &&
           <img src='/static/images/assured-service.svg' className={props.classes.assuredImage} />
         }
         {
-          props.orderDetails.delivery_option !== NORMAL &&
+          props.orderDetails.delivery_option !== DELIVERY_OPTION_NORMAL &&
           <img src='/static/images/express-delivery-icon.svg' />
         }
       </div>

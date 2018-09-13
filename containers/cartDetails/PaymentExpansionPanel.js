@@ -15,8 +15,8 @@ import PaymentDeliveryDetail from './PaymentDeliveryDetail'
 import { SELECT_PAYMENT_MODE } from '../messages/cartMessages'
 
 import {
-  LF_ASSURED,
-  NORMAL,
+  SERVICE_TYPE_LFASSURED,
+  DELIVERY_OPTION_NORMAL,
   SNACK_BAR_DURATION
 } from '../../components/constants/Constants'
 
@@ -84,8 +84,8 @@ class PaymentExpansionPanel extends React.Component {
           }}
         >
           {
-            (this.props.cartState.payload.service_type === LF_ASSURED ||
-            this.props.cartState.payload.delivery_option !== NORMAL) &&
+            (this.props.cartState.payload.service_type === SERVICE_TYPE_LFASSURED ||
+            this.props.cartState.payload.delivery_option !== DELIVERY_OPTION_NORMAL) &&
             <PaymentDeliveryDetail
               cartState={this.props.cartState}
               optForExpressDeliveryLoading={this.props.optForExpressDeliveryLoading}
