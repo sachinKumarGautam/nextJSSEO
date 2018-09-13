@@ -221,40 +221,27 @@ class SearchMedicine extends React.Component {
       ? this.state.isOpen
       : isOpen
     // restrict closing of search item list because of pincode dialog invokes blur event on search bar
-    if (type !== Downshift.stateChangeTypes.keyDownEnter) {
+    if (type === Downshift.stateChangeTypes.keyDownEnter) {
+      this.handleOnEnterItem(
+        searchMedicineResult,
+        type,
+        this.state.highlightedIndex
+      )
+    } else {
       this.setState({
         highlightedIndex: highlightedIndex
       })
     }
 
-    this.setState(
-      prevState => ({
-        isOpen
-      }),
-      () => {
-        this.handleOnEnterItem(
-          Downshift.stateChangeTypes,
-          searchMedicineResult,
-          type,
-          this.state.highlightedIndex
-        )
-      }
-    )
+    this.setState({ isOpen })
   }
 
-  handleOnEnterItem = (
-    stateChangeTypes,
-    searchMedicineResult,
-    type,
-    prevHighlightedIndex
-  ) => {
-    if (type === stateChangeTypes.keyDownEnter) {
-      const slug = searchMedicineResult[prevHighlightedIndex].slug
-      const city = this.props.checkPincodeState.payload.city
-      const href = `${PRODUCT_DETAILS}?id=${slug}&location=${city}`
-      const as = `${PRODUCT_DETAILS}/${slug}?location=${city}`
-      Router.push(href, as)
-    }
+  handleOnEnterItem = (searchMedicineResult, type, prevHighlightedIndex) => {
+    const slug = searchMedicineResult[prevHighlightedIndex].slug
+    const city = this.props.checkPincodeState.payload.city
+    const href = `${PRODUCT_DETAILS}?id=${slug}&location=${city}`
+    const as = `${PRODUCT_DETAILS}/${slug}?location=${city}`
+    Router.push(href, as)
   }
 
   render () {
