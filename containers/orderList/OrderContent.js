@@ -126,8 +126,8 @@ class OrderContent extends Component {
             <Typography
               variant='caption'
               className={
-                // props.orderList.status === 'Payment Pending'
-                // ? props.classes.pendingStyle :
+                 this.props.orderDetails.viewStatus === 'Payment Pending'
+                 ? this.props.classes.pendingStyle :
                 this.props.classes.statusStyle
               }
             >
@@ -173,7 +173,7 @@ class OrderContent extends Component {
               }}
               className={this.props.classes.codButtonStyle}
               onClick={this.props.retryPayment}
-              label={'Retry Payment'}
+              label={'RETRY PAYMENT'}
             />
             <Button
               size='small'
@@ -181,7 +181,7 @@ class OrderContent extends Component {
               color='primary'
               onClick={this.props.placeOrder}
               className={this.props.classes.codButtonStyle}
-              label={'Convert to COD'}
+              label={'CONVERT TO COD'}
             />
           </div>
         }

@@ -257,7 +257,7 @@ class RetryPayment extends React.Component {
                 color='primary'
                 className={this.props.classes.buttonViewStyle}
                 onClick={this.retryPayment.bind(this)}
-                label={'Continue'}
+                label={'CONTINUE'}
               />
             </div>
           </ActivityIndicator>
