@@ -11,11 +11,72 @@ import ActivityIndicator from '../../components/activityIndicator/index'
 import SnackbarErrorMessage
   from '../../components/activityIndicator/error/SnackbarErrorMessage'
 
+  import { storage } from '../../services/firebase'
+
 class HomePageWrapper extends Component {
+  constructor (props) {
+    super(props)
+    this.state = {
+      publishedContent: []
+    }
+  }
+
   resetState () {
     this.props.resetCartItemErrorState()
     this.props.resetUploadPrescriptionError()
   }
+
+  componentDidMount () {
+    this.newsRef = storage.collection('news')
+
+    this.getRecentlyPublishedContent()
+  }
+
+  getRecentlyPublishedContent () {
+    this.queryLimitedData()
+  }
+
+  queryLimitedData () {
+    this.newsRef
+      .where('is_enabled', '==', true)
+      .where('is_published', '==', true)
+      .orderBy('created_at', 'desc')
+      .limit(3)
+      .onSnapshot((querySnapshot) => {
+        let payload = []
+
+        querySnapshot.forEach(function (doc) {
+          let docObj = doc.data()
+
+          docObj = {
+            ...docObj,
+            doc_id: doc.id,
+            isLoading: false
+          }
+
+          payload = [
+            ...payload,
+            docObj
+          ]
+        })
+        this.saveRecentlyPublishedContent(payload)
+      })
+  }
+
+  saveRecentlyPublishedContent (payload) {
+    const modifiedPayload = payload.map(item => {
+      const body = item.body.split(" ").slice(0,12).join(" ") + ' ...'
+      return {
+        ...item,
+        body: body 
+      }
+    })
+
+    this.setState({
+      publishedContent: modifiedPayload
+    })
+  }
+
   render () {
     return (
       <div>
@@ -50,7 +111,9 @@ class HomePageWrapper extends Component {
             incrementCartItemLoading={this.props.incrementCartItemLoading}
             cartState={this.props.cartState}
           />
-          <ArticleSection />
+          <ArticleSection 
+            publishedContent={this.state.publishedContent}
+          />
           <Testimonal homePageState={this.props.homePageState} />
         </ActivityIndicator>
       </div>

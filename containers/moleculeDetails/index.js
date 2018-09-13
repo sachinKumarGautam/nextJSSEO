@@ -71,8 +71,16 @@ class MoleculeDetailsWrapper extends Component {
   }
 
   saveRecentlyPublishedContent (payload) {
+    const modifiedPayload = payload.map(item => {
+      const body = item.body.split(" ").slice(0,12).join(" ") + ' ...'
+      return {
+        ...item,
+        body: body 
+      }
+    })
+
     this.setState({
-      publishedContent: payload
+      publishedContent: modifiedPayload
     })
   }
 

@@ -18,10 +18,7 @@ const styles = theme => {
     },
     cardContent: {
       ...theme.typography.caption,
-      color: theme.palette.customGrey.grey500,
-      textOverflow: 'ellipsis',
-      overflow: 'hidden',
-      whiteSpace: 'nowrap'
+      color: theme.palette.customGrey.grey500
     }
   }
 }
