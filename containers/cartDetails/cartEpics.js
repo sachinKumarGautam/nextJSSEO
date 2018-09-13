@@ -428,7 +428,8 @@ export function uploadPrescriptionEpic (action$, store) {
           return uploadPrescriptionSuccess(
             data.cartState,
             data.uploadedFiles,
-            updatedCartPrescriptions
+            updatedCartPrescriptions,
+            data.isHomePage
           )
         }),
         catchError(error => {

@@ -139,31 +139,31 @@ class RefillMedicineList extends Component {
               {this.props.pastMedicineState.payload.length
                 ? <ul className={this.props.classes.medicineListWrapper}>
                   {modifiyMedicineList(
-                      pastMedicineList,
-                      cartItems
-                    ).map(itemDetails => (
-                      <li className={this.props.classes.listItem}>
-                        <MedicineListDetails
-                          isLoading={this.props.isLoading}
-                          itemDetails={itemDetails}
-                          checkIfAlredyExistInCart={
-                            itemDetails.is_exist_in_cart
-                          }
-                          isRefillMedicines
-                          addToCartHandler={this.props.addToCartHandler}
-                          checkPincodeState={this.props.checkPincodeState}
-                          onClickOfPatient={this.onClickOfPatient}
-                          pastMedicineState={this.props.pastMedicineState}
-                          cartState={this.props.cartState}
-                        />
-                      </li>
-                    ))}
+                    pastMedicineList,
+                    cartItems
+                  ).map(itemDetails => (
+                    <li className={this.props.classes.listItem}>
+                      <MedicineListDetails
+                        isLoading={this.props.isLoading}
+                        itemDetails={itemDetails}
+                        checkIfAlredyExistInCart={
+                          itemDetails.is_exist_in_cart
+                        }
+                        isRefillMedicines
+                        addToCartHandler={this.props.addToCartHandler}
+                        checkPincodeState={this.props.checkPincodeState}
+                        onClickOfPatient={this.onClickOfPatient}
+                        pastMedicineState={this.props.pastMedicineState}
+                        cartState={this.props.cartState}
+                      />
+                    </li>
+                  ))}
                 </ul>
                 : <Typography
                   gutterBottom
                   variant='body2'
                   className={this.props.classes.noContent}
-                  >
+                >
                   {NO_REFILL_MEDICINE}
                 </Typography>}
             </ActivityIndicator>

@@ -116,9 +116,9 @@ class PatientDetailsCard extends React.Component {
                       classes={{
                         root: this.props.classes.selectButtonRoot
                       }}
-                      >
+                    >
                         SELECT
-                      </Typography>
+                    </Typography>
                     : <div onClick={this.props.openPatientFormModal}>
                       <Typography
                         variant='caption'
@@ -126,9 +126,9 @@ class PatientDetailsCard extends React.Component {
                         classes={{
                           root: this.props.classes.selectButtonRoot
                         }}
-                        >
+                      >
                           EDIT
-                        </Typography>
+                      </Typography>
                     </div>}
                 </Grid>
               </Grid>

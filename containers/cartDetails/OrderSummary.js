@@ -309,6 +309,8 @@ class OrderSummary extends React.Component {
           updateAddressFormValue={this.props.updateAddressFormValue}
           getLocalityDetailListLoading={this.props.getLocalityDetailListLoading}
           checkPincodeDetailLoading={this.props.checkPincodeLoading}
+          checkPincodeState={this.props.checkPincodeState}
+          updateLassuredExpressFlag={this.props.updateLassuredExpressFlag}
         />
         <PaymentExpansionPanel
           expanded={this.state.expanded}

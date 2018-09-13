@@ -183,9 +183,10 @@ export default withStyles(styles)(
         props.handleClose,
         setSubmitting,
         values,
-        { isDeliveryAddress: false },
-        props.incrementCartItemLoading,
-        props.inProgressCartItem
+        {
+          incrementCartItemLoading: props.incrementCartItemLoading,
+          inProgressCartItem: props.inProgressCartItem
+        }
       )
     },
     displayName: 'pincode' // helps with React DevTools
