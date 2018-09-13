@@ -39,6 +39,10 @@ const styles = theme => {
       color: theme.palette.customRed.red200,
       paddingRight: theme.spacing.unit
     },
+    orangeStyle: {
+      color: theme.palette.customYellow.yellow400,
+      paddingRight: theme.spacing.unit
+    },
     prescriptionStyle: {
       width: theme.spacing.unit * 10,
       height: theme.spacing.unit * 10,
@@ -127,7 +131,7 @@ class OrderContent extends Component {
               variant='caption'
               className={
                  this.props.orderDetails.viewStatus === 'Payment Pending'
-                 ? this.props.classes.pendingStyle :
+                 ? this.props.classes.orangeStyle :
                 this.props.classes.statusStyle
               }
             >
