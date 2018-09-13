@@ -10,8 +10,7 @@ import SearchIcon from '@material-ui/icons/Search'
 import MedicineListDetails from '../../components/MedicineListDetails'
 import TextErrorMessage
   from '../../components/activityIndicator/error/TextErrorMessage'
-
-import { PRODUCT_SEARCH } from '../../routes/RouteConstant'
+import { PRODUCT_SEARCH, PRODUCT_DETAILS } from '../../routes/RouteConstant'
 
 import { CUSTOM_MESSGAE_SNACKBAR } from '../messages/errorMessages'
 import debounce from 'lodash.debounce'
@@ -23,7 +22,7 @@ const styles = theme => ({
   },
   container: {
     flexGrow: 1,
-    width: theme.spacing.unit * 80,
+    width: 'auto',
     margin: '0 auto',
     position: 'relative'
   },
@@ -33,26 +32,24 @@ const styles = theme => ({
     overflow: 'scroll',
     zIndex: 1,
     left: 0,
-    right: 0,
-    marginLeft: theme.spacing.unit * 2,
-    marginRight: theme.spacing.unit * 2
+    right: 0
   },
   chip: {
     margin: `${theme.spacing.unit / 2}px ${theme.spacing.unit / 4}px`
   },
   inputFormControl: {
     flexWrap: 'wrap',
-    width: theme.spacing.unit * 80,
-    paddingLeft: theme.spacing.unit * 5,
+    width: 'auto',
+    paddingLeft: theme.spacing.unit * 4,
     borderColor: theme.palette.customGrey.grey200,
     border: `1px solid ${theme.palette.common.black}`,
-    borderRadius: theme.spacing.unit * 4
+    borderRadius: theme.spacing.unit * 4,
+    backgroundColor: theme.palette.secondary.main
   },
   inputFocused: {
-    border: `1px solid ${theme.palette.primary.main}`
+    border: `1px solid ${theme.palette.customGrey.grey100}`
   },
   searchButton: {
-    borderLeft: `1px solid ${theme.palette.customGrey.grey200}`,
     position: 'absolute',
     right: 0,
     top: -(theme.spacing.unit * 2.2),
@@ -63,10 +60,12 @@ const styles = theme => ({
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
-    borderRadius: `0px ${theme.spacing.unit * 2}px ${theme.spacing.unit * 2}px 0px`
+    borderRadius: `0px ${theme.spacing.unit * 2}px ${theme.spacing.unit * 2}px 0px`,
+    marginLeft: theme.spacing.unit * 2.5
   },
   iconColor: {
-    color: theme.palette.customGrey.grey500
+    color: theme.palette.customGrey.grey500,
+    marginLeft: theme.spacing.unit * 4
   },
   searchContentWrapper: {
     listStyle: 'none',
@@ -90,8 +89,9 @@ const styles = theme => ({
   },
   progress: {
     position: 'absolute',
-    left: theme.spacing.unit * 1.5,
-    color: theme.palette.customGrey.grey100
+    left: theme.spacing.unit * 3.5,
+    color: theme.palette.primary.main,
+    zIndex: 999
   },
   errorMessage: {
     ...theme.typography.caption,
@@ -154,7 +154,6 @@ function renderSuggestion ({
   searchItemStyle,
   highlightedSearchItem,
   selectedSearchItem,
-  onSelectItem,
   checkPincodeState,
   addToCartHandler
 }) {
@@ -180,7 +179,8 @@ class SearchMedicine extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
-      isOpen: false
+      isOpen: false,
+      highlightedIndex: ''
     }
     this.searchMedicineOnChange = this.searchMedicineOnChange.bind(this)
     this.stateChangeHandler = this.stateChangeHandler.bind(this)
@@ -213,15 +213,35 @@ class SearchMedicine extends React.Component {
   }
 
   stateChangeHandler = changes => {
-    let { isOpen = this.state.isOpen, type } = changes
+    let { isOpen = this.state.isOpen, type, highlightedIndex } = changes
+    const searchMedicineResult = this.props.searchMedicineState.payload
+      .searchMedicineResult
 
     isOpen = type === Downshift.stateChangeTypes.blurInput
       ? this.state.isOpen
       : isOpen
     // restrict closing of search item list because of pincode dialog invokes blur event on search bar
-    this.setState({
-      isOpen
-    })
+    if (type === Downshift.stateChangeTypes.keyDownEnter) {
+      this.handleOnEnterItem(
+        searchMedicineResult,
+        type,
+        this.state.highlightedIndex
+      )
+    } else {
+      this.setState({
+        highlightedIndex: highlightedIndex
+      })
+    }
+
+    this.setState({ isOpen })
+  }
+
+  handleOnEnterItem = (searchMedicineResult, type, prevHighlightedIndex) => {
+    const slug = searchMedicineResult[prevHighlightedIndex].slug
+    const city = this.props.checkPincodeState.payload.city
+    const href = `${PRODUCT_DETAILS}?id=${slug}&location=${city}`
+    const as = `${PRODUCT_DETAILS}/${slug}?location=${city}`
+    Router.push(href, as)
   }
 
   render () {
@@ -244,17 +264,12 @@ class SearchMedicine extends React.Component {
             errorMessage={
               this.props.searchMedicineState.errorState.error.response
                 ? this.props.searchMedicineState.errorState.error.response.body
-                    .error.message
+                  .error.message
                 : CUSTOM_MESSGAE_SNACKBAR
             }
             customStyle={this.props.classes.errorMessage}
           />}
-        <Downshift
-          onStateChange={this.stateChangeHandler}
-          // onOuterClick={this.onOuterClick}
-          // onSelectItem={this.onSelectItem}
-          isOpen={isOpen}
-        >
+        <Downshift onStateChange={this.stateChangeHandler} isOpen={isOpen}>
           {({
             getInputProps,
             getItemProps,
@@ -283,27 +298,26 @@ class SearchMedicine extends React.Component {
                   <ul
                     {...getMenuProps()}
                     className={classes.searchContentWrapper}
-                    >
+                  >
                     {modifiyMedicineList(
-                        searchMedicineResult,
-                        cartItems
-                      ).map((suggestion, index) =>
-                        renderSuggestion({
-                          suggestion,
-                          index,
-                          itemProps: getItemProps({
-                            item: suggestion.name
-                          }),
-                          highlightedIndex,
-                          selectedItem,
-                          onSelectItem: this.onSelectItem,
-                          searchItemStyle: classes.searchItem,
-                          highlightedSearchItem: `${classes.searchItem} ${classes.highlightedSearchItem}`,
-                          selectedSearchItem: `${classes.searchItem} ${classes.selectedSearchItem}`,
-                          checkPincodeState,
-                          addToCartHandler
-                        })
-                      )}
+                      searchMedicineResult,
+                      cartItems
+                    ).map((suggestion, index) =>
+                      renderSuggestion({
+                        suggestion,
+                        index,
+                        itemProps: getItemProps({
+                          item: suggestion.name
+                        }),
+                        highlightedIndex,
+                        selectedItem,
+                        searchItemStyle: classes.searchItem,
+                        highlightedSearchItem: `${classes.searchItem} ${classes.highlightedSearchItem}`,
+                        selectedSearchItem: `${classes.searchItem} ${classes.selectedSearchItem}`,
+                        checkPincodeState,
+                        addToCartHandler
+                      })
+                    )}
                   </ul>
                 </Paper>
                 : null}

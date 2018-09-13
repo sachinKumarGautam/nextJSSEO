@@ -19,7 +19,9 @@ import {
   STREET1_REQUIRED,
   MOBILE_INVALID,
   MOBILE_VALIDATION_REGEX,
-  NUMBER_VALIDATION_REGEX
+  NUMBER_VALIDATION_REGEX,
+  NAME_VALIDATION_REGEX,
+  NAME_VALIDATION_MSG
 } from '../../containers/messages/ValidationMsg'
 
 // Helper styles for demo
@@ -67,8 +69,8 @@ class DeliveryForm extends React.Component {
     else if (event.target.value.length === 6) {
       this.props.checkPincodeDetailLoading(
         this.props.checkPincodeState,
-        { handleClose: '' },
-        { setSubmitting: '' },
+        null, // handleClose function to close pincode dialog
+        null, // setSubmitting function for pincode form submission
         event.target.value,
         { isDeliveryAddress: true }
       )
@@ -90,6 +92,12 @@ class DeliveryForm extends React.Component {
       (name === 'mobile' && inputValue.length <= 10 && regexInputExpression) ||
       !inputValue
     ) {
+      this.props.updateAddressFormValue(
+        this.props.deliveryDetailsState,
+        name,
+        inputValue
+      )
+    } else {
       this.props.updateAddressFormValue(
         this.props.deliveryDetailsState,
         name,
@@ -297,7 +305,10 @@ export default withStyles(styles)(
       }
     },
     validationSchema: Yup.object().shape({
-      full_name: Yup.string().trim().required(FULL_NAME_REQUIRED),
+      full_name: Yup.string()
+        .matches(NAME_VALIDATION_REGEX, NAME_VALIDATION_MSG)
+        .trim()
+        .required(FULL_NAME_REQUIRED),
       mobile: Yup.string()
         .trim()
         .min(10, MOBILE_INVALID)

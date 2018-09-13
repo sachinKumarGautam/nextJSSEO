@@ -22,8 +22,8 @@ const styles = theme => {
       }
     },
     paper: {
-      padding: theme.spacing.unit,
-      width: theme.spacing.unit * 25,
+      padding: theme.spacing.unit * 1.5,
+      maxWidth: theme.spacing.unit * 25,
       backgroundColor: `${theme.palette.customGrey.grey50} !important`,
       pointerEvents: 'auto !important',
       '&:after': {
@@ -37,13 +37,14 @@ const styles = theme => {
       borderRadius: '4px'
     },
     popoverContent: {
-      fontSize: theme.typography.pxToRem(10),
+      fontSize: theme.typography.pxToRem(12),
       color: theme.palette.customGrey.grey500,
       marginBottom: theme.spacing.unit
     },
     popoverLink: {
       ...theme.typography.body3,
       color: theme.palette.primary.main,
+      fontSize: theme.typography.pxToRem(14),
       textDecoration: 'none'
     },
     horizontalItem: {
@@ -54,11 +55,13 @@ const styles = theme => {
   }
 }
 
-const PopoverContent = (props) => (
+const PopoverContent = props => (
   <div>
-    <Typography className={props.styles.popoverContent}>
-      {props.item.description ? props.item.description : ''}
-    </Typography>
+    {props.item.description
+      ? <Typography className={props.styles.popoverContent}>
+        {props.item.description}
+      </Typography>
+      : null}
     <Link
       as={`${MOLECULE_DETAILS}/${props.item.slug}`}
       href={`${MOLECULE_DETAILS}?id=${props.item.slug}`}
@@ -70,12 +73,13 @@ const PopoverContent = (props) => (
 
 class ProductMolecule extends Component {
   render () {
-    const {classes} = this.props
+    const { classes } = this.props
 
     return (
       <div className={classes.horizontalItem}>
-        {
-          this.props.salts && this.props.salts.length && this.props.salts.map((item, index) => {
+        {this.props.salts &&
+          this.props.salts.length &&
+          this.props.salts.map((item, index) => {
             let popperId = 'moleculeItem' + index
             return (
               <div>
@@ -95,16 +99,14 @@ class ProductMolecule extends Component {
                   effect='solid'
                   place='bottom'
                   className={classes.paper}
-                  delayHide={500}
-                  delayShow={500}
+                  delayHide={250}
+                  delayShow={250}
                 >
                   <PopoverContent item={item} styles={classes} />
                 </ReactTooltip>
               </div>
             )
-          }
-          )
-        }
+          })}
       </div>
     )
   }

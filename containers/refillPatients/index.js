@@ -14,9 +14,7 @@ import {
   updateSelectedPatientDetails
 } from './refillActions'
 
-import {
-  deleteCartLoading
-} from '../cartDetails/cartActions'
+import { deleteCartLoading } from '../cartDetails/cartActions'
 /*
   bread crumbs
   side menu of patient list
@@ -50,7 +48,9 @@ class RefillPatientsWrapper extends Component {
                 pastMedicineState={this.props.pastMedicineState}
                 addToCartHandler={this.props.addToCartHandler}
                 checkPincodeState={this.props.checkPincodeState}
-                getRefillPastMedicinesLoading={this.props.actions.getRefillPastMedicinesLoading}
+                getRefillPastMedicinesLoading={
+                  this.props.actions.getRefillPastMedicinesLoading
+                }
                 cartState={this.props.cartState}
                 deleteCartLoading={this.props.actions.deleteCartLoading}
               />

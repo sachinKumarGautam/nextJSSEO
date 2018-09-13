@@ -10,3 +10,6 @@ export const LF_ASSURED_DETAIL = 'Your order is covered under LifCare Assured.'
 export const EXPRESS_DELIVERY_DETAIL = 'Your order is covered under Express Delivery.'
 export const VERIFICATION_RX = 'Verification of a valid prescription is pending for this order, for the commencement of the LifCare Assured service guarantee.'
 export const SELECT_PAYMENT_MODE = 'Please select payment mode.'
+
+export const LIFCARE_ASSURED_CONFLICT_MSG = 'LifCare Assured service is not available on this pincode. Press Ok to proceed with our regular service.'
+export const LIFCARE_URGENT_CONFLICT_MSG = 'LifCare Express Delivery service is not available on this pincode. Press Ok to proceed with the regular delivery service.'

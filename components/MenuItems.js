@@ -10,7 +10,8 @@ import {
   PRESCRIPTION,
   CARE_POINTS,
   ADDRESS_LIST,
-  PATIENT_LIST
+  PATIENT_LIST,
+  REFILL_PATIENTS
 } from '../routes/RouteConstant'
 
 import { getReplacedString } from '../utils/replaceConstants'
@@ -79,6 +80,12 @@ class MenuItems extends Component {
           onClick={this.redirectToPath.bind(this, PRESCRIPTION)}
         >
           Prescriptions
+        </MenuItem>
+        <MenuItem
+          className={menuStyle}
+          onClick={this.redirectToPath.bind(this, REFILL_PATIENTS)}
+        >
+          Refill Past Medicines
         </MenuItem>
         <MenuItem
           className={menuStyle}

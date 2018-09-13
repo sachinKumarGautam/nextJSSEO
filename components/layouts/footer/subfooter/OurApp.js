@@ -35,12 +35,12 @@ const OurApp = ({classes}) => (
         Our App
     </Typography>
     <div className={classes.iconWithText}>
-      <a href="https://play.google.com/store/apps/details?id=com.lifcare.launch&hl=en" target="_blank">
+      <a href='https://play.google.com/store/apps/details?id=com.lifcare.launch&hl=en' target='_blank'>
         <img className={classes.img} src={'/static/images/asset-1.svg'} />
       </a>
     </div>
     <div className={classes.iconWithText}>
-      <a target="_blank" href="https://itunes.apple.com/in/app/lifcare/id1254964377?mt=8">
+      <a target='_blank' href='https://itunes.apple.com/in/app/lifcare/id1254964377?mt=8'>
         <img className={classes.img2} src={'/static/images/appStore.png'} />
       </a>
     </div>

@@ -22,7 +22,8 @@ const styles = theme => {
       ...theme.typography.body1,
       color: theme.palette.customGrey.grey500,
       fontWeight: theme.typography.fontWeightBold,
-      marginBottom: theme.spacing.unit / 4
+      marginBottom: theme.spacing.unit / 4,
+      display: 'inline-block'
     },
     customBrand: {
       ...theme.typography.body3,
@@ -58,7 +59,7 @@ const styles = theme => {
       border: `1px solid ${theme.palette.primary.main}`
     },
     buttonLabel: {
-      color: '#80c241'
+      color: theme.palette.primary.main
     }
   }
 }
@@ -100,6 +101,8 @@ class RelatedMedicinesCard extends React.Component {
           variant={'body1'}
           name={props.itemDetails.name}
           customStyle={props.classes.medicineName}
+          serviceType={props.itemDetails.available_service_type}
+          deliveryOption={props.itemDetails.available_delivery_option}
         />
         <div>
           <ProductBrand
@@ -144,7 +147,7 @@ class RelatedMedicinesCard extends React.Component {
             }}
             onClick={this.addToCart}
             label={'Add To Cart'}
-            />
+          />
           : <AlreadyAdded />}
       </div>
     )

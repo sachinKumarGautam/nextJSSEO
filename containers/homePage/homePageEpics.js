@@ -3,37 +3,30 @@ import { mergeMap, catchError, map } from 'rxjs/operators'
 import { ofType } from 'redux-observable'
 import http from '../../services/api/ajaxWrapper'
 
-import {
-  GET_BACKGROUND_IMAGES_LOADING
-} from './homePageActionTypes'
+import { GET_USER_REVIEW_LOADING } from './homePageActionTypes'
 
-import {
-  getBackGroundImagesSuccess,
-  getBackGroundImagesFailure
-} from './homePageActions'
+import { getUserReviewSuccess, getUserReviewFailure } from './homePageActions'
 
-import {
-  getSliderImages$
-} from '../../services/api'
+import { getUserReview$ } from '../../services/api'
 
 /**
  * Represents to the epic of get home page background image.
  * @param {object} action$ - this is the ActionsObservable
  * @param {object} store - to access the state from reducers
  */
-export function getBackGroungImages (action$, store) {
+export function getUserReview (action$, store) {
   return action$.pipe(
-    ofType(GET_BACKGROUND_IMAGES_LOADING),
+    ofType(GET_USER_REVIEW_LOADING),
     mergeMap(data => {
-      return http(getSliderImages$(data.tagName)).pipe(
+      return http(getUserReview$()).pipe(
         map(result => {
-          return getBackGroundImagesSuccess(
+          return getUserReviewSuccess(
             data.homePageState,
             result.body.payload.content
           )
         }),
         catchError(error => {
-          return of(getBackGroundImagesFailure(data.homePageState, error))
+          return of(getUserReviewFailure(data.homePageState, error))
         })
       )
     })
