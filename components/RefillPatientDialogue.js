@@ -7,10 +7,10 @@ import DialogContent from '@material-ui/core/DialogContent'
 import DialogTitle from '@material-ui/core/DialogTitle'
 import Typography from '@material-ui/core/Typography'
 
-import Button from '../../components/button'
+import Button from './button'
 import {
   REFILL_PATIENT_DIALOGUE_MSG
-} from '../messages/refillPatientMessage'
+} from '../containers/messages/refillPatientMessage'
 
 const styles = theme => ({
   refillPatientWrapper: {
@@ -52,13 +52,15 @@ class RefillPatientDialogue extends Component {
             paper: this.props.classes.paper
           }}
         >
-          <DialogTitle id='form-dialog-title'>Refill Order</DialogTitle>
+          <DialogTitle id='form-dialog-title'>
+            {this.props.dialogTitle}
+          </DialogTitle>
           <DialogContent>
             <Typography
               varaint='caption'
               className={this.props.classes.refillContent}
             >
-              {REFILL_PATIENT_DIALOGUE_MSG}
+              {this.props.dialogContent}
             </Typography>
           </DialogContent>
           <DialogActions>

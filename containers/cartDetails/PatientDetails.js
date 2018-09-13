@@ -7,7 +7,8 @@ import PatientDetailForm from '../patientDetails/PatientDetailForm'
 import PatientDetailsCard from '../../components/PatientDetailsCard'
 
 import ActivityIndicator from '../../components/activityIndicator'
-import CommonSpinner from '../../components/activityIndicator/loader/CommonSpinner'
+import CommonSpinner
+  from '../../components/activityIndicator/loader/CommonSpinner'
 
 const styles = theme => ({
   addressWrapper: {
@@ -52,10 +53,12 @@ const PatientDetails = props => (
             bottomLoader
           >
             <PatientDetailsCard
+              onClickOfPatient={props.onClickOfPatient}
               patientDetail={patientDetail}
               savePatientSelected={props.savePatientSelected}
               patientIdSelected={props.patientIdSelected}
               isCartPage={props.isCartPage}
+              cartType={props.cartType}
             />
           </ActivityIndicator>
         </Grid>
