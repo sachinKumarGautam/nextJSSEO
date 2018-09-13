@@ -27,6 +27,7 @@ const initialState = {
     diseases: [],
     slug: '',
     selling_price: 0,
+    mrp :0,
     discount: 0,
     uses: [],
     side_effects: [],
