@@ -221,19 +221,22 @@ class SearchMedicine extends React.Component {
       ? this.state.isOpen
       : isOpen
     // restrict closing of search item list because of pincode dialog invokes blur event on search bar
+    if (type !== Downshift.stateChangeTypes.keyDownEnter) {
+      this.setState({
+        highlightedIndex: highlightedIndex
+      })
+    }
+
     this.setState(
       prevState => ({
-        isOpen,
-        highlightedIndex: highlightedIndex,
-        prevHighlightedIndex: prevState.highlightedIndex
+        isOpen
       }),
       () => {
         this.handleOnEnterItem(
           Downshift.stateChangeTypes,
           searchMedicineResult,
           type,
-          this.state.prevHighlightedIndex,
-          highlightedIndex
+          this.state.highlightedIndex
         )
       }
     )
@@ -243,8 +246,7 @@ class SearchMedicine extends React.Component {
     stateChangeTypes,
     searchMedicineResult,
     type,
-    prevHighlightedIndex,
-    highlightedIndex
+    prevHighlightedIndex
   ) => {
     if (type === stateChangeTypes.keyDownEnter) {
       const slug = searchMedicineResult[prevHighlightedIndex].slug

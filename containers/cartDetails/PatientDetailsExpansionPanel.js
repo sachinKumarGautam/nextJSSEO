@@ -14,7 +14,8 @@ import AddPatientButton from '../patientDetails/AddPatientButton'
 
 class PatientDetailsExpansionPanel extends React.Component {
   state = {
-    openPatientFormDialog: false
+    openPatientFormDialog: false,
+    inProgressPatientId: 0
   }
 
   openPatientFormModal () {
@@ -30,6 +31,10 @@ class PatientDetailsExpansionPanel extends React.Component {
   }
 
   savePatientSelected (patientSelected) {
+    this.setState({
+      inProgressPatientId: patientSelected.id
+    })
+
     this.props.savePatientToCartLoading(
       this.props.cartState,
       patientSelected,
@@ -115,6 +120,8 @@ class PatientDetailsExpansionPanel extends React.Component {
             savePatientSelected={this.savePatientSelected.bind(this)}
             patientIdSelected={this.props.patientIdSelected}
             patientDetailsWrapper={this.props.patientDetailsWrapper}
+            patientDetails={patientDetails}
+            inProgressPatientId={this.state.inProgressPatientId}
           />
           <Button
             size='small'
