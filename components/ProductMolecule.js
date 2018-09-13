@@ -23,7 +23,6 @@ const styles = theme => {
     },
     paper: {
       padding: theme.spacing.unit * 1.5,
-      boxShadow: '0 0 6px 0 rgba(224, 224, 224, 0.72)',
       maxWidth: theme.spacing.unit * 25,
       backgroundColor: `${theme.palette.customGrey.grey50} !important`,
       pointerEvents: 'auto !important',

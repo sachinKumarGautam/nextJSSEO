@@ -69,8 +69,8 @@ class DeliveryForm extends React.Component {
     else if (event.target.value.length === 6) {
       this.props.checkPincodeDetailLoading(
         this.props.checkPincodeState,
-        { handleClose: '' },
-        { setSubmitting: '' },
+        null, // handleClose function to close pincode dialog
+        null, // setSubmitting function for pincode form submission
         event.target.value,
         { isDeliveryAddress: true }
       )

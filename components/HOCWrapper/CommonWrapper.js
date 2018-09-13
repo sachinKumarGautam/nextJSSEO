@@ -6,7 +6,8 @@ import {
   incrementCartItemLoading,
   getAnonymousCartIdLoading,
   resetCartState,
-  resetCartItemErrorState
+  resetCartItemErrorState,
+  resetCartLoadingState
 } from '../../containers/cartDetails/cartActions'
 import {
   openPincodeDialog,
@@ -16,8 +17,11 @@ import {
 import withRoot from '../../src/withRoot'
 
 import ActivityIndicator from '../activityIndicator/index'
-import SnackbarErrorMessage from '../activityIndicator/error/SnackbarErrorMessage'
-import DialogueErrorMessage from '../activityIndicator/error/DialogueErrorMessage'
+import SnackbarErrorMessage
+  from '../activityIndicator/error/SnackbarErrorMessage'
+import DialogueErrorMessage
+  from '../activityIndicator/error/DialogueErrorMessage'
+import Loader from '../activityIndicator/loader'
 
 import {
   INVALID_CART_TEXT,
@@ -38,6 +42,10 @@ export function withCommonWrapper (Page) {
       this.state = {
         inProgressCartItem: {}
       }
+    }
+
+    componentDidMount () {
+      this.props.actions.resetCartLoadingState(this.props.cartState)
     }
 
     addToCartHandler (inProgressCartItem, event) {
@@ -76,14 +84,15 @@ export function withCommonWrapper (Page) {
 
     render () {
       const { checkPincodeState, actions } = this.props
-
       const { inProgressCartItem } = this.state
       return (
         <React.Fragment>
           <ActivityIndicator
+            isLoading={this.props.cartState.isLoading}
+            LoaderComp={<Loader isLoading loaderType={'fullPageSpinner'} />}
             isError={
               this.props.cartState.payload.cart_items.errorState.isError ||
-              this.props.cartState.payload.is_cart_invalid
+                this.props.cartState.payload.is_cart_invalid
             }
             ErrorComp={
               this.props.cartState.payload.is_cart_invalid
@@ -93,7 +102,9 @@ export function withCommonWrapper (Page) {
                   handleCartInvalid={this.handleCartInvalid.bind(this)}
                 />
                 : <SnackbarErrorMessage
-                  error={this.props.cartState.payload.cart_items.errorState.error}
+                  error={
+                    this.props.cartState.payload.cart_items.errorState.error
+                  }
                   resetState={this.resetState.bind(this)}
                 />
             }
@@ -132,7 +143,8 @@ export function withCommonWrapper (Page) {
           checkPincodeLoading,
           getAnonymousCartIdLoading,
           resetCartItemErrorState,
-          resetCartState
+          resetCartState,
+          resetCartLoadingState
         },
         dispatch
       )

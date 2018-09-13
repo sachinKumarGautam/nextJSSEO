@@ -10,7 +10,7 @@ import ProductBrand from '../../components/ProductBrand'
 import ProductPackSize from '../../components/ProductPackSize'
 
 import {
-  URGENT_DELIVERY,
+  DELIVERY_OPTION_URGENT,
   IN_STOCK
 } from '../../components/constants/Constants'
 
@@ -88,6 +88,8 @@ const MedicineList = (props) => {
                   <ProductName
                     customStyle={props.classes.medicineNameWrapper}
                     name={orderItem.name}
+                    serviceType={orderItem.available_service_type}
+                    deliveryOption={orderItem.available_delivery_option}
                   />
                   <ProductBrand
                     customStyle={props.classes.companyNameWrapper}
@@ -102,7 +104,7 @@ const MedicineList = (props) => {
                   />
                   <Typography className={props.classes.deliveryByText}>
                     {
-                      orderItem.available_delivery_option === URGENT_DELIVERY
+                      orderItem.available_delivery_option === DELIVERY_OPTION_URGENT
                         ? (
                           orderItem.stock_availability === IN_STOCK
                             ? `Delivery by today`
