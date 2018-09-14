@@ -9,6 +9,7 @@ import Head from 'next/head'
 import Router from 'next/router'
 
 import OrderDetailsWrapper from '../containers/orderDetails'
+import Layout from '../components/layouts/Layout'
 
 import {
   orderDetail
@@ -38,21 +39,19 @@ class OrderDetails extends React.Component {
 
   render () {
     // const { query } = Router
-    const { id } = this.props
+    const { id, addToCartHandler } = this.props
 
     return (
-      <div>
-        <Head>
-          <title>{orderDetail.title}</title>
-        </Head>
-        <Header />
+      <Layout
+        title={orderDetail.title}
+        addToCartHandler={addToCartHandler}
+      >
         <div className={this.props.classes.root}>
           <OrderDetailsWrapper
             orderId={id}
           />
         </div>
-        <Footer />
-      </div>
+      </Layout>
     )
   }
 }
