@@ -4,6 +4,8 @@ import { withStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
 import Button from '@material-ui/core/Button'
 
+import Router from 'next/router'
+
 const styles = theme => {
   return {
     articleWrapper: {
@@ -53,6 +55,7 @@ const styles = theme => {
       height: theme.spacing.unit * 19
     },
     detailWrapper: {
+      cursor: 'pointer',
       width: theme.spacing.unit * 37.5,
       backgroundColor: theme.palette.secondary.main
     },
@@ -78,7 +81,10 @@ class ArticleSection extends Component {
           {
             this.props.publishedContent.map((item) => {
               return (
-                <div className={this.props.classes.detailWrapper}>
+                <div
+                  className={this.props.classes.detailWrapper}
+                  onClick={() => Router.push(item.web_link)}
+                >
                   <img src={item.images[0]} className={this.props.classes.imageStyle} />
                   <Typography
                     variant='body2'
