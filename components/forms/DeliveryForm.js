@@ -97,7 +97,7 @@ class DeliveryForm extends React.Component {
         name,
         inputValue
       )
-    } else {
+    } else if (name !== 'mobile') {
       this.props.updateAddressFormValue(
         this.props.deliveryDetailsState,
         name,
