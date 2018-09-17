@@ -106,25 +106,25 @@ class PaymentExpansionPanel extends React.Component {
               <PaymentDeliveryDetail
                 cartState={this.props.cartState}
                 optForExpressDeliveryLoading={
-                this.props.optForExpressDeliveryLoading
-              }
+                  this.props.optForExpressDeliveryLoading
+                }
                 constantsState={this.props.constantsState}
-            />}
+              />}
           {this.props.cartState.payload.total_payable_amount
             ? <div>
               <Typography className={this.props.selectPaymentMode}>
                   SELECT PAYMENT MODE
-                </Typography>
+              </Typography>
               <PaymentChannels
                 radioWrapper={this.props.radioWrapper}
                 paymentChannel={this.state.paymentChannel}
                 paymentChannelsPayload={
-                    this.props.cartState.payload.payment_channels
-                  }
+                  this.props.cartState.payload.payment_channels
+                }
                 handlePaymentChannelsChange={this.handlePaymentChannelsChange.bind(
-                    this
-                  )}
-                />
+                  this
+                )}
+              />
             </div>
             : null}
           <TermsAndCondition />
