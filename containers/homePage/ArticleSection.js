@@ -4,6 +4,8 @@ import { withStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
 import Button from '@material-ui/core/Button'
 
+import { Grid } from '@material-ui/core'
+
 const styles = theme => {
   return {
     articleWrapper: {
@@ -49,11 +51,11 @@ const styles = theme => {
       paddingBottom: theme.spacing.unit * 3.375
     },
     imageStyle: {
-      width: theme.spacing.unit * 37.5,
-      height: theme.spacing.unit * 19
+      width: '100%',
+      height: theme.spacing.unit * 24
     },
     detailWrapper: {
-      width: theme.spacing.unit * 37.5,
+      width: '100%',
       backgroundColor: theme.palette.secondary.main
     },
     articleListWrapper: {
@@ -92,29 +94,31 @@ class ArticleSection extends Component {
         >
           Recently Published
         </Typography>
-        <div className={this.props.classes.articleListWrapper}>
+        <Grid container spacing={24}>
           {
             relatedArticle.map((item) => {
               return (
-                <div className={this.props.classes.detailWrapper}>
-                  <img src={item.image} className={this.props.classes.imageStyle} />
-                  <Typography
-                    variant='body2'
-                    className={this.props.classes.title}
-                  >
-                    {item.label}
-                  </Typography>
-                  <Typography
-                    variant='body2'
-                    className={this.props.classes.description}
-                  >
-                    {item.description}
-                  </Typography>
-                </div>
+                <Grid item xs={4}>
+                  <div className={this.props.classes.detailWrapper}>
+                    <img src={item.image} className={this.props.classes.imageStyle} />
+                    <Typography
+                      variant='body2'
+                      className={this.props.classes.title}
+                    >
+                      {item.label}
+                    </Typography>
+                    <Typography
+                      variant='body2'
+                      className={this.props.classes.description}
+                    >
+                      {item.description}
+                    </Typography>
+                  </div>
+                </Grid>
               )
             })
           }
-        </div>
+        </Grid>
         <div className={this.props.classes.buttonWrapperStyle}>
           <Button
             variant='raised'
