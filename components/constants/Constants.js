@@ -1,4 +1,3 @@
-import {statusList} from '../../../jiva/src/client/components/orderManagement/orderModification/orderStatus/orderStatusList';
 export const SNACK_BAR_DURATION = 6000
 export const SNACK_BAR_DURATION_3000 = 3000
 

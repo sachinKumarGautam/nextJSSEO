@@ -17,11 +17,11 @@ const styles = theme => {
       ...theme.typography.body3,
       color: theme.palette.customBlack.black1000,
       marginBottom: theme.spacing.unit,
-      marginLeft: theme.spacing.unit,      
+      marginLeft: theme.spacing.unit,
       display: 'inline-block',
       borderRadius: theme.spacing.unit,
       backgroundColor: theme.palette.customGrey.grey100,
-      padding: `${theme.spacing.unit/8}px ${theme.spacing.unit}px`
+      padding: `${theme.spacing.unit / 8}px ${theme.spacing.unit}px`
     }
   }
 }
@@ -33,15 +33,15 @@ const ProductStatus = (props) => (
     component='h3'
     className={`${props.classes.status} ${props.customStyle}`}
   >
-  {
-    (props.status === RETIRED_STATUS || props.status === IN_ACTIVE_STATUS)
-      ? RETIRED_STATUS_MAPPING
-      : (
-        props.status === TEMPORARY_SUSPENDED_STATUS
-          ? TEMPORARY_SUSPENDED_STATUS_MAPPING
-          : props.status
-      )
-  }
+    {
+      (props.status === RETIRED_STATUS || props.status === IN_ACTIVE_STATUS)
+        ? RETIRED_STATUS_MAPPING
+        : (
+          props.status === TEMPORARY_SUSPENDED_STATUS
+            ? TEMPORARY_SUSPENDED_STATUS_MAPPING
+            : props.status
+        )
+    }
   </Typography>
 )
 
