@@ -55,7 +55,7 @@ export default function (state = initialState, action) {
           diseases: action.diseases,
           slug: action.slug,
           selling_price: action.selling_price,
-          mrp : action.mrp,
+          mrp: action.mrp,
           discount: action.discount,
           uses: action.uses,
           side_effects: action.side_effects,

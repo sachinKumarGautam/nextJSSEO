@@ -108,10 +108,12 @@ class CartDetailsWrapper extends Component {
         this.props.customerState.payload.id // pass customer id
       )
 
-      this.props.actions.getDeliveryDetailsListLoading(
-        this.props.deliveryDetailsState,
-        this.props.customerState.payload.id // pass customer id
-      )
+      if (!this.props.loginState.isNewUser) {
+        this.props.actions.getDeliveryDetailsListLoading(
+          this.props.deliveryDetailsState,
+          this.props.customerState.payload.id // pass customer id
+        )
+      }
     }
   }
 
@@ -126,10 +128,12 @@ class CartDetailsWrapper extends Component {
         this.props.customerState.payload.id // pass customer id
       )
 
-      this.props.actions.getDeliveryDetailsListLoading(
-        this.props.deliveryDetailsState,
-        this.props.customerState.payload.id // pass customer id
-      )
+      if (!this.props.loginState.isNewUser) {
+        this.props.actions.getDeliveryDetailsListLoading(
+          this.props.deliveryDetailsState,
+          this.props.customerState.payload.id // pass customer id
+        )
+      }
     }
   }
 

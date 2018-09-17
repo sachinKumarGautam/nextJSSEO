@@ -66,7 +66,6 @@ class LoginForm extends React.Component {
       touched,
       errors,
       isSubmitting,
-      handleBlur,
       handleSubmit,
       classes,
       loginState
@@ -92,7 +91,6 @@ class LoginForm extends React.Component {
             id='mobile'
             value={values.mobile}
             onChange={this.handleChange}
-            onBlur={handleBlur}
             autoFocus
             placeholder={'Enter registered mobile no.'}
           />
@@ -120,7 +118,11 @@ class LoginForm extends React.Component {
             isloading={isSubmitting}
             variant='raised'
             color='primary'
-            label={'Login with OTP'}
+            label={
+              this.props.isRegisterClicked
+                ? 'Register with OTP'
+                : 'Login with OTP'
+            }
           />
         </div>
       </form>
