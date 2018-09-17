@@ -80,6 +80,8 @@ const CommonButton = buttonProps => {
       <div className={classes.wrapper}>
         <Button
           variant={variant || null}
+          disableFocusRipple={disableFocusRipple}
+          disableRipple={disableRipple}
           className={
             isloading && !loaderPosition
               ? classNames(className, classes.buttonloader)
