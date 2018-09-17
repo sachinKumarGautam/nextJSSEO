@@ -65,6 +65,7 @@ class Register extends React.Component {
           loginState={loginState}
           customerState={customerState}
           checkReferralCodeLoading={checkReferralCodeLoading}
+          isRegisterClicked={this.props.isRegisterClicked}
         />
         <Typography
           variant='caption'

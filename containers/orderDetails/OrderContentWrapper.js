@@ -166,7 +166,7 @@ const OrderContentWrapper = (props) => {
             }}
             className={props.classes.buttonViewStyle}
             onClick={props.retryPayment}
-            label={'Retry Payment'}
+            label={'RETRY PAYMENT'}
           />
           <Button
             size='small'
@@ -177,7 +177,7 @@ const OrderContentWrapper = (props) => {
             }}
             className={props.classes.buttonHomeStyle}
             onClick={props.placeOrder}
-            label={'Convert to COD'}
+            label={'CONVERT TO COD'}
           />
         </div>
       }

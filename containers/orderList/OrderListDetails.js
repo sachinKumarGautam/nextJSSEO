@@ -47,7 +47,7 @@ const styles = theme => ({
     ...theme.typography.headline,
     color: theme.palette.customGrey.grey500,
     marginLeft: theme.spacing.unit * 2,
-    marginBottom: theme.spacing.unit * 6
+    marginBottom: theme.spacing.unit * 7
   },
   buttonRoot: {
     backgroundColor: theme.palette.common.white,

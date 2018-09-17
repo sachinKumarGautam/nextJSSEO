@@ -16,8 +16,16 @@ import ComponentSpecificError
 
 import { NO_REFILL_MEDICINE } from '../messages/noDataMessage'
 
-import RefillPatientDialogue from './RefillPatientDialogue'
+import RefillPatientDialogue from '../../components/RefillPatientDialogue'
 import { modifiyMedicineList } from '../../utils/common'
+import {
+  SWITCH_PATIENT_DIALOG_TITLE,
+  REFILL_DIALOG_TITLE,
+  SWITCH_PATIENT_DIALOG_CONTENT,
+  REFILL_DIALOG_CONTENT
+} from '../messages/refillPatientMessage'
+
+import { REFILL } from '../../components/constants/Constants'
 
 const styles = theme => {
   return {
@@ -51,12 +59,10 @@ class RefillMedicineList extends Component {
     super(props)
     this.state = {
       open: false,
+      dialogTitle: '',
+      dialogContent: '',
       medicineName: null
     }
-    this.handleClose = this.handleClose.bind(this)
-    this.onClickOfPatient = this.onClickOfPatient.bind(this)
-    this.onClickOfOk = this.onClickOfOk.bind(this)
-    this.addMedicine = this.addMedicine.bind(this)
   }
   tryAgain () {
     this.props.getRefillPastMedicinesLoading(
@@ -64,35 +70,43 @@ class RefillMedicineList extends Component {
       this.props.pastMedicineState.selectedPatientId
     )
   }
-  onClickOfPatient (item) {
+  onClickOfPatient = item => {
+    const sourceType = this.props.cartState.payload.source_type
     this.setState({
       open: true,
+      dialogTitle: sourceType === REFILL
+        ? SWITCH_PATIENT_DIALOG_TITLE
+        : REFILL_DIALOG_TITLE,
+      dialogContent: sourceType === REFILL
+        ? SWITCH_PATIENT_DIALOG_CONTENT
+        : REFILL_DIALOG_CONTENT,
       medicineName: item
     })
   }
 
-  handleClose () {
+  handleClose = () => {
     this.setState({
       open: false
     })
   }
 
-  onClickOfOk () {
+  onClickOfOk = () => {
+    this.setState({
+      open: false
+    })
     this.props.deleteCartLoading(
       this.props.cartState,
       this.props.checkPincodeState.payload.source,
       this.props.checkPincodeState.payload.id,
-      'REFILL',
+      REFILL,
       this.props.pastMedicineState.selectedPatient,
-      this.addMedicine
+      this.addMedicine,
+      true
     )
   }
 
-  addMedicine () {
+  addMedicine = () => {
     this.props.addToCartHandler(this.state.medicineName)
-    this.setState({
-      open: false
-    })
   }
 
   render () {
@@ -153,6 +167,8 @@ class RefillMedicineList extends Component {
                 </Typography>}
             </ActivityIndicator>
             <RefillPatientDialogue
+              dialogTitle={this.state.dialogTitle}
+              dialogContent={this.state.dialogContent}
               open={this.state.open}
               handleClose={this.handleClose}
               onClickOfOk={this.onClickOfOk}

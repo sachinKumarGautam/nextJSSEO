@@ -599,6 +599,17 @@ export default function cartReducer (state = initialState, action) {
         }
       }
 
+    case cartActionTypes.RESET_CART_LOADING_STATE:
+      return {
+        ...state,
+        isLoading: action.isLoading,
+        errorState: {
+          ...state.errorState,
+          isError: action.isError,
+          error: action.error
+        }
+      }
+
     case cartActionTypes.RESET_CART_STATE:
       return {
         ...state,
@@ -950,33 +961,29 @@ export default function cartReducer (state = initialState, action) {
     case cartActionTypes.DELETE_CART_LOADING:
       return {
         ...state,
-        payload: {
-          ...state.payload,
-          isLoading: action.isLoading
+        isLoading: action.isLoading,
+        errorState: {
+          ...state.errorState,
+          isError: action.isError,
+          error: action.error
         }
       }
 
     case cartActionTypes.DELETE_CART_SUCCESS:
       return {
         ...state,
-        payload: {
-          ...state.payload,
-          isLoading: action.isLoading,
-          payload: initialState.payload
-        }
+        isLoading: action.isLoading,
+        payload: initialState.payload
       }
 
     case cartActionTypes.DELETE_CART_FAILURE:
       return {
         ...state,
-        payload: {
-          ...state.payload,
-          isLoading: action.isLoading,
-          errorState: {
-            ...state.payload.errorState,
-            isError: action.isError,
-            error: action.error
-          }
+        isLoading: action.isLoading,
+        errorState: {
+          ...state.errorState,
+          isError: action.isError,
+          error: action.error
         }
       }
 

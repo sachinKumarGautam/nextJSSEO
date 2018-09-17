@@ -14,4 +14,6 @@ export const SERVICE_TYPE_LFASSURED = 'LF_ASSURED'
 
 export const IN_STOCK = 'IN_STOCK'
 
-// export const NORMAL = 'NORMAL'
+export const REFILL = 'REFILL'
+
+export const SCROLL_TO_TOP_HEIGHT = 120

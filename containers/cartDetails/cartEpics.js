@@ -68,6 +68,10 @@ import {
 } from './cartActions'
 
 import {
+  toggleAuthentication
+} from '../login/loginActions'
+
+import {
   getAnonymousCartId$,
   getCartDetails$,
   putCartItem$,
@@ -86,9 +90,7 @@ import {
   deleteCart$
 } from '../../services/api'
 
-import {
-  PAYMENT_GATEWAY
-} from '../../components/constants/paymentConstants'
+import { PAYMENT_GATEWAY } from '../../components/constants/paymentConstants'
 
 export function getAnonymousCartIdEpic (action$, store) {
   return action$.pipe(
@@ -98,7 +100,7 @@ export function getAnonymousCartIdEpic (action$, store) {
         getAnonymousCartId$(data.source, data.facility_code, data.source_type)
       ).pipe(
         flatMap(result => {
-          if (data.source_type === 'REFILL') {
+          if (data.isAssignPatientToCart) {
             return of(
               getAnonymousCartIdSuccess(data.cartState, result.body.payload),
               savePatientToCartLoading(
@@ -252,7 +254,11 @@ export function incrementCartItemEpic (action$, store) {
       }
       return http(putCartItem$(cartUid, medicineIncremented)).pipe(
         flatMap(result => {
-          if (medicineIncremented.quantity === 1) {
+          const cartItems = data.cartState.payload.cart_items.payload
+          const checkIfAlredyExistInCart = cartItems.findIndex(
+            cartItem => medicineIncremented.sku === cartItem.sku
+          )
+          if (checkIfAlredyExistInCart === -1) {
             return of(
               goToCartSnackbar(data.cartState, true),
               putCartItemSuccess(data.cartState, result.body.payload)
@@ -370,8 +376,10 @@ export function cartTransferEpic (action$, store) {
   return action$.pipe(
     ofType(CART_TRANSFER_LOADING),
     mergeMap(data => {
+      const loginState = store.getState().loginState
+
       return http(cartTransfer$(data.cartState.payload.uid)).pipe(
-        map(result => {
+        flatMap(result => {
           let cartItems = result.body.payload.cart_items
           let cartPrescriptions = result.body.payload.cart_prescriptions
 
@@ -390,11 +398,15 @@ export function cartTransferEpic (action$, store) {
               }
             }
           )
-          return cartTransferSuccess(
-            data.cartState,
-            result,
-            cartItems,
-            updatedCartPrescriptions
+
+          return of(
+            cartTransferSuccess(
+              data.cartState,
+              result,
+              cartItems,
+              updatedCartPrescriptions
+            ),
+            toggleAuthentication(loginState, true)
           )
         }),
         catchError(error => {
@@ -592,9 +604,7 @@ export function paymentInitiateEpic (action$, store) {
               paymentInitiateFailure(data.cartState, error)
             )
           } else {
-            return of(
-              paymentInitiateFailure(data.cartState, error)
-            )
+            return of(paymentInitiateFailure(data.cartState, error))
           }
         })
       )
@@ -638,7 +648,8 @@ export function deleteCartState (action$, store) {
               data.facility_code,
               data.source_type,
               data.patientId,
-              data.addMedicine
+              data.addMedicine,
+              data.isAssignPatientToCart
             )
           )
         }),

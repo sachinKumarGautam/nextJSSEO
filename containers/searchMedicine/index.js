@@ -10,8 +10,7 @@ import SearchIcon from '@material-ui/icons/Search'
 import MedicineListDetails from '../../components/MedicineListDetails'
 import TextErrorMessage
   from '../../components/activityIndicator/error/TextErrorMessage'
-
-import { PRODUCT_SEARCH } from '../../routes/RouteConstant'
+import { PRODUCT_SEARCH, PRODUCT_DETAILS } from '../../routes/RouteConstant'
 
 import { CUSTOM_MESSGAE_SNACKBAR } from '../messages/errorMessages'
 import debounce from 'lodash.debounce'
@@ -33,7 +32,10 @@ const styles = theme => ({
     overflow: 'scroll',
     zIndex: 1,
     left: 0,
-    right: 0
+    right: 0,
+    marginLeft: theme.spacing.unit * 4,
+    marginRight: theme.spacing.unit * 2,
+    width: 'auto'
   },
   chip: {
     margin: `${theme.spacing.unit / 2}px ${theme.spacing.unit / 4}px`
@@ -155,7 +157,6 @@ function renderSuggestion ({
   searchItemStyle,
   highlightedSearchItem,
   selectedSearchItem,
-  onSelectItem,
   checkPincodeState,
   addToCartHandler
 }) {
@@ -181,7 +182,8 @@ class SearchMedicine extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
-      isOpen: false
+      isOpen: false,
+      highlightedIndex: ''
     }
     this.searchMedicineOnChange = this.searchMedicineOnChange.bind(this)
     this.stateChangeHandler = this.stateChangeHandler.bind(this)
@@ -214,15 +216,35 @@ class SearchMedicine extends React.Component {
   }
 
   stateChangeHandler = changes => {
-    let { isOpen = this.state.isOpen, type } = changes
+    let { isOpen = this.state.isOpen, type, highlightedIndex } = changes
+    const searchMedicineResult = this.props.searchMedicineState.payload
+      .searchMedicineResult
 
     isOpen = type === Downshift.stateChangeTypes.blurInput
       ? this.state.isOpen
       : isOpen
     // restrict closing of search item list because of pincode dialog invokes blur event on search bar
-    this.setState({
-      isOpen
-    })
+    if (type === Downshift.stateChangeTypes.keyDownEnter) {
+      this.handleOnEnterItem(
+        searchMedicineResult,
+        type,
+        this.state.highlightedIndex
+      )
+    } else {
+      this.setState({
+        highlightedIndex: highlightedIndex
+      })
+    }
+
+    this.setState({ isOpen })
+  }
+
+  handleOnEnterItem = (searchMedicineResult, type, prevHighlightedIndex) => {
+    const slug = searchMedicineResult[prevHighlightedIndex].slug
+    const city = this.props.checkPincodeState.payload.city
+    const href = `${PRODUCT_DETAILS}?id=${slug}&location=${city}`
+    const as = `${PRODUCT_DETAILS}/${slug}?location=${city}`
+    Router.push(href, as)
   }
 
   render () {
@@ -250,12 +272,7 @@ class SearchMedicine extends React.Component {
             }
             customStyle={this.props.classes.errorMessage}
           />}
-        <Downshift
-          onStateChange={this.stateChangeHandler}
-          // onOuterClick={this.onOuterClick}
-          // onSelectItem={this.onSelectItem}
-          isOpen={isOpen}
-        >
+        <Downshift onStateChange={this.stateChangeHandler} isOpen={isOpen}>
           {({
             getInputProps,
             getItemProps,
@@ -297,7 +314,6 @@ class SearchMedicine extends React.Component {
                         }),
                         highlightedIndex,
                         selectedItem,
-                        onSelectItem: this.onSelectItem,
                         searchItemStyle: classes.searchItem,
                         highlightedSearchItem: `${classes.searchItem} ${classes.highlightedSearchItem}`,
                         selectedSearchItem: `${classes.searchItem} ${classes.selectedSearchItem}`,

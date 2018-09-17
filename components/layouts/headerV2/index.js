@@ -27,6 +27,10 @@ import {
   uploadPrescriptionLoading
 } from '../../../containers/cartDetails/cartActions'
 
+import {
+  resetIsNewUserFlag
+} from '../../../containers/login/loginActions'
+
 import { HOME_PAGE } from '../../../routes/RouteConstant'
 
 import Router from 'next/router'
@@ -62,7 +66,8 @@ const styles = theme => ({
   wrapCart: {
     alignItems: 'center',
     display: 'flex',
-    flexDirection: 'row'
+    flexDirection: 'row',
+    justifyContent: 'space-between'
   },
   searchWrapper: {
     display: 'none'
@@ -136,6 +141,8 @@ class Header extends React.Component {
       this.props.cartState,
       isCartOpenRegisterDialog
     )
+
+    this.props.actions.resetIsNewUserFlag(this.props.loginState)
   }
 
   render () {
@@ -168,7 +175,7 @@ class Header extends React.Component {
                     }}
                   />
                 </Grid>
-                <Grid item xs={loginState.isAuthenticated ? 6 : 5} lg={7}>
+                <Grid item xs={loginState.isAuthenticated ? 6 : 5} lg={loginState.isAuthenticated ? 7 : 6}>
                   {!this.props.isHomePage ? (
                     <SearchMedicine
                       searchMedicineState={searchMedicineState}
@@ -179,10 +186,11 @@ class Header extends React.Component {
                     />
                   ) : null}
                 </Grid>
-                <Grid item xs={3} lg={loginState.isAuthenticated ? 3 : 2}>
+                <Grid item xs={3} lg={3}>
                   <Subheader
                     isAuthenticated={this.props.loginState.isAuthenticated}
                     openLoginModal={this.openLoginModal}
+                    isHomePage={this.props.isHomePage}
                   />
                 </Grid>
                 <Grid
@@ -275,7 +283,8 @@ function mapDispatchToProps (dispatch) {
         getAnonymousCartIdLoading,
         updateIsCartOpenRegisterModalFlag,
         goToCartSnackbar,
-        uploadPrescriptionLoading
+        uploadPrescriptionLoading,
+        resetIsNewUserFlag
       },
       dispatch
     )

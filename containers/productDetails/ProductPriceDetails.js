@@ -82,7 +82,7 @@ class ProductPriceDetails extends Component {
               <div className={classes.priceWrapper}>
                 <StrokePrice
                   variant={'body1'}
-                  mrp={productDetailsState.payload.selling_price}
+                  mrp={productDetailsState.payload.mrp}
                 />
                 <ProductDiscount
                   discount={productDetailsState.payload.discount}
@@ -96,6 +96,8 @@ class ProductPriceDetails extends Component {
               <div className={classes.cardActions}>
                 <QuantityField onChangeQuantity={this.onChangeQuantity} />
                 <Button
+                  disableFocusRipple
+                  disableRipple
                   variant='outlined'
                   size='small'
                   classes={{

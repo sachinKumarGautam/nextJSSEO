@@ -6,7 +6,8 @@ export function getAnonymousCartIdLoading (
   facilityCode,
   sourceType = '',
   patientDetail,
-  addMedicine
+  addMedicine,
+  isAssignPatientToCart
 ) {
   return {
     type: cartActionTypes.GET_ANONYMOUS_CART_ID_LOADING,
@@ -17,7 +18,8 @@ export function getAnonymousCartIdLoading (
     facility_code: facilityCode,
     source_type: sourceType,
     patientDetail: patientDetail,
-    addMedicine: addMedicine
+    addMedicine: addMedicine,
+    isAssignPatientToCart
   }
 }
 
@@ -472,6 +474,13 @@ export function resetCartState () {
   }
 }
 
+export function resetCartLoadingState (cartState) {
+  return {
+    type: cartActionTypes.RESET_CART_LOADING_STATE,
+    cartState
+  }
+}
+
 export function goToCartSnackbar (cartState, showAddToCartSnackBar) {
   return {
     type: cartActionTypes.GO_TO_CART_SNACKBAR,
@@ -573,11 +582,7 @@ export function optForDoctorCallbackFailure (cartState, error) {
   }
 }
 
-export function verifyPaymentLoading (
-  cartState,
-  response,
-  orderId
-) {
+export function verifyPaymentLoading (cartState, response, orderId) {
   return {
     type: cartActionTypes.VERIFY_PAYMENT_LOADING,
     cartState,
@@ -655,10 +660,7 @@ export function optForExpressDeliveryFailure (cartState, error) {
   }
 }
 
-export function updatePaymentFailureFlag (
-  cartState,
-  isPaymentFailure
-) {
+export function updatePaymentFailureFlag (cartState, isPaymentFailure) {
   return {
     type: cartActionTypes.UPDATE_PAYMENT_FAILURE_FLAG,
     cartState,
@@ -667,11 +669,7 @@ export function updatePaymentFailureFlag (
   }
 }
 
-export function paymentInitiateLoading (
-  cartState,
-  orderId,
-  paymentMode
-) {
+export function paymentInitiateLoading (cartState, orderId, paymentMode) {
   return {
     type: cartActionTypes.PAYMENT_INITIATE_LOADING,
     cartState,
@@ -682,11 +680,7 @@ export function paymentInitiateLoading (
   }
 }
 
-export function paymentInitiateSuccess (
-  cartState,
-  payload,
-  paymentGateway
-) {
+export function paymentInitiateSuccess (cartState, payload, paymentGateway) {
   return {
     type: cartActionTypes.PAYMENT_INITIATE_SUCCESS,
     cartState,
@@ -755,7 +749,8 @@ export function deleteCartLoading (
   facilityCode,
   sourceType,
   patientId,
-  addMedicine
+  addMedicine,
+  isAssignPatientToCart
 ) {
   return {
     type: cartActionTypes.DELETE_CART_LOADING,
@@ -765,7 +760,8 @@ export function deleteCartLoading (
     facility_code: facilityCode,
     source_type: sourceType,
     patientId: patientId,
-    addMedicine
+    addMedicine,
+    isAssignPatientToCart
   }
 }
 
