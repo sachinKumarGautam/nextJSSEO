@@ -49,7 +49,7 @@ const styles = theme => {
 
 class TeleConsultationDetail extends Component {
   onGetStarted () {
-    return scrollTo('search-section')
+    return scrollTo('search-section', 120)
   }
   render () {
     return (

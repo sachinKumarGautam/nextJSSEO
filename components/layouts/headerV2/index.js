@@ -183,6 +183,7 @@ class Header extends React.Component {
                   <Subheader
                     isAuthenticated={this.props.loginState.isAuthenticated}
                     openLoginModal={this.openLoginModal}
+                    isHomePage={this.props.isHomePage}
                   />
                 </Grid>
                 <Grid
@@ -209,8 +210,8 @@ class Header extends React.Component {
                 </Grid>
               </Grid>
             </Toolbar>
-           
-         </div>
+
+          </div>
           {(this.state.openLoginDialog ||
             this.props.cartState.isCartOpenLoginDialog ||
             this.props.cartState.isCartOpenRegisterDialog) && (
