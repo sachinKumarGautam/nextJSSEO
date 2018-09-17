@@ -15,15 +15,16 @@ import PaymentDeliveryDetail from './PaymentDeliveryDetail'
 import { SELECT_PAYMENT_MODE } from '../messages/cartMessages'
 
 import {
-  LF_ASSURED,
-  NORMAL,
+  SERVICE_TYPE_LFASSURED,
+  DELIVERY_OPTION_NORMAL,
   SNACK_BAR_DURATION
 } from '../../components/constants/Constants'
 
 class PaymentExpansionPanel extends React.Component {
   state = {
     paymentChannel: '',
-    isShowSnackbar: false
+    isShowSnackbar: false,
+    snackBarMsg: ''
   }
 
   placeOrder () {
@@ -35,9 +36,23 @@ class PaymentExpansionPanel extends React.Component {
         this.props.cartState,
         this.state.paymentChannel
       )
+    } else if (
+      !this.props.cartState.payload.cart_items.payload.length &&
+      !this.props.cartState.payload.is_doctor_callback.payload &&
+      !this.props.cartState.payload.cart_prescriptions.length
+    ) {
+      this.setState({
+        isShowSnackbar: true
+      })
+      this.setState({
+        snackBarMsg: ATLEAST_ONE_ITEM
+      })
     } else {
       this.setState({
         isShowSnackbar: true
+      })
+      this.setState({
+        snackBarMsg: SELECT_PAYMENT_MODE
       })
     }
   }
@@ -55,7 +70,8 @@ class PaymentExpansionPanel extends React.Component {
   }
 
   render () {
-    const shippingAddressDetails = this.props.cartState.payload.shipping_address_details
+    const shippingAddressDetails = this.props.cartState.payload
+      .shipping_address_details
     const patientDetails = this.props.cartState.payload.patient_details
 
     return (
@@ -63,18 +79,18 @@ class PaymentExpansionPanel extends React.Component {
         expanded={this.props.expanded === 'panel5'}
         onChange={
           this.props.loginState.isAuthenticated &&
-          shippingAddressDetails.payload.shipping_address_id
+            shippingAddressDetails.payload.shipping_address_id
             ? this.props.handleChange
             : null
         }
         className={this.props.expansionPanel}
       >
         <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-          <img src='/static/images/payment.svg' className={this.props.imageIcon} />
-          <Typography
-            component='h1'
-            className={this.props.heading}
-          >
+          <img
+            src='/static/images/payment.svg'
+            className={this.props.imageIcon}
+          />
+          <Typography component='h1' className={this.props.heading}>
             Payment
           </Typography>
         </ExpansionPanelSummary>
@@ -84,32 +100,32 @@ class PaymentExpansionPanel extends React.Component {
           }}
         >
           {
-            (this.props.cartState.payload.service_type === LF_ASSURED ||
-            this.props.cartState.payload.delivery_option !== NORMAL) &&
+            (this.props.cartState.payload.service_type === SERVICE_TYPE_LFASSURED ||
+            this.props.cartState.payload.delivery_option !== DELIVERY_OPTION_NORMAL) &&
             <PaymentDeliveryDetail
               cartState={this.props.cartState}
-              optForExpressDeliveryLoading={this.props.optForExpressDeliveryLoading}
+              optForExpressDeliveryLoading={
+                this.props.optForExpressDeliveryLoading
+              }
               constantsState={this.props.constantsState}
-            />
-          }
-          {
-            this.props.cartState.payload.total_payable_amount
-              ? (
-                <div>
-                  <Typography
-                    className={this.props.selectPaymentMode}
-                  >
-                    SELECT PAYMENT MODE
-                  </Typography>
-                  <PaymentChannels
-                    radioWrapper={this.props.radioWrapper}
-                    paymentChannel={this.state.paymentChannel}
-                    paymentChannelsPayload={this.props.cartState.payload.payment_channels}
-                    handlePaymentChannelsChange={this.handlePaymentChannelsChange.bind(this)}
-                  />
-                </div>
-              ) : null
-          }
+            />}
+          {this.props.cartState.payload.total_payable_amount
+            ? <div>
+              <Typography className={this.props.selectPaymentMode}>
+                  SELECT PAYMENT MODE
+              </Typography>
+              <PaymentChannels
+                radioWrapper={this.props.radioWrapper}
+                paymentChannel={this.state.paymentChannel}
+                paymentChannelsPayload={
+                  this.props.cartState.payload.payment_channels
+                }
+                handlePaymentChannelsChange={this.handlePaymentChannelsChange.bind(
+                  this
+                )}
+              />
+            </div>
+            : null}
           <TermsAndCondition />
           <Button
             size='small'
@@ -120,13 +136,13 @@ class PaymentExpansionPanel extends React.Component {
             }}
             label={
               this.props.cartState.payload.total_payable_amount
-                ? 'Place Order'
-                : 'Place a COD Order'
+              ? 'PLACE ORDER'
+              : 'Place a COD Order'
             }
             onClick={this.placeOrder.bind(this)}
             disabled={
               !patientDetails.payload.patient_id ||
-              !shippingAddressDetails.payload.shipping_address_id
+                !shippingAddressDetails.payload.shipping_address_id
             }
           />
           <Snackbar
@@ -140,7 +156,7 @@ class PaymentExpansionPanel extends React.Component {
             ContentProps={{
               'aria-describedby': 'cart-items'
             }}
-            message={<span>{SELECT_PAYMENT_MODE}</span>}
+            message={<span>{this.state.snackBarMsg}</span>}
           />
         </ExpansionPanelDetails>
       </ExpansionPanel>

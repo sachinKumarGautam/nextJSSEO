@@ -89,6 +89,8 @@ const OrderContentWrapper = (props) => {
     <div className={props.classes.orderContentWrapper}>
       <OrderStatusDetails
         orderId={props.orderDetailsState.payload.id}
+        serviceType={props.orderDetailsState.payload.service_type}
+        deliveryOption={props.orderDetailsState.payload.delivery_option}
       />
       <Divider />
       <PaymentDetails
@@ -164,7 +166,7 @@ const OrderContentWrapper = (props) => {
             }}
             className={props.classes.buttonViewStyle}
             onClick={props.retryPayment}
-            label={'Retry Payment'}
+            label={'RETRY PAYMENT'}
           />
           <Button
             size='small'
@@ -175,7 +177,7 @@ const OrderContentWrapper = (props) => {
             }}
             className={props.classes.buttonHomeStyle}
             onClick={props.placeOrder}
-            label={'Convert to COD'}
+            label={'CONVERT TO COD'}
           />
         </div>
       }

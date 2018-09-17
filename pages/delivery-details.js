@@ -17,7 +17,8 @@ import {
   submitDeliveryDetailsLoading,
   updateAddressFormValue,
   getLocalityDetailListLoading,
-  resetDeliveryAddressSelected
+  resetDeliveryAddressSelected,
+  resetErrorState
 } from '../containers/deliveryDetails/deliveryDetailsActions'
 
 import {
@@ -33,10 +34,10 @@ const styles = theme => ({
     paddingBottom: theme.spacing.unit * 3,
     paddingLeft: theme.spacing.unit * 7,
     paddingRight: theme.spacing.unit * 7,
-    maxWidth: theme.breakpoints.values.lg,
-    minWidth: theme.breakpoints.values.md,
     margin: '0 auto',
-    marginTop: theme.spacing.unit * 12
+    marginTop: theme.spacing.unit * 7.5,
+    maxWidth: theme.breakpoints.values.lg,
+    minWidth: theme.breakpoints.values.md
   },
   title: {
     fontWeight: theme.typography.fontWeightBold
@@ -86,6 +87,7 @@ class DeliveryDetails extends React.Component {
               checkPincodeState={this.props.checkPincodeState}
               resetDeliveryAddressSelected={this.props.actions.resetDeliveryAddressSelected}
               getDeliveryDetailsListLoading={this.props.actions.getDeliveryDetailsListLoading}
+              resetErrorState={this.props.actions.resetErrorState}
             />
           </Paper>
         </div>
@@ -113,7 +115,8 @@ function mapDispatchToProps (dispatch) {
         checkPincodeLoading,
         updateAddressFormValue,
         getLocalityDetailListLoading,
-        resetDeliveryAddressSelected
+        resetDeliveryAddressSelected,
+        resetErrorState
       },
       dispatch
     )

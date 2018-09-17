@@ -18,7 +18,8 @@ const styles = theme => {
     },
     addressTypeStyle: {
       color: theme.palette.customGrey.grey500,
-      fontWeight: theme.typography.fontWeightBold
+      fontWeight: theme.typography.fontWeightBold,
+      paddingBottom: theme.spacing.unit
     },
     addressTypeWrapper: {
       display: 'flex',
@@ -53,6 +54,12 @@ const styles = theme => {
       ...theme.typography.body2,
       color: theme.palette.customGreen.green300,
       fontWeight: theme.typography.fontWeightBold
+    },
+    addressName: {
+      color: theme.palette.customGrey.grey500,
+      paddingBottom: theme.spacing.unit,
+      marginLeft: theme.spacing.unit * 5,
+      fontWeight: theme.typography.fontWeightBold
     }
   }
 }
@@ -65,8 +72,8 @@ const AddressDetailsCard = props => (
         : props.classes.addressWrapperStyle
     }
     onClick={
-      props.saveAddressSelected
-        ? props.saveAddressSelected.bind(this, props.deliveryDetail.id)
+      props.checkPincodeServiceble
+        ? props.checkPincodeServiceble.bind(this, props.deliveryDetail)
         : null
     }
   >
@@ -81,6 +88,12 @@ const AddressDetailsCard = props => (
     </div>
     <Typography
       variant='caption'
+      className={props.classes.addressName}
+    >
+      {props.deliveryDetail.full_name} - {props.deliveryDetail.mobile}
+    </Typography>
+    <Typography
+      variant='caption'
       className={props.classes.addressStyle}
     >
       {props.deliveryDetail.street1}
@@ -90,6 +103,12 @@ const AddressDetailsCard = props => (
       className={props.classes.addressStyle}
     >
       {props.deliveryDetail.street2}
+    </Typography>
+    <Typography
+      variant='caption'
+      className={props.classes.addressStyle}
+    >
+      {props.deliveryDetail.city} - {props.deliveryDetail.pincode}
     </Typography>
     {
       props.isCartPage

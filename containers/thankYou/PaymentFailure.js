@@ -164,7 +164,7 @@ class PaymentFailure extends React.Component {
                 }}
                 className={this.props.classes.buttonViewStyle}
                 onClick={this.props.retryPayment}
-                label={'Retry Payment'}
+                label={'RETRY PAYMENT'}
               />
               <Button
                 size='small'
@@ -172,7 +172,7 @@ class PaymentFailure extends React.Component {
                 color='primary'
                 className={this.props.classes.buttonViewStyle}
                 onClick={this.placeOrder.bind(this)}
-                label={'Convert to COD'}
+                label={'CONVERT TO COD'}
               />
             </div>
           </ActivityIndicator>

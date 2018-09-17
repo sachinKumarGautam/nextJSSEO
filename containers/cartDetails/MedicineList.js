@@ -86,6 +86,8 @@ class MedicineList extends Component {
                   <ProductName
                     customStyle={this.props.classes.medicineNameWrapper}
                     name={cartItem.name}
+                    serviceType={cartItem.available_service_type}
+                    deliveryOption={cartItem.available_delivery_option}
                   />
                   <ProductBrand
                     customStyle={this.props.classes.companyNameWrapper}

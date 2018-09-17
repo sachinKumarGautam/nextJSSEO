@@ -51,6 +51,7 @@ export function getProductDetailSuccess (productDetailsState, result) {
     discount: result.discount,
     uses: result.uses,
     selling_price: result.selling_price,
+    mrp : result.mrp,
     side_effects: result.side_effects,
     how_it_works: result.how_it_works,
     precautions: result.precautions,

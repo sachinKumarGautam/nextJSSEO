@@ -10,7 +10,8 @@ import {
   GET_LOCALITY_LIST_LOADING,
   GET_LOCALITY_LIST_SUCCESS,
   GET_LOCALITY_LIST_FAILURE,
-  RESET_DELIVERY_ADDRESS_SELECTED
+  RESET_DELIVERY_ADDRESS_SELECTED,
+  REST_DELIVERY_FORM
 } from './deliveryDetailsActionTypes'
 
 /**
@@ -171,5 +172,11 @@ export function resetDeliveryAddressSelected (deliveryDetailsState) {
   return {
     type: RESET_DELIVERY_ADDRESS_SELECTED,
     deliveryDetailsState
+  }
+}
+
+export function resetErrorState () {
+  return {
+    type: REST_DELIVERY_FORM
   }
 }

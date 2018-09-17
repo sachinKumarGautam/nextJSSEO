@@ -12,7 +12,8 @@ import {
   RESET_DELIVERY_ADDRESS_SELECTED,
   SUBMIT_DELIVERY_DETAILS_SUCCESS,
   SUBMIT_DELIVERY_DETAILS_LOADING,
-  SUBMIT_DELIVERY_DETAILS_FAILURE
+  SUBMIT_DELIVERY_DETAILS_FAILURE,
+  REST_DELIVERY_FORM
 } from './deliveryDetailsActionTypes'
 
 export default function deliveryDetailsReducer (state = initialState, action) {
@@ -167,6 +168,16 @@ export default function deliveryDetailsReducer (state = initialState, action) {
           }
         }
       }
+
+      case REST_DELIVERY_FORM:
+        return {
+          ...state,
+          addressForm: {
+            ...state.addressForm,
+            isLoading: initialState.isLoading,
+            errorState: initialState.errorState
+          }
+        }
 
     default:
       return state
