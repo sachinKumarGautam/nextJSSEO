@@ -1,8 +1,9 @@
 import React from 'react'
 import Snackbar from '@material-ui/core/Snackbar'
+import Link from 'next/link'
 import SnackbarContent from '@material-ui/core/SnackbarContent'
 import { withStyles } from '@material-ui/core/styles'
-import Link from 'next/link'
+import Router from 'next/router'
 import { CART_DETAILS } from '../../routes/RouteConstant'
 // import IconButton from '@material-ui/core/IconButton'
 // import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart'
@@ -51,16 +52,9 @@ class GoToCartSnackbar extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
-      open: false,
       vertical: 'top',
       horizontal: 'right'
     }
-
-    this.cartUrl = getReplacedString(CART_DETAILS)
-  }
-
-  handleClick = state => () => {
-    this.setState({ open: true, ...state })
   }
 
   handleClose = () => {
@@ -69,32 +63,38 @@ class GoToCartSnackbar extends React.Component {
 
   render () {
     const { classes } = this.props
+    const href = getReplacedString(CART_DETAILS)
     return (
       <div>
-        <Link prefetch href={this.cartUrl}>
-          <Snackbar
-            anchorOrigin={{
-              vertical: 'bottom',
-              horizontal: 'center'
-            }}
-            classes={{
-              anchorOriginBottomCenter: classes.anchorOriginBottomCenter
-            }}
-            autoHideDuration={SNACK_BAR_DURATION}
-            open={this.props.cartState.payload.showAddToCartSnackBar}
-            onClose={this.handleClose}
-            ContentProps={{
-              'aria-describedby': 'cart-items'
-            }}
-          >
-            <SnackbarContent
-              className={classes.snackbarSuccess}
-              aria-describedby='client-snackbar'
-              message={
-                <div className={classes.buttonWrapper}>
-                  <Typography variant='caption' className={classes.text}>
-                    {ITEM_ADDED_TO_CART}
-                  </Typography>
+        <Snackbar
+          anchorOrigin={{
+            vertical: 'bottom',
+            horizontal: 'center'
+          }}
+          classes={{
+            anchorOriginBottomCenter: classes.anchorOriginBottomCenter
+          }}
+          autoHideDuration={SNACK_BAR_DURATION}
+          open={this.props.cartState.payload.showAddToCartSnackBar}
+          onClose={this.handleClose}
+          ContentProps={{
+            'aria-describedby': 'cart-items'
+          }}
+        >
+          <SnackbarContent
+            className={classes.snackbarSuccess}
+            aria-describedby='client-snackbar'
+            message={
+              <div
+                onMouseEnter={() => {
+                  Router.prefetch(href)
+                }}
+                className={classes.buttonWrapper}
+              >
+                <Typography variant='caption' className={classes.text}>
+                  {ITEM_ADDED_TO_CART}
+                </Typography>
+                <Link href={href}>
                   <Button
                     size='small'
                     variant='success'
@@ -107,11 +107,11 @@ class GoToCartSnackbar extends React.Component {
                     label={'Go To Cart'}
                     onClick={this.handleClose}
                   />
-                </div>
-              }
-            />
-          </Snackbar>
-        </Link>
+                </Link>
+              </div>
+            }
+          />
+        </Snackbar>
       </div>
     )
   }

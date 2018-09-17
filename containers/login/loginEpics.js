@@ -11,8 +11,7 @@ import {
   sendOtpSuccess,
   sendOtpFailure,
   verifyOtpSuccess,
-  verifyOtpFailure,
-  toggleAuthentication
+  verifyOtpFailure
 } from './loginActions'
 
 import {
@@ -79,7 +78,6 @@ export function verifyOTP (action$, store) {
             )
           } else {
             successObservable = of(
-              toggleAuthentication(loginState, true),
               fetchUserInfoLoading(customerState, mobile),
               verifyOtpSuccess(loginState, result, isNewUser),
               updatePhoneNumber(customerState, mobile),

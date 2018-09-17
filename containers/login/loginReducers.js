@@ -8,7 +8,8 @@ import {
   OTP_VERIFIED_LOADING,
   OTP_VERIFIED_SUCCESS,
   TOGGLE_AUTHENTICATION,
-  RESET_LOGIN_STATE
+  RESET_LOGIN_STATE,
+  RESET_IS_NEW_USER_FLAG
 } from './loginActionTypes'
 
 export default function (state = initialState, action) {
@@ -95,6 +96,12 @@ export default function (state = initialState, action) {
         ...state,
         errorStateVerifyOtp: initialState.errorStateVerifyOtp,
         errorStateSendOtp: initialState.errorStateSendOtp
+      }
+      
+    case RESET_IS_NEW_USER_FLAG:
+      return {
+        ...state,
+        isNewUser: action.isNewUser
       }
 
     default:
