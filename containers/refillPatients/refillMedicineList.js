@@ -72,7 +72,6 @@ class RefillMedicineList extends Component {
   }
   onClickOfPatient = item => {
     const sourceType = this.props.cartState.payload.source_type
-    const dialogTitle = ''
     this.setState({
       open: true,
       dialogTitle: sourceType === REFILL
