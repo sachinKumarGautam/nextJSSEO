@@ -107,13 +107,14 @@ class MedicineListDetails extends React.Component {
         as={`${PRODUCT_DETAILS}/${props.itemDetails.slug}?location=${city}`}
       >
         <div className={props.classes.medicineListContentWrapper}>
-          <div onClick={this.props.onSelectItem}>
+          <div>
             <ProductName
               variant={'body1'}
               name={props.itemDetails.name}
               customStyle={props.classes.customName}
+              serviceType={props.itemDetails.available_service_type}
+              deliveryOption={props.itemDetails.available_delivery_option}
             />
-
             {/* {props.isRefillMedicines && <RefillDueDays />} */}
             <ProductBrand
               variant={'caption'}

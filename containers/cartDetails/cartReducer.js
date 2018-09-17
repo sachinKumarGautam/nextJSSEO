@@ -310,6 +310,9 @@ export default function cartReducer (state = initialState, action) {
           ...state.payload,
           available_delivery_option: action.available_delivery_option,
           preferred_delivery_option: action.preferred_delivery_option,
+          delivery_option: action.delivery_option,
+          service_type: action.service_type,
+          urgent_delivery_charge: action.urgent_delivery_charge,
           shipping_address_details: {
             ...state.payload.shipping_address_details,
             isLoading: action.isLoading,
@@ -573,7 +576,8 @@ export default function cartReducer (state = initialState, action) {
             total_tax_amount: action.total_tax_amount,
             facility_code: action.facility_code,
             status: action.status,
-            source: action.source
+            source: action.source,
+            urgent_delivery_charge: action.urgent_delivery_charge
           }
         }
       }
@@ -589,6 +593,17 @@ export default function cartReducer (state = initialState, action) {
             isError: action.isError,
             error: action.error
           }
+        }
+      }
+
+    case cartActionTypes.RESET_CART_LOADING_STATE:
+      return {
+        ...state,
+        isLoading: action.isLoading,
+        errorState: {
+          ...state.errorState,
+          isError: action.isError,
+          error: action.error
         }
       }
 
@@ -796,12 +811,22 @@ export default function cartReducer (state = initialState, action) {
         ...state,
         expressDeliveryCheck: {
           ...state.expressDeliveryCheck,
-          isLoading: action.isLoading,
-          payload: action.payload
+          isLoading: action.isLoading
         },
         payload: {
           ...state.payload,
-          preferred_delivery_option: action.preferred_delivery_option
+          preferred_delivery_option: action.preferred_delivery_option,
+          urgent_delivery_charge: action.urgent_delivery_charge,
+          delivery_option: action.delivery_option,
+          service_type: action.service_type,
+          total_sale_price: action.total_sale_price,
+          total_payable_amount: action.total_payable_amount,
+          redeemable_care_points: action.redeemable_care_points,
+          redeemable_cash: action.redeemable_cash,
+          cart_items: {
+            ...state.payload.cart_items,
+            payload: action.cart_items
+          }
         }
       }
 
@@ -933,33 +958,29 @@ export default function cartReducer (state = initialState, action) {
     case cartActionTypes.DELETE_CART_LOADING:
       return {
         ...state,
-        payload: {
-          ...state.payload,
-          isLoading: action.isLoading
+        isLoading: action.isLoading,
+        errorState: {
+          ...state.errorState,
+          isError: action.isError,
+          error: action.error
         }
       }
 
     case cartActionTypes.DELETE_CART_SUCCESS:
       return {
         ...state,
-        payload: {
-          ...state.payload,
-          isLoading: action.isLoading,
-          payload: initialState.payload
-        }
+        isLoading: action.isLoading,
+        payload: initialState.payload
       }
 
     case cartActionTypes.DELETE_CART_FAILURE:
       return {
         ...state,
-        payload: {
-          ...state.payload,
-          isLoading: action.isLoading,
-          errorState: {
-            ...state.payload.errorState,
-            isError: action.isError,
-            error: action.error
-          }
+        isLoading: action.isLoading,
+        errorState: {
+          ...state.errorState,
+          isError: action.isError,
+          error: action.error
         }
       }
 
@@ -974,6 +995,12 @@ export default function cartReducer (state = initialState, action) {
             error: action.error
           }
         }
+      }
+
+    case cartActionTypes.UPDATE_LFASSURED_EXPRESS_FLAG:
+      return {
+        ...state,
+        isLAssuredLExpressAlertOpen: action.isLAssuredLExpressAlertOpen
       }
 
     default:
