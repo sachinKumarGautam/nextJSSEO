@@ -24,7 +24,9 @@ const styles = theme => ({
   },
   changePhoneNumber: {
     color: theme.palette.primary.main,
-    marginLeft: theme.spacing.unit * 2
+    marginLeft: theme.spacing.unit * 2,
+    textDecoration: 'underline',
+    cursor: 'pointer'
   }
 })
 
@@ -33,7 +35,9 @@ class OTP extends React.Component {
     const { classes, toggleForm, loginState, verifyOtpLoading } = this.props
     return (
       <div className={classes.container}>
-        <Typography className={classes.otpHeading}> OTP has been sent on this number </Typography>
+        <Typography className={classes.otpHeading}>
+          {' '}OTP has been sent on this number{' '}
+        </Typography>
         <Typography className={classes.phoneNumber}>
           {loginState.payload.initialMobile}
           <span
