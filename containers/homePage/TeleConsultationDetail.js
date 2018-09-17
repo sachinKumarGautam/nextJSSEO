@@ -6,6 +6,8 @@ import Button from '@material-ui/core/Button'
 
 import {scrollTo} from '../../utils/scrollToSections'
 
+import {SCROLL_TO_TOP_HEIGHT} from '../../components/constants/Constants'
+
 const styles = theme => {
   return {
     button: {
@@ -49,7 +51,7 @@ const styles = theme => {
 
 class TeleConsultationDetail extends Component {
   onGetStarted () {
-    return scrollTo('search-section', 120)
+    return scrollTo('search-section', SCROLL_TO_TOP_HEIGHT)
   }
   render () {
     return (

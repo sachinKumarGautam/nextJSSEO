@@ -10,12 +10,21 @@ import Fade from '@material-ui/core/Fade'
 import Login from './Login'
 import Register from './Register'
 import OTP from './OTP'
-import { sendOtpLoading, verifyOtpLoading } from './loginActions'
+import {
+  sendOtpLoading,
+  verifyOtpLoading,
+  resetIsNewUserFlag
+} from './loginActions'
+
 import {
   customerRegisterLoading,
   checkReferralCodeLoading,
   resetCustomerFormState
 } from '../user/customer/customerActions'
+
+import {
+  updateIsCartOpenRegisterModalFlag
+} from '../cartDetails/cartActions'
 
 import ActivityIndicator from '../../components/activityIndicator/index'
 import SnackbarErrorMessage
@@ -52,27 +61,45 @@ class LoginWrapper extends React.Component {
     super(props)
 
     this.state = {
-      modalName: 'login'
+      modalName: 'login',
+      isRegisterClicked: false
     }
     this.toggleForm = this.toggleForm.bind(this)
-  }
-
-  toggleForm (name) {
-    this.setState({
-      modalName: name
-    })
+    this.toggleRegisterClicked = this.toggleRegisterClicked.bind(this)
   }
 
   componentDidMount () {
-    if (this.props.isCartOpenRegisterDialog) {
+    if (this.props.cartState.isCartOpenRegisterDialog) {
       this.setState({
-        modalName: 'register'
-      })
-    } else {
-      this.setState({
-        modalName: 'login'
+        isRegisterClicked: true
       })
     }
+  }
+
+  toggleRegisterClicked (name) {
+    if (name === 'loginClick') {
+      this.setState({
+        isRegisterClicked: false
+      })
+    } else if (name === 'registerClick') {
+      this.setState({
+        isRegisterClicked: true
+      })
+    }
+  }
+
+  toggleForm (name) {
+    if (name === 'login') {
+      this.setState({
+        isRegisterClicked: false
+      })
+
+      this.props.actions.resetIsNewUserFlag(this.props.loginState)
+    }
+
+    this.setState({
+      modalName: name
+    })
   }
 
   resetState () {
@@ -85,9 +112,11 @@ class LoginWrapper extends React.Component {
         return (
           <Login
             toggleForm={this.toggleForm}
+            toggleRegisterClicked={this.toggleRegisterClicked}
             closeLoginModal={this.props.closeLoginModal}
             sendOtpLoading={this.props.actions.sendOtpLoading}
             loginState={this.props.loginState}
+            isRegisterClicked={this.state.isRegisterClicked}
           />
         )
 
@@ -102,6 +131,7 @@ class LoginWrapper extends React.Component {
               this.props.actions.checkReferralCodeLoading
             }
             customerRegisterLoading={this.props.actions.customerRegisterLoading}
+            isRegisterClicked={this.state.isRegisterClicked}
           />
         )
 
@@ -113,6 +143,7 @@ class LoginWrapper extends React.Component {
             loginState={this.props.loginState}
             verifyOtpLoading={this.props.actions.verifyOtpLoading}
             sendOtpLoading={this.props.actions.sendOtpLoading}
+            isRegisterClicked={this.state.isRegisterClicked}
           />
         )
     }
@@ -124,19 +155,16 @@ class LoginWrapper extends React.Component {
       <div>
         <ActivityIndicator
           isError={
+            this.props.cartState.errorState.isError ||
             this.props.customerState.errorStateCustomerRegister.isError ||
-              this.props.customerState.payload.membership_code.errorState
-                .isError ||
-              this.props.customerState.payload.referral_code.errorState.isError
+            this.props.customerState.payload.referral_code.errorState.isError
           }
           ErrorComp={
             <SnackbarErrorMessage
               error={
+                this.props.cartState.errorState.error ||
                 this.props.customerState.errorStateCustomerRegister.error ||
-                  this.props.customerState.payload.membership_code.errorState
-                    .error ||
-                  this.props.customerState.payload.referral_code.errorState
-                    .error
+                this.props.customerState.payload.referral_code.errorState.error
               }
               resetState={this.resetState.bind(this)}
             />
@@ -160,7 +188,12 @@ class LoginWrapper extends React.Component {
                 root: classes.dialogTitle
               }}
             >
-              {this.state.modalName.toUpperCase()}
+              {
+                this.state.isRegisterClicked ||
+                this.props.loginState.isNewUser
+                  ? 'REGISTER'
+                  : 'LOGIN'
+              }
             </DialogTitle>
             <DialogContent>
               {this.getModal(this.state.modalName)}
@@ -174,6 +207,7 @@ class LoginWrapper extends React.Component {
 
 function mapStateToProps (state) {
   return {
+    cartState: state.cartState,
     loginState: state.loginState,
     customerState: state.customerState
   }
@@ -187,7 +221,9 @@ function mapDispatchToProps (dispatch) {
         verifyOtpLoading,
         customerRegisterLoading,
         checkReferralCodeLoading,
-        resetCustomerFormState
+        resetCustomerFormState,
+        resetIsNewUserFlag,
+        updateIsCartOpenRegisterModalFlag
       },
       dispatch
     )

@@ -27,6 +27,10 @@ import {
   uploadPrescriptionLoading
 } from '../../../containers/cartDetails/cartActions'
 
+import {
+  resetIsNewUserFlag
+} from '../../../containers/login/loginActions'
+
 import { HOME_PAGE } from '../../../routes/RouteConstant'
 
 import Router from 'next/router'
@@ -137,6 +141,8 @@ class Header extends React.Component {
       this.props.cartState,
       isCartOpenRegisterDialog
     )
+
+    this.props.actions.resetIsNewUserFlag(this.props.loginState)
   }
 
   render () {
@@ -277,7 +283,8 @@ function mapDispatchToProps (dispatch) {
         getAnonymousCartIdLoading,
         updateIsCartOpenRegisterModalFlag,
         goToCartSnackbar,
-        uploadPrescriptionLoading
+        uploadPrescriptionLoading,
+        resetIsNewUserFlag
       },
       dispatch
     )

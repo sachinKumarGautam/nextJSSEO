@@ -8,6 +8,7 @@ import {scrollTo} from '../../utils/scrollToSections'
 import Router from 'next/router'
 import { REFILL_PATIENTS } from '../../routes/RouteConstant'
 import { getReplacedString } from '../../utils/replaceConstants'
+import {SCROLL_TO_TOP_HEIGHT} from '../../components/constants/Constants'
 
 const styles = theme => {
   return {
@@ -50,7 +51,7 @@ const styles = theme => {
 class RefillMedicineSection extends Component {
   onPlaceOrder () {
     if (!this.props.loginState.isAuthenticated || this.props.loginState.isNewUser) {
-      return scrollTo('search-section', 120)
+      return scrollTo('search-section', SCROLL_TO_TOP_HEIGHT)
     } else {
       const url = getReplacedString(REFILL_PATIENTS)
       return Router.push(url)

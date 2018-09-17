@@ -17,7 +17,10 @@ import {
   getMembershipCodeSuccess,
   getMembershipCodeFailure
 } from './customerActions'
-import { toggleAuthentication } from '../../login/loginActions'
+
+import {
+  resetIsNewUserFlag
+} from '../../login/loginActions'
 
 import http from '../../../services/api/ajaxWrapper'
 import {
@@ -43,9 +46,9 @@ export function registerCustomer (action$, store) {
             data.closeLoginModal()
           }, 250)
           return of(
-            toggleAuthentication(loginState, true),
             customerRegisterSuccess(customerState, result),
-            cartTransferLoading(cartState)
+            cartTransferLoading(cartState),
+            resetIsNewUserFlag(loginState)
           )
         }),
         catchError(error => {
