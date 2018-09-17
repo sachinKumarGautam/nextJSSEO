@@ -10,11 +10,12 @@ import Fade from '@material-ui/core/Fade'
 import Login from './Login'
 import Register from './Register'
 import OTP from './OTP'
-import { sendOtpLoading, verifyOtpLoading, resetLoginState } from './loginActions'
+
 import {
   sendOtpLoading,
   verifyOtpLoading,
-  resetIsNewUserFlag
+  resetIsNewUserFlag,
+  resetLoginState
 } from './loginActions'
 
 import {
