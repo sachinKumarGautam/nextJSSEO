@@ -6,7 +6,6 @@ import { withStyles } from '@material-ui/core/styles'
 import withRoot from '../src/withRoot'
 
 import Head from 'next/head'
-import Router from 'next/router'
 
 import OrderDetailsWrapper from '../containers/orderDetails'
 

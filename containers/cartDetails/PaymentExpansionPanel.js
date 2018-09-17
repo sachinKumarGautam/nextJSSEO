@@ -12,7 +12,7 @@ import PaymentChannels from '../../components/PaymentChannels'
 import TermsAndCondition from './TermsAndCondition'
 import PaymentDeliveryDetail from './PaymentDeliveryDetail'
 
-import { SELECT_PAYMENT_MODE } from '../messages/cartMessages'
+import { SELECT_PAYMENT_MODE, ATLEAST_ONE_ITEM } from '../messages/cartMessages'
 
 import {
   SERVICE_TYPE_LFASSURED,
@@ -99,31 +99,32 @@ class PaymentExpansionPanel extends React.Component {
             root: this.props.thankYouWrapper
           }}
         >
-          {
-            (this.props.cartState.payload.service_type === SERVICE_TYPE_LFASSURED ||
-            this.props.cartState.payload.delivery_option !== DELIVERY_OPTION_NORMAL) &&
-            <PaymentDeliveryDetail
-              cartState={this.props.cartState}
-              optForExpressDeliveryLoading={
+          {(this.props.cartState.payload.service_type ===
+            SERVICE_TYPE_LFASSURED ||
+            this.props.cartState.payload.delivery_option !==
+              DELIVERY_OPTION_NORMAL) &&
+              <PaymentDeliveryDetail
+                cartState={this.props.cartState}
+                optForExpressDeliveryLoading={
                 this.props.optForExpressDeliveryLoading
               }
-              constantsState={this.props.constantsState}
+                constantsState={this.props.constantsState}
             />}
           {this.props.cartState.payload.total_payable_amount
             ? <div>
               <Typography className={this.props.selectPaymentMode}>
                   SELECT PAYMENT MODE
-              </Typography>
+                </Typography>
               <PaymentChannels
                 radioWrapper={this.props.radioWrapper}
                 paymentChannel={this.state.paymentChannel}
                 paymentChannelsPayload={
-                  this.props.cartState.payload.payment_channels
-                }
+                    this.props.cartState.payload.payment_channels
+                  }
                 handlePaymentChannelsChange={this.handlePaymentChannelsChange.bind(
-                  this
-                )}
-              />
+                    this
+                  )}
+                />
             </div>
             : null}
           <TermsAndCondition />
@@ -136,8 +137,8 @@ class PaymentExpansionPanel extends React.Component {
             }}
             label={
               this.props.cartState.payload.total_payable_amount
-              ? 'PLACE ORDER'
-              : 'Place a COD Order'
+                ? 'PLACE ORDER'
+                : 'Place a COD Order'
             }
             onClick={this.placeOrder.bind(this)}
             disabled={
