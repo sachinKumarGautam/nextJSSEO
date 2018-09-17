@@ -50,7 +50,7 @@ const styles = theme => {
 class RefillMedicineSection extends Component {
   onPlaceOrder () {
     if (!this.props.loginState.isAuthenticated || this.props.loginState.isNewUser) {
-      return scrollTo('search-section')
+      return scrollTo('search-section', 120)
     } else {
       const url = getReplacedString(REFILL_PATIENTS)
       return Router.push(url)
