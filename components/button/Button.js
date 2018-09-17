@@ -71,13 +71,17 @@ const CommonButton = buttonProps => {
     type,
     onClick,
     className,
-    loaderPosition
+    loaderPosition,
+    disableFocusRipple,
+    disableRipple
   } = buttonProps
   return (
     <React.Fragment>
       <div className={classes.wrapper}>
         <Button
           variant={variant || null}
+          disableFocusRipple={disableFocusRipple}
+          disableRipple={disableRipple}
           className={
             isloading && !loaderPosition
               ? classNames(className, classes.buttonloader)

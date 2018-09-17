@@ -34,7 +34,10 @@ app
     // product details page
     server.get('/product/:id', (req, res) => {
       const actualPage = '/product-details'
-      const queryParams = { product_id: req.params.id, location: req.query.location }
+      const queryParams = {
+        product_id: req.params.id,
+        location: req.query.location
+      }
       app.render(req, res, actualPage, queryParams)
     })
 
@@ -44,13 +47,15 @@ app
       const queryParams = { customer_id: req.params.id }
 
       if (!req.cookies.token) {
-        res.redirect(url.format({
-          pathname: '/',
-          query: {
-            'authentication': false,
-            'path': req.originalUrl
-          }
-        }))
+        res.redirect(
+          url.format({
+            pathname: '/',
+            query: {
+              authentication: false,
+              path: req.originalUrl
+            }
+          })
+        )
       } else {
         app.render(req, res, actualPage, queryParams)
       }
@@ -62,13 +67,15 @@ app
       const queryParams = { customer_id: req.params.id }
 
       if (!req.cookies.token) {
-        res.redirect(url.format({
-          pathname: '/',
-          query: {
-            'authentication': false,
-            'path': req.originalUrl
-          }
-        }))
+        res.redirect(
+          url.format({
+            pathname: '/',
+            query: {
+              authentication: false,
+              path: req.originalUrl
+            }
+          })
+        )
       } else {
         app.render(req, res, actualPage, queryParams)
       }
@@ -80,13 +87,15 @@ app
       const queryParams = { customer_id: req.params.id }
 
       if (!req.cookies.token) {
-        res.redirect(url.format({
-          pathname: '/',
-          query: {
-            'authentication': false,
-            'path': req.originalUrl
-          }
-        }))
+        res.redirect(
+          url.format({
+            pathname: '/',
+            query: {
+              authentication: false,
+              path: req.originalUrl
+            }
+          })
+        )
       } else {
         app.render(req, res, actualPage, queryParams)
       }
@@ -98,13 +107,15 @@ app
       const queryParams = { customer_id: req.params.id }
 
       if (!req.cookies.token) {
-        res.redirect(url.format({
-          pathname: '/',
-          query: {
-            'authentication': false,
-            'path': req.originalUrl
-          }
-        }))
+        res.redirect(
+          url.format({
+            pathname: '/',
+            query: {
+              authentication: false,
+              path: req.originalUrl
+            }
+          })
+        )
       } else {
         app.render(req, res, actualPage, queryParams)
       }
@@ -116,13 +127,15 @@ app
       const queryParams = { customer_id: req.params.id }
 
       if (!req.cookies.token) {
-        res.redirect(url.format({
-          pathname: '/',
-          query: {
-            'authentication': false,
-            'path': req.originalUrl
-          }
-        }))
+        res.redirect(
+          url.format({
+            pathname: '/',
+            query: {
+              authentication: false,
+              path: req.originalUrl
+            }
+          })
+        )
       } else {
         app.render(req, res, actualPage, queryParams)
       }
@@ -134,13 +147,15 @@ app
       const queryParams = { customer_id: req.params.id }
 
       if (!req.cookies.token) {
-        res.redirect(url.format({
-          pathname: '/',
-          query: {
-            'authentication': false,
-            'path': req.originalUrl
-          }
-        }))
+        res.redirect(
+          url.format({
+            pathname: '/',
+            query: {
+              authentication: false,
+              path: req.originalUrl
+            }
+          })
+        )
       } else {
         app.render(req, res, actualPage, queryParams)
       }
@@ -156,16 +171,21 @@ app
     // thank you page
     server.get('/order/:id/order-confirmation', (req, res) => {
       const actualPage = '/order-confirmation'
-      const queryParams = { id: req.params.id, paymentStatus: req.query['payment-status'] }
+      const queryParams = {
+        id: req.params.id,
+        paymentStatus: req.query['payment-status']
+      }
 
       if (!req.cookies.token) {
-        res.redirect(url.format({
-          pathname: '/',
-          query: {
-            'authentication': false,
-            'path': req.originalUrl
-          }
-        }))
+        res.redirect(
+          url.format({
+            pathname: '/',
+            query: {
+              authentication: false,
+              path: req.originalUrl
+            }
+          })
+        )
       } else {
         app.render(req, res, actualPage, queryParams)
       }
@@ -181,7 +201,10 @@ app
     // home page
     server.get('/', (req, res) => {
       const actualPage = '/'
-      const queryParams = { authentication: req.query.authentication, path: req.query.path }
+      const queryParams = {
+        authentication: req.query.authentication,
+        path: req.query.path
+      }
       app.render(req, res, actualPage, queryParams)
     })
 

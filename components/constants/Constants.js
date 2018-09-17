@@ -25,3 +25,5 @@ export const RETIRED_STATUS_MAPPING = 'Unavailable'
 export const INACTIVE_STATUS_MAPPING = 'Unavailable'
 export const TEMPORARY_SUSPENDED_STATUS_MAPPING = 'Temporarily Unavailable'
 // product status list end here
+
+export const SCROLL_TO_TOP_HEIGHT = 120

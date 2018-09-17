@@ -21,9 +21,9 @@ export function getRelatedMedicines (action$, store) {
   return action$.pipe(
     ofType(GET_RELATED_MEDICINES_LOADING),
     mergeMap(data => {
+      const medicineListState = store.getState().medicineListState
       return http(getMedicineList$(data.saltName, data.page, data.size)).pipe(
         map(result => {
-          const medicineListState = store.getState().medicineListState
           let modifiedResponse = [
             ...medicineListState.payload,
             ...result.body.payload.content

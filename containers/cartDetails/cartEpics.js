@@ -68,6 +68,10 @@ import {
 } from './cartActions'
 
 import {
+  toggleAuthentication
+} from '../login/loginActions'
+
+import {
   getAnonymousCartId$,
   getCartDetails$,
   putCartItem$,
@@ -250,7 +254,11 @@ export function incrementCartItemEpic (action$, store) {
       }
       return http(putCartItem$(cartUid, medicineIncremented)).pipe(
         flatMap(result => {
-          if (medicineIncremented.quantity === 1) {
+          const cartItems = data.cartState.payload.cart_items.payload
+          const checkIfAlredyExistInCart = cartItems.findIndex(
+            cartItem => medicineIncremented.sku === cartItem.sku
+          )
+          if (checkIfAlredyExistInCart === -1) {
             return of(
               goToCartSnackbar(data.cartState, true),
               putCartItemSuccess(data.cartState, result.body.payload)
@@ -368,8 +376,10 @@ export function cartTransferEpic (action$, store) {
   return action$.pipe(
     ofType(CART_TRANSFER_LOADING),
     mergeMap(data => {
+      const loginState = store.getState().loginState
+
       return http(cartTransfer$(data.cartState.payload.uid)).pipe(
-        map(result => {
+        flatMap(result => {
           let cartItems = result.body.payload.cart_items
           let cartPrescriptions = result.body.payload.cart_prescriptions
 
@@ -388,11 +398,15 @@ export function cartTransferEpic (action$, store) {
               }
             }
           )
-          return cartTransferSuccess(
-            data.cartState,
-            result,
-            cartItems,
-            updatedCartPrescriptions
+
+          return of(
+            cartTransferSuccess(
+              data.cartState,
+              result,
+              cartItems,
+              updatedCartPrescriptions
+            ),
+            toggleAuthentication(loginState, true)
           )
         }),
         catchError(error => {
