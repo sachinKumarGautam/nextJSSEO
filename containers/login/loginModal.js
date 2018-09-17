@@ -11,6 +11,7 @@ const initialState = {
   },
   isNewUser: false,
   isAuthenticated: false,
+  isSessionExpired: false,
   isLoadingVerifyOtp: false,
   errorStateVerifyOtp: {
     isError: false,

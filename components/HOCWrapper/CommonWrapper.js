@@ -9,6 +9,9 @@ import {
   resetCartItemErrorState,
   resetCartLoadingState
 } from '../../containers/cartDetails/cartActions'
+
+import { handleSessionExpiration } from '../../containers/login/loginActions'
+
 import {
   openPincodeDialog,
   checkPincodeLoading
@@ -27,6 +30,11 @@ import {
   INVALID_CART_TEXT,
   INVALID_CART_DESCRIPTION
 } from '../../containers/messages/errorMessages'
+
+import {
+  SESSION_EXPIRED,
+  SESSION_EXPIRED_CONTENT
+} from '../../containers/messages/commonMsg'
 
 export function withCommonWrapper (Page) {
   class CommonWrapper extends React.Component {
@@ -68,7 +76,7 @@ export function withCommonWrapper (Page) {
     handleClose = () =>
       this.props.actions.openPincodeDialog(this.props.checkPincodeState, false)
 
-    handleCartInvalid () {
+    handleDialogOk () {
       this.props.actions.resetCartState()
       this.props.actions.getAnonymousCartIdLoading(
         this.props.cartState,
@@ -82,32 +90,54 @@ export function withCommonWrapper (Page) {
       this.props.actions.resetCartItemErrorState()
     }
 
+    getErrorComp = (isCartInvalid, isSessionExpired) => {
+      if (isSessionExpired) {
+        // this.props.actions.handleSessionExpiration(this.props.loginState, false)
+        return (
+          <DialogueErrorMessage
+            dialogKey={'sessionExpired'}
+            handleSessionExpiration={this.props.actions.handleSessionExpiration}
+            loginState={this.props.loginState}
+            isSessionExpired={isSessionExpired}
+            dialogueTitle={SESSION_EXPIRED}
+            dialogueContent={SESSION_EXPIRED_CONTENT}
+            onClickOk={this.handleDialogOk.bind(this)}
+          />
+        )
+      } else if (isCartInvalid) {
+        return (
+          <DialogueErrorMessage
+            dialogueTitle={INVALID_CART_TEXT}
+            dialogueContent={INVALID_CART_DESCRIPTION}
+            onClickOk={this.handleDialogOk.bind(this)}
+          />
+        )
+      } else {
+        return (
+          <SnackbarErrorMessage
+            error={this.props.cartState.payload.cart_items.errorState.error}
+            resetState={this.resetState.bind(this)}
+          />
+        )
+      }
+    }
+
     render () {
-      const { checkPincodeState, actions } = this.props
+      const { checkPincodeState, cartState, actions, loginState } = this.props
       const { inProgressCartItem } = this.state
+      const isSessionExpired = loginState.isSessionExpired
+      const isCartInvalid = cartState.payload.is_cart_invalid
       return (
         <React.Fragment>
           <ActivityIndicator
             isLoading={this.props.cartState.isLoading}
             LoaderComp={<Loader isLoading loaderType={'fullPageSpinner'} />}
             isError={
-              this.props.cartState.payload.cart_items.errorState.isError ||
-                this.props.cartState.payload.is_cart_invalid
+              cartState.payload.cart_items.errorState.isError ||
+                isCartInvalid ||
+                isSessionExpired
             }
-            ErrorComp={
-              this.props.cartState.payload.is_cart_invalid
-                ? <DialogueErrorMessage
-                  dialogueTitle={INVALID_CART_TEXT}
-                  dialogueContent={INVALID_CART_DESCRIPTION}
-                  handleCartInvalid={this.handleCartInvalid.bind(this)}
-                />
-                : <SnackbarErrorMessage
-                  error={
-                    this.props.cartState.payload.cart_items.errorState.error
-                  }
-                  resetState={this.resetState.bind(this)}
-                />
-            }
+            ErrorComp={this.getErrorComp(isCartInvalid, isSessionExpired)}
             bottomError
           >
             <Page {...this.props} addToCartHandler={this.addToCartHandler} />
@@ -130,7 +160,8 @@ export function withCommonWrapper (Page) {
     return {
       checkPincodeState: state.checkPincodeState,
       searchMedicineState: state.searchMedicineState,
-      cartState: state.cartState
+      cartState: state.cartState,
+      loginState: state.loginState
     }
   }
 
@@ -144,7 +175,8 @@ export function withCommonWrapper (Page) {
           getAnonymousCartIdLoading,
           resetCartItemErrorState,
           resetCartState,
-          resetCartLoadingState
+          resetCartLoadingState,
+          handleSessionExpiration
         },
         dispatch
       )
