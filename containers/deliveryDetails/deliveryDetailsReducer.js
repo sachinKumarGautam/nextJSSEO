@@ -169,15 +169,15 @@ export default function deliveryDetailsReducer (state = initialState, action) {
         }
       }
 
-      case REST_DELIVERY_FORM:
-        return {
-          ...state,
-          addressForm: {
-            ...state.addressForm,
-            isLoading: initialState.isLoading,
-            errorState: initialState.errorState
-          }
+    case REST_DELIVERY_FORM:
+      return {
+        ...state,
+        addressForm: {
+          ...state.addressForm,
+          isLoading: initialState.isLoading,
+          errorState: initialState.errorState
         }
+      }
 
     default:
       return state
