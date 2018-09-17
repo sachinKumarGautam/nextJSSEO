@@ -96,6 +96,8 @@ class ProductPriceDetails extends Component {
               <div className={classes.cardActions}>
                 <QuantityField onChangeQuantity={this.onChangeQuantity} />
                 <Button
+                  disableFocusRipple
+                  disableRipple
                   variant='outlined'
                   size='small'
                   classes={{

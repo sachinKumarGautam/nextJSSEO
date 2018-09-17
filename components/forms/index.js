@@ -30,6 +30,7 @@ const FormWrapper = props => {
           toggleForm={toggleForm}
           onSubmit={onSubmit}
           loginState={loginState}
+          isRegisterClicked={props.isRegisterClicked}
         />
       )
 
@@ -53,6 +54,7 @@ const FormWrapper = props => {
           onSubmit={onSubmit}
           loginState={loginState}
           resendButtonClick={resendButtonClick}
+          isRegisterClicked={props.isRegisterClicked}
         />
       )
 

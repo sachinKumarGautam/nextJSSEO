@@ -81,20 +81,20 @@ class GoToCartSnackbar extends React.Component {
             'aria-describedby': 'cart-items'
           }}
         >
-          <Link href={href}>
-            <SnackbarContent
-              className={classes.snackbarSuccess}
-              aria-describedby='client-snackbar'
-              message={
-                <div
-                  onMouseEnter={() => {
-                    Router.prefetch(href)
-                  }}
-                  className={classes.buttonWrapper}
-                >
-                  <Typography variant='caption' className={classes.text}>
-                    {ITEM_ADDED_TO_CART}
-                  </Typography>
+          <SnackbarContent
+            className={classes.snackbarSuccess}
+            aria-describedby='client-snackbar'
+            message={
+              <div
+                onMouseEnter={() => {
+                  Router.prefetch(href)
+                }}
+                className={classes.buttonWrapper}
+              >
+                <Typography variant='caption' className={classes.text}>
+                  {ITEM_ADDED_TO_CART}
+                </Typography>
+                <Link href={href}>
                   <Button
                     size='small'
                     variant='success'
@@ -107,10 +107,10 @@ class GoToCartSnackbar extends React.Component {
                     label={'Go To Cart'}
                     onClick={this.handleClose}
                   />
-                </div>
-              }
-            />
-          </Link>
+                </Link>
+              </div>
+            }
+          />
         </Snackbar>
       </div>
     )

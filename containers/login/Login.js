@@ -50,21 +50,43 @@ class SignIn extends React.Component {
           onSubmit={this.props.sendOtpLoading}
           toggleForm={this.props.toggleForm}
           loginState={this.props.loginState}
-          closeModal={this.props.closeLoginModal} />
-        <Typography
-          variant='caption'
-          className={classes.accountInfo}
-          gutterBottom
-        >
-              Don’t have an account?
-          <a
-            href='#'
-            className={classes.registerLabel}
-            onClick={this.props.toggleForm.bind(this, 'register')}
-          >
-              Register
-          </a>
-        </Typography>
+          closeModal={this.props.closeLoginModal}
+          isRegisterClicked={this.props.isRegisterClicked}
+        />
+        {
+          this.props.isRegisterClicked
+            ? (
+              <Typography
+                variant='caption'
+                className={classes.accountInfo}
+                gutterBottom
+              >
+                  Have an account?
+                <a
+                  href='#'
+                  className={classes.registerLabel}
+                  onClick={this.props.toggleRegisterClicked.bind(this, 'loginClick')}
+                >
+                  Login
+                </a>
+              </Typography>
+            ) : (
+              <Typography
+                variant='caption'
+                className={classes.accountInfo}
+                gutterBottom
+              >
+                  Don’t have an account?
+                <a
+                  href='#'
+                  className={classes.registerLabel}
+                  onClick={this.props.toggleRegisterClicked.bind(this, 'registerClick')}
+                >
+                  Register
+                </a>
+              </Typography>
+            )
+        }
       </div>
     )
   }
