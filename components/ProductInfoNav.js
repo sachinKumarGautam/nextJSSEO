@@ -43,7 +43,8 @@ const styles = theme => {
     },
     hover: {
       color: theme.palette.primary.main,
-      transitionDelay: '2s'
+      transitionDelay: '2s',
+      cursor: 'pointer'
     }
   }
 }

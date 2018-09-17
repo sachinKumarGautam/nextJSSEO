@@ -62,7 +62,8 @@ const styles = theme => ({
   wrapCart: {
     alignItems: 'center',
     display: 'flex',
-    flexDirection: 'row'
+    flexDirection: 'row',
+    justifyContent: 'space-between'
   },
   searchWrapper: {
     display: 'none'
@@ -168,7 +169,7 @@ class Header extends React.Component {
                     }}
                   />
                 </Grid>
-                <Grid item xs={loginState.isAuthenticated ? 6 : 5} lg={7}>
+                <Grid item xs={loginState.isAuthenticated ? 6 : 5} lg={loginState.isAuthenticated ? 7 : 6}>
                   {!this.props.isHomePage ? (
                     <SearchMedicine
                       searchMedicineState={searchMedicineState}
@@ -179,7 +180,7 @@ class Header extends React.Component {
                     />
                   ) : null}
                 </Grid>
-                <Grid item xs={3} lg={loginState.isAuthenticated ? 3 : 2}>
+                <Grid item xs={3} lg={3}>
                   <Subheader
                     isAuthenticated={this.props.loginState.isAuthenticated}
                     openLoginModal={this.openLoginModal}
