@@ -90,9 +90,7 @@ import {
   deleteCart$
 } from '../../services/api'
 
-import {
-  PAYMENT_GATEWAY
-} from '../../components/constants/paymentConstants'
+import { PAYMENT_GATEWAY } from '../../components/constants/paymentConstants'
 
 export function getAnonymousCartIdEpic (action$, store) {
   return action$.pipe(
@@ -102,7 +100,7 @@ export function getAnonymousCartIdEpic (action$, store) {
         getAnonymousCartId$(data.source, data.facility_code, data.source_type)
       ).pipe(
         flatMap(result => {
-          if (data.source_type === 'REFILL') {
+          if (data.isAssignPatientToCart) {
             return of(
               getAnonymousCartIdSuccess(data.cartState, result.body.payload),
               savePatientToCartLoading(
@@ -602,9 +600,7 @@ export function paymentInitiateEpic (action$, store) {
               paymentInitiateFailure(data.cartState, error)
             )
           } else {
-            return of(
-              paymentInitiateFailure(data.cartState, error)
-            )
+            return of(paymentInitiateFailure(data.cartState, error))
           }
         })
       )
@@ -648,7 +644,8 @@ export function deleteCartState (action$, store) {
               data.facility_code,
               data.source_type,
               data.patientId,
-              data.addMedicine
+              data.addMedicine,
+              data.isAssignPatientToCart
             )
           )
         }),

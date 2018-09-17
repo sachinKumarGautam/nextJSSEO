@@ -246,6 +246,7 @@ class OrderSummary extends React.Component {
           optForDoctorCallbackLoading={this.props.optForDoctorCallbackLoading}
         />
         <PatientDetailsExpansionPanel
+          onClickOfPatient={this.props.onClickOfPatient}
           expanded={this.state.expanded}
           loginState={this.props.loginState}
           cartState={this.props.cartState}
@@ -266,6 +267,7 @@ class OrderSummary extends React.Component {
           patientIdSelected={
             this.props.cartState.payload.patient_details.payload.patient_id
           }
+          cartType={this.props.cartState.payload.source_type}
           patientDetailsWrapper={this.props.classes.patientDetailsWrapper}
           nextButtonRoot={this.props.classes.nextButtonRoot}
           handleNextChange={this.handleNextChange.bind(this, 'panel4', true)}
