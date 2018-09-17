@@ -15,7 +15,7 @@ import {
   openPincodeDialog
 } from '../../containers/location/pincode/pincodeAction'
 
-import { storage } from '../../services/firebase'
+import queryLimitedData from '../../utils/queryLimitedData'
 
 /*
   bread crumbs
@@ -30,56 +30,23 @@ class ProductDetailsWrapper extends Component {
       hover: {},
       publishedContent: []
     }
+
+    this.saveRecentlyPublishedContent = this.saveRecentlyPublishedContent.bind(this)
   }
 
   componentDidMount () {
-    this.newsRef = storage.collection('news')
-
     this.getRecentlyPublishedContent()
   }
 
   getRecentlyPublishedContent () {
-    this.queryLimitedData()
-  }
-
-  queryLimitedData () {
-    this.newsRef
-      .where('is_enabled', '==', true)
-      .where('is_published', '==', true)
-      .orderBy('created_at', 'desc')
-      .limit(3)
-      .onSnapshot((querySnapshot) => {
-        let payload = []
-
-        querySnapshot.forEach(function (doc) {
-          let docObj = doc.data()
-
-          docObj = {
-            ...docObj,
-            doc_id: doc.id,
-            isLoading: false
-          }
-
-          payload = [
-            ...payload,
-            docObj
-          ]
-        })
-        this.saveRecentlyPublishedContent(payload)
-      })
+    queryLimitedData(
+      this.saveRecentlyPublishedContent
+    )
   }
 
   saveRecentlyPublishedContent (payload) {
-    const modifiedPayload = payload.map(item => {
-      const body = item.body.split(' ').slice(0, 12).join(' ') + ' ...'
-      return {
-        ...item,
-        body: body
-      }
-    })
-
     this.setState({
-      publishedContent: modifiedPayload
+      publishedContent: payload
     })
   }
 

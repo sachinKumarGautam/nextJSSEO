@@ -8,10 +8,9 @@ import MembershipCardDetail from './MembershipCardDetail'
 import ArticleSection from './ArticleSection'
 import Testimonal from './Testimonal'
 import ActivityIndicator from '../../components/activityIndicator/index'
-import SnackbarErrorMessage
-  from '../../components/activityIndicator/error/SnackbarErrorMessage'
+import SnackbarErrorMessage from '../../components/activityIndicator/error/SnackbarErrorMessage'
 
-import { storage } from '../../services/firebase'
+import queryLimitedData from '../../utils/queryLimitedData'
 
 class HomePageWrapper extends Component {
   constructor (props) {
@@ -19,6 +18,8 @@ class HomePageWrapper extends Component {
     this.state = {
       publishedContent: []
     }
+
+    this.saveRecentlyPublishedContent = this.saveRecentlyPublishedContent.bind(this)
   }
 
   resetState () {
@@ -27,53 +28,18 @@ class HomePageWrapper extends Component {
   }
 
   componentDidMount () {
-    this.newsRef = storage.collection('news')
-
     this.getRecentlyPublishedContent()
   }
 
   getRecentlyPublishedContent () {
-    this.queryLimitedData()
-  }
-
-  queryLimitedData () {
-    this.newsRef
-      .where('is_enabled', '==', true)
-      .where('is_published', '==', true)
-      .orderBy('created_at', 'desc')
-      .limit(3)
-      .onSnapshot((querySnapshot) => {
-        let payload = []
-
-        querySnapshot.forEach(function (doc) {
-          let docObj = doc.data()
-
-          docObj = {
-            ...docObj,
-            doc_id: doc.id,
-            isLoading: false
-          }
-
-          payload = [
-            ...payload,
-            docObj
-          ]
-        })
-        this.saveRecentlyPublishedContent(payload)
-      })
+    queryLimitedData(
+      this.saveRecentlyPublishedContent
+    )
   }
 
   saveRecentlyPublishedContent (payload) {
-    const modifiedPayload = payload.map(item => {
-      const body = item.body.split(' ').slice(0, 12).join(' ') + ' ...'
-      return {
-        ...item,
-        body: body
-      }
-    })
-
     this.setState({
-      publishedContent: modifiedPayload
+      publishedContent: payload
     })
   }
 
