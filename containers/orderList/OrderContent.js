@@ -130,9 +130,9 @@ class OrderContent extends Component {
             <Typography
               variant='caption'
               className={
-                 this.props.orderDetails.viewStatus === 'Payment Pending'
-                 ? this.props.classes.orangeStyle :
-                this.props.classes.statusStyle
+                this.props.orderDetails.viewStatus === 'Payment Pending'
+                  ? this.props.classes.orangeStyle
+                  : this.props.classes.statusStyle
               }
             >
               {this.props.orderDetails.viewStatus}
