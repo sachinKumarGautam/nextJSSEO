@@ -97,13 +97,12 @@ class GoToCartSnackbar extends React.Component {
                   </Typography>
                   <Button
                     size='small'
-                    variant='success'
+                    variant='flat'
                     color={'primary'}
                     className={classes.editButton}
-                    // classes={{
-                    //   root: classes.couponButtonRoot,
-                    //   label: classes.editButtonLabel
-                    // }}
+                    classes={{
+                      label: classes.editButtonLabel
+                    }}
                     label={'Go To Cart'}
                     onClick={this.handleClose}
                   />

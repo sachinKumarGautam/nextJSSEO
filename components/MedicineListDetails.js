@@ -10,8 +10,11 @@ import ProductPrice from './ProductPrice'
 import StrokePrice from './StrokePrice'
 import EstimatedPriceLabel from './EstimatedPriceLabel'
 import { PRODUCT_DETAILS } from '../routes/RouteConstant'
-import Button from './button/Button'
+import Button from './button'
 import AlreadyAdded from './AlreadyAdded'
+import ProductStatus from './ProductStatus'
+
+import { ACTIVE_STATUS } from './constants/Constants'
 
 const styles = theme => {
   return {
@@ -25,7 +28,8 @@ const styles = theme => {
       ...theme.typography.body3
     },
     customPackSize: {
-      ...theme.typography.body3
+      ...theme.typography.body3,
+      display: 'inline-block'
     },
     customPrice: {
       ...theme.typography.body1,
@@ -51,13 +55,14 @@ const styles = theme => {
       marginRight: theme.spacing.unit * 3,
       cursor: 'pointer'
     },
-    buttonRoot: {
-      border: `1px solid ${theme.palette.primary.main}`
-    },
-    buttonLabel: {
-      color: theme.palette.primary.main,
-      fontSize: theme.typography.body3.fontSize
-    },
+    // buttonLabel: {
+    //   color: theme.palette.primary.main,
+    //   fontSize: theme.typography.body3.fontSize
+    // },
+    // disabledButtonLabel: {
+    //   color: theme.palette.customGrey.grey300,
+    //   fontSize: theme.typography.body3.fontSize
+    // },
     buttonWrapperStyle: {
       marginTop: theme.spacing.unit,
       float: 'right',
@@ -133,6 +138,13 @@ class MedicineListDetails extends React.Component {
                   : props.itemDetails.pack_size
               }
             />
+            {
+              props.itemDetails.status !== ACTIVE_STATUS &&
+              <ProductStatus
+                variant={'caption'}
+                status={props.itemDetails.status}
+              />
+            }
             {props.checkPincodeState.payload.pincode &&
               <Typography
                 gutterBottom
@@ -167,14 +179,11 @@ class MedicineListDetails extends React.Component {
               {!checkIfAlredyExistInCart
                 ? <Button
                   variant='outlined'
-                  classes={{
-                    root: props.classes.buttonRoot,
-                    label: props.classes.buttonLabel
-                  }}
                   size='small'
                   color='primary'
                   onClick={this.addToCart} // this is coming from HOC
                   label={'Add To Cart'}
+                  disabled={props.itemDetails.status !== ACTIVE_STATUS}
                 />
                 : <AlreadyAdded />}
             </div>
