@@ -189,6 +189,7 @@ class Header extends React.Component {
                   <Subheader
                     isAuthenticated={this.props.loginState.isAuthenticated}
                     openLoginModal={this.openLoginModal}
+                    isHomePage={this.props.isHomePage}
                   />
                 </Grid>
                 <Grid
