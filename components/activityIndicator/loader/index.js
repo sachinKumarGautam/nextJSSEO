@@ -44,7 +44,7 @@ class Loader extends React.Component {
         default:
           return (
             <CommonSpinner
-              loaderStyle={loaderStyle}
+              customStyle={customStyle}
               isLoading={isLoading}
               className={className}
               text={text}

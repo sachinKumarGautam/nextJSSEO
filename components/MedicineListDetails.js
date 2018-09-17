@@ -107,7 +107,7 @@ class MedicineListDetails extends React.Component {
         as={`${PRODUCT_DETAILS}/${props.itemDetails.slug}?location=${city}`}
       >
         <div className={props.classes.medicineListContentWrapper}>
-          <div onClick={this.props.onSelectItem}>
+          <div>
             <ProductName
               variant={'body1'}
               name={props.itemDetails.name}
