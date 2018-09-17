@@ -8,11 +8,11 @@ const styles = theme => ({
     paddingLeft: theme.spacing.unit * 2.5
   },
   deliveryDateText: {
-    fontSize: theme.spacing.unit * 2,
+    fontSize: theme.spacing.unit * 2.25,
     color: theme.palette.customGrey.grey700
   },
   deliveryDate: {
-    fontSize: theme.spacing.unit * 2,
+    fontSize: theme.spacing.unit * 2.25,
     fontWeight: theme.typography.fontWeightBold,
     marginTop: theme.spacing.unit * 1.25,
     color: theme.palette.customGrey.grey500

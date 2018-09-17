@@ -12,7 +12,7 @@ const styles = theme => ({
     marginTop: theme.spacing.unit * 1.25
   },
   patientName: {
-    fontSize: theme.spacing.unit * 2,
+    fontSize: theme.spacing.unit * 2.25,
     fontWeight: theme.typography.fontWeightBold,
     color: theme.palette.customGrey.grey500,
     marginLeft: theme.spacing.unit * 2.5

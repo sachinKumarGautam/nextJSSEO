@@ -67,22 +67,17 @@ class MedicineList extends React.Component {
     this.state = {
       page: 0
     }
-    // this.onClickOfShowMore = this.onClickOfShowMore.bind(this)
-  }
 
-  componentDidMount () {
-    this.setState({
-      page: 0
-    })
+    this.onClickOfShowMore = this.onClickOfShowMore.bind(this)
   }
 
   // Represents to get medicine list when clicked on show more with page size and size per page.
-  onClickOfShowMore = () => {
-    if (this.props.productName) {
-      this.setState({
-        page: this.state.page + 1
-      }, () => (
-        this.props.searchMedicineLoading(
+  onClickOfShowMore () {
+    this.setState({
+      page: this.state.page + 1
+    }, () => {
+      if (this.props.productName) {
+        return this.props.searchMedicineLoading(
           this.props.searchMedicineState,
           this.props.checkPincodeState.payload.id,
           this.props.productName,
@@ -90,19 +85,16 @@ class MedicineList extends React.Component {
           10, // page size,
           false // is header props is false
         )
-      ))
-    } else {
-      this.props.getRelatedMedicinesLoading(
-        this.props.medicineListState,
-        this.props.moleculeName, // pass salt name
-        this.state.page + 1, // page number
-        10, // page size,
-        true
-      )
-      this.setState({
-        page: this.state.page + 1
-      })
-    }
+      } else {
+        return this.props.getRelatedMedicinesLoading(
+          this.props.medicineListState,
+          this.props.moleculeName, // pass salt name
+          this.state.page, // page number
+          10, // page size,
+          true
+        )
+      }
+    })
 
     this.props.updateIsShowMore()
   }

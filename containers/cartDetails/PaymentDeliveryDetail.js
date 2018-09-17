@@ -30,7 +30,7 @@ const styles = theme => ({
   },
   text: {
     ...theme.typography.body3,
-    color: theme.palette.customGrey.grey200,
+    color: theme.palette.customGrey.grey600,
     textAlign: 'left',
     marginLeft: theme.spacing.unit
   },
@@ -38,9 +38,15 @@ const styles = theme => ({
     marginLeft: theme.spacing.unit * 6,
     marginTop: theme.spacing.unit * 2
   },
+  rxText: {
+    ...theme.typography.body3,
+    color: theme.palette.customGrey.grey500,
+    textAlign: 'left',
+    marginLeft: theme.spacing.unit
+  },
   asssuredText: {
     ...theme.typography.body3,
-    color: theme.palette.customGrey.grey200,
+    color: theme.palette.customGrey.grey600,
     textAlign: 'left',
     marginLeft: theme.spacing.unit * 1.5
   },
@@ -157,7 +163,7 @@ class PaymentDeliveryDetail extends Component {
             />
             <Typography
               varaint='caption'
-              className={this.props.classes.text}
+              className={this.props.classes.rxText}
             >
               {VERIFICATION_RX}
             </Typography>
