@@ -62,9 +62,7 @@ import PlaceOrderLoader
   from '../../components/activityIndicator/loader/PlaceOrderLoader'
 import {
   SWITCH_PATIENT_DIALOG_TITLE,
-  REFILL_DIALOG_TITLE,
-  SWITCH_PATIENT_DIALOG_CONTENT,
-  REFILL_DIALOG_CONTENT
+  SWITCH_PATIENT_DIALOG_CONTENT
 } from '../messages/refillPatientMessage'
 import RefillPatientDialogue from '../../components/RefillPatientDialogue'
 
@@ -148,7 +146,6 @@ class CartDetailsWrapper extends Component {
     this.setState({
       selectedPatient
     })
-    const dialogTitle = ''
     this.setState({
       open: true,
       dialogTitle: SWITCH_PATIENT_DIALOG_TITLE,
@@ -361,7 +358,6 @@ function mapStateToProps (state) {
     deliveryDetailsState: state.deliveryDetailsState,
     checkPincodeState: state.checkPincodeState,
     constantsState: state.constantsState,
-    checkPincodeState: state.checkPincodeState,
     pastMedicineState: state.pastMedicineState
   }
 }
