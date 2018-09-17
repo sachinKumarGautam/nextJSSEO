@@ -250,7 +250,11 @@ export function incrementCartItemEpic (action$, store) {
       }
       return http(putCartItem$(cartUid, medicineIncremented)).pipe(
         flatMap(result => {
-          if (medicineIncremented.quantity === 1) {
+          const cartItems = data.cartState.payload.cart_items.payload
+          const checkIfAlredyExistInCart = cartItems.findIndex(
+            cartItem => medicineIncremented.sku === cartItem.sku
+          )
+          if (checkIfAlredyExistInCart === -1) {
             return of(
               goToCartSnackbar(data.cartState, true),
               putCartItemSuccess(data.cartState, result.body.payload)

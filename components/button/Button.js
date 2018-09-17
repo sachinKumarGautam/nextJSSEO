@@ -71,7 +71,9 @@ const CommonButton = buttonProps => {
     type,
     onClick,
     className,
-    loaderPosition
+    loaderPosition,
+    disableFocusRipple,
+    disableRipple
   } = buttonProps
   return (
     <React.Fragment>
