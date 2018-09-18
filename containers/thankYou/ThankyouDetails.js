@@ -17,7 +17,7 @@ const styles = theme => ({
     marginBottom: theme.spacing.unit * 2.25
   },
   thankyou: {
-    fontSize: theme.typography.pxToRem(32),
+    fontSize: theme.spacing.unit * 4,
     color: theme.palette.customGrey.grey500,
     marginLeft: theme.spacing.unit * 2,
     marginBottom: theme.spacing.unit,
