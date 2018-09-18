@@ -1,4 +1,4 @@
-import { Observable, map } from 'rxjs/Observable'
+import { Observable } from 'rxjs/Observable'
 import { of } from 'rxjs/observable/of'
 
 import NProgress from 'nprogress'

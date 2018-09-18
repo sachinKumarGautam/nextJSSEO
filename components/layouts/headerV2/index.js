@@ -68,7 +68,7 @@ const styles = theme => ({
     alignItems: 'center',
     display: 'flex',
     flexDirection: 'row',
-    justifyContent: 'space-between'
+    justifyContent: 'space-evenly'
   },
   searchWrapper: {
     display: 'none'

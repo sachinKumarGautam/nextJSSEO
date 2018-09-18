@@ -1,3 +1,4 @@
+import React from 'react'
 import MedicineListsLoader from './MedicineListsLoader'
 import Divider from '@material-ui/core/Divider'
 

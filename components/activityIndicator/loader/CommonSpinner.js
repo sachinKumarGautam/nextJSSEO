@@ -16,7 +16,7 @@ const styles = theme => ({
 })
 
 function CommonSpinner (props) {
-  const { classes, customStyle, size } = props
+  const { size } = props
   return (
     <CircularProgress
       className={props.customStyle}
