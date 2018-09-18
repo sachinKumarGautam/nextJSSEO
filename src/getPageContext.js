@@ -71,6 +71,9 @@ const theme = createMuiTheme({
       },
       containedPrimary: {
         color: '#ffffff'
+      },
+      raisedPrimary: {
+        color: '#ffffff'
       }
     }
   },
