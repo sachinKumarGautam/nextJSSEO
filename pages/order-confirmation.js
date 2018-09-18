@@ -39,7 +39,15 @@ class OrderConfirmationWrapper extends React.Component {
 
     return (
       <Layout
-        title={orderConfirmation.title}
+        title={
+          query.paymentStatus === 'success'
+            ? orderConfirmation.successTitle
+            : (
+              query.paymentStatus === 'failed'
+                ? orderConfirmation.pendingTitle
+                : orderConfirmation.retryTitle
+            )
+        }
         addToCartHandler={addToCartHandler}
       >
         <div className={this.props.classes.root}>
