@@ -8,18 +8,19 @@ const styles = theme => {
   return {
     imageStyle: {
       width: '100%',
-      height: theme.spacing.unit * 40.75,
+      height: theme.spacing.unit * 52.5,
       backgroundImage: `url(/static/images/headerBg.png)`,
       backgroundSize: 'cover',
       backgroundPosition: 'center'
     },
     textStyle: {
       ...theme.typography.title,
+      fontSize: theme.typography.pxToRem(32),
       textAlign: 'center',
       color: theme.palette.secondary.main,
       fontWeight: theme.typography.fontWeightBold,
-      paddingTop: theme.spacing.unit * 27.125,
-      marginBottom: theme.spacing.unit * 1.5
+      paddingTop: theme.spacing.unit * 35.5,
+      marginBottom: theme.spacing.unit * 2.75
     }
   }
 }
