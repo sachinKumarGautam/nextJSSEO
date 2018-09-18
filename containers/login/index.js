@@ -10,10 +10,12 @@ import Fade from '@material-ui/core/Fade'
 import Login from './Login'
 import Register from './Register'
 import OTP from './OTP'
+
 import {
   sendOtpLoading,
   verifyOtpLoading,
-  resetIsNewUserFlag
+  resetIsNewUserFlag,
+  resetLoginState
 } from './loginActions'
 
 import {
@@ -22,7 +24,10 @@ import {
   resetCustomerFormState
 } from '../user/customer/customerActions'
 
-import { updateIsCartOpenRegisterModalFlag } from '../cartDetails/cartActions'
+import {
+  updateIsCartOpenRegisterModalFlag,
+  resetCartLoadingState
+} from '../cartDetails/cartActions'
 
 import ActivityIndicator from '../../components/activityIndicator/index'
 import SnackbarErrorMessage
@@ -103,6 +108,8 @@ class LoginWrapper extends React.Component {
 
   resetState () {
     this.props.actions.resetCustomerFormState()
+    this.props.actions.resetLoginState()
+    this.props.actions.resetCartLoadingState()
   }
 
   getModal (name) {
@@ -219,8 +226,10 @@ function mapDispatchToProps (dispatch) {
         customerRegisterLoading,
         checkReferralCodeLoading,
         resetCustomerFormState,
+        resetLoginState,
         resetIsNewUserFlag,
-        updateIsCartOpenRegisterModalFlag
+        updateIsCartOpenRegisterModalFlag,
+        resetCartLoadingState
       },
       dispatch
     )

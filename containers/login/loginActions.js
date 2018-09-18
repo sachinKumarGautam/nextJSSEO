@@ -6,7 +6,9 @@ import {
   OTP_VERIFIED_FAILURE,
   OTP_VERIFIED_SUCCESS,
   TOGGLE_AUTHENTICATION,
-  RESET_IS_NEW_USER_FLAG
+  RESET_LOGIN_STATE,
+  RESET_IS_NEW_USER_FLAG,
+  HANDLE_SESSION_EXPIRATION
 } from './loginActionTypes'
 
 import { setCookie, removeCookie } from '../../utils/cookie'
@@ -99,10 +101,24 @@ export function logout () {
   }
 }
 
+export function resetLoginState () {
+  return {
+    type: RESET_LOGIN_STATE
+  }
+}
+
 export function resetIsNewUserFlag (loginState) {
   return {
     type: RESET_IS_NEW_USER_FLAG,
     loginState,
     isNewUser: false
+  }
+}
+
+export function handleSessionExpiration (loginState, isSessionExpired) {
+  return {
+    type: HANDLE_SESSION_EXPIRATION,
+    loginState,
+    isSessionExpired
   }
 }

@@ -151,24 +151,22 @@ class OTPForm extends React.Component {
             onChange={this.handleChange}
             placeholder={OTP_PLACEHOLDER}
           />
-          {errors.otp &&
-            touched.otp &&
+          {
+            ((errors.otp && touched.otp) || loginState.errorStateVerifyOtp.isError) &&
             <FormHelperText id='otp'>
-              {errors.otp}
-            </FormHelperText>}
-          {loginState.errorStateVerifyOtp.isError &&
-            <FormHelperText id='otp'>
-              {CUSTOM_MESSGAE_SNACKBAR}
-            </FormHelperText>}
-          {this.state.isHideResetButton
-            ? <Typography align='right' className={classes.resendTimer}>
-              {this.state.updateCounter}
-            </Typography>
-            : <a onClick={this.resendOtp}>
-              <Typography align='right' className={classes.resendLink}>
+              {errors.otp ? errors.otp : CUSTOM_MESSGAE_SNACKBAR }
+            </FormHelperText>
+          }
+          {
+            this.state.isHideResetButton
+              ? (<Typography align='right' className={classes.resendTimer}>
+                {this.state.updateCounter}
+              </Typography>)
+              : (<a onClick={this.resendOtp}>
+                <Typography align='right' className={classes.resendLink}>
                   Resend OTP
               </Typography>
-            </a>}
+            </a>)}
         </FormControl>
         <div className={classes.buttonWrapper}>
           <Button

@@ -23,8 +23,11 @@ const styles = theme => ({
   },
   paymentStatusText: {
     textAlign: 'right',
-    color: theme.palette.customYellow.yellow400,
+    color: theme.palette.customGreen.green300,
     fontWeight: theme.typography.fontWeightBold
+  },
+  pendingStatus: {
+    color: theme.palette.customYellow.yellow400
   },
   placedOnWrapper: {
     display: 'flex',
@@ -68,7 +71,11 @@ const PaymentDetails = (props) => {
       </Grid>
       <Grid item xs={3}>
         <Typography
-          className={props.classes.paymentStatusText}
+          className={
+            props.paymentStatus === 'Payment Pending'
+              ? `${props.classes.pendingStatus} ${props.classes.paymentStatusText}`
+              : props.classes.paymentStatusText
+          }
         >
           Status: {props.paymentStatus}
         </Typography>

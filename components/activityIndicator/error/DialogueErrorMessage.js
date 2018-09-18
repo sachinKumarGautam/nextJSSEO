@@ -6,13 +6,12 @@ import DialogActions from '@material-ui/core/DialogActions'
 import DialogContent from '@material-ui/core/DialogContent'
 import DialogTitle from '@material-ui/core/DialogTitle'
 import Router from 'next/router'
-import {
-  HOME_PAGE
-} from '../../../routes/RouteConstant'
+import { HOME_PAGE } from '../../../routes/RouteConstant'
 
 import { getReplacedString } from '../../../utils/replaceConstants'
 import Button from '../../button'
 import Typography from '@material-ui/core/Typography'
+import { logoutWithReload } from '../../../utils/removePersistState'
 
 const styles = theme => ({
   buttonRoot: {
@@ -50,10 +49,14 @@ class DialogueErrorMessage extends Component {
 
   onClickOfOk () {
     Router.push(getReplacedString(HOME_PAGE))
-    this.props.handleCartInvalid()
+    this.props.onClickOk()
     this.setState({
       open: false
     })
+    if (this.props.dialogKey === 'sessionExpired') {
+      logoutWithReload()
+      this.props.handleSessionExpiration(this.props.loginState, false)
+    }
   }
 
   render () {
@@ -66,13 +69,14 @@ class DialogueErrorMessage extends Component {
         }}
       >
         <DialogTitle id='form-dialog-title'>
-          <img src='/static/images/precautions_grey.svg' className={this.props.classes.errorIcon} />
+          <img
+            src='/static/images/precautions_grey.svg'
+            className={this.props.classes.errorIcon}
+          />
           {this.props.dialogueTitle}
         </DialogTitle>
         <DialogContent>
-          <Typography
-            varaint='caption'
-          >
+          <Typography varaint='caption'>
             {this.props.dialogueContent}
           </Typography>
         </DialogContent>

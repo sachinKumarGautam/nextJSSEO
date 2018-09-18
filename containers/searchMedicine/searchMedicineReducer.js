@@ -2,7 +2,8 @@ import initialState from './searchMedicineModal'
 import {
   SEARCH_MEDICINE_LOADING,
   SEARCH_MEDICINE_SUCCESS,
-  SEARCH_MEDICINE_FAILURE
+  SEARCH_MEDICINE_FAILURE,
+  RESET_SEARCH_MEDICINE_STATE
 } from './searchMedicineActionTypes'
 
 export default function searchMedicineReducer (state = initialState, action) {
@@ -44,6 +45,13 @@ export default function searchMedicineReducer (state = initialState, action) {
           isError: action.isError,
           error: action.error
         }
+      }
+
+    case RESET_SEARCH_MEDICINE_STATE:
+      return {
+        ...state,
+        isLoading: initialState.isLoading,
+        errorState: initialState.errorState
       }
 
     default:

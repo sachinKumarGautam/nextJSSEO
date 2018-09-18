@@ -207,11 +207,7 @@ export default function cartReducer (state = initialState, action) {
           ...state.payload,
           patient_details: {
             ...state.payload.patient_details,
-            errorState: {
-              ...state.payload.patient_details.errorState,
-              isError: action.isError,
-              error: action.error
-            }
+            errorState: initialState.errorState
           }
         }
       }
@@ -277,11 +273,7 @@ export default function cartReducer (state = initialState, action) {
           ...state.payload,
           shipping_address_details: {
             ...state.payload.shipping_address_details,
-            errorState: {
-              ...state.payload.shipping_address_details.errorState,
-              isError: action.isError,
-              error: action.error
-            }
+            errorState: initialState.errorState
           }
         }
       }

@@ -15,7 +15,8 @@ import {
   getPatientDetailsListLoading,
   savePatientSelected,
   submitPatientDetailsLoading,
-  resetPatientSelected
+  resetPatientSelected,
+  resetPatientForm
 } from '../containers/patientDetails/patientDetailsActions'
 
 // page title
@@ -76,6 +77,7 @@ class PatientDetails extends React.Component {
               cartState={this.props.cartState}
               getPatientDetailsListLoading={this.props.actions.getPatientDetailsListLoading}
               resetPatientSelected={this.props.actions.resetPatientSelected}
+              resetPatientForm={this.props.actions.resetPatientForm}
             />
           </Paper>
         </div>
@@ -99,7 +101,8 @@ function mapDispatchToProps (dispatch) {
         getPatientDetailsListLoading,
         savePatientSelected,
         submitPatientDetailsLoading,
-        resetPatientSelected
+        resetPatientSelected,
+        resetPatientForm
       },
       dispatch
     )

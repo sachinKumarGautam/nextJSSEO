@@ -1,4 +1,5 @@
 import ContentLoader from 'react-content-loader'
+import React from 'react'
 
 const CardItemLoader = props => (
   <React.Fragment>

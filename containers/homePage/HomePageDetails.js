@@ -69,6 +69,7 @@ class HomePageWrapper extends Component {
             addToCartHandler={this.props.addToCartHandler}
             cartState={this.props.cartState}
             uploadPrescriptionLoading={this.props.uploadPrescriptionLoading}
+            resetSearchMedicineState={this.props.resetSearchMedicineState}
           />
           <DiscountDetailSection />
           <RefillMedicineSection loginState={this.props.loginState} />
