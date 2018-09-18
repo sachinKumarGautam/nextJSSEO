@@ -8,12 +8,22 @@ export const DELIVERY_OPTION_NORMAL = 'NORMAL'
 // service type
 export const SERVICE_TYPE_NORMAL = 'NORMAL'
 export const SERVICE_TYPE_LFASSURED = 'LF_ASSURED'
-// export const LF_ASSURED = 'LF_ASSURED'
-
-// export const URGENT_DELIVERY = 'URGENT_DELIVERY'
 
 export const IN_STOCK = 'IN_STOCK'
 
 export const REFILL = 'REFILL'
+
+// product statusList
+export const ACTIVE_STATUS = 'Active'
+export const PENDING_STATUS = 'Pending'
+export const IN_ACTIVE_STATUS = 'Inactive'
+export const PERMANENT_DISCONTINUED_STATUS = 'Permanently Discontinued'
+export const RETIRED_STATUS = 'Retired'
+export const TEMPORARY_SUSPENDED_STATUS = 'Temporarily Suspended'
+
+export const RETIRED_STATUS_MAPPING = 'Unavailable'
+export const INACTIVE_STATUS_MAPPING = 'Unavailable'
+export const TEMPORARY_SUSPENDED_STATUS_MAPPING = 'Temporarily Unavailable'
+// product status list end here
 
 export const SCROLL_TO_TOP_HEIGHT = 120

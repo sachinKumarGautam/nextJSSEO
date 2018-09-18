@@ -22,7 +22,9 @@ class Loader extends React.Component {
       isLoading,
       text,
       thickness,
-      size
+      size,
+      className,
+      customLoaderText
     } = this.props
 
     if (isLoading) {

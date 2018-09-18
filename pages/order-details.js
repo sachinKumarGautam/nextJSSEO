@@ -1,11 +1,7 @@
 import React from 'react'
-import Header from '../components/layouts/header'
-import Footer from '../components/layouts/footer'
 
 import { withStyles } from '@material-ui/core/styles'
 import withRoot from '../src/withRoot'
-
-import Head from 'next/head'
 
 import OrderDetailsWrapper from '../containers/orderDetails'
 import Layout from '../components/layouts/Layout'

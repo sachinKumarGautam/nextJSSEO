@@ -15,6 +15,8 @@ import ProductPriceDetailsLoader
   from '../../components/activityIndicator/loader/ProductPriceDetailsLoader'
 import ActivityIndicator from '../../components/activityIndicator'
 
+import { ACTIVE_STATUS } from '../../components/constants/Constants'
+
 /*
   Product price
   product discount
@@ -37,10 +39,10 @@ const styles = theme => ({
     display: 'flex',
     alignItems: 'baseline',
     marginTop: theme.spacing.unit * 2
-  },
-  label: {
-    color: theme.palette.primary.main
   }
+  // label: {
+  //   color: theme.palette.primary.main
+  // }
 })
 
 class ProductPriceDetails extends Component {
@@ -100,15 +102,16 @@ class ProductPriceDetails extends Component {
                   disableRipple
                   variant='outlined'
                   size='small'
-                  classes={{
-                    label: classes.label
-                  }}
+                  // classes={{
+                  //   label: classes.label
+                  // }}
                   color='primary'
                   onClick={this.props.addToCartHandler.bind(
                     this,
                     productDetailsState.payload
                   )} // it check first any selected city then add to cart
                   label={'Add To Cart'}
+                  disabled={productDetailsState.payload.status !== ACTIVE_STATUS}
                 />
               </div>
             </CardContent>

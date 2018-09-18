@@ -44,6 +44,9 @@ const theme = createMuiTheme({
     },
     customRed: {
       red200: '#e83f6f'
+    },
+    customBlack: {
+      black1000: '#000000'
     }
   },
   overrides: {
@@ -57,11 +60,20 @@ const theme = createMuiTheme({
         borderRadius: 32
       },
       outlined: {
-        border: '1px solid #80c241'
+        border: '1px solid #80c241',
+        '&$disabled': {
+          border: '1px solid #dadada'
+        }
       },
       label: {
-        color: '#fff',
+        // color: '#fff',
         textTransform: 'none'
+      },
+      containedPrimary: {
+        color: '#ffffff'
+      },
+      raisedPrimary: {
+        color: '#ffffff'
       }
     }
   },

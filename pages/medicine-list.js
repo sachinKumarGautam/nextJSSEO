@@ -126,7 +126,6 @@ class MedicineList extends React.Component {
   }
 
   render () {
-    const { query } = Router
     const {
       addToCartHandler,
       checkPincodeState,

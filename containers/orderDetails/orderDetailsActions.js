@@ -60,7 +60,7 @@ export function getOrderDetailsSuccess (
     activeStep: result.activeStep,
     viewStatus: result.viewStatus,
     source: result.source,
-    seller_name: result.seller_name,
+    seller_name: result.seller_name ? result.seller_name : 'trusted channel partner',
     payment_method: result.payment_method,
     promised_delivery_date: result.promised_delivery_date,
     order_items: result.order_items,

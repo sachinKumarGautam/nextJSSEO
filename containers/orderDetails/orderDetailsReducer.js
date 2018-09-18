@@ -57,7 +57,8 @@ export default function orderDetailsReducer (state = initialState, action) {
           order_prescriptions: action.order_prescriptions,
           source_type: action.source_type,
           delivery_option: action.delivery_option,
-          service_type: action.service_type
+          service_type: action.service_type,
+          seller_name: action.seller_name
         },
         isLoading: action.isLoading
       }

@@ -43,12 +43,7 @@ const AddressDetails = (props) => {
       <Typography
         className={props.classes.street}
       >
-        {props.shippingAddress.street1}
-      </Typography>
-      <Typography
-        className={props.classes.street}
-      >
-        {props.shippingAddress.street2}
+        {props.shippingAddress.street1}, {props.shippingAddress.street2}, {props.shippingAddress.city}, {props.shippingAddress.pincode}
       </Typography>
     </div>
   )
