@@ -3,7 +3,6 @@ import React, {Component} from 'react'
 import { withStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
 import Button from '@material-ui/core/Button'
-
 import Router from 'next/router'
 
 const styles = theme => {
@@ -51,7 +50,7 @@ const styles = theme => {
       paddingBottom: theme.spacing.unit * 3.75
     },
     imageStyle: {
-      width: theme.spacing.unit * 37.5,
+      width: '100%',
       height: theme.spacing.unit * 19
     },
     detailWrapper: {
@@ -62,7 +61,7 @@ const styles = theme => {
     articleListWrapper: {
       display: 'flex',
       flexDirection: 'row',
-      justifyContent: 'space-between'
+      justifyContent: 'space-around'
     }
   }
 }

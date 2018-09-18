@@ -8,9 +8,6 @@ import DialogTitle from '@material-ui/core/DialogTitle'
 import Typography from '@material-ui/core/Typography'
 
 import Button from './button'
-import {
-  REFILL_PATIENT_DIALOGUE_MSG
-} from '../containers/messages/refillPatientMessage'
 
 const styles = theme => ({
   refillPatientWrapper: {
