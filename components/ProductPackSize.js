@@ -8,7 +8,8 @@ const styles = theme => {
     packSize: {
       ...theme.typography.caption,
       color: theme.palette.customGrey.grey200,
-      marginBottom: theme.spacing.units
+      marginBottom: theme.spacing.units,
+      display: 'inline-block'
     }
   }
 }

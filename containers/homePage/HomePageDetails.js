@@ -8,14 +8,41 @@ import MembershipCardDetail from './MembershipCardDetail'
 import ArticleSection from './ArticleSection'
 import Testimonal from './Testimonal'
 import ActivityIndicator from '../../components/activityIndicator/index'
-import SnackbarErrorMessage
-  from '../../components/activityIndicator/error/SnackbarErrorMessage'
+import SnackbarErrorMessage from '../../components/activityIndicator/error/SnackbarErrorMessage'
+
+import queryLimitedData from '../../utils/queryLimitedData'
 
 class HomePageWrapper extends Component {
+  constructor (props) {
+    super(props)
+    this.state = {
+      publishedContent: []
+    }
+
+    this.saveRecentlyPublishedContent = this.saveRecentlyPublishedContent.bind(this)
+  }
+
   resetState () {
     this.props.resetCartItemErrorState()
     this.props.resetUploadPrescriptionError()
   }
+
+  componentDidMount () {
+    this.getRecentlyPublishedContent()
+  }
+
+  getRecentlyPublishedContent () {
+    queryLimitedData(
+      this.saveRecentlyPublishedContent
+    )
+  }
+
+  saveRecentlyPublishedContent (payload) {
+    this.setState({
+      publishedContent: payload
+    })
+  }
+
   render () {
     return (
       <div>
@@ -50,7 +77,9 @@ class HomePageWrapper extends Component {
             incrementCartItemLoading={this.props.incrementCartItemLoading}
             cartState={this.props.cartState}
           />
-          <ArticleSection />
+          <ArticleSection
+            publishedContent={this.state.publishedContent}
+          />
           <Testimonal homePageState={this.props.homePageState} />
         </ActivityIndicator>
       </div>

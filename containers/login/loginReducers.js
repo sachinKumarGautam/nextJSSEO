@@ -8,7 +8,8 @@ import {
   OTP_VERIFIED_LOADING,
   OTP_VERIFIED_SUCCESS,
   TOGGLE_AUTHENTICATION,
-  RESET_IS_NEW_USER_FLAG
+  RESET_IS_NEW_USER_FLAG,
+  HANDLE_SESSION_EXPIRATION
 } from './loginActionTypes'
 
 export default function (state = initialState, action) {
@@ -94,6 +95,12 @@ export default function (state = initialState, action) {
       return {
         ...state,
         isNewUser: action.isNewUser
+      }
+
+    case HANDLE_SESSION_EXPIRATION:
+      return {
+        ...state,
+        isSessionExpired: action.isSessionExpired
       }
 
     default:
