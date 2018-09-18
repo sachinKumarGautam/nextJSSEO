@@ -52,7 +52,7 @@ const styles = theme => {
     },
     imageStyle: {
       width: '100%',
-      height: theme.spacing.unit * 24
+      height: theme.spacing.unit * 19
     },
     detailWrapper: {
       width: '100%',
