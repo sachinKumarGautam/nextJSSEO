@@ -88,7 +88,8 @@ class AddressDetailsExpansionPanel extends React.Component {
         incrementCartItemLoading: null,
         inProgressCartItem: {},
         isCartAddressSelection: true,
-        addressId: deliveryDetails.id
+        addressId: deliveryDetails.id,
+        isDeliveryAssignment: true
       }
     )
   }

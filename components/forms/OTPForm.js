@@ -152,15 +152,9 @@ class OTPForm extends React.Component {
             placeholder={OTP_PLACEHOLDER}
           />
           {
-            errors.otp && touched.otp &&
+            ((errors.otp && touched.otp) || loginState.errorStateVerifyOtp.isError) &&
             <FormHelperText id='otp'>
-              {errors.otp}
-            </FormHelperText>
-          }
-          {
-            loginState.errorStateVerifyOtp.isError &&
-            <FormHelperText id='otp'>
-              {CUSTOM_MESSGAE_SNACKBAR}
+              {errors.otp ? errors.otp : CUSTOM_MESSGAE_SNACKBAR }
             </FormHelperText>
           }
           {

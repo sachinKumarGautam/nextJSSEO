@@ -223,6 +223,18 @@ export default function (state = initialState, action) {
           ...state.errorStateCustomerRegister,
           isError: action.isError,
           error: action.error
+        },
+        errorStateFetchCustomerDetails: initialState.errorStateFetchCustomerDetails,
+        isLoadingFetchCustomerDetails: initialState.isLoadingFetchCustomerDetails,
+        referral_code: {
+          ...state.referral_code,
+          isLoading: initialState.isLoading,
+          errorState: initialState.errorState
+        },
+        membership_code: {
+          ...state.membership_code,
+          isLoading: initialState.isLoading,
+          errorState: initialState.errorState
         }
       }
 

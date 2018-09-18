@@ -39,6 +39,7 @@ class SearchSection extends Component {
           addToCartHandler={this.props.addToCartHandler}
           cartState={this.props.cartState}
           uploadPrescriptionLoading={this.props.uploadPrescriptionLoading}
+          resetSearchMedicineState={this.props.resetSearchMedicineState}
         />
       </div>
     )
