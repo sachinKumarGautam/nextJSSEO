@@ -75,11 +75,11 @@ class PatientDetailsCard extends React.Component {
         }
         onClick={this.handleOnClickPatientCard}
       >
-        <Grid container spacing={24}>
-          <Grid item xs={3}>
+        <Grid container>
+          <Grid item xs={2}>
             <img src='/static/images/profile.svg' />
           </Grid>
-          <Grid item xs={9}>
+          <Grid item xs={10}>
             <Typography
               variant='caption'
               className={this.props.classes.userNameStyle}
