@@ -25,7 +25,6 @@ const MedicineListWrapper = props => (
         searchMedicineState={props.searchMedicineState}
         medicineListState={props.medicineState}
         moleculeName={props.moleculeName}
-        queryMoleculeName={props.queryMoleculeName}
         productName={props.productName}
         addToCartHandler={props.addToCartHandler}
         searchMedicineLoading={props.searchMedicineLoading}
