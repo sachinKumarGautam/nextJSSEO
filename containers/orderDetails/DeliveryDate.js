@@ -5,17 +5,18 @@ import Typography from '@material-ui/core/Typography'
 
 const styles = theme => ({
   deliveryDateWrapper: {
-    paddingLeft: theme.spacing.unit * 2.5
+    paddingLeft: theme.spacing.unit * 2.5,
+    display: 'flex',
+    flexDirection: 'row',
+    fontSize: theme.spacing.unit * 2,
   },
   deliveryDateText: {
-    fontSize: theme.spacing.unit * 2,
     color: theme.palette.customGrey.grey700
   },
   deliveryDate: {
-    fontSize: theme.spacing.unit * 2,
     fontWeight: theme.typography.fontWeightBold,
-    marginTop: theme.spacing.unit * 1.25,
-    color: theme.palette.customGrey.grey500
+    color: theme.palette.customGrey.grey500,
+    marginLeft: theme.spacing.unit
   }
 })
 
@@ -25,7 +26,7 @@ const DeliveryDate = (props) => {
       <Typography
         className={props.classes.deliveryDateText}
       >
-        Estimated Delivery
+        Estimated Delivery:
       </Typography>
       <Typography
         className={props.classes.deliveryDate}
