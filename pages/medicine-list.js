@@ -153,7 +153,6 @@ class MedicineList extends React.Component {
               addToCartHandler={addToCartHandler}
               checkPincodeState={checkPincodeState}
               moleculeName={moleculeName}
-              queryMoleculeName={moleculeName}
               productName={productName}
               searchMedicineLoading={actions.searchMedicineLoading}
               getRelatedMedicinesLoading={actions.getRelatedMedicinesLoading}

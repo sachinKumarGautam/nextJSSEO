@@ -20,8 +20,8 @@ export const moleculeList = {
 
 export const orderConfirmation = {
   successTitle: 'Thank You',
-  retryTitle: 'Retry',
-  pendingTitle: 'Pending',
+  retryTitle: 'Payment Retry',
+  pendingTitle: 'Payment Pending',
   description: ''
 }
 
