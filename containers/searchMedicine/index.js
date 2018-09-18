@@ -266,7 +266,7 @@ class SearchMedicine extends React.Component {
     const cartItems = cartState.payload.cart_items.payload
     return (
       <div className={classes.root}>
-       <ActivityIndicator
+        <ActivityIndicator
           isError={this.props.searchMedicineState.errorState.isError}
           ErrorComp={
             <SnackbarErrorMessage
