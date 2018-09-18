@@ -19,8 +19,12 @@ let http = propGenerator => {
     .catch(data => {
       // stop loader even request fails
       NProgress.done()
-      console.log('Status code : ', data.error.status, data)
-      if (data.error && data.error.status === 401 && data.error.response && data.error.response.body.error === "invalid_token") {
+      if (
+        data.error &&
+        data.error.status === 401 &&
+        data.error.response &&
+        data.error.response.body.error === 'invalid_token'
+      ) {
         const loginState = store.getState().loginState
         const isSessionExpired = true
         // return re vaidate function

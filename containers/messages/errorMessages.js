@@ -11,4 +11,3 @@ export const PAGE_NOT_FOUND_MESSAGE = 'We can’t seem to find the page you are 
 export const INVALID_CART_TEXT = 'Invalid Cart'
 
 export const INVALID_CART_DESCRIPTION = 'This cart became invalid as you have already placed this order!'
-

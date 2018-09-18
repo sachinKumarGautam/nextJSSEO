@@ -103,7 +103,6 @@ export default function (state = initialState, action) {
         isSessionExpired: action.isSessionExpired
       }
 
-
     default:
       return state
   }

@@ -7,8 +7,7 @@ import {
   OTP_VERIFIED_SUCCESS,
   TOGGLE_AUTHENTICATION,
   RESET_IS_NEW_USER_FLAG,
-  HANDLE_SESSION_EXPIRATION,
-  RESET_SESSION_STATUS
+  HANDLE_SESSION_EXPIRATION
 } from './loginActionTypes'
 
 import { setCookie, removeCookie } from '../../utils/cookie'
@@ -69,7 +68,7 @@ export function verifyOtpSuccess (loginState, result) {
   return {
     type: OTP_VERIFIED_SUCCESS,
     loginState,
-    access_token: 'dkdldkldkl', // result.body.access_token
+    access_token: result.body.access_token,
     refresh_token: result.body.refresh_token,
     scope: result.body.scope,
     isLoading: false
