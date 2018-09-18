@@ -14,6 +14,8 @@ import {
   getRelatedMedicinesLoading
 } from '../medicineList/medicineListActions'
 
+import queryLimitedData from '../../utils/queryLimitedData'
+
 /*
   bread crumbs
   Molecule Details
@@ -26,8 +28,27 @@ class MoleculeDetailsWrapper extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      hover: {}
+      hover: {},
+      publishedContent: []
     }
+
+    this.saveRecentlyPublishedContent = this.saveRecentlyPublishedContent.bind(this)
+  }
+
+  componentDidMount () {
+    this.getRecentlyPublishedContent()
+  }
+
+  getRecentlyPublishedContent () {
+    queryLimitedData(
+      this.saveRecentlyPublishedContent
+    )
+  }
+
+  saveRecentlyPublishedContent (payload) {
+    this.setState({
+      publishedContent: payload
+    })
   }
 
   toggleHover (item) {
@@ -75,7 +96,9 @@ class MoleculeDetailsWrapper extends Component {
               medicineListState={this.props.medicineListState}
               getRelatedMedicinesLoading={this.props.actions.getRelatedMedicinesLoading}
             />
-            <RelatedArticles />
+            <RelatedArticles
+              publishedContent={this.state.publishedContent}
+            />
           </Grid>
         </Grid>
       </div>

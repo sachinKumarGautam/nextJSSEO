@@ -27,7 +27,7 @@ const ArticleCard = (props) => (
   <Card elevation={1}>
     <CardMedia
       className={props.classes.media}
-      image={props.articleDetail.image}
+      image={props.articleDetail.images[0]}
       title='article'
     />
     <CardContent>
@@ -37,10 +37,10 @@ const ArticleCard = (props) => (
         component='h2'
         className={props.classes.cardTitle}
       >
-        {props.articleDetail.label}
+        {props.articleDetail.title}
       </Typography>
       <Typography component='p' className={props.classes.cardContent}>
-        {props.articleDetail.description}
+        {props.articleDetail.body}
       </Typography>
     </CardContent>
   </Card>

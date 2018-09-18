@@ -4,6 +4,8 @@ import { withStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
 import Button from '@material-ui/core/Button'
 
+import Router from 'next/router'
+
 const styles = theme => {
   return {
     articleWrapper: {
@@ -46,13 +48,14 @@ const styles = theme => {
       lineHeight: theme.spacing.unit * 0.21375,
       paddingLeft: theme.spacing.unit * 3.25,
       paddingRight: theme.spacing.unit * 5.5,
-      paddingBottom: theme.spacing.unit * 3.375
+      paddingBottom: theme.spacing.unit * 3.75
     },
     imageStyle: {
       width: theme.spacing.unit * 37.5,
       height: theme.spacing.unit * 19
     },
     detailWrapper: {
+      cursor: 'pointer',
       width: theme.spacing.unit * 37.5,
       backgroundColor: theme.palette.secondary.main
     },
@@ -63,24 +66,6 @@ const styles = theme => {
     }
   }
 }
-
-const relatedArticle = [
-  {
-    image: '../../static/images/womanHair.jpg',
-    label: 'Does loosing hair makes you lose your mind?',
-    description: 'Well you need not worry or freak out anymore, as a fact losing 50 to 100 strands...'
-  },
-  {
-    image: '../../static/images/images.jpeg',
-    label: '4 Ways to grow Thick Eyebrows Naturally',
-    description: 'Thick eyebrows have always been in demand. Thick, well-shaped eyebrows...'
-  },
-  {
-    image: '../../static/images/jogging.jpg',
-    label: 'Arthritis, can it lead to cardiovascular risk?',
-    description: 'According to recent research, patients who have been diagnosed with...'
-  }
-]
 
 class ArticleSection extends Component {
   render () {
@@ -94,21 +79,24 @@ class ArticleSection extends Component {
         </Typography>
         <div className={this.props.classes.articleListWrapper}>
           {
-            relatedArticle.map((item) => {
+            this.props.publishedContent.map((item) => {
               return (
-                <div className={this.props.classes.detailWrapper}>
-                  <img src={item.image} className={this.props.classes.imageStyle} />
+                <div
+                  className={this.props.classes.detailWrapper}
+                  onClick={() => Router.push(item.web_link)}
+                >
+                  <img src={item.images[0]} className={this.props.classes.imageStyle} />
                   <Typography
                     variant='body2'
                     className={this.props.classes.title}
                   >
-                    {item.label}
+                    {item.title}
                   </Typography>
                   <Typography
                     variant='body2'
                     className={this.props.classes.description}
                   >
-                    {item.description}
+                    {item.body}
                   </Typography>
                 </div>
               )
