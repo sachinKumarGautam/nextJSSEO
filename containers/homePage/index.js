@@ -5,7 +5,8 @@ import { bindActionCreators } from 'redux'
 
 import HomePageDetails from './HomePageDetails'
 import {
-  searchMedicineLoading
+  searchMedicineLoading,
+  resetSearchMedicineState
 } from '../searchMedicine/searchMedicineAction'
 
 import {
@@ -31,6 +32,7 @@ class HomePageWrapper extends Component {
           uploadPrescriptionLoading={this.props.actions.uploadPrescriptionLoading}
           resetCartItemErrorState={this.props.actions.resetCartItemErrorState}
           resetUploadPrescriptionError={this.props.actions.resetUploadPrescriptionError}
+          resetSearchMedicineState={this.props.actions.resetSearchMedicineState}
         />
       </div>
     )
@@ -45,7 +47,8 @@ function mapDispatchToProps (dispatch) {
         incrementCartItemLoading,
         uploadPrescriptionLoading,
         resetCartItemErrorState,
-        resetUploadPrescriptionError
+        resetUploadPrescriptionError,
+        resetSearchMedicineState
       },
       dispatch
     )

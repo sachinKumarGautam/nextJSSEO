@@ -25,7 +25,8 @@ import {
 } from '../user/customer/customerActions'
 
 import {
-  updateIsCartOpenRegisterModalFlag
+  updateIsCartOpenRegisterModalFlag,
+  resetCartLoadingState
 } from '../cartDetails/cartActions'
 
 import ActivityIndicator from '../../components/activityIndicator/index'
@@ -107,6 +108,7 @@ class LoginWrapper extends React.Component {
   resetState () {
     this.props.actions.resetCustomerFormState()
     this.props.actions.resetLoginState()
+    this.props.actions.resetCartLoadingState()
   }
 
   getModal (name) {
@@ -227,7 +229,8 @@ function mapDispatchToProps (dispatch) {
         resetCustomerFormState,
         resetLoginState,
         resetIsNewUserFlag,
-        updateIsCartOpenRegisterModalFlag
+        updateIsCartOpenRegisterModalFlag,
+        resetCartLoadingState
       },
       dispatch
     )

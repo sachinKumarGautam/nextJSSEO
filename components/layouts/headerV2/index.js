@@ -185,6 +185,7 @@ class Header extends React.Component {
                       searchMedicineLoading={actions.searchMedicineLoading}
                       addToCartHandler={this.props.addToCartHandler}
                       cartState={this.props.cartState}
+                      resetSearchMedicineState={this.props.actions.resetSearchMedicineState}
                     />
                   ) : null}
                 </Grid>
