@@ -74,7 +74,7 @@ class MedicineList extends React.Component {
   // Represents to get medicine list when clicked on show more with page size and size per page.
   onClickOfShowMore () {
     if (this.props.productName) {
-      return this.props.searchMedicineLoading(
+      this.props.searchMedicineLoading(
         this.props.searchMedicineState,
         this.props.checkPincodeState.payload.id,
         this.props.productName,
@@ -83,7 +83,7 @@ class MedicineList extends React.Component {
         false // is header props is false
       )
     } else {
-      return this.props.getRelatedMedicinesLoading(
+      this.props.getRelatedMedicinesLoading(
         this.props.medicineListState,
         this.props.moleculeName, // pass salt name
         this.state.page + 1, // page number
