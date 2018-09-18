@@ -57,7 +57,7 @@ import {
   submitPatientDetailsLoading
 } from '../patientDetails/patientDetailsActions'
 
-import { checkPincodeLoading } from '../location/pincode/pincodeAction'
+import { checkPincodeLoading, resetPincodeState } from '../location/pincode/pincodeAction'
 import PlaceOrderLoader
   from '../../components/activityIndicator/loader/PlaceOrderLoader'
 import {
@@ -182,6 +182,7 @@ class CartDetailsWrapper extends Component {
     this.props.actions.resetSavePatientToCartError()
     this.props.actions.resetSaveDeliveryAddressToCartError()
     this.props.actions.resetUploadPrescriptionError()
+    this.props.actions.resetPincodeState()
   }
 
   getErrorComponent () {
@@ -204,7 +205,8 @@ class CartDetailsWrapper extends Component {
               this.props.cartState.payload.cart_items.errorState.error ||
               this.props.cartState.payload.is_doctor_callback.errorState.error ||
               this.props.cartState.payload.patient_details.errorState.error ||
-              this.props.cartState.payload.shipping_address_details.errorState.error
+              this.props.cartState.payload.shipping_address_details.errorState.error ||
+              this.props.checkPincodeState.errorState.error
           }
           resetState={this.resetState}
         />
@@ -236,7 +238,8 @@ class CartDetailsWrapper extends Component {
               this.props.cartState.payload.cart_items.errorState.isError ||
               this.props.cartState.payload.is_doctor_callback.errorState.isError ||
               this.props.cartState.payload.patient_details.errorState.isError ||
-              this.props.cartState.payload.shipping_address_details.errorState.isError
+              this.props.cartState.payload.shipping_address_details.errorState.isError ||
+              (this.props.checkPincodeState.errorState.isError && this.props.checkPincodeState.isDeliveryAssignment)
           }
           ErrorComp={this.getErrorComponent()}
           bottomError={!this.props.cartState.errorState.isError}
@@ -391,7 +394,8 @@ function mapDispatchToProps (dispatch) {
         resetSaveDeliveryAddressToCartError,
         resetUploadPrescriptionError,
         deleteCartLoading,
-        updateLassuredExpressFlag
+        updateLassuredExpressFlag,
+        resetPincodeState
       },
       dispatch
     )
