@@ -160,7 +160,6 @@ class LoginWrapper extends React.Component {
           isError={
             this.props.cartState.errorState.isError ||
             this.props.customerState.errorStateCustomerRegister.isError ||
-            this.props.customerState.payload.membership_code.errorState.isError ||
             this.props.customerState.payload.referral_code.errorState.isError
           }
           ErrorComp={
@@ -168,7 +167,6 @@ class LoginWrapper extends React.Component {
               error={
                 this.props.cartState.errorState.error ||
                 this.props.customerState.errorStateCustomerRegister.error ||
-                this.props.customerState.payload.membership_code.errorState.error ||
                 this.props.customerState.payload.referral_code.errorState.error
               }
               resetState={this.resetState.bind(this)}

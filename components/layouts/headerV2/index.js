@@ -28,7 +28,8 @@ import {
 } from '../../../containers/cartDetails/cartActions'
 
 import {
-  resetIsNewUserFlag
+  resetIsNewUserFlag,
+  resetLoginState
 } from '../../../containers/login/loginActions'
 
 import { HOME_PAGE } from '../../../routes/RouteConstant'
@@ -143,6 +144,7 @@ class Header extends React.Component {
     )
 
     this.props.actions.resetIsNewUserFlag(this.props.loginState)
+    this.props.actions.resetLoginState()
   }
 
   render () {
@@ -284,7 +286,8 @@ function mapDispatchToProps (dispatch) {
         updateIsCartOpenRegisterModalFlag,
         goToCartSnackbar,
         uploadPrescriptionLoading,
-        resetIsNewUserFlag
+        resetIsNewUserFlag,
+        resetLoginState
       },
       dispatch
     )

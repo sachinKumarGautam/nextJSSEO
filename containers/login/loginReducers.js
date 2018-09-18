@@ -97,7 +97,7 @@ export default function (state = initialState, action) {
         errorStateVerifyOtp: initialState.errorStateVerifyOtp,
         errorStateSendOtp: initialState.errorStateSendOtp
       }
-      
+
     case RESET_IS_NEW_USER_FLAG:
       return {
         ...state,
