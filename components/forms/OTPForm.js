@@ -91,7 +91,7 @@ class OTPForm extends React.Component {
     })
 
     this.otpResendTimer = setInterval(() => {
-      this.setState((prevState) => {
+      this.setState(prevState => {
         return {
           updateCounter: prevState.updateCounter - 1
         }
@@ -113,7 +113,7 @@ class OTPForm extends React.Component {
       this.props.loginState,
       this.props.setSubmitting,
       this.props.toggleForm,
-      {mobile: this.props.loginState.payload.initialMobile}
+      { mobile: this.props.loginState.payload.initialMobile }
     )
     this.customCountTimer()
   }
@@ -151,29 +151,24 @@ class OTPForm extends React.Component {
             onChange={this.handleChange}
             placeholder={OTP_PLACEHOLDER}
           />
-          {
-            errors.otp && touched.otp &&
+          {errors.otp &&
+            touched.otp &&
             <FormHelperText id='otp'>
               {errors.otp}
-            </FormHelperText>
-          }
-          {
-            loginState.errorStateVerifyOtp.isError &&
+            </FormHelperText>}
+          {loginState.errorStateVerifyOtp.isError &&
             <FormHelperText id='otp'>
               {CUSTOM_MESSGAE_SNACKBAR}
-            </FormHelperText>
-          }
-          {
-            this.state.isHideResetButton
-              ? (<Typography align='right' className={classes.resendTimer}>
-                Resend {this.state.updateCounter}
-              </Typography>)
-              : (<a onClick={this.resendOtp}>
-                <Typography align='right' className={classes.resendLink}>
+            </FormHelperText>}
+          {this.state.isHideResetButton
+            ? <Typography align='right' className={classes.resendTimer}>
+              {this.state.updateCounter}
+            </Typography>
+            : <a onClick={this.resendOtp}>
+              <Typography align='right' className={classes.resendLink}>
                   Resend OTP
-                </Typography>
-              </a>)
-          }
+              </Typography>
+            </a>}
         </FormControl>
         <div className={classes.buttonWrapper}>
           <Button
@@ -182,8 +177,7 @@ class OTPForm extends React.Component {
             variant='raised'
             color='primary'
             label={
-              this.props.isRegisterClicked ||
-              loginState.isNewUser
+              this.props.isRegisterClicked || loginState.isNewUser
                 ? 'Register'
                 : 'Login'
             }

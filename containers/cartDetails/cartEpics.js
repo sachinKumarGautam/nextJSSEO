@@ -654,7 +654,7 @@ export function deleteCartState (action$, store) {
           )
         }),
         catchError(error => {
-          return deleteCartFailure(data.cartState, error)
+          return of(deleteCartFailure(data.cartState, error))
         })
       )
     })

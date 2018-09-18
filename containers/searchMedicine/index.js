@@ -103,6 +103,9 @@ const styles = theme => ({
     textAlign: 'left',
     paddingLeft: theme.spacing.unit * 18,
     width: theme.spacing.unit * 80
+  },
+  searchMedicineText: {
+    fontSize: theme.typography.pxToRem(13)
   }
 })
 
@@ -124,6 +127,7 @@ function renderInput (inputProps) {
           disableUnderline: true,
           // inputRef: ref,
           classes: {
+            root: classes.searchMedicineText,
             formControl: classes.inputFormControl,
             focused: classes.inputFocused
           },

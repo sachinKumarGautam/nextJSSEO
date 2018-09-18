@@ -39,7 +39,10 @@ const styles = theme => {
       },
       borderBottom: `1px solid ${theme.palette.customGrey.grey100}`,
       paddingBottom: theme.spacing.unit * 2,
-      marginTop: theme.spacing.unit * 2
+      paddingTop: theme.spacing.unit * 2,
+      '&:hover': {
+        backgroundColor: theme.palette.customGrey.grey50
+      }
     },
     buttonRoot: {
       // backgroundColor: '#ffffff',
@@ -57,6 +60,9 @@ const styles = theme => {
       textAlign: 'center',
       marginTop: theme.spacing.unit * 1.25,
       fontWeight: theme.typography.fontWeightBold
+    },
+    listWrapperStyle: {
+      paddingTop: '0'
     }
   }
 }
@@ -128,7 +134,7 @@ class MedicineList extends React.Component {
             isLoading={isLoading}
             LoaderComp={<MultipleMedicineLoader />}
           >
-            <CardContent>
+            <CardContent className={classes.listWrapperStyle}>
               {medicineListState.length
                 ? <ul className={classes.articleListWrapper}>
                   {modifiyMedicineList(

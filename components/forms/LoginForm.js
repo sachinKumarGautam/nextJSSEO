@@ -45,7 +45,12 @@ const styles = theme => ({
     width: theme.spacing.unit * 25
   },
   mobilePrefix: {
-    marginBottom: theme.spacing.unit / 8
+    marginBottom: theme.spacing.unit / 8,
+    color: theme.palette.customGrey.grey200
+  },
+  mobileIcon: {
+    color: theme.palette.customGrey.grey200,
+    height: theme.spacing.unit * 2
   }
 })
 
@@ -83,7 +88,7 @@ class LoginForm extends React.Component {
           <Input
             startAdornment={
               <InputAdornment position='start'>
-                <AccountCircle />
+                <AccountCircle className={classes.mobileIcon} />
                 <span className={classes.mobilePrefix}>{'+91'}</span>
               </InputAdornment>
             }

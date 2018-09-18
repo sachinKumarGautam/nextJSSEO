@@ -22,9 +22,7 @@ import {
   resetCustomerFormState
 } from '../user/customer/customerActions'
 
-import {
-  updateIsCartOpenRegisterModalFlag
-} from '../cartDetails/cartActions'
+import { updateIsCartOpenRegisterModalFlag } from '../cartDetails/cartActions'
 
 import ActivityIndicator from '../../components/activityIndicator/index'
 import SnackbarErrorMessage
@@ -48,6 +46,7 @@ const styles = theme => ({
   dialogTitle: {
     ...theme.typography.title,
     textAlign: 'center',
+    fontSize: theme.spacing.unit * 2.25,
     color: theme.palette.primary.main
   }
 })
@@ -156,15 +155,16 @@ class LoginWrapper extends React.Component {
         <ActivityIndicator
           isError={
             this.props.cartState.errorState.isError ||
-            this.props.customerState.errorStateCustomerRegister.isError ||
-            this.props.customerState.payload.referral_code.errorState.isError
+              this.props.customerState.errorStateCustomerRegister.isError ||
+              this.props.customerState.payload.referral_code.errorState.isError
           }
           ErrorComp={
             <SnackbarErrorMessage
               error={
                 this.props.cartState.errorState.error ||
-                this.props.customerState.errorStateCustomerRegister.error ||
-                this.props.customerState.payload.referral_code.errorState.error
+                  this.props.customerState.errorStateCustomerRegister.error ||
+                  this.props.customerState.payload.referral_code.errorState
+                    .error
               }
               resetState={this.resetState.bind(this)}
             />
@@ -188,12 +188,9 @@ class LoginWrapper extends React.Component {
                 root: classes.dialogTitle
               }}
             >
-              {
-                this.state.isRegisterClicked ||
-                this.props.loginState.isNewUser
-                  ? 'REGISTER'
-                  : 'LOGIN'
-              }
+              {this.state.isRegisterClicked || this.props.loginState.isNewUser
+                ? 'REGISTER'
+                : 'LOGIN'}
             </DialogTitle>
             <DialogContent>
               {this.getModal(this.state.modalName)}
