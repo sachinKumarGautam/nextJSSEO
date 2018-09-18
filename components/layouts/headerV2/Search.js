@@ -27,7 +27,8 @@ const styles = theme => {
     },
     button: {
       margin: theme.spacing.unit,
-      backgroungColor: theme.palette.primary.main
+      backgroungColor: theme.palette.primary.main,
+      cursor: 'pointer'
     },
     buttonlabel: {
       ...theme.typography.caption,

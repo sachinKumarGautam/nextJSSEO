@@ -31,7 +31,9 @@ class ProductDetailsContent extends Component {
             />
           </Grid>
           <Grid item xs={3}>
-            <RelatedArticles />
+            <RelatedArticles
+              publishedContent={this.props.publishedContent}
+            />
           </Grid>
         </Grid>
       </div>

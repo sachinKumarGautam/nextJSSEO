@@ -32,7 +32,10 @@ const styles = theme => ({
     overflow: 'scroll',
     zIndex: 1,
     left: 0,
-    right: 0
+    right: 0,
+    marginLeft: theme.spacing.unit * 4,
+    marginRight: theme.spacing.unit * 2,
+    width: 'auto'
   },
   chip: {
     margin: `${theme.spacing.unit / 2}px ${theme.spacing.unit / 4}px`

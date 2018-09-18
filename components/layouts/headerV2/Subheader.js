@@ -10,6 +10,7 @@ import { HOME_PAGE } from '../../../routes/RouteConstant'
 import { getReplacedString } from '../../../utils/replaceConstants'
 import { Grid } from '@material-ui/core'
 import {scrollTo} from '../../../utils/scrollToSections'
+import {SCROLL_TO_TOP_HEIGHT} from '../../constants/Constants'
 
 const styles = theme => ({
   horizontalSubheader: {
@@ -59,8 +60,9 @@ class Subheader extends React.Component {
 
   redirectToHealth () {
     const url = getReplacedString(HOME_PAGE)
+    const height = this.props.isHomePage ? SCROLL_TO_TOP_HEIGHT : 0
     Router.push(url).then(() => {
-      return scrollTo('health-management')
+      return scrollTo('health-management', height)
     })
   }
 
