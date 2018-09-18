@@ -100,8 +100,8 @@ const styles = theme => ({
     right: 0,
     left: theme.spacing.unit * 2,
     color: theme.palette.common.white,
-    padding: theme.typography.pxToRem(9),
-    fontSize: theme.typography.pxToRem(10)
+    padding: theme.typography.pxToRem(4),
+    fontSize: theme.typography.pxToRem(8)
   },
   badgeRoot: {
     // padding: theme.spacing.unit * 2

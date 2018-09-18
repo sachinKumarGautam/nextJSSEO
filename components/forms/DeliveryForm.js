@@ -46,7 +46,8 @@ const styles = theme => ({
     textAlign: 'center'
   },
   mobilePrefix: {
-    marginBottom: 0
+    marginBottom: 0,
+    color: theme.palette.customGrey.grey200
   }
 })
 
@@ -241,7 +242,7 @@ class DeliveryForm extends React.Component {
           disabled
         >
           <Input
-            placeholder='  City'
+            placeholder='City'
             className={classes.valueStyle}
             id='city'
             type='text'

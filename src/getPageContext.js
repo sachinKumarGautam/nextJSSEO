@@ -50,6 +50,17 @@ const theme = createMuiTheme({
     }
   },
   overrides: {
+    MuiInput: {
+      root: {
+        fontSize: '16px'
+      },
+      underline: {
+        caretColor: '#80c241',
+        '&:after': {
+          borderBottom: '2px solid #80c241'
+        }
+      }
+    },
     MuiPaper: {
       elevation1: {
         boxShadow: '0 0 6px 0 rgba(224, 224, 224, 0.72)'
