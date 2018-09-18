@@ -8,7 +8,7 @@ const styles = theme => ({
     paddingLeft: theme.spacing.unit * 2.5,
     display: 'flex',
     flexDirection: 'row',
-    fontSize: theme.spacing.unit * 2,
+    fontSize: theme.spacing.unit * 2
   },
   deliveryDateText: {
     color: theme.palette.customGrey.grey700

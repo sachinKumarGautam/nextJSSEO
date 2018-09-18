@@ -2,7 +2,8 @@ import {
   CHECK_PINCODE_LOADING,
   CHECK_PINCODE_SUCCESS,
   CHECK_PINCODE_FAILURE,
-  HANDLE_PINCODE_DIALOG
+  HANDLE_PINCODE_DIALOG,
+  RESET_PINCODE_STATE
 } from './pincodeActionTypes'
 
 export function openPincodeDialog (checkPincodeState, { isOpen }) {
@@ -32,7 +33,8 @@ export function checkPincodeLoading (
     addressId: defaultArgs.addressId,
     isLoading: true,
     isError: false,
-    error: {}
+    error: {},
+    isDeliveryAssignment: defaultArgs.isDeliveryAssignment
   }
 }
 
@@ -64,5 +66,11 @@ export function checkPincodeFailure (checkPincodeState, error) {
     isLoading: false,
     isError: true,
     error: error.response ? error.response.body.error.code : null
+  }
+}
+
+export function resetPincodeState () {
+  return {
+    type: RESET_PINCODE_STATE
   }
 }

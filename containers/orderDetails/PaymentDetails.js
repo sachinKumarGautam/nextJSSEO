@@ -27,7 +27,7 @@ const styles = theme => ({
     fontWeight: theme.typography.fontWeightBold
   },
   pendingStatus: {
-    color: theme.palette.customYellow.yellow400,
+    color: theme.palette.customYellow.yellow400
   },
   placedOnWrapper: {
     display: 'flex',
@@ -73,8 +73,8 @@ const PaymentDetails = (props) => {
         <Typography
           className={
             props.paymentStatus === 'Payment Pending'
-            ? `${props.classes.pendingStatus} ${props.classes.paymentStatusText}`
-            : props.classes.paymentStatusText
+              ? `${props.classes.pendingStatus} ${props.classes.paymentStatusText}`
+              : props.classes.paymentStatusText
           }
         >
           Status: {props.paymentStatus}

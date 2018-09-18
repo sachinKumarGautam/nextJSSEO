@@ -89,6 +89,7 @@ class Search extends Component {
           searchMedicineLoading={this.props.searchMedicineLoading}
           addToCartHandler={this.props.addToCartHandler}
           cartState={this.props.cartState}
+          resetSearchMedicineState={this.props.resetSearchMedicineState}
         />
         <Typography variant='body1' className={this.props.classes.orTextStyle}>
           OR

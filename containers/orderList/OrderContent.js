@@ -78,7 +78,7 @@ const styles = theme => {
     codButtonStyle: {
       // ...theme.typography.caption,
       marginLeft: theme.spacing.unit * 2
-    },
+    }
     // reviewStyle: {
     //   ...theme.typography.body4,
     //   color: theme.palette.customGrey.grey200,

@@ -135,6 +135,7 @@ class Main extends Component {
                   this.props.getLocalityDetailListLoading
                 }
                 checkPincodeState={this.props.checkPincodeState}
+                resetErrorState={this.props.resetErrorState}
               />
             </div>
           </div>

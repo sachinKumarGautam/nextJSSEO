@@ -15,7 +15,8 @@ import { handleSessionExpiration } from '../../containers/login/loginActions'
 
 import {
   openPincodeDialog,
-  checkPincodeLoading
+  checkPincodeLoading,
+  resetPincodeState
 } from '../../containers/location/pincode/pincodeAction'
 
 import withRoot from '../../src/withRoot'
@@ -74,8 +75,10 @@ export function withCommonWrapper (Page) {
       }
     }
 
-    handleClose = () =>
+    handleClose = () => {
       this.props.actions.openPincodeDialog(this.props.checkPincodeState, false)
+      this.props.actions.resetPincodeState()
+    }
 
     handleDialogOk () {
       this.props.actions.resetCartState()
@@ -177,7 +180,8 @@ export function withCommonWrapper (Page) {
           resetCartItemErrorState,
           resetCartState,
           resetCartLoadingState,
-          handleSessionExpiration
+          handleSessionExpiration,
+          resetPincodeState
         },
         dispatch
       )
