@@ -8,11 +8,11 @@ import CircularProgress from '@material-ui/core/CircularProgress'
 import Button from '../../components/button'
 import SearchIcon from '@material-ui/icons/Search'
 import MedicineListDetails from '../../components/MedicineListDetails'
-import TextErrorMessage
-  from '../../components/activityIndicator/error/TextErrorMessage'
 import { PRODUCT_SEARCH, PRODUCT_DETAILS } from '../../routes/RouteConstant'
 
-import { CUSTOM_MESSGAE_SNACKBAR } from '../messages/errorMessages'
+import ActivityIndicator from '../../components/activityIndicator/index'
+import SnackbarErrorMessage
+  from '../../components/activityIndicator/error/SnackbarErrorMessage'
 import debounce from 'lodash.debounce'
 import { modifiyMedicineList } from '../../utils/common'
 
@@ -247,6 +247,10 @@ class SearchMedicine extends React.Component {
     Router.push(href, as)
   }
 
+  resetState () {
+    this.props.resetSearchMedicineState()
+  }
+
   render () {
     const {
       classes,
@@ -262,72 +266,74 @@ class SearchMedicine extends React.Component {
     const cartItems = cartState.payload.cart_items.payload
     return (
       <div className={classes.root}>
-        {this.props.searchMedicineState.errorState.isError &&
-          <TextErrorMessage
-            errorMessage={
-              this.props.searchMedicineState.errorState.error.response
-                ? this.props.searchMedicineState.errorState.error.response.body
-                  .error.message
-                : CUSTOM_MESSGAE_SNACKBAR
-            }
-            customStyle={this.props.classes.errorMessage}
-          />}
-        <Downshift onStateChange={this.stateChangeHandler} isOpen={isOpen}>
-          {({
-            getInputProps,
-            getItemProps,
-            getMenuProps,
-            isOpen,
-            inputValue,
-            selectedItem,
-            highlightedIndex
-          }) => (
-            <div className={classes.container}>
-              {renderInput({
-                fullWidth: true,
-                classes,
-                InputProps: getInputProps({
-                  placeholder: 'Search medicine...',
-                  id: 'search-medicine',
-                  autoFocus: true,
-                  onChange: this.searchMedicineOnChange,
-                  inputValue
-                }),
-                onSearchClick: this.onSearchClick,
-                searchMedicineIsLoading
-              })}
-              {isOpen
-                ? <Paper className={classes.paper} square>
-                  <ul
-                    {...getMenuProps()}
-                    className={classes.searchContentWrapper}
-                  >
-                    {modifiyMedicineList(
-                      searchMedicineResult,
-                      cartItems
-                    ).map((suggestion, index) =>
-                      renderSuggestion({
-                        suggestion,
-                        index,
-                        itemProps: getItemProps({
-                          item: suggestion.name
-                        }),
-                        highlightedIndex,
-                        selectedItem,
-                        onSelectItem: this.onSelectItem,
-                        searchItemStyle: classes.searchItem,
-                        highlightedSearchItem: `${classes.searchItem} ${classes.highlightedSearchItem}`,
-                        selectedSearchItem: `${classes.searchItem} ${classes.selectedSearchItem}`,
-                        checkPincodeState,
-                        addToCartHandler
-                      })
-                    )}
-                  </ul>
-                </Paper>
-                : null}
-            </div>
-          )}
-        </Downshift>
+       <ActivityIndicator
+          isError={this.props.searchMedicineState.errorState.isError}
+          ErrorComp={
+            <SnackbarErrorMessage
+              error={this.props.searchMedicineState.errorState.error
+              }
+              resetState={this.resetState.bind(this)}
+            />
+          }
+          bottomError
+        >
+          <Downshift onStateChange={this.stateChangeHandler} isOpen={isOpen}>
+            {({
+              getInputProps,
+              getItemProps,
+              getMenuProps,
+              isOpen,
+              inputValue,
+              selectedItem,
+              highlightedIndex
+            }) => (
+              <div className={classes.container}>
+                {renderInput({
+                  fullWidth: true,
+                  classes,
+                  InputProps: getInputProps({
+                    placeholder: 'Search medicine...',
+                    id: 'search-medicine',
+                    autoFocus: true,
+                    onChange: this.searchMedicineOnChange,
+                    inputValue
+                  }),
+                  onSearchClick: this.onSearchClick,
+                  searchMedicineIsLoading
+                })}
+                {isOpen
+                  ? <Paper className={classes.paper} square>
+                    <ul
+                      {...getMenuProps()}
+                      className={classes.searchContentWrapper}
+                    >
+                      {modifiyMedicineList(
+                        searchMedicineResult,
+                        cartItems
+                      ).map((suggestion, index) =>
+                        renderSuggestion({
+                          suggestion,
+                          index,
+                          itemProps: getItemProps({
+                            item: suggestion.name
+                          }),
+                          highlightedIndex,
+                          selectedItem,
+                          onSelectItem: this.onSelectItem,
+                          searchItemStyle: classes.searchItem,
+                          highlightedSearchItem: `${classes.searchItem} ${classes.highlightedSearchItem}`,
+                          selectedSearchItem: `${classes.searchItem} ${classes.selectedSearchItem}`,
+                          checkPincodeState,
+                          addToCartHandler
+                        })
+                      )}
+                    </ul>
+                  </Paper>
+                  : null}
+              </div>
+            )}
+          </Downshift>
+        </ActivityIndicator>
       </div>
     )
   }

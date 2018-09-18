@@ -14,7 +14,7 @@ import CartIcon from '../../CartIcon'
 import Login from '../../../containers/login'
 import getPageContext from '../../../src/getPageContext'
 import MenuWrapper from '../../../containers/menu'
-import { searchMedicineLoading } from '../../../containers/searchMedicine/searchMedicineAction'
+import { searchMedicineLoading, resetSearchMedicineState } from '../../../containers/searchMedicine/searchMedicineAction'
 import GoToCartSnackbar from '../../../containers/cartDetails/GoToCartSnackbar'
 import Toolbar from '@material-ui/core/Toolbar'
 import Search from './Search'
@@ -257,6 +257,7 @@ class Header extends React.Component {
                 uploadPrescriptionLoading={
                   this.props.actions.uploadPrescriptionLoading
                 }
+                resetSearchMedicineState={this.props.actions.resetSearchMedicineState}
               />
             </div>
           )}
@@ -287,7 +288,8 @@ function mapDispatchToProps (dispatch) {
         goToCartSnackbar,
         uploadPrescriptionLoading,
         resetIsNewUserFlag,
-        resetLoginState
+        resetLoginState,
+        resetSearchMedicineState
       },
       dispatch
     )

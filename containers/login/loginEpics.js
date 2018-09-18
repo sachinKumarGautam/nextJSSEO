@@ -11,7 +11,8 @@ import {
   sendOtpSuccess,
   sendOtpFailure,
   verifyOtpSuccess,
-  verifyOtpFailure
+  verifyOtpFailure,
+  resetLoginState
 } from './loginActions'
 
 import {
@@ -31,12 +32,12 @@ export function sendOTP (action$, store) {
       const loginState = store.getState().loginState
 
       return http(sendOtp$(data.values)).pipe(
-        map(result => {
+        flatMap(result => {
           data.setSubmitting(false)
           setTimeout(() => {
             data.toggleForm('otp')
           }, 350)
-          return sendOtpSuccess(loginState, result, data.values)
+          return of(sendOtpSuccess(loginState, result, data.values), resetLoginState())
         }),
         catchError(error => {
           data.setSubmitting(false)

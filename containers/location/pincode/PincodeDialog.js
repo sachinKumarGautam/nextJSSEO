@@ -128,7 +128,7 @@ class PincodeDialog extends React.Component {
                   type='number'
                   value={values.pincode}
                   onChange={this.handleChange}
-                  onBlur={handleBlur}
+                  // onBlur={handleBlur}
                   placeholder={'Enter you pincode'}
                 />
                 <FormHelperText id='pincode'>

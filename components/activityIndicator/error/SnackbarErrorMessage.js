@@ -5,7 +5,7 @@ import Typography from '@material-ui/core/Typography'
 import Snackbar from '@material-ui/core/Snackbar'
 import SnackbarContent from '@material-ui/core/SnackbarContent'
 
-import { SNACK_BAR_DURATION } from '../../constants/Constants'
+import { SNACK_BAR_DURATION_3000 } from '../../constants/Constants'
 import { CUSTOM_MESSGAE_SNACKBAR } from '../../../containers/messages/errorMessages'
 
 const styles = theme => {
@@ -60,7 +60,7 @@ class SnackbarErrorMessage extends Component {
           classes={{
             anchorOriginBottomCenter: this.props.classes.anchorOriginBottomCenter
           }}
-          autoHideDuration={SNACK_BAR_DURATION}
+          autoHideDuration={SNACK_BAR_DURATION_3000}
           open={this.state.open}
           onClose={this.handleClose.bind(this)}
           ContentProps={{
