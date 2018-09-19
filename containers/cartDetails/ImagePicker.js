@@ -46,6 +46,7 @@ const styles = theme => ({
     zIndex: -1
   },
   pickerListLabel: {
+    cursor: 'pointer',
     width: theme.spacing.unit * 12.5,
     textAlign: 'center',
     background: theme.palette.common.white,
