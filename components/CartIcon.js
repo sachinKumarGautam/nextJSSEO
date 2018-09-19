@@ -125,10 +125,18 @@ class CartIcon extends Component {
   render () {
     const { classes } = this.props
     const cartItems = this.props.cartState.payload.cart_items.payload
+    const href = getReplacedString(CART_DETAILS)
     return (
       <div>
-        <Link prefetch href={getReplacedString(CART_DETAILS)}>
-          <a className={classes.moleculeTag} data-tip data-for='cartIcon'>
+        <Link href={href}>
+          <a 
+            onMouseEnter={() => {
+                  Router.prefetch(href)
+            }} 
+            className={classes.moleculeTag} 
+            data-tip 
+            data-for='cartIcon'
+          >
             <IconButton
               className={classes.button}
               color={'primary'}

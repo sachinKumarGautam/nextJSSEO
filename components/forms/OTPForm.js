@@ -160,7 +160,7 @@ class OTPForm extends React.Component {
           {
             this.state.isHideResetButton
               ? (<Typography align='right' className={classes.resendTimer}>
-                {this.state.updateCounter}
+                {this.state.updateCounter} s
               </Typography>)
               : (<a onClick={this.resendOtp}>
                 <Typography align='right' className={classes.resendLink}>
