@@ -64,9 +64,6 @@ const styles = theme => {
 class MedicineList extends React.Component {
   constructor (props) {
     super(props)
-    this.state = {
-      page: 0
-    }
 
     this.onClickOfShowMore = this.onClickOfShowMore.bind(this)
   }
@@ -78,7 +75,7 @@ class MedicineList extends React.Component {
         this.props.searchMedicineState,
         this.props.checkPincodeState.payload.id,
         this.props.productName,
-        this.state.page + 1, // page number
+        this.props.page + 1, // page number
         10, // page size,
         false // is header props is false
       )
@@ -86,17 +83,13 @@ class MedicineList extends React.Component {
       this.props.getRelatedMedicinesLoading(
         this.props.medicineListState,
         this.props.moleculeName, // pass salt name
-        this.state.page + 1, // page number
+        this.props.page + 1, // page number
         10, // page size,
         true
       )
     }
 
-    this.setState((prevState) => {
-      return {
-        page: prevState.page + 1
-      }
-    })
+    this.props.updateIsShowMore()
   }
 
   render () {
@@ -110,8 +103,8 @@ class MedicineList extends React.Component {
     } = this.props
     const cartItems = cartState.payload.cart_items.payload
     const showMoreCondition = this.props.moleculeName
-      ? ((this.state.page + 1) !== this.props.medicineListState.totalPages)
-      : ((this.state.page + 1) !== this.props.searchMedicineState.payload.totalPages)
+      ? ((this.props.page + 1) !== this.props.medicineListState.totalPages)
+      : ((this.props.page + 1) !== this.props.searchMedicineState.payload.totalPages)
 
     return (
       <div className={classes.medicineListWrapper}>
