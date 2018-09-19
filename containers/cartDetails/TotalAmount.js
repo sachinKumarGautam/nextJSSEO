@@ -12,7 +12,7 @@ const styles = theme => ({
     fontSize: theme.spacing.unit * 2.25,
     fontWeight: theme.typography.fontWeightBold,
     textAlign: 'right',
-    paddingRight: theme.spacing.unit * 4.125
+    paddingRight: theme.spacing.unit * 3
   },
   totalAmountText: {
     fontSize: theme.spacing.unit * 2.25,

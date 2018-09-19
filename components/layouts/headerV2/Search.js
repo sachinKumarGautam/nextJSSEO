@@ -58,12 +58,15 @@ const styles = theme => {
       border: `1px dashed ${theme.palette.customGrey.grey200}`,
       marginTop: theme.spacing.unit * 1.25,
       marginLeft: theme.spacing.unit * 6.25
+    },
+    labelStyle: {
+      cursor: 'pointer'
     }
   }
 }
 
 class Search extends Component {
-  onImageSelection (event) {
+  onImageSelection(event) {
     this.props.uploadPrescriptionLoading(
       this.props.cartState,
       event.target.files[0],
@@ -71,16 +74,16 @@ class Search extends Component {
     )
   }
 
-  componentDidUpdate (prevProps) {
+  componentDidUpdate(prevProps) {
     if (
       this.props.cartState.prescriptionDetails.isHomePage !==
-        prevProps.cartState.prescriptionDetails.isHomePage
+      prevProps.cartState.prescriptionDetails.isHomePage
     ) {
       const url = getReplacedString(CART_DETAILS)
       return Router.push(url)
     }
   }
-  render () {
+  render() {
     return (
       <div className={this.props.classes.searchWrapper}>
         <SearchMedicine
@@ -89,6 +92,7 @@ class Search extends Component {
           searchMedicineLoading={this.props.searchMedicineLoading}
           addToCartHandler={this.props.addToCartHandler}
           cartState={this.props.cartState}
+          resetSearchMedicineState={this.props.resetSearchMedicineState}
         />
         <Typography variant='body1' className={this.props.classes.orTextStyle}>
           OR
@@ -100,7 +104,7 @@ class Search extends Component {
           accept='image/*'
           onChange={this.onImageSelection.bind(this)}
         />
-        <label for='file'>
+        <label for='file' className={this.props.classes.labelStyle}>
           <Button
             variant='raised'
             color='primary'
@@ -109,7 +113,7 @@ class Search extends Component {
               label: this.props.classes.buttonlabel
             }}
           >
-            <label for='file'>Upload Prescription</label>
+            <label for='file' className={this.props.classes.labelStyle}>Upload Prescription</label>
           </Button>
         </label>
       </div>

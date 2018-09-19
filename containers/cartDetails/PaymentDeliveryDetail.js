@@ -56,8 +56,8 @@ const styles = theme => ({
     marginRight: theme.spacing.unit * 1.25
   },
   rxImageStyle: {
-    width: theme.spacing.unit * 1.75,
-    height: theme.spacing.unit * 2.75
+    width: theme.spacing.unit * 2.75,
+    height: theme.spacing.unit * 4
   },
   paper: {
     padding: theme.spacing.unit,

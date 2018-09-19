@@ -17,7 +17,8 @@ import {
   submitDeliveryDetailsLoading,
   updateAddressFormValue,
   getLocalityDetailListLoading,
-  resetDeliveryAddressSelected
+  resetDeliveryAddressSelected,
+  resetErrorState
 } from '../containers/deliveryDetails/deliveryDetailsActions'
 
 import {
@@ -86,6 +87,7 @@ class DeliveryDetails extends React.Component {
               checkPincodeState={this.props.checkPincodeState}
               resetDeliveryAddressSelected={this.props.actions.resetDeliveryAddressSelected}
               getDeliveryDetailsListLoading={this.props.actions.getDeliveryDetailsListLoading}
+              resetErrorState={this.props.actions.resetErrorState}
             />
           </Paper>
         </div>
@@ -113,7 +115,8 @@ function mapDispatchToProps (dispatch) {
         checkPincodeLoading,
         updateAddressFormValue,
         getLocalityDetailListLoading,
-        resetDeliveryAddressSelected
+        resetDeliveryAddressSelected,
+        resetErrorState
       },
       dispatch
     )

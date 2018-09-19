@@ -20,7 +20,7 @@ const styles = theme => {
       letterSpacing: '2.2px',
       fontWeight: theme.typography.fontWeightBold,
       marginTop: theme.spacing.unit * 27.5,
-      marginBottom: theme.spacing.unit * 27.5,
+      // marginBottom: theme.spacing.unit * 27.5,
       marginRight: theme.spacing.unit * 3.625,
       marginLeft: theme.spacing.unit * 8.75
     },
@@ -37,8 +37,7 @@ const styles = theme => {
     userReview: {
       color: theme.palette.customGrey.grey450,
       marginTop: theme.spacing.unit * 3.3,
-      marginBottom: theme.spacing.unit * 8,
-      height: theme.spacing.unit * 20.125
+      height: theme.spacing.unit * 32
     },
     userReviewWrapper: {
       width: '76%',
@@ -67,7 +66,8 @@ const styles = theme => {
     },
     userDetailWrapper: {
       display: 'flex',
-      flexDirection: 'row'
+      flexDirection: 'row',
+      height: theme.spacing.unit * 10
     }
   }
 }
@@ -136,7 +136,7 @@ class Testimonals extends Component {
                           variant='body2'
                           className={this.props.classes.userAge}
                         >
-                          {item.age}
+                          {item.gender === 'male' ? 'Male' : 'Female'}, {item.age}
                         </Typography>
                       </div>
                     </div>

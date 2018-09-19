@@ -48,7 +48,8 @@ const styles = theme => ({
     color: theme.palette.customGrey.grey100
   },
   mobilePrefix: {
-    marginBottom: theme.spacing.unit / 8
+    marginBottom: theme.spacing.unit / 8,
+    color: theme.palette.customGrey.grey200
   }
 })
 
@@ -161,6 +162,7 @@ class RegisterForm extends React.Component {
             placeholder={'Mobile'}
             onChange={this.onChangePhoneNumber}
             value={values.mobile}
+            disabled
             startAdornment={
               <InputAdornment position='start'>
                 <span className={classes.mobilePrefix}>{'+91'}</span>
@@ -181,15 +183,11 @@ class RegisterForm extends React.Component {
           <Select
             value={values.gender}
             onChange={handleChange}
-            // placeholder={'Gender'}
-            inputProps={{
-              name: 'gender',
-              id: 'gender',
-              placeholder: 'Gender'
-            }}
+            displayEmpty
+            name={'gender'}
           >
             <MenuItem value='' disabled>
-              <em>Gender</em>
+              Gender
             </MenuItem>
             <MenuItem value={'male'}>Male</MenuItem>
             <MenuItem value={'female'}>Female</MenuItem>

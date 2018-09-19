@@ -100,8 +100,8 @@ const styles = theme => ({
     right: 0,
     left: theme.spacing.unit * 2,
     color: theme.palette.common.white,
-    padding: theme.typography.pxToRem(9),
-    fontSize: theme.typography.pxToRem(10)
+    padding: theme.typography.pxToRem(4),
+    fontSize: theme.typography.pxToRem(8)
   },
   badgeRoot: {
     // padding: theme.spacing.unit * 2
@@ -125,10 +125,18 @@ class CartIcon extends Component {
   render () {
     const { classes } = this.props
     const cartItems = this.props.cartState.payload.cart_items.payload
+    const href = getReplacedString(CART_DETAILS)
     return (
       <div>
-        <Link prefetch href={getReplacedString(CART_DETAILS)}>
-          <a className={classes.moleculeTag} data-tip data-for='cartIcon'>
+        <Link href={href}>
+          <a 
+            onMouseEnter={() => {
+                  Router.prefetch(href)
+            }} 
+            className={classes.moleculeTag} 
+            data-tip 
+            data-for='cartIcon'
+          >
             <IconButton
               className={classes.button}
               color={'primary'}

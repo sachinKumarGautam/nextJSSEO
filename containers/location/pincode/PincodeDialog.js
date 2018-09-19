@@ -29,7 +29,8 @@ const styles = theme => ({
   },
   formControl: {
     margin: theme.spacing.unit,
-    width: '100%'
+    width: '100%',
+    marginLeft: 0
   },
   buttonWrapper: {
     marginTop: theme.spacing.unit * 3.5,
@@ -45,7 +46,8 @@ const styles = theme => ({
     color: theme.palette.common.black
   },
   cancelButton: {
-    marginRight: theme.spacing.unit
+    marginRight: theme.spacing.unit * 2.25,
+    display: 'flex'
   }
 })
 
@@ -81,7 +83,7 @@ class PincodeDialog extends React.Component {
       touched,
       errors,
       isSubmitting,
-      handleBlur,
+      // handleBlur,
       handleSubmit,
       classes,
       checkPincodeState
@@ -128,7 +130,7 @@ class PincodeDialog extends React.Component {
                   type='number'
                   value={values.pincode}
                   onChange={this.handleChange}
-                  onBlur={handleBlur}
+                  // onBlur={handleBlur}
                   placeholder={'Enter you pincode'}
                 />
                 <FormHelperText id='pincode'>
@@ -153,15 +155,15 @@ class PincodeDialog extends React.Component {
                   label: classes.buttonLabel
                 }}
               />
+              <Button
+                onClick={props.handleSubmit}
+                isloading={isSubmitting}
+                color='primary'
+                label={'Apply'}
+                variant='raised'
+                autoFocus
+              />
             </div>
-            <Button
-              onClick={props.handleSubmit}
-              isloading={isSubmitting}
-              color='primary'
-              label={'Apply'}
-              variant='raised'
-              autoFocus
-            />
           </DialogActions>
         </Dialog>
       </div>

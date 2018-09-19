@@ -46,7 +46,8 @@ const styles = theme => ({
     textAlign: 'center'
   },
   mobilePrefix: {
-    marginBottom: theme.spacing.unit / 8
+    marginBottom: theme.spacing.unit / 8,
+    color: theme.palette.customGrey.grey200
   }
 })
 

@@ -109,6 +109,7 @@ class PatientDetailsList extends Component {
                   this.props.submitPatientDetailsLoading
                 }
                 isEdit={'false'}
+                resetPatientForm={this.props.resetPatientForm}
               />
             </div>
           </div>

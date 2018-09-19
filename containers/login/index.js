@@ -10,10 +10,12 @@ import Fade from '@material-ui/core/Fade'
 import Login from './Login'
 import Register from './Register'
 import OTP from './OTP'
+
 import {
   sendOtpLoading,
   verifyOtpLoading,
-  resetIsNewUserFlag
+  resetIsNewUserFlag,
+  resetLoginState
 } from './loginActions'
 
 import {
@@ -23,7 +25,8 @@ import {
 } from '../user/customer/customerActions'
 
 import {
-  updateIsCartOpenRegisterModalFlag
+  updateIsCartOpenRegisterModalFlag,
+  resetCartLoadingState
 } from '../cartDetails/cartActions'
 
 import ActivityIndicator from '../../components/activityIndicator/index'
@@ -48,6 +51,7 @@ const styles = theme => ({
   dialogTitle: {
     ...theme.typography.title,
     textAlign: 'center',
+    fontSize: theme.spacing.unit * 2.25,
     color: theme.palette.primary.main
   }
 })
@@ -104,6 +108,8 @@ class LoginWrapper extends React.Component {
 
   resetState () {
     this.props.actions.resetCustomerFormState()
+    this.props.actions.resetLoginState()
+    this.props.actions.resetCartLoadingState()
   }
 
   getModal (name) {
@@ -156,15 +162,16 @@ class LoginWrapper extends React.Component {
         <ActivityIndicator
           isError={
             this.props.cartState.errorState.isError ||
-            this.props.customerState.errorStateCustomerRegister.isError ||
-            this.props.customerState.payload.referral_code.errorState.isError
+              this.props.customerState.errorStateCustomerRegister.isError ||
+              this.props.customerState.payload.referral_code.errorState.isError
           }
           ErrorComp={
             <SnackbarErrorMessage
               error={
                 this.props.cartState.errorState.error ||
-                this.props.customerState.errorStateCustomerRegister.error ||
-                this.props.customerState.payload.referral_code.errorState.error
+                  this.props.customerState.errorStateCustomerRegister.error ||
+                  this.props.customerState.payload.referral_code.errorState
+                    .error
               }
               resetState={this.resetState.bind(this)}
             />
@@ -188,12 +195,9 @@ class LoginWrapper extends React.Component {
                 root: classes.dialogTitle
               }}
             >
-              {
-                this.state.isRegisterClicked ||
-                this.props.loginState.isNewUser
-                  ? 'REGISTER'
-                  : 'LOGIN'
-              }
+              {this.state.isRegisterClicked || this.props.loginState.isNewUser
+                ? 'REGISTER'
+                : 'LOGIN'}
             </DialogTitle>
             <DialogContent>
               {this.getModal(this.state.modalName)}
@@ -222,8 +226,10 @@ function mapDispatchToProps (dispatch) {
         customerRegisterLoading,
         checkReferralCodeLoading,
         resetCustomerFormState,
+        resetLoginState,
         resetIsNewUserFlag,
-        updateIsCartOpenRegisterModalFlag
+        updateIsCartOpenRegisterModalFlag,
+        resetCartLoadingState
       },
       dispatch
     )

@@ -16,6 +16,7 @@ const initialState = {
   },
   isPincodeDialogOpen: false,
   isLoading: false,
+  isDeliveryAssignment: false,
   errorState: {
     isError: false,
     error: {}

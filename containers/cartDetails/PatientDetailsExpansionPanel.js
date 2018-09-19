@@ -126,12 +126,7 @@ class PatientDetailsExpansionPanel extends React.Component {
               root: this.props.nextButtonRoot
             }}
             label={'NEXT'}
-            onClick={
-              this.props.loginState.isAuthenticated &&
-                patientDetails.payload.patient_id
-                ? this.props.handleNextChange
-                : null
-            }
+            onClick={this.props.handleNextChange}
           />
         </ExpansionPanelDetails>
       </ExpansionPanel>

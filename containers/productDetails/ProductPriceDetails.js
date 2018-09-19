@@ -100,7 +100,7 @@ class ProductPriceDetails extends Component {
                 <Button
                   disableFocusRipple
                   disableRipple
-                  variant='outlined'
+                  variant='contained'
                   size='small'
                   // classes={{
                   //   label: classes.label
@@ -111,7 +111,9 @@ class ProductPriceDetails extends Component {
                     productDetailsState.payload
                   )} // it check first any selected city then add to cart
                   label={'Add To Cart'}
-                  disabled={productDetailsState.payload.status !== ACTIVE_STATUS}
+                  disabled={
+                    productDetailsState.payload.status !== ACTIVE_STATUS
+                  }
                 />
               </div>
             </CardContent>
