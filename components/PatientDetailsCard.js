@@ -76,7 +76,7 @@ class PatientDetailsCard extends React.Component {
         }
         onClick={this.handleOnClickPatientCard}
       >
-        <Grid container>
+        <Grid container spacing={24}>
           <Grid item xs={2}>
             <img src='/static/images/profile.svg' />
           </Grid>
