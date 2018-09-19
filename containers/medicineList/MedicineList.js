@@ -108,9 +108,9 @@ class MedicineList extends React.Component {
       cartState
     } = this.props
     const cartItems = cartState.payload.cart_items.payload
-    const showMoreCondition = this.props.moleculeName
-      ? ((this.props.page + 1) !== this.props.medicineListState.totalPages)
-      : ((this.props.page + 1) !== this.props.searchMedicineState.payload.totalPages)
+    const medicineListPagesCondition = (this.props.page + 1) !== this.props.medicineListState.totalPages
+    const searchMedicinePagesCondition = (this.props.page + 1) !== this.props.searchMedicineState.payload.totalPages
+    const showMoreCondition = this.props.moleculeName ? medicineListPagesCondition : searchMedicinePagesCondition
 
     return (
       <div className={classes.medicineListWrapper}>

@@ -1,7 +1,6 @@
 // dependencies
 import React from 'react'
 import { withStyles } from '@material-ui/core/styles'
-import Router from 'next/router'
 
 // components
 import withRoot from '../src/withRoot'
@@ -34,26 +33,26 @@ class OrderConfirmationWrapper extends React.Component {
   }
 
   render () {
-    const {query} = Router
     const { addToCartHandler } = this.props
+    const paymentCondition = (
+      this.props.paymentStatus === 'failed'
+        ? orderConfirmation.pendingTitle
+        : orderConfirmation.retryTitle
+    )
 
     return (
       <Layout
         title={
-          query.paymentStatus === 'success'
+          this.props.paymentStatus === 'success'
             ? orderConfirmation.successTitle
-            : (
-              query.paymentStatus === 'failed'
-                ? orderConfirmation.pendingTitle
-                : orderConfirmation.retryTitle
-            )
+            : paymentCondition
         }
         addToCartHandler={addToCartHandler}
       >
         <div className={this.props.classes.root}>
           <ThankyouWrapper
-            queryParamPaymentStatus={query.paymentStatus}
-            orderId={query.id}
+            queryParamPaymentStatus={this.props.paymentStatus}
+            orderId={this.props.id}
           />
         </div>
       </Layout>

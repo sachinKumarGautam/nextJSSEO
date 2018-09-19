@@ -68,7 +68,7 @@ const styles = theme => {
 }
 
 class ArticleSection extends Component {
-  render() {
+  render () {
     return (
       <div className={this.props.classes.articleWrapper}>
         <Typography

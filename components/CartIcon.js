@@ -129,12 +129,12 @@ class CartIcon extends Component {
     return (
       <div>
         <Link href={href}>
-          <a 
+          <a
             onMouseEnter={() => {
-                  Router.prefetch(href)
-            }} 
-            className={classes.moleculeTag} 
-            data-tip 
+              Router.prefetch(href)
+            }}
+            className={classes.moleculeTag}
+            data-tip
             data-for='cartIcon'
           >
             <IconButton

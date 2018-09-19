@@ -156,6 +156,8 @@ class OrderListDetails extends Component {
 
   render () {
     const { orderListState } = this.props
+    const orderListPagesCondition = (this.state.page + 1) !== this.props.orderListState.totalPages
+
     return (
       <Card elevation={'1'} className={this.props.classes.card}>
         <CardContent className={this.props.classes.cardContent}>
@@ -215,7 +217,7 @@ class OrderListDetails extends Component {
             }
             {
               this.props.orderListState.payload.length &&
-              (this.state.page + 1) !== this.props.orderListState.totalPages
+              orderListPagesCondition
                 ? (
                   <div className={this.props.classes.buttonWrapper}>
                     <Button
