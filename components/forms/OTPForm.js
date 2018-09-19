@@ -165,8 +165,8 @@ class OTPForm extends React.Component {
               : (<a onClick={this.resendOtp}>
                 <Typography align='right' className={classes.resendLink}>
                   Resend OTP
-              </Typography>
-            </a>)}
+                </Typography>
+              </a>)}
         </FormControl>
         <div className={classes.buttonWrapper}>
           <Button

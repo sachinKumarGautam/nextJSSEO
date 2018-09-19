@@ -35,7 +35,11 @@ const styles = theme => {
       fontWeight: theme.typography.fontWeightBold,
       paddingLeft: theme.spacing.unit * 5.25,
       paddingRight: theme.spacing.unit * 5.25,
-      color: theme.palette.secondary.main
+      color: theme.palette.secondary.main,
+      cursor: 'pointer'
+    },
+    buttonRoot: {
+      cursor: 'pointer'
     },
     pickerListInput: {
       width: '0.1px',
@@ -107,7 +111,8 @@ class Search extends Component {
             color='primary'
             className={this.props.classes.button}
             classes={{
-              label: this.props.classes.buttonlabel
+              label: this.props.classes.buttonlabel,
+              root: this.props.classes.buttonRoot
             }}
           >
             <label for='file'>Upload Prescription</label>

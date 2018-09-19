@@ -1,8 +1,8 @@
-import React, {Component} from 'react'
+import React, { Component } from 'react'
 
 import { withStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
-import Button from '@material-ui/core/Button'
+// import Button from '@material-ui/core/Button'
 import Router from 'next/router'
 
 const styles = theme => {
@@ -10,7 +10,8 @@ const styles = theme => {
     articleWrapper: {
       paddingLeft: theme.spacing.unit * 5.9375,
       paddingRight: theme.spacing.unit * 4.625,
-      backgroundColor: theme.palette.customGrey.grey50
+      backgroundColor: theme.palette.customGrey.grey50,
+      paddingBottom: theme.spacing.unit * 8.75
     },
     articleTitle: {
       fontSize: theme.typography.pxToRem(20),
@@ -67,7 +68,7 @@ const styles = theme => {
 }
 
 class ArticleSection extends Component {
-  render () {
+  render() {
     return (
       <div className={this.props.classes.articleWrapper}>
         <Typography
@@ -102,7 +103,7 @@ class ArticleSection extends Component {
             })
           }
         </div>
-        <div className={this.props.classes.buttonWrapperStyle}>
+        {/* <div className={this.props.classes.buttonWrapperStyle}>
           <Button
             variant='raised'
             color='secondary'
@@ -114,7 +115,7 @@ class ArticleSection extends Component {
           >
             READ MORE
           </Button>
-        </div>
+        </div> */}
       </div>
     )
   }
