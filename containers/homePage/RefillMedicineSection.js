@@ -1,14 +1,14 @@
-import React, {Component} from 'react'
+import React, { Component } from 'react'
 
 import { withStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
 import Button from '@material-ui/core/Button'
 
-import {scrollTo} from '../../utils/scrollToSections'
+import { scrollTo } from '../../utils/scrollToSections'
 import Router from 'next/router'
 import { REFILL_PATIENTS } from '../../routes/RouteConstant'
 import { getReplacedString } from '../../utils/replaceConstants'
-import {SCROLL_TO_TOP_HEIGHT} from '../../components/constants/Constants'
+import { SCROLL_TO_TOP_HEIGHT } from '../../components/constants/Constants'
 
 const styles = theme => {
   return {
