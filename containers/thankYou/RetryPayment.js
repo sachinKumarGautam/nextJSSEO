@@ -38,7 +38,6 @@ const styles = theme => ({
     paddingBottom: 0
   },
   buttonViewStyle: {
-    ...theme.typography.body2,
     paddingLeft: theme.spacing.unit * 5,
     paddingRight: theme.spacing.unit * 5,
     paddingTop: theme.spacing.unit,

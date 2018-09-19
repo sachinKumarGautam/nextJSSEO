@@ -215,7 +215,7 @@ class OrderListDetails extends Component {
             }
             {
               this.props.orderListState.payload.length &&
-              this.state.page !== this.props.orderListState.totalPages
+              (this.state.page + 1) !== this.props.orderListState.totalPages
                 ? (
                   <div className={this.props.classes.buttonWrapper}>
                     <Button

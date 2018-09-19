@@ -39,7 +39,6 @@ const styles = theme => ({
     fontWeight: theme.typography.fontWeightBold
   },
   buttonViewStyle: {
-    ...theme.typography.body2,
     paddingLeft: theme.spacing.unit * 4,
     paddingRight: theme.spacing.unit * 4,
     paddingTop: theme.spacing.unit,
