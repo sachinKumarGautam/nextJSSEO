@@ -66,7 +66,7 @@ const styles = theme => {
 }
 
 class Search extends Component {
-  onImageSelection(event) {
+  onImageSelection (event) {
     this.props.uploadPrescriptionLoading(
       this.props.cartState,
       event.target.files[0],
@@ -74,7 +74,7 @@ class Search extends Component {
     )
   }
 
-  componentDidUpdate(prevProps) {
+  componentDidUpdate (prevProps) {
     if (
       this.props.cartState.prescriptionDetails.isHomePage !==
       prevProps.cartState.prescriptionDetails.isHomePage
@@ -83,7 +83,7 @@ class Search extends Component {
       return Router.push(url)
     }
   }
-  render() {
+  render () {
     return (
       <div className={this.props.classes.searchWrapper}>
         <SearchMedicine

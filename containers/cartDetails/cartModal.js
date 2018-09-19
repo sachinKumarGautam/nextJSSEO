@@ -127,6 +127,9 @@ const initialState = {
       facility_code: 0,
       status: '',
       source: '',
+      payment_confirmation_time: '',
+      payment_cancellation_time: '',
+      customer_care_number: '',
       urgent_delivery_charge: 0
     },
     isLoading: false,

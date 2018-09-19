@@ -156,6 +156,8 @@ class OrderListDetails extends Component {
 
   render () {
     const { orderListState } = this.props
+    const orderListPagesCondition = (this.state.page + 1) !== this.props.orderListState.totalPages
+
     return (
       <Card elevation={'1'} className={this.props.classes.card}>
         <CardContent className={this.props.classes.cardContent}>
@@ -214,23 +216,25 @@ class OrderListDetails extends Component {
               </Typography>
             }
             {
-              this.props.orderListState.payload.length
-                ? <div className={this.props.classes.buttonWrapper}>
-                  <Button
-                    size='medium'
-                    loaderColor={'primary'}
-                    // isloading={orderListState.isLoading}
-                    variant='outlined'
-                    className={this.props.classes.button}
-                    classes={{
-                      root: this.props.classes.buttonRoot,
-                      label: this.props.classes.buttonLabel
-                    }}
-                    onClick={this.onClickOfShowMore.bind(this)}
-                    label={'Show more'}
-                  />
-                </div>
-                : null
+              this.props.orderListState.payload.length &&
+              orderListPagesCondition
+                ? (
+                  <div className={this.props.classes.buttonWrapper}>
+                    <Button
+                      size='medium'
+                      loaderColor={'primary'}
+                      // isloading={orderListState.isLoading}
+                      variant='outlined'
+                      className={this.props.classes.button}
+                      classes={{
+                        root: this.props.classes.buttonRoot,
+                        label: this.props.classes.buttonLabel
+                      }}
+                      onClick={this.onClickOfShowMore.bind(this)}
+                      label={'Show more'}
+                    />
+                  </div>
+                ) : null
             }
           </ActivityIndicator>
         </CardContent>

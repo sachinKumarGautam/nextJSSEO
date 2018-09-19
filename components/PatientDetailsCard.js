@@ -9,6 +9,7 @@ import { REFILL } from './constants/Constants'
 const styles = theme => {
   return {
     patientWrapperStyle: {
+      cursor: 'pointer',
       border: `1px solid ${theme.palette.customGrey.grey250}`,
       padding: theme.spacing.unit * 2.5,
       borderRadius: theme.spacing.unit * 0.5

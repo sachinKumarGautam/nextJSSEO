@@ -569,6 +569,9 @@ export default function cartReducer (state = initialState, action) {
             facility_code: action.facility_code,
             status: action.status,
             source: action.source,
+            payment_confirmation_time: action.payment_confirmation_time,
+            payment_cancellation_time: action.payment_cancellation_time,
+            customer_care_number: action.customer_care_number,
             urgent_delivery_charge: action.urgent_delivery_charge
           }
         }

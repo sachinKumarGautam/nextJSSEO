@@ -11,11 +11,13 @@ const styles = theme => ({
     fontSize: theme.spacing.unit * 2
   },
   deliveryDateText: {
+    fontSize: theme.spacing.unit * 2.25,
     color: theme.palette.customGrey.grey700
   },
   deliveryDate: {
     fontWeight: theme.typography.fontWeightBold,
-    color: theme.palette.customGrey.grey500,
+    fontSize: theme.spacing.unit * 2.25,
+    color: theme.palette.customGrey.grey700,
     marginLeft: theme.spacing.unit
   }
 })

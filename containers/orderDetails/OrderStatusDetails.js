@@ -21,12 +21,12 @@ const styles = theme => ({
     alignItems: 'center'
   },
   title: {
-    fontSize: theme.spacing.unit * 2.25,
+    fontSize: theme.spacing.unit * 2.75,
     paddingLeft: theme.spacing.unit * 2.5,
     color: theme.palette.customGrey.grey500
   },
   orderId: {
-    fontSize: theme.spacing.unit * 2.25,
+    fontSize: theme.spacing.unit * 2.75,
     marginLeft: theme.spacing.unit * 1.25,
     fontWeight: theme.typography.fontWeightBold,
     color: theme.palette.customGrey.grey500,

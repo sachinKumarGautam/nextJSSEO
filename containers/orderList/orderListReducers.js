@@ -25,6 +25,7 @@ export default function orderListReducers (state = initialState, action) {
       return {
         ...state,
         payload: action.payload,
+        totalPages: action.totalPages,
         isLoading: action.isLoading
       }
 

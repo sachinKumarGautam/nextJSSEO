@@ -39,7 +39,6 @@ const styles = theme => ({
     fontWeight: theme.typography.fontWeightBold
   },
   buttonViewStyle: {
-    ...theme.typography.body2,
     paddingLeft: theme.spacing.unit * 4,
     paddingRight: theme.spacing.unit * 4,
     paddingTop: theme.spacing.unit,
@@ -142,15 +141,15 @@ class PaymentFailure extends React.Component {
                 }
                 We have received your Order No. {this.props.cartState.orderResponse.payload.order_number}.
                 However, the payment was unsuccessful. If money has been deducted, your order will be confirmed in the next
-                {' ' + this.props.cartState.payload.payment_confirmation_time + ' '}
+                {' ' + this.props.cartState.orderResponse.payload.payment_confirmation_time + ' '}
                 minutes and you will receive a confirmation message. In case you dont receive
                 a confirmation, the amount deducted will be automatically refunded
                 back to your account in the next 5-7 days. You have an option to retry the
                 payment or convert your order into cash on delivery till the next
-                {' ' + this.props.cartState.payload.payment_cancellation_time + ' '}.
+                {' ' + this.props.cartState.orderResponse.payload.payment_cancellation_time + ' '}.
                 Post that, your order will be automatically cancelled. Please feel free to
                 reach out to us at
-                {' ' + this.props.cartState.payload.customer_care_number + ' '} in case of any queries.
+                {' ' + this.props.cartState.orderResponse.payload.customer_care_number + ' '} in case of any queries.
               </Typography>
             </div>
             <div className={this.props.classes.buttonWrapper}>

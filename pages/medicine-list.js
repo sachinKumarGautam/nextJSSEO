@@ -48,7 +48,8 @@ class MedicineList extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
-      isShowMore: false
+      isShowMore: false,
+      page: 0
     }
     this.getMedicineDetail = this.getMedicineDetail.bind(this)
     this.tryAgain = this.tryAgain.bind(this)
@@ -88,7 +89,8 @@ class MedicineList extends React.Component {
 
   updateIsShowMore () {
     this.setState({
-      isShowMore: true
+      isShowMore: true,
+      page: this.state.page + 1
     })
   }
 
@@ -163,6 +165,7 @@ class MedicineList extends React.Component {
               }
               updateIsShowMore={this.updateIsShowMore.bind(this)}
               cartState={this.props.cartState}
+              page={this.state.page}
             />
           </ActivityIndicator>
         </div>

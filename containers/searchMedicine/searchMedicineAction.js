@@ -38,11 +38,12 @@ export function searchMedicineLoading (
  * @param {object} result - Search medicine results
  */
 
-export function searchMedicineSuccess (searchMedicineState, result) {
+export function searchMedicineSuccess (searchMedicineState, result, totalPages) {
   return {
     type: SEARCH_MEDICINE_SUCCESS,
     searchMedicineState,
     payload: result,
+    totalPages: totalPages,
     isLoading: false
   }
 }
