@@ -92,11 +92,11 @@ class MedicineList extends React.Component {
       )
     }
 
-    this.setState({
-      page: this.state.page + 1
+    this.setState((prevState) => {
+      return {
+        page: prevState.page + 1
+      }
     })
-
-    this.props.updateIsShowMore()
   }
 
   render () {
@@ -109,6 +109,9 @@ class MedicineList extends React.Component {
       cartState
     } = this.props
     const cartItems = cartState.payload.cart_items.payload
+    const showMoreCondition = this.props.moleculeName
+      ? ((this.state.page + 1) !== this.props.medicineListState.totalPages)
+      : ((this.state.page + 1) !== this.props.searchMedicineState.payload.totalPages)
 
     return (
       <div className={classes.medicineListWrapper}>
@@ -162,8 +165,7 @@ class MedicineList extends React.Component {
         </Card>
         {
           medicineListState.length &&
-          this.props.moleculeName &&
-          ((this.state.page + 1) !== this.props.medicineListState.totalPages)
+          showMoreCondition
             ? (
               <div className={classes.buttonWrapper}>
                 <Button
