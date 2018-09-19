@@ -35,11 +35,7 @@ const styles = theme => {
       fontWeight: theme.typography.fontWeightBold,
       paddingLeft: theme.spacing.unit * 5.25,
       paddingRight: theme.spacing.unit * 5.25,
-      color: theme.palette.secondary.main,
-      cursor: 'pointer'
-    },
-    buttonRoot: {
-      cursor: 'pointer'
+      color: theme.palette.secondary.main
     },
     pickerListInput: {
       width: '0.1px',
@@ -62,12 +58,15 @@ const styles = theme => {
       border: `1px dashed ${theme.palette.customGrey.grey200}`,
       marginTop: theme.spacing.unit * 1.25,
       marginLeft: theme.spacing.unit * 6.25
+    },
+    labelStyle: {
+      cursor: 'pointer'
     }
   }
 }
 
 class Search extends Component {
-  onImageSelection (event) {
+  onImageSelection(event) {
     this.props.uploadPrescriptionLoading(
       this.props.cartState,
       event.target.files[0],
@@ -75,16 +74,16 @@ class Search extends Component {
     )
   }
 
-  componentDidUpdate (prevProps) {
+  componentDidUpdate(prevProps) {
     if (
       this.props.cartState.prescriptionDetails.isHomePage !==
-        prevProps.cartState.prescriptionDetails.isHomePage
+      prevProps.cartState.prescriptionDetails.isHomePage
     ) {
       const url = getReplacedString(CART_DETAILS)
       return Router.push(url)
     }
   }
-  render () {
+  render() {
     return (
       <div className={this.props.classes.searchWrapper}>
         <SearchMedicine
@@ -105,17 +104,16 @@ class Search extends Component {
           accept='image/*'
           onChange={this.onImageSelection.bind(this)}
         />
-        <label for='file'>
+        <label for='file' className={this.props.classes.labelStyle}>
           <Button
             variant='raised'
             color='primary'
             className={this.props.classes.button}
             classes={{
-              label: this.props.classes.buttonlabel,
-              root: this.props.classes.buttonRoot
+              label: this.props.classes.buttonlabel
             }}
           >
-            <label for='file'>Upload Prescription</label>
+            <label for='file' className={this.props.classes.labelStyle}>Upload Prescription</label>
           </Button>
         </label>
       </div>
