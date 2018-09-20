@@ -54,7 +54,7 @@ class FullPageError extends Component {
   render () {
     return (
       <div className={this.props.classes.errorWrapper}>
-        <img src='/static/images/404.svg' className={this.props.classes.imageStyle} />
+        <img src='/static/images/error.svg' className={this.props.classes.imageStyle} />
         <Typography
           variant='subheading'
           className={this.props.classes.textStyle}
