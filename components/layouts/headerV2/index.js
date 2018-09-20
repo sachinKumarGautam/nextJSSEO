@@ -171,7 +171,7 @@ class Header extends React.Component {
                 <Grid item xs={1} lg={1}>
                   <img
                     className={classes.lifcareLogoStyle}
-                    src='/static/images/logo-green.svg'
+                    src='/static/images/new-logo.svg'
                     onClick={() => {
                       Router.push({ pathname: HOME_PAGE })
                     }}
