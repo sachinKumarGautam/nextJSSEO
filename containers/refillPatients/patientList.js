@@ -59,7 +59,7 @@ class PatientList extends Component {
             }
           }}
         >
-          <MenuItem key={''} value={0}>
+          <MenuItem key={''} value={0} disabled={this.props.pastMedicineState.selectedPatientId !== 0}>
             Select Patient
           </MenuItem>
           {patientDetailsState.payload.map((patient, index) => (
