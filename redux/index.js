@@ -8,7 +8,10 @@ import errorReporter from '../utils/errorReporter'
 import autoMergeLevel2 from 'redux-persist/lib/stateReconciler/autoMergeLevel2'
 import { migrations } from './persistMigration'
 
-const composeEnhancers = (typeof window !== 'undefined' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) || compose
+const composeEnhancers =
+  (typeof window !== 'undefined' &&
+    window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) ||
+  compose
 
 export let config = null
 export let store = null
@@ -16,12 +19,17 @@ export let store = null
 function makeConfiguredStore (rootReducer, initialState) {
   const epicMiddleware = createEpicMiddleware(rootEpic)
   // const logger = createLogger({ collapsed: true }) // log every action to see what's happening behind the scenes.
-  const reduxMiddleware = composeEnhancers(applyMiddleware(thunkMiddleware, epicMiddleware, errorReporter))
+  const reduxMiddleware = composeEnhancers(
+    applyMiddleware(thunkMiddleware, epicMiddleware, errorReporter)
+  )
 
   return createStore(rootReducer, initialState, reduxMiddleware)
-};
+}
 
-export default function initStore (initialState, {isServer, req, debug, storeKey}) {
+export default function initStore (
+  initialState,
+  { isServer, req, debug, storeKey }
+) {
   if (isServer) {
     // initialState = initialState || {fromServer: 'foo'}
 
@@ -29,9 +37,12 @@ export default function initStore (initialState, {isServer, req, debug, storeKey
     return store
   } else {
     // we need it only on client side
-    const {persistStore, persistReducer} = require('redux-persist')
+    const {
+      persistStore,
+      createMigrate,
+      persistReducer
+    } = require('redux-persist')
     const storage = require('redux-persist/es/storage').default
-    const { createMigrate } = require('redux-persist')
 
     const persistConfig = {
       key: 'lifcareSite1.0.0',
