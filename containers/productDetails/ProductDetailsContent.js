@@ -5,6 +5,7 @@ import Grid from '@material-ui/core/Grid'
 
 import ProductUseCases from '../../components/ProductUseCases'
 import RelatedArticles from '../../components/RelatedArticles'
+import UnderConstruction from '../../components/UnderConstruction'
 
 /*
   product use cases
@@ -23,17 +24,20 @@ class ProductDetailsContent extends Component {
   render () {
     return (
       <div>
-        <Grid container spacing={24} className={this.props.classes.contentWrapper}>
+        <Grid
+          container
+          spacing={24}
+          className={this.props.classes.contentWrapper}
+        >
           <Grid item xs={9}>
-            <ProductUseCases
+            {/* <ProductUseCases
               hover={this.props.hover}
               summaryData={this.props.productDetailsState.payload}
-            />
+            /> */}
+            <UnderConstruction />
           </Grid>
           <Grid item xs={3}>
-            <RelatedArticles
-              publishedContent={this.props.publishedContent}
-            />
+            <RelatedArticles publishedContent={this.props.publishedContent} />
           </Grid>
         </Grid>
       </div>
