@@ -39,14 +39,14 @@ const styles = theme => {
 }
 
 class SearchSection extends Component {
-  render () {
+  render() {
     const settings = {
       dots: false,
       infinite: true,
       slidesToShow: 1,
       slidesToScroll: 1,
       autoplay: true,
-      autoplaySpeed: 3000,
+      autoplaySpeed: 2000,
       adaptiveHeight: true,
       nextArrow: <br />,
       prevArrow: <br />,
