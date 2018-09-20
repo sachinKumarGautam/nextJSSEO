@@ -33,13 +33,13 @@ const styles = theme => {
       fontWeight: theme.typography.fontWeightBold
     },
     slickGridStyle: {
-      paddingTop: theme.spacing.unit * 33.5
+      paddingTop: theme.spacing.unit * 33
     }
   }
 }
 
 class SearchSection extends Component {
-  render() {
+  render () {
     const settings = {
       dots: false,
       infinite: true,

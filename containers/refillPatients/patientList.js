@@ -14,6 +14,13 @@ const styles = theme => ({
   menuWrapper: {
     display: 'flex',
     flexDirection: 'row-reverse'
+  },
+  inputStyle: {
+    ...theme.typography.subheading,
+    color: '#4a4a4a'
+  },
+  imageStyle: {
+    marginTop: theme.spacing.unit / 2
   }
 })
 
@@ -42,9 +49,19 @@ class PatientList extends Component {
           select
           className={classes.textField}
           InputProps={{
-            startAdornment: <InputAdornment position='start'><img src='/static/images/shape-copy.svg' /></InputAdornment>
+            startAdornment: <InputAdornment position='start'>
+              <img src='/static/images/shape-copy-2.svg' className={classes.imageStyle} />
+            </InputAdornment>
+          }}
+          SelectProps={{
+            classes: {
+              selectMenu: classes.inputStyle
+            }
           }}
         >
+          <MenuItem key={''} value={0}>
+            Select Patient
+          </MenuItem>
           {patientDetailsState.payload.map((patient, index) => (
             <MenuItem key={index} value={patient.id}>
               {patient.full_name}
