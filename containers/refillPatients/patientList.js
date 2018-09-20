@@ -17,15 +17,15 @@ const styles = theme => ({
   },
   inputStyle: {
     ...theme.typography.subheading,
-    color: '#4a4a4a'
+    color: theme.palette.customGrey.grey500
   },
   imageStyle: {
-    marginTop: theme.spacing.unit / 2
+    marginTop: theme.spacing.unit
   }
 })
 
 class PatientList extends Component {
-  getPastMedicines (event, index, value) {
+  getPastMedicines(event, index, value) {
     this.props.getRefillPastMedicinesLoading(
       this.props.pastMedicineState,
       event.target.value
@@ -39,7 +39,7 @@ class PatientList extends Component {
     )
   }
 
-  render () {
+  render() {
     const { classes, patientDetailsState } = this.props
     return (
       <div className={classes.menuWrapper}>
