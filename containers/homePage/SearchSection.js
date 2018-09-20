@@ -33,7 +33,7 @@ const styles = theme => {
       fontWeight: theme.typography.fontWeightBold
     },
     slickGridStyle: {
-      paddingTop: theme.spacing.unit * 33.5
+      paddingTop: theme.spacing.unit * 33.12
     }
   }
 }
