@@ -5,6 +5,8 @@ import { createEpicMiddleware } from 'redux-observable'
 import reducer from './reducer'
 import { rootEpic } from './epics'
 import errorReporter from '../utils/errorReporter'
+import autoMergeLevel2 from 'redux-persist/lib/stateReconciler/autoMergeLevel2'
+import { migrations } from './persistMigration'
 
 const composeEnhancers = (typeof window !== 'undefined' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) || compose
 
@@ -29,9 +31,13 @@ export default function initStore (initialState, {isServer, req, debug, storeKey
     // we need it only on client side
     const {persistStore, persistReducer} = require('redux-persist')
     const storage = require('redux-persist/es/storage').default
+    const { createMigrate } = require('redux-persist')
 
     const persistConfig = {
       key: 'lifcareSite1.0.0',
+      version: 0,
+      debug: true,
+      stateReconciler: autoMergeLevel2,
       blacklist: [
         'medicineListState',
         'orderListState',
@@ -40,6 +46,7 @@ export default function initStore (initialState, {isServer, req, debug, storeKey
         'patientDetailsState',
         'thankYouState'
       ],
+      migrate: createMigrate(migrations, { debug: true }),
       storage
     }
 
