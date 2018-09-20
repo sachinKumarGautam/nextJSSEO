@@ -21,5 +21,5 @@ export const LIFCARE_ASSURED_CONFLICT_MSG =
   'LifCare Assured service is not available on this pincode. Press Ok to proceed with our regular service.'
 export const LIFCARE_URGENT_CONFLICT_MSG =
   'LifCare Express Delivery service is not available on this pincode. Press Ok to proceed with the regular delivery service.'
-export const SELECT_PATIENT = 'SELECT ANY PATIENT TO CONTINUE.'
-export const SELECT_ADDRESS = 'SELECT ANY ADDRESS TO CONTINUE.'
+export const SELECT_PATIENT = 'Select any patient to continue.'
+export const SELECT_ADDRESS = 'Select any address to continue.'
