@@ -17,7 +17,8 @@ const styles = theme => ({
   },
   listItemText: {
     ...theme.typography.body1,
-    color: theme.palette.customGrey.grey200
+    color: theme.palette.customGrey.grey200,
+    textDecoration: 'none'
   }
 })
 
@@ -28,27 +29,27 @@ const CompanyInfo = ({classes}) => (
     </Typography>
     <div className={classes.iconWithText}>
       <Typography className={classes.listItemText} variant='subheading' component='h2'>
-          Diabetes
+          <a href="https://blog.lifcare.in/tag/diabetes/" target="_blank" style={{textDecoration: 'none'}} className={classes.listItemText} >Diabetes</a>
       </Typography>
     </div>
     <div className={classes.iconWithText}>
       <Typography className={classes.listItemText} variant='subheading' component='h2'>
-          Blood pressure
+          <a href="https://blog.lifcare.in/tag/blood-pressure/" target="_blank" className={classes.listItemText} >Blood Pressure</a>
       </Typography>
     </div>
     <div className={classes.iconWithText}>
       <Typography className={classes.listItemText} variant='subheading' component='h2'>
-        Hypertension
+          <a href="https://blog.lifcare.in/tag/arthritis/" target="_blank" className={classes.listItemText} >Arthritis</a>
       </Typography>
     </div>
     <div className={classes.iconWithText}>
       <Typography className={classes.listItemText} variant='subheading' component='h2'>
-        Cardiac
+          <a href="https://blog.lifcare.in/tag/cancer/" target="_blank" className={classes.listItemText} >Cancer</a>
       </Typography>
     </div>
     <div className={classes.iconWithText}>
       <Typography className={classes.listItemText} variant='subheading' component='h2'>
-        Arthritis
+          <a href="https://blog.lifcare.in/tag/brain/" target="_blank" className={classes.listItemText} >Brain</a>
       </Typography>
     </div>
   </div>
