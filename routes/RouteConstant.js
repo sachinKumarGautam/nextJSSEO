@@ -28,6 +28,6 @@ export const PRIVACY_POLICY = '/company/privacy'
 
 export const ABOUT_US = '/company/about'
 
-export const FAQ = '/company/FAQ'
+export const FAQ = '/company/faq'
 
 export const TERMS = '/company/terms'

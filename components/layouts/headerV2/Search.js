@@ -61,7 +61,7 @@ const styles = theme => {
       borderRadius: theme.spacing.unit * 3,
       lineHeight: 1.07,
       letterSpacing: '0.3px',
-      boxShadow: '0 1px 3px rgba(0,0,0,0.12), 0 2px 3px rgba(0,0,0,0.24)'
+      boxShadow: theme.shadows[0]
     }
   }
 }
@@ -110,17 +110,6 @@ class Search extends Component {
           className={this.props.classes.labelStyle}
         >
           Upload Prescription
-          {/* <Button
-            variant='raised'
-            color='primary'
-            className={this.props.classes.button}
-            classes={{
-              label: this.props.classes.buttonlabel
-            }}
-            for='file'
-          >
-            <label for='file' className={this.props.classes.labelStyle}>Upload Prescription</label>
-          </Button> */}
         </label>
       </div>
     )

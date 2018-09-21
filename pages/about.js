@@ -1,7 +1,5 @@
 // dependencies
 import React from 'react'
-import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
 import { withStyles } from '@material-ui/core/styles'
 import Paper from '@material-ui/core/Paper'
 
@@ -43,22 +41,4 @@ class About extends React.Component {
   }
 }
 
-function mapStateToProps (state) {
-  return {
-  }
-}
-
-function mapDispatchToProps (dispatch) {
-  return {
-    actions: bindActionCreators(
-      {
-      },
-      dispatch
-    )
-  }
-}
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(withRoot(withStyles(styles)(About)))
+export default (withRoot(withStyles(styles)(About)))

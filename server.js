@@ -211,7 +211,7 @@ app
     })
 
     // faq page
-    server.get('/company/FAQ', (req, res) => {
+    server.get('/company/faq', (req, res) => {
       const actualPage = '/faq'
       app.render(req, res, actualPage)
     })
