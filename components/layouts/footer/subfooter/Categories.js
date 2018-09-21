@@ -29,7 +29,7 @@ const CompanyInfo = ({classes}) => (
     </Typography>
     <div className={classes.iconWithText}>
       <Typography className={classes.listItemText} variant='subheading' component='h2'>
-          <a href="https://blog.lifcare.in/tag/diabetes/" target="_blank" style={{textDecoration: 'none'}} className={classes.listItemText} >Diabetes</a>
+          <a href="https://blog.lifcare.in/tag/diabetes/" target="_blank" className={classes.listItemText} >Diabetes</a>
       </Typography>
     </div>
     <div className={classes.iconWithText}>
