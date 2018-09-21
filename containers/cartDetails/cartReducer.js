@@ -173,6 +173,7 @@ export default function cartReducer (state = initialState, action) {
             isLoading: action.isLoading
           },
           discount: action.discount,
+          payment_channels: action.payment_channels,
           redeemed_care_points: action.redeemed_care_points,
           redeemable_care_points: action.redeemable_care_points,
           total_mrp: action.total_mrp,
@@ -234,6 +235,7 @@ export default function cartReducer (state = initialState, action) {
         ...state,
         payload: {
           ...state.payload,
+          payment_channels: action.payment_channels,
           patient_details: {
             ...state.payload.patient_details,
             isLoading: action.isLoading,
@@ -300,6 +302,7 @@ export default function cartReducer (state = initialState, action) {
         ...state,
         payload: {
           ...state.payload,
+          payment_channels: action.payment_channels,
           available_delivery_option: action.available_delivery_option,
           preferred_delivery_option: action.preferred_delivery_option,
           delivery_option: action.delivery_option,
@@ -886,10 +889,7 @@ export default function cartReducer (state = initialState, action) {
         payload: {
           ...state.payload,
           state: action.state,
-          status: action.status,
-          payment_confirmation_time: action.payment_confirmation_time,
-          payment_cancellation_time: action.payment_cancellation_time,
-          customer_care_number: action.customer_care_number
+          status: action.status
         },
         orderResponse: {
           ...state.orderResponse,
@@ -897,7 +897,10 @@ export default function cartReducer (state = initialState, action) {
             ...state.orderResponse.payload,
             isLoading: action.isLoading,
             order_number: action.order_number,
-            order_type: action.order_type
+            order_type: action.order_type,
+            payment_confirmation_time: action.payment_confirmation_time,
+            payment_cancellation_time: action.payment_cancellation_time,
+            customer_care_number: action.customer_care_number
           }
         },
         payment_gateway: action.payment_gateway,

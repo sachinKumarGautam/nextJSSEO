@@ -143,6 +143,7 @@ export function putCartItemSuccess (cartState, result) {
     isLoading: false,
     cart_items: result.cart_items,
     discount: result.discount,
+    payment_channels: result.payment_channels,
     redeemed_care_points: result.redeemed_care_points,
     redeemable_care_points: result.redeemable_care_points,
     total_mrp: result.total_mrp,
@@ -209,6 +210,7 @@ export function savePatientToCartSuccess (cartState, patient, result) {
     patient_id: result.patient_id,
     patient: patient,
     patient_full_name: result.patient_full_name,
+    payment_channels: result.payment_channels,
     isLoading: false
   }
 }
@@ -247,6 +249,7 @@ export function saveDeliveryAddressToCartSuccess (cartState, result) {
   return {
     type: cartActionTypes.SAVE_DELIVERY_ADDRESS_TO_CART_SUCCESS,
     cartState,
+    payment_channels: result.payment_channels,
     shipping_address_id: result.shipping_address_id,
     shipping_address: result.shipping_address,
     available_delivery_option: result.available_delivery_option,
