@@ -61,6 +61,7 @@ const styles = theme => ({
     marginLeft: theme.spacing.unit * 6.25
   },
   pickerListLabelPlus: {
+    cursor: 'pointer',
     fontSize: theme.spacing.unit * 4.375,
     display: 'block',
     marginBottom: theme.spacing.unit * 0.625
