@@ -14,11 +14,18 @@ const styles = theme => ({
   menuWrapper: {
     display: 'flex',
     flexDirection: 'row-reverse'
+  },
+  inputStyle: {
+    ...theme.typography.subheading,
+    color: theme.palette.customGrey.grey500
+  },
+  imageStyle: {
+    marginTop: theme.spacing.unit
   }
 })
 
 class PatientList extends Component {
-  getPastMedicines (event, index, value) {
+  getPastMedicines(event, index, value) {
     this.props.getRefillPastMedicinesLoading(
       this.props.pastMedicineState,
       event.target.value
@@ -32,7 +39,7 @@ class PatientList extends Component {
     )
   }
 
-  render () {
+  render() {
     const { classes, patientDetailsState } = this.props
     return (
       <div className={classes.menuWrapper}>
@@ -42,9 +49,19 @@ class PatientList extends Component {
           select
           className={classes.textField}
           InputProps={{
-            startAdornment: <InputAdornment position='start'><img src='/static/images/shape-copy.svg' /></InputAdornment>
+            startAdornment: <InputAdornment position='start'>
+              <img src='/static/images/shape-copy-2.svg' className={classes.imageStyle} />
+            </InputAdornment>
+          }}
+          SelectProps={{
+            classes: {
+              selectMenu: classes.inputStyle
+            }
           }}
         >
+          <MenuItem key={''} value={0} disabled={this.props.pastMedicineState.selectedPatientId !== 0}>
+            Select Patient
+          </MenuItem>
           {patientDetailsState.payload.map((patient, index) => (
             <MenuItem key={index} value={patient.id}>
               {patient.full_name}
