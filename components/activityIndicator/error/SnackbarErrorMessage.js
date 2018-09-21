@@ -28,20 +28,20 @@ const styles = theme => {
 }
 
 class SnackbarErrorMessage extends Component {
-  constructor (props) {
+  constructor(props) {
     super(props)
     this.state = {
       open: false
     }
   }
 
-  componentDidMount () {
+  componentDidMount() {
     this.setState({
       open: true
     })
   }
 
-  handleClose () {
+  handleClose() {
     this.setState({
       open: false
     })
@@ -49,7 +49,7 @@ class SnackbarErrorMessage extends Component {
     this.props.resetState && this.props.resetState()
   }
 
-  render () {
+  render() {
     return (
       <div>
         <Snackbar
@@ -72,7 +72,7 @@ class SnackbarErrorMessage extends Component {
             aria-describedby='client-snackbar'
             message={
               <div className={this.props.classes.snackbarWrapper}>
-                <img src='/static/images/error.svg' />
+                <img src='/static/images/error_outline.1.svg' />
                 <Typography
                   variant='caption'
                   className={this.props.classes.snackbarMessage}
