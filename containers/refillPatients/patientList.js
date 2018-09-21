@@ -25,7 +25,7 @@ const styles = theme => ({
 })
 
 class PatientList extends Component {
-  getPastMedicines(event, index, value) {
+  getPastMedicines (event, index, value) {
     this.props.getRefillPastMedicinesLoading(
       this.props.pastMedicineState,
       event.target.value
@@ -39,7 +39,7 @@ class PatientList extends Component {
     )
   }
 
-  render() {
+  render () {
     const { classes, patientDetailsState } = this.props
     return (
       <div className={classes.menuWrapper}>

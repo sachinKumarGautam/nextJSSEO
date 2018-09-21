@@ -9,7 +9,7 @@ import { withStyles } from '@material-ui/core/styles'
 
 import UserDetail from './UserDetail'
 import MenuItems from '../../components/MenuItems'
-import Button from '../../components/button'
+// import Button from '../../components/button'
 import SubMenuList from './SubMenuList'
 
 import { logoutWithReload } from '../../utils/removePersistState'
@@ -56,7 +56,7 @@ class MenuLayout extends Component {
     logoutWithReload()
   }
 
-  render () {
+  render() {
     return (
       <div>
         <IconButton
@@ -90,7 +90,7 @@ class MenuLayout extends Component {
           }</MenuItem>
           <Divider />
           <MenuItems logout={this.logout.bind(this)} />
-          <Button
+          {/* <Button
             size='small'
             variant='outlined'
             color='primary'
@@ -101,7 +101,7 @@ class MenuLayout extends Component {
             className={this.props.classes.buttonStyle}
             onClick={this.handleClickOpen}
             label={'Chat now'}
-          />
+          /> */}
           <Divider />
           <SubMenuList />
         </Menu>

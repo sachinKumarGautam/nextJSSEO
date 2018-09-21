@@ -23,3 +23,11 @@ export const HOME_PAGE = '/'
 export const PRODUCT_SEARCH = '/product/search'
 
 export const ORDER_DETAILS = '/order/order_id'
+
+export const PRIVACY_POLICY = '/company/privacy'
+
+export const ABOUT_US = '/company/about'
+
+export const FAQ = '/company/FAQ'
+
+export const TERMS = '/company/terms'

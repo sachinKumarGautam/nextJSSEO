@@ -36,6 +36,13 @@ const styles = theme => {
     listWrapper: {
       listStyle: 'none',
       paddingLeft: 0
+    },
+    logoutStyle: {
+      ...theme.typography.caption,
+      paddingLeft: theme.spacing.unit * 7,
+      color: theme.palette.customGrey.grey500,
+      paddingTop: theme.spacing.unit * 0,
+      marginBottom: theme.spacing.unit * 2
     }
   }
 }
@@ -93,11 +100,11 @@ class MenuItems extends Component {
         >
           Care Points / Care Points +
         </MenuItem>
-        {!this.props.isSideMenu &&
+        {/* {!this.props.isSideMenu &&
           <MenuItem className={menuStyle}>Content</MenuItem>}
         {!this.props.isSideMenu &&
-          <MenuItem className={menuStyle}>Bookmarks</MenuItem>}
-        <MenuItem className={menuStyle} onClick={this.props.logout}>
+          <MenuItem className={menuStyle}>Bookmarks</MenuItem>} */}
+        <MenuItem className={this.props.classes.logoutStyle} onClick={this.props.logout}>
           Log out
         </MenuItem>
       </div>
