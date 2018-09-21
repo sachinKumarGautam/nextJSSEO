@@ -56,7 +56,7 @@ class MenuLayout extends Component {
     logoutWithReload()
   }
 
-  render() {
+  render () {
     return (
       <div>
         <IconButton

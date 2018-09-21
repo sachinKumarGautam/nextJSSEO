@@ -9,7 +9,7 @@ const styles = theme => {
 }
 
 class TermsAndCondition extends Component {
-  render() {
+  render () {
     return (
       <StaticPage
         title='Terms & conditions'
