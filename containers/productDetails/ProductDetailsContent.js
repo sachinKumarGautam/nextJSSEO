@@ -36,23 +36,23 @@ class ProductDetailsContent extends Component {
         isLoading={productDetailsState.isLoadingGetProductDetails}
         LoaderComp={null}
       >
-          <Grid
-            container
-            spacing={24}
-            className={this.props.classes.contentWrapper}
-          >
-            <Grid item xs={9}>
-              {!uses && !side_effects && !how_it_works && !precautions
-                ? <UnderConstruction />
-                : <ProductUseCases
-                  hover={this.props.hover}
-                  summaryData={productDetailsStateData}
-                  />}
-            </Grid>
-            <Grid item xs={3}>
-              <RelatedArticles publishedContent={this.props.publishedContent} />
-            </Grid>
+        <Grid
+          container
+          spacing={24}
+          className={this.props.classes.contentWrapper}
+        >
+          <Grid item xs={9}>
+            {!uses && !side_effects && !how_it_works && !precautions
+              ? <UnderConstruction />
+              : <ProductUseCases
+                hover={this.props.hover}
+                summaryData={productDetailsStateData}
+              />}
           </Grid>
+          <Grid item xs={3}>
+            <RelatedArticles publishedContent={this.props.publishedContent} />
+          </Grid>
+        </Grid>
       </ActivityIndicator>
     )
   }
