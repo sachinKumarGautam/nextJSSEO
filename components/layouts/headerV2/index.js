@@ -24,7 +24,8 @@ import {
   updateIsCartOpenLoginFlag,
   updateIsCartOpenRegisterModalFlag,
   goToCartSnackbar,
-  uploadPrescriptionLoading
+  uploadPrescriptionLoading,
+  updateShowNoCartIdDialogFlag
 } from '../../../containers/cartDetails/cartActions'
 
 import {
@@ -95,19 +96,19 @@ class Header extends React.Component {
     }
   }
 
-  componentDidMount () {
-    if (
-      !this.props.loginState.isAuthenticated &&
-      !this.props.cartState.payload.uid
-    ) {
-      this.props.actions.getAnonymousCartIdLoading(
-        this.props.cartState,
-        this.props.checkPincodeState.payload.source,
-        this.props.checkPincodeState.payload.id,
-        ''
-      )
-    }
-  }
+  // componentDidMount () {
+  //   if (
+  //     !this.props.loginState.isAuthenticated &&
+  //     !this.props.cartState.payload.uid
+  //   ) {
+  //     this.props.actions.getAnonymousCartIdLoading(
+  //       this.props.cartState,
+  //       this.props.checkPincodeState.payload.source,
+  //       this.props.checkPincodeState.payload.id,
+  //       ''
+  //     )
+  //   }
+  // }
 
   componentDidUpdate (prevProps) {
     if (
@@ -120,9 +121,18 @@ class Header extends React.Component {
   }
 
   openLoginModal () {
-    this.setState({
-      openLoginDialog: true
-    })
+    if (!this.props.cartState.payload.uid) {
+      const isShowNoCartIdDialog = true
+
+      this.props.actions.updateShowNoCartIdDialogFlag(
+        this.props.cartState,
+        isShowNoCartIdDialog
+      )
+    } else {
+      this.setState({
+        openLoginDialog: true
+      })
+    }
   }
 
   closeLoginModal () {
@@ -290,7 +300,8 @@ function mapDispatchToProps (dispatch) {
         uploadPrescriptionLoading,
         resetIsNewUserFlag,
         resetLoginState,
-        resetSearchMedicineState
+        resetSearchMedicineState,
+        updateShowNoCartIdDialogFlag
       },
       dispatch
     )
