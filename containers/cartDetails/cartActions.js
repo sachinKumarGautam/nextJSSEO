@@ -285,6 +285,7 @@ export function cartTransferSuccess (
     isLoading: false,
     id: payload.id,
     uid: payload.uid,
+    payment_channels: payload.payment_channels,
     customer_id: payload.customer_id,
     patient_id: payload.patient_id,
     patient_full_name: payload.patient_full_name,

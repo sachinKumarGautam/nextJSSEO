@@ -356,6 +356,7 @@ export default function cartReducer (state = initialState, action) {
           ...state.payload,
           id: action.id,
           uid: action.uid,
+          payment_channels: action.payment_channels,
           customer_id: action.customer_id,
           patient_details: {
             ...state.payload.patient_details,
