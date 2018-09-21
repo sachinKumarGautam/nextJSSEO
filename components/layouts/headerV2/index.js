@@ -212,7 +212,10 @@ class Header extends React.Component {
                   lg={loginState.isAuthenticated ? 1 : 2}
                 >
                   <div className={this.props.classes.wrapCart}>
-                    <CartIcon cartState={this.props.cartState} />
+                    <CartIcon
+                      cartState={this.props.cartState}
+                      updateShowNoCartIdDialogFlag={this.props.actions.updateShowNoCartIdDialogFlag}
+                    />
                     {loginState.isAuthenticated ? (
                       <MenuWrapper />
                     ) : (
@@ -269,6 +272,7 @@ class Header extends React.Component {
                   this.props.actions.uploadPrescriptionLoading
                 }
                 resetSearchMedicineState={this.props.actions.resetSearchMedicineState}
+                updateShowNoCartIdDialogFlag={this.props.actions.updateShowNoCartIdDialogFlag}
               />
             </div>
           )}

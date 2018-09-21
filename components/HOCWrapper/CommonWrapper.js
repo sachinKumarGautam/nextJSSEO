@@ -103,12 +103,12 @@ export function withCommonWrapper (Page) {
     handleShowNoCartIdDialogOk () {
       const isShowNoCartIdDialog = false
 
-      this.props.actions.getAnonymousCartIdLoading(
-        this.props.cartState,
-        this.props.checkPincodeState.payload.source,
-        this.props.checkPincodeState.payload.id,
-        ''
-      )
+      // this.props.actions.getAnonymousCartIdLoading(
+      //   this.props.cartState,
+      //   this.props.checkPincodeState.payload.source,
+      //   this.props.checkPincodeState.payload.id,
+      //   ''
+      // )
 
       this.props.actions.updateShowNoCartIdDialogFlag(
         this.props.cartState,

@@ -67,11 +67,20 @@ const styles = theme => {
 
 class Search extends Component {
   onImageSelection (event) {
-    this.props.uploadPrescriptionLoading(
-      this.props.cartState,
-      event.target.files[0],
-      true
-    )
+    if (!this.props.cartState.payload.uid) {
+      const isShowNoCartIdDialog = true
+
+      this.props.updateShowNoCartIdDialogFlag(
+        this.props.cartState,
+        isShowNoCartIdDialog
+      )
+    } else {
+      this.props.uploadPrescriptionLoading(
+        this.props.cartState,
+        event.target.files[0],
+        true
+      )
+    }
   }
 
   componentDidUpdate (prevProps) {
