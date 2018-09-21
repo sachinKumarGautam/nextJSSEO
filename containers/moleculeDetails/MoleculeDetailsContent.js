@@ -13,7 +13,8 @@ import ProductUseCases from '../../components/ProductUseCases'
 const styles = theme => {
   return {
     contentWrapper: {
-      marginTop: theme.spacing.unit * 8
+      marginTop: theme.spacing.unit * 8,
+      paddingLeft: theme.spacing.unit * 1.25
     }
   }
 }
@@ -22,7 +23,11 @@ class MoleculeDetailsContent extends Component {
   render () {
     return (
       <div>
-        <Grid container spacing={24} className={this.props.classes.contentWrapper}>
+        <Grid
+          container
+          spacing={24}
+          className={this.props.classes.contentWrapper}
+        >
           <ProductUseCases
             hover={this.props.hover}
             summaryData={this.props.moleculeDetailsStatePayload}

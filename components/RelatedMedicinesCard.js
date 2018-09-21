@@ -56,10 +56,16 @@ const styles = theme => {
       marginBottom: theme.spacing.unit
     },
     buttonRoot: {
-      border: `1px solid ${theme.palette.primary.main}`
+      border: `1px solid ${theme.palette.primary.main}`,
+      padding: `${0} ${theme.spacing.unit/2}`,
+      minHeight: theme.spacing.unit * 1.5,
+      // padding: '4px 4px',
+
     },
     buttonLabel: {
-      color: theme.palette.primary.main
+      color: theme.palette.primary.main,
+      fontSize: '12px',
+      // padding: '4px 4px',
     }
   }
 }
@@ -146,8 +152,8 @@ class RelatedMedicinesCard extends React.Component {
               label: props.classes.buttonLabel
             }}
             onClick={this.addToCart}
-            label={'Add To Cart'}
-          />
+            label={'ADD TO CART'}
+            />
           : <AlreadyAdded />}
       </div>
     )

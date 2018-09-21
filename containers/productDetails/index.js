@@ -28,10 +28,13 @@ class ProductDetailsWrapper extends Component {
     super(props)
     this.state = {
       hover: {},
+      showSnackBar: false,
       publishedContent: []
     }
 
-    this.saveRecentlyPublishedContent = this.saveRecentlyPublishedContent.bind(this)
+    this.saveRecentlyPublishedContent = this.saveRecentlyPublishedContent.bind(
+      this
+    )
   }
 
   componentDidMount () {
@@ -39,9 +42,7 @@ class ProductDetailsWrapper extends Component {
   }
 
   getRecentlyPublishedContent () {
-    queryLimitedData(
-      this.saveRecentlyPublishedContent
-    )
+    queryLimitedData(this.saveRecentlyPublishedContent)
   }
 
   saveRecentlyPublishedContent (payload) {
