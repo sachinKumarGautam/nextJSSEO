@@ -81,6 +81,13 @@ const styles = theme => ({
     height: theme.spacing.unit * 7.5,
     display: 'flex',
     justifyContent: 'space-between'
+  },
+  orTextStyle: {
+    ...theme.typography.caption,
+    color: theme.palette.common.black,
+    fontWeight: theme.typography.fontWeightBold,
+    marginLeft: theme.spacing.unit * 1.25,
+    marginRight: theme.spacing.unit * 1.25
   }
 })
 
@@ -284,6 +291,7 @@ class Header extends React.Component {
                 uploadPrescriptionLoading={
                   this.props.actions.uploadPrescriptionLoading
                 }
+                orTextStyle={this.props.classes.orTextStyle}
                 resetSearchMedicineState={this.props.actions.resetSearchMedicineState}
                 updateShowNoCartIdDialogFlag={this.props.actions.updateShowNoCartIdDialogFlag}
               />

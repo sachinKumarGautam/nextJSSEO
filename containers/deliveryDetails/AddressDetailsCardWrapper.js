@@ -40,6 +40,7 @@ class AddressDetailsCardWrapper extends React.Component {
                 <AddressDetailsCard
                   deliveryDetail={deliveryDetail}
                   openDeliveryFormModal={this.props.openDeliveryFormModal.bind(this, true)}
+                  addressWrapper={this.props.addressWrapper}
                 />
               </Grid>
             )

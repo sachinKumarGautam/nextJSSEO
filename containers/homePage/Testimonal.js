@@ -77,10 +77,11 @@ class Testimonals extends Component {
     let settings = {
       dots: false,
       speed: 500,
+      infinite: false,
       slidesToShow: 3,
-      slidesToScroll: 1,
+      slidesToScroll: 2,
       nextArrow: <img src='/static/images/shape.svg' />,
-      prevArrow: <br />,
+      prevArrow: <img src='/static/images/leftArrow.svg' />,
       autoplay: false
     }
     return (
