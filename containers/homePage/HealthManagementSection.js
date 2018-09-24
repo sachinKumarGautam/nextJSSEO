@@ -1,4 +1,4 @@
-import React, {Component} from 'react'
+import React, { Component } from 'react'
 
 import { withStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
@@ -40,7 +40,7 @@ class HealthManagementSection extends Component {
           variant='body2'
           className={this.props.classes.description}
         >
-          A better way to manage your health. Diet, Lifestyle and Doctors play a significant role in determining your health outcomes. Once you enrol and re-order your medicines from us, we provide a Life Coach and doctor tele-consultation service, Absolutely Free!
+          <b>A better way to manage your health.</b> Diet, Lifestyle and Doctors play a significant role in determining your health outcomes. Once you enrol and re-order your medicines from us, we provide a Life Coach and doctor tele-consultation service, Absolutely Free!
         </Typography>
         <TeleConsultationDetail />
         <HealthCoachDetail />

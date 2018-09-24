@@ -237,8 +237,8 @@ class Header extends React.Component {
             <Login
               openLoginDialog={
                 this.state.openLoginDialog ||
-                  this.props.cartState.isCartOpenLoginDialog ||
-                  this.props.cartState.isCartOpenRegisterDialog
+                this.props.cartState.isCartOpenLoginDialog ||
+                this.props.cartState.isCartOpenRegisterDialog
               }
               openLoginModal={this.openLoginModal}
               isCartOpenRegisterDialog={
