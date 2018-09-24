@@ -1,4 +1,4 @@
-import React, {Component} from 'react'
+import React, { Component } from 'react'
 
 import { withStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
@@ -14,7 +14,7 @@ const styles = theme => {
       paddingBottom: theme.spacing.unit * 10.25
     },
     healthCoachTitle: {
-      fontSize: theme.typography.pxToRem(24),
+      fontSize: theme.typography.pxToRem(20),
       fontWeight: theme.typography.fontWeightBold,
       marginLeft: theme.spacing.unit * 5.5
     },
@@ -47,13 +47,13 @@ class HealthCoachDetail extends Component {
             variant='body2'
             className={this.props.classes.healthCoachTitle}
           >
-                Health Coach
+            Health Coach
           </Typography>
           <Typography
             variant='body2'
             className={this.props.classes.healthCoachDescription}
           >
-                Our Life Coaches help you determine the right diet and lifestyle interventions for you. Every month!
+            Our Life Coaches help you determine the right diet and lifestyle interventions for you. Every month!
           </Typography>
           <Grid container>
             <Grid item xs={2}>
@@ -62,7 +62,7 @@ class HealthCoachDetail extends Component {
                 variant='body1'
                 className={this.props.classes.captionTextStyle}
               >
-                  DIET
+                DIET
               </Typography>
             </Grid>
             <Grid item xs={2}>
@@ -71,7 +71,7 @@ class HealthCoachDetail extends Component {
                 variant='body1'
                 className={this.props.classes.captionTextStyle}
               >
-                  EXERCISE
+                EXERCISE
               </Typography>
             </Grid>
             <Grid item xs={2}>
@@ -80,7 +80,7 @@ class HealthCoachDetail extends Component {
                 variant='body1'
                 className={this.props.classes.captionTextStyle}
               >
-                  LIFESTYLE CHOICES
+                LIFESTYLE CHOICES
               </Typography>
             </Grid>
             <Grid item xs={2}>
@@ -89,7 +89,7 @@ class HealthCoachDetail extends Component {
                 variant='body1'
                 className={this.props.classes.captionTextStyle}
               >
-                  WEIGHT MANAGEMENT
+                WEIGHT MANAGEMENT
               </Typography>
             </Grid>
           </Grid>

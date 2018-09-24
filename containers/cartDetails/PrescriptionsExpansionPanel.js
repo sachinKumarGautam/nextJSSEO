@@ -20,11 +20,6 @@ class PrescriptionsExpansionPanel extends React.Component {
       event.target.files[0],
       false
     )
-    this.props.optForDoctorCallbackLoading(
-      this.props.cartState,
-      this.props.cartState.payload.uid,
-      !this.props.cartState.payload.is_doctor_callback.payload
-    )
   }
 
   onDeleteButton (index) {
