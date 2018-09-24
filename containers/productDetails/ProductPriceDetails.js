@@ -39,10 +39,13 @@ const styles = theme => ({
     display: 'flex',
     alignItems: 'baseline',
     marginTop: theme.spacing.unit * 2
+  },
+  label: {
+    color: theme.palette.primary.main
+  },
+  buttonRoot: {
+    padding: `0px ${theme.spacing.unit * 2}px`
   }
-  // label: {
-  //   color: theme.palette.primary.main
-  // }
 })
 
 class ProductPriceDetails extends Component {
@@ -102,9 +105,9 @@ class ProductPriceDetails extends Component {
                   disableRipple
                   variant='contained'
                   size='small'
-                  // classes={{
-                  //   label: classes.label
-                  // }}
+                  classes={{
+                    root: classes.buttonRoot
+                  }}
                   color='primary'
                   onClick={this.props.addToCartHandler.bind(
                     this,

@@ -61,7 +61,6 @@ class MoleculeDetails extends React.Component {
   componentDidMount () {
     // Represents to get molecule details.
     const { query } = Router
-    console.log(query)
     if (Router.query.molecule_id) {
       this.props.actions.getMoleculeSummaryLoading(
         this.props.moleculeDetailsState,

@@ -8,7 +8,7 @@ const styles = theme => {
     label: {
       ...theme.typography.body3,
       color: theme.palette.customGrey.grey600,
-      marginLeft: theme.spacing.unit * 1.75
+      marginLeft: theme.spacing.unit * 1.5
     },
     assuredServiceWrapper: {
       display: 'flex',
