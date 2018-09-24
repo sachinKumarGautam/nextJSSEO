@@ -113,8 +113,7 @@ export function withCommonWrapper (Page) {
       this.props.actions.getAnonymousCartIdLoading(
         this.props.cartState,
         this.props.checkPincodeState.payload.source,
-        this.props.checkPincodeState.payload.id,
-        ''
+        this.props.checkPincodeState.payload.id
       )
     }
 
