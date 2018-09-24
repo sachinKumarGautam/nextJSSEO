@@ -111,7 +111,7 @@ class Header extends React.Component {
 
   componentDidUpdate (prevProps) {
     if (
-      (this.props.authentication === 'false') &&
+      (this.props.authentication == 'false') &&
       this.props.path &&
       prevProps.customerState.payload.id !== this.props.customerState.payload.id
     ) {
