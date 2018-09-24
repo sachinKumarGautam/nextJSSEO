@@ -1,4 +1,4 @@
-import React, {Component} from 'react'
+import React, { Component } from 'react'
 
 import { withStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
@@ -27,7 +27,7 @@ const styles = theme => {
       textAlign: 'center'
     },
     button: {
-      margin: theme.spacing.unit,
+      margiTop: theme.spacing.unit,
       backgroungColor: theme.palette.primary.main,
       marginBottom: theme.spacing.unit * 12
     },
@@ -38,10 +38,6 @@ const styles = theme => {
       paddingRight: theme.spacing.unit * 3,
       color: theme.palette.secondary.main
     },
-    buttonWrapperStyle: {
-      marginBottom: theme.spacing.unit * 11.375,
-      textAlign: 'center'
-    },
     membershipCardTitle: {
       fontSize: theme.typography.pxToRem(16),
       fontWeight: theme.typography.fontWeightBold
@@ -49,6 +45,15 @@ const styles = theme => {
     membershipCardDescription: {
       ...theme.typography.body1,
       marginBottom: theme.spacing.unit * 1.25
+    },
+    cardWrapper: {
+      display: 'flex',
+      flexDirection: 'row',
+      alignItems: 'center'
+    },
+    imageStyle: {
+      marginRight: theme.spacing.unit * 4.75,
+      marginBottom: theme.spacing.unit * 12
     }
   }
 }
@@ -80,9 +85,11 @@ class MembershipCardDetail extends Component {
         >
           Save more with our pre-paid membership plans. Enroll today and get discounts on all your medicines for 1 year.
         </Typography>
-        <Grid container spacing={24}>
-          <Grid item xs={6}>
-            <img src='/static/images/atulya-frt.png' />
+        <div className={this.props.classes.cardWrapper}>
+          <div>
+            <img src='/static/images/atulya-frt.png' className={this.props.classes.imageStyle} />
+          </div>
+          <div>
             <Typography
               variant='body2'
               className={this.props.classes.membershipCardTitle}
@@ -110,42 +117,10 @@ class MembershipCardDetail extends Component {
               }}
               onClick={this.onAddToCart.bind(this, 'Atulya', 'I08415')}
             >
-            ADD TO CART
+              ADD TO CART
             </Button>
-          </Grid>
-          <Grid item xs={6}>
-            <img src='/static/images/saarthi-frt.png' />
-            <Typography
-              variant='body2'
-              className={this.props.classes.membershipCardTitle}
-            >
-              Saarthi Membership Card
-            </Typography>
-            <Typography
-              variant='body2'
-              className={this.props.classes.membershipCardDescription}
-            >
-              Customer gets flat 20% off on every order for a year.
-            </Typography>
-            <Typography
-              variant='body2'
-              className={this.props.classes.membershipCardTitle}
-            >
-              &#8377;999.00
-            </Typography>
-            <Button
-              variant='raised'
-              color='primary'
-              className={this.props.classes.button}
-              classes={{
-                label: this.props.classes.buttonlabel
-              }}
-              onClick={this.onAddToCart.bind(this, 'Saarthi', 'I08414')}
-            >
-            ADD TO CART
-            </Button>
-          </Grid>
-        </Grid>
+          </div>
+        </div>
       </div>
     )
   }

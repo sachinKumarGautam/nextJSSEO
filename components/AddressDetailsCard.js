@@ -71,7 +71,7 @@ const AddressDetailsCard = props => (
     className={
       (props.addressIdSelected === props.deliveryDetail.id)
         ? props.classes.addressWrapperSelectedStyle
-        : props.classes.addressWrapperStyle
+        : (props.addressWrapper ? props.addressWrapper : props.classes.addressWrapperStyle)
     }
     onClick={
       props.checkPincodeServiceble

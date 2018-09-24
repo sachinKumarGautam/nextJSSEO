@@ -32,9 +32,9 @@ const styles = theme => {
 }
 
 class HealthManagementSection extends Component {
-  render() {
+  render () {
     return (
-      <div className={this.props.classes.healthWrapper}>
+      <div className={this.props.classes.healthWrapper} id='health-management'>
         <Typography
           variant='headline'
           className={this.props.classes.title}

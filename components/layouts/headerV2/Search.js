@@ -9,7 +9,7 @@ import { getReplacedString } from '../../../utils/replaceConstants'
 
 const styles = theme => {
   return {
-    orTextStyle: {
+    textStyle: {
       ...theme.typography.caption,
       color: theme.palette.secondary.main,
       fontWeight: theme.typography.fontWeightBold,
@@ -95,7 +95,10 @@ class Search extends Component {
           cartState={this.props.cartState}
           resetSearchMedicineState={this.props.resetSearchMedicineState}
         />
-        <Typography variant='body1' className={this.props.classes.orTextStyle}>
+        <Typography
+          variant='body1'
+          className={this.props.orTextStyle ? this.props.orTextStyle : this.props.classes.textStyle}
+        >
           OR
         </Typography>
         <input

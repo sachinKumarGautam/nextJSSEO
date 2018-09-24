@@ -31,12 +31,17 @@ const styles = theme => {
     captionTextStyle: {
       fontSize: theme.typography.pxToRem(12),
       marginLeft: theme.spacing.unit * 6
+    },
+    scaleImageStyle: {
+      width: theme.spacing.unit * 4,
+      marginBottom: theme.spacing.unit * 4.125,
+      marginLeft: theme.spacing.unit * 5.5
     }
   }
 }
 
 class HealthCoachDetail extends Component {
-  render() {
+  render () {
     return (
       <div className={this.props.classes.contentWrapper} id='health-coach'>
         <div>
@@ -84,7 +89,7 @@ class HealthCoachDetail extends Component {
               </Typography>
             </Grid>
             <Grid item xs={2}>
-              <img src='/static/images/noun-weight-loss-118506.svg' className={this.props.classes.captionImageStyle} />
+              <img src='/static/images/scale.svg' className={this.props.classes.scaleImageStyle} />
               <Typography
                 variant='body1'
                 className={this.props.classes.captionTextStyle}
