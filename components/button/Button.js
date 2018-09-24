@@ -1,3 +1,4 @@
+import React from 'react'
 import Button from '@material-ui/core/Button'
 import { withStyles } from '@material-ui/core/styles'
 import classNames from 'classnames'
@@ -71,13 +72,17 @@ const CommonButton = buttonProps => {
     type,
     onClick,
     className,
-    loaderPosition
+    loaderPosition,
+    disableFocusRipple,
+    disableRipple
   } = buttonProps
   return (
     <React.Fragment>
       <div className={classes.wrapper}>
         <Button
           variant={variant || null}
+          disableFocusRipple={disableFocusRipple}
+          disableRipple={disableRipple}
           className={
             isloading && !loaderPosition
               ? classNames(className, classes.buttonloader)

@@ -28,11 +28,14 @@ const styles = theme => {
     contentKey: {
       color: theme.palette.customGreen.green400,
       textTransform: 'uppercase',
+      fontSize: theme.spacing.unit * 1.75,
+      display: 'flex',
+      alignItems: 'center',
       marginLeft: theme.spacing.unit
     },
     contentKeyWrapper: {
-      display: 'flex',
-      alignItems: 'center'
+      display: 'flex'
+      // alignItems: 'center',
     },
     tableWrapper: {
       border: `0.5px solid ${theme.palette.customGrey.grey100}`,
@@ -83,7 +86,6 @@ const TableContent = props => {
                 <div className={props.classes.contentKeyWrapper}>
                   <img src={'/static/images/avoidPrecaution.svg'} />
                   <Typography
-                    gutterBottom
                     variant='body1'
                     className={props.classes.contentKey}
                   >
@@ -123,7 +125,6 @@ const TableContent = props => {
                 <div className={props.classes.contentKeyWrapper}>
                   <img src={'/static/images/foodPrecaution.svg'} />
                   <Typography
-                    gutterBottom
                     variant='body1'
                     className={props.classes.contentKey}
                   >
@@ -163,7 +164,6 @@ const TableContent = props => {
                 <div className={props.classes.contentKeyWrapper}>
                   <img src={'/static/images/storagePrecaution.svg'} />
                   <Typography
-                    gutterBottom
                     variant='body1'
                     className={props.classes.contentKey}
                   >
@@ -203,7 +203,6 @@ const TableContent = props => {
                 <div className={props.classes.contentKeyWrapper}>
                   <img src={'/static/images/missDosePrecaution.svg'} />
                   <Typography
-                    gutterBottom
                     variant='body1'
                     className={props.classes.contentKey}
                   >

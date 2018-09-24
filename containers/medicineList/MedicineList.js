@@ -39,7 +39,10 @@ const styles = theme => {
       },
       borderBottom: `1px solid ${theme.palette.customGrey.grey100}`,
       paddingBottom: theme.spacing.unit * 2,
-      marginTop: theme.spacing.unit * 2
+      paddingTop: theme.spacing.unit * 2,
+      '&:hover': {
+        backgroundColor: theme.palette.customGrey.grey50
+      }
     },
     buttonRoot: {
       // backgroundColor: '#ffffff',
@@ -57,6 +60,9 @@ const styles = theme => {
       textAlign: 'center',
       marginTop: theme.spacing.unit * 1.25,
       fontWeight: theme.typography.fontWeightBold
+    },
+    listWrapperStyle: {
+      paddingTop: '0'
     }
   }
 }
@@ -64,9 +70,7 @@ const styles = theme => {
 class MedicineList extends React.Component {
   constructor (props) {
     super(props)
-    this.state = {
-      page: 0
-    }
+
     this.onClickOfShowMore = this.onClickOfShowMore.bind(this)
   }
 
@@ -77,7 +81,7 @@ class MedicineList extends React.Component {
         this.props.searchMedicineState,
         this.props.checkPincodeState.payload.id,
         this.props.productName,
-        this.state.page + 1, // page number
+        this.props.page + 1, // page number
         10, // page size,
         false // is header props is false
       )
@@ -85,15 +89,11 @@ class MedicineList extends React.Component {
       this.props.getRelatedMedicinesLoading(
         this.props.medicineListState,
         this.props.moleculeName, // pass salt name
-        this.state.page + 1, // page number
+        this.props.page + 1, // page number
         10, // page size,
         true
       )
     }
-
-    this.setState({
-      page: this.state.page + 1
-    })
 
     this.props.updateIsShowMore()
   }
@@ -108,6 +108,9 @@ class MedicineList extends React.Component {
       cartState
     } = this.props
     const cartItems = cartState.payload.cart_items.payload
+    const medicineListPagesCondition = (this.props.page + 1) !== this.props.medicineListState.totalPages
+    const searchMedicinePagesCondition = (this.props.page + 1) !== this.props.searchMedicineState.payload.totalPages
+    const showMoreCondition = this.props.moleculeName ? medicineListPagesCondition : searchMedicinePagesCondition
 
     return (
       <div className={classes.medicineListWrapper}>
@@ -126,9 +129,10 @@ class MedicineList extends React.Component {
         <Card elevation={1}>
           <ActivityIndicator
             isLoading={isLoading}
+            bottomLoader
             LoaderComp={<MultipleMedicineLoader />}
           >
-            <CardContent>
+            <CardContent className={classes.listWrapperStyle}>
               {medicineListState.length
                 ? <ul className={classes.articleListWrapper}>
                   {modifiyMedicineList(
@@ -159,24 +163,28 @@ class MedicineList extends React.Component {
             </CardContent>
           </ActivityIndicator>
         </Card>
-        {medicineListState.length
-          ? <div className={classes.buttonWrapper}>
-            <Button
-              size='medium'
-              variant='outlined'
-              disabled={isLoading}
-              loaderColor={'primary'}
-              loaderPosition={'center'}
-              isloading={isLoading}
-              classes={{
-                root: classes.buttonRoot,
-                label: classes.buttonLabel
-              }}
-              onClick={this.onClickOfShowMore}
-              label={'Show more'}
-            />
-          </div>
-          : null}
+        {
+          medicineListState.length &&
+          showMoreCondition
+            ? (
+              <div className={classes.buttonWrapper}>
+                <Button
+                  size='medium'
+                  variant='outlined'
+                  disabled={isLoading}
+                  loaderColor={'primary'}
+                  loaderPosition={'center'}
+                  isloading={isLoading}
+                  classes={{
+                    root: classes.buttonRoot,
+                    label: classes.buttonLabel
+                  }}
+                  onClick={this.onClickOfShowMore}
+                  label={'Show more'}
+                />
+              </div>
+            ) : null
+        }
       </div>
     )
   }

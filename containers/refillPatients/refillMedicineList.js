@@ -34,15 +34,18 @@ const styles = theme => {
       paddingLeft: 0
     },
     listItem: {
+      '&:hover': {
+        backgroundColor: theme.palette.customGrey.grey50
+      },
       '&:not(:last-child)': {
         borderBottom: `1px solid ${theme.palette.customGrey.grey100}`,
         paddingBottom: theme.spacing.unit * 2
       },
-      marginTop: theme.spacing.unit * 2
+      paddingTop: theme.spacing.unit * 2
     },
     treatmentHeading: {
       marginLeft: theme.spacing.unit * 3,
-      marginBottom: theme.spacing.unit * 6.5,
+      marginBottom: theme.spacing.unit * 3.5,
       fontWeight: theme.typography.fontWeightBold
     },
     noContent: {
@@ -50,6 +53,9 @@ const styles = theme => {
       textAlign: 'center',
       marginTop: theme.spacing.unit * 1.25,
       fontWeight: theme.typography.fontWeightBold
+    },
+    listWrapperStyle: {
+      // paddingTop: '0'
     }
   }
 }
@@ -72,7 +78,6 @@ class RefillMedicineList extends Component {
   }
   onClickOfPatient = item => {
     const sourceType = this.props.cartState.payload.source_type
-    const dialogTitle = ''
     this.setState({
       open: true,
       dialogTitle: sourceType === REFILL
@@ -116,7 +121,7 @@ class RefillMedicineList extends Component {
     return (
       <div>
         <Card elevation={'1'}>
-          <CardContent>
+          <CardContent className={this.props.classes.listWrapperStyle}>
             <Typography
               gutterBottom
               variant='title'

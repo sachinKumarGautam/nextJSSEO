@@ -6,17 +6,20 @@ const styles = theme => ({
   alreadyAdded: {
     color: theme.palette.primary.main,
     marginRight: theme.spacing.unit,
-    marginLeft: theme.spacing.unit,
+    marginLeft: theme.spacing.unit / 2,
     display: 'inline-block'
   },
   outerWrapper: {
     display: 'flex'
+  },
+  checkIcon: {
+    width: theme.spacing.unit * 2.25
   }
 })
 
 const AlreadyAdded = ({ classes }) => (
   <div className={classes.outerWrapper}>
-    <CheckIcon color={'primary'} />
+    <CheckIcon className={classes.checkIcon} color={'primary'} />
     <Typography component={'h4'} className={classes.alreadyAdded}>
       Added
     </Typography>

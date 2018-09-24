@@ -45,7 +45,12 @@ const styles = theme => ({
     width: theme.spacing.unit * 25
   },
   mobilePrefix: {
-    marginBottom: theme.spacing.unit / 8
+    marginBottom: theme.spacing.unit / 8,
+    color: theme.palette.customGrey.grey200
+  },
+  mobileIcon: {
+    color: theme.palette.customGrey.grey200,
+    height: theme.spacing.unit * 2
   }
 })
 
@@ -66,7 +71,6 @@ class LoginForm extends React.Component {
       touched,
       errors,
       isSubmitting,
-      handleBlur,
       handleSubmit,
       classes,
       loginState
@@ -84,7 +88,7 @@ class LoginForm extends React.Component {
           <Input
             startAdornment={
               <InputAdornment position='start'>
-                <AccountCircle />
+                <AccountCircle className={classes.mobileIcon} />
                 <span className={classes.mobilePrefix}>{'+91'}</span>
               </InputAdornment>
             }
@@ -92,7 +96,6 @@ class LoginForm extends React.Component {
             id='mobile'
             value={values.mobile}
             onChange={this.handleChange}
-            onBlur={handleBlur}
             autoFocus
             placeholder={'Enter registered mobile no.'}
           />
@@ -120,7 +123,11 @@ class LoginForm extends React.Component {
             isloading={isSubmitting}
             variant='raised'
             color='primary'
-            label={'Login with OTP'}
+            label={
+              this.props.isRegisterClicked
+                ? 'Register with OTP'
+                : 'Login with OTP'
+            }
           />
         </div>
       </form>

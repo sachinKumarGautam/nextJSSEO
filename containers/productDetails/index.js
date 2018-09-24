@@ -15,6 +15,8 @@ import {
   openPincodeDialog
 } from '../../containers/location/pincode/pincodeAction'
 
+import queryLimitedData from '../../utils/queryLimitedData'
+
 /*
   bread crumbs
   Product Details
@@ -25,8 +27,28 @@ class ProductDetailsWrapper extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      hover: {}
+      hover: {},
+      showSnackBar: false,
+      publishedContent: []
     }
+
+    this.saveRecentlyPublishedContent = this.saveRecentlyPublishedContent.bind(
+      this
+    )
+  }
+
+  componentDidMount () {
+    this.getRecentlyPublishedContent()
+  }
+
+  getRecentlyPublishedContent () {
+    queryLimitedData(this.saveRecentlyPublishedContent)
+  }
+
+  saveRecentlyPublishedContent (payload) {
+    this.setState({
+      publishedContent: payload
+    })
   }
 
   toggleHover (item) {
@@ -57,6 +79,7 @@ class ProductDetailsWrapper extends Component {
           <ProductDetailsContent
             hover={this.state.hover}
             productDetailsState={this.props.productDetailsState}
+            publishedContent={this.state.publishedContent}
           />
         </section>
       </div>

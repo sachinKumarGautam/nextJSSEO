@@ -88,7 +88,8 @@ class AddressDetailsExpansionPanel extends React.Component {
         incrementCartItemLoading: null,
         inProgressCartItem: {},
         isCartAddressSelection: true,
-        addressId: deliveryDetails.id
+        addressId: deliveryDetails.id,
+        isDeliveryAssignment: true
       }
     )
   }
@@ -198,11 +199,7 @@ class AddressDetailsExpansionPanel extends React.Component {
               root: this.props.nextButtonRoot
             }}
             label={'NEXT'}
-            onClick={
-              shippingAddressDetails.payload.shipping_address_id
-                ? this.props.handleNextChange
-                : null
-            }
+            onClick={this.props.handleNextChange}
           />
 
           <Dialog

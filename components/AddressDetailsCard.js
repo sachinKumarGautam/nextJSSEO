@@ -7,6 +7,7 @@ import { withStyles } from '@material-ui/core/styles'
 const styles = theme => {
   return {
     addressWrapperStyle: {
+      cursor: 'pointer',
       border: `1px solid ${theme.palette.customGrey.grey250}`,
       padding: theme.spacing.unit * 2.5,
       borderRadius: theme.spacing.unit * 0.5
@@ -19,7 +20,8 @@ const styles = theme => {
     addressTypeStyle: {
       color: theme.palette.customGrey.grey500,
       fontWeight: theme.typography.fontWeightBold,
-      paddingBottom: theme.spacing.unit
+      paddingBottom: theme.spacing.unit,
+      textTransform: 'uppercase'
     },
     addressTypeWrapper: {
       display: 'flex',
@@ -31,7 +33,7 @@ const styles = theme => {
     },
     addressStyle: {
       color: theme.palette.customGrey.grey500,
-      paddingBottom: theme.spacing.unit,
+      paddingBottom: theme.spacing.unit / 4,
       marginLeft: theme.spacing.unit * 5
     },
     addressDescriptionStyle: {
@@ -78,7 +80,10 @@ const AddressDetailsCard = props => (
     }
   >
     <div className={props.classes.addressTypeWrapper}>
-      <img src='/static/images/home.svg' className={props.classes.addressTypeImage} />
+      <img
+        src='/static/images/home.svg'
+        className={props.classes.addressTypeImage}
+      />
       <Typography
         variant='caption'
         className={props.classes.addressTypeStyle}

@@ -11,7 +11,6 @@ import ReactTooltip from 'react-tooltip'
 
 import Button from './button'
 
-import Link from 'next/link'
 import Router from 'next/router'
 
 import { CART_DETAILS } from '../routes/RouteConstant'
@@ -100,8 +99,8 @@ const styles = theme => ({
     right: 0,
     left: theme.spacing.unit * 2,
     color: theme.palette.common.white,
-    padding: theme.typography.pxToRem(9),
-    fontSize: theme.typography.pxToRem(10)
+    padding: theme.typography.pxToRem(4),
+    fontSize: theme.typography.pxToRem(8)
   },
   badgeRoot: {
     // padding: theme.spacing.unit * 2
@@ -118,35 +117,51 @@ class CartIcon extends Component {
   }
 
   redirectToPath (path) {
-    const url = getReplacedString(path)
-    Router.push(url)
+    if (!this.props.cartState.payload.uid) {
+      const isShowNoCartIdDialog = true
+
+      this.props.updateShowNoCartIdDialogFlag(
+        this.props.cartState,
+        isShowNoCartIdDialog
+      )
+    } else {
+      const url = getReplacedString(path)
+      Router.push(url)
+    }
   }
 
   render () {
     const { classes } = this.props
     const cartItems = this.props.cartState.payload.cart_items.payload
+    const href = getReplacedString(CART_DETAILS)
     return (
       <div>
-        <Link prefetch href={getReplacedString(CART_DETAILS)}>
-          <a className={classes.moleculeTag} data-tip data-for='cartIcon'>
-            <IconButton
-              className={classes.button}
-              color={'primary'}
-              aria-label='Add to shopping cart'
+        <a
+          onClick={this.redirectToPath.bind(this, href)}
+          onMouseEnter={() => {
+            Router.prefetch(href)
+          }}
+          className={classes.moleculeTag}
+          data-tip
+          data-for='cartIcon'
+        >
+          <IconButton
+            className={classes.button}
+            color={'primary'}
+            aria-label='Add to shopping cart'
+          >
+            <Badge
+              badgeContent={cartItems.length}
+              color='primary'
+              classes={{
+                root: classes.badgeRoot,
+                badge: classes.badge
+              }}
             >
-              <Badge
-                badgeContent={cartItems.length}
-                color='primary'
-                classes={{
-                  root: classes.badgeRoot,
-                  badge: classes.badge
-                }}
-              >
-                <ShoppingCartIcon classes={{ root: classes.iconStyle }} />
-              </Badge>
-            </IconButton>
-          </a>
-        </Link>
+              <ShoppingCartIcon classes={{ root: classes.iconStyle }} />
+            </Badge>
+          </IconButton>
+        </a>
         <ReactTooltip
           id='cartIcon'
           effect='solid'

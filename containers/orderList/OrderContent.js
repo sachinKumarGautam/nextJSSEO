@@ -6,9 +6,7 @@ import Typography from '@material-ui/core/Typography'
 
 import Button from '../../components/button'
 
-import {
-  PAYMENT_PENDING
-} from '../../components/constants/paymentConstants'
+import { PAYMENT_PENDING } from '../../components/constants/paymentConstants'
 
 const styles = theme => {
   return {
@@ -22,14 +20,16 @@ const styles = theme => {
     },
     userIconStyle: {
       color: theme.palette.customGrey.grey300,
-      height: theme.spacing.unit * 2,
+      height: theme.spacing.unit * 3,
       marginTop: theme.spacing.unit / 8
     },
     userNameStyle: {
       color: theme.palette.customGrey.grey500,
       fontWeight: theme.typography.fontWeightBold,
+      fontSize: theme.typography.pxToRem(16),
       display: 'flex',
-      flexDirection: 'row'
+      flexDirection: 'row',
+      alignItems: 'center'
     },
     statusStyle: {
       color: theme.palette.customGreen.green300,
@@ -37,6 +37,10 @@ const styles = theme => {
     },
     pendingStyle: {
       color: theme.palette.customRed.red200,
+      paddingRight: theme.spacing.unit
+    },
+    orangeStyle: {
+      color: theme.palette.customYellow.yellow400,
       paddingRight: theme.spacing.unit
     },
     prescriptionStyle: {
@@ -72,43 +76,47 @@ const styles = theme => {
       marginBottom: theme.spacing.unit * 2
     },
     codButtonStyle: {
-      ...theme.typography.caption,
+      // ...theme.typography.caption,
       marginLeft: theme.spacing.unit * 2
     },
-    reviewStyle: {
-      ...theme.typography.body4,
-      color: theme.palette.customGrey.grey200,
-      fontWeight: theme.typography.fontWeightBold
-    },
-    reviewWrapperStyle: {
-      paddingTop: theme.spacing.unit * 2,
-      paddingLeft: theme.spacing.unit * 2,
-      paddingRight: theme.spacing.unit * 3,
-      paddingBottom: theme.spacing.unit * 2,
-      display: 'flex',
-      justifyContent: 'space-between'
-    },
-    helpStyle: {
-      ...theme.typography.body4,
-      color: theme.palette.customGrey.grey200,
-      fontWeight: theme.typography.fontWeightBold,
-      marginLeft: theme.spacing.unit * 3
-    },
-    cancelStyle: {
-      ...theme.typography.body4,
-      color: theme.palette.customGrey.grey500,
-      fontWeight: theme.typography.fontWeightBold
-    },
-    reviewHelpWrapper: {
-      display: 'flex'
+    customerFullName: {
+      marginLeft: theme.spacing.unit
     }
+    // reviewStyle: {
+    //   ...theme.typography.body4,
+    //   color: theme.palette.customGrey.grey200,
+    //   fontWeight: theme.typography.fontWeightBold
+    // },
+    // reviewWrapperStyle: {
+    //   paddingTop: theme.spacing.unit * 2,
+    //   paddingLeft: theme.spacing.unit * 2,
+    //   paddingRight: theme.spacing.unit * 3,
+    //   paddingBottom: theme.spacing.unit * 2,
+    //   display: 'flex',
+    //   justifyContent: 'space-between'
+    // },
+    // helpStyle: {
+    //   ...theme.typography.body4,
+    //   color: theme.palette.customGrey.grey200,
+    //   fontWeight: theme.typography.fontWeightBold,
+    //   marginLeft: theme.spacing.unit * 3
+    // },
+    // cancelStyle: {
+    //   ...theme.typography.body4,
+    //   color: theme.palette.customGrey.grey500,
+    //   fontWeight: theme.typography.fontWeightBold
+    // },
+    // reviewHelpWrapper: {
+    //   display: 'flex'
+    // }
   }
 }
 
 class OrderContent extends Component {
   render () {
     let itemsLeft = this.props.orderDetails.items.length - 3
-    let image = this.props.orderDetails.prescriptions.length &&
+    let image =
+      this.props.orderDetails.prescriptions.length &&
       this.props.orderDetails.prescriptions[0].location
     return (
       <div>
@@ -119,16 +127,18 @@ class OrderContent extends Component {
               className={this.props.classes.userNameStyle}
             >
               <Person className={this.props.classes.userIconStyle} />
-              {this.props.orderDetails.customer_full_name}
+              <div className={this.props.classes.customerFullName}>
+                {this.props.orderDetails.customer_full_name}
+              </div>
             </Typography>
           </div>
           <div>
             <Typography
               variant='caption'
               className={
-                 this.props.orderDetails.viewStatus === 'Payment Pending'
-                 ? this.props.classes.pendingStyle :
-                this.props.classes.statusStyle
+                this.props.orderDetails.viewStatus === 'Payment Pending'
+                  ? this.props.classes.orangeStyle
+                  : this.props.classes.statusStyle
               }
             >
               {this.props.orderDetails.viewStatus}
@@ -136,32 +146,27 @@ class OrderContent extends Component {
           </div>
         </div>
         <div className={this.props.classes.medicineDetailWrapper}>
-          <img
-            src={image}
-            className={this.props.classes.prescriptionStyle}
-          />
+          <img src={image} className={this.props.classes.prescriptionStyle} />
           <div>
-            {
-              this.props.orderDetails.items.map((itemDetail, index) => (
+            {this.props.orderDetails.items.map(
+              (itemDetail, index) =>
                 index < 3 &&
-                  <Typography
-                    variant='caption'
-                    className={this.props.classes.medicineNameStyle}
-                  >
-                    {itemDetail.name}
-                  </Typography>
-              ))
-            }
+                <Typography
+                  variant='caption'
+                  className={this.props.classes.medicineNameStyle}
+                >
+                  {itemDetail.name}
+                </Typography>
+            )}
             <Typography
               variant='caption'
               className={this.props.classes.quantityStyle}
             >
-              {(itemsLeft > 0) && `+${itemsLeft} Items`}
+              {itemsLeft > 0 && `+${itemsLeft} Items`}
             </Typography>
           </div>
         </div>
-        {
-          this.props.orderDetails.status === PAYMENT_PENDING &&
+        {this.props.orderDetails.status === PAYMENT_PENDING &&
           <div className={this.props.classes.buttonWrapperStyle}>
             <Button
               size='small'
@@ -183,8 +188,7 @@ class OrderContent extends Component {
               className={this.props.classes.codButtonStyle}
               label={'CONVERT TO COD'}
             />
-          </div>
-        }
+          </div>}
         {/* <div className={this.props.classes.reviewWrapperStyle}>
           <div className={this.props.classes.reviewHelpWrapper}>
             <Typography

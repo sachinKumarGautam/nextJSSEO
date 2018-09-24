@@ -10,7 +10,7 @@ const styles = theme => ({
     marginBottom: theme.spacing.unit * 2.25
   },
   thankyou: {
-    fontSize: theme.typography.pxToRem(32),
+    fontSize: theme.spacing.unit * 4,
     color: theme.palette.customYellow.yellow400,
     marginLeft: theme.spacing.unit * 2.5,
     marginBottom: theme.spacing.unit,

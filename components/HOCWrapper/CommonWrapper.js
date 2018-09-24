@@ -1,3 +1,4 @@
+import React from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import PincodeDialog from '../../containers/location/pincode/PincodeDialog'
@@ -7,11 +8,16 @@ import {
   getAnonymousCartIdLoading,
   resetCartState,
   resetCartItemErrorState,
-  resetCartLoadingState
+  resetCartLoadingState,
+  updateShowNoCartIdDialogFlag
 } from '../../containers/cartDetails/cartActions'
+
+import { handleSessionExpiration } from '../../containers/login/loginActions'
+
 import {
   openPincodeDialog,
-  checkPincodeLoading
+  checkPincodeLoading,
+  resetPincodeState
 } from '../../containers/location/pincode/pincodeAction'
 
 import withRoot from '../../src/withRoot'
@@ -25,8 +31,15 @@ import Loader from '../activityIndicator/loader'
 
 import {
   INVALID_CART_TEXT,
-  INVALID_CART_DESCRIPTION
+  INVALID_CART_DESCRIPTION,
+  NO_CART_ID_TEXT,
+  NO_CART_ID_DESCRIPTION
 } from '../../containers/messages/errorMessages'
+
+import {
+  SESSION_EXPIRED,
+  SESSION_EXPIRED_CONTENT
+} from '../../containers/messages/commonMsg'
 
 export function withCommonWrapper (Page) {
   class CommonWrapper extends React.Component {
@@ -49,26 +62,37 @@ export function withCommonWrapper (Page) {
     }
 
     addToCartHandler (inProgressCartItem, event) {
-      if (this.props.checkPincodeState.payload.pincode) {
-        this.props.actions.incrementCartItemLoading(
+      if (!this.props.cartState.payload.uid) {
+        const isShowNoCartIdDialog = true
+
+        this.props.actions.updateShowNoCartIdDialogFlag(
           this.props.cartState,
-          inProgressCartItem
+          isShowNoCartIdDialog
         )
       } else {
-        this.setState({
-          inProgressCartItem
-        })
+        if (this.props.checkPincodeState.payload.pincode) {
+          this.props.actions.incrementCartItemLoading(
+            this.props.cartState,
+            inProgressCartItem
+          )
+        } else {
+          this.setState({
+            inProgressCartItem
+          })
 
-        this.props.actions.openPincodeDialog(this.props.checkPincodeState, {
-          isOpen: true
-        })
+          this.props.actions.openPincodeDialog(this.props.checkPincodeState, {
+            isOpen: true
+          })
+        }
       }
     }
 
-    handleClose = () =>
+    handleClose = () => {
       this.props.actions.openPincodeDialog(this.props.checkPincodeState, false)
+      this.props.actions.resetPincodeState()
+    }
 
-    handleCartInvalid () {
+    handleDialogOk () {
       this.props.actions.resetCartState()
       this.props.actions.getAnonymousCartIdLoading(
         this.props.cartState,
@@ -78,36 +102,92 @@ export function withCommonWrapper (Page) {
       )
     }
 
+    handleShowNoCartIdDialogOk () {
+      const isShowNoCartIdDialog = false
+
+      this.props.actions.updateShowNoCartIdDialogFlag(
+        this.props.cartState,
+        isShowNoCartIdDialog
+      )
+
+      this.props.actions.getAnonymousCartIdLoading(
+        this.props.cartState,
+        this.props.checkPincodeState.payload.source,
+        this.props.checkPincodeState.payload.id
+      )
+    }
+
     resetState () {
       this.props.actions.resetCartItemErrorState()
     }
 
+    getErrorComp = (isCartInvalid, isSessionExpired) => {
+      if (isSessionExpired) {
+        // this.props.actions.handleSessionExpiration(this.props.loginState, false)
+        return (
+          <DialogueErrorMessage
+            dialogKey={'sessionExpired'}
+            handleSessionExpiration={this.props.actions.handleSessionExpiration}
+            loginState={this.props.loginState}
+            isSessionExpired={isSessionExpired}
+            dialogueTitle={SESSION_EXPIRED}
+            dialogueContent={SESSION_EXPIRED_CONTENT}
+            onClickOk={this.handleDialogOk.bind(this)}
+          />
+        )
+      } else if (isCartInvalid) {
+        return (
+          <DialogueErrorMessage
+            dialogueTitle={INVALID_CART_TEXT}
+            dialogueContent={INVALID_CART_DESCRIPTION}
+            onClickOk={this.handleDialogOk.bind(this)}
+          />
+        )
+      } else if (this.props.cartState.isShowNoCartIdDialog) {
+        return (
+          <DialogueErrorMessage
+            dialogueTitle={NO_CART_ID_TEXT}
+            dialogueContent={NO_CART_ID_DESCRIPTION}
+            isShowNoCartIdDialog={this.props.cartState.isShowNoCartIdDialog}
+            onClickOk={this.handleShowNoCartIdDialogOk.bind(this)}
+          />
+        )
+      } else if (this.props.cartState.errorState.isError) {
+        return (
+          <SnackbarErrorMessage
+            error={this.props.cartState.errorState.error}
+          />
+        )
+      } else {
+        return (
+          <SnackbarErrorMessage
+            error={this.props.cartState.payload.cart_items.errorState.error}
+            resetState={this.resetState.bind(this)}
+          />
+        )
+      }
+    }
+
     render () {
-      const { checkPincodeState, actions } = this.props
+      const { checkPincodeState, cartState, actions, loginState } = this.props
       const { inProgressCartItem } = this.state
+      const isSessionExpired = loginState.isSessionExpired
+      const isCartInvalid = cartState.payload.is_cart_invalid
+      const isShowNoCartIdDialog = cartState.isShowNoCartIdDialog
+
       return (
         <React.Fragment>
           <ActivityIndicator
             isLoading={this.props.cartState.isLoading}
             LoaderComp={<Loader isLoading loaderType={'fullPageSpinner'} />}
             isError={
-              this.props.cartState.payload.cart_items.errorState.isError ||
-                this.props.cartState.payload.is_cart_invalid
+              cartState.payload.cart_items.errorState.isError ||
+                isCartInvalid ||
+                isSessionExpired ||
+                isShowNoCartIdDialog ||
+                cartState.errorState.isError
             }
-            ErrorComp={
-              this.props.cartState.payload.is_cart_invalid
-                ? <DialogueErrorMessage
-                  dialogueTitle={INVALID_CART_TEXT}
-                  dialogueContent={INVALID_CART_DESCRIPTION}
-                  handleCartInvalid={this.handleCartInvalid.bind(this)}
-                />
-                : <SnackbarErrorMessage
-                  error={
-                    this.props.cartState.payload.cart_items.errorState.error
-                  }
-                  resetState={this.resetState.bind(this)}
-                />
-            }
+            ErrorComp={this.getErrorComp(isCartInvalid, isSessionExpired)}
             bottomError
           >
             <Page {...this.props} addToCartHandler={this.addToCartHandler} />
@@ -130,7 +210,8 @@ export function withCommonWrapper (Page) {
     return {
       checkPincodeState: state.checkPincodeState,
       searchMedicineState: state.searchMedicineState,
-      cartState: state.cartState
+      cartState: state.cartState,
+      loginState: state.loginState
     }
   }
 
@@ -144,7 +225,10 @@ export function withCommonWrapper (Page) {
           getAnonymousCartIdLoading,
           resetCartItemErrorState,
           resetCartState,
-          resetCartLoadingState
+          resetCartLoadingState,
+          handleSessionExpiration,
+          resetPincodeState,
+          updateShowNoCartIdDialogFlag
         },
         dispatch
       )

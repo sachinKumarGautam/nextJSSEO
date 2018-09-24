@@ -91,7 +91,7 @@ class OTPForm extends React.Component {
     })
 
     this.otpResendTimer = setInterval(() => {
-      this.setState((prevState) => {
+      this.setState(prevState => {
         return {
           updateCounter: prevState.updateCounter - 1
         }
@@ -113,7 +113,7 @@ class OTPForm extends React.Component {
       this.props.loginState,
       this.props.setSubmitting,
       this.props.toggleForm,
-      {mobile: this.props.loginState.payload.initialMobile}
+      { mobile: this.props.loginState.payload.initialMobile }
     )
     this.customCountTimer()
   }
@@ -152,28 +152,21 @@ class OTPForm extends React.Component {
             placeholder={OTP_PLACEHOLDER}
           />
           {
-            errors.otp && touched.otp &&
+            ((errors.otp && touched.otp) || loginState.errorStateVerifyOtp.isError) &&
             <FormHelperText id='otp'>
-              {errors.otp}
-            </FormHelperText>
-          }
-          {
-            loginState.errorStateVerifyOtp.isError &&
-            <FormHelperText id='otp'>
-              {CUSTOM_MESSGAE_SNACKBAR}
+              {errors.otp ? errors.otp : CUSTOM_MESSGAE_SNACKBAR }
             </FormHelperText>
           }
           {
             this.state.isHideResetButton
               ? (<Typography align='right' className={classes.resendTimer}>
-                Resend {this.state.updateCounter}
+                {this.state.updateCounter} seconds
               </Typography>)
               : (<a onClick={this.resendOtp}>
                 <Typography align='right' className={classes.resendLink}>
                   Resend OTP
                 </Typography>
-              </a>)
-          }
+              </a>)}
         </FormControl>
         <div className={classes.buttonWrapper}>
           <Button
@@ -181,7 +174,11 @@ class OTPForm extends React.Component {
             isloading={isSubmitting}
             variant='raised'
             color='primary'
-            label={'Login'}
+            label={
+              this.props.isRegisterClicked || loginState.isNewUser
+                ? 'Register'
+                : 'Login'
+            }
           />
         </div>
       </form>

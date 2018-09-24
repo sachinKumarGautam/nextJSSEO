@@ -41,6 +41,7 @@ class PatientDetailForm extends React.Component {
           ErrorComp={
             <SnackbarErrorMessage
               error={this.props.patientFormState.addNewPatient.errorState.error}
+              resetState={this.props.resetPatientForm}
             />
           }
           bottomError

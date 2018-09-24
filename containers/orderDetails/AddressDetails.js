@@ -10,12 +10,13 @@ const styles = theme => ({
     paddingLeft: theme.spacing.unit * 2.5
   },
   address: {
-    fontSize: theme.spacing.unit * 2,
+    fontSize: theme.spacing.unit * 2.25,
     fontWeight: theme.typography.fontWeightBold,
     color: theme.palette.customGrey.grey500,
     marginLeft: theme.spacing.unit * 2.5
   },
   street: {
+    fontSize: theme.spacing.unit * 2.25,
     marginLeft: theme.spacing.unit * 6.875
   },
   image: {
@@ -42,12 +43,7 @@ const AddressDetails = (props) => {
       <Typography
         className={props.classes.street}
       >
-        {props.shippingAddress.street1}
-      </Typography>
-      <Typography
-        className={props.classes.street}
-      >
-        {props.shippingAddress.street2}
+        {props.shippingAddress.street1}, {props.shippingAddress.street2}, {props.shippingAddress.city}, {props.shippingAddress.pincode}
       </Typography>
     </div>
   )

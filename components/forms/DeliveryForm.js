@@ -46,7 +46,8 @@ const styles = theme => ({
     textAlign: 'center'
   },
   mobilePrefix: {
-    marginBottom: theme.spacing.unit / 8
+    marginBottom: 0,
+    color: theme.palette.customGrey.grey200
   }
 })
 
@@ -97,7 +98,7 @@ class DeliveryForm extends React.Component {
         name,
         inputValue
       )
-    } else {
+    } else if (name !== 'mobile') {
       this.props.updateAddressFormValue(
         this.props.deliveryDetailsState,
         name,
@@ -241,7 +242,7 @@ class DeliveryForm extends React.Component {
           disabled
         >
           <Input
-            placeholder='  City'
+            placeholder='City'
             className={classes.valueStyle}
             id='city'
             type='text'

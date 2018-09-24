@@ -1,7 +1,8 @@
 import {
   SEARCH_MEDICINE_LOADING,
   SEARCH_MEDICINE_SUCCESS,
-  SEARCH_MEDICINE_FAILURE
+  SEARCH_MEDICINE_FAILURE,
+  RESET_SEARCH_MEDICINE_STATE
 } from './searchMedicineActionTypes'
 
 /**
@@ -37,11 +38,12 @@ export function searchMedicineLoading (
  * @param {object} result - Search medicine results
  */
 
-export function searchMedicineSuccess (searchMedicineState, result) {
+export function searchMedicineSuccess (searchMedicineState, result, totalPages) {
   return {
     type: SEARCH_MEDICINE_SUCCESS,
     searchMedicineState,
     payload: result,
+    totalPages: totalPages,
     isLoading: false
   }
 }
@@ -57,5 +59,11 @@ export function searchMedicineFailure (searchMedicineState, error) {
     isLoading: false,
     isError: true,
     error: error
+  }
+}
+
+export function resetSearchMedicineState () {
+  return {
+    type: RESET_SEARCH_MEDICINE_STATE
   }
 }

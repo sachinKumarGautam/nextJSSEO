@@ -31,8 +31,8 @@ const styles = theme => ({
     position: 'absolute',
     right: 0,
     color: theme.palette.common.white,
-    width: theme.spacing.unit * 3.125,
-    height: theme.spacing.unit * 3.125,
+    width: theme.spacing.unit * 2.5,
+    height: theme.spacing.unit * 2.5,
     background: theme.palette.common.black,
     borderRadius: '50%',
     textAlign: 'center'
@@ -46,6 +46,7 @@ const styles = theme => ({
     zIndex: -1
   },
   pickerListLabel: {
+    cursor: 'pointer',
     width: theme.spacing.unit * 12.5,
     textAlign: 'center',
     background: theme.palette.common.white,
@@ -60,6 +61,7 @@ const styles = theme => ({
     marginLeft: theme.spacing.unit * 6.25
   },
   pickerListLabelPlus: {
+    cursor: 'pointer',
     fontSize: theme.spacing.unit * 4.375,
     display: 'block',
     marginBottom: theme.spacing.unit * 0.625
@@ -67,6 +69,9 @@ const styles = theme => ({
   deleteButtonWrapper: {
     position: 'relative',
     display: 'inline-block'
+  },
+  deleteImageStyle: {
+    width: theme.spacing.unit
   }
 })
 
@@ -103,7 +108,7 @@ const ImagePicker = (props) => (
               className={props.classes.deleteButton}
               onClick={props.onDeleteButton.bind(this, index)}
             >
-              x
+              <img src='/static/images/delete.svg' className={props.classes.deleteImageStyle} />
             </div>
             <img
               src={image.url}

@@ -31,8 +31,8 @@ export function getOrderListDetails (action$, store) {
     mergeMap(data => {
       return http(getOrderList$(data.customerId, data.page, data.size)).pipe(
         map(result => {
-          let modifiedPayload =
-            [...data.orderListState.payload, ...result.body.payload.content]
+          let modifiedPayload = [...data.orderListState.payload, ...result.body.payload.content]
+          const totalPages = result.body.payload.totalPages
           const modifiedResponse = modifiedPayload.map(payload => {
             const orderStatus = getOrderStatusProgressDetails(payload.state, payload.status)
             const viewStatus = orderStatus.viewStatus
@@ -45,7 +45,8 @@ export function getOrderListDetails (action$, store) {
 
           return getOrderListDetailsSuccess(
             data.orderListState,
-            modifiedResponse
+            modifiedResponse,
+            totalPages
           )
         }),
         catchError(error => {

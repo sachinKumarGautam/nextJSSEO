@@ -173,6 +173,7 @@ export default function cartReducer (state = initialState, action) {
             isLoading: action.isLoading
           },
           discount: action.discount,
+          payment_channels: action.payment_channels,
           redeemed_care_points: action.redeemed_care_points,
           redeemable_care_points: action.redeemable_care_points,
           total_mrp: action.total_mrp,
@@ -207,11 +208,7 @@ export default function cartReducer (state = initialState, action) {
           ...state.payload,
           patient_details: {
             ...state.payload.patient_details,
-            errorState: {
-              ...state.payload.patient_details.errorState,
-              isError: action.isError,
-              error: action.error
-            }
+            errorState: initialState.errorState
           }
         }
       }
@@ -238,6 +235,7 @@ export default function cartReducer (state = initialState, action) {
         ...state,
         payload: {
           ...state.payload,
+          payment_channels: action.payment_channels,
           patient_details: {
             ...state.payload.patient_details,
             isLoading: action.isLoading,
@@ -277,11 +275,7 @@ export default function cartReducer (state = initialState, action) {
           ...state.payload,
           shipping_address_details: {
             ...state.payload.shipping_address_details,
-            errorState: {
-              ...state.payload.shipping_address_details.errorState,
-              isError: action.isError,
-              error: action.error
-            }
+            errorState: initialState.errorState
           }
         }
       }
@@ -308,6 +302,7 @@ export default function cartReducer (state = initialState, action) {
         ...state,
         payload: {
           ...state.payload,
+          payment_channels: action.payment_channels,
           available_delivery_option: action.available_delivery_option,
           preferred_delivery_option: action.preferred_delivery_option,
           delivery_option: action.delivery_option,
@@ -361,6 +356,7 @@ export default function cartReducer (state = initialState, action) {
           ...state.payload,
           id: action.id,
           uid: action.uid,
+          payment_channels: action.payment_channels,
           customer_id: action.customer_id,
           patient_details: {
             ...state.payload.patient_details,
@@ -577,6 +573,9 @@ export default function cartReducer (state = initialState, action) {
             facility_code: action.facility_code,
             status: action.status,
             source: action.source,
+            payment_confirmation_time: action.payment_confirmation_time,
+            payment_cancellation_time: action.payment_cancellation_time,
+            customer_care_number: action.customer_care_number,
             urgent_delivery_charge: action.urgent_delivery_charge
           }
         }
@@ -891,10 +890,7 @@ export default function cartReducer (state = initialState, action) {
         payload: {
           ...state.payload,
           state: action.state,
-          status: action.status,
-          payment_confirmation_time: action.payment_confirmation_time,
-          payment_cancellation_time: action.payment_cancellation_time,
-          customer_care_number: action.customer_care_number
+          status: action.status
         },
         orderResponse: {
           ...state.orderResponse,
@@ -902,7 +898,10 @@ export default function cartReducer (state = initialState, action) {
             ...state.orderResponse.payload,
             isLoading: action.isLoading,
             order_number: action.order_number,
-            order_type: action.order_type
+            order_type: action.order_type,
+            payment_confirmation_time: action.payment_confirmation_time,
+            payment_cancellation_time: action.payment_cancellation_time,
+            customer_care_number: action.customer_care_number
           }
         },
         payment_gateway: action.payment_gateway,
@@ -1001,6 +1000,12 @@ export default function cartReducer (state = initialState, action) {
       return {
         ...state,
         isLAssuredLExpressAlertOpen: action.isLAssuredLExpressAlertOpen
+      }
+
+    case cartActionTypes.UPDATE_SHOW_NO_CART_ID_DIALOG_FLAG:
+      return {
+        ...state,
+        isShowNoCartIdDialog: action.isShowNoCartIdDialog
       }
 
     default:

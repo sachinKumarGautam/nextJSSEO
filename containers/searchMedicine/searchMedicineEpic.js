@@ -29,6 +29,8 @@ export function searchMedicine (action$, store) {
       ).pipe(
         map(result => {
           let modifiedResponse
+          const totalPages = result.body.payload.totalPages
+
           if (data.pageNumber) {
             modifiedResponse = [
               ...searchMedicineState.payload.searchMedicineResult,
@@ -38,7 +40,11 @@ export function searchMedicine (action$, store) {
             modifiedResponse = result.body.payload.content
           }
 
-          return searchMedicineSuccess(searchMedicineState, modifiedResponse)
+          return searchMedicineSuccess(
+            searchMedicineState,
+            modifiedResponse,
+            totalPages
+          )
         }),
         catchError(error => {
           return of(searchMedicineFailure(searchMedicineState, error))

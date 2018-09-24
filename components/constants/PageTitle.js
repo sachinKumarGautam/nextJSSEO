@@ -19,7 +19,9 @@ export const moleculeList = {
 }
 
 export const orderConfirmation = {
-  title: 'Thank You',
+  successTitle: 'Thank You',
+  retryTitle: 'Payment Retry',
+  pendingTitle: 'Payment Pending',
   description: ''
 }
 
@@ -60,5 +62,25 @@ export const cartDetail = {
 
 export const orderDetail = {
   title: 'Order Detail',
+  description: ''
+}
+
+export const privacyPolicy = {
+  title: 'Privacy & Data Security',
+  description: ''
+}
+
+export const aboutUs = {
+  title: 'About Us',
+  description: ''
+}
+
+export const faq = {
+  title: 'FAQ',
+  description: ''
+}
+
+export const terms = {
+  title: 'Terms & conditions',
   description: ''
 }

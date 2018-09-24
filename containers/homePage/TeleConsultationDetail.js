@@ -1,10 +1,12 @@
-import React, {Component} from 'react'
+import React, { Component } from 'react'
 
 import { withStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
 import Button from '@material-ui/core/Button'
 
-import {scrollTo} from '../../utils/scrollToSections'
+import { scrollTo } from '../../utils/scrollToSections'
+
+import { SCROLL_TO_TOP_HEIGHT } from '../../components/constants/Constants'
 
 const styles = theme => {
   return {
@@ -33,7 +35,7 @@ const styles = theme => {
       paddingBottom: theme.spacing.unit * 6
     },
     teleconsultTitle: {
-      fontSize: theme.typography.pxToRem(24),
+      fontSize: theme.typography.pxToRem(20),
       fontWeight: theme.typography.fontWeightBold,
       textAlign: 'right',
       marginRight: theme.spacing.unit * 7.57
@@ -49,7 +51,7 @@ const styles = theme => {
 
 class TeleConsultationDetail extends Component {
   onGetStarted () {
-    return scrollTo('search-section')
+    return scrollTo('search-section', SCROLL_TO_TOP_HEIGHT)
   }
   render () {
     return (
@@ -59,13 +61,13 @@ class TeleConsultationDetail extends Component {
             variant='body2'
             className={this.props.classes.teleconsultTitle}
           >
-              Doctor Tele-consultation
+            Doctor Tele-consultation
           </Typography>
           <Typography
             variant='body2'
             className={this.props.classes.teleconsultDescription}
           >
-              Consult the best doctors for your health condition, from the comfort of your home!
+            Consult the best doctors for your health condition, from the comfort of your home!
           </Typography>
           <Button
             variant='raised'

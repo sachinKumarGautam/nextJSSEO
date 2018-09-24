@@ -57,14 +57,12 @@ import {
   submitPatientDetailsLoading
 } from '../patientDetails/patientDetailsActions'
 
-import { checkPincodeLoading } from '../location/pincode/pincodeAction'
+import { checkPincodeLoading, resetPincodeState } from '../location/pincode/pincodeAction'
 import PlaceOrderLoader
   from '../../components/activityIndicator/loader/PlaceOrderLoader'
 import {
   SWITCH_PATIENT_DIALOG_TITLE,
-  REFILL_DIALOG_TITLE,
-  SWITCH_PATIENT_DIALOG_CONTENT,
-  REFILL_DIALOG_CONTENT
+  SWITCH_PATIENT_DIALOG_CONTENT
 } from '../messages/refillPatientMessage'
 import RefillPatientDialogue from '../../components/RefillPatientDialogue'
 
@@ -108,10 +106,12 @@ class CartDetailsWrapper extends Component {
         this.props.customerState.payload.id // pass customer id
       )
 
-      this.props.actions.getDeliveryDetailsListLoading(
-        this.props.deliveryDetailsState,
-        this.props.customerState.payload.id // pass customer id
-      )
+      if (!this.props.loginState.isNewUser) {
+        this.props.actions.getDeliveryDetailsListLoading(
+          this.props.deliveryDetailsState,
+          this.props.customerState.payload.id // pass customer id
+        )
+      }
     }
   }
 
@@ -126,10 +126,12 @@ class CartDetailsWrapper extends Component {
         this.props.customerState.payload.id // pass customer id
       )
 
-      this.props.actions.getDeliveryDetailsListLoading(
-        this.props.deliveryDetailsState,
-        this.props.customerState.payload.id // pass customer id
-      )
+      if (!this.props.loginState.isNewUser) {
+        this.props.actions.getDeliveryDetailsListLoading(
+          this.props.deliveryDetailsState,
+          this.props.customerState.payload.id // pass customer id
+        )
+      }
     }
   }
 
@@ -144,7 +146,6 @@ class CartDetailsWrapper extends Component {
     this.setState({
       selectedPatient
     })
-    const dialogTitle = ''
     this.setState({
       open: true,
       dialogTitle: SWITCH_PATIENT_DIALOG_TITLE,
@@ -181,6 +182,7 @@ class CartDetailsWrapper extends Component {
     this.props.actions.resetSavePatientToCartError()
     this.props.actions.resetSaveDeliveryAddressToCartError()
     this.props.actions.resetUploadPrescriptionError()
+    this.props.actions.resetPincodeState()
   }
 
   getErrorComponent () {
@@ -201,11 +203,9 @@ class CartDetailsWrapper extends Component {
               this.props.cartState.prescriptionDetails.errorState.error ||
               this.props.cartState.expressDeliveryCheck.errorState.error ||
               this.props.cartState.payload.cart_items.errorState.error ||
-              this.props.cartState.payload.is_doctor_callback.errorState
-                .error ||
+              this.props.cartState.payload.is_doctor_callback.errorState.error ||
               this.props.cartState.payload.patient_details.errorState.error ||
-              this.props.cartState.payload.shipping_address_details.errorState
-                .error ||
+              this.props.cartState.payload.shipping_address_details.errorState.error ||
               this.props.checkPincodeState.errorState.error
           }
           resetState={this.resetState}
@@ -236,12 +236,10 @@ class CartDetailsWrapper extends Component {
               this.props.cartState.prescriptionDetails.errorState.isError ||
               this.props.cartState.expressDeliveryCheck.errorState.isError ||
               this.props.cartState.payload.cart_items.errorState.isError ||
-              this.props.cartState.payload.is_doctor_callback.errorState
-                .isError ||
+              this.props.cartState.payload.is_doctor_callback.errorState.isError ||
               this.props.cartState.payload.patient_details.errorState.isError ||
-              this.props.cartState.payload.shipping_address_details.errorState
-                .isError ||
-              this.props.checkPincodeState.errorState.isError
+              this.props.cartState.payload.shipping_address_details.errorState.isError ||
+              (this.props.checkPincodeState.errorState.isError && this.props.checkPincodeState.isDeliveryAssignment)
           }
           ErrorComp={this.getErrorComponent()}
           bottomError={!this.props.cartState.errorState.isError}
@@ -357,7 +355,6 @@ function mapStateToProps (state) {
     deliveryDetailsState: state.deliveryDetailsState,
     checkPincodeState: state.checkPincodeState,
     constantsState: state.constantsState,
-    checkPincodeState: state.checkPincodeState,
     pastMedicineState: state.pastMedicineState
   }
 }
@@ -397,7 +394,8 @@ function mapDispatchToProps (dispatch) {
         resetSaveDeliveryAddressToCartError,
         resetUploadPrescriptionError,
         deleteCartLoading,
-        updateLassuredExpressFlag
+        updateLassuredExpressFlag,
+        resetPincodeState
       },
       dispatch
     )

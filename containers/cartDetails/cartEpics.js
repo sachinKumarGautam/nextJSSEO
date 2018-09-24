@@ -64,8 +64,14 @@ import {
   deleteCartSuccess,
   deleteCartFailure,
   getAnonymousCartIdLoading,
-  savePatientToCartLoading
+  savePatientToCartLoading,
+  updateShowNoCartIdDialogFlag,
+  optForDoctorCallbackLoading
 } from './cartActions'
+
+import {
+  toggleAuthentication
+} from '../login/loginActions'
 
 import {
   getAnonymousCartId$,
@@ -96,8 +102,11 @@ export function getAnonymousCartIdEpic (action$, store) {
         getAnonymousCartId$(data.source, data.facility_code, data.source_type)
       ).pipe(
         flatMap(result => {
+          const isShowNoCartIdDialog = false
+
           if (data.isAssignPatientToCart) {
             return of(
+              updateShowNoCartIdDialogFlag(data.cartState, isShowNoCartIdDialog),
               getAnonymousCartIdSuccess(data.cartState, result.body.payload),
               savePatientToCartLoading(
                 data.cartState,
@@ -109,6 +118,7 @@ export function getAnonymousCartIdEpic (action$, store) {
             )
           } else {
             return of(
+              updateShowNoCartIdDialogFlag(data.cartState, isShowNoCartIdDialog),
               getAnonymousCartIdSuccess(data.cartState, result.body.payload)
             )
           }
@@ -250,7 +260,11 @@ export function incrementCartItemEpic (action$, store) {
       }
       return http(putCartItem$(cartUid, medicineIncremented)).pipe(
         flatMap(result => {
-          if (medicineIncremented.quantity === 1) {
+          const cartItems = data.cartState.payload.cart_items.payload
+          const checkIfAlredyExistInCart = cartItems.findIndex(
+            cartItem => medicineIncremented.sku === cartItem.sku
+          )
+          if (checkIfAlredyExistInCart === -1) {
             return of(
               goToCartSnackbar(data.cartState, true),
               putCartItemSuccess(data.cartState, result.body.payload)
@@ -368,8 +382,10 @@ export function cartTransferEpic (action$, store) {
   return action$.pipe(
     ofType(CART_TRANSFER_LOADING),
     mergeMap(data => {
+      const loginState = store.getState().loginState
+
       return http(cartTransfer$(data.cartState.payload.uid)).pipe(
-        map(result => {
+        flatMap(result => {
           let cartItems = result.body.payload.cart_items
           let cartPrescriptions = result.body.payload.cart_prescriptions
 
@@ -388,11 +404,15 @@ export function cartTransferEpic (action$, store) {
               }
             }
           )
-          return cartTransferSuccess(
-            data.cartState,
-            result,
-            cartItems,
-            updatedCartPrescriptions
+
+          return of(
+            cartTransferSuccess(
+              data.cartState,
+              result,
+              cartItems,
+              updatedCartPrescriptions
+            ),
+            toggleAuthentication(loginState, true)
           )
         }),
         catchError(error => {
@@ -413,7 +433,7 @@ export function uploadPrescriptionEpic (action$, store) {
       return http(
         uploadPrescriptionEpic$(data.cartState.payload.uid, formData)
       ).pipe(
-        map(result => {
+        flatMap(result => {
           let cartPrescriptions = result.body.payload.cart_prescriptions
 
           let updatedCartPrescriptions = cartPrescriptions.map(
@@ -425,12 +445,27 @@ export function uploadPrescriptionEpic (action$, store) {
             }
           )
 
-          return uploadPrescriptionSuccess(
-            data.cartState,
-            data.uploadedFiles,
-            updatedCartPrescriptions,
-            data.isHomePage
-          )
+          if (data.cartState.payload.is_doctor_callback.payload) {
+            return of(uploadPrescriptionSuccess(
+              data.cartState,
+              data.uploadedFiles,
+              updatedCartPrescriptions,
+              data.isHomePage
+            ),
+            optForDoctorCallbackLoading(
+              data.cartState,
+              data.cartState.payload.uid,
+              !data.cartState.payload.is_doctor_callback.payload
+            )
+            )
+          } else {
+            return of(uploadPrescriptionSuccess(
+              data.cartState,
+              data.uploadedFiles,
+              updatedCartPrescriptions,
+              data.isHomePage
+            ))
+          }
         }),
         catchError(error => {
           return of(uploadPrescriptionFailure(data.cartState, error))
@@ -640,7 +675,7 @@ export function deleteCartState (action$, store) {
           )
         }),
         catchError(error => {
-          return deleteCartFailure(data.cartState, error)
+          return of(deleteCartFailure(data.cartState, error))
         })
       )
     })

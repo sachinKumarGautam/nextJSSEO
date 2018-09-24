@@ -87,7 +87,7 @@ class PriceDetails extends Component {
               <Typography className={this.props.classes.discount}>
                 Care Points
               </Typography>
-              <a href='#' data-tip data-for='care_point'>
+              <a data-tip data-for='care_point'>
                 <img
                   src='/static/images/info-outline.svg'
                   className={this.props.classes.iconStyle}
@@ -113,7 +113,7 @@ class PriceDetails extends Component {
               <Typography className={this.props.classes.discount}>
                 Care Points Plus
               </Typography>
-              <a href='#' data-tip data-for='care_point_plus'>
+              <a data-tip data-for='care_point_plus'>
                 <img
                   src='/static/images/info-outline.svg'
                   className={this.props.classes.iconStyle}
@@ -143,7 +143,7 @@ class PriceDetails extends Component {
               this.props.cartState.payload.urgent_delivery_charge
                 ? (
                   <Typography className={this.props.classes.discount}>
-                  Express Delivery Charges
+                    Express Delivery Charges
                   </Typography>
                 )
                 : null
@@ -151,7 +151,7 @@ class PriceDetails extends Component {
           </Grid>
           <Grid item xs={4}>
             <Typography className={this.props.classes.itemTotalAmount}>
-            ₹{this.props.cartState.payload.total_mrp}
+              ₹{this.props.cartState.payload.total_mrp}
             </Typography>
             <Typography className={this.props.classes.discountAmount}>
               - ₹ {this.props.cartState.payload.discount}

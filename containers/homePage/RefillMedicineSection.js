@@ -1,13 +1,14 @@
-import React, {Component} from 'react'
+import React, { Component } from 'react'
 
 import { withStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
 import Button from '@material-ui/core/Button'
 
-import {scrollTo} from '../../utils/scrollToSections'
+import { scrollTo } from '../../utils/scrollToSections'
 import Router from 'next/router'
 import { REFILL_PATIENTS } from '../../routes/RouteConstant'
 import { getReplacedString } from '../../utils/replaceConstants'
+import { SCROLL_TO_TOP_HEIGHT } from '../../components/constants/Constants'
 
 const styles = theme => {
   return {
@@ -50,7 +51,7 @@ const styles = theme => {
 class RefillMedicineSection extends Component {
   onPlaceOrder () {
     if (!this.props.loginState.isAuthenticated || this.props.loginState.isNewUser) {
-      return scrollTo('search-section')
+      return scrollTo('search-section', SCROLL_TO_TOP_HEIGHT)
     } else {
       const url = getReplacedString(REFILL_PATIENTS)
       return Router.push(url)
@@ -69,7 +70,7 @@ class RefillMedicineSection extends Component {
           variant='body2'
           className={this.props.classes.description}
         >
-          LifCare saves you all the time and effort to re-visit pharmacies by proactively reminding you to refill your medicines on-time every-month. Receive timely reminders for your medicine refills, and get them re-delivered every month.
+          LifCare saves you all the time and effort to re-visit pharmacies, by proactively refilling your medicines on-time every-time.
         </Typography>
         <div className={this.props.classes.imageStyle}>
           <img src='/static/images/refillDetail.svg' />

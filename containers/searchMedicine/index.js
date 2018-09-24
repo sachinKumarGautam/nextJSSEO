@@ -8,11 +8,11 @@ import CircularProgress from '@material-ui/core/CircularProgress'
 import Button from '../../components/button'
 import SearchIcon from '@material-ui/icons/Search'
 import MedicineListDetails from '../../components/MedicineListDetails'
-import TextErrorMessage
-  from '../../components/activityIndicator/error/TextErrorMessage'
 import { PRODUCT_SEARCH, PRODUCT_DETAILS } from '../../routes/RouteConstant'
 
-import { CUSTOM_MESSGAE_SNACKBAR } from '../messages/errorMessages'
+import ActivityIndicator from '../../components/activityIndicator/index'
+import SnackbarErrorMessage
+  from '../../components/activityIndicator/error/SnackbarErrorMessage'
 import debounce from 'lodash.debounce'
 import { modifiyMedicineList } from '../../utils/common'
 
@@ -32,7 +32,10 @@ const styles = theme => ({
     overflow: 'scroll',
     zIndex: 1,
     left: 0,
-    right: 0
+    right: 0,
+    marginLeft: theme.spacing.unit * 4,
+    marginRight: theme.spacing.unit * 2,
+    width: 'auto'
   },
   chip: {
     margin: `${theme.spacing.unit / 2}px ${theme.spacing.unit / 4}px`
@@ -52,7 +55,7 @@ const styles = theme => ({
   searchButton: {
     position: 'absolute',
     right: 0,
-    top: -(theme.spacing.unit * 2.2),
+    top: -(theme.spacing.unit * 1.95),
     height: theme.spacing.unit * 4,
     borderRadius: `0px ${theme.spacing.unit * 2}px ${theme.spacing.unit * 2}px 0px`
   },
@@ -64,8 +67,7 @@ const styles = theme => ({
     marginLeft: theme.spacing.unit * 2.5
   },
   iconColor: {
-    color: theme.palette.customGrey.grey500,
-    marginLeft: theme.spacing.unit * 4
+    color: theme.palette.customGrey.grey500
   },
   searchContentWrapper: {
     listStyle: 'none',
@@ -93,13 +95,8 @@ const styles = theme => ({
     color: theme.palette.primary.main,
     zIndex: 999
   },
-  errorMessage: {
-    ...theme.typography.caption,
-    color: theme.palette.customRed.red200,
-    fontSize: theme.typography.pxToRem(11),
-    textAlign: 'left',
-    paddingLeft: theme.spacing.unit * 18,
-    width: theme.spacing.unit * 80
+  searchMedicineText: {
+    fontSize: theme.typography.pxToRem(13)
   }
 })
 
@@ -110,6 +107,7 @@ function renderInput (inputProps) {
     ref,
     onChange,
     searchMedicineIsLoading,
+    onKeyPress,
     ...other
   } = inputProps
   return (
@@ -117,10 +115,12 @@ function renderInput (inputProps) {
       {searchMedicineIsLoading &&
         <CircularProgress className={classes.progress} size={20} />}
       <TextField
+        onKeyPress={onKeyPress.bind(this, InputProps.inputValue)}
         InputProps={{
           disableUnderline: true,
           // inputRef: ref,
           classes: {
+            root: classes.searchMedicineText,
             formControl: classes.inputFormControl,
             focused: classes.inputFocused
           },
@@ -130,6 +130,7 @@ function renderInput (inputProps) {
       />
       <Button
         color='primary'
+        size='small'
         variant='flat'
         classes={{
           root: classes.searchButton
@@ -180,7 +181,8 @@ class SearchMedicine extends React.Component {
     super(props)
     this.state = {
       isOpen: false,
-      highlightedIndex: ''
+      highlightedIndex: '',
+      isFocus: false
     }
     this.searchMedicineOnChange = this.searchMedicineOnChange.bind(this)
     this.stateChangeHandler = this.stateChangeHandler.bind(this)
@@ -210,6 +212,12 @@ class SearchMedicine extends React.Component {
     const href = `${PRODUCT_SEARCH}?slug=${medicineName}`
     const as = `${PRODUCT_SEARCH}?slug=${medicineName}`
     Router.push(href, as)
+  }
+
+  onKeyPress = (value, event) => {
+    if (event.charCode === 13 && value && value.length > 3) {
+      this.onSearchClick(value)
+    }
   }
 
   stateChangeHandler = changes => {
@@ -244,6 +252,10 @@ class SearchMedicine extends React.Component {
     Router.push(href, as)
   }
 
+  resetState () {
+    this.props.resetSearchMedicineState()
+  }
+
   render () {
     const {
       classes,
@@ -259,71 +271,74 @@ class SearchMedicine extends React.Component {
     const cartItems = cartState.payload.cart_items.payload
     return (
       <div className={classes.root}>
-        {this.props.searchMedicineState.errorState.isError &&
-          <TextErrorMessage
-            errorMessage={
-              this.props.searchMedicineState.errorState.error.response
-                ? this.props.searchMedicineState.errorState.error.response.body
-                  .error.message
-                : CUSTOM_MESSGAE_SNACKBAR
-            }
-            customStyle={this.props.classes.errorMessage}
-          />}
-        <Downshift onStateChange={this.stateChangeHandler} isOpen={isOpen}>
-          {({
-            getInputProps,
-            getItemProps,
-            getMenuProps,
-            isOpen,
-            inputValue,
-            selectedItem,
-            highlightedIndex
-          }) => (
-            <div className={classes.container}>
-              {renderInput({
-                fullWidth: true,
-                classes,
-                InputProps: getInputProps({
-                  placeholder: 'Search medicine...',
-                  id: 'search-medicine',
-                  autoFocus: true,
-                  onChange: this.searchMedicineOnChange,
-                  inputValue
-                }),
-                onSearchClick: this.onSearchClick,
-                searchMedicineIsLoading
-              })}
-              {isOpen
-                ? <Paper className={classes.paper} square>
-                  <ul
-                    {...getMenuProps()}
-                    className={classes.searchContentWrapper}
-                  >
-                    {modifiyMedicineList(
-                      searchMedicineResult,
-                      cartItems
-                    ).map((suggestion, index) =>
-                      renderSuggestion({
-                        suggestion,
-                        index,
-                        itemProps: getItemProps({
-                          item: suggestion.name
-                        }),
-                        highlightedIndex,
-                        selectedItem,
-                        searchItemStyle: classes.searchItem,
-                        highlightedSearchItem: `${classes.searchItem} ${classes.highlightedSearchItem}`,
-                        selectedSearchItem: `${classes.searchItem} ${classes.selectedSearchItem}`,
-                        checkPincodeState,
-                        addToCartHandler
-                      })
-                    )}
-                  </ul>
-                </Paper>
-                : null}
-            </div>
-          )}
-        </Downshift>
+        <ActivityIndicator
+          isError={this.props.searchMedicineState.errorState.isError}
+          ErrorComp={
+            <SnackbarErrorMessage
+              error={this.props.searchMedicineState.errorState.error}
+              resetState={this.resetState.bind(this)}
+            />
+          }
+          bottomError
+        >
+          <Downshift onStateChange={this.stateChangeHandler} isOpen={isOpen}>
+            {({
+              getInputProps,
+              getItemProps,
+              getMenuProps,
+              isOpen,
+              inputValue,
+              selectedItem,
+              highlightedIndex
+            }) => (
+              <div className={classes.container}>
+                {renderInput({
+                  fullWidth: true,
+                  classes,
+                  InputProps: getInputProps({
+                    placeholder: 'Search medicine...',
+                    id: 'search-medicine',
+                    autoFocus: true,
+                    onChange: this.searchMedicineOnChange,
+                    inputValue
+                  }),
+                  onSearchClick: this.onSearchClick,
+                  searchMedicineIsLoading,
+                  onKeyPress: this.onKeyPress
+                })}
+                {isOpen
+                  ? <Paper className={classes.paper} square>
+                    <ul
+                      {...getMenuProps()}
+                      className={classes.searchContentWrapper}
+                    >
+                      {modifiyMedicineList(
+                        searchMedicineResult,
+                        cartItems
+                      ).map((suggestion, index) =>
+                        renderSuggestion({
+                          suggestion,
+                          index,
+                          itemProps: getItemProps({
+                            item: suggestion.name
+                          }),
+                          highlightedIndex,
+                          selectedItem,
+                          onSelectItem: this.onSelectItem,
+                          searchItemStyle: classes.searchItem,
+                          highlightedSearchItem: `${classes.searchItem} ${classes.highlightedSearchItem}`,
+                          selectedSearchItem: `${classes.searchItem} ${classes.selectedSearchItem}`,
+                          checkPincodeState,
+                          addToCartHandler
+                        })
+                      )}
+                    </ul>
+                  </Paper>
+                  : null}
+              </div>
+            )}
+          </Downshift>
+        </ActivityIndicator>
       </div>
     )
   }
