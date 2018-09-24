@@ -20,6 +20,11 @@ class PrescriptionsExpansionPanel extends React.Component {
       event.target.files[0],
       false
     )
+    this.props.optForDoctorCallbackLoading(
+      this.props.cartState,
+      this.props.cartState.payload.uid,
+      !this.props.cartState.payload.is_doctor_callback.payload
+    )
   }
 
   onDeleteButton (index) {
@@ -72,7 +77,7 @@ class PrescriptionsExpansionPanel extends React.Component {
             onImageSelection={this.onImageSelection.bind(this)}
             files={this.props.files}
             onDeleteButton={this.onDeleteButton.bind(this)}
-            // onViewImage={this.onViewImage}
+          // onViewImage={this.onViewImage}
           />
           <div className={this.props.checkboxWrapper}>
             <div className={this.props.checkbox}>

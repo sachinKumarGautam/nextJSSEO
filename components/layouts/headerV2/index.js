@@ -111,7 +111,7 @@ class Header extends React.Component {
 
   componentDidUpdate (prevProps) {
     if (
-      (this.props.authentication == 'false') &&
+      (this.props.authentication === 'false') &&
       this.props.path &&
       prevProps.customerState.payload.id !== this.props.customerState.payload.id
     ) {
@@ -228,8 +228,8 @@ class Header extends React.Component {
               <Login
                 openLoginDialog={
                   this.state.openLoginDialog ||
-                this.props.cartState.isCartOpenLoginDialog ||
-                this.props.cartState.isCartOpenRegisterDialog
+                  this.props.cartState.isCartOpenLoginDialog ||
+                  this.props.cartState.isCartOpenRegisterDialog
                 }
                 openLoginModal={this.openLoginModal}
                 isCartOpenRegisterDialog={
