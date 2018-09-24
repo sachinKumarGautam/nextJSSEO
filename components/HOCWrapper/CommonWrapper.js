@@ -103,16 +103,16 @@ export function withCommonWrapper (Page) {
     handleShowNoCartIdDialogOk () {
       const isShowNoCartIdDialog = false
 
-      // this.props.actions.getAnonymousCartIdLoading(
-      //   this.props.cartState,
-      //   this.props.checkPincodeState.payload.source,
-      //   this.props.checkPincodeState.payload.id,
-      //   ''
-      // )
-
       this.props.actions.updateShowNoCartIdDialogFlag(
         this.props.cartState,
         isShowNoCartIdDialog
+      )
+
+      this.props.actions.getAnonymousCartIdLoading(
+        this.props.cartState,
+        this.props.checkPincodeState.payload.source,
+        this.props.checkPincodeState.payload.id,
+        ''
       )
     }
 
@@ -147,6 +147,7 @@ export function withCommonWrapper (Page) {
           <DialogueErrorMessage
             dialogueTitle={'No Cart Created'}
             dialogueContent={'Please try again later.'}
+            isShowNoCartIdDialog={this.props.cartState.isShowNoCartIdDialog}
             onClickOk={this.handleShowNoCartIdDialogOk.bind(this)}
           />
         )

@@ -96,19 +96,19 @@ class Header extends React.Component {
     }
   }
 
-  // componentDidMount () {
-  //   if (
-  //     !this.props.loginState.isAuthenticated &&
-  //     !this.props.cartState.payload.uid
-  //   ) {
-  //     this.props.actions.getAnonymousCartIdLoading(
-  //       this.props.cartState,
-  //       this.props.checkPincodeState.payload.source,
-  //       this.props.checkPincodeState.payload.id,
-  //       ''
-  //     )
-  //   }
-  // }
+  componentDidMount () {
+    if (
+      !this.props.loginState.isAuthenticated &&
+      !this.props.cartState.payload.uid
+    ) {
+      this.props.actions.getAnonymousCartIdLoading(
+        this.props.cartState,
+        this.props.checkPincodeState.payload.source,
+        this.props.checkPincodeState.payload.id,
+        ''
+      )
+    }
+  }
 
   componentDidUpdate (prevProps) {
     if (
