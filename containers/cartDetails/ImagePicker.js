@@ -71,8 +71,7 @@ const styles = theme => ({
     display: 'inline-block'
   },
   deleteImageStyle: {
-    padding: theme.spacing.unit * 0.75,
-    width: theme.spacing.unit * 2.375
+    width: theme.spacing.unit
   }
 })
 
