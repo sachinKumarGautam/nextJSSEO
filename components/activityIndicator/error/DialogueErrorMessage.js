@@ -48,7 +48,10 @@ class DialogueErrorMessage extends Component {
   }
 
   onClickOfOk () {
-    Router.push(getReplacedString(HOME_PAGE))
+    if (!this.props.isShowNoCartIdDialog) {
+      Router.push(getReplacedString(HOME_PAGE))
+    }
+
     this.props.onClickOk()
     this.setState({
       open: false

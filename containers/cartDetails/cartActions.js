@@ -803,3 +803,11 @@ export function updateLassuredExpressFlag (cartState, { isDialogOpen }) {
     isLAssuredLExpressAlertOpen: isDialogOpen
   }
 }
+
+export function updateShowNoCartIdDialogFlag (cartState, isShowNoCartIdDialog) {
+  return {
+    type: cartActionTypes.UPDATE_SHOW_NO_CART_ID_DIALOG_FLAG,
+    cartState,
+    isShowNoCartIdDialog: isShowNoCartIdDialog
+  }
+}

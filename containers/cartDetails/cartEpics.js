@@ -65,6 +65,7 @@ import {
   deleteCartFailure,
   getAnonymousCartIdLoading,
   savePatientToCartLoading,
+  updateShowNoCartIdDialogFlag,
   optForDoctorCallbackLoading
 } from './cartActions'
 
@@ -101,8 +102,11 @@ export function getAnonymousCartIdEpic (action$, store) {
         getAnonymousCartId$(data.source, data.facility_code, data.source_type)
       ).pipe(
         flatMap(result => {
+          const isShowNoCartIdDialog = false
+
           if (data.isAssignPatientToCart) {
             return of(
+              updateShowNoCartIdDialogFlag(data.cartState, isShowNoCartIdDialog),
               getAnonymousCartIdSuccess(data.cartState, result.body.payload),
               savePatientToCartLoading(
                 data.cartState,
@@ -114,6 +118,7 @@ export function getAnonymousCartIdEpic (action$, store) {
             )
           } else {
             return of(
+              updateShowNoCartIdDialogFlag(data.cartState, isShowNoCartIdDialog),
               getAnonymousCartIdSuccess(data.cartState, result.body.payload)
             )
           }
