@@ -5,6 +5,8 @@ import Grid from '@material-ui/core/Grid'
 
 import ProductUseCases from '../../components/ProductUseCases'
 import RelatedArticles from '../../components/RelatedArticles'
+import UnderConstruction from '../../components/UnderConstruction'
+import ActivityIndicator from '../../components/activityIndicator'
 
 /*
   product use cases
@@ -21,22 +23,40 @@ const styles = theme => {
 
 class ProductDetailsContent extends Component {
   render () {
+    const { productDetailsState } = this.props
+    const productDetailsStateData = productDetailsState.payload
+    const {
+      uses,
+      side_effects,
+      how_it_works,
+      precautions
+    } = productDetailsStateData
     return (
-      <div>
-        <Grid container spacing={24} className={this.props.classes.contentWrapper}>
+      <ActivityIndicator
+        isLoading={productDetailsState.isLoadingGetProductDetails}
+        LoaderComp={null}
+      >
+        <Grid
+          container
+          spacing={24}
+          className={this.props.classes.contentWrapper}
+        >
           <Grid item xs={9}>
-            <ProductUseCases
-              hover={this.props.hover}
-              summaryData={this.props.productDetailsState.payload}
-            />
+            {!uses.length &&
+              !side_effects.length &&
+              !how_it_works.length &&
+              !precautions.length
+              ? <UnderConstruction />
+              : <ProductUseCases
+                hover={this.props.hover}
+                summaryData={productDetailsStateData}
+              />}
           </Grid>
           <Grid item xs={3}>
-            <RelatedArticles
-              publishedContent={this.props.publishedContent}
-            />
+            <RelatedArticles publishedContent={this.props.publishedContent} />
           </Grid>
         </Grid>
-      </div>
+      </ActivityIndicator>
     )
   }
 }

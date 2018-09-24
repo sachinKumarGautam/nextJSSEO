@@ -22,17 +22,13 @@ const styles = theme => ({
   }
 })
 
-const DeliveryDate = (props) => {
+const DeliveryDate = props => {
   return (
     <div className={props.classes.deliveryDateWrapper}>
-      <Typography
-        className={props.classes.deliveryDateText}
-      >
+      <Typography className={props.classes.deliveryDateText}>
         Estimated Delivery:
       </Typography>
-      <Typography
-        className={props.classes.deliveryDate}
-      >
+      <Typography className={props.classes.deliveryDate}>
         {props.promisedDeliveryDate}
       </Typography>
     </div>

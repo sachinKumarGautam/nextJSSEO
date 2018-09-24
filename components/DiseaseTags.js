@@ -10,12 +10,14 @@ const styles = theme => {
       color: theme.palette.customGrey.grey600,
       marginRight: theme.spacing.unit * 1.25,
       backgroundColor: theme.palette.secondary.main,
-      border: `1px solid ${theme.palette.customGrey.grey100}`
+      border: `1px solid ${theme.palette.customGrey.grey100}`,
+      display: 'flex',
+      justifyContent: 'center'
     }
   }
 }
 
-const DiseaseTags = (props) => (
+const DiseaseTags = props => (
   <div>
     {props.diseases.map((disease, index) => (
       <Chip label={disease} className={props.classes.tags} />

@@ -61,7 +61,6 @@ class MoleculeDetails extends React.Component {
   componentDidMount () {
     // Represents to get molecule details.
     const { query } = Router
-
     if (Router.query.molecule_id) {
       this.props.actions.getMoleculeSummaryLoading(
         this.props.moleculeDetailsState,
@@ -87,12 +86,9 @@ class MoleculeDetails extends React.Component {
   }
 
   render () {
-    const { addToCartHandler, classes } = this.props
+    const { addToCartHandler, classes, moleculeDetailsState } = this.props
     return (
-      <Layout
-        title={moleculeList.title}
-        addToCartHandler={addToCartHandler}
-      >
+      <Layout title={moleculeList.title} addToCartHandler={addToCartHandler}>
         <div className={classes.wrapperStyle}>
           <ActivityIndicator
             isError={this.props.moleculeDetailsState.errorState.isError}
@@ -105,6 +101,7 @@ class MoleculeDetails extends React.Component {
           >
             <Paper className={classes.root} elevation={1}>
               <MoleculeDetailsWrapper
+                moleculeDetailsState={moleculeDetailsState}
                 checkPincodeState={this.props.checkPincodeState}
                 addToCartHandler={addToCartHandler}
               />

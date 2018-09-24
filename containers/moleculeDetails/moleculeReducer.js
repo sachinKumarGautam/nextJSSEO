@@ -19,7 +19,6 @@ export default function moleculeReducer (state = initialState, action) {
           error: action.error
         }
       }
-
     // update success details of molecule summary API
     case GET_MOLECULE_SUMMARY_SUCCESS:
       return {
@@ -29,7 +28,7 @@ export default function moleculeReducer (state = initialState, action) {
           id: action.id,
           name: action.name,
           description: action.description,
-          side_effects: action.side_effects,
+          side_effects: action.side_effects ? action.side_effects : [],
           advice: action.advice,
           restrictions: action.restrictions,
           classification: action.classification,
@@ -41,15 +40,14 @@ export default function moleculeReducer (state = initialState, action) {
           is_tele_consult: action.is_tele_consult,
           max_order_quantity: action.max_order_quantity,
           bulk_order_quantity: action.bulk_order_quantity,
-          uses: action.uses,
-          how_it_works: action.how_it_works,
-          precautions: action.precautions,
+          uses: action.uses ? action.uses : [],
+          how_it_works: action.how_it_works ? action.how_it_works : [],
+          precautions: action.precautions ? action.precautions : {},
           habit_forming: action.habit_forming,
           cold_storage: action.cold_storage
         },
         isLoading: action.isLoading
       }
-
     // update failure details of molecule summary API
     case GET_MOLECULE_SUMMARY_FAILURE:
       return {
