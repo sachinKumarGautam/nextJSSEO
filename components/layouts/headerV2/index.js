@@ -26,7 +26,8 @@ import {
   updateIsCartOpenLoginFlag,
   updateIsCartOpenRegisterModalFlag,
   goToCartSnackbar,
-  uploadPrescriptionLoading
+  uploadPrescriptionLoading,
+  updateShowNoCartIdDialogFlag
 } from '../../../containers/cartDetails/cartActions'
 
 import {
@@ -128,9 +129,18 @@ class Header extends React.Component {
   }
 
   openLoginModal () {
-    this.setState({
-      openLoginDialog: true
-    })
+    if (!this.props.cartState.payload.uid) {
+      const isShowNoCartIdDialog = true
+
+      this.props.actions.updateShowNoCartIdDialogFlag(
+        this.props.cartState,
+        isShowNoCartIdDialog
+      )
+    } else {
+      this.setState({
+        openLoginDialog: true
+      })
+    }
   }
 
   closeLoginModal () {
@@ -220,18 +230,26 @@ class Header extends React.Component {
                   lg={loginState.isAuthenticated ? 1 : 2}
                 >
                   <div className={this.props.classes.wrapCart}>
-                    <CartIcon cartState={this.props.cartState} />
-                    {loginState.isAuthenticated
-                      ? <MenuWrapper />
-                      : <Button
-                        variant='raised'
-                        size='medium'
-                        color='primary'
-                        aria-label='login'
-                        onClick={this.openLoginModal}
-                        className={classes.button}
-                        label={'Login / Register'}
-                      />}
+                    <CartIcon
+                      cartState={this.props.cartState}
+                      updateShowNoCartIdDialogFlag={this.props.actions.updateShowNoCartIdDialogFlag}
+                    />
+                    {
+                      loginState.isAuthenticated
+                        ? (
+                          <MenuWrapper />
+                        ) : (
+                          <Button
+                            variant='raised'
+                            size='medium'
+                            color='primary'
+                            aria-label='login'
+                            onClick={this.openLoginModal}
+                            className={classes.button}
+                            label={'Login / Register'}
+                          />
+                        )
+                    }
                   </div>
                 </Grid>
               </Grid>
@@ -273,10 +291,9 @@ class Header extends React.Component {
                 uploadPrescriptionLoading={
                   this.props.actions.uploadPrescriptionLoading
                 }
-                resetSearchMedicineState={
-                  this.props.actions.resetSearchMedicineState
-                }
                 orTextStyle={this.props.classes.orTextStyle}
+                resetSearchMedicineState={this.props.actions.resetSearchMedicineState}
+                updateShowNoCartIdDialogFlag={this.props.actions.updateShowNoCartIdDialogFlag}
               />
             </div>}
         </AppBar>
@@ -307,7 +324,8 @@ function mapDispatchToProps (dispatch) {
         uploadPrescriptionLoading,
         resetIsNewUserFlag,
         resetLoginState,
-        resetSearchMedicineState
+        resetSearchMedicineState,
+        updateShowNoCartIdDialogFlag
       },
       dispatch
     )

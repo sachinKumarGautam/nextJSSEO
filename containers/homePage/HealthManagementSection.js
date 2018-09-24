@@ -21,7 +21,6 @@ const styles = theme => {
     subTitle: {
       ...theme.typography.body2,
       fontSize: theme.typography.pxToRem(18),
-      paddingBottom: theme.spacing.unit * 2.675,
       paddingBottom: theme.spacing.unit * 4.25
     },
     description: {

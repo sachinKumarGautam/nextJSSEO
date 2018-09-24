@@ -4,8 +4,6 @@ import { withStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
 import Button from '@material-ui/core/Button'
 
-import { Grid } from '@material-ui/core'
-
 const styles = theme => {
   return {
     membershipWrapper: {
@@ -21,10 +19,6 @@ const styles = theme => {
     description: {
       ...theme.typography.body2,
       marginBottom: theme.spacing.unit * 5.375
-    },
-    imageStyle: {
-      marginBottom: theme.spacing.unit * 9.625,
-      textAlign: 'center'
     },
     button: {
       margiTop: theme.spacing.unit,
@@ -60,15 +54,25 @@ const styles = theme => {
 
 class MembershipCardDetail extends Component {
   onAddToCart (name, sku) {
-    const medicineSelected = {
-      name: name,
-      sku: sku,
-      quantity: 0
+    if (!this.props.cartState.payload.uid) {
+      const isShowNoCartIdDialog = true
+
+      this.props.updateShowNoCartIdDialogFlag(
+        this.props.cartState,
+        isShowNoCartIdDialog
+      )
+    } else {
+      const medicineSelected = {
+        name: name,
+        sku: sku,
+        quantity: 0
+      }
+
+      this.props.incrementCartItemLoading(
+        this.props.cartState,
+        medicineSelected
+      )
     }
-    this.props.incrementCartItemLoading(
-      this.props.cartState,
-      medicineSelected
-    )
   }
   render () {
     return (
