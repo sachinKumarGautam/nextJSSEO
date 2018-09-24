@@ -3,7 +3,6 @@ import React, { Component } from 'react'
 import { withStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
 import SearchMedicine from '../../../containers/searchMedicine/index'
-import Button from '@material-ui/core/Button'
 import Router from 'next/router'
 import { CART_DETAILS } from '../../../routes/RouteConstant'
 import { getReplacedString } from '../../../utils/replaceConstants'
@@ -24,18 +23,6 @@ const styles = theme => {
       paddingLeft: theme.spacing.unit * 24,
       paddingRight: theme.spacing.unit * 24,
       paddingBottom: theme.spacing.unit * 2
-    },
-    button: {
-      margin: theme.spacing.unit,
-      backgroungColor: theme.palette.primary.main,
-      cursor: 'pointer'
-    },
-    buttonlabel: {
-      ...theme.typography.caption,
-      fontWeight: theme.typography.fontWeightBold,
-      paddingLeft: theme.spacing.unit * 5.25,
-      paddingRight: theme.spacing.unit * 5.25,
-      color: theme.palette.secondary.main
     },
     pickerListInput: {
       width: '0.1px',
@@ -60,7 +47,21 @@ const styles = theme => {
       marginLeft: theme.spacing.unit * 6.25
     },
     labelStyle: {
-      cursor: 'pointer'
+      ...theme.typography.caption,
+      fontWeight: theme.typography.fontWeightBold,
+      paddingLeft: theme.spacing.unit * 5.25,
+      paddingRight: theme.spacing.unit * 5.25,
+      color: theme.palette.secondary.main,
+      paddingTop: theme.spacing.unit,
+      paddingBottom: theme.spacing.unit,
+      backgroundColor: theme.palette.primary.main,
+      cursor: 'pointer',
+      display: 'block',
+      textAlign: 'center',
+      borderRadius: theme.spacing.unit * 3,
+      lineHeight: 1.07,
+      letterSpacing: '0.3px',
+      boxShadow: '0 1px 3px rgba(0,0,0,0.12), 0 2px 3px rgba(0,0,0,0.24)'
     }
   }
 }
@@ -113,17 +114,11 @@ class Search extends Component {
           accept='image/*'
           onChange={this.onImageSelection.bind(this)}
         />
-        <label for='file' className={this.props.classes.labelStyle}>
-          <Button
-            variant='raised'
-            color='primary'
-            className={this.props.classes.button}
-            classes={{
-              label: this.props.classes.buttonlabel
-            }}
-          >
-            <label for='file' className={this.props.classes.labelStyle}>Upload Prescription</label>
-          </Button>
+        <label
+          for='file'
+          className={this.props.classes.labelStyle}
+        >
+          Upload Prescription
         </label>
       </div>
     )

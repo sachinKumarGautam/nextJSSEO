@@ -2,14 +2,13 @@ import React, { Component } from 'react'
 
 import IconButton from '@material-ui/core/IconButton'
 import Menu from '@material-ui/core/Menu'
-import MenuItem from '@material-ui/core/MenuItem'
 import AccountCircle from '@material-ui/icons/AccountCircle'
 import Divider from '@material-ui/core/Divider'
 import { withStyles } from '@material-ui/core/styles'
 
 import UserDetail from './UserDetail'
 import MenuItems from '../../components/MenuItems'
-import Button from '../../components/button'
+// import Button from '../../components/button'
 import SubMenuList from './SubMenuList'
 
 import { logoutWithReload } from '../../utils/removePersistState'
@@ -83,14 +82,12 @@ class MenuLayout extends Component {
           }}
           className={this.props.classes.menuStyle}
         >
-          <MenuItem>{
-            <UserDetail
-              customerState={this.props.customerState}
-            />
-          }</MenuItem>
+          <UserDetail
+            customerState={this.props.customerState}
+          />
           <Divider />
           <MenuItems logout={this.logout.bind(this)} />
-          <Button
+          {/* <Button
             size='small'
             variant='outlined'
             color='primary'
@@ -101,7 +98,7 @@ class MenuLayout extends Component {
             className={this.props.classes.buttonStyle}
             onClick={this.handleClickOpen}
             label={'Chat now'}
-          />
+          /> */}
           <Divider />
           <SubMenuList />
         </Menu>
