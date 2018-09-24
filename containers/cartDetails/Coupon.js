@@ -191,6 +191,7 @@ class Coupon extends Component {
               fullWidth
               value={this.props.cartState.couponDetail.couponCode}
               onChange={this.onChange.bind(this)}
+              onKeyPress={this.onClickOfApply.bind(this)}
             />
             {
               this.props.cartState.couponDetail.errorState.isError
