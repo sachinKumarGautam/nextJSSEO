@@ -110,7 +110,7 @@ class ProductPriceDetails extends Component {
                     this,
                     productDetailsState.payload
                   )} // it check first any selected city then add to cart
-                  label={'Add To Cart'}
+                  label={'ADD TO CART'}
                   disabled={
                     productDetailsState.payload.status !== ACTIVE_STATUS
                   }
