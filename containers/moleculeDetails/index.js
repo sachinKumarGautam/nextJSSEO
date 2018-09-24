@@ -81,7 +81,7 @@ class MoleculeDetailsWrapper extends Component {
               <section>
                 <MoleculeDetailsContent
                   hover={this.state.hover}
-                  moleculeDetailsStatePayload={moleculeDetailsState.payload}
+                  moleculeDetailsState={moleculeDetailsState}
                 />
               </section>
             </ActivityIndicator>
@@ -111,7 +111,6 @@ class MoleculeDetailsWrapper extends Component {
 
 function mapStateToProps (state) {
   return {
-    moleculeDetailsState: state.moleculeDetailsState,
     medicineListState: state.medicineListState,
     cartState: state.cartState
   }

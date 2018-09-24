@@ -4,6 +4,7 @@ import { withStyles } from '@material-ui/core/styles'
 import Grid from '@material-ui/core/Grid'
 
 import ProductUseCases from '../../components/ProductUseCases'
+import UnderConstruction from '../../components/UnderConstruction'
 
 /*
   product use cases
@@ -21,6 +22,9 @@ const styles = theme => {
 
 class MoleculeDetailsContent extends Component {
   render () {
+    const { payload } = this.props.moleculeDetailsState
+
+    const { uses, side_effects, how_it_works, precautions } = payload
     return (
       <div>
         <Grid
@@ -28,10 +32,16 @@ class MoleculeDetailsContent extends Component {
           spacing={24}
           className={this.props.classes.contentWrapper}
         >
-          <ProductUseCases
-            hover={this.props.hover}
-            summaryData={this.props.moleculeDetailsStatePayload}
-          />
+          {
+            !uses.length &&
+            !side_effects.length &&
+            !how_it_works.length &&
+            Object.keys(precautions).length === 0
+              ? <UnderConstruction />
+              : <ProductUseCases
+                hover={this.props.hover}
+                summaryData={payload}
+              />}
         </Grid>
       </div>
     )
