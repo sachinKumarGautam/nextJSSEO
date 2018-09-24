@@ -50,12 +50,12 @@ const styles = theme => {
 }
 
 class TeleConsultationDetail extends Component {
-  onGetStarted () {
+  onGetStarted() {
     return scrollTo('search-section', SCROLL_TO_TOP_HEIGHT)
   }
-  render () {
+  render() {
     return (
-      <div className={this.props.classes.contentWrapper}>
+      <div className={this.props.classes.contentWrapper} id='health-management'>
         <div>
           <Typography
             variant='body2'

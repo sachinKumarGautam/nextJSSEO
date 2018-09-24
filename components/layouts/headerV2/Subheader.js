@@ -48,6 +48,7 @@ class Subheader extends React.Component {
     }
     this.toggleHover = this.toggleHover.bind(this)
     this.redirectToHealth = this.redirectToHealth.bind(this)
+    this.redirectToConsult = this.redirectToConsult.bind(this)
   }
 
   toggleHover (item) {
@@ -59,6 +60,14 @@ class Subheader extends React.Component {
   }
 
   redirectToHealth () {
+    const url = getReplacedString(HOME_PAGE)
+    const height = this.props.isHomePage ? SCROLL_TO_TOP_HEIGHT : 0
+    Router.push(url).then(() => {
+      return scrollTo('health-coach', height)
+    })
+  }
+
+  redirectToConsult () {
     const url = getReplacedString(HOME_PAGE)
     const height = this.props.isHomePage ? SCROLL_TO_TOP_HEIGHT : 0
     Router.push(url).then(() => {
@@ -115,7 +124,7 @@ class Subheader extends React.Component {
         </Grid>
         <Grid item xs={4}>
           <a
-            onClick={this.redirectToHealth}
+            onClick={this.redirectToConsult}
             onMouseEnter={this.toggleHover.bind(this, 'consultation')}
             onMouseLeave={this.toggleHover.bind(this, 'consultation')}
             className={classes.subHeaderItem}

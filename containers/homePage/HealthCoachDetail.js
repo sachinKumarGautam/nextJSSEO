@@ -36,9 +36,9 @@ const styles = theme => {
 }
 
 class HealthCoachDetail extends Component {
-  render () {
+  render() {
     return (
-      <div className={this.props.classes.contentWrapper}>
+      <div className={this.props.classes.contentWrapper} id='health-coach'>
         <div>
           <img src='/static/images/doctor2.png' />
         </div>
