@@ -13,7 +13,8 @@ const styles = theme => ({
   orderNoWrapper: {
     justifyContent: 'space-between',
     display: 'flex',
-    flexDirection: 'row'
+    flexDirection: 'row',
+    marginBottom: theme.spacing.unit
   },
   orderWrapper: {
     display: 'flex',
@@ -21,14 +22,15 @@ const styles = theme => ({
     alignItems: 'center'
   },
   title: {
-    fontSize: theme.spacing.unit * 2.75,
+    fontSize: theme.spacing.unit * 2.5,
     paddingLeft: theme.spacing.unit * 2.5,
     color: theme.palette.customGrey.grey500
   },
   orderId: {
-    fontSize: theme.spacing.unit * 2.75,
+    fontSize: theme.spacing.unit * 2.5,
     marginLeft: theme.spacing.unit * 1.25,
     fontWeight: theme.typography.fontWeightBold,
+    letterSpacing: '0.6px',
     color: theme.palette.customGrey.grey500,
     marginRight: theme.spacing.unit
   },
