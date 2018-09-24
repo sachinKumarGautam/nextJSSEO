@@ -65,7 +65,8 @@ import {
   deleteCartFailure,
   getAnonymousCartIdLoading,
   savePatientToCartLoading,
-  updateShowNoCartIdDialogFlag
+  updateShowNoCartIdDialogFlag,
+  optForDoctorCallbackLoading
 } from './cartActions'
 
 import {
@@ -432,7 +433,7 @@ export function uploadPrescriptionEpic (action$, store) {
       return http(
         uploadPrescriptionEpic$(data.cartState.payload.uid, formData)
       ).pipe(
-        map(result => {
+        flatMap(result => {
           let cartPrescriptions = result.body.payload.cart_prescriptions
 
           let updatedCartPrescriptions = cartPrescriptions.map(
@@ -444,12 +445,27 @@ export function uploadPrescriptionEpic (action$, store) {
             }
           )
 
-          return uploadPrescriptionSuccess(
-            data.cartState,
-            data.uploadedFiles,
-            updatedCartPrescriptions,
-            data.isHomePage
-          )
+          if (data.cartState.payload.is_doctor_callback.payload) {
+            return of(uploadPrescriptionSuccess(
+              data.cartState,
+              data.uploadedFiles,
+              updatedCartPrescriptions,
+              data.isHomePage
+            ),
+            optForDoctorCallbackLoading(
+              data.cartState,
+              data.cartState.payload.uid,
+              !data.cartState.payload.is_doctor_callback.payload
+            )
+            )
+          } else {
+            return of(uploadPrescriptionSuccess(
+              data.cartState,
+              data.uploadedFiles,
+              updatedCartPrescriptions,
+              data.isHomePage
+            ))
+          }
         }),
         catchError(error => {
           return of(uploadPrescriptionFailure(data.cartState, error))
