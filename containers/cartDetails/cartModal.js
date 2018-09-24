@@ -71,6 +71,7 @@ const initialState = {
     redeemable_care_points: 0,
     redeemable_cash: 0
   },
+  isShowNoCartIdDialog: false,
   isCartOpenLoginDialog: false,
   showAddToCartSnackBar: false,
   isCartOpenRegisterDialog: false,

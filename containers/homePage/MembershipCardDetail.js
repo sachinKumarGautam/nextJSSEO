@@ -55,15 +55,25 @@ const styles = theme => {
 
 class MembershipCardDetail extends Component {
   onAddToCart (name, sku) {
-    const medicineSelected = {
-      name: name,
-      sku: sku,
-      quantity: 0
+    if (!this.props.cartState.payload.uid) {
+      const isShowNoCartIdDialog = true
+
+      this.props.updateShowNoCartIdDialogFlag(
+        this.props.cartState,
+        isShowNoCartIdDialog
+      )
+    } else {
+      const medicineSelected = {
+        name: name,
+        sku: sku,
+        quantity: 0
+      }
+
+      this.props.incrementCartItemLoading(
+        this.props.cartState,
+        medicineSelected
+      )
     }
-    this.props.incrementCartItemLoading(
-      this.props.cartState,
-      medicineSelected
-    )
   }
   render () {
     return (

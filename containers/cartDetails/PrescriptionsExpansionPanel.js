@@ -72,7 +72,7 @@ class PrescriptionsExpansionPanel extends React.Component {
             onImageSelection={this.onImageSelection.bind(this)}
             files={this.props.files}
             onDeleteButton={this.onDeleteButton.bind(this)}
-            // onViewImage={this.onViewImage}
+          // onViewImage={this.onViewImage}
           />
           <div className={this.props.checkboxWrapper}>
             <div className={this.props.checkbox}>
