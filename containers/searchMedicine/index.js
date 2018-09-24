@@ -57,7 +57,10 @@ const styles = theme => ({
     right: 0,
     top: -(theme.spacing.unit * 2.2),
     height: theme.spacing.unit * 4,
-    borderRadius: `0px ${theme.spacing.unit * 2}px ${theme.spacing.unit * 2}px 0px`
+    borderRadius: `0px ${theme.spacing.unit * 2}px ${theme.spacing.unit * 2}px 0px`,
+    '&:hover': {
+      width: '20px !important'
+    }
   },
   searchBar: {
     display: 'flex',
@@ -67,8 +70,7 @@ const styles = theme => ({
     marginLeft: theme.spacing.unit * 2.5
   },
   iconColor: {
-    color: theme.palette.customGrey.grey500,
-    marginLeft: theme.spacing.unit * 4
+    color: theme.palette.customGrey.grey500
   },
   searchContentWrapper: {
     listStyle: 'none',
@@ -95,14 +97,6 @@ const styles = theme => ({
     left: theme.spacing.unit * 3.5,
     color: theme.palette.primary.main,
     zIndex: 999
-  },
-  errorMessage: {
-    ...theme.typography.caption,
-    color: theme.palette.customRed.red200,
-    fontSize: theme.typography.pxToRem(11),
-    textAlign: 'left',
-    paddingLeft: theme.spacing.unit * 18,
-    width: theme.spacing.unit * 80
   },
   searchMedicineText: {
     fontSize: theme.typography.pxToRem(13)
@@ -138,6 +132,7 @@ function renderInput (inputProps) {
       <Button
         color='primary'
         variant='flat'
+        size='small'
         classes={{
           root: classes.searchButton
         }}

@@ -7,7 +7,8 @@ const styles = theme => ({
   pageWrapper: {
     marginLeft: theme.spacing.unit * 12,
     marginRight: theme.spacing.unit * 12,
-    paddingTop: theme.spacing.unit * 9.125
+    paddingTop: theme.spacing.unit * 9.125,
+    marginBottom: theme.spacing.unit * 12
   },
   title: {
     ...theme.typography.headline,
