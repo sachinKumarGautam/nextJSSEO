@@ -19,13 +19,18 @@ export function searchMedicine (action$, store) {
     ofType(SEARCH_MEDICINE_LOADING),
     mergeMap(data => {
       const searchMedicineState = store.getState().searchMedicineState
+      const checkPincodeState = store.getState().checkPincodeState
+      const pincode = checkPincodeState.payload.pincode
+      let queryString
+
+      if(pincode !== '') {
+        queryString = `q=${data.value}&pincode=${pincode}&size=${data.pageSize}&page=${data.pageNumber}`
+      } else {
+        queryString = `q=${data.value}&size=${data.pageSize}&page=${data.pageNumber}`
+      }
+      
       return http(
-        searchMedicine$(
-          data.value,
-          data.facilityId,
-          data.pageNumber,
-          data.pageSize
-        )
+        searchMedicine$(queryString)
       ).pipe(
         map(result => {
           let modifiedResponse
