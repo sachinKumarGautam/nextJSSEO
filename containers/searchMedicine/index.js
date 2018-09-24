@@ -55,7 +55,7 @@ const styles = theme => ({
   searchButton: {
     position: 'absolute',
     right: 0,
-    top: -(theme.spacing.unit * 2.2),
+    top: -(theme.spacing.unit * 1.95),
     height: theme.spacing.unit * 4,
     borderRadius: `0px ${theme.spacing.unit * 2}px ${theme.spacing.unit * 2}px 0px`
   },
@@ -107,6 +107,7 @@ function renderInput (inputProps) {
     ref,
     onChange,
     searchMedicineIsLoading,
+    onKeyPress,
     ...other
   } = inputProps
   return (
@@ -114,6 +115,7 @@ function renderInput (inputProps) {
       {searchMedicineIsLoading &&
         <CircularProgress className={classes.progress} size={20} />}
       <TextField
+        onKeyPress={onKeyPress.bind(this, InputProps.inputValue)}
         InputProps={{
           disableUnderline: true,
           // inputRef: ref,
@@ -128,8 +130,8 @@ function renderInput (inputProps) {
       />
       <Button
         color='primary'
-        variant='flat'
         size='small'
+        variant='flat'
         classes={{
           root: classes.searchButton
         }}
@@ -179,7 +181,8 @@ class SearchMedicine extends React.Component {
     super(props)
     this.state = {
       isOpen: false,
-      highlightedIndex: ''
+      highlightedIndex: '',
+      isFocus: false
     }
     this.searchMedicineOnChange = this.searchMedicineOnChange.bind(this)
     this.stateChangeHandler = this.stateChangeHandler.bind(this)
@@ -209,6 +212,12 @@ class SearchMedicine extends React.Component {
     const href = `${PRODUCT_SEARCH}?slug=${medicineName}`
     const as = `${PRODUCT_SEARCH}?slug=${medicineName}`
     Router.push(href, as)
+  }
+
+  onKeyPress = (value, event) => {
+    if (event.charCode === 13 && value && value.length > 3) {
+      this.onSearchClick(value)
+    }
   }
 
   stateChangeHandler = changes => {
@@ -266,8 +275,7 @@ class SearchMedicine extends React.Component {
           isError={this.props.searchMedicineState.errorState.isError}
           ErrorComp={
             <SnackbarErrorMessage
-              error={this.props.searchMedicineState.errorState.error
-              }
+              error={this.props.searchMedicineState.errorState.error}
               resetState={this.resetState.bind(this)}
             />
           }
@@ -295,7 +303,8 @@ class SearchMedicine extends React.Component {
                     inputValue
                   }),
                   onSearchClick: this.onSearchClick,
-                  searchMedicineIsLoading
+                  searchMedicineIsLoading,
+                  onKeyPress: this.onKeyPress
                 })}
                 {isOpen
                   ? <Paper className={classes.paper} square>
