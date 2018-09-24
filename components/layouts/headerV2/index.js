@@ -12,9 +12,11 @@ import SearchMedicine from '../../../containers/searchMedicine'
 import Subheader from './Subheader'
 import CartIcon from '../../CartIcon'
 import Login from '../../../containers/login'
-import getPageContext from '../../../src/getPageContext'
 import MenuWrapper from '../../../containers/menu'
-import { searchMedicineLoading, resetSearchMedicineState } from '../../../containers/searchMedicine/searchMedicineAction'
+import {
+  searchMedicineLoading,
+  resetSearchMedicineState
+} from '../../../containers/searchMedicine/searchMedicineAction'
 import GoToCartSnackbar from '../../../containers/cartDetails/GoToCartSnackbar'
 import Toolbar from '@material-ui/core/Toolbar'
 import Search from './Search'
@@ -84,14 +86,13 @@ const styles = theme => ({
 class Header extends React.Component {
   constructor (props, context) {
     super(props, context)
-    this.pageContext = getPageContext()
     this.openLoginModal = this.openLoginModal.bind(this)
     this.closeLoginModal = this.closeLoginModal.bind(this)
     this.state = {
-      openLoginDialog:
-        this.props.authentication && !this.props.loginState.isAuthenticated
-          ? this.props.authentication
-          : false
+      openLoginDialog: this.props.authentication &&
+        !this.props.loginState.isAuthenticated
+        ? this.props.authentication
+        : false
     }
   }
 
@@ -111,7 +112,7 @@ class Header extends React.Component {
 
   componentDidUpdate (prevProps) {
     if (
-      !this.props.authentication &&
+      (this.props.authentication == 'false') &&
       this.props.path &&
       prevProps.customerState.payload.id !== this.props.customerState.payload.id
     ) {
@@ -167,7 +168,11 @@ class Header extends React.Component {
               }}
               disableGutters
             >
-              <Grid container spacing={24} className={this.props.classes.gridStyle}>
+              <Grid
+                container
+                spacing={24}
+                className={this.props.classes.gridStyle}
+              >
                 <Grid item xs={1} lg={1}>
                   <img
                     className={classes.lifcareLogoStyle}
@@ -177,17 +182,23 @@ class Header extends React.Component {
                     }}
                   />
                 </Grid>
-                <Grid item xs={loginState.isAuthenticated ? 6 : 5} lg={loginState.isAuthenticated ? 7 : 6}>
-                  {!this.props.isHomePage ? (
-                    <SearchMedicine
+                <Grid
+                  item
+                  xs={loginState.isAuthenticated ? 6 : 5}
+                  lg={loginState.isAuthenticated ? 7 : 6}
+                >
+                  {!this.props.isHomePage
+                    ? <SearchMedicine
                       searchMedicineState={searchMedicineState}
                       checkPincodeState={checkPincodeState}
                       searchMedicineLoading={actions.searchMedicineLoading}
                       addToCartHandler={this.props.addToCartHandler}
                       cartState={this.props.cartState}
-                      resetSearchMedicineState={this.props.actions.resetSearchMedicineState}
+                      resetSearchMedicineState={
+                        this.props.actions.resetSearchMedicineState
+                      }
                     />
-                  ) : null}
+                    : null}
                 </Grid>
                 <Grid item xs={3} lg={3}>
                   <Subheader
@@ -203,10 +214,9 @@ class Header extends React.Component {
                 >
                   <div className={this.props.classes.wrapCart}>
                     <CartIcon cartState={this.props.cartState} />
-                    {loginState.isAuthenticated ? (
-                      <MenuWrapper />
-                    ) : (
-                      <Button
+                    {loginState.isAuthenticated
+                      ? <MenuWrapper />
+                      : <Button
                         variant='raised'
                         size='medium'
                         color='primary'
@@ -214,8 +224,7 @@ class Header extends React.Component {
                         onClick={this.openLoginModal}
                         className={classes.button}
                         label={'Login / Register'}
-                      />
-                    )}
+                      />}
                   </div>
                 </Grid>
               </Grid>
@@ -224,27 +233,26 @@ class Header extends React.Component {
           </div>
           {(this.state.openLoginDialog ||
             this.props.cartState.isCartOpenLoginDialog ||
-            this.props.cartState.isCartOpenRegisterDialog) && (
-              <Login
-                openLoginDialog={
-                  this.state.openLoginDialog ||
-                this.props.cartState.isCartOpenLoginDialog ||
-                this.props.cartState.isCartOpenRegisterDialog
-                }
-                openLoginModal={this.openLoginModal}
-                isCartOpenRegisterDialog={
+            this.props.cartState.isCartOpenRegisterDialog) &&
+            <Login
+              openLoginDialog={
+                this.state.openLoginDialog ||
+                  this.props.cartState.isCartOpenLoginDialog ||
                   this.props.cartState.isCartOpenRegisterDialog
-                }
-                closeLoginModal={this.closeLoginModal}
-                loginState={loginState}
-                customerState={customerState}
-              />
-            )}
+              }
+              openLoginModal={this.openLoginModal}
+              isCartOpenRegisterDialog={
+                this.props.cartState.isCartOpenRegisterDialog
+              }
+              closeLoginModal={this.closeLoginModal}
+              loginState={loginState}
+              customerState={customerState}
+            />}
           <GoToCartSnackbar
             goToCartSnackbar={this.props.actions.goToCartSnackbar}
             cartState={this.props.cartState}
           />
-          {this.props.isHomePage && (
+          {this.props.isHomePage &&
             <div
               id='search-header'
               className={this.props.classes.searchWrapper}
@@ -258,10 +266,11 @@ class Header extends React.Component {
                 uploadPrescriptionLoading={
                   this.props.actions.uploadPrescriptionLoading
                 }
-                resetSearchMedicineState={this.props.actions.resetSearchMedicineState}
+                resetSearchMedicineState={
+                  this.props.actions.resetSearchMedicineState
+                }
               />
-            </div>
-          )}
+            </div>}
         </AppBar>
       </React.Fragment>
     )
@@ -298,8 +307,5 @@ function mapDispatchToProps (dispatch) {
 }
 
 export default withStyles(styles)(
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )(Header)
+  connect(mapStateToProps, mapDispatchToProps)(Header)
 )

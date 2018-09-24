@@ -57,10 +57,10 @@ export default function (state = initialState, action) {
           selling_price: action.selling_price,
           mrp: action.mrp,
           discount: action.discount,
-          uses: action.uses,
-          side_effects: action.side_effects,
-          how_it_works: action.how_it_works,
-          precautions: action.precautions,
+          uses: action.uses ? action.uses : [],
+          side_effects: action.side_effects ? action.side_effects : [],
+          how_it_works: action.how_it_works ? action.how_it_works : [],
+          precautions: action.precautions ? action.precautions : {},
           tele_consult: action.tele_consult,
           urgent_dl_available: action.urgent_dl_available,
           lc_assured_available: action.lc_assured_available,
@@ -90,7 +90,6 @@ export default function (state = initialState, action) {
           quantity: action.quantity
         }
       }
-
     //   case GET_PRODUCT_DETAILS_SUMMARY_LOADING :
     //   return {
     //     ...state,
