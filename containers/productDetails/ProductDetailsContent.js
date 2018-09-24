@@ -50,7 +50,7 @@ class ProductDetailsContent extends Component {
               : <ProductUseCases
                 hover={this.props.hover}
                 summaryData={productDetailsStateData}
-                />}
+              />}
           </Grid>
           <Grid item xs={3}>
             <RelatedArticles publishedContent={this.props.publishedContent} />

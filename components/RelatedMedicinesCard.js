@@ -150,7 +150,7 @@ class RelatedMedicinesCard extends React.Component {
             }}
             onClick={this.addToCart}
             label={'Add To Cart'}
-            />
+          />
           : <AlreadyAdded />}
       </div>
     )
