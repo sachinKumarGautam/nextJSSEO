@@ -95,14 +95,6 @@ const styles = theme => ({
     color: theme.palette.primary.main,
     zIndex: 999
   },
-  errorMessage: {
-    ...theme.typography.caption,
-    color: theme.palette.customRed.red200,
-    fontSize: theme.typography.pxToRem(11),
-    textAlign: 'left',
-    paddingLeft: theme.spacing.unit * 18,
-    width: theme.spacing.unit * 80
-  },
   searchMedicineText: {
     fontSize: theme.typography.pxToRem(13)
   }

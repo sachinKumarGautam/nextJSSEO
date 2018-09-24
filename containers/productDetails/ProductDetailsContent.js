@@ -27,8 +27,8 @@ class ProductDetailsContent extends Component {
     const productDetailsStateData = productDetailsState.payload
     const {
       uses,
-      side_effects,
-      how_it_works,
+      sideEffects,
+      howItWorks,
       precautions
     } = productDetailsStateData
     return (
@@ -43,8 +43,8 @@ class ProductDetailsContent extends Component {
         >
           <Grid item xs={9}>
             {!uses.length &&
-              !side_effects.length &&
-              !how_it_works.length &&
+              !sideEffects.length &&
+              !howItWorks.length &&
               !precautions.length
               ? <UnderConstruction />
               : <ProductUseCases
