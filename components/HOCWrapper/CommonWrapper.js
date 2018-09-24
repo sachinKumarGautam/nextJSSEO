@@ -150,6 +150,12 @@ export function withCommonWrapper (Page) {
             onClickOk={this.handleShowNoCartIdDialogOk.bind(this)}
           />
         )
+      } else if (this.props.cartState.errorState.isError) {
+        return (
+          <SnackbarErrorMessage
+            error={this.props.cartState.errorState.error}
+          />
+        )
       } else {
         return (
           <SnackbarErrorMessage
@@ -176,7 +182,8 @@ export function withCommonWrapper (Page) {
               cartState.payload.cart_items.errorState.isError ||
                 isCartInvalid ||
                 isSessionExpired ||
-                isShowNoCartIdDialog
+                isShowNoCartIdDialog ||
+                cartState.errorState.isError
             }
             ErrorComp={this.getErrorComp(isCartInvalid, isSessionExpired)}
             bottomError
