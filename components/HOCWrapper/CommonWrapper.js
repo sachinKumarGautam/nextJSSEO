@@ -31,7 +31,9 @@ import Loader from '../activityIndicator/loader'
 
 import {
   INVALID_CART_TEXT,
-  INVALID_CART_DESCRIPTION
+  INVALID_CART_DESCRIPTION,
+  NO_CART_ID_TEXT,
+  NO_CART_ID_DESCRIPTION
 } from '../../containers/messages/errorMessages'
 
 import {
@@ -145,8 +147,8 @@ export function withCommonWrapper (Page) {
       } else if (this.props.cartState.isShowNoCartIdDialog) {
         return (
           <DialogueErrorMessage
-            dialogueTitle={'No Cart Created'}
-            dialogueContent={'Please try again later.'}
+            dialogueTitle={NO_CART_ID_TEXT}
+            dialogueContent={NO_CART_ID_DESCRIPTION}
             isShowNoCartIdDialog={this.props.cartState.isShowNoCartIdDialog}
             onClickOk={this.handleShowNoCartIdDialogOk.bind(this)}
           />
