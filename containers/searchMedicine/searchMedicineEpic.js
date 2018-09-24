@@ -23,12 +23,12 @@ export function searchMedicine (action$, store) {
       const pincode = checkPincodeState.payload.pincode
       let queryString
 
-      if(pincode !== '') {
+      if (pincode !== '') {
         queryString = `q=${data.value}&pincode=${pincode}&size=${data.pageSize}&page=${data.pageNumber}`
       } else {
         queryString = `q=${data.value}&size=${data.pageSize}&page=${data.pageNumber}`
       }
-      
+
       return http(
         searchMedicine$(queryString)
       ).pipe(
