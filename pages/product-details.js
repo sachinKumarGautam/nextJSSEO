@@ -37,14 +37,14 @@ const styles = theme => ({
     margin: '0 auto',
     marginTop: theme.spacing.unit * 7.5,
     maxWidth: theme.breakpoints.values.lg,
-    minWidth: theme.breakpoints.values.md
+    minWidth: theme.breakpoints.values.md,
+    minHeight: theme.spacing.unit * 100
   },
   title: {
     fontWeight: theme.typography.fontWeightBold
   },
   wrapperStyle: {
-    paddingBottom: theme.spacing.unit * 3,
-    minHeight: theme.spacing.unit * 100
+    paddingBottom: theme.spacing.unit * 3
   }
 })
 
@@ -91,16 +91,18 @@ class ProductDetails extends React.Component {
   getErrorComponent () {
     if (
       this.props.productDetailsState.errorStateGetProductDetails.error &&
-      this.props.productDetailsState.errorStateGetProductDetails.error.response &&
-      this.props.productDetailsState.errorStateGetProductDetails.error.response.statusCode === 404
+      this.props.productDetailsState.errorStateGetProductDetails.error
+        .response &&
+      this.props.productDetailsState.errorStateGetProductDetails.error.response
+        .statusCode === 404
     ) {
-      return (
-        <PageNotFound />
-      )
+      return <PageNotFound />
     } else {
       return (
         <FullPageError
-          error={this.props.productDetailsState.errorStateGetProductDetails.error}
+          error={
+            this.props.productDetailsState.errorStateGetProductDetails.error
+          }
           tryAgain={this.tryAgain.bind(this)}
         />
       )
@@ -108,18 +110,24 @@ class ProductDetails extends React.Component {
   }
 
   render () {
-    const { classes, actions, checkPincodeState, addToCartHandler, product_id } = this.props
+    const {
+      classes,
+      actions,
+      checkPincodeState,
+      addToCartHandler,
+      product_id
+    } = this.props
     return (
-      <Layout
-        title={productDetail.title}
-        addToCartHandler={addToCartHandler}
-      >
+      <Layout title={productDetail.title} addToCartHandler={addToCartHandler}>
         <div className={this.props.classes.wrapperStyle}>
           <ActivityIndicator
-            isError={this.props.productDetailsState.errorStateGetProductDetails.isError}
+            isError={
+              this.props.productDetailsState.errorStateGetProductDetails.isError
+            }
             ErrorComp={this.getErrorComponent()}
           >
-            {product_id && product_id !== 'undefined' &&
+            {product_id &&
+              product_id !== 'undefined' &&
               <Paper className={classes.root} elevation={1}>
                 <ProductDetailsWrapper
                   checkPincodeState={checkPincodeState}
@@ -127,8 +135,7 @@ class ProductDetails extends React.Component {
                   addToCartHandler={addToCartHandler}
                   onChangeQuantity={actions.onChangeQuantity}
                 />
-              </Paper>
-            }
+              </Paper>}
           </ActivityIndicator>
         </div>
       </Layout>
