@@ -33,11 +33,11 @@ const ProductName = (props) => (
     </Typography>
     {
       props.deliveryOption === DELIVERY_OPTION_URGENT &&
-      <img src='static/images/express-delivery-icon.svg' />
+      <img src='/static/images/express-delivery-icon.svg' />
     }
     {
       props.serviceType === SERVICE_TYPE_LFASSURED &&
-      <img src='static/images/assured-service.svg' />
+      <img src='/static/images/assured-service.svg' />
     }
   </React.Fragment>
 )

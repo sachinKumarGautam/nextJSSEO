@@ -7,28 +7,28 @@ import DialogContent from '@material-ui/core/DialogContent'
 import DialogTitle from '@material-ui/core/DialogTitle'
 import Typography from '@material-ui/core/Typography'
 
-import Button from './button'
+import Button from '../../components/button'
 
 const styles = theme => ({
-  refillPatientWrapper: {
+  bulkOrderWrapper: {
     marginTop: theme.spacing.unit * 2.25,
     textAlign: 'center',
     marginBottom: theme.spacing.unit * 3,
     marginLeft: theme.spacing.unit * 4,
     marginRight: theme.spacing.unit * 2
   },
-  refillPatientButtonRoot: {
+  bulkOrderButtonRoot: {
     border: 'none',
     borderRadius: 0
   },
-  refillPatientApplyButtonLabel: {
+  bulkOrderApplyButtonLabel: {
     color: theme.palette.customGrey.grey500
   },
-  refillPatientCancelButtonLabel: {
+  bulkOrderCancelButtonLabel: {
     color: theme.palette.customGreen.green300
   },
   paper: {
-    width: theme.spacing.unit * 40
+    width: theme.spacing.unit * 100
   },
   refillContent: {
     ...theme.typography.body2,
@@ -37,10 +37,40 @@ const styles = theme => ({
   }
 })
 
-class RefillPatientDialogue extends Component {
+class BulkOrderDialogue extends Component {
+  constructor(props) {
+    super(props)
+    this.getMessage = this.getMessage.bind(this)
+  }
+  getMessage() {
+    let patientFullName =
+      this.props.cartState.payload.customer_full_name
+    let messageMedicine =
+      this.props.cartState.payload.cart_items.payload.filter(
+        (item) => item.bulk_order_quantity && item.excessive_ordered_quantity
+      )
+
+    let message =
+      messageMedicine.map((item) => {
+        return `More than ${item.bulk_order_quantity} items have been ordered for ${item.name} by ${patientFullName} in the past 30 days. `
+      })
+
+    return (
+      <div>
+        {message.map((msg) => (
+          <p style={{ textAlign: 'left' }}>
+            {msg}
+          </p>
+        ))}
+        <p style={{ textAlign: 'left' }}>
+          Do you still wish to continue to place an order?
+        </p>
+      </div>
+    )
+  }
   render() {
     return (
-      <div className={this.props.classes.refillPatientWrapper}>
+      <div className={this.props.classes.bulkOrderWrapper}>
         <Dialog
           open={this.props.open}
           onClose={this.props.handleClose}
@@ -50,14 +80,14 @@ class RefillPatientDialogue extends Component {
           }}
         >
           <DialogTitle id='form-dialog-title'>
-            {this.props.dialogTitle}
+            Bulk Medicine Alert!
           </DialogTitle>
           <DialogContent>
             <Typography
               varaint='caption'
               className={this.props.classes.refillContent}
             >
-              {this.props.dialogContent}
+              {this.getMessage()}
             </Typography>
           </DialogContent>
           <DialogActions>
@@ -66,20 +96,10 @@ class RefillPatientDialogue extends Component {
               color='primary'
               onClick={this.props.handleClose}
               classes={{
-                root: this.props.classes.refillPatientButtonRoot,
-                label: this.props.classes.refillPatientApplyButtonLabel
+                root: this.props.classes.bulkOrderButtonRoot,
+                label: this.props.classes.bulkOrderCancelButtonLabel
               }}
-              label={'Cancel'}
-            />
-            <Button
-              size='small'
-              color='primary'
-              onClick={this.props.onClickOfOk}
-              classes={{
-                root: this.props.classes.refillPatientButtonRoot,
-                label: this.props.classes.refillPatientCancelButtonLabel
-              }}
-              label={'Ok'}
+              label={'Continue'}
             />
           </DialogActions>
         </Dialog>
@@ -88,4 +108,4 @@ class RefillPatientDialogue extends Component {
   }
 }
 
-export default withStyles(styles)(RefillPatientDialogue)
+export default withStyles(styles)(BulkOrderDialogue)

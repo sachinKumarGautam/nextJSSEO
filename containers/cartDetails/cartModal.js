@@ -8,6 +8,7 @@ const initialState = {
     customer_first_name: '',
     customer_last_name: '',
     facility_code: 0,
+    excessive_ordered_quantity: false,
     patient_details: {
       payload: {
         patient_id: 0,

@@ -5,7 +5,7 @@ import {
   ON_CHANGE_QUANITY
 } from './productDetailsActionTypes'
 
-export function getProductDetailLoading (productDetailsState, productName, location) {
+export function getProductDetailLoading(productDetailsState, productName, location) {
   return {
     type: GET_PRODUCT_DETAILS_LOADING,
     productDetailsState,
@@ -17,7 +17,7 @@ export function getProductDetailLoading (productDetailsState, productName, locat
   }
 }
 
-export function getProductDetailSuccess (productDetailsState, result) {
+export function getProductDetailSuccess(productDetailsState, result) {
   result = result.body.payload
   return {
     type: GET_PRODUCT_DETAILS_SUCCESS,
@@ -61,11 +61,12 @@ export function getProductDetailSuccess (productDetailsState, result) {
     is_cold_storage: result.is_cold_storage,
     packaging_type: result.packaging_type,
     description: result.description,
-    isLoading: false
+    isLoading: false,
+    max_order_unit_quantity: result.max_order_unit_quantity
   }
 }
 
-export function getProductDetailFailure (productDetailsState, error) {
+export function getProductDetailFailure(productDetailsState, error) {
   return {
     type: GET_PRODUCT_DETAILS_FAILURE,
     productDetailsState,
@@ -75,7 +76,7 @@ export function getProductDetailFailure (productDetailsState, error) {
   }
 }
 
-export function onChangeQuantity (productDetailsState, quantity) {
+export function onChangeQuantity(productDetailsState, quantity) {
   return {
     type: ON_CHANGE_QUANITY,
     productDetailsState,

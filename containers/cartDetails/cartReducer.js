@@ -2,7 +2,7 @@ import initialState from './cartModal'
 
 import * as cartActionTypes from './cartActionTypes'
 
-export default function cartReducer (state = initialState, action) {
+export default function cartReducer(state = initialState, action) {
   switch (action.type) {
     case cartActionTypes.GET_ANONYMOUS_CART_ID_LOADING:
       return {
@@ -102,6 +102,7 @@ export default function cartReducer (state = initialState, action) {
           facility_code: action.facility_code,
           status: action.status,
           source: action.source,
+          excessive_ordered_quantity: action.excessive_ordered_quantity,
           cart_items: {
             ...state.payload.cart_items,
             payload: action.cart_items
@@ -178,7 +179,8 @@ export default function cartReducer (state = initialState, action) {
           total_mrp: action.total_mrp,
           total_payable_amount: action.total_payable_amount,
           total_sale_price: action.total_sale_price,
-          total_tax_amount: action.total_tax_amount
+          total_tax_amount: action.total_tax_amount,
+          excessive_ordered_quantity: action.excessive_ordered_quantity
         }
       }
 
