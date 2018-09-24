@@ -30,7 +30,7 @@ const styles = theme => ({
     fontSize: theme.spacing.unit * 2.5,
     marginLeft: theme.spacing.unit * 1.25,
     fontWeight: theme.typography.fontWeightBold,
-    letterSpacing: '0.6px',
+    letterSpacing: theme.spacing.unit * 0.075,
     color: theme.palette.customGrey.grey500,
     marginRight: theme.spacing.unit
   },
@@ -48,28 +48,20 @@ const styles = theme => ({
   }
 })
 
-const OrderStatusDetails = (props) => {
+const OrderStatusDetails = props => {
   return (
     <div className={props.classes.orderNoWrapper}>
       <div className={props.classes.orderWrapper}>
-        <Typography
-          className={props.classes.title}
-        >
+        <Typography className={props.classes.title}>
           Order No.
         </Typography>
-        <Typography
-          className={props.classes.orderId}
-        >
+        <Typography className={props.classes.orderId}>
           {props.orderId}
         </Typography>
-        {
-          props.deliveryOption === DELIVERY_OPTION_URGENT &&
-          <img src='static/images/express-delivery-icon.svg' />
-        }
-        {
-          props.serviceType === SERVICE_TYPE_LFASSURED &&
-          <img src='static/images/assured-service.svg' />
-        }
+        {props.deliveryOption === DELIVERY_OPTION_URGENT &&
+          <img src='static/images/express-delivery-icon.svg' />}
+        {props.serviceType === SERVICE_TYPE_LFASSURED &&
+          <img src='static/images/assured-service.svg' />}
       </div>
       {
         // <div>

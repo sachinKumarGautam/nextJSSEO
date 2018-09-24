@@ -42,12 +42,15 @@ class ProductDetailsContent extends Component {
           className={this.props.classes.contentWrapper}
         >
           <Grid item xs={9}>
-            {!uses && !side_effects && !how_it_works && !precautions
+            {!uses.length &&
+              !side_effects.length &&
+              !how_it_works.length &&
+              !precautions.length
               ? <UnderConstruction />
               : <ProductUseCases
                 hover={this.props.hover}
                 summaryData={productDetailsStateData}
-              />}
+                />}
           </Grid>
           <Grid item xs={3}>
             <RelatedArticles publishedContent={this.props.publishedContent} />
