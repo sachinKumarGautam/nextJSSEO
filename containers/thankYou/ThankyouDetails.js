@@ -4,11 +4,20 @@ import { withStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
 
 import {formatDate} from '../../utils/FormatDate'
-import {DESCRIPTION} from '../messages/thankyouMessages'
 import {
   DELIVERY_OPTION_URGENT,
   SERVICE_TYPE_LFASSURED
 } from '../../components/constants/Constants'
+
+import ReactTooltip from 'react-tooltip'
+
+import {
+  UREGNT_DELIVERY_TEXT
+} from '../messages/cartMessages'
+
+import {
+  getReplacedString
+} from '../../utils/replaceConstants'
 
 const styles = theme => ({
   imageStyle: {
@@ -57,6 +66,25 @@ const styles = theme => ({
     paddingBottom: theme.spacing.unit * 2,
     marginLeft: theme.spacing.unit * 5,
     marginRight: theme.spacing.unit * 12.12
+  },
+  paper: {
+    padding: theme.spacing.unit,
+    width: theme.spacing.unit * 34,
+    backgroundColor: `${theme.palette.customGrey.grey50} !important`,
+    pointerEvents: 'auto !important',
+    '&:after': {
+      borderRightColor: `${theme.palette.customGrey.grey50} !important`
+    },
+    '&:hover': {
+      visibility: 'visible !important',
+      opacity: '1 !important'
+    },
+    opacity: '1 !important',
+    borderRadius: '4px'
+  },
+  infoStyle: {
+    textDecoration: 'none',
+    color: theme.palette.common.black
   }
 })
 
@@ -119,7 +147,30 @@ const ThankyouDetails = (props) => {
         variant='body2'
         className={props.classes.description}
       >
-        {DESCRIPTION}
+        Your order is under process and is promised for same day Express delivery
+        <a
+          href='#'
+          data-tip
+          data-for='urgent_delivery'
+          className={props.classes.infoStyle}
+        >
+              *
+          <ReactTooltip
+            id='urgent_delivery'
+            effect='solid'
+            place='right'
+            className={props.classes.paper}
+            // delayHide={1000}
+            delayShow={500}
+          >
+            <Typography
+              variant='caption'
+            >
+              {getReplacedString(UREGNT_DELIVERY_TEXT, props.constantsState.constants.payload.constantsPayload)}
+            </Typography>
+          </ReactTooltip>
+        </a>
+            . We will call you shortly to confirm medicines and quantities.
       </Typography>
     </div>
   )

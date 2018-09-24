@@ -111,7 +111,7 @@ class PriceDetails extends Component {
             </div>
             <div className={this.props.classes.infoWrapper}>
               <Typography className={this.props.classes.discount}>
-                Care Points Plus
+                Care Points +
               </Typography>
               <a data-tip data-for='care_point_plus'>
                 <img

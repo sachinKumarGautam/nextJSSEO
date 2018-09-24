@@ -10,14 +10,16 @@ const styles = theme => ({
     paddingLeft: theme.spacing.unit * 2.5
   },
   address: {
-    fontSize: theme.spacing.unit * 2.25,
+    fontSize: theme.typography.pxToRem(14),
     fontWeight: theme.typography.fontWeightBold,
     color: theme.palette.customGrey.grey500,
-    marginLeft: theme.spacing.unit * 2.5
+    marginLeft: theme.spacing.unit * 2.5,
+    marginTop: theme.spacing.unit / 4
   },
   street: {
-    fontSize: theme.spacing.unit * 2.25,
-    marginLeft: theme.spacing.unit * 6.875
+    fontSize: theme.typography.pxToRem(14),
+    marginLeft: theme.spacing.unit * 6.875,
+    marginTop: theme.spacing.unit / 4
   },
   image: {
     height: theme.spacing.unit * 2,

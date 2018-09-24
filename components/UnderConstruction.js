@@ -6,9 +6,10 @@ const styles = theme => ({
     margin: '0 auto',
     display: 'flex',
     textAlign: 'center',
-    flexDirection: 'column',
+    flexDirection: 'row',
     justifyContent: 'center',
-    marginTop: theme.spacing.unit * 2
+    marginTop: theme.spacing.unit * 2,
+    alignItems: 'center'
   },
   img: {
     width: theme.typography.pxToRem(283),
@@ -30,22 +31,14 @@ const styles = theme => ({
 
 const UnderConstruction = ({ classes }) => (
   <div className={classes.outerWrapper}>
-    <img src='/static/images/construction-image.svg' alt='construction-image' />
-    <Typography
-      className={classes.mainText}
-      gutterBottom
-      variant={'display2'}
-      component='h3'
-    >
-      Under Construction!
-    </Typography>
+    <img src='/static/images/paymentPendingIcon.svg' alt='construction-image' />
     <Typography
       className={classes.subText}
       gutterBottom
       variant={'title'}
       component='h4'
     >
-      This page is under construction
+      We are working to get you the details soon
     </Typography>
   </div>
 )
