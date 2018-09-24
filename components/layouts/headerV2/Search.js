@@ -61,7 +61,7 @@ const styles = theme => {
       borderRadius: theme.spacing.unit * 3,
       lineHeight: 1.07,
       letterSpacing: '0.3px',
-      boxShadow: theme.shadows[0]
+      boxShadow: '0 1px 3px rgba(0,0,0,0.12), 0 2px 3px rgba(0,0,0,0.24)'
     }
   }
 }

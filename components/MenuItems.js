@@ -20,7 +20,7 @@ const styles = theme => {
   return {
     orderStyle: {
       ...theme.typography.caption,
-      paddingLeft: theme.spacing.unit * 7,
+      paddingLeft: theme.spacing.unit * 6.75,
       color: theme.palette.customGrey.grey500,
       marginTop: theme.spacing.unit * 2,
       paddingBottom: theme.spacing.unit / 2,
@@ -28,7 +28,7 @@ const styles = theme => {
     },
     menuStyle: {
       ...theme.typography.caption,
-      paddingLeft: theme.spacing.unit * 7,
+      paddingLeft: theme.spacing.unit * 6.75,
       color: theme.palette.customGrey.grey500,
       paddingTop: theme.spacing.unit * 0,
       paddingBottom: theme.spacing.unit / 2
@@ -39,7 +39,7 @@ const styles = theme => {
     },
     logoutStyle: {
       ...theme.typography.caption,
-      paddingLeft: theme.spacing.unit * 7,
+      paddingLeft: theme.spacing.unit * 6.75,
       color: theme.palette.customGrey.grey500,
       paddingTop: theme.spacing.unit * 0,
       marginBottom: theme.spacing.unit * 2

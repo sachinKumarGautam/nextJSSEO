@@ -18,7 +18,7 @@ const styles = theme => {
   return {
     languageSubMenuStyle: {
       ...theme.typography.caption,
-      paddingLeft: theme.spacing.unit * 7,
+      paddingLeft: theme.spacing.unit * 6.75,
       color: theme.palette.customGrey.grey500,
       paddingTop: 0,
       paddingBottom: theme.spacing.unit / 2,
@@ -26,14 +26,14 @@ const styles = theme => {
     },
     secondSubMenuStyle: {
       ...theme.typography.caption,
-      paddingLeft: theme.spacing.unit * 7,
+      paddingLeft: theme.spacing.unit * 6.75,
       color: theme.palette.customGrey.grey500,
       paddingTop: 0,
       paddingBottom: theme.spacing.unit / 2
     },
     privacySubMenuStyle: {
       ...theme.typography.caption,
-      paddingLeft: theme.spacing.unit * 7,
+      paddingLeft: theme.spacing.unit * 6.75,
       color: theme.palette.customGrey.grey500,
       marginBottom: theme.spacing.unit * 2,
       paddingTop: 0,

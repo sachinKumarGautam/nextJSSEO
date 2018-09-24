@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 
 import IconButton from '@material-ui/core/IconButton'
 import Menu from '@material-ui/core/Menu'
-import MenuItem from '@material-ui/core/MenuItem'
 import AccountCircle from '@material-ui/icons/AccountCircle'
 import Divider from '@material-ui/core/Divider'
 import { withStyles } from '@material-ui/core/styles'
@@ -83,11 +82,9 @@ class MenuLayout extends Component {
           }}
           className={this.props.classes.menuStyle}
         >
-          <MenuItem>{
-            <UserDetail
-              customerState={this.props.customerState}
-            />
-          }</MenuItem>
+          <UserDetail
+            customerState={this.props.customerState}
+          />
           <Divider />
           <MenuItems logout={this.logout.bind(this)} />
           {/* <Button

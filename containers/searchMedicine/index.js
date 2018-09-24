@@ -57,10 +57,7 @@ const styles = theme => ({
     right: 0,
     top: -(theme.spacing.unit * 2.2),
     height: theme.spacing.unit * 4,
-    borderRadius: `0px ${theme.spacing.unit * 2}px ${theme.spacing.unit * 2}px 0px`,
-    '&:hover': {
-      width: '20px !important'
-    }
+    borderRadius: `0px ${theme.spacing.unit * 2}px ${theme.spacing.unit * 2}px 0px`
   },
   searchBar: {
     display: 'flex',
