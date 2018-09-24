@@ -27,9 +27,16 @@ class MoleculeDetails extends Component {
   render () {
     return (
       <div className={this.props.classes.productDetailsWrapper}>
-        <ProductName variant={'title'} name={this.props.moleculeDetailsStatePayload.name} />
-        <DiseaseTagsWrapper diseases={this.props.moleculeDetailsStatePayload.diseases} />
-        <ProductOverview overview={''} />
+        <ProductName
+          variant={'title'}
+          name={this.props.moleculeDetailsStatePayload.name}
+        />
+        <DiseaseTagsWrapper
+          diseases={this.props.moleculeDetailsStatePayload.diseases}
+        />
+        <ProductOverview
+          overview={this.props.moleculeDetailsStatePayload.description}
+        />
         <ProductInfoNav
           toggleHover={this.props.toggleHover}
           hover={this.props.hover}

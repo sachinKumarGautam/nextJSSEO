@@ -18,7 +18,7 @@ class MyDocument extends Document {
             name='viewport'
             content={
               'user-scalable=0, initial-scale=1, ' +
-              'minimum-scale=1, width=device-width, height=device-height'
+                'minimum-scale=1, width=device-width, height=device-height'
             }
           />
           {/* PWA primary color */}
@@ -58,8 +58,6 @@ class MyDocument extends Document {
             href="https://fonts.googleapis.com/css?family=Roboto:300,400,500"
           /> */}
 
-          <script src='https://checkout.razorpay.com/v1/checkout.js' async />
-
           <link
             rel='stylesheet'
             type='text/css'
@@ -76,6 +74,7 @@ class MyDocument extends Document {
             rel='stylesheet'
             href='https://fonts.googleapis.com/css?family=Roboto:300,400,500'
           />
+          <script src='https://checkout.razorpay.com/v1/checkout.js' async />
         </Head>
         <body>
           <Main />

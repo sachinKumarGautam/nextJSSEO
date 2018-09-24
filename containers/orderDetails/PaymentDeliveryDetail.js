@@ -17,15 +17,13 @@ import {
   DELIVERY_OPTION_URGENT
 } from '../../components/constants/Constants'
 
-import {
-  getReplacedString
-} from '../../utils/replaceConstants'
+import { getReplacedString } from '../../utils/replaceConstants'
 
 const styles = theme => ({
   textWrapper: {
     display: 'flex',
     flexDirection: 'row',
-    marginBottom: theme.spacing.unit * 1.5
+    marginBottom: theme.spacing.unit * 3
   },
   text: {
     ...theme.typography.body3,
@@ -82,8 +80,7 @@ class PaymentDeliveryDetail extends Component {
 
     return (
       <div className={this.props.classes.mainWrapper}>
-        {
-          this.props.serviceType === SERVICE_TYPE_LFASSURED &&
+        {this.props.serviceType === SERVICE_TYPE_LFASSURED &&
           <div className={this.props.classes.textWrapper}>
             <img
               src='/static/images/shape.svg'
@@ -95,11 +92,7 @@ class PaymentDeliveryDetail extends Component {
             >
               {LF_ASSURED_DETAIL}
             </Typography>
-            <a
-              href='#'
-              data-tip
-              data-for='assured'
-            >
+            <a href='#' data-tip data-for='assured'>
               <img
                 src='/static/images/info-outline.svg'
                 className={this.props.classes.tooltipIconInage}
@@ -112,17 +105,13 @@ class PaymentDeliveryDetail extends Component {
                 // delayHide={1000}
                 delayShow={500}
               >
-                <Typography
-                  variant='caption'
-                >
+                <Typography variant='caption'>
                   {getReplacedString(LF_ASSURED_TEXT, constantsPayload)}
                 </Typography>
               </ReactTooltip>
             </a>
-          </div>
-        }
-        {
-          this.props.deliveryOption === DELIVERY_OPTION_URGENT &&
+          </div>}
+        {this.props.deliveryOption === DELIVERY_OPTION_URGENT &&
           <div className={this.props.classes.textWrapper}>
             <img
               src='/static/images/express-delivery-icon.svg'
@@ -134,11 +123,7 @@ class PaymentDeliveryDetail extends Component {
             >
               {EXPRESS_DELIVERY_DETAIL}
             </Typography>
-            <a
-              href='#'
-              data-tip
-              data-for='urgent_delivery'
-            >
+            <a href='#' data-tip data-for='urgent_delivery'>
               <img
                 src='/static/images/info-outline.svg'
                 className={this.props.classes.tooltipIconInage}
@@ -151,30 +136,22 @@ class PaymentDeliveryDetail extends Component {
                 // delayHide={1000}
                 delayShow={500}
               >
-                <Typography
-                  variant='caption'
-                >
+                <Typography variant='caption'>
                   {getReplacedString(UREGNT_DELIVERY_TEXT, constantsPayload)}
                 </Typography>
               </ReactTooltip>
             </a>
-          </div>
-        }
-        {
-          this.props.serviceType === SERVICE_TYPE_LFASSURED &&
+          </div>}
+        {this.props.serviceType === SERVICE_TYPE_LFASSURED &&
           <div className={this.props.classes.textWrapper}>
             <img
               src='/static/images/rx-pending.svg'
               className={this.props.classes.rxImageStyle}
             />
-            <Typography
-              varaint='caption'
-              className={this.props.classes.text}
-            >
+            <Typography varaint='caption' className={this.props.classes.text}>
               {VERIFICATION_RX}
             </Typography>
-          </div>
-        }
+          </div>}
       </div>
     )
   }
