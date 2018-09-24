@@ -49,7 +49,7 @@ const styles = theme => {
 }
 
 class RefillMedicineSection extends Component {
-  onPlaceOrder () {
+  onPlaceOrder() {
     if (!this.props.loginState.isAuthenticated || this.props.loginState.isNewUser) {
       return scrollTo('search-section', SCROLL_TO_TOP_HEIGHT)
     } else {
@@ -57,7 +57,7 @@ class RefillMedicineSection extends Component {
       return Router.push(url)
     }
   }
-  render () {
+  render() {
     return (
       <div className={this.props.classes.refillWrapper}>
         <Typography
@@ -70,7 +70,7 @@ class RefillMedicineSection extends Component {
           variant='body2'
           className={this.props.classes.description}
         >
-          LifCare saves you all the time and effort to re-visit pharmacies by proactively reminding you to refill your medicines on-time every-month. Receive timely reminders for your medicine refills, and get them re-delivered every month.
+          LifCare saves you all the time and effort to re-visit pharmacies, by proactively refilling your medicines on-time every-time.
         </Typography>
         <div className={this.props.classes.imageStyle}>
           <img src='/static/images/refillDetail.svg' />
