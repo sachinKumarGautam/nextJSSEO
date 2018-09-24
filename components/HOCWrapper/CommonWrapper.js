@@ -42,17 +42,17 @@ import {
   MEDICINE_QUANTITY_ALERT
 } from '../../containers/messages/cartMessages'
 
-import Snackbar from '@material-ui/core/Snackbar';
+import Snackbar from '@material-ui/core/Snackbar'
 
-export function withCommonWrapper(Page) {
+export function withCommonWrapper (Page) {
   class CommonWrapper extends React.Component {
-    static getInitialProps(ctx) {
+    static getInitialProps (ctx) {
       if (Page.getInitialProps) {
         return Page.getInitialProps(ctx)
       }
     }
 
-    constructor(props) {
+    constructor (props) {
       super(props)
       this.addToCartHandler = this.addToCartHandler.bind(this)
       this.handleCloseSnackbar = this.handleCloseSnackbar.bind(this)
@@ -62,7 +62,7 @@ export function withCommonWrapper(Page) {
       }
     }
 
-    componentDidMount() {
+    componentDidMount () {
       this.props.actions.resetCartLoadingState(this.props.cartState)
     }
 
@@ -72,7 +72,7 @@ export function withCommonWrapper(Page) {
       })
     )
 
-    addToCartHandler(inProgressCartItem, event) {
+    addToCartHandler (inProgressCartItem, event) {
       if (inProgressCartItem.max_order_quantity &&
         inProgressCartItem.quantity >= inProgressCartItem.max_order_quantity) {
         this.handleCloseSnackbar()
@@ -99,7 +99,7 @@ export function withCommonWrapper(Page) {
       this.props.actions.resetPincodeState()
     }
 
-    handleDialogOk() {
+    handleDialogOk () {
       this.props.actions.resetCartState()
       this.props.actions.getAnonymousCartIdLoading(
         this.props.cartState,
@@ -109,7 +109,7 @@ export function withCommonWrapper(Page) {
       )
     }
 
-    resetState() {
+    resetState () {
       this.props.actions.resetCartItemErrorState()
     }
 
@@ -145,7 +145,7 @@ export function withCommonWrapper(Page) {
       }
     }
 
-    render() {
+    render () {
       const { checkPincodeState, cartState, actions, loginState } = this.props
       const { inProgressCartItem } = this.state
       const isSessionExpired = loginState.isSessionExpired
@@ -177,22 +177,22 @@ export function withCommonWrapper(Page) {
           <Snackbar
             anchorOrigin={{
               vertical: 'bottom',
-              horizontal: 'center',
+              horizontal: 'center'
             }}
             open={this.state.openSnackbar}
             autoHideDuration={6000}
             onClose={this.handleCloseSnackbar}
             ContentProps={{
-              'aria-describedby': 'message-id',
+              'aria-describedby': 'message-id'
             }}
-            message={<span id="message-id">{MEDICINE_QUANTITY_ALERT}</span>}
+            message={<span id='message-id'>{MEDICINE_QUANTITY_ALERT}</span>}
           />
         </React.Fragment>
       )
     }
   }
 
-  function mapStateToProps(state) {
+  function mapStateToProps (state) {
     return {
       checkPincodeState: state.checkPincodeState,
       searchMedicineState: state.searchMedicineState,
@@ -201,7 +201,7 @@ export function withCommonWrapper(Page) {
     }
   }
 
-  function mapDispatchToProps(dispatch) {
+  function mapDispatchToProps (dispatch) {
     return {
       actions: bindActionCreators(
         {

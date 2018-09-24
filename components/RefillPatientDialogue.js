@@ -38,7 +38,7 @@ const styles = theme => ({
 })
 
 class RefillPatientDialogue extends Component {
-  render() {
+  render () {
     return (
       <div className={this.props.classes.refillPatientWrapper}>
         <Dialog

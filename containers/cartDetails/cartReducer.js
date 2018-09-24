@@ -2,7 +2,7 @@ import initialState from './cartModal'
 
 import * as cartActionTypes from './cartActionTypes'
 
-export default function cartReducer(state = initialState, action) {
+export default function cartReducer (state = initialState, action) {
   switch (action.type) {
     case cartActionTypes.GET_ANONYMOUS_CART_ID_LOADING:
       return {

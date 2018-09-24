@@ -29,7 +29,7 @@ import {
   COD
 } from '../../components/constants/paymentConstants'
 
-import Snackbar from '@material-ui/core/Snackbar';
+import Snackbar from '@material-ui/core/Snackbar'
 
 /*
   avatar
@@ -79,7 +79,7 @@ const styles = theme => ({
 })
 
 class CartDetails extends Component {
-  constructor(props) {
+  constructor (props) {
     super(props)
     this.state = {
       quantityStatus: null,
@@ -96,7 +96,7 @@ class CartDetails extends Component {
     })
   )
 
-  decrementCartItem(cartItem) {
+  decrementCartItem (cartItem) {
     this.setState({
       quantityStatus: 'decrease'
     })
@@ -107,7 +107,7 @@ class CartDetails extends Component {
     }
   }
 
-  incrementCartItem(cartItem) {
+  incrementCartItem (cartItem) {
     if (cartItem.max_order_quantity &&
       cartItem.quantity >= cartItem.max_order_quantity) {
       this.handleCloseSnackbar()
@@ -119,7 +119,7 @@ class CartDetails extends Component {
     }
   }
 
-  openCheckout(cartState) {
+  openCheckout (cartState) {
     openRazorpayCheckout(
       cartState,
       this.props.customerState,
@@ -128,7 +128,7 @@ class CartDetails extends Component {
     )
   }
 
-  onModalDismiss() {
+  onModalDismiss () {
     const isPaymentFailure = true
 
     this.props.updatePaymentFailureFlag(
@@ -137,7 +137,7 @@ class CartDetails extends Component {
     )
   }
 
-  verifyPayment(response) {
+  verifyPayment (response) {
     this.props.verifyPaymentLoading(
       this.props.cartState,
       response,
@@ -145,7 +145,7 @@ class CartDetails extends Component {
     )
   }
 
-  componentDidUpdate(prevProps) {
+  componentDidUpdate (prevProps) {
     if (
       (this.props.cartState.isOrderSubmitted !==
         prevProps.cartState.isOrderSubmitted) &&
@@ -187,7 +187,7 @@ class CartDetails extends Component {
     }
   }
 
-  render() {
+  render () {
     return (
       <Card elevation={'1'} className={this.props.classes.card}>
         <CardContent
@@ -244,15 +244,15 @@ class CartDetails extends Component {
           <Snackbar
             anchorOrigin={{
               vertical: 'bottom',
-              horizontal: 'center',
+              horizontal: 'center'
             }}
             open={this.state.openSnackbar}
             autoHideDuration={6000}
             onClose={this.handleCloseSnackbar}
             ContentProps={{
-              'aria-describedby': 'message-id',
+              'aria-describedby': 'message-id'
             }}
-            message={<span id="message-id">{MEDICINE_QUANTITY_ALERT}</span>}
+            message={<span id='message-id'>{MEDICINE_QUANTITY_ALERT}</span>}
           />
         </CardContent>
       </Card>

@@ -85,7 +85,7 @@ const styles = theme => ({
 })
 
 class CartDetailsWrapper extends Component {
-  constructor(props) {
+  constructor (props) {
     super(props)
     this.state = {
       open: false,
@@ -99,7 +99,7 @@ class CartDetailsWrapper extends Component {
     this.resetState = this.resetState.bind(this)
     this.handleBulkOrderDialogue = this.handleBulkOrderDialogue.bind(this)
   }
-  componentDidMount() {
+  componentDidMount () {
     const cartUid = this.props.cartState.payload.uid
     this.props.actions.getCartDetailsLoading(this.props.cartState, cartUid)
     this.props.actions.resetApiStateSubmitOrder() // reset Submit order api state
@@ -119,7 +119,7 @@ class CartDetailsWrapper extends Component {
     }
   }
 
-  componentDidUpdate(prevProps) {
+  componentDidUpdate (prevProps) {
     if (
       this.props.customerState.payload.id !==
       prevProps.customerState.payload.id &&
@@ -139,7 +139,8 @@ class CartDetailsWrapper extends Component {
     }
 
     if (
-      (prevProps.cartState.payload.excessive_ordered_quantity !==
+      (
+        prevProps.cartState.payload.excessive_ordered_quantity !==
         this.props.cartState.payload.excessive_ordered_quantity) &&
       this.props.cartState.payload.excessive_ordered_quantity
     ) {
@@ -153,7 +154,7 @@ class CartDetailsWrapper extends Component {
     })
   )
 
-  tryAgain() {
+  tryAgain () {
     this.props.actions.getCartDetailsLoading(
       this.props.cartState,
       this.props.cartState.payload.uid
@@ -192,18 +193,18 @@ class CartDetailsWrapper extends Component {
     )
   }
 
-  addMedicine() {
+  addMedicine () {
     this.props.addToCartHandler(this.state.medicineName)
   }
 
-  resetState() {
+  resetState () {
     this.props.actions.resetSavePatientToCartError()
     this.props.actions.resetSaveDeliveryAddressToCartError()
     this.props.actions.resetUploadPrescriptionError()
     this.props.actions.resetPincodeState()
   }
 
-  getErrorComponent() {
+  getErrorComponent () {
     if (this.props.cartState.errorState.isError) {
       return (
         <FullPageError
@@ -232,7 +233,7 @@ class CartDetailsWrapper extends Component {
     }
   }
 
-  render() {
+  render () {
     const { classes } = this.props
     const submitOrderLoading = this.props.cartState.orderResponse.isLoading
     return (
@@ -369,7 +370,7 @@ class CartDetailsWrapper extends Component {
   }
 }
 
-function mapStateToProps(state) {
+function mapStateToProps (state) {
   return {
     loginState: state.loginState,
     cartState: state.cartState,
@@ -382,7 +383,7 @@ function mapStateToProps(state) {
   }
 }
 
-function mapDispatchToProps(dispatch) {
+function mapDispatchToProps (dispatch) {
   return {
     actions: bindActionCreators(
       {

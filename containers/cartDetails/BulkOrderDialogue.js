@@ -38,11 +38,11 @@ const styles = theme => ({
 })
 
 class BulkOrderDialogue extends Component {
-  constructor(props) {
+  constructor (props) {
     super(props)
     this.getMessage = this.getMessage.bind(this)
   }
-  getMessage() {
+  getMessage () {
     let patientFullName =
       this.props.cartState.payload.customer_full_name
     let messageMedicine =
@@ -68,7 +68,7 @@ class BulkOrderDialogue extends Component {
       </div>
     )
   }
-  render() {
+  render () {
     return (
       <div className={this.props.classes.bulkOrderWrapper}>
         <Dialog
