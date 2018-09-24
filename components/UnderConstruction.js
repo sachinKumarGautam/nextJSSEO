@@ -19,7 +19,7 @@ const styles = theme => ({
     fontSize: theme.typography.pxToRem(30),
     marginTop: theme.typography.pxToRem(35),
     letterSpacing: '0',
-    fontWeight: 'bold',
+    fontWeight: theme.typography.fontWeightNormal,
     color: theme.palette.customGrey.grey500
   },
   subText: {
