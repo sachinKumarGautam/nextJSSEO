@@ -198,6 +198,30 @@ app
       app.render(req, res, actualPage, queryParams)
     })
 
+    // privacy policy page
+    server.get('/company/privacy', (req, res) => {
+      const actualPage = '/privacy'
+      app.render(req, res, actualPage)
+    })
+
+    // about us page
+    server.get('/company/about', (req, res) => {
+      const actualPage = '/about'
+      app.render(req, res, actualPage)
+    })
+
+    // faq page
+    server.get('/company/faq', (req, res) => {
+      const actualPage = '/faq'
+      app.render(req, res, actualPage)
+    })
+
+    // faq page
+    server.get('/company/terms', (req, res) => {
+      const actualPage = '/terms'
+      app.render(req, res, actualPage)
+    })
+
     // home page
     server.get('/', (req, res) => {
       const actualPage = '/'

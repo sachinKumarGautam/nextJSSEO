@@ -6,10 +6,10 @@ const styles = theme => {
   return {
     nameMenuStyle: {
       ...theme.typography.subheading,
-      paddingLeft: theme.spacing.unit * 5,
+      paddingLeft: theme.spacing.unit * 6.75,
       color: theme.palette.customGreen.green300,
-      paddingTop: theme.spacing.unit,
-      paddingBottom: theme.spacing.unit
+      paddingTop: theme.spacing.unit * 1.5,
+      paddingBottom: theme.spacing.unit * 1.5
     }
   }
 }

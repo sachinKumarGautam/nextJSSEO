@@ -72,7 +72,7 @@ class SnackbarErrorMessage extends Component {
             aria-describedby='client-snackbar'
             message={
               <div className={this.props.classes.snackbarWrapper}>
-                <img src='/static/images/error.svg' />
+                <img src='/static/images/error_outline.1.svg' />
                 <Typography
                   variant='caption'
                   className={this.props.classes.snackbarMessage}
