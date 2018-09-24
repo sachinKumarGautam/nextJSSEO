@@ -206,7 +206,7 @@ const TableContent = props => {
                     variant='body1'
                     className={props.classes.contentKey}
                   >
-                    {'MissDose'}
+                    {'Missed Dose'}
                   </Typography>
                 </div>
               </TableCell>

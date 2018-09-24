@@ -47,7 +47,7 @@ export function getOrderDetails (action$, store) {
             activeStep: orderStatusProgressDetails.activeStep,
             promised_delivery_date: formatDateWithMonth(payload.promised_delivery_date),
             created_at: formatDateWithMonth(payload.created_at),
-            seller_name: payload.seller_name ? payload.seller_name : 'trusted channel partner',
+            seller_name: payload.seller_name ? payload.seller_name : 'trusted channel partners',
             shipping_address: {
               ...payload.shipping_address,
               type: payload.shipping_address.type ? payload.shipping_address.type : 'Others'
