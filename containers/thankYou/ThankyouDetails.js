@@ -19,11 +19,6 @@ import {
   getReplacedString
 } from '../../utils/replaceConstants'
 
-import {
-  DESCRIPTION_FIRST,
-  DESCRIPTION_SECOND
-} from '../messages/thankyouMessages'
-
 const styles = theme => ({
   imageStyle: {
     marginLeft: theme.spacing.unit * 5,
@@ -70,7 +65,8 @@ const styles = theme => ({
     color: theme.palette.customGrey.grey500,
     paddingBottom: theme.spacing.unit * 2,
     marginLeft: theme.spacing.unit * 5,
-    marginRight: theme.spacing.unit * 12.12
+    marginRight: theme.spacing.unit * 12.12,
+    display: 'inline-block'
   },
   paper: {
     padding: theme.spacing.unit,
@@ -85,7 +81,7 @@ const styles = theme => ({
       opacity: '1 !important'
     },
     opacity: '1 !important',
-    borderRadius: '4px'
+    borderRadius: theme.spacing.unit / 2
   },
   infoStyle: {
     textDecoration: 'none',
@@ -152,14 +148,13 @@ const ThankyouDetails = (props) => {
         variant='body2'
         className={props.classes.description}
       >
-        {DESCRIPTION_FIRST}
-        <a
+        Your order is under process and is promised for same day Express delivery<a
           href='#'
           data-tip
           data-for='urgent_delivery'
           className={props.classes.infoStyle}
         >
-              *
+              *.
           <ReactTooltip
             id='urgent_delivery'
             effect='solid'
@@ -174,7 +169,7 @@ const ThankyouDetails = (props) => {
               {getReplacedString(UREGNT_DELIVERY_TEXT, props.constantsState.constants.payload.constantsPayload)}
             </Typography>
           </ReactTooltip>
-        </a>{DESCRIPTION_SECOND}
+        </a>We will call you shortly to confirm medicines and quantities.
       </Typography>
     </div>
   )
