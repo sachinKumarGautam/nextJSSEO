@@ -183,33 +183,24 @@ class OrderSummary extends React.Component {
       !this.props.cartState.payload.cart_prescriptions.length
     ) {
       this.setState({
-        isShowSnackbar: true
-      })
-      this.setState({
+        isShowSnackbar: true,
         snackBarMsg: ATLEAST_ONE_ITEM
       })
       return false
     } else if (!this.props.loginState.isAuthenticated) {
       this.setState({
-        isShowSnackbar: true
-      })
-      this.setState({
-        snackBarMsg: PLEASE_LOGIN
+        expanded: 'panel1'
       })
       return false
     } else if (panelName === 'patientPanel' && !patientId) {
       this.setState({
-        isShowSnackbar: true
-      })
-      this.setState({
+        isShowSnackbar: true,
         snackBarMsg: SELECT_PATIENT
       })
       return false
     } else if (panelName === 'addressPanel' && !shippingAddressId) {
       this.setState({
-        isShowSnackbar: true
-      })
-      this.setState({
+        isShowSnackbar: true,
         snackBarMsg: SELECT_ADDRESS
       })
       return false
