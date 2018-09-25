@@ -17,16 +17,15 @@ import Button from '../../components/button'
 import AddressDetails from './AddressDetails'
 import SelectedAddressDetails from './SelectedAddressDetails'
 
-import AddDeliveryAddressButton from '../deliveryDetails/AddDeliveryAddressButton'
+import AddDeliveryAddressButton
+  from '../deliveryDetails/AddDeliveryAddressButton'
 
 import {
   LIFCARE_URGENT_CONFLICT_MSG,
   LIFCARE_ASSURED_CONFLICT_MSG
 } from '../messages/cartMessages'
 
-import {
-  DELIVERY_OPTION_URGENT
-} from '../../components/constants/Constants'
+import { DELIVERY_OPTION_URGENT } from '../../components/constants/Constants'
 
 const styles = theme => ({
   dialogWrapper: {
@@ -53,7 +52,8 @@ class AddressDetailsExpansionPanel extends React.Component {
     addressId: 0
   }
 
-  openDeliveryFormModal () {
+  openDeliveryFormModal (event) {
+    event.stopPropagation()
     this.setState({
       openDeliveryFormDialog: true
     })
@@ -66,10 +66,9 @@ class AddressDetailsExpansionPanel extends React.Component {
   }
 
   closeExpressDialog () {
-    this.props.updateLassuredExpressFlag(
-      this.props.cartState,
-      { isDialogOpen: false }
-    )
+    this.props.updateLassuredExpressFlag(this.props.cartState, {
+      isDialogOpen: false
+    })
   }
 
   checkPincodeServiceble (deliveryDetails) {
@@ -82,7 +81,7 @@ class AddressDetailsExpansionPanel extends React.Component {
       this.props.checkPincodeState,
       null, // handle close function for closing pincode popup
       null, // setSubmitting function while submitting form
-      {'pincode': deliveryDetails.pincode},
+      { pincode: deliveryDetails.pincode },
       {
         isDeliveryAddress: false,
         incrementCartItemLoading: null,
@@ -99,14 +98,14 @@ class AddressDetailsExpansionPanel extends React.Component {
       this.props.cartState,
       this.state.addressId
     )
-    this.props.updateLassuredExpressFlag(
-      this.props.cartState,
-      { isDialogOpen: false }
-    )
+    this.props.updateLassuredExpressFlag(this.props.cartState, {
+      isDialogOpen: false
+    })
   }
 
   render () {
-    const shippingAddressDetails = this.props.cartState.payload.shipping_address_details
+    const shippingAddressDetails = this.props.cartState.payload
+      .shipping_address_details
     const patientDetails = this.props.cartState.payload.patient_details
 
     return (
@@ -114,7 +113,7 @@ class AddressDetailsExpansionPanel extends React.Component {
         expanded={this.props.expanded === 'panel4'}
         onChange={
           this.props.loginState.isAuthenticated &&
-          patientDetails.payload.patient_id
+            patientDetails.payload.patient_id
             ? this.props.handleChange
             : null
         }
@@ -126,42 +125,37 @@ class AddressDetailsExpansionPanel extends React.Component {
             content: this.props.patientContentWrapper
           }}
         >
-          <img src='/static/images/delivery.svg' className={this.props.imageIcon} />
+          <img
+            src='/static/images/delivery.svg'
+            className={this.props.imageIcon}
+          />
           <div className={this.props.patientWrapper}>
             <div className={this.props.checkedIconWrapper}>
-              {
-                this.props.expanded !== 'panel4' &&
+              {this.props.expanded !== 'panel4' &&
                 shippingAddressDetails.payload.shipping_address_id
-                  ? (
-                    <SelectedAddressDetails
-                      heading={this.props.heading}
-                      patientDetails={this.props.patientDetails}
-                      shipping_address={shippingAddressDetails.payload.shipping_address}
-                    />
-                  ) : (
-                    <Typography
-                      component='h1'
-                      className={this.props.heading}
-                    >
+                ? <SelectedAddressDetails
+                  heading={this.props.heading}
+                  patientDetails={this.props.patientDetails}
+                  shipping_address={
+                      shippingAddressDetails.payload.shipping_address
+                    }
+                  />
+                : <Typography component='h1' className={this.props.heading}>
                     Delivery Details
-                    </Typography>
-                  )
-              }
-              {
-                this.props.addressIdSelected
-                  ? (
-                    <img src='/static/images/checkedIcon.svg' className={this.props.checkedIcon} />
-                  ) : null
-              }
+                  </Typography>}
+              {this.props.addressIdSelected
+                ? <img
+                  src='/static/images/checkedIcon.svg'
+                  className={this.props.checkedIcon}
+                  />
+                : null}
             </div>
-            {
-              this.props.expanded === 'panel4' &&
+            {this.props.expanded === 'panel4' &&
               <AddDeliveryAddressButton
                 buttonRoot={this.props.buttonRoot}
                 buttonLabel={this.props.buttonLabel}
                 onClick={this.openDeliveryFormModal.bind(this)}
-              />
-            }
+              />}
           </div>
         </ExpansionPanelSummary>
         <ExpansionPanelDetails
@@ -175,7 +169,9 @@ class AddressDetailsExpansionPanel extends React.Component {
             buttonRoot={this.props.buttonRoot}
             buttonLabel={this.props.buttonLabel}
             openDeliveryFormModal={this.openDeliveryFormModal.bind(this)}
-            submitDeliveryDetailsLoading={this.props.submitDeliveryDetailsLoading}
+            submitDeliveryDetailsLoading={
+              this.props.submitDeliveryDetailsLoading
+            }
             openDeliveryFormDialog={this.state.openDeliveryFormDialog}
             customerState={this.props.customerState}
             deliveryFormState={this.props.deliveryFormState}
@@ -186,7 +182,9 @@ class AddressDetailsExpansionPanel extends React.Component {
             addressDetailsWrapper={this.props.patientDetailsWrapper}
             updateAddressFormValue={this.props.updateAddressFormValue}
             checkPincodeDetailLoading={this.props.checkPincodeDetailLoading}
-            getLocalityDetailListLoading={this.props.getLocalityDetailListLoading}
+            getLocalityDetailListLoading={
+              this.props.getLocalityDetailListLoading
+            }
             checkPincodeState={this.props.checkPincodeState}
             inProgressAddressId={this.state.addressId}
             shippingAddressDetails={shippingAddressDetails}
@@ -211,21 +209,19 @@ class AddressDetailsExpansionPanel extends React.Component {
             }}
           >
             <DialogTitle id='Express delivery alert'>
-              {
-                (this.props.cartState.payload.delivery_option === DELIVERY_OPTION_URGENT &&
-                !this.props.checkPincodeState.payload.is_urgent_dl_available)
-                  ? 'Lifcare Express Delivery Alert'
-                  : 'Lifcare Assured Service Alert'
-              }
+              {this.props.cartState.payload.delivery_option ===
+                DELIVERY_OPTION_URGENT &&
+                !this.props.checkPincodeState.payload.is_urgent_dl_available
+                ? 'Lifcare Express Delivery Alert'
+                : 'Lifcare Assured Service Alert'}
             </DialogTitle>
             <DialogContent>
               <DialogContentText>
-                {
-                  (this.props.cartState.payload.delivery_option === DELIVERY_OPTION_URGENT &&
-                  !this.props.checkPincodeState.payload.is_urgent_dl_available)
-                    ? LIFCARE_URGENT_CONFLICT_MSG
-                    : LIFCARE_ASSURED_CONFLICT_MSG
-                }
+                {this.props.cartState.payload.delivery_option ===
+                  DELIVERY_OPTION_URGENT &&
+                  !this.props.checkPincodeState.payload.is_urgent_dl_available
+                  ? LIFCARE_URGENT_CONFLICT_MSG
+                  : LIFCARE_ASSURED_CONFLICT_MSG}
               </DialogContentText>
             </DialogContent>
             <DialogActions>
@@ -242,7 +238,8 @@ class AddressDetailsExpansionPanel extends React.Component {
               </Button>
               <Button
                 onClick={this.saveSelectedAddress.bind(this)}
-                color='primary' autoFocus
+                color='primary'
+                autoFocus
                 classes={{
                   root: this.props.classes.buttonRoot,
                   label: this.props.classes.okButtonLabel

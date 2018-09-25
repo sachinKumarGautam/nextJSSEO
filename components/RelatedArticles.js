@@ -37,11 +37,14 @@ const styles = theme => {
       '&:not(:last-child)': {
         marginBottom: theme.spacing.unit * 4
       }
+    },
+    linkTag: {
+      textDecoration: 'none'
     }
   }
 }
 
-const RelatedArticles = (props) => (
+const RelatedArticles = props => (
   <div className={props.classes.relatedArticlesWrapper}>
     <Typography
       gutterBottom
@@ -49,25 +52,23 @@ const RelatedArticles = (props) => (
       component='h1'
       className={props.classes.title}
     >
-      <img src={'/static/images/related-articles.svg'} className={props.classes.imageTitle} />
+      <img
+        src={'/static/images/related-articles.svg'}
+        className={props.classes.imageTitle}
+      />
       Related Articles
     </Typography>
     <aside>
       <ul className={props.classes.articleListWrapper}>
-        {
-          props.publishedContent.map((articleDetail) => {
-            return (
-              <li
-                className={props.classes.listItem}
-                onClick={() => Router.push(articleDetail.web_link)}
-              >
-                <ArticleCard
-                  articleDetail={articleDetail}
-                />
-              </li>
-            )
-          })
-        }
+        {props.publishedContent.map(articleDetail => {
+          return (
+            <li className={props.classes.listItem}>
+              <a className={props.classes.linkTag} href={articleDetail.web_link} target='_blank'>
+                <ArticleCard articleDetail={articleDetail} />
+              </a>
+            </li>
+          )
+        })}
       </ul>
       {/* <a className={props.classes.viewAllLink}>view all</a> */}
     </aside>

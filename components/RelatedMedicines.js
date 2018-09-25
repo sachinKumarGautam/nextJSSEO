@@ -63,6 +63,7 @@ class RelatedMedicines extends React.Component {
       3 // page size
     )
   }
+
   render () {
     const medicineList = this.props.medicineList
     const cartItems = this.props.cartState.payload.cart_items.payload

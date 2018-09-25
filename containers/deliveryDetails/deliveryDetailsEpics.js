@@ -19,9 +19,7 @@ import {
   getLocalityDetailListFailure
 } from './deliveryDetailsActions'
 
-import {
-  saveDeliveryAddressToCartLoading
-} from '../cartDetails/cartActions'
+import { saveDeliveryAddressToCartLoading } from '../cartDetails/cartActions'
 
 import {
   getDeliveryDetailsList$,
@@ -50,10 +48,29 @@ export function getDeliveryDetailsList (action$, store) {
             }
           })
 
-          return getDeliveryDetailsListSuccess(data.deliveryDetailsState, modifiedPayload)
+          return getDeliveryDetailsListSuccess(
+            data.deliveryDetailsState,
+            modifiedPayload
+          )
         }),
-        catchError(error => {
-          return of(getDeliveryDetailsListFailure(data.deliveryDetailsState, error))
+        catchError(errorResponse => {
+          let isLoading
+          let isError
+          if (errorResponse.error.status === 404) {
+            isLoading = false
+            isError = false
+          } else {
+            isLoading = true
+            isError = true
+          }
+          return of(
+            getDeliveryDetailsListFailure(
+              data.deliveryDetailsState,
+              errorResponse,
+              isLoading,
+              isError
+            )
+          )
         })
       )
     })
@@ -69,7 +86,11 @@ export function submitDeliveryDetails (action$, store) {
       let api
 
       if (data.isEdit) {
-        api = editDeliveryDetails$(data.customerId, data.values, data.deliveryDetailsState.addressForm.id)
+        api = editDeliveryDetails$(
+          data.customerId,
+          data.values,
+          data.deliveryDetailsState.addressForm.id
+        )
       } else {
         api = submitDeliveryDetails$(data.customerId, data.values)
       }
@@ -79,25 +100,27 @@ export function submitDeliveryDetails (action$, store) {
           let modifiedAddressDetailsList = data.deliveryDetailsState.payload
 
           if (data.isEdit) {
-            modifiedAddressDetailsList = data.deliveryDetailsState.payload.map(address => {
-              if (data.deliveryDetailsState.addressForm.id === address.id) {
-                return {
-                  ...address,
-                  full_name: result.body.payload.full_name,
-                  mobile: result.body.payload.mobile,
-                  pincode: result.body.payload.pincode,
-                  locality: result.body.payload.locality,
-                  street1: result.body.payload.street1,
-                  street2: result.body.payload.street2,
-                  city: result.body.payload.city,
-                  state: result.body.payload.state
-                }
-              } else {
-                return {
-                  ...address
+            modifiedAddressDetailsList = data.deliveryDetailsState.payload.map(
+              address => {
+                if (data.deliveryDetailsState.addressForm.id === address.id) {
+                  return {
+                    ...address,
+                    full_name: result.body.payload.full_name,
+                    mobile: result.body.payload.mobile,
+                    pincode: result.body.payload.pincode,
+                    locality: result.body.payload.locality,
+                    street1: result.body.payload.street1,
+                    street2: result.body.payload.street2,
+                    city: result.body.payload.city,
+                    state: result.body.payload.state
+                  }
+                } else {
+                  return {
+                    ...address
+                  }
                 }
               }
-            })
+            )
           }
 
           data.setSubmitting(false)
@@ -105,19 +128,37 @@ export function submitDeliveryDetails (action$, store) {
 
           if (data.isCartPage) {
             return of(
-              submitDeliveryDetailsSuccess(deliveryDetailsState, modifiedAddressDetailsList),
-              saveDeliveryAddressToCartLoading(cartState, result.body.payload.id),
-              getDeliveryDetailsListLoading(deliveryDetailsState, data.customerId)
+              submitDeliveryDetailsSuccess(
+                deliveryDetailsState,
+                modifiedAddressDetailsList
+              ),
+              saveDeliveryAddressToCartLoading(
+                cartState,
+                result.body.payload.id
+              ),
+              getDeliveryDetailsListLoading(
+                deliveryDetailsState,
+                data.customerId
+              )
             )
           } else {
             if (data.isEdit) {
               return of(
-                submitDeliveryDetailsSuccess(deliveryDetailsState, modifiedAddressDetailsList)
+                submitDeliveryDetailsSuccess(
+                  deliveryDetailsState,
+                  modifiedAddressDetailsList
+                )
               )
             } else {
               return of(
-                submitDeliveryDetailsSuccess(deliveryDetailsState, modifiedAddressDetailsList),
-                getDeliveryDetailsListLoading(deliveryDetailsState, data.customerId)
+                submitDeliveryDetailsSuccess(
+                  deliveryDetailsState,
+                  modifiedAddressDetailsList
+                ),
+                getDeliveryDetailsListLoading(
+                  deliveryDetailsState,
+                  data.customerId
+                )
               )
             }
           }
@@ -149,15 +190,15 @@ export function getLocalityList (action$, store) {
         )
       ).pipe(
         map(result => {
-          return (
-            getLocalityDetailListSuccess(
-              data.deliveryDetailsState,
-              result.body.payload.content
-            )
+          return getLocalityDetailListSuccess(
+            data.deliveryDetailsState,
+            result.body.payload.content
           )
         }),
         catchError(error => {
-          return of(getLocalityDetailListFailure(data.deliveryDetailsState, error))
+          return of(
+            getLocalityDetailListFailure(data.deliveryDetailsState, error)
+          )
         })
       )
     })

@@ -47,6 +47,7 @@ let http = propGenerator => {
         )
       } else {
         // return error
+        console.log('eroror', data)
         return Observable.throw(data)
       }
     })

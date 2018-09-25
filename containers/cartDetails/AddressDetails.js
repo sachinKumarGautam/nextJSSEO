@@ -7,7 +7,9 @@ import DeliveryDetailForm from '../deliveryDetails/DeliveryDetailsForm'
 import AddressDetailsCard from '../../components/AddressDetailsCard'
 
 import ActivityIndicator from '../../components/activityIndicator'
-import CommonSpinner from '../../components/activityIndicator/loader/CommonSpinner'
+import CommonSpinner
+  from '../../components/activityIndicator/loader/CommonSpinner'
+import NoDeliveryAddress from '../../components/NoDeliveryAddress'
 
 const styles = theme => ({
   addressWrapper: {
@@ -36,36 +38,36 @@ const AddressDetails = props => (
         getLocalityDetailListLoading={props.getLocalityDetailListLoading}
       />
     </Grid>
-    {
-      props.deliveryDetailsState.payload.map(deliveryDetail => {
-        return (
-          <Grid item xs={6} className={props.classes.addressWrapper}>
-            <ActivityIndicator
-              isLoading={
-                deliveryDetail.id === props.inProgressAddressId
-                  ? (props.checkPincodeState.isLoading || props.shippingAddressDetails.isLoading)
-                  : false
-              }
-              LoaderComp={
-                <CommonSpinner
-                  customStyle={props.classes.spinnerCustomStyle}
-                  thickness={3}
-                  size={25}
-                />
-              }
-              bottomLoader
-            >
-              <AddressDetailsCard
-                deliveryDetail={deliveryDetail}
-                checkPincodeServiceble={props.checkPincodeServiceble}
-                addressIdSelected={props.addressIdSelected}
-                isCartPage={props.isCartPage}
+    {!props.deliveryDetailsState.payload.length ? <NoDeliveryAddress /> : null}
+    {props.deliveryDetailsState.payload.map(deliveryDetail => {
+      return (
+        <Grid item xs={6} className={props.classes.addressWrapper}>
+          <ActivityIndicator
+            isLoading={
+              deliveryDetail.id === props.inProgressAddressId
+                ? props.checkPincodeState.isLoading ||
+                    props.shippingAddressDetails.isLoading
+                : false
+            }
+            LoaderComp={
+              <CommonSpinner
+                customStyle={props.classes.spinnerCustomStyle}
+                thickness={3}
+                size={25}
               />
-            </ActivityIndicator>
-          </Grid>
-        )
-      })
-    }
+            }
+            bottomLoader
+          >
+            <AddressDetailsCard
+              deliveryDetail={deliveryDetail}
+              checkPincodeServiceble={props.checkPincodeServiceble}
+              addressIdSelected={props.addressIdSelected}
+              isCartPage={props.isCartPage}
+            />
+          </ActivityIndicator>
+        </Grid>
+      )
+    })}
   </Grid>
 )
 

@@ -329,7 +329,7 @@ class OrderSummary extends React.Component {
           }
           openDeliveryFormDialog={this.state.openDeliveryFormDialog}
           customerState={this.props.customerState}
-          deliveryFormState={this.props.deliveryDetailsState.deliveryFormState}
+          deliveryFormState={this.props.deliveryDetailsState.addressForm}
           deliveryDetailsState={this.props.deliveryDetailsState}
           addressIdSelected={
             this.props.cartState.payload.shipping_address_details.payload
