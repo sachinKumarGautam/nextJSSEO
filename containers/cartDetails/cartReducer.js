@@ -622,8 +622,8 @@ export default function cartReducer (state = initialState, action) {
     case cartActionTypes.GO_TO_CART_SNACKBAR:
       return {
         ...state,
-          showAddToCartSnackBar: action.showAddToCartSnackBar,
-          snackbarMsg: action.msg
+        showAddToCartSnackBar: action.showAddToCartSnackBar,
+        snackbarMsg: action.msg
       }
 
     case cartActionTypes.SUBMIT_COUPON_CODE_LOADING:
