@@ -90,7 +90,13 @@ class Search extends Component {
       prevProps.cartState.prescriptionDetails.isHomePage
     ) {
       const url = getReplacedString(CART_DETAILS)
-      return Router.push(url)
+      const isCartOpenLoginDialog = !this.props.loginState.isAuthenticated
+      return Router.push(url).then(() => {
+        this.props.updateIsCartOpenLoginFlag(
+          this.props.cartState,
+          isCartOpenLoginDialog
+        )
+      })
     }
   }
   render () {

@@ -74,6 +74,10 @@ class PincodeDialog extends React.Component {
       inputValue
     )
     if ((regexInputExpression && inputValue.length <= 6) || !inputValue) {
+      this.props.changePincodeValue(
+        this.props.checkPincodeState,
+        event.target.value
+      )
       this.props.handleChange(event)
     }
   }
@@ -82,7 +86,6 @@ class PincodeDialog extends React.Component {
     const { props } = this
 
     const {
-      values,
       touched,
       errors,
       isSubmitting,
@@ -134,7 +137,7 @@ class PincodeDialog extends React.Component {
                   fullWidth
                   autoComplete='off'
                   id='pincode'
-                  value={values.pincode}
+                  value={props.checkPincodeState.pincodeValue}
                   onChange={this.handleChange}
                   // onBlur={handleBlur}
                   placeholder={'Enter your pincode'}
@@ -179,8 +182,9 @@ class PincodeDialog extends React.Component {
 
 export default withStyles(styles)(
   withFormik({
+    enableReinitialize: true,
     mapPropsToValues: props => ({
-      pincode: props.checkPincodeState.payload.pincode
+      pincode: props.checkPincodeState.payload.pincodeValue
     }),
     validationSchema: Yup.object().shape({
       pincode: Yup.number().required(PINCODE_REQUIRED)

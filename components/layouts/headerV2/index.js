@@ -294,6 +294,8 @@ class Header extends React.Component {
                 orTextStyle={this.props.classes.orTextStyle}
                 resetSearchMedicineState={this.props.actions.resetSearchMedicineState}
                 updateShowNoCartIdDialogFlag={this.props.actions.updateShowNoCartIdDialogFlag}
+                updateIsCartOpenLoginFlag={this.props.actions.updateIsCartOpenLoginFlag}
+                loginState={this.props.loginState}
               />
             </div>}
         </AppBar>
