@@ -40,8 +40,7 @@ const styles = theme => ({
     textAlign: 'center'
   },
   otpInput: {
-    textAlign: 'center',
-    letterSpacing: theme.spacing.unit / 2
+    // textAlign: 'center',
   },
   resendTimer: {
     ...theme.typography.body3,
@@ -151,22 +150,20 @@ class OTPForm extends React.Component {
             onChange={this.handleChange}
             placeholder={OTP_PLACEHOLDER}
           />
-          {
-            ((errors.otp && touched.otp) || loginState.errorStateVerifyOtp.isError) &&
+          {((errors.otp && touched.otp) ||
+            loginState.errorStateVerifyOtp.isError) &&
             <FormHelperText id='otp'>
-              {errors.otp ? errors.otp : CUSTOM_MESSGAE_SNACKBAR }
-            </FormHelperText>
-          }
-          {
-            this.state.isHideResetButton
-              ? (<Typography align='right' className={classes.resendTimer}>
-                {this.state.updateCounter} seconds
-              </Typography>)
-              : (<a onClick={this.resendOtp}>
-                <Typography align='right' className={classes.resendLink}>
+              {errors.otp ? errors.otp : CUSTOM_MESSGAE_SNACKBAR}
+            </FormHelperText>}
+          {this.state.isHideResetButton
+            ? <Typography align='right' className={classes.resendTimer}>
+              {this.state.updateCounter} seconds
+              </Typography>
+            : <a onClick={this.resendOtp}>
+              <Typography align='right' className={classes.resendLink}>
                   Resend OTP
                 </Typography>
-              </a>)}
+            </a>}
         </FormControl>
         <div className={classes.buttonWrapper}>
           <Button
