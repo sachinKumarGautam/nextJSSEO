@@ -96,7 +96,7 @@ class PatientDetailsCard extends React.Component {
                 {' '}
                 {this.props.patientDetail.age ? '|' : ''}
                 {' '}
-                {this.props.patientDetail.age}
+                {this.props.patientDetail.age ? this.props.patientDetail.age : ''}
               </Typography>
             </div>
             <div>
