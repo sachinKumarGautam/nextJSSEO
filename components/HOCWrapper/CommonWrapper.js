@@ -48,6 +48,8 @@ import {
 
 import Snackbar from '@material-ui/core/Snackbar'
 
+import {SNACK_BAR_DURATION} from '../constants/Constants'
+
 export function withCommonWrapper (Page) {
   class CommonWrapper extends React.Component {
     static getInitialProps (ctx) {
@@ -232,7 +234,7 @@ export function withCommonWrapper (Page) {
               horizontal: 'center'
             }}
             open={this.state.openSnackbar}
-            autoHideDuration={6000}
+            autoHideDuration={SNACK_BAR_DURATION}
             onClose={this.handleCloseSnackbar}
             ContentProps={{
               'aria-describedby': 'message-id'

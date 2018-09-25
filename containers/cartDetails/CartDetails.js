@@ -31,6 +31,8 @@ import {
 
 import Snackbar from '@material-ui/core/Snackbar'
 
+import {SNACK_BAR_DURATION} from '../../components/constants/Constants'
+
 /*
   avatar
   medicine list
@@ -247,7 +249,7 @@ class CartDetails extends Component {
               horizontal: 'center'
             }}
             open={this.state.openSnackbar}
-            autoHideDuration={6000}
+            autoHideDuration={SNACK_BAR_DURATION}
             onClose={this.handleCloseSnackbar}
             ContentProps={{
               'aria-describedby': 'message-id'

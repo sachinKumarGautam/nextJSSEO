@@ -9,6 +9,8 @@ import Typography from '@material-ui/core/Typography'
 
 import Button from '../../components/button'
 
+import {BULK_ORDER_QUANTITY_ALERT} from '../messages/cartMessages'
+
 const styles = theme => ({
   bulkOrderWrapper: {
     marginTop: theme.spacing.unit * 2.25,
@@ -63,7 +65,7 @@ class BulkOrderDialogue extends Component {
           </p>
         ))}
         <p style={{ textAlign: 'left' }}>
-          Do you still wish to continue to place an order?
+          {BULK_ORDER_QUANTITY_ALERT}
         </p>
       </div>
     )
