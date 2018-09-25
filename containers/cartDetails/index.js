@@ -54,7 +54,9 @@ import {
 
 import {
   getPatientDetailsListLoading,
-  submitPatientDetailsLoading
+  submitPatientDetailsLoading,
+  updatePatientFormValue,
+  resetPatientSelected
 } from '../patientDetails/patientDetailsActions'
 
 import {
@@ -327,6 +329,8 @@ class CartDetailsWrapper extends Component {
                   updateLassuredExpressFlag={
                     this.props.actions.updateLassuredExpressFlag
                   }
+                  updatePatientFormValue={this.props.actions.updatePatientFormValue}
+                  resetPatientSelected={this.props.actions.resetPatientSelected}
                 />
               </section>
             </Grid>
@@ -427,7 +431,9 @@ function mapDispatchToProps (dispatch) {
         resetUploadPrescriptionError,
         deleteCartLoading,
         updateLassuredExpressFlag,
-        resetPincodeState
+        resetPincodeState,
+        updatePatientFormValue,
+        resetPatientSelected
       },
       dispatch
     )

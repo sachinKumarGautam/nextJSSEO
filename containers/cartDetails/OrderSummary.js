@@ -300,6 +300,8 @@ class OrderSummary extends React.Component {
           checkedIconWrapper={this.props.classes.checkedIconWrapper}
           checkedIcon={this.props.classes.checkedIcon}
           patientDetails={this.props.classes.patientDetails}
+          updatePatientFormValue={this.props.updatePatientFormValue}
+          resetPatientSelected={this.props.resetPatientSelected}
         />
         <AddressDetailsExpansionPanel
           expanded={this.state.expanded}

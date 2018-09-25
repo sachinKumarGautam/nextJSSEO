@@ -75,6 +75,7 @@ class PatientDetailForm extends React.Component {
                 customerState={this.props.customerState}
                 patientFormState={this.props.patientFormState}
                 closeModal={this.props.closePatientFormModal}
+                updatePatientFormValue={this.props.updatePatientFormValue}
               />
             </DialogContent>
           </Dialog>
