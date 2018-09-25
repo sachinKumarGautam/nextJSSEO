@@ -27,8 +27,7 @@ import {
 
 import {
   ORDER_DETAILS,
-  THANK_YOU,
-  HOME_PAGE
+  THANK_YOU
 } from '../../routes/RouteConstant'
 
 import {
@@ -45,14 +44,6 @@ class ThankyouWrapper extends Component {
       this.props.checkPincodeState.payload.id,
       ''
     )
-
-    window.onpopstate = this.onBackButtonEvent
-  }
-
-  onBackButtonEvent = (event) => {
-    event.preventDefault()
-    const url = getReplacedString(HOME_PAGE)
-    Router.push(url)
   }
 
   viewYouOrder () {
