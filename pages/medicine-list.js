@@ -106,11 +106,7 @@ class MedicineList extends React.Component {
     if (this.state.isShowMore) {
       return (
         <SnackbarErrorMessage
-          error={
-            this.props.searchMedicineState.errorState.isError
-              ? this.props.searchMedicineState.errorState
-              : this.props.medicineListState.errorState.error
-          }
+          error={this.props.globalErrorState}
         />
       )
     } else if (!this.state.isShowMore) {
@@ -179,7 +175,8 @@ function mapStateToProps (state) {
     medicineListState: state.medicineListState,
     searchMedicineState: state.searchMedicineState,
     checkPincodeState: state.checkPincodeState,
-    cartState: state.cartState
+    cartState: state.cartState,
+    globalErrorState: state.globalErrorState
   }
 }
 

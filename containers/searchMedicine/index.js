@@ -275,7 +275,7 @@ class SearchMedicine extends React.Component {
           isError={this.props.searchMedicineState.errorState.isError}
           ErrorComp={
             <SnackbarErrorMessage
-              error={this.props.searchMedicineState.errorState.error}
+              error={this.props.globalErrorState}
               resetState={this.resetState.bind(this)}
             />
           }

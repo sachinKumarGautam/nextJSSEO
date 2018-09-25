@@ -28,20 +28,20 @@ const styles = theme => {
 }
 
 class SnackbarErrorMessage extends Component {
-  constructor(props) {
+  constructor (props) {
     super(props)
     this.state = {
       open: false
     }
   }
 
-  componentDidMount() {
+  componentDidMount () {
     this.setState({
       open: true
     })
   }
 
-  handleClose() {
+  handleClose () {
     this.setState({
       open: false
     })
@@ -49,8 +49,7 @@ class SnackbarErrorMessage extends Component {
     this.props.resetState && this.props.resetState()
   }
 
-  render() {
-    console.log(this.props.error)
+  render () {
     return (
       <div>
         <Snackbar
@@ -78,7 +77,7 @@ class SnackbarErrorMessage extends Component {
                   variant='caption'
                   className={this.props.classes.snackbarMessage}
                 >
-                  {snackbarMapping(this.props.error.response ? this.props.error.response.status : '')}
+                  {snackbarMapping((this.props.error && this.props.error.statusCode) ? this.props.error.statusCode : '')}
                 </Typography>
               </div>
             }

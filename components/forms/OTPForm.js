@@ -55,7 +55,7 @@ const styles = theme => ({
 })
 
 class OTPForm extends React.Component {
-  constructor(props) {
+  constructor (props) {
     super(props)
     this.state = {
       isSubmit: false,
@@ -68,7 +68,7 @@ class OTPForm extends React.Component {
     this.resendOtp = this.resendOtp.bind(this)
   }
 
-  componentDidMount() {
+  componentDidMount () {
     this.customCountTimer()
   }
 
@@ -82,7 +82,7 @@ class OTPForm extends React.Component {
     }
   }
 
-  customCountTimer() {
+  customCountTimer () {
     this.setState({
       isHideResetButton: true
     })
@@ -105,7 +105,7 @@ class OTPForm extends React.Component {
     }, 1000)
   }
 
-  resendOtp() {
+  resendOtp () {
     this.props.resendButtonClick(
       this.props.loginState,
       this.props.setSubmitting,
@@ -115,7 +115,7 @@ class OTPForm extends React.Component {
     this.customCountTimer()
   }
 
-  render() {
+  render () {
     const {
       values,
       touched,

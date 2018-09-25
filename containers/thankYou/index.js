@@ -81,6 +81,7 @@ class ThankyouWrapper extends Component {
             viewYouOrder={this.viewYouOrder.bind(this)}
             retryPayment={this.retryPayment.bind(this)}
             constantsState={this.props.constantsState}
+            globalErrorState={this.props.globalErrorState}
           />
           <Loader
             loaderType={'fullPageSpinner'}
@@ -120,7 +121,8 @@ function mapStateToProps (state) {
     thankYouState: state.thankYouState,
     orderDetailsState: state.orderDetailsState,
     constantsState: state.constantsState,
-    checkPincodeState: state.checkPincodeState
+    checkPincodeState: state.checkPincodeState,
+    globalErrorState: state.globalErrorState
   }
 }
 

@@ -166,10 +166,7 @@ class LoginWrapper extends React.Component {
           }
           ErrorComp={
             <SnackbarErrorMessage
-              error={
-                this.props.customerState.errorStateCustomerRegister.error ||
-                this.props.cartState.errorState.error
-              }
+              error={this.props.globalErrorState}
               resetState={this.resetState.bind(this)}
             />
           }
@@ -210,7 +207,8 @@ function mapStateToProps (state) {
   return {
     cartState: state.cartState,
     loginState: state.loginState,
-    customerState: state.customerState
+    customerState: state.customerState,
+    globalErrorState: state.globalErrorState
   }
 }
 

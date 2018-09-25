@@ -151,21 +151,21 @@ class Main extends Component {
             ? <AddressDetailsCardWrapper
               openDeliveryFormModal={this.openDeliveryFormModal.bind(this)}
               saveDeliveryAddressSelected={this.saveDeliveryAddressSelected.bind(
-                  this
-                )}
+                this
+              )}
               isLoading={this.props.deliveryDetailsState.isLoading}
               errorState={this.props.deliveryDetailsState.errorState}
               payload={this.props.deliveryDetailsState.payload}
               addressDetailsCardWrapper={
-                  this.props.classes.addressDetailsCardWrapper
-                }
+                this.props.classes.addressDetailsCardWrapper
+              }
               customerState={this.props.customerState}
               getDeliveryDetailsListLoading={
-                  this.props.getDeliveryDetailsListLoading
-                }
+                this.props.getDeliveryDetailsListLoading
+              }
               deliveryDetailsState={this.props.deliveryDetailsState}
               addressWrapper={this.props.classes.addressWrapper}
-              />
+            />
             : <NoDeliveryAddress />}
         </CardContent>
       </Card>

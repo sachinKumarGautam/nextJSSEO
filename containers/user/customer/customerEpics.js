@@ -31,7 +31,7 @@ import {
 } from '../../../services/api/index'
 import { cartTransferLoading } from '../../cartDetails/cartActions'
 
-export function registerCustomer(action$, store) {
+export function registerCustomer (action$, store) {
   return action$.pipe(
     ofType(CUSTOMER_REGISTER_LOADING),
     mergeMap(data => {
@@ -60,7 +60,7 @@ export function registerCustomer(action$, store) {
   )
 }
 
-export function fetchUserInfo(action$, store) {
+export function fetchUserInfo (action$, store) {
   return action$.pipe(
     ofType(FETCH_USER_INFO_LOADING),
     mergeMap(data => {
@@ -77,7 +77,7 @@ export function fetchUserInfo(action$, store) {
   )
 }
 
-export function checkReferralCode(action$, store) {
+export function checkReferralCode (action$, store) {
   return action$.pipe(
     ofType(CHECK_REFERRAL_CODE_LOADING),
     mergeMap(data => {
@@ -94,7 +94,7 @@ export function checkReferralCode(action$, store) {
   )
 }
 
-export function getMembershipCodeLoading(action$, store) {
+export function getMembershipCodeLoading (action$, store) {
   return action$.pipe(
     ofType(GET_MEMBERSHIP_CODE_LOADING),
     mergeMap(data => {
