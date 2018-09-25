@@ -40,7 +40,8 @@ const styles = theme => ({
     textAlign: 'center'
   },
   otpInput: {
-    // textAlign: 'center',
+    textAlign: 'center',
+    letterSpacing: theme.spacing.unit
   },
   resendTimer: {
     ...theme.typography.body3,
@@ -128,9 +129,6 @@ class OTPForm extends React.Component {
       loginState
       //   closeLoginModal
     } = this.props
-    // const otpApiError =
-    // const otpError = errors.otp ? error.otp : loginState.errorStateVerifyOtp.error
-    console.log('otp error', errors.otp)
     return (
       <form onSubmit={handleSubmit}>
         <FormControl
