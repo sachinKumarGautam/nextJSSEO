@@ -74,7 +74,10 @@ class PincodeDialog extends React.Component {
       inputValue
     )
     if ((regexInputExpression && inputValue.length <= 6) || !inputValue) {
-      this.props.handleChange(event)
+      this.props.changePincodeValue(
+        this.props.checkPincodeState,
+        event.target.value
+      )
     }
   }
 
@@ -134,7 +137,7 @@ class PincodeDialog extends React.Component {
                   fullWidth
                   autoComplete='off'
                   id='pincode'
-                  value={values.pincode}
+                  value={props.checkPincodeState.pincodeValue}
                   onChange={this.handleChange}
                   // onBlur={handleBlur}
                   placeholder={'Enter your pincode'}

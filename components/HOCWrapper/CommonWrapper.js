@@ -17,7 +17,8 @@ import { handleSessionExpiration } from '../../containers/login/loginActions'
 import {
   openPincodeDialog,
   checkPincodeLoading,
-  resetPincodeState
+  resetPincodeState,
+  changePincodeValue
 } from '../../containers/location/pincode/pincodeAction'
 
 import withRoot from '../../src/withRoot'
@@ -59,6 +60,10 @@ export function withCommonWrapper (Page) {
 
     componentDidMount () {
       this.props.actions.resetCartLoadingState(this.props.cartState)
+      this.props.actions.changePincodeValue(
+        this.props.checkPincodeState,
+        this.props.checkPincodeState.payload.pincode
+      )
     }
 
     addToCartHandler (inProgressCartItem, event) {
@@ -89,7 +94,7 @@ export function withCommonWrapper (Page) {
 
     handleClose = () => {
       this.props.actions.openPincodeDialog(this.props.checkPincodeState, false)
-      this.props.actions.resetPincodeState()
+      this.props.actions.resetPincodeState(this.props.checkPincodeState)
     }
 
     handleDialogOk () {
@@ -200,6 +205,7 @@ export function withCommonWrapper (Page) {
             inProgressCartItem={inProgressCartItem}
             handleClose={this.handleClose}
             checkPincodeState={checkPincodeState}
+            changePincodeValue={actions.changePincodeValue}
           />
         </React.Fragment>
       )
@@ -228,7 +234,8 @@ export function withCommonWrapper (Page) {
           resetCartLoadingState,
           handleSessionExpiration,
           resetPincodeState,
-          updateShowNoCartIdDialogFlag
+          updateShowNoCartIdDialogFlag,
+          changePincodeValue
         },
         dispatch
       )
