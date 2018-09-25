@@ -1,5 +1,7 @@
 export const NO_CART_ITEM = 'There is no item in your cart yet'
 export const ITEM_ADDED_TO_CART = '1 item added in your cart.'
+export const QUANTITY_UPDATED = 'Item quantity updated.'
+export const ITEM_REMOVED = 'Item removed successfully.'
 export const PRESCRIPTION_DESCRIPTION =
   '*Upload your prescription. If you do not have a ready prescription, you may opt for a tele-consultation with our doctor and create a prescription.'
 export const LOGIN_DESCRIPTION =
@@ -23,3 +25,7 @@ export const LIFCARE_URGENT_CONFLICT_MSG =
   'LifCare Express Delivery service is not available on this pincode. Press Ok to proceed with the regular delivery service.'
 export const SELECT_PATIENT = 'Select any patient to continue.'
 export const SELECT_ADDRESS = 'Select any address to continue.'
+
+export const MEDICINE_QUANTITY_ALERT = 'Cannot order more quantity for this medicine!'
+
+export const BULK_ORDER_QUANTITY_ALERT = 'Do you still wish to continue to place an order?'

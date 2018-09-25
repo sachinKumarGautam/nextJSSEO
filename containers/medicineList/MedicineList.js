@@ -108,9 +108,13 @@ class MedicineList extends React.Component {
       cartState
     } = this.props
     const cartItems = cartState.payload.cart_items.payload
-    const medicineListPagesCondition = (this.props.page + 1) !== this.props.medicineListState.totalPages
-    const searchMedicinePagesCondition = (this.props.page + 1) !== this.props.searchMedicineState.payload.totalPages
-    const showMoreCondition = this.props.moleculeName ? medicineListPagesCondition : searchMedicinePagesCondition
+    const medicineListPagesCondition =
+      this.props.page + 1 !== this.props.medicineListState.totalPages
+    const searchMedicinePagesCondition =
+      this.props.page + 1 !== this.props.searchMedicineState.payload.totalPages
+    const showMoreCondition = this.props.moleculeName
+      ? medicineListPagesCondition
+      : searchMedicinePagesCondition
 
     return (
       <div className={classes.medicineListWrapper}>
@@ -129,11 +133,11 @@ class MedicineList extends React.Component {
         <Card elevation={1}>
           <ActivityIndicator
             isLoading={isLoading}
-            bottomLoader
+            bottomLoader={!!this.props.page}
             LoaderComp={<MultipleMedicineLoader />}
           >
             <CardContent className={classes.listWrapperStyle}>
-              {medicineListState.length
+              {medicineListState.length && !isLoading
                 ? <ul className={classes.articleListWrapper}>
                   {modifiyMedicineList(
                     medicineListState,
@@ -159,32 +163,27 @@ class MedicineList extends React.Component {
                 >
                   {NO_MEDICINE_LIST}
                 </Typography>}
-
             </CardContent>
           </ActivityIndicator>
         </Card>
-        {
-          medicineListState.length &&
-          showMoreCondition
-            ? (
-              <div className={classes.buttonWrapper}>
-                <Button
-                  size='medium'
-                  variant='outlined'
-                  disabled={isLoading}
-                  loaderColor={'primary'}
-                  loaderPosition={'center'}
-                  isloading={isLoading}
-                  classes={{
-                    root: classes.buttonRoot,
-                    label: classes.buttonLabel
-                  }}
-                  onClick={this.onClickOfShowMore}
-                  label={'Show more'}
-                />
-              </div>
-            ) : null
-        }
+        {medicineListState.length && showMoreCondition
+          ? <div className={classes.buttonWrapper}>
+            <Button
+              size='medium'
+              variant='outlined'
+              disabled={isLoading}
+              loaderColor={'primary'}
+              loaderPosition={'center'}
+              isloading={isLoading}
+              classes={{
+                root: classes.buttonRoot,
+                label: classes.buttonLabel
+              }}
+              onClick={this.onClickOfShowMore}
+              label={'Show more'}
+            />
+          </div>
+          : null}
       </div>
     )
   }

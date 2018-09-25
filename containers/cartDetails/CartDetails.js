@@ -16,7 +16,7 @@ import Router from 'next/router'
 
 import { THANK_YOU } from '../../routes/RouteConstant'
 
-import { NO_MEDICINES } from '../messages/cartMessages'
+import { NO_MEDICINES, MEDICINE_QUANTITY_ALERT } from '../messages/cartMessages'
 import CartItemLoader
   from '../../components/activityIndicator/loader/cartLoaders/CartItemLoaderWrapper'
 import ActivityIndicator from '../../components/activityIndicator/index'
@@ -28,6 +28,10 @@ import openRazorpayCheckout from '../../utils/openRazorpayCheckout'
 import {
   COD
 } from '../../components/constants/paymentConstants'
+
+import Snackbar from '@material-ui/core/Snackbar'
+
+import {SNACK_BAR_DURATION} from '../../components/constants/Constants'
 
 /*
   avatar
@@ -80,12 +84,19 @@ class CartDetails extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      quantityStatus: null
+      quantityStatus: null,
+      openSnackbar: false
     }
 
     this.verifyPayment = this.verifyPayment.bind(this)
     this.onModalDismiss = this.onModalDismiss.bind(this)
   }
+
+  handleCloseSnackbar = () => (
+    this.setState({
+      openSnackbar: !this.state.openSnackbar
+    })
+  )
 
   decrementCartItem (cartItem) {
     this.setState({
@@ -99,10 +110,15 @@ class CartDetails extends Component {
   }
 
   incrementCartItem (cartItem) {
-    this.setState({
-      quantityStatus: 'increase'
-    })
-    this.props.incrementCartItemLoading(this.props.cartState, cartItem)
+    if (cartItem.max_order_quantity &&
+      cartItem.quantity >= cartItem.max_order_quantity) {
+      this.handleCloseSnackbar()
+    } else {
+      this.setState({
+        quantityStatus: 'increase'
+      })
+      this.props.incrementCartItemLoading(this.props.cartState, cartItem)
+    }
   }
 
   openCheckout (cartState) {
@@ -134,14 +150,14 @@ class CartDetails extends Component {
   componentDidUpdate (prevProps) {
     if (
       (this.props.cartState.isOrderSubmitted !==
-      prevProps.cartState.isOrderSubmitted) &&
+        prevProps.cartState.isOrderSubmitted) &&
       this.props.cartState.isOrderSubmitted &&
       this.props.cartState.orderResponse.payload.order_type !== COD
     ) {
       this.openCheckout(this.props.cartState)
     } else if (
       (this.props.cartState.payment.isPaymentSuccessful !==
-      prevProps.cartState.payment.isPaymentSuccessful) &&
+        prevProps.cartState.payment.isPaymentSuccessful) &&
       this.props.cartState.payment.isPaymentSuccessful
     ) {
       this.props.resetCartState()
@@ -151,7 +167,7 @@ class CartDetails extends Component {
       Router.push(href, as)
     } else if (
       (this.props.cartState.payment.isPaymentFailure !==
-      prevProps.cartState.payment.isPaymentFailure) &&
+        prevProps.cartState.payment.isPaymentFailure) &&
       this.props.cartState.payment.isPaymentFailure
     ) {
       this.props.resetCartState()
@@ -161,7 +177,7 @@ class CartDetails extends Component {
       Router.push(href, as)
     } else if (
       (this.props.cartState.orderResponse.payload.order_number !==
-      prevProps.cartState.orderResponse.payload.order_number
+        prevProps.cartState.orderResponse.payload.order_number
       ) &&
       this.props.cartState.orderResponse.payload.order_type === COD
     ) {
@@ -227,6 +243,19 @@ class CartDetails extends Component {
           </ActivityIndicator>
           {!this.props.cartState.isLoading &&
             <TotalAmount cartState={this.props.cartState} />}
+          <Snackbar
+            anchorOrigin={{
+              vertical: 'bottom',
+              horizontal: 'center'
+            }}
+            open={this.state.openSnackbar}
+            autoHideDuration={SNACK_BAR_DURATION}
+            onClose={this.handleCloseSnackbar}
+            ContentProps={{
+              'aria-describedby': 'message-id'
+            }}
+            message={<span id='message-id'>{MEDICINE_QUANTITY_ALERT}</span>}
+          />
         </CardContent>
       </Card>
     )
