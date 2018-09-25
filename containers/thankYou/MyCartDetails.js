@@ -8,6 +8,12 @@ import Typography from '@material-ui/core/Typography'
 import PriceDetails from '../orderDetails/PriceDetails'
 import TotalAmount from '../cartDetails/TotalAmount'
 
+import {
+  PAYMENT_FAILED,
+  PAYMENT_SUCCESS,
+  PAYMENT_RETRY
+} from '../../components/constants/paymentConstants'
+
 const styles = theme => ({
   card: {
     marginLeft: theme.spacing.unit * 3
@@ -48,7 +54,12 @@ const MyCartDetails = (props) => {
             variant='h1'
             className={props.classes.myCartText}
           >
-            MY CART
+            {
+              props.queryParamPaymentStatus === PAYMENT_FAILED ||
+              props.queryParamPaymentStatus === PAYMENT_RETRY
+                ? 'ORDER DETAILS'
+                : 'MY CART'
+            }
           </Typography>
         </div>
         <PriceDetails

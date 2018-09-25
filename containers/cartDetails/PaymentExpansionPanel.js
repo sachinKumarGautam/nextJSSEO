@@ -30,7 +30,7 @@ class PaymentExpansionPanel extends React.Component {
   placeOrder () {
     if (
       this.state.paymentChannel !== '' ||
-      !this.props.cartState.payload.total_payable_amount
+      this.props.cartState.payload.total_payable_amount
     ) {
       this.props.submitOrderLoading(
         this.props.cartState,
