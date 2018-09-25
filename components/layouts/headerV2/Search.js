@@ -90,7 +90,7 @@ class Search extends Component {
       prevProps.cartState.prescriptionDetails.isHomePage
     ) {
       const url = getReplacedString(CART_DETAILS)
-      const isCartOpenLoginDialog = true
+      const isCartOpenLoginDialog = this.props.loginState.isAuthenticated ? false : true
       return Router.push(url).then(() => {
         this.props.updateIsCartOpenLoginFlag(
           this.props.cartState,
