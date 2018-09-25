@@ -29,31 +29,29 @@ class PaymentExpansionPanel extends React.Component {
 
   placeOrder () {
     if (
-      this.state.paymentChannel !== '' ||
-      !this.props.cartState.payload.total_payable_amount
-    ) {
-      this.props.submitOrderLoading(
-        this.props.cartState,
-        this.state.paymentChannel
-      )
-    } else if (
-      !this.props.cartState.payload.cart_items.payload.length &&
       !this.props.cartState.payload.is_doctor_callback.payload &&
-      !this.props.cartState.payload.cart_prescriptions.length
+      !this.props.cartState.payload.cart_prescriptions.length &&
+      !this.props.cartState.payload.cart_items.payload.length
     ) {
       this.setState({
-        isShowSnackbar: true
-      })
-      this.setState({
+        isShowSnackbar: true,
         snackBarMsg: ATLEAST_ONE_ITEM
       })
     } else {
-      this.setState({
-        isShowSnackbar: true
-      })
-      this.setState({
-        snackBarMsg: SELECT_PAYMENT_MODE
-      })
+      if (
+        this.state.paymentChannel !== '' ||
+        !this.props.cartState.payload.total_payable_amount
+      ) {
+        this.props.submitOrderLoading(
+          this.props.cartState,
+          this.state.paymentChannel
+        )
+      } else {
+        this.setState({
+          isShowSnackbar: true,
+          snackBarMsg: SELECT_PAYMENT_MODE
+        })
+      }
     }
   }
 

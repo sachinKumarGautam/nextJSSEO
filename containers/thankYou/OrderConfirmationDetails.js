@@ -80,7 +80,7 @@ const OrderConfirmationDetails = props => {
         bottomError
       >
         <CardContent className={props.classes.cardContent}>
-          <ThankyouDetails cartState={props.cartState} />
+          <ThankyouDetails cartState={props.cartState} constantsState={props.constantsState} />
           <Divider />
           <RefillDetails
             submitRefillDateLoading={props.submitRefillDateLoading}

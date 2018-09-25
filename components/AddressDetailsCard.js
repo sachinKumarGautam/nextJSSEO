@@ -95,7 +95,13 @@ const AddressDetailsCard = props => (
       variant='caption'
       className={props.classes.addressName}
     >
-      {props.deliveryDetail.full_name} - {props.deliveryDetail.mobile}
+      {props.deliveryDetail.full_name}
+    </Typography>
+    <Typography
+      variant='caption'
+      className={props.classes.addressName}
+    >
+      {props.deliveryDetail.mobile}
     </Typography>
     <Typography
       variant='caption'

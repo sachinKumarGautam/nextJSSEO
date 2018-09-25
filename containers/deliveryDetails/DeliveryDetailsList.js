@@ -9,6 +9,7 @@ import { withStyles } from '@material-ui/core/styles'
 import AddDeliveryAddressButton from './AddDeliveryAddressButton'
 import DeliveryDetailForm from './DeliveryDetailsForm'
 import AddressDetailsCardWrapper from './AddressDetailsCardWrapper'
+import NoDeliveryAddress from '../../components/NoDeliveryAddress'
 
 const styles = theme => {
   return {
@@ -125,7 +126,9 @@ class Main extends Component {
               />
               <DeliveryDetailForm
                 isEdit={this.state.isEdit}
-                isAddNewAddressButtonClicked={this.state.isAddNewAddressButtonClicked}
+                isAddNewAddressButtonClicked={
+                  this.state.isAddNewAddressButtonClicked
+                }
                 onSubmit={this.props.submitDeliveryDetailsLoading}
                 openDeliveryFormDialog={this.state.openDeliveryFormDialog}
                 customerState={this.props.customerState}
@@ -144,20 +147,26 @@ class Main extends Component {
               />
             </div>
           </div>
-          <AddressDetailsCardWrapper
-            openDeliveryFormModal={this.openDeliveryFormModal.bind(this)}
-            saveDeliveryAddressSelected={this.saveDeliveryAddressSelected.bind(this)}
-            isLoading={this.props.deliveryDetailsState.isLoading}
-            errorState={this.props.deliveryDetailsState.errorState}
-            payload={this.props.deliveryDetailsState.payload}
-            addressDetailsCardWrapper={
-              this.props.classes.addressDetailsCardWrapper
-            }
-            customerState={this.props.customerState}
-            getDeliveryDetailsListLoading={this.props.getDeliveryDetailsListLoading}
-            deliveryDetailsState={this.props.deliveryDetailsState}
-            addressWrapper={this.props.classes.addressWrapper}
-          />
+          {this.props.deliveryDetailsState.payload.length
+            ? <AddressDetailsCardWrapper
+              openDeliveryFormModal={this.openDeliveryFormModal.bind(this)}
+              saveDeliveryAddressSelected={this.saveDeliveryAddressSelected.bind(
+                this
+              )}
+              isLoading={this.props.deliveryDetailsState.isLoading}
+              errorState={this.props.deliveryDetailsState.errorState}
+              payload={this.props.deliveryDetailsState.payload}
+              addressDetailsCardWrapper={
+                this.props.classes.addressDetailsCardWrapper
+              }
+              customerState={this.props.customerState}
+              getDeliveryDetailsListLoading={
+                this.props.getDeliveryDetailsListLoading
+              }
+              deliveryDetailsState={this.props.deliveryDetailsState}
+              addressWrapper={this.props.classes.addressWrapper}
+            />
+            : <NoDeliveryAddress />}
         </CardContent>
       </Card>
     )
