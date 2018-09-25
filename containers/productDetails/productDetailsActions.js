@@ -45,6 +45,7 @@ export function getProductDetailSuccess (productDetailsState, result) {
     available_service_type: result.available_service_type,
     max_order_quantity: result.max_order_quantity,
     bulk_order_quantity: result.bulk_order_quantity,
+    quantity: 0,
     refill_index: result.refill_index,
     diseases: result.diseases,
     slug: result.slug,

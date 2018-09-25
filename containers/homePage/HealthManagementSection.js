@@ -16,7 +16,11 @@ const styles = theme => {
     title: {
       fontSize: theme.typography.pxToRem(26),
       fontWeight: theme.typography.fontWeightBold,
-      paddingTop: theme.spacing.unit * 6.5,
+      paddingTop: theme.spacing.unit * 6.5
+    },
+    subTitle: {
+      ...theme.typography.body2,
+      fontSize: theme.typography.pxToRem(18),
       paddingBottom: theme.spacing.unit * 4.25
     },
     description: {
@@ -38,9 +42,15 @@ class HealthManagementSection extends Component {
         </Typography>
         <Typography
           variant='body2'
+          className={this.props.classes.subTitle}
+        >
+          A better way to manage your health.
+        </Typography>
+        <Typography
+          variant='body2'
           className={this.props.classes.description}
         >
-          <b>A better way to manage your health.</b> Diet, Lifestyle and Doctors play a significant role in determining your health outcomes. Once you enrol and re-order your medicines from us, we provide a Life Coach and doctor tele-consultation service, Absolutely Free!
+          Diet, Lifestyle and Doctors play a significant role in determining your health outcomes. Once you enrol and re-order your medicines from us, we provide a Life Coach and doctor tele-consultation service, Absolutely Free!
         </Typography>
         <TeleConsultationDetail />
         <HealthCoachDetail />

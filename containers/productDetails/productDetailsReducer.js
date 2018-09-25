@@ -67,7 +67,8 @@ export default function (state = initialState, action) {
           is_cold_storage: action.is_cold_storage,
           packaging_type: action.packaging_type,
           description: action.description,
-          max_order_unit_quantity: action.max_order_unit_quantity
+          max_order_unit_quantity: action.max_order_unit_quantity,
+          quantity: action.quantity
         }
       }
 

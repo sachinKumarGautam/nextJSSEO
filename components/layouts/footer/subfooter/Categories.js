@@ -49,7 +49,7 @@ const CompanyInfo = ({classes}) => (
     </div>
     <div className={classes.iconWithText}>
       <Typography className={classes.listItemText} variant='subheading' component='h2'>
-        <a href='https://blog.lifcare.in/tag/brain/' target='_blank' className={classes.listItemText} >Brain</a>
+        <a href='https://blog.lifcare.in/tag/neuro/' target='_blank' className={classes.listItemText} >Neuro</a>
       </Typography>
     </div>
   </div>
