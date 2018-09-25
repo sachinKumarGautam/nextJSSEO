@@ -14,7 +14,7 @@ const styles = theme => ({
   },
   placedOnText: {
     fontSize: theme.spacing.unit * 1.75,
-    marginLeft: theme.spacing.unit * 2.5,
+    marginLeft: theme.spacing.unit * 3.75,
     color: theme.palette.customGrey.grey500
   },
   placeOn: {
@@ -60,7 +60,7 @@ const PaymentDetails = (props) => {
           <Typography
             className={props.classes.placeOn}
           >
-            Payment
+            Payment Type
           </Typography>
           <Typography
             className={props.classes.paymentText}

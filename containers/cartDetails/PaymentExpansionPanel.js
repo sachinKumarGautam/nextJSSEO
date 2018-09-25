@@ -128,7 +128,12 @@ class PaymentExpansionPanel extends React.Component {
             </div>
             : null}
           <TermsAndCondition
-            retailFaciltyName={this.props.cartState.payload.seller_detail.retail_facilty_name}
+            retailFaciltyName={
+              (this.props.cartState.payload.seller_detail &&
+              this.props.cartState.payload.seller_detail.retail_facilty_name)
+                ? this.props.cartState.payload.seller_detail.retail_facilty_name
+                : 'Trusted channel partners'
+            }
           />
           <Button
             size='small'
