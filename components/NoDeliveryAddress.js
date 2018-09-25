@@ -13,8 +13,8 @@ const styles = theme => ({
     marginLeft: theme.spacing.unit
   },
   img: {
-    width: '30px',
-    height: '30px'
+    width: theme.spacing.unit * 3.75,
+    height: theme.spacing.unit * 3.75
   }
 })
 
