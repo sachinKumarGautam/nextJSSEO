@@ -78,6 +78,7 @@ class PincodeDialog extends React.Component {
         this.props.checkPincodeState,
         event.target.value
       )
+      this.props.handleChange(event)
     }
   }
 
@@ -85,7 +86,6 @@ class PincodeDialog extends React.Component {
     const { props } = this
 
     const {
-      values,
       touched,
       errors,
       isSubmitting,
@@ -182,8 +182,9 @@ class PincodeDialog extends React.Component {
 
 export default withStyles(styles)(
   withFormik({
+    enableReinitialize: true,
     mapPropsToValues: props => ({
-      pincode: props.checkPincodeState.payload.pincode
+      pincode: props.checkPincodeState.payload.pincodeValue
     }),
     validationSchema: Yup.object().shape({
       pincode: Yup.number().required(PINCODE_REQUIRED)

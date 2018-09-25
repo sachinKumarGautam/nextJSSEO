@@ -25,13 +25,18 @@ const styles = theme => ({
   },
   subText: {
     fontSize: theme.spacing.unit * 2.25,
-    color: theme.palette.customGrey.grey200
+    color: theme.palette.customGrey.grey200,
+    marginTop: theme.spacing.unit * 1.25
+  },
+  imgaeStyle: {
+    marginRight: theme.spacing.unit * 1.25,
+    width: theme.spacing.unit * 3
   }
 })
 
 const UnderConstruction = ({ classes }) => (
   <div className={classes.outerWrapper}>
-    <img src='/static/images/paymentPendingIcon.svg' alt='construction-image' />
+    <img src='/static/images/paymentPendingIcon.svg' alt='construction-image' className={classes.imgaeStyle} />
     <Typography
       className={classes.subText}
       gutterBottom
