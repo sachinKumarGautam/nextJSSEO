@@ -3,7 +3,8 @@ import {
   CHECK_PINCODE_SUCCESS,
   CHECK_PINCODE_FAILURE,
   HANDLE_PINCODE_DIALOG,
-  RESET_PINCODE_STATE
+  RESET_PINCODE_STATE,
+  CHANGE_PINCODE
 } from './pincodeActionTypes'
 
 export function openPincodeDialog (checkPincodeState, { isOpen }) {
@@ -69,8 +70,16 @@ export function checkPincodeFailure (checkPincodeState, error) {
   }
 }
 
-export function resetPincodeState () {
+export function resetPincodeState (checkPincodeState) {
   return {
-    type: RESET_PINCODE_STATE
+    type: RESET_PINCODE_STATE,
+    pincode: checkPincodeState.payload.pincode
+  }
+}
+
+export function changePincodeValue (checkPincodeState, pincodeValue) {
+  return {
+    type: CHANGE_PINCODE,
+    pincodeValue: pincodeValue
   }
 }

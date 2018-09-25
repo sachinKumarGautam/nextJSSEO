@@ -60,6 +60,7 @@ class OrderConfirmation extends React.Component {
                 submitRefillDateLoading={this.props.submitRefillDateLoading}
                 thankYouState={this.props.thankYouState}
                 viewYouOrder={this.props.viewYouOrder}
+                constantsState={this.props.constantsState}
               />
             }
             {

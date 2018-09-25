@@ -3,12 +3,29 @@ import React from 'react'
 import { withStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
 
-import {formatDate} from '../../utils/FormatDate'
-import {DESCRIPTION} from '../messages/thankyouMessages'
+import { formatDate } from '../../utils/FormatDate'
 import {
   DELIVERY_OPTION_URGENT,
   SERVICE_TYPE_LFASSURED
 } from '../../components/constants/Constants'
+
+import ReactTooltip from 'react-tooltip'
+
+import {
+  UREGNT_DELIVERY_TEXT,
+  LF_ASSURED_TEXT
+} from '../messages/cartMessages'
+
+import {
+  getReplacedString
+} from '../../utils/replaceConstants'
+
+import {
+  DESCRIPTION_FIRST,
+  DESCRIPTION_SECOND,
+  ASSURED_DELIVERY_MSG,
+  NORMAL_DELIVERY_MSG
+} from '../messages/thankyouMessages'
 
 const styles = theme => ({
   imageStyle: {
@@ -56,7 +73,27 @@ const styles = theme => ({
     color: theme.palette.customGrey.grey500,
     paddingBottom: theme.spacing.unit * 2,
     marginLeft: theme.spacing.unit * 5,
-    marginRight: theme.spacing.unit * 12.12
+    marginRight: theme.spacing.unit * 12.12,
+    display: 'inline-block'
+  },
+  paper: {
+    padding: theme.spacing.unit,
+    width: theme.spacing.unit * 34,
+    backgroundColor: `${theme.palette.customGrey.grey50} !important`,
+    pointerEvents: 'auto !important',
+    '&:after': {
+      borderRightColor: `${theme.palette.customGrey.grey50} !important`
+    },
+    '&:hover': {
+      visibility: 'visible !important',
+      opacity: '1 !important'
+    },
+    opacity: '1 !important',
+    borderRadius: theme.spacing.unit / 2
+  },
+  infoStyle: {
+    textDecoration: 'none',
+    color: theme.palette.common.black
   }
 })
 
@@ -73,7 +110,7 @@ const ThankyouDetails = (props) => {
           variant='display1'
           className={props.classes.thankyou}
         >
-          Thank you for your order
+                    Thank you for your order
         </Typography>
       </div>
       <div className={props.classes.orderWrapper}>
@@ -81,13 +118,13 @@ const ThankyouDetails = (props) => {
           variant='subheading'
           className={props.classes.order}
         >
-          Order No
+                    Order No
         </Typography>
         <Typography
           variant='subheading'
           className={props.classes.orderNumber}
         >
-          : {props.cartState.orderResponse.payload.order_number}
+                    : {props.cartState.orderResponse.payload.order_number}
         </Typography>
         {
           props.cartState.orderResponse.payload.service_type === SERVICE_TYPE_LFASSURED &&
@@ -103,24 +140,84 @@ const ThankyouDetails = (props) => {
           variant='body2'
           className={props.classes.deliveryDate}
         >
-          Estimated Delivery Date
+                    Estimated Delivery Date
         </Typography>
         <Typography
           variant='body2'
           className={props.classes.deliveryDateValue}
         >
-          : {
+                    : {
             props.cartState.orderResponse.payload.promised_delivery_date
               ? formatDate(props.cartState.orderResponse.payload.promised_delivery_date) : ''
           }
         </Typography>
       </div>
-      <Typography
-        variant='body2'
-        className={props.classes.description}
-      >
-        {DESCRIPTION}
-      </Typography>
+      {
+        props.cartState.orderResponse.payload.delivery_option === DELIVERY_OPTION_URGENT
+          ? <Typography
+            variant='body2'
+            className={props.classes.description}
+          >
+            {DESCRIPTION_FIRST}<a
+              href='#'
+              data-tip
+              data-for='urgent_delivery'
+              className={props.classes.infoStyle}
+            >
+                            *.
+              <ReactTooltip
+                id='urgent_delivery'
+                effect='solid'
+                place='right'
+                className={props.classes.paper}
+                // delayHide={1000}
+                delayShow={500}
+              >
+                <Typography
+                  variant='caption'
+                >
+                  {getReplacedString(UREGNT_DELIVERY_TEXT, props.constantsState.constants.payload.constantsPayload)}
+                </Typography>
+              </ReactTooltip>
+            </a>{DESCRIPTION_SECOND}
+          </Typography>
+          : (
+            props.cartState.orderResponse.payload.service_type === SERVICE_TYPE_LFASSURED
+              ? <Typography
+                variant='body2'
+                className={props.classes.description}
+              >
+                {ASSURED_DELIVERY_MSG}<a
+                  href='#'
+                  data-tip
+                  data-for='assured'
+                  className={props.classes.infoStyle}
+                >
+                                    *.
+                  <ReactTooltip
+                    id='assured'
+                    effect='solid'
+                    place='right'
+                    className={props.classes.paper}
+                    // delayHide={1000}
+                    delayShow={500}
+                  >
+                    <Typography
+                      variant='caption'
+                    >
+                      {getReplacedString(LF_ASSURED_TEXT, props.constantsState.constants.payload.constantsPayload)}
+                    </Typography>
+                  </ReactTooltip>
+                </a>{DESCRIPTION_SECOND}
+              </Typography>
+              : <Typography
+                variant='body2'
+                className={props.classes.description}
+              >
+                {NORMAL_DELIVERY_MSG}
+              </Typography>
+          )
+      }
     </div>
   )
 }

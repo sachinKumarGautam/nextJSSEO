@@ -4,7 +4,7 @@ import { withStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
 import Person from '@material-ui/icons/Person'
 
-import {formatDateWithMonth} from '../../utils/FormatDate'
+import { formatDateWithMonth } from '../../utils/FormatDate'
 
 const styles = theme => ({
   imageStyle: {
@@ -69,6 +69,9 @@ class PrescriptionContent extends Component {
       <div className={this.props.classes.prescriptionWrapper}>
         <img
           src={this.props.prescription.location}
+          onError={e => {
+            e.target.src = '/static/images/placeholder.svg'
+          }}
           className={this.props.classes.imageStyle}
         />
         <div className={this.props.classes.detailWrapper}>

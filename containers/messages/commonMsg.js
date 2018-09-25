@@ -12,3 +12,5 @@ export const SESSION_EXPIRED = 'Session expired'
 
 export const SESSION_EXPIRED_CONTENT =
   'Your session has expired due to inactivity'
+
+export const NO_ADDRESS_AVAILABLE = 'Please add a delivery address.'

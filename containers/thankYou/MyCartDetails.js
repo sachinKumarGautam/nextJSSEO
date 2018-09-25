@@ -10,7 +10,6 @@ import TotalAmount from '../cartDetails/TotalAmount'
 
 import {
   PAYMENT_FAILED,
-  PAYMENT_SUCCESS,
   PAYMENT_RETRY
 } from '../../components/constants/paymentConstants'
 

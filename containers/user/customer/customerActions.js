@@ -117,6 +117,7 @@ export function customerRegisterSuccess (customerState, result) {
     customerState,
     id: result.body.payload.id,
     full_name: result.body.payload.full_name,
+    mobile: result.body.payload.mobile,
     default_patient_id: result.body.payload.default_patient_id,
     gender: result.body.payload.gender,
     membership_code: result.body.payload.membership_code,

@@ -65,6 +65,26 @@ class DeliveryForm extends React.Component {
     )
   }
 
+  componentDidUpdate (prevProps) {
+    const fullName = this.props.customerState.payload.full_name
+    const mobile = this.props.customerState.payload.mobile
+    const prevPropsFullName = prevProps.customerState.payload.full_name
+    const prevPropsMobile = prevProps.customerState.payload.mobile
+
+    if (fullName !== prevPropsFullName || mobile !== prevPropsMobile) {
+      this.props.updateAddressFormValue(
+        this.props.deliveryDetailsState,
+        'full_name',
+        fullName
+      )
+      this.props.updateAddressFormValue(
+        this.props.deliveryDetailsState,
+        'mobile',
+        this.props.customerState.payload.mobile
+      )
+    }
+  }
+
   onPincodeInput (handleChange, event) {
     if (event.target.value.length > 6) return
     else if (event.target.value.length === 6) {
