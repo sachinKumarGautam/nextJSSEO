@@ -96,7 +96,8 @@ export function getCartDetailsSuccess (
     service_type: result.service_type,
     seller_detail: result.seller_detail,
     available_delivery_option: result.available_delivery_option,
-    preferred_delivery_option: result.preferred_delivery_option
+    preferred_delivery_option: result.preferred_delivery_option,
+    excessive_ordered_quantity: result.excessive_ordered_quantity
   }
 }
 
@@ -151,6 +152,7 @@ export function putCartItemSuccess (cartState, result) {
     total_payable_amount: result.total_payable_amount,
     total_sale_price: result.total_sale_price,
     total_tax_amount: result.total_tax_amount,
+    excessive_ordered_quantity: result.excessive_ordered_quantity,
     seller_detail: result.seller_detail
   }
 }
@@ -261,6 +263,14 @@ export function saveDeliveryAddressToCartSuccess (cartState, result) {
     delivery_option: result.delivery_option,
     service_type: result.service_type,
     urgent_delivery_charge: result.urgent_delivery_charge,
+    cart_items: result.cart_items,
+    discount: result.discount,
+    redeemed_care_points: result.redeemed_care_points,
+    redeemable_care_points: result.redeemable_care_points,
+    total_mrp: result.total_mrp,
+    total_payable_amount: result.total_payable_amount,
+    total_sale_price: result.total_sale_price,
+    total_tax_amount: result.total_tax_amount,
     seller_detail: result.seller_detail
   }
 }

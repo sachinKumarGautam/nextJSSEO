@@ -31,6 +31,7 @@ const PatientDetailsWrapper = props => (
           customerState={props.customerState}
           getPatientDetailsListLoading={props.getPatientDetailsListLoading}
           resetPatientSelected={props.resetPatientSelected}
+          updatePatientFormValue={props.updatePatientFormValue}
           resetPatientForm={props.resetPatientForm}
         />
       </Grid>

@@ -62,7 +62,8 @@ export function getProductDetailSuccess (productDetailsState, result) {
     is_cold_storage: result.is_cold_storage,
     packaging_type: result.packaging_type,
     description: result.description,
-    isLoading: false
+    isLoading: false,
+    max_order_unit_quantity: result.max_order_unit_quantity
   }
 }
 

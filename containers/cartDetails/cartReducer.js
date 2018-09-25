@@ -102,6 +102,7 @@ export default function cartReducer (state = initialState, action) {
           facility_code: action.facility_code,
           status: action.status,
           source: action.source,
+          excessive_ordered_quantity: action.excessive_ordered_quantity,
           cart_items: {
             ...state.payload.cart_items,
             payload: action.cart_items
@@ -181,6 +182,7 @@ export default function cartReducer (state = initialState, action) {
           total_payable_amount: action.total_payable_amount,
           total_sale_price: action.total_sale_price,
           total_tax_amount: action.total_tax_amount,
+          excessive_ordered_quantity: action.excessive_ordered_quantity,
           seller_detail: action.seller_detail
         }
       }
@@ -305,7 +307,18 @@ export default function cartReducer (state = initialState, action) {
         ...state,
         payload: {
           ...state.payload,
+          cart_items: {
+            ...state.payload.cart_items,
+            payload: action.cart_items
+          },
+          discount: action.discount,
           payment_channels: action.payment_channels,
+          redeemed_care_points: action.redeemed_care_points,
+          redeemable_care_points: action.redeemable_care_points,
+          total_mrp: action.total_mrp,
+          total_payable_amount: action.total_payable_amount,
+          total_sale_price: action.total_sale_price,
+          total_tax_amount: action.total_tax_amount,
           seller_detail: action.seller_detail,
           available_delivery_option: action.available_delivery_option,
           preferred_delivery_option: action.preferred_delivery_option,

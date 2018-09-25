@@ -31,6 +31,7 @@ const PatientDetails = props => (
         patientFormState={props.patientDetailsState}
         customerState={props.customerState}
         submitPatientDetailsLoading={props.submitPatientDetailsLoading}
+        updatePatientFormValue={props.updatePatientFormValue}
         isEdit={'false'}
       />
     </Grid>

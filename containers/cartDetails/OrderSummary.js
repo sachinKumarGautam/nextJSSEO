@@ -14,7 +14,7 @@ import {
   SELECT_PATIENT,
   SELECT_ADDRESS
 } from '../../containers/messages/cartMessages'
-import { PLEASE_LOGIN } from '../../containers/messages/commonMsg'
+
 import { SNACK_BAR_DURATION_3000 } from '../../components/constants/Constants'
 
 const styles = theme => ({
@@ -300,6 +300,8 @@ class OrderSummary extends React.Component {
           checkedIconWrapper={this.props.classes.checkedIconWrapper}
           checkedIcon={this.props.classes.checkedIcon}
           patientDetails={this.props.classes.patientDetails}
+          updatePatientFormValue={this.props.updatePatientFormValue}
+          resetPatientSelected={this.props.resetPatientSelected}
         />
         <AddressDetailsExpansionPanel
           expanded={this.state.expanded}

@@ -79,7 +79,10 @@ class OrderConfirmation extends React.Component {
           </ActivityIndicator>
         </Grid>
         <Grid item xs={5}>
-          <MyCartDetails cartState={this.props.cartState} />
+          <MyCartDetails
+            cartState={this.props.cartState}
+            queryParamPaymentStatus={this.props.queryParamPaymentStatus}
+          />
         </Grid>
       </Grid>
     )

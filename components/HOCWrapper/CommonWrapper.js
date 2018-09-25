@@ -42,6 +42,14 @@ import {
   SESSION_EXPIRED_CONTENT
 } from '../../containers/messages/commonMsg'
 
+import {
+  MEDICINE_QUANTITY_ALERT
+} from '../../containers/messages/cartMessages'
+
+import Snackbar from '@material-ui/core/Snackbar'
+
+import {SNACK_BAR_DURATION} from '../constants/Constants'
+
 export function withCommonWrapper (Page) {
   class CommonWrapper extends React.Component {
     static getInitialProps (ctx) {
@@ -53,8 +61,10 @@ export function withCommonWrapper (Page) {
     constructor (props) {
       super(props)
       this.addToCartHandler = this.addToCartHandler.bind(this)
+      this.handleCloseSnackbar = this.handleCloseSnackbar.bind(this)
       this.state = {
-        inProgressCartItem: {}
+        inProgressCartItem: {},
+        openSnackbar: false
       }
     }
 
@@ -66,6 +76,12 @@ export function withCommonWrapper (Page) {
       )
     }
 
+    handleCloseSnackbar = () => (
+      this.setState({
+        openSnackbar: !this.state.openSnackbar
+      })
+    )
+
     addToCartHandler (inProgressCartItem, event) {
       if (!this.props.cartState.payload.uid) {
         const isShowNoCartIdDialog = true
@@ -75,19 +91,24 @@ export function withCommonWrapper (Page) {
           isShowNoCartIdDialog
         )
       } else {
-        if (this.props.checkPincodeState.payload.pincode) {
-          this.props.actions.incrementCartItemLoading(
-            this.props.cartState,
-            inProgressCartItem
-          )
+        if (inProgressCartItem.max_order_quantity &&
+          inProgressCartItem.quantity >= inProgressCartItem.max_order_quantity) {
+          this.handleCloseSnackbar()
         } else {
-          this.setState({
-            inProgressCartItem
-          })
+          if (this.props.checkPincodeState.payload.pincode) {
+            this.props.actions.incrementCartItemLoading(
+              this.props.cartState,
+              inProgressCartItem
+            )
+          } else {
+            this.setState({
+              inProgressCartItem
+            })
 
-          this.props.actions.openPincodeDialog(this.props.checkPincodeState, {
-            isOpen: true
-          })
+            this.props.actions.openPincodeDialog(this.props.checkPincodeState, {
+              isOpen: true
+            })
+          }
         }
       }
     }
@@ -187,10 +208,10 @@ export function withCommonWrapper (Page) {
             LoaderComp={<Loader isLoading loaderType={'fullPageSpinner'} />}
             isError={
               cartState.payload.cart_items.errorState.isError ||
-                isCartInvalid ||
-                isSessionExpired ||
-                isShowNoCartIdDialog ||
-                cartState.errorState.isError
+              isCartInvalid ||
+              isSessionExpired ||
+              isShowNoCartIdDialog ||
+              cartState.errorState.isError
             }
             ErrorComp={this.getErrorComp(isCartInvalid, isSessionExpired)}
             bottomError
@@ -206,6 +227,19 @@ export function withCommonWrapper (Page) {
             handleClose={this.handleClose}
             checkPincodeState={checkPincodeState}
             changePincodeValue={actions.changePincodeValue}
+          />
+          <Snackbar
+            anchorOrigin={{
+              vertical: 'bottom',
+              horizontal: 'center'
+            }}
+            open={this.state.openSnackbar}
+            autoHideDuration={SNACK_BAR_DURATION}
+            onClose={this.handleCloseSnackbar}
+            ContentProps={{
+              'aria-describedby': 'message-id'
+            }}
+            message={<span id='message-id'>{MEDICINE_QUANTITY_ALERT}</span>}
           />
         </React.Fragment>
       )

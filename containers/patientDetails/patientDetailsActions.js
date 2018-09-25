@@ -7,7 +7,8 @@ import {
   SUBMIT_PATIENT_SUCCESS,
   SUBMIT_PATIENT_FAILURE,
   RESET_PATIENT_SELECTED,
-  RESET_PATIENT_FORM
+  RESET_PATIENT_FORM,
+  UPDATE_PATIENT_FORM_VALUE
 } from './patientDetailsActionTypes'
 
 /**
@@ -149,5 +150,14 @@ export function resetPatientSelected (patientDetailsState) {
 export function resetPatientForm () {
   return {
     type: RESET_PATIENT_FORM
+  }
+}
+
+export function updatePatientFormValue (patientDetailsState, name, value) {
+  return {
+    type: UPDATE_PATIENT_FORM_VALUE,
+    patientDetailsState,
+    name,
+    value
   }
 }

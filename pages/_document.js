@@ -60,18 +60,6 @@ class MyDocument extends Document {
 
           <link
             rel='stylesheet'
-            type='text/css'
-            charset='UTF-8'
-            href='https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.css'
-          />
-          <link
-            rel='stylesheet'
-            type='text/css'
-            href='https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css'
-          />
-
-          <link
-            rel='stylesheet'
             href='https://fonts.googleapis.com/css?family=Roboto:300,400,500'
           />
           <script src='https://checkout.razorpay.com/v1/checkout.js' async />

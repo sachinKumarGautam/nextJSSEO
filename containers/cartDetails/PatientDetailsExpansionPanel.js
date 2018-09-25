@@ -28,6 +28,8 @@ class PatientDetailsExpansionPanel extends React.Component {
     this.setState({
       openPatientFormDialog: false
     })
+
+    this.props.resetPatientSelected(this.props.patientDetailsState)
   }
 
   savePatientSelected (patientSelected) {
@@ -117,6 +119,7 @@ class PatientDetailsExpansionPanel extends React.Component {
             cartType={this.props.cartType}
             patientDetails={patientDetails}
             inProgressPatientId={this.state.inProgressPatientId}
+            updatePatientFormValue={this.props.updatePatientFormValue}
           />
           <Button
             size='small'
