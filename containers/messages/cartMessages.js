@@ -4,7 +4,7 @@ export const PRESCRIPTION_DESCRIPTION =
   '*Upload your prescription. If you do not have a ready prescription, you may opt for a tele-consultation with our doctor and create a prescription.'
 export const LOGIN_DESCRIPTION =
   'To place an order now, login to your existing account or register'
-export const ATLEAST_ONE_ITEM = 'Please add medicines or upload prescriptions'
+export const ATLEAST_ONE_ITEM = 'Please add a medicine or upload a prescription'
 export const NO_MEDICINES = 'No medicines added in cart'
 export const LF_ASSURED_TEXT =
   '100% medicine availability. Delivery within promised timelines if valid prescription available, else delivery promise will begin post verification of prescription. Instant cashback of express_lcassured_undelivered_cashback% of order value in your care points+ if promise not met.'

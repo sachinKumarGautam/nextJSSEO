@@ -1,7 +1,6 @@
 import React from 'react'
 
 import { withStyles } from '@material-ui/core/styles'
-import IconButton from '@material-ui/core/IconButton'
 
 const styles = theme => ({
   imagePickerWrapper: {
@@ -64,7 +63,8 @@ const styles = theme => ({
     cursor: 'pointer',
     fontSize: theme.spacing.unit * 4.375,
     display: 'block',
-    marginBottom: theme.spacing.unit * 0.625
+    marginBottom: theme.spacing.unit * 0.625,
+    marginTop: theme.spacing.unit * 0.625
   },
   deleteButtonWrapper: {
     position: 'relative',
@@ -88,14 +88,12 @@ const ImagePicker = (props) => (
       <label
         className={props.classes.pickerListLabel}
         for='file'>
-        <IconButton>
-          <label
-            className={props.classes.pickerListLabelPlus}
-            for='file'
-          >
-            +
-          </label>
-        </IconButton>
+        <label
+          className={props.classes.pickerListLabelPlus}
+          for='file'
+        >
+          +
+        </label>
       </label>
       {
         props.files.map((image, index) => (

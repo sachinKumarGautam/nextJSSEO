@@ -75,7 +75,7 @@ class TermsAndCondition extends Component {
             varaint='caption'
             className={this.props.classes.soldTextMapping}
           >
-            Sold by (Name of retail entity), fulfilled by LifCare
+            Sold by {this.props.retailFaciltyName}, fulfilled by LifCare
           </Typography>
         </div>
         <div className={this.props.classes.textWrapper}>

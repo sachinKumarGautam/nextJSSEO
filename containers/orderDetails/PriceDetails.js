@@ -160,21 +160,21 @@ class PriceDetails extends Component {
           </Grid>
           <Grid item xs={4}>
             <Typography className={this.props.classes.itemTotalAmount}>
-              Rs. {this.props.orderDetailsState.payload.total_mrp}
+              &#8377; {this.props.orderDetailsState.payload.total_mrp}
             </Typography>
             <Typography className={this.props.classes.discountAmount}>
-              - Rs. {this.props.orderDetailsState.payload.discount}
+              - &#8377; {this.props.orderDetailsState.payload.discount}
             </Typography>
             <Typography className={this.props.classes.discountAmount}>
-              - Rs. {this.props.orderDetailsState.payload.redeemed_care_points}
+              - &#8377; {this.props.orderDetailsState.payload.redeemed_care_points}
             </Typography>
             <Typography className={this.props.classes.discountAmount}>
-              - Rs. {this.props.orderDetailsState.payload.redeemed_cash}
+              - &#8377; {this.props.orderDetailsState.payload.redeemed_cash}
             </Typography>
             {
               this.props.orderDetailsState.payload.coupon_code &&
               <Typography className={this.props.classes.discountAmount}>
-                - Rs. {this.props.orderDetailsState.payload.coupon_discount}
+                - &#8377; {this.props.orderDetailsState.payload.coupon_discount}
               </Typography>
             }
             {
