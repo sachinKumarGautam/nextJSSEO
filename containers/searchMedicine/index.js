@@ -101,8 +101,6 @@ const styles = theme => ({
   }
 })
 
-
-
 function renderInput (inputProps) {
   const {
     InputProps,
@@ -313,33 +311,33 @@ class SearchMedicine extends React.Component {
                   ? <Paper className={classes.paper} square>
                     {!searchMedicineResult.length &&
                         inputValue.length > 3 &&
-                        !searchMedicineIsLoading &&
-                        <MedicineNotAvailable />}
-                    <ul
-                      {...getMenuProps()}
-                      className={classes.searchContentWrapper}
-                      >
-                      {modifiyMedicineList(
-                          searchMedicineResult,
-                          cartItems
-                        ).map((suggestion, index) =>
-                          renderSuggestion({
-                            suggestion,
-                            index,
-                            itemProps: getItemProps({
-                              item: suggestion.name
-                            }),
-                            highlightedIndex,
-                            selectedItem,
-                            onSelectItem: this.onSelectItem,
-                            searchItemStyle: classes.searchItem,
-                            highlightedSearchItem: `${classes.searchItem} ${classes.highlightedSearchItem}`,
-                            selectedSearchItem: `${classes.searchItem} ${classes.selectedSearchItem}`,
-                            checkPincodeState,
-                            addToCartHandler
-                          })
-                        )}
-                    </ul>
+                        !searchMedicineIsLoading
+                        ? <MedicineNotAvailable />
+                        : <ul
+                          {...getMenuProps()}
+                          className={classes.searchContentWrapper}
+                          >
+                          {modifiyMedicineList(
+                              searchMedicineResult,
+                              cartItems
+                            ).map((suggestion, index) =>
+                              renderSuggestion({
+                                suggestion,
+                                index,
+                                itemProps: getItemProps({
+                                  item: suggestion.name
+                                }),
+                                highlightedIndex,
+                                selectedItem,
+                                onSelectItem: this.onSelectItem,
+                                searchItemStyle: classes.searchItem,
+                                highlightedSearchItem: `${classes.searchItem} ${classes.highlightedSearchItem}`,
+                                selectedSearchItem: `${classes.searchItem} ${classes.selectedSearchItem}`,
+                                checkPincodeState,
+                                addToCartHandler
+                              })
+                            )}
+                        </ul>}
                   </Paper>
                   : null}
               </div>
