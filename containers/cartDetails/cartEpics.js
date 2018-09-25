@@ -93,7 +93,8 @@ import {
 import { PAYMENT_GATEWAY } from '../../components/constants/paymentConstants'
 import {
   QUANTITY_UPDATED,
-  ITEM_ADDED_TO_CART
+  ITEM_ADDED_TO_CART,
+  ITEM_REMOVED
 } from '../../containers/messages/cartMessages'
 
 export function getAnonymousCartIdEpic (action$, store) {
@@ -231,8 +232,11 @@ export function decrementCartItemEpic (action$, store) {
       }
 
       return http(putCartItem$(cartUid, medicineDecremented)).pipe(
-        map(result => {
-          return putCartItemSuccess(data.cartState, result.body.payload)
+        flatMap(result => {
+          return of(
+            goToCartSnackbar(data.cartState, true, QUANTITY_UPDATED),
+            putCartItemSuccess(data.cartState, result.body.payload)
+          )
         }),
         catchError(error => {
           return cartApiErrorHandling(
@@ -310,8 +314,12 @@ export function deleteCartItemEpic (action$, store) {
       let cartItemSku = data.medicineSelected.sku
 
       return http(deleteCartItem$(cartUid, cartItemSku)).pipe(
-        map(result => {
-          return putCartItemSuccess(data.cartState, result.body.payload)
+        flatMap(result => {
+          return of(goToCartSnackbar(
+            data.cartState,
+            true,
+            ITEM_REMOVED
+          ), putCartItemSuccess(data.cartState, result.body.payload))
         }),
         catchError(error => {
           return cartApiErrorHandling(

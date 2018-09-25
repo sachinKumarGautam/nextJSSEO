@@ -1,6 +1,7 @@
 export const NO_CART_ITEM = 'There is no item in your cart yet'
 export const ITEM_ADDED_TO_CART = '1 item added in your cart.'
-export const QUANTITY_UPDATED = 'Item quantity updated'
+export const QUANTITY_UPDATED = 'Cart items updated.'
+export const ITEM_REMOVED = 'Item removed successfully.'
 export const PRESCRIPTION_DESCRIPTION =
   '*Upload your prescription. If you do not have a ready prescription, you may opt for a tele-consultation with our doctor and create a prescription.'
 export const LOGIN_DESCRIPTION =
