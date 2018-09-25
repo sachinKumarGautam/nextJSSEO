@@ -115,6 +115,7 @@ class PatientDetailsList extends Component {
                 }
                 isEdit={'false'}
                 resetPatientForm={this.props.resetPatientForm}
+                updatePatientFormValue={this.props.updatePatientFormValue}
               />
             </div>
           </div>
