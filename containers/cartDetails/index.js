@@ -49,7 +49,7 @@ import {
   getDeliveryDetailsListLoading,
   submitDeliveryDetailsLoading,
   updateAddressFormValue,
-  getLocalityDetailListLoading,
+  getLocalityDetailListLoading
 } from '../deliveryDetails/deliveryDetailsActions'
 
 import {
@@ -100,7 +100,7 @@ class CartDetailsWrapper extends Component {
     this.tryAgain = this.tryAgain.bind(this)
     this.resetState = this.resetState.bind(this)
   }
-  
+
   componentDidMount () {
     const cartUid = this.props.cartState.payload.uid
     this.props.actions.getCartDetailsLoading(this.props.cartState, cartUid)
@@ -409,7 +409,7 @@ function mapDispatchToProps (dispatch) {
         resetUploadPrescriptionError,
         deleteCartLoading,
         updateLassuredExpressFlag,
-        resetPincodeState,
+        resetPincodeState
       },
       dispatch
     )

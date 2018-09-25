@@ -22,7 +22,8 @@ const styles = theme => {
   return {
     title: {
       ...theme.typography.title,
-      color: theme.palette.customGrey.grey600
+      color: theme.palette.customGrey.grey600,
+      fontSize: theme.spacing.unit * 2.75
     },
     articleListWrapper: {
       listStyle: 'none',

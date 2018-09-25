@@ -8,18 +8,18 @@ const styles = theme => {
     label: {
       ...theme.typography.body3,
       color: theme.palette.customGrey.grey600,
-      marginLeft: theme.spacing.unit * 1.75
+      marginLeft: theme.spacing.unit * 1.5
     },
     assuredServiceWrapper: {
       display: 'flex',
       alignItems: 'center',
       marginTop: theme.spacing.unit,
-      marginLeft: theme.spacing.unit * 1.25
+      marginLeft: theme.spacing.unit * 1.5
     }
   }
 }
 
-const AssuredServiceInfo = (props) => (
+const AssuredServiceInfo = props => (
   <div className={props.classes.assuredServiceWrapper}>
     <img src={'/static/images/assured-service.svg'} />
     <Typography component='caption' className={props.classes.label}>

@@ -76,7 +76,7 @@ class DiscountDetailSection extends Component {
           15% OFF
         </Typography>
         <Typography variant='body1' className={this.props.classes.lastText}>
-          discount on first order
+          on all orders
         </Typography>
       </div>
     )

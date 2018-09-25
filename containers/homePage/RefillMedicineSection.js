@@ -26,9 +26,12 @@ const styles = theme => {
       ...theme.typography.body2,
       marginBottom: theme.spacing.unit * 11.625
     },
-    imageStyle: {
+    imageWrapperStyle: {
       marginBottom: theme.spacing.unit * 9.625,
       textAlign: 'center'
+    },
+    imageStyle: {
+      ...theme.typography.caption
     },
     button: {
       margin: theme.spacing.unit,
@@ -70,9 +73,9 @@ class RefillMedicineSection extends Component {
           variant='body2'
           className={this.props.classes.description}
         >
-          LifCare saves you all the time and effort to re-visit pharmacies by proactively reminding you to refill your medicines on-time every-month. Receive timely reminders for your medicine refills, and get them re-delivered every month.
+          LifCare saves you all the time and effort to re-visit pharmacies, by proactively refilling your medicines on-time every-time.
         </Typography>
-        <div className={this.props.classes.imageStyle}>
+        <div className={this.props.classes.imageWrapperStyle}>
           <img src='/static/images/refillDetail.svg' />
         </div>
         <div className={this.props.classes.buttonWrapperStyle}>

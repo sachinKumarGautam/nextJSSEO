@@ -1,4 +1,4 @@
-import React, {Component} from 'react'
+import React, { Component } from 'react'
 
 import { withStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
@@ -14,7 +14,7 @@ const styles = theme => {
       paddingBottom: theme.spacing.unit * 10.25
     },
     healthCoachTitle: {
-      fontSize: theme.typography.pxToRem(24),
+      fontSize: theme.typography.pxToRem(20),
       fontWeight: theme.typography.fontWeightBold,
       marginLeft: theme.spacing.unit * 5.5
     },
@@ -31,6 +31,11 @@ const styles = theme => {
     captionTextStyle: {
       fontSize: theme.typography.pxToRem(12),
       marginLeft: theme.spacing.unit * 6
+    },
+    scaleImageStyle: {
+      width: theme.spacing.unit * 4,
+      marginBottom: theme.spacing.unit * 4.125,
+      marginLeft: theme.spacing.unit * 5.5
     }
   }
 }
@@ -38,7 +43,7 @@ const styles = theme => {
 class HealthCoachDetail extends Component {
   render () {
     return (
-      <div className={this.props.classes.contentWrapper}>
+      <div className={this.props.classes.contentWrapper} id='health-coach'>
         <div>
           <img src='/static/images/doctor2.png' />
         </div>
@@ -47,13 +52,13 @@ class HealthCoachDetail extends Component {
             variant='body2'
             className={this.props.classes.healthCoachTitle}
           >
-                Health Coach
+            Health Coach
           </Typography>
           <Typography
             variant='body2'
             className={this.props.classes.healthCoachDescription}
           >
-                Our Life Coaches help you determine the right diet and lifestyle interventions for you. Every month!
+            Our Life Coaches help you determine the right diet and lifestyle interventions for you. Every month!
           </Typography>
           <Grid container>
             <Grid item xs={2}>
@@ -62,7 +67,7 @@ class HealthCoachDetail extends Component {
                 variant='body1'
                 className={this.props.classes.captionTextStyle}
               >
-                  DIET
+                DIET
               </Typography>
             </Grid>
             <Grid item xs={2}>
@@ -71,7 +76,7 @@ class HealthCoachDetail extends Component {
                 variant='body1'
                 className={this.props.classes.captionTextStyle}
               >
-                  EXERCISE
+                EXERCISE
               </Typography>
             </Grid>
             <Grid item xs={2}>
@@ -80,16 +85,16 @@ class HealthCoachDetail extends Component {
                 variant='body1'
                 className={this.props.classes.captionTextStyle}
               >
-                  LIFESTYLE CHOICES
+                LIFESTYLE CHOICES
               </Typography>
             </Grid>
             <Grid item xs={2}>
-              <img src='/static/images/noun-weight-loss-118506.svg' className={this.props.classes.captionImageStyle} />
+              <img src='/static/images/scale.svg' className={this.props.classes.scaleImageStyle} />
               <Typography
                 variant='body1'
                 className={this.props.classes.captionTextStyle}
               >
-                  WEIGHT MANAGEMENT
+                WEIGHT MANAGEMENT
               </Typography>
             </Grid>
           </Grid>

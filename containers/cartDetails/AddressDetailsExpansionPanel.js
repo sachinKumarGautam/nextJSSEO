@@ -137,17 +137,17 @@ class AddressDetailsExpansionPanel extends React.Component {
                   heading={this.props.heading}
                   patientDetails={this.props.patientDetails}
                   shipping_address={
-                      shippingAddressDetails.payload.shipping_address
-                    }
-                  />
+                    shippingAddressDetails.payload.shipping_address
+                  }
+                />
                 : <Typography component='h1' className={this.props.heading}>
                     Delivery Details
-                  </Typography>}
+                </Typography>}
               {this.props.addressIdSelected
                 ? <img
                   src='/static/images/checkedIcon.svg'
                   className={this.props.checkedIcon}
-                  />
+                />
                 : null}
             </div>
             {this.props.expanded === 'panel4' &&

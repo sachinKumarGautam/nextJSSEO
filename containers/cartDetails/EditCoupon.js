@@ -9,8 +9,6 @@ const styles = theme => ({
   couponDetailWrapper: {
     marginTop: theme.spacing.unit * 2.25,
     marginBottom: theme.spacing.unit * 3,
-    marginLeft: theme.spacing.unit,
-    marginRight: theme.spacing.unit * 2,
     border: `1px dashed ${theme.palette.customGrey.grey200}`,
     textAlign: 'left',
     justifyContent: 'space-between',
@@ -36,7 +34,8 @@ const styles = theme => ({
     paddingBottom: theme.spacing.unit
   },
   editButton: {
-    textAlign: 'center'
+    textAlign: 'center',
+    marginRight: theme.spacing.unit * 2
   },
   editButtonLabel: {
     ...theme.typography.caption,

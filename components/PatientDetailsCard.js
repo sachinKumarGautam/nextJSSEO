@@ -72,7 +72,7 @@ class PatientDetailsCard extends React.Component {
         className={
           this.props.patientIdSelected === this.props.patientDetail.id
             ? this.props.classes.patientWrapperSelectedStyle
-            : this.props.classes.patientWrapperStyle
+            : (this.props.patientWrapper ? this.props.patientWrapper : this.props.classes.patientWrapperStyle)
         }
         onClick={this.handleOnClickPatientCard}
       >

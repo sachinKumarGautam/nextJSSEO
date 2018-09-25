@@ -16,12 +16,11 @@ import DialogContentText from '@material-ui/core/DialogContentText'
 import {
   PINCODE_INVALID,
   CHECKING_PINCODE,
-  PINCODE_REQUIRED
+  PINCODE_REQUIRED,
+  NUMBER_VALIDATION_REGEX
 } from '../../messages/ValidationMsg'
 
-import {
-  CUSTOM_MESSGAE_SNACKBAR
-} from '../../messages/errorMessages'
+import { CUSTOM_MESSGAE_SNACKBAR } from '../../messages/errorMessages'
 
 const styles = theme => ({
   paper: {
@@ -70,7 +69,11 @@ function getPincodeErrorMsg (
 
 class PincodeDialog extends React.Component {
   handleChange = event => {
-    if (event.target.value.length <= 6) {
+    const inputValue = event.target.value
+    const regexInputExpression = RegExp(NUMBER_VALIDATION_REGEX).test(
+      inputValue
+    )
+    if ((regexInputExpression && inputValue.length <= 6) || !inputValue) {
       this.props.handleChange(event)
     }
   }
@@ -118,7 +121,11 @@ class PincodeDialog extends React.Component {
               <FormControl
                 className={classes.formControl}
                 aria-describedby='pincode'
-                error={pincodeFormError || inValidPincodeError || checkPincodeState.errorState.isError}
+                error={
+                  pincodeFormError ||
+                    inValidPincodeError ||
+                    checkPincodeState.errorState.isError
+                }
               >
                 <Input
                   autoFocus
@@ -127,11 +134,10 @@ class PincodeDialog extends React.Component {
                   fullWidth
                   autoComplete='off'
                   id='pincode'
-                  type='number'
                   value={values.pincode}
                   onChange={this.handleChange}
                   // onBlur={handleBlur}
-                  placeholder={'Enter you pincode'}
+                  placeholder={'Enter your pincode'}
                 />
                 <FormHelperText id='pincode'>
                   {getPincodeErrorMsg(

@@ -29,27 +29,27 @@ const CompanyInfo = ({classes}) => (
     </Typography>
     <div className={classes.iconWithText}>
       <Typography className={classes.listItemText} variant='subheading' component='h2'>
-          <a href="https://blog.lifcare.in/tag/diabetes/" target="_blank" className={classes.listItemText} >Diabetes</a>
+        <a href='https://blog.lifcare.in/tag/diabetes/' target='_blank' className={classes.listItemText} >Diabetes</a>
       </Typography>
     </div>
     <div className={classes.iconWithText}>
       <Typography className={classes.listItemText} variant='subheading' component='h2'>
-          <a href="https://blog.lifcare.in/tag/blood-pressure/" target="_blank" className={classes.listItemText} >Blood Pressure</a>
+        <a href='https://blog.lifcare.in/tag/blood-pressure/' target='_blank' className={classes.listItemText} >Blood Pressure</a>
       </Typography>
     </div>
     <div className={classes.iconWithText}>
       <Typography className={classes.listItemText} variant='subheading' component='h2'>
-          <a href="https://blog.lifcare.in/tag/arthritis/" target="_blank" className={classes.listItemText} >Arthritis</a>
+        <a href='https://blog.lifcare.in/tag/arthritis/' target='_blank' className={classes.listItemText} >Arthritis</a>
       </Typography>
     </div>
     <div className={classes.iconWithText}>
       <Typography className={classes.listItemText} variant='subheading' component='h2'>
-          <a href="https://blog.lifcare.in/tag/cancer/" target="_blank" className={classes.listItemText} >Cancer</a>
+        <a href='https://blog.lifcare.in/tag/cancer/' target='_blank' className={classes.listItemText} >Cancer</a>
       </Typography>
     </div>
     <div className={classes.iconWithText}>
       <Typography className={classes.listItemText} variant='subheading' component='h2'>
-          <a href="https://blog.lifcare.in/tag/brain/" target="_blank" className={classes.listItemText} >Brain</a>
+        <a href='https://blog.lifcare.in/tag/neuro/' target='_blank' className={classes.listItemText} >Neuro</a>
       </Typography>
     </div>
   </div>

@@ -53,6 +53,11 @@ const styles = theme => {
     },
     addressDetailsCardWrapper: {
       padding: theme.spacing.unit * 1.25
+    },
+    addressWrapper: {
+      border: `1px solid ${theme.palette.customGrey.grey250}`,
+      padding: theme.spacing.unit * 2.5,
+      borderRadius: theme.spacing.unit * 0.5
     }
   }
 }
@@ -111,7 +116,7 @@ class Main extends Component {
               component='h1'
               className={this.props.classes.title}
             >
-              Address
+              Addresses
             </Typography>
             <div className={this.props.classes.buttonWrapper}>
               <AddDeliveryAddressButton
@@ -145,21 +150,18 @@ class Main extends Component {
           {this.props.deliveryDetailsState.payload.length
             ? <AddressDetailsCardWrapper
               openDeliveryFormModal={this.openDeliveryFormModal.bind(this)}
-              saveDeliveryAddressSelected={this.saveDeliveryAddressSelected.bind(
-                  this
-                )}
+              saveDeliveryAddressSelected={this.saveDeliveryAddressSelected.bind(this)}
               isLoading={this.props.deliveryDetailsState.isLoading}
               errorState={this.props.deliveryDetailsState.errorState}
               payload={this.props.deliveryDetailsState.payload}
               addressDetailsCardWrapper={
-                  this.props.classes.addressDetailsCardWrapper
-                }
+                this.props.classes.addressDetailsCardWrapper
+              }
               customerState={this.props.customerState}
-              getDeliveryDetailsListLoading={
-                  this.props.getDeliveryDetailsListLoading
-                }
+              getDeliveryDetailsListLoading={this.props.getDeliveryDetailsListLoading}
               deliveryDetailsState={this.props.deliveryDetailsState}
-              />
+              addressWrapper={this.props.classes.addressWrapper}
+            />
             : <NoDeliveryAddress />}
         </CardContent>
       </Card>

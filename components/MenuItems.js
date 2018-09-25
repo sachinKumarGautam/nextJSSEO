@@ -62,6 +62,10 @@ class MenuItems extends Component {
       ? this.props.customMenuStyle
       : this.props.classes.menuStyle
 
+    let logout = this.props.isSideMenu
+      ? this.props.customMenuStyle
+      : this.props.classes.logoutStyle
+
     return (
       <div className={this.props.classes.listWrapper}>
         <MenuItem
@@ -92,19 +96,19 @@ class MenuItems extends Component {
           className={menuStyle}
           onClick={this.redirectToPath.bind(this, REFILL_PATIENTS)}
         >
-          Refill Past Medicines
+          Past Medicines
         </MenuItem>
         <MenuItem
           className={menuStyle}
           onClick={this.redirectToPath.bind(this, CARE_POINTS)}
         >
-          Care Points / Care Points +
+          Care Points
         </MenuItem>
         {/* {!this.props.isSideMenu &&
           <MenuItem className={menuStyle}>Content</MenuItem>}
         {!this.props.isSideMenu &&
           <MenuItem className={menuStyle}>Bookmarks</MenuItem>} */}
-        <MenuItem className={this.props.classes.logoutStyle} onClick={this.props.logout}>
+        <MenuItem className={logout} onClick={this.props.logout}>
           Log out
         </MenuItem>
       </div>

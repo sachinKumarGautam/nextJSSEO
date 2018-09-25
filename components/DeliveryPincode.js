@@ -27,7 +27,10 @@ const styles = theme => {
       ...theme.typography.caption,
       marginLeft: theme.spacing.unit * 2,
       color: theme.palette.primary.main,
-      cursor: 'pointer'
+      cursor: 'pointer',
+      '&:hover': {
+        textDecoration: 'underline'
+      }
     }
   }
 }

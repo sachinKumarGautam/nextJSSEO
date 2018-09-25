@@ -78,6 +78,9 @@ const styles = theme => {
     codButtonStyle: {
       // ...theme.typography.caption,
       marginLeft: theme.spacing.unit * 2
+    },
+    customerFullName: {
+      marginLeft: theme.spacing.unit
     }
     // reviewStyle: {
     //   ...theme.typography.body4,

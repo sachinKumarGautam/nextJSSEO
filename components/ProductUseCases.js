@@ -22,7 +22,11 @@ class ProductUseCases extends Component {
               <ListContent
                 title={'Uses'}
                 itemKey={'uses'}
-                src={this.props.hover.uses ? '/static/images/uses-green.svg' : '/static/images/uses.svg'}
+                src={
+                  this.props.hover.uses
+                    ? '/static/images/uses-green.svg'
+                    : '/static/images/uses.svg'
+                }
                 content={this.props.summaryData.uses}
                 hover={this.props.hover}
               />
@@ -33,7 +37,11 @@ class ProductUseCases extends Component {
               <ListContent
                 title={'Side Effects'}
                 itemKey={'sideEffects'}
-                src={this.props.hover.sideEffects ? '/static/images/side-effects-green.svg' : '/static/images/side-effects.svg'}
+                src={
+                  this.props.hover.sideEffects
+                    ? '/static/images/side-effects-green.svg'
+                    : '/static/images/side-effects.svg'
+                }
                 content={this.props.summaryData.side_effects}
                 hover={this.props.hover}
               />
@@ -44,23 +52,30 @@ class ProductUseCases extends Component {
               <ListContent
                 title={'How it Works'}
                 itemKey={'howItWorks'}
-                src={this.props.hover.howItWorks ? '/static/images/how-it-works-green.svg' : '/static/images/how-it-works.svg'}
+                src={
+                  this.props.hover.howItWorks
+                    ? '/static/images/how-it-works-green.svg'
+                    : '/static/images/how-it-works.svg'
+                }
                 content={this.props.summaryData.how_it_works}
                 hover={this.props.hover}
               />
             </articles>
           </Grid>
-          <Grid item xs={12}>
+          <Grid item xs={10}>
             <articles>
               {this.props.summaryData.precautions &&
                 <TableContent
                   itemKey={'precautions'}
                   hover={this.props.hover}
                   title={'Precautions'}
-                  src={this.props.hover.precautions ? '/static/images/precautions-green.svg' : '/static/images/precautions.svg'}
+                  src={
+                    this.props.hover.precautions
+                      ? '/static/images/precautions-green.svg'
+                      : '/static/images/precautions.svg'
+                  }
                   content={this.props.summaryData.precautions}
-                />
-              }
+                />}
             </articles>
           </Grid>
         </Grid>

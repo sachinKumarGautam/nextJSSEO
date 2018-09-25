@@ -76,6 +76,7 @@ class HomePageWrapper extends Component {
           <HealthManagementSection />
           <MembershipCardDetail
             incrementCartItemLoading={this.props.incrementCartItemLoading}
+            updateShowNoCartIdDialogFlag={this.props.updateShowNoCartIdDialogFlag}
             cartState={this.props.cartState}
           />
           <ArticleSection

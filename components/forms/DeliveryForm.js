@@ -71,7 +71,7 @@ class DeliveryForm extends React.Component {
     const prevPropsFullName = prevProps.customerState.payload.full_name
     const prevPropsMobile = prevProps.customerState.payload.mobile
 
-    if(fullName !== prevPropsFullName || mobile !== prevPropsMobile){
+    if (fullName !== prevPropsFullName || mobile !== prevPropsMobile) {
       this.props.updateAddressFormValue(
         this.props.deliveryDetailsState,
         'full_name',
@@ -83,9 +83,7 @@ class DeliveryForm extends React.Component {
         this.props.customerState.payload.mobile
       )
     }
-    
   }
-
 
   onPincodeInput (handleChange, event) {
     if (event.target.value.length > 6) return

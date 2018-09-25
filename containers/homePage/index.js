@@ -13,7 +13,8 @@ import {
   incrementCartItemLoading,
   uploadPrescriptionLoading,
   resetCartItemErrorState,
-  resetUploadPrescriptionError
+  resetUploadPrescriptionError,
+  updateShowNoCartIdDialogFlag
 } from '../cartDetails/cartActions'
 
 class HomePageWrapper extends Component {
@@ -33,6 +34,7 @@ class HomePageWrapper extends Component {
           resetCartItemErrorState={this.props.actions.resetCartItemErrorState}
           resetUploadPrescriptionError={this.props.actions.resetUploadPrescriptionError}
           resetSearchMedicineState={this.props.actions.resetSearchMedicineState}
+          updateShowNoCartIdDialogFlag={this.props.actions.updateShowNoCartIdDialogFlag}
         />
       </div>
     )
@@ -48,7 +50,8 @@ function mapDispatchToProps (dispatch) {
         uploadPrescriptionLoading,
         resetCartItemErrorState,
         resetUploadPrescriptionError,
-        resetSearchMedicineState
+        resetSearchMedicineState,
+        updateShowNoCartIdDialogFlag
       },
       dispatch
     )

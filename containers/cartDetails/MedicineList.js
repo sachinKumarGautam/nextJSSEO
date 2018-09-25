@@ -47,7 +47,8 @@ const styles = theme => ({
     display: 'flex',
     flexDirection: 'row',
     marginRight: theme.spacing.unit * 3,
-    justifyContent: 'flex-end'
+    justifyContent: 'flex-end',
+    alignItems: 'center'
   },
   deliveryTat: {
     ...theme.typography.body3,
@@ -142,9 +143,7 @@ class MedicineList extends Component {
                         customStyle={this.props.classes.fabProgress}
                       />
                     </div>
-                    <Typography
-                      className={this.props.classes.cartAmountWrapper}
-                    >
+                    <Typography>
                       {cartItem.quantity}
                     </Typography>
                     <div
