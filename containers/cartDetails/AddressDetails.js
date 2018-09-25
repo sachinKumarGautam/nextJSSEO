@@ -44,26 +44,26 @@ const AddressDetails = props => (
           <Grid item xs={6} className={props.classes.addressWrapper}>
             <ActivityIndicator
               isLoading={
-                  deliveryDetail.id === props.inProgressAddressId
-                    ? props.checkPincodeState.isLoading ||
+                deliveryDetail.id === props.inProgressAddressId
+                  ? props.checkPincodeState.isLoading ||
                         props.shippingAddressDetails.isLoading
-                    : false
-                }
+                  : false
+              }
               LoaderComp={
                 <CommonSpinner
                   customStyle={props.classes.spinnerCustomStyle}
                   thickness={3}
                   size={25}
-                  />
-                }
+                />
+              }
               bottomLoader
-              >
+            >
               <AddressDetailsCard
                 deliveryDetail={deliveryDetail}
                 checkPincodeServiceble={props.checkPincodeServiceble}
                 addressIdSelected={props.addressIdSelected}
                 isCartPage={props.isCartPage}
-                />
+              />
             </ActivityIndicator>
           </Grid>
         )

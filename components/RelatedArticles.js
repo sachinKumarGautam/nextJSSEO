@@ -5,8 +5,6 @@ import Typography from '@material-ui/core/Typography'
 
 import ArticleCard from './ArticleCard'
 
-import Router from 'next/router'
-
 const styles = theme => {
   return {
     relatedArticlesWrapper: {
