@@ -1,5 +1,6 @@
 const initialState = {
   payload: [],
+  isEdit: false,
   patient: {
     full_name: '',
     gender: '',

@@ -302,6 +302,7 @@ class OrderSummary extends React.Component {
           patientDetails={this.props.classes.patientDetails}
           updatePatientFormValue={this.props.updatePatientFormValue}
           resetPatientSelected={this.props.resetPatientSelected}
+          resetIsEditFlag={this.props.resetIsEditFlag}
         />
         <AddressDetailsExpansionPanel
           expanded={this.state.expanded}

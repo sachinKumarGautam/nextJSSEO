@@ -8,7 +8,8 @@ import {
   SUBMIT_PATIENT_FAILURE,
   RESET_PATIENT_SELECTED,
   RESET_PATIENT_FORM,
-  UPDATE_PATIENT_FORM_VALUE
+  UPDATE_PATIENT_FORM_VALUE,
+  RESET_IS_EDIT_FLAG
 } from './patientDetailsActionTypes'
 
 /**
@@ -70,7 +71,8 @@ export function savePatientSelected (patientDetailsState, patientDetail) {
   return {
     type: SAVE_PATIENT_SELECTED,
     patientDetailsState,
-    patientDetail: patientDetail
+    patientDetail: patientDetail,
+    isEdit: true
   }
 }
 
@@ -159,5 +161,13 @@ export function updatePatientFormValue (patientDetailsState, name, value) {
     patientDetailsState,
     name,
     value
+  }
+}
+
+export function resetIsEditFlag (patientDetailsState) {
+  return {
+    type: RESET_IS_EDIT_FLAG,
+    patientDetailsState,
+    isEdit: false
   }
 }

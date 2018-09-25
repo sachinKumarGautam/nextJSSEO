@@ -17,7 +17,8 @@ import {
   submitPatientDetailsLoading,
   resetPatientSelected,
   updatePatientFormValue,
-  resetPatientForm
+  resetPatientForm,
+  resetIsEditFlag
 } from '../containers/patientDetails/patientDetailsActions'
 
 // page title
@@ -79,6 +80,7 @@ class PatientDetails extends React.Component {
               getPatientDetailsListLoading={this.props.actions.getPatientDetailsListLoading}
               resetPatientSelected={this.props.actions.resetPatientSelected}
               resetPatientForm={this.props.actions.resetPatientForm}
+              resetIsEditFlag={this.props.actions.resetIsEditFlag}
               updatePatientFormValue={this.props.actions.updatePatientFormValue}
             />
           </Paper>
@@ -105,6 +107,7 @@ function mapDispatchToProps (dispatch) {
         submitPatientDetailsLoading,
         resetPatientSelected,
         resetPatientForm,
+        resetIsEditFlag,
         updatePatientFormValue
       },
       dispatch
