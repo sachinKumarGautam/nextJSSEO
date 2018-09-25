@@ -144,6 +144,7 @@ class Main extends Component {
                 }
                 checkPincodeState={this.props.checkPincodeState}
                 resetErrorState={this.props.resetErrorState}
+                globalErrorState={this.props.globalErrorState}
               />
             </div>
           </div>

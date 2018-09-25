@@ -80,6 +80,7 @@ class PatientDetails extends React.Component {
               resetPatientSelected={this.props.actions.resetPatientSelected}
               resetPatientForm={this.props.actions.resetPatientForm}
               updatePatientFormValue={this.props.actions.updatePatientFormValue}
+              globalErrorState={this.props.globalErrorState}
             />
           </Paper>
         </div>
@@ -92,7 +93,8 @@ function mapStateToProps (state) {
   return {
     cartState: state.cartState,
     patientDetailsState: state.patientDetailsState,
-    customerState: state.customerState
+    customerState: state.customerState,
+    globalErrorState: state.globalErrorState
   }
 }
 

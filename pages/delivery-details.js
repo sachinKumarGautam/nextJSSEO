@@ -88,6 +88,7 @@ class DeliveryDetails extends React.Component {
               resetDeliveryAddressSelected={this.props.actions.resetDeliveryAddressSelected}
               getDeliveryDetailsListLoading={this.props.actions.getDeliveryDetailsListLoading}
               resetErrorState={this.props.actions.resetErrorState}
+              globalErrorState={rthis.props.globalErrorState}
             />
           </Paper>
         </div>
@@ -101,7 +102,8 @@ function mapStateToProps (state) {
     cartState: state.cartState,
     deliveryDetailsState: state.deliveryDetailsState,
     customerState: state.customerState,
-    checkPincodeState: state.checkPincodeState
+    checkPincodeState: state.checkPincodeState,
+    globalErrorState: state.globalErrorState
   }
 }
 

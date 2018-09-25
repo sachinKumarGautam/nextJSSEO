@@ -49,7 +49,8 @@ import {
   getDeliveryDetailsListLoading,
   submitDeliveryDetailsLoading,
   updateAddressFormValue,
-  getLocalityDetailListLoading
+  getLocalityDetailListLoading,
+  resetDeliveryAddressSelected
 } from '../deliveryDetails/deliveryDetailsActions'
 
 import {
@@ -320,6 +321,8 @@ class CartDetailsWrapper extends Component {
                   }
                   updatePatientFormValue={this.props.actions.updatePatientFormValue}
                   resetPatientSelected={this.props.actions.resetPatientSelected}
+                  resetDeliveryAddressSelected={this.props.actions.resetDeliveryAddressSelected}
+                  globalErrorState={this.props.globalErrorState}
                 />
               </section>
             </Grid>
@@ -423,7 +426,8 @@ function mapDispatchToProps (dispatch) {
         updateLassuredExpressFlag,
         resetPincodeState,
         updatePatientFormValue,
-        resetPatientSelected
+        resetPatientSelected,
+        resetDeliveryAddressSelected
       },
       dispatch
     )

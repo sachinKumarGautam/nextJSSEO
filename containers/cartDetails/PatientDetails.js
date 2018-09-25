@@ -33,6 +33,7 @@ const PatientDetails = props => (
         submitPatientDetailsLoading={props.submitPatientDetailsLoading}
         updatePatientFormValue={props.updatePatientFormValue}
         isEdit={'false'}
+        globalErrorState={props.globalErrorState}
       />
     </Grid>
     {props.patientDetailsState.payload.map(patientDetail => {

@@ -50,6 +50,7 @@ class SnackbarErrorMessage extends Component {
   }
 
   render () {
+    console.log(this.props)
     return (
       <div>
         <Snackbar
