@@ -128,6 +128,9 @@ class OTPForm extends React.Component {
       loginState
       //   closeLoginModal
     } = this.props
+    // const otpApiError =
+    // const otpError = errors.otp ? error.otp : loginState.errorStateVerifyOtp.error
+    console.log('otp error', errors.otp)
     return (
       <form onSubmit={handleSubmit}>
         <FormControl
