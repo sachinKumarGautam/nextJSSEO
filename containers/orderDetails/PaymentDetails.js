@@ -14,7 +14,7 @@ const styles = theme => ({
   },
   placedOnText: {
     fontSize: theme.spacing.unit * 1.75,
-    marginLeft: theme.spacing.unit * 3.75,
+    marginLeft: theme.spacing.unit * 5.625,
     color: theme.palette.customGrey.grey500
   },
   placeOn: {
@@ -35,7 +35,7 @@ const styles = theme => ({
   },
   paymentText: {
     fontSize: theme.spacing.unit * 1.75,
-    marginLeft: theme.spacing.unit * 3.75,
+    marginLeft: theme.spacing.unit * 2.5,
     color: theme.palette.customGrey.grey500
   }
 })

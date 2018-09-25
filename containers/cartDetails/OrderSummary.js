@@ -14,7 +14,7 @@ import {
   SELECT_PATIENT,
   SELECT_ADDRESS
 } from '../../containers/messages/cartMessages'
-import { PLEASE_LOGIN } from '../../containers/messages/commonMsg'
+
 import { SNACK_BAR_DURATION_3000 } from '../../components/constants/Constants'
 
 const styles = theme => ({

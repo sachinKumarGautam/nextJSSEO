@@ -15,6 +15,7 @@ import SnackbarErrorMessage
   from '../../components/activityIndicator/error/SnackbarErrorMessage'
 import debounce from 'lodash.debounce'
 import { modifiyMedicineList } from '../../utils/common'
+import MedicineNotAvailable from './MedicineNotAvailable'
 
 const styles = theme => ({
   root: {
@@ -136,7 +137,7 @@ function renderInput (inputProps) {
           root: classes.searchButton
         }}
         onClick={
-          InputProps.inputValue
+          InputProps.inputValue.length > 3
             ? inputProps.onSearchClick.bind(this, InputProps.inputValue)
             : null
         }
@@ -308,31 +309,35 @@ class SearchMedicine extends React.Component {
                 })}
                 {isOpen
                   ? <Paper className={classes.paper} square>
-                    <ul
-                      {...getMenuProps()}
-                      className={classes.searchContentWrapper}
-                    >
-                      {modifiyMedicineList(
-                        searchMedicineResult,
-                        cartItems
-                      ).map((suggestion, index) =>
-                        renderSuggestion({
-                          suggestion,
-                          index,
-                          itemProps: getItemProps({
-                            item: suggestion.name
-                          }),
-                          highlightedIndex,
-                          selectedItem,
-                          onSelectItem: this.onSelectItem,
-                          searchItemStyle: classes.searchItem,
-                          highlightedSearchItem: `${classes.searchItem} ${classes.highlightedSearchItem}`,
-                          selectedSearchItem: `${classes.searchItem} ${classes.selectedSearchItem}`,
-                          checkPincodeState,
-                          addToCartHandler
-                        })
-                      )}
-                    </ul>
+                    {!searchMedicineResult.length &&
+                        inputValue.length > 3 &&
+                        !searchMedicineIsLoading
+                        ? <MedicineNotAvailable />
+                        : <ul
+                          {...getMenuProps()}
+                          className={classes.searchContentWrapper}
+                          >
+                          {modifiyMedicineList(
+                              searchMedicineResult,
+                              cartItems
+                            ).map((suggestion, index) =>
+                              renderSuggestion({
+                                suggestion,
+                                index,
+                                itemProps: getItemProps({
+                                  item: suggestion.name
+                                }),
+                                highlightedIndex,
+                                selectedItem,
+                                onSelectItem: this.onSelectItem,
+                                searchItemStyle: classes.searchItem,
+                                highlightedSearchItem: `${classes.searchItem} ${classes.highlightedSearchItem}`,
+                                selectedSearchItem: `${classes.searchItem} ${classes.selectedSearchItem}`,
+                                checkPincodeState,
+                                addToCartHandler
+                              })
+                            )}
+                        </ul>}
                   </Paper>
                   : null}
               </div>

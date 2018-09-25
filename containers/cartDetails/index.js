@@ -61,8 +61,7 @@ import {
   checkPincodeLoading,
   resetPincodeState
 } from '../location/pincode/pincodeAction'
-import PlaceOrderLoader
-  from '../../components/activityIndicator/loader/PlaceOrderLoader'
+
 import {
   SWITCH_PATIENT_DIALOG_TITLE,
   SWITCH_PATIENT_DIALOG_CONTENT
