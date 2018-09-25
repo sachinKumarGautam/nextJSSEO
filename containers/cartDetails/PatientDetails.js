@@ -32,7 +32,7 @@ const PatientDetails = props => (
         customerState={props.customerState}
         submitPatientDetailsLoading={props.submitPatientDetailsLoading}
         updatePatientFormValue={props.updatePatientFormValue}
-        isEdit={'false'}
+        isEdit={props.patientDetailsState.isEdit}
       />
     </Grid>
     {props.patientDetailsState.payload.map(patientDetail => {

@@ -223,12 +223,6 @@ export default withStyles(styles)(
       gender: Yup.string().required(GENDER_REQUIRED)
     }),
     handleSubmit: (values, { props, setSubmitting }) => {
-      let isEdit = false
-
-      if (props.patientFormState.patient.full_name) {
-        isEdit = true
-      }
-
       props.onSubmit(
         props.patientFormState,
         props.customerId,
@@ -236,7 +230,7 @@ export default withStyles(styles)(
         props.closeModal,
         values,
         props.isCartPage,
-        isEdit
+        props.isEdit
       )
     },
     displayName: 'PatientForm' // helps with React DevTools
