@@ -132,7 +132,6 @@ class Coupon extends Component {
         ''
       )
     }
-    this.props.resetCouponDetail()
   }
 
   onChange (event) {
@@ -144,8 +143,8 @@ class Coupon extends Component {
 
   componentDidUpdate (prevProps) {
     if ((this.props.cartState.couponDetail.isCouponApplied !==
-    prevProps.cartState.couponDetail.isCouponApplied) &&
-    this.props.cartState.couponDetail.isCouponApplied) {
+      prevProps.cartState.couponDetail.isCouponApplied) &&
+      this.props.cartState.couponDetail.isCouponApplied) {
       this.setState({
         open: false
       })
@@ -192,6 +191,7 @@ class Coupon extends Component {
               fullWidth
               value={this.props.cartState.couponDetail.couponCode}
               onChange={this.onChange.bind(this)}
+              onKeyPress={this.onClickOfApply.bind(this)}
             />
             {
               this.props.cartState.couponDetail.errorState.isError

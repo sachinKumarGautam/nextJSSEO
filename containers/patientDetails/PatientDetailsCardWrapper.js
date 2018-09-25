@@ -40,6 +40,7 @@ class PatientDetailsCardWrapper extends Component {
                 <PatientDetailsCard
                   openPatientFormModal={this.props.openPatientFormModal}
                   patientDetail={patientDetail}
+                  patientWrapper={this.props.patientWrapper}
                 />
               </Grid>
             )

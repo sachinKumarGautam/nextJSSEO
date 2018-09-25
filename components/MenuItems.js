@@ -96,13 +96,13 @@ class MenuItems extends Component {
           className={menuStyle}
           onClick={this.redirectToPath.bind(this, REFILL_PATIENTS)}
         >
-          Refill Past Medicines
+          Past Medicines
         </MenuItem>
         <MenuItem
           className={menuStyle}
           onClick={this.redirectToPath.bind(this, CARE_POINTS)}
         >
-          Care Points / Care Points +
+          Care Points
         </MenuItem>
         {/* {!this.props.isSideMenu &&
           <MenuItem className={menuStyle}>Content</MenuItem>}

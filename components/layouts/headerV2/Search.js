@@ -9,7 +9,7 @@ import { getReplacedString } from '../../../utils/replaceConstants'
 
 const styles = theme => {
   return {
-    orTextStyle: {
+    textStyle: {
       ...theme.typography.caption,
       color: theme.palette.secondary.main,
       fontWeight: theme.typography.fontWeightBold,
@@ -68,11 +68,20 @@ const styles = theme => {
 
 class Search extends Component {
   onImageSelection (event) {
-    this.props.uploadPrescriptionLoading(
-      this.props.cartState,
-      event.target.files[0],
-      true
-    )
+    if (!this.props.cartState.payload.uid) {
+      const isShowNoCartIdDialog = true
+
+      this.props.updateShowNoCartIdDialogFlag(
+        this.props.cartState,
+        isShowNoCartIdDialog
+      )
+    } else {
+      this.props.uploadPrescriptionLoading(
+        this.props.cartState,
+        event.target.files[0],
+        true
+      )
+    }
   }
 
   componentDidUpdate (prevProps) {
@@ -95,7 +104,10 @@ class Search extends Component {
           cartState={this.props.cartState}
           resetSearchMedicineState={this.props.resetSearchMedicineState}
         />
-        <Typography variant='body1' className={this.props.classes.orTextStyle}>
+        <Typography
+          variant='body1'
+          className={this.props.orTextStyle ? this.props.orTextStyle : this.props.classes.textStyle}
+        >
           OR
         </Typography>
         <input

@@ -20,7 +20,8 @@ const styles = theme => ({
     color: theme.palette.customGrey.grey500
   },
   imageStyle: {
-    marginTop: theme.spacing.unit
+    marginTop: theme.spacing.unit,
+    marginLeft: theme.spacing.unit * 1.75
   }
 })
 

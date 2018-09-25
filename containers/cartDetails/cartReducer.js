@@ -1007,6 +1007,12 @@ export default function cartReducer (state = initialState, action) {
         isLAssuredLExpressAlertOpen: action.isLAssuredLExpressAlertOpen
       }
 
+    case cartActionTypes.UPDATE_SHOW_NO_CART_ID_DIALOG_FLAG:
+      return {
+        ...state,
+        isShowNoCartIdDialog: action.isShowNoCartIdDialog
+      }
+
     default:
       return state
   }
