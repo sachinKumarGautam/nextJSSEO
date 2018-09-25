@@ -124,10 +124,15 @@ class MedicineList extends Component {
                   <div className={this.props.classes.buttonWrapper}>
 
                     <div
-                      onClick={this.props.decrementCartItem.bind(
-                        this,
-                        cartItem
-                      )}
+                      onClick={
+                        quantityStatus !== 'decrease' && !cartItem.isLoading
+                          ? (
+                            this.props.decrementCartItem.bind(
+                              this,
+                              cartItem
+                            )
+                          ) : null
+                      }
                       className={this.props.classes.iconButton}
                     >
                       <img
@@ -148,10 +153,15 @@ class MedicineList extends Component {
                     </Typography>
                     <div
                       className={this.props.classes.iconButton}
-                      onClick={this.props.incrementCartItem.bind(
-                        this,
-                        cartItem
-                      )}
+                      onClick={
+                        quantityStatus !== 'increase' && !cartItem.isLoading
+                          ? (
+                            this.props.incrementCartItem.bind(
+                              this,
+                              cartItem
+                            )
+                          ) : null
+                      }
                     >
                       <img
                         className={this.props.classes.buttonImage}
