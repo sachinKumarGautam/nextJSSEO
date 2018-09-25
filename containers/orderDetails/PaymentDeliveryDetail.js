@@ -83,7 +83,7 @@ class PaymentDeliveryDetail extends Component {
         {this.props.serviceType === SERVICE_TYPE_LFASSURED &&
           <div className={this.props.classes.textWrapper}>
             <img
-              src='/static/images/shape.svg'
+              src='/static/images/assured-service.svg'
               className={this.props.classes.rxImageStyle}
             />
             <Typography

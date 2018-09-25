@@ -94,6 +94,7 @@ export function getCartDetailsSuccess (
     source_type: result.source_type,
     delivery_option: result.delivery_option,
     service_type: result.service_type,
+    seller_detail: result.seller_detail,
     available_delivery_option: result.available_delivery_option,
     preferred_delivery_option: result.preferred_delivery_option
   }
@@ -149,7 +150,8 @@ export function putCartItemSuccess (cartState, result) {
     total_mrp: result.total_mrp,
     total_payable_amount: result.total_payable_amount,
     total_sale_price: result.total_sale_price,
-    total_tax_amount: result.total_tax_amount
+    total_tax_amount: result.total_tax_amount,
+    seller_detail: result.seller_detail
   }
 }
 
@@ -211,6 +213,7 @@ export function savePatientToCartSuccess (cartState, patient, result) {
     patient: patient,
     patient_full_name: result.patient_full_name,
     payment_channels: result.payment_channels,
+    seller_detail: result.seller_detail,
     isLoading: false
   }
 }
@@ -257,7 +260,8 @@ export function saveDeliveryAddressToCartSuccess (cartState, result) {
     preferred_delivery_option: result.preferred_delivery_option,
     delivery_option: result.delivery_option,
     service_type: result.service_type,
-    urgent_delivery_charge: result.urgent_delivery_charge
+    urgent_delivery_charge: result.urgent_delivery_charge,
+    seller_detail: result.seller_detail
   }
 }
 
@@ -297,7 +301,8 @@ export function cartTransferSuccess (
     cart_prescriptions: cartPrescriptions,
     doctor_callback: payload.doctor_callback,
     is_cart_transfered: true,
-    source_type: payload.source_type
+    source_type: payload.source_type,
+    seller_detail: result.seller_detail
   }
 }
 

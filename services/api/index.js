@@ -122,11 +122,11 @@ const registerCustomer$ = data =>
     body: data
   })
 
-const searchMedicine$ = (inputValue, facilityCode, pageNumber, pageSize) =>
+const searchMedicine$ = (queryString) =>
   makeAjaxRequest({
     method: 'GET',
     url: fetchUrl('catalog', 'medicine/search', 'QUERY_STRING', {
-      query_string: `q=${inputValue}&facility-code=${facilityCode}&size=${pageSize}&page=${pageNumber}`
+      query_string: queryString
     })
   })
 

@@ -35,7 +35,7 @@ class TotalAmount extends Component {
         </Grid>
         <Grid item xs={4}>
           <Typography className={this.props.classes.totalAmount}>
-            Rs. {this.props.orderDetailsState.payload.total_sale_price}
+            &#8377; {this.props.orderDetailsState.payload.total_sale_price}
           </Typography>
         </Grid>
       </Grid>
