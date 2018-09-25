@@ -1,32 +1,31 @@
 import {
-  GET_BACKGROUND_IMAGES_LOADING,
-  GET_BACKGROUND_IMAGES_SUCCESS,
-  GET_BACKGROUND_IMAGES_FAILURE
+  GET_USER_REVIEW_LOADING,
+  GET_USER_REVIEW_SUCCESS,
+  GET_USER_REVIEW_FAILURE
 } from './homePageActionTypes'
 
 /**
- * Represents to the loading state to get the home page background images.
+ * Represents to the loading state to get the home page user review.
  * @param {object} homePageState - The object maintained for payload, loading and error state.
  */
-export function getBackGroundImagesLoading (homePageState, tagName) {
+export function getUserReviewLoading (homePageState) {
   return {
-    type: GET_BACKGROUND_IMAGES_LOADING,
+    type: GET_USER_REVIEW_LOADING,
     homePageState,
     isLoading: true,
     isError: false,
-    error: {},
-    tagName
+    error: {}
   }
 }
 
 /**
- * Represents to the success state to get the home page background images.
+ * Represents to the success state to get the home page user review.
  * @param {object} homePageState - The object maintained for payload, loading and error state.
  * @param {array} result - The home page background image payload obtained from the API response
  */
-export function getBackGroundImagesSuccess (homePageState, result) {
+export function getUserReviewSuccess (homePageState, result) {
   return {
-    type: GET_BACKGROUND_IMAGES_SUCCESS,
+    type: GET_USER_REVIEW_SUCCESS,
     homePageState,
     isLoading: false,
     payload: result
@@ -34,13 +33,13 @@ export function getBackGroundImagesSuccess (homePageState, result) {
 }
 
 /**
- * Represents to the error state to get the home page background images.
+ * Represents to the error state to get the home page user review.
  * @param {object} homePageState - The object maintained for payload, loading and error state.
  * @param {object} error - The error details when API throws an error
  */
-export function getBackGroundImagesFailure (homePageState, error) {
+export function getUserReviewFailure (homePageState, error) {
   return {
-    type: GET_BACKGROUND_IMAGES_FAILURE,
+    type: GET_USER_REVIEW_FAILURE,
     homePageState,
     isLoading: false,
     isError: true,

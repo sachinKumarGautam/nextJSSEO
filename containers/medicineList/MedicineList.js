@@ -12,9 +12,9 @@ import MultipleMedicineLoader
   from '../../components/activityIndicator/loader/medicineListLoader/MultipleMedicineLoader'
 import ActivityIndicator from '../../components/activityIndicator'
 
-import {
-  NO_MEDICINE_LIST
-} from '../messages/noDataMessage'
+import { modifiyMedicineList } from '../../utils/common'
+
+import { NO_MEDICINE_LIST } from '../messages/noDataMessage'
 
 const styles = theme => {
   return {
@@ -39,7 +39,10 @@ const styles = theme => {
       },
       borderBottom: `1px solid ${theme.palette.customGrey.grey100}`,
       paddingBottom: theme.spacing.unit * 2,
-      marginTop: theme.spacing.unit * 2
+      paddingTop: theme.spacing.unit * 2,
+      '&:hover': {
+        backgroundColor: theme.palette.customGrey.grey50
+      }
     },
     buttonRoot: {
       // backgroundColor: '#ffffff',
@@ -57,6 +60,9 @@ const styles = theme => {
       textAlign: 'center',
       marginTop: theme.spacing.unit * 1.25,
       fontWeight: theme.typography.fontWeightBold
+    },
+    listWrapperStyle: {
+      paddingTop: '0'
     }
   }
 }
@@ -64,9 +70,7 @@ const styles = theme => {
 class MedicineList extends React.Component {
   constructor (props) {
     super(props)
-    this.state = {
-      page: 0
-    }
+
     this.onClickOfShowMore = this.onClickOfShowMore.bind(this)
   }
 
@@ -77,7 +81,7 @@ class MedicineList extends React.Component {
         this.props.searchMedicineState,
         this.props.checkPincodeState.payload.id,
         this.props.productName,
-        this.state.page + 1, // page number
+        this.props.page + 1, // page number
         10, // page size,
         false // is header props is false
       )
@@ -85,15 +89,11 @@ class MedicineList extends React.Component {
       this.props.getRelatedMedicinesLoading(
         this.props.medicineListState,
         this.props.moleculeName, // pass salt name
-        this.state.page + 1, // page number
+        this.props.page + 1, // page number
         10, // page size,
         true
       )
     }
-
-    this.setState({
-      page: this.state.page + 1
-    })
 
     this.props.updateIsShowMore()
   }
@@ -104,8 +104,17 @@ class MedicineList extends React.Component {
       classes,
       checkPincodeState,
       addToCartHandler,
-      isLoading
+      isLoading,
+      cartState
     } = this.props
+    const cartItems = cartState.payload.cart_items.payload
+    const medicineListPagesCondition =
+      this.props.page + 1 !== this.props.medicineListState.totalPages
+    const searchMedicinePagesCondition =
+      this.props.page + 1 !== this.props.searchMedicineState.payload.totalPages
+    const showMoreCondition = this.props.moleculeName
+      ? medicineListPagesCondition
+      : searchMedicinePagesCondition
 
     return (
       <div className={classes.medicineListWrapper}>
@@ -124,36 +133,40 @@ class MedicineList extends React.Component {
         <Card elevation={1}>
           <ActivityIndicator
             isLoading={isLoading}
+            bottomLoader={!!this.props.page}
             LoaderComp={<MultipleMedicineLoader />}
           >
-            <CardContent>
-              {
-                medicineListState.length
-                  ? <ul className={classes.articleListWrapper}>
-                    {medicineListState.map(itemDetails => (
-                      <li className={classes.listItem}>
-                        <MedicineListDetails
-                          isLoading={isLoading}
-                          itemDetails={itemDetails}
-                          addToCartHandler={addToCartHandler}
-                          checkPincodeState={checkPincodeState}
-                        />
-                      </li>
-                    ))}
-                  </ul>
-                  : <Typography
-                    gutterBottom
-                    variant='body2'
-                    className={classes.noMedicineText}
-                  >
-                    {NO_MEDICINE_LIST}
-                  </Typography>
-              }
-
+            <CardContent className={classes.listWrapperStyle}>
+              {medicineListState.length && !isLoading
+                ? <ul className={classes.articleListWrapper}>
+                  {modifiyMedicineList(
+                    medicineListState,
+                    cartItems
+                  ).map(itemDetails => (
+                    <li className={classes.listItem}>
+                      <MedicineListDetails
+                        isLoading={isLoading}
+                        checkIfAlredyExistInCart={
+                          itemDetails.is_exist_in_cart
+                        }
+                        itemDetails={itemDetails}
+                        addToCartHandler={addToCartHandler}
+                        checkPincodeState={checkPincodeState}
+                      />
+                    </li>
+                  ))}
+                </ul>
+                : <Typography
+                  gutterBottom
+                  variant='body2'
+                  className={classes.noMedicineText}
+                >
+                  {NO_MEDICINE_LIST}
+                </Typography>}
             </CardContent>
           </ActivityIndicator>
         </Card>
-        {medicineListState.length
+        {medicineListState.length && showMoreCondition
           ? <div className={classes.buttonWrapper}>
             <Button
               size='medium'
@@ -170,8 +183,7 @@ class MedicineList extends React.Component {
               label={'Show more'}
             />
           </div>
-          : null
-        }
+          : null}
       </div>
     )
   }

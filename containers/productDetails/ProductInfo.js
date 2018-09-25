@@ -9,8 +9,11 @@ import ProductOverview from '../../components/ProductOverview'
 import ProductInfoNav from '../../components/ProductInfoNav'
 import CommonContentLoader
   from '../../components/activityIndicator/loader/CommonContentLoader'
+import ProductStatus from '../../components/ProductStatus'
 
 import ActivityIndicator from '../../components/activityIndicator'
+
+import { ACTIVE_STATUS } from '../../components/constants/Constants'
 
 /*
   Product name
@@ -35,6 +38,8 @@ class ProductInfo extends Component {
           <ProductName
             variant={'title'}
             name={productDetailsState.payload.name}
+            serviceType={productDetailsState.available_service_type}
+            deliveryOption={productDetailsState.available_delivery_option}
           />
           <ProductBrand
             variant={'subheading'}
@@ -49,6 +54,13 @@ class ProductInfo extends Component {
                 : ''
             }
           />
+          {
+            productDetailsState.payload.status !== ACTIVE_STATUS &&
+            <ProductStatus
+              variant={'caption'}
+              status={productDetailsState.payload.status}
+            />
+          }
           <ProductMolecule
             variant={'body1'}
             salts={productDetailsState.payload.salts}

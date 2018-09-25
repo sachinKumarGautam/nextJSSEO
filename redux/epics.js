@@ -11,9 +11,7 @@ import {
   getMembershipCodeLoading
 } from '../containers/user/customer/customerEpics'
 
-import {
-  getRelatedMedicines
-} from '../containers/medicineList/medicineListEpics'
+import { getRelatedMedicines } from '../containers/medicineList/medicineListEpics'
 
 import { getProductDetails } from '../containers/productDetails/productEpic'
 
@@ -32,9 +30,7 @@ import {
 
 import { getOrderListDetails } from '../containers/orderList/orderListEpics'
 
-import {
-  getPrescriptionList
-} from '../containers/prescription/prescriptionEpics'
+import { getPrescriptionList } from '../containers/prescription/prescriptionEpics'
 
 import { carePointsList } from '../containers/carePoint/carePointEpics'
 
@@ -55,7 +51,9 @@ import {
   submitOrderEpic,
   applyCouponCode,
   optDoctorCallback,
+  verifyPaymentEpic,
   optExpressDelivery,
+  paymentInitiateEpic,
   deleteCartState
 } from '../containers/cartDetails/cartEpics'
 
@@ -65,19 +63,16 @@ import { submitRefillDate } from '../containers/thankYou/thankYouEpics'
 // import * as actions from './actions'
 // import * as types from './actionTypes'
 
-import {
-  getPatientPastMedicineList
-} from '../containers/refillPatients/refillEpics'
+import { getPatientPastMedicineList } from '../containers/refillPatients/refillEpics'
 
-import { getBackGroungImages } from '../containers/homePage/homePageEpics'
+import { getUserReview } from '../containers/homePage/homePageEpics'
 
 import {
-  getOrderDetails
+  getOrderDetails,
+  getPaymentChannelsEpic
 } from '../containers/orderDetails/orderDetailsEpics'
 
-import {
-  getConstantsEpic
-} from '../components/constants/constantsEpic'
+import { getConstantsEpic } from '../components/constants/constantsEpic'
 
 export const rootEpic = combineEpics(
   getMoleculeSummary,
@@ -113,14 +108,17 @@ export const rootEpic = combineEpics(
   submitDeliveryDetails,
   submitRefillDate,
   getPatientPastMedicineList,
-  getBackGroungImages,
+  getUserReview,
   applyCouponCode,
   optDoctorCallback,
+  verifyPaymentEpic,
   checkReferralCode,
   getMembershipCodeLoading,
   getLocalityList,
   getOrderDetails,
+  getPaymentChannelsEpic,
   optExpressDelivery,
+  paymentInitiateEpic,
   deleteCartState,
   getConstantsEpic
 )

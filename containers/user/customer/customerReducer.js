@@ -85,6 +85,7 @@ export default function (state = initialState, action) {
           ...state.payload,
           id: action.id,
           full_name: action.full_name,
+          mobile: action.mobile,
           default_patient_id: action.default_patient_id,
           gender: action.gender,
           membership_code: {
@@ -223,6 +224,18 @@ export default function (state = initialState, action) {
           ...state.errorStateCustomerRegister,
           isError: action.isError,
           error: action.error
+        },
+        errorStateFetchCustomerDetails: initialState.errorStateFetchCustomerDetails,
+        isLoadingFetchCustomerDetails: initialState.isLoadingFetchCustomerDetails,
+        referral_code: {
+          ...state.referral_code,
+          isLoading: initialState.isLoading,
+          errorState: initialState.errorState
+        },
+        membership_code: {
+          ...state.membership_code,
+          isLoading: initialState.isLoading,
+          errorState: initialState.errorState
         }
       }
 

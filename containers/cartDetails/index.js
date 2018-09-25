@@ -12,8 +12,10 @@ import OrderSummary from './OrderSummary'
 import CartDetails from './CartDetails'
 
 import ActivityIndicator from '../../components/activityIndicator/index'
-import FullPageError from '../../components/activityIndicator/error/FullPageError'
-import SnackbarErrorMessage from '../../components/activityIndicator/error/SnackbarErrorMessage'
+import FullPageError
+  from '../../components/activityIndicator/error/FullPageError'
+import SnackbarErrorMessage
+  from '../../components/activityIndicator/error/SnackbarErrorMessage'
 
 import {
   updateIsCartOpenLoginFlag,
@@ -31,12 +33,16 @@ import {
   applyCouponCodeLoading,
   updateCouponCode,
   optForDoctorCallbackLoading,
+  verifyPaymentLoading,
+  updatePaymentFailureFlag,
   optForExpressDeliveryLoading,
   resetApiStateSubmitOrder,
   resetCouponDetail,
   resetSavePatientToCartError,
   resetSaveDeliveryAddressToCartError,
-  resetUploadPrescriptionError
+  resetUploadPrescriptionError,
+  deleteCartLoading,
+  updateLassuredExpressFlag
 } from './cartActions'
 
 import {
@@ -48,12 +54,25 @@ import {
 
 import {
   getPatientDetailsListLoading,
-  submitPatientDetailsLoading
+  submitPatientDetailsLoading,
+  updatePatientFormValue,
+  resetPatientSelected
 } from '../patientDetails/patientDetailsActions'
 
-import { checkPincodeLoading } from '../location/pincode/pincodeAction'
-import PlaceOrderLoader
-  from '../../components/activityIndicator/loader/PlaceOrderLoader'
+import {
+  checkPincodeLoading,
+  resetPincodeState
+} from '../location/pincode/pincodeAction'
+
+import {
+  SWITCH_PATIENT_DIALOG_TITLE,
+  SWITCH_PATIENT_DIALOG_CONTENT
+} from '../messages/refillPatientMessage'
+import RefillPatientDialogue from '../../components/RefillPatientDialogue'
+import FullPageMainLoader
+  from '../../components/activityIndicator/loader/FullPageMainLoader'
+
+import BulkOrderDialogue from './BulkOrderDialogue'
 
 /*
   bread crumbs
@@ -74,10 +93,19 @@ const styles = theme => ({
 class CartDetailsWrapper extends Component {
   constructor (props) {
     super(props)
+    this.state = {
+      open: false,
+      dialogTitle: '',
+      dialogContent: '',
+      selectedPatient: {},
+      openBulkOrderDialogue: false
+    }
     this.getErrorComponent = this.getErrorComponent.bind(this)
     this.tryAgain = this.tryAgain.bind(this)
     this.resetState = this.resetState.bind(this)
+    this.handleBulkOrderDialogue = this.handleBulkOrderDialogue.bind(this)
   }
+
   componentDidMount () {
     const cartUid = this.props.cartState.payload.uid
     this.props.actions.getCartDetailsLoading(this.props.cartState, cartUid)
@@ -89,17 +117,19 @@ class CartDetailsWrapper extends Component {
         this.props.customerState.payload.id // pass customer id
       )
 
-      this.props.actions.getDeliveryDetailsListLoading(
-        this.props.deliveryDetailsState,
-        this.props.customerState.payload.id // pass customer id
-      )
+      if (!this.props.loginState.isNewUser) {
+        this.props.actions.getDeliveryDetailsListLoading(
+          this.props.deliveryDetailsState,
+          this.props.customerState.payload.id // pass customer id
+        )
+      }
     }
   }
 
   componentDidUpdate (prevProps) {
     if (
       this.props.customerState.payload.id !==
-        prevProps.customerState.payload.id &&
+      prevProps.customerState.payload.id &&
       !this.props.cartState.orderResponse.payload.order_number
     ) {
       this.props.actions.getPatientDetailsListLoading(
@@ -107,12 +137,29 @@ class CartDetailsWrapper extends Component {
         this.props.customerState.payload.id // pass customer id
       )
 
-      this.props.actions.getDeliveryDetailsListLoading(
-        this.props.deliveryDetailsState,
-        this.props.customerState.payload.id // pass customer id
-      )
+      if (!this.props.loginState.isNewUser) {
+        this.props.actions.getDeliveryDetailsListLoading(
+          this.props.deliveryDetailsState,
+          this.props.customerState.payload.id // pass customer id
+        )
+      }
+    }
+
+    if (
+      (
+        prevProps.cartState.payload.excessive_ordered_quantity !==
+        this.props.cartState.payload.excessive_ordered_quantity) &&
+      this.props.cartState.payload.excessive_ordered_quantity
+    ) {
+      this.handleBulkOrderDialogue()
     }
   }
+
+  handleBulkOrderDialogue = () => (
+    this.setState({
+      openBulkOrderDialogue: !this.state.openBulkOrderDialogue
+    })
+  )
 
   tryAgain () {
     this.props.actions.getCartDetailsLoading(
@@ -121,19 +168,54 @@ class CartDetailsWrapper extends Component {
     )
   }
 
+  onClickOfPatient = selectedPatient => {
+    this.setState({
+      selectedPatient
+    })
+    this.setState({
+      open: true,
+      dialogTitle: SWITCH_PATIENT_DIALOG_TITLE,
+      dialogContent: SWITCH_PATIENT_DIALOG_CONTENT
+    })
+  }
+
+  handleClose = () => {
+    this.setState({
+      open: false
+    })
+  }
+
+  onClickOfOk = () => {
+    this.setState({
+      open: false
+    })
+    this.props.actions.deleteCartLoading(
+      this.props.cartState,
+      this.props.checkPincodeState.payload.source,
+      this.props.checkPincodeState.payload.id,
+      '',
+      this.state.selectedPatient,
+      this.props.addMedicine,
+      true
+    )
+  }
+
+  addMedicine () {
+    this.props.addToCartHandler(this.state.medicineName)
+  }
+
   resetState () {
     this.props.actions.resetSavePatientToCartError()
     this.props.actions.resetSaveDeliveryAddressToCartError()
     this.props.actions.resetUploadPrescriptionError()
+    this.props.actions.resetPincodeState()
   }
 
   getErrorComponent () {
     if (this.props.cartState.errorState.isError) {
       return (
         <FullPageError
-          error={
-            this.props.cartState.errorState.error
-          }
+          error={this.props.cartState.errorState.error}
           tryAgain={this.tryAgain}
         />
       )
@@ -149,7 +231,8 @@ class CartDetailsWrapper extends Component {
             this.props.cartState.payload.cart_items.errorState.error ||
             this.props.cartState.payload.is_doctor_callback.errorState.error ||
             this.props.cartState.payload.patient_details.errorState.error ||
-            this.props.cartState.payload.shipping_address_details.errorState.error
+            this.props.cartState.payload.shipping_address_details.errorState.error ||
+            this.props.checkPincodeState.errorState.error
           }
           resetState={this.resetState}
         />
@@ -166,11 +249,13 @@ class CartDetailsWrapper extends Component {
           isLoading={this.props.cartState.isLoading || submitOrderLoading}
         />
         {/* Full page loader for Submit order and it add success animation */}
-        <PlaceOrderLoader
+        {/* <PlaceOrderLoader
           isLoading={submitOrderLoading}
           orderNumber={this.props.cartState.orderResponse.payload.order_number}
-        />
+        /> */}
         <ActivityIndicator
+          isLoading={submitOrderLoading}
+          LoaderComp={<FullPageMainLoader />}
           isError={
             this.props.cartState.errorState.isError ||
             this.props.patientDetailsState.errorState.isError ||
@@ -181,18 +266,21 @@ class CartDetailsWrapper extends Component {
             this.props.cartState.payload.cart_items.errorState.isError ||
             this.props.cartState.payload.is_doctor_callback.errorState.isError ||
             this.props.cartState.payload.patient_details.errorState.isError ||
-            this.props.cartState.payload.shipping_address_details.errorState.isError
+            this.props.cartState.payload.shipping_address_details.errorState.isError ||
+            (this.props.checkPincodeState.errorState.isError && this.props.checkPincodeState.isDeliveryAssignment)
           }
           ErrorComp={this.getErrorComponent()}
           bottomError={!this.props.cartState.errorState.isError}
+          bottomLoader
         >
           <Grid
             container
-            className={submitOrderLoading ? classes.blurCartPage : ''}
+          // className={submitOrderLoading ? classes.blurCartPage : ''}
           >
             <Grid item xs={7}>
               <section>
                 <OrderSummary
+                  onClickOfPatient={this.onClickOfPatient}
                   loginState={this.props.loginState}
                   cartState={this.props.cartState}
                   customerState={this.props.customerState}
@@ -230,9 +318,19 @@ class CartDetailsWrapper extends Component {
                     this.props.actions.updateAddressFormValue
                   }
                   checkPincodeLoading={this.props.actions.checkPincodeLoading}
-                  getLocalityDetailListLoading={this.props.actions.getLocalityDetailListLoading}
-                  optForExpressDeliveryLoading={this.props.actions.optForExpressDeliveryLoading}
+                  getLocalityDetailListLoading={
+                    this.props.actions.getLocalityDetailListLoading
+                  }
+                  optForExpressDeliveryLoading={
+                    this.props.actions.optForExpressDeliveryLoading
+                  }
                   constantsState={this.props.constantsState}
+                  checkPincodeState={this.props.checkPincodeState}
+                  updateLassuredExpressFlag={
+                    this.props.actions.updateLassuredExpressFlag
+                  }
+                  updatePatientFormValue={this.props.actions.updatePatientFormValue}
+                  resetPatientSelected={this.props.actions.resetPatientSelected}
                 />
               </section>
             </Grid>
@@ -240,13 +338,16 @@ class CartDetailsWrapper extends Component {
               <section className={classes.stickyWrapper}>
                 <CartDetails
                   cartState={this.props.cartState}
+                  customerState={this.props.customerState}
                   incrementCartItemLoading={
                     this.props.actions.incrementCartItemLoading
                   }
                   decrementCartItemLoading={
                     this.props.actions.decrementCartItemLoading
                   }
-                  deleteCartItemLoading={this.props.actions.deleteCartItemLoading}
+                  deleteCartItemLoading={
+                    this.props.actions.deleteCartItemLoading
+                  }
                   resetCartState={this.props.actions.resetCartState}
                   applyCouponCodeLoading={
                     this.props.actions.applyCouponCodeLoading
@@ -254,10 +355,26 @@ class CartDetailsWrapper extends Component {
                   updateCouponCode={this.props.actions.updateCouponCode}
                   checkPincodeState={this.props.checkPincodeState}
                   resetCouponDetail={this.props.actions.resetCouponDetail}
+                  verifyPaymentLoading={this.props.actions.verifyPaymentLoading}
+                  updatePaymentFailureFlag={
+                    this.props.actions.updatePaymentFailureFlag
+                  }
                 />
               </section>
             </Grid>
           </Grid>
+          <RefillPatientDialogue
+            dialogTitle={this.state.dialogTitle}
+            dialogContent={this.state.dialogContent}
+            open={this.state.open}
+            handleClose={this.handleClose}
+            onClickOfOk={this.onClickOfOk}
+          />
+          <BulkOrderDialogue
+            cartState={this.props.cartState}
+            open={this.state.openBulkOrderDialogue}
+            handleClose={this.handleBulkOrderDialogue}
+          />
         </ActivityIndicator>
         {/* </ActivityIndicator> */}
       </div>
@@ -273,7 +390,8 @@ function mapStateToProps (state) {
     patientDetailsState: state.patientDetailsState,
     deliveryDetailsState: state.deliveryDetailsState,
     checkPincodeState: state.checkPincodeState,
-    constantsState: state.constantsState
+    constantsState: state.constantsState,
+    pastMedicineState: state.pastMedicineState
   }
 }
 
@@ -300,6 +418,8 @@ function mapDispatchToProps (dispatch) {
         applyCouponCodeLoading,
         updateCouponCode,
         optForDoctorCallbackLoading,
+        verifyPaymentLoading,
+        updatePaymentFailureFlag,
         updateAddressFormValue,
         getLocalityDetailListLoading,
         checkPincodeLoading,
@@ -308,7 +428,12 @@ function mapDispatchToProps (dispatch) {
         resetCouponDetail,
         resetSavePatientToCartError,
         resetSaveDeliveryAddressToCartError,
-        resetUploadPrescriptionError
+        resetUploadPrescriptionError,
+        deleteCartLoading,
+        updateLassuredExpressFlag,
+        resetPincodeState,
+        updatePatientFormValue,
+        resetPatientSelected
       },
       dispatch
     )

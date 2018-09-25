@@ -12,7 +12,7 @@ const styles = theme => ({
     fontSize: theme.spacing.unit * 2.25,
     fontWeight: theme.typography.fontWeightBold,
     textAlign: 'right',
-    paddingRight: theme.spacing.unit * 4.125
+    paddingRight: theme.spacing.unit * 3
   },
   totalAmountText: {
     fontSize: theme.spacing.unit * 2.25,
@@ -31,7 +31,7 @@ class TotalAmount extends Component {
         </Grid>
         <Grid item xs={4}>
           <Typography className={this.props.classes.totalAmount}>
-            ₹ {this.props.cartState.payload.total_sale_price}
+            ₹ {this.props.cartState.payload.total_payable_amount}
           </Typography>
         </Grid>
       </Grid>

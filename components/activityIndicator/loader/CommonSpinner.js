@@ -16,12 +16,12 @@ const styles = theme => ({
 })
 
 function CommonSpinner (props) {
-  const { classes, customStyle, size } = props
+  const { size } = props
   return (
     <CircularProgress
       className={props.customStyle}
       size={size || 50}
-      thickness={4}
+      thickness={props.thickness ? props.thickness : 4}
     />
   )
 }

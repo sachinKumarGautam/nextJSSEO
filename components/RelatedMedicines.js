@@ -12,15 +12,18 @@ import SideListItemsLoader from './activityIndicator/loader/SideListItemLoader'
 import ActivityIndicator from './activityIndicator'
 
 import Link from 'next/link'
-import ComponentSpecificError from './activityIndicator/error/ComponentSpecificError'
+import ComponentSpecificError
+  from './activityIndicator/error/ComponentSpecificError'
 
 import Router from 'next/router'
+import { modifiyMedicineList } from '../utils/common'
 
 const styles = theme => {
   return {
     title: {
       ...theme.typography.title,
-      color: theme.palette.customGrey.grey600
+      color: theme.palette.customGrey.grey600,
+      fontSize: theme.spacing.unit * 2.75
     },
     articleListWrapper: {
       listStyle: 'none',
@@ -61,7 +64,10 @@ class RelatedMedicines extends React.Component {
       3 // page size
     )
   }
+
   render () {
+    const medicineList = this.props.medicineList
+    const cartItems = this.props.cartState.payload.cart_items.payload
     return (
       <div className={this.props.classes.relatedMedicinesWrapper}>
         <Typography
@@ -86,10 +92,14 @@ class RelatedMedicines extends React.Component {
           >
             <CardContent>
               <ul className={this.props.classes.articleListWrapper}>
-                {this.props.medicineList.map((item, index) => (
+                {modifiyMedicineList(
+                  medicineList,
+                  cartItems
+                ).map((item, index) => (
                   <li className={this.props.classes.listItem}>
                     <RelatedMedicinesCard
                       checkPincodeState={this.props.checkPincodeState}
+                      checkIfAlredyExistInCart={item.is_exist_in_cart}
                       itemDetails={item}
                       addToCartHandler={this.props.addToCartHandler}
                     />

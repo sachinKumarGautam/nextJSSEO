@@ -16,11 +16,11 @@ const styles = theme => ({
     paddingBottom: theme.spacing.unit * 3,
     paddingLeft: theme.spacing.unit * 5,
     paddingRight: theme.spacing.unit * 3.5,
-    maxWidth: theme.breakpoints.values.lg,
-    minWidth: theme.breakpoints.values.md,
     margin: '0 auto',
-    marginTop: theme.spacing.unit * 12,
-    minHeight: theme.spacing.unit * 100
+    marginTop: theme.spacing.unit * 7.5,
+    minHeight: theme.spacing.unit * 100,
+    maxWidth: theme.breakpoints.values.lg,
+    minWidth: theme.breakpoints.values.md
   },
   title: {
     fontWeight: theme.typography.fontWeightBold
@@ -28,15 +28,32 @@ const styles = theme => ({
 })
 
 class OrderConfirmationWrapper extends React.Component {
+  static getInitialProps ({query}) {
+    return query
+  }
+
   render () {
     const { addToCartHandler } = this.props
+    const paymentCondition = (
+      this.props.paymentStatus === 'failed'
+        ? orderConfirmation.pendingTitle
+        : orderConfirmation.retryTitle
+    )
+
     return (
       <Layout
-        title={orderConfirmation.title}
+        title={
+          this.props.paymentStatus === 'success'
+            ? orderConfirmation.successTitle
+            : paymentCondition
+        }
         addToCartHandler={addToCartHandler}
       >
         <div className={this.props.classes.root}>
-          <ThankyouWrapper />
+          <ThankyouWrapper
+            queryParamPaymentStatus={this.props.paymentStatus}
+            orderId={this.props.id}
+          />
         </div>
       </Layout>
     )

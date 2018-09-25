@@ -20,9 +20,10 @@ const getCarePointsList$ = (customerId, cashType) =>
   makeAjaxRequest({
     method: 'GET',
     url: fetchUrl('', 'wallet/' + customerId + '/transaction', 'QUERY_STRING', {
-      query_string: cashType === 'all'
-        ? `size=10&page=0`
-        : `cash-type=${cashType}&size=100&page=0`
+      query_string:
+        cashType === 'all'
+          ? `size=10&page=0`
+          : `cash-type=${cashType}&size=100&page=0`
     })
   })
 
@@ -121,11 +122,11 @@ const registerCustomer$ = data =>
     body: data
   })
 
-const searchMedicine$ = (inputValue, facilityCode, pageNumber, pageSize) =>
+const searchMedicine$ = (queryString) =>
   makeAjaxRequest({
     method: 'GET',
     url: fetchUrl('catalog', 'medicine/search', 'QUERY_STRING', {
-      query_string: `q=${inputValue}&facility-code=${facilityCode}&size=${pageSize}&page=${pageNumber}`
+      query_string: queryString
     })
   })
 
@@ -253,10 +254,10 @@ const getPatientPastMedicineList$ = (patientId, facilityCode) =>
     )
   })
 
-const getSliderImages$ = tagName =>
+const getUserReview$ = tagName =>
   makeAjaxRequest({
     method: 'GET',
-    url: fetchUrl('account', 'offer/tag/' + tagName, 'GET_LIST')
+    url: fetchUrl('account', 'customer/review', 'CREATE')
   })
 
 const applyCouponForCart$ = (cartUid, couponCode) =>
@@ -319,19 +320,37 @@ const expressDelivery$ = (cartId, deliveryOption) =>
     )
   })
 
-const deleteCart$ = (cartUid) => (
+const verifyPayment$ = (orderId, body) =>
+  makeAjaxRequest({
+    method: 'POST',
+    url: fetchUrl('order', orderId + '/payment/verify', 'CREATE'),
+    body: body
+  })
+
+const paymentInitiate$ = body =>
+  makeAjaxRequest({
+    method: 'POST',
+    url: fetchUrl('order', 'payment/initiate', 'CREATE'),
+    body: body
+  })
+
+const getPaymentChannels$ = orderId =>
+  makeAjaxRequest({
+    method: 'GET',
+    url: fetchUrl('order', orderId + '/payment/channels', 'CREATE')
+  })
+
+const deleteCart$ = cartUid =>
   makeAjaxRequest({
     method: 'DELETE',
     url: fetchUrl('cart', cartUid, 'CREATE')
   })
-)
 
-const getConstants$ = () => (
+const getConstants$ = () =>
   makeAjaxRequest({
     method: 'GET',
     url: fetchUrl('config', 'app-constant', 'GET_LIST')
   })
-)
 
 export {
   getMoleculeSummary$,
@@ -362,9 +381,11 @@ export {
   submitDeliveryDetails$,
   submitRefillDate$,
   getPatientPastMedicineList$,
-  getSliderImages$,
+  getUserReview$,
   applyCouponForCart$,
   teleConsultation$,
+  verifyPayment$,
+  paymentInitiate$,
   editPatientDetails$,
   searchLocalityForPincode$,
   editDeliveryDetails$,
@@ -372,6 +393,7 @@ export {
   getMembershipCode$,
   getOrderDetails$,
   expressDelivery$,
+  getPaymentChannels$,
   deleteCart$,
   getConstants$
 }

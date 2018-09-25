@@ -22,27 +22,29 @@ const styles = theme => {
       }
     },
     paper: {
-      padding: theme.spacing.unit,
-      width: theme.spacing.unit * 25,
+      padding: theme.spacing.unit * 1.5,
+      maxWidth: theme.spacing.unit * 25,
       backgroundColor: `${theme.palette.customGrey.grey50} !important`,
       pointerEvents: 'auto !important',
       '&:after': {
-        borderRightColor: `${theme.palette.customGrey.grey50} !important`
+        borderBottomColor: `${theme.palette.customGrey.grey50} !important`
       },
       '&:hover': {
         visibility: 'visible !important',
         opacity: '1 !important'
       },
+      opacity: '1 !important',
       borderRadius: '4px'
     },
     popoverContent: {
-      fontSize: theme.typography.pxToRem(10),
+      fontSize: theme.typography.pxToRem(12),
       color: theme.palette.customGrey.grey500,
       marginBottom: theme.spacing.unit
     },
     popoverLink: {
       ...theme.typography.body3,
       color: theme.palette.primary.main,
+      fontSize: theme.typography.pxToRem(14),
       textDecoration: 'none'
     },
     horizontalItem: {
@@ -53,11 +55,13 @@ const styles = theme => {
   }
 }
 
-const PopoverContent = (props) => (
+const PopoverContent = props => (
   <div>
-    <Typography className={props.styles.popoverContent}>
-      {props.item.description ? props.item.description : ''}
-    </Typography>
+    {props.item.description
+      ? <Typography className={props.styles.popoverContent}>
+        {props.item.description}
+      </Typography>
+      : null}
     <Link
       as={`${MOLECULE_DETAILS}/${props.item.slug}`}
       href={`${MOLECULE_DETAILS}?id=${props.item.slug}`}
@@ -69,12 +73,13 @@ const PopoverContent = (props) => (
 
 class ProductMolecule extends Component {
   render () {
-    const {classes} = this.props
+    const { classes } = this.props
 
     return (
       <div className={classes.horizontalItem}>
-        {
-          this.props.salts && this.props.salts.length && this.props.salts.map((item, index) => {
+        {this.props.salts &&
+          this.props.salts.length &&
+          this.props.salts.map((item, index) => {
             let popperId = 'moleculeItem' + index
             return (
               <div>
@@ -92,18 +97,16 @@ class ProductMolecule extends Component {
                 <ReactTooltip
                   id={popperId}
                   effect='solid'
-                  place='right'
+                  place='bottom'
                   className={classes.paper}
-                  delayHide={1000}
-                  delayShow={1000}
+                  delayHide={250}
+                  delayShow={250}
                 >
                   <PopoverContent item={item} styles={classes} />
                 </ReactTooltip>
               </div>
             )
-          }
-          )
-        }
+          })}
       </div>
     )
   }

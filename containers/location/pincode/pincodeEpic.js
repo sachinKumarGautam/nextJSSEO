@@ -1,13 +1,27 @@
 import { of } from 'rxjs/observable/of'
 import { mergeMap, catchError, flatMap } from 'rxjs/operators'
 import { ofType } from 'redux-observable'
+
 import { CHECK_PINCODE_LOADING } from './pincodeActionTypes'
+
 import { checkPincodeSuccess, checkPincodeFailure } from './pincodeAction'
 import {
   updateAddressFormValue
 } from '../../deliveryDetails/deliveryDetailsActions'
+import {
+  updateLassuredExpressFlag,
+  saveDeliveryAddressToCartLoading
+} from '../../cartDetails/cartActions'
+
 import { checkPincode$ } from '../../../services/api'
 import http from '../../../services/api/ajaxWrapper'
+
+import {
+  SERVICE_TYPE_LFASSURED,
+  SERVICE_TYPE_NORMAL,
+  DELIVERY_OPTION_URGENT,
+  DELIVERY_OPTION_NORMAL
+} from '../../../components/constants/Constants'
 
 /**
  * Represents to the epic of get medicine list.
@@ -24,6 +38,7 @@ export function checkPincode (action$, store) {
       return http(checkPincode$(data.pincode)).pipe(
         flatMap(result => {
           if (data.isDeliveryAddress) {
+            // handling from delivery address form call
             return of(
               checkPincodeSuccess(checkPincodeState, result),
               updateAddressFormValue(
@@ -37,7 +52,34 @@ export function checkPincode (action$, store) {
                 result.body.payload.state
               )
             )
+          } else if (data.isCartAddressSelection) {
+            // handling from cart page while selecting address
+            const serviceType = result.body.payload.is_lc_assured_available
+              ? SERVICE_TYPE_LFASSURED
+              : SERVICE_TYPE_NORMAL
+
+            const deliveryOption = result.body.payload.is_urgent_dl_available
+              ? DELIVERY_OPTION_URGENT
+              : DELIVERY_OPTION_NORMAL
+
+            if (
+              (cartState.payload.service_type !== serviceType &&
+                cartState.payload.service_type === SERVICE_TYPE_LFASSURED) ||
+              (cartState.payload.delivery_option !== deliveryOption &&
+                cartState.payload.delivery_option === DELIVERY_OPTION_URGENT)
+            ) {
+              return of(
+                checkPincodeSuccess(checkPincodeState, result),
+                updateLassuredExpressFlag(cartState, {isDialogOpen: true})
+              )
+            } else {
+              return of(
+                checkPincodeSuccess(checkPincodeState, result),
+                saveDeliveryAddressToCartLoading(cartState, data.addressId)
+              )
+            }
           } else {
+            // default pincode handling
             setTimeout(() => {
               data.handleClose()
             }, 350)
@@ -58,7 +100,7 @@ export function checkPincode (action$, store) {
           }
         }),
         catchError(error => {
-          if (data.isDeliveryAddress) {
+          if (data.isDeliveryAddress || data.isCartAddressSelection) {
             return of(
               checkPincodeFailure(
                 checkPincodeState,

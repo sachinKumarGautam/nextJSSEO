@@ -29,11 +29,12 @@ export function getOrderListDetailsLoading (orderListState, customerId, page, si
  * @param {object} orderListState - The object maintained for payload, loading and error state.
  * @param {array} result - The order list details obtained from the API response
  */
-export function getOrderListDetailsSuccess (orderListState, result) {
+export function getOrderListDetailsSuccess (orderListState, result, totalPages) {
   return {
     type: GET_ORDER_LIST_DETAILS_SUCCESS,
     orderListState,
     isLoading: false,
+    totalPages: totalPages,
     payload: result
   }
 }

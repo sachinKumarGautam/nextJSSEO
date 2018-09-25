@@ -9,6 +9,7 @@ import { withStyles } from '@material-ui/core/styles'
 import AddDeliveryAddressButton from './AddDeliveryAddressButton'
 import DeliveryDetailForm from './DeliveryDetailsForm'
 import AddressDetailsCardWrapper from './AddressDetailsCardWrapper'
+import NoDeliveryAddress from '../../components/NoDeliveryAddress'
 
 const styles = theme => {
   return {
@@ -52,6 +53,11 @@ const styles = theme => {
     },
     addressDetailsCardWrapper: {
       padding: theme.spacing.unit * 1.25
+    },
+    addressWrapper: {
+      border: `1px solid ${theme.palette.customGrey.grey250}`,
+      padding: theme.spacing.unit * 2.5,
+      borderRadius: theme.spacing.unit * 0.5
     }
   }
 }
@@ -110,7 +116,7 @@ class Main extends Component {
               component='h1'
               className={this.props.classes.title}
             >
-              Address
+              Addresses
             </Typography>
             <div className={this.props.classes.buttonWrapper}>
               <AddDeliveryAddressButton
@@ -120,7 +126,9 @@ class Main extends Component {
               />
               <DeliveryDetailForm
                 isEdit={this.state.isEdit}
-                isAddNewAddressButtonClicked={this.state.isAddNewAddressButtonClicked}
+                isAddNewAddressButtonClicked={
+                  this.state.isAddNewAddressButtonClicked
+                }
                 onSubmit={this.props.submitDeliveryDetailsLoading}
                 openDeliveryFormDialog={this.state.openDeliveryFormDialog}
                 customerState={this.props.customerState}
@@ -135,22 +143,30 @@ class Main extends Component {
                   this.props.getLocalityDetailListLoading
                 }
                 checkPincodeState={this.props.checkPincodeState}
+                resetErrorState={this.props.resetErrorState}
               />
             </div>
           </div>
-          <AddressDetailsCardWrapper
-            openDeliveryFormModal={this.openDeliveryFormModal.bind(this)}
-            saveDeliveryAddressSelected={this.saveDeliveryAddressSelected.bind(this)}
-            isLoading={this.props.deliveryDetailsState.isLoading}
-            errorState={this.props.deliveryDetailsState.errorState}
-            payload={this.props.deliveryDetailsState.payload}
-            addressDetailsCardWrapper={
-              this.props.classes.addressDetailsCardWrapper
-            }
-            customerState={this.props.customerState}
-            getDeliveryDetailsListLoading={this.props.getDeliveryDetailsListLoading}
-            deliveryDetailsState={this.props.deliveryDetailsState}
-          />
+          {this.props.deliveryDetailsState.payload.length
+            ? <AddressDetailsCardWrapper
+              openDeliveryFormModal={this.openDeliveryFormModal.bind(this)}
+              saveDeliveryAddressSelected={this.saveDeliveryAddressSelected.bind(
+                this
+              )}
+              isLoading={this.props.deliveryDetailsState.isLoading}
+              errorState={this.props.deliveryDetailsState.errorState}
+              payload={this.props.deliveryDetailsState.payload}
+              addressDetailsCardWrapper={
+                this.props.classes.addressDetailsCardWrapper
+              }
+              customerState={this.props.customerState}
+              getDeliveryDetailsListLoading={
+                this.props.getDeliveryDetailsListLoading
+              }
+              deliveryDetailsState={this.props.deliveryDetailsState}
+              addressWrapper={this.props.classes.addressWrapper}
+            />
+            : <NoDeliveryAddress />}
         </CardContent>
       </Card>
     )

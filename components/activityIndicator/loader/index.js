@@ -22,7 +22,9 @@ class Loader extends React.Component {
       isLoading,
       text,
       thickness,
-      size
+      size,
+      className,
+      customLoaderText
     } = this.props
 
     if (isLoading) {
@@ -44,7 +46,7 @@ class Loader extends React.Component {
         default:
           return (
             <CommonSpinner
-              loaderStyle={loaderStyle}
+              customStyle={customStyle}
               isLoading={isLoading}
               className={className}
               text={text}

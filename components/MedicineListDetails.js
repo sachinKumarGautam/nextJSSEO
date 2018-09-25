@@ -10,7 +10,11 @@ import ProductPrice from './ProductPrice'
 import StrokePrice from './StrokePrice'
 import EstimatedPriceLabel from './EstimatedPriceLabel'
 import { PRODUCT_DETAILS } from '../routes/RouteConstant'
-import Button from './button/Button'
+import Button from './button'
+import AlreadyAdded from './AlreadyAdded'
+import ProductStatus from './ProductStatus'
+
+import { ACTIVE_STATUS } from './constants/Constants'
 
 const styles = theme => {
   return {
@@ -24,7 +28,8 @@ const styles = theme => {
       ...theme.typography.body3
     },
     customPackSize: {
-      ...theme.typography.body3
+      ...theme.typography.body3,
+      display: 'inline-block'
     },
     customPrice: {
       ...theme.typography.body1,
@@ -47,26 +52,27 @@ const styles = theme => {
       alignItems: 'stretch',
       justifyContent: 'space-between',
       marginLeft: theme.spacing.unit * 3,
-      marginRight: theme.spacing.unit * 3
+      marginRight: theme.spacing.unit * 3,
+      cursor: 'pointer'
     },
-    buttonRoot: {
-      border: `1px solid ${theme.palette.primary.main}`
-    },
-    buttonLabel: {
-      color: theme.palette.primary.main,
-      fontSize: theme.typography.body3.fontSize
-    },
+    // buttonLabel: {
+    //   color: theme.palette.primary.main,
+    //   fontSize: theme.typography.body3.fontSize
+    // },
+    // disabledButtonLabel: {
+    //   color: theme.palette.customGrey.grey300,
+    //   fontSize: theme.typography.body3.fontSize
+    // },
     buttonWrapperStyle: {
       marginTop: theme.spacing.unit,
-      float: 'right'
+      float: 'right',
+      minWidth: theme.spacing.unit * 10,
+      display: 'inline-block'
     },
     deliveryTat: {
       ...theme.typography.body3,
       color: theme.palette.customGrey.grey500,
       fontWeight: theme.typography.fontWeightBold
-    },
-    cursor: {
-      cursor: 'pointer'
     }
   }
 }
@@ -86,6 +92,7 @@ class MedicineListDetails extends React.Component {
         event.stopPropagation()
         this.props.addToCartHandler(this.props.itemDetails)
       } else {
+        event.stopPropagation()
         this.props.onClickOfPatient(this.props.itemDetails)
       }
     } else {
@@ -96,24 +103,23 @@ class MedicineListDetails extends React.Component {
 
   render () {
     const { props } = this
+    const { checkIfAlredyExistInCart } = props
     const city = this.props.checkPincodeState.payload.city
     return (
-      <div className={props.classes.medicineListContentWrapper}>
-        <Link
-          prefetch
-          href={`${PRODUCT_DETAILS}?id=${props.itemDetails.slug}&location=${city}`}
-          as={`${PRODUCT_DETAILS}/${props.itemDetails.slug}?location=${city}`}
-        >
-          <div
-            onClick={this.props.onSelectItem}
-            className={props.classes.cursor}
-          >
+      <Link
+        prefetch
+        href={`${PRODUCT_DETAILS}?id=${props.itemDetails.slug}&location=${city}`}
+        as={`${PRODUCT_DETAILS}/${props.itemDetails.slug}?location=${city}`}
+      >
+        <div className={props.classes.medicineListContentWrapper}>
+          <div>
             <ProductName
               variant={'body1'}
               name={props.itemDetails.name}
               customStyle={props.classes.customName}
+              serviceType={props.itemDetails.available_service_type}
+              deliveryOption={props.itemDetails.available_delivery_option}
             />
-
             {/* {props.isRefillMedicines && <RefillDueDays />} */}
             <ProductBrand
               variant={'caption'}
@@ -132,6 +138,13 @@ class MedicineListDetails extends React.Component {
                   : props.itemDetails.pack_size
               }
             />
+            {
+              props.itemDetails.status !== ACTIVE_STATUS &&
+              <ProductStatus
+                variant={'caption'}
+                status={props.itemDetails.status}
+              />
+            }
             {props.checkPincodeState.payload.pincode &&
               <Typography
                 gutterBottom
@@ -146,38 +159,37 @@ class MedicineListDetails extends React.Component {
                 days
               </Typography>}
           </div>
-        </Link>
-        <div>
-          <EstimatedPriceLabel
-            variant={'caption'}
-            customStyle={props.classes.customEstimatedLabel}
-            estimatePriceText={'*Est. Price '}
-          />
-          <ProductPrice
-            variant={'body1'}
-            customStyle={props.classes.customPrice}
-            sellingPrice={props.itemDetails.selling_price}
-          />
-          <StrokePrice
-            variant={'caption'}
-            customStyle={props.classes.customStrokePrice}
-            mrp={props.itemDetails.mrp}
-          />
-          <div className={props.classes.buttonWrapperStyle}>
-            <Button
-              variant='outlined'
-              classes={{
-                root: props.classes.buttonRoot,
-                label: props.classes.buttonLabel
-              }}
-              size='small'
-              color='primary'
-              onClick={this.addToCart} // this is coming from HOC
-              label={'Add To Cart'}
+          <div>
+            <EstimatedPriceLabel
+              variant={'caption'}
+              customStyle={props.classes.customEstimatedLabel}
+              estimatePriceText={'*Est. Price '}
             />
+            <ProductPrice
+              variant={'body1'}
+              customStyle={props.classes.customPrice}
+              sellingPrice={props.itemDetails.selling_price}
+            />
+            <StrokePrice
+              variant={'caption'}
+              customStyle={props.classes.customStrokePrice}
+              mrp={props.itemDetails.mrp}
+            />
+            <div className={props.classes.buttonWrapperStyle}>
+              {!checkIfAlredyExistInCart
+                ? <Button
+                  variant='outlined'
+                  size='small'
+                  color='primary'
+                  onClick={this.addToCart} // this is coming from HOC
+                  label={'Add To Cart'}
+                  disabled={props.itemDetails.status !== ACTIVE_STATUS}
+                />
+                : <AlreadyAdded />}
+            </div>
           </div>
         </div>
-      </div>
+      </Link>
     )
   }
 }

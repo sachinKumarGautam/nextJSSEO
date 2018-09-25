@@ -1,5 +1,12 @@
 import { of } from 'rxjs/observable/of'
-import { mergeMap, catchError, map, switchMap, flatMap } from 'rxjs/operators'
+import {
+  mergeMap,
+  catchError,
+  map,
+  switchMap,
+  flatMap,
+  debounceTime
+} from 'rxjs/operators'
 import { ofType } from 'redux-observable'
 import http from '../../services/api/ajaxWrapper'
 
@@ -17,6 +24,8 @@ import {
   SUBMIT_ORDER_LOADING,
   SUBMIT_COUPON_CODE_LOADING,
   OPT_DOCTOR_CALLBACK_LOADING,
+  VERIFY_PAYMENT_LOADING,
+  PAYMENT_INITIATE_LOADING,
   OPT_EXPRESS_DELIVERY_LOADING,
   DELETE_CART_LOADING
 } from './cartActionTypes'
@@ -45,13 +54,24 @@ import {
   applyCouponCodeFailure,
   optForDoctorCallbackSuccess,
   optForDoctorCallbackFailure,
+  verifyPaymentSuccess,
+  verifyPaymentFailure,
+  paymentInitiateSuccess,
+  paymentInitiateFailure,
   optForExpressDeliverySuccess,
   optForExpressDeliveryFailure,
+  redirectToOrderDetailsPage,
   deleteCartSuccess,
   deleteCartFailure,
   getAnonymousCartIdLoading,
-  savePatientToCartLoading
+  savePatientToCartLoading,
+  updateShowNoCartIdDialogFlag,
+  optForDoctorCallbackLoading
 } from './cartActions'
+
+import {
+  toggleAuthentication
+} from '../login/loginActions'
 
 import {
   getAnonymousCartId$,
@@ -66,9 +86,13 @@ import {
   submitOrder$,
   applyCouponForCart$,
   teleConsultation$,
+  verifyPayment$,
+  paymentInitiate$,
   expressDelivery$,
   deleteCart$
 } from '../../services/api'
+
+import { PAYMENT_GATEWAY } from '../../components/constants/paymentConstants'
 
 export function getAnonymousCartIdEpic (action$, store) {
   return action$.pipe(
@@ -78,8 +102,11 @@ export function getAnonymousCartIdEpic (action$, store) {
         getAnonymousCartId$(data.source, data.facility_code, data.source_type)
       ).pipe(
         flatMap(result => {
-          if (data.source_type === 'REFILL') {
+          const isShowNoCartIdDialog = false
+
+          if (data.isAssignPatientToCart) {
             return of(
+              updateShowNoCartIdDialogFlag(data.cartState, isShowNoCartIdDialog),
               getAnonymousCartIdSuccess(data.cartState, result.body.payload),
               savePatientToCartLoading(
                 data.cartState,
@@ -91,6 +118,7 @@ export function getAnonymousCartIdEpic (action$, store) {
             )
           } else {
             return of(
+              updateShowNoCartIdDialogFlag(data.cartState, isShowNoCartIdDialog),
               getAnonymousCartIdSuccess(data.cartState, result.body.payload)
             )
           }
@@ -119,10 +147,7 @@ export function getCartDetailsEpic (action$, store) {
   )
 }
 
-function cartApiLoadingHandling (
-  cartState,
-  medicineSelected
-) {
+function cartApiLoadingHandling (cartState, medicineSelected) {
   let cartItems = cartState.payload.cart_items.payload
 
   cartItems.forEach((cartMedicine, index) => {
@@ -145,12 +170,7 @@ function cartApiLoadingHandling (
     cart_items: cartItems
   }
 
-  return of(
-    putCartItemSuccess(
-      cartState,
-      payload
-    )
-  )
+  return of(putCartItemSuccess(cartState, payload))
 }
 
 function cartApiErrorHandling (cartState, medicineSelected, error) {
@@ -177,23 +197,14 @@ function cartApiErrorHandling (cartState, medicineSelected, error) {
     cart_items: cartItems
   }
 
-  return of(
-    putCartItemFailure(
-      cartState,
-      payload,
-      error
-    )
-  )
+  return of(putCartItemFailure(cartState, payload, error))
 }
 
 export function decrementCartItemLoadingEpic (action$, store) {
   return action$.pipe(
     ofType(DECREMENT_CART_ITEM_LOADING),
     mergeMap(data => {
-      return cartApiLoadingHandling(
-        data.cartState,
-        data.medicineSelected
-      )
+      return cartApiLoadingHandling(data.cartState, data.medicineSelected)
     })
   )
 }
@@ -201,6 +212,7 @@ export function decrementCartItemLoadingEpic (action$, store) {
 export function decrementCartItemEpic (action$, store) {
   return action$.pipe(
     ofType(DECREMENT_CART_ITEM_LOADING),
+    debounceTime(350),
     mergeMap(data => {
       let cartUid = data.cartState.payload.uid
 
@@ -230,10 +242,7 @@ export function incrementCartItemLoadingEpic (action$, store) {
   return action$.pipe(
     ofType(INCREMENT_CART_ITEM_LOADING),
     mergeMap(data => {
-      return cartApiLoadingHandling(
-        data.cartState,
-        data.medicineSelected
-      )
+      return cartApiLoadingHandling(data.cartState, data.medicineSelected)
     })
   )
 }
@@ -241,6 +250,7 @@ export function incrementCartItemLoadingEpic (action$, store) {
 export function incrementCartItemEpic (action$, store) {
   return action$.pipe(
     ofType(INCREMENT_CART_ITEM_LOADING),
+    debounceTime(350),
     mergeMap(data => {
       const cartUid = data.cartState.payload.uid
       const medicineIncremented = {
@@ -250,7 +260,11 @@ export function incrementCartItemEpic (action$, store) {
       }
       return http(putCartItem$(cartUid, medicineIncremented)).pipe(
         flatMap(result => {
-          if (medicineIncremented.quantity === 1) {
+          const cartItems = data.cartState.payload.cart_items.payload
+          const checkIfAlredyExistInCart = cartItems.findIndex(
+            cartItem => medicineIncremented.sku === cartItem.sku
+          )
+          if (checkIfAlredyExistInCart === -1) {
             return of(
               goToCartSnackbar(data.cartState, true),
               putCartItemSuccess(data.cartState, result.body.payload)
@@ -260,7 +274,11 @@ export function incrementCartItemEpic (action$, store) {
           }
         }),
         catchError(error => {
-          return cartApiErrorHandling(data.cartState, data.medicineSelected, error)
+          return cartApiErrorHandling(
+            data.cartState,
+            data.medicineSelected,
+            error
+          )
         })
       )
     })
@@ -271,10 +289,7 @@ export function deleteCartItemLoadingEpic (action$, store) {
   return action$.pipe(
     ofType(DELETE_CART_ITEM_LOADING),
     mergeMap(data => {
-      return cartApiLoadingHandling(
-        data.cartState,
-        data.medicineSelected
-      )
+      return cartApiLoadingHandling(data.cartState, data.medicineSelected)
     })
   )
 }
@@ -367,8 +382,10 @@ export function cartTransferEpic (action$, store) {
   return action$.pipe(
     ofType(CART_TRANSFER_LOADING),
     mergeMap(data => {
+      const loginState = store.getState().loginState
+
       return http(cartTransfer$(data.cartState.payload.uid)).pipe(
-        map(result => {
+        flatMap(result => {
           let cartItems = result.body.payload.cart_items
           let cartPrescriptions = result.body.payload.cart_prescriptions
 
@@ -387,11 +404,15 @@ export function cartTransferEpic (action$, store) {
               }
             }
           )
-          return cartTransferSuccess(
-            data.cartState,
-            result,
-            cartItems,
-            updatedCartPrescriptions
+
+          return of(
+            cartTransferSuccess(
+              data.cartState,
+              result,
+              cartItems,
+              updatedCartPrescriptions
+            ),
+            toggleAuthentication(loginState, true)
           )
         }),
         catchError(error => {
@@ -412,7 +433,7 @@ export function uploadPrescriptionEpic (action$, store) {
       return http(
         uploadPrescriptionEpic$(data.cartState.payload.uid, formData)
       ).pipe(
-        map(result => {
+        flatMap(result => {
           let cartPrescriptions = result.body.payload.cart_prescriptions
 
           let updatedCartPrescriptions = cartPrescriptions.map(
@@ -424,11 +445,27 @@ export function uploadPrescriptionEpic (action$, store) {
             }
           )
 
-          return uploadPrescriptionSuccess(
-            data.cartState,
-            data.uploadedFiles,
-            updatedCartPrescriptions
-          )
+          if (data.cartState.payload.is_doctor_callback.payload) {
+            return of(uploadPrescriptionSuccess(
+              data.cartState,
+              data.uploadedFiles,
+              updatedCartPrescriptions,
+              data.isHomePage
+            ),
+            optForDoctorCallbackLoading(
+              data.cartState,
+              data.cartState.payload.uid,
+              !data.cartState.payload.is_doctor_callback.payload
+            )
+            )
+          } else {
+            return of(uploadPrescriptionSuccess(
+              data.cartState,
+              data.uploadedFiles,
+              updatedCartPrescriptions,
+              data.isHomePage
+            ))
+          }
         }),
         catchError(error => {
           return of(uploadPrescriptionFailure(data.cartState, error))
@@ -481,6 +518,14 @@ export function submitOrderEpic (action$, store) {
       let body = {
         cart_uid: data.cartState.payload.uid
       }
+
+      if (data.paymentChannel !== '') {
+        body = {
+          ...body,
+          payment_method: data.paymentChannel
+        }
+      }
+
       return http(submitOrder$(data.cartState, body)).pipe(
         map(result => {
           return submitOrderSuccess(data.cartState, result.body.payload)
@@ -528,11 +573,73 @@ export function optDoctorCallback (action$, store) {
   )
 }
 
+export function verifyPaymentEpic (action$, store) {
+  return action$.pipe(
+    ofType(VERIFY_PAYMENT_LOADING),
+    mergeMap(data => {
+      const razorpayDetails = {
+        razorpay_order_id: data.razorpay_order_id,
+        razorpay_payment_id: data.razorpay_payment_id,
+        razorpay_signature: data.razorpay_signature
+      }
+
+      const body = {
+        gateway_name: PAYMENT_GATEWAY,
+        gateway_data: razorpayDetails
+      }
+
+      return http(verifyPayment$(data.orderId, body)).pipe(
+        map(result => {
+          const payload = result.body.payload.order
+
+          return verifyPaymentSuccess(data.cartState, payload)
+        }),
+        catchError(error => {
+          return of(verifyPaymentFailure(data.cartState, error))
+        })
+      )
+    })
+  )
+}
+
+export function paymentInitiateEpic (action$, store) {
+  return action$.pipe(
+    ofType(PAYMENT_INITIATE_LOADING),
+    mergeMap(data => {
+      const body = {
+        order_id: data.orderId,
+        payment_method: data.paymentMode
+      }
+
+      return http(paymentInitiate$(body)).pipe(
+        map(result => {
+          const payload = result.body.payload.order
+          const paymentGateway = result.body.payload.payment_gateway
+
+          return paymentInitiateSuccess(data.cartState, payload, paymentGateway)
+        }),
+        catchError(error => {
+          if (error.status === 400) {
+            return of(
+              redirectToOrderDetailsPage(data.cartState),
+              paymentInitiateFailure(data.cartState, error)
+            )
+          } else {
+            return of(paymentInitiateFailure(data.cartState, error))
+          }
+        })
+      )
+    })
+  )
+}
+
 export function optExpressDelivery (action$, store) {
   return action$.pipe(
     ofType(OPT_EXPRESS_DELIVERY_LOADING),
     mergeMap(data => {
-      return http(expressDelivery$(data.cartUId, data.expressDeliveryCheck)).pipe(
+      return http(
+        expressDelivery$(data.cartUId, data.expressDeliveryCheck)
+      ).pipe(
         map(result => {
           return optForExpressDeliverySuccess(
             data.cartState,
@@ -562,12 +669,13 @@ export function deleteCartState (action$, store) {
               data.facility_code,
               data.source_type,
               data.patientId,
-              data.addMedicine
+              data.addMedicine,
+              data.isAssignPatientToCart
             )
           )
         }),
         catchError(error => {
-          return deleteCartFailure(data.cartState, error)
+          return of(deleteCartFailure(data.cartState, error))
         })
       )
     })

@@ -26,6 +26,7 @@ export default function medicineListReducer (state = initialState, action) {
       return {
         ...state,
         payload: action.payload,
+        totalPages: action.totalPages,
         isLoading: action.isLoading
       }
 

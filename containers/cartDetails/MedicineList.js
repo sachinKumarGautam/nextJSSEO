@@ -47,7 +47,8 @@ const styles = theme => ({
     display: 'flex',
     flexDirection: 'row',
     marginRight: theme.spacing.unit * 3,
-    justifyContent: 'flex-end'
+    justifyContent: 'flex-end',
+    alignItems: 'center'
   },
   deliveryTat: {
     ...theme.typography.body3,
@@ -86,6 +87,8 @@ class MedicineList extends Component {
                   <ProductName
                     customStyle={this.props.classes.medicineNameWrapper}
                     name={cartItem.name}
+                    serviceType={cartItem.available_service_type}
+                    deliveryOption={cartItem.available_delivery_option}
                   />
                   <ProductBrand
                     customStyle={this.props.classes.companyNameWrapper}
@@ -121,10 +124,15 @@ class MedicineList extends Component {
                   <div className={this.props.classes.buttonWrapper}>
 
                     <div
-                      onClick={this.props.decrementCartItem.bind(
-                        this,
-                        cartItem
-                      )}
+                      onClick={
+                        !cartItem.isLoading
+                          ? (
+                            this.props.decrementCartItem.bind(
+                              this,
+                              cartItem
+                            )
+                          ) : null
+                      }
                       className={this.props.classes.iconButton}
                     >
                       <img
@@ -140,17 +148,20 @@ class MedicineList extends Component {
                         customStyle={this.props.classes.fabProgress}
                       />
                     </div>
-                    <Typography
-                      className={this.props.classes.cartAmountWrapper}
-                    >
+                    <Typography>
                       {cartItem.quantity}
                     </Typography>
                     <div
                       className={this.props.classes.iconButton}
-                      onClick={this.props.incrementCartItem.bind(
-                        this,
-                        cartItem
-                      )}
+                      onClick={
+                        !cartItem.isLoading
+                          ? (
+                            this.props.incrementCartItem.bind(
+                              this,
+                              cartItem
+                            )
+                          ) : null
+                      }
                     >
                       <img
                         className={this.props.classes.buttonImage}

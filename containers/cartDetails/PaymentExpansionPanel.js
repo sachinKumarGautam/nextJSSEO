@@ -1,29 +1,83 @@
 import React from 'react'
 
-import Radio from '@material-ui/core/Radio'
 import ExpansionPanel from '@material-ui/core/ExpansionPanel'
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails'
 import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary'
 import Typography from '@material-ui/core/Typography'
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
+import Snackbar from '@material-ui/core/Snackbar'
 
 import Button from '../../components/button'
+import PaymentChannels from '../../components/PaymentChannels'
 import TermsAndCondition from './TermsAndCondition'
 import PaymentDeliveryDetail from './PaymentDeliveryDetail'
 
+import { SELECT_PAYMENT_MODE, ATLEAST_ONE_ITEM } from '../messages/cartMessages'
+
 import {
-  LF_ASSURED,
-  NORMAL
+  SERVICE_TYPE_LFASSURED,
+  DELIVERY_OPTION_NORMAL,
+  SNACK_BAR_DURATION
 } from '../../components/constants/Constants'
 
 class PaymentExpansionPanel extends React.Component {
+  state = {
+    paymentChannel: '',
+    isShowSnackbar: false,
+    snackBarMsg: ''
+  }
+
   placeOrder () {
-    this.props.submitOrderLoading(
-      this.props.cartState
-    )
+    if (
+      this.state.paymentChannel !== '' ||
+      this.props.cartState.payload.total_payable_amount
+    ) {
+      this.props.submitOrderLoading(
+        this.props.cartState,
+        this.state.paymentChannel
+      )
+    } else if (
+      !this.props.cartState.payload.cart_items.payload.length &&
+      !this.props.cartState.payload.is_doctor_callback.payload &&
+      !this.props.cartState.payload.cart_prescriptions.length
+    ) {
+      this.setState({
+        isShowSnackbar: true,
+        snackBarMsg: ATLEAST_ONE_ITEM
+      })
+    } else {
+      if (
+        this.state.paymentChannel !== '' ||
+        !this.props.cartState.payload.total_payable_amount
+      ) {
+        this.props.submitOrderLoading(
+          this.props.cartState,
+          this.state.paymentChannel
+        )
+      } else {
+        this.setState({
+          isShowSnackbar: true,
+          snackBarMsg: SELECT_PAYMENT_MODE
+        })
+      }
+    }
+  }
+
+  handlePaymentChannelsChange (event) {
+    this.setState({
+      paymentChannel: event.target.value
+    })
+  }
+
+  handleClose () {
+    this.setState({
+      isShowSnackbar: false
+    })
   }
 
   render () {
-    const shippingAddressDetails = this.props.cartState.payload.shipping_address_details
+    const shippingAddressDetails = this.props.cartState.payload
+      .shipping_address_details
     const patientDetails = this.props.cartState.payload.patient_details
 
     return (
@@ -31,18 +85,18 @@ class PaymentExpansionPanel extends React.Component {
         expanded={this.props.expanded === 'panel5'}
         onChange={
           this.props.loginState.isAuthenticated &&
-          shippingAddressDetails.payload.shipping_address_id
+            shippingAddressDetails.payload.shipping_address_id
             ? this.props.handleChange
             : null
         }
         className={this.props.expansionPanel}
       >
-        <ExpansionPanelSummary expandIcon={<div />}>
-          <img src='/static/images/payment.svg' className={this.props.imageIcon} />
-          <Typography
-            component='h1'
-            className={this.props.heading}
-          >
+        <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
+          <img
+            src='/static/images/payment.svg'
+            className={this.props.imageIcon}
+          />
+          <Typography component='h1' className={this.props.heading}>
             Payment
           </Typography>
         </ExpansionPanelSummary>
@@ -51,32 +105,42 @@ class PaymentExpansionPanel extends React.Component {
             root: this.props.thankYouWrapper
           }}
         >
-          {
-            (this.props.cartState.payload.service_type === LF_ASSURED ||
-            this.props.cartState.payload.delivery_option !== NORMAL) &&
-            <PaymentDeliveryDetail
-              cartState={this.props.cartState}
-              optForExpressDeliveryLoading={this.props.optForExpressDeliveryLoading}
-              constantsState={this.props.constantsState}
-            />
-          }
-          <div className={this.props.radioWrapper}>
-            <Radio
-              checked
-              name='radio-button-demo'
-              classes={{
-                root: this.props.radioButton,
-                checked: this.props.checked
-              }}
-            />
-            <Typography
-              component='h2'
-              className={this.props.paymentDescription}
-            >
-              Cash On Delivery
-            </Typography>
-          </div>
-          <TermsAndCondition />
+          {(this.props.cartState.payload.service_type ===
+            SERVICE_TYPE_LFASSURED ||
+            this.props.cartState.payload.delivery_option !==
+              DELIVERY_OPTION_NORMAL) &&
+              <PaymentDeliveryDetail
+                cartState={this.props.cartState}
+                optForExpressDeliveryLoading={
+                  this.props.optForExpressDeliveryLoading
+                }
+                constantsState={this.props.constantsState}
+              />}
+          {this.props.cartState.payload.total_payable_amount
+            ? <div>
+              <Typography className={this.props.selectPaymentMode}>
+                  SELECT PAYMENT MODE
+              </Typography>
+              <PaymentChannels
+                radioWrapper={this.props.radioWrapper}
+                paymentChannel={this.state.paymentChannel}
+                paymentChannelsPayload={
+                  this.props.cartState.payload.payment_channels
+                }
+                handlePaymentChannelsChange={this.handlePaymentChannelsChange.bind(
+                  this
+                )}
+              />
+            </div>
+            : null}
+          <TermsAndCondition
+            retailFaciltyName={
+              (this.props.cartState.payload.seller_detail &&
+              this.props.cartState.payload.seller_detail.retail_facilty_name)
+                ? this.props.cartState.payload.seller_detail.retail_facilty_name
+                : 'trusted channel partners'
+            }
+          />
           <Button
             size='small'
             color='primary'
@@ -84,12 +148,29 @@ class PaymentExpansionPanel extends React.Component {
             classes={{
               root: this.props.nextButtonRoot
             }}
-            label={'Place Order'}
+            label={
+              this.props.cartState.payload.total_payable_amount
+                ? 'PLACE ORDER'
+                : 'Place a COD Order'
+            }
             onClick={this.placeOrder.bind(this)}
             disabled={
               !patientDetails.payload.patient_id ||
-              !shippingAddressDetails.payload.shipping_address_id
+                !shippingAddressDetails.payload.shipping_address_id
             }
+          />
+          <Snackbar
+            anchorOrigin={{
+              vertical: 'bottom',
+              horizontal: 'center'
+            }}
+            autoHideDuration={SNACK_BAR_DURATION}
+            open={this.state.isShowSnackbar}
+            onClose={this.handleClose.bind(this)}
+            ContentProps={{
+              'aria-describedby': 'cart-items'
+            }}
+            message={<span>{this.state.snackBarMsg}</span>}
           />
         </ExpansionPanelDetails>
       </ExpansionPanel>

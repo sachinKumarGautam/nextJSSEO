@@ -10,7 +10,8 @@ import {
   GET_LOCALITY_LIST_LOADING,
   GET_LOCALITY_LIST_SUCCESS,
   GET_LOCALITY_LIST_FAILURE,
-  RESET_DELIVERY_ADDRESS_SELECTED
+  RESET_DELIVERY_ADDRESS_SELECTED,
+  RESET_DELIVERY_FORM
 } from './deliveryDetailsActionTypes'
 
 /**
@@ -18,7 +19,10 @@ import {
  * @param {object} deliveryDetailsState - The object maintained for payload, loading and error state.
  * @param {number} customerId - The value of the customer id according to which list will occur
  */
-export function getDeliveryDetailsListLoading (deliveryDetailsState, customerId) {
+export function getDeliveryDetailsListLoading (
+  deliveryDetailsState,
+  customerId
+) {
   return {
     type: GET_DELIVERY_DETAILS_LIST_LOADING,
     deliveryDetailsState,
@@ -48,12 +52,17 @@ export function getDeliveryDetailsListSuccess (deliveryDetailsState, result) {
  * @param {object} deliveryDetailsState - The object maintained for payload, loading and error state.
  * @param {object} error - The error details when API throws an error
  */
-export function getDeliveryDetailsListFailure (deliveryDetailsState, error) {
+export function getDeliveryDetailsListFailure (
+  deliveryDetailsState,
+  error,
+  isLoading,
+  isError
+) {
   return {
     type: GET_DELIVERY_DETAILS_LIST_FAILURE,
     deliveryDetailsState,
-    isLoading: false,
-    isError: true,
+    isLoading: isLoading,
+    isError: isError,
     error: error
   }
 }
@@ -63,7 +72,10 @@ export function getDeliveryDetailsListFailure (deliveryDetailsState, error) {
  * @param {object} patientDetailsState - The object maintained for payload, loading and error state.
  * @param {number} patientIdSelected - The value of the selected addressId
  */
-export function saveDeliveryAddressSelected (deliveryDetailsState, deliveryDetail) {
+export function saveDeliveryAddressSelected (
+  deliveryDetailsState,
+  deliveryDetail
+) {
   return {
     type: SAVE_ADDRESS_SELECTED,
     deliveryDetailsState,
@@ -171,5 +183,11 @@ export function resetDeliveryAddressSelected (deliveryDetailsState) {
   return {
     type: RESET_DELIVERY_ADDRESS_SELECTED,
     deliveryDetailsState
+  }
+}
+
+export function resetErrorState () {
+  return {
+    type: RESET_DELIVERY_FORM
   }
 }

@@ -9,6 +9,7 @@ import ProductPrice from './ProductPrice'
 import StrokePrice from './StrokePrice'
 import EstimatedPriceLabel from './EstimatedPriceLabel'
 import Button from './button/Button'
+import AlreadyAdded from './AlreadyAdded'
 
 const styles = theme => {
   return {
@@ -21,7 +22,8 @@ const styles = theme => {
       ...theme.typography.body1,
       color: theme.palette.customGrey.grey500,
       fontWeight: theme.typography.fontWeightBold,
-      marginBottom: theme.spacing.unit / 4
+      marginBottom: theme.spacing.unit / 4,
+      display: 'inline-block'
     },
     customBrand: {
       ...theme.typography.body3,
@@ -54,10 +56,13 @@ const styles = theme => {
       marginBottom: theme.spacing.unit
     },
     buttonRoot: {
-      border: `1px solid ${theme.palette.primary.main}`
+      border: `1px solid ${theme.palette.primary.main}`,
+      padding: `${0} ${theme.spacing.unit / 2}`,
+      minHeight: theme.spacing.unit * 1.5
     },
     buttonLabel: {
-      color: '#80c241'
+      color: theme.palette.primary.main,
+      fontSize: theme.spacing.unit * 1.5
     }
   }
 }
@@ -92,13 +97,15 @@ class RelatedMedicinesCard extends React.Component {
 
   render () {
     const { props } = this
-
+    const checkIfAlredyExistInCart = props.checkIfAlredyExistInCart
     return (
       <div>
         <ProductName
           variant={'body1'}
           name={props.itemDetails.name}
           customStyle={props.classes.medicineName}
+          serviceType={props.itemDetails.available_service_type}
+          deliveryOption={props.itemDetails.available_delivery_option}
         />
         <div>
           <ProductBrand
@@ -133,16 +140,18 @@ class RelatedMedicinesCard extends React.Component {
             estimatePriceText={'*Estimated Price'}
           />
         </div>
-        <Button
-          variant='outlined'
-          color='primary'
-          classes={{
-            root: props.classes.buttonRoot,
-            label: props.classes.buttonLabel
-          }}
-          onClick={this.addToCart}
-          label={'Add To Cart'}
-        />
+        {!checkIfAlredyExistInCart
+          ? <Button
+            variant='outlined'
+            color='primary'
+            classes={{
+              root: props.classes.buttonRoot,
+              label: props.classes.buttonLabel
+            }}
+            onClick={this.addToCart}
+            label={'Add To Cart'}
+          />
+          : <AlreadyAdded />}
       </div>
     )
   }

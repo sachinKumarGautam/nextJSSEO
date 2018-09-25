@@ -15,6 +15,8 @@ import ProductPriceDetailsLoader
   from '../../components/activityIndicator/loader/ProductPriceDetailsLoader'
 import ActivityIndicator from '../../components/activityIndicator'
 
+import { ACTIVE_STATUS } from '../../components/constants/Constants'
+
 /*
   Product price
   product discount
@@ -40,6 +42,9 @@ const styles = theme => ({
   },
   label: {
     color: theme.palette.primary.main
+  },
+  buttonRoot: {
+    padding: `0px ${theme.spacing.unit * 2}px`
   }
 })
 
@@ -82,7 +87,7 @@ class ProductPriceDetails extends Component {
               <div className={classes.priceWrapper}>
                 <StrokePrice
                   variant={'body1'}
-                  mrp={productDetailsState.payload.selling_price}
+                  mrp={productDetailsState.payload.mrp}
                 />
                 <ProductDiscount
                   discount={productDetailsState.payload.discount}
@@ -96,17 +101,22 @@ class ProductPriceDetails extends Component {
               <div className={classes.cardActions}>
                 <QuantityField onChangeQuantity={this.onChangeQuantity} />
                 <Button
-                  variant='outlined'
+                  disableFocusRipple
+                  disableRipple
+                  variant='contained'
                   size='small'
                   classes={{
-                    label: classes.label
+                    root: classes.buttonRoot
                   }}
                   color='primary'
                   onClick={this.props.addToCartHandler.bind(
                     this,
                     productDetailsState.payload
                   )} // it check first any selected city then add to cart
-                  label={'Add To Cart'}
+                  label={'ADD TO CART'}
+                  disabled={
+                    productDetailsState.payload.status !== ACTIVE_STATUS
+                  }
                 />
               </div>
             </CardContent>

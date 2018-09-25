@@ -20,7 +20,9 @@ import {
   MOBILE_INVALID,
   REFERRAL_CODE_INVALID,
   MOBILE_VALIDATION_REGEX,
-  NUMBER_VALIDATION_REGEX
+  NUMBER_VALIDATION_REGEX,
+  NAME_VALIDATION_REGEX,
+  NAME_VALIDATION_MSG
 } from '../../containers/messages/ValidationMsg'
 
 // Helper styles for demo
@@ -46,7 +48,8 @@ const styles = theme => ({
     color: theme.palette.customGrey.grey100
   },
   mobilePrefix: {
-    marginBottom: theme.spacing.unit / 8
+    marginBottom: theme.spacing.unit / 8,
+    color: theme.palette.customGrey.grey200
   }
 })
 
@@ -159,6 +162,7 @@ class RegisterForm extends React.Component {
             placeholder={'Mobile'}
             onChange={this.onChangePhoneNumber}
             value={values.mobile}
+            disabled
             startAdornment={
               <InputAdornment position='start'>
                 <span className={classes.mobilePrefix}>{'+91'}</span>
@@ -179,15 +183,11 @@ class RegisterForm extends React.Component {
           <Select
             value={values.gender}
             onChange={handleChange}
-            // placeholder={'Gender'}
-            inputProps={{
-              name: 'gender',
-              id: 'gender',
-              placeholder: 'Gender'
-            }}
+            displayEmpty
+            name={'gender'}
           >
-            <MenuItem value=''>
-              <em>Gender</em>
+            <MenuItem value='' disabled>
+              Gender
             </MenuItem>
             <MenuItem value={'male'}>Male</MenuItem>
             <MenuItem value={'female'}>Female</MenuItem>
@@ -276,7 +276,10 @@ export default withStyles(styles)(
       }
     },
     validationSchema: Yup.object().shape({
-      full_name: Yup.string().trim().required(FULL_NAME_REQUIRED),
+      full_name: Yup.string()
+        .matches(NAME_VALIDATION_REGEX, NAME_VALIDATION_MSG)
+        .trim()
+        .required(FULL_NAME_REQUIRED),
       mobile: Yup.string()
         .trim()
         .min(10, MOBILE_INVALID)

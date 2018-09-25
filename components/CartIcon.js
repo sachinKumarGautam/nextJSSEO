@@ -11,7 +11,6 @@ import ReactTooltip from 'react-tooltip'
 
 import Button from './button'
 
-// import Link from 'next/link'
 import Router from 'next/router'
 
 import { CART_DETAILS } from '../routes/RouteConstant'
@@ -22,12 +21,6 @@ import { getReplacedString } from '../utils/replaceConstants'
 const styles = theme => ({
   button: {
     margin: theme.spacing.unit
-  },
-  menuPaperProps: {
-    width: theme.spacing.unit * 32
-  },
-  menuStyle: {
-    top: theme.spacing.unit * 5
   },
   summaryStyle: {
     ...theme.typography.body3,
@@ -81,8 +74,8 @@ const styles = theme => ({
     marginBottom: theme.spacing.unit * 2
   },
   paper: {
-    padding: theme.spacing.unit,
-    width: theme.spacing.unit * 25,
+    padding: theme.spacing.unit * 1.5,
+    width: theme.spacing.unit * 32,
     backgroundColor: `${theme.palette.secondary.main} !important`,
     pointerEvents: 'auto !important',
     '&:after': {
@@ -92,6 +85,7 @@ const styles = theme => ({
       visibility: 'visible !important',
       opacity: '1 !important'
     },
+    opacity: '1 !important',
     borderRadius: '4px',
     boxShadow: '0 4px 4px 2px rgba(0, 0, 0, 0.14)'
   },
@@ -105,8 +99,8 @@ const styles = theme => ({
     right: 0,
     left: theme.spacing.unit * 2,
     color: theme.palette.common.white,
-    padding: theme.typography.pxToRem(9),
-    fontSize: theme.typography.pxToRem(10)
+    padding: theme.typography.pxToRem(4),
+    fontSize: theme.typography.pxToRem(8)
   },
   badgeRoot: {
     // padding: theme.spacing.unit * 2
@@ -123,16 +117,34 @@ class CartIcon extends Component {
   }
 
   redirectToPath (path) {
-    const url = getReplacedString(path)
-    Router.push(url)
+    if (!this.props.cartState.payload.uid) {
+      const isShowNoCartIdDialog = true
+
+      this.props.updateShowNoCartIdDialogFlag(
+        this.props.cartState,
+        isShowNoCartIdDialog
+      )
+    } else {
+      const url = getReplacedString(path)
+      Router.push(url)
+    }
   }
 
   render () {
     const { classes } = this.props
     const cartItems = this.props.cartState.payload.cart_items.payload
+    const href = getReplacedString(CART_DETAILS)
     return (
       <div>
-        <a className={classes.moleculeTag} data-tip data-for='cartIcon'>
+        <a
+          onClick={this.redirectToPath.bind(this, href)}
+          onMouseEnter={() => {
+            Router.prefetch(href)
+          }}
+          className={classes.moleculeTag}
+          data-tip
+          data-for='cartIcon'
+        >
           <IconButton
             className={classes.button}
             color={'primary'}
@@ -155,7 +167,7 @@ class CartIcon extends Component {
           effect='solid'
           place='bottom'
           className={classes.paper}
-          delayHide={500}
+          // delayHide={500}
           delayShow={100}
         >
           <div className={classes.summaryMenuWrapper}>

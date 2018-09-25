@@ -1,6 +1,7 @@
 const initialState = {
   payload: {
     searchMedicineResult: [],
+    totalPages: 0,
     inProgressMedicineDetails: {
 
     }

@@ -17,7 +17,9 @@ import {
   GENDER_REQUIRED,
   MOBILE_INVALID,
   MOBILE_VALIDATION_REGEX,
-  NUMBER_VALIDATION_REGEX
+  NUMBER_VALIDATION_REGEX,
+  NAME_VALIDATION_REGEX,
+  NAME_VALIDATION_MSG
 } from '../../containers/messages/ValidationMsg'
 
 // Helper styles for demo
@@ -44,14 +46,21 @@ const styles = theme => ({
     textAlign: 'center'
   },
   mobilePrefix: {
-    marginBottom: theme.spacing.unit / 8
+    marginBottom: theme.spacing.unit / 8,
+    color: theme.palette.customGrey.grey200
   }
 })
 
 class PatientForm extends React.Component {
   handleChangeAge = event => {
-    if (event.target.value < 150) {
-      this.props.handleChange(event)
+    const inputValue = event.target.value
+
+    if (inputValue < 150) {
+      this.props.updatePatientFormValue(
+        this.props.patientDetailsState,
+        'age',
+        inputValue
+      )
     }
   }
 
@@ -60,9 +69,24 @@ class PatientForm extends React.Component {
     const regexInputExpression = RegExp(NUMBER_VALIDATION_REGEX).test(
       inputValue
     )
+
     if ((regexInputExpression && inputValue.length <= 10) || !inputValue) {
-      this.props.handleChange(event)
+      this.props.updatePatientFormValue(
+        this.props.patientDetailsState,
+        'mobile',
+        inputValue
+      )
     }
+  }
+
+  onChange (name, handleChange, event) {
+    const inputValue = event.target.value
+
+    this.props.updatePatientFormValue(
+      this.props.patientDetailsState,
+      name,
+      inputValue
+    )
   }
 
   render () {
@@ -86,9 +110,8 @@ class PatientForm extends React.Component {
             placeholder='Full Name'
             id='full_name'
             type='text'
-            onChange={handleChange}
+            onChange={this.onChange.bind(this, 'full_name', handleChange)}
             value={values.full_name}
-
           />
           {errors.full_name &&
             touched.full_name &&
@@ -103,11 +126,11 @@ class PatientForm extends React.Component {
         >
           <Select
             value={values.gender}
-            onChange={handleChange}
+            onChange={this.onChange.bind(this, 'gender', handleChange)}
             name='gender'
             displayEmpty
           >
-            <MenuItem value=''>
+            <MenuItem value='' disabled>
               <em>Gender</em>
             </MenuItem>
             <MenuItem value={'Male'}>Male</MenuItem>
@@ -186,7 +209,10 @@ export default withStyles(styles)(
       }
     },
     validationSchema: Yup.object().shape({
-      full_name: Yup.string().trim().required(FULL_NAME_REQUIRED),
+      full_name: Yup.string()
+        .matches(NAME_VALIDATION_REGEX, NAME_VALIDATION_MSG)
+        .trim()
+        .required(FULL_NAME_REQUIRED),
       mobile: Yup.string()
         .min(10, MOBILE_INVALID)
         .max(10, MOBILE_INVALID)

@@ -1,4 +1,4 @@
-import Header from './header'
+import Header from './headerV2'
 import Footer from './footer'
 
 import Head from 'next/head'
@@ -12,6 +12,7 @@ const Layout = (props) => (
       addToCartHandler={props.addToCartHandler}
       authentication={props.authentication}
       path={props.path}
+      isHomePage={props.isHomePage}
     />
     {props.children}
     <Footer />

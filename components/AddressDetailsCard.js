@@ -7,6 +7,7 @@ import { withStyles } from '@material-ui/core/styles'
 const styles = theme => {
   return {
     addressWrapperStyle: {
+      cursor: 'pointer',
       border: `1px solid ${theme.palette.customGrey.grey250}`,
       padding: theme.spacing.unit * 2.5,
       borderRadius: theme.spacing.unit * 0.5
@@ -18,7 +19,9 @@ const styles = theme => {
     },
     addressTypeStyle: {
       color: theme.palette.customGrey.grey500,
-      fontWeight: theme.typography.fontWeightBold
+      fontWeight: theme.typography.fontWeightBold,
+      paddingBottom: theme.spacing.unit,
+      textTransform: 'uppercase'
     },
     addressTypeWrapper: {
       display: 'flex',
@@ -30,7 +33,7 @@ const styles = theme => {
     },
     addressStyle: {
       color: theme.palette.customGrey.grey500,
-      paddingBottom: theme.spacing.unit,
+      paddingBottom: theme.spacing.unit / 4,
       marginLeft: theme.spacing.unit * 5
     },
     addressDescriptionStyle: {
@@ -53,6 +56,12 @@ const styles = theme => {
       ...theme.typography.body2,
       color: theme.palette.customGreen.green300,
       fontWeight: theme.typography.fontWeightBold
+    },
+    addressName: {
+      color: theme.palette.customGrey.grey500,
+      paddingBottom: theme.spacing.unit,
+      marginLeft: theme.spacing.unit * 5,
+      fontWeight: theme.typography.fontWeightBold
     }
   }
 }
@@ -62,16 +71,19 @@ const AddressDetailsCard = props => (
     className={
       (props.addressIdSelected === props.deliveryDetail.id)
         ? props.classes.addressWrapperSelectedStyle
-        : props.classes.addressWrapperStyle
+        : (props.addressWrapper ? props.addressWrapper : props.classes.addressWrapperStyle)
     }
     onClick={
-      props.saveAddressSelected
-        ? props.saveAddressSelected.bind(this, props.deliveryDetail.id)
+      props.checkPincodeServiceble
+        ? props.checkPincodeServiceble.bind(this, props.deliveryDetail)
         : null
     }
   >
     <div className={props.classes.addressTypeWrapper}>
-      <img src='/static/images/home.svg' className={props.classes.addressTypeImage} />
+      <img
+        src='/static/images/home.svg'
+        className={props.classes.addressTypeImage}
+      />
       <Typography
         variant='caption'
         className={props.classes.addressTypeStyle}
@@ -79,6 +91,18 @@ const AddressDetailsCard = props => (
         {props.deliveryDetail.type}
       </Typography>
     </div>
+    <Typography
+      variant='caption'
+      className={props.classes.addressName}
+    >
+      {props.deliveryDetail.full_name}
+    </Typography>
+    <Typography
+      variant='caption'
+      className={props.classes.addressName}
+    >
+      {props.deliveryDetail.mobile}
+    </Typography>
     <Typography
       variant='caption'
       className={props.classes.addressStyle}
@@ -90,6 +114,12 @@ const AddressDetailsCard = props => (
       className={props.classes.addressStyle}
     >
       {props.deliveryDetail.street2}
+    </Typography>
+    <Typography
+      variant='caption'
+      className={props.classes.addressStyle}
+    >
+      {props.deliveryDetail.city} - {props.deliveryDetail.pincode}
     </Typography>
     {
       props.isCartPage

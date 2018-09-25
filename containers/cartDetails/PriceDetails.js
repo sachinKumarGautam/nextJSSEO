@@ -61,6 +61,7 @@ const styles = theme => ({
       visibility: 'visible !important',
       opacity: '1 !important'
     },
+    opacity: '1 !important',
     borderRadius: '4px'
   },
   description: {
@@ -86,7 +87,7 @@ class PriceDetails extends Component {
               <Typography className={this.props.classes.discount}>
                 Care Points
               </Typography>
-              <a href='#' data-tip data-for='care_point'>
+              <a data-tip data-for='care_point'>
                 <img
                   src='/static/images/info-outline.svg'
                   className={this.props.classes.iconStyle}
@@ -96,8 +97,8 @@ class PriceDetails extends Component {
                   effect='solid'
                   place='right'
                   className={this.props.classes.paper}
-                  delayHide={1000}
-                  delayShow={1000}
+                  // delayHide={1000}
+                  delayShow={500}
                 >
                   <Typography
                     variant='caption'
@@ -110,9 +111,9 @@ class PriceDetails extends Component {
             </div>
             <div className={this.props.classes.infoWrapper}>
               <Typography className={this.props.classes.discount}>
-                Care Points Plus
+                Care Points +
               </Typography>
-              <a href='#' data-tip data-for='care_point_plus'>
+              <a data-tip data-for='care_point_plus'>
                 <img
                   src='/static/images/info-outline.svg'
                   className={this.props.classes.iconStyle}
@@ -122,8 +123,8 @@ class PriceDetails extends Component {
                   effect='solid'
                   place='right'
                   className={this.props.classes.paper}
-                  delayHide={1000}
-                  delayShow={1000}
+                  // delayHide={1000}
+                  delayShow={500}
                 >
                   <Typography
                     variant='caption'
@@ -139,20 +140,18 @@ class PriceDetails extends Component {
                 Coupon Discount
               </Typography>}
             {
-              // <Typography className={this.props.classes.itemTotal}>
-              //   Amount Payable
-              // </Typography>
-              // <Typography className={this.props.classes.itemTotal}>
-              //   Amount Paid
-              // </Typography>
-              // <Typography className={this.props.classes.itemTotal}>
-              //   Remaining Amount Payable
-              // </Typography>
+              this.props.cartState.payload.urgent_delivery_charge
+                ? (
+                  <Typography className={this.props.classes.discount}>
+                    Express Delivery Charges
+                  </Typography>
+                )
+                : null
             }
           </Grid>
           <Grid item xs={4}>
             <Typography className={this.props.classes.itemTotalAmount}>
-            ₹{this.props.cartState.payload.total_mrp}
+              ₹ {this.props.cartState.payload.total_mrp}
             </Typography>
             <Typography className={this.props.classes.discountAmount}>
               - ₹ {this.props.cartState.payload.discount}
@@ -168,15 +167,13 @@ class PriceDetails extends Component {
                 - ₹ {this.props.cartState.payload.coupon_discount}
               </Typography>}
             {
-              // <Typography className={this.props.classes.itemTotalAmount}>
-              //   Rs. 800.00
-              // </Typography>
-              // <Typography className={this.props.classes.itemTotalAmount}>
-              //   Rs. 0.00
-              // </Typography>
-              // <Typography className={this.props.classes.itemTotalAmount}>
-              //   Rs. 800.00
-              // </Typography>
+              this.props.cartState.payload.urgent_delivery_charge
+                ? (
+                  <Typography className={this.props.classes.discountAmount}>
+                    {this.props.cartState.payload.urgent_delivery_charge}
+                  </Typography>
+                )
+                : null
             }
           </Grid>
         </Grid>

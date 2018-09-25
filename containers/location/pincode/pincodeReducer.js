@@ -4,7 +4,9 @@ import {
   CHECK_PINCODE_LOADING,
   CHECK_PINCODE_SUCCESS,
   CHECK_PINCODE_FAILURE,
-  HANDLE_PINCODE_DIALOG
+  HANDLE_PINCODE_DIALOG,
+  RESET_PINCODE_STATE,
+  CHANGE_PINCODE
 } from './pincodeActionTypes'
 
 export default function checkPincodeReducer (state = initialState, action) {
@@ -18,7 +20,8 @@ export default function checkPincodeReducer (state = initialState, action) {
           ...state.errorState,
           isError: action.isError,
           error: action.error
-        }
+        },
+        isDeliveryAssignment: action.isDeliveryAssignment
       }
 
       // update success details of check pincode api
@@ -41,7 +44,8 @@ export default function checkPincodeReducer (state = initialState, action) {
           is_lc_assured_available: action.is_lc_assured_available,
           is_urgent_dl_available: action.is_lc_assured_available,
           urgent_delivery_charge: action.urgent_delivery_charge
-        }
+        },
+        pincodeValue: action.pincode
       }
 
       // update failure details of check pincode api
@@ -61,6 +65,22 @@ export default function checkPincodeReducer (state = initialState, action) {
         ...state,
         isPincodeDialogOpen: action.isOpen
       }
+
+    case RESET_PINCODE_STATE:
+      return {
+        ...state,
+        isLoading: initialState.isLoading,
+        errorState: initialState.errorState,
+        isDeliveryAssignment: initialState.isDeliveryAssignment,
+        pincodeValue: action.pincode
+      }
+
+    case CHANGE_PINCODE: {
+      return {
+        ...state,
+        pincodeValue: action.pincodeValue
+      }
+    }
 
     default:
       return state

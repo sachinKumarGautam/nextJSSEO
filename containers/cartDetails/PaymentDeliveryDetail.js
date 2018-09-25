@@ -15,7 +15,7 @@ import {
 import {
   DELIVERY_OPTION_URGENT,
   DELIVERY_OPTION_NORMAL,
-  LF_ASSURED
+  SERVICE_TYPE_LFASSURED
 } from '../../components/constants/Constants'
 
 import {
@@ -30,7 +30,7 @@ const styles = theme => ({
   },
   text: {
     ...theme.typography.body3,
-    color: theme.palette.customGrey.grey200,
+    color: theme.palette.customGrey.grey600,
     textAlign: 'left',
     marginLeft: theme.spacing.unit
   },
@@ -38,9 +38,15 @@ const styles = theme => ({
     marginLeft: theme.spacing.unit * 6,
     marginTop: theme.spacing.unit * 2
   },
+  rxText: {
+    ...theme.typography.body3,
+    color: theme.palette.customGrey.grey500,
+    textAlign: 'left',
+    marginLeft: theme.spacing.unit
+  },
   asssuredText: {
     ...theme.typography.body3,
-    color: theme.palette.customGrey.grey200,
+    color: theme.palette.customGrey.grey600,
     textAlign: 'left',
     marginLeft: theme.spacing.unit * 1.5
   },
@@ -50,8 +56,8 @@ const styles = theme => ({
     marginRight: theme.spacing.unit * 1.25
   },
   rxImageStyle: {
-    width: theme.spacing.unit * 1.75,
-    height: theme.spacing.unit * 2.75
+    width: theme.spacing.unit * 2.75,
+    height: theme.spacing.unit * 4
   },
   paper: {
     padding: theme.spacing.unit,
@@ -65,6 +71,7 @@ const styles = theme => ({
       visibility: 'visible !important',
       opacity: '1 !important'
     },
+    opacity: '1 !important',
     borderRadius: '4px'
   },
   tooltipIconInage: {
@@ -110,10 +117,10 @@ class PaymentDeliveryDetail extends Component {
     return (
       <div className={this.props.classes.mainWrapper}>
         {
-          this.props.cartState.payload.service_type === LF_ASSURED &&
+          this.props.cartState.payload.service_type === SERVICE_TYPE_LFASSURED &&
           <div className={this.props.classes.textWrapper}>
             <img
-              src='/static/images/shape.svg'
+              src='/static/images/assured-service.svg'
             />
             <Typography
               varaint='caption'
@@ -135,8 +142,8 @@ class PaymentDeliveryDetail extends Component {
                 effect='solid'
                 place='right'
                 className={this.props.classes.paper}
-                delayHide={1000}
-                delayShow={1000}
+                // delayHide={1000}
+                delayShow={500}
               >
                 <Typography
                   variant='caption'
@@ -148,7 +155,7 @@ class PaymentDeliveryDetail extends Component {
           </div>
         }
         {
-          this.props.cartState.payload.service_type === LF_ASSURED &&
+          this.props.cartState.payload.service_type === SERVICE_TYPE_LFASSURED &&
           <div className={this.props.classes.textWrapper}>
             <img
               src='/static/images/rx-pending.svg'
@@ -156,7 +163,7 @@ class PaymentDeliveryDetail extends Component {
             />
             <Typography
               varaint='caption'
-              className={this.props.classes.text}
+              className={this.props.classes.rxText}
             >
               {VERIFICATION_RX}
             </Typography>
@@ -196,8 +203,8 @@ class PaymentDeliveryDetail extends Component {
                 effect='solid'
                 place='right'
                 className={this.props.classes.paper}
-                delayHide={1000}
-                delayShow={1000}
+                // delayHide={1000}
+                delayShow={500}
               >
                 <Typography
                   variant='caption'

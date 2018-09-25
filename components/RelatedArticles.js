@@ -5,24 +5,6 @@ import Typography from '@material-ui/core/Typography'
 
 import ArticleCard from './ArticleCard'
 
-const relatedArticle = [
-  {
-    image: '../../static/images/womanHair.jpg',
-    label: 'Does loosing hair makes you lose your mind?',
-    description: 'Well you need not worry or freak out anymore, as a fact losing 50 to 100 strands...'
-  },
-  {
-    image: '../../static/images/images.jpeg',
-    label: '4 Ways to grow Thick Eyebrows Naturally',
-    description: 'Thick eyebrows have always been in demand. Thick, well-shaped eyebrows...'
-  },
-  {
-    image: '../../static/images/jogging.jpg',
-    label: 'Arthritis, can it lead to cardiovascular risk?',
-    description: 'According to recent research, patients who have been diagnosed with...'
-  }
-]
-
 const styles = theme => {
   return {
     relatedArticlesWrapper: {
@@ -49,14 +31,18 @@ const styles = theme => {
       fontWeight: theme.typography.fontWeightMedium
     },
     listItem: {
+      cursor: 'pointer',
       '&:not(:last-child)': {
         marginBottom: theme.spacing.unit * 4
       }
+    },
+    linkTag: {
+      textDecoration: 'none'
     }
   }
 }
 
-const RelatedArticles = (props) => (
+const RelatedArticles = props => (
   <div className={props.classes.relatedArticlesWrapper}>
     <Typography
       gutterBottom
@@ -64,22 +50,23 @@ const RelatedArticles = (props) => (
       component='h1'
       className={props.classes.title}
     >
-      <img src={'/static/images/related-articles.svg'} className={props.classes.imageTitle} />
-      Articles
+      <img
+        src={'/static/images/related-articles.svg'}
+        className={props.classes.imageTitle}
+      />
+      Related Articles
     </Typography>
     <aside>
       <ul className={props.classes.articleListWrapper}>
-        {
-          relatedArticle.map((articleDetail) => {
-            return (
-              <li className={props.classes.listItem}>
-                <ArticleCard
-                  articleDetail={articleDetail}
-                />
-              </li>
-            )
-          })
-        }
+        {props.publishedContent.map(articleDetail => {
+          return (
+            <li className={props.classes.listItem}>
+              <a className={props.classes.linkTag} href={articleDetail.web_link} target='_blank'>
+                <ArticleCard articleDetail={articleDetail} />
+              </a>
+            </li>
+          )
+        })}
       </ul>
       {/* <a className={props.classes.viewAllLink}>view all</a> */}
     </aside>

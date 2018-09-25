@@ -14,9 +14,8 @@ import {
   updateSelectedPatientDetails
 } from './refillActions'
 
-import {
-  deleteCartLoading
-} from '../cartDetails/cartActions'
+import { deleteCartLoading } from '../cartDetails/cartActions'
+import SideMenu from '../../components/SideMenu'
 /*
   bread crumbs
   side menu of patient list
@@ -29,8 +28,15 @@ class RefillPatientsWrapper extends Component {
       <div>
         <BreadCrumbs />
         <Grid container spacing={24}>
-          <Grid item xs={3}>
+          <Grid item xs={2}>
             <aside>
+              <SideMenu
+                isLoading={this.props.patientDetailsState.isLoading}
+              />
+            </aside>
+          </Grid>
+          <Grid item xs={10}>
+            <section>
               <PatientList
                 patientDetailsState={this.props.patientDetailsState}
                 getRefillPastMedicinesLoading={
@@ -41,16 +47,14 @@ class RefillPatientsWrapper extends Component {
                   this.props.actions.updateSelectedPatientDetails
                 }
               />
-            </aside>
-          </Grid>
-          <Grid item xs={9}>
-            <section>
               <RefillMedicineList
                 isLoading={this.props.pastMedicineState.isLoading}
                 pastMedicineState={this.props.pastMedicineState}
                 addToCartHandler={this.props.addToCartHandler}
                 checkPincodeState={this.props.checkPincodeState}
-                getRefillPastMedicinesLoading={this.props.actions.getRefillPastMedicinesLoading}
+                getRefillPastMedicinesLoading={
+                  this.props.actions.getRefillPastMedicinesLoading
+                }
                 cartState={this.props.cartState}
                 deleteCartLoading={this.props.actions.deleteCartLoading}
               />

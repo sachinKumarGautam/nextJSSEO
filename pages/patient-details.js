@@ -15,7 +15,9 @@ import {
   getPatientDetailsListLoading,
   savePatientSelected,
   submitPatientDetailsLoading,
-  resetPatientSelected
+  resetPatientSelected,
+  updatePatientFormValue,
+  resetPatientForm
 } from '../containers/patientDetails/patientDetailsActions'
 
 // page title
@@ -27,10 +29,10 @@ const styles = theme => ({
     paddingBottom: theme.spacing.unit * 3,
     paddingLeft: theme.spacing.unit * 7,
     paddingRight: theme.spacing.unit * 7,
-    maxWidth: theme.breakpoints.values.lg,
-    minWidth: theme.breakpoints.values.md,
     margin: '0 auto',
-    marginTop: theme.spacing.unit * 12
+    marginTop: theme.spacing.unit * 7.5,
+    maxWidth: theme.breakpoints.values.lg,
+    minWidth: theme.breakpoints.values.md
   },
   title: {
     fontWeight: theme.typography.fontWeightBold
@@ -76,6 +78,8 @@ class PatientDetails extends React.Component {
               cartState={this.props.cartState}
               getPatientDetailsListLoading={this.props.actions.getPatientDetailsListLoading}
               resetPatientSelected={this.props.actions.resetPatientSelected}
+              resetPatientForm={this.props.actions.resetPatientForm}
+              updatePatientFormValue={this.props.actions.updatePatientFormValue}
             />
           </Paper>
         </div>
@@ -99,7 +103,9 @@ function mapDispatchToProps (dispatch) {
         getPatientDetailsListLoading,
         savePatientSelected,
         submitPatientDetailsLoading,
-        resetPatientSelected
+        resetPatientSelected,
+        resetPatientForm,
+        updatePatientFormValue
       },
       dispatch
     )

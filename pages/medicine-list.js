@@ -24,7 +24,8 @@ import { medicineList } from '../components/constants/PageTitle'
 // activity indicatoe
 import ActivityIndicator from '../components/activityIndicator'
 import FullPageError from '../components/activityIndicator/error/FullPageError'
-import SnackbarErrorMessage from '../components/activityIndicator/error/SnackbarErrorMessage'
+import SnackbarErrorMessage
+  from '../components/activityIndicator/error/SnackbarErrorMessage'
 
 const styles = theme => ({
   root: {
@@ -32,11 +33,11 @@ const styles = theme => ({
     paddingBottom: theme.spacing.unit * 3,
     paddingLeft: theme.spacing.unit * 7,
     paddingRight: theme.spacing.unit * 7,
-    maxWidth: theme.breakpoints.values.lg,
-    minWidth: theme.breakpoints.values.md,
     margin: '0 auto',
-    marginTop: theme.spacing.unit * 12,
-    minHeight: theme.spacing.unit * 100
+    marginTop: theme.spacing.unit * 7.5,
+    minHeight: theme.spacing.unit * 100,
+    maxWidth: theme.breakpoints.values.lg,
+    minWidth: theme.breakpoints.values.md
   },
   title: {
     fontWeight: theme.typography.fontWeightBold
@@ -47,7 +48,8 @@ class MedicineList extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
-      isShowMore: false
+      isShowMore: false,
+      page: 0
     }
     this.getMedicineDetail = this.getMedicineDetail.bind(this)
     this.tryAgain = this.tryAgain.bind(this)
@@ -87,7 +89,8 @@ class MedicineList extends React.Component {
 
   updateIsShowMore () {
     this.setState({
-      isShowMore: true
+      isShowMore: true,
+      page: this.state.page + 1
     })
   }
 
@@ -140,7 +143,7 @@ class MedicineList extends React.Component {
           <ActivityIndicator
             isError={
               this.props.medicineListState.errorState.isError ||
-              this.props.searchMedicineState.errorState.isError
+                this.props.searchMedicineState.errorState.isError
             }
             ErrorComp={this.getErrorComponent()}
             bottomError={this.state.isShowMore}
@@ -160,8 +163,9 @@ class MedicineList extends React.Component {
                   ? searchMedicineState.payload.searchMedicineResult
                   : medicineListState.payload
               }
-
               updateIsShowMore={this.updateIsShowMore.bind(this)}
+              cartState={this.props.cartState}
+              page={this.state.page}
             />
           </ActivityIndicator>
         </div>
@@ -174,7 +178,8 @@ function mapStateToProps (state) {
   return {
     medicineListState: state.medicineListState,
     searchMedicineState: state.searchMedicineState,
-    checkPincodeState: state.checkPincodeState
+    checkPincodeState: state.checkPincodeState,
+    cartState: state.cartState
   }
 }
 

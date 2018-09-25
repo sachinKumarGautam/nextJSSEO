@@ -5,8 +5,13 @@ import CardContent from '@material-ui/core/CardContent'
 import { withStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
 
-import PriceDetails from '../cartDetails/PriceDetails'
+import PriceDetails from '../orderDetails/PriceDetails'
 import TotalAmount from '../cartDetails/TotalAmount'
+
+import {
+  PAYMENT_FAILED,
+  PAYMENT_RETRY
+} from '../../components/constants/paymentConstants'
 
 const styles = theme => ({
   card: {
@@ -48,11 +53,16 @@ const MyCartDetails = (props) => {
             variant='h1'
             className={props.classes.myCartText}
           >
-            MY CART
+            {
+              props.queryParamPaymentStatus === PAYMENT_FAILED ||
+              props.queryParamPaymentStatus === PAYMENT_RETRY
+                ? 'ORDER DETAILS'
+                : 'MY CART'
+            }
           </Typography>
         </div>
         <PriceDetails
-          cartState={props.cartState.orderResponse}
+          orderDetailsState={props.cartState.orderResponse}
         />
         <TotalAmount
           cartState={props.cartState.orderResponse}

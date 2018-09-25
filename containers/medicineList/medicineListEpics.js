@@ -21,15 +21,16 @@ export function getRelatedMedicines (action$, store) {
   return action$.pipe(
     ofType(GET_RELATED_MEDICINES_LOADING),
     mergeMap(data => {
+      const medicineListState = store.getState().medicineListState
       return http(getMedicineList$(data.saltName, data.page, data.size)).pipe(
         map(result => {
-          const medicineListState = store.getState().medicineListState
+          const totalPages = result.body.payload.totalPages
           let modifiedResponse = [
             ...medicineListState.payload,
             ...result.body.payload.content
           ]
 
-          return getRelatedMedicinesSuccess(medicineListState, modifiedResponse)
+          return getRelatedMedicinesSuccess(medicineListState, modifiedResponse, totalPages)
         }),
         catchError(error => {
           return of(getRelatedMedicinesFailure(medicineListState, error))

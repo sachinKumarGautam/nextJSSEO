@@ -8,7 +8,9 @@ import {
   SUBMIT_PATIENT_LOADING,
   SUBMIT_PATIENT_SUCCESS,
   SUBMIT_PATIENT_FAILURE,
-  RESET_PATIENT_SELECTED
+  RESET_PATIENT_SELECTED,
+  RESET_PATIENT_FORM,
+  UPDATE_PATIENT_FORM_VALUE
 } from './patientDetailsActionTypes'
 
 export default function patientDetailsReducer (state = initialState, action) {
@@ -98,6 +100,25 @@ export default function patientDetailsReducer (state = initialState, action) {
       return {
         ...state,
         patient: initialState.patient
+      }
+
+    case RESET_PATIENT_FORM:
+      return {
+        ...state,
+        addNewPatient: {
+          ...state.addNewPatient,
+          isLoading: initialState.isLoading,
+          errorState: initialState.errorState
+        }
+      }
+
+    case UPDATE_PATIENT_FORM_VALUE:
+      return {
+        ...state,
+        patient: {
+          ...state.patient,
+          [action.name]: action.value
+        }
       }
 
     default:

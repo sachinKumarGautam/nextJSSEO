@@ -48,6 +48,11 @@ const styles = theme => {
     },
     patientDetailsCardWrapper: {
       padding: theme.spacing.unit * 1.25
+    },
+    patientWrapper: {
+      border: `1px solid ${theme.palette.customGrey.grey250}`,
+      padding: theme.spacing.unit * 2.5,
+      borderRadius: theme.spacing.unit * 0.5
     }
   }
 }
@@ -109,6 +114,8 @@ class PatientDetailsList extends Component {
                   this.props.submitPatientDetailsLoading
                 }
                 isEdit={'false'}
+                resetPatientForm={this.props.resetPatientForm}
+                updatePatientFormValue={this.props.updatePatientFormValue}
               />
             </div>
           </div>
@@ -123,6 +130,7 @@ class PatientDetailsList extends Component {
             }
             getPatientDetailsListLoading={this.props.getPatientDetailsListLoading}
             customerState={this.props.customerState}
+            patientWrapper={this.props.classes.patientWrapper}
           />
         </CardContent>
       </Card>

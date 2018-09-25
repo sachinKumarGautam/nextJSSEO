@@ -62,6 +62,7 @@ const styles = theme => ({
       visibility: 'visible !important',
       opacity: '1 !important'
     },
+    opacity: '1 !important',
     borderRadius: '4px'
   },
   description: {
@@ -101,8 +102,8 @@ class PriceDetails extends Component {
                   effect='solid'
                   place='right'
                   className={this.props.classes.paper}
-                  delayHide={1000}
-                  delayShow={1000}
+                  // delayHide={1000}
+                  delayShow={500}
                 >
                   <Typography
                     variant='caption'
@@ -131,8 +132,8 @@ class PriceDetails extends Component {
                   effect='solid'
                   place='right'
                   className={this.props.classes.paper}
-                  delayHide={1000}
-                  delayShow={1000}
+                  // delayHide={1000}
+                  delayShow={500}
                 >
                   <Typography
                     variant='caption'
@@ -149,25 +150,39 @@ class PriceDetails extends Component {
                 Coupon Discount
               </Typography>
             }
+            {
+              this.props.orderDetailsState.payload.urgent_delivery_charge
+                ? (<Typography className={this.props.classes.discount}>
+                Express Delivery Charges
+                </Typography>)
+                : null
+            }
           </Grid>
           <Grid item xs={4}>
             <Typography className={this.props.classes.itemTotalAmount}>
-              Rs. {this.props.orderDetailsState.payload.total_mrp}
+              &#8377; {this.props.orderDetailsState.payload.total_mrp}
             </Typography>
             <Typography className={this.props.classes.discountAmount}>
-              - Rs. {this.props.orderDetailsState.payload.discount}
+              - &#8377; {this.props.orderDetailsState.payload.discount}
             </Typography>
             <Typography className={this.props.classes.discountAmount}>
-              - Rs. {this.props.orderDetailsState.payload.redeemed_care_points}
+              - &#8377; {this.props.orderDetailsState.payload.redeemed_care_points}
             </Typography>
             <Typography className={this.props.classes.discountAmount}>
-              - Rs. {this.props.orderDetailsState.payload.redeemed_cash}
+              - &#8377; {this.props.orderDetailsState.payload.redeemed_cash}
             </Typography>
             {
               this.props.orderDetailsState.payload.coupon_code &&
               <Typography className={this.props.classes.discountAmount}>
-                - Rs. {this.props.orderDetailsState.payload.coupon_discount}
+                - &#8377; {this.props.orderDetailsState.payload.coupon_discount}
               </Typography>
+            }
+            {
+              this.props.orderDetailsState.payload.urgent_delivery_charge
+                ? (<Typography className={this.props.classes.discountAmount}>
+                  {this.props.orderDetailsState.payload.urgent_delivery_charge}
+                </Typography>)
+                : null
             }
           </Grid>
         </Grid>

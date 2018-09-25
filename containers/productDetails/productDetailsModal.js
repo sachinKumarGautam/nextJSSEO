@@ -27,6 +27,7 @@ const initialState = {
     diseases: [],
     slug: '',
     selling_price: 0,
+    mrp: 0,
     discount: 0,
     uses: [],
     side_effects: [],
@@ -37,7 +38,8 @@ const initialState = {
     lc_assured_available: false,
     is_cold_storage: false,
     packaging_type: null,
-    description: ''
+    description: '',
+    max_order_unit_quantity: 0
   },
   isLoadingGetProductDetails: false,
   errorStateGetProductDetails: {

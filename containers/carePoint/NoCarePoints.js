@@ -1,3 +1,4 @@
+import React from 'react'
 import { withStyles } from '@material-ui/core/styles'
 import Loader from '../../components/activityIndicator/loader'
 import Typography from '@material-ui/core/Typography'

@@ -18,7 +18,9 @@ import PriceDetails from './PriceDetails'
 import TotalAmount from './TotalAmount'
 import TermsAndCondition from './TermsAndCondition'
 
-// import Button from '../../components/button'
+import Button from '../../components/button'
+
+import { PAYMENT_PENDING } from '../../components/constants/paymentConstants'
 
 /*
   OrderStatusDetails
@@ -80,37 +82,38 @@ const styles = theme => ({
   }
 })
 
-const OrderContentWrapper = (props) => {
+const OrderContentWrapper = props => {
   return (
     <div className={props.classes.orderContentWrapper}>
       <OrderStatusDetails
         orderId={props.orderDetailsState.payload.id}
+        serviceType={props.orderDetailsState.payload.service_type}
+        deliveryOption={props.orderDetailsState.payload.delivery_option}
       />
-      <Divider />
+      <Divider className={props.classes.divider} />
       <PaymentDetails
         createdAt={props.orderDetailsState.payload.created_at}
         paymentMethod={props.orderDetailsState.payload.payment_method}
         paymentStatus={props.orderDetailsState.payload.viewStatus}
       />
-      <Bazooka
-        orderDetailsState={props.orderDetailsState}
-      />
+      <Bazooka orderDetailsState={props.orderDetailsState} />
       <PaymentDeliveryDetail
         deliveryOption={props.orderDetailsState.payload.delivery_option}
         serviceType={props.orderDetailsState.payload.service_type}
         constantsState={props.constantsState}
       />
       <DeliveryDate
-        promisedDeliveryDate={props.orderDetailsState.payload.promised_delivery_date}
+        promisedDeliveryDate={
+          props.orderDetailsState.payload.promised_delivery_date
+        }
       />
-      {
-        props.orderDetailsState.payload.order_prescriptions.length
-          ? (
-            <Prescriptions
-              orderPrescriptions={props.orderDetailsState.payload.order_prescriptions}
-            />
-          ) : null
-      }
+      {props.orderDetailsState.payload.order_prescriptions.length
+        ? <Prescriptions
+          orderPrescriptions={
+            props.orderDetailsState.payload.order_prescriptions
+          }
+        />
+        : null}
       <PatientDetails
         patientFirstName={props.orderDetailsState.payload.patient_first_name}
         patientLastName={props.orderDetailsState.payload.patient_last_name}
@@ -118,62 +121,48 @@ const OrderContentWrapper = (props) => {
       <AddressDetails
         shippingAddress={props.orderDetailsState.payload.shipping_address}
       />
-      {
-        props.orderDetailsState.payload.order_items.length
-          ? (
-            <MedicineList
-              orderItems={props.orderDetailsState.payload.order_items}
-            />
-          ) : null
-      }
+      {props.orderDetailsState.payload.order_items.length
+        ? <MedicineList
+          orderItems={props.orderDetailsState.payload.order_items}
+        />
+        : null}
       <CouponMessage />
       <Divider className={props.classes.divider} />
-      {
-        props.orderDetailsState.payload.order_items.length
-          ? (
-            <PriceDetails
-              orderDetailsState={props.orderDetailsState}
-            />
-          ) : null
-      }
-      {
-        props.orderDetailsState.payload.order_items.length
-          ? (
-            <TotalAmount
-              orderDetailsState={props.orderDetailsState}
-            />
-          ) : null
-      }
+      {props.orderDetailsState.payload.order_items.length
+        ? <PriceDetails orderDetailsState={props.orderDetailsState} />
+        : null}
+      {props.orderDetailsState.payload.order_items.length
+        ? <TotalAmount orderDetailsState={props.orderDetailsState} />
+        : null}
       <TermsAndCondition
         sellerName={props.orderDetailsState.payload.seller_name}
       />
-      {
-        // <div className={props.classes.buttonWrapper}>
-        //   <Button
-        //     size='small'
-        //     variant='outlined'
-        //     color='primary'
-        //     classes={{
-        //       root: props.classes.buttonViewRoot,
-        //       label: props.classes.buttonViewLabel
-        //     }}
-        //     className={props.classes.buttonViewStyle}
-        //     // onClick={this.handleClickOpen}
-        //     label={'Retry Payment'}
-        //   />
-        //   <Button
-        //     size='small'
-        //     variant='raised'
-        //     color='primary'
-        //     classes={{
-        //       label: props.classes.buttonHomeLabel
-        //     }}
-        //     className={props.classes.buttonHomeStyle}
-        //     // onClick={() => { Router.push({ pathname: HOME_PAGE }) }}
-        //     label={'Convert to COD'}
-        //   />
-        // </div>
-      }
+      {props.orderDetailsState.payload.status === PAYMENT_PENDING &&
+        <div className={props.classes.buttonWrapper}>
+          <Button
+            size='small'
+            variant='outlined'
+            color='primary'
+            classes={{
+              root: props.classes.buttonViewRoot,
+              label: props.classes.buttonViewLabel
+            }}
+            className={props.classes.buttonViewStyle}
+            onClick={props.retryPayment}
+            label={'RETRY PAYMENT'}
+          />
+          <Button
+            size='small'
+            variant='raised'
+            color='primary'
+            classes={{
+              label: props.classes.buttonHomeLabel
+            }}
+            className={props.classes.buttonHomeStyle}
+            onClick={props.placeOrder}
+            label={'CONVERT TO COD'}
+          />
+        </div>}
       {
         // <OrderDetailsFooter />
       }

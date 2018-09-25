@@ -12,10 +12,11 @@ const styles = theme => ({
     marginTop: theme.spacing.unit * 1.25
   },
   patientName: {
-    fontSize: theme.spacing.unit * 2,
+    fontSize: theme.typography.pxToRem(14),
     fontWeight: theme.typography.fontWeightBold,
     color: theme.palette.customGrey.grey500,
-    marginLeft: theme.spacing.unit * 2.5
+    marginLeft: theme.spacing.unit * 2.5,
+    marginTop: theme.spacing.unit / 4
   },
   image: {
     height: theme.spacing.unit * 2,

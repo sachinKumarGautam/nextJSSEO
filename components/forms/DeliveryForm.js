@@ -19,7 +19,9 @@ import {
   STREET1_REQUIRED,
   MOBILE_INVALID,
   MOBILE_VALIDATION_REGEX,
-  NUMBER_VALIDATION_REGEX
+  NUMBER_VALIDATION_REGEX,
+  NAME_VALIDATION_REGEX,
+  NAME_VALIDATION_MSG
 } from '../../containers/messages/ValidationMsg'
 
 // Helper styles for demo
@@ -44,7 +46,8 @@ const styles = theme => ({
     textAlign: 'center'
   },
   mobilePrefix: {
-    marginBottom: theme.spacing.unit / 8
+    marginBottom: 0,
+    color: theme.palette.customGrey.grey200
   }
 })
 
@@ -62,13 +65,33 @@ class DeliveryForm extends React.Component {
     )
   }
 
+  componentDidUpdate (prevProps) {
+    const fullName = this.props.customerState.payload.full_name
+    const mobile = this.props.customerState.payload.mobile
+    const prevPropsFullName = prevProps.customerState.payload.full_name
+    const prevPropsMobile = prevProps.customerState.payload.mobile
+
+    if (fullName !== prevPropsFullName || mobile !== prevPropsMobile) {
+      this.props.updateAddressFormValue(
+        this.props.deliveryDetailsState,
+        'full_name',
+        fullName
+      )
+      this.props.updateAddressFormValue(
+        this.props.deliveryDetailsState,
+        'mobile',
+        this.props.customerState.payload.mobile
+      )
+    }
+  }
+
   onPincodeInput (handleChange, event) {
     if (event.target.value.length > 6) return
     else if (event.target.value.length === 6) {
       this.props.checkPincodeDetailLoading(
         this.props.checkPincodeState,
-        { handleClose: '' },
-        { setSubmitting: '' },
+        null, // handleClose function to close pincode dialog
+        null, // setSubmitting function for pincode form submission
         event.target.value,
         { isDeliveryAddress: true }
       )
@@ -90,6 +113,12 @@ class DeliveryForm extends React.Component {
       (name === 'mobile' && inputValue.length <= 10 && regexInputExpression) ||
       !inputValue
     ) {
+      this.props.updateAddressFormValue(
+        this.props.deliveryDetailsState,
+        name,
+        inputValue
+      )
+    } else if (name !== 'mobile') {
       this.props.updateAddressFormValue(
         this.props.deliveryDetailsState,
         name,
@@ -233,7 +262,7 @@ class DeliveryForm extends React.Component {
           disabled
         >
           <Input
-            placeholder='  City'
+            placeholder='City'
             className={classes.valueStyle}
             id='city'
             type='text'
@@ -297,7 +326,10 @@ export default withStyles(styles)(
       }
     },
     validationSchema: Yup.object().shape({
-      full_name: Yup.string().trim().required(FULL_NAME_REQUIRED),
+      full_name: Yup.string()
+        .matches(NAME_VALIDATION_REGEX, NAME_VALIDATION_MSG)
+        .trim()
+        .required(FULL_NAME_REQUIRED),
       mobile: Yup.string()
         .trim()
         .min(10, MOBILE_INVALID)

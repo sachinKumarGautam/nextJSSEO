@@ -45,12 +45,14 @@ export function getProductDetailSuccess (productDetailsState, result) {
     available_service_type: result.available_service_type,
     max_order_quantity: result.max_order_quantity,
     bulk_order_quantity: result.bulk_order_quantity,
+    quantity: 0,
     refill_index: result.refill_index,
     diseases: result.diseases,
     slug: result.slug,
     discount: result.discount,
     uses: result.uses,
     selling_price: result.selling_price,
+    mrp: result.mrp,
     side_effects: result.side_effects,
     how_it_works: result.how_it_works,
     precautions: result.precautions,
@@ -60,7 +62,8 @@ export function getProductDetailSuccess (productDetailsState, result) {
     is_cold_storage: result.is_cold_storage,
     packaging_type: result.packaging_type,
     description: result.description,
-    isLoading: false
+    isLoading: false,
+    max_order_unit_quantity: result.max_order_unit_quantity
   }
 }
 

@@ -2,7 +2,9 @@ import {
   CHECK_PINCODE_LOADING,
   CHECK_PINCODE_SUCCESS,
   CHECK_PINCODE_FAILURE,
-  HANDLE_PINCODE_DIALOG
+  HANDLE_PINCODE_DIALOG,
+  RESET_PINCODE_STATE,
+  CHANGE_PINCODE
 } from './pincodeActionTypes'
 
 export function openPincodeDialog (checkPincodeState, { isOpen }) {
@@ -17,22 +19,23 @@ export function checkPincodeLoading (
   handleClose,
   setSubmitting,
   values,
-  { isDeliveryAddress },
-  incrementCartItemLoading = null,
-  inProgressCartItem = {}
+  {...defaultArgs} // an object with default values
 ) {
   return {
     type: CHECK_PINCODE_LOADING,
     checkPincodeState,
     handleClose: handleClose,
     setSubmitting: setSubmitting,
-    isDeliveryAddress: isDeliveryAddress,
-    incrementCartItemLoading: incrementCartItemLoading,
-    inProgressCartItem: inProgressCartItem,
-    pincode: isDeliveryAddress ? values : values.pincode,
+    isDeliveryAddress: defaultArgs.isDeliveryAddress,
+    incrementCartItemLoading: defaultArgs.incrementCartItemLoading,
+    inProgressCartItem: defaultArgs.inProgressCartItem,
+    pincode: defaultArgs.isDeliveryAddress ? values : values.pincode,
+    isCartAddressSelection: defaultArgs.isCartAddressSelection,
+    addressId: defaultArgs.addressId,
     isLoading: true,
     isError: false,
-    error: {}
+    error: {},
+    isDeliveryAssignment: defaultArgs.isDeliveryAssignment
   }
 }
 
@@ -64,5 +67,19 @@ export function checkPincodeFailure (checkPincodeState, error) {
     isLoading: false,
     isError: true,
     error: error.response ? error.response.body.error.code : null
+  }
+}
+
+export function resetPincodeState (checkPincodeState) {
+  return {
+    type: RESET_PINCODE_STATE,
+    pincode: checkPincodeState.payload.pincode
+  }
+}
+
+export function changePincodeValue (checkPincodeState, pincodeValue) {
+  return {
+    type: CHANGE_PINCODE,
+    pincodeValue: pincodeValue
   }
 }

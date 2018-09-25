@@ -1,5 +1,5 @@
 import { of } from 'rxjs/observable/of'
-import { mergeMap, catchError, map, flatMap } from 'rxjs/operators'
+import { mergeMap, catchError, flatMap } from 'rxjs/operators'
 import { ofType } from 'redux-observable'
 import http from '../../services/api/ajaxWrapper'
 
@@ -12,7 +12,7 @@ import {
   sendOtpFailure,
   verifyOtpSuccess,
   verifyOtpFailure,
-  toggleAuthentication
+  resetLoginState
 } from './loginActions'
 
 import {
@@ -32,12 +32,12 @@ export function sendOTP (action$, store) {
       const loginState = store.getState().loginState
 
       return http(sendOtp$(data.values)).pipe(
-        map(result => {
+        flatMap(result => {
           data.setSubmitting(false)
           setTimeout(() => {
             data.toggleForm('otp')
           }, 350)
-          return sendOtpSuccess(loginState, result, data.values)
+          return of(sendOtpSuccess(loginState, result, data.values), resetLoginState())
         }),
         catchError(error => {
           data.setSubmitting(false)
@@ -79,7 +79,6 @@ export function verifyOTP (action$, store) {
             )
           } else {
             successObservable = of(
-              toggleAuthentication(loginState, true),
               fetchUserInfoLoading(customerState, mobile),
               verifyOtpSuccess(loginState, result, isNewUser),
               updatePhoneNumber(customerState, mobile),

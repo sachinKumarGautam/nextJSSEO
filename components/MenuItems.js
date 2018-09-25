@@ -10,7 +10,8 @@ import {
   PRESCRIPTION,
   CARE_POINTS,
   ADDRESS_LIST,
-  PATIENT_LIST
+  PATIENT_LIST,
+  REFILL_PATIENTS
 } from '../routes/RouteConstant'
 
 import { getReplacedString } from '../utils/replaceConstants'
@@ -19,7 +20,7 @@ const styles = theme => {
   return {
     orderStyle: {
       ...theme.typography.caption,
-      paddingLeft: theme.spacing.unit * 7,
+      paddingLeft: theme.spacing.unit * 6.75,
       color: theme.palette.customGrey.grey500,
       marginTop: theme.spacing.unit * 2,
       paddingBottom: theme.spacing.unit / 2,
@@ -27,7 +28,7 @@ const styles = theme => {
     },
     menuStyle: {
       ...theme.typography.caption,
-      paddingLeft: theme.spacing.unit * 7,
+      paddingLeft: theme.spacing.unit * 6.75,
       color: theme.palette.customGrey.grey500,
       paddingTop: theme.spacing.unit * 0,
       paddingBottom: theme.spacing.unit / 2
@@ -35,6 +36,13 @@ const styles = theme => {
     listWrapper: {
       listStyle: 'none',
       paddingLeft: 0
+    },
+    logoutStyle: {
+      ...theme.typography.caption,
+      paddingLeft: theme.spacing.unit * 6.75,
+      color: theme.palette.customGrey.grey500,
+      paddingTop: theme.spacing.unit * 0,
+      marginBottom: theme.spacing.unit * 2
     }
   }
 }
@@ -53,6 +61,10 @@ class MenuItems extends Component {
     let menuStyle = this.props.isSideMenu
       ? this.props.customMenuStyle
       : this.props.classes.menuStyle
+
+    let logout = this.props.isSideMenu
+      ? this.props.customMenuStyle
+      : this.props.classes.logoutStyle
 
     return (
       <div className={this.props.classes.listWrapper}>
@@ -82,15 +94,21 @@ class MenuItems extends Component {
         </MenuItem>
         <MenuItem
           className={menuStyle}
+          onClick={this.redirectToPath.bind(this, REFILL_PATIENTS)}
+        >
+          Past Medicines
+        </MenuItem>
+        <MenuItem
+          className={menuStyle}
           onClick={this.redirectToPath.bind(this, CARE_POINTS)}
         >
-          Care Points / Care Points +
+          Care Points
         </MenuItem>
-        {!this.props.isSideMenu &&
+        {/* {!this.props.isSideMenu &&
           <MenuItem className={menuStyle}>Content</MenuItem>}
         {!this.props.isSideMenu &&
-          <MenuItem className={menuStyle}>Bookmarks</MenuItem>}
-        <MenuItem className={menuStyle} onClick={this.props.logout}>
+          <MenuItem className={menuStyle}>Bookmarks</MenuItem>} */}
+        <MenuItem className={logout} onClick={this.props.logout}>
           Log out
         </MenuItem>
       </div>

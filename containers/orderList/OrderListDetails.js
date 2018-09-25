@@ -17,8 +17,15 @@ import ComponentSpecificError from '../../components/activityIndicator/error/Com
 import SnackbarErrorMessage from '../../components/activityIndicator/error/SnackbarErrorMessage'
 
 import { getReplacedString } from '../../utils/replaceConstants'
-import { ORDER_DETAILS } from '../../routes/RouteConstant'
+import {
+  ORDER_DETAILS,
+  THANK_YOU
+} from '../../routes/RouteConstant'
 import {NO_ORDER_LIST} from '../messages/noDataMessage'
+
+import {
+  COD
+} from '../../components/constants/paymentConstants'
 
 import Router from 'next/router'
 
@@ -40,7 +47,7 @@ const styles = theme => ({
     ...theme.typography.headline,
     color: theme.palette.customGrey.grey500,
     marginLeft: theme.spacing.unit * 2,
-    marginBottom: theme.spacing.unit * 6
+    marginBottom: theme.spacing.unit * 7
   },
   buttonRoot: {
     backgroundColor: theme.palette.common.white,
@@ -71,6 +78,21 @@ class OrderListDetails extends Component {
     this.state = {
       page: 0,
       isShowMore: false
+    }
+  }
+
+  componentDidUpdate (prevProps) {
+    if (
+      (this.props.cartState.isOrderSubmitted !==
+      prevProps.cartState.isOrderSubmitted) &&
+      this.props.cartState.isOrderSubmitted &&
+      this.props.cartState.orderResponse.payload.order_type === COD
+    ) {
+      this.props.resetCartState()
+      const url = getReplacedString(THANK_YOU)
+      const as = `${url}?payment-status=success`
+      const href = `${url}?payment-status=success`
+      Router.push(href, as)
     }
   }
 
@@ -110,8 +132,32 @@ class OrderListDetails extends Component {
     Router.push(url)
   }
 
+  placeOrder (orderId) {
+    const paymentChannel = COD
+
+    this.props.paymentInitiateLoading(
+      this.props.cartState,
+      orderId,
+      paymentChannel
+    )
+  }
+
+  retryPayment (orderId) {
+    const mappedObject = {
+      order_id: orderId
+    }
+
+    this.props.resetCartState()
+    const url = getReplacedString(THANK_YOU, mappedObject)
+    const as = `${url}?payment-status=retry`
+    const href = `${url}?payment-status=retry`
+    Router.push(href, as)
+  }
+
   render () {
     const { orderListState } = this.props
+    const orderListPagesCondition = (this.state.page + 1) !== this.props.orderListState.totalPages
+
     return (
       <Card elevation={'1'} className={this.props.classes.card}>
         <CardContent className={this.props.classes.cardContent}>
@@ -151,7 +197,11 @@ class OrderListDetails extends Component {
                       redirectToOrderDeatails={this.redirectToOrderDeatails.bind(this, orderDetails.id)}
                     />
                     <Divider />
-                    <OrderContent orderDetails={orderDetails} />
+                    <OrderContent
+                      orderDetails={orderDetails}
+                      placeOrder={this.placeOrder.bind(this, orderDetails.id)}
+                      retryPayment={this.retryPayment.bind(this, orderDetails.id)}
+                    />
                     <Divider />
                     <OrderFooter orderDetails={orderDetails} />
                   </div>
@@ -166,23 +216,25 @@ class OrderListDetails extends Component {
               </Typography>
             }
             {
-              this.props.orderListState.payload.length
-                ? <div className={this.props.classes.buttonWrapper}>
-                  <Button
-                    size='medium'
-                    loaderColor={'primary'}
-                    // isloading={orderListState.isLoading}
-                    variant='outlined'
-                    className={this.props.classes.button}
-                    classes={{
-                      root: this.props.classes.buttonRoot,
-                      label: this.props.classes.buttonLabel
-                    }}
-                    onClick={this.onClickOfShowMore.bind(this)}
-                    label={'Show more'}
-                  />
-                </div>
-                : null
+              this.props.orderListState.payload.length &&
+              orderListPagesCondition
+                ? (
+                  <div className={this.props.classes.buttonWrapper}>
+                    <Button
+                      size='medium'
+                      loaderColor={'primary'}
+                      // isloading={orderListState.isLoading}
+                      variant='outlined'
+                      className={this.props.classes.button}
+                      classes={{
+                        root: this.props.classes.buttonRoot,
+                        label: this.props.classes.buttonLabel
+                      }}
+                      onClick={this.onClickOfShowMore.bind(this)}
+                      label={'Show more'}
+                    />
+                  </div>
+                ) : null
             }
           </ActivityIndicator>
         </CardContent>

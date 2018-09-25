@@ -1,79 +1,75 @@
 import React, { Component } from 'react'
 
-import MenuList from '@material-ui/core/MenuList'
+import TextField from '@material-ui/core/TextField'
 import MenuItem from '@material-ui/core/MenuItem'
 import { withStyles } from '@material-ui/core/styles'
-import ListItemIcon from '@material-ui/core/ListItemIcon'
-import ListItemText from '@material-ui/core/ListItemText'
-import ActivityIndicator from '../../components/activityIndicator'
-import SideListItemsLoader
-  from '../../components/activityIndicator/loader/SideListItemLoader'
+import InputAdornment from '@material-ui/core/InputAdornment'
 
 const styles = theme => ({
-  menuItem: {
-    '&:focus': {
-      // backgroundColor: theme.palette.primary.main,
-      '& $primary, & $icon': {
-        color: theme.palette.primary.main,
-        fontWeight: theme.typography.fontWeightBold
-      }
-    }
+  textField: {
+    flexBasis: theme.spacing.unit * 34.25,
+    margin: theme.spacing.unit,
+    marginRight: theme.spacing.unit * 1.5
   },
-  primary: {
-    ...theme.typography.caption,
+  menuWrapper: {
+    display: 'flex',
+    flexDirection: 'row-reverse'
+  },
+  inputStyle: {
+    ...theme.typography.subheading,
     color: theme.palette.customGrey.grey500
   },
-  icon: {
-    marginRight: theme.spacing.unit * 1.81
+  imageStyle: {
+    marginTop: theme.spacing.unit,
+    marginLeft: theme.spacing.unit * 1.75
   }
 })
 
 class PatientList extends Component {
-  getPastMedicines (patientId, patientName, patient) {
+  getPastMedicines (event, index, value) {
     this.props.getRefillPastMedicinesLoading(
       this.props.pastMedicineState,
-      patientId
+      event.target.value
     )
+    const patientDetail = this.props.patientDetailsState.payload.filter((item) => item.id === event.target.value)
     this.props.updateSelectedPatientDetails(
       this.props.pastMedicineState,
-      patientId,
-      patientName,
-      patient
+      event.target.value,
+      patientDetail.full_name,
+      patientDetail
     )
   }
 
   render () {
     const { classes, patientDetailsState } = this.props
     return (
-      <ActivityIndicator
-        isLoading={patientDetailsState.isLoading}
-        LoaderComp={<SideListItemsLoader />}
-      >
-        <MenuList>
+      <div className={classes.menuWrapper}>
+        <TextField
+          value={this.props.pastMedicineState.selectedPatientId}
+          onChange={this.getPastMedicines.bind(this)}
+          select
+          className={classes.textField}
+          InputProps={{
+            startAdornment: <InputAdornment position='start'>
+              <img src='/static/images/shape-copy-2.svg' className={classes.imageStyle} />
+            </InputAdornment>
+          }}
+          SelectProps={{
+            classes: {
+              selectMenu: classes.inputStyle
+            }
+          }}
+        >
+          <MenuItem key={''} value={0} disabled={this.props.pastMedicineState.selectedPatientId !== 0}>
+            Select Patient
+          </MenuItem>
           {patientDetailsState.payload.map((patient, index) => (
-            <MenuItem
-              className={classes.menuItem}
-              onClick={
-                this.getPastMedicines.bind(
-                  this,
-                  patient.id,
-                  patient.full_name,
-                  patient
-                )
-              }
-            >
-              <ListItemIcon className={classes.icon}>
-                <img src='/static/images/shape-copy.svg' />
-              </ListItemIcon>
-              <ListItemText
-                classes={{ primary: classes.primary }}
-                inset
-                primary={patient.full_name}
-              />
+            <MenuItem key={index} value={patient.id}>
+              {patient.full_name}
             </MenuItem>
           ))}
-        </MenuList>
-      </ActivityIndicator>
+        </TextField>
+      </div>
     )
   }
 }
