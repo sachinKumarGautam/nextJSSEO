@@ -125,7 +125,7 @@ class MedicineList extends Component {
 
                     <div
                       onClick={
-                        quantityStatus !== 'decrease' && !cartItem.isLoading
+                        !cartItem.isLoading
                           ? (
                             this.props.decrementCartItem.bind(
                               this,
@@ -154,7 +154,7 @@ class MedicineList extends Component {
                     <div
                       className={this.props.classes.iconButton}
                       onClick={
-                        quantityStatus !== 'increase' && !cartItem.isLoading
+                        !cartItem.isLoading
                           ? (
                             this.props.incrementCartItem.bind(
                               this,
