@@ -190,7 +190,7 @@ const ThankyouDetails = (props) => {
                 {ASSURED_DELIVERY_MSG}<a
                   href='#'
                   data-tip
-                  data-for='urgent_delivery'
+                  data-for='assured'
                   className={props.classes.infoStyle}
                 >
                                     *.
