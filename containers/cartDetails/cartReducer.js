@@ -107,6 +107,7 @@ export default function cartReducer (state = initialState, action) {
             ...state.payload.cart_items,
             payload: action.cart_items
           },
+          seller_detail: action.seller_detail,
           cart_prescriptions: action.cart_prescriptions,
           source_type: action.source_type,
           delivery_option: action.delivery_option,
@@ -181,7 +182,8 @@ export default function cartReducer (state = initialState, action) {
           total_payable_amount: action.total_payable_amount,
           total_sale_price: action.total_sale_price,
           total_tax_amount: action.total_tax_amount,
-          excessive_ordered_quantity: action.excessive_ordered_quantity
+          excessive_ordered_quantity: action.excessive_ordered_quantity,
+          seller_detail: action.seller_detail
         }
       }
 
@@ -238,6 +240,7 @@ export default function cartReducer (state = initialState, action) {
         payload: {
           ...state.payload,
           payment_channels: action.payment_channels,
+          seller_detail: action.seller_detail,
           patient_details: {
             ...state.payload.patient_details,
             isLoading: action.isLoading,
@@ -305,6 +308,7 @@ export default function cartReducer (state = initialState, action) {
         payload: {
           ...state.payload,
           payment_channels: action.payment_channels,
+          seller_detail: action.seller_detail,
           available_delivery_option: action.available_delivery_option,
           preferred_delivery_option: action.preferred_delivery_option,
           delivery_option: action.delivery_option,
@@ -380,6 +384,7 @@ export default function cartReducer (state = initialState, action) {
           cart_prescriptions: action.cart_prescriptions,
           is_cart_transfered: action.is_cart_transfered,
           source_type: action.source_type,
+          seller_detail: action.seller_detail,
           is_doctor_callback: {
             ...state.payload.is_doctor_callback,
             payload: action.doctor_callback

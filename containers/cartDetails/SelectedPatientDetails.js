@@ -14,8 +14,8 @@ const SelectedPatientDetails = props => (
       component='h1'
       className={props.patientDetails}
     >
-      {props.patient.gender} |
-      {props.patient.age}
+      {props.patient.gender}
+      {props.patient.age ? ' | ' + props.patient.age : ''}
     </Typography>
     <Typography
       component='h1'

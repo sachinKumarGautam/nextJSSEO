@@ -151,7 +151,7 @@ class PriceDetails extends Component {
           </Grid>
           <Grid item xs={4}>
             <Typography className={this.props.classes.itemTotalAmount}>
-              ₹{this.props.cartState.payload.total_mrp}
+              ₹ {this.props.cartState.payload.total_mrp}
             </Typography>
             <Typography className={this.props.classes.discountAmount}>
               - ₹ {this.props.cartState.payload.discount}

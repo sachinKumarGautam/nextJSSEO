@@ -50,6 +50,7 @@ const initialState = {
         error: {}
       }
     },
+    seller_detail: {},
     coupon_code: '',
     care_points: 0,
     coupon_discount: 0,
