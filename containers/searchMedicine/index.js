@@ -297,7 +297,7 @@ class SearchMedicine extends React.Component {
                   fullWidth: true,
                   classes,
                   InputProps: getInputProps({
-                    placeholder: 'Search medicine...',
+                    placeholder: 'Search Medicines',
                     id: 'search-medicine',
                     autoFocus: true,
                     onChange: this.searchMedicineOnChange,
