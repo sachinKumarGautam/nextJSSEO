@@ -66,7 +66,7 @@ export function checkPincodeFailure (checkPincodeState, error) {
     checkPincodeState,
     isLoading: false,
     isError: true,
-    error: error.response ? error.response.body.error.code : null
+    error: error
   }
 }
 

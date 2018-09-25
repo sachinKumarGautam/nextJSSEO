@@ -17,9 +17,6 @@ import {
   NUMBER_VALIDATION_REGEX
 } from '../../containers/messages/ValidationMsg'
 import { OTP_PLACEHOLDER } from '../../containers/messages/PlaceholderMsg'
-import {
-  CUSTOM_MESSGAE_SNACKBAR
-} from '../../containers/messages/errorMessages'
 
 const styles = theme => ({
   formControl: {
@@ -58,7 +55,7 @@ const styles = theme => ({
 })
 
 class OTPForm extends React.Component {
-  constructor (props) {
+  constructor(props) {
     super(props)
     this.state = {
       isSubmit: false,
@@ -71,7 +68,7 @@ class OTPForm extends React.Component {
     this.resendOtp = this.resendOtp.bind(this)
   }
 
-  componentDidMount () {
+  componentDidMount() {
     this.customCountTimer()
   }
 
@@ -85,7 +82,7 @@ class OTPForm extends React.Component {
     }
   }
 
-  customCountTimer () {
+  customCountTimer() {
     this.setState({
       isHideResetButton: true
     })
@@ -108,7 +105,7 @@ class OTPForm extends React.Component {
     }, 1000)
   }
 
-  resendOtp () {
+  resendOtp() {
     this.props.resendButtonClick(
       this.props.loginState,
       this.props.setSubmitting,
@@ -118,7 +115,7 @@ class OTPForm extends React.Component {
     this.customCountTimer()
   }
 
-  render () {
+  render() {
     const {
       values,
       touched,
@@ -136,7 +133,7 @@ class OTPForm extends React.Component {
           aria-describedby='otp'
           error={
             (errors.otp && touched.otp) ||
-              loginState.errorStateVerifyOtp.isError
+            loginState.errorStateVerifyOtp.isError
           }
         >
           <Input
@@ -154,7 +151,7 @@ class OTPForm extends React.Component {
           {
             ((errors.otp && touched.otp) || loginState.errorStateVerifyOtp.isError) &&
             <FormHelperText id='otp'>
-              {errors.otp ? errors.otp : CUSTOM_MESSGAE_SNACKBAR }
+              {errors.otp ? errors.otp : OTP_INVALID}
             </FormHelperText>
           }
           {
