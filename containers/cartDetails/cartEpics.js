@@ -69,9 +69,7 @@ import {
   optForDoctorCallbackLoading
 } from './cartActions'
 
-import {
-  toggleAuthentication
-} from '../login/loginActions'
+import { toggleAuthentication } from '../login/loginActions'
 
 import {
   getAnonymousCartId$,
@@ -93,6 +91,11 @@ import {
 } from '../../services/api'
 
 import { PAYMENT_GATEWAY } from '../../components/constants/paymentConstants'
+import {
+  QUANTITY_UPDATED,
+  ITEM_ADDED_TO_CART,
+  ITEM_REMOVED
+} from '../../containers/messages/cartMessages'
 
 export function getAnonymousCartIdEpic (action$, store) {
   return action$.pipe(
@@ -106,7 +109,10 @@ export function getAnonymousCartIdEpic (action$, store) {
 
           if (data.isAssignPatientToCart) {
             return of(
-              updateShowNoCartIdDialogFlag(data.cartState, isShowNoCartIdDialog),
+              updateShowNoCartIdDialogFlag(
+                data.cartState,
+                isShowNoCartIdDialog
+              ),
               getAnonymousCartIdSuccess(data.cartState, result.body.payload),
               savePatientToCartLoading(
                 data.cartState,
@@ -118,7 +124,10 @@ export function getAnonymousCartIdEpic (action$, store) {
             )
           } else {
             return of(
-              updateShowNoCartIdDialogFlag(data.cartState, isShowNoCartIdDialog),
+              updateShowNoCartIdDialogFlag(
+                data.cartState,
+                isShowNoCartIdDialog
+              ),
               getAnonymousCartIdSuccess(data.cartState, result.body.payload)
             )
           }
@@ -223,8 +232,11 @@ export function decrementCartItemEpic (action$, store) {
       }
 
       return http(putCartItem$(cartUid, medicineDecremented)).pipe(
-        map(result => {
-          return putCartItemSuccess(data.cartState, result.body.payload)
+        flatMap(result => {
+          return of(
+            goToCartSnackbar(data.cartState, true, QUANTITY_UPDATED),
+            putCartItemSuccess(data.cartState, result.body.payload)
+          )
         }),
         catchError(error => {
           return cartApiErrorHandling(
@@ -264,14 +276,14 @@ export function incrementCartItemEpic (action$, store) {
           const checkIfAlredyExistInCart = cartItems.findIndex(
             cartItem => medicineIncremented.sku === cartItem.sku
           )
-          if (checkIfAlredyExistInCart === -1) {
-            return of(
-              goToCartSnackbar(data.cartState, true),
-              putCartItemSuccess(data.cartState, result.body.payload)
-            )
-          } else {
-            return of(putCartItemSuccess(data.cartState, result.body.payload))
-          }
+          const snackbarMsg = medicineIncremented.quantity > 1
+            ? QUANTITY_UPDATED
+            : ITEM_ADDED_TO_CART
+
+          return of(
+            goToCartSnackbar(data.cartState, true, snackbarMsg),
+            putCartItemSuccess(data.cartState, result.body.payload)
+          )
         }),
         catchError(error => {
           return cartApiErrorHandling(
@@ -302,8 +314,12 @@ export function deleteCartItemEpic (action$, store) {
       let cartItemSku = data.medicineSelected.sku
 
       return http(deleteCartItem$(cartUid, cartItemSku)).pipe(
-        map(result => {
-          return putCartItemSuccess(data.cartState, result.body.payload)
+        flatMap(result => {
+          return of(goToCartSnackbar(
+            data.cartState,
+            true,
+            ITEM_REMOVED
+          ), putCartItemSuccess(data.cartState, result.body.payload))
         }),
         catchError(error => {
           return cartApiErrorHandling(
@@ -446,25 +462,28 @@ export function uploadPrescriptionEpic (action$, store) {
           )
 
           if (data.cartState.payload.is_doctor_callback.payload) {
-            return of(uploadPrescriptionSuccess(
-              data.cartState,
-              data.uploadedFiles,
-              updatedCartPrescriptions,
-              data.isHomePage
-            ),
-            optForDoctorCallbackLoading(
-              data.cartState,
-              data.cartState.payload.uid,
-              !data.cartState.payload.is_doctor_callback.payload
-            )
+            return of(
+              uploadPrescriptionSuccess(
+                data.cartState,
+                data.uploadedFiles,
+                updatedCartPrescriptions,
+                data.isHomePage
+              ),
+              optForDoctorCallbackLoading(
+                data.cartState,
+                data.cartState.payload.uid,
+                !data.cartState.payload.is_doctor_callback.payload
+              )
             )
           } else {
-            return of(uploadPrescriptionSuccess(
-              data.cartState,
-              data.uploadedFiles,
-              updatedCartPrescriptions,
-              data.isHomePage
-            ))
+            return of(
+              uploadPrescriptionSuccess(
+                data.cartState,
+                data.uploadedFiles,
+                updatedCartPrescriptions,
+                data.isHomePage
+              )
+            )
           }
         }),
         catchError(error => {

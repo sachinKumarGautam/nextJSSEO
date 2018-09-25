@@ -40,7 +40,8 @@ const styles = theme => ({
     textAlign: 'center'
   },
   otpInput: {
-    // textAlign: 'center',
+    textAlign: 'center',
+    letterSpacing: theme.spacing.unit
   },
   resendTimer: {
     ...theme.typography.body3,

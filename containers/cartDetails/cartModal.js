@@ -75,6 +75,7 @@ const initialState = {
   isShowNoCartIdDialog: false,
   isCartOpenLoginDialog: false,
   showAddToCartSnackBar: false,
+  snackbarMsg: '',
   isCartOpenRegisterDialog: false,
   isLoading: false,
   errorState: {
