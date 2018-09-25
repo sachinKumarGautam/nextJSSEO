@@ -74,7 +74,7 @@ export default function checkPincodeReducer (state = initialState, action) {
         isDeliveryAssignment: initialState.isDeliveryAssignment,
         pincodeValue: action.pincode
       }
-    
+
     case CHANGE_PINCODE: {
       return {
         ...state,

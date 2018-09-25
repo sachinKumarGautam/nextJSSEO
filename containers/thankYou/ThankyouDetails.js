@@ -19,6 +19,11 @@ import {
   getReplacedString
 } from '../../utils/replaceConstants'
 
+import {
+  DESCRIPTION_FIRST,
+  DESCRIPTION_SECOND
+} from '../messages/thankyouMessages'
+
 const styles = theme => ({
   imageStyle: {
     marginLeft: theme.spacing.unit * 5,
@@ -147,7 +152,7 @@ const ThankyouDetails = (props) => {
         variant='body2'
         className={props.classes.description}
       >
-        Your order is under process and is promised for same day Express delivery
+        {DESCRIPTION_FIRST}
         <a
           href='#'
           data-tip
@@ -169,8 +174,7 @@ const ThankyouDetails = (props) => {
               {getReplacedString(UREGNT_DELIVERY_TEXT, props.constantsState.constants.payload.constantsPayload)}
             </Typography>
           </ReactTooltip>
-        </a>
-            . We will call you shortly to confirm medicines and quantities.
+        </a>{DESCRIPTION_SECOND}
       </Typography>
     </div>
   )
