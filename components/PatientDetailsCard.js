@@ -93,10 +93,7 @@ class PatientDetailsCard extends React.Component {
                 className={this.props.classes.genderStyle}
               >
                 {this.props.patientDetail.gender}
-                {' '}
-                {this.props.patientDetail.age ? '|' : ''}
-                {' '}
-                {this.props.patientDetail.age ? this.props.patientDetail.age : ''}
+                {this.props.patientDetail.age ? ' | ' + this.props.patientDetail.age : ''}
               </Typography>
             </div>
             <div>
