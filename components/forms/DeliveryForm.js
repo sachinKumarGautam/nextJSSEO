@@ -175,7 +175,6 @@ class DeliveryForm extends React.Component {
             placeholder='Phone No.'
             className={classes.valueStyle}
             id='mobile'
-            disabled
             onChange={this.onChange.bind(this, 'mobile', handleChange)}
             value={values.mobile}
             startAdornment={

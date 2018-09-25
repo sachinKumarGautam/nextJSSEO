@@ -1,5 +1,6 @@
 import { withStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
+import { NO_ADDRESS_AVAILABLE } from '../containers/messages/commonMsg'
 
 const styles = theme => ({
   noAddress: {
@@ -22,7 +23,7 @@ const NoDeliveryAddress = ({ classes }) => (
   <div className={classes.noAddress}>
     <img className={classes.img} src='/static/images/no-address.png' />
     <Typography className={classes.text}>
-      Please add a delivery address{' '}
+      {NO_ADDRESS_AVAILABLE}
     </Typography>
   </div>
 )
