@@ -127,9 +127,9 @@ export function handleSessionExpiration (loginState, isSessionExpired) {
   }
 }
 
-export function updateErrorDetail (status) {
+export function updateErrorDetail (errorDetail) {
   return {
     type: COMMON_ERROR_UPDATE,
-    status
+    errorDetail
   }
 }

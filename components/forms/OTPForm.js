@@ -18,6 +18,10 @@ import {
 } from '../../containers/messages/ValidationMsg'
 import { OTP_PLACEHOLDER } from '../../containers/messages/PlaceholderMsg'
 
+import {
+  CUSTOM_MESSGAE_SNACKBAR
+} from '../../containers/messages/errorMessages'
+
 const styles = theme => ({
   formControl: {
     margin: theme.spacing.unit,
@@ -122,7 +126,8 @@ class OTPForm extends React.Component {
       isSubmitting,
       handleSubmit,
       classes,
-      loginState
+      loginState,
+      globalErrorState
       //   closeLoginModal
     } = this.props
     return (
@@ -150,7 +155,7 @@ class OTPForm extends React.Component {
           {((errors.otp && touched.otp) ||
             loginState.errorStateVerifyOtp.isError) &&
             <FormHelperText id='otp'>
-              {errors.otp ? errors.otp : OTP_INVALID}
+              {errors.otp ? errors.otp : (globalErrorState.statusCode === 401 ? OTP_INVALID : CUSTOM_MESSGAE_SNACKBAR )}
             </FormHelperText>}
           {this.state.isHideResetButton
             ? <Typography align='right' className={classes.resendTimer}>

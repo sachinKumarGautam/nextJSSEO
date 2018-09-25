@@ -55,6 +55,7 @@ class OTP extends React.Component {
           loginState={this.props.loginState}
           resendButtonClick={this.props.sendOtpLoading}
           isRegisterClicked={this.props.isRegisterClicked}
+          globalErrorState={this.props.globalErrorState}
         />
       </div>
     )

@@ -150,6 +150,7 @@ class LoginWrapper extends React.Component {
             verifyOtpLoading={this.props.actions.verifyOtpLoading}
             sendOtpLoading={this.props.actions.sendOtpLoading}
             isRegisterClicked={this.state.isRegisterClicked}
+            globalErrorState={this.props.globalErrorState}
           />
         )
     }

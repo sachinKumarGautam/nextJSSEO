@@ -89,7 +89,7 @@ const reducer = (state, action) => {
       ...state,
       globalErrorState: {
         ...state.globalErrorState,
-        statusCode: action.status.error.status ? action.status.error.status : 0
+        statusCode: action.errorDetail.error.status ? action.errorDetail.error.status : 0
       }
     }
   }
