@@ -57,7 +57,10 @@ import {
   submitPatientDetailsLoading
 } from '../patientDetails/patientDetailsActions'
 
-import { checkPincodeLoading, resetPincodeState } from '../location/pincode/pincodeAction'
+import {
+  checkPincodeLoading,
+  resetPincodeState
+} from '../location/pincode/pincodeAction'
 import PlaceOrderLoader
   from '../../components/activityIndicator/loader/PlaceOrderLoader'
 import {
@@ -65,6 +68,8 @@ import {
   SWITCH_PATIENT_DIALOG_CONTENT
 } from '../messages/refillPatientMessage'
 import RefillPatientDialogue from '../../components/RefillPatientDialogue'
+import FullPageMainLoader
+  from '../../components/activityIndicator/loader/FullPageMainLoader'
 
 /*
   bread crumbs
@@ -95,6 +100,7 @@ class CartDetailsWrapper extends Component {
     this.tryAgain = this.tryAgain.bind(this)
     this.resetState = this.resetState.bind(this)
   }
+
   componentDidMount () {
     const cartUid = this.props.cartState.payload.uid
     this.props.actions.getCartDetailsLoading(this.props.cartState, cartUid)
@@ -203,9 +209,11 @@ class CartDetailsWrapper extends Component {
               this.props.cartState.prescriptionDetails.errorState.error ||
               this.props.cartState.expressDeliveryCheck.errorState.error ||
               this.props.cartState.payload.cart_items.errorState.error ||
-              this.props.cartState.payload.is_doctor_callback.errorState.error ||
+              this.props.cartState.payload.is_doctor_callback.errorState
+                .error ||
               this.props.cartState.payload.patient_details.errorState.error ||
-              this.props.cartState.payload.shipping_address_details.errorState.error ||
+              this.props.cartState.payload.shipping_address_details.errorState
+                .error ||
               this.props.checkPincodeState.errorState.error
           }
           resetState={this.resetState}
@@ -223,11 +231,13 @@ class CartDetailsWrapper extends Component {
           isLoading={this.props.cartState.isLoading || submitOrderLoading}
         />
         {/* Full page loader for Submit order and it add success animation */}
-        <PlaceOrderLoader
+        {/* <PlaceOrderLoader
           isLoading={submitOrderLoading}
           orderNumber={this.props.cartState.orderResponse.payload.order_number}
-        />
+        /> */}
         <ActivityIndicator
+          isLoading={submitOrderLoading}
+          LoaderComp={<FullPageMainLoader />}
           isError={
             this.props.cartState.errorState.isError ||
               this.props.patientDetailsState.errorState.isError ||
@@ -236,17 +246,21 @@ class CartDetailsWrapper extends Component {
               this.props.cartState.prescriptionDetails.errorState.isError ||
               this.props.cartState.expressDeliveryCheck.errorState.isError ||
               this.props.cartState.payload.cart_items.errorState.isError ||
-              this.props.cartState.payload.is_doctor_callback.errorState.isError ||
+              this.props.cartState.payload.is_doctor_callback.errorState
+                .isError ||
               this.props.cartState.payload.patient_details.errorState.isError ||
-              this.props.cartState.payload.shipping_address_details.errorState.isError ||
-              (this.props.checkPincodeState.errorState.isError && this.props.checkPincodeState.isDeliveryAssignment)
+              this.props.cartState.payload.shipping_address_details.errorState
+                .isError ||
+              (this.props.checkPincodeState.errorState.isError &&
+                this.props.checkPincodeState.isDeliveryAssignment)
           }
           ErrorComp={this.getErrorComponent()}
           bottomError={!this.props.cartState.errorState.isError}
+          bottomLoader
         >
           <Grid
             container
-            className={submitOrderLoading ? classes.blurCartPage : ''}
+            // className={submitOrderLoading ? classes.blurCartPage : ''}
           >
             <Grid item xs={7}>
               <section>
