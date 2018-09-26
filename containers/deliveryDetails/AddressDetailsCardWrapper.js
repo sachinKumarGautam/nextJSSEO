@@ -36,11 +36,12 @@ class AddressDetailsCardWrapper extends React.Component {
         >
           {this.props.payload.map(deliveryDetail => {
             return (
-              <Grid item xs={6} onClick={this.props.saveDeliveryAddressSelected.bind(this, deliveryDetail)}>
+              <Grid item xs={6}>
                 <AddressDetailsCard
                   deliveryDetail={deliveryDetail}
                   openDeliveryFormModal={this.props.openDeliveryFormModal.bind(this, true)}
                   addressWrapper={this.props.addressWrapper}
+                  selectAddressDetail={this.props.saveDeliveryAddressSelected.bind(this, deliveryDetail)}
                 />
               </Grid>
             )

@@ -124,6 +124,7 @@ class PatientDetailsCard extends React.Component {
                         classes={{
                           root: this.props.classes.selectButtonRoot
                         }}
+                        onClick={this.props.selectPatientDetail}
                       >
                           EDIT
                       </Typography>
