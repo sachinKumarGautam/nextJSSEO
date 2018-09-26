@@ -141,6 +141,16 @@ class Coupon extends Component {
     )
   }
 
+  onKeyPress = (event) => {
+    if (event.charCode === 13) {
+      this.props.applyCouponCodeLoading(
+        this.props.cartState,
+        this.props.cartState.payload.uid,
+        this.props.cartState.couponDetail.couponCode
+      )
+    }
+  }
+
   componentDidUpdate (prevProps) {
     if ((this.props.cartState.couponDetail.isCouponApplied !==
       prevProps.cartState.couponDetail.isCouponApplied) &&
@@ -191,7 +201,7 @@ class Coupon extends Component {
               fullWidth
               value={this.props.cartState.couponDetail.couponCode}
               onChange={this.onChange.bind(this)}
-              onKeyPress={this.onClickOfApply.bind(this)}
+              onKeyPress={this.onKeyPress}
             />
             {
               this.props.cartState.couponDetail.errorState.isError

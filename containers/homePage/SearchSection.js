@@ -11,9 +11,10 @@ const styles = theme => {
     imageStyle: {
       width: '100%',
       height: theme.spacing.unit * 52.5,
-      backgroundImage: `url(/static/images/headerBg.png)`,
+      backgroundImage: `url(https://res.cloudinary.com/lfcr/image/upload/q_auto/v1537969771/media/happy_family.png)`,
       backgroundSize: 'cover',
-      backgroundPosition: 'center'
+      backgroundPosition: 'center',
+      backgroundPositionY: theme.spacing.unit * 97.25
     },
     textStyle: {
       ...theme.typography.title,
