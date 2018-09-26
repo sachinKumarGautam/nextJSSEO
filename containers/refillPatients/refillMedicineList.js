@@ -102,7 +102,6 @@ class RefillMedicineList extends Component {
     this.setState({
       open: false
     })
-    console.log(this.props)
     this.props.deleteCartLoading(
       this.props.cartState,
       this.props.checkPincodeState.payload.source,
