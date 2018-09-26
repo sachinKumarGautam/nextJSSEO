@@ -330,7 +330,8 @@ export function updateIsCartOpenLoginFlag (cartState, isCartOpenLoginDialog) {
   return {
     type: cartActionTypes.UPDATE_IS_CART_OPEN_LOGIN_FLAG,
     cartState: cartState,
-    isCartOpenLoginDialog: isCartOpenLoginDialog
+    isCartOpenLoginDialog: isCartOpenLoginDialog,
+    isHomePage: false
   }
 }
 
@@ -825,11 +826,5 @@ export function updateShowNoCartIdDialogFlag (cartState, isShowNoCartIdDialog) {
     type: cartActionTypes.UPDATE_SHOW_NO_CART_ID_DIALOG_FLAG,
     cartState,
     isShowNoCartIdDialog: isShowNoCartIdDialog
-  }
-}
-
-export function resetHomePageKeyInPrescription () {
-  return {
-    type: cartActionTypes.RESET_PRESCRIPTION_HOMEPAGE_STATE
   }
 }

@@ -115,7 +115,12 @@ class AddressDetailsExpansionPanel extends React.Component {
         expanded={this.props.expanded === 'panel4'}
         onChange={
           this.props.loginState.isAuthenticated &&
-            patientDetails.payload.patient_id
+          patientDetails.payload.patient_id &&
+            (
+              this.props.cartState.payload.cart_items.payload.length ||
+              this.props.cartState.payload.cart_prescriptions.length ||
+              this.props.cartState.payload.is_doctor_callback.payload
+            )
             ? this.props.handleChange
             : null
         }

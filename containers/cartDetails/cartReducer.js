@@ -417,7 +417,11 @@ export default function cartReducer (state = initialState, action) {
     case cartActionTypes.UPDATE_IS_CART_OPEN_LOGIN_FLAG:
       return {
         ...state,
-        isCartOpenLoginDialog: action.isCartOpenLoginDialog
+        isCartOpenLoginDialog: action.isCartOpenLoginDialog,
+        prescriptionDetails: {
+          ...state.prescriptionDetails,
+          isHomePage: false
+        }
       }
 
     case cartActionTypes.UPDATE_IS_CART_OPEN_REGISTER_MODAL_FLAG:
@@ -1022,15 +1026,6 @@ export default function cartReducer (state = initialState, action) {
       return {
         ...state,
         isShowNoCartIdDialog: action.isShowNoCartIdDialog
-      }
-
-    case cartActionTypes.RESET_PRESCRIPTION_HOMEPAGE_STATE:
-      return {
-        ...state,
-        prescriptionDetails: {
-          ...state.prescriptionDetails,
-          isHomePage: false
-        }
       }
 
     default:

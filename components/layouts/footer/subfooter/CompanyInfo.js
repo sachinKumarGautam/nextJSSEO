@@ -56,12 +56,12 @@ class CompanyInfo extends Component {
             FAQ
           </Typography>
         </div>
-        <div className={this.props.classes.iconWithText} onClick={this.redirectToPath.bind(this, TERMS)}>
+        {/* <div className={this.props.classes.iconWithText} onClick={this.redirectToPath.bind(this, TERMS)}>
           <img src={'/static/images/info-outline.svg'} />
           <Typography className={this.props.classes.listItemText} variant='subheading' component='h2'>
             Terms & conditions
           </Typography>
-        </div>
+        </div> */}
         <div className={this.props.classes.iconWithText} onClick={this.redirectToPath.bind(this, PRIVACY_POLICY)}>
           <img src={'/static/images/privacy.svg'} />
           <Typography className={this.props.classes.listItemText} variant='subheading' component='h2'>
