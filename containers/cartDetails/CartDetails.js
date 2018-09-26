@@ -101,7 +101,7 @@ class CartDetails extends Component {
     })
     if (cartItem.quantity === 1) {
       this.props.deleteCartItemLoading(this.props.cartState, cartItem)
-    } else {
+    } else if (cartItem.quantity > 1) {
       this.props.decrementCartItemLoading(this.props.cartState, cartItem)
     }
   }
@@ -216,11 +216,11 @@ class CartDetails extends Component {
                   incrementCartItem={this.incrementCartItem.bind(this)}
                   checkPincodeState={this.props.checkPincodeState}
                   quantityStatus={this.state.quantityStatus}
-                />
+                  />
                 : <div>
                   <Typography
                     className={this.props.classes.medicineListWrapper}
-                  >
+                    >
                     {NO_MEDICINES}
                   </Typography>
                   <Divider />
@@ -231,7 +231,7 @@ class CartDetails extends Component {
                   updateCouponCode={this.props.updateCouponCode}
                   cartState={this.props.cartState}
                   resetCouponDetail={this.props.resetCouponDetail}
-                />
+                  />
                 : null}
               <PriceDetails cartState={this.props.cartState} />
             </div>
