@@ -85,7 +85,12 @@ class PaymentExpansionPanel extends React.Component {
         expanded={this.props.expanded === 'panel5'}
         onChange={
           this.props.loginState.isAuthenticated &&
-            shippingAddressDetails.payload.shipping_address_id
+          shippingAddressDetails.payload.shipping_address_id &&
+            (
+              this.props.cartState.payload.cart_items.payload.length ||
+              this.props.cartState.payload.cart_prescriptions.length ||
+              this.props.cartState.payload.is_doctor_callback.payload
+            )
             ? this.props.handleChange
             : null
         }

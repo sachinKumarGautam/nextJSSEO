@@ -42,8 +42,7 @@ import {
   resetSaveDeliveryAddressToCartError,
   resetUploadPrescriptionError,
   deleteCartLoading,
-  updateLassuredExpressFlag,
-  resetHomePageKeyInPrescription
+  updateLassuredExpressFlag
 } from './cartActions'
 
 import {
@@ -128,7 +127,13 @@ class CartDetailsWrapper extends Component {
       }
     }
 
-    this.props.actions.resetHomePageKeyInPrescription()
+    if (this.props.cartState.prescriptionDetails.isHomePage) {
+      const isCartOpenLoginDialog = !this.props.loginState.isAuthenticated
+      this.props.actions.updateIsCartOpenLoginFlag(
+        this.props.cartState,
+        isCartOpenLoginDialog
+      )
+    }
   }
 
   componentDidUpdate (prevProps) {
@@ -440,8 +445,7 @@ function mapDispatchToProps (dispatch) {
         updatePatientFormValue,
         resetPatientSelected,
         resetDeliveryAddressSelected,
-        resetIsEditFlag,
-        resetHomePageKeyInPrescription
+        resetIsEditFlag
       },
       dispatch
     )
