@@ -91,6 +91,7 @@ class SearchSection extends Component {
           uploadPrescriptionLoading={this.props.uploadPrescriptionLoading}
           resetSearchMedicineState={this.props.resetSearchMedicineState}
           loginState={this.props.loginState}
+          updateIsCartOpenLoginFlag={this.props.updateIsCartOpenLoginFlag}
         />
       </div>
     )
