@@ -76,6 +76,9 @@ const styles = theme => {
     },
     disableLink: {
       pointerEvents: 'none'
+    },
+    button: {
+      pointerEvents: 'auto !important'
     }
   }
 }
@@ -87,6 +90,7 @@ class MedicineListDetails extends React.Component {
   }
 
   addToCart (event) {
+    event.preventDefault()
     if (this.props.isRefillMedicines) {
       if (
         this.props.pastMedicineState.selectedPatientId ===
@@ -115,7 +119,6 @@ class MedicineListDetails extends React.Component {
       <div className={!props.itemDetails.slug ? props.classes.disableLink : ''}>
         <Link
           prefetch
-          disabled
           href={searchMedicinePageLinkHref}
           as={searchMedicinePageLinkAs}
         >
@@ -190,6 +193,7 @@ class MedicineListDetails extends React.Component {
                     color='primary'
                     onClick={this.addToCart} // this is coming from HOC
                     label={'Add To Cart'}
+                    className={props.classes.button}
                     disabled={props.itemDetails.status !== ACTIVE_STATUS}
                   />
                   : <AlreadyAdded />}
