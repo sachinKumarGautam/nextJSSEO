@@ -42,13 +42,11 @@ import {
   SESSION_EXPIRED_CONTENT
 } from '../../containers/messages/commonMsg'
 
-import {
-  MEDICINE_QUANTITY_ALERT
-} from '../../containers/messages/cartMessages'
+import { MEDICINE_QUANTITY_ALERT } from '../../containers/messages/cartMessages'
 
 import Snackbar from '@material-ui/core/Snackbar'
 
-import {SNACK_BAR_DURATION} from '../constants/Constants'
+import { SNACK_BAR_DURATION } from '../constants/Constants'
 
 export function withCommonWrapper (Page) {
   class CommonWrapper extends React.Component {
@@ -76,13 +74,12 @@ export function withCommonWrapper (Page) {
       )
     }
 
-    handleCloseSnackbar = () => (
+    handleCloseSnackbar = () =>
       this.setState({
         openSnackbar: !this.state.openSnackbar
       })
-    )
 
-    addToCartHandler (inProgressCartItem, {...defaultArgs}) {
+    addToCartHandler (inProgressCartItem, event) {
       if (!this.props.cartState.payload.uid) {
         const isShowNoCartIdDialog = true
 
@@ -91,8 +88,10 @@ export function withCommonWrapper (Page) {
           isShowNoCartIdDialog
         )
       } else {
-        if (inProgressCartItem.max_order_quantity &&
-          inProgressCartItem.quantity >= inProgressCartItem.max_order_quantity) {
+        if (
+          inProgressCartItem.max_order_quantity &&
+          inProgressCartItem.quantity >= inProgressCartItem.max_order_quantity
+        ) {
           this.handleCloseSnackbar()
         } else {
           if (this.props.checkPincodeState.payload.pincode) {
@@ -179,11 +178,7 @@ export function withCommonWrapper (Page) {
           />
         )
       } else if (this.props.cartState.errorState.isError) {
-        return (
-          <SnackbarErrorMessage
-            error={this.props.globalErrorState}
-          />
-        )
+        return <SnackbarErrorMessage error={this.props.globalErrorState} />
       } else {
         return (
           <SnackbarErrorMessage
@@ -208,10 +203,10 @@ export function withCommonWrapper (Page) {
             LoaderComp={<Loader isLoading loaderType={'fullPageSpinner'} />}
             isError={
               cartState.payload.cart_items.errorState.isError ||
-              isCartInvalid ||
-              isSessionExpired ||
-              isShowNoCartIdDialog ||
-              cartState.errorState.isError
+                isCartInvalid ||
+                isSessionExpired ||
+                isShowNoCartIdDialog ||
+                cartState.errorState.isError
             }
             ErrorComp={this.getErrorComp(isCartInvalid, isSessionExpired)}
             bottomError
