@@ -130,7 +130,8 @@ class CartDetailsWrapper extends Component {
   componentDidUpdate (prevProps) {
     if (
       this.props.customerState.payload.id !==
-      prevProps.customerState.payload.id &&
+        prevProps.customerState.payload.id &&
+      this.props.customerState.payload.id &&
       !this.props.cartState.orderResponse.payload.order_number
     ) {
       this.props.actions.getPatientDetailsListLoading(
@@ -138,7 +139,10 @@ class CartDetailsWrapper extends Component {
         this.props.customerState.payload.id // pass customer id
       )
 
-      if (!this.props.loginState.isNewUser) {
+      if (
+        !this.props.loginState.isNewUser &&
+        this.props.customerState.payload.id
+      ) {
         this.props.actions.getDeliveryDetailsListLoading(
           this.props.deliveryDetailsState,
           this.props.customerState.payload.id // pass customer id
@@ -147,20 +151,18 @@ class CartDetailsWrapper extends Component {
     }
 
     if (
-      (
-        prevProps.cartState.payload.excessive_ordered_quantity !==
-        this.props.cartState.payload.excessive_ordered_quantity) &&
+      prevProps.cartState.payload.excessive_ordered_quantity !==
+        this.props.cartState.payload.excessive_ordered_quantity &&
       this.props.cartState.payload.excessive_ordered_quantity
     ) {
       this.handleBulkOrderDialogue()
     }
   }
 
-  handleBulkOrderDialogue = () => (
+  handleBulkOrderDialogue = () =>
     this.setState({
       openBulkOrderDialogue: !this.state.openBulkOrderDialogue
     })
-  )
 
   tryAgain () {
     this.props.actions.getCartDetailsLoading(
@@ -225,15 +227,17 @@ class CartDetailsWrapper extends Component {
         <SnackbarErrorMessage
           error={
             this.props.patientDetailsState.errorState.error ||
-            this.props.deliveryDetailsState.errorState.error ||
-            this.props.cartState.orderResponse.errorState.error ||
-            this.props.cartState.prescriptionDetails.errorState.error ||
-            this.props.cartState.expressDeliveryCheck.errorState.error ||
-            this.props.cartState.payload.cart_items.errorState.error ||
-            this.props.cartState.payload.is_doctor_callback.errorState.error ||
-            this.props.cartState.payload.patient_details.errorState.error ||
-            this.props.cartState.payload.shipping_address_details.errorState.error ||
-            this.props.checkPincodeState.errorState.error
+              this.props.deliveryDetailsState.errorState.error ||
+              this.props.cartState.orderResponse.errorState.error ||
+              this.props.cartState.prescriptionDetails.errorState.error ||
+              this.props.cartState.expressDeliveryCheck.errorState.error ||
+              this.props.cartState.payload.cart_items.errorState.error ||
+              this.props.cartState.payload.is_doctor_callback.errorState
+                .error ||
+              this.props.cartState.payload.patient_details.errorState.error ||
+              this.props.cartState.payload.shipping_address_details.errorState
+                .error ||
+              this.props.checkPincodeState.errorState.error
           }
           resetState={this.resetState}
         />
@@ -259,16 +263,19 @@ class CartDetailsWrapper extends Component {
           LoaderComp={<FullPageMainLoader />}
           isError={
             this.props.cartState.errorState.isError ||
-            this.props.patientDetailsState.errorState.isError ||
-            this.props.deliveryDetailsState.errorState.isError ||
-            this.props.cartState.orderResponse.errorState.isError ||
-            this.props.cartState.prescriptionDetails.errorState.isError ||
-            this.props.cartState.expressDeliveryCheck.errorState.isError ||
-            this.props.cartState.payload.cart_items.errorState.isError ||
-            this.props.cartState.payload.is_doctor_callback.errorState.isError ||
-            this.props.cartState.payload.patient_details.errorState.isError ||
-            this.props.cartState.payload.shipping_address_details.errorState.isError ||
-            (this.props.checkPincodeState.errorState.isError && this.props.checkPincodeState.isDeliveryAssignment)
+              this.props.patientDetailsState.errorState.isError ||
+              this.props.deliveryDetailsState.errorState.isError ||
+              this.props.cartState.orderResponse.errorState.isError ||
+              this.props.cartState.prescriptionDetails.errorState.isError ||
+              this.props.cartState.expressDeliveryCheck.errorState.isError ||
+              this.props.cartState.payload.cart_items.errorState.isError ||
+              this.props.cartState.payload.is_doctor_callback.errorState
+                .isError ||
+              this.props.cartState.payload.patient_details.errorState.isError ||
+              this.props.cartState.payload.shipping_address_details.errorState
+                .isError ||
+              (this.props.checkPincodeState.errorState.isError &&
+                this.props.checkPincodeState.isDeliveryAssignment)
           }
           ErrorComp={this.getErrorComponent()}
           bottomError={!this.props.cartState.errorState.isError}
@@ -276,7 +283,7 @@ class CartDetailsWrapper extends Component {
         >
           <Grid
             container
-          // className={submitOrderLoading ? classes.blurCartPage : ''}
+            // className={submitOrderLoading ? classes.blurCartPage : ''}
           >
             <Grid item xs={7}>
               <section>
@@ -330,7 +337,9 @@ class CartDetailsWrapper extends Component {
                   updateLassuredExpressFlag={
                     this.props.actions.updateLassuredExpressFlag
                   }
-                  updatePatientFormValue={this.props.actions.updatePatientFormValue}
+                  updatePatientFormValue={
+                    this.props.actions.updatePatientFormValue
+                  }
                   resetPatientSelected={this.props.actions.resetPatientSelected}
                   resetIsEditFlag={this.props.actions.resetIsEditFlag}
                 />
