@@ -33,6 +33,7 @@ const PatientDetailsWrapper = props => (
           resetPatientSelected={props.resetPatientSelected}
           updatePatientFormValue={props.updatePatientFormValue}
           resetPatientForm={props.resetPatientForm}
+          resetIsEditFlag={props.resetIsEditFlag}
         />
       </Grid>
     </Grid>

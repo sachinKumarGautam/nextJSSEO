@@ -28,6 +28,13 @@ class HomePageWrapper extends Component {
   }
 
   componentDidMount () {
+    const element = document.getElementsByClassName('slick-arrow')
+
+    if (element.length) {
+      element[0].className = 'slick-arrow'
+      element[0].style.display = 'inline-block'
+    }
+
     this.getRecentlyPublishedContent()
   }
 

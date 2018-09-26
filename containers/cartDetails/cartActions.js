@@ -500,11 +500,12 @@ export function resetCartLoadingState (cartState) {
   }
 }
 
-export function goToCartSnackbar (cartState, showAddToCartSnackBar) {
+export function goToCartSnackbar (cartState, showAddToCartSnackBar, msg) {
   return {
     type: cartActionTypes.GO_TO_CART_SNACKBAR,
     cartState,
-    showAddToCartSnackBar
+    showAddToCartSnackBar,
+    msg
   }
 }
 
