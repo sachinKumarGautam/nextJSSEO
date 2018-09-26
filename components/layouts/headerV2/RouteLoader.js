@@ -8,6 +8,20 @@ Router.onRouteChangeStart = url => {
 }
 Router.onRouteChangeComplete = () => NProgress.done()
 Router.onRouteChangeError = () => NProgress.done()
+Router.beforePopState = () => console.log('sachin sachin')
+
+// Router.beforePopState(({ url, as, options }) => {
+//   // // I only want to allow these two routes!
+//   // if (as !== "/" || as !== "/other") {
+//   //   // Have SSR render bad routes as a 404.
+//   //   window.location.href = as
+//   //   return false
+//   // }
+
+//   console.log('Sachin Kumar')
+
+//   return true
+// })
 
 export default () => (
   <div>

@@ -37,7 +37,10 @@ export function sendOTP (action$, store) {
           setTimeout(() => {
             data.toggleForm('otp')
           }, 350)
-          return of(sendOtpSuccess(loginState, result, data.values), resetLoginState())
+          return of(
+            sendOtpSuccess(loginState, result, data.values),
+            resetLoginState()
+          )
         }),
         catchError(error => {
           data.setSubmitting(false)
@@ -79,8 +82,8 @@ export function verifyOTP (action$, store) {
             )
           } else {
             successObservable = of(
-              fetchUserInfoLoading(customerState, mobile),
               verifyOtpSuccess(loginState, result, isNewUser),
+              fetchUserInfoLoading(customerState, mobile),
               updatePhoneNumber(customerState, mobile),
               cartTransferLoading(cartState)
             )
