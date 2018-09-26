@@ -827,3 +827,9 @@ export function updateShowNoCartIdDialogFlag (cartState, isShowNoCartIdDialog) {
     isShowNoCartIdDialog: isShowNoCartIdDialog
   }
 }
+
+export function resetHomePageKeyInPrescription () {
+  return {
+    type: cartActionTypes.RESET_PRESCRIPTION_HOMEPAGE_STATE
+  }
+}
