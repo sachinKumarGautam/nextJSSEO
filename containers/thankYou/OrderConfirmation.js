@@ -31,9 +31,7 @@ class OrderConfirmation extends React.Component {
             }
             ErrorComp={
               <SnackbarErrorMessage
-                error={
-                  this.props.cartState.payment.errorState.error
-                }
+                error={this.props.globalErrorState}
                 resetState={this.resetPaymentInitiateErrorState.bind(this)}
               />
             }

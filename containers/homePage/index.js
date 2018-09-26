@@ -14,7 +14,8 @@ import {
   uploadPrescriptionLoading,
   resetCartItemErrorState,
   resetUploadPrescriptionError,
-  updateShowNoCartIdDialogFlag
+  updateShowNoCartIdDialogFlag,
+  updateIsCartOpenLoginFlag
 } from '../cartDetails/cartActions'
 
 class HomePageWrapper extends Component {
@@ -35,6 +36,7 @@ class HomePageWrapper extends Component {
           resetUploadPrescriptionError={this.props.actions.resetUploadPrescriptionError}
           resetSearchMedicineState={this.props.actions.resetSearchMedicineState}
           updateShowNoCartIdDialogFlag={this.props.actions.updateShowNoCartIdDialogFlag}
+          updateIsCartOpenLoginFlag={this.props.actions.updateIsCartOpenLoginFlag}
         />
       </div>
     )
@@ -51,7 +53,8 @@ function mapDispatchToProps (dispatch) {
         resetCartItemErrorState,
         resetUploadPrescriptionError,
         resetSearchMedicineState,
-        updateShowNoCartIdDialogFlag
+        updateShowNoCartIdDialogFlag,
+        updateIsCartOpenLoginFlag
       },
       dispatch
     )

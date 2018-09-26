@@ -6,7 +6,7 @@ import Snackbar from '@material-ui/core/Snackbar'
 import SnackbarContent from '@material-ui/core/SnackbarContent'
 
 import { SNACK_BAR_DURATION_3000 } from '../../constants/Constants'
-import { CUSTOM_MESSGAE_SNACKBAR } from '../../../containers/messages/errorMessages'
+import { snackbarMapping } from './SnackbarErrorMapping'
 
 const styles = theme => {
   return {
@@ -77,11 +77,7 @@ class SnackbarErrorMessage extends Component {
                   variant='caption'
                   className={this.props.classes.snackbarMessage}
                 >
-                  {
-                    this.props.error.response
-                      ? this.props.error.response.body.error.message
-                      : CUSTOM_MESSGAE_SNACKBAR
-                  }
+                  {snackbarMapping((this.props.error && this.props.error.statusCode) ? this.props.error.statusCode : '')}
                 </Typography>
               </div>
             }

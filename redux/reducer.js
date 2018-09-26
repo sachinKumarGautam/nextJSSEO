@@ -35,8 +35,17 @@ const isengard = (store, action) => {
   )
 }
 
+const globalErrorState = (store, action) => {
+  return (
+    store || {
+      statusCode: 0
+    }
+  )
+}
+
 const appReducer = combineReducers({
   isengard,
+  globalErrorState,
   moleculeDetailsState: moleculeDetailsReducer,
   loginState: loginReducer,
   customerState: customerReducer,
@@ -73,6 +82,16 @@ const reducer = (state, action) => {
   // TODO: reset all state
   if (action.type === 'RESET_APPLICATION_STATE') {
     state = undefined
+  }
+
+  if (action.type === 'COMMON_ERROR_UPDATE') {
+    return {
+      ...state,
+      globalErrorState: {
+        ...state.globalErrorState,
+        statusCode: action.errorDetail.error.status ? action.errorDetail.error.status : 0
+      }
+    }
   }
 
   return appReducer(state, action)

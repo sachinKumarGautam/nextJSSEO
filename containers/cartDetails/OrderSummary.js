@@ -302,6 +302,7 @@ class OrderSummary extends React.Component {
           patientDetails={this.props.classes.patientDetails}
           updatePatientFormValue={this.props.updatePatientFormValue}
           resetPatientSelected={this.props.resetPatientSelected}
+          globalErrorState={this.props.globalErrorState}
           resetIsEditFlag={this.props.resetIsEditFlag}
         />
         <AddressDetailsExpansionPanel
@@ -345,6 +346,8 @@ class OrderSummary extends React.Component {
           checkPincodeDetailLoading={this.props.checkPincodeLoading}
           checkPincodeState={this.props.checkPincodeState}
           updateLassuredExpressFlag={this.props.updateLassuredExpressFlag}
+          resetDeliveryAddressSelected={this.props.resetDeliveryAddressSelected}
+          globalErrorState={this.props.globalErrorState}
         />
         <PaymentExpansionPanel
           expanded={this.state.expanded}

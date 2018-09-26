@@ -176,8 +176,7 @@ class CartDetails extends Component {
         prevProps.cartState.orderResponse.payload.order_number &&
       this.props.cartState.orderResponse.payload.order_type === COD
     ) {
-      thi
-      s.props.resetCartState()
+      this.props.resetCartState()
       const url = getReplacedString(THANK_YOU)
       const as = `${url}?payment-status=success`
       const href = `${url}?payment-status=success`

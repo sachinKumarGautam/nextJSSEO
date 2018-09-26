@@ -36,6 +36,7 @@ const AddressDetails = props => (
         updateAddressFormValue={props.updateAddressFormValue}
         checkPincodeDetailLoading={props.checkPincodeDetailLoading}
         getLocalityDetailListLoading={props.getLocalityDetailListLoading}
+        globalErrorState={props.globalErrorState}
       />
     </Grid>
     {props.deliveryDetailsState.payload.length
