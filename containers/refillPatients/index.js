@@ -14,7 +14,7 @@ import {
   updateSelectedPatientDetails
 } from './refillActions'
 
-import { deleteCartLoading } from '../cartDetails/cartActions'
+import { deleteCartLoading, resetSavePatientToCartError } from '../cartDetails/cartActions'
 import SideMenu from '../../components/SideMenu'
 /*
   bread crumbs
@@ -58,6 +58,7 @@ class RefillPatientsWrapper extends Component {
                 cartState={this.props.cartState}
                 deleteCartLoading={this.props.actions.deleteCartLoading}
                 globalErrorState={this.props.globalErrorState}
+                resetSavePatientToCartError={this.props.actions.resetSavePatientToCartError}
               />
             </section>
           </Grid>
@@ -83,7 +84,8 @@ function mapDispatchToProps (dispatch) {
       {
         getRefillPastMedicinesLoading,
         updateSelectedPatientDetails,
-        deleteCartLoading
+        deleteCartLoading,
+        resetSavePatientToCartError
       },
       dispatch
     )
