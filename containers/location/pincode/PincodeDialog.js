@@ -17,7 +17,8 @@ import {
   PINCODE_INVALID,
   CHECKING_PINCODE,
   PINCODE_REQUIRED,
-  NUMBER_VALIDATION_REGEX
+  NUMBER_VALIDATION_REGEX,
+  NUMBER_VALIDATION_MSG
 } from '../../messages/ValidationMsg'
 
 import { CUSTOM_MESSGAE_SNACKBAR } from '../../messages/errorMessages'
@@ -187,7 +188,10 @@ export default withStyles(styles)(
       pincode: props.checkPincodeState.payload.pincodeValue
     }),
     validationSchema: Yup.object().shape({
-      pincode: Yup.number().required(PINCODE_REQUIRED)
+      pincode: Yup.string()
+        .trim()
+        .matches(NUMBER_VALIDATION_REGEX, NUMBER_VALIDATION_MSG)
+        .required(PINCODE_REQUIRED)
     }),
     handleSubmit: (values, { props, setSubmitting }) => {
       props.onSubmit(

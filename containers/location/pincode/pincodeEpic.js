@@ -70,7 +70,7 @@ export function checkPincode (action$, store) {
             ) {
               return of(
                 checkPincodeSuccess(checkPincodeState, result),
-                updateLassuredExpressFlag(cartState, {isDialogOpen: true})
+                updateLassuredExpressFlag(cartState, { isDialogOpen: true })
               )
             } else {
               return of(
@@ -84,7 +84,11 @@ export function checkPincode (action$, store) {
               data.handleClose()
             }, 350)
             data.setSubmitting(false)
-            if (typeof data.incrementCartItemLoading === 'function') {
+            if (
+              typeof data.incrementCartItemLoading === 'function' &&
+              data.inProgressCartItem.sku &&
+              !checkPincodeState.isChangePincode
+            ) {
               // only invokes in case of cart item increment
               // checks if any add to cart function is comming from parent and invokes it
               return of(
@@ -101,20 +105,10 @@ export function checkPincode (action$, store) {
         }),
         catchError(error => {
           if (data.isDeliveryAddress || data.isCartAddressSelection) {
-            return of(
-              checkPincodeFailure(
-                checkPincodeState,
-                error
-              )
-            )
+            return of(checkPincodeFailure(checkPincodeState, error))
           } else {
             data.setSubmitting(false)
-            return of(
-              checkPincodeFailure(
-                checkPincodeState,
-                error
-              )
-            )
+            return of(checkPincodeFailure(checkPincodeState, error))
           }
         })
       )

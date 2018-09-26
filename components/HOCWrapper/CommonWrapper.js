@@ -82,7 +82,7 @@ export function withCommonWrapper (Page) {
       })
     )
 
-    addToCartHandler (inProgressCartItem, event) {
+    addToCartHandler (inProgressCartItem, {...defaultArgs}) {
       if (!this.props.cartState.payload.uid) {
         const isShowNoCartIdDialog = true
 
