@@ -216,11 +216,11 @@ class CartDetails extends Component {
                   incrementCartItem={this.incrementCartItem.bind(this)}
                   checkPincodeState={this.props.checkPincodeState}
                   quantityStatus={this.state.quantityStatus}
-                  />
+                />
                 : <div>
                   <Typography
                     className={this.props.classes.medicineListWrapper}
-                    >
+                  >
                     {NO_MEDICINES}
                   </Typography>
                   <Divider />
@@ -231,7 +231,7 @@ class CartDetails extends Component {
                   updateCouponCode={this.props.updateCouponCode}
                   cartState={this.props.cartState}
                   resetCouponDetail={this.props.resetCouponDetail}
-                  />
+                />
                 : null}
               <PriceDetails cartState={this.props.cartState} />
             </div>
