@@ -109,6 +109,7 @@ class Search extends Component {
           addToCartHandler={this.props.addToCartHandler}
           cartState={this.props.cartState}
           resetSearchMedicineState={this.props.resetSearchMedicineState}
+          globalErrorState={this.props.globalErrorState}
         />
         <Typography
           variant='body1'

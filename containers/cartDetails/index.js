@@ -50,7 +50,8 @@ import {
   getDeliveryDetailsListLoading,
   submitDeliveryDetailsLoading,
   updateAddressFormValue,
-  getLocalityDetailListLoading
+  getLocalityDetailListLoading,
+  resetDeliveryAddressSelected
 } from '../deliveryDetails/deliveryDetailsActions'
 
 import {
@@ -228,20 +229,7 @@ class CartDetailsWrapper extends Component {
     } else {
       return (
         <SnackbarErrorMessage
-          error={
-            this.props.patientDetailsState.errorState.error ||
-              this.props.deliveryDetailsState.errorState.error ||
-              this.props.cartState.orderResponse.errorState.error ||
-              this.props.cartState.prescriptionDetails.errorState.error ||
-              this.props.cartState.expressDeliveryCheck.errorState.error ||
-              this.props.cartState.payload.cart_items.errorState.error ||
-              this.props.cartState.payload.is_doctor_callback.errorState
-                .error ||
-              this.props.cartState.payload.patient_details.errorState.error ||
-              this.props.cartState.payload.shipping_address_details.errorState
-                .error ||
-              this.props.checkPincodeState.errorState.error
-          }
+          error={this.props.globalErrorState}
           resetState={this.resetState}
         />
       )
@@ -344,6 +332,8 @@ class CartDetailsWrapper extends Component {
                     this.props.actions.updatePatientFormValue
                   }
                   resetPatientSelected={this.props.actions.resetPatientSelected}
+                  resetDeliveryAddressSelected={this.props.actions.resetDeliveryAddressSelected}
+                  globalErrorState={this.props.globalErrorState}
                   resetIsEditFlag={this.props.actions.resetIsEditFlag}
                 />
               </section>
@@ -405,7 +395,8 @@ function mapStateToProps (state) {
     deliveryDetailsState: state.deliveryDetailsState,
     checkPincodeState: state.checkPincodeState,
     constantsState: state.constantsState,
-    pastMedicineState: state.pastMedicineState
+    pastMedicineState: state.pastMedicineState,
+    globalErrorState: state.globalErrorState
   }
 }
 
@@ -448,6 +439,7 @@ function mapDispatchToProps (dispatch) {
         resetPincodeState,
         updatePatientFormValue,
         resetPatientSelected,
+        resetDeliveryAddressSelected,
         resetIsEditFlag,
         resetHomePageKeyInPrescription
       },

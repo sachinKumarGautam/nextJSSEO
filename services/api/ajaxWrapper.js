@@ -5,6 +5,7 @@ import NProgress from 'nprogress'
 import { store } from '../../redux'
 import { isCartInvalid } from '../../containers/cartDetails/cartActions'
 import { handleSessionExpiration } from '../../containers/login/loginActions'
+import { updateErrorDetail } from '../../containers/login/loginActions'
 
 let http = propGenerator => {
   // route loader for api loading
@@ -47,6 +48,7 @@ let http = propGenerator => {
         )
       } else {
         // return error
+        Observable.throw(store.dispatch(updateErrorDetail(data)))
         return Observable.throw(data)
       }
     })

@@ -33,6 +33,7 @@ class OrderListWrapper extends Component {
             paymentInitiateLoading={actions.paymentInitiateLoading}
             resetCartState={actions.resetCartState}
             cartState={this.props.cartState}
+            globalErrorState={this.props.globalErrorState}
           />
         </section>
       </div>
@@ -57,7 +58,8 @@ function mapStateToProps (state) {
   return {
     cartState: state.cartState,
     orderListState: state.orderListState,
-    customerState: state.customerState
+    customerState: state.customerState,
+    globalErrorState: state.globalErrorState
   }
 }
 

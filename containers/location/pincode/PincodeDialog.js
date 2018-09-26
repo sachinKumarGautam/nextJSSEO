@@ -96,7 +96,13 @@ class PincodeDialog extends React.Component {
       // toggleForm
     } = props
     const pincodeLoading = checkPincodeState.isLoading
-    const pincodeError = checkPincodeState.errorState.error
+    const pincodeError = checkPincodeState.errorState.error.error
+      ? (
+        checkPincodeState.errorState.error.error.response
+          ? checkPincodeState.errorState.error.error.response.body.error.code
+          : null
+      )
+      : null
     const pincodeFormError = errors.pincode && touched.pincode
       ? errors.pincode
       : ''

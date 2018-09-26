@@ -126,6 +126,7 @@ class PatientDetailsExpansionPanel extends React.Component {
             patientDetails={patientDetails}
             inProgressPatientId={this.state.inProgressPatientId}
             updatePatientFormValue={this.props.updatePatientFormValue}
+            globalErrorState={this.props.globalErrorState}
           />
           <Button
             size='small'

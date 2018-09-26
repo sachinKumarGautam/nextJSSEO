@@ -22,6 +22,7 @@ class OrderList extends Component {
               paymentInitiateLoading={this.props.paymentInitiateLoading}
               resetCartState={this.props.resetCartState}
               cartState={this.props.cartState}
+              globalErrorState={this.props.globalErrorState}
             />
           </Grid>
         </Grid>

@@ -177,7 +177,7 @@ class OrderListDetails extends Component {
             ErrorComp={
               this.state.isShowMore
                 ? <SnackbarErrorMessage
-                  error={orderListState.errorState.error}
+                  error={this.props.globalErrorState}
                 />
                 : <ComponentSpecificError
                   error={orderListState.errorState.error}

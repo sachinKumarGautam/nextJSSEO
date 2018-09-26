@@ -1,4 +1,4 @@
-export const CUSTOM_MESSGAE_SNACKBAR = 'Oops!! Something went wrong'
+export const CUSTOM_MESSGAE_SNACKBAR = 'Something went wrong. Please try again!'
 
 export const ERROR_MESSAGE_TEXT = 'Oops! Something went wrong.'
 
@@ -14,4 +14,12 @@ export const INVALID_CART_DESCRIPTION = 'This cart became invalid as you have al
 
 export const NO_CART_ID_TEXT = 'Oops!'
 
-export const NO_CART_ID_DESCRIPTION = 'Something went wrong. Please try again.'
+export const NO_CART_ID_DESCRIPTION = 'Something went wrong. Please try again!'
+
+export const ERROR_404_MSG = `No data available!`
+
+export const ERROR_400_MSG = `Information is invalid. Please try again!`
+
+export const ERROR_408_MSG = `Couldn't retrieve information. Please try again!`
+
+export const ERROR_428_MSG = `Couldn't perform required action. Please try again!`

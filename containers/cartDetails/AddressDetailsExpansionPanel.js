@@ -63,6 +63,8 @@ class AddressDetailsExpansionPanel extends React.Component {
     this.setState({
       openDeliveryFormDialog: false
     })
+
+    this.props.resetDeliveryAddressSelected(this.props.deliveryDetailsState)
   }
 
   closeExpressDialog () {
@@ -188,6 +190,7 @@ class AddressDetailsExpansionPanel extends React.Component {
             checkPincodeState={this.props.checkPincodeState}
             inProgressAddressId={this.state.addressId}
             shippingAddressDetails={shippingAddressDetails}
+            globalErrorState={this.props.globalErrorState}
           />
           <Button
             size='small'
