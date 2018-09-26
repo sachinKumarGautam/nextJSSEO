@@ -34,6 +34,7 @@ const PatientDetailsWrapper = props => (
           updatePatientFormValue={props.updatePatientFormValue}
           resetPatientForm={props.resetPatientForm}
           globalErrorState={props.globalErrorState}
+          resetIsEditFlag={props.resetIsEditFlag}
         />
       </Grid>
     </Grid>

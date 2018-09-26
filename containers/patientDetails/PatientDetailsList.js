@@ -61,7 +61,8 @@ class PatientDetailsList extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      openPatientFormDialog: false
+      openPatientFormDialog: false,
+      isEdit: false
     }
   }
 
@@ -69,6 +70,12 @@ class PatientDetailsList extends Component {
     this.setState({
       openPatientFormDialog: true
     })
+  }
+
+  addNewPatientClick () {
+    this.props.resetIsEditFlag(this.props.patientDetailsState)
+
+    this.openPatientFormModal()
   }
 
   closePatientFormModal () {
@@ -103,7 +110,7 @@ class PatientDetailsList extends Component {
               <AddPatientButton
                 buttonRoot={this.props.classes.buttonRoot}
                 buttonLabel={this.props.classes.buttonLabel}
-                onClick={this.openPatientFormModal.bind(this)}
+                onClick={this.addNewPatientClick.bind(this)}
               />
               <PatientDetailForm
                 closePatientFormModal={this.closePatientFormModal.bind(this)}
@@ -113,7 +120,7 @@ class PatientDetailsList extends Component {
                 submitPatientDetailsLoading={
                   this.props.submitPatientDetailsLoading
                 }
-                isEdit={'false'}
+                isEdit={this.props.patientDetailsState.isEdit}
                 resetPatientForm={this.props.resetPatientForm}
                 updatePatientFormValue={this.props.updatePatientFormValue}
                 globalErrorState={this.props.globalErrorState}

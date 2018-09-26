@@ -10,7 +10,8 @@ import {
   SUBMIT_PATIENT_FAILURE,
   RESET_PATIENT_SELECTED,
   RESET_PATIENT_FORM,
-  UPDATE_PATIENT_FORM_VALUE
+  UPDATE_PATIENT_FORM_VALUE,
+  RESET_IS_EDIT_FLAG
 } from './patientDetailsActionTypes'
 
 export default function patientDetailsReducer (state = initialState, action) {
@@ -51,6 +52,7 @@ export default function patientDetailsReducer (state = initialState, action) {
     case SAVE_PATIENT_SELECTED:
       return {
         ...state,
+        isEdit: action.isEdit,
         patient: action.patientDetail
       }
 
@@ -119,6 +121,12 @@ export default function patientDetailsReducer (state = initialState, action) {
           ...state.patient,
           [action.name]: action.value
         }
+      }
+
+    case RESET_IS_EDIT_FLAG:
+      return {
+        ...state,
+        isEdit: action.isEdit
       }
 
     default:

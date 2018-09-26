@@ -63,12 +63,13 @@ class PatientDetailForm extends React.Component {
                 root: classes.dialogTitle
               }}
             >
-              {this.props.patientFormState.patient.full_name
+              {this.props.isEdit
                 ? 'EDIT PATIENT'
                 : 'ADD NEW PATIENT'}
             </DialogTitle>
             <DialogContent>
               <Form
+                isEdit={this.props.isEdit}
                 isCartPage={this.props.isCartPage}
                 type={'patientForm'}
                 onSubmit={this.props.submitPatientDetailsLoading}

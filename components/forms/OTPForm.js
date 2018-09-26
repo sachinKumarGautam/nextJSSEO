@@ -41,7 +41,8 @@ const styles = theme => ({
     textAlign: 'center'
   },
   otpInput: {
-    // textAlign: 'center',
+    textAlign: 'center',
+    letterSpacing: theme.spacing.unit
   },
   resendTimer: {
     ...theme.typography.body3,
@@ -155,7 +156,7 @@ class OTPForm extends React.Component {
           {((errors.otp && touched.otp) ||
             loginState.errorStateVerifyOtp.isError) &&
             <FormHelperText id='otp'>
-              {errors.otp ? errors.otp : (globalErrorState.statusCode === 401 ? OTP_INVALID : CUSTOM_MESSGAE_SNACKBAR )}
+              {errors.otp ? errors.otp : (globalErrorState.statusCode === 401 ? OTP_INVALID : CUSTOM_MESSGAE_SNACKBAR)}
             </FormHelperText>}
           {this.state.isHideResetButton
             ? <Typography align='right' className={classes.resendTimer}>

@@ -24,6 +24,12 @@ class PatientDetailsExpansionPanel extends React.Component {
     })
   }
 
+  addNewPatientClick () {
+    this.props.resetIsEditFlag(this.props.patientDetailsState)
+
+    this.openPatientFormModal()
+  }
+
   closePatientFormModal () {
     this.setState({
       openPatientFormDialog: false
@@ -92,7 +98,7 @@ class PatientDetailsExpansionPanel extends React.Component {
               <AddPatientButton
                 buttonRoot={this.props.buttonRoot}
                 buttonLabel={this.props.buttonLabel}
-                onClick={this.openPatientFormModal.bind(this)}
+                onClick={this.addNewPatientClick.bind(this)}
               />}
           </div>
         </ExpansionPanelSummary>

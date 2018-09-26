@@ -33,12 +33,14 @@ const styles = theme => ({
   },
   buttonWrapper: {
     display: 'flex',
-    flexDirection: 'row'
+    flexDirection: 'row',
+    alignItems: 'center'
   },
   text: {
-    marginTop: theme.spacing.unit,
+    // marginTop: theme.spacing.unit,
     marginRight: theme.spacing.unit * 2,
-    color: theme.palette.secondary.main
+    color: theme.palette.secondary.main,
+    alignItems: 'center'
   },
   snackbarSuccess: {
     backgroundColor: theme.palette.customGreen.green400
@@ -58,12 +60,18 @@ class GoToCartSnackbar extends React.Component {
   }
 
   handleClose = () => {
-    this.props.goToCartSnackbar(this.props.cartState, false)
+    this.props.goToCartSnackbar(
+      this.props.cartState,
+      false,
+      this.props.cartState.snackbarMsg
+    )
   }
 
   render () {
-    const { classes } = this.props
+    const { classes, cartState } = this.props
     const href = getReplacedString(CART_DETAILS)
+    const snackbarMsg = cartState.snackbarMsg
+    const isCartPage = Router.pathname === '/cart-details'
     return (
       <div>
         <Snackbar
@@ -75,7 +83,7 @@ class GoToCartSnackbar extends React.Component {
             anchorOriginBottomCenter: classes.anchorOriginBottomCenter
           }}
           autoHideDuration={SNACK_BAR_DURATION}
-          open={this.props.cartState.payload.showAddToCartSnackBar}
+          open={this.props.cartState.showAddToCartSnackBar}
           onClose={this.handleClose}
           ContentProps={{
             'aria-describedby': 'cart-items'
@@ -92,21 +100,22 @@ class GoToCartSnackbar extends React.Component {
                 className={classes.buttonWrapper}
               >
                 <Typography variant='caption' className={classes.text}>
-                  {ITEM_ADDED_TO_CART}
+                  {snackbarMsg}
                 </Typography>
-                <Link href={href}>
-                  <Button
-                    size='small'
-                    variant='flat'
-                    color={'primary'}
-                    className={classes.editButton}
-                    classes={{
-                      label: classes.editButtonLabel
-                    }}
-                    label={'Go To Cart'}
-                    onClick={this.handleClose}
-                  />
-                </Link>
+                {!isCartPage &&
+                  <Link href={href}>
+                    <Button
+                      size='small'
+                      variant='flat'
+                      color={'primary'}
+                      className={classes.editButton}
+                      classes={{
+                        label: classes.editButtonLabel
+                      }}
+                      label={'Go To Cart'}
+                      onClick={this.handleClose}
+                    />
+                  </Link>}
               </div>
             }
           />
