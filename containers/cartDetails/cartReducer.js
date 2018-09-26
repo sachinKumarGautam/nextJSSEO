@@ -1024,6 +1024,15 @@ export default function cartReducer (state = initialState, action) {
         isShowNoCartIdDialog: action.isShowNoCartIdDialog
       }
 
+    case cartActionTypes.RESET_PRESCRIPTION_HOMEPAGE_STATE:
+      return {
+        ...state,
+        prescriptionDetails: {
+          ...state.prescriptionDetails,
+          isHomePage: false
+        }
+      }
+
     default:
       return state
   }

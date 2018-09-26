@@ -116,6 +116,16 @@ class Header extends React.Component {
         ''
       )
     }
+
+    if (
+      !this.props.cartState.prescriptionDetails.isHomePage
+    ) {
+      const isCartOpenLoginDialog = false
+      this.props.actions.updateIsCartOpenLoginFlag(
+        this.props.cartState,
+        isCartOpenLoginDialog
+      )
+    }
   }
 
   componentDidUpdate (prevProps) {
