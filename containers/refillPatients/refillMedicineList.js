@@ -14,6 +14,8 @@ import MultipleMedicineLoader
 import ComponentSpecificError
   from '../../components/activityIndicator/error/ComponentSpecificError'
 
+import SnackbarErrorMessage from '../../components/activityIndicator/error/SnackbarErrorMessage'
+
 import { NO_REFILL_MEDICINE } from '../messages/noDataMessage'
 
 import RefillPatientDialogue from '../../components/RefillPatientDialogue'
@@ -105,7 +107,7 @@ class RefillMedicineList extends Component {
       this.props.checkPincodeState.payload.source,
       this.props.checkPincodeState.payload.id,
       REFILL,
-      this.props.pastMedicineState.selectedPatient,
+      this.props.pastMedicineState.selectedPatient[0],
       this.addMedicine,
       true
     )
@@ -113,6 +115,10 @@ class RefillMedicineList extends Component {
 
   addMedicine = () => {
     this.props.addToCartHandler(this.state.medicineName)
+  }
+
+  resetState = () => {
+    this.props.resetSavePatientToCartError()
   }
 
   render () {
@@ -131,15 +137,24 @@ class RefillMedicineList extends Component {
               Treatments of {this.props.pastMedicineState.selectedPatientName}
             </Typography>
             <ActivityIndicator
-              isError={this.props.pastMedicineState.errorState.isError}
+              isError={
+                this.props.pastMedicineState.errorState.isError ||
+                this.props.cartState.payload.patient_details.errorState.isError
+              }
               ErrorComp={
-                <ComponentSpecificError
-                  error={this.props.pastMedicineState.errorState.error}
-                  tryAgain={this.tryAgain.bind(this)}
-                />
+                this.props.pastMedicineState.errorState.isError
+                  ? <ComponentSpecificError
+                    error={this.props.pastMedicineState.errorState.error}
+                    tryAgain={this.tryAgain.bind(this)}
+                  />
+                  : <SnackbarErrorMessage
+                    error={this.props.globalErrorState}
+                    resetState={this.resetState}
+                  />
               }
               isLoading={this.props.isLoading}
               LoaderComp={<MultipleMedicineLoader />}
+              bottomError={this.props.cartState.payload.patient_details.errorState.isError}
             >
               {this.props.pastMedicineState.payload.length
                 ? <ul className={this.props.classes.medicineListWrapper}>
