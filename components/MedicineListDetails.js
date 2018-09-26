@@ -73,6 +73,9 @@ const styles = theme => {
       ...theme.typography.body3,
       color: theme.palette.customGrey.grey500,
       fontWeight: theme.typography.fontWeightBold
+    },
+    disableLink: {
+      pointerEvents: 'none'
     }
   }
 }
@@ -105,91 +108,97 @@ class MedicineListDetails extends React.Component {
     const { props } = this
     const { checkIfAlredyExistInCart } = props
     const city = this.props.checkPincodeState.payload.city
+    const searchMedicinePageLinkHref = `${PRODUCT_DETAILS}?id=${props.itemDetails.slug}&location=${city}`
+    const searchMedicinePageLinkAs = `${PRODUCT_DETAILS}/${props.itemDetails.slug}?location=${city}`
+
     return (
-      <Link
-        prefetch
-        href={`${PRODUCT_DETAILS}?id=${props.itemDetails.slug}&location=${city}`}
-        as={`${PRODUCT_DETAILS}/${props.itemDetails.slug}?location=${city}`}
-      >
-        <div className={props.classes.medicineListContentWrapper}>
-          <div>
-            <ProductName
-              variant={'body1'}
-              name={props.itemDetails.name}
-              customStyle={props.classes.customName}
-              serviceType={props.itemDetails.available_service_type}
-              deliveryOption={props.itemDetails.available_delivery_option}
-            />
-            {/* {props.isRefillMedicines && <RefillDueDays />} */}
-            <ProductBrand
-              variant={'caption'}
-              withoutImage
-              customStyle={props.classes.customBrand}
-              brand={props.itemDetails.brand_name}
-            />
-            <ProductPackSize
-              variant={'caption'}
-              withoutImage
-              customStyle={props.classes.customPackSize}
-              packType={props.itemDetails.pack_type}
-              packSize={
-                props.itemDetails.pack_size && props.itemDetails.pack_size.name
-                  ? props.itemDetails.pack_size.name
-                  : props.itemDetails.pack_size
-              }
-            />
-            {
-              props.itemDetails.status !== ACTIVE_STATUS &&
-              <ProductStatus
-                variant={'caption'}
-                status={props.itemDetails.status}
+      <div className={!props.itemDetails.slug ? props.classes.disableLink : ''}>
+        <Link
+          prefetch
+          disabled
+          href={searchMedicinePageLinkHref}
+          as={searchMedicinePageLinkAs}
+        >
+          <div className={props.classes.medicineListContentWrapper}>
+            <div>
+              <ProductName
+                variant={'body1'}
+                name={props.itemDetails.name}
+                customStyle={props.classes.customName}
+                serviceType={props.itemDetails.available_service_type}
+                deliveryOption={props.itemDetails.available_delivery_option}
               />
-            }
-            {props.checkPincodeState.payload.pincode &&
-              <Typography
-                gutterBottom
-                variant='caption'
-                component='h1'
-                className={props.classes.deliveryTat}
-              >
-                Delivery by
-                {' '}
-                {props.checkPincodeState.payload.delivery_day}
-                {' '}
-                days
-              </Typography>}
-          </div>
-          <div>
-            <EstimatedPriceLabel
-              variant={'caption'}
-              customStyle={props.classes.customEstimatedLabel}
-              estimatePriceText={'*Est. Price '}
-            />
-            <ProductPrice
-              variant={'body1'}
-              customStyle={props.classes.customPrice}
-              sellingPrice={props.itemDetails.selling_price}
-            />
-            <StrokePrice
-              variant={'caption'}
-              customStyle={props.classes.customStrokePrice}
-              mrp={props.itemDetails.mrp}
-            />
-            <div className={props.classes.buttonWrapperStyle}>
-              {!checkIfAlredyExistInCart
-                ? <Button
-                  variant='outlined'
-                  size='small'
-                  color='primary'
-                  onClick={this.addToCart} // this is coming from HOC
-                  label={'Add To Cart'}
-                  disabled={props.itemDetails.status !== ACTIVE_STATUS}
-                />
-                : <AlreadyAdded />}
+              {/* {props.isRefillMedicines && <RefillDueDays />} */}
+              <ProductBrand
+                variant={'caption'}
+                withoutImage
+                customStyle={props.classes.customBrand}
+                brand={props.itemDetails.brand_name}
+              />
+              <ProductPackSize
+                variant={'caption'}
+                withoutImage
+                customStyle={props.classes.customPackSize}
+                packType={props.itemDetails.pack_type}
+                packSize={
+                  props.itemDetails.pack_size &&
+                    props.itemDetails.pack_size.name
+                    ? props.itemDetails.pack_size.name
+                    : props.itemDetails.pack_size
+                }
+              />
+              {props.itemDetails.status !== ACTIVE_STATUS &&
+                <ProductStatus
+                  variant={'caption'}
+                  status={props.itemDetails.status}
+                />}
+              {props.checkPincodeState.payload.pincode &&
+                <Typography
+                  gutterBottom
+                  variant='caption'
+                  component='h1'
+                  className={props.classes.deliveryTat}
+                >
+                  Delivery by
+                  {' '}
+                  {props.checkPincodeState.payload.delivery_day}
+                  {' '}
+                  days
+                </Typography>}
+            </div>
+            <div>
+              <EstimatedPriceLabel
+                variant={'caption'}
+                customStyle={props.classes.customEstimatedLabel}
+                estimatePriceText={'*Est. Price '}
+              />
+              <ProductPrice
+                variant={'body1'}
+                customStyle={props.classes.customPrice}
+                sellingPrice={props.itemDetails.selling_price}
+              />
+              <StrokePrice
+                variant={'caption'}
+                customStyle={props.classes.customStrokePrice}
+                mrp={props.itemDetails.mrp}
+              />
+              <div className={props.classes.buttonWrapperStyle}>
+                {!checkIfAlredyExistInCart
+                  ? <Button
+                    variant='outlined'
+                    size='small'
+                    color='primary'
+                    onClick={this.addToCart} // this is coming from HOC
+                    label={'Add To Cart'}
+                    disabled={props.itemDetails.status !== ACTIVE_STATUS}
+                  />
+                  : <AlreadyAdded />}
+              </div>
             </div>
           </div>
-        </div>
-      </Link>
+        </Link>
+
+      </div>
     )
   }
 }
