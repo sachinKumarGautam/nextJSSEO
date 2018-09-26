@@ -86,8 +86,12 @@ class DeliveryForm extends React.Component {
   }
 
   onPincodeInput (handleChange, event) {
-    if (event.target.value.length > 6) return
-    else if (event.target.value.length === 6) {
+    const inputValue = event.target.value
+    const regexInputExpression = RegExp(NUMBER_VALIDATION_REGEX).test(
+      inputValue
+    )
+
+    if ((event.target.value.length <= 6 && regexInputExpression) || !inputValue) {
       this.props.checkPincodeDetailLoading(
         this.props.checkPincodeState,
         null, // handleClose function to close pincode dialog
@@ -95,13 +99,12 @@ class DeliveryForm extends React.Component {
         event.target.value,
         { isDeliveryAddress: true }
       )
+      this.props.updateAddressFormValue(
+        this.props.deliveryDetailsState,
+        'pincode',
+        event.target.value
+      )
     }
-
-    this.props.updateAddressFormValue(
-      this.props.deliveryDetailsState,
-      'pincode',
-      event.target.value
-    )
   }
 
   onChange (name, handleChange, event) {
@@ -198,7 +201,6 @@ class DeliveryForm extends React.Component {
             placeholder='Pincode'
             className={classes.valueStyle}
             id='pincode'
-            type='number'
             onChange={this.onPincodeInput.bind(this, handleChange)}
             value={values.pincode}
           />

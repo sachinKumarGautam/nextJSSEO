@@ -57,6 +57,7 @@ class RefillPatientsWrapper extends Component {
                 }
                 cartState={this.props.cartState}
                 deleteCartLoading={this.props.actions.deleteCartLoading}
+                globalErrorState={this.props.globalErrorState}
               />
             </section>
           </Grid>
@@ -71,7 +72,8 @@ function mapStateToProps (state) {
     pastMedicineState: state.pastMedicineState,
     patientDetailsState: state.patientDetailsState,
     checkPincodeState: state.checkPincodeState,
-    cartState: state.cartState
+    cartState: state.cartState,
+    globalErrorState: state.globalErrorState
   }
 }
 
