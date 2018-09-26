@@ -109,7 +109,7 @@ const ImagePicker = (props) => (
               <img src='/static/images/delete.svg' className={props.classes.deleteImageStyle} />
             </div>
             <img
-              src={image.url}
+              src={image.location}
               className={props.classes.pickerImage}
               alt={image.id}
             />
