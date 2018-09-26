@@ -88,7 +88,7 @@ class DeliveryDetails extends React.Component {
               resetDeliveryAddressSelected={this.props.actions.resetDeliveryAddressSelected}
               getDeliveryDetailsListLoading={this.props.actions.getDeliveryDetailsListLoading}
               resetErrorState={this.props.actions.resetErrorState}
-              globalErrorState={rthis.props.globalErrorState}
+              globalErrorState={this.props.globalErrorState}
             />
           </Paper>
         </div>
