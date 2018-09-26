@@ -181,13 +181,13 @@ export function withCommonWrapper (Page) {
       } else if (this.props.cartState.errorState.isError) {
         return (
           <SnackbarErrorMessage
-            error={this.props.cartState.errorState.error}
+            error={this.props.globalErrorState}
           />
         )
       } else {
         return (
           <SnackbarErrorMessage
-            error={this.props.cartState.payload.cart_items.errorState.error}
+            error={this.props.globalErrorState}
             resetState={this.resetState.bind(this)}
           />
         )
@@ -251,7 +251,8 @@ export function withCommonWrapper (Page) {
       checkPincodeState: state.checkPincodeState,
       searchMedicineState: state.searchMedicineState,
       cartState: state.cartState,
-      loginState: state.loginState
+      loginState: state.loginState,
+      globalErrorState: state.globalErrorState
     }
   }
 
