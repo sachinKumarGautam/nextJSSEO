@@ -116,7 +116,7 @@ class PriceDetails extends Component {
             </div>
             <div className={this.props.classes.infoWrapper}>
               <Typography className={this.props.classes.discount}>
-                Care Points Plus
+                Care Points +
               </Typography>
               <a
                 href='#'
