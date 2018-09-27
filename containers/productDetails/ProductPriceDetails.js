@@ -102,7 +102,7 @@ class ProductPriceDetails extends Component {
                   openPincodeDialog={this.handleChangePincodeDialog}
                 />}
               <div className={classes.cardActions}>
-                <QuantityField onChangeQuantity={this.onChangeQuantity} />
+                <QuantityField onChangeQuantity={this.onChangeQuantity} productDetailsState={productDetailsState} />
                 <Button
                   disableFocusRipple
                   disableRipple
