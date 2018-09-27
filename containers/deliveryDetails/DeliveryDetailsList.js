@@ -88,6 +88,19 @@ class Main extends Component {
       isEdit: isEdit,
       isAddNewAddressButtonClicked: false
     })
+
+    if (!isEdit) {
+      this.props.updateAddressFormValue(
+        this.props.deliveryDetailsState,
+        'full_name',
+        this.props.customerState.payload.full_name
+      )
+      this.props.updateAddressFormValue(
+        this.props.deliveryDetailsState,
+        'mobile',
+        this.props.customerState.payload.mobile
+      )
+    }
   }
 
   closeDeliveryFormModal () {

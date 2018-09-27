@@ -57,6 +57,17 @@ class AddressDetailsExpansionPanel extends React.Component {
     this.setState({
       openDeliveryFormDialog: true
     })
+
+    this.props.updateAddressFormValue(
+      this.props.deliveryDetailsState,
+      'full_name',
+      this.props.customerState.payload.full_name
+    )
+    this.props.updateAddressFormValue(
+      this.props.deliveryDetailsState,
+      'mobile',
+      this.props.customerState.payload.mobile
+    )
   }
 
   closeDeliveryFormModal () {
@@ -115,7 +126,7 @@ class AddressDetailsExpansionPanel extends React.Component {
         expanded={this.props.expanded === 'panel4'}
         onChange={
           this.props.loginState.isAuthenticated &&
-          patientDetails.payload.patient_id &&
+            patientDetails.payload.patient_id &&
             (
               this.props.cartState.payload.cart_items.payload.length ||
               this.props.cartState.payload.cart_prescriptions.length ||
@@ -148,7 +159,7 @@ class AddressDetailsExpansionPanel extends React.Component {
                   }
                 />
                 : <Typography component='h1' className={this.props.heading}>
-                    Delivery Details
+                  Delivery Details
                 </Typography>}
               {this.props.addressIdSelected
                 ? <img
