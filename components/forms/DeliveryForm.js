@@ -52,39 +52,6 @@ const styles = theme => ({
 })
 
 class DeliveryForm extends React.Component {
-  componentDidMount () {
-    this.props.updateAddressFormValue(
-      this.props.deliveryDetailsState,
-      'full_name',
-      this.props.customerState.payload.full_name
-    )
-    this.props.updateAddressFormValue(
-      this.props.deliveryDetailsState,
-      'mobile',
-      this.props.customerState.payload.mobile
-    )
-  }
-
-  componentDidUpdate (prevProps) {
-    const fullName = this.props.customerState.payload.full_name
-    const mobile = this.props.customerState.payload.mobile
-    const prevPropsFullName = prevProps.customerState.payload.full_name
-    const prevPropsMobile = prevProps.customerState.payload.mobile
-
-    if (fullName !== prevPropsFullName || mobile !== prevPropsMobile) {
-      this.props.updateAddressFormValue(
-        this.props.deliveryDetailsState,
-        'full_name',
-        fullName
-      )
-      this.props.updateAddressFormValue(
-        this.props.deliveryDetailsState,
-        'mobile',
-        this.props.customerState.payload.mobile
-      )
-    }
-  }
-
   onPincodeInput (handleChange, event) {
     const inputValue = event.target.value
     const regexInputExpression = RegExp(NUMBER_VALIDATION_REGEX).test(
