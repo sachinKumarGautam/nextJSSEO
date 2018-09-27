@@ -132,7 +132,7 @@ class Header extends React.Component {
     if (
       (this.props.authentication == 'false') &&
       this.props.path &&
-      prevProps.customerState.payload.id !== this.props.customerState.payload.id
+      prevProps.loginState.isAuthenticated !== this.props.loginState.isAuthenticated
     ) {
       Router.push(this.props.path)
     }
