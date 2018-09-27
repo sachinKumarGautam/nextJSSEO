@@ -68,10 +68,6 @@ export function withCommonWrapper (Page) {
 
     componentDidMount () {
       this.props.actions.resetCartLoadingState(this.props.cartState)
-      this.props.actions.changePincodeValue(
-        this.props.checkPincodeState,
-        this.props.checkPincodeState.payload.pincode
-      )
     }
 
     handleCloseSnackbar = () =>
@@ -203,10 +199,10 @@ export function withCommonWrapper (Page) {
             LoaderComp={<Loader isLoading loaderType={'fullPageSpinner'} />}
             isError={
               cartState.payload.cart_items.errorState.isError ||
-                isCartInvalid ||
-                isSessionExpired ||
-                isShowNoCartIdDialog ||
-                cartState.errorState.isError
+              isCartInvalid ||
+              isSessionExpired ||
+              isShowNoCartIdDialog ||
+              cartState.errorState.isError
             }
             ErrorComp={this.getErrorComp(isCartInvalid, isSessionExpired)}
             bottomError
