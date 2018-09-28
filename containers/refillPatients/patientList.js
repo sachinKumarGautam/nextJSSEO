@@ -35,7 +35,7 @@ class PatientList extends Component {
     this.props.updateSelectedPatientDetails(
       this.props.pastMedicineState,
       event.target.value,
-      patientDetail.full_name,
+      patientDetail[0].full_name,
       patientDetail
     )
   }
