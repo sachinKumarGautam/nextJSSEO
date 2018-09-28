@@ -1,118 +1,86 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import Button from '@material-ui/core/Button';
-import Dialog from '@material-ui/core/Dialog';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogActions from '@material-ui/core/DialogActions';
-import Typography from '@material-ui/core/Typography';
-import { withStyles } from '@material-ui/core/styles';
-import withRoot from '../src/withRoot';
+// dependencies
+import React from 'react'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+import { withStyles } from '@material-ui/core/styles'
+import Paper from '@material-ui/core/Paper'
 
-import Link from 'next/link'
+// components
+import withRoot from '../src/withRoot'
+import Layout from '../components/layouts/Layout'
+import HomePageWrapper from '../containers/homePage'
 
-import withRedux from 'next-redux-wrapper'
-import initStore from '../redux'
-import CharacterInfo from '../components/CharacterInfo'
-import { rootEpic } from '../redux/epics'
-import * as actions from '../redux/actions'
-import { of } from 'rxjs/observable/of'
+import { getUserReviewLoading } from '../containers/homePage/homePageActions'
+
+import { fetchConstantsLoading } from '../components/constants/constantsAction'
+
+// page title
+import { homePage } from '../components/constants/PageTitle'
 
 const styles = theme => ({
   root: {
-    textAlign: 'center',
-    paddingTop: theme.spacing.unit * 20,
-  },
-});
-
-class Index extends React.Component {
-  static async getInitialProps ({ store, isServer }) {
-    const resultAction = await rootEpic(
-      of(actions.fetchCharacter(isServer)),
-      store
-    ).toPromise() // we need to convert Observable to Promise
-    store.dispatch(resultAction)
-
-    return { isServer }
+    paddingBottom: theme.spacing.unit * 2,
+    margin: '0 auto',
+    marginTop: theme.spacing.unit * 7.5,
+    width: '100%',
+    maxWidth: theme.breakpoints.values.lg,
+    minWidth: theme.breakpoints.values.md
   }
+})
 
-  state = {
-    open: false,
-  };
-
-  handleClose = () => {
-    this.setState({
-      open: false,
-    });
-  };
-
-  handleClick = () => {
-    this.setState({
-      open: true,
-    });
-  };
+class HomePage extends React.Component {
+  static getInitialProps ({ query }) {
+    return query
+  }
 
   componentDidMount () {
-    this.props.startFetchingCharacters()
+    // get background images
+    this.props.actions.getUserReviewLoading(this.props.homePageState)
+
+    // fetch app constants
+    this.props.actions.fetchConstantsLoading(this.props.constantsState)
   }
 
-  componentWillUnmount () {
-    this.props.stopFetchingCharacters()
-  }
-
-  render() {
-    const { classes } = this.props;
-    const { open } = this.state;
-
+  render () {
+    const { addToCartHandler, classes, authentication, path } = this.props
     return (
-      <div>
+      <Layout
+        title={homePage.title}
+        addToCartHandler={addToCartHandler}
+        authentication={authentication}
+        path={path}
+        isHomePage
+      >
         <div>
-          <h1>Index Page</h1>
-          <CharacterInfo />
-          <br />
-          <nav>
-            <Link href='/other'><a>Navigate to "/other"</a></Link>
-          </nav>
+          <Paper className={classes.root} elevation={1}>
+            <HomePageWrapper addToCartHandler={addToCartHandler} />
+          </Paper>
         </div>
-        <div className={classes.root}>
-          <Dialog open={open} onClose={this.handleClose}>
-            <DialogTitle>Super Secret Password</DialogTitle>
-            <DialogContent>
-              <DialogContentText>1-2-3-4-5</DialogContentText>
-            </DialogContent>
-            <DialogActions>
-              <Button color="primary" onClick={this.handleClose}>
-                OK
-              </Button>
-            </DialogActions>
-          </Dialog>
-          <Typography variant="display1" gutterBottom>
-            Material-UI
-          </Typography>
-          <Typography variant="subheading" gutterBottom>
-            example project
-          </Typography>
-          <Button variant="raised" color="primary" onClick={this.handleClick}>
-            Super Secret Password
-          </Button>
-        </div>
-      </div>
-    );
+      </Layout>
+    )
   }
 }
 
-Index.propTypes = {
-  classes: PropTypes.object.isRequired,
-};
-
-// export default withRoot(withStyles(styles)(Index));
-
-export default withRedux(
-  initStore,
-  null,
-  {
-    startFetchingCharacters: actions.startFetchingCharacters,
-    stopFetchingCharacters: actions.stopFetchingCharacters
+function mapStateToProps (state) {
+  return {
+    homePageState: state.homePageState,
+    constantsState: state.constantsState
   }
-)(withRoot(withStyles(styles)(Index)))
+}
+
+function mapDispatchToProps (dispatch) {
+  return {
+    actions: bindActionCreators(
+      {
+        getUserReviewLoading,
+        fetchConstantsLoading
+      },
+      dispatch
+    )
+  }
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withRoot(withStyles(styles)(HomePage)))

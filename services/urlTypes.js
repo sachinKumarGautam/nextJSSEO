@@ -1,0 +1,7 @@
+export const GET_LIST = 'GET_LIST'
+export const GET_ONE = 'GET_ONE'
+export const CREATE = 'CREATE'
+export const SEARCH_MEDICINE = 'SEARCH_MEDICINE'
+export const LOGIN = 'LOGIN'
+export const SEARCH_CUSTOMER = 'SEARCH_CUSTOMER'
+export const QUERY_STRING = 'QUERY_STRING'

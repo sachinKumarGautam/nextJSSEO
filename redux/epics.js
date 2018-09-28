@@ -1,53 +1,124 @@
-import { interval } from 'rxjs/observable/interval'
-import { of } from 'rxjs/observable/of'
-import { takeUntil, mergeMap, catchError, map } from 'rxjs/operators'
-import { combineEpics, ofType } from 'redux-observable'
-import ajax from 'universal-rx-request' // because standard AjaxObservable only works in browser
+import { combineEpics } from 'redux-observable'
 
-import * as actions from './actions'
-import * as types from './actionTypes'
+import { getMoleculeSummary } from '../containers/moleculeDetails/moleculeEpics'
 
-export const fetchUserEpic = (action$, store) =>
-  action$.pipe(
-    ofType(types.START_FETCHING_CHARACTERS),
-    mergeMap(action => {
-      return interval(3000).pipe(
-        mergeMap(x =>
-          actions.fetchCharacter({
-            isServer: store.getState().isServer
-          })
-        ),
-        takeUntil(action$.ofType(types.STOP_FETCHING_CHARACTERS))
-      )
-    })
-  )
+import { sendOTP, verifyOTP } from '../containers/login/loginEpics'
 
-export const fetchCharacterEpic = (action$, store) =>
-  action$.pipe(
-    ofType(types.FETCH_CHARACTER),
-    mergeMap(action =>
-      ajax({
-        url: `https://swapi.co/api/people/${store.getState().nextCharacterId}`
-      }).pipe(
-        map(response =>
-          actions.fetchCharacterSuccess(
-            response.body,
-            store.getState().isServer
-          )
-        ),
-        catchError(error =>
-          of(
-            actions.fetchCharacterFailure(
-              error.response.body,
-              store.getState().isServer
-            )
-          )
-        )
-      )
-    )
-  )
+import {
+  registerCustomer,
+  fetchUserInfo,
+  checkReferralCode,
+  getMembershipCodeLoading
+} from '../containers/user/customer/customerEpics'
+
+import { getRelatedMedicines } from '../containers/medicineList/medicineListEpics'
+
+import { getProductDetails } from '../containers/productDetails/productEpic'
+
+import { searchMedicine } from '../containers/searchMedicine/searchMedicineEpic'
+
+import {
+  getDeliveryDetailsList,
+  submitDeliveryDetails,
+  getLocalityList
+} from '../containers/deliveryDetails/deliveryDetailsEpics'
+
+import {
+  getPatientDetailsList,
+  submitPatient
+} from '../containers/patientDetails/patientDetailsEpics'
+
+import { getOrderListDetails } from '../containers/orderList/orderListEpics'
+
+import { getPrescriptionList } from '../containers/prescription/prescriptionEpics'
+
+import { carePointsList } from '../containers/carePoint/carePointEpics'
+
+import {
+  getAnonymousCartIdEpic,
+  getCartDetailsEpic,
+  decrementCartItemLoadingEpic,
+  decrementCartItemEpic,
+  incrementCartItemLoadingEpic,
+  incrementCartItemEpic,
+  deleteCartItemLoadingEpic,
+  deleteCartItemEpic,
+  savePatientToCartEpic,
+  cartTransferEpic,
+  saveDeliveryAddressToCartEpic,
+  uploadPrescriptionEpic,
+  deletePrescriptionEpic,
+  submitOrderEpic,
+  applyCouponCode,
+  optDoctorCallback,
+  verifyPaymentEpic,
+  optExpressDelivery,
+  paymentInitiateEpic,
+  deleteCartState
+} from '../containers/cartDetails/cartEpics'
+
+import { checkPincode } from '../containers/location/pincode/pincodeEpic'
+
+import { submitRefillDate } from '../containers/thankYou/thankYouEpics'
+// import * as actions from './actions'
+// import * as types from './actionTypes'
+
+import { getPatientPastMedicineList } from '../containers/refillPatients/refillEpics'
+
+import { getUserReview } from '../containers/homePage/homePageEpics'
+
+import {
+  getOrderDetails,
+  getPaymentChannelsEpic
+} from '../containers/orderDetails/orderDetailsEpics'
+
+import { getConstantsEpic } from '../components/constants/constantsEpic'
 
 export const rootEpic = combineEpics(
-  fetchUserEpic,
-  fetchCharacterEpic
+  getMoleculeSummary,
+  getRelatedMedicines,
+  sendOTP,
+  verifyOTP,
+  registerCustomer,
+  fetchUserInfo,
+  getProductDetails,
+  getAnonymousCartIdEpic,
+  getCartDetailsEpic,
+  decrementCartItemLoadingEpic,
+  decrementCartItemEpic,
+  incrementCartItemLoadingEpic,
+  incrementCartItemEpic,
+  deleteCartItemLoadingEpic,
+  deleteCartItemEpic,
+  searchMedicine,
+  fetchUserInfo,
+  getDeliveryDetailsList,
+  getPatientDetailsList,
+  savePatientToCartEpic,
+  saveDeliveryAddressToCartEpic,
+  getOrderListDetails,
+  getPrescriptionList,
+  carePointsList,
+  submitPatient,
+  cartTransferEpic,
+  uploadPrescriptionEpic,
+  deletePrescriptionEpic,
+  submitOrderEpic,
+  checkPincode,
+  submitDeliveryDetails,
+  submitRefillDate,
+  getPatientPastMedicineList,
+  getUserReview,
+  applyCouponCode,
+  optDoctorCallback,
+  verifyPaymentEpic,
+  checkReferralCode,
+  getMembershipCodeLoading,
+  getLocalityList,
+  getOrderDetails,
+  getPaymentChannelsEpic,
+  optExpressDelivery,
+  paymentInitiateEpic,
+  deleteCartState,
+  getConstantsEpic
 )
