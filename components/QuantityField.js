@@ -18,6 +18,12 @@ const styles = theme => ({
   },
   quantityTextFix: {
     marginTop: theme.spacing.unit
+  },
+  menu: {
+    ...theme.typography.caption,
+    paddingTop: theme.spacing.unit / 4,
+    paddingBottom: theme.spacing.unit / 4,
+    color: theme.palette.customGrey.grey500
   }
 })
 
@@ -40,7 +46,7 @@ const QuantityField = (props) => (
       value={props.productDetailsState.payload.quantity + 1}
     >
       {quantity.map(item => (
-        <MenuItem key={item} value={item}>
+        <MenuItem key={item} value={item} className={props.classes.menu}>
           {item}
         </MenuItem>
       ))}
