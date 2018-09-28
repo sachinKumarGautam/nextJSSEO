@@ -146,13 +146,13 @@ class OrderContent extends Component {
           </div>
         </div>
         <div className={this.props.classes.medicineDetailWrapper}>
-          <img 
-            src={image} 
+          <img
+            src={image}
             className={this.props.classes.prescriptionStyle}
-            onError={ e => {
+            onError={e => {
               e.target.src = '/static/images/placeholder.svg'
             }}
-            />
+          />
           <div>
             {this.props.orderDetails.items.map(
               (itemDetail, index) =>
