@@ -35,6 +35,7 @@ const styles = theme => ({
     background: theme.palette.common.black,
     borderRadius: '50%',
     textAlign: 'center',
+    cursor: 'pointer'
   },
   pickerListInput: {
     width: '0.1px',
@@ -68,8 +69,7 @@ const styles = theme => ({
   },
   deleteButtonWrapper: {
     position: 'relative',
-    display: 'inline-block',
-    cursor: 'pointer'
+    display: 'inline-block'
   },
   deleteImageStyle: {
     width: theme.spacing.unit
