@@ -1,22 +1,17 @@
 import React, { Component } from 'react'
 import StaticPage from '../../components/StaticPage'
 
-import { withStyles } from '@material-ui/core/styles'
-// import { Typography } from '@material-ui/core'
-
-const styles = theme => {
-  return {}
-}
+import terms from './terms.html'
 
 class TermsAndCondition extends Component {
-  render () {
+  render() {
     return (
       <StaticPage
         title='Terms & conditions'
-        content={''}
+        content={<div dangerouslySetInnerHTML={terms} />}
       />
     )
   }
 }
 
-export default withStyles(styles)(TermsAndCondition)
+export default TermsAndCondition
