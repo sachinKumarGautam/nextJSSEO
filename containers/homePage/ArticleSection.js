@@ -57,7 +57,8 @@ const styles = theme => {
     detailWrapper: {
       cursor: 'pointer',
       width: theme.spacing.unit * 37.5,
-      backgroundColor: theme.palette.secondary.main
+      backgroundColor: theme.palette.secondary.main,
+      textDecoration: 'none'
     },
     articleListWrapper: {
       display: 'flex',
@@ -68,7 +69,7 @@ const styles = theme => {
 }
 
 class ArticleSection extends Component {
-  render () {
+  render() {
     return (
       <div className={this.props.classes.articleWrapper}>
         <Typography
