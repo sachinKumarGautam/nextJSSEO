@@ -26,7 +26,7 @@ const styles = theme => {
     captionImageStyle: {
       width: theme.spacing.unit * 5,
       marginBottom: theme.spacing.unit * 4.125,
-      marginLeft: theme.spacing.unit * 5.5
+      marginLeft: theme.spacing.unit * 6
     },
     captionTextStyle: {
       fontSize: theme.typography.pxToRem(12),
@@ -36,6 +36,9 @@ const styles = theme => {
       width: theme.spacing.unit * 4,
       marginBottom: theme.spacing.unit * 4.125,
       marginLeft: theme.spacing.unit * 5.5
+    },
+    gridStyle: {
+      alignItems: 'baseline'
     }
   }
 }
@@ -60,7 +63,7 @@ class HealthCoachDetail extends Component {
           >
             Our Life Coaches help you determine the right diet and lifestyle interventions for you. Every month!
           </Typography>
-          <Grid container>
+          <Grid container className={this.props.classes.gridStyle}>
             <Grid item xs={2}>
               <img src='/static/images/food.svg' className={this.props.classes.captionImageStyle} />
               <Typography
@@ -89,7 +92,7 @@ class HealthCoachDetail extends Component {
               </Typography>
             </Grid>
             <Grid item xs={2}>
-              <img src='/static/images/scale.svg' className={this.props.classes.scaleImageStyle} />
+              <img src='/static/images/scale.svg' className={this.props.classes.captionImageStyle} />
               <Typography
                 variant='body1'
                 className={this.props.classes.captionTextStyle}
