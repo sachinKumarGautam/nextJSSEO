@@ -191,6 +191,10 @@ class SearchMedicine extends React.Component {
     this.searchMedicineDebounce = debounce(this.searchMedicineDebounce, 350)
   }
 
+  componentDidMount () {
+    this.resetState()
+  }
+
   searchMedicineOnChange = event => {
     event.persist()
     this.searchMedicineDebounce(event)
@@ -310,8 +314,7 @@ class SearchMedicine extends React.Component {
                 })}
                 {isOpen
                   ? <Paper className={classes.paper} square>
-                    {
-                      !searchMedicineResult.length &&
+                    {!searchMedicineResult.length &&
                         inputValue.length > 3 &&
                         !searchMedicineIsLoading &&
                         !searchMedicineIsError
@@ -319,27 +322,27 @@ class SearchMedicine extends React.Component {
                         : <ul
                           {...getMenuProps()}
                           className={classes.searchContentWrapper}
-                        >
+                          >
                           {modifiyMedicineList(
-                            searchMedicineResult,
-                            cartItems
-                          ).map((suggestion, index) =>
-                            renderSuggestion({
-                              suggestion,
-                              index,
-                              itemProps: getItemProps({
-                                item: suggestion.name
-                              }),
-                              highlightedIndex,
-                              selectedItem,
-                              onSelectItem: this.onSelectItem,
-                              searchItemStyle: classes.searchItem,
-                              highlightedSearchItem: `${classes.searchItem} ${classes.highlightedSearchItem}`,
-                              selectedSearchItem: `${classes.searchItem} ${classes.selectedSearchItem}`,
-                              checkPincodeState,
-                              addToCartHandler
-                            })
-                          )}
+                              searchMedicineResult,
+                              cartItems
+                            ).map((suggestion, index) =>
+                              renderSuggestion({
+                                suggestion,
+                                index,
+                                itemProps: getItemProps({
+                                  item: suggestion.name
+                                }),
+                                highlightedIndex,
+                                selectedItem,
+                                onSelectItem: this.onSelectItem,
+                                searchItemStyle: classes.searchItem,
+                                highlightedSearchItem: `${classes.searchItem} ${classes.highlightedSearchItem}`,
+                                selectedSearchItem: `${classes.searchItem} ${classes.selectedSearchItem}`,
+                                checkPincodeState,
+                                addToCartHandler
+                              })
+                            )}
                         </ul>}
                   </Paper>
                   : null}
