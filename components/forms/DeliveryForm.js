@@ -194,6 +194,7 @@ class DeliveryForm extends React.Component {
             id='pincode'
             onChange={this.onPincodeInput.bind(this, handleChange)}
             value={values.pincode}
+            autoComplete='off'
           />
           {((errors.pincode && touched.pincode) || isPincodeNotFound) &&
             <FormHelperText id='pincode'>

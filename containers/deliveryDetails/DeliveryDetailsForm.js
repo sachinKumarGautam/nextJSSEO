@@ -86,7 +86,6 @@ class DeliveryDetailForm extends React.Component {
                   this.props.getLocalityDetailListLoading
                 }
                 checkPincodeState={this.props.checkPincodeState}
-                resetPincodeState={this.props.resetPincodeState}
               />
             </DialogContent>
           </Dialog>
