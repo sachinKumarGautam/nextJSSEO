@@ -1,4 +1,9 @@
-export const GA_TRACKING_ID = 'UA-102190877-5'
+const GA_TRACKING_ID_PROD = 'UA-102190877-5'
+const GA_TRACKING_ID_DEV = 'UA-102190877-6'
+
+export const GA_TRACKING_ID = process.env.NODE_ENV === 'production'
+  ? GA_TRACKING_ID_PROD
+  : GA_TRACKING_ID_DEV
 
 // https://developers.google.com/analytics/devguides/collection/gtagjs/pages
 export const pageview = url => {

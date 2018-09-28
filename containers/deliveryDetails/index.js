@@ -34,6 +34,7 @@ const DeliveryDetailsWrapper = props => (
           getDeliveryDetailsListLoading={props.getDeliveryDetailsListLoading}
           resetErrorState={props.resetErrorState}
           globalErrorState={props.globalErrorState}
+          resetPincodeState={props.resetPincodeState}
         />
       </Grid>
     </Grid>
