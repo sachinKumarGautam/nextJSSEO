@@ -348,6 +348,7 @@ class OrderSummary extends React.Component {
           updateLassuredExpressFlag={this.props.updateLassuredExpressFlag}
           resetDeliveryAddressSelected={this.props.resetDeliveryAddressSelected}
           globalErrorState={this.props.globalErrorState}
+          resetPincodeState={this.props.resetPincodeState}
         />
         <PaymentExpansionPanel
           expanded={this.state.expanded}

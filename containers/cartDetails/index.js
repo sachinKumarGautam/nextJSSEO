@@ -220,7 +220,7 @@ class CartDetailsWrapper extends Component {
     this.props.actions.resetSavePatientToCartError()
     this.props.actions.resetSaveDeliveryAddressToCartError()
     this.props.actions.resetUploadPrescriptionError()
-    this.props.actions.resetPincodeState()
+    this.props.actions.resetPincodeState(this.props.checkPincodeState)
   }
 
   getErrorComponent () {
@@ -337,9 +337,12 @@ class CartDetailsWrapper extends Component {
                     this.props.actions.updatePatientFormValue
                   }
                   resetPatientSelected={this.props.actions.resetPatientSelected}
-                  resetDeliveryAddressSelected={this.props.actions.resetDeliveryAddressSelected}
+                  resetDeliveryAddressSelected={
+                    this.props.actions.resetDeliveryAddressSelected
+                  }
                   globalErrorState={this.props.globalErrorState}
                   resetIsEditFlag={this.props.actions.resetIsEditFlag}
+                  resetPincodeState={this.props.actions.resetPincodeState}
                 />
               </section>
             </Grid>

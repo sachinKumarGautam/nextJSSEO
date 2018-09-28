@@ -109,6 +109,7 @@ class Main extends Component {
     })
 
     this.props.resetDeliveryAddressSelected(this.props.deliveryDetailsState)
+    this.props.resetPincodeState(this.props.checkPincodeState)
   }
 
   saveDeliveryAddressSelected (deliveryDetail) {

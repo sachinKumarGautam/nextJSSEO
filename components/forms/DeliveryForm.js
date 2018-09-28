@@ -21,7 +21,8 @@ import {
   MOBILE_VALIDATION_REGEX,
   NUMBER_VALIDATION_REGEX,
   NAME_VALIDATION_REGEX,
-  NAME_VALIDATION_MSG
+  NAME_VALIDATION_MSG,
+  PINCODE_INVALID
 } from '../../containers/messages/ValidationMsg'
 
 // Helper styles for demo
@@ -58,7 +59,10 @@ class DeliveryForm extends React.Component {
       inputValue
     )
 
-    if ((event.target.value.length <= 6 && regexInputExpression) || !inputValue) {
+    if (
+      (event.target.value.length <= 6 && regexInputExpression) ||
+      !inputValue
+    ) {
       this.props.checkPincodeDetailLoading(
         this.props.checkPincodeState,
         null, // handleClose function to close pincode dialog
@@ -70,6 +74,21 @@ class DeliveryForm extends React.Component {
         this.props.deliveryDetailsState,
         'pincode',
         event.target.value
+      )
+    }
+
+    if (
+      inputValue.length < this.props.deliveryDetailsState.addressForm.pincode
+    ) {
+      this.props.updateAddressFormValue(
+        this.props.deliveryDetailsState,
+        'city',
+        ''
+      )
+      this.props.updateAddressFormValue(
+        this.props.deliveryDetailsState,
+        'state',
+        ''
       )
     }
   }
@@ -115,6 +134,11 @@ class DeliveryForm extends React.Component {
       handleChange,
       classes
     } = this.props
+    const pincodeError = this.props.checkPincodeState.errorState.isError
+    const isPincodeNotFound =
+      this.props.checkPincodeState.errorState.error.error &&
+      this.props.checkPincodeState.errorState.error.error.status === 404
+
     return (
       <form onSubmit={handleSubmit}>
         <FormControl
@@ -162,7 +186,7 @@ class DeliveryForm extends React.Component {
         <FormControl
           className={classes.formControl}
           aria-describedby='pincode'
-          error={errors.pincode && touched.pincode}
+          error={(errors.pincode && touched.pincode) || isPincodeNotFound}
         >
           <Input
             placeholder='Pincode'
@@ -171,10 +195,11 @@ class DeliveryForm extends React.Component {
             onChange={this.onPincodeInput.bind(this, handleChange)}
             value={values.pincode}
           />
-          {errors.pincode &&
-            touched.pincode &&
+          {((errors.pincode && touched.pincode) || isPincodeNotFound) &&
             <FormHelperText id='pincode'>
-              {errors.pincode}
+              {errors.pincode
+                ? errors.pincode
+                : isPincodeNotFound ? PINCODE_INVALID : null}
             </FormHelperText>}
         </FormControl>
         <FormControl
