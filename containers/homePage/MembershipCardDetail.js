@@ -36,6 +36,11 @@ const styles = theme => {
       fontSize: theme.typography.pxToRem(16),
       fontWeight: theme.typography.fontWeightBold
     },
+    membershipCardAmount: {
+      fontSize: theme.typography.pxToRem(16),
+      fontWeight: theme.typography.fontWeightBold,
+      marginBottom: theme.spacing.unit * 1.25
+    },
     membershipCardDescription: {
       ...theme.typography.body1,
       marginBottom: theme.spacing.unit * 1.25
@@ -108,7 +113,7 @@ class MembershipCardDetail extends Component {
             </Typography>
             <Typography
               variant='body2'
-              className={this.props.classes.membershipCardTitle}
+              className={this.props.classes.membershipCardAmount}
             >
               &#8377;1999.00
             </Typography>

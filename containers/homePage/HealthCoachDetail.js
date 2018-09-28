@@ -26,7 +26,7 @@ const styles = theme => {
     captionImageStyle: {
       width: theme.spacing.unit * 5,
       marginBottom: theme.spacing.unit * 4.125,
-      marginLeft: theme.spacing.unit * 5.5
+      marginLeft: theme.spacing.unit * 6
     },
     captionTextStyle: {
       fontSize: theme.typography.pxToRem(12),
@@ -36,6 +36,18 @@ const styles = theme => {
       width: theme.spacing.unit * 4,
       marginBottom: theme.spacing.unit * 4.125,
       marginLeft: theme.spacing.unit * 5.5
+    },
+    sleepIconStyle: {
+      width: theme.spacing.unit * 5,
+      marginBottom: theme.spacing.unit * 4.125,
+      marginLeft: theme.spacing.unit * 6,
+      marginTop: theme.spacing.unit
+    },
+    weightIconStyle: {
+      width: theme.spacing.unit * 4.625,
+      marginBottom: theme.spacing.unit * 3.875,
+      marginLeft: theme.spacing.unit * 6,
+      marginTop: theme.spacing.unit / 4
     }
   }
 }
@@ -80,7 +92,7 @@ class HealthCoachDetail extends Component {
               </Typography>
             </Grid>
             <Grid item xs={2}>
-              <img src='/static/images/sleep.svg' className={this.props.classes.captionImageStyle} />
+              <img src='/static/images/sleep.svg' className={this.props.classes.sleepIconStyle} />
               <Typography
                 variant='body1'
                 className={this.props.classes.captionTextStyle}
@@ -89,7 +101,7 @@ class HealthCoachDetail extends Component {
               </Typography>
             </Grid>
             <Grid item xs={2}>
-              <img src='/static/images/scale.svg' className={this.props.classes.scaleImageStyle} />
+              <img src='/static/images/scale.svg' className={this.props.classes.weightIconStyle} />
               <Typography
                 variant='body1'
                 className={this.props.classes.captionTextStyle}

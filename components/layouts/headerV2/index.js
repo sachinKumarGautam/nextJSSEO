@@ -30,6 +30,8 @@ import {
   updateShowNoCartIdDialogFlag
 } from '../../../containers/cartDetails/cartActions'
 
+import Link from 'next/link'
+
 import {
   resetIsNewUserFlag,
   resetLoginState
@@ -201,13 +203,12 @@ class Header extends React.Component {
                 className={this.props.classes.gridStyle}
               >
                 <Grid item xs={1} lg={1}>
-                  <img
-                    className={classes.lifcareLogoStyle}
-                    src='/static/images/new-logo.svg'
-                    onClick={() => {
-                      Router.push({ pathname: HOME_PAGE })
-                    }}
-                  />
+                  <Link href={HOME_PAGE} passHref >
+                    <img
+                      className={classes.lifcareLogoStyle}
+                      src='/static/images/new-logo.svg'
+                    />
+                  </Link>
                 </Grid>
                 <Grid
                   item
