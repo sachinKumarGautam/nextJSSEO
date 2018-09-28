@@ -452,21 +452,21 @@ export function uploadPrescriptionEpic (action$, store) {
         flatMap(result => {
           let cartPrescriptions = result.body.payload.cart_prescriptions
 
-          let updatedCartPrescriptions = cartPrescriptions.map(
-            (prescription, index) => {
-              return {
-                ...prescription,
-                url: prescription.location
-              }
-            }
-          )
+          // let updatedCartPrescriptions = cartPrescriptions.map(
+          //   (prescription, index) => {
+          //     return {
+          //       ...prescription,
+          //       url: prescription.location
+          //     }
+          //   }
+          // )
 
           if (data.cartState.payload.is_doctor_callback.payload) {
             return of(
               uploadPrescriptionSuccess(
                 data.cartState,
                 data.uploadedFiles,
-                updatedCartPrescriptions,
+                cartPrescriptions,
                 data.isHomePage
               ),
               optForDoctorCallbackLoading(
@@ -480,7 +480,7 @@ export function uploadPrescriptionEpic (action$, store) {
               uploadPrescriptionSuccess(
                 data.cartState,
                 data.uploadedFiles,
-                updatedCartPrescriptions,
+                cartPrescriptions,
                 data.isHomePage
               )
             )
@@ -507,19 +507,19 @@ export function deletePrescriptionEpic (action$, store) {
         map(result => {
           let cartPrescriptions = result.body.payload.cart_prescriptions
 
-          let updatedCartPrescriptions = cartPrescriptions.map(
-            (prescription, index) => {
-              return {
-                ...prescription,
-                url: prescription.location
-              }
-            }
-          )
+          // let updatedCartPrescriptions = cartPrescriptions.map(
+          //   (prescription, index) => {
+          //     return {
+          //       ...prescription,
+          //       url: prescription.location
+          //     }
+          //   }
+          // )
 
           return deletePrescriptionSuccess(
             data.cartState,
             data.uploadedFiles,
-            updatedCartPrescriptions
+            cartPrescriptions
           )
         }),
         catchError(error => {

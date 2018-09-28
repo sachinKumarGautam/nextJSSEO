@@ -3,7 +3,7 @@ import ajax from 'universal-rx-request' // because standard AjaxObservable only 
 const timeout = 60000
 
 // const defaultAuthHeader = process.env.REACT_APP_ACCESS_TOKEN
-const defaultAuthHeader = 'Bearer 076cfb92-f233-446e-9ed6-30c0b7b93831'
+const defaultAuthHeader = 'Bearer 6ca6459e-0e71-4ccf-ae99-9acdd7d3fb49'
 
 export default function makeAjaxRequest (params) {
   let contentType, // handle custom content type

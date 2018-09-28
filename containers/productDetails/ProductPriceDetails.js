@@ -64,7 +64,10 @@ class ProductPriceDetails extends Component {
   }
 
   handleChangePincodeDialog () {
-    this.props.openPincodeDialog(this.props.checkPincodeState, { isOpen: true })
+    this.props.openPincodeDialog(this.props.checkPincodeState, {
+      isOpen: true,
+      isChangePincode: true
+    })
   }
 
   render () {
@@ -99,7 +102,7 @@ class ProductPriceDetails extends Component {
                   openPincodeDialog={this.handleChangePincodeDialog}
                 />}
               <div className={classes.cardActions}>
-                <QuantityField onChangeQuantity={this.onChangeQuantity} />
+                <QuantityField onChangeQuantity={this.onChangeQuantity} productDetailsState={productDetailsState} />
                 <Button
                   disableFocusRipple
                   disableRipple

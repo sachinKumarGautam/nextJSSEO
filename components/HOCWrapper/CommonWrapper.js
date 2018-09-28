@@ -42,13 +42,11 @@ import {
   SESSION_EXPIRED_CONTENT
 } from '../../containers/messages/commonMsg'
 
-import {
-  MEDICINE_QUANTITY_ALERT
-} from '../../containers/messages/cartMessages'
+import { MEDICINE_QUANTITY_ALERT } from '../../containers/messages/cartMessages'
 
 import Snackbar from '@material-ui/core/Snackbar'
 
-import {SNACK_BAR_DURATION} from '../constants/Constants'
+import { SNACK_BAR_DURATION } from '../constants/Constants'
 
 export function withCommonWrapper (Page) {
   class CommonWrapper extends React.Component {
@@ -70,17 +68,12 @@ export function withCommonWrapper (Page) {
 
     componentDidMount () {
       this.props.actions.resetCartLoadingState(this.props.cartState)
-      this.props.actions.changePincodeValue(
-        this.props.checkPincodeState,
-        this.props.checkPincodeState.payload.pincode
-      )
     }
 
-    handleCloseSnackbar = () => (
+    handleCloseSnackbar = () =>
       this.setState({
         openSnackbar: !this.state.openSnackbar
       })
-    )
 
     addToCartHandler (inProgressCartItem, event) {
       if (!this.props.cartState.payload.uid) {
@@ -91,8 +84,10 @@ export function withCommonWrapper (Page) {
           isShowNoCartIdDialog
         )
       } else {
-        if (inProgressCartItem.max_order_quantity &&
-          inProgressCartItem.quantity >= inProgressCartItem.max_order_quantity) {
+        if (
+          inProgressCartItem.max_order_quantity &&
+          inProgressCartItem.quantity >= inProgressCartItem.max_order_quantity
+        ) {
           this.handleCloseSnackbar()
         } else {
           if (this.props.checkPincodeState.payload.pincode) {
@@ -179,15 +174,11 @@ export function withCommonWrapper (Page) {
           />
         )
       } else if (this.props.cartState.errorState.isError) {
-        return (
-          <SnackbarErrorMessage
-            error={this.props.cartState.errorState.error}
-          />
-        )
+        return <SnackbarErrorMessage error={this.props.globalErrorState} />
       } else {
         return (
           <SnackbarErrorMessage
-            error={this.props.cartState.payload.cart_items.errorState.error}
+            error={this.props.globalErrorState}
             resetState={this.resetState.bind(this)}
           />
         )
@@ -251,7 +242,8 @@ export function withCommonWrapper (Page) {
       checkPincodeState: state.checkPincodeState,
       searchMedicineState: state.searchMedicineState,
       cartState: state.cartState,
-      loginState: state.loginState
+      loginState: state.loginState,
+      globalErrorState: state.globalErrorState
     }
   }
 

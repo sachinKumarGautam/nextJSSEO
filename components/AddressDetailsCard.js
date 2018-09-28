@@ -141,6 +141,7 @@ const AddressDetailsCard = props => (
               classes={{
                 root: props.classes.selectButtonRoot
               }}
+              onClick={props.selectAddressDetail}
             >
               EDIT
             </Typography>

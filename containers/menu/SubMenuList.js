@@ -69,12 +69,12 @@ class SubMenuList extends React.Component {
         >
           FAQ
         </MenuItem>
-        <MenuItem
+        {/* <MenuItem
           className={this.props.classes.secondSubMenuStyle}
           onClick={this.redirectToPath.bind(this, TERMS)}
         >
           Terms & conditions
-        </MenuItem>
+        </MenuItem> */}
         <MenuItem
           className={this.props.classes.privacySubMenuStyle}
           onClick={this.redirectToPath.bind(this, PRIVACY_POLICY)}

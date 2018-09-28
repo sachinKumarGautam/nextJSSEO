@@ -417,7 +417,11 @@ export default function cartReducer (state = initialState, action) {
     case cartActionTypes.UPDATE_IS_CART_OPEN_LOGIN_FLAG:
       return {
         ...state,
-        isCartOpenLoginDialog: action.isCartOpenLoginDialog
+        isCartOpenLoginDialog: action.isCartOpenLoginDialog,
+        prescriptionDetails: {
+          ...state.prescriptionDetails,
+          isHomePage: false
+        }
       }
 
     case cartActionTypes.UPDATE_IS_CART_OPEN_REGISTER_MODAL_FLAG:

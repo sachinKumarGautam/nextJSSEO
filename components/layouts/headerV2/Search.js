@@ -86,17 +86,12 @@ class Search extends Component {
 
   componentDidUpdate (prevProps) {
     if (
-      this.props.cartState.prescriptionDetails.isHomePage !==
-      prevProps.cartState.prescriptionDetails.isHomePage
+      (this.props.cartState.prescriptionDetails.isHomePage !==
+      prevProps.cartState.prescriptionDetails.isHomePage) &&
+      this.props.cartState.prescriptionDetails.isHomePage
     ) {
       const url = getReplacedString(CART_DETAILS)
-      const isCartOpenLoginDialog = !this.props.loginState.isAuthenticated
-      return Router.push(url).then(() => {
-        this.props.updateIsCartOpenLoginFlag(
-          this.props.cartState,
-          isCartOpenLoginDialog
-        )
-      })
+      return Router.push(url)
     }
   }
   render () {
@@ -109,6 +104,7 @@ class Search extends Component {
           addToCartHandler={this.props.addToCartHandler}
           cartState={this.props.cartState}
           resetSearchMedicineState={this.props.resetSearchMedicineState}
+          globalErrorState={this.props.globalErrorState}
         />
         <Typography
           variant='body1'

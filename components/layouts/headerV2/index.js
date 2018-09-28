@@ -116,13 +116,23 @@ class Header extends React.Component {
         ''
       )
     }
+
+    if (
+      !this.props.cartState.prescriptionDetails.isHomePage
+    ) {
+      const isCartOpenLoginDialog = false
+      this.props.actions.updateIsCartOpenLoginFlag(
+        this.props.cartState,
+        isCartOpenLoginDialog
+      )
+    }
   }
 
   componentDidUpdate (prevProps) {
     if (
       (this.props.authentication == 'false') &&
       this.props.path &&
-      prevProps.customerState.payload.id !== this.props.customerState.payload.id
+      prevProps.loginState.isAuthenticated !== this.props.loginState.isAuthenticated
     ) {
       Router.push(this.props.path)
     }
@@ -214,6 +224,7 @@ class Header extends React.Component {
                       resetSearchMedicineState={
                         this.props.actions.resetSearchMedicineState
                       }
+                      globalErrorState={this.props.globalErrorState}
                     />
                     : null}
                 </Grid>
@@ -296,6 +307,7 @@ class Header extends React.Component {
                 updateShowNoCartIdDialogFlag={this.props.actions.updateShowNoCartIdDialogFlag}
                 updateIsCartOpenLoginFlag={this.props.actions.updateIsCartOpenLoginFlag}
                 loginState={this.props.loginState}
+                globalErrorState={this.props.globalErrorState}
               />
             </div>}
         </AppBar>
@@ -310,7 +322,8 @@ function mapStateToProps (state) {
     customerState: state.customerState,
     cartState: state.cartState,
     checkPincodeState: state.checkPincodeState,
-    searchMedicineState: state.searchMedicineState
+    searchMedicineState: state.searchMedicineState,
+    globalErrorState: state.globalErrorState
   }
 }
 

@@ -40,7 +40,7 @@ class DeliveryDetailForm extends React.Component {
           isError={this.props.deliveryDetailsState.addressForm.errorState.isError}
           ErrorComp={
             <SnackbarErrorMessage
-              error={this.props.deliveryDetailsState.addressForm.errorState.error}
+              error={this.props.globalErrorState}
               resetState={this.props.resetErrorState}
             />
           }

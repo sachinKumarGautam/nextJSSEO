@@ -14,5 +14,6 @@ export const REFERRAL_CODE_INVALID = 'Referral code is not valid'
 export const STREET1_REQUIRED = 'Please enter Flat/House/Office No.'
 export const MOBILE_VALIDATION_REGEX = /^[6-9]\d{9}$/
 export const NUMBER_VALIDATION_REGEX = /^\d+$/
+export const NUMBER_VALIDATION_MSG = 'Enter a valid number.'
 export const NAME_VALIDATION_REGEX = /^[a-zA-Z ]{3,30}$/
 export const NAME_VALIDATION_MSG = 'Please enter a valid name.'

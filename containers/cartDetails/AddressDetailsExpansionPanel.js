@@ -57,12 +57,25 @@ class AddressDetailsExpansionPanel extends React.Component {
     this.setState({
       openDeliveryFormDialog: true
     })
+
+    this.props.updateAddressFormValue(
+      this.props.deliveryDetailsState,
+      'full_name',
+      this.props.customerState.payload.full_name
+    )
+    this.props.updateAddressFormValue(
+      this.props.deliveryDetailsState,
+      'mobile',
+      this.props.customerState.payload.mobile
+    )
   }
 
   closeDeliveryFormModal () {
     this.setState({
       openDeliveryFormDialog: false
     })
+
+    this.props.resetDeliveryAddressSelected(this.props.deliveryDetailsState)
   }
 
   closeExpressDialog () {
@@ -113,7 +126,12 @@ class AddressDetailsExpansionPanel extends React.Component {
         expanded={this.props.expanded === 'panel4'}
         onChange={
           this.props.loginState.isAuthenticated &&
-            patientDetails.payload.patient_id
+            patientDetails.payload.patient_id &&
+            (
+              this.props.cartState.payload.cart_items.payload.length ||
+              this.props.cartState.payload.cart_prescriptions.length ||
+              this.props.cartState.payload.is_doctor_callback.payload
+            )
             ? this.props.handleChange
             : null
         }
@@ -141,7 +159,7 @@ class AddressDetailsExpansionPanel extends React.Component {
                   }
                 />
                 : <Typography component='h1' className={this.props.heading}>
-                    Delivery Details
+                  Delivery Details
                 </Typography>}
               {this.props.addressIdSelected
                 ? <img
@@ -188,6 +206,7 @@ class AddressDetailsExpansionPanel extends React.Component {
             checkPincodeState={this.props.checkPincodeState}
             inProgressAddressId={this.state.addressId}
             shippingAddressDetails={shippingAddressDetails}
+            globalErrorState={this.props.globalErrorState}
           />
           <Button
             size='small'

@@ -63,7 +63,8 @@ export default function checkPincodeReducer (state = initialState, action) {
     case HANDLE_PINCODE_DIALOG:
       return {
         ...state,
-        isPincodeDialogOpen: action.isOpen
+        isPincodeDialogOpen: action.isOpen,
+        isChangePincode: action.isChangePincode
       }
 
     case RESET_PINCODE_STATE:

@@ -330,7 +330,8 @@ export function updateIsCartOpenLoginFlag (cartState, isCartOpenLoginDialog) {
   return {
     type: cartActionTypes.UPDATE_IS_CART_OPEN_LOGIN_FLAG,
     cartState: cartState,
-    isCartOpenLoginDialog: isCartOpenLoginDialog
+    isCartOpenLoginDialog: isCartOpenLoginDialog,
+    isHomePage: false
   }
 }
 

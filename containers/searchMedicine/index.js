@@ -269,6 +269,7 @@ class SearchMedicine extends React.Component {
     const searchMedicineResult =
       searchMedicineState.payload.searchMedicineResult
     const searchMedicineIsLoading = searchMedicineState.isLoading
+    const searchMedicineIsError = searchMedicineState.errorState.isError
     const cartItems = cartState.payload.cart_items.payload
     return (
       <div className={classes.root}>
@@ -276,7 +277,7 @@ class SearchMedicine extends React.Component {
           isError={this.props.searchMedicineState.errorState.isError}
           ErrorComp={
             <SnackbarErrorMessage
-              error={this.props.searchMedicineState.errorState.error}
+              error={this.props.globalErrorState}
               resetState={this.resetState.bind(this)}
             />
           }
@@ -309,35 +310,37 @@ class SearchMedicine extends React.Component {
                 })}
                 {isOpen
                   ? <Paper className={classes.paper} square>
-                    {!searchMedicineResult.length &&
+                    {
+                      !searchMedicineResult.length &&
                         inputValue.length > 3 &&
-                        !searchMedicineIsLoading
-                      ? <MedicineNotAvailable />
-                      : <ul
-                        {...getMenuProps()}
-                        className={classes.searchContentWrapper}
-                      >
-                        {modifiyMedicineList(
-                          searchMedicineResult,
-                          cartItems
-                        ).map((suggestion, index) =>
-                          renderSuggestion({
-                            suggestion,
-                            index,
-                            itemProps: getItemProps({
-                              item: suggestion.name
-                            }),
-                            highlightedIndex,
-                            selectedItem,
-                            onSelectItem: this.onSelectItem,
-                            searchItemStyle: classes.searchItem,
-                            highlightedSearchItem: `${classes.searchItem} ${classes.highlightedSearchItem}`,
-                            selectedSearchItem: `${classes.searchItem} ${classes.selectedSearchItem}`,
-                            checkPincodeState,
-                            addToCartHandler
-                          })
-                        )}
-                      </ul>}
+                        !searchMedicineIsLoading &&
+                        !searchMedicineIsError
+                        ? <MedicineNotAvailable />
+                        : <ul
+                          {...getMenuProps()}
+                          className={classes.searchContentWrapper}
+                        >
+                          {modifiyMedicineList(
+                            searchMedicineResult,
+                            cartItems
+                          ).map((suggestion, index) =>
+                            renderSuggestion({
+                              suggestion,
+                              index,
+                              itemProps: getItemProps({
+                                item: suggestion.name
+                              }),
+                              highlightedIndex,
+                              selectedItem,
+                              onSelectItem: this.onSelectItem,
+                              searchItemStyle: classes.searchItem,
+                              highlightedSearchItem: `${classes.searchItem} ${classes.highlightedSearchItem}`,
+                              selectedSearchItem: `${classes.searchItem} ${classes.selectedSearchItem}`,
+                              checkPincodeState,
+                              addToCartHandler
+                            })
+                          )}
+                        </ul>}
                   </Paper>
                   : null}
               </div>

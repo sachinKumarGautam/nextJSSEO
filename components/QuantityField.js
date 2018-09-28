@@ -3,15 +3,13 @@ import React from 'react'
 import { withStyles } from '@material-ui/core/styles'
 import TextField from '@material-ui/core/TextField'
 import Typography from '@material-ui/core/Typography'
+import MenuItem from '@material-ui/core/MenuItem'
 
 const styles = theme => ({
   textField: {
     marginLeft: theme.spacing.unit,
     width: theme.spacing.unit * 8,
     marginRight: theme.spacing.unit * 4
-  },
-  menu: {
-    width: theme.spacing.unit * 8
   },
   wrapper: {
     display: 'flex',
@@ -20,6 +18,12 @@ const styles = theme => ({
   },
   quantityTextFix: {
     marginTop: theme.spacing.unit
+  },
+  menu: {
+    ...theme.typography.caption,
+    paddingTop: theme.spacing.unit / 4,
+    paddingBottom: theme.spacing.unit / 4,
+    color: theme.palette.customGrey.grey500
   }
 })
 
@@ -39,17 +43,12 @@ const QuantityField = (props) => (
       defaultValue={'1'}
       onChange={props.onChangeQuantity.bind(this)}
       className={props.classes.textField}
-      SelectProps={{
-        native: true,
-        MenuProps: {
-          className: props.classes.menu
-        }
-      }}
+      value={props.productDetailsState.payload.quantity + 1}
     >
       {quantity.map(item => (
-        <option key={item} value={item}>
+        <MenuItem key={item} value={item} className={props.classes.menu}>
           {item}
-        </option>
+        </MenuItem>
       ))}
     </TextField>
   </div>

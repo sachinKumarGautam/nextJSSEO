@@ -16,6 +16,7 @@ const initialState = {
   },
   pincodeValue: '',
   isPincodeDialogOpen: false,
+  isChangePincode: false,
   isLoading: false,
   isDeliveryAssignment: false,
   errorState: {

@@ -7,10 +7,11 @@ import {
   CHANGE_PINCODE
 } from './pincodeActionTypes'
 
-export function openPincodeDialog (checkPincodeState, { isOpen }) {
+export function openPincodeDialog (checkPincodeState, { ...defaultArgs }) {
   return {
     type: HANDLE_PINCODE_DIALOG,
-    isOpen
+    isOpen: defaultArgs.isOpen,
+    isChangePincode: defaultArgs.isChangePincode ? defaultArgs.isChangePincode : false
   }
 }
 
@@ -19,7 +20,7 @@ export function checkPincodeLoading (
   handleClose,
   setSubmitting,
   values,
-  {...defaultArgs} // an object with default values
+  { ...defaultArgs } // an object with default values
 ) {
   return {
     type: CHECK_PINCODE_LOADING,
@@ -66,7 +67,7 @@ export function checkPincodeFailure (checkPincodeState, error) {
     checkPincodeState,
     isLoading: false,
     isError: true,
-    error: error.response ? error.response.body.error.code : null
+    error: error
   }
 }
 

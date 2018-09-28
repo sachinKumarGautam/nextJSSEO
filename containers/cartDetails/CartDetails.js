@@ -25,13 +25,11 @@ import { getReplacedString } from '../../utils/replaceConstants'
 
 import openRazorpayCheckout from '../../utils/openRazorpayCheckout'
 
-import {
-  COD
-} from '../../components/constants/paymentConstants'
+import { COD } from '../../components/constants/paymentConstants'
 
 import Snackbar from '@material-ui/core/Snackbar'
 
-import {SNACK_BAR_DURATION} from '../../components/constants/Constants'
+import { SNACK_BAR_DURATION } from '../../components/constants/Constants'
 
 /*
   avatar
@@ -92,11 +90,10 @@ class CartDetails extends Component {
     this.onModalDismiss = this.onModalDismiss.bind(this)
   }
 
-  handleCloseSnackbar = () => (
+  handleCloseSnackbar = () =>
     this.setState({
       openSnackbar: !this.state.openSnackbar
     })
-  )
 
   decrementCartItem (cartItem) {
     this.setState({
@@ -104,14 +101,16 @@ class CartDetails extends Component {
     })
     if (cartItem.quantity === 1) {
       this.props.deleteCartItemLoading(this.props.cartState, cartItem)
-    } else {
+    } else if (cartItem.quantity > 1) {
       this.props.decrementCartItemLoading(this.props.cartState, cartItem)
     }
   }
 
   incrementCartItem (cartItem) {
-    if (cartItem.max_order_quantity &&
-      cartItem.quantity >= cartItem.max_order_quantity) {
+    if (
+      cartItem.max_order_quantity &&
+      cartItem.quantity >= cartItem.max_order_quantity
+    ) {
       this.handleCloseSnackbar()
     } else {
       this.setState({
@@ -133,10 +132,7 @@ class CartDetails extends Component {
   onModalDismiss () {
     const isPaymentFailure = true
 
-    this.props.updatePaymentFailureFlag(
-      this.props.cartState,
-      isPaymentFailure
-    )
+    this.props.updatePaymentFailureFlag(this.props.cartState, isPaymentFailure)
   }
 
   verifyPayment (response) {
@@ -149,15 +145,15 @@ class CartDetails extends Component {
 
   componentDidUpdate (prevProps) {
     if (
-      (this.props.cartState.isOrderSubmitted !==
-        prevProps.cartState.isOrderSubmitted) &&
+      this.props.cartState.isOrderSubmitted !==
+        prevProps.cartState.isOrderSubmitted &&
       this.props.cartState.isOrderSubmitted &&
       this.props.cartState.orderResponse.payload.order_type !== COD
     ) {
       this.openCheckout(this.props.cartState)
     } else if (
-      (this.props.cartState.payment.isPaymentSuccessful !==
-        prevProps.cartState.payment.isPaymentSuccessful) &&
+      this.props.cartState.payment.isPaymentSuccessful !==
+        prevProps.cartState.payment.isPaymentSuccessful &&
       this.props.cartState.payment.isPaymentSuccessful
     ) {
       this.props.resetCartState()
@@ -166,8 +162,8 @@ class CartDetails extends Component {
       const href = `${url}?payment-status=success`
       Router.push(href, as)
     } else if (
-      (this.props.cartState.payment.isPaymentFailure !==
-        prevProps.cartState.payment.isPaymentFailure) &&
+      this.props.cartState.payment.isPaymentFailure !==
+        prevProps.cartState.payment.isPaymentFailure &&
       this.props.cartState.payment.isPaymentFailure
     ) {
       this.props.resetCartState()
@@ -176,9 +172,8 @@ class CartDetails extends Component {
       const href = `${url}?payment-status=failed`
       Router.push(href, as)
     } else if (
-      (this.props.cartState.orderResponse.payload.order_number !==
-        prevProps.cartState.orderResponse.payload.order_number
-      ) &&
+      this.props.cartState.orderResponse.payload.order_number !==
+        prevProps.cartState.orderResponse.payload.order_number &&
       this.props.cartState.orderResponse.payload.order_type === COD
     ) {
       this.props.resetCartState()

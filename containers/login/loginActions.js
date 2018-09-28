@@ -11,6 +11,10 @@ import {
   HANDLE_SESSION_EXPIRATION
 } from './loginActionTypes'
 
+import {
+  COMMON_ERROR_UPDATE
+} from '../../redux/actionTypes'
+
 import { setCookie, removeCookie } from '../../utils/cookie'
 
 export function sendOtpLoading (loginState, setSubmitting, toggleForm, values) {
@@ -120,5 +124,12 @@ export function handleSessionExpiration (loginState, isSessionExpired) {
     type: HANDLE_SESSION_EXPIRATION,
     loginState,
     isSessionExpired
+  }
+}
+
+export function updateErrorDetail (errorDetail) {
+  return {
+    type: COMMON_ERROR_UPDATE,
+    errorDetail
   }
 }

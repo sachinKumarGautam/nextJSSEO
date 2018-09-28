@@ -33,6 +33,7 @@ const DeliveryDetailsWrapper = props => (
           resetDeliveryAddressSelected={props.resetDeliveryAddressSelected}
           getDeliveryDetailsListLoading={props.getDeliveryDetailsListLoading}
           resetErrorState={props.resetErrorState}
+          globalErrorState={props.globalErrorState}
         />
       </Grid>
     </Grid>

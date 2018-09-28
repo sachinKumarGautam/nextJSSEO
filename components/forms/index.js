@@ -55,6 +55,7 @@ const FormWrapper = props => {
           loginState={loginState}
           resendButtonClick={resendButtonClick}
           isRegisterClicked={props.isRegisterClicked}
+          globalErrorState={props.globalErrorState}
         />
       )
 

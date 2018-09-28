@@ -52,42 +52,13 @@ const styles = theme => ({
 })
 
 class DeliveryForm extends React.Component {
-  componentDidMount () {
-    this.props.updateAddressFormValue(
-      this.props.deliveryDetailsState,
-      'full_name',
-      this.props.customerState.payload.full_name
-    )
-    this.props.updateAddressFormValue(
-      this.props.deliveryDetailsState,
-      'mobile',
-      this.props.customerState.payload.mobile
-    )
-  }
-
-  componentDidUpdate (prevProps) {
-    const fullName = this.props.customerState.payload.full_name
-    const mobile = this.props.customerState.payload.mobile
-    const prevPropsFullName = prevProps.customerState.payload.full_name
-    const prevPropsMobile = prevProps.customerState.payload.mobile
-
-    if (fullName !== prevPropsFullName || mobile !== prevPropsMobile) {
-      this.props.updateAddressFormValue(
-        this.props.deliveryDetailsState,
-        'full_name',
-        fullName
-      )
-      this.props.updateAddressFormValue(
-        this.props.deliveryDetailsState,
-        'mobile',
-        this.props.customerState.payload.mobile
-      )
-    }
-  }
-
   onPincodeInput (handleChange, event) {
-    if (event.target.value.length > 6) return
-    else if (event.target.value.length === 6) {
+    const inputValue = event.target.value
+    const regexInputExpression = RegExp(NUMBER_VALIDATION_REGEX).test(
+      inputValue
+    )
+
+    if ((event.target.value.length <= 6 && regexInputExpression) || !inputValue) {
       this.props.checkPincodeDetailLoading(
         this.props.checkPincodeState,
         null, // handleClose function to close pincode dialog
@@ -95,13 +66,12 @@ class DeliveryForm extends React.Component {
         event.target.value,
         { isDeliveryAddress: true }
       )
+      this.props.updateAddressFormValue(
+        this.props.deliveryDetailsState,
+        'pincode',
+        event.target.value
+      )
     }
-
-    this.props.updateAddressFormValue(
-      this.props.deliveryDetailsState,
-      'pincode',
-      event.target.value
-    )
   }
 
   onChange (name, handleChange, event) {
@@ -198,7 +168,6 @@ class DeliveryForm extends React.Component {
             placeholder='Pincode'
             className={classes.valueStyle}
             id='pincode'
-            type='number'
             onChange={this.onPincodeInput.bind(this, handleChange)}
             value={values.pincode}
           />

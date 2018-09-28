@@ -123,6 +123,7 @@ class PatientDetailsList extends Component {
                 isEdit={this.props.patientDetailsState.isEdit}
                 resetPatientForm={this.props.resetPatientForm}
                 updatePatientFormValue={this.props.updatePatientFormValue}
+                globalErrorState={this.props.globalErrorState}
               />
             </div>
           </div>
