@@ -3,6 +3,7 @@ import Document, { Head, Main, NextScript } from 'next/document'
 import JssProvider from 'react-jss/lib/JssProvider'
 import flush from 'styled-jsx/server'
 import getPageContext from '../src/getPageContext'
+import { GA_TRACKING_ID } from '../utils/gaTag'
 
 class MyDocument extends Document {
   render () {
@@ -62,7 +63,20 @@ class MyDocument extends Document {
             rel='stylesheet'
             href='https://fonts.googleapis.com/css?family=Roboto:300,400,500'
           />
+          <script
+            async
+            src={`https://www.googletagmanager.com/gtag/js?id=${GA_TRACKING_ID}`}
+          />
           <script src='https://checkout.razorpay.com/v1/checkout.js' async />
+          <script
+            dangerouslySetInnerHTML={{
+              __html: `
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', '${GA_TRACKING_ID}');
+          `}}
+          />
         </Head>
         <body>
           <Main />
