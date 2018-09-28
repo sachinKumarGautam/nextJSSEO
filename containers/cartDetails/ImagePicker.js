@@ -34,7 +34,7 @@ const styles = theme => ({
     height: theme.spacing.unit * 2.5,
     background: theme.palette.common.black,
     borderRadius: '50%',
-    textAlign: 'center'
+    textAlign: 'center',
   },
   pickerListInput: {
     width: '0.1px',
@@ -68,16 +68,17 @@ const styles = theme => ({
   },
   deleteButtonWrapper: {
     position: 'relative',
-    display: 'inline-block'
+    display: 'inline-block',
+    cursor: 'pointer'
   },
   deleteImageStyle: {
     width: theme.spacing.unit
   }
 })
 
-const ImagePicker = (props) => (
+const ImagePicker = props => (
   <div className={props.classes.imagePickerWrapper}>
-    <div className={props.classes.pickerList} >
+    <div className={props.classes.pickerList}>
       <input
         className={props.classes.pickerListInput}
         id='file'
@@ -85,37 +86,33 @@ const ImagePicker = (props) => (
         accept='image/*'
         onChange={props.onImageSelection.bind(this)}
       />
-      <label
-        className={props.classes.pickerListLabel}
-        for='file'>
-        <label
-          className={props.classes.pickerListLabelPlus}
-          for='file'
-        >
+      <label className={props.classes.pickerListLabel} for='file'>
+        <label className={props.classes.pickerListLabelPlus} for='file'>
           +
         </label>
       </label>
-      {
-        props.files.map((image, index) => (
+      {props.files.map((image, index) => (
+        <div
+          className={props.classes.deleteButtonWrapper}
+          // onClick={props.onViewImage.bind(this, image.url)}
+          key={image.id}
+        >
           <div
-            className={props.classes.deleteButtonWrapper}
-            // onClick={props.onViewImage.bind(this, image.url)}
-            key={image.id}
+            className={props.classes.deleteButton}
+            onClick={props.onDeleteButton.bind(this, index)}
           >
-            <div
-              className={props.classes.deleteButton}
-              onClick={props.onDeleteButton.bind(this, index)}
-            >
-              <img src='/static/images/delete.svg' className={props.classes.deleteImageStyle} />
-            </div>
             <img
-              src={image.location}
-              className={props.classes.pickerImage}
-              alt={image.id}
+              src='/static/images/delete.svg'
+              className={props.classes.deleteImageStyle}
             />
           </div>
-        ))
-      }
+          <img
+            src={image.location}
+            className={props.classes.pickerImage}
+            alt={image.id}
+          />
+        </div>
+      ))}
     </div>
   </div>
 )
