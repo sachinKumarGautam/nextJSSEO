@@ -39,16 +39,17 @@ const styles = theme => {
       color: theme.palette.customGrey.grey500,
       textAlign: 'right',
       justifyContent: 'right',
-      marginBottom: theme.spacing.unit * 3
+      marginBottom: theme.spacing.unit * 3,
+      marginRight: theme.spacing.unit * 2
     }
   }
 }
 
 class TermsAndCondition extends Component {
-  render() {
+  render () {
     return (
       <StaticPage
-        title='Terms & conditions'
+        title='Terms & Conditions'
         content={<div>
           <Typography
             variant='body2'

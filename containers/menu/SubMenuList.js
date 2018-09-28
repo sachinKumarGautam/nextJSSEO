@@ -47,11 +47,11 @@ const styles = theme => {
 }
 
 class SubMenuList extends React.Component {
-  redirectToPath(path) {
+  redirectToPath (path) {
     const url = getReplacedString(path)
     Router.push(url)
   }
-  render() {
+  render () {
     return (
       <div className={this.props.classes.listWrapper}>
         {/* <MenuItem className={props.classes.languageSubMenuStyle}>Languages (Hindi/English)</MenuItem> */}
@@ -59,7 +59,7 @@ class SubMenuList extends React.Component {
           className={this.props.classes.languageSubMenuStyle}
           onClick={this.redirectToPath.bind(this, ABOUT_US)}
         >
-          About us
+          About Us
         </MenuItem>
         {/* <MenuItem className={props.classes.secondSubMenuStyle}>Careers</MenuItem> */}
         {/* <MenuItem className={props.classes.secondSubMenuStyle}>Contact us</MenuItem> */}
@@ -73,7 +73,7 @@ class SubMenuList extends React.Component {
           className={this.props.classes.secondSubMenuStyle}
           onClick={this.redirectToPath.bind(this, TERMS)}
         >
-          Terms & conditions
+          Terms & Conditions
         </MenuItem>
         <MenuItem
           className={this.props.classes.privacySubMenuStyle}

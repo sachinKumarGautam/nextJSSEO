@@ -19,7 +19,7 @@ const styles = theme => ({
 })
 
 class StaticPage extends Component {
-  render() {
+  render () {
     return (
       <div className={this.props.classes.pageWrapper}>
         <Typography
