@@ -318,32 +318,32 @@ class SearchMedicine extends React.Component {
                         inputValue.length > 3 &&
                         !searchMedicineIsLoading &&
                         !searchMedicineIsError
-                        ? <MedicineNotAvailable />
-                        : <ul
-                          {...getMenuProps()}
-                          className={classes.searchContentWrapper}
-                          >
-                          {modifiyMedicineList(
-                              searchMedicineResult,
-                              cartItems
-                            ).map((suggestion, index) =>
-                              renderSuggestion({
-                                suggestion,
-                                index,
-                                itemProps: getItemProps({
-                                  item: suggestion.name
-                                }),
-                                highlightedIndex,
-                                selectedItem,
-                                onSelectItem: this.onSelectItem,
-                                searchItemStyle: classes.searchItem,
-                                highlightedSearchItem: `${classes.searchItem} ${classes.highlightedSearchItem}`,
-                                selectedSearchItem: `${classes.searchItem} ${classes.selectedSearchItem}`,
-                                checkPincodeState,
-                                addToCartHandler
-                              })
-                            )}
-                        </ul>}
+                      ? <MedicineNotAvailable />
+                      : <ul
+                        {...getMenuProps()}
+                        className={classes.searchContentWrapper}
+                      >
+                        {modifiyMedicineList(
+                          searchMedicineResult,
+                          cartItems
+                        ).map((suggestion, index) =>
+                          renderSuggestion({
+                            suggestion,
+                            index,
+                            itemProps: getItemProps({
+                              item: suggestion.name
+                            }),
+                            highlightedIndex,
+                            selectedItem,
+                            onSelectItem: this.onSelectItem,
+                            searchItemStyle: classes.searchItem,
+                            highlightedSearchItem: `${classes.searchItem} ${classes.highlightedSearchItem}`,
+                            selectedSearchItem: `${classes.searchItem} ${classes.selectedSearchItem}`,
+                            checkPincodeState,
+                            addToCartHandler
+                          })
+                        )}
+                      </ul>}
                   </Paper>
                   : null}
               </div>
