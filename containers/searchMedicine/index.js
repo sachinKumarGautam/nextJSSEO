@@ -201,7 +201,7 @@ class SearchMedicine extends React.Component {
   }
 
   searchMedicineDebounce (event) {
-    if (event.target.value) {
+    if (event.target.value.length > 3) {
       this.props.searchMedicineLoading(
         this.props.searchMedicineState,
         this.props.checkPincodeState.payload.id,
