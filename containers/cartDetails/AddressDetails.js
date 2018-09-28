@@ -37,6 +37,7 @@ const AddressDetails = props => (
         checkPincodeDetailLoading={props.checkPincodeDetailLoading}
         getLocalityDetailListLoading={props.getLocalityDetailListLoading}
         globalErrorState={props.globalErrorState}
+        checkPincodeState={props.checkPincodeState}
       />
     </Grid>
     {props.deliveryDetailsState.payload.length

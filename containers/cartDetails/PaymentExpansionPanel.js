@@ -20,6 +20,8 @@ import {
   SNACK_BAR_DURATION
 } from '../../components/constants/Constants'
 
+import { event } from '../../utils/gaTag'
+
 class PaymentExpansionPanel extends React.Component {
   state = {
     paymentChannel: '',
@@ -28,6 +30,16 @@ class PaymentExpansionPanel extends React.Component {
   }
 
   placeOrder () {
+    const gaPaymentType = this.state.paymentChannel
+      ? this.state.paymentChannel
+      : 'COD'
+
+    event({
+      action: 'placeOrder',
+      category: 'order',
+      label: `payment-type: ${gaPaymentType}`
+    })
+
     if (
       !this.props.cartState.payload.cart_items.payload.length &&
       !this.props.cartState.payload.is_doctor_callback.payload &&
@@ -39,16 +51,16 @@ class PaymentExpansionPanel extends React.Component {
       })
     } else {
       if (
-        (this.state.paymentChannel !== '' &&
-          this.props.cartState.payload.total_payable_amount)
+        this.state.paymentChannel !== '' &&
+        this.props.cartState.payload.total_payable_amount
       ) {
         this.props.submitOrderLoading(
           this.props.cartState,
           this.state.paymentChannel
         )
       } else if (
-        (this.state.paymentChannel !== '' ||
-          !this.props.cartState.payload.total_payable_amount)
+        this.state.paymentChannel !== '' ||
+        !this.props.cartState.payload.total_payable_amount
       ) {
         this.props.submitOrderLoading(
           this.props.cartState,
@@ -86,11 +98,9 @@ class PaymentExpansionPanel extends React.Component {
         onChange={
           this.props.loginState.isAuthenticated &&
             shippingAddressDetails.payload.shipping_address_id &&
-            (
-              this.props.cartState.payload.cart_items.payload.length ||
+            (this.props.cartState.payload.cart_items.payload.length ||
               this.props.cartState.payload.cart_prescriptions.length ||
-              this.props.cartState.payload.is_doctor_callback.payload
-            )
+              this.props.cartState.payload.is_doctor_callback.payload)
             ? this.props.handleChange
             : null
         }
@@ -113,18 +123,18 @@ class PaymentExpansionPanel extends React.Component {
           {(this.props.cartState.payload.service_type ===
             SERVICE_TYPE_LFASSURED ||
             this.props.cartState.payload.delivery_option !==
-            DELIVERY_OPTION_NORMAL) &&
-            <PaymentDeliveryDetail
-              cartState={this.props.cartState}
-              optForExpressDeliveryLoading={
-                this.props.optForExpressDeliveryLoading
-              }
-              constantsState={this.props.constantsState}
-            />}
+              DELIVERY_OPTION_NORMAL) &&
+              <PaymentDeliveryDetail
+                cartState={this.props.cartState}
+                optForExpressDeliveryLoading={
+                  this.props.optForExpressDeliveryLoading
+                }
+                constantsState={this.props.constantsState}
+              />}
           {this.props.cartState.payload.total_payable_amount
             ? <div>
               <Typography className={this.props.selectPaymentMode}>
-                SELECT PAYMENT MODE
+                  SELECT PAYMENT MODE
               </Typography>
               <PaymentChannels
                 radioWrapper={this.props.radioWrapper}
@@ -140,8 +150,8 @@ class PaymentExpansionPanel extends React.Component {
             : null}
           <TermsAndCondition
             retailFaciltyName={
-              (this.props.cartState.payload.seller_detail &&
-                this.props.cartState.payload.seller_detail.retail_facilty_name)
+              this.props.cartState.payload.seller_detail &&
+                this.props.cartState.payload.seller_detail.retail_facilty_name
                 ? this.props.cartState.payload.seller_detail.retail_facilty_name
                 : 'trusted channel partners'
             }
@@ -161,7 +171,7 @@ class PaymentExpansionPanel extends React.Component {
             onClick={this.placeOrder.bind(this)}
             disabled={
               !patientDetails.payload.patient_id ||
-              !shippingAddressDetails.payload.shipping_address_id
+                !shippingAddressDetails.payload.shipping_address_id
             }
           />
           <Snackbar

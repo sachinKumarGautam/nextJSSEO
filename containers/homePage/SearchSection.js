@@ -13,8 +13,7 @@ const styles = theme => {
       height: theme.spacing.unit * 52.5,
       backgroundImage: `url(https://res.cloudinary.com/lfcr/image/upload/q_auto/v1537969771/media/happy_family.png)`,
       backgroundSize: 'cover',
-      backgroundPosition: 'center',
-      backgroundPositionY: theme.spacing.unit * 97.25
+      backgroundPosition: 'center'
     },
     textStyle: {
       ...theme.typography.title,

@@ -1,5 +1,5 @@
 import { of } from 'rxjs/observable/of'
-import { mergeMap, catchError, flatMap } from 'rxjs/operators'
+import { mergeMap, catchError, flatMap, debounceTime } from 'rxjs/operators'
 import { ofType } from 'redux-observable'
 
 import { CHECK_PINCODE_LOADING } from './pincodeActionTypes'
@@ -31,6 +31,7 @@ import {
 export function checkPincode (action$, store) {
   return action$.pipe(
     ofType(CHECK_PINCODE_LOADING),
+    debounceTime(500),
     mergeMap(data => {
       const checkPincodeState = store.getState().checkPincodeState
       const cartState = store.getState().cartState
