@@ -1,9 +1,13 @@
 import Header from './headerV2'
 import Footer from './footer'
+import Router from 'next/router'
 
 import Head from 'next/head'
+import * as gtag from '../../utils/gaTag'
 
-const Layout = (props) => (
+Router.onRouteChangeComplete = url => gtag.pageview(url)
+
+const Layout = props => (
   <div>
     <Head>
       <title>{props.title}</title>

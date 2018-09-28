@@ -22,7 +22,8 @@ import {
 } from '../containers/deliveryDetails/deliveryDetailsActions'
 
 import {
-  checkPincodeLoading
+  checkPincodeLoading,
+  resetPincodeState
 } from '../containers/location/pincode/pincodeAction'
 
 // page title
@@ -67,16 +68,17 @@ class DeliveryDetails extends React.Component {
   render () {
     const { addToCartHandler } = this.props
     return (
-      <Layout
-        title={deliveryDetails.title}
-        addToCartHandler={addToCartHandler}
-      >
+      <Layout title={deliveryDetails.title} addToCartHandler={addToCartHandler}>
         <div className={this.props.classes.wrapperStyle}>
           <Paper className={this.props.classes.root} elevation={1}>
             <DeliveryDetailsWrapper
               deliveryDetailsState={this.props.deliveryDetailsState}
-              saveDeliveryAddressSelected={this.props.actions.saveDeliveryAddressSelected}
-              submitDeliveryDetailsLoading={this.props.actions.submitDeliveryDetailsLoading}
+              saveDeliveryAddressSelected={
+                this.props.actions.saveDeliveryAddressSelected
+              }
+              submitDeliveryDetailsLoading={
+                this.props.actions.submitDeliveryDetailsLoading
+              }
               customerState={this.props.customerState}
               checkPincodeLoading={this.props.actions.checkPincodeLoading}
               updateAddressFormValue={this.props.actions.updateAddressFormValue}
@@ -85,10 +87,15 @@ class DeliveryDetails extends React.Component {
                 this.props.actions.getLocalityDetailListLoading
               }
               checkPincodeState={this.props.checkPincodeState}
-              resetDeliveryAddressSelected={this.props.actions.resetDeliveryAddressSelected}
-              getDeliveryDetailsListLoading={this.props.actions.getDeliveryDetailsListLoading}
+              resetDeliveryAddressSelected={
+                this.props.actions.resetDeliveryAddressSelected
+              }
+              getDeliveryDetailsListLoading={
+                this.props.actions.getDeliveryDetailsListLoading
+              }
               resetErrorState={this.props.actions.resetErrorState}
               globalErrorState={this.props.globalErrorState}
+              resetPincodeState={this.props.actions.resetPincodeState}
             />
           </Paper>
         </div>
@@ -118,7 +125,8 @@ function mapDispatchToProps (dispatch) {
         updateAddressFormValue,
         getLocalityDetailListLoading,
         resetDeliveryAddressSelected,
-        resetErrorState
+        resetErrorState,
+        resetPincodeState
       },
       dispatch
     )

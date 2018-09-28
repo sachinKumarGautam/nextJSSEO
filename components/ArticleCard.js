@@ -10,7 +10,7 @@ const styles = theme => {
   return {
     media: {
       height: 0,
-      paddingTop: '56.25%' // 16:9
+      height: theme.spacing.unit * 15.75
     },
     cardTitle: {
       ...theme.typography.subheading,

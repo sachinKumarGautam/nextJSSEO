@@ -22,10 +22,10 @@ const styles = theme => ({
   }
 })
 
-const CompanyInfo = ({classes}) => (
+const CompanyInfo = ({ classes }) => (
   <div>
     <Typography className={classes.listHeaderText} variant='headline' color='default'>
-        Categories
+      Categories
     </Typography>
     <div className={classes.iconWithText}>
       <Typography className={classes.listItemText} variant='subheading' component='h2'>
@@ -39,7 +39,7 @@ const CompanyInfo = ({classes}) => (
     </div>
     <div className={classes.iconWithText}>
       <Typography className={classes.listItemText} variant='subheading' component='h2'>
-        <a href='https://blog.lifcare.in/tag/arthritis/' target='_blank' className={classes.listItemText} >Arthritis</a>
+        <a href='https://blog.lifcare.in/tag/ortho/' target='_blank' className={classes.listItemText} >Ortho</a>
       </Typography>
     </div>
     <div className={classes.iconWithText}>
