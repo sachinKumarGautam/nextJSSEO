@@ -39,7 +39,7 @@ const styles = theme => {
 }
 
 class SearchSection extends Component {
-  render() {
+  render () {
     const settings = {
       dots: false,
       infinite: true,

@@ -57,7 +57,8 @@ const styles = theme => {
     detailWrapper: {
       cursor: 'pointer',
       width: theme.spacing.unit * 37.5,
-      backgroundColor: theme.palette.secondary.main
+      backgroundColor: theme.palette.secondary.main,
+      textDecoration: 'none'
     },
     articleListWrapper: {
       display: 'flex',
@@ -68,7 +69,7 @@ const styles = theme => {
 }
 
 class ArticleSection extends Component {
-  render () {
+  render() {
     return (
       <div className={this.props.classes.articleWrapper}>
         <Typography
@@ -81,10 +82,7 @@ class ArticleSection extends Component {
           {
             this.props.publishedContent.map((item) => {
               return (
-                <div
-                  className={this.props.classes.detailWrapper}
-                  onClick={() => Router.push(item.web_link)}
-                >
+                <a className={this.props.classes.detailWrapper} href={item.web_link} target='_blank'>
                   <img src={item.images[0]} className={this.props.classes.imageStyle} />
                   <Typography
                     variant='body2'
@@ -98,7 +96,7 @@ class ArticleSection extends Component {
                   >
                     {item.body}
                   </Typography>
-                </div>
+                </a>
               )
             })
           }
