@@ -11,10 +11,9 @@ const styles = theme => {
     imageStyle: {
       width: '100%',
       height: theme.spacing.unit * 52.5,
-      backgroundImage: `url(https://res.cloudinary.com/lfcr/image/upload/q_auto/v1537969771/media/happy_family.png)`,
+      backgroundImage: `url(https://res.cloudinary.com/lfcr/image/upload/c_crop,h_1268,q_auto:low,w_1900/v1538141138/media/happy_family.png)`,
       backgroundSize: 'cover',
-      backgroundPosition: 'center',
-      backgroundPositionY: theme.spacing.unit * 97.25
+      backgroundPosition: 'center'
     },
     textStyle: {
       ...theme.typography.title,
@@ -40,7 +39,7 @@ const styles = theme => {
 }
 
 class SearchSection extends Component {
-  render () {
+  render() {
     const settings = {
       dots: false,
       infinite: true,

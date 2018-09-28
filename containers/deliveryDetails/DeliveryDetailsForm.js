@@ -8,7 +8,8 @@ import Fade from '@material-ui/core/Fade'
 import Form from '../../components/forms/index'
 
 import ActivityIndicator from '../../components/activityIndicator/index'
-import SnackbarErrorMessage from '../../components/activityIndicator/error/SnackbarErrorMessage'
+import SnackbarErrorMessage
+  from '../../components/activityIndicator/error/SnackbarErrorMessage'
 
 const styles = theme => ({
   paper: {
@@ -37,7 +38,9 @@ class DeliveryDetailForm extends React.Component {
     return (
       <div>
         <ActivityIndicator
-          isError={this.props.deliveryDetailsState.addressForm.errorState.isError}
+          isError={
+            this.props.deliveryDetailsState.addressForm.errorState.isError
+          }
           ErrorComp={
             <SnackbarErrorMessage
               error={this.props.globalErrorState}
@@ -63,12 +66,9 @@ class DeliveryDetailForm extends React.Component {
                 root: classes.dialogTitle
               }}
             >
-              {
-                this.props.isEdit &&
-                !this.props.isAddNewAddressButtonClicked
-                  ? 'EDIT ADDRESS'
-                  : 'ADD NEW ADDRESS'
-              }
+              {this.props.isEdit && !this.props.isAddNewAddressButtonClicked
+                ? 'EDIT ADDRESS'
+                : 'ADD NEW ADDRESS'}
             </DialogTitle>
             <DialogContent>
               <Form
@@ -82,7 +82,9 @@ class DeliveryDetailForm extends React.Component {
                 closeModal={this.props.closeDeliveryFormModal}
                 checkPincodeDetailLoading={this.props.checkPincodeDetailLoading}
                 updateAddressFormValue={this.props.updateAddressFormValue}
-                getLocalityDetailListLoading={this.props.getLocalityDetailListLoading}
+                getLocalityDetailListLoading={
+                  this.props.getLocalityDetailListLoading
+                }
                 checkPincodeState={this.props.checkPincodeState}
               />
             </DialogContent>
@@ -93,4 +95,4 @@ class DeliveryDetailForm extends React.Component {
   }
 }
 
-export default (withStyles(styles)(DeliveryDetailForm))
+export default withStyles(styles)(DeliveryDetailForm)

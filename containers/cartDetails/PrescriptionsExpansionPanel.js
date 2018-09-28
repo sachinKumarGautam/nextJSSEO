@@ -45,6 +45,9 @@ class PrescriptionsExpansionPanel extends React.Component {
           <img
             src='/static/images/attachedPrescriptions.svg'
             className={this.props.imageIcon}
+            onError={ e => {
+              e.target.src = '/static/images/placeholder.svg'
+            }}
           />
           <Typography component='h1' className={this.props.heading}>
             {this.props.files.length

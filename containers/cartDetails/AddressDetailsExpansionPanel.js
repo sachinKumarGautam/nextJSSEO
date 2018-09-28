@@ -76,6 +76,7 @@ class AddressDetailsExpansionPanel extends React.Component {
     })
 
     this.props.resetDeliveryAddressSelected(this.props.deliveryDetailsState)
+    this.props.resetPincodeState(this.props.checkPincodeState)
   }
 
   closeExpressDialog () {
