@@ -113,7 +113,8 @@ export default function cartReducer (state = initialState, action) {
           delivery_option: action.delivery_option,
           service_type: action.service_type,
           payment_channels: action.payment_channels,
-          preferred_delivery_option: action.preferred_delivery_option
+          preferred_delivery_option: action.preferred_delivery_option,
+          shipping_fee: action.shipping_fee
         }
       }
 
@@ -183,7 +184,8 @@ export default function cartReducer (state = initialState, action) {
           total_sale_price: action.total_sale_price,
           total_tax_amount: action.total_tax_amount,
           excessive_ordered_quantity: action.excessive_ordered_quantity,
-          seller_detail: action.seller_detail
+          seller_detail: action.seller_detail,
+          shipping_fee: action.shipping_fee
         }
       }
 
@@ -333,7 +335,8 @@ export default function cartReducer (state = initialState, action) {
               shipping_address_id: action.shipping_address_id,
               shipping_address: action.shipping_address
             }
-          }
+          },
+          shipping_fee: action.shipping_fee
         }
       }
 
@@ -399,7 +402,8 @@ export default function cartReducer (state = initialState, action) {
           is_doctor_callback: {
             ...state.payload.is_doctor_callback,
             payload: action.doctor_callback
-          }
+          },
+          shipping_fee: action.shipping_fee
         }
       }
 
@@ -598,7 +602,8 @@ export default function cartReducer (state = initialState, action) {
             payment_confirmation_time: action.payment_confirmation_time,
             payment_cancellation_time: action.payment_cancellation_time,
             customer_care_number: action.customer_care_number,
-            urgent_delivery_charge: action.urgent_delivery_charge
+            urgent_delivery_charge: action.urgent_delivery_charge,
+            shipping_fee: action.shipping_fee
           }
         }
       }
@@ -683,7 +688,8 @@ export default function cartReducer (state = initialState, action) {
           total_tax_amount: action.total_tax_amount,
           discount: action.discount,
           shipping_fee: action.shipping_fee,
-          short_coupon_description: action.short_coupon_description
+          short_coupon_description: action.short_coupon_description,
+          shipping_fee: action.shipping_fee
         }
       }
 

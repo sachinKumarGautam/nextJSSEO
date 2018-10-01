@@ -70,7 +70,8 @@ const initialState = {
     service_type: '',
     urgent_delivery_charge: 0,
     redeemable_care_points: 0,
-    redeemable_cash: 0
+    redeemable_cash: 0,
+    shipping_fee: 0
   },
   isShowNoCartIdDialog: false,
   isCartOpenLoginDialog: false,
@@ -134,7 +135,8 @@ const initialState = {
       payment_confirmation_time: '',
       payment_cancellation_time: '',
       customer_care_number: '',
-      urgent_delivery_charge: 0
+      urgent_delivery_charge: 0,
+      shipping_fee: 0
     },
     isLoading: false,
     errorState: {

@@ -151,9 +151,16 @@ class PriceDetails extends Component {
               </Typography>
             }
             {
+              this.props.orderDetailsState.payload.shipping_fee
+                ? <Typography className={this.props.classes.discount}>
+                  Shipping Charges
+                </Typography>
+                : null
+            }
+            {
               this.props.orderDetailsState.payload.urgent_delivery_charge
                 ? (<Typography className={this.props.classes.discount}>
-                Express Delivery Charges
+                  Express Delivery Charges
                 </Typography>)
                 : null
             }
@@ -176,6 +183,13 @@ class PriceDetails extends Component {
               <Typography className={this.props.classes.discountAmount}>
                 - &#8377; {this.props.orderDetailsState.payload.coupon_discount}
               </Typography>
+            }
+            {
+              this.props.orderDetailsState.payload.shipping_fee
+                ? <Typography className={this.props.classes.discountAmount}>
+                  - &#8377; {this.props.orderDetailsState.payload.shipping_fee}
+                </Typography>
+                : null
             }
             {
               this.props.orderDetailsState.payload.urgent_delivery_charge
