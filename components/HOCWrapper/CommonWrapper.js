@@ -1,6 +1,8 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
+import Router from 'next/router'
+
 import PincodeDialog from '../../containers/location/pincode/PincodeDialog'
 
 import {
@@ -49,11 +51,10 @@ import { getCookie } from '../../utils/cookie'
 import Snackbar from '@material-ui/core/Snackbar'
 
 import { SNACK_BAR_DURATION } from '../constants/Constants'
-import { removeQueryParameters } from '../../utils/common'
 
 export function withCommonWrapper (Page) {
   class CommonWrapper extends React.Component {
-    static getInitialProps (ctx, router) {
+    static getInitialProps (ctx) {
       if (Page.getInitialProps) {
         return Page.getInitialProps(ctx)
       }
@@ -80,9 +81,20 @@ export function withCommonWrapper (Page) {
         this.props.loginState.isAuthenticated
       ) {
         this.props.actions.handleSessionExpiration(this.props.loginState, true)
-        // removeQueryParameters()
       }
       this.props.actions.resetCartLoadingState(this.props.cartState)
+    }
+
+    componentDidUpdate (prevProps) {
+      const queryParams = this.props.router.query
+      if (
+        queryParams.authentication == 'false' &&
+        queryParams.path &&
+        prevProps.loginState.isAuthenticated !==
+          this.props.loginState.isAuthenticated
+      ) {
+        Router.push(queryParams.path)
+      }
     }
 
     handleCloseSnackbar = () =>

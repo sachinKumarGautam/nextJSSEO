@@ -39,7 +39,6 @@ import {
 
 import { HOME_PAGE } from '../../../routes/RouteConstant'
 
-import Router from 'next/router'
 import { Grid } from '@material-ui/core'
 
 const styles = theme => ({
@@ -127,16 +126,6 @@ class Header extends React.Component {
         this.props.cartState,
         isCartOpenLoginDialog
       )
-    }
-  }
-
-  componentDidUpdate (prevProps) {
-    if (
-      (this.props.authentication == 'false') &&
-      this.props.path &&
-      prevProps.loginState.isAuthenticated !== this.props.loginState.isAuthenticated
-    ) {
-      Router.push(this.props.path)
     }
   }
 

@@ -67,8 +67,7 @@ export function verifyOtpLoading (
 }
 
 export function verifyOtpSuccess (loginState, result) {
-  const maxAge = 3600 * 24 * 30
-  setCookie('token', result.body.access_token, maxAge)
+  setCookie('token', result.body.access_token)
   return {
     type: OTP_VERIFIED_SUCCESS,
     loginState,
