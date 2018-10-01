@@ -11,9 +11,7 @@ import {
   HANDLE_SESSION_EXPIRATION
 } from './loginActionTypes'
 
-import {
-  COMMON_ERROR_UPDATE
-} from '../../redux/actionTypes'
+import { COMMON_ERROR_UPDATE } from '../../redux/actionTypes'
 
 import { setCookie, removeCookie } from '../../utils/cookie'
 
@@ -69,7 +67,8 @@ export function verifyOtpLoading (
 }
 
 export function verifyOtpSuccess (loginState, result) {
-  setCookie('token', result.body.access_token)
+  const maxAge = 3600 * 24 * 30
+  setCookie('token', result.body.access_token, maxAge)
   return {
     type: OTP_VERIFIED_SUCCESS,
     loginState,

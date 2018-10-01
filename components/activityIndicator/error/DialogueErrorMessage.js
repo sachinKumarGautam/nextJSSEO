@@ -51,11 +51,11 @@ class DialogueErrorMessage extends Component {
     this.setState({
       open: false // to close dialog
     })
-    if (!this.props.isShowNoCartIdDialog) {
-      Router.push(getReplacedString(HOME_PAGE))
-    }
+
     if (this.props.dialogKey === 'sessionExpired') {
       logoutWithReload()
+    } else if (!this.props.isShowNoCartIdDialog) {
+      Router.push(getReplacedString(HOME_PAGE))
     } else {
       this.props.onClickOk()
     }

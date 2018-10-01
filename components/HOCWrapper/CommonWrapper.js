@@ -49,6 +49,7 @@ import { getCookie } from '../../utils/cookie'
 import Snackbar from '@material-ui/core/Snackbar'
 
 import { SNACK_BAR_DURATION } from '../constants/Constants'
+import { removeQueryParameters } from '../../utils/common'
 
 export function withCommonWrapper (Page) {
   class CommonWrapper extends React.Component {
@@ -72,14 +73,14 @@ export function withCommonWrapper (Page) {
       const queryParams = this.props.router.query
       const isCookieExist = !!getCookie('token')
 
-      console.log(isCookieExist)
-
       if (
         queryParams.authentication == 'false' &&
         queryParams.path &&
-        !isCookieExist
+        !isCookieExist &&
+        this.props.loginState.isAuthenticated
       ) {
         this.props.actions.handleSessionExpiration(this.props.loginState, true)
+        // removeQueryParameters()
       }
       this.props.actions.resetCartLoadingState(this.props.cartState)
     }
@@ -274,8 +275,7 @@ export function withCommonWrapper (Page) {
           handleSessionExpiration,
           resetPincodeState,
           updateShowNoCartIdDialogFlag,
-          changePincodeValue,
-          
+          changePincodeValue
         },
         dispatch
       )

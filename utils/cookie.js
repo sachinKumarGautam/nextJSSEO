@@ -3,16 +3,17 @@
 
 import cookie from 'js-cookie'
 
-export const setCookie = (key, value) => {
+export const setCookie = (key, value, maxAge) => {
   if (process.browser) {
     cookie.set(key, value, {
-      expires: 1,
+      expires: 30,
+      // maxAge: maxAge,
       path: '/'
     })
   }
 }
 
-export const removeCookie = (key) => {
+export const removeCookie = key => {
   if (process.browser) {
     cookie.remove(key, {
       expires: 1
