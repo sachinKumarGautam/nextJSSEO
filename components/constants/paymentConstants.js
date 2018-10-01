@@ -1,4 +1,6 @@
 export const KEY_ID = 'rzp_test_XuRgeVefqaaxKa'
+//production key for payment - 
+// export const KEY_ID = 'rrzp_live_DYdkRHIfzLAXHT'
 
 export const PAYMENT_EMAIL = 'userpayments@lifcare.in'
 
