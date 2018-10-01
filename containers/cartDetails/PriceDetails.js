@@ -72,7 +72,7 @@ const styles = theme => ({
 })
 
 class PriceDetails extends Component {
-  render () {
+  render() {
     return (
       <div className={this.props.classes.priceDetailsWrapper}>
         <Grid container>
@@ -176,7 +176,7 @@ class PriceDetails extends Component {
               </Typography>}
             {this.props.cartState.payload.shipping_fee
               ? <Typography className={this.props.classes.discountAmount}>
-                - ₹ {this.props.cartState.payload.shipping_fee}
+                + ₹ {this.props.cartState.payload.shipping_fee}
               </Typography>
               : null
             }
