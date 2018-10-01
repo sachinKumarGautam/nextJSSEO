@@ -41,6 +41,8 @@ class HomePage extends React.Component {
     this.props.actions.fetchConstantsLoading(this.props.constantsState)
   }
 
+  
+
   render () {
     const { addToCartHandler, classes, authentication, path } = this.props
     return (

@@ -44,13 +44,15 @@ import {
 
 import { MEDICINE_QUANTITY_ALERT } from '../../containers/messages/cartMessages'
 
+import { getCookie } from '../../utils/cookie'
+
 import Snackbar from '@material-ui/core/Snackbar'
 
 import { SNACK_BAR_DURATION } from '../constants/Constants'
 
 export function withCommonWrapper (Page) {
   class CommonWrapper extends React.Component {
-    static getInitialProps (ctx) {
+    static getInitialProps (ctx, router) {
       if (Page.getInitialProps) {
         return Page.getInitialProps(ctx)
       }
@@ -67,6 +69,18 @@ export function withCommonWrapper (Page) {
     }
 
     componentDidMount () {
+      const queryParams = this.props.router.query
+      const isCookieExist = !!getCookie('token')
+
+      console.log(isCookieExist)
+
+      if (
+        queryParams.authentication == 'false' &&
+        queryParams.path &&
+        !isCookieExist
+      ) {
+        this.props.actions.handleSessionExpiration(this.props.loginState, true)
+      }
       this.props.actions.resetCartLoadingState(this.props.cartState)
     }
 
@@ -148,7 +162,6 @@ export function withCommonWrapper (Page) {
         return (
           <DialogueErrorMessage
             dialogKey={'sessionExpired'}
-            handleSessionExpiration={this.props.actions.handleSessionExpiration}
             loginState={this.props.loginState}
             isSessionExpired={isSessionExpired}
             dialogueTitle={SESSION_EXPIRED}
@@ -199,10 +212,10 @@ export function withCommonWrapper (Page) {
             LoaderComp={<Loader isLoading loaderType={'fullPageSpinner'} />}
             isError={
               cartState.payload.cart_items.errorState.isError ||
-              isCartInvalid ||
-              isSessionExpired ||
-              isShowNoCartIdDialog ||
-              cartState.errorState.isError
+                isCartInvalid ||
+                isSessionExpired ||
+                isShowNoCartIdDialog ||
+                cartState.errorState.isError
             }
             ErrorComp={this.getErrorComp(isCartInvalid, isSessionExpired)}
             bottomError
@@ -261,7 +274,8 @@ export function withCommonWrapper (Page) {
           handleSessionExpiration,
           resetPincodeState,
           updateShowNoCartIdDialogFlag,
-          changePincodeValue
+          changePincodeValue,
+          
         },
         dispatch
       )

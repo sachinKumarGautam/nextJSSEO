@@ -3,7 +3,8 @@ import Head from 'next/head'
 import NProgress from 'nprogress'
 import Router from 'next/router'
 
-Router.onRouteChangeStart = url => {
+Router.onRouteChangeStart = (url, prev) => {
+  console.log(url, prev)
   NProgress.start()
 }
 Router.onRouteChangeComplete = () => NProgress.done()
