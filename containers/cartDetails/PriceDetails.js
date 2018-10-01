@@ -72,7 +72,7 @@ const styles = theme => ({
 })
 
 class PriceDetails extends Component {
-  render () {
+  render() {
     return (
       <div className={this.props.classes.priceDetailsWrapper}>
         <Grid container>
@@ -135,10 +135,17 @@ class PriceDetails extends Component {
                 </ReactTooltip>
               </a>
             </div>
-            {this.props.cartState.payload.coupon_code &&
+            {
+              this.props.cartState.payload.coupon_code &&
               <Typography className={this.props.classes.discount}>
-                Coupon Discount
-              </Typography>}
+                Discount
+              </Typography>
+            }
+            {this.props.cartState.payload.shipping_fee &&
+              <Typography className={this.props.classes.discount}>
+                Shipping Charges
+              </Typography>
+            }
             {
               this.props.cartState.payload.urgent_delivery_charge
                 ? (
@@ -162,6 +169,11 @@ class PriceDetails extends Component {
             <Typography className={this.props.classes.discountAmount}>
               - ₹ {this.props.cartState.payload.redeemable_care_points}
             </Typography>
+            {this.props.cartState.payload.shipping_fee &&
+              <Typography className={this.props.classes.discount}>
+                - ₹ {this.props.cartState.payload.shipping_fee}
+              </Typography>
+            }
             {this.props.cartState.payload.coupon_code &&
               <Typography className={this.props.classes.discountAmount}>
                 - ₹ {this.props.cartState.payload.coupon_discount}
