@@ -14,7 +14,7 @@ import getApiServiceVersion from './apiVersion'
 const baseUrl = 'http://sandbox.lifcare.in'
 // const baseUrl = 'https://lifcare.in'
 
-function fetchUrl(
+function fetchUrl (
   apiServiceType,
   postfixUrl,
   type,

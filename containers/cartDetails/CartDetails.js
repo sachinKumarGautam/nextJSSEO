@@ -14,9 +14,15 @@ import TotalAmount from './TotalAmount'
 
 import Router from 'next/router'
 
-import { THANK_YOU } from '../../routes/RouteConstant'
+import {
+  THANK_YOU,
+  ORDER_DETAILS
+} from '../../routes/RouteConstant'
 
-import { NO_MEDICINES, MEDICINE_QUANTITY_ALERT } from '../messages/cartMessages'
+import {
+  NO_MEDICINES,
+  MEDICINE_QUANTITY_ALERT
+} from '../messages/cartMessages'
 import CartItemLoader
   from '../../components/activityIndicator/loader/cartLoaders/CartItemLoaderWrapper'
 import ActivityIndicator from '../../components/activityIndicator/index'
@@ -146,14 +152,14 @@ class CartDetails extends Component {
   componentDidUpdate (prevProps) {
     if (
       this.props.cartState.isOrderSubmitted !==
-        prevProps.cartState.isOrderSubmitted &&
+      prevProps.cartState.isOrderSubmitted &&
       this.props.cartState.isOrderSubmitted &&
       this.props.cartState.orderResponse.payload.order_type !== COD
     ) {
       this.openCheckout(this.props.cartState)
     } else if (
       this.props.cartState.payment.isPaymentSuccessful !==
-        prevProps.cartState.payment.isPaymentSuccessful &&
+      prevProps.cartState.payment.isPaymentSuccessful &&
       this.props.cartState.payment.isPaymentSuccessful
     ) {
       this.props.resetCartState()
@@ -163,7 +169,7 @@ class CartDetails extends Component {
       Router.push(href, as)
     } else if (
       this.props.cartState.payment.isPaymentFailure !==
-        prevProps.cartState.payment.isPaymentFailure &&
+      prevProps.cartState.payment.isPaymentFailure &&
       this.props.cartState.payment.isPaymentFailure
     ) {
       this.props.resetCartState()
@@ -173,7 +179,7 @@ class CartDetails extends Component {
       Router.push(href, as)
     } else if (
       this.props.cartState.orderResponse.payload.order_number !==
-        prevProps.cartState.orderResponse.payload.order_number &&
+      prevProps.cartState.orderResponse.payload.order_number &&
       this.props.cartState.orderResponse.payload.order_type === COD
     ) {
       this.props.resetCartState()

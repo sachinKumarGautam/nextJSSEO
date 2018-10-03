@@ -55,7 +55,7 @@ class PatientForm extends React.Component {
   handleChangeAge = event => {
     const inputValue = event.target.value
 
-    if (inputValue < 150) {
+    if (inputValue.length < 3) {
       this.props.updatePatientFormValue(
         this.props.patientDetailsState,
         'age',

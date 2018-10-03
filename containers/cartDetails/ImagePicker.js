@@ -4,12 +4,13 @@ import { withStyles } from '@material-ui/core/styles'
 
 const styles = theme => ({
   imagePickerWrapper: {
-    width: '100%',
     height: theme.spacing.unit * 12.5,
     background: theme.palette.common.white,
     display: 'flex',
     flexDirection: 'row',
-    flex: 12
+    flex: 12,
+    marginLeft: theme.spacing.unit * 6.25,
+    marginRight: theme.spacing.unit * 6.25
   },
   pickerList: {
     display: 'flex',
@@ -57,8 +58,7 @@ const styles = theme => ({
     flexShrink: 0,
     marginRight: theme.spacing.unit * 0.625,
     border: `1px dashed ${theme.palette.customGrey.grey200}`,
-    marginTop: theme.spacing.unit * 1.25,
-    marginLeft: theme.spacing.unit * 6.25
+    marginTop: theme.spacing.unit * 1.25
   },
   pickerListLabelPlus: {
     cursor: 'pointer',
