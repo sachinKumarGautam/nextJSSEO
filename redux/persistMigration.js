@@ -1,5 +1,5 @@
 export const migrations = {
-  0: (state) => {
+  1: (state) => {
     return {
       ...state,
       cartState: {

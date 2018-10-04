@@ -46,7 +46,7 @@ export default function initStore (
 
     const persistConfig = {
       key: 'lifcareSite1.0.0',
-      version: 0,
+      version: 1,
       debug: true,
       stateReconciler: autoMergeLevel2,
       blacklist: [

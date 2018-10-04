@@ -72,7 +72,7 @@ const styles = theme => ({
 })
 
 class PriceDetails extends Component {
-  render() {
+  render () {
     return (
       <div className={this.props.classes.priceDetailsWrapper}>
         <Grid container>
