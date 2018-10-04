@@ -1,6 +1,7 @@
 import fetchUrl from '../fetchUrl'
 
 import makeAjaxRequest from './makeAjaxRequest'
+import { defaultAuthHeader } from './makeAjaxRequest'
 
 const getMoleculeSummary$ = saltIds =>
   makeAjaxRequest({
@@ -20,10 +21,9 @@ const getCarePointsList$ = (customerId, cashType) =>
   makeAjaxRequest({
     method: 'GET',
     url: fetchUrl('', 'wallet/' + customerId + '/transaction', 'QUERY_STRING', {
-      query_string:
-        cashType === 'all'
-          ? `size=10&page=0`
-          : `cash-type=${cashType}&size=100&page=0`
+      query_string: cashType === 'all'
+        ? `size=10&page=0`
+        : `cash-type=${cashType}&size=100&page=0`
     })
   })
 
@@ -96,7 +96,8 @@ const sendOtp$ = data =>
     method: 'POST',
     url: fetchUrl('auth', 'otp', 'CREATE'),
     contentType: 'application/x-www-form-urlencoded',
-    body: { mobile: data.mobile }
+    body: { mobile: data.mobile },
+    authHeader: defaultAuthHeader
   })
 
 const fetchUserInfo$ = mobileNumber =>
@@ -122,7 +123,7 @@ const registerCustomer$ = data =>
     body: data
   })
 
-const searchMedicine$ = (queryString) =>
+const searchMedicine$ = queryString =>
   makeAjaxRequest({
     method: 'GET',
     url: fetchUrl('catalog', 'medicine/search', 'QUERY_STRING', {

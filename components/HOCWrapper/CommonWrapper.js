@@ -1,6 +1,8 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
+import Router from 'next/router'
+
 import PincodeDialog from '../../containers/location/pincode/PincodeDialog'
 
 import {
@@ -44,6 +46,8 @@ import {
 
 import { MEDICINE_QUANTITY_ALERT } from '../../containers/messages/cartMessages'
 
+import { getCookie } from '../../utils/cookie'
+
 import Snackbar from '@material-ui/core/Snackbar'
 
 import { SNACK_BAR_DURATION } from '../constants/Constants'
@@ -67,7 +71,30 @@ export function withCommonWrapper (Page) {
     }
 
     componentDidMount () {
+      const queryParams = this.props.router.query
+      const isCookieExist = !!getCookie('token')
+
+      if (
+        queryParams.authentication == 'false' &&
+        queryParams.path &&
+        !isCookieExist &&
+        this.props.loginState.isAuthenticated
+      ) {
+        this.props.actions.handleSessionExpiration(this.props.loginState, true)
+      }
       this.props.actions.resetCartLoadingState(this.props.cartState)
+    }
+
+    componentDidUpdate (prevProps) {
+      const queryParams = this.props.router.query
+      if (
+        queryParams.authentication == 'false' &&
+        queryParams.path &&
+        prevProps.loginState.isAuthenticated !==
+          this.props.loginState.isAuthenticated
+      ) {
+        Router.push(queryParams.path)
+      }
     }
 
     handleCloseSnackbar = () =>
@@ -148,7 +175,6 @@ export function withCommonWrapper (Page) {
         return (
           <DialogueErrorMessage
             dialogKey={'sessionExpired'}
-            handleSessionExpiration={this.props.actions.handleSessionExpiration}
             loginState={this.props.loginState}
             isSessionExpired={isSessionExpired}
             dialogueTitle={SESSION_EXPIRED}
@@ -199,10 +225,10 @@ export function withCommonWrapper (Page) {
             LoaderComp={<Loader isLoading loaderType={'fullPageSpinner'} />}
             isError={
               cartState.payload.cart_items.errorState.isError ||
-              isCartInvalid ||
-              isSessionExpired ||
-              isShowNoCartIdDialog ||
-              cartState.errorState.isError
+                isCartInvalid ||
+                isSessionExpired ||
+                isShowNoCartIdDialog ||
+                cartState.errorState.isError
             }
             ErrorComp={this.getErrorComp(isCartInvalid, isSessionExpired)}
             bottomError
