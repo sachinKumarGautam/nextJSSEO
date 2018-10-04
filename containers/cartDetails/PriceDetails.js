@@ -135,10 +135,18 @@ class PriceDetails extends Component {
                 </ReactTooltip>
               </a>
             </div>
-            {this.props.cartState.payload.coupon_code &&
+            {
+              this.props.cartState.payload.coupon_code &&
               <Typography className={this.props.classes.discount}>
-                Coupon Discount
-              </Typography>}
+                Discount
+              </Typography>
+            }
+            {this.props.cartState.payload.shipping_fee
+              ? <Typography className={this.props.classes.discount}>
+                Shipping Charges
+              </Typography>
+              : null
+            }
             {
               this.props.cartState.payload.urgent_delivery_charge
                 ? (
@@ -166,6 +174,12 @@ class PriceDetails extends Component {
               <Typography className={this.props.classes.discountAmount}>
                 - ₹ {this.props.cartState.payload.coupon_discount}
               </Typography>}
+            {this.props.cartState.payload.shipping_fee
+              ? <Typography className={this.props.classes.discountAmount}>
+                + ₹ {this.props.cartState.payload.shipping_fee}
+              </Typography>
+              : null
+            }
             {
               this.props.cartState.payload.urgent_delivery_charge
                 ? (

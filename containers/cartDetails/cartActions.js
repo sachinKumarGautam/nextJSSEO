@@ -97,7 +97,8 @@ export function getCartDetailsSuccess (
     seller_detail: result.seller_detail,
     available_delivery_option: result.available_delivery_option,
     preferred_delivery_option: result.preferred_delivery_option,
-    excessive_ordered_quantity: result.excessive_ordered_quantity
+    excessive_ordered_quantity: result.excessive_ordered_quantity,
+    shipping_fee: result.shipping_fee
   }
 }
 
@@ -153,7 +154,8 @@ export function putCartItemSuccess (cartState, result) {
     total_sale_price: result.total_sale_price,
     total_tax_amount: result.total_tax_amount,
     excessive_ordered_quantity: result.excessive_ordered_quantity,
-    seller_detail: result.seller_detail
+    seller_detail: result.seller_detail,
+    shipping_fee: result.shipping_fee
   }
 }
 
@@ -271,7 +273,8 @@ export function saveDeliveryAddressToCartSuccess (cartState, result) {
     total_payable_amount: result.total_payable_amount,
     total_sale_price: result.total_sale_price,
     total_tax_amount: result.total_tax_amount,
-    seller_detail: result.seller_detail
+    seller_detail: result.seller_detail,
+    shipping_fee: result.shipping_fee
   }
 }
 
@@ -312,7 +315,8 @@ export function cartTransferSuccess (
     doctor_callback: payload.doctor_callback,
     is_cart_transfered: true,
     source_type: payload.source_type,
-    seller_detail: result.seller_detail
+    seller_detail: result.seller_detail,
+    shipping_fee: result.shipping_fee
   }
 }
 
@@ -474,7 +478,8 @@ export function submitOrderSuccess (cartState, result) {
     customer_care_number: result.order.customer_care_number,
     isOrderSubmitted: true,
     isLoading: false,
-    urgent_delivery_charge: result.order.urgent_delivery_charge
+    urgent_delivery_charge: result.order.urgent_delivery_charge,
+    shipping_fee: result.order.shipping_charge
   }
 }
 
@@ -540,7 +545,8 @@ export function applyCouponCodeSuccess (cartState, result) {
     shipping_fee: result.shipping_fee,
     short_coupon_description: result.short_coupon_description,
     isLoading: false,
-    isCouponApplied: true
+    isCouponApplied: true,
+    shipping_fee: result.shipping_fee
   }
 }
 
@@ -667,7 +673,8 @@ export function optForExpressDeliverySuccess (cartState, result) {
     total_payable_amount: result.total_payable_amount,
     redeemable_care_points: result.redeemable_care_points,
     redeemable_cash: result.redeemable_cash,
-    cart_items: result.cart_items
+    cart_items: result.cart_items,
+    shipping_fee: result.shipping_fee
   }
 }
 

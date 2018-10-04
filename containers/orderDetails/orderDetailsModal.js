@@ -34,7 +34,8 @@ const initialState = {
     is_cart_invalid: false,
     source_type: '',
     delivery_option: '',
-    service_type: ''
+    service_type: '',
+    shipping_fee: 0
   },
   isLoading: false,
   errorState: {
