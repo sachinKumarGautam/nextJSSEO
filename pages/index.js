@@ -16,11 +16,6 @@ import { fetchConstantsLoading } from '../components/constants/constantsAction'
 
 // page title
 import { homePage } from '../components/constants/PageTitle'
-import {
-  HOMEPAGE_META_TITLE,
-  HOMEPAGE_META_DESCRIPTION,
-  HOMEPAGE_META_KEYWORDS
-} from '../components/constants/MetaConstants'
 
 const styles = theme => ({
   root: {
@@ -54,9 +49,9 @@ class HomePage extends React.Component {
         authentication={authentication}
         path={path}
         isHomePage
-        title={HOMEPAGE_META_TITLE}
-        metaDescription={HOMEPAGE_META_DESCRIPTION}
-        metaKeywords={HOMEPAGE_META_KEYWORDS}
+        title={homePage.title}
+        metaDescription={homePage.description}
+        metaKeywords={homePage.keywords}
       >
         <div>
           <Paper className={classes.root} elevation={1}>
