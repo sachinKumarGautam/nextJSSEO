@@ -251,9 +251,8 @@ class SearchMedicine extends React.Component {
 
   handleOnEnterItem = (searchMedicineResult, type, prevHighlightedIndex) => {
     const slug = searchMedicineResult[prevHighlightedIndex].slug
-    const city = this.props.checkPincodeState.payload.city
-    const href = `${PRODUCT_DETAILS}?id=${slug}&location=${city}`
-    const as = `${PRODUCT_DETAILS}/${slug}?location=${city}`
+    const href = `${PRODUCT_DETAILS}?id=${slug}`
+    const as = `${PRODUCT_DETAILS}/${slug}`
     Router.push(href, as)
   }
 

@@ -111,9 +111,8 @@ class MedicineListDetails extends React.Component {
   render () {
     const { props } = this
     const { checkIfAlredyExistInCart } = props
-    const city = this.props.checkPincodeState.payload.city
-    const searchMedicinePageLinkHref = `${PRODUCT_DETAILS}?id=${props.itemDetails.slug}&location=${city}`
-    const searchMedicinePageLinkAs = `${PRODUCT_DETAILS}/${props.itemDetails.slug}?location=${city}`
+    const searchMedicinePageLinkHref = `${PRODUCT_DETAILS}?id=${props.itemDetails.slug}`
+    const searchMedicinePageLinkAs = `${PRODUCT_DETAILS}/${props.itemDetails.slug}`
 
     return (
       <div className={!props.itemDetails.slug ? props.classes.disableLink : ''}>

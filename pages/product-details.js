@@ -64,7 +64,7 @@ class ProductDetails extends React.Component {
       this.props.actions.getProductDetailLoading(
         this.props.productDetailsState,
         query.product_id,
-        query.location
+        this.props.checkPincodeState.payload.city
       )
     }
   }
