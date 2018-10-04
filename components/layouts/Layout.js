@@ -11,6 +11,8 @@ const Layout = props => (
   <div>
     <Head>
       <title>{props.title}</title>
+      <meta name='description' content={props.metaDescription} />
+      <meta name='keywords' content={props.metaKeywords} />
     </Head>
     <Header
       addToCartHandler={props.addToCartHandler}

@@ -4,6 +4,11 @@ import JssProvider from 'react-jss/lib/JssProvider'
 import flush from 'styled-jsx/server'
 import getPageContext from '../src/getPageContext'
 import { GA_TRACKING_ID } from '../utils/gaTag'
+import {
+  HOMEPAGE_META_TITLE,
+  HOMEPAGE_META_DESCRIPTION,
+  HOMEPAGE_META_KEYWORDS
+} from '../components/constants/MetaConstants'
 
 class MyDocument extends Document {
   render () {
@@ -12,7 +17,7 @@ class MyDocument extends Document {
     return (
       <html lang='en' dir='ltr'>
         <Head>
-          <title>Lifcare</title>
+          <title>{HOMEPAGE_META_TITLE}</title>
           <meta charSet='utf-8' />
           {/* Use minimum-scale=1 to enable GPU rasterization */}
           <meta
@@ -22,6 +27,8 @@ class MyDocument extends Document {
                 'minimum-scale=1, width=device-width, height=device-height'
             }
           />
+          <meta name='description' content={''} />
+          <meta name='keywords' content={''} />
           {/* PWA primary color */}
           <meta
             name='theme-color'
@@ -75,7 +82,8 @@ class MyDocument extends Document {
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
             gtag('config', '${GA_TRACKING_ID}');
-          `}}
+          `
+            }}
           />
         </Head>
         <body>
