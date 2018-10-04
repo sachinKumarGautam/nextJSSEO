@@ -58,7 +58,8 @@ export default function orderDetailsReducer (state = initialState, action) {
           source_type: action.source_type,
           delivery_option: action.delivery_option,
           service_type: action.service_type,
-          seller_name: action.seller_name
+          seller_name: action.seller_name,
+          shipping_fee: action.shipping_fee
         },
         isLoading: action.isLoading
       }
