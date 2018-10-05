@@ -52,6 +52,7 @@ class HomePage extends React.Component {
         title={homePage.title}
         metaDescription={homePage.description}
         metaKeywords={homePage.keywords}
+        canonical = {homePage.canonical}
       >
         <div>
           <Paper className={classes.root} elevation={1}>

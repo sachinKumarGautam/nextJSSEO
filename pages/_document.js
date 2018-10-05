@@ -23,8 +23,7 @@ class MyDocument extends Document {
                 'minimum-scale=1, width=device-width, height=device-height'
             }
           />
-          <meta name='description' content={''} />
-          <meta name='keywords' content={''} />
+          
           {/* PWA primary color */}
           <meta
             name='theme-color'
