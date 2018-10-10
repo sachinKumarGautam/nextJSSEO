@@ -11,6 +11,13 @@ const Layout = props => (
   <div>
     <Head>
       <title>{props.title}</title>
+      <meta name='description' content={props.metaDescription} />
+      <meta name='keywords' content={props.metaKeywords} />
+      {props.metaDescription && <meta name='description' content={props.metaDescription} />}
+      {props.metaKeywords && <meta name='keywords' content={props.metaKeywords} />}
+      {props.title && <meta name='og:title' content={props.title} />}
+      {props.metaDescription && <meta name='og:description' content={props.metaDescription} />}
+      {props.canonical && <link rel="canonical" href={props.canonical} />}
     </Head>
     <Header
       addToCartHandler={props.addToCartHandler}

@@ -67,7 +67,8 @@ export function getOrderDetailsSuccess (
     order_prescriptions: result.order_prescriptions,
     source_type: result.source_type,
     delivery_option: result.delivery_option,
-    service_type: result.service_type
+    service_type: result.service_type,
+    shipping_fee: result.shipping_charge
   }
 }
 

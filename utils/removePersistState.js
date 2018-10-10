@@ -1,15 +1,13 @@
 import { purgeStoredState } from 'redux-persist'
 import { config, store } from '../redux'
 
-import {logout} from '../containers/login/loginActions'
+import { logout } from '../containers/login/loginActions'
 
-import {
-  HOME_PAGE
-} from '../routes/RouteConstant'
+import { HOME_PAGE } from '../routes/RouteConstant'
 
-export const logoutWithReload = (path) => {
+export const logoutWithReload = () => {
   purgeStoredState(config)
-  let promiseToLogout = new Promise((resolve) => {
+  let promiseToLogout = new Promise(resolve => {
     resolve(store.dispatch(logout()))
   })
   promiseToLogout.then(() => {

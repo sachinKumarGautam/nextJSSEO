@@ -14,7 +14,7 @@ import Router from 'next/router'
 import withRoot from '../src/withRoot'
 
 export default withRoot(
-  withRedux(initStore, { debug: true })(
+  withRedux(initStore, { debug: false })(
     class MyApp extends App {
       constructor (props) {
         super(props)
