@@ -45,11 +45,14 @@ class HomePage extends React.Component {
     const { addToCartHandler, classes, authentication, path } = this.props
     return (
       <Layout
-        title={homePage.title}
         addToCartHandler={addToCartHandler}
         authentication={authentication}
         path={path}
         isHomePage
+        title={homePage.title}
+        metaDescription={homePage.description}
+        metaKeywords={homePage.keywords}
+        canonical = {homePage.canonical}
       >
         <div>
           <Paper className={classes.root} elevation={1}>
@@ -80,7 +83,6 @@ function mapDispatchToProps (dispatch) {
   }
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(withRoot(withStyles(styles)(HomePage)))
+export default connect(mapStateToProps, mapDispatchToProps)(
+  withRoot(withStyles(styles)(HomePage))
+)

@@ -9,7 +9,7 @@ import autoMergeLevel2 from 'redux-persist/lib/stateReconciler/autoMergeLevel2'
 import { migrations } from './persistMigration'
 
 const composeEnhancers =
-  (typeof window !== 'undefined' &&
+  (typeof window !== 'undefined' && process.env.NODE_ENV !== 'production' &&
     window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) ||
   compose
 
@@ -46,8 +46,8 @@ export default function initStore (
 
     const persistConfig = {
       key: 'lifcareSite1.0.0',
-      version: 0,
-      debug: true,
+      version: 1,
+      debug: false,
       stateReconciler: autoMergeLevel2,
       blacklist: [
         'medicineListState',
@@ -57,7 +57,7 @@ export default function initStore (
         'patientDetailsState',
         'thankYouState'
       ],
-      migrate: createMigrate(migrations, { debug: true }),
+      migrate: createMigrate(migrations, { debug: false }),
       storage
     }
 

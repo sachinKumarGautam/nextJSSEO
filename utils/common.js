@@ -17,3 +17,12 @@ export const modifiyMedicineList = (medicineList, cartItems) => {
   })
   return updatedmedicineList
 }
+
+export function removeQueryParameters () {
+  // return window.history.pushState("object or string", "Title", "/"+window.location.href.substring(window.location.href.lastIndexOf('/') + 1).split("?")[0]);
+  var uri = window.location.toString()
+  if (uri.indexOf('?') > 0) {
+    var clean_uri = uri.substring(0, uri.indexOf('?'))
+    window.history.replaceState({}, document.title, clean_uri)
+  }
+}
