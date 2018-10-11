@@ -151,6 +151,14 @@ class CartDetails extends Component {
 
   componentDidUpdate (prevProps) {
     if (
+      this.props.cartState.order_placed !==
+      prevProps.cartState.order_placed &&
+      this.props.cartState.order_placed
+    ) {
+      this.props.resetCartState()
+      const url = getReplacedString(ORDER_DETAILS)
+      Router.push(url)
+    } else if (
       this.props.cartState.isOrderSubmitted !==
       prevProps.cartState.isOrderSubmitted &&
       this.props.cartState.isOrderSubmitted &&

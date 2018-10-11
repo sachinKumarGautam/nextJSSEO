@@ -19,7 +19,9 @@ import {
   MOBILE_VALIDATION_REGEX,
   NUMBER_VALIDATION_REGEX,
   NAME_VALIDATION_REGEX,
-  NAME_VALIDATION_MSG
+  NAME_VALIDATION_MSG,
+  AGE_VALIDATION_REGEX,
+  AGE_VALIDATION_MSG
 } from '../../containers/messages/ValidationMsg'
 
 // Helper styles for demo
@@ -54,8 +56,11 @@ const styles = theme => ({
 class PatientForm extends React.Component {
   handleChangeAge = event => {
     const inputValue = event.target.value
+    const regexInputExpression = RegExp(AGE_VALIDATION_REGEX).test(
+      inputValue
+    )
 
-    if (inputValue.length < 3) {
+    if ((regexInputExpression && inputValue < 150) || !inputValue) {
       this.props.updatePatientFormValue(
         this.props.patientDetailsState,
         'age',

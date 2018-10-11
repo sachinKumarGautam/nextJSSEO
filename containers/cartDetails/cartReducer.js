@@ -563,6 +563,7 @@ export default function cartReducer (state = initialState, action) {
       return {
         ...state,
         payment_gateway: action.payment_gateway,
+        order_placed: action.order_placed,
         isOrderSubmitted: action.isOrderSubmitted,
         orderResponse: {
           ...state.orderResponse,
@@ -925,6 +926,7 @@ export default function cartReducer (state = initialState, action) {
           }
         },
         payment_gateway: action.payment_gateway,
+        order_placed: action.order_placed,
         isOrderSubmitted: action.isOrderSubmitted
       }
 

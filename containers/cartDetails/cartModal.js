@@ -95,6 +95,7 @@ const initialState = {
     visibleImageUrl: ''
   },
   payment_gateway: {},
+  order_placed: false,
   payment: {
     payload: {},
     isPaymentSuccessful: false,
