@@ -14,7 +14,7 @@ class MyDocument extends Document {
       <html lang='en' dir='ltr'>
         <Head>
           <title>{homePage.title}</title>
-          <meta charSet='utf-8' />
+          {/* <meta charSet='utf-8' /> */}
           {/* Use minimum-scale=1 to enable GPU rasterization */}
           <meta
             name='viewport'
@@ -47,7 +47,7 @@ class MyDocument extends Document {
           <link
             rel='stylesheet'
             type='text/css'
-            charset='UTF-8'
+            // charset='UTF-8'
             href='https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.css'
           />
           <link
