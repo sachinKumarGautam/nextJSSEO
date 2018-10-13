@@ -63,8 +63,7 @@ class ProductDetails extends React.Component {
     if (query.product_id) {
       this.props.actions.getProductDetailLoading(
         this.props.productDetailsState,
-        query.product_id,
-        this.props.checkPincodeState.payload.city
+        query.product_id
       )
     }
   }

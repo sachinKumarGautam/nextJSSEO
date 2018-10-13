@@ -107,6 +107,8 @@ class Coupon extends Component {
       open: true
     })
 
+    this.props.resetCouponDetail()
+
     this.props.updateCouponCode(
       this.props.cartState,
       this.props.cartState.couponDetail.payload.coupon_code

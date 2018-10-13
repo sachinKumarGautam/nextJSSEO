@@ -54,11 +54,11 @@ class PatientList extends Component {
               <img src='/static/images/shape-copy-2.svg' className={classes.imageStyle} />
             </InputAdornment>
           }}
-          SelectProps={{
-            classes: {
-              selectMenu: classes.inputStyle
-            }
-          }}
+          // SelectProps={{
+          //   classes: {
+          //     selectMenu: classes.inputStyle
+          //   }
+          // }}
         >
           <MenuItem key={''} value={0} disabled={this.props.pastMedicineState.selectedPatientId !== 0}>
             Select Patient
