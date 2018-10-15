@@ -75,6 +75,7 @@ export function withCommonWrapper (Page) {
       const isCookieExist = !!getCookie('token')
 
       if (
+        queryParams &&
         queryParams.authentication == 'false' &&
         queryParams.path &&
         !isCookieExist &&
@@ -88,6 +89,7 @@ export function withCommonWrapper (Page) {
     componentDidUpdate (prevProps) {
       const queryParams = this.props.router.query
       if (
+        queryParams &&
         queryParams.authentication == 'false' &&
         queryParams.path &&
         prevProps.loginState.isAuthenticated !==
