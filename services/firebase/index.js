@@ -27,4 +27,6 @@ if (!firebase.apps.length) {
 }
 // firebase.initializeApp(config)
 
-export var storage = firebase.firestore()
+export const storage = firebase.firestore()
+const settings = {timestampsInSnapshots: true}
+storage.settings(settings)
