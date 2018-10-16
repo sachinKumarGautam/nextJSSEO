@@ -133,7 +133,8 @@ class MedicineList extends React.Component {
         <Card elevation={1}>
           <ActivityIndicator
             isLoading={isLoading}
-            bottomLoader={!!this.props.page}
+            //bottomLoader={!!this.props.page}
+            bottomLoader
             LoaderComp={<MultipleMedicineLoader />}
           >
             <CardContent className={classes.listWrapperStyle}>
