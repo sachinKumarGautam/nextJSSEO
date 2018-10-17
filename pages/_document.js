@@ -69,7 +69,7 @@ class MyDocument extends Document {
             async
             src={`https://www.googletagmanager.com/gtag/js?id=${GA_TRACKING_ID}`}
           />
-          <script src='https://checkout.razorpay.com/v1/checkout.js' async />
+          {/* <script src='https://checkout.razorpay.com/v1/checkout.js' async /> */}
           <script
             dangerouslySetInnerHTML={{
               __html: `
