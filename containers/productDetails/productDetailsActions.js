@@ -5,11 +5,10 @@ import {
   ON_CHANGE_QUANITY
 } from './productDetailsActionTypes'
 
-export function getProductDetailLoading (productDetailsState, productName, location) {
+export function getProductDetailLoading (productDetailsState, productName) {
   return {
     type: GET_PRODUCT_DETAILS_LOADING,
     productDetailsState,
-    location,
     productName,
     isLoading: true,
     isError: false,

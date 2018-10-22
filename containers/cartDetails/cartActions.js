@@ -446,6 +446,7 @@ export function submitOrderSuccess (cartState, result) {
     type: cartActionTypes.SUBMIT_ORDER_SUCCESS,
     cartState,
     payment_gateway: result.payment_gateway,
+    order_placed: result.order_placed,
     order_number: result.order.id,
     order_type: result.order.order_type,
     delivery_option: result.order.delivery_option,
@@ -708,12 +709,13 @@ export function paymentInitiateLoading (cartState, orderId, paymentMode) {
   }
 }
 
-export function paymentInitiateSuccess (cartState, payload, paymentGateway) {
+export function paymentInitiateSuccess (cartState, payload, paymentGateway, orderPlaced) {
   return {
     type: cartActionTypes.PAYMENT_INITIATE_SUCCESS,
     cartState,
     order_number: payload.id,
     order_type: payload.order_type,
+    order_placed: orderPlaced,
     payment_gateway: paymentGateway,
     isOrderSubmitted: true,
     state: payload.state,
