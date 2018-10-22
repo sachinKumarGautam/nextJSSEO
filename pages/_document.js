@@ -65,6 +65,7 @@ class MyDocument extends Document {
             rel='stylesheet'
             href='https://fonts.googleapis.com/css?family=Roboto:300,400,500'
           />
+          <script src="https://gist.github.com/mstijak/715fa2dd3f495a98386c3ebbadbabb8c"/>
           <script
             async
             src={`https://www.googletagmanager.com/gtag/js?id=${GA_TRACKING_ID}`}
