@@ -7,7 +7,6 @@
     "@material-ui/icons": "^1.1.0",
     "@zeit/next-css": "^0.2.0",
     "babel-eslint": "^8.2.5",
-    "babel-polyfill": "^6.26.0",
     "cookie-parser": "^1.4.3",
     "downshift": "^2.0.6",
     "eslint-loader": "1.9.0",
