@@ -4,6 +4,7 @@ import CompanyInfo from './CompanyInfo'
 import ContactUs from './ContantUs'
 import Categories from './Categories'
 import OurApp from './OurApp'
+import Typography from '@material-ui/core/Typography'
 
 const styles = theme => ({
   root: {
@@ -20,15 +21,20 @@ const styles = theme => ({
     width: '100%'
   },
   footerContent : {
-    color : "#9b9b9b"
+    ...theme.typography.body1,
+    color : theme.palette.customGrey.grey200,
+    marginBottom: theme.spacing.unit * 2
   },
   footerHeading : {
-    fontWeight : "bold",
-    fontSize : "16px",
-    color : '#fff'
+    ...theme.typography.subheading,
+    color: theme.palette.secondary.main,
+    fontWeight: theme.typography.fontWeightBold,
+    marginBottom: theme.spacing.unit * 3
   },
-  aboveFooter : {
-    fontFamily : "Lato, sans-serif"
+  lastContent: {
+    ...theme.typography.body1,
+    color : theme.palette.customGrey.grey200,
+    marginBottom: theme.spacing.unit * 4
   }
 })
 
@@ -39,15 +45,21 @@ const SubFooter = ({classes}) => (
     component='div'
     square
   >
-    <div className = {classes.aboveFooter}>
-      <p className = {classes.footerHeading}>Welcome to LifCare - your one-stop solution for all chronic disease management needs!</p>
-      <div className={classes.footerContent}>
-        <p>LifCare is a subscription-based online pharmacy for chronic patients suffering from diabetes, hypertension, asthma, arthritis, gastritis, kidney, cardiac & neuro illnesses etc.</p>
-        <p>All LifCare members get exclusive benefits like FLAT discounts on every Online medicine order for the lifetime along with privileges like free doctor teleconsultation, diet counselling, and diagnostic lab tests for health checkups etc.</p>
-        <p>The official online medicine shopping app by LifCare allows additional benefits like easy one-click medicine re-fills, monthly reminders and additional discounts applicable only on the mobile app.</p>
-      </div>
+    <div>
+      <Typography variant={'subheading'} className={classes.footerHeading}>
+        Welcome to LifCare - your one-stop solution for all chronic disease management needs!
+      </Typography>
+      <Typography variant={'body2'} className={classes.footerContent}>
+        LifCare is a subscription-based online pharmacy for chronic patients suffering from diabetes, hypertension, asthma, arthritis, gastritis, kidney, cardiac & neuro illnesses etc.
+      </Typography>
+      <Typography variant={'body2'} className={classes.footerContent}>
+        All LifCare members get exclusive benefits like FLAT discounts on every Online medicine order for the lifetime along with privileges like free doctor teleconsultation, diet counselling, and diagnostic lab tests for health checkups etc.
+      </Typography>
+      <Typography variant={'body2'} className={classes.lastContent}>
+        The official online medicine shopping app by LifCare allows additional benefits like easy one-click medicine re-fills, monthly reminders and additional discounts applicable only on the mobile app.
+      </Typography>
     </div>
-    <br/>
+    
     <div className={classes.footerInnerWrapper}>
       <CompanyInfo />
       <ContactUs />
