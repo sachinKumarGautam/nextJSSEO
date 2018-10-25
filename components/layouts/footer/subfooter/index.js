@@ -29,7 +29,8 @@ const styles = theme => ({
     ...theme.typography.subheading,
     color: theme.palette.secondary.main,
     fontWeight: theme.typography.fontWeightBold,
-    marginBottom: theme.spacing.unit * 3
+    marginBottom: theme.spacing.unit * 3,
+    fontSize: theme.typography.pxToRem(16)
   },
   lastContent: {
     ...theme.typography.body1,
