@@ -4,7 +4,7 @@ import CompanyInfo from './CompanyInfo'
 import ContactUs from './ContantUs'
 import Categories from './Categories'
 import OurApp from './OurApp'
-import Typography from '@material-ui/core/Typography'
+
 
 const styles = theme => ({
   root: {
@@ -19,23 +19,6 @@ const styles = theme => ({
     flexDirection: 'row',
     justifyContent: 'space-between',
     width: '100%'
-  },
-  footerContent : {
-    ...theme.typography.body1,
-    color : theme.palette.customGrey.grey200,
-    marginBottom: theme.spacing.unit * 2
-  },
-  footerHeading : {
-    ...theme.typography.subheading,
-    color: theme.palette.secondary.main,
-    fontWeight: theme.typography.fontWeightBold,
-    marginBottom: theme.spacing.unit * 3,
-    fontSize: theme.typography.pxToRem(16)
-  },
-  lastContent: {
-    ...theme.typography.body1,
-    color : theme.palette.customGrey.grey200,
-    marginBottom: theme.spacing.unit * 4
   }
 })
 
@@ -46,7 +29,7 @@ const SubFooter = ({classes}) => (
     component='div'
     square
   >
-    <div>
+    {/* <div>
       <Typography variant={'subheading'} className={classes.footerHeading}>
         Welcome to LifCare - your one-stop solution for all chronic disease management needs!
       </Typography>
@@ -59,7 +42,7 @@ const SubFooter = ({classes}) => (
       <Typography variant={'body2'} className={classes.lastContent}>
         The official online medicine shopping app by LifCare allows additional benefits like easy one-click medicine re-fills, monthly reminders and additional discounts applicable only on the mobile app.
       </Typography>
-    </div>
+    </div> */}
     
     <div className={classes.footerInnerWrapper}>
       <CompanyInfo />

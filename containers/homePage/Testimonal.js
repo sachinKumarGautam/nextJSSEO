@@ -42,7 +42,7 @@ const styles = theme => {
     userReviewWrapper: {
       width: '76%',
       marginTop: theme.spacing.unit * 9.375,
-      marginBottom: theme.spacing.unit * 14.125,
+      marginBottom: theme.spacing.unit * 10,
       marginLeft: theme.spacing.unit * 4
     },
     invertedCommaStyle: {
