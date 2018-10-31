@@ -27,7 +27,7 @@ const ProductPackSize = (props) => (
           class='fas fa-pills'
           style={{color: '#9b9b9b', marginRight: '6px'}}
         />
-    } {props.packType} / {props.packSize}
+    } {props.packType} {props.packSize ? ' / ' + props.packSize : null}
   </Typography>
 )
 

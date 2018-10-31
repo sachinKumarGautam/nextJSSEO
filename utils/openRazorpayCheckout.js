@@ -44,7 +44,7 @@ function getRazorpayOptions (
     'order_id': paymentGateway.ref_transaction_id,
     'name': customerState.payload.full_name,
     'description': cartState.orderResponse.payload.order_number,
-    'image': '/static/images/logo-green.svg',
+    'image': '/static/images/new-logo.svg',
     'handler': (response) => {
       verifyPayment(response)
     },

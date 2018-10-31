@@ -8,8 +8,8 @@ import MenuItem from '@material-ui/core/MenuItem'
 const styles = theme => ({
   textField: {
     marginLeft: theme.spacing.unit,
-    width: theme.spacing.unit * 8,
-    marginRight: theme.spacing.unit * 4
+    marginRight: theme.spacing.unit * 4,
+    textAlign: 'center'
   },
   wrapper: {
     display: 'flex',

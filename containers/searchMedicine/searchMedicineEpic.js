@@ -36,13 +36,27 @@ export function searchMedicine (action$, store) {
           let modifiedResponse
           const totalPages = result.body.payload.totalPages
 
-          if (data.pageNumber) {
-            modifiedResponse = [
-              ...searchMedicineState.payload.searchMedicineResult,
-              ...result.body.payload.content
-            ]
+          if (result.body.payload.content.length) {
+            if (data.pageNumber) {
+              modifiedResponse = [
+                ...searchMedicineState.payload.searchMedicineResult,
+                ...result.body.payload.content
+              ]
+            } else {
+              modifiedResponse = result.body.payload.content
+            }
           } else {
-            modifiedResponse = result.body.payload.content
+            const date = new Date()
+            const randomNumber = date.getTime()
+
+            modifiedResponse = [{
+              name: data.value,
+              sku: 'NEW' + randomNumber,
+              quantity: 0,
+              mrp: 0,
+              selling_price: 0,
+              status: 'Active'
+            }]
           }
 
           return searchMedicineSuccess(

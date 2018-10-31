@@ -118,7 +118,7 @@ class RefillDetails extends Component {
           variant='body2'
           className={this.props.classes.description}
         >
-          We ensure that you never miss you medicines
+          We ensure that you never miss your medicines.
         </Typography>
         <div className={this.props.classes.buttonWrapperStyle}>
           {

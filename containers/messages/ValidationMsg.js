@@ -17,3 +17,5 @@ export const NUMBER_VALIDATION_REGEX = /^\d+$/
 export const NUMBER_VALIDATION_MSG = 'Enter a valid number.'
 export const NAME_VALIDATION_REGEX = /^[a-zA-Z ]{3,30}$/
 export const NAME_VALIDATION_MSG = 'Please enter a valid name.'
+export const AGE_VALIDATION_REGEX = /^[1-9][0-9]*$/
+export const AGE_VALIDATION_MSG = 'Please enter valid age.'
