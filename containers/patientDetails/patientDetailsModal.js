@@ -15,8 +15,8 @@ const initialState = {
   patientFormDetails: {
     full_name: '',
     gender: '',
-    age: 0,
-    mobile: 0
+    age: '',
+    mobile: ''
   },
   addNewPatient: {
     payload: [],

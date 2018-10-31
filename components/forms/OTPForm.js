@@ -171,6 +171,7 @@ class OTPForm extends React.Component {
         <div className={classes.buttonWrapper}>
           <Button
             type='submit'
+            disabled={loginState.isLoadingVerifyOtp}
             isloading={isSubmitting}
             variant='raised'
             color='primary'

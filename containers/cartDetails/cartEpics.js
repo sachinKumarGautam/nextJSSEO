@@ -634,8 +634,14 @@ export function paymentInitiateEpic (action$, store) {
         map(result => {
           const payload = result.body.payload.order
           const paymentGateway = result.body.payload.payment_gateway
+          const orderPlaced = result.body.payload.order_placed
 
-          return paymentInitiateSuccess(data.cartState, payload, paymentGateway)
+          return paymentInitiateSuccess(
+            data.cartState,
+            payload,
+            paymentGateway,
+            orderPlaced
+          )
         }),
         catchError(error => {
           if (error.status === 400) {
