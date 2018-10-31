@@ -19,7 +19,6 @@ import { homePage } from '../components/constants/PageTitle'
 
 const styles = theme => ({
   root: {
-    paddingBottom: theme.spacing.unit * 2,
     margin: '0 auto',
     marginTop: theme.spacing.unit * 7.5,
     width: '100%',
