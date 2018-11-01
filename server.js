@@ -14,6 +14,17 @@ app
 
     server.use(cookieParser())
 
+    const options = {
+      root: path.join(__dirname, '/static'),
+      headers: {
+        'Content-Type': 'text/plain;charset=UTF-8'
+      }
+    }
+
+    server.get('/robots.txt', (req, res) =>
+      res.status(200).sendFile('robots.txt', options)
+    )
+
     // molecule details page
     server.get('/product/molecule/:id', (req, res) => {
       const actualPage = '/molecule-details'
