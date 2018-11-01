@@ -16,6 +16,11 @@ app
 
     server.use(cookieParser())
 
+    // APNs site assicaitions
+    server.get('/apple-app-site-association', function (req, res) {
+      res.sendFile(appDeepLink.apnsAssociations, { root: __dirname });
+    });
+
     // Android verified links
     server.get('/.well-known/assetlinks.json', function (req, res) {
       res.sendFile(appDeepLink.androidVerifiedAppLinks, { root: __dirname });
