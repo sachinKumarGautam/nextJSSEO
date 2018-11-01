@@ -6,8 +6,9 @@ const dev = process.env.NODE_ENV !== 'production'
 const app = next({ dev })
 const handle = app.getRequestHandler()
 const url = require('url')
+const path = require('path')
 
-const appDeepLink = require('./appDeepLink');
+const appDeepLink = require('./appDeepLink')
 
 app
   .prepare()
@@ -16,15 +17,25 @@ app
 
     server.use(cookieParser())
 
+    const options = {
+      root: path.join(__dirname, '/static'),
+      headers: {
+        'Content-Type': 'text/plain;charset=UTF-8'
+      }
+    }
+
+    server.get('/robots.txt', (req, res) =>
+      res.status(200).sendFile('robots.txt', options)
+    )
     // APNs site assicaitions
     server.get('/apple-app-site-association', function (req, res) {
-      res.sendFile(appDeepLink.apnsAssociations, { root: __dirname });
-    });
+      res.sendFile(appDeepLink.apnsAssociations, { root: __dirname })
+    })
 
     // Android verified links
     server.get('/.well-known/assetlinks.json', function (req, res) {
-      res.sendFile(appDeepLink.androidVerifiedAppLinks, { root: __dirname });
-    });
+      res.sendFile(appDeepLink.androidVerifiedAppLinks, { root: __dirname })
+    })
 
     // molecule details page
     server.get('/product/molecule/:id', (req, res) => {
