@@ -6,6 +6,7 @@ const dev = process.env.NODE_ENV !== 'production'
 const app = next({ dev })
 const handle = app.getRequestHandler()
 const url = require('url')
+const path = require('path')
 
 app
   .prepare()
