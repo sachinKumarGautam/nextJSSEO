@@ -7,12 +7,19 @@ const app = next({ dev })
 const handle = app.getRequestHandler()
 const url = require('url')
 
+const appDeepLink = require('./appDeepLink');
+
 app
   .prepare()
   .then(() => {
     const server = express()
 
     server.use(cookieParser())
+
+    // Android verified links
+    server.get('/.well-known/assetlinks.json', function (req, res) {
+      res.sendFile(appDeepLink.androidVerifiedAppLinks, { root: __dirname });
+    });
 
     // molecule details page
     server.get('/product/molecule/:id', (req, res) => {

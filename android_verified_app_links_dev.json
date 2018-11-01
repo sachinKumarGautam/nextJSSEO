@@ -1,0 +1,14 @@
+[
+    {
+        "relation": [
+            "delegate_permission/common.handle_all_urls"
+        ],
+        "target": {
+            "namespace": "android_app",
+            "package_name": "com.lifcare.launch.debug",
+            "sha256_cert_fingerprints": [
+                "C7:C4:E8:D2:8E:EA:B0:2E:78:73:D1:DF:2D:EF:C8:02:11:E9:A1:6A:5A:EE:E6:7D:04:A2:CF:35:32:2F:E4:E9"
+            ]
+        }
+    }
+]
