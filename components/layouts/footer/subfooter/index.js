@@ -5,6 +5,7 @@ import ContactUs from './ContantUs'
 import Categories from './Categories'
 import OurApp from './OurApp'
 
+
 const styles = theme => ({
   root: {
     paddingTop: theme.spacing.unit * 5.37,
@@ -28,7 +29,7 @@ const SubFooter = ({classes}) => (
     component='div'
     square
   >
-    <div className={classes.footerInnerWrapper}>
+  <div className={classes.footerInnerWrapper}>
       <CompanyInfo />
       <ContactUs />
       <Categories />

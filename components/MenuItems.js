@@ -48,7 +48,17 @@ const styles = theme => {
 }
 
 class MenuItems extends Component {
+  constructor(props){
+    super(props)
+    this.state={
+      selectedItem: ''
+    }
+  }
   redirectToPath (path) {
+    this.setState({
+      selectedItem: path
+    })
+
     const url = getReplacedString(path)
     Router.push(url)
   }
@@ -70,36 +80,42 @@ class MenuItems extends Component {
       <div className={this.props.classes.listWrapper}>
         <MenuItem
           className={orderStyle}
+          selected={ORDER === this.state.selectedItem}
           onClick={this.redirectToPath.bind(this, ORDER)}
         >
           Orders
         </MenuItem>
         <MenuItem
           className={menuStyle}
+          selected={PATIENT_LIST === this.state.selectedItem}
           onClick={this.redirectToPath.bind(this, PATIENT_LIST)}
         >
           Patients
         </MenuItem>
         <MenuItem
           className={menuStyle}
+          selected={ADDRESS_LIST === this.state.selectedItem}
           onClick={this.redirectToPath.bind(this, ADDRESS_LIST)}
         >
           Addresses
         </MenuItem>
         <MenuItem
           className={menuStyle}
+          selected={PRESCRIPTION === this.state.selectedItem}
           onClick={this.redirectToPath.bind(this, PRESCRIPTION)}
         >
           Prescriptions
         </MenuItem>
         <MenuItem
           className={menuStyle}
+          selected={REFILL_PATIENTS === this.state.selectedItem}
           onClick={this.redirectToPath.bind(this, REFILL_PATIENTS)}
         >
           Past Medicines
         </MenuItem>
         <MenuItem
           className={menuStyle}
+          selected={CARE_POINTS === this.state.selectedItem}
           onClick={this.redirectToPath.bind(this, CARE_POINTS)}
         >
           Care Points

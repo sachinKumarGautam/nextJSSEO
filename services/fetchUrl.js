@@ -11,15 +11,11 @@ import {
 import getApiServiceVersion from './apiVersion'
 
 // const baseUrl = process.env.REACT_APP_BASE_URL
-//const baseUrl = 'http://sandbox.lifcare.in'
- const baseUrl = 'https://lifcare.in'
+// const baseUrl = 'http://sandbox.lifcare.in'
+// www for production url
+const baseUrl = 'https://www.lifcare.in'
 
-function fetchUrl (
-  apiServiceType,
-  postfixUrl,
-  type,
-  paramsJson
-) {
+function fetchUrl (apiServiceType, postfixUrl, type, paramsJson) {
   let url = ''
   const versionNumber = getApiServiceVersion(apiServiceType)
 

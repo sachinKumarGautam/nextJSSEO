@@ -11,6 +11,7 @@ import ActivityIndicator from '../../components/activityIndicator/index'
 import SnackbarErrorMessage from '../../components/activityIndicator/error/SnackbarErrorMessage'
 
 import queryLimitedData from '../../utils/queryLimitedData'
+import HomePageContent from './HomePageContent'
 
 class HomePageWrapper extends Component {
   constructor (props) {
@@ -92,6 +93,7 @@ class HomePageWrapper extends Component {
             publishedContent={this.state.publishedContent}
           />
           <Testimonal homePageState={this.props.homePageState} />
+          <HomePageContent />
         </ActivityIndicator>
       </div>
     )

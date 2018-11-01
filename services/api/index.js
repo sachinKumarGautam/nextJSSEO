@@ -106,12 +106,12 @@ const fetchUserInfo$ = mobileNumber =>
     url: fetchUrl('account', 'customer/mobile/' + mobileNumber, 'GET_LIST')
   })
 
-const getProductDetails$ = (productName, location) =>
+const getProductDetails$ = (productName) =>
   makeAjaxRequest({
     method: 'GET',
     url: fetchUrl(
       'catalog',
-      `medicine/slug/${productName}?location=${location}`,
+      `medicine/slug/${productName}`,
       'GET_LIST'
     )
   })

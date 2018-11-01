@@ -4,8 +4,10 @@ import { of } from 'rxjs/observable/of'
 import NProgress from 'nprogress'
 import { store } from '../../redux'
 import { isCartInvalid } from '../../containers/cartDetails/cartActions'
-import { handleSessionExpiration } from '../../containers/login/loginActions'
-import { updateErrorDetail } from '../../containers/login/loginActions'
+import {
+  handleSessionExpiration,
+  updateErrorDetail
+} from '../../containers/login/loginActions'
 
 let http = propGenerator => {
   // route loader for api loading
