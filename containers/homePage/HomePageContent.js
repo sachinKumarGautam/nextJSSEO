@@ -127,7 +127,7 @@ All our tests are conducted by NABL- certified labs under the supervision of a h
                 </Typography>
                 <Typography variant={'body2'} className={this.props.classes.footerContent}>
                 We are constantly on the path of helping more and more people get their medicines on time and we'd love to have you on board with us on this journey.
-Call us on 8302032000 or drop us an e-mail at <a className={this.props.classes.footerhyperlink} href='mailto:care@lifcare.in'>care@lifcare.in</a> to connect with us. You can also download our mobile app from <a className={this.props.classes.footerhyperlink} href="https://play.google.com/store/apps/details?id=com.lifcare.launch&hl=en">Google PlayStore</a> and <a className={this.props.classes.footerhyperlink} href="https://itunes.apple.com/in/app/lifcare/id1254964377?mt=8">iOS AppStore</a>.
+Call us on 8302032000 or drop us an e-mail at <a className={this.props.classes.footerhyperlink} href='mailto:care@lifcare.in'>care@lifcare.in</a> to connect with us. You can also download our mobile app from PlayStore and AppStore.
                 </Typography>
             </div>
         )
