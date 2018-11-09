@@ -7,13 +7,15 @@ if (typeof require !== 'undefined') {
 
 module.exports = withCSS()
 
-// module.exports = {
-//   exportPathMap: function () {
-//     return {
-//       '/': { page: '/' }
-//     }
-//   }
-// }
+module.exports = {
+  exportPathMap: function () {
+    return {
+      '/': { page: '/' },
+      '/googled7d319937cff5e96.html': { page: '/googled7d319937cff5e96.html' },
+      '/robots.txt': { page: '/robots.txt' }
+    }
+  }
+}
 
 // module.exports = {
 //     webpack: function (cfg) {
