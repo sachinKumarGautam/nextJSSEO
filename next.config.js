@@ -7,6 +7,14 @@ if (typeof require !== 'undefined') {
 
 module.exports = withCSS()
 
+module.exports = {
+  exportPathMap: function () {
+    return {
+      '/': { page: '/' }
+    }
+  }
+}
+
 // module.exports = {
 //     webpack: function (cfg) {
 //       cfg.plugins = cfg.plugins.filter(plugin => {

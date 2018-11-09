@@ -1,0 +1,1 @@
+module.exports=__NEXT_REGISTER_PAGE("/wrapperComp",function(){return{page:webpackJsonp([20],{1247:function(e,p,o){e.exports=o(452)}},[1247]).default}});
