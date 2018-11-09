@@ -27,6 +27,10 @@ app
     server.get('/robots.txt', (req, res) =>
       res.status(200).sendFile('robots.txt', options)
     )
+
+    server.get('/googled7d319937cff5e96.html', (req, res) =>
+      res.status(200).sendFile('googled7d319937cff5e96.html', options)
+    )
     // APNs site assicaitions
     server.get('/apple-app-site-association', function (req, res) {
       res.sendFile(appDeepLink.apnsAssociations, { root: __dirname })

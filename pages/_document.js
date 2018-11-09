@@ -23,7 +23,7 @@ class MyDocument extends Document {
                 'minimum-scale=1, width=device-width, height=device-height'
             }
           />
-          
+
           {/* PWA primary color */}
           <meta
             name='theme-color'
@@ -42,7 +42,7 @@ class MyDocument extends Document {
             rel='stylesheet'
             href='https://use.fontawesome.com/releases/v5.0.13/css/all.css'
             integrity='sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp'
-            crossorigin='anonymous'
+            crossOrigin='anonymous'
           />
           <link
             rel='stylesheet'
@@ -65,7 +65,7 @@ class MyDocument extends Document {
             rel='stylesheet'
             href='https://fonts.googleapis.com/css?family=Roboto:300,400,500'
           />
-          <script src="https://gist.github.com/mstijak/715fa2dd3f495a98386c3ebbadbabb8c"/>
+          <script src='https://gist.github.com/mstijak/715fa2dd3f495a98386c3ebbadbabb8c' />
           <script
             async
             src={`https://www.googletagmanager.com/gtag/js?id=${GA_TRACKING_ID}`}
