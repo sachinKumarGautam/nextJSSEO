@@ -10,9 +10,9 @@ module.exports = withCSS()
 module.exports = {
   exportPathMap: function () {
     return {
-      '/': { page: '/' },
-      '/googled7d319937cff5e96.html': { page: '/googled7d319937cff5e96.html' },
-      '/robots.txt': { page: '/robots.txt' }
+      '/': { page: '/' }
+      // '/googled7d319937cff5e96.html': { page: '/googled7d319937cff5e96.html' },
+      // '/robots.txt': { page: '/robots.txt' }
     }
   }
 }
